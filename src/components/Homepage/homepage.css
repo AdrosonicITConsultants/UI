@@ -1,0 +1,81 @@
+.homeimg{
+  background-image: url("http://localhost/wordpress/wp-content/uploads/2020/03/calculator_bg-scaled-e1584353976962-300x200.jpg"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+.demo{
+    margin-top:100px;
+    background-color: white;
+    border-radius: 10px;
+    
+    width:100%;
+}
+.logohome{
+    width:30%;
+    height:auto;
+    margin-top:20px;
+}
+.logoselect{
+    width:80%;
+    height:auto;
+    margin-top:5px;
+}
+.hrline{
+    margin-top: 1px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid black;
+    width: 40%;
+}
+.line3{
+    margin-top: 30px;
+    color: grey;
+}
+.line5{
+    margin-top: 30px;
+    color:blue;
+}
+.line6{
+    margin-top: 30px;
+    color:violet;
+}
+.font2{
+    font-size: 15px;
+}
+.font3{
+
+    font-size: 20px;
+}
+.font4{
+    font-size: 35px;
+}
+.half{
+    width:10%;
+    margin-top:17%;
+    float: left;
+    font-size: 37px;
+}
+.box1{
+    float: left;
+    height:auto;
+    width:35%;
+    border: 1px solid #cbcbcb;
+    margin-left:10%;
+    box-shadow: 0px 3px #888888;
+    border-radius:10px;
+   
+}
+.box3{
+    float: left;
+    height:auto;
+    width:35%;
+    border: 1px solid #cbcbcb;
+    margin-right:10%;
+    box-shadow: 0px 3px #888888;
+    border-radius:10px;
+}
+.selectorrow{
+    margin-top:20px;
+}

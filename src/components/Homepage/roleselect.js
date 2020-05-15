@@ -17,7 +17,7 @@ export default class roleselect extends Component {
                                     An initiative by Antran
                                 </Row>
                                 <Row noGutters={true} className="text-center font2">
-                                Part of TataTrusts
+                                    Part of TataTrusts
                                 </Row>
                                 <Row noGutters={true} className="text-center line3 font3">
                                     What describes you the best?

@@ -1,3 +1,20 @@
+:root{
+  --lightGreen:#DBFFDE;
+  --mainGreen:#00B939;
+  --darkGreen:#009A2F;
+  --mainBlue:#3964D9;
+  --mainBlack:#000000;
+  --mainFont: #ffffff;
+
+
+} 
+
+body{
+  font-family: 'lato', sans-serif !important;
+  /* background: var(--lightGreen) !important;
+  color: var(--mainFont) !important;   */
+}
+
 .App {
   text-align: center;
 }

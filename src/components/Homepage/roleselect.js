@@ -4,6 +4,24 @@ import "./homepage.css"
 import logo from "../../assets/logo.png";
 
 export default class roleselect extends Component {
+    constructor() {
+        super();
+        this.state = {
+          
+        };
+      }
+    
+      artistopen() {
+         this.props.handler(1);
+        
+      } 
+      buyeropen() {
+        this.props.handler(3);
+       
+     } 
+    
+     
+    
     render() {
 
         return(
@@ -24,7 +42,7 @@ export default class roleselect extends Component {
                                 
                                 </Row>
                                 <Row noGutters={true} className="selectorrow text-center">
-                                    <div className="box1">
+                                    <div className="box1" onClick={() => this.artistopen()}>
                                         <Row noGutters={true}>
                                         <img src={logo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
@@ -36,7 +54,7 @@ export default class roleselect extends Component {
                                     <div className="half text-center">
                                         or
                                     </div>
-                                    <div className="box3 ">
+                                    <div className="box3 " onClick={() => this.buyeropen()}>
                                         <Row noGutters={true}>
                                         <img src={logo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>

@@ -20,15 +20,19 @@ export default class HomePage extends Component {
 
                  renderSection(num){
                      switch (num) {
-                       case 0:
+                      case 0:
+                        return <Roleselect handler={this.handler} />;
+                        break;
+                       case 1:
                          return <Buyeruser handler={this.handler} />;
                          break;
-                       case 1:
+                       case 2:
                          return <Buyerpass handler={this.handler} />;
                          break;
-                       case 2:
+                       case 3:
                          return <Artistlogin handler={this.handler} />;
-                         break;
+                        break;
+                      
                        default:
                          break;
                      }
@@ -65,6 +69,8 @@ export default class HomePage extends Component {
                                {/* <Artistlogin handler={this.handler} /> */}
                              </Col>
                            </Row>
+                           <br/>
+                           <br/><br/><br/>                           
                          </Container>
                        </div>
                      </React.Fragment>

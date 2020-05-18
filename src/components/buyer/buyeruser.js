@@ -20,9 +20,13 @@ export default class buyeruser extends Component {
         showValidation: !this.state.showValidation,
       });
     } else {
-     this.props.handler(1);
+     this.props.handler(2);
     }
   } 
+  backoperation() {
+     this.props.handler(0);
+    }
+
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -37,7 +41,7 @@ export default class buyeruser extends Component {
         <div className="demo" noGutters={true}>
           <br></br>
           <Row noGutters={true} className="">
-            <span className="col-sm-2 glyphicon glyphicon-arrow-left"></span>
+            <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
             <h2 className="col-sm-8">Login</h2>
             <img src={logo} className="col-sm-2" alt="TataTrusts logo"></img>
           </Row>

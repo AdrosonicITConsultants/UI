@@ -14,7 +14,10 @@ export default class artistlogin extends Component {
                      showUserName: true,
                    };
                  }               
-
+                 backoperation() {
+                  this.props.handler(0);
+                 }
+               
                  Login() {
                       if (this.state.userName == "") {
                         this.setState({
@@ -45,7 +48,7 @@ export default class artistlogin extends Component {
                        <div className="demo" noGutters={true}>
                          <br></br>
                          <Row noGutters={true} className="">
-                           <span className="col-sm-2 glyphicon glyphicon-arrow-left"></span>
+                           <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
                            <h2 className="col-sm-8">Login</h2>
                            <img
                              src={logo}

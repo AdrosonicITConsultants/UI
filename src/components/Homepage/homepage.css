@@ -83,7 +83,7 @@
 
 .BuyerLogin{
     border-radius: 25px !important;
-    height: 2.5em;
+    height: 3em !important;
 }
 /* enable absolute positioning */
 .inner-addon {

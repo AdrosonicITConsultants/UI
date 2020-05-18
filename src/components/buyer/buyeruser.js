@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css";
-import logo from "../../assets/logo.svg";
+import logos from "../../assets"
 
 export default class buyeruser extends Component {
   constructor() {
@@ -43,13 +43,13 @@ export default class buyeruser extends Component {
           <Row noGutters={true} className="">
             <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
             <h2 className="col-sm-8">Login</h2>
-            <img src={logo} className="col-sm-2" alt="TataTrusts logo"></img>
+            <img src={logos.mainlogo} className="col-sm-2" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
           <Row noGutters={true}>
             <span className="col-sm-4"></span>
-            <img src={logo} className="col-sm-4" alt="TataTrusts logo"></img>
+            <img src={logos.mainlogo} className="col-sm-4" alt="TataTrusts logo"></img>
             <span className="col-sm-4"></span>
           </Row>
 
@@ -66,7 +66,7 @@ export default class buyeruser extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                  <img src={logos.userlogo}  className="glyphicon"></img>
                     <input
                       type="text"
                       id="userName"

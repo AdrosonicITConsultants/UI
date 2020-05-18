@@ -14,7 +14,7 @@
     width:100%;
 }
 .logohome{
-    width:30%;
+    width:25%;
     height:auto;
     margin-top:20px;
 }
@@ -28,7 +28,18 @@
     margin-bottom: 20px;
     border: 0;
     border-top: 1px solid black;
-    width: 40%;
+    width: 75%;
+}
+
+.vrline{
+    border-left: 2px solid;
+    height: 2em;
+    margin-top: -2em;
+    position: absolute;
+    left: 50%;
+    /* margin-left: -3px; */
+    /* top: 0; */
+    color: var(--lightFont);
 }
 .line3{
     margin-top: 30px;
@@ -46,10 +57,12 @@
     font-size: 15px;
 }
 .font3{
-
     font-size: 20px;
 }
 .font4{
+font-size: 25px;
+}
+.font5{
     font-size: 35px;
 }
 .half{

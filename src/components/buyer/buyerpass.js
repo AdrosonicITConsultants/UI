@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css"
+import "./buyer.css"
 import logos from "../../assets";
 
 export default class buyerpass extends Component {
@@ -44,11 +45,13 @@ export default class buyerpass extends Component {
                        <div className="demo" noGutters={true}>
                          <br></br>
                          <Row noGutters={true} className="">
-                           <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
-                           <h2 className="col-sm-8">Login</h2>
+                           <div className="col-sm-8">
+                             <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
+                             <h2 className="col-sm-6 margin-login">Login</h2>
+                           </div>
                            <img
-                             src={logos.mainlogo}
-                             className="col-sm-2"
+                             src={logos.mainlogoside}
+                             className="col-sm-4"
                              alt="TataTrusts logo"
                            ></img>
                          </Row>
@@ -143,11 +146,9 @@ export default class buyerpass extends Component {
                          </Row>
 
                          <Row noGutters={true}>
-                           <span className="col-sm-3 text-center">Help</span>
+                           <strong className="col-sm-3 text-center">Help?</strong>
                            <span className="col-sm-5"></span>
-                           <span className="col-sm-4 text-center">
-                             Privacy policy
-                           </span>
+                           <span style={{ color: "var(--lightFont)" }} className="col-sm-4 text-center">Privacy policy</span>
                          </Row>
                          <br></br>
                        </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col , Container} from 'reactstrap';
 import "./homepage.css"
-import logo from "../../assets/logo.png";
+import logos from "../../assets";
 
 export default class roleselect extends Component {
     constructor() {
@@ -12,11 +12,11 @@ export default class roleselect extends Component {
       }
     
       artistopen() {
-         this.props.handler(1);
+         this.props.handler(3);
         
       } 
       buyeropen() {
-        this.props.handler(3);
+        this.props.handler(1);
        
      } 
     
@@ -28,35 +28,32 @@ export default class roleselect extends Component {
             <React.Fragment> 
                  <div className="demo" noGutters={true}>
                                 <Row noGutters={true} className="text-center">
-                                    <img src={logo} alt="TataTrusts logo" className="logohome"></img>
+                        <img src={logos.mainlogo} alt="TataTrusts logo" className="logohome"></img>
                                 </Row>
-                                <hr className="hrline"></hr>
-                                <Row noGutters={true} className="text-center font2" >
-                                    An initiative by Antran
-                                </Row>
-                                <Row noGutters={true} className="text-center font2">
-                                    Part of TataTrusts
-                                </Row>
-                                <Row noGutters={true} className="text-center line3 font3">
+                                
+                                <Row noGutters={true} className="text-center line3 font4">
                                     What describes you the best?
                                 
                                 </Row>
                                 <Row noGutters={true} className="selectorrow text-center">
                                     <div className="box1" onClick={() => this.artistopen()}>
                                         <Row noGutters={true}>
-                                        <img src={logo} alt="TataTrusts logo" className="logoselect"></img>
+                                <img src={logos.mainlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
                                         <Row noGutters={true} className="text-center font4">
                                             Artist
                                         </Row>
 
-                                    </div>
-                                    <div className="half text-center">
+                                    </div>                        
+                                    <div style={{color:"var(--lightFont)"}} className="half text-center">
+                            <div className="vrline"></div>
                                         or
+                                         <div style={{ marginTop: "0em", height:"3em" }} className="vrline"></div>
                                     </div>
+                       
                                     <div className="box3 " onClick={() => this.buyeropen()}>
                                         <Row noGutters={true}>
-                                        <img src={logo} alt="TataTrusts logo" className="logoselect"></img>
+                                <img src={logos.mainlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
                                         <Row noGutters={true} className="text-center font4">
                                             Buyer

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col , Container} from 'reactstrap';
 import "./homepage.css"
-import logo from "../../assets/logo.png";
+import logos from "../../assets";
 import Roleselect from "./roleselect"
 import Buyerpass from "../buyer/buyerpass";
 import Buyeruser from "../buyer/buyeruser";

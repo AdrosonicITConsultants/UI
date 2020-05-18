@@ -48,13 +48,12 @@ export default class artistlogin extends Component {
                        <div className="demo" noGutters={true}>
                          <br></br>
                          <Row noGutters={true} className="">
-                           <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
-                           <h2 className="col-sm-8">Login</h2>
-                           <img
-                             src={logos.mainlogo}
-                             className="col-sm-2"
-                             alt="TataTrusts logo"
-                           ></img>
+                           <div className="col-sm-8">
+                             <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
+                             <h2 className="col-sm-6 margin-login">Login</h2>
+                           </div>
+
+                           <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
                          </Row>
                          <br />
                          <Row noGutters={true}>
@@ -71,7 +70,7 @@ export default class artistlogin extends Component {
                            <Row noGutters={true}>
                              <span className="col-sm-1"></span>
                              <span className="col-sm-10">
-                               Login using your mobile number or email id
+                              Enter your registered mobile number or email id
                              </span>
                            </Row>
                            <Row noGutters={true}>
@@ -172,11 +171,9 @@ export default class artistlogin extends Component {
                            </div>
                          </Row>
                          <Row noGutters={true}>
-                           <span className="col-sm-3 text-center">Help</span>
+                           <strong className="col-sm-3 text-center">Help?</strong>
                            <span className="col-sm-5"></span>
-                           <span className="col-sm-4 text-center">
-                             Privacy policy
-                           </span>
+                           <span style={{ color: "var(--lightFont)" }} className="col-sm-4 text-center">Privacy policy</span>
                          </Row>
                          <br></br>
                        </div>

@@ -1,0 +1,11 @@
+.margin-login {
+    font-weight: 600;
+    margin-top: 0.3em;   
+    font-family: var(--PlayfairFont);
+}
+
+.margin-arrow {
+    margin-top: 1.3em;
+    margin-left: 2em;
+}
+

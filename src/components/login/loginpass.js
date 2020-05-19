@@ -22,13 +22,15 @@ export default class buyerpass extends Component {
                        showValidation: !this.state.showValidation,
                      });
                    } else {
-                     this.props.handler(2);
+                     debugger;
+                     //this.props.handler(1);
                    }
                     alert("login clicked");
                  }
 
                  backoperation() {
-                  this.props.handler(1);
+                   debugger;
+                   this.props.handler(this.props.userpage--);
                  }
                
 
@@ -59,11 +61,12 @@ export default class buyerpass extends Component {
                          <br />
                          <Row noGutters={true}>
                            <span className="col-sm-4"></span>
-                           <img
-                             src={logos.mainlogo}
-                             className="col-sm-4"
-                             alt="TataTrusts logo"
-                           ></img>
+                           {(this.props.userpage == 3) ?
+                             <img src={logos.mainlogo} className="col-sm-4" alt="buyer TataTrusts logo"></img>
+                             :
+                             <img src={logos.mainlogo} className="col-sm-4" alt="artist TataTrusts logo"></img>
+
+                           }
                            <span className="col-sm-4"></span>
                          </Row>
 

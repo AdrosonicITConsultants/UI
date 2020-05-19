@@ -21,7 +21,7 @@ export default class buyeruser extends Component {
         showValidation: !this.state.showValidation,
       });
     } else {
-     this.props.handler(2);
+      this.props.handler(this.props.userpage++);
     }
   } 
   backoperation() {
@@ -53,7 +53,13 @@ export default class buyeruser extends Component {
           <br />
           <Row noGutters={true}>
             <span className="col-sm-4"></span>
-            <img src={logos.mainlogo} className="col-sm-4" alt="TataTrusts logo"></img>
+           {(this.props.userpage == 1)?
+              <img src={logos.mainlogo} className="col-sm-4" alt="buyer TataTrusts logo"></img>             
+            :           
+              <img src={logos.mainlogo} className="col-sm-4" alt="artist TataTrusts logo"></img>
+            
+            }
+            
             <span className="col-sm-4"></span>
           </Row>
 

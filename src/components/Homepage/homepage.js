@@ -3,9 +3,9 @@ import { Row, Col , Container} from 'reactstrap';
 import "./homepage.css"
 import logos from "../../assets";
 import Roleselect from "./roleselect"
-import Buyerpass from "../buyer/buyerpass";
-import Buyeruser from "../buyer/buyeruser";
-import Artistlogin from "../artist/artistlogin"
+import Loginpass from "../login/loginpass";
+import Loginuser from "../login/loginuser";
+// import Artistlogin from "../artist/artistlogin"
 
 export default class HomePage extends Component {
                  constructor(props) {
@@ -21,17 +21,20 @@ export default class HomePage extends Component {
                  renderSection(num){
                      switch (num) {
                       case 0:
-                        return <Roleselect handler={this.handler} />;
+                         return <Roleselect handler={this.handler} userpage={this.state.userpage} />;
                         break;
                        case 1:
-                         return <Buyeruser handler={this.handler} />;
+                         return <Loginuser handler={this.handler} userpage={this.state.userpage} />;
                          break;
                        case 2:
-                         return <Buyerpass handler={this.handler} />;
+                         return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
                          break;
                        case 3:
-                         return <Artistlogin handler={this.handler} />;
+                         return <Loginuser handler={this.handler} userpage={this.state.userpage}  />;
                         break;
+                       case 3:
+                         return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
+                         break;
                       
                        default:
                          break;

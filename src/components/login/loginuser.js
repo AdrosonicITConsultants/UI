@@ -9,8 +9,7 @@ export default class buyeruser extends Component {
     super();
     this.state = {
       userName: "",   
-      showValidation: false,
-      showUserName: true,
+      showValidation: false     
     };
   }
 
@@ -57,23 +56,39 @@ export default class buyeruser extends Component {
           </Row>
 
           <br />
+          <br />
+          <br />
           <Row noGutters={true}>
             <span className="col-sm-4"></span>
            {(this.props.userpage == 1)?
-              <img src={logos.mainlogo} className="col-sm-4" alt="buyer TataTrusts logo"></img>             
+           <div className="col-sm-4 text-center">
+              <i className="circleDiv">
+                  <img src={logos.buyerlogo} className="cicrleLogo" alt="buyer TataTrusts logo"></img> 
+                  <div className="circleText">Buyer</div>
+              </i>     
+              </div>
             :           
-              <img src={logos.mainlogo} className="col-sm-4" alt="artist TataTrusts logo"></img>
+              <div className="col-sm-4 text-center">
+                <i className="circleDiv">
+                  <img src={logos.buyerlogo} className="cicrleLogo" alt="artist TataTrusts logo"></img>
+                  <div className="circleText">Artist</div>
+                </i>
+              </div>
             
             }
+
+           
             
             <span className="col-sm-4"></span>
           </Row>
-
+          <br />
+          <br />
+        
           <br />         
             <div>
               <Row noGutters={true}>
                 <span className="col-sm-1"></span>
-                <span className="col-sm-10">
+                <span className="col-sm-10 text-center">
                 Enter your registered mobile number or email id
                 </span>
               </Row>
@@ -82,7 +97,7 @@ export default class buyeruser extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                  <img src={logos.userlogo}  className="glyphicon"></img>
+                  <img src={logos.usernamelogo} className="usernameLogo glyphicon"></img>
                     <input
                       type="text"
                       id="userName"
@@ -116,6 +131,8 @@ export default class buyeruser extends Component {
               </div>
             </Row>         
           <br />
+          <br />
+          <br />
           {/* <Row noGutters={true}>
                 <div className="col-sm-12 text-center">
                   <h2>Or</h2>
@@ -129,7 +146,7 @@ export default class buyeruser extends Component {
                   <h2>google login</h2>
                 </div>
               </Row> */}
-          <hr className="hrline"></hr>
+          <hr className="hrline" style={{ bordertop:"2px solid #d8d9da !important"}}></hr>
           <Row noGutters={true}>
             <div className="col-sm-12 text-center">
               <div>

@@ -64,22 +64,36 @@ export default class buyerpass extends Component {
                          </Row>
 
                          <br />
+                         <br />
+                         <br />
                          <Row noGutters={true}>
                            <span className="col-sm-4"></span>
                            {(this.props.userpage == 2) ?
-                             <img src={logos.mainlogo} className="col-sm-4" alt="buyer TataTrusts logo"></img>
+                             <div className="col-sm-4 text-center">
+                               <i className="circleDiv">
+                                 <img src={logos.buyerlogo} className="cicrleLogo" alt="buyer TataTrusts logo"></img>
+                                 <div className="circleText">Buyer</div>
+                               </i>
+                             </div>
                              :
-                             <img src={logos.mainlogo} className="col-sm-4" alt="artist TataTrusts logo"></img>
+                             <div className="col-sm-4 text-center">
+                               <i className="circleDiv">
+                                 <img src={logos.buyerlogo} className="cicrleLogo" alt="artist TataTrusts logo"></img>
+                                 <div className="circleText">Artist</div>
+                               </i>
+                             </div>
 
                            }
                            <span className="col-sm-4"></span>
                          </Row>
 
                          <br />
+                         <br />
+                         <br />
                          <div>
                            <Row noGutters={true}>
                              <span className="col-sm-1"></span>
-                             <span className="col-sm-10">
+                             <span className="col-sm-10 text-center">
                                Enter your password
                              </span>
                            </Row>
@@ -88,7 +102,7 @@ export default class buyerpass extends Component {
                              <div className="form-group col-sm-10 col-xs-6">
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
-                                 <img src={logos.locklogo} className="glyphicon"></img>
+                                 <img src={logos.locklogo} className="glyphicon locklogo"></img>
                                  <input
                                    id="pass"
                                    type="text"
@@ -130,6 +144,8 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
+                         <br />
+                         <br />
                          <br />
                          {/* <Row noGutters={true}>
                 <div className="col-sm-12 text-center">

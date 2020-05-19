@@ -21,7 +21,13 @@ export default class buyeruser extends Component {
         showValidation: !this.state.showValidation,
       });
     } else {
-      this.props.handler(this.props.userpage++);
+      if(this.props.userpage == 1){
+        this.props.handler(2);
+      }
+      else{
+        this.props.handler(4);
+      }
+      
     }
   } 
   backoperation() {

@@ -32,7 +32,7 @@ export default class HomePage extends Component {
                        case 3:
                          return <Loginuser handler={this.handler} userpage={this.state.userpage}  />;
                         break;
-                       case 3:
+                       case 4:
                          return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
                          break;
                       

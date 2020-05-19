@@ -29,8 +29,13 @@ export default class buyerpass extends Component {
                  }
 
                  backoperation() {
-                   debugger;
-                   this.props.handler(this.props.userpage--);
+                   if (this.props.userpage == 2){
+                     this.props.handler(1);
+                   }
+                   else{
+                     this.props.handler(3);
+                   }
+                   
                  }
                
 
@@ -61,7 +66,7 @@ export default class buyerpass extends Component {
                          <br />
                          <Row noGutters={true}>
                            <span className="col-sm-4"></span>
-                           {(this.props.userpage == 3) ?
+                           {(this.props.userpage == 2) ?
                              <img src={logos.mainlogo} className="col-sm-4" alt="buyer TataTrusts logo"></img>
                              :
                              <img src={logos.mainlogo} className="col-sm-4" alt="artist TataTrusts logo"></img>

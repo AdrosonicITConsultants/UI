@@ -1,0 +1,27 @@
+.registerimg{
+    background-image: url("../../../assets/calculator_bg-scaled-e1584353976962-2048x1362.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    min-height:100vh;
+  }
+  .demo{
+    margin-top:100px;
+    background-color: white;
+    border-radius: 10px;
+    min-height:650px;
+    height:auto;
+    width:83.33%;
+    margin-left: 8.5%;
+}
+.font2{
+    font-size: 15px;
+}
+.font3{
+
+    font-size: 20px;
+}
+.font4{
+    font-size: 35px;
+}

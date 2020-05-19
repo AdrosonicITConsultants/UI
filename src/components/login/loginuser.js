@@ -132,9 +132,16 @@ export default class buyeruser extends Component {
           <hr className="hrline"></hr>
           <Row noGutters={true}>
             <div className="col-sm-12 text-center">
+            {(this.props.userpage == 1)?
+               <div>
+               new user <a href="/buyer-registration">click here</a> to register.
+              </div>            
+            :           
               <div>
-                new user <a href="./">click here</a> to register.
+                new user <a href="/artist-registration">click here</a> to register.
               </div>
+            
+            }
             </div>
           </Row>
 

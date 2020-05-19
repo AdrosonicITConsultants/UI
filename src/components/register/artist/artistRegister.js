@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col , Container} from 'reactstrap';
 import "./artistRegister.css"
-import Buyerlogin from "../../buyer/buyeruser";
+// import Buyerlogin from "../../buyer/buyeruser";
 import Artreg1 from "./artreg1";
 import Artreg2 from "./artreg2";
+import Artreg3 from "./artreg3";
 
 export default class artistRegister extends Component {
     constructor(props) {
@@ -24,6 +25,9 @@ export default class artistRegister extends Component {
             case 1:
               return <Artreg2 handler={this.handler} />;
               break;
+            case 2:
+              return <Artreg3 handler={this.handler} />;
+              break;  
                    
             default:
               break;

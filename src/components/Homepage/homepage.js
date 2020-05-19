@@ -24,12 +24,14 @@ export default class HomePage extends Component {
                          return <Roleselect handler={this.handler} userpage={this.state.userpage} />;
                         break;
                        case 1:
+                         //buyer
                          return <Loginuser handler={this.handler} userpage={this.state.userpage} />;
                          break;
                        case 2:
                          return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
                          break;
                        case 3:
+                         //artist
                          return <Loginuser handler={this.handler} userpage={this.state.userpage}  />;
                         break;
                        case 4:

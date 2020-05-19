@@ -3,52 +3,44 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 
-export default class artreg2 extends Component {
+export default class artreg3 extends Component {
     constructor() {
         super();
         this.state = {
-          emailid: "",
-          otppin: "",     
-          showValidation: false,
-          showValidationpin: false,
+          password: "",
+          confirmpass: "",     
+          showValidationpass: false,
+          showValidationconfirmpass: false,
           showUserName: true,
         };
       }
-      operation1(){
-        if (this.state.emailid == "") {
-          this.setState({
-            showValidation: !this.state.showValidation,
-          });
-        }
-
-
-      }
+    
       operation() {
         debugger;
-        if (this.state.emailid == "") {
+        if (this.state.password == "") {
             this.setState({
-              showValidation: !this.state.showValidation,
+                showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.otppin == ""){                    
+          else if (this.state.confirmpass !== this.state.password ){                    
               this.setState({
-                showValidationpin: !this.state.showValidationpin,
+                showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
-            this.props.handler(2);
+            this.props.handler(3);
           }
       }
 
       backoperation() {
-         this.props.handler(0);
+         this.props.handler(1);
         }
     
     
       handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
-          showValidation: false,
-          showValidationpin: false,
+            showValidationpass: false,
+            showValidationconfirmpass: false
         });
       }
     
@@ -82,7 +74,7 @@ export default class artreg2 extends Component {
           <Row noGutters={true} className="text-center line3 font3">
           <span className="col-sm-1"></span>
                 <span className="col-sm-10">
-                enter your email ID
+                enter your new password
                 </span>
                
           </Row>
@@ -97,55 +89,36 @@ export default class artreg2 extends Component {
                   <div className="inner-addon left-addon">
                     <i className="glyphicon glyphicon-user"></i>
                     <input
-                      type="email"
-                      id="emailid"
+                      type="password"
+                      id="password"
                       className="form-control BuyerLogin"
-                      placeholder="emailID"
-                      name="emailid"
+                      placeholder="password"
+                      name="password"
                       onChange={(e) => this.handleChange(e)}
                     />
-                    {this.state.showValidation ? (
-                      <span className="bg-danger">please enter email ID</span>
+                    {this.state.showValidationpass ? (
+                      <span className="bg-danger">please enter your password</span>
                     ) : null}
                   </div>
                 </div>
               </Row>
-              <br />
-            <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
-                <button
-                  style={{
-                    background: "#000000",
-                    color: "white",
-                    borderRadius: "2em",
-                    width: "8em",
-                    height: "3em",
-                  }}
-                  onClick={() => this.operation1()}
-                >
-                  Send OTP
-                </button>
-              </div>
-            </Row>         
-          <br />
-
-
-          <Row noGutters={true}>
+       
+              <Row noGutters={true}>
                 <div className="col-sm-1"></div>
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
                     <i className="glyphicon glyphicon-user"></i>
                     <input
-                      type="number"
-                      id="otppin"
+                      type="password"
+                      id="confirmpass"
                       className="form-control BuyerLogin"
-                      placeholder="Enter OTP received in your email id"
-                      name="otppin"
+                      placeholder="Re-enter yourpassword"
+                      name="confirmpass"
                       onChange={(e) => this.handleChange(e)}
                     />
-                    {this.state.showValidationpin ? (
-                      <span className="bg-danger">please enter OTP</span>
+                    {this.state.showValidationconfirmpass ? (
+                      <span className="bg-danger">password does not match</span>
                     ) : null}
                   </div>
                 </div>
@@ -164,7 +137,7 @@ export default class artreg2 extends Component {
                   }}
                   onClick={() => this.operation()}
                 >
-                  verify & proceed
+                 next
                 </button>
               </div>
             </Row>         

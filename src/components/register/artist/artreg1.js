@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
-import logo from "../../../assets/logo.svg";
+import logos from "../../../assets"
 
 export default class artreg1 extends Component {
     constructor() {
@@ -40,6 +40,7 @@ export default class artreg1 extends Component {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
           showValidation: false,
+          showValidationpin: false
         });
       }
     
@@ -48,24 +49,25 @@ export default class artreg1 extends Component {
             <React.Fragment>
          <Col
             xs={{ size: "12" }}
-            sm={{ size: "5" }}
+            sm={{ size: "2" }}
             md={{ size: "3" }}
-            md={{ size: "3" }}
+            lg={{ size: "3" }}
           ></Col>
           <Col
             md={{ size: "12" }}
-            sm={{ size: "7" }}
+            sm={{ size: "8" }}
             md={{ size: "6" }}
-            md={{ size: "6" }}
+            lg={{ size: "6" }}
           >
         <div className="demo text-center" noGutters={true}>
           <br></br>
           <Row noGutters={true} className="">
-            <span className="col-sm-2 glyphicon glyphicon-arrow-left" onClick={() => this.backoperation()}></span>
-            <h2 className="col-sm-6">Register</h2>
-            <img src={logo} className="col-sm-2" alt="TataTrusts logo"></img>
-
-            <img src={logo} className="col-sm-2" alt="TataTrusts logo"></img>
+            <div className="col-sm-8">
+              <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
+              <h2 className="col-sm-6 margin-login">Login</h2>
+            </div>
+           
+            <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
@@ -120,8 +122,8 @@ export default class artreg1 extends Component {
                       name="weaverpin"
                       onChange={(e) => this.handleChange(e)}
                     />
-                    {this.state.showValidation ? (
-                      <span className="bg-danger">please enter username</span>
+                    {this.state.showValidationpin ? (
+                      <span className="bg-danger">please enter pin</span>
                     ) : null}
                   </div>
                 </div>

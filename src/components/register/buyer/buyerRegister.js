@@ -50,8 +50,7 @@ export default class buyerRegister extends Component {
                             {this.renderSection(this.state.userpage)}
 
                         </Row>
-                        <br />
-                        <br /><br /><br />
+                        
                     </Container>
                 </div>
             </React.Fragment>

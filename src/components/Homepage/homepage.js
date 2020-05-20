@@ -60,12 +60,16 @@ export default class HomePage extends Component {
                                sm={{ size: "5" }}
                                md={{ size: "6" }}
                                md={{ size: "7" }}
-                             ></Col>
+                               className="vcenter fullscreen"
+                             >
+                               <div ></div>
+                             </Col>
                              <Col
                                md={{ size: "12" }}
                                sm={{ size: "7" }}
                                md={{ size: "6" }}
                                md={{ size: "5" }}
+                               className="vcenter"
                              >
                                
                                {this.renderSection(this.state.userpage)}

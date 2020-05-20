@@ -7,7 +7,7 @@
   min-height:100vh;
 }
 .demo{
-    margin-top:100px;
+    /* margin-top:20px; */
     background-color: white;
     border-radius: 10px;
     
@@ -192,6 +192,9 @@ body {
     margin: 1px;
     left: 4px;
 }
+.fullscreen{
+    height:100vh;
+}
 
 @keyframes slideInFromLeft {
   0% {
@@ -200,4 +203,217 @@ body {
   100% {
     transform: translateX(0);
   }
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none!important;
+}
+
+@media only screen and ( min-width: 1200px ) {
+
+    .homeimg{
+        background-image: url("../../assets/calculator_bg-scaled-e1584353976962-2048x1362.jpg"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: auto;
+        min-height:100vh;
+      }
+      .demo{
+          /* margin-top:100px; */
+          background-color: white;
+          border-radius: 10px;
+          
+          width:90%;
+      }
+      .logohome{
+          width:30%;
+          height:auto;
+          margin-top:20px;
+      }
+      .logoselect{
+           width: 45%;
+          padding-top: 30%;
+          height: auto;
+          margin-top: 5px;
+          padding-bottom: 15%;
+      }
+      .hrline{
+          margin-top: 7px;
+          margin-bottom: 13px;
+          border: 0;
+          border-top: 1px solid #666666;
+          width: 68%;
+      }
+      button{
+          font-size: 16px!important;
+      }
+      .vrline{
+          border-left: 2px solid;
+          height: 1.5em;
+          margin-top: -15%;
+          position: absolute;
+          left: 45%;
+          /* margin-left: -3px; */
+          /* top: 0; */
+          color: #c7c7c7;
+      }
+      .mr-5{
+          margin-right: 35px!important;
+      }
+      .ml-5{
+          margin-left: 10px!important;
+      }
+      .line3{
+          margin-top: 16px;
+          color: grey;
+          font-family: var(--PlayfairFont) !important;
+      
+      }
+      .line31{
+          margin-top: 16px;
+          color: grey;
+      
+      }
+      .line311{
+          margin-top: 16px;
+          
+      
+      }
+      .line5{
+          margin-top: 16px;
+          color:blue;
+      }
+      .line7{
+      
+          margin-top: 16px;
+          font-size: 15px;
+      }
+      .line6{
+          margin-top: 16px;
+          
+              color: dodgerblue;
+          font-size: 15px;
+      }
+      .font2{
+          font-size: 15px;
+      }
+      .font3{
+          font-size: 20px;
+      }
+      .font4{
+          font-size: 25px;
+      }
+      .font5{
+          font-size: 35px;
+      }
+      .half{
+          width:20%;
+          margin-top:17%;
+          float: left;
+          font-size: 37px;
+      }
+      .box1{
+           float: left;
+          height: auto;
+          width: 30%;
+          border: 1px solid #ffffff;
+          margin-left: 10%;
+          box-shadow: 0px 10px 20px 0px #d8d6d6;
+          border-radius: 15px;
+      
+          
+         
+      }
+      .box3{
+          float: left;
+          height: auto;
+          width: 30%;
+          border: 1px solid #ffffff;
+          margin-right: 10%;
+          box-shadow: 0px 10px 20px 0px #d8d6d6;
+          border-radius: 15px;
+      }
+      .selectorrow{
+          margin-top:20px;
+      }
+      
+      .BuyerLogin{
+          border-radius: 25px !important;
+          height: 3.5em !important;
+      }
+      /* enable absolute positioning */
+      .inner-addon {
+        position: relative;
+      }
+      
+      /* style glyph */
+      .inner-addon .glyphicon {
+        position: absolute;
+        padding: 10px;
+        pointer-events: none;
+      }
+      
+      /* align glyph */
+      .left-addon .glyphicon  { left:  0px;}
+      .right-addon .glyphicon { right: 0px;}
+      
+      /* add padding  */
+      .left-addon input  { padding-left:  40px; }
+      .right-addon input { padding-right: 30px; }
+      
+      
+      
+      body {
+        margin: 10px;
+      }
+      
+      .circleDiv {
+      /*border-radius: 50%;*/
+      /* animation: 1s ease-out 0s 1 slideInFromLeft; */
+       background: white; 
+        font-size: 25px;
+        text-align: center;
+        margin-right: 10px;
+        border-radius:50%;
+        display:inline-block;
+        padding:10px;
+        width: 3em;
+          height: 3em;
+          box-shadow: 0px 0px 31px -8px #ff9d9d;
+          font-family: var(--lato);
+      }
+      
+      .cicrleLogo {
+              width: 1.5em;
+          padding-top: 6px;
+          margin-left: -6%;
+      }
+      
+      .circleText {
+          font-family: lato;
+          font-size: 13px;
+          margin-left: 4px;
+      }
+      
+      .usernameLogo {
+          width: 48px;
+      }
+      
+      .locklogo {
+          width: 38px;
+          margin: 1px;
+          left: 4px;
+      }
+      
+      @keyframes slideInFromLeft {
+        0% {
+          transform: translate(170%, 220%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
 }

@@ -11,7 +11,7 @@ export default class artistRegister extends Component {
         super(props);
 
           this.state = {
-            userpage : 2
+            userpage : 0
           };
         this.handler = this.handler.bind(this);
        

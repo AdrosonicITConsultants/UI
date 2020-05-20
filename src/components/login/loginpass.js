@@ -102,7 +102,7 @@ export default class buyerpass extends Component {
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
-                                 <img src={logos.locklogo} className="glyphicon locklogo1"></img>
+                                 <img src={logos.locklogo} className="glyphicon locklogo"></img>
                                  <input
                                    id="pass"
                                    type="text"

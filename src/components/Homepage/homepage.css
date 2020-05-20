@@ -26,13 +26,15 @@
     padding-bottom: 15%;
 }
 .hrline{
-    margin-top: 1px;
-    margin-bottom: 20px;
+    margin-top: 7px;
+    margin-bottom: 13px;
     border: 0;
-    border-top: 1px solid black;
-    width: 75%;
+    border-top: 1px solid #666666;
+    width: 68%;
 }
-
+button{
+    font-size: 16px!important;
+}
 .vrline{
     border-left: 2px solid;
     height: 1.5em;
@@ -43,16 +45,39 @@
     /* top: 0; */
     color: #c7c7c7;
 }
+.mr-5{
+    margin-right: 35px!important;
+}
+.ml-5{
+    margin-left: 10px!important;
+}
 .line3{
-    margin-top: 30px;
+    margin-top: 27px;
     color: grey;
+    font-family: var(--PlayfairFont) !important;
+
+}
+.line31{
+    margin-top: 27px;
+    color: grey;
+
+}
+.line311{
+    margin-top: 27px;
+    
+
 }
 .line5{
-    margin-top: 30px;
+    margin-top: 27px;
     color:blue;
 }
+.line7{
+
+    margin-top: 27px;
+    font-size: 15px;
+}
 .line6{
-    margin-top: 30px;
+    margin-top: 27px;
     
         color: dodgerblue;
     font-size: 15px;
@@ -64,7 +89,7 @@
     font-size: 20px;
 }
 .font4{
-font-size: 25px;
+    font-size: 25px;
 }
 .font5{
     font-size: 35px;

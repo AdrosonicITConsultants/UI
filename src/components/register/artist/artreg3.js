@@ -64,17 +64,20 @@ export default class artreg3 extends Component {
           <Row noGutters={true} className="">
             <div className="col-sm-8">
               <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Login</h2>
+              <h2 className="col-sm-6 margin-login">Register</h2>
             </div>
            
             <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
-          <Row noGutters={true} className="text-center line3 font3">
+          <br />
+          <Row noGutters={true} className="text-center line3 font4">
           <span className="col-sm-1"></span>
                 <span className="col-sm-10">
-                enter your new password
+                <img src={logos.locklogo}   
+                  className="locklogo glyphicon mr-5"></img>
+                Enter your new password
                 </span>
                
           </Row>
@@ -87,7 +90,7 @@ export default class artreg3 extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                    {/* <i className="glyphicon glyphicon-user"></i> */}
                     <input
                       type="password"
                       id="password"
@@ -108,7 +111,7 @@ export default class artreg3 extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                    {/* <i className="glyphicon glyphicon-user"></i> */}
                     <input
                       type="password"
                       id="confirmpass"
@@ -137,16 +140,18 @@ export default class artreg3 extends Component {
                   }}
                   onClick={() => this.operation()}
                 >
-                 next
+                 Next
                 </button>
               </div>
             </Row>         
           <br />
+          <br />
           <hr className="hrline"></hr>
-          <Row noGutters={true} className="text-center line3 font3">
+          <br />
+          <Row noGutters={true} className="text-center line311 font4">
               <span className="col-sm-2"></span>
                 <span className="col-sm-8">
-                in case of any help               </span>
+                In case of any help               </span>
                
           </Row>
           <br/>
@@ -157,7 +162,7 @@ export default class artreg3 extends Component {
                     background: "white",
                     color: "#000000",
                     borderRadius: "2em",
-                    width: "8em",
+                    width: "10em",
                     height: "3em",
                   }}
                 //   onClick={() => this.operation()}
@@ -167,8 +172,12 @@ export default class artreg3 extends Component {
               </div>
             </Row> 
             <br/>
-            <Row noGutters={true} className="text-center font3">
+            
+            <br/>
+            <Row noGutters={true} className="text-center line6 font3">
+                                    
                                     Change language
+                                    <img src={logos.language}  className="ml-5"></img>
                                 </Row>
 
           {/* <Row noGutters={true}>

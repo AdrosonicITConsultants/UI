@@ -64,30 +64,29 @@ export default class artreg1 extends Component {
           <Row noGutters={true} className="">
             <div className="col-sm-8">
               <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Login</h2>
+              <h2 className="col-sm-6 margin-login">Register</h2>
             </div>
            
             <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
-          <Row noGutters={true} className="text-center line3 font3">
+          <Row noGutters={true} className="text-center line3 font4">
           <span className="col-sm-1"></span>
                 <span className="col-sm-10">
-                Do you have a weaver ID
+                Do you have a weaver ID?
                 </span>
                
           </Row>
-
-          <br />         
+      
            
              
               <Row noGutters={true}>
                 <div className="col-sm-1"></div>
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
-                  <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                  <div className="inner-addon2 left-addon2">
+                  <img src={logos.userlogo} className="userLogo glyphicon"></img>
                     <input
                       type="text"
                       id="weaverid"
@@ -102,18 +101,18 @@ export default class artreg1 extends Component {
                   </div>
                 </div>
               </Row>
-              <Row noGutters={true} className="text-center line3 font3">
+              <Row noGutters={true} className="text-center line3 font4">
               <span className="col-sm-1"></span>
                 <span className="col-sm-10">
-                Enter 4 digit pin provided along with weaver ID                </span>
+                Enter your 4 digit pin provided along with weaver ID                </span>
                
           </Row>
           <Row noGutters={true}>
                 <div className="col-sm-1"></div>
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
-                  <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                  <div className="inner-addon2 left-addon2">
+                  <img src={logos.ionickeylogo} className="ionickeylogo glyphicon"></img>
                     <input
                       type="number"
                       id="weaverpin"
@@ -148,10 +147,10 @@ export default class artreg1 extends Component {
             </Row>         
           <br />
           <hr className="hrline"></hr>
-          <Row noGutters={true} className="text-center line3 font3">
+          <Row noGutters={true} className="text-center line31 font4">
               <span className="col-sm-2"></span>
                 <span className="col-sm-8">
-                if you don't have a weaver id get in touch with us.                </span>
+                If you don't have a weaver id get in touch with us.                </span>
                
           </Row>
           <br/>
@@ -162,7 +161,7 @@ export default class artreg1 extends Component {
                     background: "white",
                     color: "#000000",
                     borderRadius: "2em",
-                    width: "8em",
+                    width: "10em",
                     height: "3em",
                   }}
                 //   onClick={() => this.operation()}
@@ -175,9 +174,13 @@ export default class artreg1 extends Component {
          
 
           <Row noGutters={true}>
-            <span className="col-sm-3 text-center">Help</span>
-            <span className="col-sm-5"></span>
-            <span className="col-sm-4 text-center">Privacy policy</span>
+            <span className="col-sm-3 text-center line7 font3">Help?</span>
+            <span className="col-sm-3"></span>
+            <span className="col-sm-6 text-center line6 font3">
+                                    
+                                    Change language
+                                    <img src={logos.language} className="ml-5"></img>
+                                </span>
           </Row>
           <br></br>
         </div>

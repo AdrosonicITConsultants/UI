@@ -22,6 +22,37 @@
 
     font-size: 20px;
 }
-.font4{
+.mr-5{
+    margin-right: 35px!important;
+}
+.font5{
     font-size: 35px;
 }
+.userLogo {
+    width: 42px;
+}
+.ionickeylogo {
+    width: 47px;
+}
+.locklogo{
+    width: 30px;
+}
+/* align glyph */
+.left-addon2 .glyphicon  { left:  6px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon2 input  { padding-left:  48px; }
+.right-addon input { padding-right: 30px; }
+
+/* enable absolute positioning */
+.inner-addon2 {
+    position: relative;
+  }
+  
+  /* style glyph */
+  .inner-addon2 .glyphicon {
+    position: absolute;
+    padding: 12px;
+    pointer-events: none;
+  }

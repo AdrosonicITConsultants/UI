@@ -72,22 +72,25 @@ export default class artreg2 extends Component {
           <Row noGutters={true} className="">
             <div className="col-sm-8">
               <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Login</h2>
+              <h2 className="col-sm-6 margin-login">Register</h2>
             </div>
            
             <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
-          <Row noGutters={true} className="text-center line3 font3">
+          <Row noGutters={true} className="text-center line3 font4">
           <span className="col-sm-1"></span>
+          
                 <span className="col-sm-10">
-                enter your email ID
+                  <img src={logos.locklogo}   
+                  className="locklogo glyphicon mr-5"></img>
+                  Enter your email ID
                 </span>
                
           </Row>
 
-          <br />         
+               
            
              
               <Row noGutters={true}>
@@ -95,7 +98,7 @@ export default class artreg2 extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                    {/* <i className="glyphicon glyphicon-user"></i> */}
                     <input
                       type="email"
                       id="emailid"
@@ -135,7 +138,7 @@ export default class artreg2 extends Component {
                 <div className="form-group col-sm-10 col-xs-6">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
-                    <i className="glyphicon glyphicon-user"></i>
+                    {/* <i className="glyphicon glyphicon-user"></i> */}
                     <input
                       type="number"
                       id="otppin"
@@ -159,24 +162,25 @@ export default class artreg2 extends Component {
                     background: "#000000",
                     color: "white",
                     borderRadius: "2em",
-                    width: "8em",
+                    width: "11em",
                     height: "3em",
                   }}
                   onClick={() => this.operation()}
                 >
-                  verify & proceed
+                  Verify & proceed
                 </button>
               </div>
             </Row>         
           <br />
           <hr className="hrline"></hr>
-          <Row noGutters={true} className="text-center line3 font3">
+          <Row noGutters={true} className="text-center line311 font4">
               <span className="col-sm-2"></span>
                 <span className="col-sm-8">
-                in case of any help               </span>
+                In case of any help               </span>
                
           </Row>
           <br/>
+          <br />
           <Row noGutters={true}>
               <div className="col-sm-12 text-center">
                 <button
@@ -184,7 +188,7 @@ export default class artreg2 extends Component {
                     background: "white",
                     color: "#000000",
                     borderRadius: "2em",
-                    width: "8em",
+                    width: "10em",
                     height: "3em",
                   }}
                 //   onClick={() => this.operation()}
@@ -194,8 +198,10 @@ export default class artreg2 extends Component {
               </div>
             </Row> 
             <br/>
-            <Row noGutters={true} className="text-center font3">
+            <Row noGutters={true} className="text-center line6 font3">
+                                    
                                     Change language
+                                    <img src={logos.language}  className="ml-5"></img>
                                 </Row>
 
           {/* <Row noGutters={true}>

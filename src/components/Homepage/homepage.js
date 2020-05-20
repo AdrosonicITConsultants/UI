@@ -78,8 +78,7 @@ export default class HomePage extends Component {
                                {/* <Artistlogin handler={this.handler} /> */}
                              </Col>
                            </Row>
-                           <br/>
-                           <br/><br/><br/>                           
+                                                      
                          </Container>
                        </div>
                      </React.Fragment>

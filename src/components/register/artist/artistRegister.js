@@ -16,7 +16,7 @@ export default class artistRegister extends Component {
         this.handler = this.handler.bind(this);
        
       }
-
+    
       renderSection(num){
           switch (num) {
            case 0:
@@ -27,7 +27,7 @@ export default class artistRegister extends Component {
               break;
             case 2:
               return <Artreg3 handler={this.handler} />;
-              break;  
+              break; 
                    
             default:
               break;

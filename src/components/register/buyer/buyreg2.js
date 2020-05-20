@@ -15,8 +15,7 @@ export default class buyreg2 extends Component {
       showUserName: true,
     };
   }
-  operation1() {
-    debugger;
+  operation1() {    
     const emailcheck = isEmail;
     
     // validator.isEmail(this.state.emailid);

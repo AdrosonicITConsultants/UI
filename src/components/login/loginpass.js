@@ -53,7 +53,11 @@ export default class buyerpass extends Component {
                          <br></br>
                          <Row noGutters={true} className="">
                            <div className="col-xs-8">
-                             <img src={logos.backarrowicon} className="col-xs-2 arrowsize margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
+                             <img
+                               src={logos.backarrowicon}
+                               className="col-xs-2 arrowsize margin-arrow glyphicon"
+                               onClick={() => this.backoperation()}
+                             ></img>
                              <h2 className="col-xs-6 margin-login">Login</h2>
                            </div>
                            <img
@@ -68,22 +72,29 @@ export default class buyerpass extends Component {
                          <br />
                          <Row noGutters={true}>
                            <span className="col-xs-4"></span>
-                           {(this.props.userpage == 2) ?
+                           {this.props.userpage == 2 ? (
                              <div className="col-xs-4 text-center">
                                <i className="circleDiv">
-                                 <img src={logos.buyerlogo} className="cicrleLogo" alt="buyer TataTrusts logo"></img>
+                                 <img
+                                   src={logos.buyerlogo}
+                                   className="cicrleLogo"
+                                   alt="buyer TataTrusts logo"
+                                 ></img>
                                  <div className="circleText">Buyer</div>
                                </i>
                              </div>
-                             :
+                           ) : (
                              <div className="col-xs-4 text-center">
                                <i className="circleDiv">
-                                 <img src={logos.buyerlogo} className="cicrleLogo" alt="artist TataTrusts logo"></img>
+                                 <img
+                                   src={logos.buyerlogo}
+                                   className="cicrleLogo"
+                                   alt="artist TataTrusts logo"
+                                 ></img>
                                  <div className="circleText">Artist</div>
                                </i>
                              </div>
-
-                           }
+                           )}
                            <span className="col-xs-4"></span>
                          </Row>
 
@@ -102,10 +113,13 @@ export default class buyerpass extends Component {
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
-                                 <img src={logos.locklogo} className="glyphicon locklogo"></img>
+                                 <img
+                                   src={logos.locklogo}
+                                   className="glyphicon locklogo"
+                                 ></img>
                                  <input
                                    id="pass"
-                                   type="text"
+                                   type="password"
                                    className="form-control BuyerLogin"
                                    placeholder="password"
                                    name="password"
@@ -126,7 +140,6 @@ export default class buyerpass extends Component {
                            </Row>
                          </div>
 
-                         
                          <Row noGutters={true}>
                            <div className="col-xs-12 text-center">
                              <button
@@ -144,7 +157,6 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
-                        
                          <br />
                          {/* <Row noGutters={true}>
                 <div className="col-xs-12 text-center">
@@ -162,16 +174,33 @@ export default class buyerpass extends Component {
                          <hr className="hrline"></hr>
                          <Row noGutters={true}>
                            <div className="col-xs-12 text-center font2">
-                             <div>
-                               new user <a href="./">click here</a> to register.
-                             </div>
+                             {this.props.userpage == 2 ? (
+                               <div>
+                                 new user{" "}
+                                 <a href="/buyer-registration">click here</a> to
+                                 register.
+                               </div>
+                             ) : (
+                               <div>
+                                 new user{" "}
+                                 <a href="/artist-registration">click here</a>{" "}
+                                 to register.
+                               </div>
+                             )}
                            </div>
                          </Row>
 
                          <Row noGutters={true}>
-                           <strong className="col-xs-3 text-center line7 font3">Help?</strong>
+                           <strong className="col-xs-3 text-center line7 font3">
+                             Help?
+                           </strong>
                            <span className="col-xs-4"></span>
-                           <span style={{ color: "var(--lightFont)" }} className="col-xs-5 text-center line7 font3">Privacy policy</span>
+                           <span
+                             style={{ color: "var(--lightFont)" }}
+                             className="col-xs-5 text-center line7 font3"
+                           >
+                             Privacy policy
+                           </span>
                          </Row>
                          <br></br>
                        </div>

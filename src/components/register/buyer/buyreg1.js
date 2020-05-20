@@ -64,7 +64,10 @@ export default class artreg1 extends Component {
           <Row noGutters={true} className="">
             <div className="col-sm-8">
               <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Register</h2>
+                    <div>
+                      <h2 className="col-xs-6 margin-registertext">Register</h2>
+                      <h4 className="margin-roletext">Buyer</h4>
+                    </div>
             </div>
            
             <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>

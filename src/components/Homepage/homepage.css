@@ -156,7 +156,16 @@ button{
 .left-addon input  { padding-left:  40px; }
 .right-addon input { padding-right: 30px; }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 body {
   margin: 10px;
@@ -195,9 +204,14 @@ body {
 }
 .locklogo {
     width: 38px;
+    left: 5px !important;
     
 }
 
+.bg-danger{
+color:red;
+background-color: white !important;
+}
 .locklogo1 {
     width: 38px;
     margin: 1px;

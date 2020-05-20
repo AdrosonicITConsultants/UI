@@ -39,6 +39,13 @@ export default class HomePage extends Component {
                          break;
                       
                        default:
+                           return (
+                             <Roleselect
+                               handler={this.handler}
+                               userpage={this.state.userpage}
+                             />
+                           );
+                           break;
                          break;
                      }
                  }

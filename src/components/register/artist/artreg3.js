@@ -66,7 +66,10 @@ export default class artreg3 extends Component {
           <Row noGutters={true} className="">
             <div className="col-xs-8">
               <img src={logos.backarrowicon} className="col-xs-2 margin-arrow arrowsize glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-xs-6 margin-login">Register</h2>
+                    <div>
+                      <h2 className="col-xs-6 margin-registertext">Register</h2>
+                      <h4 className="margin-roletext">Artist</h4>
+                    </div>
             </div>
            
             <img src={logos.mainlogoside} className="col-xs-4" alt="TataTrusts logo"></img>
@@ -102,7 +105,7 @@ export default class artreg3 extends Component {
                     />
                     {this.state.showValidationpass ? (
                       <span className="bg-danger">please enter your password</span>
-                    ) : null}
+                    ) : <br/>}
                   </div>
                 </div>
               </Row>
@@ -123,7 +126,7 @@ export default class artreg3 extends Component {
                     />
                     {this.state.showValidationconfirmpass ? (
                       <span className="bg-danger">password does not match</span>
-                    ) : null}
+                    ) : <br/>}
                   </div>
                 </div>
               </Row>

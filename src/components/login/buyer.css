@@ -4,6 +4,20 @@
     font-family: var(--PlayfairFont);
 }
 
+.margin-registertext {
+    font-weight: 600;
+    margin-top: 0.1em;   
+    font-family: var(--PlayfairFont);
+}
+
+.margin-roletext{
+    float: left;
+    margin-left: 35%;
+    margin-top: -0.5em;
+    color: grey;
+     font-family: var(--LatoFont);
+}
+
 .margin-arrow {
     margin-top: 1.3em;
     margin-left: 2em;

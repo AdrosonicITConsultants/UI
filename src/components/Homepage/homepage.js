@@ -56,20 +56,20 @@ export default class HomePage extends Component {
                          <Container>
                            <Row noGutters={true} className="mt-5">
                              <Col
-                               xs={{ size: "12" }}
+                               xs={{ size: "0" }}
                                sm={{ size: "5" }}
                                md={{ size: "6" }}
-                               md={{ size: "7" }}
+                               lg={{ size: "7" }}
                                className="vcenter fullscreen"
                              >
                                <div ></div>
                              </Col>
                              <Col
-                               md={{ size: "12" }}
+                               xs={{ size: "12" }}
                                sm={{ size: "7" }}
                                md={{ size: "6" }}
-                               md={{ size: "5" }}
-                               className="vcenter"
+                               lg={{ size: "5" }}
+                               className="vcenter "
                              >
                                
                                {this.renderSection(this.state.userpage)}

@@ -47,7 +47,7 @@ export default class roleselect extends Component {
                                     </div>                        
                         <div style={{ color:"#c7c7c7"}} className="half text-center">
                             <div className="vrline"></div>
-                            <div style={{ marginTop: "-10%", height: "1.5em" }}>or</div>
+                            <div className ="or" style={{}}>or</div>
                                       
                                          <div style={{ marginTop: "2%", height:"1.5em" }} className="vrline"></div>
                                     </div>

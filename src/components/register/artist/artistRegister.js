@@ -11,7 +11,7 @@ export default class artistRegister extends Component {
         super(props);
 
           this.state = {
-            userpage : 0
+            userpage : 2
           };
         this.handler = this.handler.bind(this);
        
@@ -50,8 +50,7 @@ export default class artistRegister extends Component {
                            {this.renderSection(this.state.userpage)}
                             
                            </Row>
-                           <br/>
-                           <br/><br/><br/>                           
+                                                  
                          </Container>
                        </div>
                      </React.Fragment>

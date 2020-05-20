@@ -7,13 +7,10 @@
     min-height:100vh;
   }
   .demoa{
-    margin-top:100px;
     background-color: white;
     border-radius: 10px;
-    min-height:650px;
-    height:auto;
-    width:100%;
-    /* margin-left: 8.5%; */
+    width: 90%;
+    margin: 0 auto;
 }
 .font2{
     font-size: 15px;
@@ -22,6 +19,7 @@
 
     font-size: 20px;
 }
+
 .mr-5{
     margin-right: 35px!important;
 }
@@ -34,8 +32,8 @@
 .ionickeylogo {
     width: 47px;
 }
-.locklogo{
-    width: 30px;
+.locklogo1{
+    width: 20px;
 }
 /* align glyph */
 .left-addon2 .glyphicon  { left:  6px;}
@@ -56,3 +54,47 @@
     padding: 12px;
     pointer-events: none;
   }
+
+@media only screen and ( max-width: 480px ) {
+    .demoa{
+        margin-top:20px;
+       
+    }
+   
+}
+
+@media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+
+    .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+    }
+   
+}
+@media only screen and ( min-width: 1200px ) {
+    
+    .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        margin: 0 auto;
+        height: 620px;
+    }
+
+    
+    .vrline{
+        border-left: 2px solid;
+        height: 1.5em;
+        margin-top: -15%;
+        position: absolute;
+        left: 45%;
+        /* margin-left: -3px; */
+        /* top: 0; */
+        color: #c7c7c7;
+    }
+
+}

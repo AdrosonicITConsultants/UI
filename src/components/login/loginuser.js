@@ -47,28 +47,28 @@ export default class buyeruser extends Component {
         <div className="demo" noGutters={true}>
           <br></br>
           <Row noGutters={true} className="">
-            <div className="col-sm-8">
-              <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Login</h2>
+            <div className="col-xs-8">
+              <img src={logos.backarrowicon} className="col-xs-2 margin-arrow arrowsize glyphicon" onClick={() => this.backoperation()}></img>
+              <h2 className="col-xs-6 margin-login">Login</h2>
             </div>
            
-            <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
+            <img src={logos.mainlogoside} className="col-xs-4" alt="TataTrusts logo"></img>
           </Row>
 
           <br />
           <br />
           <br />
           <Row noGutters={true}>
-            <span className="col-sm-4"></span>
+            <span className="col-xs-4"></span>
            {(this.props.userpage == 1)?
-           <div className="col-sm-4 text-center">
+           <div className="col-xs-4 text-center">
               <i className="circleDiv">
                   <img src={logos.buyerlogo} className="cicrleLogo" alt="buyer TataTrusts logo"></img> 
                   <div className="circleText">Buyer</div>
               </i>     
               </div>
             :           
-              <div className="col-sm-4 text-center">
+              <div className="col-xs-4 text-center">
                 <i className="circleDiv">
                   <img src={logos.buyerlogo} className="cicrleLogo" alt="artist TataTrusts logo"></img>
                   <div className="circleText">Artist</div>
@@ -79,7 +79,7 @@ export default class buyeruser extends Component {
 
            
             
-            <span className="col-sm-4"></span>
+            <span className="col-xs-4"></span>
           </Row>
           <br />
           <br />
@@ -87,14 +87,14 @@ export default class buyeruser extends Component {
           <br />         
             <div>
               <Row noGutters={true}>
-                <span className="col-sm-1"></span>
-                <span className="col-sm-10 text-center">
+                <span className="col-xs-1"></span>
+                <span className="col-xs-10 text-center font2">
                 Enter your registered mobile number or email id
                 </span>
               </Row>
               <Row noGutters={true}>
-                <div className="col-sm-1"></div>
-                <div className="form-group col-sm-10 col-xs-6">
+                <div className="col-xs-1"></div>
+                <div className="form-group col-xs-10">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
                   <img src={logos.usernamelogo} className="usernameLogo glyphicon"></img>
@@ -113,9 +113,9 @@ export default class buyeruser extends Component {
                 </div>
               </Row>
             </div>        
-          <br />
+          
             <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
+              <div className="col-xs-12 text-center">
                 <button
                   style={{
                     background: "#000000",
@@ -130,11 +130,11 @@ export default class buyeruser extends Component {
                 </button>
               </div>
             </Row>         
-          <br />
-          <br />
+         
+         
           <br />
           {/* <Row noGutters={true}>
-                <div className="col-sm-12 text-center">
+                <div className="col-xs-12 text-center">
                   <h2>Or</h2>
                 </div>
               </Row>
@@ -142,13 +142,13 @@ export default class buyeruser extends Component {
               <br />
 
               <Row noGutters={true}>
-                <div className="col-sm-12 text-center">
+                <div className="col-xs-12 text-center">
                   <h2>google login</h2>
                 </div>
               </Row> */}
           <hr className="hrline" style={{ bordertop:"2px solid #d8d9da !important"}}></hr>
           <Row noGutters={true}>
-            <div className="col-sm-12 text-center">
+            <div className="col-xs-12 text-center font2">
             {(this.props.userpage == 1)?
                <div>
                new user <a href="/buyer-registration">click here</a> to register.
@@ -163,9 +163,9 @@ export default class buyeruser extends Component {
           </Row>
 
           <Row noGutters={true}>
-            <strong className="col-sm-3 text-center">Help?</strong>
-            <span className="col-sm-5"></span>
-            <span style={{ color: "var(--lightFont)"}} className="col-sm-4 text-center">Privacy policy</span>
+            <strong className="col-xs-3 text-center line7 font3">Help?</strong>
+            <span className="col-xs-4"></span>
+            <span style={{ color: "var(--lightFont)"}} className="col-xs-5 text-center line7 font3">Privacy policy</span>
           </Row>
           <br></br>
         </div>

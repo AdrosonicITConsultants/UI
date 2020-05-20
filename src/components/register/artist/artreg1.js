@@ -52,28 +52,30 @@ export default class artreg1 extends Component {
             sm={{ size: "2" }}
             md={{ size: "3" }}
             lg={{ size: "3" }}
+            className="vcenter fullscreen"
           ></Col>
           <Col
-            md={{ size: "12" }}
+            xs={{ size: "12" }}
             sm={{ size: "8" }}
             md={{ size: "6" }}
             lg={{ size: "6" }}
+            className="vcenter "
           >
-        <div className="demo text-center" noGutters={true}>
+        <div className="demoa text-center" noGutters={true}>
           <br></br>
           <Row noGutters={true} className="">
-            <div className="col-sm-8">
-              <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Register</h2>
+            <div className="col-xs-8">
+              <img src={logos.backarrowicon} className="col-xs-2 margin-arrow arrowsize glyphicon" onClick={() => this.backoperation()}></img>
+              <h2 className="col-xs-6 margin-login">Register</h2>
             </div>
            
-            <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
+            <img src={logos.mainlogoside} className="col-xs-4" alt="TataTrusts logo"></img>
           </Row>
 
-          <br />
-          <Row noGutters={true} className="text-center line3 font4">
-          <span className="col-sm-1"></span>
-                <span className="col-sm-10">
+          
+          <Row noGutters={true} className="text-center line32 font3">
+          <span className="col-xs-1"></span>
+                <span className="col-xs-10">
                 Do you have a weaver ID?
                 </span>
                
@@ -82,8 +84,8 @@ export default class artreg1 extends Component {
            
              
               <Row noGutters={true}>
-                <div className="col-sm-1"></div>
-                <div className="form-group col-sm-10 col-xs-6">
+                <div className="col-xs-1"></div>
+                <div className="form-group col-xs-10 ">
                   <label className="control-label"></label>
                   <div className="inner-addon2 left-addon2">
                   <img src={logos.userlogo} className="userLogo glyphicon"></img>
@@ -101,15 +103,15 @@ export default class artreg1 extends Component {
                   </div>
                 </div>
               </Row>
-              <Row noGutters={true} className="text-center line3 font4">
-              <span className="col-sm-1"></span>
-                <span className="col-sm-10">
+              <Row noGutters={true} className="text-center line32 font3">
+              <span className="col-xs-1"></span>
+                <span className="col-xs-10">
                 Enter your 4 digit pin provided along with weaver ID                </span>
                
           </Row>
           <Row noGutters={true}>
-                <div className="col-sm-1"></div>
-                <div className="form-group col-sm-10 col-xs-6">
+                <div className="col-xs-1"></div>
+                <div className="form-group col-xs-10 ">
                   <label className="control-label"></label>
                   <div className="inner-addon2 left-addon2">
                   <img src={logos.ionickeylogo} className="ionickeylogo glyphicon"></img>
@@ -128,9 +130,9 @@ export default class artreg1 extends Component {
                 </div>
               </Row>
                  
-          <br />
+         
             <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
+              <div className="col-xs-12 text-center">
                 <button
                   style={{
                     background: "#000000",
@@ -147,15 +149,15 @@ export default class artreg1 extends Component {
             </Row>         
           <br />
           <hr className="hrline"></hr>
-          <Row noGutters={true} className="text-center line31 font4">
-              <span className="col-sm-2"></span>
-                <span className="col-sm-8">
+          <Row noGutters={true} className="text-center line32 font3">
+              <span className="col-xs-2"></span>
+                <span className="col-xs-8">
                 If you don't have a weaver id get in touch with us.                </span>
                
           </Row>
-          <br/>
+          
           <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
+              <div className="col-xs-12 text-center">
                 <button
                   style={{
                     background: "white",
@@ -170,13 +172,12 @@ export default class artreg1 extends Component {
                 </button>
               </div>
             </Row> 
-            <br/>
-         
+                  
 
           <Row noGutters={true}>
-            <span className="col-sm-3 text-center line7 font3">Help?</span>
-            <span className="col-sm-3"></span>
-            <span className="col-sm-6 text-center line6 font3">
+            <span className="col-xs-3 text-center line7 font3">Help?</span>
+            <span className="col-xs-3"></span>
+            <span className="col-xs-6 text-center line6 font3">
                                     
                                     Change language
                                     <img src={logos.language} className="ml-5"></img>

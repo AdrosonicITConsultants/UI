@@ -51,32 +51,33 @@ export default class artreg3 extends Component {
             xs={{ size: "12" }}
             sm={{ size: "2" }}
             md={{ size: "3" }}
-            md={{ size: "3" }}
+            lg={{ size: "3" }}
+            className="vcenter fullscreen"
           ></Col>
           <Col
-            md={{ size: "12" }}
+            xs={{ size: "12" }}
             sm={{ size: "8" }}
             md={{ size: "6" }}
-            md={{ size: "6" }}
+            lg={{ size: "6" }}
+            className="vcenter "
           >
-        <div className="demo text-center" noGutters={true}>
+        <div className="demoa text-center" noGutters={true}>
           <br></br>
           <Row noGutters={true} className="">
-            <div className="col-sm-8">
-              <img src={logos.backarrowicon} className="col-sm-2 margin-arrow glyphicon" onClick={() => this.backoperation()}></img>
-              <h2 className="col-sm-6 margin-login">Register</h2>
+            <div className="col-xs-8">
+              <img src={logos.backarrowicon} className="col-xs-2 margin-arrow arrowsize glyphicon" onClick={() => this.backoperation()}></img>
+              <h2 className="col-xs-6 margin-login">Register</h2>
             </div>
            
-            <img src={logos.mainlogoside} className="col-sm-4" alt="TataTrusts logo"></img>
+            <img src={logos.mainlogoside} className="col-xs-4" alt="TataTrusts logo"></img>
           </Row>
 
-          <br />
-          <br />
-          <Row noGutters={true} className="text-center line3 font4">
-          <span className="col-sm-1"></span>
-                <span className="col-sm-10">
+          
+          <Row noGutters={true} className="text-center line32 font3">
+          <span className="col-xs-1"></span>
+                <span className="col-xs-10">
                 <img src={logos.locklogo}   
-                  className="locklogo glyphicon mr-5"></img>
+                  className="locklogo1 glyphicon mr-5"></img>
                 Enter your new password
                 </span>
                
@@ -86,8 +87,8 @@ export default class artreg3 extends Component {
            
              
               <Row noGutters={true}>
-                <div className="col-sm-1"></div>
-                <div className="form-group col-sm-10 col-xs-6">
+                <div className="col-xs-1"></div>
+                <div className="form-group col-xs-10">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
                     {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -107,8 +108,8 @@ export default class artreg3 extends Component {
               </Row>
        
               <Row noGutters={true}>
-                <div className="col-sm-1"></div>
-                <div className="form-group col-sm-10 col-xs-6">
+                <div className="col-xs-1"></div>
+                <div className="form-group col-xs-10 ">
                   <label className="control-label"></label>
                   <div className="inner-addon left-addon">
                     {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -129,7 +130,7 @@ export default class artreg3 extends Component {
                  
           <br />
             <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
+              <div className="col-xs-12 text-center">
                 <button
                   style={{
                     background: "#000000",
@@ -144,19 +145,19 @@ export default class artreg3 extends Component {
                 </button>
               </div>
             </Row>         
-          <br />
+       
           <br />
           <hr className="hrline"></hr>
-          <br />
-          <Row noGutters={true} className="text-center line311 font4">
-              <span className="col-sm-2"></span>
-                <span className="col-sm-8">
+          
+          <Row noGutters={true} className="text-center line311 font3">
+              <span className="col-xs-2"></span>
+                <span className="col-xs-8">
                 In case of any help               </span>
                
           </Row>
           <br/>
           <Row noGutters={true}>
-              <div className="col-sm-12 text-center">
+              <div className="col-xs-12 text-center">
                 <button
                   style={{
                     background: "white",
@@ -171,9 +172,9 @@ export default class artreg3 extends Component {
                 </button>
               </div>
             </Row> 
-            <br/>
             
-            <br/>
+            
+           
             <Row noGutters={true} className="text-center line6 font3">
                                     
                                     Change language
@@ -181,9 +182,9 @@ export default class artreg3 extends Component {
                                 </Row>
 
           {/* <Row noGutters={true}>
-            <span className="col-sm-3 text-center">Help</span>
-            <span className="col-sm-5"></span>
-            <span className="col-sm-4 text-center">Privacy policy</span>
+            <span className="col-xs-3 text-center">Help</span>
+            <span className="col-xs-5"></span>
+            <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
           <br></br>
         </div>

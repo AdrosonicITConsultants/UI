@@ -6,15 +6,7 @@
     height: auto;
     min-height:100vh;
   }
-  .demoa{
-    margin-top:100px;
-    background-color: white;
-    border-radius: 10px;
-    min-height:650px;
-    height:auto;
-    width:100%;
-    /* margin-left: 8.5%; */
-}
+ 
 .font2{
     font-size: 15px;
 }

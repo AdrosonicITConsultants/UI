@@ -32,6 +32,13 @@
     border-top: 1px solid #666666;
     width: 68%;
 }
+.hrline2{
+    margin-top: 7px;
+    margin-bottom: 13px;
+    border: 0;
+    border-top: 1px solid #666666;
+    width: 50%;
+}
 button{
     font-size: 16px!important;
 }
@@ -131,7 +138,11 @@ button{
 .selectorrow{
     margin-top:20px;
 }
+.form2{
+    width:80%!important;
+    margin:auto;
 
+}
 .BuyerLogin{
     border-radius: 25px !important;
     height: 3.5em !important;
@@ -362,7 +373,8 @@ background-color: white !important;
 @media only screen and ( max-width: 480px ) {
    
 }
-
+@media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+}
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
    
 }

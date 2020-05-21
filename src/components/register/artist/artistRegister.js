@@ -5,13 +5,13 @@ import "./artistRegister.css"
 import Artreg1 from "./artreg1";
 import Artreg2 from "./artreg2";
 import Artreg3 from "./artreg3";
-
+import Artreg4 from "./artreg4";
 export default class artistRegister extends Component {
     constructor(props) {
         super(props);
 
           this.state = {
-            userpage : 0
+            userpage : 3
           };
         this.handler = this.handler.bind(this);
        
@@ -28,6 +28,9 @@ export default class artistRegister extends Component {
             case 2:
               return <Artreg3 handler={this.handler} />;
               break; 
+            case 3:
+            return <Artreg4 handler={this.handler} />;
+            break; 
                    
             default:
               break;

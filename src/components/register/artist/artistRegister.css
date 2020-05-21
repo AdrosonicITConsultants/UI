@@ -12,6 +12,12 @@
     width: 90%;
     margin: 0 auto;
 }
+.demoab{
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+}
 .font2{
     font-size: 15px;
 }
@@ -54,14 +60,67 @@
     padding: 12px;
     pointer-events: none;
   }
+  .BuyerLogin1{
+    border-radius: 25px !important;
+    height: 2.5em !important;
+}
+.vcenter1 {
+    display: inline-block;
+    vertical-align: middle;
+    float: none!important;
+}
+.fullscreen1{
+    height:100vh;
+}
+.logoreg3wid{
+    width:29%!important;
+}
+.form-group1{
+    margin-bottom: 5px;
+}
+.padform{
+    padding-left: 50px;
+}
+
 
 @media only screen and ( max-width: 480px ) {
     .demoa{
         margin-top:20px;
        
     }
-   
+    .fullscreen1{
+        height:0vh;
+    }
 }
+@media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+    }
+    .fullscreen1{
+        height:0vh;
+    }
+    .vcenter1 {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 44%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
+    }
+    .logoreg3wid {
+        width: 40%!important;
+    }
+
+}
+
 
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
 
@@ -72,11 +131,49 @@
         margin: 30px auto;
         width:400px;
     }
+    .vcenter {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .vcenter1 {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+    }
+    .fullscreen1{
+        height:0vh;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 44%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
+    }
+    .logoreg3wid {
+        width: 40%!important;
+    }
    
 }
 @media only screen and ( min-width: 1200px ) {
     
     .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        margin: 0 auto;
+        height: 665px;
+    }
+    .demoab{
         /* margin-top:100px; */
         background-color: white;
         border-radius: 10px;
@@ -95,6 +192,13 @@
         /* margin-left: -3px; */
         /* top: 0; */
         color: #c7c7c7;
+    }
+    .margin-roletext1{
+        float: left;
+        margin-left: 29%;
+        margin-top: -0.5em;
+        color: grey;
+         font-family: var(--LatoFont);
     }
 
 }

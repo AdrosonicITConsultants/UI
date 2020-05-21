@@ -23,6 +23,8 @@ export default class buyerpass extends Component {
                      });
                    } else {
                      debugger;
+                        window.open("./demo-video", "_self");
+                  
                      //this.props.handler(1);
                    }
                     alert("login clicked");

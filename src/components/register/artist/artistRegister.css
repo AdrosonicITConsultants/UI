@@ -82,6 +82,67 @@
     padding-left: 50px;
 }
 
+div label input {
+   margin-right:100px;
+}
+body {
+    font-family:sans-serif;
+}
+
+#ck-button {
+    font-family: var(--PlayfairFont);
+    font-weight: normal;
+    margin:4px;
+    background-color:white;
+    border-radius:25px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+    display: inline-block; 
+    width: 125px;
+    margin:20px;
+   
+}
+
+#ck-button:hover {
+    background:lightgreen;
+}
+
+#ck-button label {
+   
+    /* width:4.0em; */
+}
+
+#ck-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+    cursor: pointer;
+    font-weight: 500;
+    color: grey;
+}
+.img_wrp {
+  display: inline-block;
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#ck-button label input {
+    position:absolute;
+    top:-20px;
+    display: none;
+}
+
+#ck-button input:checked + span {
+    /* background-color:#911; */
+    color: green;
+}
+
+
+
 
 @media only screen and ( max-width: 480px ) {
     .demoa{

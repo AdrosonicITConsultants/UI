@@ -9,8 +9,9 @@ import backarrowicon from "./back-arrow.svg"
 import usernamelogo from "./account_circle-24px.png"
 import buyerlogo from "./Icon feather-shopping-cart.png"
 import language from "./Icon metro-language.png"
+import uploadphoto from "./Upload-photo.png";
 
 
 
 
-export default { mainlogo, mainlogoside, userlogo, locklogo, coderwalllogo, emaillogo, ionickeylogo, backarrowicon, usernamelogo, buyerlogo, language};
+export default { mainlogo, mainlogoside, userlogo, locklogo, coderwalllogo, emaillogo, ionickeylogo, backarrowicon, usernamelogo, buyerlogo, language, uploadphoto};

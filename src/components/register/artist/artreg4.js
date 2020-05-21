@@ -27,12 +27,12 @@ export default class artreg4 extends Component {
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
-            this.props.handler(3);
+            this.props.handler(4);
           }
       }
 
       backoperation() {
-         this.props.handler(2);
+         this.props.handler(3);
         }
     
     

@@ -13,6 +13,7 @@ export default class artreg5 extends Component {
                      showValidationpass: false,
                      showValidationconfirmpass: false,
                      showUserName: true,
+                     selectedFile: []
                    };
                  }
 
@@ -74,12 +75,7 @@ debugger
                          onClick={() => {
                            this.refs.fileUploader.click();
                          }}
-                         style={{
-                           width: "100px",
-                           marginLeft: "18em",
-                           cursor: "pointer",
-                           height: "100px",
-                         }}
+                         className="profileImage"
                          src={logos.uploadphoto}
                        ></img>
                      );
@@ -87,12 +83,7 @@ debugger
                        $imagePreview = (
                          <div className="image-container img_wrp">
                            <img
-                             style={{
-                               width: "100px",
-                               marginLeft: "18em",
-                               cursor: "pointer",
-                               height: "100px",
-                             }}
+                             className="profileImage"
                              onClick={() => {
                                this.refs.fileUploader.click();
                              }}

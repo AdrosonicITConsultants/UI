@@ -3,7 +3,11 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets";
 import isEmail from "validator/lib/isEmail";   
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+
+toast.configure()
 export default class buyreg1 extends Component {
   constructor() {
     super();
@@ -23,6 +27,9 @@ export default class buyreg1 extends Component {
       this.setState({
         showValidation: !this.state.showValidation,
       });
+    }
+    else{
+      toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
     }
   }
   operation() {
@@ -70,7 +77,7 @@ export default class buyreg1 extends Component {
           lg={{ size: "6" }}
           className="vcenter "
         >
-          <div className="demoa text-center" noGutters={true}>
+          <div className="demoa demoabAnimation text-center" noGutters={true}>
             <br></br>
             <Row noGutters={true} className="">
               <div className="col-xs-6">

@@ -3,6 +3,10 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import isEmail from "validator/lib/isEmail";
+import  customToast  from "../../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 
 export default class artreg2 extends Component {
@@ -16,7 +20,10 @@ export default class artreg2 extends Component {
                      showUserName: true,
                    };
                  }
-                 operation1() {
+
+               
+
+                 SendOtp() {
                    debugger;
                    const emailcheck = isEmail;
 
@@ -28,6 +35,9 @@ export default class artreg2 extends Component {
                      this.setState({
                        showValidation: !this.state.showValidation,
                      });
+                   }
+                   else{
+                     customToast.success("OTP sent successfully", {autoClose : false});
                    }
                  }
                  operation() {
@@ -148,7 +158,7 @@ export default class artreg2 extends Component {
                                    width: "8em",
                                    height: "3em",
                                  }}
-                                 onClick={() => this.operation1()}
+                                 onClick={() => this.SendOtp()}
                                >
                                  Send OTP
                                </button>

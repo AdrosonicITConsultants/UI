@@ -5,13 +5,14 @@ import HomePage from "./components/Homepage/homepage";
 import Artistregister from "./components/register/artist/artistRegister";
 import Buyerregister from "./components/register/buyer/buyerRegister";
 import { memoryHistory, browserHistory } from "./helpers/history";
-
 import videoPlayer from './components/login/videoPlayer';
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <React.Fragment>
       <Router history={browserHistory}>
+        <ToastContainer></ToastContainer>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />

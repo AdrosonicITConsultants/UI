@@ -64,7 +64,10 @@ export default class artreg1 extends Component {
               lg={{ size: "6" }}
               className="vcenter "
             >
-              <div className="demoa text-center" noGutters={true}>
+              <div
+                className="demoa demoabAnimation text-center"
+                noGutters={true}
+              >
                 <br></br>
                 <Row noGutters={true} className="">
                   <div className="col-xs-6">

@@ -11,6 +11,7 @@ import buyerlogo from "./Icon feather-shopping-cart.png"
 import language from "./Icon metro-language.png"
 import uploadphoto from "./Upload-photo.png";
 import skiplogo from "./Icon-skip-next.svg";
+import uploadlogo from "./s_icon_upload SVG.svg";
 
 
 
@@ -29,5 +30,5 @@ export default {
   language,
   uploadphoto,
   skiplogo,
-  
+  uploadlogo,
 };

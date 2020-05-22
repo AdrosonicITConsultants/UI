@@ -252,7 +252,7 @@ background-color: white !important;
 
 @keyframes slideInFromLeft {
   0% {
-    transform: translate(170%, 220%);
+    transform: translate(90%);
   }
   100% {
     transform: translateX(0);

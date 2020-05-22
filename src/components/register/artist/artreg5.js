@@ -45,21 +45,23 @@ export default class artreg5 extends Component {
                    let reader = new FileReader();
 
                    reader.onloadend = () => {
+                   let imagebytes = reader.result;               
                      this.setState({
-                       imagePreviewUrl: reader.result,
+                       selectedFile: { ...this.state.selectedFile, imagebytes },
+                       imagePreviewUrl: imagebytes,
                      });
                    };
-debugger
                    if (event.target.files[0]) {
                    reader.readAsDataURL(event.target.files[0]);
 
                    }
                  };
 
-// resertImage(){
-// this.setState({
-//   imagePreviewUrl: logos.uploadphoto,
-// });}
+resertImage(){
+this.setState({
+  selectedFile : [],
+  imagePreviewUrl: logos.uploadphoto,
+});}
 
                  handleChange(e) {
                    this.setState({ [e.target.name]: e.target.value });
@@ -91,15 +93,15 @@ debugger
                              alt="icon"
                              width="200"
                            />{" "}
-                           {/* <button
+                           <button
                            style={{margin: "-10px"}}
                              type="button"
-                             class="close"
+                             className="close"
                              aria-label="Close"
                              onClick={()=>{this.resertImage()}}
                            >
                              <span aria-hidden="true">X</span>
-                           </button> */}
+                           </button>
                          </div>
                        );
                      }
@@ -135,7 +137,10 @@ debugger
                          lg={{ size: "8" }}
                          className="vcenter1 "
                        >
-                         <div className="demoab text-center" noGutters={true}>
+                         <div
+                           className="demoab demoabAnimation text-center"
+                           noGutters={true}
+                         >
                            <br></br>
                            <Row noGutters={true} className="">
                              <div className="col-xs-7">
@@ -205,7 +210,6 @@ debugger
                                </label>
                              </div>
                            </Row>
-                           
                            <Row noGutters={true}>
                              <div id="ck-button">
                                <label>

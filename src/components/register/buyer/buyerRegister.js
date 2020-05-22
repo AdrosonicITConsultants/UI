@@ -5,13 +5,18 @@ import "./buyerRegister.css"
 import Buyreg1 from "./buyreg1";
 import Buyreg2 from "./buyreg2";
 import Buyreg3 from "./buyreg3";
+import Buyreg4 from "./buyreg4";
+import Buyreg5 from "./buyreg5";
+import Buyreg6 from "./buyreg6";
+
+
 
 export default class buyerRegister extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            userpage: 0
+            userpage: 5
         };
         this.handler = this.handler.bind(this);
 
@@ -20,15 +25,23 @@ export default class buyerRegister extends Component {
     renderSection(num) {
         switch (num) {
             case 0:
-                return <Buyreg2 handler={this.handler} />;
+                return <Buyreg1 handler={this.handler} />;
                 break;
             case 1:
+                return <Buyreg2 handler={this.handler} />;
+                break;
+            case 2:
                 return <Buyreg3 handler={this.handler} />;
                 break;
-            // case 2:
-            //     return <Artreg3 handler={this.handler} />;
-            //     break;
-
+            case 3:
+                return <Buyreg4 handler={this.handler} />;
+                break;
+            case 4:
+                return <Buyreg5 handler={this.handler} />;
+                break;
+            case 5:
+                return <Buyreg6 handler={this.handler} />;
+                break;
             default:
                 break;
         }

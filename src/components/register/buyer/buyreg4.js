@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
-import { CountryDropdown, RegionDropdown } from 'react-indian-state-region-selector';
 
-export default class artreg4 extends Component {
+export default class buyreg4 extends Component {
     constructor() {
         super();
         this.state = {
@@ -35,12 +34,12 @@ export default class artreg4 extends Component {
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
-            this.props.handler(4);
+            this.props.handler(3);
           }
       }
 
       backoperation() {
-         this.props.handler(3);
+         this.props.handler(2);
         }
     
     
@@ -84,20 +83,30 @@ export default class artreg4 extends Component {
                 <img src={logos.mainlogoside} className="col-xs-3 logoreg3wid" alt="TataTrusts logo"></img>
             </Row>
 
-          
-            <Row noGutters={true} className="text-center line32 font3">
-            <span className="col-xs-1"></span>
-                <span className="col-xs-10">
+        
+            <Row noGutters={true} className="text-left line32  font3">
+            {/* <span className="col-xs-1"></span> */}
+                <span className="col-xs-10 ml-6">
                 {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                WEAVER ID : BIKASNAG10
+               Enter your details to complete registeration
                 </span>
                 
             </Row>
+            
+            <Row noGutters={true}>
+                
+                    <span className="col-xs-10 line32 text-left ml-6 font3">
+                    {/* <img src={logos.locklogo}   
+                        className="locklogo1 glyphicon mr-5"></img> */}
+                            Company Details
+                    </span>
+                </Row>
+            
             <Row noGutters={true}>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
                     <Col xs={{size :"11", offset:"1" }} className="form-group1 text-left">
-                    <label className="control-label padform text-left">First Name</label>
+                    <label className="control-label padform text-left">Branch/Company Name</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
@@ -108,126 +117,33 @@ export default class artreg4 extends Component {
                         name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your first Name</span>
-                        ) : <br/>} */}
+                        {this.state.showValidationpass ? (
+                        <span className="bg-danger">please enter your Branch/Company Name</span>
+                        ) : <br/>}
                     </div>
                     </Col>
                 </Col>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Last Name</label>
+                    <label className="control-label padform text-left">GST No.</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
-                        type="text"
+                        type="number"
                         id="lastname"
                         className="form-control form2 BuyerLogin1"
                         //placeholder="lastname"
                         name="lastname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your lastname</span>
-                        ) : <br/>} */}
+                        <br/>
                     </div>  
                     </Col>
                 </Col> 
+                
                 <Col xs={{size :"12"}} md={{size :"6"}}>
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Pin Code</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="number"
-                        id="pincode"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="pincode"
-                        name="pincode"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your pincode</span>
-                        ) : <br/>} */}
-                    </div>  
-                    </Col>
-                </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Cluster</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="text"
-                        id="cluster"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="cluster"
-                        name="cluster"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your cluster</span>
-                        ) : <br/>} */}
-                    </div>  
-                    </Col>
-                </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">District</label>
-                    <div className="inner-addon">
-                       
-                        <input
-                        type="text"
-                        id="district"
-                        className="form-control form2 BuyerLogin1"
-                       
-                        name="cluster"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        
-                    </div>  
-                    </Col>
-                </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">State</label>
-                    <div className="inner-addon">
-                       
-                        <input
-                        type="text"
-                        id="state"
-                        className="form-control form2 BuyerLogin1"
-                        
-                        name="state"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        
-                    </div>  
-                    
-                    </Col>
-                </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Email ID</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="email"
-                        id="emailid"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="emailid"
-                        name="emailid"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your emailid</span>
-                        ) : <br/>} */}
-                    </div>  
-                    </Col>
-                </Col>   
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Mobile Number</label>
+                    <label className="control-label padform text-left">Office contact Number</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
@@ -238,34 +154,33 @@ export default class artreg4 extends Component {
                         name="mobileno"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your mobile no</span>
-                        ) : <br/>} */}
+                        {this.state.showValidationpass ? (
+                        <span className="bg-danger">please enter your Office contact Number</span>
+                        ) : <br/>}
                     </div>  
                     </Col>
                 </Col>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">PAN No.</label>
+                    <label className="control-label padform text-left">Upload Brand Logo</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
-                        type="text"
-                        id="panno"
+                        type="number"
+                        id="mobileno"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="panno"
-                        name="panno"
+                        //placeholder="mobileno"
+                        name="mobileno"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your PAN No.</span>
-                        ) : <br/>} */}
+                        <br/>
                     </div>  
                     </Col>
-                </Col> 
+                </Col>
+                 
                 <Col xs={{size :"12"}} md={{size :"6"}}>
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Address</label>
+                    <label className="control-label padform text-left">CIN Number</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
@@ -276,17 +191,33 @@ export default class artreg4 extends Component {
                         name="address"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your Address</span>
-                        ) : <br/>} */}
+                        <br/>
                     </div>  
                     </Col>
                 </Col>  
-                
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
+                    <label className="control-label padform text-left">PAN Number</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="address"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="address"
+                        name="address"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                        <br/>
+                    </div>  
+                    </Col>
+                </Col>
             </Row>
             <br></br>
             <div className="text-center">Fields are mandatory</div>      
             <hr className="hrline2"></hr>
+            <div className="text-center">Next up :Registered address</div>   
+            <br></br>   
            
              
              
@@ -307,25 +238,18 @@ export default class artreg4 extends Component {
                 </button>
               </div>
             </Row>   
-            <br></br>      
+            <br></br>
+            <br></br>
+            <Row noGutters={true}>
+            <strong className="col-xs-3 text-center line7 font3">Help?</strong>
+            <span className="col-xs-4"></span>
+            <span style={{ color: "var(--lightFont)"}} className="col-xs-5 text-center line7 font3">Privacy policy</span>
+          </Row>
+               
        
          
           
-          <Row noGutters={true} className="text-center line312 font3">
-              <span className="col-xs-2"></span>
-                <span className="col-xs-8">
-                Need Help?             </span>
-               
-          </Row>
-          
-            
-            
-           
-            <Row noGutters={true} className="text-center line6 font3">
-                                    
-                                    Change language
-                                    <img src={logos.language}  className="ml-5"></img>
-                                </Row>
+         
 
           {/* <Row noGutters={true}>
             <span className="col-xs-3 text-center">Help</span>

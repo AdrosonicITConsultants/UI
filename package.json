@@ -12,6 +12,8 @@
     "react-bootstrap": "^1.0.1",
     "react-btn-checkbox": "0.0.2",
     "react-dom": "^16.13.1",
+    "react-india-state-region-selector": "^6.1.0",
+    "react-indian-state-region-selector": "^6.1.0",
     "react-player": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",

@@ -3,7 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 
-export default class buyreg3 extends Component {
+export default class buyreg6 extends Component {
     constructor() {
         super();
         this.state = {
@@ -39,7 +39,7 @@ export default class buyreg3 extends Component {
       }
 
       backoperation() {
-         this.props.handler(1);
+         this.props.handler(4);
         }
     
     
@@ -83,10 +83,10 @@ export default class buyreg3 extends Component {
                 <img src={logos.mainlogoside} className="col-xs-3 logoreg3wid" alt="TataTrusts logo"></img>
             </Row>
 
-          <br></br>
-            <Row noGutters={true} className="text-center line32 font3">
-            <span className="col-xs-1"></span>
-                <span className="col-xs-10">
+        
+            <Row noGutters={true} className="text-left line32  font3">
+            {/*  */}
+                <span className="col-xs-10 ml-6">
                 {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
                Enter your details to complete registeration
@@ -95,18 +95,28 @@ export default class buyreg3 extends Component {
             </Row>
             <br></br>
             <Row noGutters={true}>
-                
-                    <span className="col-xs-10 line32 text-left ml-6 font3">
+            <span className="col-xs-1"></span>
+                    <span className="col-xs-10 line32 text-center font3">
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}
-                            Personal Details
+                            Provide your link for web presence
                     </span>
-                </Row>
+            </Row>
+            <br></br>
             
+
             <Row noGutters={true}>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11", offset:"1" }} className="form-group1 text-left">
-                    <label className="control-label padform text-left">First Name</label>
+                <span className="col-xs-3"></span>
+                <span className="col-xs-6 text-center font2">
+                you can skip this step and add your links later in the profile section
+                </span>
+              </Row>
+              <br></br>
+
+            <Row noGutters={true}>
+                <Col xs={{size :"12"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Address Line 1</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
@@ -117,92 +127,40 @@ export default class buyreg3 extends Component {
                         name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your first Name</span>
-                        ) : <br/>}
+                      <br/>
                     </div>
                     </Col>
                 </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Last Name</label>
+                <Col xs={{size :"12"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Address Line 1</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                         type="text"
-                        id="lastname"
+                        id="firstname"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="lastname"
-                        name="lastname"
+                        //placeholder="firstname"
+                        name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        <br/>
-                    </div>  
+                      <br/>
+                    </div>
                     </Col>
-                </Col> 
+                </Col>
                 
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Mobile Number</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="number"
-                        id="mobileno"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="mobileno"
-                        name="mobileno"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your mobile no</span>
-                        ) : <br/>}
-                    </div>  
-                    </Col>
-                </Col>
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Alternate contact Number</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="number"
-                        id="mobileno"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="mobileno"
-                        name="mobileno"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        <br/>
-                    </div>  
-                    </Col>
-                </Col>
-                 
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Designation</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="text"
-                        id="address"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="address"
-                        name="address"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        <br/>
-                    </div>  
-                    </Col>
-                </Col>  
                 
             </Row>
-            <br></br>
-            <div className="text-center">Fields are mandatory</div>      
-            <hr className="hrline2"></hr>
-            <div className="text-center">Next up :Company Details</div>   
-            <br></br>   
-           
+            <Row noGutters={true}>
+            <span className="col-xs-1"></span>
+                    <span className="col-xs-10 line322 text-center font3">
+                    {/* <img src={logos.locklogo}   
+                        className="locklogo1 glyphicon mr-5"></img> */}
+                            skip
+                    </span>
+            </Row>
+           <br></br>
+         
              
              
          
@@ -218,10 +176,15 @@ export default class buyreg3 extends Component {
                   }}
                   onClick={() => this.operation()}
                 >
-                 Next
+                 Complete
                 </button>
               </div>
             </Row>   
+            <br></br>  
+            <div className="text-center">By completing this form and signup processyou hereby agree to our <br></br>terms and condition</div>      
+            
+            <br></br>   
+           
             <Row noGutters={true}>
             <strong className="col-xs-3 text-center line7 font3">Help?</strong>
             <span className="col-xs-4"></span>

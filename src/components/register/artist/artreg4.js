@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import { CountryDropdown, RegionDropdown } from 'react-indian-state-region-selector';
 
 export default class artreg4 extends Component {
     constructor() {
@@ -12,9 +13,16 @@ export default class artreg4 extends Component {
           showValidationpass: false,
           showValidationconfirmpass: false,
           showUserName: true,
+          State: '', region: '' ,
         };
       }
-    
+      selectCountry (val) {
+        this.setState({ State: val });
+      }
+     
+      selectRegion (val) {
+        this.setState({ region: val });
+      }
       operation() {
         debugger;
         if (this.state.password == "") {
@@ -45,6 +53,7 @@ export default class artreg4 extends Component {
       }
     
     render() {
+      const { Country, region } = this.state;
         return (
             <React.Fragment>
          <Col
@@ -166,18 +175,16 @@ export default class artreg4 extends Component {
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
                     <label className="control-label padform text-left">District</label>
                     <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                       
                         <input
                         type="text"
                         id="district"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="cluster"
+                       
                         name="cluster"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your District</span>
-                        ) : <br/>} */}
+                        
                     </div>  
                     </Col>
                 </Col>
@@ -185,19 +192,18 @@ export default class artreg4 extends Component {
                     <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
                     <label className="control-label padform text-left">State</label>
                     <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                       
                         <input
                         type="text"
                         id="state"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="state"
+                        
                         name="state"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your State</span>
-                        ) : <br/>} */}
+                        
                     </div>  
+                    
                     </Col>
                 </Col>
                 <Col xs={{size :"12"}} md={{size :"6"}}>

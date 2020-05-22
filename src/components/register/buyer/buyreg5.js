@@ -3,7 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 
-export default class buyreg3 extends Component {
+export default class buyreg5 extends Component {
     constructor() {
         super();
         this.state = {
@@ -39,7 +39,7 @@ export default class buyreg3 extends Component {
       }
 
       backoperation() {
-         this.props.handler(1);
+         this.props.handler(3);
         }
     
     
@@ -83,30 +83,30 @@ export default class buyreg3 extends Component {
                 <img src={logos.mainlogoside} className="col-xs-3 logoreg3wid" alt="TataTrusts logo"></img>
             </Row>
 
-          <br></br>
-            <Row noGutters={true} className="text-center line32 font3">
-            <span className="col-xs-1"></span>
-                <span className="col-xs-10">
+        
+            <Row noGutters={true} className="text-left line32  font3">
+            {/* <span className="col-xs-1"></span> */}
+                <span className="col-xs-10 ml-6">
                 {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
                Enter your details to complete registeration
                 </span>
                 
             </Row>
-            <br></br>
+            
             <Row noGutters={true}>
                 
                     <span className="col-xs-10 line32 text-left ml-6 font3">
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}
-                            Personal Details
+                            Registered Address
                     </span>
                 </Row>
             
             <Row noGutters={true}>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11", offset:"1" }} className="form-group1 text-left">
-                    <label className="control-label padform text-left">First Name</label>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Address Line 1</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
@@ -117,90 +117,135 @@ export default class buyreg3 extends Component {
                         name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your first Name</span>
-                        ) : <br/>}
+                      <br/>
                     </div>
                     </Col>
                 </Col>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Last Name</label>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Address Line 2</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                         type="text"
-                        id="lastname"
+                        id="firstname"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="lastname"
-                        name="lastname"
+                        //placeholder="firstname"
+                        name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        <br/>
-                    </div>  
-                    </Col>
-                </Col> 
-                
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Mobile Number</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="number"
-                        id="mobileno"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="mobileno"
-                        name="mobileno"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your mobile no</span>
-                        ) : <br/>}
-                    </div>  
+                       <br/>
+                    </div>
                     </Col>
                 </Col>
                 <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Alternate contact Number</label>
-                    <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                        type="number"
-                        id="mobileno"
-                        className="form-control form2 BuyerLogin1"
-                        //placeholder="mobileno"
-                        name="mobileno"
-                        onChange={(e) => this.handleChange(e)}
-                        />
-                        <br/>
-                    </div>  
-                    </Col>
-                </Col>
-                 
-                <Col xs={{size :"12"}} md={{size :"6"}}>
-                    <Col xs={{size :"11" ,offset:"1"}} className="form-group1 text-left">
-                    <label className="control-label padform text-left">Designation</label>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Street</label>
                     <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                         type="text"
-                        id="address"
+                        id="firstname"
                         className="form-control form2 BuyerLogin1"
-                        //placeholder="address"
-                        name="address"
+                        //placeholder="firstname"
+                        name="firstname"
                         onChange={(e) => this.handleChange(e)}
                         />
-                        <br/>
-                    </div>  
+                       <br/>
+                    </div>
                     </Col>
-                </Col>  
+                </Col>
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">City</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="firstname"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="firstname"
+                        name="firstname"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                       <br/>
+                    </div>
+                    </Col>
+                </Col>
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">State</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="firstname"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="firstname"
+                        name="firstname"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                       <br/>
+                    </div>
+                    </Col>
+                </Col>
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Country</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="firstname"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="firstname"
+                        name="firstname"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                       <br/>
+                    </div>
+                    </Col>
+                </Col>
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Pincode</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="firstname"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="firstname"
+                        name="firstname"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                       <br/>
+                    </div>
+                    </Col>
+                </Col>
+                <Col xs={{size :"12"}} md={{size :"6"}}>
+                    <Col xs={{size :"11", offset:"1" }} className="form-group11 text-left">
+                    <label className="control-label padform text-left">Landmark</label>
+                    <div className="inner-addon">
+                        {/* <i className="glyphicon glyphicon-user"></i> */}
+                        <input
+                        type="text"
+                        id="firstname"
+                        className="form-control form2 BuyerLogin1"
+                        //placeholder="firstname"
+                        name="firstname"
+                        onChange={(e) => this.handleChange(e)}
+                        />
+                       <br/>
+                    </div>
+                    </Col>
+                </Col>
                 
             </Row>
-            <br></br>
+           
             <div className="text-center">Fields are mandatory</div>      
             <hr className="hrline2"></hr>
-            <div className="text-center">Next up :Company Details</div>   
+            <div className="text-center">Next up :Registered address</div>   
             <br></br>   
            
              
@@ -222,6 +267,7 @@ export default class buyreg3 extends Component {
                 </button>
               </div>
             </Row>   
+          
             <Row noGutters={true}>
             <strong className="col-xs-3 text-center line7 font3">Help?</strong>
             <span className="col-xs-4"></span>

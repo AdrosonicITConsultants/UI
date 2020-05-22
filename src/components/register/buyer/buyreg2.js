@@ -2,54 +2,43 @@ import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets";
-import isEmail from "validator/lib/isEmail";
 
 export default class buyreg2 extends Component {
   constructor() {
     super();
     this.state = {
-      emailid: "",
-      otppin: "",
-      showValidation: false,
-      showValidationpin: false,
+      password: "",
+      confirmpass: "",
+      showValidationpass: false,
+      showValidationconfirmpass: false,
       showUserName: true,
     };
   }
-  operation1() {    
-    const emailcheck = isEmail;
-    
-    // validator.isEmail(this.state.emailid);
-    if (this.state.emailid == "" || !emailcheck(this.state.emailid)) {
-      this.setState({
-        showValidation: !this.state.showValidation,
-      });
-    }
-  }
+
   operation() {
     debugger;
-    if (this.state.emailid == "") {
+    if (this.state.password == "") {
       this.setState({
-        showValidation: !this.state.showValidation,
+        showValidationpass: !this.state.showValidationpass,
       });
-    } else if (this.state.otppin == "") {
+    } else if (this.state.confirmpass !== this.state.password) {
       this.setState({
-        showValidationpin: !this.state.showValidationpin,
+        showValidationconfirmpass: !this.state.showValidationconfirmpass,
       });
     } else {
-      this.props.handler(1);
+      this.props.handler(2);
     }
   }
 
   backoperation() {
-      window.open("./", "_self");
     this.props.handler(0);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({
-      showValidation: false,
-      showValidationpin: false,
+      showValidationpass: false,
+      showValidationconfirmpass: false,
     });
   }
 
@@ -79,10 +68,8 @@ export default class buyreg2 extends Component {
                   className="col-xs-2 margin-arrow arrowsize glyphicon"
                   onClick={() => this.backoperation()}
                 ></img>
-                <div>
-                  <h2 className="col-xs-6 margin-registertext">Register</h2>
-                  <h4 className="margin-roletext">Buyer</h4>
-                </div>
+                <h2 className="col-xs-6 margin-registertext">Register</h2>
+                <h4 className="margin-roletext">Buyer</h4>
               </div>
 
               <img
@@ -94,14 +81,38 @@ export default class buyreg2 extends Component {
 
             <Row noGutters={true} className="text-center line32 font3">
               <span className="col-xs-1"></span>
-
               <span className="col-xs-10">
                 <img
                   src={logos.locklogo}
                   className="locklogo1 glyphicon mr-5"
                 ></img>
-                Enter your email ID
+                Enter your new password
               </span>
+            </Row>
+
+            <br />
+
+            <Row noGutters={true}>
+              <div className="col-xs-1"></div>
+              <div className="form-group col-xs-10">
+                <label className="control-label"></label>
+                <div className="inner-addon left-addon">
+                  {/* <i className="glyphicon glyphicon-user"></i> */}
+                  <input
+                    type="password"
+                    id="password"
+                    className="form-control BuyerLogin"
+                    placeholder="password"
+                    name="password"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                  {this.state.showValidationpass ? (
+                    <span className="bg-danger">
+                      please enter your password
+                    </span>
+                  ) : <br/>}
+                </div>
+              </div>
             </Row>
 
             <Row noGutters={true}>
@@ -111,20 +122,21 @@ export default class buyreg2 extends Component {
                 <div className="inner-addon left-addon">
                   {/* <i className="glyphicon glyphicon-user"></i> */}
                   <input
-                    type="email"
-                    id="emailid"
+                    type="password"
+                    id="confirmpass"
                     className="form-control BuyerLogin"
-                    placeholder="emailID"
-                    name="emailid"
+                    placeholder="Re-enter yourpassword"
+                    name="confirmpass"
                     onChange={(e) => this.handleChange(e)}
                   />
-                  {this.state.showValidation ? (
-                    <span className="bg-danger">please enter valid email ID</span>
+                  {this.state.showValidationconfirmpass ? (
+                    <span className="bg-danger">password does not match</span>
                   ) : <br/>}
                 </div>
               </div>
             </Row>
 
+            <br />
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
@@ -135,57 +147,20 @@ export default class buyreg2 extends Component {
                     width: "8em",
                     height: "3em",
                   }}
-                  onClick={() => this.operation1()}
-                >
-                  Send OTP
-                </button>
-              </div>
-            </Row>
-
-            <Row noGutters={true}>
-              <div className="col-xs-1"></div>
-              <div className="form-group col-xs-10 ">
-                <label className="control-label"></label>
-                <div className="inner-addon left-addon">
-                  {/* <i className="glyphicon glyphicon-user"></i> */}
-                  <input
-                    type="number"
-                    id="otppin"
-                    className="form-control BuyerLogin"
-                    placeholder="Enter OTP received in your email id"
-                    name="otppin"
-                    onChange={(e) => this.handleChange(e)}
-                  />
-                  {this.state.showValidationpin ? (
-                    <span className="bg-danger">please enter OTP</span>
-                  ) : <br/>}
-                </div>
-              </div>
-            </Row>
-
-            <Row noGutters={true}>
-              <div className="col-xs-12 text-center">
-                <button
-                  style={{
-                    background: "#000000",
-                    color: "white",
-                    borderRadius: "2em",
-                    width: "11em",
-                    height: "3em",
-                  }}
                   onClick={() => this.operation()}
                 >
-                  Verify & proceed
+                  Next
                 </button>
               </div>
             </Row>
+
             <br />
             <hr className="hrline"></hr>
+
             <Row noGutters={true} className="text-center line311 font3">
               <span className="col-xs-2"></span>
               <span className="col-xs-8">In case of any help </span>
             </Row>
-
             <br />
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">

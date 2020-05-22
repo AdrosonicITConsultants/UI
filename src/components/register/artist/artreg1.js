@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col} from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
-import { useHistory } from "react-router-dom";
 
 export default class artreg1 extends Component {
     constructor() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets";
-import isEmail from "validator/lib/isEmail";
+import isEmail from "validator/lib/isEmail";   
 
 export default class buyreg1 extends Component {
   constructor() {

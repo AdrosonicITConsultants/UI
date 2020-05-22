@@ -73,7 +73,8 @@
     height:100vh;
 }
 .logoreg3wid{
-    width:29%!important;
+   width: 30%!important;
+    margin-left: 4em;
 }
 .form-group1{
     margin-bottom: 5px;
@@ -84,6 +85,16 @@
 .padform{
     padding-left: 50px;
 }
+.requiredStar{
+    font-size: 30px;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 2px;
+    font-family: var(--LatoFont);
+    color: #e85555;
+}
+
+
 
 div label input {
    margin-right:100px;

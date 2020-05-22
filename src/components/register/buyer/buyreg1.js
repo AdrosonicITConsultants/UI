@@ -73,7 +73,7 @@ export default class buyreg1 extends Component {
           <div className="demoa text-center" noGutters={true}>
             <br></br>
             <Row noGutters={true} className="">
-              <div className="col-xs-8">
+              <div className="col-xs-6">
                 <img
                   src={logos.backarrowicon}
                   className="col-xs-2 margin-arrow arrowsize glyphicon"
@@ -87,7 +87,7 @@ export default class buyreg1 extends Component {
 
               <img
                 src={logos.mainlogoside}
-                className="col-xs-4"
+                className="col-xs-6 tatatrustLogo"
                 alt="TataTrusts logo"
               ></img>
             </Row>
@@ -119,8 +119,12 @@ export default class buyreg1 extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidation ? (
-                    <span className="bg-danger">please enter valid email ID</span>
-                  ) : <br/>}
+                    <span className="bg-danger">
+                      please enter valid email ID
+                    </span>
+                  ) : (
+                    <br />
+                  )}
                 </div>
               </div>
             </Row>
@@ -158,7 +162,9 @@ export default class buyreg1 extends Component {
                   />
                   {this.state.showValidationpin ? (
                     <span className="bg-danger">please enter OTP</span>
-                  ) : <br/>}
+                  ) : (
+                    <br />
+                  )}
                 </div>
               </div>
             </Row>

@@ -77,7 +77,7 @@ export default class artreg2 extends Component {
                          <div className="demoa text-center" noGutters={true}>
                            <br></br>
                            <Row noGutters={true} className="">
-                             <div className="col-xs-8">
+                             <div className="col-xs-6">
                                <img
                                  src={logos.backarrowicon}
                                  className="col-xs-2 margin-arrow arrowsize glyphicon"
@@ -93,7 +93,7 @@ export default class artreg2 extends Component {
 
                              <img
                                src={logos.mainlogoside}
-                               className="col-xs-4"
+                               className="tatatrustLogo col-xs-6"
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
@@ -167,7 +167,6 @@ export default class artreg2 extends Component {
                                    className="form-control BuyerLogin"
                                    placeholder="Enter OTP received in your email id"
                                    name="otppin"
-                                  
                                    onChange={(e) => this.handleChange(e)}
                                  />
                                  {this.state.showValidationpin ? (

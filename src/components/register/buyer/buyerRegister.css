@@ -1,13 +1,23 @@
 .ml-6{
-    margin-left:29px;
+    margin-left:48px;
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
     .ml-6{
-        margin-left:40px;
+        margin-left:48px;
     }
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
     .ml-6{
-        margin-left:40px;
+        margin-left:48px;
     }
+}
+
+.reg6text {
+        color: grey;
+    font-family: var(--LatoFont);
+}
+
+.reg6textbox {
+    width: 55%!important;
+    margin: auto;
 }

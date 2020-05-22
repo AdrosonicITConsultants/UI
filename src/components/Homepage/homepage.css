@@ -150,6 +150,14 @@ button{
     border-radius: 25px !important;
     height: 3.5em !important;
 }
+.tatatrustLogo{
+    width: 13em !important;
+    float: right !important;
+    margin-right: 10px;
+}
+.mrleft2em {
+    margin-left: 2em;
+}
 /* enable absolute positioning */
 .inner-addon {
   position: relative;

@@ -13,7 +13,7 @@ export default class artistRegister extends Component {
 
           this.state = {       
 
-            userpage : 0
+          userpage : 4
  
           };
         this.handler = this.handler.bind(this);

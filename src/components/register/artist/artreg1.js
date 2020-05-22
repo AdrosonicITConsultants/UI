@@ -67,7 +67,7 @@ export default class artreg1 extends Component {
               <div className="demoa text-center" noGutters={true}>
                 <br></br>
                 <Row noGutters={true} className="">
-                  <div className="col-xs-8">
+                  <div className="col-xs-6">
                     <img
                       src={logos.backarrowicon}
                       className="col-xs-2 margin-arrow arrowsize glyphicon"
@@ -81,7 +81,7 @@ export default class artreg1 extends Component {
 
                   <img
                     src={logos.mainlogoside}
-                    className="col-xs-4"
+                    className="tatatrustLogo col-xs-6"
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
@@ -138,7 +138,7 @@ export default class artreg1 extends Component {
                         id="weaverpin"
                         className="form-control BuyerLogin"
                         placeholder="weaverpin"
-                        name="weaverpin"                    
+                        name="weaverpin"
                         onChange={(e) => this.handleChange(e)}
                       />
                       {this.state.showValidationpin ? (
@@ -184,7 +184,6 @@ export default class artreg1 extends Component {
                         borderRadius: "2em",
                         width: "10em",
                         height: "3em",
-                        
                       }}
                       //   onClick={() => this.operation()}
                     >

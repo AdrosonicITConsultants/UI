@@ -62,23 +62,24 @@ export default class buyreg2 extends Component {
           <div className="demoa text-center" noGutters={true}>
             <br></br>
             <Row noGutters={true} className="">
-              <div className="col-xs-8">
+              <div className="col-xs-6">
                 <img
                   src={logos.backarrowicon}
                   className="col-xs-2 margin-arrow arrowsize glyphicon"
                   onClick={() => this.backoperation()}
                 ></img>
-                <h2 className="col-xs-6 margin-registertext">Register</h2>
-                <h4 className="margin-roletext">Buyer</h4>
+                <div>
+                  <h2 className="col-xs-6 margin-registertext">Register</h2>
+                  <h4 className="margin-roletext">Buyer</h4>
+                </div>
               </div>
 
               <img
                 src={logos.mainlogoside}
-                className="col-xs-4"
+                className="col-xs-6 tatatrustLogo"
                 alt="TataTrusts logo"
               ></img>
             </Row>
-
             <Row noGutters={true} className="text-center line32 font3">
               <span className="col-xs-1"></span>
               <span className="col-xs-10">
@@ -110,7 +111,9 @@ export default class buyreg2 extends Component {
                     <span className="bg-danger">
                       please enter your password
                     </span>
-                  ) : <br/>}
+                  ) : (
+                    <br />
+                  )}
                 </div>
               </div>
             </Row>
@@ -131,7 +134,9 @@ export default class buyreg2 extends Component {
                   />
                   {this.state.showValidationconfirmpass ? (
                     <span className="bg-danger">password does not match</span>
-                  ) : <br/>}
+                  ) : (
+                    <br />
+                  )}
                 </div>
               </div>
             </Row>

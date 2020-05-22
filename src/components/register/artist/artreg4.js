@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
-import { CountryDropdown, RegionDropdown } from 'react-indian-state-region-selector';
+
 
 export default class artreg4 extends Component {
     constructor() {
@@ -40,7 +40,7 @@ export default class artreg4 extends Component {
       }
 
       backoperation() {
-         this.props.handler(3);
+         this.props.handler(2);
         }
     
     

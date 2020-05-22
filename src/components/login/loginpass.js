@@ -54,21 +54,21 @@ export default class buyerpass extends Component {
                        <div className="demo" noGutters={true}>
                          <br></br>
                          <Row noGutters={true} className="">
-                           <div className="col-xs-8">
+                           <div className="col-xs-6">
                              <img
                                src={logos.backarrowicon}
-                               className="col-xs-2 arrowsize margin-arrow glyphicon"
+                               className="col-xs-2 margin-arrow arrowsize glyphicon"
                                onClick={() => this.backoperation()}
                              ></img>
                              <h2 className="col-xs-6 margin-login">Login</h2>
                            </div>
+
                            <img
                              src={logos.mainlogoside}
-                             className="col-xs-4"
+                             className="col-xs-6 tatatrustLogo"
                              alt="TataTrusts logo"
                            ></img>
                          </Row>
-
                          <br />
                          <br />
                          <br />

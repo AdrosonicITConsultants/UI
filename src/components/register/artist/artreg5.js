@@ -93,15 +93,22 @@ this.setState({
                              alt="icon"
                              width="200"
                            />{" "}
-                           <button
-                           style={{margin: "-10px"}}
-                             type="button"
-                             className="close"
-                             aria-label="Close"
-                             onClick={()=>{this.resertImage()}}
-                           >
-                             <span aria-hidden="true">X</span>
-                           </button>
+                        
+                             <img
+                               style={{ margin: "-3px", width:"14px" }}
+                               type="button"
+                               className="close"
+                               aria-label="Close"
+                               onClick={() => {
+                                 this.resertImage();
+                               }}
+                               
+                               src={logos.closelogo}
+                               aria-hidden="true"
+                             >
+                               
+                             </img>
+                        
                          </div>
                        );
                      }
@@ -291,20 +298,23 @@ this.setState({
                                </a>
                              </div>
                            </Row>
-                           <br></br> <br></br>
+                           <br />
+                           <br />
+                           <br />
+                           <br />
                            <Row
                              noGutters={true}
-                             className="text-center line312 font1"
+                             className="text-center line312 font2"
                            >
                              <div
-                               className="col-xs-4 font1"
+                               className="col-xs-4 font2"
                                style={{ float: "left" }}
                              >
                                Privacy Policy
                              </div>
-                             <div className="col-xs-4">Need Help? </div>
+                             <div className="col-xs-4 font2">Need Help? </div>
                              <div
-                               className="col-xs-4"
+                               className="col-xs-4 font2"
                                style={{ float: "right" }}
                              >
                                {" "}

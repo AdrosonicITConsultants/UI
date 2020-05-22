@@ -5,6 +5,8 @@ import logos from "../../assets";
 import Roleselect from "./roleselect"
 import Loginpass from "../login/loginpass";
 import Loginuser from "../login/loginuser";
+import Artreg2 from "../register/artist/artreg2";
+import Buyreg1 from "../register/buyer/buyreg1";
 // import Artistlogin from "../artist/artistlogin"
 
 export default class HomePage extends Component {
@@ -20,32 +22,72 @@ export default class HomePage extends Component {
 
                  renderSection(num){
                      switch (num) {
-                      case 0:
-                         return <Roleselect handler={this.handler} userpage={this.state.userpage} />;
-                        break;
+                       case 0:
+                         return (
+                           <Roleselect
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
+                         break;
                        case 1:
                          //buyer
-                         return <Loginuser handler={this.handler} userpage={this.state.userpage} />;
+                         return (
+                           <Loginuser
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
                          break;
                        case 2:
-                         return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
+                         return (
+                           <Loginpass
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
                          break;
                        case 3:
                          //artist
-                         return <Loginuser handler={this.handler} userpage={this.state.userpage}  />;
-                        break;
-                       case 4:
-                         return <Loginpass handler={this.handler} userpage={this.state.userpage} />;
+                         return (
+                           <Loginuser
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
                          break;
-                      
+                       case 4:
+                         return (
+                           <Loginpass
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
+                         break;
+                       case 5:
+                         return (
+                           <Artreg2
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
+                       case 6:
+                         return (
+                           <Buyreg1
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
+                         break;
+
                        default:
-                           return (
-                             <Roleselect
-                               handler={this.handler}
-                               userpage={this.state.userpage}
-                             />
-                           );
-                           break;
+                         return (
+                           <Roleselect
+                             handler={this.handler}
+                             userpage={this.state.userpage}
+                           />
+                         );
+                         break;
                          break;
                      }
                  }

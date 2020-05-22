@@ -115,10 +115,6 @@ export default class artreg2 extends Component {
                              <span className="col-xs-1"></span>
 
                              <span className="col-xs-10">
-                               <img
-                                 src={logos.locklogo}
-                                 className="locklogo1 glyphicon mr-5"
-                               ></img>
                                Enter your email ID
                              </span>
                            </Row>
@@ -129,6 +125,11 @@ export default class artreg2 extends Component {
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
+                                 <img
+                                   style={{ width: "42px", margin: "2px" }}
+                                   src={logos.emaillogo}
+                                   className="ionickeylogo glyphicon"
+                                 ></img>
                                  <input
                                    type="email"
                                    id="emailid"
@@ -171,6 +172,11 @@ export default class artreg2 extends Component {
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
+                                 <img
+                                   style={{ width: "42px", margin: "4px" }}
+                                   src={logos.otplogo}
+                                   className="ionickeylogo glyphicon"
+                                 ></img>
                                  <input
                                    type="number"
                                    id="otppin"

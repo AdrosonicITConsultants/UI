@@ -137,7 +137,9 @@ export default class buyerpass extends Component {
                            </Row>
                            <Row noGutters={true}>
                              <div className="col-xs-11 text-right">
-                               <a href="./">forgot password?</a>
+                               {this.props.userpage == 2 ?
+                               <a href="./">forgot password?</a>:
+                               <a href="./">forgot password?</a>}
                              </div>
                            </Row>
                          </div>

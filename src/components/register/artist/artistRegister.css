@@ -178,7 +178,12 @@ body {
 .mt77{
    margin-top: 77px;
 }
-
+.mt23{
+    margin-top: 23px;
+}
+.mt17{
+    margin-top: 17px;
+}
 
 
 @media only screen and ( max-width: 480px ) {
@@ -205,6 +210,13 @@ body {
         margin: 30px auto;
         width:100%;
         height:auto;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 30%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
     }
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){

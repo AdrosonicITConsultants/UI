@@ -7,33 +7,25 @@ export default class buyreg3 extends Component {
     constructor() {
         super();
         this.state = {
-          password: "",
-          confirmpass: "",     
+          firstname : "",
+          lastname :"",
+          mobileno : "",
+          alternatemobno : "",
+          designation : "",
           showValidationpass: false,
-          showValidationconfirmpass: false,
-          showUserName: true,
-          State: '', region: '' ,
+          
         };
       }
-      selectCountry (val) {
-        this.setState({ State: val });
-      }
-     
-      selectRegion (val) {
-        this.setState({ region: val });
-      }
+    
       operation() {
         debugger;
-        if (this.state.password == "") {
+        if (this.state.firstname == "" || this.state.mobileno == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.confirmpass !== this.state.password ){                    
-              this.setState({
-                showValidationconfirmpass: !this.state.showValidationconfirmpass,
-              });
-          } else {
+           else {
+             this.props.spd(this.state.firstname,this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation);
             this.props.handler(3);
           }
       }
@@ -47,7 +39,6 @@ export default class buyreg3 extends Component {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
             showValidationpass: false,
-            showValidationconfirmpass: false
         });
       }
     
@@ -141,13 +132,9 @@ export default class buyreg3 extends Component {
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {this.state.showValidationpass ? (
-                          <span className="bg-danger">
-                            please enter your first Name
-                          </span>
-                        ) : (
-                          <br />
-                        )}
+                       
+                          
+                        
                       </div>
                     </Col>
                   </Col>
@@ -169,7 +156,7 @@ export default class buyreg3 extends Component {
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -192,13 +179,7 @@ export default class buyreg3 extends Component {
                           name="mobileno"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {this.state.showValidationpass ? (
-                          <span className="bg-danger">
-                            please enter your mobile no
-                          </span>
-                        ) : (
-                          <br />
-                        )}
+                        
                       </div>
                     </Col>
                   </Col>
@@ -214,13 +195,13 @@ export default class buyreg3 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
-                          id="mobileno"
+                          id="alternatemobno"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="mobileno"
-                          name="mobileno"
+                          name="alternatemobno"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -237,18 +218,21 @@ export default class buyreg3 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="address"
+                          id="designation"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="address"
-                          name="address"
+                          name="designation"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
                 </Row>
-
+                {this.state.showValidationpass ? (
+                    <span className="bg-danger">please enter all  mandatory fields</span>
+                  ) : (
+                    <br />
+                  )}           
                 <div className="text-center" style={{ color: "#cc6868" }}>
                   <strong
                     className="requiredStar"
@@ -278,7 +262,7 @@ export default class buyreg3 extends Component {
                     </button>
                   </div>
                 </Row>
-                <Row noGutters={true}>
+                <Row noGutters={true} className="mt37"> 
                   <strong className="col-xs-3 text-center line7 font3">
                     Help?
                   </strong>
@@ -296,7 +280,7 @@ export default class buyreg3 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                <br></br>
+                
               </div>
             </Col>
           </React.Fragment>

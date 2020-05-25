@@ -29,6 +29,7 @@ export default class buyreg1 extends Component {
       });
     }
     else{
+      this.props.so(this.state.emailid);
       toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
     }
   }
@@ -43,13 +44,14 @@ export default class buyreg1 extends Component {
         showValidationpin: !this.state.showValidationpin,
       });
     } else {
+      this.props.co(this.state.otppin)
       this.props.handler(1);
     }
   }
 
   backoperation() {
       window.open("./", "_self");
-    this.props.handler(0);
+    // this.props.handler(0);
   }
 
   handleChange(e) {
@@ -217,10 +219,10 @@ export default class buyreg1 extends Component {
               </div>
             </Row>
 
-            <Row noGutters={true} className="text-center line6 mt37">
+            {/* <Row noGutters={true} className="text-center line6 mt37">
               Change language
               <img src={logos.language} className="ml-5"></img>
-            </Row>
+            </Row> */}
 
             {/* <Row noGutters={true}>
             <span className="col-xs-3 text-center">Help</span>

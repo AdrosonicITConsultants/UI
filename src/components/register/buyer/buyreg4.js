@@ -7,14 +7,13 @@ export default class buyreg4 extends Component {
                  constructor() {
                    super();
                    this.state = {
-                     password: "",
-                     confirmpass: "",
-                     showValidationpass: false,
-                     showValidationconfirmpass: false,
-                     showUserName: true,
-                     State: "",
-                     region: "",
-                     brandLogo : []
+                    companyname : "",
+                    gstno : "",
+                    officeno : "",
+                    cinno : "",
+                    panno : "",
+                    showValidationpass: false,
+                    brandLogo : []
                    };
                  }
                  selectCountry(val) {
@@ -26,16 +25,12 @@ export default class buyreg4 extends Component {
                  }
                  operation() {
                    debugger;
-                   if (this.state.password == "") {
+                   if (this.state.companyname == "" || this.state.panno == "") {
                      this.setState({
                        showValidationpass: !this.state.showValidationpass,
                      });
-                   } else if (this.state.confirmpass !== this.state.password) {
-                     this.setState({
-                       showValidationconfirmpass: !this.state
-                         .showValidationconfirmpass,
-                     });
                    } else {
+                     this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno)
                      this.props.handler(4);
                    }
                  }
@@ -48,7 +43,6 @@ export default class buyreg4 extends Component {
                    this.setState({ [e.target.name]: e.target.value });
                    this.setState({
                      showValidationpass: false,
-                     showValidationconfirmpass: false,
                    });
                  }
 
@@ -113,7 +107,8 @@ export default class buyreg4 extends Component {
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
-
+                            <br>
+                            </br>
                            <Row
                              noGutters={true}
                              className="text-left line32  font3"
@@ -132,7 +127,7 @@ export default class buyreg4 extends Component {
                                Enter your details to complete registeration
                              </span>
                            </Row>
-
+                          <br></br>
                            <Row noGutters={true}>
                              <span
                                style={{ fontWeight: "600" }}
@@ -159,19 +154,13 @@ export default class buyreg4 extends Component {
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
-                                     id="firstname"
+                                     id="companyname"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="firstname"
-                                     name="firstname"
+                                     name="companyname"
                                      onChange={(e) => this.handleChange(e)}
                                    />
-                                   {this.state.showValidationpass ? (
-                                     <span className="bg-danger">
-                                       please enter your Branch/Company Name
-                                     </span>
-                                   ) : (
-                                     <br />
-                                   )}
+                                   
                                  </div>
                                </Col>
                              </Col>
@@ -187,13 +176,13 @@ export default class buyreg4 extends Component {
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="number"
-                                     id="lastname"
+                                     id="gstno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="lastname"
-                                     name="lastname"
+                                     name="gstno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
-                                   <br />
+                                  
                                  </div>
                                </Col>
                              </Col>
@@ -210,19 +199,19 @@ export default class buyreg4 extends Component {
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="number"
-                                     id="mobileno"
+                                     id="officeno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="mobileno"
-                                     name="mobileno"
+                                     name="officeno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
-                                   {this.state.showValidationpass ? (
+                                   {/* {this.state.showValidationpass ? (
                                      <span className="bg-danger">
                                        please enter your Office contact Number
                                      </span>
                                    ) : (
                                      <br />
-                                   )}
+                                   )} */}
                                  </div>
                                </Col>
                              </Col>
@@ -270,7 +259,7 @@ export default class buyreg4 extends Component {
                                      style={{ display: "none" }}
                                    ></input>
 
-                                   <br />
+                                   
                                  </div>
                                </Col>
                              </Col>
@@ -287,10 +276,10 @@ export default class buyreg4 extends Component {
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
-                                     id="address"
+                                     id="cinno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     name="address"
+                                     name="cinno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                    <br />
@@ -310,10 +299,10 @@ export default class buyreg4 extends Component {
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
-                                     id="address"
+                                     id="panno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     name="address"
+                                     name="panno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                    <br />
@@ -321,7 +310,12 @@ export default class buyreg4 extends Component {
                                </Col>
                              </Col>
                            </Row>
-                           <br></br>
+                           {this.state.showValidationpass ? (
+                    <span className="bg-danger">please enter all  mandatory fields</span>
+                  ) : (
+                    <br />
+                  )} 
+                           
                            <div
                              className="text-center"
                              style={{ color: "#cc6868" }}
@@ -358,7 +352,7 @@ export default class buyreg4 extends Component {
                            </Row>
                            <br></br>
 
-                           <Row noGutters={true}>
+                           <Row noGutters={true} className="mt17">
                              <strong className="col-xs-3 text-center line7 font3">
                                Help?
                              </strong>
@@ -376,7 +370,7 @@ export default class buyreg4 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                           <br></br>
+                           
                          </div>
                        </Col>
                      </React.Fragment>

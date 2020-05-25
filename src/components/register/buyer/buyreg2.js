@@ -11,8 +11,7 @@ export default class buyreg2 extends Component {
       confirmpass: "",
       showValidationpass: false,
       showValidationconfirmpass: false,
-      showUserName: true,
-    };
+        };
   }
 
   operation() {
@@ -26,6 +25,8 @@ export default class buyreg2 extends Component {
         showValidationconfirmpass: !this.state.showValidationconfirmpass,
       });
     } else {
+      this.props.sp(this.state.password);
+
       this.props.handler(2);
     }
   }
@@ -80,6 +81,7 @@ export default class buyreg2 extends Component {
                 alt="TataTrusts logo"
               ></img>
             </Row>
+            <br></br>
             <Row noGutters={true} className="text-center line32 font3">
               <span className="col-xs-1"></span>
               <span className="col-xs-10">
@@ -150,7 +152,7 @@ export default class buyreg2 extends Component {
                     color: "white",
                     borderRadius: "2em",
                     width: "8em",
-                    height: "3em",
+                    height: "2.5em",
                   }}
                   onClick={() => this.operation()}
                 >
@@ -175,7 +177,7 @@ export default class buyreg2 extends Component {
                     color: "#000000",
                     borderRadius: "2em",
                     width: "10em",
-                    height: "3em",
+                    height: "2.5em",
                   }}
                   //   onClick={() => this.operation()}
                 >
@@ -184,10 +186,10 @@ export default class buyreg2 extends Component {
               </div>
             </Row>
 
-            <Row noGutters={true} className="text-center line6 font3">
+            {/* <Row noGutters={true} className="text-center line6 font3">
               Change language
               <img src={logos.language} className="ml-5"></img>
-            </Row>
+            </Row> */}
 
             {/* <Row noGutters={true}>
             <span className="col-xs-3 text-center">Help</span>

@@ -7,33 +7,27 @@ export default class buyreg5 extends Component {
     constructor() {
         super();
         this.state = {
-          password: "",
-          confirmpass: "",     
+          adl1 : "",
+          adl2 : "",
+          street : "",
+          city : "",
+          state : "",
+          country : "",
+          pincode : "",
+          landmark : "",    
           showValidationpass: false,
-          showValidationconfirmpass: false,
-          showUserName: true,
-          State: '', region: '' ,
+          
         };
       }
-      selectCountry (val) {
-        this.setState({ State: val });
-      }
-     
-      selectRegion (val) {
-        this.setState({ region: val });
-      }
+
       operation() {
         debugger;
-        if (this.state.password == "") {
+        if (this.state.adl1 == "" || this.state.country == "" || this.state.pincode == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
             });
-          }
-          else if (this.state.confirmpass !== this.state.password ){                    
-              this.setState({
-                showValidationconfirmpass: !this.state.showValidationconfirmpass,
-              });
-          } else {
+          }else {
+            this.props.sad(this.state.adl1,this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark)
             this.props.handler(5);
           }
       }
@@ -47,7 +41,6 @@ export default class buyreg5 extends Component {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
             showValidationpass: false,
-            showValidationconfirmpass: false
         });
       }
     
@@ -92,7 +85,7 @@ export default class buyreg5 extends Component {
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
-
+                <br></br>
                 <Row noGutters={true} className="text-left line32  font3">
                   {/* <span className="col-xs-1"></span> */}
                   <span
@@ -108,6 +101,7 @@ export default class buyreg5 extends Component {
                     Enter your details to complete registeration
                   </span>
                 </Row>
+                <br></br>
 
                 <Row noGutters={true}>
                   <span
@@ -134,13 +128,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="adl1"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="adl1"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -156,13 +150,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="adl2"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="adl2"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -178,13 +172,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="street"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="firststreetame"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                      
                       </div>
                     </Col>
                   </Col>
@@ -200,13 +194,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="city"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="city"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                       
                       </div>
                     </Col>
                   </Col>
@@ -222,13 +216,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="state"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="state"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                      
                       </div>
                     </Col>
                   </Col>
@@ -244,13 +238,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="country"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="country"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -266,13 +260,13 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
+                        
                       </div>
                     </Col>
                   </Col>
@@ -288,18 +282,21 @@ export default class buyreg5 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="landmark"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="landmark"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        <br />
                       </div>
                     </Col>
                   </Col>
                 </Row>
-
+                {this.state.showValidationpass ? (
+                    <span className="bg-danger">please enter all  mandatory fields</span>
+                  ) : (
+                    <br />
+                  )} 
                 <div className="text-center" style={{ color: "#cc6868" }}>
                   <strong
                     className="requiredStar"
@@ -330,7 +327,7 @@ export default class buyreg5 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true}>
+                <Row noGutters={true} className= "mt23">
                   <strong className="col-xs-3 text-center line7 font3">
                     Help?
                   </strong>
@@ -348,7 +345,7 @@ export default class buyreg5 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                <br></br>
+           
               </div>
             </Col>
           </React.Fragment>

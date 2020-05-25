@@ -7,36 +7,18 @@ export default class buyreg6 extends Component {
     constructor() {
         super();
         this.state = {
-          password: "",
-          confirmpass: "",     
-          showValidationpass: false,
-          showValidationconfirmpass: false,
-          showUserName: true,
-          State: '', region: '' ,
+          weblink : "",
+          sociallink : "",
+         
         };
       }
-      selectCountry (val) {
-        this.setState({ State: val });
-      }
-     
-      selectRegion (val) {
-        this.setState({ region: val });
-      }
+    
       operation() {
         debugger;
-        if (this.state.password == "") {
-            this.setState({
-                showValidationpass: !this.state.showValidationpass,
-            });
-          }
-          else if (this.state.confirmpass !== this.state.password ){                    
-              this.setState({
-                showValidationconfirmpass: !this.state.showValidationconfirmpass,
-              });
-          } else {
-              window.open("./", "_self"); // to redirect to login page
-            this.props.handler(5);
-          }
+            this.props.sl(this.state.weblink,this.state.sociallink);
+            // window.open("./", "_self"); // to redirect to login page
+            // this.props.handler(5);
+         
       }
 
       backoperation() {
@@ -46,10 +28,7 @@ export default class buyreg6 extends Component {
     
       handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-        this.setState({
-            showValidationpass: false,
-            showValidationconfirmpass: false
-        });
+        
       }
     
     render() {
@@ -148,10 +127,10 @@ export default class buyreg6 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="firstname"
+                          id="weblink"
                           className="form-control reg6textbox BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="weblink"
                           onChange={(e) => this.handleChange(e)}
                         />
                         <br />
@@ -170,10 +149,10 @@ export default class buyreg6 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
-                          id="mdeialink"
+                          id="sociallink"
                           className="form-control reg6textbox BuyerLogin1"
                           //placeholder="firstname"
-                          name="firstname"
+                          name="sociallink"
                           onChange={(e) => this.handleChange(e)}
                         />
                         <br />
@@ -235,7 +214,7 @@ export default class buyreg6 extends Component {
 
                 <br></br>
 
-                <Row noGutters={true}>
+                <Row noGutters={true} className="mt17">
                   <strong className="col-xs-3 text-center line7 font3">
                     Help?
                   </strong>
@@ -253,7 +232,7 @@ export default class buyreg6 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                <br></br>
+                
               </div>
             </Col>
           </React.Fragment>

@@ -12,27 +12,42 @@ export default class artistRegister extends Component {
         super(props);
 
           this.state = {       
-
-          userpage : 4
+            userpage : 2,
+            weaverid : "",
+            emailid : "",
+            password : "",
+            firstname : "",
+            lastname : "",
+            pincode : "",
+            cluster : "",
+            district : "",
+            state : "",
+            mobileno : "",
+            panno : "",
+            address : "",
  
           };
         this.handler = this.handler.bind(this);
+        this.checkweaverid = this.checkweaverid.bind(this);
+        this.sendotp = this.sendotp.bind(this);
+        this.storepassword = this.storepassword.bind(this);
+        this.storedetails1 = this.storedetails1.bind(this);
        
       }
     
       renderSection(num){
           switch (num) {
             case 0:
-              return <Artreg1 handler={this.handler} />;
+              return <Artreg1 handler={this.handler} cwi = {this.checkweaverid} />;
               break;
             case 1:
-              return <Artreg2 handler={this.handler} />;
+              return <Artreg2 handler={this.handler} so = {this.sendotp} co = {this.checkotp}/>;
               break;
             case 2:
-              return <Artreg3 handler={this.handler} />;
+              return <Artreg3 handler={this.handler} sp = {this.storepassword} />;
               break;
             case 3:
-              return <Artreg4 handler={this.handler} />;
+              return <Artreg4 handler={this.handler} sd1 = {this.storedetails1} />;
               break;
             case 4:
               return <Artreg5 handler={this.handler} />;
@@ -41,7 +56,34 @@ export default class artistRegister extends Component {
               break;
           }
       }
-      
+      storedetails1(firstname,lastname,pincode,cluster,district,state,mobileno,panno,address){
+        this.setState({firstname : firstname,
+        lastname : lastname,
+        pincode : pincode,
+        cluster : cluster,
+        district : district,
+        state : state,
+        mobileno : mobileno,
+        panno : panno,
+        address : address});
+        console.log(firstname,lastname,pincode,cluster,district,state,mobileno,panno,address);
+      }
+      storepassword(password){
+        this.setState({password : password});
+        console.log(password);
+      }
+      sendotp(emailid){
+        console.log(emailid);
+        this.setState({emailid : emailid});
+      }
+      checkotp(otppin){
+        console.log(otppin);
+      }
+      checkweaverid(weaverid ,weaverpin){
+        console.log(weaverid , weaverpin);
+        this.setState({weaverid : weaverid});
+      }
+
       handler(num) {              
         this.setState({ userpage : num }, () => {
           console.log(this.state.userpage);

@@ -21,9 +21,11 @@ export default class buyeruser extends Component {
       });
     } else {
       if(this.props.userpage == 1){
+        this.props.cub(this.state.userName);
         this.props.handler(2);
       }
       else{
+        this.props.cua(this.state.userName);
         this.props.handler(4);
       }
       
@@ -123,7 +125,7 @@ export default class buyeruser extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidation ? (
-                    <span className="bg-danger">please enter username</span>
+                    <span className="bg-danger">please enter your userID</span>
                   ) : (
                     <br />
                   )}
@@ -140,9 +142,11 @@ export default class buyeruser extends Component {
                   color: "white",
                   borderRadius: "2em",
                   width: "8em",
-                  height: "3em",
+                  height: "2.5em",
                 }}
+                // onClick={() => this.operation()}
                 onClick={() => this.operation()}
+
               >
                 Next
               </button>
@@ -183,17 +187,17 @@ export default class buyeruser extends Component {
             </div>
           </Row>
 
-          <Row noGutters={true}>
-            <strong className="col-xs-3 text-center line7 font3">Help?</strong>
+          <Row noGutters={true} className="mt57">
+            <strong className="col-xs-3 text-center line7 font6">Help?</strong>
             <span className="col-xs-4"></span>
             <span
               style={{ color: "var(--lightFont)" }}
-              className="col-xs-5 text-center line7 font3"
+              className="col-xs-5 text-center line7 font6"
             >
               Privacy policy
             </span>
           </Row>
-          <br></br>
+          
         </div>
       </React.Fragment>
     );

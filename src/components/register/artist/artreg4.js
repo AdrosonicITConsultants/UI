@@ -8,33 +8,36 @@ export default class artreg4 extends Component {
     constructor() {
         super();
         this.state = {
-          password: "",
-          confirmpass: "",     
+          firstname : "",
+          lastname : "",
+          pincode : "",
+          cluster : "",
+          district : "",
+          state : "",
+          mobileno : "",
+          panno : "",
+          address : "",
+              
           showValidationpass: false,
           showValidationconfirmpass: false,
           showUserName: true,
           State: '', region: '' ,
         };
       }
-      selectCountry (val) {
-        this.setState({ State: val });
-      }
      
-      selectRegion (val) {
-        this.setState({ region: val });
-      }
       operation() {
         debugger;
-        if (this.state.password == "") {
+        if (this.state.firstname == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.confirmpass !== this.state.password ){                    
+          else if (this.state.lastname == "" ){                    
               this.setState({
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
+            this.props.sd1(this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address)
             this.props.handler(4);
           }
       }
@@ -311,7 +314,7 @@ export default class artreg4 extends Component {
        
          
           
-          <Row noGutters={true} className="text-center line312 font3">
+          <Row noGutters={true} className="text-center line312 font2">
               <span className="col-xs-2"></span>
                 <span className="col-xs-8">
                 Need Help?             </span>
@@ -321,7 +324,7 @@ export default class artreg4 extends Component {
             
             
            
-            <Row noGutters={true} className="text-center line6 font3">
+            <Row noGutters={true} className="text-center line6 mt7">
                                     
                                     Change language
                                     <img src={logos.language}  className="ml-5"></img>

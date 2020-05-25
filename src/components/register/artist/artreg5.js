@@ -120,7 +120,6 @@ this.setState({
                             }}
                             style={{
                               width: "100px",
-                              marginLeft: "18em",
                               cursor: "pointer",
                             }}
                             src={logos.uploadphoto}
@@ -166,7 +165,7 @@ this.setState({
 
                              <img
                                src={logos.mainlogoside}
-                               style={{ marginLeft: "4em" }}
+                               
                                className="col-xs-3 logoreg3wid"
                                alt="TataTrusts logo"
                              ></img>
@@ -177,8 +176,8 @@ this.setState({
                            ></Row>
                            <br></br>
                            <Row>
-                             <div className="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-ld-6 offset-ld-3">
-                               <div className="col-md-4"></div>
+                             <div className="col-xs-12">
+                               {/* <div className="col-md-4"></div> */}
                                {$imagePreview}
                                <input
                                  accept="image/png, image/jpeg"
@@ -298,13 +297,10 @@ this.setState({
                                </a>
                              </div>
                            </Row>
-                           <br />
-                           <br />
-                           <br />
-                           <br />
+                           
                            <Row
                              noGutters={true}
-                             className="text-center line312 font2"
+                             className="text-center mt77"
                            >
                              <div
                                className="col-xs-4 font2"
@@ -312,9 +308,9 @@ this.setState({
                              >
                                Privacy Policy
                              </div>
-                             <div className="col-xs-4 font2">Need Help? </div>
+                             <div className="col-xs-4 line312 font2">Need Help? </div>
                              <div
-                               className="col-xs-4 font2"
+                               className="col-xs-4 line6"
                                style={{ float: "right" }}
                              >
                                {" "}

@@ -12,20 +12,20 @@
 
 .margin-roletext{
     float: left;
-    margin-left: 48%;
+    margin-left: 37%;
     margin-top: -0.5em;
     color: grey;
      font-family: var(--LatoFont);
 }
 .margin-roletext1{
     float: left;
-    margin-left: 31%;
+    margin-left: 22%;
     margin-top: -0.5em;
     color: grey;
      font-family: var(--LatoFont);
 }
 .margin-arrow {
     margin-top: 1.3em;
-    margin-left: 2em;
+    margin-left: 0em;
 }
 

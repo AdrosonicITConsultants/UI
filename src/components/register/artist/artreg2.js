@@ -17,14 +17,14 @@ export default class artreg2 extends Component {
                      otppin: "",
                      showValidation: false,
                      showValidationpin: false,
-                     showUserName: true,
+                     
                    };
                  }
 
                
 
                  SendOtp() {
-                   debugger;
+                   
                    const emailcheck = isEmail;
 
                    // validator.isEmail(this.state.emailid);
@@ -37,6 +37,7 @@ export default class artreg2 extends Component {
                      });
                    }
                    else{
+                     this.props.so(this.state.emailid);
                      customToast.success("OTP sent successfully", {autoClose : false});
                    }
                  }
@@ -51,6 +52,7 @@ export default class artreg2 extends Component {
                        showValidationpin: !this.state.showValidationpin,
                      });
                    } else {
+                     this.props.co(this.state.otppin)
                      this.props.handler(2);
                    }
                  }
@@ -107,7 +109,7 @@ export default class artreg2 extends Component {
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
-
+                          <br></br>
                            <Row
                              noGutters={true}
                              className="text-center line32 font3"
@@ -126,9 +128,8 @@ export default class artreg2 extends Component {
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
                                  <img
-                                   style={{ width: "42px", margin: "2px" }}
                                    src={logos.emaillogo}
-                                   className="ionickeylogo glyphicon"
+                                   className="maillogo glyphicon"
                                  ></img>
                                  <input
                                    type="email"
@@ -157,7 +158,7 @@ export default class artreg2 extends Component {
                                    color: "white",
                                    borderRadius: "2em",
                                    width: "8em",
-                                   height: "3em",
+                                   height: "2.5em",
                                  }}
                                  onClick={() => this.SendOtp()}
                                >
@@ -173,9 +174,8 @@ export default class artreg2 extends Component {
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
                                  <img
-                                   style={{ width: "42px", margin: "4px" }}
                                    src={logos.otplogo}
-                                   className="ionickeylogo glyphicon"
+                                   className="otplogo glyphicon"
                                  ></img>
                                  <input
                                    type="number"
@@ -204,7 +204,7 @@ export default class artreg2 extends Component {
                                    color: "white",
                                    borderRadius: "2em",
                                    width: "11em",
-                                   height: "3em",
+                                   height: "2.5em",
                                  }}
                                  onClick={() => this.operation()}
                                >
@@ -233,7 +233,7 @@ export default class artreg2 extends Component {
                                    color: "#000000",
                                    borderRadius: "2em",
                                    width: "10em",
-                                   height: "3em",
+                                   height: "2.5em",
                                  }}
                                  //   onClick={() => this.operation()}
                                >
@@ -244,7 +244,7 @@ export default class artreg2 extends Component {
 
                            <Row
                              noGutters={true}
-                             className="text-center line6 font3"
+                             className="text-center line6 mt37"
                            >
                              Change language
                              <img src={logos.language} className="ml-5"></img>
@@ -255,7 +255,7 @@ export default class artreg2 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                           <br></br>
+                           
                          </div>
                        </Col>
                      </React.Fragment>

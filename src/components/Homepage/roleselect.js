@@ -67,7 +67,7 @@ export default class roleselect extends Component {
                                 <Row noGutters={true} className="text-center line5 font3">
                                     Need Help Deciding?
                                 </Row>
-                                <Row noGutters={true} className="text-center line6 font3">
+                                <Row noGutters={true} className="text-center line61 font3">
                                     <img src={logos.language}></img>
                                     Change language
                                 </Row>

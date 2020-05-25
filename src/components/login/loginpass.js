@@ -22,12 +22,22 @@ export default class buyerpass extends Component {
                        showValidation: !this.state.showValidation,
                      });
                    } else {
-                     debugger;
-                        window.open("./demo-video", "_self");
+                    
+                      if(this.props.userpage == 2){
+                        this.props.cpb(this.state.password);
+                        
+                      }
+                      else{
+                        this.props.cpa(this.state.password);
+                        
+                      }
+                        
+                        // window.open("./demo-video", "_self");
+                        alert("login clicked");
                   
                      //this.props.handler(1);
                    }
-                    alert("login clicked");
+                    
                  }
 
                  backoperation() {
@@ -143,7 +153,7 @@ export default class buyerpass extends Component {
                              </div>
                            </Row>
                          </div>
-
+                                <br></br>
                          <Row noGutters={true}>
                            <div className="col-xs-12 text-center">
                              <button
@@ -152,7 +162,7 @@ export default class buyerpass extends Component {
                                  color: "white",
                                  borderRadius: "2em",
                                  width: "8em",
-                                 height: "3em",
+                                 height: "2.5em",
                                }}
                                onClick={() => this.Login()}
                              >
@@ -194,19 +204,17 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
-                         <Row noGutters={true}>
-                           <strong className="col-xs-3 text-center line7 font3">
-                             Help?
-                           </strong>
-                           <span className="col-xs-4"></span>
-                           <span
-                             style={{ color: "var(--lightFont)" }}
-                             className="col-xs-5 text-center line7 font3"
-                           >
-                             Privacy policy
-                           </span>
-                         </Row>
-                         <br></br>
+                         <Row noGutters={true} className="mt37">
+            <strong className="col-xs-3 text-center line7 font6">Help?</strong>
+            <span className="col-xs-4"></span>
+            <span
+              style={{ color: "var(--lightFont)" }}
+              className="col-xs-5 text-center line7 font6"
+            >
+              Privacy policy
+            </span>
+          </Row>
+                        
                        </div>
                      </React.Fragment>
                    );

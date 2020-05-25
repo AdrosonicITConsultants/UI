@@ -27,6 +27,7 @@ export default class artreg3 extends Component {
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
+            this.props.sp(this.state.password);
             this.props.handler(3);
           }
       }
@@ -82,7 +83,7 @@ export default class artreg3 extends Component {
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
-
+                <br></br>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10">
@@ -100,7 +101,7 @@ export default class artreg3 extends Component {
                   <div className="col-xs-1"></div>
                   <div className="form-group col-xs-10">
                     <label className="control-label"></label>
-                    <div className="inner-addon left-addon">
+                    <div className="inner-addon ">
                       {/* <i className="glyphicon glyphicon-user"></i> */}
                       <input
                         type="password"
@@ -125,7 +126,7 @@ export default class artreg3 extends Component {
                   <div className="col-xs-1"></div>
                   <div className="form-group col-xs-10 ">
                     <label className="control-label"></label>
-                    <div className="inner-addon left-addon">
+                    <div className="inner-addon ">
                       {/* <i className="glyphicon glyphicon-user"></i> */}
                       <input
                         type="password"
@@ -155,7 +156,7 @@ export default class artreg3 extends Component {
                         color: "white",
                         borderRadius: "2em",
                         width: "8em",
-                        height: "3em",
+                        height: "2.5em",
                       }}
                       onClick={() => this.operation()}
                     >
@@ -180,7 +181,7 @@ export default class artreg3 extends Component {
                         color: "#000000",
                         borderRadius: "2em",
                         width: "10em",
-                        height: "3em",
+                        height: "2.5em",
                       }}
                       //   onClick={() => this.operation()}
                     >
@@ -189,7 +190,7 @@ export default class artreg3 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true} className="text-center line6 font3">
+                <Row noGutters={true} className="text-center line6 mt37">
                   Change language
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
@@ -199,7 +200,7 @@ export default class artreg3 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                <br></br>
+                
               </div>
             </Col>
           </React.Fragment>

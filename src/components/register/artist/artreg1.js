@@ -27,13 +27,14 @@ export default class artreg1 extends Component {
                 showValidationpin: !this.state.showValidationpin,
               });
           } else {
+            this.props.cwi(this.state.weaverid ,this.state.weaverpin )
             this.props.handler(1);
           }
       }
 
       backoperation() {
         window.open("./", "_self");
-              this.props.handler(0);
+        // this.props.handler(0);
 
         }
     
@@ -88,10 +89,10 @@ export default class artreg1 extends Component {
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
-
+                <br></br>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10">Do you have a weaver ID?</span>
+                  <span className="col-xs-10 fontplay">Do you have a weaver ID?</span>
                 </Row>
 
                 <Row noGutters={true}>
@@ -123,7 +124,7 @@ export default class artreg1 extends Component {
                 </Row>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10">
+                  <span className="col-xs-10 fontplay">
                     Enter your 4 digit pin provided along with weaver ID{" "}
                   </span>
                 </Row>
@@ -161,7 +162,7 @@ export default class artreg1 extends Component {
                         color: "white",
                         borderRadius: "2em",
                         width: "8em",
-                        height: "3em",
+                        height: "2.5em",
                       }}
                       onClick={() => this.operation()}
                     >
@@ -177,6 +178,7 @@ export default class artreg1 extends Component {
                     If you don't have a weaver id get in touch with us.{" "}
                   </span>
                 </Row>
+                <br></br>
 
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
@@ -186,7 +188,7 @@ export default class artreg1 extends Component {
                         color: "#000000",
                         borderRadius: "2em",
                         width: "10em",
-                        height: "3em",
+                        height: "2.5em",
                       }}
                       //   onClick={() => this.operation()}
                     >
@@ -195,12 +197,12 @@ export default class artreg1 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true}>
-                  <span className="col-xs-3 text-center line7 font3">
+                <Row noGutters={true} className="mt7">
+                  <span className="col-xs-3 text-center line7 font6">
                     Help?
                   </span>
                   <span className="col-xs-3"></span>
-                  <span className="col-xs-6 text-center line6 font3">
+                  <span className="col-xs-6 text-center line6 font6">
                     Change language
                     <img src={logos.language} className="ml-5"></img>
                   </span>

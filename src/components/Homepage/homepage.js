@@ -5,8 +5,8 @@ import logos from "../../assets";
 import Roleselect from "./roleselect"
 import Loginpass from "../login/loginpass";
 import Loginuser from "../login/loginuser";
-import Artreg2 from "../register/artist/artreg2";
-import Buyreg1 from "../register/buyer/buyreg1";
+// import Artreg2 from "../register/artist/artreg2";
+// import Buyreg1 from "../register/buyer/buyreg1";
 // import Artistlogin from "../artist/artistlogin"
 
 export default class HomePage extends Component {
@@ -14,10 +14,14 @@ export default class HomePage extends Component {
                    super(props);
 
                      this.state = {
+                       username : "",
                        userpage : 0
                      };
                    this.handler = this.handler.bind(this);
-                  
+                   this.checkpasswordBuyer = this.checkpasswordBuyer.bind(this);
+                   this.checkusernameArtist = this.checkusernameArtist.bind(this);
+                   this.checkpasswordArtist = this.checkpasswordArtist.bind(this);
+                   this.checkusernameBuyer = this.checkusernameBuyer.bind(this);
                  }
 
                  renderSection(num){
@@ -36,6 +40,7 @@ export default class HomePage extends Component {
                            <Loginuser
                              handler={this.handler}
                              userpage={this.state.userpage}
+                             cub = {this.checkusernameBuyer}
                            />
                          );
                          break;
@@ -44,6 +49,7 @@ export default class HomePage extends Component {
                            <Loginpass
                              handler={this.handler}
                              userpage={this.state.userpage}
+                             cpb = {this.checkpasswordBuyer}
                            />
                          );
                          break;
@@ -53,6 +59,7 @@ export default class HomePage extends Component {
                            <Loginuser
                              handler={this.handler}
                              userpage={this.state.userpage}
+                             cua = {this.checkusernameArtist}
                            />
                          );
                          break;
@@ -61,24 +68,25 @@ export default class HomePage extends Component {
                            <Loginpass
                              handler={this.handler}
                              userpage={this.state.userpage}
+                             cpa = {this.checkpasswordArtist}
                            />
                          );
                          break;
-                       case 5:
-                         return (
-                           <Artreg2
-                             handler={this.handler}
-                             userpage={this.state.userpage}
-                           />
-                         );
-                       case 6:
-                         return (
-                           <Buyreg1
-                             handler={this.handler}
-                             userpage={this.state.userpage}
-                           />
-                         );
-                         break;
+                      //  case 5:
+                      //    return (
+                      //      <Artreg2
+                      //        handler={this.handler}
+                      //        userpage={this.state.userpage}
+                      //      />
+                      //    );
+                      //  case 6:
+                      //    return (
+                      //      <Buyreg1
+                      //        handler={this.handler}
+                      //        userpage={this.state.userpage}
+                      //      />
+                      //    );
+                      //    break;
 
                        default:
                          return (
@@ -91,7 +99,23 @@ export default class HomePage extends Component {
                          break;
                      }
                  }
-                 
+                checkusernameArtist(userName){
+                  console.log("artist :" + userName);
+                  this.setState({ username : userName } );
+
+                }
+                checkpasswordArtist(password){
+                  console.log("artist :" + this.state.username);
+                  console.log("artistpass :" + password);
+               }
+                 checkusernameBuyer(userName){
+                   console.log("buyer :" + userName);
+                   this.setState({ username : userName }, () =>{});
+                 }
+                 checkpasswordBuyer(password){
+                  console.log("buyer :" + this.state.username);
+                  console.log("buyerpass :" + password);
+                }
                  handler(num) {              
                    this.setState({ userpage : num }, () => {
                      console.log(this.state.userpage);

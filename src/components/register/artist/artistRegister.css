@@ -11,12 +11,15 @@
     border-radius: 10px;
     width: 90%;
     margin: 0 auto;
+    height:590px;
+    width: 400px;
 }
 .demoab{
     background-color: white;
     border-radius: 10px;
     width: 90%;
     margin: 0 auto;
+    height:619px;
 }
 .font2{
     font-size: 15px;
@@ -33,10 +36,19 @@
     font-size: 35px;
 }
 .userLogo {
-    width: 42px;
+    width: 35px;
+}
+.mt7{
+    margin-top:7px;
 }
 .ionickeylogo {
-    width: 47px;
+    width: 40px;
+}
+.maillogo{
+    width: 38px;
+}
+.otplogo{
+    width: 40px;
 }
 .locklogo1{
     width: 20px;
@@ -57,7 +69,7 @@
   /* style glyph */
   .inner-addon2 .glyphicon {
     position: absolute;
-    padding: 12px;
+    padding: 9px;
     pointer-events: none;
   }
   .BuyerLogin1{
@@ -163,16 +175,36 @@ body {
     border-radius: 50%;
     box-shadow: 0px 0px 31px -8px #ff9d9d;
 }
+.mt77{
+   margin-top: 77px;
+}
 
 
 
 @media only screen and ( max-width: 480px ) {
+   
     .demoa{
-        margin-top:20px;
-       
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:100%;
+        height:auto;
     }
     .fullscreen1{
         height:0vh;
+    }
+    .logoreg3wid {
+        width: 40%!important;
+        margin-left: 0px;
+    }
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:100%;
+        height:auto;
     }
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
@@ -182,6 +214,7 @@ body {
         border-radius: 10px;
         margin: 30px auto;
         width:400px;
+        height:auto;
     }
     .fullscreen1{
         height:0vh;
@@ -193,13 +226,14 @@ body {
     }
     .margin-roletext1 {
         float: left;
-        margin-left: 44%;
+        margin-left: 32%;
         margin-top: -0.5em;
         color: grey;
         font-family: var(--LatoFont);
     }
     .logoreg3wid {
         width: 40%!important;
+        margin-left: 0px;
     }
 
 }
@@ -230,19 +264,21 @@ body {
         border-radius: 10px;
         margin: 30px auto;
         width:400px;
+        height:auto;
     }
     .fullscreen1{
         height:0vh;
     }
     .margin-roletext1 {
         float: left;
-        margin-left: 44%;
+        margin-left: 33%;
         margin-top: -0.5em;
         color: grey;
         font-family: var(--LatoFont);
     }
     .logoreg3wid {
         width: 40%!important;
+        margin-left: 0px;
     }
    
 }
@@ -252,9 +288,9 @@ body {
         /* margin-top:100px; */
         background-color: white;
         border-radius: 10px;
-        width: 80%;
+        width: 400px;
         margin: 0 auto;
-        height: 665px;
+        height: 590px;
     }
     .demoab{
         /* margin-top:100px; */
@@ -262,7 +298,7 @@ body {
         border-radius: 10px;
         width: 80%;
         margin: 0 auto;
-        height: 665px;
+        height: 619px;
     }
 
     
@@ -278,7 +314,7 @@ body {
     }
     .margin-roletext1{
         float: left;
-        margin-left: 29%;
+        margin-left: 21%;
         margin-top: -0.5em;
         color: grey;
          font-family: var(--LatoFont);

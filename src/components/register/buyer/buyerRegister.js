@@ -16,7 +16,7 @@ export default class buyerRegister extends Component {
         super(props);
 
         this.state = {
-            userpage: 3
+            userpage: 0
         };
         this.handler = this.handler.bind(this);
 

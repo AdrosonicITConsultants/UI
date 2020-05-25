@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
-import "../../Homepage/homepage.css";
-import logos from "../../../assets"
+import "../Homepage/homepage.css";
+import logos from "../../assets"
 import isEmail from "validator/lib/isEmail";
-import  customToast  from "../../../shared/customToast";
+import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from 'react-toastify';
 
 
 
 
-export default class artreg2 extends Component {
+export default class forgotpass1 extends Component {
                  constructor() {
                    super();
                    this.state = {
@@ -39,12 +38,16 @@ export default class artreg2 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
-                     customToast.success("OTP sent successfully", {position: toast.POSITION.TOP_RIGHT ,autoClose : true});
+                     customToast.success("OTP sent successfully", {autoClose : false});
                    }
                  }
                  operation() {
                    debugger;
-                   if (this.state.emailid == "") {
+                    const emailcheck = isEmail;
+                   if (
+                     this.state.emailid == "" ||
+                     !emailcheck(this.state.emailid)
+                   ) {
                      this.setState({
                        showValidation: !this.state.showValidation,
                      });
@@ -53,13 +56,15 @@ export default class artreg2 extends Component {
                        showValidationpin: !this.state.showValidationpin,
                      });
                    } else {
-                     this.props.co(this.state.otppin)
-                     this.props.handler(2);
+                     this.props.co(this.state.otppin);
+                     this.props.handler(1);
                    }
                  }
 
                  backoperation() {
-                   this.props.handler(0);
+                  //  this.props.handler(0);
+        window.open("./", "_self");
+
                  }
 
                  handleChange(e) {
@@ -100,7 +105,13 @@ export default class artreg2 extends Component {
                                  <h2 className="col-xs-6 margin-registertext">
                                    Register
                                  </h2>
-                                 <h4 className="margin-roletext">Artist</h4>
+                                 {window.location.pathname.indexOf(
+                                   "passwordA"
+                                 ) !== -1 ? (
+                                   <h4 className="margin-roletext">Artist</h4>
+                                 ) : (
+                                   <h4 className="margin-roletext">Buyer</h4>
+                                 )}
                                </div>
                              </div>
 
@@ -221,9 +232,6 @@ export default class artreg2 extends Component {
                              <div className="col-xs-12 text-center">
                                <button
                                  className="whiteButton"
-                                 style={{
-                                   width: "10em",
-                                 }}
                                  //   onClick={() => this.operation()}
                                >
                                  Reach out to us

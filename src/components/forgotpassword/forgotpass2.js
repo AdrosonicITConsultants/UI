@@ -1,54 +1,52 @@
-import React, { Component } from 'react';
-import { Row, Col} from "reactstrap";
-import "../../Homepage/homepage.css";
-import logos from "../../../assets"
+import React, { Component } from "react";
+import { Row, Col, Container } from "reactstrap";
+import "../Homepage/homepage.css";
+import logos from "../../assets";
+import "react-toastify/dist/ReactToastify.css";
 
-export default class artreg1 extends Component {
+export default class forgotpass2 extends Component {
     constructor() {
         super();
         this.state = {
-          weaverid: "",
-          weaverpin: "",     
-          showValidation: false,
-          showValidationpin: false,
+          password: "",
+          confirmpass: "",     
+          showValidationpass: false,
+          showValidationconfirmpass: false,
           showUserName: true,
         };
       }
     
       operation() {
         debugger;
-        if (this.state.weaverid == "") {
+        if (this.state.password == "") {
             this.setState({
-              showValidation: !this.state.showValidation,
+                showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.weaverpin == ""){                    
+          else if (this.state.confirmpass !== this.state.password ){                    
               this.setState({
-                showValidationpin: !this.state.showValidationpin,
+                showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
-            this.props.cwi(this.state.weaverid ,this.state.weaverpin )
-            this.props.handler(1);
+            this.props.sp(this.state.password);
+            this.props.handler(2);
           }
       }
 
       backoperation() {
-        window.open("./", "_self");
-        // this.props.handler(0);
-
+         this.props.handler(0);
         }
     
     
       handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
-          showValidation: false,
-          showValidationpin: false
+            showValidationpass: false,
+            showValidationconfirmpass: false
         });
       }
     
     render() {
-      
         return (
           <React.Fragment>
             <Col
@@ -65,10 +63,7 @@ export default class artreg1 extends Component {
               lg={{ size: "6" }}
               className="vcenter "
             >
-              <div
-                className="demoa demoabAnimation text-center"
-                noGutters={true}
-              >
+              <div className="demoa text-center" noGutters={true}>
                 <br></br>
                 <Row noGutters={true} className="">
                   <div className="col-xs-6">
@@ -79,7 +74,11 @@ export default class artreg1 extends Component {
                     ></img>
                     <div>
                       <h2 className="col-xs-6 margin-registertext">Register</h2>
-                      <h4 className="margin-roletext">Artist</h4>
+                      {window.location.pathname.indexOf("passwordA") !== -1 ? (
+                        <h4 className="margin-roletext">Artist</h4>
+                      ) : (
+                        <h4 className="margin-roletext">Buyer</h4>
+                      )}
                     </div>
                   </div>
 
@@ -92,31 +91,34 @@ export default class artreg1 extends Component {
                 <br></br>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10 fontplay">
-                    Do you have a weaver ID?
+                  <span className="col-xs-10">
+                    <img
+                      src={logos.locklogo}
+                      className="locklogo1 glyphicon mr-5"
+                    ></img>
+                    Enter your new password
                   </span>
                 </Row>
 
+                <br />
+
                 <Row noGutters={true}>
                   <div className="col-xs-1"></div>
-                  <div className="form-group col-xs-10 ">
+                  <div className="form-group col-xs-10">
                     <label className="control-label"></label>
-                    <div className="inner-addon2 left-addon2">
-                      <img
-                        src={logos.userlogo}
-                        className="userLogo glyphicon"
-                      ></img>
+                    <div className="inner-addon ">
+                      {/* <i className="glyphicon glyphicon-user"></i> */}
                       <input
-                        type="text"
-                        id="weaverid"
+                        type="password"
+                        id="password"
                         className="form-control BuyerLogin"
-                        placeholder="weaverID"
-                        name="weaverid"
+                        placeholder="password"
+                        name="password"
                         onChange={(e) => this.handleChange(e)}
                       />
-                      {this.state.showValidation ? (
+                      {this.state.showValidationpass ? (
                         <span className="bg-danger">
-                          please enter weaver ID
+                          please enter your password
                         </span>
                       ) : (
                         <br />
@@ -124,31 +126,25 @@ export default class artreg1 extends Component {
                     </div>
                   </div>
                 </Row>
-                <Row noGutters={true} className="text-center line32 font3">
-                  <span className="col-xs-1"></span>
-                  <span className="col-xs-10 fontplay">
-                    Enter your 4 digit pin provided along with weaver ID{" "}
-                  </span>
-                </Row>
+
                 <Row noGutters={true}>
                   <div className="col-xs-1"></div>
                   <div className="form-group col-xs-10 ">
                     <label className="control-label"></label>
-                    <div className="inner-addon2 left-addon2">
-                      <img
-                        src={logos.ionickeylogo}
-                        className="ionickeylogo glyphicon"
-                      ></img>
+                    <div className="inner-addon ">
+                      {/* <i className="glyphicon glyphicon-user"></i> */}
                       <input
-                        type="number"
-                        id="weaverpin"
+                        type="password"
+                        id="confirmpass"
                         className="form-control BuyerLogin"
-                        placeholder="weaverpin"
-                        name="weaverpin"
+                        placeholder="Re-enter yourpassword"
+                        name="confirmpass"
                         onChange={(e) => this.handleChange(e)}
                       />
-                      {this.state.showValidationpin ? (
-                        <span className="bg-danger">please enter pin</span>
+                      {this.state.showValidationconfirmpass ? (
+                        <span className="bg-danger">
+                          password does not match
+                        </span>
                       ) : (
                         <br />
                       )}
@@ -156,33 +152,30 @@ export default class artreg1 extends Component {
                   </div>
                 </Row>
 
+                <br />
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      className="blackButton"
+                  className="blackButton"
                       onClick={() => this.operation()}
                     >
                       Next
                     </button>
                   </div>
                 </Row>
+
                 <br />
                 <hr className="hrline"></hr>
-                <Row noGutters={true} className="text-center line32 font3">
-                  <span className="col-xs-2"></span>
-                  <span className="col-xs-8">
-                    If you don't have a weaver id get in touch with us.{" "}
-                  </span>
-                </Row>
-                <br></br>
 
+                <Row noGutters={true} className="text-center line311 font3">
+                  <span className="col-xs-2"></span>
+                  <span className="col-xs-8">In case of any help </span>
+                </Row>
+                <br />
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      className="whiteButton"
-                      style={{                       
-                        width: "10em",                      
-                      }}
+                     className="whiteButton"
                       //   onClick={() => this.operation()}
                     >
                       Reach out to us
@@ -190,17 +183,16 @@ export default class artreg1 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true} className="mt7">
-                  <span className="col-xs-3 text-center line7 font6">
-                    Help?
-                  </span>
-                  <span className="col-xs-3"></span>
-                  <span className="col-xs-6 text-center line6 font6">
-                    Change language
-                    <img src={logos.language} className="ml-5"></img>
-                  </span>
+                <Row noGutters={true} className="text-center line6 mt37">
+                  Change language
+                  <img src={logos.language} className="ml-5"></img>
                 </Row>
-                <br></br>
+
+                {/* <Row noGutters={true}>
+            <span className="col-xs-3 text-center">Help</span>
+            <span className="col-xs-5"></span>
+            <span className="col-xs-4 text-center">Privacy policy</span>
+          </Row> */}
               </div>
             </Col>
           </React.Fragment>

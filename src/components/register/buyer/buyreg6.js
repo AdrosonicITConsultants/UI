@@ -165,7 +165,11 @@ export default class buyreg6 extends Component {
                   <span className="col-xs-10 line322 text-center font3">
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}
-                 <img style={{width:"13px", marginRight :"5px"}} src={logos.skiplogo}></img>   skip
+                    <img
+                      style={{ width: "13px", marginRight: "5px" }}
+                      src={logos.skiplogo}
+                    ></img>{" "}
+                    skip
                   </span>
                 </Row>
                 <br></br>
@@ -173,20 +177,14 @@ export default class buyreg6 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      style={{
-                        background: "#000000",
-                        color: "white",
-                        borderRadius: "2em",
-                        width: "8em",
-                        height: "2.5em",
-                      }}
+                      className="blackButton"
                       onClick={() => this.operation()}
                     >
                       Complete
                     </button>
                   </div>
                 </Row>
-                <br/>
+                <br />
                 <Row noGutters={true} className="text-center line312 font1">
                   <div
                     style={{

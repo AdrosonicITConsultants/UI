@@ -151,13 +151,7 @@ export default class artreg3 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      style={{
-                        background: "#000000",
-                        color: "white",
-                        borderRadius: "2em",
-                        width: "8em",
-                        height: "2.5em",
-                      }}
+                      className="blackButton"
                       onClick={() => this.operation()}
                     >
                       Next
@@ -176,12 +170,9 @@ export default class artreg3 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
+                      className="whiteButton"
                       style={{
-                        background: "white",
-                        color: "#000000",
-                        borderRadius: "2em",
                         width: "10em",
-                        height: "2.5em",
                       }}
                       //   onClick={() => this.operation()}
                     >
@@ -200,7 +191,6 @@ export default class artreg3 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                
               </div>
             </Col>
           </React.Fragment>

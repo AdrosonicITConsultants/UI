@@ -3,8 +3,9 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets";
 import isEmail from "validator/lib/isEmail";   
-import { ToastContainer, toast } from "react-toastify";
+import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 toast.configure()
@@ -30,12 +31,17 @@ export default class buyreg1 extends Component {
     }
     else{
       this.props.so(this.state.emailid);
-      toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
+      // toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
+     customToast.success("OTP sent successfully", {
+       position: toast.POSITION.TOP_RIGHT,
+       autoClose: true,
+     });
     }
   }
   operation() {
     debugger;
-    if (this.state.emailid == "") {
+    const emailcheck = isEmail;
+    if (this.state.emailid == "" ||!emailcheck(this.state.emailid)) {
       this.setState({
         showValidation: !this.state.showValidation,
       });
@@ -106,7 +112,7 @@ export default class buyreg1 extends Component {
 
               <span className="col-xs-10">
                 <img
-                  src={logos.locklogo}
+                  src={logos.emaillogo}
                   className="locklogo1 glyphicon mr-5"
                 ></img>
                 Enter your email ID
@@ -141,13 +147,7 @@ export default class buyreg1 extends Component {
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
-                  style={{
-                    background: "#000000",
-                    color: "white",
-                    borderRadius: "2em",
-                    width: "8em",
-                    height: "2.5em",
-                  }}
+                  className="blackButton"
                   onClick={() => this.operation1()}
                 >
                   Send OTP
@@ -181,12 +181,9 @@ export default class buyreg1 extends Component {
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
+                  className="blackButton"
                   style={{
-                    background: "#000000",
-                    color: "white",
-                    borderRadius: "2em",
                     width: "11em",
-                    height: "2.5em",
                   }}
                   onClick={() => this.operation()}
                 >
@@ -205,12 +202,9 @@ export default class buyreg1 extends Component {
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
+                  className="whiteButton"
                   style={{
-                    background: "white",
-                    color: "#000000",
-                    borderRadius: "2em",
                     width: "10em",
-                    height: "2.5em",
                   }}
                   //   onClick={() => this.operation()}
                 >

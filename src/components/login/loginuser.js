@@ -137,16 +137,9 @@ export default class buyeruser extends Component {
           <Row noGutters={true}>
             <div className="col-xs-12 text-center">
               <button
-                style={{
-                  background: "#000000",
-                  color: "white",
-                  borderRadius: "2em",
-                  width: "8em",
-                  height: "2.5em",
-                }}
+                className="blackButton"
                 // onClick={() => this.operation()}
                 onClick={() => this.operation()}
-
               >
                 Next
               </button>
@@ -197,7 +190,6 @@ export default class buyeruser extends Component {
               Privacy policy
             </span>
           </Row>
-          
         </div>
       </React.Fragment>
     );

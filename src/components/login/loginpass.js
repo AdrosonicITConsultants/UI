@@ -147,23 +147,23 @@ export default class buyerpass extends Component {
                            </Row>
                            <Row noGutters={true}>
                              <div className="col-xs-11 text-right">
-                               {this.props.userpage == 2 ?
-                               <a href="./">forgot password?</a>:
-                               <a href="./">forgot password?</a>}
+                               {this.props.userpage == 2 ? (
+                                 <a href="./forgot-passwordB">
+                                   forgot password?
+                                 </a>
+                               ) : (
+                                 <a href="./forgot-passwordA">
+                                   forgot password?
+                                 </a>
+                               )}
                              </div>
                            </Row>
                          </div>
-                                <br></br>
+                         <br></br>
                          <Row noGutters={true}>
                            <div className="col-xs-12 text-center">
                              <button
-                               style={{
-                                 background: "#000000",
-                                 color: "white",
-                                 borderRadius: "2em",
-                                 width: "8em",
-                                 height: "2.5em",
-                               }}
+                               className="blackButton"
                                onClick={() => this.Login()}
                              >
                                Login
@@ -205,16 +205,17 @@ export default class buyerpass extends Component {
                          </Row>
 
                          <Row noGutters={true} className="mt37">
-            <strong className="col-xs-3 text-center line7 font6">Help?</strong>
-            <span className="col-xs-4"></span>
-            <span
-              style={{ color: "var(--lightFont)" }}
-              className="col-xs-5 text-center line7 font6"
-            >
-              Privacy policy
-            </span>
-          </Row>
-                        
+                           <strong className="col-xs-3 text-center line7 font6">
+                             Help?
+                           </strong>
+                           <span className="col-xs-4"></span>
+                           <span
+                             style={{ color: "var(--lightFont)" }}
+                             className="col-xs-5 text-center line7 font6"
+                           >
+                             Privacy policy
+                           </span>
+                         </Row>
                        </div>
                      </React.Fragment>
                    );

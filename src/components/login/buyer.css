@@ -24,6 +24,14 @@
     color: grey;
      font-family: var(--LatoFont);
 }
+
+.margin-roletext2 {
+    float: left;
+    margin-left: -41%;
+    margin-top: 18%;
+    color: grey;
+    font-family: var(--LatoFont);
+}
 .margin-arrow {
     margin-top: 1.3em;
     margin-left: 0em;

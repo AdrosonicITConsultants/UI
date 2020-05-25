@@ -7,6 +7,7 @@ import Buyerregister from "./components/register/buyer/buyerRegister";
 import { memoryHistory, browserHistory } from "./helpers/history";
 import videoPlayer from './components/login/videoPlayer';
 import { ToastContainer } from "react-toastify";
+import ForgotpassRouter from "./components/forgotpassword/forgotpassRouter";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
+          <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
+          <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/demo-video" component={videoPlayer} />
         </Switch>
       </Router>

@@ -33,14 +33,14 @@
     margin-top: 7px;
     margin-bottom: 13px;
     border: 0;
-    border-top: 1px solid #666666;
+    border-top: 1px solid #ccc;
     width: 68%;
 }
 .hrline2{
     margin-top: 7px;
     margin-bottom: 7px;
     border: 0;
-    border-top: 1px solid #666666;
+    border-top: 1px solid #ccc;
     width: 50%;
 }
 button{
@@ -221,6 +221,24 @@ body {
     font-family: var(--lato);
 }
 
+.circleDivPass {
+    border: 1px solid green;
+    /* border-radius: 50%; */
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    
+    background: white;
+    font-size: 25px;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 10px;
+    width: 3em;
+    height: 3em;
+    box-shadow: 0px 0px 31px -8px green;
+    font-family: var(--lato);
+}
+
 .cicrleLogo {
         width: 1.5em;
     padding-top: 6px;
@@ -269,12 +287,39 @@ background-color: white !important;
     height: 1.5em ;
   }
 
+ .greenButton {
+    background: var(--mainGreen);
+    color: white;
+    border-radius: 2em;
+    width: 8em;
+    border: 1px white;
+    height: 2.5em;
+ } 
+
+ .blackButton {
+    background: rgb(0, 0, 0);
+    color: white;
+    border-radius: 2em;
+    width: 8em;
+    height: 2.5em;
+    border: white;
+ }
+
+ .whiteButton {
+    background: white;
+    color: rgb(0, 0, 0);
+    border-radius: 2em;
+    width: 10em;
+    height: 2.5em;
+    border: var(--lightFont) 1px solid;
+ }
+
 @keyframes slideInFromLeft {
   0% {
-    transform: translate(90%);
+    transform: scale(0,0)
   }
   100% {
-    transform: translateX(0);
+    transform: scale(1,1)
   }
 }
 .vcenter {

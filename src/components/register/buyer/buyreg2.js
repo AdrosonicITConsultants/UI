@@ -145,13 +145,7 @@ export default class buyreg2 extends Component {
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
-                  style={{
-                    background: "#000000",
-                    color: "white",
-                    borderRadius: "2em",
-                    width: "8em",
-                    height: "3em",
-                  }}
+                  className="blackButton"
                   onClick={() => this.operation()}
                 >
                   Next
@@ -170,12 +164,9 @@ export default class buyreg2 extends Component {
             <Row noGutters={true}>
               <div className="col-xs-12 text-center">
                 <button
+                  className="whiteButton"
                   style={{
-                    background: "white",
-                    color: "#000000",
-                    borderRadius: "2em",
                     width: "10em",
-                    height: "3em",
                   }}
                   //   onClick={() => this.operation()}
                 >

@@ -315,12 +315,8 @@ export default class buyreg5 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
+                      className="blackButton"
                       style={{
-                        background: "#000000",
-                        color: "white",
-                        borderRadius: "2em",
-                        width: "8em",
-                        height: "2.5em",
                         marginTop: "8px",
                       }}
                       onClick={() => this.operation()}

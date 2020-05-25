@@ -18,6 +18,7 @@ export default class videoPlayer extends Component {
               onEnded={() => this.SkiptoHomepgae()}
             ></ReactPlayer>
             <button
+              className="blackButton"
               style={{
                 float: "right",
                 position: "relative",

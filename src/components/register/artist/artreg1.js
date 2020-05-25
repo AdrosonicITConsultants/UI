@@ -92,7 +92,9 @@ export default class artreg1 extends Component {
                 <br></br>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10 fontplay">Do you have a weaver ID?</span>
+                  <span className="col-xs-10 fontplay">
+                    Do you have a weaver ID?
+                  </span>
                 </Row>
 
                 <Row noGutters={true}>
@@ -157,13 +159,7 @@ export default class artreg1 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      style={{
-                        background: "#000000",
-                        color: "white",
-                        borderRadius: "2em",
-                        width: "8em",
-                        height: "2.5em",
-                      }}
+                      className="blackButton"
                       onClick={() => this.operation()}
                     >
                       Next
@@ -183,12 +179,9 @@ export default class artreg1 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                      style={{
-                        background: "white",
-                        color: "#000000",
-                        borderRadius: "2em",
-                        width: "10em",
-                        height: "2.5em",
+                      className="whiteButton"
+                      style={{                       
+                        width: "10em",                      
                       }}
                       //   onClick={() => this.operation()}
                     >

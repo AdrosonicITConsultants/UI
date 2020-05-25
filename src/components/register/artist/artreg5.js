@@ -165,7 +165,6 @@ this.setState({
 
                              <img
                                src={logos.mainlogoside}
-                               
                                className="col-xs-3 logoreg3wid"
                                alt="TataTrusts logo"
                              ></img>
@@ -257,13 +256,7 @@ this.setState({
                            <Row noGutters={true}>
                              <div className="col-xs-12 text-center">
                                <button
-                                 style={{
-                                   background: "#000000",
-                                   color: "white",
-                                   borderRadius: "2em",
-                                   width: "8em",
-                                   height: "2.5em",
-                                 }}
+                                 className="blackButton"
                                  onClick={() => this.operation()}
                                >
                                  Complete
@@ -297,18 +290,17 @@ this.setState({
                                </a>
                              </div>
                            </Row>
-                           
-                           <Row
-                             noGutters={true}
-                             className="text-center mt77"
-                           >
+
+                           <Row noGutters={true} className="text-center mt77">
                              <div
                                className="col-xs-4 font2"
                                style={{ float: "left" }}
                              >
                                Privacy Policy
                              </div>
-                             <div className="col-xs-4 line312 font2">Need Help? </div>
+                             <div className="col-xs-4 line312 font2">
+                               Need Help?{" "}
+                             </div>
                              <div
                                className="col-xs-4 line6"
                                style={{ float: "right" }}

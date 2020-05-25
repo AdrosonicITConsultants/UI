@@ -178,7 +178,15 @@ body {
 .mt77{
    margin-top: 77px;
 }
+.resetsuccessfulText {
+    color: var(--mainGreen);
+    font-size: 20px;
+    font-family: var(--LatoFont);
+}
 
+.emailconfirmationText {
+    color: var(--lightFont);
+}
 
 
 @media only screen and ( max-width: 480px ) {

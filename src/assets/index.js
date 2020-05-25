@@ -14,6 +14,7 @@ import skiplogo from "./Icon-skip-next.svg";
 import uploadlogo from "./s_icon_upload SVG.svg";
 import otplogo from "./Otp.svg";
 import closelogo from "./close_icon.svg";
+import tickLogo from "./tick-done.svg";
 
 
 
@@ -35,4 +36,5 @@ export default {
   uploadlogo,
   otplogo,
   closelogo,
+  tickLogo,
 };

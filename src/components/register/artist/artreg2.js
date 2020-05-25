@@ -5,6 +5,7 @@ import logos from "../../../assets"
 import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
 
 
 
@@ -38,7 +39,7 @@ export default class artreg2 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
-                     customToast.success("OTP sent successfully", {autoClose : false});
+                     customToast.success("OTP sent successfully", {position: toast.POSITION.TOP_RIGHT ,autoClose : true});
                    }
                  }
                  operation() {
@@ -109,7 +110,7 @@ export default class artreg2 extends Component {
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
-                          <br></br>
+                           <br></br>
                            <Row
                              noGutters={true}
                              className="text-center line32 font3"
@@ -153,13 +154,7 @@ export default class artreg2 extends Component {
                            <Row noGutters={true}>
                              <div className="col-xs-12 text-center">
                                <button
-                                 style={{
-                                   background: "#000000",
-                                   color: "white",
-                                   borderRadius: "2em",
-                                   width: "8em",
-                                   height: "2.5em",
-                                 }}
+                                 className="blackButton"
                                  onClick={() => this.SendOtp()}
                                >
                                  Send OTP
@@ -199,12 +194,9 @@ export default class artreg2 extends Component {
                            <Row noGutters={true}>
                              <div className="col-xs-12 text-center">
                                <button
+                                 className="blackButton"
                                  style={{
-                                   background: "#000000",
-                                   color: "white",
-                                   borderRadius: "2em",
                                    width: "11em",
-                                   height: "2.5em",
                                  }}
                                  onClick={() => this.operation()}
                                >
@@ -228,12 +220,9 @@ export default class artreg2 extends Component {
                            <Row noGutters={true}>
                              <div className="col-xs-12 text-center">
                                <button
+                                 className="whiteButton"
                                  style={{
-                                   background: "white",
-                                   color: "#000000",
-                                   borderRadius: "2em",
                                    width: "10em",
-                                   height: "2.5em",
                                  }}
                                  //   onClick={() => this.operation()}
                                >
@@ -255,7 +244,6 @@ export default class artreg2 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                           
                          </div>
                        </Col>
                      </React.Fragment>

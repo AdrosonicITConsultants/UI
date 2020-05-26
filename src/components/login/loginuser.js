@@ -97,7 +97,7 @@ export default class buyeruser extends Component {
             <span className="col-xs-4"></span>
           </Row>
           <br />
-          <br />
+         
 
           <br />
           <div>
@@ -133,7 +133,7 @@ export default class buyeruser extends Component {
               </div>
             </Row>
           </div>
-
+          <br />
           <Row noGutters={true}>
             <div className="col-xs-12 text-center">
               <button

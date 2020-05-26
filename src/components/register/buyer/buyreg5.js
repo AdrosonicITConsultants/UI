@@ -101,7 +101,7 @@ export default class buyreg5 extends Component {
                     Enter your details to complete registeration
                   </span>
                 </Row>
-                <br></br>
+                {/* <br></br> */}
 
                 <Row noGutters={true}>
                   <span

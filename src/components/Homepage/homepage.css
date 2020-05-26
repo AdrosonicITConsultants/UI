@@ -437,14 +437,13 @@ background-color: white !important;
           height:578px;
           width:400px;
       }
-
       
       .vrline{
           border-left: 2px solid;
           height: 1.5em;
           margin-top: -15%;
           position: absolute;
-          left: 45%;
+          left: 50%;
           /* margin-left: -3px; */
           /* top: 0; */
           color: #c7c7c7;

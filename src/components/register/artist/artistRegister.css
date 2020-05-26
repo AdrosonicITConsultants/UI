@@ -320,7 +320,7 @@ body {
     }
 
     
-    .vrline{
+    /* .vrline{
         border-left: 2px solid;
         height: 1.5em;
         margin-top: -15%;
@@ -328,8 +328,8 @@ body {
         left: 45%;
         /* margin-left: -3px; */
         /* top: 0; */
-        color: #c7c7c7;
-    }
+        /* color: #c7c7c7;
+    } */ 
     .margin-roletext1{
         float: left;
         margin-left: 21%;

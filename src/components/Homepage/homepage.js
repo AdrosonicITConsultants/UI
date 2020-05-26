@@ -5,6 +5,11 @@ import logos from "../../assets";
 import Roleselect from "./roleselect"
 import Loginpass from "../login/loginpass";
 import Loginuser from "../login/loginuser";
+import TTCEapi from "../../services/API/TTCEapi";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 // import Artreg2 from "../register/artist/artreg2";
 // import Buyreg1 from "../register/buyer/buyreg1";
 // import Artistlogin from "../artist/artistlogin"
@@ -38,18 +43,20 @@ export default class HomePage extends Component {
                          //buyer
                          return (
                            <Loginuser
+                             ref="childb"
                              handler={this.handler}
                              userpage={this.state.userpage}
-                             cub = {this.checkusernameBuyer}
+                             cub={this.checkusernameBuyer}
                            />
                          );
                          break;
                        case 2:
                          return (
                            <Loginpass
+                             ref="childb"
                              handler={this.handler}
                              userpage={this.state.userpage}
-                             cpb = {this.checkpasswordBuyer}
+                             cpb={this.checkpasswordBuyer}
                            />
                          );
                          break;
@@ -57,36 +64,23 @@ export default class HomePage extends Component {
                          //artist
                          return (
                            <Loginuser
+                             ref="childa"
                              handler={this.handler}
                              userpage={this.state.userpage}
-                             cua = {this.checkusernameArtist}
+                             cua={this.checkusernameArtist}
                            />
                          );
                          break;
                        case 4:
                          return (
                            <Loginpass
+                             ref="childa"
                              handler={this.handler}
                              userpage={this.state.userpage}
-                             cpa = {this.checkpasswordArtist}
+                             cpa={this.checkpasswordArtist}
                            />
                          );
-                         break;
-                      //  case 5:
-                      //    return (
-                      //      <Artreg2
-                      //        handler={this.handler}
-                      //        userpage={this.state.userpage}
-                      //      />
-                      //    );
-                      //  case 6:
-                      //    return (
-                      //      <Buyreg1
-                      //        handler={this.handler}
-                      //        userpage={this.state.userpage}
-                      //      />
-                      //    );
-                      //    break;
+                         break;                  
 
                        default:
                          return (
@@ -100,8 +94,22 @@ export default class HomePage extends Component {
                      }
                  }
                 checkusernameArtist(userName){
-                  console.log("artist :" + userName);
-                  this.setState({ username : userName } );
+                  console.log("artist :" + userName);  
+                   this.setState({ userName: userName }, () => {
+                     TTCEapi.validateUsername(userName).then((response) => {
+                       debugger;
+                       if (response.data.valid) {
+                       if (this.state.userpage == 1) {                      
+                         this.handler(2);
+                       } else {                      
+                         this.handler(4);
+                       }
+                       } else {
+                         this.refs.childa.showValidation();
+                       }
+                     });
+                   });
+
 
                 }
                 checkpasswordArtist(password){
@@ -110,7 +118,25 @@ export default class HomePage extends Component {
                }
                  checkusernameBuyer(userName){
                    console.log("buyer :" + userName);
-                   this.setState({ username : userName }, () =>{});
+                        console.log("artist :" + userName);
+                        this.setState({ userName: userName }, () => {
+                          TTCEapi.validateUsername(userName).then(
+                            (response) => {
+                              debugger;
+                              if (response.data.valid) {
+                                if (this.state.userpage == 1) {
+                                  this.handler(2);
+                                } else {
+                                  this.handler(4);
+                                }
+                              } else {
+                                this.refs.childb.showValidation();
+                              }
+                            }
+                          );
+                        });
+
+
                  }
                  checkpasswordBuyer(password){
                   console.log("buyer :" + this.state.username);

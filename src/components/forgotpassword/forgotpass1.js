@@ -38,7 +38,7 @@ export default class forgotpass1 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
-                     customToast.success("OTP sent successfully", {autoClose : false});
+                
                    }
                  }
                  operation() {
@@ -56,8 +56,8 @@ export default class forgotpass1 extends Component {
                        showValidationpin: !this.state.showValidationpin,
                      });
                    } else {
-                     this.props.co(this.state.otppin);
-                     this.props.handler(1);
+                     this.props.vo(this.state.emailid, this.state.otppin);
+                    
                    }
                  }
 

@@ -36,9 +36,9 @@ export default class artistRegister extends Component {
                    this.handler = this.handler.bind(this);
                    this.checkweaverid = this.checkweaverid.bind(this);
                    this.sendotp = this.sendotp.bind(this);
+                   this.verifyOtp = this.verifyOtp.bind(this);
                    this.storepassword = this.storepassword.bind(this);
                    this.storedetails1 = this.storedetails1.bind(this);
-                   this.verifyOtp = this.verifyOtp.bind(this);
                  }
 
                  renderSection(num) {
@@ -118,52 +118,68 @@ export default class artistRegister extends Component {
                      address
                    );
                  }
-                 storepassword(password) {
-                   this.setState({ password: password });
-                   console.log(password);
-                 }
-                 sendotp(emailid) {
-                   console.log(emailid);
-                   this.setState({ emailid: emailid });
-                 }
-                 checkotp(otppin) {
-                   console.log(otppin);
-                 }
+               
                  checkweaverid(weaverid, weaverpin) {
                    // console.log(weaverid , weaverpin);
-                   this.setState({ weaverid: weaverid }, () => {
-                     TTCEapi.checkWeaverId(this.state.weaverid, weaverpin).then(
-                       (response) => {
+                   this.setState(
+                     { weaverid: weaverid, weaverpin: weaverpin },
+                     () => {
+                       TTCEapi.checkWeaverId(
+                         this.state.weaverid,
+                         weaverpin
+                       ).then((response) => {
                          if (response.data.valid) {
                            this.handler(1);
                          } else {
-                          // alert("Wrong credentials");
-                            customToast.error("Wrong credentials", {
-                              position: toast.POSITION.TOP_RIGHT,
-                              autoClose: true,
-                            });
+                           // alert("Wrong credentials");
+                           customToast.error("Wrong credentials", {
+                             position: toast.POSITION.TOP_RIGHT,
+                             autoClose: true,
+                           });
                          }
+                       });
+                     }
+                   );
+                 }
+
+                 sendotp(emailid) {
+                   console.log(emailid);
+                 
+                   debugger;
+                   this.setState({ emailid: emailid }, () => {
+                     TTCEapi.sendOtp(emailid).then((response) => {
+                       debugger;
+                       if (response.data.valid) {
+                         customToast.success(response.data.data, {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
+                       } else {
+                         customToast.error("Error while sending OTP.", {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
                        }
-                     );
+                     });
                    });
                  }
 
-                 verifyOtp(emailid, otppin){
+                 verifyOtp(emailid, otppin) {
                    debugger;
-                    this.setState({ emailid: otppin }, () => {
-                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                        debugger;
-                        if (response.data.valid) {
-                          this.handler(2);
-                        } else {
-                          customToast.error("please enter valid OTP", {
-                            position: toast.POSITION.TOP_RIGHT,
-                            autoClose: true,
-                          });
+                   this.setState({ emailid: emailid }, () => {
+                     TTCEapi.verifyOtp(emailid, otppin).then((response) => {
+                       debugger;
+                       if (response.data.valid) {
+                         this.handler(2);
+                       } else {
+                         customToast.error("please enter valid OTP", {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
                          // alert("please enter valid OTP.");
-                        }
-                      });
-                    });
+                       }
+                     });
+                   });
                  }
 
                  handler(num) {

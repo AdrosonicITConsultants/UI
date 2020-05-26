@@ -5,77 +5,151 @@ import "../register/artist/artistRegister.css";
 import Forgotpass1 from "./forgotpass1";
 import Forgotpass2 from "./forgotpass2";
 import Forgotpass3 from "./forgotpass3";
+import TTCEapi from "../../services/API/TTCEapi";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default class ForgotpassRouter extends Component {
-  constructor(props) {
-    super(props);
+                 constructor(props) {
+                   super(props);
 
-    this.state = {
-      userpage: 0,   
-      emailid: "",
-      password: "",
-    
-    };
-    this.handler = this.handler.bind(this);
-  //  this.checkweaverid = this.checkweaverid.bind(this);
-    this.sendotp = this.sendotp.bind(this);
-    this.storepassword = this.storepassword.bind(this);
- //   this.storedetails1 = this.storedetails1.bind(this);
-  }
+                   this.state = {
+                     userpage: 0,
+                     emailid: "",
+                     password: "",
+                   };
+                   this.handler = this.handler.bind(this);
+                   //  this.checkweaverid = this.checkweaverid.bind(this);
+                   this.sendotp = this.sendotp.bind(this);
+                   this.passwordReset = this.passwordReset.bind(this);
+                   this.verifyOtp = this.verifyOtp.bind(this);
+                   //   this.storedetails1 = this.storedetails1.bind(this);
+                 }
 
-  renderSection(num) {
-    switch (num) {
-      case 0:
-        return (
-          <Forgotpass1
-            handler={this.handler}
-            so={this.sendotp}
-            co={this.checkotp}
-          />
-        );
-        break;
-      case 1:
-        return <Forgotpass2 handler={this.handler} sp={this.storepassword} />;
-        break;
-      case 2:
-        return <Forgotpass3 handler={this.handler} sp={this.storepassword} />;
-        break;
+                 sendotp(emailid) {
+                   debugger;
+                   console.log(emailid);                
+                   debugger;
+                   this.setState({ emailid: emailid }, () => {
+                     TTCEapi.sendOtpForgotpass(emailid).then((response) => {
+                       debugger;
+                       if (response.data.valid) {
+                         customToast.success(response.data.data, {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
+                       } else {
+                         customToast.error("Error while sending OTP.", {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
+                       }
+                     });
+                   });
+                 }
 
-      default:
-        break;
-    }
-  }
-  
-  storepassword(password) {
-    this.setState({ password: password });
-    console.log(password);
-  }
-  sendotp(emailid) {
-    console.log(emailid);
-    this.setState({ emailid: emailid });
-  }
-  checkotp(otppin) {
-    console.log(otppin);
-  }
- 
+                 verifyOtp(emailid, otppin) {
+                   debugger;
+                   this.setState({ emailid: emailid }, () => {
+                     TTCEapi.verifyOtp(emailid, otppin).then((response) => {
+                       debugger;
+                       if (response.data.valid) {
+                         this.handler(1);
+                       } else {
+                         this.handler(1); //remove after testing
+                         customToast.error("please enter valid OTP", {
+                           position: toast.POSITION.TOP_RIGHT,
+                           autoClose: true,
+                         });
+                         // alert("please enter valid OTP.");
+                       }
+                     });
+                   });
+                 }
 
-  handler(num) {
-    this.setState({ userpage: num }, () => {
-      console.log(this.state.userpage);
-    });
-  }
+                 passwordReset(password, username = this.state.emailid) {
+                   debugger;
+                   this.setState(
+                     { username: username, password: password },
+                     () => {
+                       TTCEapi.passwordReset(username, password).then(
+                         (response) => {
+                           debugger;
+                           if (response.data.valid) {
+                             this.handler(2);
+                           } else {
+                             customToast.error(response.data.errorMessage, {
+                               position: toast.POSITION.TOP_RIGHT,
+                               autoClose: true,
+                             });
+                             // alert("please enter valid OTP.");
+                           }
+                         }
+                       );
+                     }
+                   );
+                 }
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className="registerimg">
-          <Container>
-            <Row noGutters={true} className="mt-5">
-              {this.renderSection(this.state.userpage)}
-            </Row>
-          </Container>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+                 renderSection(num) {
+                   switch (num) {
+                     case 0:
+                       return (
+                         <Forgotpass1
+                           handler={this.handler}
+                           so={this.sendotp}
+                           vo={this.verifyOtp}
+                         />
+                       );
+                       break;
+                     case 1:
+                       return (
+                         <Forgotpass2
+                           handler={this.handler}
+                           pr={this.passwordReset}
+                         />
+                       );
+                       break;
+                     case 2:
+                       return (
+                         <Forgotpass3
+                           handler={this.handler}
+                           sp={this.storepassword}
+                         />
+                       );
+                       break;
+
+                     default:
+                       break;
+                   }
+                 }
+
+                 storepassword(password) {
+                   this.setState({ password: password });
+                   console.log(password);
+                 }
+
+                 checkotp(otppin) {
+                   console.log(otppin);
+                 }
+
+                 handler(num) {
+                   this.setState({ userpage: num }, () => {
+                     console.log(this.state.userpage);
+                   });
+                 }
+
+                 render() {
+                   return (
+                     <React.Fragment>
+                       <div className="registerimg">
+                         <Container>
+                           <Row noGutters={true} className="mt-5">
+                             {this.renderSection(this.state.userpage)}
+                           </Row>
+                         </Container>
+                       </div>
+                     </React.Fragment>
+                   );
+                 }
+               }

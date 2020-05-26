@@ -28,8 +28,8 @@ export default class forgotpass2 extends Component {
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
           } else {
-            this.props.sp(this.state.password);
-            this.props.handler(2);
+            this.props.pr(this.state.password);
+           
           }
       }
 

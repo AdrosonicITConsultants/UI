@@ -102,7 +102,7 @@ export default class artreg4 extends Component {
                   <span className="col-xs-10">
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    WEAVER ID : BIKASNAG10
+                    WEAVER ID : {this.props.weaverid}
                   </span>
                 </Row>
                 <Row noGutters={true}>
@@ -385,7 +385,7 @@ export default class artreg4 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                <br></br>
+                
               </div>
             </Col>
           </React.Fragment>

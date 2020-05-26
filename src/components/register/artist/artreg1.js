@@ -28,7 +28,8 @@ export default class artreg1 extends Component {
               });
           } else {
             this.props.cwi(this.state.weaverid ,this.state.weaverpin )
-            this.props.handler(1);
+
+            // this.props.handler(1);
           }
       }
 

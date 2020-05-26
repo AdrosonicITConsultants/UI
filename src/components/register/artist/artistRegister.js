@@ -7,12 +7,13 @@ import Artreg2 from "./artreg2";
 import Artreg3 from "./artreg3";
 import Artreg4 from "./artreg4";
 import Artreg5 from "./artreg5";
+import TTCEapi from '../../../services/API/TTCEapi';
 export default class artistRegister extends Component {
     constructor(props) {
         super(props);
 
           this.state = {       
-            userpage : 4,
+            userpage : 0,
             weaverid : "",
             emailid : "",
             password : "",
@@ -47,10 +48,10 @@ export default class artistRegister extends Component {
               return <Artreg3 handler={this.handler} sp = {this.storepassword} />;
               break;
             case 3:
-              return <Artreg4 handler={this.handler} sd1 = {this.storedetails1} />;
+              return <Artreg4 handler={this.handler} sd1 = {this.storedetails1} weaverid = {this.state.weaverid}/>;
               break;
             case 4:
-              return <Artreg5 handler={this.handler} />;
+              return <Artreg5 handler={this.handler}  />;
               break;
             default:
               break;
@@ -80,8 +81,20 @@ export default class artistRegister extends Component {
         console.log(otppin);
       }
       checkweaverid(weaverid ,weaverpin){
-        console.log(weaverid , weaverpin);
-        this.setState({weaverid : weaverid});
+        // console.log(weaverid , weaverpin);
+        this.setState({weaverid : weaverid}, ()=>{  
+          TTCEapi.checkWeaverId(this.state.weaverid, weaverpin)
+          .then((response)=>{
+            if(response.data.valid){
+              this.handler(1);            
+            }else{
+              alert("Wrong credentials");
+            }
+
+            }
+          );
+
+        });
       }
 
       handler(num) {              

@@ -39,7 +39,7 @@ export default class artreg2 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
-                     customToast.success("OTP sent successfully", {position: toast.POSITION.TOP_RIGHT ,autoClose : true});
+                   
                    }
                  }
                  operation() {

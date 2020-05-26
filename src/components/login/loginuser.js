@@ -13,20 +13,24 @@ export default class buyeruser extends Component {
     };
   }
 
+
+              showValidation(){
+  this.setState({
+    showValidation: !this.state.showValidation,
+  });
+}
   operation() {
     debugger;
     if (this.state.userName == "") {
-      this.setState({
-        showValidation: !this.state.showValidation,
-      });
+     this.showValidation();
     } else {
       if(this.props.userpage == 1){
         this.props.cub(this.state.userName);
-        this.props.handler(2);
+    
       }
       else{
         this.props.cua(this.state.userName);
-        this.props.handler(4);
+      
       }
       
     }
@@ -125,7 +129,7 @@ export default class buyeruser extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidation ? (
-                    <span className="bg-danger">please enter your userID</span>
+                    <span className="bg-danger">please enter valid userID</span>
                   ) : (
                     <br />
                   )}

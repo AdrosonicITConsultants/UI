@@ -15,12 +15,16 @@ export default class buyerpass extends Component {
                    };
                  }
 
+                 showValidationpass(){
+  this.setState({
+    showValidation: !this.state.showValidation,
+  });
+                 }
+
                  Login() {
                    debugger;
                    if (this.state.password == "") {
-                     this.setState({
-                       showValidation: !this.state.showValidation,
-                     });
+                   this.showValidationpass();
                    } else {
                     
                       if(this.props.userpage == 2){

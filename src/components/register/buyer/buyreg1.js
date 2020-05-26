@@ -31,11 +31,7 @@ export default class buyreg1 extends Component {
     }
     else{
       this.props.so(this.state.emailid);
-      // toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
-     customToast.success("OTP sent successfully", {
-       position: toast.POSITION.TOP_RIGHT,
-       autoClose: true,
-     });
+      // toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})    
     }
   }
   operation() {
@@ -50,8 +46,8 @@ export default class buyreg1 extends Component {
         showValidationpin: !this.state.showValidationpin,
       });
     } else {
-      this.props.co(this.state.otppin)
-      this.props.handler(1);
+      this.props.vo(this.state.emailid, this.state.otppin);
+     
     }
   }
 

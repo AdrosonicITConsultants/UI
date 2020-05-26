@@ -53,8 +53,9 @@ export default class artreg2 extends Component {
                        showValidationpin: !this.state.showValidationpin,
                      });
                    } else {
-                     this.props.co(this.state.otppin)
-                     this.props.handler(2);
+                  //   this.props.co(this.state.otppin)
+                     this.props.vo(this.state.emailid, this.state.otppin);
+                   
                    }
                  }
 

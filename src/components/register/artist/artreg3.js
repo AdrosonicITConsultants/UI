@@ -16,7 +16,7 @@ export default class artreg3 extends Component {
       }
     
       operation() {
-        debugger;
+        // debugger;
         if (this.state.password == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
@@ -43,6 +43,11 @@ export default class artreg3 extends Component {
             showValidationpass: false,
             showValidationconfirmpass: false
         });
+      }
+      componentDidMount(){
+        this.setState({password : this.props.password ,
+                       confirmpass : this.props.password 
+                      });
       }
     
     render() {
@@ -109,6 +114,7 @@ export default class artreg3 extends Component {
                         className="form-control BuyerLogin"
                         placeholder="password"
                         name="password"
+                        value = {this.state.password}
                         onChange={(e) => this.handleChange(e)}
                       />
                       {this.state.showValidationpass ? (
@@ -134,6 +140,7 @@ export default class artreg3 extends Component {
                         className="form-control BuyerLogin"
                         placeholder="Re-enter yourpassword"
                         name="confirmpass"
+                        value = {this.state.confirmpass}
                         onChange={(e) => this.handleChange(e)}
                       />
                       {this.state.showValidationconfirmpass ? (

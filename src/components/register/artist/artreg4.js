@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import TTCEapi from '../../../services/API/TTCEapi';
 
 
 export default class artreg4 extends Component {
@@ -17,7 +18,8 @@ export default class artreg4 extends Component {
           mobileno : "",
           panno : "",
           address : "",
-              
+          clusterdata : [],
+          clusterid : "",
           showValidationpass: false,
           showValidationconfirmpass: false,
           showUserName: true,
@@ -26,19 +28,17 @@ export default class artreg4 extends Component {
       }
      
       operation() {
-        debugger;
-        if (this.state.firstname == "") {
+        // debugger;
+        if (this.state.firstname == ""  || this.state.clusterid == -1) {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.lastname == "" ){                    
-              this.setState({
-                showValidationconfirmpass: !this.state.showValidationconfirmpass,
-              });
-          } else {
-            this.props.sd1(this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address)
+          else {
+            this.props.sd1(this.state.firstname,this.state.lastname,this.state.pincode,this.state.clusterid,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address,this.state.cluster)
+            console.log(this.state);
             this.props.handler(4);
+ 
           }
       }
 
@@ -46,13 +46,65 @@ export default class artreg4 extends Component {
          this.props.handler(2);
         }
     
-    
+        handleCluster(e) {
+          // console.log(e.target.id);
+          var index = e.target.selectedIndex;
+          var optionElement = e.target.childNodes[index];
+          var option =  optionElement.getAttribute('clusterid');
+          console.log(option);
+          
+          this.setState({ [e.target.name]: e.target.value , clusterid : option}, ()=> {
+            console.log(this.state);
+            
+          });
+          this.setState({
+              showValidationpass: false,
+          });
+        }
       handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
             showValidationpass: false,
-            showValidationconfirmpass: false
         });
+      }
+      componentDidMount(){
+        console.log("here");
+        this.setState({firstname : this.props.firstname ,
+          lastname : this.props.lastname,
+          pincode : this.props.pincode,
+          clusterid : this.props.cluster,
+          district : this.props.district,
+          state : this.props.state,
+          mobileno : this.props.mobileno,
+          panno : this.props.panno,
+          address : this.props.address,
+          cluster: this.props.clustername,
+          
+
+         },()=>{
+          console.log(this.state);
+         });
+
+        TTCEapi.getClusters().then((response)=>{
+            this.setState({clusterdata : response.data.data},() => {
+              // this.setState({cluster : this.state.clusterdata[0].desc})
+              var ind = 0; 
+              if(this.state.clusterid > 0)
+              {
+                // this.setState({clusterid : -1 });
+                
+              }
+              else {
+                this.setState({clusterid : -1  , cluster : 'Select Cluster' });
+                
+
+              }
+              // console.log("show" + this.state.clusterdata[ind].desc);
+              
+            });
+
+        });
+        // console.log(this.state);
       }
     
     render() {
@@ -123,6 +175,7 @@ export default class artreg4 extends Component {
                           id="firstname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.firstname}
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -147,6 +200,7 @@ export default class artreg4 extends Component {
                           id="lastname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="lastname"
+                          value = {this.state.lastname}
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -172,6 +226,7 @@ export default class artreg4 extends Component {
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="pincode"
+                          value = {this.state.pincode}
                           name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -193,14 +248,22 @@ export default class artreg4 extends Component {
 
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                          type="text"
+                        <select id="cluster"
+                          className="form-control form2 BuyerLogin1"
+                          name="cluster"
+                          value = {this.state.cluster}
+                          onChange={(e) => this.handleCluster(e)}  >
+                            <option key = '0' clusterid = '-1'  value='Select Cluster'>Select Cluster</option>
+                        {this.state.clusterdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.desc}>{item.desc}</option>)}
+                      </select>
+                        {/* <select
+                          
                           id="cluster"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="cluster"
                           name="cluster"
                           onChange={(e) => this.handleChange(e)}
-                        />
+                        ></select> */}
                         {/* {this.state.showValidationpass ? (
                         <span className="bg-danger">please enter your cluster</span>
                         ) : <br/>} */}
@@ -220,7 +283,8 @@ export default class artreg4 extends Component {
                           type="text"
                           id="district"
                           className="form-control form2 BuyerLogin1"
-                          name="cluster"
+                          name="district"
+                          value = {this.state.district}
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -239,7 +303,9 @@ export default class artreg4 extends Component {
                           type="text"
                           id="state"
                           className="form-control form2 BuyerLogin1"
+                          value = {this.state.state}
                           name="state"
+                          
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -261,8 +327,9 @@ export default class artreg4 extends Component {
                           type="email"
                           id="emailid"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="emailid"
+                          value = {this.props.emailid}
                           name="emailid"
+                          disabled
                           onChange={(e) => this.handleChange(e)}
                         />
                         {/* {this.state.showValidationpass ? (
@@ -288,6 +355,7 @@ export default class artreg4 extends Component {
                           id="mobileno"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="mobileno"
+                          value = {this.state.mobileno}
                           name="mobileno"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -311,6 +379,7 @@ export default class artreg4 extends Component {
                           type="text"
                           id="panno"
                           className="form-control form2 BuyerLogin1"
+                          value = {this.state.panno}
                           //placeholder="panno"
                           name="panno"
                           onChange={(e) => this.handleChange(e)}
@@ -335,13 +404,14 @@ export default class artreg4 extends Component {
                           type="text"
                           id="address"
                           className="form-control form2 BuyerLogin1"
+                          value = {this.state.address}
                           //placeholder="address"
                           name="address"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
+                        {this.state.showValidationpass ? (
                         <span className="bg-danger">please enter your Address</span>
-                        ) : <br/>} */}
+                        ) : <br/>}
                       </div>
                     </Col>
                   </Col>
@@ -392,3 +462,40 @@ export default class artreg4 extends Component {
         );
     }
 }
+// {
+//   "address": {
+//     "city": "",
+//     "country": "test",
+//     "district": "test",
+//     "id": 0,
+//     "landmark": "",
+//     "line1": "test",
+//     "line2": "",
+//     "pincode": "test",
+//     "state": "test",
+//     "street": ""
+//   },
+//   "alternateMobile": "",
+//   "buyerCompanyDetails": {
+//     "cin": "",
+//     "companyName": "",
+//     "contact": "",
+//     "gstNo": "",
+//     "id": 0,
+//     "logo": ""
+//   },
+//   "designation": "",
+//   "email": "test@gmail.com",
+//   "firstName": "test",
+//   "lastName": "test",
+//   "mobile": "7888788",
+//   "pancard": "test",
+//   "password": "222",
+//   "productCategoryIds": [
+//     0
+//   ],
+//   "refRoleId": 1,
+//   "socialMediaLink": "string",
+//   "weaverId": 123,
+//   "websiteLink": "string"
+// }

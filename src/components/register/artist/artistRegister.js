@@ -19,9 +19,9 @@ export default class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 0,
-                     weaverid: "",
-                     emailid: "",
+                     userpage: 2,
+                     weaverid: "Ma1209",
+                     emailid: "p@ii.com",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -32,6 +32,10 @@ export default class artistRegister extends Component {
                      mobileno: "",
                      panno: "",
                      address: "",
+                     clustername : "",
+
+                    //  weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address
+
                    };
                    this.handler = this.handler.bind(this);
                    this.checkweaverid = this.checkweaverid.bind(this);
@@ -65,6 +69,7 @@ export default class artistRegister extends Component {
                          <Artreg3
                            handler={this.handler}
                            sp={this.storepassword}
+                           password = {this.state.password}
                          />
                        );
                        break;
@@ -74,6 +79,18 @@ export default class artistRegister extends Component {
                            handler={this.handler}
                            sd1={this.storedetails1}
                            weaverid={this.state.weaverid}
+                           emailid = {this.state.emailid}
+                           firstname = {this.state.firstname}
+                           lastname = {this.state.lastname}
+                           pincode = {this.state.pincode}
+                           cluster = {this.state.cluster}
+                           district = {this.state.district}
+                           state = {this.state.state}
+                           mobileno = {this.state.mobileno}
+                           panno = {this.state.panno}
+                           address = {this.state.address}
+                           clustername = {this.state.clustername}
+
                          />
                        );
                        break;
@@ -93,7 +110,8 @@ export default class artistRegister extends Component {
                    state,
                    mobileno,
                    panno,
-                   address
+                   address,
+                   clustername
                  ) {
                    this.setState({
                      firstname: firstname,
@@ -105,20 +123,33 @@ export default class artistRegister extends Component {
                      mobileno: mobileno,
                      panno: panno,
                      address: address,
+                     clustername : clustername
+                   },() => {
+                     TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.password,this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address).then((response) => {
+
+                     } )
                    });
-                   console.log(
-                     firstname,
-                     lastname,
-                     pincode,
-                     cluster,
-                     district,
-                     state,
-                     mobileno,
-                     panno,
-                     address
-                   );
+                  //  console.log(
+                  //    firstname,
+                  //    lastname,
+                  //    pincode,
+                  //    cluster,
+                  //    district,
+                  //    state,
+                  //    mobileno,
+                  //    panno,
+                  //    address
+                  //  );
                  }
-               
+                 storepassword(password){
+                  this.setState(
+                    { password: password } , () => {
+                      console.log(this.state.password);
+
+                    });
+
+
+                 }
                  checkweaverid(weaverid, weaverpin) {
                    // console.log(weaverid , weaverpin);
                    this.setState(
@@ -145,7 +176,7 @@ export default class artistRegister extends Component {
                  sendotp(emailid) {
                    console.log(emailid);
                  
-                   debugger;
+                  //  debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
                        debugger;
@@ -165,10 +196,10 @@ export default class artistRegister extends Component {
                  }
 
                  verifyOtp(emailid, otppin) {
-                   debugger;
+                  //  debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                       debugger;
+                      //  debugger;
                        if (response.data.valid) {
                          this.handler(2);
                        } else {

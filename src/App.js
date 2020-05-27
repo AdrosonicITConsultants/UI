@@ -8,6 +8,7 @@ import { memoryHistory, browserHistory } from "./helpers/history";
 import videoPlayer from './components/login/videoPlayer';
 import { ToastContainer } from "react-toastify";
 import ForgotpassRouter from "./components/forgotpassword/forgotpassRouter";
+import LandingPage from "./components/landingpage/landingpage"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/demo-video" component={videoPlayer} />
+          <Route exact path="/home" component={LandingPage} />
         </Switch>
       </Router>
     </React.Fragment>

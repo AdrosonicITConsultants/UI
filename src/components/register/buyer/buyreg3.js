@@ -41,6 +41,21 @@ export default class buyreg3 extends Component {
             showValidationpass: false,
         });
       }
+      componentDidMount(){
+        this.setState({firstname : this.props.firstname ,
+          lastname : this.props.lastname,
+          mobileno : this.props.mobileno,
+          alternatemobno : this.props.alternatemobno,
+          designation : this.props.designation,
+         
+          
+
+         },()=>{
+          console.log(this.state);
+         });
+        
+
+      }
     
     render() {
       const { Country, region } = this.state;
@@ -129,6 +144,7 @@ export default class buyreg3 extends Component {
                           id="firstname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value= {this.state.firstname}
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -153,6 +169,7 @@ export default class buyreg3 extends Component {
                           id="lastname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="lastname"
+                          value= {this.state.lastname}
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -176,6 +193,8 @@ export default class buyreg3 extends Component {
                           id="mobileno"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="mobileno"
+                          value= {this.state.mobileno}
+
                           name="mobileno"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -198,6 +217,8 @@ export default class buyreg3 extends Component {
                           id="alternatemobno"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="mobileno"
+                          value= {this.state.alternatemobno}
+
                           name="alternatemobno"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -220,6 +241,8 @@ export default class buyreg3 extends Component {
                           type="text"
                           id="designation"
                           className="form-control form2 BuyerLogin1"
+                          value= {this.state.designationx}
+
                           name="designation"
                           onChange={(e) => this.handleChange(e)}
                         />

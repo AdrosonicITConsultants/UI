@@ -137,27 +137,28 @@ class TTCEapi {
         return error;
       });
   }
-  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address)    {
+  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
         
     let url = ApiUrl + "/register/user";
         var data = {
             address : {
                 district : district,
-                line1 : address,
+                line1 : address1,
                 pincode :pincode,
                 state : state 
             },
-            clusterId :cluster,
+            clusterId : parseInt(cluster),
             email : emailid,
             firstName : firstname,
             lastName : lastname,
             mobile : mobileno,
             pancard : panno,
             password: password,
-            refrefRoleId : 1,
-            productCategoryIds:[1,2],
-            weaverId:weaverid,
+            refRoleId : 1,
+            productCategoryIds:[1],
+            weaverId:weaverid
         };
+        console.log(data);
         var config = {
           headers: {
             "Content-type": "application/json",
@@ -173,6 +174,8 @@ class TTCEapi {
             return error;
           });
     }
+
+
     static getClusters(){
     let url = ApiUrl + "/cluster/getAllClusters";
 

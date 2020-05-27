@@ -20,13 +20,13 @@ export default class artistRegister extends Component {
 
                    this.state = {
                      userpage: 2,
-                     weaverid: "Ma1209",
-                     emailid: "p@ii.com",
+                     weaverid: "123",
+                     emailid: "abctrr@gmail.com",
                      password: "",
                      firstname: "",
                      lastname: "",
                      pincode: "",
-                     cluster: "",
+                     cluster: -1,
                      district: "",
                      state: "",
                      mobileno: "",

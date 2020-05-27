@@ -21,8 +21,8 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 5,
-                     emailid: "",
+                     userpage: 1,
+                     emailid: "piyush@ppp.com",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -86,6 +86,11 @@ export default class buyerRegister extends Component {
                          <Buyreg3
                            handler={this.handler}
                            spd={this.storepersonaldetails}
+                           firstname = {this.state.firstname}
+                           lastname = {this.state.lastname}
+                           mobileno = {this.state.mobileno}
+                           alternatemobno = {this.state.alternatemobno}
+                           designation = {this.state.designation}
                          />
                        );
                        break;
@@ -94,6 +99,13 @@ export default class buyerRegister extends Component {
                          <Buyreg4
                            handler={this.handler}
                            scd={this.storecompanydetails}
+                           companyname = {this.state.companyname}
+                           gstno = {this.state.gstno}
+                           officeno = {this.state.officeno}
+                           brandLogo = {this.state.brandLogo}
+                           cinno = {this.state.cinno}
+                           panno = {this.state.panno}
+
                          />
                        );
                        break;
@@ -213,8 +225,10 @@ export default class buyerRegister extends Component {
                    );
                  }
                  storepassword(password) {
-                   this.setState({ password: password });
-                   console.log(password);
+                   this.setState({ password: password },() =>{ 
+                      console.log(this.state);
+                   });
+                  //  console.log(password);
                  }
                
                  
@@ -228,7 +242,7 @@ export default class buyerRegister extends Component {
                    debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
-                       debugger;
+                      //  debugger;
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,

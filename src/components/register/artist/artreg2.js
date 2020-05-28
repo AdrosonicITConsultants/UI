@@ -101,7 +101,7 @@ export default class artreg2 extends Component {
                                  <h2 className="col-xs-6 margin-registertext">
                                    Register
                                  </h2>
-                                 <h4 className="margin-roletext">Artist</h4>
+                                 <h4 className="margin-roletext">Artisan</h4>
                                </div>
                              </div>
 

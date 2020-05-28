@@ -107,7 +107,7 @@ export default class buyerpass extends Component {
                                    className="cicrleLogo"
                                    alt="artist TataTrusts logo"
                                  ></img>
-                                 <div className="circleText">Artist</div>
+                                 <div className="circleText">Artisan</div>
                                </i>
                              </div>
                            )}

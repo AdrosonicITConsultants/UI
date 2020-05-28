@@ -150,14 +150,13 @@ export default class artistRegister extends Component {
 
 
                  }
-                 checkweaverid(weaverid, weaverpin) {
+                 checkweaverid(weaverid) {
                    // console.log(weaverid , weaverpin);
                    this.setState(
-                     { weaverid: weaverid, weaverpin: weaverpin },
+                     { weaverid: weaverid },
                      () => {
                        TTCEapi.checkWeaverId(
-                         this.state.weaverid,
-                         weaverpin
+                         this.state.weaverid                    
                        ).then((response) => {
                          if (response.data.valid) {
                            this.handler(1);

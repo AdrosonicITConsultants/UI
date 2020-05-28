@@ -138,7 +138,7 @@ export default class artreg4 extends Component {
                       <h3 className="col-xs-6 margin-registertext text-left">
                         Register
                       </h3>
-                      <h4 className="margin-roletext1">Artist</h4>
+                      <h4 className="margin-roletext1">Artisan</h4>
                     </div>
                   </div>
 
@@ -154,7 +154,7 @@ export default class artreg4 extends Component {
                   <span className="col-xs-10">
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    WEAVER ID : {this.props.weaverid}
+                    ARTISAN ID : {this.props.weaverid}
                   </span>
                 </Row>
                 <Row noGutters={true}>
@@ -175,7 +175,7 @@ export default class artreg4 extends Component {
                           id="firstname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.firstname}
+                          value={this.state.firstname}
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -200,7 +200,7 @@ export default class artreg4 extends Component {
                           id="lastname"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="lastname"
-                          value = {this.state.lastname}
+                          value={this.state.lastname}
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -226,7 +226,7 @@ export default class artreg4 extends Component {
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="pincode"
-                          value = {this.state.pincode}
+                          value={this.state.pincode}
                           name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -248,14 +248,26 @@ export default class artreg4 extends Component {
 
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <select id="cluster"
+                        <select
+                          id="cluster"
                           className="form-control form2 BuyerLogin1"
                           name="cluster"
-                          value = {this.state.cluster}
-                          onChange={(e) => this.handleCluster(e)}  >
-                            <option key = '0' clusterid = '-1'  value='Select Cluster'>Select Cluster</option>
-                        {this.state.clusterdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.desc}>{item.desc}</option>)}
-                      </select>
+                          value={this.state.cluster}
+                          onChange={(e) => this.handleCluster(e)}
+                        >
+                          <option key="0" clusterid="-1" value="Select Cluster">
+                            Select Cluster
+                          </option>
+                          {this.state.clusterdata.map((item) => (
+                            <option
+                              key={item.id}
+                              clusterid={item.id}
+                              value={item.desc}
+                            >
+                              {item.desc}
+                            </option>
+                          ))}
+                        </select>
                         {/* <select
                           
                           id="cluster"
@@ -284,7 +296,7 @@ export default class artreg4 extends Component {
                           id="district"
                           className="form-control form2 BuyerLogin1"
                           name="district"
-                          value = {this.state.district}
+                          value={this.state.district}
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -303,9 +315,8 @@ export default class artreg4 extends Component {
                           type="text"
                           id="state"
                           className="form-control form2 BuyerLogin1"
-                          value = {this.state.state}
+                          value={this.state.state}
                           name="state"
-                          
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -327,7 +338,7 @@ export default class artreg4 extends Component {
                           type="email"
                           id="emailid"
                           className="form-control form2 BuyerLogin1"
-                          value = {this.props.emailid}
+                          value={this.props.emailid}
                           name="emailid"
                           disabled
                           onChange={(e) => this.handleChange(e)}
@@ -355,7 +366,7 @@ export default class artreg4 extends Component {
                           id="mobileno"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="mobileno"
-                          value = {this.state.mobileno}
+                          value={this.state.mobileno}
                           name="mobileno"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -379,7 +390,7 @@ export default class artreg4 extends Component {
                           type="text"
                           id="panno"
                           className="form-control form2 BuyerLogin1"
-                          value = {this.state.panno}
+                          value={this.state.panno}
                           //placeholder="panno"
                           name="panno"
                           onChange={(e) => this.handleChange(e)}
@@ -404,14 +415,18 @@ export default class artreg4 extends Component {
                           type="text"
                           id="address"
                           className="form-control form2 BuyerLogin1"
-                          value = {this.state.address}
+                          value={this.state.address}
                           //placeholder="address"
                           name="address"
                           onChange={(e) => this.handleChange(e)}
                         />
                         {this.state.showValidationpass ? (
-                        <span className="bg-danger">please fill mandatory fields</span>
-                        ) : <br/>}
+                          <span className="bg-danger">
+                            please fill mandatory fields
+                          </span>
+                        ) : (
+                          <br />
+                        )}
                       </div>
                     </Col>
                   </Col>
@@ -455,7 +470,6 @@ export default class artreg4 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                
               </div>
             </Col>
           </React.Fragment>

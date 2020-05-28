@@ -159,7 +159,7 @@ this.setState({
                                  <h3 className="col-xs-6 margin-registertext text-left">
                                    Register
                                  </h3>
-                                 <h4 className="margin-roletext1">Artist</h4>
+                                 <h4 className="margin-roletext1">Artisan</h4>
                                </div>
                              </div>
 

@@ -78,7 +78,7 @@ export default class artreg3 extends Component {
                     ></img>
                     <div>
                       <h2 className="col-xs-6 margin-registertext">Register</h2>
-                      <h4 className="margin-roletext">Artist</h4>
+                      <h4 className="margin-roletext">Artisan</h4>
                     </div>
                   </div>
 
@@ -114,7 +114,7 @@ export default class artreg3 extends Component {
                         className="form-control BuyerLogin"
                         placeholder="password"
                         name="password"
-                        value = {this.state.password}
+                        value={this.state.password}
                         onChange={(e) => this.handleChange(e)}
                       />
                       {this.state.showValidationpass ? (
@@ -140,7 +140,7 @@ export default class artreg3 extends Component {
                         className="form-control BuyerLogin"
                         placeholder="Re-enter yourpassword"
                         name="confirmpass"
-                        value = {this.state.confirmpass}
+                        value={this.state.confirmpass}
                         onChange={(e) => this.handleChange(e)}
                       />
                       {this.state.showValidationconfirmpass ? (

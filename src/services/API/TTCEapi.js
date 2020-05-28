@@ -17,11 +17,11 @@ class TTCEapi {
   //#region post methods
 
   //#region registration
-  static checkWeaverId(weaverId, weaverPin) {
+  static checkWeaverId(weaverId) {
     let url = ApiUrl + "/register/verifyWeaverDetails";
     var data = {
       weaverId: weaverId,
-      pin: weaverPin,
+     // pin: weaverPin,
     };
     var config = {
       headers: {
@@ -166,57 +166,7 @@ class TTCEapi {
         return error;
       });
   }
-<<<<<<< HEAD
-  static registerArtist(
-    weaverid,
-    emailid,
-    password,
-    firstname,
-    lastname,
-    pincode,
-    cluster,
-    district,
-    state,
-    mobileno,
-    panno,
-    address
-  ) {
-    let url = ApiUrl + "/register/user";
-    var data = {
-      address: {
-        district: district,
-        line1: address,
-        pincode: pincode,
-        state: state,
-      },
-      clusterId: cluster,
-      email: emailid,
-      firstName: firstname,
-      lastName: lastname,
-      mobile: mobileno,
-      pancard: panno,
-      password: password,
-      refrefRoleId: 1,
-      productCategoryIds: [1, 2],
-      weaverId: weaverid,
-    };
-    var config = {
-      headers: {
-        "Content-type": "application/json",
-      },
-    };
-    return axios
-      .post(url, data, config)
-      .then((response) => {
-        console.log(response);
-        return response;
-      })
-      .catch((error) => {
-        return error;
-      });
-  }
-  static getClusters() {
-=======
+
   static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
         
     let url = ApiUrl + "/register/user";
@@ -309,7 +259,6 @@ class TTCEapi {
 
 
     static getClusters(){
->>>>>>> 61a4d25442907caa0cf843e2970d630161628777
     let url = ApiUrl + "/cluster/getAllClusters";
 
     return axios

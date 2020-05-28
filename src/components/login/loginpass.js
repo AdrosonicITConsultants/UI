@@ -26,7 +26,7 @@ export default class buyerpass extends Component {
                    if (this.state.password == "") {
                    this.showValidationpass();
                    } else {
-                    
+                    debugger
                       if(this.props.userpage == 2){
                         this.props.cpb(this.state.password);
                         

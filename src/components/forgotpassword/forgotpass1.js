@@ -103,15 +103,16 @@ export default class forgotpass1 extends Component {
                                ></img>
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
-                                   Register
+                                   Reset
                                  </h2>
-                                 {window.location.pathname.indexOf(
+                                 {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
                                    <h4 className="margin-roletext">Artist</h4>
                                  ) : (
                                    <h4 className="margin-roletext">Buyer</h4>
-                                 )}
+                                 )} */}
+                                 <h4 className="margin-roletext">Password</h4>
                                </div>
                              </div>
 

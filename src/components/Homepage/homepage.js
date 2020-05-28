@@ -9,12 +9,15 @@ import TTCEapi from "../../services/API/TTCEapi";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { connect } from "react-redux";
+import * as Actions from "../../redux/action/action"
+import {Link} from "react-router-dom"
+import { memoryHistory, browserHistory } from "../../helpers/history";
 // import Artreg2 from "../register/artist/artreg2";
 // import Buyreg1 from "../register/buyer/buyreg1";
 // import Artistlogin from "../artist/artistlogin"
 
-export default class HomePage extends Component {
+ class HomePage extends Component {
                  constructor(props) {
                    super(props);
 
@@ -94,16 +97,17 @@ export default class HomePage extends Component {
                      }
                  }
                 checkusernameArtist(userName){
-                  console.log("artist :" + userName);  
-                   this.setState({ userName: userName }, () => {
+                //  console.log("artist :" + userName);  
+                   this.setState({ username: userName }, () => {
+                     console.log("artist :" + this.state.username);
                      TTCEapi.validateUsername(userName).then((response) => {
                        debugger;
                        if (response.data.valid) {
-                       if (this.state.userpage == 1) {                      
-                         this.handler(2);
-                       } else {                      
-                         this.handler(4);
-                       }
+                         if (this.state.userpage == 1) {
+                           this.handler(2);
+                         } else {
+                           this.handler(4);
+                         }
                        } else {
                          this.refs.childa.showValidation();
                        }
@@ -114,12 +118,34 @@ export default class HomePage extends Component {
                 }
                 checkpasswordArtist(password){
                   console.log("artist :" + this.state.username);
-                  console.log("artistpass :" + password);
+                  this.setState({ username: this.state.username }, () => {
+                    TTCEapi.login(this.state.username, password).then(
+                      (response) => {
+                        debugger;
+                        if (response.data.valid) {
+                          debugger
+                    
+                      let token = response.data.data.acctoken;
+                      let user = response.data.data.user;
+                      let userTypeId = 2;
+                      this.props.dispatch(
+                        Actions.loginSuccess(token, user, userTypeId)
+                      );
+                      browserHistory.push("/home");                     
+  
+                        } else {
+                          this.refs.childa.showValidationpass();
+                        }
+                      }
+                    );
+                  });
+
+
                }
                  checkusernameBuyer(userName){
                    console.log("buyer :" + userName);
                         console.log("artist :" + userName);
-                        this.setState({ userName: userName }, () => {
+                        this.setState({ username: userName }, () => {
                           TTCEapi.validateUsername(userName).then(
                             (response) => {
                               debugger;
@@ -140,7 +166,26 @@ export default class HomePage extends Component {
                  }
                  checkpasswordBuyer(password){
                   console.log("buyer :" + this.state.username);
-                  console.log("buyerpass :" + password);
+                     this.setState({ username: this.state.username }, () => {
+                       TTCEapi.login(this.state.username, password).then(
+                         (response) => {
+                           debugger;
+                           if (response.data.valid) {
+                           
+                             let token = response.data.data.acctoken;
+                             let user = response.data.data.user;
+                             let userTypeId = 2;
+                             this.props.dispatch(
+                               Actions.loginSuccess(token, user, userTypeId)
+                             );
+                              browserHistory.push("/home"); 
+                           } else {
+                             this.refs.childb.showValidationpass();
+                           }
+                         }
+                       );
+                     });
+
                 }
                  handler(num) {              
                    this.setState({ userpage : num }, () => {
@@ -184,3 +229,11 @@ export default class HomePage extends Component {
                    );
                  }
                }
+
+
+                function mapStateToProps(state) {
+                return {}
+                }
+
+               const connectedLoginPage = connect(mapStateToProps)(HomePage);
+               export default  connectedLoginPage ;

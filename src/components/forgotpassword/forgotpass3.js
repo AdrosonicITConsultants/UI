@@ -94,18 +94,18 @@ export default class forgotpass3 extends Component {
                            <br></br>
                            <Row noGutters={true} className="">
                              <div className="col-xs-6">
-                             
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
-                                   Register
+                                   Reset
                                  </h2>
-                                 {window.location.pathname.indexOf(
+                                 {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
                                    <h4 className="margin-roletext2">Artist</h4>
                                  ) : (
                                    <h4 className="margin-roletext2">Buyer</h4>
-                                 )}
+                                 )} */}
+                                 <h4 className="margin-roletext2">Password</h4>
                                </div>
                              </div>
 
@@ -170,7 +170,7 @@ export default class forgotpass3 extends Component {
 
                            <Row noGutters={true}>
                              <span
-                               style={{color: "var(--lightFont)"}}
+                               style={{ color: "var(--lightFont)" }}
                                className="col-xs-12 text-center"
                              >
                                Privacy policy

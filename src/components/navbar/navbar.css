@@ -245,7 +245,7 @@ background: #ffffff;
 	  position: relative;
 	}
 	.menu-item-space {
-	      padding-left: 49em !important;
+	      padding-left: 20em !important;
   }
 	.menu:after {
 	  content: "";

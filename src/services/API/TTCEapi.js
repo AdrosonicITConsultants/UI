@@ -1,6 +1,7 @@
 import axios from "axios";
 import isEmail from "validator/lib/isEmail";
-
+import setAuthorizationtoken from "../utils/setAuthorizationtoken";
+import jwt from  "jsonwebtoken";
 
 var env = "dev";
 var ApiUrl = "http://101.53.156.143:8090";
@@ -63,6 +64,34 @@ class TTCEapi {
   //#endregion
 
   //#region login
+  static login(username, password) {
+    let url = ApiUrl + "/login/authenticate";
+    var data = {
+      emailOrMobile: username,
+      password: password,
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+          debugger
+          const token = response.data.data.acctoken;
+          const user = response.data.data.user;
+          localStorage.setItem('jwtToken', token);
+           localStorage.setItem("user", JSON.stringify(user));
+          setAuthorizationtoken(token);
+          debugger;
+        console.log(jwt.decode(token));
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+  }
 
   static passwordReset(username, password) {
     let url = ApiUrl + "/forgotpassword/resetpassword";
@@ -137,43 +166,55 @@ class TTCEapi {
         return error;
       });
   }
-  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address)    {
-        
+  static registerArtist(
+    weaverid,
+    emailid,
+    password,
+    firstname,
+    lastname,
+    pincode,
+    cluster,
+    district,
+    state,
+    mobileno,
+    panno,
+    address
+  ) {
     let url = ApiUrl + "/register/user";
-        var data = {
-            address : {
-                district : district,
-                line1 : address,
-                pincode :pincode,
-                state : state 
-            },
-            clusterId :cluster,
-            email : emailid,
-            firstName : firstname,
-            lastName : lastname,
-            mobile : mobileno,
-            pancard : panno,
-            password: password,
-            refrefRoleId : 1,
-            productCategoryIds:[1,2],
-            weaverId:weaverid,
-        };
-        var config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-        return axios
-          .post(url, data, config)
-          .then((response) => {
-            console.log(response);
-            return response;
-          })
-          .catch((error) => {
-            return error;
-          });
-    }
-    static getClusters(){
+    var data = {
+      address: {
+        district: district,
+        line1: address,
+        pincode: pincode,
+        state: state,
+      },
+      clusterId: cluster,
+      email: emailid,
+      firstName: firstname,
+      lastName: lastname,
+      mobile: mobileno,
+      pancard: panno,
+      password: password,
+      refrefRoleId: 1,
+      productCategoryIds: [1, 2],
+      weaverId: weaverid,
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+  }
+  static getClusters() {
     let url = ApiUrl + "/cluster/getAllClusters";
 
     return axios
@@ -185,7 +226,7 @@ class TTCEapi {
       .catch((error) => {
         return error;
       });
-    }
+  }
   //#endregion
 
   //#endregion

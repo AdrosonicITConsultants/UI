@@ -166,6 +166,7 @@ class TTCEapi {
         return error;
       });
   }
+<<<<<<< HEAD
   static registerArtist(
     weaverid,
     emailid,
@@ -215,6 +216,100 @@ class TTCEapi {
       });
   }
   static getClusters() {
+=======
+  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
+        
+    let url = ApiUrl + "/register/user";
+        var data = {
+            address : {
+                district : district,
+                line1 : address1,
+                pincode :pincode,
+                state : state 
+            },
+            clusterId : parseInt(cluster),
+            email : emailid,
+            firstName : firstname,
+            lastName : lastname,
+            mobile : mobileno,
+            pancard : panno,
+            password: password,
+            refRoleId : 1,
+            productCategoryIds:[1],
+            weaverId:weaverid
+        };
+        console.log(data);
+        var config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+        };
+        return axios
+          .post(url, data, config)
+          .then((response) => {
+            console.log(response);
+            return response;
+          })
+          .catch((error) => {
+            return error;
+          });
+    }
+
+    static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
+      adl2,street,city,state,country,pincode,landmark,weblink, sociallink,firstname,
+      lastname,mobileno,alternatemobno,designation,password,emailid)    {
+        
+      let url = ApiUrl + "/register/user";
+          var data = {
+              address : {
+                city: city,
+                country: country,
+                landmark: landmark,
+                line2: adl2,                               
+                street: street,
+                line1 : adl1,
+                pincode :pincode,
+                state : state 
+              },
+              alternateMobile: alternatemobno,
+              buyerCompanyDetails : {
+                  cin : cinno,
+                  companyName : companyname,
+                  contact : officeno,
+                  gstNo: gstno,
+                  logo: logoname
+              },
+              designation: designation,
+              email : emailid,
+              firstName : firstname,
+              lastName : lastname,
+              mobile : mobileno,
+              pancard : panno,
+              password: password,
+              refRoleId : 2,
+              socialMediaLink: sociallink,  
+              websiteLink: weblink
+          };
+          console.log(data);
+          var config = {
+            headers: {
+              "Content-type": "application/json",
+            },
+          };
+          return axios
+            .post(url, data, config)
+            .then((response) => {
+              console.log(response);
+              return response;
+            })
+            .catch((error) => {
+              return error;
+            });
+      }
+
+
+    static getClusters(){
+>>>>>>> 61a4d25442907caa0cf843e2970d630161628777
     let url = ApiUrl + "/cluster/getAllClusters";
 
     return axios

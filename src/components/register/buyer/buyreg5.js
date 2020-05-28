@@ -43,7 +43,25 @@ export default class buyreg5 extends Component {
             showValidationpass: false,
         });
       }
-    
+      componentDidMount(){
+        this.setState({adl1 : this.props.adl1 ,
+          adl2 : this.props.adl2,
+          street : this.props.street,
+          city : this.props.city,
+          state : this.props.state,
+          country : this.props.country,
+          pincode : this.props.pincode,
+          landmark : this.props.landmark,
+
+         
+          
+
+         },()=>{
+          console.log(this.state);
+         });
+        
+
+      }
     render() {
       const { Country, region } = this.state;
         return (
@@ -131,6 +149,7 @@ export default class buyreg5 extends Component {
                           id="adl1"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.adl1}
                           name="adl1"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -153,6 +172,8 @@ export default class buyreg5 extends Component {
                           id="adl2"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.adl2}
+
                           name="adl2"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -175,7 +196,8 @@ export default class buyreg5 extends Component {
                           id="street"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          name="firststreetame"
+                          value = {this.state.street}
+                          name="street"
                           onChange={(e) => this.handleChange(e)}
                         />
                       
@@ -197,6 +219,8 @@ export default class buyreg5 extends Component {
                           id="city"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.city}
+
                           name="city"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -219,6 +243,7 @@ export default class buyreg5 extends Component {
                           id="state"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.state}
                           name="state"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -241,6 +266,7 @@ export default class buyreg5 extends Component {
                           id="country"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.country}
                           name="country"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -263,6 +289,7 @@ export default class buyreg5 extends Component {
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.pincode}
                           name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -285,6 +312,7 @@ export default class buyreg5 extends Component {
                           id="landmark"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
+                          value = {this.state.landmark}
                           name="landmark"
                           onChange={(e) => this.handleChange(e)}
                         />

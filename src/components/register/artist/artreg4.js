@@ -19,7 +19,7 @@ export default class artreg4 extends Component {
           panno : "",
           address : "",
           clusterdata : [],
-          clusterid : "",
+          clusterid : -1,
           showValidationpass: false,
           showValidationconfirmpass: false,
           showUserName: true,
@@ -410,7 +410,7 @@ export default class artreg4 extends Component {
                           onChange={(e) => this.handleChange(e)}
                         />
                         {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your Address</span>
+                        <span className="bg-danger">please fill mandatory fields</span>
                         ) : <br/>}
                       </div>
                     </Col>

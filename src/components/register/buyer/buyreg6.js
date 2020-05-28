@@ -30,7 +30,16 @@ export default class buyreg6 extends Component {
         this.setState({ [e.target.name]: e.target.value });
         
       }
-    
+      componentDidMount(){
+        this.setState({weblink : this.props.weblink ,
+          sociallink : this.props.sociallink,
+
+         },()=>{
+          console.log(this.state);
+         });
+        
+
+      }
     render() {
       const { Country, region } = this.state;
         return (
@@ -162,12 +171,12 @@ export default class buyreg6 extends Component {
                 </Row>
                 <Row noGutters={true}>
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10 line322 text-center font3">
+                  <span className="col-xs-10 line322 text-center font3" onClick={() => this.operation()}>
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}
                     <img
                       style={{ width: "13px", marginRight: "5px" }}
-                      src={logos.skiplogo}
+                      src={logos.skiplogo} 
                     ></img>{" "}
                     skip
                   </span>

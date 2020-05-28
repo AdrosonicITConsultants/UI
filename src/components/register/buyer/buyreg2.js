@@ -42,6 +42,12 @@ export default class buyreg2 extends Component {
       showValidationconfirmpass: false,
     });
   }
+  componentDidMount(){
+    this.setState({password : this.props.password ,
+                   confirmpass : this.props.password 
+                  });
+  }
+
 
   render() {
     return (
@@ -107,6 +113,7 @@ export default class buyreg2 extends Component {
                     className="form-control BuyerLogin"
                     placeholder="password"
                     name="password"
+                    value = {this.state.password}
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidationpass ? (
@@ -132,6 +139,8 @@ export default class buyreg2 extends Component {
                     className="form-control BuyerLogin"
                     placeholder="Re-enter yourpassword"
                     name="confirmpass"
+                    value = {this.state.confirmpass}
+
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidationconfirmpass ? (

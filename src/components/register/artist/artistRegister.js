@@ -19,14 +19,14 @@ export default class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 2,
-                     weaverid: "Ma1209",
-                     emailid: "p@ii.com",
+                     userpage: 0,
+                     weaverid: "",
+                     emailid: "",
                      password: "",
                      firstname: "",
                      lastname: "",
                      pincode: "",
-                     cluster: "",
+                     cluster: -1,
                      district: "",
                      state: "",
                      mobileno: "",
@@ -127,7 +127,7 @@ export default class artistRegister extends Component {
                    },() => {
                      TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.password,this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address).then((response) => {
 
-                     } )
+                     } );
                    });
                   //  console.log(
                   //    firstname,

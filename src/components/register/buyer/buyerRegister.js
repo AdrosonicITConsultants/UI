@@ -21,8 +21,8 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 5,
-                     emailid: "",
+                     userpage: 0,
+                     emailid: "piyush@ppp.com",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -33,6 +33,7 @@ export default class buyerRegister extends Component {
                      gstno: "",
                      officeno: "",
                      brandLogo: [],
+                     logoname : "",
                      cinno: "",
                      panno: "",
                      adl1: "",
@@ -45,6 +46,8 @@ export default class buyerRegister extends Component {
                      landmark: "",
                      weblink: "",
                      sociallink: "",
+
+                     
                    };
                    this.handler = this.handler.bind(this);
                    this.sendotp = this.sendotp.bind(this);
@@ -62,6 +65,7 @@ export default class buyerRegister extends Component {
                    this.storelink = this.storelink.bind(this);
                  }
 
+
                  renderSection(num) {
                    switch (num) {
                      case 0:
@@ -78,6 +82,7 @@ export default class buyerRegister extends Component {
                          <Buyreg2
                            handler={this.handler}
                            sp={this.storepassword}
+                           password = {this.state.password}
                          />
                        );
                        break;
@@ -86,6 +91,11 @@ export default class buyerRegister extends Component {
                          <Buyreg3
                            handler={this.handler}
                            spd={this.storepersonaldetails}
+                           firstname = {this.state.firstname}
+                           lastname = {this.state.lastname}
+                           mobileno = {this.state.mobileno}
+                           alternatemobno = {this.state.alternatemobno}
+                           designation = {this.state.designation}
                          />
                        );
                        break;
@@ -94,6 +104,14 @@ export default class buyerRegister extends Component {
                          <Buyreg4
                            handler={this.handler}
                            scd={this.storecompanydetails}
+                           companyname = {this.state.companyname}
+                           gstno = {this.state.gstno}
+                           officeno = {this.state.officeno}
+                           brandLogo = {this.state.brandLogo}
+                           cinno = {this.state.cinno}
+                           panno = {this.state.panno}
+                           logoname = {this.state.logoname}
+
                          />
                        );
                        break;
@@ -102,12 +120,25 @@ export default class buyerRegister extends Component {
                          <Buyreg5
                            handler={this.handler}
                            sad={this.storeaddressdetails}
+                           adl1 = {this.state.adl1}
+                           adl2 = {this.state.adl2}
+                           street = {this.state.street}
+                           city = {this.state.city}
+                           state = {this.state.state}
+                           country = {this.state.country}
+                           pincode = {this.state.pincode}
+                           landmark = {this.state.landmark}
+                           
                          />
                        );
                        break;
                      case 5:
                        return (
-                         <Buyreg6 handler={this.handler} sl={this.storelink} />
+                         <Buyreg6 
+                            handler={this.handler} 
+                            sl={this.storelink} 
+                            sociallink = {this.state.sociallink}
+                            weblink = {this.state.weblink}/>
                        );
                        break;
                      default:
@@ -119,7 +150,14 @@ export default class buyerRegister extends Component {
                      { weblink: weblink, sociallink: sociallink },
                      () => {
                        console.log(this.state.weblink, this.state.sociallink);
-                     }
+                          TTCEapi.registerBuyer(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,this.state.adl1,
+                            this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.weblink, this.state.sociallink,this.state.firstname,
+                            this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid).then(
+                              (response) => {
+
+                              }
+                            );
+                      }
                    );
                  }
                  storeaddressdetails(
@@ -163,7 +201,8 @@ export default class buyerRegister extends Component {
                    officeno,
                    brandLogo,
                    cinno,
-                   panno
+                   panno,
+                   logoname
                  ) {
                    this.setState(
                      {
@@ -173,6 +212,7 @@ export default class buyerRegister extends Component {
                        brandLogo: brandLogo,
                        panno: panno,
                        cinno: cinno,
+                       logoname : logoname
                      },
                      () => {
                        console.log(
@@ -181,7 +221,8 @@ export default class buyerRegister extends Component {
                          this.state.officeno,
                          this.state.brandLogo,
                          this.state.cinno,
-                         this.state.panno
+                         this.state.panno,
+                         this.state.logoname
                        );
                      }
                    );
@@ -213,8 +254,10 @@ export default class buyerRegister extends Component {
                    );
                  }
                  storepassword(password) {
-                   this.setState({ password: password });
-                   console.log(password);
+                   this.setState({ password: password },() =>{ 
+                      console.log(this.state);
+                   });
+                  //  console.log(password);
                  }
                
                  
@@ -228,7 +271,7 @@ export default class buyerRegister extends Component {
                    debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
-                       debugger;
+                      //  debugger;
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,

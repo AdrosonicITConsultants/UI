@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css"
 import "./buyer.css"
 import logos from "../../assets";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class buyerpass extends Component {
                  constructor() {
@@ -34,12 +35,10 @@ export default class buyerpass extends Component {
                       else{
                         this.props.cpa(this.state.password);
                         
-                      }
+                      }                      
                         
-                        // window.open("./demo-video", "_self");
-                        alert("login clicked");
-                  
-                     //this.props.handler(1);
+                        alert("login clicked");                 
+                
                    }
                     
                  }

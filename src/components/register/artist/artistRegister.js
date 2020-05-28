@@ -11,6 +11,7 @@ import TTCEapi from '../../../services/API/TTCEapi';
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 
 
@@ -162,7 +163,7 @@ export default class artistRegister extends Component {
                            this.handler(1);
                          } else {
                            // alert("Wrong credentials");
-                           customToast.error("Wrong credentials", {
+                           customToast.error("Please enter valid Artisan ID.", {
                              position: toast.POSITION.TOP_RIGHT,
                              autoClose: true,
                            });

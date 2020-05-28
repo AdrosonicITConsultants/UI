@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import ReactPlayer from  "react-player"
 import video from "../../assets/file_example_MP4_480_1_5MG.mp4";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class videoPlayer extends Component {
 
-    SkiptoHomepgae() {
-        window.open("./","_self");
+    SkiptoHomepgae() {      
+              browserHistory.push("/home"); 
     }
     render() {
         return (

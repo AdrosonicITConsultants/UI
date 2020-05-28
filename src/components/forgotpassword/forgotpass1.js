@@ -5,6 +5,7 @@ import logos from "../../assets"
 import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 
 
@@ -63,7 +64,8 @@ export default class forgotpass1 extends Component {
 
                  backoperation() {
                   //  this.props.handler(0);
-        window.open("./", "_self");
+   
+              browserHistory.push("/"); 
 
                  }
 

@@ -6,6 +6,7 @@ import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import buyeruser from '../login/loginuser';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 
 
@@ -55,7 +56,8 @@ export default class forgotpass3 extends Component {
                    } else {
                      this.props.co(this.state.otppin)
                    //  this.props.handler(1);
-                      window.open("./", "_self");
+                      
+                            browserHistory.push("/"); 
                    }
                  }
 
@@ -154,7 +156,9 @@ export default class forgotpass3 extends Component {
                              <div className="col-xs-12 text-center">
                                <button
                                  className="greenButton"
-                                 onClick={() => window.open("./", "_self")}
+                                 onClick={() => 
+                                        browserHistory.push("/")
+                                  }
                                >
                                  Login Now
                                </button>

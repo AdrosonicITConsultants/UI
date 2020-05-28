@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col} from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import { memoryHistory, browserHistory } from "../../../helpers/history";
+
 
 export default class artreg1 extends Component {
     constructor() {
@@ -35,7 +37,8 @@ export default class artreg1 extends Component {
       }
 
       backoperation() {
-        window.open("./", "_self");
+      
+              browserHistory.push("/"); 
         // this.props.handler(0);
 
         }

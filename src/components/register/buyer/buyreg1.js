@@ -6,6 +6,8 @@ import isEmail from "validator/lib/isEmail";
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { memoryHistory, browserHistory } from "../../../helpers/history";
+
 
 
 toast.configure()
@@ -52,7 +54,8 @@ export default class buyreg1 extends Component {
   }
 
   backoperation() {
-      window.open("./", "_self");
+    
+            browserHistory.push("/"); 
     // this.props.handler(0);
   }
 

@@ -174,7 +174,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                            
                              let token = response.data.data.acctoken;
                              let user = response.data.data.user;
-                             let userTypeId = 2;
+                             let userTypeId = 1;
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );

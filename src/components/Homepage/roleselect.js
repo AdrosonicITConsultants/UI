@@ -31,16 +31,17 @@ export default class roleselect extends Component {
                         <img src={logos.mainlogo} alt="TataTrusts logo" className="logohome"></img>
                                 </Row>
                                 
-                                <Row noGutters={true} className="text-center line3 font4">
+                                <Row noGutters={true} className="text-center line31 font4 fontplay">
                                     What describes you the best?
                                 
                                 </Row>
+                               
                                 <Row noGutters={true} className="selectorrow text-center">
                                     <div className="box1" onClick={() => this.artistopen()}>
                                         <Row noGutters={true}>
                                 <img src={logos.buyerlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
-                                        <Row noGutters={true} className="text-center font4">
+                                        <Row noGutters={true} className="text-center font3">
                                             Artisan
                                         </Row>
 <br/>
@@ -56,7 +57,7 @@ export default class roleselect extends Component {
                                         <Row noGutters={true}>
                                 <img src={logos.buyerlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
-                                        <Row noGutters={true} className="text-center font4">
+                                        <Row noGutters={true} className="text-center font3">
                                             Buyer
                                         </Row>
                             <br />
@@ -67,9 +68,9 @@ export default class roleselect extends Component {
                                 <Row noGutters={true} className="text-center line5 font3">
                                     Need Help Deciding?
                                 </Row>
-                                <Row noGutters={true} className="text-center line61 font3">
-                                    <img src={logos.language}></img>
-                                    Change language
+                                <Row noGutters={true} className="text-center  mt37">
+                                    Privacy Policy
+                                    
                                 </Row>
                                 <br></br>
                                  

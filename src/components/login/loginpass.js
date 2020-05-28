@@ -115,7 +115,7 @@ export default class buyerpass extends Component {
                          </Row>
 
                          <br />
-                         <br />
+                       
                          <br />
                          <div>
                            <Row noGutters={true}>
@@ -208,7 +208,7 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
-                         <Row noGutters={true} className="mt37">
+                         <Row noGutters={true} className="mt50">
                            <strong className="col-xs-3 text-center line7 font6">
                              Help?
                            </strong>

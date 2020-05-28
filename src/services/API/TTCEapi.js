@@ -175,6 +175,58 @@ class TTCEapi {
           });
     }
 
+    static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
+      adl2,street,city,state,country,pincode,landmark,weblink, sociallink,firstname,
+      lastname,mobileno,alternatemobno,designation,password,emailid)    {
+        
+      let url = ApiUrl + "/register/user";
+          var data = {
+              address : {
+                city: city,
+                country: country,
+                landmark: landmark,
+                line2: adl2,                               
+                street: street,
+                line1 : adl1,
+                pincode :pincode,
+                state : state 
+              },
+              alternateMobile: alternatemobno,
+              buyerCompanyDetails : {
+                  cin : cinno,
+                  companyName : companyname,
+                  contact : officeno,
+                  gstNo: gstno,
+                  logo: logoname
+              },
+              designation: designation,
+              email : emailid,
+              firstName : firstname,
+              lastName : lastname,
+              mobile : mobileno,
+              pancard : panno,
+              password: password,
+              refRoleId : 2,
+              socialMediaLink: sociallink,  
+              websiteLink: weblink
+          };
+          console.log(data);
+          var config = {
+            headers: {
+              "Content-type": "application/json",
+            },
+          };
+          return axios
+            .post(url, data, config)
+            .then((response) => {
+              console.log(response);
+              return response;
+            })
+            .catch((error) => {
+              return error;
+            });
+      }
+
 
     static getClusters(){
     let url = ApiUrl + "/cluster/getAllClusters";

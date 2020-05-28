@@ -13,7 +13,8 @@ export default class buyreg4 extends Component {
                     cinno : "",
                     panno : "",
                     showValidationpass: false,
-                    brandLogo : []
+                    brandLogo : [],
+                    logoname : ""
                    };
                  }
        
@@ -24,7 +25,7 @@ export default class buyreg4 extends Component {
                        showValidationpass: !this.state.showValidationpass,
                      });
                    } else {
-                     this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno)
+                     this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname)
                      this.props.handler(4);
                    }
                  }
@@ -57,6 +58,9 @@ export default class buyreg4 extends Component {
                    if (event.target.files[0]) {
                    //  reader.readAsDataURL(event.target.files[0]);
                    this.refs.fileUploaderName.value = event.target.files[0].name;
+                   this.setState({
+                     logoname : event.target.files[0].name
+                   })
                    }
                  };
                  componentDidMount(){
@@ -66,7 +70,7 @@ export default class buyreg4 extends Component {
                     brandLogo : this.props.brandLogo,
                     cinno : this.props.cinno,
                     panno : this.props.panno,
-
+                    logoname : this.props.logoname
                    
                     
           
@@ -249,10 +253,10 @@ export default class buyreg4 extends Component {
                                      disabled
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="lastname"
-                                     value = {this.state.officeno}
+                                     value = {this.state.logoname}
 
                                      ref="fileUploaderName"
-                                     name="lastname"
+                                    name="lastname"
                                      onClick={() => {
                                        this.refs.fileUploader.click();
                                      }}

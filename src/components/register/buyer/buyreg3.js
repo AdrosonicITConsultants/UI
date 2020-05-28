@@ -241,7 +241,7 @@ export default class buyreg3 extends Component {
                           type="text"
                           id="designation"
                           className="form-control form2 BuyerLogin1"
-                          value= {this.state.designationx}
+                          value= {this.state.designation}
 
                           name="designation"
                           onChange={(e) => this.handleChange(e)}

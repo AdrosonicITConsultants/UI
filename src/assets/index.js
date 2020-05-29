@@ -26,11 +26,30 @@ import favoriteicon from "./material-favorite-border.svg";
 import notificationsicon from "./ionic-md-notifications-outline.svg"
 import navbarbtn1 from  "./Custom Design Icons.svg";
 import receipticon from  "./awesome-receipt.svg";
+import accountcircleicon from "./material-account-circle.svg"
+import logouticon from "./feather-log-out.svg"
+import brandingicon from "./material-branding-watermark.svg";
+import dashboardicon from "./material-dashboard.svg";
+import helpicon from "./material-help.svg";
+import receipticonH from "./material-receipt.svg";
+import cashregistericon from"./awesome-cash-register.svg";
+import staricon from "./weather-stars.svg"
+import mainLogoNavbar from "./transparent logo main nav bar.png";
+
 
 
 
 
 export default {
+  mainLogoNavbar,
+  staricon,
+  cashregistericon,
+  receipticonH,
+  helpicon,
+  brandingicon,
+  dashboardicon,
+  logouticon,
+  accountcircleicon,
   receipticon,
   quoteiconend,
   searchlogo,

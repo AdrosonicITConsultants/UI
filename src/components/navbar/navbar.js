@@ -107,7 +107,7 @@ class NavbarComponent extends Component {
                   this.state.activeTabClassName === "/" ? "active" : ""
                 }
               >
-                <img className="navbarLogo" src={logos.mainlogoside}></img>
+                <img className="navbarLogo" src={logos.mainLogoNavbar}></img>
               </a>
 
               <ol class="sub-menu">
@@ -183,7 +183,7 @@ class NavbarComponent extends Component {
                   class="menu-item"
                   style={{ borderBottom: "dashed 2px red" }}
                 >
-                  <span>
+                  <span className="col-md-10 text-left"> 
                     {this.props.user.firstName + " " + this.props.user.lastName}
                   </span>
                   <span>
@@ -191,22 +191,62 @@ class NavbarComponent extends Component {
                   </span>
                 </li>
                 <li class="menu-item">
+                  <span class="col-md-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.accountcircleicon}
+                    ></img>
+                  </span>
+
                   <a href="/">My Profile</a>
                 </li>
                 <li class="menu-item">
+                  <span class="col-md-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.cashregistericon}
+                    ></img>
+                  </span>
+
                   <a href="/">Transactions</a>
                 </li>
                 <li class="menu-item">
+                  <span class="col-md-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.receipticonH}
+                    ></img>
+                  </span>
+
                   <a href="/">My orders</a>
                 </li>
                 <li class="menu-item">
+                  <span class="col-md-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.dashboardicon}
+                    ></img>
+                  </span>
+
                   <a href="/">Dashboard</a>
                 </li>
                 <li class="menu-item">
+                  <span class="col-md-2">
+                    <img style={{ width: "15px" }} src={logos.helpicon}></img>
+                  </span>
+
                   <a href="/">Support</a>
                 </li>
                 {!isAuthenticated ? (
                   <li class="menu-item">
+                    <span class="col-md-2">
+                      {" "}
+                      <img
+                        style={{ width: "15px" }}
+                        src={logos.logouticon}
+                      ></img>
+                    </span>
+
                     <a onClick={this.logout}>Logout</a>
                   </li>
                 ) : null}

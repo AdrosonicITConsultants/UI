@@ -94,7 +94,7 @@ export default class buyreg6 extends Component {
                   ></img>
                 </Row>
           <br></br>
-                <Row noGutters={true} className="text-left line32  font3">
+                <Row noGutters={true} className="text-left line32  fontplay font3">
                   {/*  */}
                   <span
                     style={{
@@ -114,7 +114,7 @@ export default class buyreg6 extends Component {
                   <span className="col-xs-1"></span>
                   <span
                     style={{ fontWeight: "600" }}
-                    className="col-xs-10 line32 text-center font3"
+                    className="col-xs-10 line32 text-center fontplay font3"
                   >
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}

@@ -91,7 +91,7 @@ export default class artreg3 extends Component {
                 <br></br>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
-                  <span className="col-xs-10">
+                  <span className="col-xs-10 fontplay">
                     <img
                       src={logos.locklogo}
                       className="locklogo1 glyphicon mr-5"

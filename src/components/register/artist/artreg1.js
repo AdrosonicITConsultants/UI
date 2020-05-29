@@ -96,7 +96,7 @@ export default class artreg1 extends Component {
                 </Row>
                 <br></br>
                 <br />
-
+                <br />
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10 fontplay">
@@ -174,14 +174,14 @@ export default class artreg1 extends Component {
                     </button>
                   </div>
                 </Row>
-                <br />
+                
                 <br />
                 <br />
                 <hr className="hrline"></hr>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-2"></span>
                   <span className="col-xs-8">
-                    If you don't have a weaver id get in touch with us.{" "}
+                    If you don't have a Artisian id get in touch with us.{" "}
                   </span>
                 </Row>
              

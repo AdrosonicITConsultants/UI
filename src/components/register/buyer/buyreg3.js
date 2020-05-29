@@ -108,7 +108,7 @@ export default class buyreg3 extends Component {
                       fontSize: "larger",
                       color: "var(--lightBlack)",
                     }}
-                    className="col-xs-10"
+                    className="col-xs-10 fontplay"
                   >
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
@@ -119,7 +119,7 @@ export default class buyreg3 extends Component {
                 <Row noGutters={true}>
                   <span
                     style={{ fontWeight: "600" }}
-                    className="col-xs-10 line32 text-left ml-6 font3"
+                    className="col-xs-10 line32 text-left ml-6 font3 fontplay"
                   >
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}

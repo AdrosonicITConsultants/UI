@@ -194,12 +194,7 @@ class TTCEapi {
         return error;
       });
   }
-<<<<<<< HEAD
   static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1,selectedProducts)    {
-=======
-
-  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
->>>>>>> 2cd8d6f077f2fc36d5bfed8116b8b1cf914bb321
         
     let url = ApiUrl + "/register/user";
         var data = {

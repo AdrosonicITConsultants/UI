@@ -131,7 +131,7 @@ export default class forgotpass1 extends Component {
                            >
                              <span className="col-xs-1"></span>
 
-                             <span className="col-xs-10">
+                             <span className="col-xs-10 fontplay">
                                Enter your email ID
                              </span>
                            </Row>

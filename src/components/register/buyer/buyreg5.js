@@ -148,7 +148,7 @@ export default class buyreg5 extends Component {
                       fontSize: "18px",
                       color: "var(--lightBlack)",
                     }}
-                    className="col-xs-10 ml-6"
+                    className="col-xs-10 ml-6 fontplay"
                   >
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
@@ -160,7 +160,7 @@ export default class buyreg5 extends Component {
                 <Row noGutters={true}>
                   <span
                     style={{ fontWeight: "600" }}
-                    className="col-xs-10 line32 text-left ml-6 font3"
+                    className="col-xs-10 line32 text-left ml-6 font3 fontplay"
                   >
                     {/* <img src={logos.locklogo}   
                         className="locklogo1 glyphicon mr-5"></img> */}
@@ -302,7 +302,7 @@ export default class buyreg5 extends Component {
                           name="country"
                           value = {this.state.country}
                           onChange={(e) => this.handleCountry(e)}  >
-                            <option key = '0' clusterid = '-1'  value='Select Country'>Select Cluster</option>
+                            <option key = '0' clusterid = '-1'  value='Select Country'>Select Country</option>
                         {this.state.countrydata.map((item) => <option key =  {item.id} countryid={item.id} value={item.name}>{item.name}</option>)}
                       </select>
                         

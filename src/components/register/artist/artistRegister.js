@@ -20,15 +20,9 @@ export default class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-<<<<<<< HEAD
-                     userpage: 4,
+                     userpage: 0,
                      weaverid: "123",
                      emailid: "aa@a.com",
-=======
-                     userpage: 3,
-                     weaverid: "",
-                     emailid: "",
->>>>>>> 2cd8d6f077f2fc36d5bfed8116b8b1cf914bb321
                      password: "",
                      firstname: "",
                      lastname: "",

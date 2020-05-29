@@ -296,7 +296,7 @@ export default class buyerRegister extends Component {
                            autoClose: true,
                          });
                        } else {
-                         customToast.error("Error while sending OTP.", {
+                         customToast.error(response.data.errorMessage, {
                            position: toast.POSITION.TOP_RIGHT,
                            autoClose: true,
                          });
@@ -313,10 +313,10 @@ export default class buyerRegister extends Component {
                        if (response.data.valid) {
                          this.handler(1);
                        } else {
-                         customToast.error("please enter valid OTP", {
-                           position: toast.POSITION.TOP_RIGHT,
-                           autoClose: true,
-                         });
+                          customToast.error(response.data.errorMessage, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
                          // alert("please enter valid OTP.");
                        }
                      });

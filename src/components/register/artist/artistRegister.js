@@ -111,6 +111,24 @@ export default class artistRegister extends Component {
                       this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
                       this.state.district,this.state.state,this.state.mobileno,this.state.panno,
                       this.state.address,this.state.selectedprods).then((response) => {
+                         //  debugger;
+                       if (response.data.valid) {
+                        customToast.success("Registeration complete.", {
+                          position: toast.POSITION.TOP_RIGHT,
+                          autoClose: true,
+                        });
+                          setTimeout(
+                             browserHistory.push("/"),
+                            5000
+                          );
+                        
+                       } else {
+                           customToast.error(response.data.errorMessage, {
+                             position: toast.POSITION.TOP_RIGHT,
+                             autoClose: true,
+                           });
+                         // alert("please enter valid OTP.");
+                       }
 
                     } );
 
@@ -198,7 +216,7 @@ export default class artistRegister extends Component {
                            autoClose: true,
                          });
                        } else {
-                         customToast.error("Error while sending OTP.", {
+                         customToast.error(response.data.errorMessage, {
                            position: toast.POSITION.TOP_RIGHT,
                            autoClose: true,
                          });

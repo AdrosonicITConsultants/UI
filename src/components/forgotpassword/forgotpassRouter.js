@@ -40,7 +40,7 @@ export default class ForgotpassRouter extends Component {
                            autoClose: true,
                          });
                        } else {
-                         customToast.error("Error while sending OTP.", {
+                         customToast.error(response.data.errorMessage, {
                            position: toast.POSITION.TOP_RIGHT,
                            autoClose: true,
                          });

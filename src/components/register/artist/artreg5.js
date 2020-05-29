@@ -25,10 +25,14 @@ export default class artreg5 extends Component {
                    if(document.getElementById('agree').checked){
                     {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)}   console.log(this.state.selectedprods) }  )     }
                       this.props.cr(this.state.selectedprods);
-                     alert("registeration complete ");
+                     
                    }
                    else{
-                    alert("Please agree to T&C");
+                       customToast.error("Please agree to T&C", {
+                         position: toast.POSITION.TOP_RIGHT,
+                         autoClose: true,
+                       });
+                  //  alert("Please agree to T&C");
                    }
                  }
 

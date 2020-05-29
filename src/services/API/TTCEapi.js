@@ -237,20 +237,29 @@ class TTCEapi {
     }
 
     static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
-      adl2,street,city,state,country,pincode,landmark,weblink, sociallink,firstname,
+      adl2,street,city,state,country1,pincode,landmark,weblink, sociallink,firstname,
       lastname,mobileno,alternatemobno,designation,password,emailid,pocmobile,pocemail,pocname,countryid)    {
         
       let url = ApiUrl + "/register/user";
           var data = {
               address : {
                 city: city,
-                country: country,
+                country: {
+                  id : parseInt(countryid),
+                  name : country1
+
+                },
                 landmark: landmark,
                 line2: adl2,                               
                 street: street,
                 line1 : adl1,
                 pincode :pincode,
                 state : state 
+              },
+              buyerPointOfContact: {
+                contactNo: pocmobile,
+                email: pocemail,
+                firstName : pocname
               },
               alternateMobile: alternatemobno,
               buyerCompanyDetails : {

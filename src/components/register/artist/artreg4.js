@@ -157,6 +157,7 @@ export default class artreg4 extends Component {
                     <span className = "fontplay">ARTISIAN ID : </span>{this.props.weaverid}
                   </span>
                 </Row>
+                <br></br>
                 <Row noGutters={true}>
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
                     <Col
@@ -399,18 +400,19 @@ export default class artreg4 extends Component {
                           name="address"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {this.state.showValidationpass ? (
-                          <span className="bg-danger">
+                        
+                      </div>
+                    </Col>
+                  </Col>
+                </Row>
+                {this.state.showValidationpass ? (
+                          <span className="bg-danger text-center">
                             please fill mandatory fields
                           </span>
                         ) : (
                           <br />
                         )}
-                      </div>
-                    </Col>
-                  </Col>
-                </Row>
-                <br></br>
+                
                 <div className="text-center" style={{ color: "#cc6868" }}>
                   <strong
                     className="requiredStar"

@@ -16,10 +16,29 @@ import otplogo from "./Otp.svg";
 import closelogo from "./close_icon.svg";
 import tickLogo from "./tick-done.svg";
 import homepagebgtemp from "./landingpageimg.png";
+import quoteicon from "./Quote1.svg";
+import quoteiconend from "./Quote2.svg";
+import searchlogo from "./Search.svg";
+import verticalthread from "./Thread-Vertical.svg";
+import horizontalthread from "./Thread-horizontal.svg";
+import chaticon from "./material-chat_bubble_outline.svg";
+import favoriteicon from "./material-favorite-border.svg";
+import notificationsicon from "./ionic-md-notifications-outline.svg"
+import navbarbtn1 from  "./Custom Design Icons.svg";
+
 
 
 
 export default {
+  quoteiconend,
+  searchlogo,
+  verticalthread,
+  horizontalthread,
+  chaticon,
+  favoriteicon,
+  notificationsicon,
+  navbarbtn1,
+  quoteicon,
   mainlogo,
   mainlogoside,
   userlogo,

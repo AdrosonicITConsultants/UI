@@ -54,7 +54,7 @@ class NavbarComponent extends Component {
     return (
       <React.Fragment>
         <nav
-          class="menu navbarTransparent navbar-expand-sm"
+          className="menu navbarTransparent navbar-expand-sm"
           onClick={this.toggleMobileMenu}
         >
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
@@ -73,7 +73,7 @@ class NavbarComponent extends Component {
               </li>
             ) : null}
             {userTypeId === "1" ? (
-              <li class="menu-item">
+              <li className="menu-item">
                 <a
                   href="/creditpartnerHome"
                   className={
@@ -87,7 +87,7 @@ class NavbarComponent extends Component {
               </li>
             ) : null}
             {userTypeId === "3" ? (
-              <li class="menu-item">
+              <li className="menu-item">
                 <a
                   href="/traineeHome"
                   className={
@@ -100,7 +100,7 @@ class NavbarComponent extends Component {
                 </a>
               </li>
             ) : null}
-            <li class="menu-item">
+            <li className="menu-item">
               <a
                 href="/"
                 className={
@@ -116,9 +116,9 @@ class NavbarComponent extends Component {
             </li>
             <li class="menu-item">
               {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
-              <button className="navButton" style={{ width: "15em" }}>
-                <img className="navButtonImg" src={logos.userlogo}></img>
-                <span className="navButtonImg">Custom design inquiry</span>
+              <button className="navButton navbtn1">
+                <img className="navButtonImg" src={logos.navbarbtn1}></img>
+                <span className="navButtonImg">New custom design</span>
               </button>
             </li>
             <li className="menu-item-space menu-item"></li>
@@ -133,9 +133,23 @@ class NavbarComponent extends Component {
         }
       </ol>
     </li> */}
+
+            {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.searchlogo}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.favoriteicon}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.chaticon}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.notificationsicon}></img>
+            </li>
             {userTypeId === "3" || userTypeId === null ? (
               <li class="menu-item">
-                <button className="navButton" style={{ width: "10em" }}>
+                <button className="navButton navbtn2" style={{ width: "10em" }}>
                   <img className="navButtonImg" src={logos.userlogo}></img>
                   <span className="navButtonImg">My inquiries</span>
                 </button>
@@ -149,20 +163,6 @@ class NavbarComponent extends Component {
       </ol> */}
               </li>
             ) : null}
-            {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
-            <li class="menu-item">
-              <img className="navButtonImg" src={logos.userlogo}></img>
-            </li>
-            <li class="menu-item">
-              <img className="navButtonImg" src={logos.userlogo}></img>
-            </li>
-            <li class="menu-item">
-              <img className="navButtonImg" src={logos.userlogo}></img>
-            </li>
-            <li class="menu-item">
-              <img className="navButtonImg" src={logos.userlogo}></img>
-            </li>
-
             <li class="menu-item">
               <a
                 href="#"

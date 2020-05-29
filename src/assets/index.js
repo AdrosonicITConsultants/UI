@@ -25,11 +25,13 @@ import chaticon from "./material-chat_bubble_outline.svg";
 import favoriteicon from "./material-favorite-border.svg";
 import notificationsicon from "./ionic-md-notifications-outline.svg"
 import navbarbtn1 from  "./Custom Design Icons.svg";
+import receipticon from  "./awesome-receipt.svg";
 
 
 
 
 export default {
+  receipticon,
   quoteiconend,
   searchlogo,
   verticalthread,

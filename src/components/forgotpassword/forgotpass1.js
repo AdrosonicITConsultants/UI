@@ -18,7 +18,7 @@ export default class forgotpass1 extends Component {
                      otppin: "",
                      showValidation: false,
                      showValidationpin: false,
-                     
+                     isButtonDisabled: false,
                    };
                  }
 
@@ -39,6 +39,15 @@ export default class forgotpass1 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
+                      this.setState({
+                        isButtonDisabled: true,
+                      });
+
+                      // **** here's the timeout ****
+                      setTimeout(
+                        () => this.setState({ isButtonDisabled: false }),
+                        10000
+                      );
                 
                    }
                  }
@@ -169,6 +178,7 @@ export default class forgotpass1 extends Component {
                              <div className="col-xs-12 text-center">
                                <button
                                  className="blackButton"
+                                 disabled={this.state.isButtonDisabled}
                                  onClick={() => this.SendOtp()}
                                >
                                  Send OTP

@@ -6,14 +6,19 @@ import * as serviceWorker from './serviceWorker';
 // import {Provider} from "react-redux";
 // import store from "./redux/store"
 import 'bootstrap/dist/css/bootstrap.css';
+import setAuthorizationtoken from "../src/services/utils/setAuthorizationtoken";
+import store from  "../src/redux/store";
+import {Provider} from "react-redux";
 
+
+setAuthorizationtoken(localStorage.jwtToken);
 
 ReactDOM.render(
-  // <Provider store={store}>
+   <Provider store={store}>
   <React.StrictMode>
     <App />
   </React.StrictMode>
-  // </Provider>
+   </Provider>
   ,
   document.getElementById('root')
 );

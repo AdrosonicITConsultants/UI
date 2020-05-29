@@ -1,6 +1,7 @@
 import axios from "axios";
 import isEmail from "validator/lib/isEmail";
-
+import setAuthorizationtoken from "../utils/setAuthorizationtoken";
+import jwt from  "jsonwebtoken";
 
 var env = "dev";
 var ApiUrl = "http://101.53.156.143:8090";
@@ -16,11 +17,11 @@ class TTCEapi {
   //#region post methods
 
   //#region registration
-  static checkWeaverId(weaverId, weaverPin) {
+  static checkWeaverId(weaverId) {
     let url = ApiUrl + "/register/verifyWeaverDetails";
     var data = {
       weaverId: weaverId,
-      pin: weaverPin,
+     // pin: weaverPin,
     };
     var config = {
       headers: {
@@ -63,6 +64,34 @@ class TTCEapi {
   //#endregion
 
   //#region login
+  static login(username, password) {
+    let url = ApiUrl + "/login/authenticate";
+    var data = {
+      emailOrMobile: username,
+      password: password,
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+          debugger
+          const token = response.data.data.acctoken;
+          const user = response.data.data.user;
+          localStorage.setItem('jwtToken', token);
+           localStorage.setItem("user", JSON.stringify(user));
+          setAuthorizationtoken(token);
+          debugger;
+        console.log(jwt.decode(token));
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+  }
 
   static passwordReset(username, password) {
     let url = ApiUrl + "/forgotpassword/resetpassword";
@@ -165,7 +194,12 @@ class TTCEapi {
         return error;
       });
   }
+<<<<<<< HEAD
   static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1,selectedProducts)    {
+=======
+
+  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
+>>>>>>> 2cd8d6f077f2fc36d5bfed8116b8b1cf914bb321
         
     let url = ApiUrl + "/register/user";
         var data = {
@@ -268,7 +302,7 @@ class TTCEapi {
       .catch((error) => {
         return error;
       });
-    }
+  }
   //#endregion
 
   //#endregion

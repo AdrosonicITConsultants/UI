@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
     "glamor": "^2.20.40",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.13.1",
     "react-avatar-edit": "^0.8.3",
     "react-bootstrap": "^1.0.1",
@@ -22,6 +23,7 @@
     "react-scripts": "3.4.1",
     "react-toastify": "^6.0.5",
     "reactstrap": "^8.4.1",
+    "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "validate.js": "^0.13.1",
     "validator": "^13.0.0"

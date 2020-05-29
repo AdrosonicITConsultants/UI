@@ -5,6 +5,7 @@ import logos from "../../assets"
 import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 
 
@@ -63,7 +64,8 @@ export default class forgotpass1 extends Component {
 
                  backoperation() {
                   //  this.props.handler(0);
-        window.open("./", "_self");
+   
+              browserHistory.push("/"); 
 
                  }
 
@@ -103,15 +105,16 @@ export default class forgotpass1 extends Component {
                                ></img>
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
-                                   Register
+                                   Reset
                                  </h2>
-                                 {window.location.pathname.indexOf(
+                                 {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
                                    <h4 className="margin-roletext">Artist</h4>
                                  ) : (
                                    <h4 className="margin-roletext">Buyer</h4>
-                                 )}
+                                 )} */}
+                                 <h4 className="margin-roletext">Password</h4>
                                </div>
                              </div>
 

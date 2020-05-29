@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import logos from "../../assets";
 import './navbar.css';
+import { connect } from "react-redux";
+import * as Actions from "../../redux/action/action";
+
+
+
 import {
     Collapse,
     Navbar,
@@ -16,102 +21,108 @@ import {
 } from 'reactstrap';
 
 class NavbarComponent extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          isOpen: false,
-          activeTabClassName: window.location.pathname,
-          openMenu: false
-        };
-      }
-      toggle = () => {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
+  constructor(props) {
+    super(props);
 
-      toggleMobileMenu = () => {
-        this.setState({
-          openMenu: !this.state.openMenu
-        });
-      }
-      
+    this.state = {
+      isOpen: false,
+      activeTabClassName: window.location.pathname,
+      openMenu: false,
+    };
+  }
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
 
-    render() {
-      let isAuthenticated = localStorage.getItem('userTypeId') !== null;
-      let userTypeId = localStorage.getItem('userTypeId');
+  toggleMobileMenu = () => {
+    this.setState({
+      openMenu: !this.state.openMenu,
+    });
+  };
 
+  logout= (event) =>{
+   this.props.dispatch(Actions.logout());
+   
+  }
 
-        return (
-          <React.Fragment>
-            <nav class="menu navbar-expand-sm" onClick={this.toggleMobileMenu}>
-              <ol className={this.state.openMenu ? "mobile_menu" : ""}>
-                {userTypeId === "2" ? (
-                  <li class="menu-item">
-                    <a
-                      href="/patientHome"
-                      className={
-                        this.state.activeTabClassName === "/patientHome"
-                          ? "active"
-                          : ""
-                      }
-                    >
-                      Home
-                    </a>
-                  </li>
-                ) : null}
-                {userTypeId === "1" ? (
-                  <li class="menu-item">
-                    <a
-                      href="/creditpartnerHome"
-                      className={
-                        this.state.activeTabClassName === "/creditpartnerHome"
-                          ? "active"
-                          : ""
-                      }
-                    >
-                      Home
-                    </a>
-                  </li>
-                ) : null}
-                {userTypeId === "3" ? (
-                  <li class="menu-item">
-                    <a
-                      href="/traineeHome"
-                      className={
-                        this.state.activeTabClassName === "/traineeHome"
-                          ? "active"
-                          : ""
-                      }
-                    >
-                      Home
-                    </a>
-                  </li>
-                ) : null}
-                <li class="menu-item">
-                  <a
-                    href="/"
-                    className={
-                      this.state.activeTabClassName === "/" ? "active" : ""
-                    }
-                  >
-                    <img className="navbarLogo" src={logos.mainlogoside}></img>
-                  </a>
+  render() {
+    let isAuthenticated = localStorage.getItem("userTypeId") !== null;
+    let userTypeId = localStorage.getItem("userTypeId");
 
-                  <ol class="sub-menu">
-                    {/* <li class="menu-item"><a href="/aboutCOP">About COP</a></li> */}
-                  </ol>
-                </li>
-                <li class="menu-item">
-                  {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
-                  <button className="navButton" style={{width:"15em"}}>
-                    <img className="navButtonImg" src={logos.userlogo}></img>
-                    <span className="navButtonImg">Custom design inquiry</span>
-                  </button>
-                </li>
-                <li className="menu-item-space menu-item"></li>
-                {/* <li class="menu-item">
+    return (
+      <React.Fragment>
+        <nav
+          class="menu navbarTransparent navbar-expand-sm"
+          onClick={this.toggleMobileMenu}
+        >
+          <ol className={this.state.openMenu ? "mobile_menu" : ""}>
+            {userTypeId === "2" ? (
+              <li class="menu-item">
+                <a
+                  href="/patientHome"
+                  className={
+                    this.state.activeTabClassName === "/patientHome"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Home
+                </a>
+              </li>
+            ) : null}
+            {userTypeId === "1" ? (
+              <li class="menu-item">
+                <a
+                  href="/creditpartnerHome"
+                  className={
+                    this.state.activeTabClassName === "/creditpartnerHome"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Home
+                </a>
+              </li>
+            ) : null}
+            {userTypeId === "3" ? (
+              <li class="menu-item">
+                <a
+                  href="/traineeHome"
+                  className={
+                    this.state.activeTabClassName === "/traineeHome"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  Home
+                </a>
+              </li>
+            ) : null}
+            <li class="menu-item">
+              <a
+                href="/"
+                className={
+                  this.state.activeTabClassName === "/" ? "active" : ""
+                }
+              >
+                <img className="navbarLogo" src={logos.mainlogoside}></img>
+              </a>
+
+              <ol class="sub-menu">
+                {/* <li class="menu-item"><a href="/aboutCOP">About COP</a></li> */}
+              </ol>
+            </li>
+            <li class="menu-item">
+              {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
+              <button className="navButton" style={{ width: "15em" }}>
+                <img className="navButtonImg" src={logos.userlogo}></img>
+                <span className="navButtonImg">Custom design inquiry</span>
+              </button>
+            </li>
+            <li className="menu-item-space menu-item"></li>
+            {/* <li class="menu-item">
       <a href="#" className={(this.state.activeTabClassName === "/testslist") || (this.state.activeTabClassName === "/antibodies")? "active" : ""}>Lab Services</a>
       <ol class="sub-menu">
         <li class="menu-item"><a href="/testslist">List of Tests Offered</a></li>
@@ -122,13 +133,13 @@ class NavbarComponent extends Component {
         }
       </ol>
     </li> */}
-                {userTypeId === "3" || userTypeId === null ? (
-                  <li class="menu-item">
-                    <button className="navButton" style={{width:"10em"}}>
-                      <img className="navButtonImg" src={logos.userlogo}></img>
-                      <span className="navButtonImg">My inquiries</span>
-                    </button>
-                    {/* <ol class="sub-menu">
+            {userTypeId === "3" || userTypeId === null ? (
+              <li class="menu-item">
+                <button className="navButton" style={{ width: "10em" }}>
+                  <img className="navButtonImg" src={logos.userlogo}></img>
+                  <span className="navButtonImg">My inquiries</span>
+                </button>
+                {/* <ol class="sub-menu">
         <li class="menu-item"><a href="/courses-offered">Courses Offered</a></li>
         <li class="menu-item"><a href="#0">Timetable</a></li>
         {!isAuthenticated ?
@@ -136,72 +147,76 @@ class NavbarComponent extends Component {
         : null
         }
       </ol> */}
+              </li>
+            ) : null}
+            {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.userlogo}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.userlogo}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.userlogo}></img>
+            </li>
+            <li class="menu-item">
+              <img className="navButtonImg" src={logos.userlogo}></img>
+            </li>
+
+            <li class="menu-item">
+              <a
+                href="#"
+                className={
+                  this.state.activeTabClassName === "/testslist" ||
+                  this.state.activeTabClassName === "/antibodies"
+                    ? "active"
+                    : ""
+                }
+              >
+                <img src={logos.usernamelogo}></img>
+              </a>
+              <ol class="sub-menu">
+                <li
+                  class="menu-item"
+                  style={{ borderBottom: "dashed 2px red" }}
+                >
+                  {this.props.user.firstName + this.props.user.lastName}{" "}
+                  <img style={{ width: "10px" }} src={logos.closelogo}></img>
+                </li>
+                <li class="menu-item">
+                  <a href="/">My Profile</a>
+                </li>
+                <li class="menu-item">
+                  <a href="/">Transactions</a>
+                </li>
+                <li class="menu-item">
+                  <a href="/">My orders</a>
+                </li>
+                <li class="menu-item">
+                  <a href="/">Dashboard</a>
+                </li>
+                <li class="menu-item">
+                  <a href="/">Support</a>
+                </li>
+                {!isAuthenticated ? (
+                  <li class="menu-item">
+                    <a onClick={this.logout}>Logout</a>
                   </li>
                 ) : null}
-                {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
-                <li class="menu-item">
-                  <img className="navButtonImg" src={logos.userlogo}></img>
-                </li>
-                <li class="menu-item">
-                  <img className="navButtonImg" src={logos.userlogo}></img>
-                </li>
-                <li class="menu-item">
-                  <img className="navButtonImg" src={logos.userlogo}></img>
-                </li>
-                <li class="menu-item">
-                  <img className="navButtonImg" src={logos.userlogo}></img>
-                </li>
-
-                <li class="menu-item">
-                  <a
-                    href="#"
-                    className={
-                      this.state.activeTabClassName === "/testslist" ||
-                      this.state.activeTabClassName === "/antibodies"
-                        ? "active"
-                        : ""
-                    }
-                  >
-                    <img src={logos.usernamelogo}></img>
-                  </a>
-                  <ol class="sub-menu">
-                    <li
-                      class="menu-item"
-                      style={{ borderBottom: "dashed 2px red" }}>                 
-                        User name will come here{" "}
-                        <img
-                          style={{ width: "10px" }}
-                          src={logos.closelogo}
-                        ></img>
-                      
-                    </li>
-                    <li class="menu-item">
-                      <a href="/">My Profile</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="/">Transactions</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="/">My orders</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="/">Dashboard</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="/">Support</a>
-                    </li>
-                    {!isAuthenticated ? (
-                      <li class="menu-item">
-                        <a href="/register">Logout</a>
-                      </li>
-                    ) : null}
-                  </ol>
-                </li>
               </ol>
-            </nav>
-          </React.Fragment>
-        );
-    }
+            </li>
+          </ol>
+        </nav>
+      </React.Fragment>
+    );
+  }
 }
 
-export default NavbarComponent;
+
+               function mapStateToProps(state) {
+                 const {user}  = state
+                 return { user };
+               }
+
+ const connectedLoginPage = connect(mapStateToProps)(NavbarComponent);
+ export default connectedLoginPage;

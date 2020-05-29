@@ -11,6 +11,7 @@ import TTCEapi from '../../../services/API/TTCEapi';
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 
 
@@ -19,9 +20,15 @@ export default class artistRegister extends Component {
                    super(props);
 
                    this.state = {
+<<<<<<< HEAD
                      userpage: 4,
                      weaverid: "123",
                      emailid: "aa@a.com",
+=======
+                     userpage: 3,
+                     weaverid: "",
+                     emailid: "",
+>>>>>>> 2cd8d6f077f2fc36d5bfed8116b8b1cf914bb321
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -162,20 +169,19 @@ export default class artistRegister extends Component {
 
 
                  }
-                 checkweaverid(weaverid, weaverpin) {
+                 checkweaverid(weaverid) {
                    // console.log(weaverid , weaverpin);
                    this.setState(
-                     { weaverid: weaverid, weaverpin: weaverpin },
+                     { weaverid: weaverid },
                      () => {
                        TTCEapi.checkWeaverId(
-                         this.state.weaverid,
-                         weaverpin
+                         this.state.weaverid                    
                        ).then((response) => {
                          if (response.data.valid) {
                            this.handler(1);
                          } else {
                            // alert("Wrong credentials");
-                           customToast.error("Wrong credentials", {
+                           customToast.error("Please enter valid Artisan ID.", {
                              position: toast.POSITION.TOP_RIGHT,
                              autoClose: true,
                            });

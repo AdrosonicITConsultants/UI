@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Row, Col} from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import { memoryHistory, browserHistory } from "../../../helpers/history";
+
 
 export default class artreg1 extends Component {
     constructor() {
         super();
         this.state = {
           weaverid: "",
-          weaverpin: "",     
+        //  weaverpin: "",     
           showValidation: false,
           showValidationpin: false,
           showUserName: true,
@@ -22,19 +24,21 @@ export default class artreg1 extends Component {
               showValidation: !this.state.showValidation,
             });
           }
-          else if (this.state.weaverpin == ""){                    
-              this.setState({
-                showValidationpin: !this.state.showValidationpin,
-              });
-          } else {
-            this.props.cwi(this.state.weaverid ,this.state.weaverpin )
+          // else if (this.state.weaverpin == ""){                    
+          //     this.setState({
+          //       showValidationpin: !this.state.showValidationpin,
+          //     });
+         // }
+           else {
+            this.props.cwi(this.state.weaverid)
 
             // this.props.handler(1);
           }
       }
 
       backoperation() {
-        window.open("./", "_self");
+      
+              browserHistory.push("/"); 
         // this.props.handler(0);
 
         }
@@ -80,7 +84,7 @@ export default class artreg1 extends Component {
                     ></img>
                     <div>
                       <h2 className="col-xs-6 margin-registertext">Register</h2>
-                      <h4 className="margin-roletext">Artist</h4>
+                      <h4 className="margin-roletext">Artisan</h4>
                     </div>
                   </div>
 
@@ -91,10 +95,12 @@ export default class artreg1 extends Component {
                   ></img>
                 </Row>
                 <br></br>
+                <br />
+
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10 fontplay">
-                    Do you have a weaver ID?
+                    Do you have a Artisan ID?
                   </span>
                 </Row>
 
@@ -111,7 +117,7 @@ export default class artreg1 extends Component {
                         type="text"
                         id="weaverid"
                         className="form-control BuyerLogin"
-                        placeholder="weaverID"
+                        placeholder="ArtisanID"
                         name="weaverid"
                         onChange={(e) => this.handleChange(e)}
                       />
@@ -125,13 +131,13 @@ export default class artreg1 extends Component {
                     </div>
                   </div>
                 </Row>
-                <Row noGutters={true} className="text-center line32 font3">
+                {/* <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10 fontplay">
                     Enter your 4 digit pin provided along with weaver ID{" "}
                   </span>
-                </Row>
-                <Row noGutters={true}>
+                </Row> */}
+                {/* <Row noGutters={true}>
                   <div className="col-xs-1"></div>
                   <div className="form-group col-xs-10 ">
                     <label className="control-label"></label>
@@ -155,8 +161,9 @@ export default class artreg1 extends Component {
                       )}
                     </div>
                   </div>
-                </Row>
-
+                </Row> */}
+                <br />
+                <br />
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
@@ -168,6 +175,8 @@ export default class artreg1 extends Component {
                   </div>
                 </Row>
                 <br />
+                <br />
+                <br />
                 <hr className="hrline"></hr>
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-2"></span>
@@ -175,14 +184,15 @@ export default class artreg1 extends Component {
                     If you don't have a weaver id get in touch with us.{" "}
                   </span>
                 </Row>
-                <br></br>
+             
+                <br />
 
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
                       className="whiteButton"
-                      style={{                       
-                        width: "10em",                      
+                      style={{
+                        width: "10em",
                       }}
                       //   onClick={() => this.operation()}
                     >
@@ -190,13 +200,14 @@ export default class artreg1 extends Component {
                     </button>
                   </div>
                 </Row>
+                <br />
 
                 <Row noGutters={true} className="mt7">
-                  <span className="col-xs-3 text-center line7 font6">
+                  {/* <span className="col-xs-3 text-center line7 font6">
                     Help?
-                  </span>
-                  <span className="col-xs-3"></span>
-                  <span className="col-xs-6 text-center line6 font6">
+                  </span> */}
+                  {/* <span className="col-xs-3"></span> */}
+                  <span className="col-xs-12 text-center line6 font6">
                     Change language
                     <img src={logos.language} className="ml-5"></img>
                   </span>

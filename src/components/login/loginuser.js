@@ -93,7 +93,7 @@ export default class buyeruser extends Component {
                     className="cicrleLogo"
                     alt="artist TataTrusts logo"
                   ></img>
-                  <div className="circleText">Artist</div>
+                  <div className="circleText">Artisan</div>
                 </i>
               </div>
             )}
@@ -101,7 +101,6 @@ export default class buyeruser extends Component {
             <span className="col-xs-4"></span>
           </Row>
           <br />
-         
 
           <br />
           <div>

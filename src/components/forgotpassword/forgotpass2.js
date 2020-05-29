@@ -73,12 +73,15 @@ export default class forgotpass2 extends Component {
                       onClick={() => this.backoperation()}
                     ></img>
                     <div>
-                      <h2 className="col-xs-6 margin-registertext">Register</h2>
-                      {window.location.pathname.indexOf("passwordA") !== -1 ? (
-                        <h4 className="margin-roletext">Artist</h4>
-                      ) : (
-                        <h4 className="margin-roletext">Buyer</h4>
-                      )}
+                      <h2 className="col-xs-6 margin-registertext">Reset</h2>
+                      {/* {window.location.pathname.indexOf(
+                                   "passwordA"
+                                 ) !== -1 ? (
+                                   <h4 className="margin-roletext">Artist</h4>
+                                 ) : (
+                                   <h4 className="margin-roletext">Buyer</h4>
+                                 )} */}
+                      <h4 className="margin-roletext">Password</h4>
                     </div>
                   </div>
 
@@ -156,7 +159,7 @@ export default class forgotpass2 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                  className="blackButton"
+                      className="blackButton"
                       onClick={() => this.operation()}
                     >
                       Next
@@ -175,7 +178,7 @@ export default class forgotpass2 extends Component {
                 <Row noGutters={true}>
                   <div className="col-xs-12 text-center">
                     <button
-                     className="whiteButton"
+                      className="whiteButton"
                       //   onClick={() => this.operation()}
                     >
                       Reach out to us

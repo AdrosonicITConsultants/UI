@@ -1,5 +1,5 @@
 import mainlogo from "./logo.png";
-import mainlogoside from "./logo-side.png"
+import mainlogoside from "./logo-side.jpg"
 import userlogo from "./awesome-id-badge.svg"
 import locklogo from "./material-lock-outline.svg";
 import coderwalllogo from "./simple-coderwall.svg";
@@ -15,7 +15,7 @@ import uploadlogo from "./s_icon_upload SVG.svg";
 import otplogo from "./Otp.svg";
 import closelogo from "./close_icon.svg";
 import tickLogo from "./tick-done.svg";
-
+import homepagebgtemp from "./landingpageimg.png";
 
 
 
@@ -37,4 +37,5 @@ export default {
   otplogo,
   closelogo,
   tickLogo,
+  homepagebgtemp,
 };

@@ -53,7 +53,10 @@ class NavbarComponent extends Component {
 
     return (
       <React.Fragment>
-        <nav class="menu navbar-expand-sm" onClick={this.toggleMobileMenu}>
+        <nav
+          class="menu navbarTransparent navbar-expand-sm"
+          onClick={this.toggleMobileMenu}
+        >
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             {userTypeId === "2" ? (
               <li class="menu-item">

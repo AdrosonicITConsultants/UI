@@ -250,7 +250,7 @@ export default class artreg4 extends Component {
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <select
                           id="cluster"
-                          className="form-control form2 BuyerLogin1"
+                          className="form-control boxDropdown form2 BuyerLogin1"
                           name="cluster"
                           value={this.state.cluster}
                           onChange={(e) => this.handleCluster(e)}

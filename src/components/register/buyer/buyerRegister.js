@@ -12,6 +12,7 @@ import TTCEapi from "../../../services/API/TTCEapi";
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { memoryHistory, browserHistory } from "../../../helpers/history";
 
 
 
@@ -21,8 +22,8 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 5,
-                     emailid: "piyush@ppp.com",
+                     userpage: 2,
+                     emailid: "piywyyew@ppp.com",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -163,7 +164,23 @@ export default class buyerRegister extends Component {
                             this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.weblink, this.state.sociallink,this.state.firstname,
                             this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid,this.state.pocmobile,this.state.pocemail,this.state.pocname,this.state.countryid).then(
                               (response) => {
-
+                                if (response.data.valid) {
+                                  customToast.success("Registeration complete.", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                  });
+                                    setTimeout(
+                                       browserHistory.push("/"),
+                                      5000
+                                    );
+                                  
+                                 } else {
+                                     customToast.error(response.data.errorMessage, {
+                                       position: toast.POSITION.TOP_RIGHT,
+                                       autoClose: true,
+                                     });
+                                   // alert("please enter valid OTP.");
+                                 }
                               }
                             );
                       }

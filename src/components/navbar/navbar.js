@@ -150,7 +150,7 @@ class NavbarComponent extends Component {
             {userTypeId === "3" || userTypeId === null ? (
               <li class="menu-item">
                 <button className="navButton navbtn2" style={{ width: "10em" }}>
-                  <img className="navButtonImg" src={logos.userlogo}></img>
+                  <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My inquiries</span>
                 </button>
                 {/* <ol class="sub-menu">

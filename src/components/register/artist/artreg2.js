@@ -18,7 +18,7 @@ export default class artreg2 extends Component {
                      otppin: "",
                      showValidation: false,
                      showValidationpin: false,
-                     
+                     isButtonDisabled: false,
                    };
                  }
 
@@ -39,6 +39,15 @@ export default class artreg2 extends Component {
                    }
                    else{
                      this.props.so(this.state.emailid);
+                      this.setState({
+                        isButtonDisabled: true,
+                      });
+
+                      // **** here's the timeout ****
+                      setTimeout(
+                        () => this.setState({ isButtonDisabled: false }),
+                        10000
+                      );
                    
                    }
                  }
@@ -155,6 +164,7 @@ export default class artreg2 extends Component {
                            <Row noGutters={true}>
                              <div className="col-xs-12 text-center">
                                <button
+                                 disabled={this.state.isButtonDisabled}
                                  className="blackButton"
                                  onClick={() => this.SendOtp()}
                                >

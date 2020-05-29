@@ -199,6 +199,10 @@ class TTCEapi {
     let url = ApiUrl + "/register/user";
         var data = {
             address : {
+                country :{
+                  id: 1,
+                  name : "india"
+                },
                 district : district,
                 line1 : address1,
                 pincode :pincode,

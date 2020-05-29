@@ -16,8 +16,8 @@ import logos from "../../assets";
               <Container>
                 {" "}
                 <NavbarComponent></NavbarComponent>
-                <div class="parallax"></div>
-                <img style={{ width: "100%" }} src={logos.homepagebgtemp}></img>
+                {/* <div class="parallax"></div> */}
+                <img style={{ width: "100%" , marginTop: "-7.5%"}} src={logos.homepagebgtemp}></img>
                 <Footer></Footer>
               </Container>
             </React.Fragment>

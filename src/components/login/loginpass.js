@@ -22,22 +22,17 @@ export default class buyerpass extends Component {
   });
                  }
 
-                 Login() {
-                   debugger;
+                 Login() {                  
                    if (this.state.password == "") {
                    this.showValidationpass();
-                   } else {
-                    debugger
+                   } else {                  
                       if(this.props.userpage == 2){
                         this.props.cpb(this.state.password);
-                        
-                      }
+                          }
                       else{
                         this.props.cpa(this.state.password);
                         
-                      }                      
-                        
-                        alert("login clicked");                 
+                      }                   
                 
                    }
                     
@@ -114,7 +109,7 @@ export default class buyerpass extends Component {
                          </Row>
 
                          <br />
-                       
+
                          <br />
                          <div>
                            <Row noGutters={true}>
@@ -140,16 +135,16 @@ export default class buyerpass extends Component {
                                    name="password"
                                    onChange={(e) => this.handleChange(e)}
                                  />
-                                 {this.state.showValidation ? (
-                                   <span className="bg-danger">
-                                     please enter password
-                                   </span>
-                                 ) : null}
                                </div>
                              </div>
                            </Row>
                            <Row noGutters={true}>
                              <div className="col-xs-11 text-right">
+                               {this.state.showValidation ? (
+                                 <span className="bg-danger" style={{float:"left", marginLeft:"35px"}}>
+                                   please enter valid password
+                                 </span>
+                               ) : null}
                                {this.props.userpage == 2 ? (
                                  <a href="./forgot-passwordB">
                                    forgot password?

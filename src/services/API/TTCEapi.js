@@ -78,7 +78,8 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-          localStorage.clear();
+           if (response.data.valid)
+           { localStorage.clear();
           sessionStorage.clear();
           // remove user from local storage to log user out
           localStorage.removeItem("user");
@@ -88,8 +89,9 @@ class TTCEapi {
           localStorage.setItem('jwtToken', token);
            localStorage.setItem("user", JSON.stringify(user));
           setAuthorizationtoken(token);
-          debugger;
-        console.log(jwt.decode(token));
+          
+      //  console.log(jwt.decode(token));
+    }
         return response;
       })
       .catch((error) => {

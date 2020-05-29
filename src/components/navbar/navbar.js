@@ -102,7 +102,7 @@ class NavbarComponent extends Component {
             ) : null}
             <li className="menu-item">
               <a
-                href="/"
+                href="/home"
                 className={
                   this.state.activeTabClassName === "/" ? "active" : ""
                 }
@@ -116,12 +116,15 @@ class NavbarComponent extends Component {
             </li>
             <li class="menu-item">
               {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
-              <button className="navButton navbtn1">
+              <button className="navButton navbarTransparent navbtn1">
                 <img className="navButtonImg" src={logos.navbarbtn1}></img>
                 <span className="navButtonImg">New custom design</span>
               </button>
             </li>
-            <li className="menu-item-space menu-item"></li>
+            <li className="menu-item-space menu-item">
+              {/* <input type="search" className="navSearch"></input> */}
+            </li>
+
             {/* <li class="menu-item">
       <a href="#" className={(this.state.activeTabClassName === "/testslist") || (this.state.activeTabClassName === "/antibodies")? "active" : ""}>Lab Services</a>
       <ol class="sub-menu">
@@ -180,8 +183,12 @@ class NavbarComponent extends Component {
                   class="menu-item"
                   style={{ borderBottom: "dashed 2px red" }}
                 >
-                  {this.props.user.firstName + this.props.user.lastName}{" "}
-                  <img style={{ width: "10px" }} src={logos.closelogo}></img>
+                  <span>
+                    {this.props.user.firstName + " " + this.props.user.lastName}
+                  </span>
+                  <span>
+                    <img style={{ width: "10px" }} src={logos.closelogo}></img>
+                  </span>
                 </li>
                 <li class="menu-item">
                   <a href="/">My Profile</a>

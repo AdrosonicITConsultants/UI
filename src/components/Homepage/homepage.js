@@ -131,7 +131,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                       this.props.dispatch(
                         Actions.loginSuccess(token, user, userTypeId)
                       );
-                  //    browserHistory.push("/home");                     
+                      browserHistory.push("/home");                     
   
                         } else {
                           this.refs.childa.showValidationpass();
@@ -178,7 +178,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );
-                            //  browserHistory.push("/home"); 
+                              browserHistory.push("/home"); 
                            } else {
                              this.refs.childb.showValidationpass();
                            }
@@ -215,14 +215,14 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                                lg={{ size: "5" }}
                                className="vcenter "
                              >
-                               
+
                                {this.renderSection(this.state.userpage)}
                                {/* <Buyerpass handler={this.handler} /> */}
                                {/* <Buyeruser handler={this.handler} /> */}
                                {/* <Artistlogin handler={this.handler} /> */}
                              </Col>
                            </Row>
-                                                      
+                           
                          </Container>
                        </div>
                      </React.Fragment>

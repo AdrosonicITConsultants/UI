@@ -3,10 +3,11 @@
     height: 90px;
 }
 .navbarTransparent {
-        border-width: 1px !important;
+            border-width: 1px !important;
     box-shadow: 0px 0px !important;
-    background-color: rgba(128, 128, 128, 0.5) !important;
+    background-color: rgba(229, 222, 222, 0.1) !important;
     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0) 100%) !important;
+
 }
 
 
@@ -58,7 +59,7 @@
 }
 
 .navbtn1{
-	    width: 100% !important;
+	    width: 162px !important;
 	padding-left: 12px;
 	font-size: 12px !important;
 }
@@ -67,7 +68,7 @@
 color:white;
 background-color: red;
 
-	width: 100% !important;
+	/* width: 100% !important; */
 	padding-left: 12px;
 	font-size: 12px !important;
 }
@@ -183,7 +184,7 @@ background: #ffffff;
 	display: flex;
   }
   .menu > ol > .menu-item {
-	/* flex: 1; */
+	flex: 1;
 	padding: 1em;
   }
   .menu > ol > .menu-item:after {
@@ -230,7 +231,7 @@ background: #ffffff;
 	background: white;
 	opacity: 0;
 	transform-origin: bottom;
-	animation: enter 0.2s ease forwards;
+	animation: enter 0.15s ease forwards;
   }
   .sub-menu .menu-item:nth-child(1) {
 	animation-duration: 0.2s;
@@ -394,10 +395,10 @@ background: #ffffff;
 	
 
 
-	.active {
+	/* .active {
 		color: #b67575 !important;
 		text-decoration: underline !important;
-	}
+	} */
 
 	.codeVersion{
 		float: right;

@@ -22,8 +22,8 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 2,
-                     emailid: "piywyyew@ppp.com",
+                     userpage: 0,
+                     emailid: "",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -169,10 +169,9 @@ export default class buyerRegister extends Component {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
                                   });
-                                    setTimeout(
-                                       browserHistory.push("/"),
-                                      5000
-                                    );
+                                    setTimeout(() => {
+                                      browserHistory.push("/");
+                                    }, 2000);
                                   
                                  } else {
                                      customToast.error(response.data.errorMessage, {

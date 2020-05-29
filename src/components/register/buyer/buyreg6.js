@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import customToast from "../../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default class buyreg6 extends Component {
     constructor() {
@@ -20,7 +23,10 @@ export default class buyreg6 extends Component {
             {this.props.sl(this.state.weblink,this.state.sociallink);
             }
             else{
-              alert("Please agree to T&C");
+         customToast.error("Please agree to T&C", {
+           position: toast.POSITION.TOP_RIGHT,
+           autoClose: true,
+         });
             }
             // window.open("./", "_self"); // to redirect to login page
             // this.props.handler(5);

@@ -78,7 +78,11 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-          debugger
+          localStorage.clear();
+          sessionStorage.clear();
+          // remove user from local storage to log user out
+          localStorage.removeItem("user");
+          localStorage.removeItem("jwtToken");
           const token = response.data.data.acctoken;
           const user = response.data.data.user;
           localStorage.setItem('jwtToken', token);

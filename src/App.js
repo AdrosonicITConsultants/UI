@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/demo-video" component={videoPlayer} />
-          <PrivateRoute exact path="/home" component={LandingPage} />
+          {/* <PrivateRoute exact path="/home" component={LandingPage} /> */}
         </Switch>
       </Router>
     </React.Fragment>

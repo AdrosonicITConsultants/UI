@@ -118,9 +118,10 @@ export default class artistRegister extends Component {
                           autoClose: true,
                         });
                           setTimeout(
-                             browserHistory.push("/"),
-                            5000
+                            () => {browserHistory.push("/");},
+                         2000
                           );
+                          
                         
                        } else {
                            customToast.error(response.data.errorMessage, {

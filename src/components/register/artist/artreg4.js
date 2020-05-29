@@ -88,7 +88,7 @@ export default class artreg4 extends Component {
         TTCEapi.getClusters().then((response)=>{
             this.setState({clusterdata : response.data.data},() => {
               // this.setState({cluster : this.state.clusterdata[0].desc})
-              var ind = 0; 
+             
               if(this.state.clusterid > 0)
               {
                 // this.setState({clusterid : -1 });
@@ -256,17 +256,7 @@ export default class artreg4 extends Component {
                             <option key = '0' clusterid = '-1'  value='Select Cluster'>Select Cluster</option>
                         {this.state.clusterdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.desc}>{item.desc}</option>)}
                       </select>
-                        {/* <select
-                          
-                          id="cluster"
-                          className="form-control form2 BuyerLogin1"
-                          //placeholder="cluster"
-                          name="cluster"
-                          onChange={(e) => this.handleChange(e)}
-                        ></select> */}
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your cluster</span>
-                        ) : <br/>} */}
+                        
                       </div>
                     </Col>
                   </Col>
@@ -438,14 +428,14 @@ export default class artreg4 extends Component {
                     </button>
                   </div>
                 </Row>
-                <br></br>
+                
 
-                <Row noGutters={true} className="text-center line312 font2">
+                <Row noGutters={true} className="text-center line312 font2 mt17">
                   <span className="col-xs-2"></span>
                   <span className="col-xs-8">Need Help? </span>
                 </Row>
 
-                <Row noGutters={true} className="text-center line6 mt7">
+                <Row noGutters={true} className="text-center line6 ">
                   Change language
                   <img src={logos.language} className="ml-5"></img>
                 </Row>

@@ -19,9 +19,9 @@ export default class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 0,
-                     weaverid: "",
-                     emailid: "",
+                     userpage: 4,
+                     weaverid: "123",
+                     emailid: "aa@a.com",
                      password: "",
                      firstname: "",
                      lastname: "",
@@ -33,6 +33,7 @@ export default class artistRegister extends Component {
                      panno: "",
                      address: "",
                      clustername : "",
+                     selectedprods :[],
 
                     //  weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address
 
@@ -43,6 +44,7 @@ export default class artistRegister extends Component {
                    this.verifyOtp = this.verifyOtp.bind(this);
                    this.storepassword = this.storepassword.bind(this);
                    this.storedetails1 = this.storedetails1.bind(this);
+                   this.completeRegister = this.completeRegister.bind(this);
                  }
 
                  renderSection(num) {
@@ -95,11 +97,23 @@ export default class artistRegister extends Component {
                        );
                        break;
                      case 4:
-                       return <Artreg5 handler={this.handler} />;
+                       return <Artreg5 handler={this.handler} 
+                       cr = {this.completeRegister} />;
                        break;
                      default:
                        break;
                    }
+                 }
+                 completeRegister(selectedprods){
+                   this.setState({selectedprods : selectedprods},() => {
+                    TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.password,
+                      this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
+                      this.state.district,this.state.state,this.state.mobileno,this.state.panno,
+                      this.state.address,this.state.selectedprods).then((response) => {
+
+                    } );
+
+                   })
                  }
                  storedetails1(
                    firstname,
@@ -125,9 +139,7 @@ export default class artistRegister extends Component {
                      address: address,
                      clustername : clustername
                    },() => {
-                     TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.password,this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address).then((response) => {
-
-                     } );
+                     
                    });
                   //  console.log(
                   //    firstname,

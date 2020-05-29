@@ -12,6 +12,9 @@ export default class buyreg4 extends Component {
                     officeno : "",
                     cinno : "",
                     panno : "",
+                    pocname : "",
+                    pocemail : "",
+                    pocmobile : "",
                     showValidationpass: false,
                     brandLogo : [],
                     logoname : ""
@@ -25,7 +28,8 @@ export default class buyreg4 extends Component {
                        showValidationpass: !this.state.showValidationpass,
                      });
                    } else {
-                     this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname)
+                     this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,
+                      this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,this.state.pocmobile,this.state.pocemail,this.state.pocname)
                      this.props.handler(4);
                    }
                  }
@@ -70,8 +74,10 @@ export default class buyreg4 extends Component {
                     brandLogo : this.props.brandLogo,
                     cinno : this.props.cinno,
                     panno : this.props.panno,
-                    logoname : this.props.logoname
-                   
+                    logoname : this.props.logoname,
+                    pocname : this.props.pocname,
+                    pocemail: this.props.pocemail,
+                    pocmobile : this.props.pocmobile,                   
                     
           
                    },()=>{
@@ -142,7 +148,7 @@ export default class buyreg4 extends Component {
                                Enter your details to complete registeration
                              </span>
                            </Row>
-                          <br></br>
+                          
                            <Row noGutters={true}>
                              <span
                                style={{ fontWeight: "600" }}
@@ -205,36 +211,7 @@ export default class buyreg4 extends Component {
                                </Col>
                              </Col>
 
-                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
-                               <Col
-                                 xs={{ size: "11", offset: "1" }}
-                                 className="form-group1 text-left"
-                               >
-                                 <label className="control-label padform text-left">
-                                   Office contact Number
-                                 </label>
-                                 <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
-                                   <input
-                                     type="number"
-                                     id="officeno"
-                                     className="form-control form2 BuyerLogin1"
-                                     //placeholder="mobileno"
-                                     value = {this.state.officeno}
-
-                                     name="officeno"
-                                     onChange={(e) => this.handleChange(e)}
-                                   />
-                                   {/* {this.state.showValidationpass ? (
-                                     <span className="bg-danger">
-                                       please enter your Office contact Number
-                                     </span>
-                                   ) : (
-                                     <br />
-                                   )} */}
-                                 </div>
-                               </Col>
-                             </Col>
+                             
                              <Col xs={{ size: "12" }} md={{ size: "6" }}>
                                <Col
                                  xs={{ size: "11", offset: "1" }}
@@ -306,7 +283,7 @@ export default class buyreg4 extends Component {
                                      name="cinno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
-                                   <br />
+                                   
                                  </div>
                                </Col>
                              </Col>
@@ -330,7 +307,79 @@ export default class buyreg4 extends Component {
                                      name="panno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
-                                   <br />
+                                  
+                                 </div>
+                               </Col>
+                             </Col>
+                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
+                               <Col
+                                 xs={{ size: "11", offset: "1" }}
+                                 className="form-group1 text-left"
+                               >
+                                 <label className="control-label padform text-left">
+                                   Point of contact (Name)
+                                   {/* <strong className="requiredStar">*</strong> */}
+                                 </label>
+                                 <div className="inner-addon">
+                                   {/* <i className="glyphicon glyphicon-user"></i> */}
+                                   <input
+                                     type="text"
+                                     id="pocname"
+                                     className="form-control form2 BuyerLogin1"
+                                     //placeholder="address"
+                                     value = {this.state.pocname}
+                                     name="pocname"
+                                     onChange={(e) => this.handleChange(e)}
+                                   />
+                                   
+                                 </div>
+                               </Col>
+                             </Col>
+                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
+                               <Col
+                                 xs={{ size: "11", offset: "1" }}
+                                 className="form-group1 text-left"
+                               >
+                                 <label className="control-label padform text-left">
+                                   Email ID for point of contact
+                                   {/* <strong className="requiredStar">*</strong> */}
+                                 </label>
+                                 <div className="inner-addon">
+                                   {/* <i className="glyphicon glyphicon-user"></i> */}
+                                   <input
+                                     type="email"
+                                     id="pocemail"
+                                     className="form-control form2 BuyerLogin1"
+                                     //placeholder="address"
+                                     value = {this.state.pocemail}
+                                     name="pocemail"
+                                     onChange={(e) => this.handleChange(e)}
+                                   />
+                                   
+                                 </div>
+                               </Col>
+                             </Col>
+                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
+                               <Col
+                                 xs={{ size: "11", offset: "1" }}
+                                 className="form-group1 text-left"
+                               >
+                                 <label className="control-label padform text-left">
+                                   Mobile No. for point of contact
+                                   {/* <strong className="requiredStar">*</strong> */}
+                                 </label>
+                                 <div className="inner-addon">
+                                   {/* <i className="glyphicon glyphicon-user"></i> */}
+                                   <input
+                                     type="number"
+                                     id="pocmobile"
+                                     className="form-control form2 BuyerLogin1"
+                                     //placeholder="address"
+                                     value = {this.state.pocmobile}
+                                     name="pocmobile"
+                                     onChange={(e) => this.handleChange(e)}
+                                   />
+                                  
                                  </div>
                                </Col>
                              </Col>
@@ -369,19 +418,13 @@ export default class buyreg4 extends Component {
                                </button>
                              </div>
                            </Row>
-                           <br></br>
+                           
 
                            <Row noGutters={true} className="mt17">
-                             <strong className="col-xs-3 text-center line7 font3">
+                             <strong className="col-xs-12 text-center line7 ">
                                Help?
                              </strong>
-                             <span className="col-xs-4"></span>
-                             <span
-                               style={{ color: "var(--lightFont)" }}
-                               className="col-xs-5 text-center line7 font3"
-                             >
-                               Privacy policy
-                             </span>
+                             
                            </Row>
 
                            {/* <Row noGutters={true}>

@@ -251,6 +251,7 @@ export default class buyreg3 extends Component {
                     </Col>
                   </Col>
                 </Row>
+                <br></br>
                 {this.state.showValidationpass ? (
                     <span className="bg-danger">please enter all  mandatory fields</span>
                   ) : (
@@ -279,17 +280,17 @@ export default class buyreg3 extends Component {
                     </button>
                   </div>
                 </Row>
-                <Row noGutters={true} className="mt37"> 
-                  <strong className="col-xs-3 text-center line7 font3">
+                <Row noGutters={true} className="mt30"> 
+                  <strong className="col-xs-12 text-center line7 ">
                     Help?
                   </strong>
-                  <span className="col-xs-4"></span>
+                  {/* <span className="col-xs-4"></span>
                   <span
                     style={{ color: "var(--lightFont)" }}
                     className="col-xs-5 text-center line7 font3"
                   >
                     Privacy policy
-                  </span>
+                  </span> */}
                 </Row>
 
                 {/* <Row noGutters={true}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import TTCEapi from '../../../services/API/TTCEapi';
 
 export default class buyreg5 extends Component {
     constructor() {
@@ -12,10 +13,12 @@ export default class buyreg5 extends Component {
           street : "",
           city : "",
           state : "",
+          countryid : "",
           country : "",
           pincode : "",
           landmark : "",    
           showValidationpass: false,
+          countrydata : [],
           
         };
       }
@@ -27,7 +30,7 @@ export default class buyreg5 extends Component {
                 showValidationpass: !this.state.showValidationpass,
             });
           }else {
-            this.props.sad(this.state.adl1,this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark)
+            this.props.sad(this.state.adl1,this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.countryid)
             this.props.handler(5);
           }
       }
@@ -43,6 +46,21 @@ export default class buyreg5 extends Component {
             showValidationpass: false,
         });
       }
+      handleCountry(e) {
+        // console.log(e.target.id);
+        var index = e.target.selectedIndex;
+        var optionElement = e.target.childNodes[index];
+        var option =  optionElement.getAttribute('countryid');
+        console.log(option);
+        
+        this.setState({ [e.target.name]: e.target.value , countryid : option}, ()=> {
+          console.log(this.state);
+          
+        });
+        this.setState({
+            showValidationpass: false,
+        });
+      }
       componentDidMount(){
         this.setState({adl1 : this.props.adl1 ,
           adl2 : this.props.adl2,
@@ -52,6 +70,7 @@ export default class buyreg5 extends Component {
           country : this.props.country,
           pincode : this.props.pincode,
           landmark : this.props.landmark,
+          countryid : this.props.countryid,
 
          
           
@@ -60,6 +79,23 @@ export default class buyreg5 extends Component {
           console.log(this.state);
          });
         
+         TTCEapi.getCountries().then((response)=>{
+          this.setState({countrydata : response.data.data},()=>{
+            if(this.state.countryid > 0)
+            {
+              // this.setState({clusterid : -1 });
+              
+            }
+            else {
+              this.setState({countryid : -1  , country : 'Select Country' });
+
+
+            }
+          });
+         
+     
+
+      });
 
       }
     render() {
@@ -261,17 +297,17 @@ export default class buyreg5 extends Component {
                       </label>
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <input
-                          type="text"
-                          id="country"
+                        <select id="country"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
-                          value = {this.state.country}
                           name="country"
-                          onChange={(e) => this.handleChange(e)}
-                        />
+                          value = {this.state.country}
+                          onChange={(e) => this.handleCountry(e)}  >
+                            <option key = '0' clusterid = '-1'  value='Select Country'>Select Cluster</option>
+                        {this.state.countrydata.map((item) => <option key =  {item.id} countryid={item.id} value={item.name}>{item.name}</option>)}
+                      </select>
                         
                       </div>
+                      
                     </Col>
                   </Col>
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
@@ -351,17 +387,11 @@ export default class buyreg5 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true} className= "mt23">
-                  <strong className="col-xs-3 text-center line7 font3">
+                <Row noGutters={true} className= "mt30">
+                  <strong className="col-xs-12 text-center line7 ">
                     Help?
                   </strong>
-                  <span className="col-xs-4"></span>
-                  <span
-                    style={{ color: "var(--lightFont)" }}
-                    className="col-xs-5 text-center line7 font3"
-                  >
-                    Privacy policy
-                  </span>
+                 
                 </Row>
 
                 {/* <Row noGutters={true}>

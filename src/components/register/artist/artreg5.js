@@ -2,41 +2,51 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import TTCEapi from '../../../services/API/TTCEapi';
 
 export default class artreg5 extends Component {
                  constructor() {
                    super();
                
                    this.state = {
+                     products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
                      password: "",
                      confirmpass: "",
                      showValidationpass: false,
                      showValidationconfirmpass: false,
                      showUserName: true,
-                     selectedFile: []
+                     selectedFile: [],
+                     selectedprods :[]
                    };
                  }
 
                  operation() {
                    debugger;
-                   if (this.state.password == "") {
-                     this.setState({
-                       showValidationpass: !this.state.showValidationpass,
-                     });
-                   } else if (this.state.confirmpass !== this.state.password) {
-                     this.setState({
-                       showValidationconfirmpass: !this.state
-                         .showValidationconfirmpass,
-                     });
-                   } else {
-                     this.props.handler(3);
+                   if(document.getElementById('agree').checked){
+                    {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)}   console.log(this.state.selectedprods) }  )     }
+                      this.props.cr(this.state.selectedprods);
+                     alert("registeration complete ");
+                   }
+                   else{
+                    alert("Please agree to T&C");
                    }
                  }
 
                  backoperation() {
                    this.props.handler(3);
                  }
-
+                  
+                  componentDidMount(){
+                      
+                    TTCEapi.getProducts().then((response)=>{
+                      this.setState({products : response.data.data},() => {
+                        
+                        console.log(this.state.products[0].productDesc);
+                      });
+          
+                  });
+                  }
+                 
                  fileChangedHandler = (event) => {
                    this.setState({
                      selectedFile: event.target.files[0],
@@ -57,11 +67,11 @@ export default class artreg5 extends Component {
                    }
                  };
 
-resertImage(){
-this.setState({
-  selectedFile : [],
-  imagePreviewUrl: logos.uploadphoto,
-});}
+                resertImage(){
+                this.setState({
+                  selectedFile : [],
+                  imagePreviewUrl: logos.uploadphoto,
+                });}
 
                  handleChange(e) {
                    this.setState({ [e.target.name]: e.target.value });
@@ -198,59 +208,61 @@ this.setState({
                            <Row noGutters={true}>
                              <div id="ck-button">
                                <label>
-                                 <input type="checkbox" value="1" />
-                                 <span>Sarees</span>
+                                 <input type="checkbox" value="1" id={this.state.products[0].id}/>
+                                  <span>{this.state.products[0].productDesc}</span>
                                </label>
                              </div>
                              <div id="ck-button">
                                <label>
-                                 <input type="checkbox" value="2" />
-                                 <span>Dupatta</span>
+                                 <input type="checkbox" value="2" id={this.state.products[1].id}/>
+                                 <span>{this.state.products[1].productDesc}</span>
                                </label>
                              </div>
                              <div id="ck-button">
                                <label>
-                                 <input type="checkbox" value="3" />
-                                 <span>Stole/Scarf</span>
+                                 <input type="checkbox" value="3" id={this.state.products[2].id}/>
+                                 <span>{this.state.products[2].productDesc}</span>
                                </label>
                              </div>
                            </Row>
                            <Row noGutters={true}>
                              <div id="ck-button">
                                <label>
-                                 <input type="checkbox" value="1" />
-                                 <span>Fabric</span>
+                                 <input type="checkbox" value="1" id={this.state.products[3].id}/>
+                                 <span>{this.state.products[3].productDesc}</span>
                                </label>
                              </div>
                              <div id="ck-button">
                                <label>
-                                 <input type="checkbox" value="2" />
-                                 <span>Accessories</span>
+                                 <input type="checkbox" value="2" id={this.state.products[4].id}/>
+                                 <span>{this.state.products[4].productDesc}</span>
                                </label>
                              </div>
                            </Row>
+                           <br></br>
                            <Row
                              noGutters={true}
-                             className="text-center line312 font2"
+                             className="text-center line312 font1"
                            >
-                             <span className="col-xs-2"></span>
-                             <span
+                             <div
                                style={{
                                  fontFamily: "var(--LatoFont)",
                                  color: "grey",
+                                 marginTop: "10px",
+                                 fontSize: "15px",
                                }}
-                               className="col-xs-8"
+                               className="col-xs-12 text-center"
                              >
-                               You can always do this step later.{" "}
-                               <strong
-                                 style={{ cursor: "pointer" }}
+                               <input type="checkbox" name="checkbox" value="check" id="agree" /> You
+                               hearby agree to our <a
+                                 style={{ cursor: "pointer", fontSize: "15px" }}
                                  onClick={() => {
                                    alert("clicked");
                                  }}
                                >
-                                 SKIP >
-                               </strong>
-                             </span>
+                                 Terms and condition
+                               </a>
+                               </div>
                            </Row>
                            <br />
                            <Row noGutters={true}>
@@ -263,47 +275,19 @@ this.setState({
                                </button>
                              </div>
                            </Row>
-                           <Row
-                             noGutters={true}
-                             className="text-center line312 font1"
-                           >
-                             <div
-                               style={{
-                                 fontFamily: "var(--LatoFont)",
-                                 color: "grey",
-                                 marginTop: "10px",
-                                 fontSize: "10px",
-                               }}
-                               className="col-xs-12 text-center"
-                             >
-                               By completing this form and singuo process. you
-                               hearby agree to our{" "}
-                             </div>
-                             <div>
-                               <a
-                                 style={{ cursor: "pointer", fontSize: "10px" }}
-                                 onClick={() => {
-                                   alert("clicked");
-                                 }}
-                               >
-                                 Terms and condition
-                               </a>
-                             </div>
-                           </Row>
+                           
 
-                           <Row noGutters={true} className="text-center mt77">
-                             <div
-                               className="col-xs-4 font2"
-                               style={{ float: "left" }}
-                             >
-                               Privacy Policy
-                             </div>
-                             <div className="col-xs-4 line312 font2">
+                           <Row noGutters={true} className="text-center mt57">
+                             
+                             <div className="col-xs-12 line312 font2">
                                Need Help?{" "}
                              </div>
+                             
+                           </Row>
+                           <Row noGutters={true} className="text-center mt7">
                              <div
-                               className="col-xs-4 line6"
-                               style={{ float: "right" }}
+                               className="col-xs-12 line6"
+                              //  style={{ float: "right" }}
                              >
                                {" "}
                                Change language

@@ -9,13 +9,19 @@ export default class buyreg6 extends Component {
         this.state = {
           weblink : "",
           sociallink : "",
+          checktc : false,
          
         };
       }
     
       operation() {
         debugger;
-            this.props.sl(this.state.weblink,this.state.sociallink);
+        if(document.getElementById('agree').checked)
+            {this.props.sl(this.state.weblink,this.state.sociallink);
+            }
+            else{
+              alert("Please agree to T&C");
+            }
             // window.open("./", "_self"); // to redirect to login page
             // this.props.handler(5);
          
@@ -31,6 +37,12 @@ export default class buyreg6 extends Component {
         
       }
       componentDidMount(){
+        if(document.getElementById('agree').checked){
+          this.setState({checktc : true});
+        }
+        else{
+          this.setState({checktc : false});
+        }
         this.setState({weblink : this.props.weblink ,
           sociallink : this.props.sociallink,
 
@@ -81,7 +93,7 @@ export default class buyreg6 extends Component {
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
-
+          <br></br>
                 <Row noGutters={true} className="text-left line32  font3">
                   {/*  */}
                   <span
@@ -169,69 +181,55 @@ export default class buyreg6 extends Component {
                     </Col>
                   </Col>
                 </Row>
-                <Row noGutters={true}>
-                  <span className="col-xs-1"></span>
-                  <span className="col-xs-10 line322 text-center font3" onClick={() => this.operation()}>
-                    {/* <img src={logos.locklogo}   
-                        className="locklogo1 glyphicon mr-5"></img> */}
-                    <img
-                      style={{ width: "13px", marginRight: "5px" }}
-                      src={logos.skiplogo} 
-                    ></img>{" "}
-                    skip
-                  </span>
-                </Row>
+                
                 <br></br>
 
-                <Row noGutters={true}>
-                  <div className="col-xs-12 text-center">
-                    <button
-                      className="blackButton"
-                      onClick={() => this.operation()}
-                    >
-                      Complete
-                    </button>
-                  </div>
-                </Row>
-                <br />
+               
                 <Row noGutters={true} className="text-center line312 font1">
                   <div
                     style={{
                       fontFamily: "var(--LatoFont)",
                       color: "grey",
                       marginTop: "10px",
-                      fontSize: "10px",
+                      fontSize: "15px",
                     }}
                     className="col-xs-12 text-center"
                   >
-                    By completing this form and singuo process. you hearby agree
-                    to our{" "}
-                  </div>
-                  <div>
+                    <input type="checkbox" name="checkbox" value="check" id="agree" /> You hearby agree  to our
                     <a
-                      style={{ cursor: "pointer", fontSize: "10px" }}
+                      style={{ cursor: "pointer", fontSize: "15px" }}
                       onClick={() => {
                         alert("clicked");
                       }}
                     >
                       Terms and condition
                     </a>
+                  
+                  
                   </div>
                 </Row>
-
+                <br></br>
+                <Row noGutters={true}>
+                  <div className="col-xs-12 text-center">
+                    <button
+                      className="blackButton"
+                      onClick={() => this.operation()}
+                      // disabled = {this.state.checktc}
+                      // { this.state.checktc == false  ? (disabled) : () }
+                    >
+                      Complete
+                    </button>
+                  </div>
+                </Row>
                 <br></br>
 
-                <Row noGutters={true} className="mt17">
-                  <strong className="col-xs-3 text-center line7 font3">
+                <Row noGutters={true} className="mt30">
+                {/* <span className="col-xs-1 col-md-1"></span> */}
+                  <strong className="col-xs-12 text-center line7 help">
                     Help?
                   </strong>
-                  <span className="col-xs-4"></span>
-                  <span
-                    style={{ color: "var(--lightFont)" }}
-                    className="col-xs-5 text-center line7 font3"
-                  >
-                    Privacy policy
-                  </span>
+                
+                 
                 </Row>
 
                 {/* <Row noGutters={true}>

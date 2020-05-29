@@ -21,7 +21,7 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 0,
+                     userpage: 5,
                      emailid: "piyush@ppp.com",
                      password: "",
                      firstname: "",
@@ -46,6 +46,10 @@ export default class buyerRegister extends Component {
                      landmark: "",
                      weblink: "",
                      sociallink: "",
+                     pocname : "",
+                    pocemail : "",
+                    pocmobile : "",
+                    countryid : -1,
 
                      
                    };
@@ -111,6 +115,10 @@ export default class buyerRegister extends Component {
                            cinno = {this.state.cinno}
                            panno = {this.state.panno}
                            logoname = {this.state.logoname}
+                           pocname = {this.state.pocname}
+                           pocemail = {this.state.pocemail}
+                           pocmobile = {this.state.pocmobile}
+                          
 
                          />
                        );
@@ -128,6 +136,7 @@ export default class buyerRegister extends Component {
                            country = {this.state.country}
                            pincode = {this.state.pincode}
                            landmark = {this.state.landmark}
+                           countryid = {this.state.countryid}
                            
                          />
                        );
@@ -152,7 +161,7 @@ export default class buyerRegister extends Component {
                        console.log(this.state.weblink, this.state.sociallink);
                           TTCEapi.registerBuyer(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,this.state.adl1,
                             this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.weblink, this.state.sociallink,this.state.firstname,
-                            this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid).then(
+                            this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid,this.state.pocmobile,this.state.pocemail,this.state.pocname,this.state.countryid).then(
                               (response) => {
 
                               }
@@ -168,7 +177,8 @@ export default class buyerRegister extends Component {
                    state,
                    country,
                    pincode,
-                   landmark
+                   landmark,
+                   countryid
                  ) {
                    this.setState(
                      {
@@ -180,6 +190,7 @@ export default class buyerRegister extends Component {
                        country: country,
                        pincode: pincode,
                        landmark: landmark,
+                       countryid: countryid,
                      },
                      () => {
                        console.log(
@@ -190,7 +201,8 @@ export default class buyerRegister extends Component {
                          this.state.state,
                          this.state.country,
                          this.state.pincode,
-                         this.state.landmark
+                         this.state.landmark,
+                         this.state.countryid
                        );
                      }
                    );
@@ -202,7 +214,7 @@ export default class buyerRegister extends Component {
                    brandLogo,
                    cinno,
                    panno,
-                   logoname
+                   logoname,pocmobile,pocemail,pocname
                  ) {
                    this.setState(
                      {
@@ -212,7 +224,10 @@ export default class buyerRegister extends Component {
                        brandLogo: brandLogo,
                        panno: panno,
                        cinno: cinno,
-                       logoname : logoname
+                       logoname : logoname,
+                       pocmobile: pocmobile,
+                       pocemail: pocemail,
+                       pocname : pocname
                      },
                      () => {
                        console.log(
@@ -222,7 +237,10 @@ export default class buyerRegister extends Component {
                          this.state.brandLogo,
                          this.state.cinno,
                          this.state.panno,
-                         this.state.logoname
+                         this.state.logoname,
+                         this.state.pocmobile,
+                         this.state.pocemail,
+                         this.state.pocname
                        );
                      }
                    );

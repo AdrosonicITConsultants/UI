@@ -91,6 +91,34 @@ class TTCEapi {
   //#endregion
 
   //#region get methods
+    static getProducts(){
+      let url = ApiUrl + "/product/getAllProducts";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+    }
+
+
+    static getCountries(){
+      let url = ApiUrl + "/register/getAllCountries";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+    }
 
   //#region login
   static sendOtpForgotpass(emailId) {
@@ -137,7 +165,7 @@ class TTCEapi {
         return error;
       });
   }
-  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1)    {
+  static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1,selectedProducts)    {
         
     let url = ApiUrl + "/register/user";
         var data = {
@@ -155,7 +183,7 @@ class TTCEapi {
             pancard : panno,
             password: password,
             refRoleId : 1,
-            productCategoryIds:[1],
+            productCategoryIds : selectedProducts,
             weaverId:weaverid
         };
         console.log(data);
@@ -177,7 +205,7 @@ class TTCEapi {
 
     static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
       adl2,street,city,state,country,pincode,landmark,weblink, sociallink,firstname,
-      lastname,mobileno,alternatemobno,designation,password,emailid)    {
+      lastname,mobileno,alternatemobno,designation,password,emailid,pocmobile,pocemail,pocname,countryid)    {
         
       let url = ApiUrl + "/register/user";
           var data = {

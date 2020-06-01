@@ -35,12 +35,17 @@ import receipticonH from "./material-receipt.svg";
 import cashregistericon from"./awesome-cash-register.svg";
 import staricon from "./weather-stars.svg"
 import mainLogoNavbar from "./transparent logo main nav bar.png";
-
+import background1 from "./Backround1Home .png";
+import background2 from "./Backround2Home .png";
+import background3 from "./Backround3Home .png";
 
 
 
 
 export default {
+  background1,
+  background2,
+  background3,
   mainLogoNavbar,
   staricon,
   cashregistericon,

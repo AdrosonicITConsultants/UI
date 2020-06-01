@@ -121,9 +121,6 @@ class NavbarComponent extends Component {
                 <span className="navButtonImg">New custom design</span>
               </button>
             </li>
-            <li className="menu-item-space menu-item">
-              {/* <input type="search" className="navSearch"></input> */}
-            </li>
 
             {/* <li class="menu-item">
       <a href="#" className={(this.state.activeTabClassName === "/testslist") || (this.state.activeTabClassName === "/antibodies")? "active" : ""}>Lab Services</a>
@@ -167,6 +164,15 @@ class NavbarComponent extends Component {
               </li>
             ) : null}
             <li class="menu-item">
+              <span style={{ float: "right" }}>
+                {/* {this.props.user.firstName } <br/>{ this.props.user.lastName} */}
+               Hi, <span>{this.props.user.firstName}</span>
+               
+
+              </span>
+            </li>
+            <li class="menu-item">
+            
               <a
                 href="#"
                 className={
@@ -181,11 +187,9 @@ class NavbarComponent extends Component {
               <ol class="sub-menu">
                 <li
                   class="menu-item"
-                  style={{ borderBottom: "dashed 2px red" }}
+                  style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10 text-left"> 
-                    {this.props.user.firstName + " " + this.props.user.lastName}
-                  </span>
+                  <span className="col-md-10 text-left">Good Morning</span>
                   <span>
                     <img style={{ width: "10px" }} src={logos.closelogo}></img>
                   </span>

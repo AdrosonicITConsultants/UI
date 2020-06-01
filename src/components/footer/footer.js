@@ -7,7 +7,7 @@ export default class Footer extends Component {
         return (
         
             <div className="footerblack">
-
+<div> footer data</div>
             </div>
        
         )

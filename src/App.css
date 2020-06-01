@@ -4,6 +4,8 @@
   --darkGreen:#009A2F;
   --mainBlue:#3964D9;
   --mainBlack:#000000;
+  --redButtonAll :#cc0000; 
+  --texBlue: #0083be; 
   --mainFont: #ffffff;
   --PlayfairFont: 'Playfair Display', serif;
   --LatoFont : 'lato', sans-serif ;
@@ -16,6 +18,10 @@ body{
   font-family: var(--LatoFont) !important;
   /* background: var(--lightGreen) !important;
   color: var(--mainFont) !important;   */
+}
+
+.playfair {
+  font-family: var(--PlayfairFont);
 }
 
 .App {

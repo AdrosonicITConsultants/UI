@@ -10,6 +10,12 @@
 
 }
 
+.sub-menu .menu-item a{
+	text-align: left;
+    padding-left: 22% !important;
+    color: var(--mainBlue);
+}
+
 
 
 .logoHeader{
@@ -43,7 +49,7 @@
     background: white;
     border: 1px #ff0000 solid;
     height: 30px;
-    color: red;
+    color: #cc0000;
 }
 .navButtonImg {
 	/* margin-left: 10px; */
@@ -66,7 +72,7 @@
 
 .navbtn2{
 color:white;
-background-color: red;
+background-color:#cc0000;
 
 	/* width: 100% !important; */
 	padding-left: 12px;
@@ -167,7 +173,7 @@ background-color: red;
   .menu {
 background: #ffffff;
     height: 6rem;
-    z-index: 1;
+    z-index: 1001;
     position: sticky;
     top: 0;
     border: #d0c8c8 1px solid;
@@ -226,12 +232,22 @@ background: #ffffff;
 	font-weight: 600;
   }
   .sub-menu .menu-item {
-	  width: 200px;
+	  /* width: 200px;
 	padding: 0.75rem 0;
 	background: white;
 	opacity: 0;
 	transform-origin: bottom;
-	animation: enter 0.15s ease forwards;
+	animation: enter 0.15s ease forwards; */
+
+	width: 200px;
+    background: #f3eeee !important;
+    padding: 0.75rem 0;
+    /* background: white; */
+    border-bottom: white 1px solid;
+    opacity: 0;
+    transform-origin: bottom;
+    animation: enter 0.15s ease forwards;
+
   }
   .sub-menu .menu-item:nth-child(1) {
 	animation-duration: 0.2s;

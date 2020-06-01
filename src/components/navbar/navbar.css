@@ -231,6 +231,7 @@ background: #ffffff;
   .menu-item a:hover {
 	color: #000;
 	font-weight: 600;
+	
   }
 
   
@@ -244,7 +245,8 @@ background: #ffffff;
 
 	width: 200px;
     background: #f3eeee !important;
-    padding: 0.75rem 0;
+	padding: 0.75rem 0;
+	cursor: pointer;
     /* background: white; */
     border-bottom: white 1px solid;
     opacity: 0;
@@ -281,8 +283,10 @@ background: #ffffff;
 	animation-delay: 0.6s;
   }
   .sub-menu .menu-item:hover {
-	background: #ccc;
+	background: #ccc;	
+	background-color: #f1cece !important;
   }
+  
   .sub-menu .menu-item a {
 	padding: 0 0.75rem;
   }
@@ -381,6 +385,7 @@ background: #ffffff;
 	.sub-menu .menu-item {
 		width: 100vw;
 		background: #ffffff;
+		cursor:  pointer !important;
 	}
 	.sub-menu .menu-item:hover {
 		background: #fff;

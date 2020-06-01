@@ -64,11 +64,12 @@ class TTCEapi {
   //#endregion
 
   //#region login
-  static login(username, password) {
+  static login(username, password, roleID) {
     let url = ApiUrl + "/login/authenticate";
     var data = {
       emailOrMobile: username,
       password: password,
+      roleId: roleID
     };
     var config = {
       headers: {
@@ -156,8 +157,8 @@ class TTCEapi {
     }
 
   //#region login
-  static sendOtpForgotpass(emailId) {
-    let url = ApiUrl + "/forgotpassword/sendotp?email=" + emailId;
+  static sendOtpForgotpass(emailId, roleID) {
+    let url = ApiUrl + "/forgotpassword/sendotp?email=" + emailId + "&roleId=" + roleID;
 
     return axios
       .get(url)
@@ -170,8 +171,8 @@ class TTCEapi {
       });
   }
 
-  static validateUsername(username, userID) {
-    let url = ApiUrl + "/login/validateusername?emailOrMobile=" + username;
+  static validateUsername(username, roleID) {
+    let url = ApiUrl + "/login/validateusername?emailOrMobile=" + username + "&roleId=" + roleID;
 
     return axios
       .get(url)

@@ -19,6 +19,7 @@ import {
     DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { browserHistory } from '../../helpers/history';
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -67,6 +68,10 @@ class NavbarComponent extends Component {
       openMenu: !this.state.openMenu,
     });
   };
+
+  myProfile =() =>{
+    browserHistory.push("/MyProfile");
+  }
 
   logout= (event) =>{
    this.props.dispatch(Actions.logout());
@@ -214,7 +219,10 @@ class NavbarComponent extends Component {
                   class="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10 text-left">  {this.props.user.firstName }{"   "} { this.props.user.lastName}</span>
+                  <span className="col-md-10 text-left"> 
+                    {(this.props.user != null) ? <p> {this.props.user.firstName }{"  "} {this.props.user.lastName }</p>
+                      : "Welcome Guest" }
+                  </span>
                   <span>
                     <img style={{ width: "10px" }} src={logos.closelogo}></img>
                   </span>
@@ -227,7 +235,7 @@ class NavbarComponent extends Component {
                     ></img>
                   </span>
 
-                  <a href="/">My Profile</a>
+                  <a onClick={this.myProfile}>My Profile</a>
                 </li>
                 <li class="menu-item">
                   <span class="col-md-2">

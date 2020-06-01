@@ -117,9 +117,10 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 
                 }
                 checkpasswordArtist(password){
+                  debugger
                   console.log("artist :" + this.state.username);
                   this.setState({ username: this.state.username }, () => {
-                    TTCEapi.login(this.state.username, password).then(
+                    TTCEapi.login(this.state.username, password, 1).then(
                       (response) => {
                         debugger;
                         if (response.data.valid) {
@@ -167,7 +168,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                  checkpasswordBuyer(password){
                   console.log("buyer :" + this.state.username);
                      this.setState({ username: this.state.username }, () => {
-                       TTCEapi.login(this.state.username, password).then(
+                       TTCEapi.login(this.state.username, password, 2).then(
                          (response) => {
                            debugger;
                            if (response.data.valid) {

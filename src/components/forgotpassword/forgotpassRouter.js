@@ -28,10 +28,10 @@ export default class ForgotpassRouter extends Component {
                  }
 
                  sendotp(emailid) {
-                   let userID = 0;
-                    (window.location.pathname.indexOf("passwordA") !== -1 ? (userID = 1) : (userID = 2));                  
+                   let roleID = 0;
+                   (window.location.pathname.indexOf("passwordA") !== -1 ? (roleID = 1) : (roleID = 2));                  
                    this.setState({ emailid: emailid }, () => {
-                     TTCEapi.sendOtpForgotpass(emailid, userID).then((response) => {
+                     TTCEapi.sendOtpForgotpass(emailid, roleID).then((response) => {
                        debugger;
                        if (response.data.valid) {
                          customToast.success(response.data.data, {

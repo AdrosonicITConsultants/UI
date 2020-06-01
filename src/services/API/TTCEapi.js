@@ -170,7 +170,7 @@ class TTCEapi {
       });
   }
 
-  static validateUsername(username) {
+  static validateUsername(username, userID) {
     let url = ApiUrl + "/login/validateusername?emailOrMobile=" + username;
 
     return axios

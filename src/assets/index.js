@@ -38,11 +38,23 @@ import mainLogoNavbar from "./transparent logo main nav bar.png";
 import background1 from "./Backround1Home .png";
 import background2 from "./Backround2Home .png";
 import background3 from "./Backround3Home .png";
+import playstorebtn from "./Play-store-button.png"
+import appstorebtn from "./App-store-button.png"
+import heariconfilled from "./heart-filled.svg";
+import chat_bubble_filled from "./chat_bubble-filled.svg";
+import belliconfilled from "./bell-icon-filled.svg";
+
+
 
 
 
 
 export default {
+  belliconfilled,
+  chat_bubble_filled,
+  heariconfilled,
+  appstorebtn,
+  playstorebtn,
   background1,
   background2,
   background3,

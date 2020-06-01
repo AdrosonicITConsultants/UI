@@ -100,7 +100,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                 //  console.log("artist :" + userName);  
                    this.setState({ username: userName }, () => {
                      console.log("artist :" + this.state.username);
-                     TTCEapi.validateUsername(userName).then((response) => {
+                     TTCEapi.validateUsername(userName, 1).then((response) => {
                        debugger;
                        if (response.data.valid) {
                          if (this.state.userpage == 1) {
@@ -146,7 +146,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                    console.log("buyer :" + userName);
                         console.log("artist :" + userName);
                         this.setState({ username: userName }, () => {
-                          TTCEapi.validateUsername(userName).then(
+                          TTCEapi.validateUsername(userName, 2).then(
                             (response) => {
                               debugger;
                               if (response.data.valid) {

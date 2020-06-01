@@ -28,6 +28,9 @@ class NavbarComponent extends Component {
       isOpen: false,
       activeTabClassName: window.location.pathname,
       openMenu: false,
+      isnotificationHovered: false,
+      ischatHovered: false,
+      isfavHovered: false,
     };
   }
   toggle = () => {
@@ -35,6 +38,29 @@ class NavbarComponent extends Component {
       isOpen: !this.state.isOpen,
     });
   };
+
+  toggleHover(name) {
+    switch (name) {
+      case "isfavHovered":
+        this.setState({
+          isfavHovered: !this.state.isfavHovered,
+        });
+        break;
+      case "isnotificationHovered":
+        this.setState({
+          isnotificationHovered: !this.state.isnotificationHovered,
+        });
+        break; 
+      case "ischatHovered":
+        this.setState({
+          ischatHovered: !this.state.ischatHovered,
+        });
+        break;
+    
+      default:
+        break;
+    }
+  }
 
   toggleMobileMenu = () => {
     this.setState({
@@ -138,14 +164,20 @@ class NavbarComponent extends Component {
             <li class="menu-item">
               <img className="navButtonImg" src={logos.searchlogo}></img>
             </li>
-            <li class="menu-item">
-              <img className="navButtonImg" src={logos.favoriteicon}></img>
+          
+            <li onMouseEnter={() => this.toggleHover("isfavHovered")} onMouseLeave={() =>this.toggleHover("isfavHovered")} class="menu-item">
+              {this.state.isfavHovered ? <img className="navButtonImg" src={logos.heariconfilled}></img>
+                : <img className="navButtonImg" src={logos.favoriteicon}></img>}
             </li>
             <li class="menu-item">
-              <img className="navButtonImg" src={logos.chaticon}></img>
+              {this.state.ischatHovered ? <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chat_bubble_filled}></img>
+                : <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chaticon}></img>}
             </li>
             <li class="menu-item">
-              <img className="navButtonImg" src={logos.notificationsicon}></img>
+              {this.state.isnotificationHovered ? <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")} className="navButtonImg"  src={logos.belliconfilled}></img> 
+                : <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")}  className="navButtonImg" src={logos.notificationsicon}></img>}
+                
+             
             </li>
             {userTypeId === "3" || userTypeId === null ? (
               <li class="menu-item">
@@ -163,14 +195,7 @@ class NavbarComponent extends Component {
       </ol> */}
               </li>
             ) : null}
-            <li class="menu-item">
-              <span style={{ float: "right" }}>
-                {/* {this.props.user.firstName } <br/>{ this.props.user.lastName} */}
-               Hi, <span>{this.props.user.firstName}</span>
-               
-
-              </span>
-            </li>
+           
             <li class="menu-item">
             
               <a
@@ -189,7 +214,7 @@ class NavbarComponent extends Component {
                   class="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10 text-left">Good Morning</span>
+                  <span className="col-md-10 text-left">  {this.props.user.firstName }{"   "} { this.props.user.lastName}</span>
                   <span>
                     <img style={{ width: "10px" }} src={logos.closelogo}></img>
                   </span>

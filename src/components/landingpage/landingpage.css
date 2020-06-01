@@ -44,8 +44,8 @@
 .Homebg2div1 {
     float: left;
     position: absolute;
-    left: 25%;
-    top: 122%;
+    left: 28%;
+    top: 110%;
     z-index: 1000;
     background-color: #92AD40;
     padding: 5px;
@@ -60,24 +60,12 @@
     
 }
 
-.Homebg2div1:hover{
-   left: 116px;
-    width: 500px;
-    
-}
-.Homebg2div2 p{
-    margin: 0px 0 0px;
-}
-
-.Homebg2div1 p{
-    margin: 0px 0 0px;
-}
-
-.Homebg2div2 {
+.Homebg2div4 {
+    display: none;
     float: left;
     position: absolute;
-    left: 51%;
-    top: 122%;
+    left: 28%;
+    top: 110%;
     z-index: 1000;
     background-color: #92AD40;
     padding: 5px;
@@ -85,9 +73,54 @@
     font-weight: 500;
     width: 300px;
     height: 400px;
-    transition: width 1s;
+    transition:  width 2s, height 4s;
+    transition-delay: 1s;
+    text-align: right;
+    font-family: var(--PlayfairFont) !important;
+    font-size: 20px;
+       
+}
+
+ .mainDivTransitionleft:hover  .Homebg2div1  {
+     /* width: 500px; */    
+     /* display: none;  */
+     animation: fadeout 1s ease-out;    
+  
+    }
+
+    .mainDivTransitionleft:hover  .Homebg2div4{
+     
+    display: block;
+    animation: fadeinLeft 1s ease-in;  
+    width: 500px;    
+     height: 500px; 
+     left:14%;
+    
+    }
+
+     @keyframes fadeinLeft {
+         0% {opacity: 0;  }
+        100% {opacity: 1;  width: 500px;    
+     height: 500px;}
+    }
+
+
+.Homebg2div2 {
+    float: left;
+    position: absolute;
+    left: 51%;
+    top: 110%;
+    z-index: 1000;
+    background-color: #92AD40;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+    width: 300px;
+    height: 400px;
+    /* transition: width 1s; */
        font-family: var(--PlayfairFont) !important;
        font-size: 20px;
+       display: block;
 }
 
 .Homebg2div3 {
@@ -95,30 +128,65 @@
     float: left;
     position: absolute;
     left: 51%;
-    top: 122%;
+    top: 110%;
     z-index: 1000;
     background-color: #92AD40;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
-    width: 300px;
-    height: 500px;
-    transition: width 1s;
-       font-family: var(--PlayfairFont) !important;
-       font-size: 20px;
+     width: 300px;
+    height: 400px;
+    transition: width 1s ;
+    transition-delay: 1s;
+    font-family: var(--PlayfairFont) !important;
+    font-size: 20px;
 }
+.mainDivTransitionright:hover  .Homebg2div3{
+     /* width: 500px; */    
+    display: block;
+    animation: fadein 1s ease-in;
+      width: 500px;
+      height: 500px;  
+
+    }
+     .mainDivTransitionright:hover  .Homebg2div2  {
+     /* width: 500px; */    
+     /* display: none;  */
+     animation: fadeout 1s ease-out;    
+  
+    }
+    @keyframes fadein {
+        0% {opacity: 0;   }
+        100% {opacity: 1;     width: 500px;    height: 500px;}
+    }
+
+    @keyframes fadeout {
+        0% {opacity: 1;     }
+        100% {opacity: 0;     }
+    }
 
 
-.showme{ 
-display: none;
-}
-.showhim:hover .showme{
-display : block;
-}
-.showhim:hover .ok{
-display : none;
+    
+.Homebg2div2 p{
+    margin: 0px 0 0px;
 }
 
+.Homebg2div1 p{
+    margin: 0px 0 0px;
+}
+   
+
+
+
+   
+
+.maincontainer{
+background-color: black;
+}
+
+.internaldiv{
+    background-color: white;
+}
 
 .text1 {
     font-family: var(--LatoFont);
@@ -127,9 +195,11 @@ display : none;
 }
 
 .homeDivmain {
-     float: left;
+    float: left;
     position: absolute;
-    left: 51%;
-    top: 30%;
+    left: 13%;
+    top: 20%;
+    color: white;
     z-index: 1000;
+    font-family: var(--PlayfairFont);
 }

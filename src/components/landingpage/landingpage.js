@@ -11,39 +11,52 @@ import logos from "../../assets";
  class landingpage extends Component {
     render() {
         return (
-          <div>
+          <div className="maincontainer">
             <React.Fragment>
-              <Container>
+              <Container >
                 {" "}
                 <NavbarComponent></NavbarComponent>
                 {/* <div class="parallax"></div> */}
-                {/* <div className="homeDivmain">                 
+                <div className="homeDivmain">                 
                 <div>
-                  <span>
+                  <h1>
                     Timeless pieces of Indian handicrafts 
-                  </span>
+                  </h1>
+                    <h6> Some text provided by user</h6>
+                  <h6> Some text provided by user</h6>
+                    <h6> Some text provided by user</h6>
                 </div>
-                </div> */}
-                <div>
-                  <img className="HomeBg1" src={logos.background1}></img>
                 </div>
                 <div>
+                  <img className="HomeBg1 internaldiv" src={logos.background1}></img>
+                </div>
+                <div className="internaldiv">
                   <img className="HomeBg2" src={logos.background2}></img>
+                  <div className="mainDivTransitionleft">
                   <div className="Homebg2div1"> 
+               
                     <p>Artisan</p> <p>self design</p> 
-                   </div>
-                  <div className="showhim Homebg2div2">
-                    <div className="Homebg2div2 showme" >
+                      <img src={logos.mainlogoside}></img>
+                   </div> 
+                    <div className="Homebg2div4">
+                      <p> new div here Artisan</p> <p>self design</p>
+                      <img src={logos.mainlogoside}></img>
+                    </div>
+                  </div>
+                   <div className="mainDivTransitionright">
+                    <div className="Homebg2div2" >
                       {" "}
                       <p>Antaran</p> <p>co-design <p></p>collection</p>
                     </div>
-                    <div className="Homebg2div3 ok">
+
+                    <div className="Homebg2div3">
                       <p> new div here Artisan</p> <p>self design</p>
                     </div>
-                 </div>
-                  
+                   </div>
+                
+                 
                 </div>
-                <div className="col-md-12 text-center">
+                <div className="col-md-12 internaldiv text-center">
                   <div className="text1">And our Artisan say that</div>
                   <div>
                     <img src={logos.quoteicon}></img><span>... it helped provided us a platform to show case</span>
@@ -54,7 +67,7 @@ import logos from "../../assets";
                   </div>
                 </div>
                 <div>
-                  <img className="HomeBg3" src={logos.background3}></img>
+                  <img className="HomeBg3 internaldiv" src={logos.background3}></img>
                 </div>
                 <Footer></Footer>
               </Container>

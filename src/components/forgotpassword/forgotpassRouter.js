@@ -28,11 +28,10 @@ export default class ForgotpassRouter extends Component {
                  }
 
                  sendotp(emailid) {
-                   debugger;
-                   console.log(emailid);                
-                   debugger;
+                   let userID = 0;
+                    (window.location.pathname.indexOf("passwordA") !== -1 ? (userID = 1) : (userID = 2));                  
                    this.setState({ emailid: emailid }, () => {
-                     TTCEapi.sendOtpForgotpass(emailid).then((response) => {
+                     TTCEapi.sendOtpForgotpass(emailid, userID).then((response) => {
                        debugger;
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
@@ -49,20 +48,18 @@ export default class ForgotpassRouter extends Component {
                    });
                  }
 
-                 verifyOtp(emailid, otppin) {
-                   debugger;
+                 verifyOtp(emailid, otppin) {                   
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                       debugger;
+                    
                        if (response.data.valid) {
                          this.handler(1);
-                       } else {
-                         this.handler(1); //remove after testing
+                       } else {                 
                          customToast.error("please enter valid OTP", {
                            position: toast.POSITION.TOP_RIGHT,
                            autoClose: true,
                          });
-                         // alert("please enter valid OTP.");
+                        
                        }
                      });
                    });

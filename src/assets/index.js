@@ -16,8 +16,8 @@ import otplogo from "./Otp.svg";
 import closelogo from "./close_icon.svg";
 import tickLogo from "./tick-done.svg";
 import homepagebgtemp from "./landingpageimg.png";
-import quoteicon from "./Quote1.svg";
-import quoteiconend from "./Quote2.svg";
+import quoteicon from "./Quote1.png";
+import quoteiconend from "./Quote2.png";
 import searchlogo from "./Search.svg";
 import verticalthread from "./Thread-Vertical.svg";
 import horizontalthread from "./Thread-horizontal.svg";
@@ -43,13 +43,19 @@ import appstorebtn from "./App-store-button.png"
 import heariconfilled from "./heart-filled.svg";
 import chat_bubble_filled from "./chat_bubble-filled.svg";
 import belliconfilled from "./bell-icon-filled.svg";
-
-
+import artistimageLanding from "./Artisanself combined layers.png";
+import coImageHovered from  "./Co Design - hovered Expansion.png"
+import coImageLanding from "./co design combined.png"
+import artistimageLandingHovered from "./Self Design hovered backdrop combined.png";
 
 
 
 
 export default {
+  artistimageLanding,
+  coImageHovered,
+  coImageLanding,
+  artistimageLandingHovered,
   belliconfilled,
   chat_bubble_filled,
   heariconfilled,

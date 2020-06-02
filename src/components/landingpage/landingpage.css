@@ -44,10 +44,10 @@
 .Homebg2div1 {
     float: left;
     position: absolute;
-    left: 28%;
-    top: 110%;
+    left: 48%;
+    /* top: 122%; */
     z-index: 1000;
-    background-color: #92AD40;
+    background-color: white;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
@@ -64,10 +64,10 @@
     display: none;
     float: left;
     position: absolute;
-    left: 28%;
-    top: 110%;
+    left: 48%;
+    /* top: 122%; */
     z-index: 1000;
-    background-color: #92AD40;
+    background-color: white;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
@@ -78,6 +78,7 @@
     text-align: right;
     font-family: var(--PlayfairFont) !important;
     font-size: 20px;
+    box-shadow: 0px 2px 15px 4px #e2dddd;
        
 }
 
@@ -92,26 +93,26 @@
      
     display: block;
     animation: fadeinLeft 1s ease-in;  
-    width: 500px;    
-     height: 500px; 
-     left:14%;
+    width: 430px;    
+     height: 450px; 
+    left: 26.4%;
     
     }
 
      @keyframes fadeinLeft {
          0% {opacity: 0;  }
-        100% {opacity: 1;  width: 500px;    
-     height: 500px;}
+        100% {opacity: 1;  width: 430px;    
+     height: 450px;}
     }
 
 
 .Homebg2div2 {
     float: left;
     position: absolute;
-    left: 51%;
-    top: 110%;
+    /* left: 53%; */
+    /* top: 122%; */
     z-index: 1000;
-    background-color: #92AD40;
+    background-color: white;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
@@ -127,10 +128,10 @@
     display: none;
     float: left;
     position: absolute;
-    left: 51%;
-    top: 110%;
+    /* left: 53%; */
+    /* top: 122%; */
     z-index: 1000;
-    background-color: #92AD40;
+    background-color:white;
     padding: 5px;
     color: #FFFFFF;
     font-weight: 500;
@@ -140,13 +141,14 @@
     transition-delay: 1s;
     font-family: var(--PlayfairFont) !important;
     font-size: 20px;
+    box-shadow: 0px 2px 15px 4px #e2dddd;
 }
 .mainDivTransitionright:hover  .Homebg2div3{
      /* width: 500px; */    
     display: block;
     animation: fadein 1s ease-in;
-      width: 500px;
-      height: 500px;  
+      width: 430px;
+      height: 450px;  
 
     }
      .mainDivTransitionright:hover  .Homebg2div2  {
@@ -157,7 +159,7 @@
     }
     @keyframes fadein {
         0% {opacity: 0;   }
-        100% {opacity: 1;     width: 500px;    height: 500px;}
+        100% {opacity: 1;     width: 430px;    height: 450px;}
     }
 
     @keyframes fadeout {
@@ -174,10 +176,141 @@
 .Homebg2div1 p{
     margin: 0px 0 0px;
 }
+
+.textline1{
+    font-family: var(--PlayfairFont);
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.textline2 {
+        width: 330px;
+    line-height: 18px;
+    font-family: var(--LatoFont);
+    font-size: 14px;
+}
+
+.textline3{
+        font-size: 14px;
+    font-family: var(--LatoFont);
+    margin-top: 30px;
+}
+
+.textline4{
+        font-size: 14px;
+    font-family: var(--LatoFont);
+ color:black;
+ margin-top: 15px;
+}
+
+.reviewtext{
+    font-family: var(--PlayfairFont);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 0px;
+}
+
+.carousaltext1{
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.carousaltext2{
+font-size: xx-large;
+    font-weight: 100;
+    font-family: var(--PlayfairFont);
+    margin-left: 20px;
+}
+
+.carousaltext3{
+    margin-left: 20px;
+    font-weight: 100;
+    line-height: 20px;
+    margin-top: 20px;
+}
+
+
+
+.margin30{
+    margin-top: 30px;
+}
+
+.artistunHover {
+    background-image: url("../../assets/Artisanself\ combined\ layers.png");  
+    background-size: 100% 100%;
+}
+
+.artistHover {
+    background-image: url("../../assets/Self\ Design\ hovered\ backdrop\ combined.png"); 
+    height: 275px;
+    width: 103%;
+    padding: 15px;
+margin: -6px;
+background-size: 100% 100%;
    
+}
 
+.coHover {
+    background-image: url("../../assets/Co\ Design\ -\ hovered\ Expansion.png");  
+    height: 275px;
+    width: 103%;
+    padding: 15px;
+margin: -6px;
+background-size: 100% 100%;
+}
 
+.counHover {
+    background-image: url("../../assets/co\ design\ combined.png");  
+    background-position: 4% 3%;
+    /* background-size: 100% 100%; */
+}
 
+.carousalbg {
+     background-image: url("../../assets/Brocades\ -\ carousel\ cover\ shadow.png");  
+     width: 35%;
+     float: left;
+     height: 100%;
+     background-size: 170% 100%;
+         background-position: 35% 50%;
+         font-family: var(--LatoFont);
+    padding: 10px;
+
+}
+
+ .topmarginHome{
+     margin-top: 370px;
+ }
+.carousalbg2{
+    background-image: url("../../assets/Coromandel\ art\ set\ -\ middle\ layer.png");  
+     width: 65%;
+     float: right;
+     height: 100%;
+     background-size: 103% 106%;
+         background-position: 35% 50%;
+}
+.carousal{
+/* background-color: white; */
+    /* width: 75%; */
+    height: 200px;
+    /* margin-left: 8%; */
+    margin-top: 10%;
+}
+.hrline{
+    margin-top: 30px;   
+   border: 0;
+    border-top: 1px solid #ccc;
+    width: 80%;
+    float: right;
+}
+
+.hrlineLeft{
+    margin-top: 30px;   
+   border: 0;
+    border-top: 1px solid #ccc;
+    width: 80%;
+    float: left;
+}
    
 
 .maincontainer{
@@ -189,17 +322,110 @@ background-color: black;
 }
 
 .text1 {
+   margin-bottom: 5px;
     font-family: var(--LatoFont);
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .homeDivmain {
-    float: left;
-    position: absolute;
-    left: 13%;
-    top: 20%;
-    color: white;
+   background-image: url("../../assets/Backround1Home\ .png");  
+    /* float: left;
+    position: absolute; */
+    /* left: 10%;
+    top: 15%; */
+   color: white;
     z-index: 1000;
+    height: 1564px;
+    margin-top: -347px;
     font-family: var(--PlayfairFont);
+    background-size: 100% 100%;
 }
+
+.homeDiv2{
+     background-image: url("../../assets/Backround2Home\ .png");  
+    /* float: left;
+    position: absolute; */
+    /* left: 10%;
+    top: 15%; */
+   
+    z-index: 1000;
+    height: 400px;
+    margin-top: -574px;
+    /* opacity: 1.7; */
+    width: 100%;
+    font-family: var(--PlayfairFont);
+    background-size: 100% 100%;
+}
+
+.homeDiv3{
+    
+    margin-top: -100px;
+
+}
+.choosefromtext{
+    
+    font-family: var(--PlayfairFont);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--mainFont);
+    margin-top: -90px;
+
+}
+.quote{
+    width: 20px;
+    margin-top: 20px;
+}
+
+@media only screen and ( max-width: 480px ) {
+   
+}
+@media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+   
+}
+@media only screen and ( max-width: 991px ) and ( min-width: 768px ){
+    .carousaltext1 {
+    font-size: 14px;
+    }
+    .carousaltext2 {
+    font-size: 17px;
+    }
+
+      .Homebg2div1{
+            left: 20%;
+    }
+          .mainDivTransitionleft:hover  .Homebg2div4{
+ left: 7.4%; 
+ width: 350px;
+    }
+    .mainDivTransitionright:hover .Homebg2div3{
+        width: 350px;
+    }
+     @keyframes fadeinLeft {
+         0% {opacity: 0;  }
+        100% {opacity: 1;  width: 350px;    
+     height: 450px;}
+    }
+
+     @keyframes fadein {
+        0% {opacity: 0;   }
+        100% {opacity: 1;     width: 350px;    height: 450px;}
+    }
+    .textline3 {
+    font-size: 12px;
+    }
+}
+@media only screen and ( max-width: 1199px ) and ( min-width: 992px ){
+    .Homebg2div1{
+            left: 38%;
+    }
+    .carousaltext1 {
+    font-size: 14px;   
+}
+.carousaltext2 {
+    font-size: 16px;}
+       .mainDivTransitionleft:hover  .Homebg2div4{
+    left: 12.4%;
+    }
+}
+

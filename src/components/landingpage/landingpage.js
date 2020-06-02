@@ -74,7 +74,7 @@ pride and joy of traditions.</h6>
                         <div className="Homebg2div4">
                           <div className="artistHover">
                             <h3>Artisan</h3> <h3>self design</h3>
-                            <hr className="hrline"></hr>
+                            <hr className="hrline1"></hr>
                             <br />
                             <div className="textline3">
                               <p>Choose from the production ready designs which speak the</p><p>  tradition & legacy from their own cluster and</p><p>

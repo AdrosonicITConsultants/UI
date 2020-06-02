@@ -37,6 +37,10 @@
     border-top: 1px solid #ccc;
     width: 68%;
 }
+button:focus{
+ /* border-color:transparent!important; */
+ outline:none;
+}
 .hrline2{
     margin-top: 7px;
     margin-bottom: 7px;

@@ -47,7 +47,7 @@
 .navButton{
 	border-radius: 20px;
     background: white;
-    border: 1px #ff0000 solid;
+    border: 1px #cc0000 solid;
     height: 30px;
     color: #cc0000;
 }
@@ -427,3 +427,7 @@ background: #ffffff;
 	.codeVersion{
 		float: right;
 	}
+	button:focus{
+ /* border-color:transparent!important; */
+ outline:none;
+}

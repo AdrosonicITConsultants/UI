@@ -188,6 +188,7 @@
     line-height: 18px;
     font-family: var(--LatoFont);
     font-size: 14px;
+    font-weight: 100;
 }
 
 .textline3{
@@ -268,7 +269,7 @@ background-size: 100% 100%;
 
 .carousalbg {
      background-image: url("../../assets/Brocades\ -\ carousel\ cover\ shadow.png");  
-     width: 35%;
+     width: 45%;
      float: left;
      height: 100%;
      background-size: 170% 100%;
@@ -283,7 +284,7 @@ background-size: 100% 100%;
  }
 .carousalbg2{
     background-image: url("../../assets/Coromandel\ art\ set\ -\ middle\ layer.png");  
-     width: 65%;
+     width: 55%;
      float: right;
      height: 100%;
      background-size: 103% 106%;
@@ -294,9 +295,9 @@ background-size: 100% 100%;
     /* width: 75%; */
     height: 200px;
     /* margin-left: 8%; */
-    margin-top: 10%;
+    margin-top: 6%;
 }
-.hrline{
+.hrline1{
     margin-top: 30px;   
    border: 0;
     border-top: 1px solid #ccc;

@@ -97,10 +97,10 @@ export default class artreg1 extends Component {
                 <br></br>
                 <br />
                 <br />
-                <Row noGutters={true} className="text-center line32 font3">
+                <Row noGutters={true} className="text-center line32 font4">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10 fontplay">
-                    Do you have a Artisan ID?
+                    Do you have  Artisan ID?
                   </span>
                 </Row>
 
@@ -181,7 +181,7 @@ export default class artreg1 extends Component {
                 <Row noGutters={true} className="text-center line32 font3">
                   <span className="col-xs-2"></span>
                   <span className="col-xs-8">
-                    If you don't have a Artisian id get in touch with us.{" "}
+                    If you don't have  Artisian id get in touch with us.{" "}
                   </span>
                 </Row>
              

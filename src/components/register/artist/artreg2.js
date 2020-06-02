@@ -128,6 +128,10 @@ export default class artreg2 extends Component {
                              <span className="col-xs-1"></span>
 
                              <span className="col-xs-10 fontplay">
+                             <img
+                                 src={logos.emaillogo}
+                                 className="locklogo1 glyphicon mr-5"
+                               ></img>
                                Enter your email ID
                              </span>
                            </Row>
@@ -138,10 +142,10 @@ export default class artreg2 extends Component {
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
-                                 <img
+                                 {/* <img
                                    src={logos.emaillogo}
                                    className="maillogo glyphicon"
-                                 ></img>
+                                 ></img> */}
                                  <input
                                    type="email"
                                    id="emailid"
@@ -179,10 +183,10 @@ export default class artreg2 extends Component {
                                <label className="control-label"></label>
                                <div className="inner-addon left-addon">
                                  {/* <i className="glyphicon glyphicon-user"></i> */}
-                                 <img
+                                 {/* <img
                                    src={logos.otplogo}
                                    className="otplogo glyphicon"
-                                 ></img>
+                                 ></img> */}
                                  <input
                                    type="number"
                                    id="otppin"

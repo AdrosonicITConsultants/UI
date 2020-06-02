@@ -219,7 +219,7 @@ class NavbarComponent extends Component {
                   class="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10 text-left"> 
+                  <span className="col-md-10 col-sm-10 text-left"> 
                     {(this.props.user != null) ? <p> {this.props.user.firstName }{"  "} {this.props.user.lastName }</p>
                       : "Welcome Guest" }
                   </span>
@@ -228,7 +228,7 @@ class NavbarComponent extends Component {
                   </span>
                 </li>
                 <li class="menu-item">
-                  <span class="col-md-2">
+                  <span class="col-md-2 col-sm-2 ">
                     <img
                       style={{ width: "15px" }}
                       src={logos.accountcircleicon}
@@ -238,7 +238,7 @@ class NavbarComponent extends Component {
                   <a onClick={this.myProfile}>My Profile</a>
                 </li>
                 <li class="menu-item">
-                  <span class="col-md-2">
+                  <span class="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.cashregistericon}
@@ -248,7 +248,7 @@ class NavbarComponent extends Component {
                   <a href="/">Transactions</a>
                 </li>
                 <li class="menu-item">
-                  <span class="col-md-2">
+                  <span class="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.receipticonH}
@@ -258,7 +258,7 @@ class NavbarComponent extends Component {
                   <a href="/">My orders</a>
                 </li>
                 <li class="menu-item">
-                  <span class="col-md-2">
+                  <span class="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.dashboardicon}
@@ -268,7 +268,7 @@ class NavbarComponent extends Component {
                   <a href="/">Dashboard</a>
                 </li>
                 <li class="menu-item">
-                  <span class="col-md-2">
+                  <span class="col-md-2 col-sm-2">
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
 
@@ -276,7 +276,7 @@ class NavbarComponent extends Component {
                 </li>
                 {!isAuthenticated ? (
                   <li class="menu-item">
-                    <span class="col-md-2">
+                    <span class="col-md-2 col-sm-2">
                       {" "}
                       <img
                         style={{ width: "15px" }}

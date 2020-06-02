@@ -13,9 +13,9 @@ export default class Footer extends Component {
             <div className="footerblack">
                 <Row></Row>
                 <Row noGutters={true}> 
-                    <Col className="col-md-4 col-sm-4 text-left">Follow us on</Col>
-                    <Col className="col-md-4 col-sm-4  text-center">For any help</Col>
-                    <Col className="col-md-4  col-sm-4 text-right">DOWNLOAD CRAFT EXCHANGE APP ON</Col>
+                    <Col md="4" sm="4" xs="4" className="text-left">Follow us on</Col>
+                    <Col md="4" sm="4" xs="4" className="text-center">For any help</Col>
+                    <Col md="4" sm="4" xs="4"  className="text-right">DOWNLOAD CRAFT EXCHANGE APP ON</Col>
                     
                 </Row>
                 <br/>

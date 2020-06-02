@@ -168,7 +168,7 @@ export default class buyreg4 extends Component {
                                  className="form-group1 text-left"
                                >
                                  <label className="control-label padform text-left">
-                                   Branch/Company Name
+                                   Brand/Company Name
                                    <strong className="requiredStar">*</strong>
                                  </label>
                                  <div className="inner-addon">
@@ -218,7 +218,7 @@ export default class buyreg4 extends Component {
                                  className="form-group1 text-left"
                                >
                                  <label className="control-label padform text-left">
-                                   Upload Brand Logo
+                                   Upload your Brand Logo
                                  </label>
                                  <div className="inner-addon">
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -263,30 +263,7 @@ export default class buyreg4 extends Component {
                                </Col>
                              </Col>
 
-                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
-                               <Col
-                                 xs={{ size: "11", offset: "1" }}
-                                 className="form-group1 text-left"
-                               >
-                                 <label className="control-label padform text-left">
-                                   CIN Number
-                                 </label>
-                                 <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
-                                   <input
-                                     type="text"
-                                     id="cinno"
-                                     className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
-                                     value = {this.state.cinno}
-
-                                     name="cinno"
-                                     onChange={(e) => this.handleChange(e)}
-                                   />
-                                   
-                                 </div>
-                               </Col>
-                             </Col>
+                             
                              <Col xs={{ size: "12" }} md={{ size: "6" }}>
                                <Col
                                  xs={{ size: "11", offset: "1" }}
@@ -308,6 +285,30 @@ export default class buyreg4 extends Component {
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                   
+                                 </div>
+                               </Col>
+                             </Col>
+                             <Col xs={{ size: "12" }} md={{ size: "6" }}>
+                               <Col
+                                 xs={{ size: "11", offset: "1" }}
+                                 className="form-group1 text-left"
+                               >
+                                 <label className="control-label padform text-left">
+                                   CIN Number
+                                 </label>
+                                 <div className="inner-addon">
+                                   {/* <i className="glyphicon glyphicon-user"></i> */}
+                                   <input
+                                     type="text"
+                                     id="cinno"
+                                     className="form-control form2 BuyerLogin1"
+                                     //placeholder="address"
+                                     value = {this.state.cinno}
+
+                                     name="cinno"
+                                     onChange={(e) => this.handleChange(e)}
+                                   />
+                                   
                                  </div>
                                </Col>
                              </Col>

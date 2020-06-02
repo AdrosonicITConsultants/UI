@@ -25,24 +25,7 @@ class BuyerProfile extends Component {
 
                        <Col sm = {{size: "10"}}>
                            <div className= "databackground">
-                               <br></br>
-                               <br></br>
-
-                               <br></br>
-
-                               <br></br>
-
-
-                               <br></br>
-
-                               <br></br>
-
-                               <br></br>
-
-
-                               <br></br>
-
-                               <br></br>
+                            
 
 
                            </div>

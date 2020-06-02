@@ -8,9 +8,11 @@ import { memoryHistory, browserHistory } from "./helpers/history";
 import videoPlayer from './components/login/videoPlayer';
 import { ToastContainer } from "react-toastify";
 import ForgotpassRouter from "./components/forgotpassword/forgotpassRouter";
-import LandingPage from "./components/landingpage/landingpage"
-import PrivateRoute from "../src/services/utils/PrivateRoute"
-import ArtistProfile from "../src/components/profile/artistProfile"
+import LandingPage from "./components/landingpage/landingpage";
+import PrivateRoute from "../src/services/utils/PrivateRoute";
+import ArtistProfile from "../src/components/profile/artistProfile";
+import BuyerProfile from "../src/components/profile/buyerProfile";
+
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
-          <PrivateRoute exact path="/MyProfile" component={ArtistProfile} />
+          <PrivateRoute exact path="/MyProfile" component={BuyerProfile} />
         </Switch>
       </Router>
     </React.Fragment>

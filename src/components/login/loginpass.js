@@ -114,7 +114,7 @@ export default class buyerpass extends Component {
                          <div>
                            <Row noGutters={true}>
                              <span className="col-xs-1"></span>
-                             <span className="col-xs-10 text-center font2">
+                             <span className="col-xs-10 text-center font22">
                                Enter your password
                              </span>
                            </Row>
@@ -168,7 +168,7 @@ export default class buyerpass extends Component {
                              </button>
                            </div>
                          </Row>
-
+<br/>
                          <br />
                          {/* <Row noGutters={true}>
                 <div className="col-xs-12 text-center">
@@ -185,7 +185,7 @@ export default class buyerpass extends Component {
               </Row> */}
                          <hr className="hrline"></hr>
                          <Row noGutters={true}>
-                           <div className="col-xs-12 text-center font2">
+                           <div className="col-xs-12 text-center font22">
                              {this.props.userpage == 2 ? (
                                <div>
                                  new user{" "}
@@ -202,7 +202,7 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
-                         <Row noGutters={true} className="mt60">
+                         <Row noGutters={true} className="mt50">
                            <strong className="col-xs-3 text-center line7 font6">
                              Help?
                            </strong>

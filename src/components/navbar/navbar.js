@@ -90,7 +90,7 @@ class NavbarComponent extends Component {
         >
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             {userTypeId === "2" ? (
-              <li class="menu-item">
+              <li className="menu-item">
                 <a
                   href="/patientHome"
                   className={
@@ -141,11 +141,11 @@ class NavbarComponent extends Component {
                 <img className="navbarLogo" src={logos.mainLogoNavbar}></img>
               </a>
 
-              <ol class="sub-menu">
+              <ol className="sub-menu">
                 {/* <li class="menu-item"><a href="/aboutCOP">About COP</a></li> */}
               </ol>
             </li>
-            <li class="menu-item">
+            <li className="menu-item">
               {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
               <button className="navButton navbarTransparent navbtn1">
                 <img className="navButtonImg" src={logos.navbarbtn1}></img>
@@ -166,26 +166,26 @@ class NavbarComponent extends Component {
     </li> */}
 
             {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
-            <li class="menu-item">
+            <li className="menu-item">
               <img className="navButtonImg" src={logos.searchlogo}></img>
             </li>
           
-            <li onMouseEnter={() => this.toggleHover("isfavHovered")} onMouseLeave={() =>this.toggleHover("isfavHovered")} class="menu-item">
+            <li onMouseEnter={() => this.toggleHover("isfavHovered")} onMouseLeave={() => this.toggleHover("isfavHovered")} className="menu-item">
               {this.state.isfavHovered ? <img className="navButtonImg" src={logos.heariconfilled}></img>
                 : <img className="navButtonImg" src={logos.favoriteicon}></img>}
             </li>
-            <li class="menu-item">
+            <li className="menu-item">
               {this.state.ischatHovered ? <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chat_bubble_filled}></img>
                 : <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chaticon}></img>}
             </li>
-            <li class="menu-item">
+            <li className="menu-item">
               {this.state.isnotificationHovered ? <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")} className="navButtonImg"  src={logos.belliconfilled}></img> 
                 : <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")}  className="navButtonImg" src={logos.notificationsicon}></img>}
                 
              
             </li>
             {userTypeId === "3" || userTypeId === null ? (
-              <li class="menu-item">
+              <li className="menu-item">
                 <button className="navButton navbtn2" style={{ width: "10em" }}>
                   <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My inquiries</span>
@@ -201,7 +201,7 @@ class NavbarComponent extends Component {
               </li>
             ) : null}
            
-            <li class="menu-item">
+            <li className="menu-item">
             
               <a
                 href="#"
@@ -214,9 +214,9 @@ class NavbarComponent extends Component {
               >
                 <img src={logos.usernamelogo}></img>
               </a>
-              <ol class="sub-menu">
+              <ol className="sub-menu">
                 <li
-                  class="menu-item"
+                  className="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
                   <span className="col-md-10 col-sm-10 text-left"> 
@@ -227,8 +227,8 @@ class NavbarComponent extends Component {
                     <img style={{ width: "10px" }} src={logos.closelogo}></img>
                   </span>
                 </li>
-                <li class="menu-item">
-                  <span class="col-md-2 col-sm-2 ">
+                <li className="menu-item">
+                  <span className="col-md-2 col-sm-2 ">
                     <img
                       style={{ width: "15px" }}
                       src={logos.accountcircleicon}
@@ -237,8 +237,8 @@ class NavbarComponent extends Component {
 
                   <a onClick={this.myProfile}>My Profile</a>
                 </li>
-                <li class="menu-item">
-                  <span class="col-md-2 col-sm-2">
+                <li className="menu-item">
+                  <span className="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.cashregistericon}
@@ -247,8 +247,8 @@ class NavbarComponent extends Component {
 
                   <a href="/">Transactions</a>
                 </li>
-                <li class="menu-item">
-                  <span class="col-md-2 col-sm-2">
+                <li className="menu-item">
+                  <span className="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.receipticonH}
@@ -257,8 +257,8 @@ class NavbarComponent extends Component {
 
                   <a href="/">My orders</a>
                 </li>
-                <li class="menu-item">
-                  <span class="col-md-2 col-sm-2">
+                <li className="menu-item">
+                  <span className="col-md-2 col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.dashboardicon}
@@ -267,16 +267,16 @@ class NavbarComponent extends Component {
 
                   <a href="/">Dashboard</a>
                 </li>
-                <li class="menu-item">
-                  <span class="col-md-2 col-sm-2">
+                <li className="menu-item">
+                  <span className="col-md-2 col-sm-2">
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
 
                   <a href="/">Support</a>
                 </li>
                 {!isAuthenticated ? (
-                  <li class="menu-item">
-                    <span class="col-md-2 col-sm-2">
+                  <li className="menu-item">
+                    <span className="col-md-2 col-sm-2">
                       {" "}
                       <img
                         style={{ width: "15px" }}

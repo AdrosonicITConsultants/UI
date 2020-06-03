@@ -35,7 +35,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -57,7 +58,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -96,7 +98,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -118,7 +121,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -137,7 +141,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
     }
 
@@ -152,7 +157,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
     }
 
@@ -167,7 +173,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -181,7 +188,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -198,7 +206,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
   static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1,selectedProducts)    {
@@ -239,7 +248,8 @@ class TTCEapi {
             return response;
           })
           .catch((error) => {
-            return error;
+            return error.response;
+
           });
     }
 
@@ -301,7 +311,8 @@ class TTCEapi {
               return response;
             })
             .catch((error) => {
-              return error;
+              
+              return error.response;
             });
       }
 
@@ -354,7 +365,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -369,7 +381,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
   //#endregion

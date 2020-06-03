@@ -65,12 +65,12 @@ export default class roleselect extends Component {
 
 
                                 </Row>
-                                {/* <Row noGutters={true} className="text-center line5 font3">
-                                    Need Help Deciding?
-                                </Row> */}
-                    <br />
-                    <br />
-                    <br />
+                                <Row noGutters={true} className="text-center line5 font3">
+                                    Help?
+                                </Row>
+                  
+              
+                
                                 <Row noGutters={true} className="text-center  mt37">
                                     Privacy Policy
                                     

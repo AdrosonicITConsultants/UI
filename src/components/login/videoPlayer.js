@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactPlayer from  "react-player"
 import video from "../../assets/file_example_MP4_480_1_5MG.mp4";
+import "./buyer.css"
 import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class videoPlayer extends Component {
@@ -19,13 +20,7 @@ export default class videoPlayer extends Component {
               onEnded={() => this.SkiptoHomepgae()}
             ></ReactPlayer>
             <button
-              className="blackButton"
-              style={{
-                float: "right",
-                position: "relative",
-                marginRight: "20px",
-                marginTop: "-20vh",
-              }}
+              className="blackButton SkipButtonVideo"            
               onClick={() => this.SkiptoHomepgae()}
             >
               Skip to Homepage

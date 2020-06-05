@@ -32,6 +32,7 @@ class NavbarComponent extends Component {
       isnotificationHovered: false,
       ischatHovered: false,
       isfavHovered: false,
+      isSearchClicked :false,
     };
   }
   toggle = () => {
@@ -40,7 +41,8 @@ class NavbarComponent extends Component {
     });
   };
 
-  toggleHover(name) {
+  toggleHover(name) {console.log(name);
+  
     switch (name) {
       case "isfavHovered":
         this.setState({
@@ -55,6 +57,11 @@ class NavbarComponent extends Component {
       case "ischatHovered":
         this.setState({
           ischatHovered: !this.state.ischatHovered,
+        });
+        break; 
+      case "isSearchClicked":
+        this.setState({
+          isSearchClicked: !this.state.isSearchClicked,
         });
         break;
     
@@ -87,7 +94,26 @@ class NavbarComponent extends Component {
         <nav
           className="menu navbarTransparent navbar-expand-sm"
           onClick={this.toggleMobileMenu}
-        >
+        > {
+            this.state.isSearchClicked ? <div className="searchbarNav inner-addon left-addon">
+              <img
+                src={logos.searchlogo}
+                className="searchIconinTextbox glyphicon"
+              ></img>
+              <input
+              autoFocus
+                onBlur={() => this.toggleHover("isSearchClicked")} 
+                type="text"
+                id="userName"
+                className="form-control searchTextbox "
+                placeholder="Username"
+                name="userName"
+                // onChange={(e) => this.handleChange(e)}
+              />
+            
+            </div>:null
+        }
+         
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             {userTypeId === "2" ? (
               <li className="menu-item">
@@ -153,21 +179,9 @@ class NavbarComponent extends Component {
               </button>
             </li>
 
-            {/* <li class="menu-item">
-      <a href="#" className={(this.state.activeTabClassName === "/testslist") || (this.state.activeTabClassName === "/antibodies")? "active" : ""}>Lab Services</a>
-      <ol class="sub-menu">
-        <li class="menu-item"><a href="/testslist">List of Tests Offered</a></li>
-        <li class="menu-item"><a href="/antibodies">List of Antibodies</a></li>
-        {!isAuthenticated ?
-        <li class="menu-item"><a href="/register">Order a Test</a></li>
-        : null
-        }
-      </ol>
-    </li> */}
-
-            {/* <li class="menu-item"><a href="#0">Accreditations</a></li> */}
-            <li className="menu-item">
-              <img className="navButtonImg" src={logos.searchlogo}></img>
+            <li  className="menu-item">
+             
+              <img onClick={() => this.toggleHover("isSearchClicked")}  className="navButtonImg" src={logos.searchlogo}></img>          
             </li>
           
             <li onMouseEnter={() => this.toggleHover("isfavHovered")} onMouseLeave={() => this.toggleHover("isfavHovered")} className="menu-item">
@@ -219,7 +233,7 @@ class NavbarComponent extends Component {
                   className="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10 col-sm-10 text-left"> 
+                  <span className="col-md-10  col-xs-10 col-sm-10 text-left"> 
                     {(this.props.user != null) ? <p> {this.props.user.firstName }{"  "} {this.props.user.lastName }</p>
                       : "Welcome Guest" }
                   </span>
@@ -228,17 +242,17 @@ class NavbarComponent extends Component {
                   </span>
                 </li>
                 <li className="menu-item">
-                  <span className="col-md-2 col-sm-2 ">
+                  <span className="col-md-2 col-xs-2 col-sm-2 ">
                     <img
                       style={{ width: "15px" }}
                       src={logos.accountcircleicon}
                     ></img>
                   </span>
 
-                  <a onClick={this.myProfile}>My Profile</a>
+                  <a className=" text-left " onClick={this.myProfile}>My Profile</a>
                 </li>
                 <li className="menu-item">
-                  <span className="col-md-2 col-sm-2">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.cashregistericon}
@@ -248,7 +262,7 @@ class NavbarComponent extends Component {
                   <a href="/">Transactions</a>
                 </li>
                 <li className="menu-item">
-                  <span className="col-md-2 col-sm-2">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.receipticonH}
@@ -258,7 +272,7 @@ class NavbarComponent extends Component {
                   <a href="/">My orders</a>
                 </li>
                 <li className="menu-item">
-                  <span className="col-md-2 col-sm-2">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
                     <img
                       style={{ width: "15px" }}
                       src={logos.dashboardicon}
@@ -268,7 +282,7 @@ class NavbarComponent extends Component {
                   <a href="/">Dashboard</a>
                 </li>
                 <li className="menu-item">
-                  <span className="col-md-2 col-sm-2">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
 
@@ -276,7 +290,7 @@ class NavbarComponent extends Component {
                 </li>
                 {!isAuthenticated ? (
                   <li className="menu-item">
-                    <span className="col-md-2 col-sm-2">
+                    <span className="col-md-2  col-xs-2  col-sm-2">
                       {" "}
                       <img
                         style={{ width: "15px" }}

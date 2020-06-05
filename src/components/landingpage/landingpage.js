@@ -3,12 +3,28 @@ import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, Label } from "reactstrap";
 import "./landingpage.css"
 import logos from "../../assets";
 
 
  class landingpage extends Component {
+
+   ExploreMore  = (to) =>{
+switch (to) {
+  case "Self":
+    console.log(to);
+    
+    break;
+  case "New":
+    console.log(to);
+
+    break;
+  default:
+    break;
+}
+   }
+
     render() {
         return (      
             <React.Fragment>
@@ -73,6 +89,9 @@ pride and joy of traditions.</h6>
                         </div>
                         <div className="Homebg2div4">
                           <div className="artistHover">
+                            <Label style={{left:"-2px"}} 
+                              onClick={() => this.ExploreMore("Self")}
+                              className="exploremoreLeft">Explore more <strong>></strong></Label>
                             <h3>Artisan</h3> <h3>self design</h3>
                             <hr className="hrline1"></hr>
                             <br />
@@ -102,11 +121,17 @@ the modern outfits and stands apart.</p>
                       <div className="mainDivTransitionright">
                         <div className="Homebg2div2 counHover" >
                           {" "}
-                          <p>Antaran</p> <p>co-design <p></p>collection</p>
+                         
+                          <p>Antaran</p> 
+                          <p>co-design</p>
+                          <p>collection</p>
                         </div>
 
                         <div className="Homebg2div3">
                           <div className="coHover">
+                            <Label 
+                              onClick={() => this.ExploreMore("New")}
+                            className="exploremore">Explore more <strong>></strong></Label>
                             <p>Antaran</p> <p>co-design collection</p>
                             <hr className="hrlineLeft"></hr>
                             <br />

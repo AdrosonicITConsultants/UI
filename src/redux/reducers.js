@@ -13,6 +13,7 @@ const initialState = {
   userTypeId: null,
   data: null,
   searchData: [],
+  selectedLanguage: "en",
 };
 
 const reducer = (state = initialState, action) => {

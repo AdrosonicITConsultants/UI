@@ -132,7 +132,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                       this.props.dispatch(
                         Actions.loginSuccess(token, user, userTypeId)
                       );
-                      browserHistory.push("/home");                     
+                          browserHistory.push("/demo-video");                     
   
                         } else {
                           this.refs.childa.showValidationpass();
@@ -179,7 +179,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );
-                              browserHistory.push("/home"); 
+                             browserHistory.push("/demo-video"); 
                            } else {
                              this.refs.childb.showValidationpass();
                            }

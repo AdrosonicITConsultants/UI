@@ -154,7 +154,7 @@ export default class artreg4 extends Component {
                   <span className="col-xs-10">
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    <span className = "fontplay">ARTISIAN ID : </span>{this.props.weaverid}
+                    <span className = "fontplay">ARTISAN ID : </span>{this.props.weaverid}
                   </span>
                 </Row>
                 <br></br>

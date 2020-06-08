@@ -202,7 +202,7 @@ flex: 1;
 padding: 1em;
 }
 .menu > ol > .menu-item:after {
-content: "";
+/* content: "";
 position: absolute;
 width: 4px;
 height: 4px;
@@ -212,7 +212,7 @@ left: calc(70% - 2px);
 background: #FECEAB;
 will-change: transform;
 transform: scale(0);
-transition: transform 0.2s ease;
+transition: transform 0.2s ease; */
 }
 .menu > ol > .menu-item:hover:after {
 transform: scale(1);

@@ -86,8 +86,9 @@ class NavbarComponent extends Component {
   }
 
   render() {
-    let isAuthenticated = localStorage.getItem("userTypeId") !== null;
-    let userTypeId = localStorage.getItem("userTypeId");
+    let isAuthenticated =this.props.user !== null;
+    let user = this.props.user;
+    let userTypeId = user.refRoleId;
 
     return (
       <React.Fragment>
@@ -114,49 +115,7 @@ class NavbarComponent extends Component {
             </div>:null
         }
          
-          <ol className={this.state.openMenu ? "mobile_menu" : ""}>
-            {userTypeId === "2" ? (
-              <li className="menu-item">
-                <a
-                  href="/patientHome"
-                  className={
-                    this.state.activeTabClassName === "/patientHome"
-                      ? "active"
-                      : ""
-                  }
-                >
-                  Home
-                </a>
-              </li>
-            ) : null}
-            {userTypeId === "1" ? (
-              <li className="menu-item">
-                <a
-                  href="/creditpartnerHome"
-                  className={
-                    this.state.activeTabClassName === "/creditpartnerHome"
-                      ? "active"
-                      : ""
-                  }
-                >
-                  Home
-                </a>
-              </li>
-            ) : null}
-            {userTypeId === "3" ? (
-              <li className="menu-item">
-                <a
-                  href="/traineeHome"
-                  className={
-                    this.state.activeTabClassName === "/traineeHome"
-                      ? "active"
-                      : ""
-                  }
-                >
-                  Home
-                </a>
-              </li>
-            ) : null}
+          <ol className={this.state.openMenu ? "mobile_menu" : ""}>           
             <li className="menu-item">
               <a
                 href="/home"
@@ -198,20 +157,12 @@ class NavbarComponent extends Component {
                 
              
             </li>
-            {userTypeId === "3" || userTypeId === null ? (
+            {userTypeId === "2" || userTypeId === null ? (
               <li className="menu-item">
                 <button className="navButton navbtn2" style={{ width: "10em" }}>
                   <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My inquiries</span>
-                </button>
-                {/* <ol class="sub-menu">
-        <li class="menu-item"><a href="/courses-offered">Courses Offered</a></li>
-        <li class="menu-item"><a href="#0">Timetable</a></li>
-        {!isAuthenticated ?
-        <li class="menu-item"><a href="/login">Trainee Sign In</a></li>
-        : null
-        }
-      </ol> */}
+                </button>              
               </li>
             ) : null}
            

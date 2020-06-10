@@ -47,11 +47,22 @@ import artistimageLanding from "./Artisanself combined layers.png";
 import coImageHovered from  "./Co Design - hovered Expansion.png"
 import coImageLanding from "./co design combined.png"
 import artistimageLandingHovered from "./Self Design hovered backdrop combined.png";
+import edit from "./Icon feather-edit-2.svg";
+import maillogo from "./material-email.svg";
+import call from "./Icon feather-phone.svg";
+import done from "./done.svg";
+import spin from "./spin.png";
+
 
 
 
 
 export default {
+  spin,
+  done,
+  call,
+  maillogo,
+  edit,
   artistimageLanding,
   coImageHovered,
   coImageLanding,

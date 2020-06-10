@@ -112,7 +112,7 @@ export default class buyreg3 extends Component {
                   >
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    Enter your details to complete registeration
+                    Enter your details to complete registration
                   </span>
                 </Row>
                 <br></br>

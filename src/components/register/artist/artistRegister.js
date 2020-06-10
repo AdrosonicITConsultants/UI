@@ -113,7 +113,7 @@ export default class artistRegister extends Component {
                       this.state.address,this.state.selectedprods).then((response) => {
                          //  debugger;
                        if (response.data.valid) {
-                        customToast.success("Registeration complete.", {
+                        customToast.success("Registration is successful ", {
                           position: toast.POSITION.TOP_RIGHT,
                           autoClose: true,
                         });

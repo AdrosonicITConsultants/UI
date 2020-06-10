@@ -13,8 +13,10 @@ import PrivateRoute from "../src/services/utils/PrivateRoute";
 import ArtistProfile from "../src/components/profile/artistProfile";
 import BuyerProfile from "../src/components/profile/buyerProfile";
 
+import i18next from "i18next";
 
 function App() {
+  
   return (
     <React.Fragment>
       <Router history={browserHistory}>
@@ -25,11 +27,11 @@ function App() {
           <Route exact path="/artist-registration" component={Artistregister} />
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
-          <Route exact path="/demo-video" component={videoPlayer} />
+          <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={BuyerProfile} />
         </Switch>
-      </Router>
+      </Router>   
     </React.Fragment>
   );
 }

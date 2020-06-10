@@ -35,7 +35,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -57,7 +58,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -96,7 +98,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -118,7 +121,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -137,7 +141,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
     }
 
@@ -152,7 +157,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
     }
 
@@ -167,7 +173,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -181,7 +188,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
 
@@ -198,7 +206,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
   static registerArtist(weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address1,selectedProducts)    {
@@ -239,7 +248,8 @@ class TTCEapi {
             return response;
           })
           .catch((error) => {
-            return error;
+            return error.response;
+
           });
     }
 
@@ -296,13 +306,69 @@ class TTCEapi {
           return axios
             .post(url, data, config)
             .then((response) => {
+              debugger
               console.log(response);
               return response;
             })
             .catch((error) => {
-              return error;
+              
+              return error.response;
             });
       }
+
+
+  static updateBuyerProfile(companyname, gstno, officeno, cinno, panno, logoname, adl1,
+    adl2, street, city, state, country1, pincode, landmark, alternatemobno, designation, pocmobile, pocemail, pocname, countryid)   {
+
+    let url = ApiUrl + "/user/edit/profile";
+    var data = {
+      address: {
+        city: city,
+        country: {
+          id: parseInt(countryid),
+          name: country1
+        },
+        line1: adl1,
+        line2: adl2,
+        landmark: landmark,      
+        street: street,        
+        pincode: pincode,
+        state: state
+      },
+      buyerPointOfContact: {
+        contactNo: pocmobile,
+        email: pocemail,
+        firstName: pocname
+      },
+      alternateMobile: alternatemobno,
+      buyerCompanyDetails: {
+        cin: cinno,
+        companyName: companyname,
+        contact: officeno,
+        gstNo: gstno,
+        logo: logoname
+      },
+      designation: designation,    
+      pancard: panno,
+    
+    };
+    console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
 
     static getClusters(){
@@ -315,7 +381,8 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
-        return error;
+        return error.response;
+
       });
   }
   //#endregion

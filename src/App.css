@@ -128,3 +128,12 @@ body{
 .toast-error-container svg{
  color:black 
 }
+
+
+.LangBtn {
+  width: 60px;
+    height: 25px;
+    font-size: 12px !important;
+    padding: 0px !important;
+
+}

@@ -1,4 +1,4 @@
-import mainlogo from "./logo.png";
+import mainlogo from "./Logowithtextonbottom.png";
 import mainlogoside from "./logo-side.jpg"
 import userlogo from "./awesome-id-badge.svg"
 import locklogo from "./material-lock-outline.svg";

@@ -106,7 +106,7 @@ export default class buyeruser extends Component {
           <div>
             <Row noGutters={true}>
               <span className="col-xs-1"></span>
-              <span className="col-xs-10 text-center font22">
+              <span className="col-xs-10 text-center font13">
                 Enter your registered mobile number or email id
               </span>
             </Row>
@@ -168,7 +168,7 @@ export default class buyeruser extends Component {
             style={{ bordertop: "2px solid #d8d9da !important" }}
           ></hr>
           <Row noGutters={true}>
-            <div className="col-xs-12 text-center font22">
+            <div className="col-xs-12 text-center font13">
               {this.props.userpage == 1 ? (
                 <div>
                   new user <a href="/buyer-registration">click here</a> to

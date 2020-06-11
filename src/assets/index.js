@@ -47,12 +47,10 @@ import artistimageLanding from "./Artisanself combined layers.png";
 import coImageHovered from  "./Co Design - hovered Expansion.png"
 import coImageLanding from "./co design combined.png"
 import artistimageLandingHovered from "./Self Design hovered backdrop combined.png";
-<<<<<<< HEAD
 import myOrder from "./Icon material-shopping-basket.svg";
 import scissor from "./Icon feather-scissors.svg";
 import artistMainLogo from "./artistMainLogo.jpg";
 import addnewProduct from "./Add new Product icon.svg";
-=======
 import edit from "./Icon feather-edit-2.svg";
 import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
@@ -60,7 +58,6 @@ import done from "./done.svg";
 import spin from "./spin.png";
 
 
->>>>>>> 33b97b092144a4cf2186f9e853dfc48ce352aa4e
 
 
 

@@ -117,6 +117,7 @@ export default class artistRegister extends Component {
                           position: toast.POSITION.TOP_RIGHT,
                           autoClose: true,
                         });
+                        localStorage.setItem("homepageredirect", 3);
                           setTimeout(
                             () => {browserHistory.push("/");},
                          2000

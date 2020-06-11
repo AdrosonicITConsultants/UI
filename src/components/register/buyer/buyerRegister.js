@@ -169,6 +169,7 @@ export default class buyerRegister extends Component {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
                                   });
+                                  localStorage.setItem("homepageredirect", 1);
                                     setTimeout(() => {
                                       browserHistory.push("/");
                                     }, 2000);

@@ -14,6 +14,7 @@ const initialState = {
   data: null,
   searchData: [],
   selectedLanguage: "en",
+  productList :[],
 };
 
 const reducer = (state = initialState, action) => {

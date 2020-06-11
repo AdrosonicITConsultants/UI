@@ -1,0 +1,30 @@
+.tui-image-editor-menu-filter  .tui-image-editor-submenu-item > li:first-child { visibility: hidden; }
+.tui-image-editor-menu-filter  .filter-color-item { visibility: hidden; }
+.tui-image-editor-menu-filter  .tui-image-editor-submenu-item > li:nth-child(5) { visibility: hidden; }
+
+
+.tui-image-editor-menu-filter .tui-image-editor-submenu-align  > div:first-child { visibility: hidden; }
+.tui-image-editor-menu-filter .tui-image-editor-submenu-align  > div:nth-child(3) { visibility: hidden; }
+
+.tui-image-editor-menu-filter .tui-image-editor-submenu-item > li:nth-child(3) { width: 300px;
+margin-left: 25%;}
+
+
+.tie-btn-delete {
+    display: none !important;
+}
+
+.tie-btn-deleteAll {
+    display: none !important;
+}
+
+.tui-image-editor-icpartition {
+    display: none !important;
+
+}
+
+.tui-image-editor-header-logo {
+    display: none !important;
+
+}
+ 

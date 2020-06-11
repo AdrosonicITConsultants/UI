@@ -47,11 +47,18 @@ import artistimageLanding from "./Artisanself combined layers.png";
 import coImageHovered from  "./Co Design - hovered Expansion.png"
 import coImageLanding from "./co design combined.png"
 import artistimageLandingHovered from "./Self Design hovered backdrop combined.png";
-
+import myOrder from "./Icon material-shopping-basket.svg";
+import scissor from "./Icon feather-scissors.svg";
+import artistMainLogo from "./artistMainLogo.jpg";
+import addnewProduct from "./Add new Product icon.svg";
 
 
 
 export default {
+  addnewProduct,
+  artistMainLogo,
+  scissor,
+  myOrder,
   artistimageLanding,
   coImageHovered,
   coImageLanding,

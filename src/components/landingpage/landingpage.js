@@ -7,6 +7,7 @@ import { Row, Col, Container, Label } from "reactstrap";
 import "./landingpage.css"
 import logos from "../../assets";
 import BuyerLanding from "./buyerLanding"
+import ArtistLanding from  "./artistLanding"
 
 
  class landingpage extends Component {
@@ -27,15 +28,22 @@ switch (to) {
    }
 
     render() {
-        return (      
-            <React.Fragment>
-              <NavbarComponent></NavbarComponent>
-              <Container >
-                <BuyerLanding></BuyerLanding>                
-                <Footer></Footer>
-              </Container>
-            </React.Fragment>
-        
+       let isAuthenticated = this.props.user !== null;
+       let user = this.props.user;
+       let userTypeId = user.refRoleId;
+        return (
+          <React.Fragment>
+            <NavbarComponent></NavbarComponent>
+            <Container>
+              {userTypeId === 1 ? (
+                <ArtistLanding></ArtistLanding>
+              ) : (
+                <BuyerLanding></BuyerLanding>
+              )}
+
+              <Footer></Footer>
+            </Container>
+          </React.Fragment>
         );
     }
 }

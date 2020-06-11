@@ -157,7 +157,19 @@ export default class forgotpass3 extends Component {
                                <button
                                  className="greenButton"
                                  onClick={() => 
-                                        browserHistory.push("/")
+                                  {  
+                                       
+                                          {window.location.pathname.indexOf(
+                                   "passwordA"
+                                 ) !== -1 ? 
+                                    localStorage.setItem('homepageredirect', 3)
+                                 : 
+                                    localStorage.setItem('homepageredirect', 1)
+                                 } 
+                                                                          
+                                   
+                                   browserHistory.push("/");}
+                                     
                                   }
                                >
                                  Login Now

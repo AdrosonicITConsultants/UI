@@ -33,6 +33,7 @@ class NavbarComponent extends Component {
       ischatHovered: false,
       isfavHovered: false,
       isSearchClicked :false,
+
     };
   }
   toggle = () => {
@@ -41,8 +42,9 @@ class NavbarComponent extends Component {
     });
   };
 
-  toggleHover(name) {console.log(name);
-  
+  toggleHover(name) {
+    console.log(name);
+  if (this.props.user.userTypeId == 2){
     switch (name) {
       case "isfavHovered":
         this.setState({
@@ -53,21 +55,22 @@ class NavbarComponent extends Component {
         this.setState({
           isnotificationHovered: !this.state.isnotificationHovered,
         });
-        break; 
+        break;
       case "ischatHovered":
         this.setState({
           ischatHovered: !this.state.ischatHovered,
         });
-        break; 
+        break;
       case "isSearchClicked":
         this.setState({
           isSearchClicked: !this.state.isSearchClicked,
         });
         break;
-    
+
       default:
         break;
     }
+  }
   }
 
   toggleMobileMenu = () => {
@@ -86,6 +89,7 @@ class NavbarComponent extends Component {
   }
 
   render() {
+    debugger
     let isAuthenticated =this.props.user !== null;
     let user = this.props.user;
     let userTypeId = user.refRoleId;
@@ -95,15 +99,17 @@ class NavbarComponent extends Component {
         <nav
           className="menu navbarTransparent navbar-expand-sm"
           onClick={this.toggleMobileMenu}
-        > {
-            this.state.isSearchClicked ? <div className="searchbarNav inner-addon left-addon">
+        >
+          {" "}
+          {this.state.isSearchClicked ? (
+            <div className="searchbarNav inner-addon left-addon">
               <img
                 src={logos.searchlogo}
                 className="searchIconinTextbox glyphicon"
               ></img>
               <input
-              autoFocus
-                onBlur={() => this.toggleHover("isSearchClicked")} 
+                autoFocus
+                onBlur={() => this.toggleHover("isSearchClicked")}
                 type="text"
                 id="userName"
                 className="form-control searchTextbox "
@@ -111,63 +117,179 @@ class NavbarComponent extends Component {
                 name="userName"
                 // onChange={(e) => this.handleChange(e)}
               />
-            
-            </div>:null
-        }
-         
-          <ol className={this.state.openMenu ? "mobile_menu" : ""}>           
+            </div>
+          ) : null}
+          <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             <li className="menu-item">
-              <a
-                href="/home"
-                className={
-                  this.state.activeTabClassName === "/" ? "active" : ""
-                }
-              >
-                <img className="navbarLogo" src={logos.mainLogoNavbar}></img>
-              </a>
+              {userTypeId === 2 ? (
+                <a
+                  href="/home"
+                  className={
+                    this.state.activeTabClassName === "/" ? "active" : ""
+                  }
+                >
+                  {" "}
+                  <img
+                    className="navbarLogo"
+                    src={logos.mainLogoNavbar}
+                  ></img>{" "}
+                </a>
+              ) : (
+                <a
+                  href="/home"
+                  className={
+                    this.state.activeTabClassName === "/" ? "active" : ""
+                  }
+                >
+                  {" "}
+                  {/* <img className="navbarLogoA" src={logos.artistMainLogo}></img> */}
+                  <img className="navbarLogo" src={logos.mainLogoNavbar}></img>
+                </a>
+              )}
+            </li>
+            <li className="menu-item">
+              {userTypeId === 2 ? (
+                <button className="navButton navbarTransparent navbtn1">
+                  <img className="navButtonImg" src={logos.navbarbtn1}></img>
+                  <span className="navButtonImg">New custom design</span>
+                </button>
+              ) : (
+                <button className="navButtonA navbarTransparent navbtn1">
+                  <img
+                    className="navButtonImgA"
+                    src={logos.addnewProduct}
+                  ></img>
+                  <span className="navButtonImgA">Add a new Product</span>
+                </button>
+              )}
+            </li>
 
-              <ol className="sub-menu">
-                {/* <li class="menu-item"><a href="/aboutCOP">About COP</a></li> */}
-              </ol>
-            </li>
-            <li className="menu-item">
-              {/* <a href="/joinTeam" className={(this.state.activeTabClassName === "/joinTeam") || (this.state.activeTabClassName === "/careers") ? "active" : ""}>Custom design inquiry</a> */}
-              <button className="navButton navbarTransparent navbtn1">
-                <img className="navButtonImg" src={logos.navbarbtn1}></img>
-                <span className="navButtonImg">New custom design</span>
-              </button>
-            </li>
-
-            <li  className="menu-item">
-             
-              <img onClick={() => this.toggleHover("isSearchClicked")}  className="navButtonImg" src={logos.searchlogo}></img>          
-            </li>
-          
-            <li onMouseEnter={() => this.toggleHover("isfavHovered")} onMouseLeave={() => this.toggleHover("isfavHovered")} className="menu-item">
-              {this.state.isfavHovered ? <img className="navButtonImg" src={logos.heariconfilled}></img>
-                : <img className="navButtonImg" src={logos.favoriteicon}></img>}
-            </li>
-            <li className="menu-item">
-              {this.state.ischatHovered ? <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chat_bubble_filled}></img>
-                : <img onMouseEnter={() => this.toggleHover("ischatHovered")} onMouseLeave={() => this.toggleHover("ischatHovered")}  className="navButtonImg" src={logos.chaticon}></img>}
-            </li>
-            <li className="menu-item">
-              {this.state.isnotificationHovered ? <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")} className="navButtonImg"  src={logos.belliconfilled}></img> 
-                : <img onMouseEnter={() => this.toggleHover("isnotificationHovered")} onMouseLeave={() => this.toggleHover("isnotificationHovered")}  className="navButtonImg" src={logos.notificationsicon}></img>}
-                
-             
-            </li>
-            {userTypeId === "2" || userTypeId === null ? (
+            {userTypeId === 1 ? (
               <li className="menu-item">
-                <button className="navButton navbtn2" style={{ width: "10em" }}>
-                  <img className="navButtonImg1" src={logos.receipticon}></img>
-                  <span className="navButtonImg">My inquiries</span>
-                </button>              
+                {this.state.isfavHovered ? (
+                  <>
+                    <img
+                      onMouseEnter={() => this.toggleHover("isfavHovered")}
+                      onMouseLeave={() => this.toggleHover("isfavHovered")}
+                      className="navButtonImg"
+                      src={logos.myOrder}
+                    ></img>
+                    <span
+                      style={{ marginLeft: "10px !important" }}
+                      className="myorder myorderwidth col-md-12 col-sm-12"
+                    >
+                      My Orders
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <img
+                      onMouseEnter={() => this.toggleHover("isfavHovered")}
+                      onMouseLeave={() => this.toggleHover("isfavHovered")}
+                      className="navButtonImg"
+                      src={logos.myOrder}
+                    ></img>
+                    <span
+                      className="myorder1 myorderwidth col-md-12 col-sm-12"
+                    >
+                      My Orders
+                    </span>
+                  </>
+                )}
               </li>
             ) : null}
-           
+
             <li className="menu-item">
-            
+              <img
+                onClick={() => this.toggleHover("isSearchClicked")}
+                className="navButtonImg"
+                src={logos.searchlogo}
+              ></img>
+              {userTypeId === 1 ? (
+                <span className="myorder col-md-12 col-sm-12">Search</span>
+              ) : null}
+            </li>
+
+            {userTypeId === 2 ? (
+              <li className="menu-item">
+                {this.state.isfavHovered ? (
+                  <img
+                    onMouseEnter={() => this.toggleHover("isfavHovered")}
+                    onMouseLeave={() => this.toggleHover("isfavHovered")}
+                    className="navButtonImg"
+                    src={logos.heariconfilled}
+                  ></img>
+                ) : (
+                  <img
+                    onMouseEnter={() => this.toggleHover("isfavHovered")}
+                    onMouseLeave={() => this.toggleHover("isfavHovered")}
+                    className="navButtonImg"
+                    src={logos.favoriteicon}
+                  ></img>
+                )}
+              </li>
+            ) : null}
+
+            <li className="menu-item">
+              {this.state.ischatHovered ? (
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chat_bubble_filled}
+                ></img>
+              ) : (
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chaticon}
+                ></img>
+              )}
+              {userTypeId === 1 ? (
+                <span className="myorder col-md-12 col-sm-12">Chat</span>
+              ) : null}
+            </li>
+
+            <li className="menu-item">
+              {this.state.isnotificationHovered ? (
+                <img
+                  onMouseEnter={() => this.toggleHover("isnotificationHovered")}
+                  onMouseLeave={() => this.toggleHover("isnotificationHovered")}
+                  className="navButtonImg"
+                  src={logos.belliconfilled}
+                ></img>
+              ) : (
+                <img
+                  onMouseEnter={() => this.toggleHover("isnotificationHovered")}
+                  onMouseLeave={() => this.toggleHover("isnotificationHovered")}
+                  className="navButtonImg"
+                  src={logos.notificationsicon}
+                ></img>
+              )}
+              {userTypeId === 1 ? (
+                <span className="myorder col-md-12 col-sm-12">
+                  Notifications
+                </span>
+              ) : null}
+            </li>
+            <li className="menu-item">
+              {userTypeId === 2 ? (
+                <button className="navButton navbtn2" style={{ width: "11em" }}>
+                  <img className="navButtonImg1" src={logos.receipticon}></img>
+                  <span className="navButtonImg">My Enquiries</span>
+                </button>
+              ) : (
+                <button
+                  className="navButtonA navbtn2A"
+                  style={{ width: "11em" }}
+                >
+                  <img className="navButtonImg1" src={logos.receipticon}></img>
+                  <span className="navButtonImg">My Enquiries</span>
+                </button>
+              )}
+            </li>
+            <li className="menu-item">
               <a
                 href="#"
                 className={
@@ -184,12 +306,22 @@ class NavbarComponent extends Component {
                   className="menu-item"
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
-                  <span className="col-md-10  col-xs-10 col-sm-10 text-left"> 
-                    {(this.props.user != null) ? <p> {this.props.user.firstName }{"  "} {this.props.user.lastName }</p>
-                      : "Welcome Guest" }
+                  <span className="col-md-11  col-xs-11 col-sm-11 text-center">
+                    {this.props.user != null ? (
+                      <p>
+                        {" "}
+                        {this.props.user.firstName}
+                        {"  "} {this.props.user.lastName}
+                      </p>
+                    ) : (
+                      "Welcome Guest"
+                    )}
                   </span>
                   <span>
-                    <img style={{ width: "10px" }} src={logos.closelogo}></img>
+                    <img
+                      style={{ width: "10px", opacity: "0" }}
+                      src={logos.closelogo}
+                    ></img>
                   </span>
                 </li>
                 <li className="menu-item">
@@ -200,7 +332,9 @@ class NavbarComponent extends Component {
                     ></img>
                   </span>
 
-                  <a className=" text-left " onClick={this.myProfile}>My Profile</a>
+                  <a className=" text-left " onClick={this.myProfile}>
+                    My Profile
+                  </a>
                 </li>
                 <li className="menu-item">
                   <span className="col-md-2  col-xs-2  col-sm-2">
@@ -239,7 +373,7 @@ class NavbarComponent extends Component {
 
                   <a href="/">Support</a>
                 </li>
-                {!isAuthenticated ? (
+                {isAuthenticated ? (
                   <li className="menu-item">
                     <span className="col-md-2  col-xs-2  col-sm-2">
                       {" "}
@@ -248,7 +382,6 @@ class NavbarComponent extends Component {
                         src={logos.logouticon}
                       ></img>
                     </span>
-
                     <a onClick={this.logout}>Logout</a>
                   </li>
                 ) : null}

@@ -32,9 +32,20 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                    this.checkusernameBuyer = this.checkusernameBuyer.bind(this);
                  }
 
-                 renderSection(num){
+               
+
+                 renderSection(num){             
+                   if (
+                     localStorage.getItem('homepageredirect') != null
+                   ) {
+                     num = parseInt(localStorage.getItem("homepageredirect"));
+                     
+                   }
                      switch (num) {
                        case 0:
+                       //  this.props.loginpageState = 0;
+                         localStorage.removeItem("homepageredirect");
+                       
                          return (
                            <Roleselect
                              handler={this.handler}
@@ -44,6 +55,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                          break;
                        case 1:
                          //buyer
+                         localStorage.removeItem("homepageredirect");
                          return (
                            <Loginuser
                              ref="childb"
@@ -54,6 +66,8 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                          );
                          break;
                        case 2:
+                         localStorage.removeItem("homepageredirect");
+
                          return (
                            <Loginpass
                              ref="childb"
@@ -65,6 +79,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                          break;
                        case 3:
                          //artist
+                         localStorage.removeItem("homepageredirect");
                          return (
                            <Loginuser
                              ref="childa"
@@ -75,6 +90,8 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                          );
                          break;
                        case 4:
+                         localStorage.removeItem("homepageredirect");
+
                          return (
                            <Loginpass
                              ref="childa"
@@ -83,9 +100,11 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                              cpa={this.checkpasswordArtist}
                            />
                          );
-                         break;                  
+                         break;
 
                        default:
+                         localStorage.removeItem("homepageredirect");
+
                          return (
                            <Roleselect
                              handler={this.handler}
@@ -195,6 +214,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                  }
 
                  render() {
+                   
                    return (
                      <React.Fragment>
                        <div className="homeimg">
@@ -233,7 +253,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 
 
                 function mapStateToProps(state) {
-                return {}
+              
                 }
 
                const connectedLoginPage = connect(mapStateToProps)(HomePage);

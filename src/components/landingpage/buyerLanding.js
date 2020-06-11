@@ -5,7 +5,7 @@ import { Row, Col, Container, Label } from "reactstrap";
 import "./landingpage.css";
 import logos from "../../assets";
 
-class landingpage extends Component {
+class buyerLanding extends Component {
   ExploreMore = (to) => {
     switch (to) {
       case "Self":
@@ -24,7 +24,7 @@ class landingpage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container>
+     
           <Row noGutters={true}>
             <div className="homeDivmain">
               <br></br>
@@ -191,7 +191,7 @@ class landingpage extends Component {
               ></img>
             </div>
           </Row>
-        </Container>
+   
       </React.Fragment>
     );
   }
@@ -202,5 +202,5 @@ function mapStateToProps(state) {
   return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(landingpage);
+const connectedLoginPage = connect(mapStateToProps)(buyerLanding);
 export default connectedLoginPage;

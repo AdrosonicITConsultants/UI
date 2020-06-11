@@ -1,0 +1,126 @@
+
+.artistbg1{
+   background-image: url("../../assets/artistbg1.svg");
+    z-index: 1000;
+    height: 600px;
+    /* opacity: 1.7; */
+    width: 100%;
+    font-family: var(--PlayfairFont);
+    /* background-size: 99% 100%; */
+    background-size: 95% 100%;
+    /* background-position: -370% 0%; */
+    background-repeat: no-repeat;
+    margin-top: -100px;
+   
+
+
+}
+.artistbg12{
+   background-image: url("../../assets/artistbg12.png");
+    z-index: 1000;
+    height: 100px;
+    /* opacity: 1.7; */
+    width: 100%;
+    font-family: var(--PlayfairFont);
+   background-size: 50% 100%;
+    background-position: 50% 0%;
+
+    /* background-position: -370% 0%; */
+    background-repeat: no-repeat;
+    margin-top: 170px;
+
+
+}
+
+.parallaxA {
+  /* The image used */
+  /* background-image: url("../../assets/landingpageimg.png"); */
+  /* Set a specific height */
+  /* min-height: 500px;  */
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+}
+
+.artistbg1img{
+       width: 30%;
+    margin-top: 80px;
+}
+.artistbg2{
+   background-image: url(/static/media/artistbg2.6067a961.svg);
+    z-index: 1000;
+    height: 400px;
+    /* opacity: 1.7; */
+    width: 100%;
+    font-family: var(--PlayfairFont);
+    background-size: 98% 100%;
+    background-position: 46% 0%;
+    background-repeat: no-repeat;
+    
+    margin-top: -50px;
+
+
+}
+
+.artistbg3{
+   background-image: url("../../assets/A\ spin\ on\ the\ fabric\ of\ times.png");  
+    /* float: left;
+    position: absolute; */
+    /* left: 10%;
+    top: 15%; */
+   
+    z-index: 1000;
+    height: 100px;
+ margin-bottom: 20px;
+    margin-top: -80px;
+    /* opacity: 1.7; */
+    width: 50%;
+    font-family: var(--PlayfairFont);
+    background-size: 100% 100%;
+     
+}
+
+.artistLanding{
+    background: #F0F0F0 ;
+}
+
+.text1A{
+        font-family: var(--PlayfairFont);
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.text2A{
+    margin-left: 25px;
+    font-family: var(--LatoFont);
+    color: var(--lightFont);
+}
+
+.greetingName{
+    margin-top: 125px;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.mt20{
+    margin-top:20px;
+}
+
+.mt40{
+    margin-top:40px;
+}
+.mt60{
+    margin-top:60px;
+}
+.mt37{
+    margin-top:37px;
+}
+.mt30{
+    margin-top:30px;
+}
+.mt50{
+    margin-top:50px;
+}

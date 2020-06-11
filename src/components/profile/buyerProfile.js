@@ -295,7 +295,7 @@ class BuyerProfile extends Component {
                                                                     ></img>}
                                                 
                                                 <hr className="hrlinep3"></hr>
-                                                <div className="fw700">
+                                                <div className="fw700 font14">
                                                     Name
                                                 </div>
                                                 <div>
@@ -311,7 +311,7 @@ class BuyerProfile extends Component {
                                                         /> 
                                                 
                                                 </div>
-                                                <div className="fw700">
+                                                <div className="fw700 font14">
                                                     Mobile No.
                                                 </div>
                                                 <div>
@@ -327,7 +327,7 @@ class BuyerProfile extends Component {
                                                         /> 
                                                     
                                                 </div>
-                                                <div className="fw700">
+                                                <div className="fw700 font14">
                                                     Email Id
                                                 </div>
                                                 <div>

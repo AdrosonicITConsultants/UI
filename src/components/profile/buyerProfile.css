@@ -57,7 +57,7 @@
     display: inline-block!important;
     font-size : 14px!important;  
 }
-input[type="text"]:disabled {
+.profiledesig > input[type="text"]:disabled {
     background: transparent;
     border: 2px;
     padding-left: 0px;
@@ -236,7 +236,7 @@ input[type="number"]:disabled {
         display: inline-block!important;
         font-size: 20px!important;
     }
-    input[type="text"]:disabled {
+    .profiledesig > input[type="text"]:disabled {
         background: transparent;
         border: 2px;
         padding-left: 0px;
@@ -281,5 +281,21 @@ input[type="number"]:disabled {
     .font22 {
         font-size: 28px;
     }
+    .bdetail > div > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        font-size: 22px!important;
+        padding-left: 12px;
+        text-align: center;
+    }
+    .bgdis3 {
+        width: 100%!important;
+        display: inline-block!important;
+        font-size: 18px!important;
+    }
+    .bdetailsheading {
+        font-size: 22px;
+    }
+   
 
 }

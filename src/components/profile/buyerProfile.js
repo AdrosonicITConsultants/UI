@@ -22,8 +22,8 @@ class BuyerProfile extends Component {
           isDaddress : true,
           designation: this.props.user.designation,
           alternatemobno: this.props.user.alternateMobile,
-          gstno: this.props.user.buyerCompanyDetails.gstNo,
-          cinno: this.props.user.buyerCompanyDetails.cin,
+          gstno: this.props.user.companyDetails.gstNo,
+          cinno: this.props.user.companyDetails.cin,
           panno: this.props.user.pancard,
           pocname : this.props.user.pointOfContact.firstName,
           pocemail : this.props.user.pointOfContact.email,
@@ -139,7 +139,7 @@ class BuyerProfile extends Component {
                                                     
                                                     <Col sm = {{size: "6"}} >
                                                         <div  className= "companyname">
-                                                        {this.props.user.buyerCompanyDetails.companyName},{" " + this.props.user.addressses[0].city}
+                                                        {this.props.user.companyDetails.companyName},{" " + this.props.user.addressses[0].city}
 
                                                         </div>
                                                         <hr className="profileline"></hr>
@@ -366,7 +366,7 @@ class BuyerProfile extends Component {
                                                 
                                                 <hr className="hrlinep3"></hr>
                                                 <div className="font16 fw600">
-                                                    {this.props.user.buyerCompanyDetails.companyName}
+                                                    {this.props.user.companyDetails.companyName}
                                                 </div>
                                                 {this.state.isDaddress 
                                                 ? 

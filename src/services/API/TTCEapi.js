@@ -279,7 +279,7 @@ class TTCEapi {
                 firstName : pocname
               },
               alternateMobile: alternatemobno,
-              buyerCompanyDetails : {
+              companyDetails : {
                   cin : cinno,
                   companyName : companyname,
                   contact : officeno,
@@ -341,7 +341,7 @@ class TTCEapi {
         firstName: pocname
       },
       alternateMobile: alternatemobno,
-      buyerCompanyDetails: {
+      companyDetails: {
         cin: cinno,
         companyName: companyname,
         contact: officeno,

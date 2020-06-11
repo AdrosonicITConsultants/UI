@@ -23,6 +23,7 @@
     "react-i18next": "^11.5.0",
     "react-india-state-region-selector": "^6.1.0",
     "react-indian-state-region-selector": "^6.1.0",
+    "react-inline-editing": "^1.0.10",
     "react-player": "^2.0.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

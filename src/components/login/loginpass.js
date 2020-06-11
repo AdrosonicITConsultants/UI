@@ -114,7 +114,7 @@ export default class buyerpass extends Component {
                          <div>
                            <Row noGutters={true}>
                              <span className="col-xs-1"></span>
-                             <span className="col-xs-10 text-center font22">
+                             <span className="col-xs-10 text-center font13">
                                Enter your password
                              </span>
                            </Row>
@@ -185,7 +185,7 @@ export default class buyerpass extends Component {
               </Row> */}
                          <hr className="hrline"></hr>
                          <Row noGutters={true}>
-                           <div className="col-xs-12 text-center font22">
+                           <div className="col-xs-12 text-center font13">
                              {this.props.userpage == 2 ? (
                                <div>
                                  new user{" "}

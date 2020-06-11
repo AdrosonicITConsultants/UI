@@ -165,7 +165,7 @@ export default class buyerRegister extends Component {
                             this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid,this.state.pocmobile,this.state.pocemail,this.state.pocname,this.state.countryid).then(
                               (response) => {
                                 if (response.data.valid) {
-                                  customToast.success("Registeration complete.", {
+                                  customToast.success("Registration is successful ", {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
                                   });

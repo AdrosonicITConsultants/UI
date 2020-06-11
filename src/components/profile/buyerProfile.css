@@ -6,7 +6,7 @@
     height: 230px;
 }
 .profileheading{
-    font-size:40px;
+    font-size:50px;
     color: white;
     margin-left: 34px;
     margin-top: 25px;
@@ -16,13 +16,192 @@
     background-image: url("../../assets/Profilebackground.png"); 
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 1032px;
-
+    width: 90%;
+    height: 931px;
+    margin: 0 auto;
+    padding: 40px;
 }
 
+.profilelogo{
+    background-image: url("../../assets/logo2.png");
+    height: 140px;
+    width: 140px;
+    position: absolute;
+    border-radius: 50%;
+    top: -25px;
+    left: 15px;
+    background-size: 100% 100%;
+}
+.profilename{
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 26px;
+    line-height: 32px;
+}
+.profiledesig{
+    font-size: 20px;
+    width:300px!important;
+}
+.bgdis{
+    width:80%!important;
+    display: inline-block!important;
+    font-size : 14px!important;  
+}
+.bgdis2{
+    width:70%!important;
+    display: inline-block!important;
+    font-size : 14px!important;  
+}
+.bgdis3{
+    width:100%!important;
+    display: inline-block!important;
+    font-size : 14px!important;  
+}
+.profiledesig > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    padding-left: 0px;
+    font-size : 20px!important;
+}
+input[type="number"]:disabled {
+    background: transparent;
+    border: 2px;
+    padding-left: 0px;
+    
+}
+.BuyerLogin2{
+    border-radius: 25px !important;
+    height: 32px !important;
+}
+.companyname{
+    font-size :20px;
+    font-weight: 600;
 
+}
+.profileline{
+    color: black;
+    border-top: 0.5px solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
+}
+.font20{
+    font-size: 20px;
+}
+.font16{
+    font-size: 16px;
+}
+.font14{
+    font-size: 14px;
+}
+.fw600{
+    font-weight: 600;
+}
+.fw700{
+    font-weight: 700;
+}
+.pcontactbg{
+    background: yellow;
+    padding: 5px 10px;
+    line-height: 31px;
+    font-size: 16px;
+}
+
+.mr10{
+    margin-right: 10px;
+}
+.mr15{
+    margin-right: 15px;
+}
+.hrlinep2{
+    color: black;
+    border: 0.5px solid;
+    width: 50%;
+}
+.bdetail > div > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 12px;
+    text-align: center;
+}
+.font22{
+    font-size: 22px;
+}
+.bdetailsheading{
+    font-size: 16px;
+}
+.pocbg1{
+    background-color: rgba(236, 192, 1, 0.65);
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    width:45%!important;
+    min-height: 220px!important;
+}
+.pocbg2{
+    background-color: rgba(236, 192, 1, 0.65);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:45%!important;
+    float:right!important;
+    min-height: 220px!important;
+}
+.hrlinep3{
+    width: 60%;
+    border: 0.5px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+.pocbg1 > div > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+.pocbg1 > div > input[type="email"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+.centrespace{
+    width:10%;
+}
+.form-control{
+    box-shadow: none!important;
+}
+.poctick{
+    top: 5px;
+    right: 5px;
+}
+.noteprofile{
+    max-width: 290px;
+    margin: 10px auto;
+    font-size: 12px;
+    text-align: center;
+}
+#savebutton:disabled{
+    background-color: grey;
+}
+.spinimage{
+    width: 300px;
+}
+.editdesc{
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+
+}
+.checkdesc{
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+
+}
 
 
 
@@ -43,16 +222,80 @@
 @media only screen and ( min-width: 1200px ) {
     .databackground{
        
-        height: 1254px;
+        height: 1130px;
     
     }
-    .profileheading{
-        font-size:50px;
-        color: white;
-        margin-left: 34px;
-        margin-top: 25px;
-        
+    .profilename {
+        font-size: 36px;
+        font-weight: 700;
+        margin-top: 26px;
+        line-height: 40px;
     }
+    .bgdis {
+        width: 100%!important;
+        display: inline-block!important;
+        font-size: 20px!important;
+    }
+    .profiledesig > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        padding-left: 0px;
+        font-size : 28px!important;
+    }
+    .BuyerLogin2 {
+        border-radius: 25px !important;
+        height: 40px !important;
+    }
+    .companyname {
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .profileline{
+        color: black;
+        border-top: 0.5px solid;
+        margin-top: 20px;
+        margin-bottom: 20px;
     
+    }
+    .font16{
+        font-size:22px;
+    }
+    .font14{
+        font-size:18px;
+
+    }
+    .pcontactbg {
+        background: yellow;
+        padding: 5px 10px;
+        line-height: 42px;
+        font-size: 22px;
+    }
+    .bgdis2 {
+        width: 76%!important;
+        display: inline-block!important;
+        font-size: 22px!important;
+    }
+    .mt7 {
+        margin-top: 10px;
+    }
+    .font22 {
+        font-size: 28px;
+    }
+    .bdetail > div > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        font-size: 22px!important;
+        padding-left: 12px;
+        text-align: center;
+    }
+    .bgdis3 {
+        width: 100%!important;
+        display: inline-block!important;
+        font-size: 18px!important;
+    }
+    .bdetailsheading {
+        font-size: 22px;
+    }
+   
 
 }

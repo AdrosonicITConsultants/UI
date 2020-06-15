@@ -90,7 +90,7 @@ class TTCEapi {
           const token = response.data.data.acctoken;
           const user = response.data.data.user;
           localStorage.setItem('jwtToken', token);
-           localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(user));
           setAuthorizationtoken(token);
           
       //  console.log(jwt.decode(token));
@@ -317,8 +317,9 @@ class TTCEapi {
       }
 
 
-  static updateBuyerProfile(companyname, gstno, officeno, cinno, panno, logoname, adl1,
-    adl2, street, city, state, country1, pincode, landmark, alternatemobno, designation, pocmobile, pocemail, pocname, countryid)   {
+  static updateBuyerProfile(companyname, gstno, cinno, panno, logoname, adl1,
+    adl2, street, city, state, country1, pincode, landmark, alternatemobno,
+     designation, pocmobile, pocemail, pocname, countryid)   {
 
     let url = ApiUrl + "/user/edit/profile";
     var data = {
@@ -344,7 +345,6 @@ class TTCEapi {
       companyDetails: {
         cin: cinno,
         companyName: companyname,
-        contact: officeno,
         gstNo: gstno,
         logo: logoname
       },
@@ -353,13 +353,16 @@ class TTCEapi {
     
     };
     console.log(data);
+    debugger;
+    
     var config = {
       headers: {
         "Content-type": "application/json",
+        // "Authorization" : axios.defaults.headers.common['Authorization']
       },
     };
     return axios
-      .post(url, data, config)
+      .put(url, data, config)
       .then((response) => {
         console.log(response);
         return response;

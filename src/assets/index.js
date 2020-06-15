@@ -65,6 +65,9 @@ import featheredit from "./feather-edit.svg"
 import warpicon from "./Warpicon.svg";
 import reedcount from "./Reedcount .svg";
 import dimensions from "./dimensions.svg";
+import save from "./save.svg";
+
+
 
 
 
@@ -78,6 +81,7 @@ export default {
   warpweft,
   wefticon,
   extraWefticon,
+  save,
   addnewProduct,
   artistMainLogo,
   scissor,

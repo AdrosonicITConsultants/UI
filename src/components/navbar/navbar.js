@@ -91,7 +91,7 @@ browserHistory.push("/MyProfile");
   }
 
   render() {
-    debugger
+   // debugger
     let isAuthenticated =this.props.user !== null;
     let user = this.props.user;
     let userTypeId = user.refRoleId;

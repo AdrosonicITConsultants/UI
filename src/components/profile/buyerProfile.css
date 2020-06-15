@@ -63,6 +63,12 @@
     padding-left: 0px;
     font-size : 20px!important;
 }
+.companyname > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    padding-left: 0px;
+    font-size : 20px!important;
+}
 input[type="number"]:disabled {
     background: transparent;
     border: 2px;
@@ -73,11 +79,11 @@ input[type="number"]:disabled {
     border-radius: 25px !important;
     height: 32px !important;
 }
-.companyname{
+/* .companyname{
     font-size :20px;
     font-weight: 600;
 
-}
+} */
 .profileline{
     color: black;
     border-top: 0.5px solid;
@@ -115,7 +121,7 @@ input[type="number"]:disabled {
 }
 .hrlinep2{
     color: black;
-    border: 0.5px solid;
+    border-top: 0.5px solid;
     width: 50%;
 }
 .bdetail > div > input[type="text"]:disabled {
@@ -149,7 +155,7 @@ input[type="number"]:disabled {
 }
 .hrlinep3{
     width: 60%;
-    border: 0.5px solid black;
+    border-top: 0.5px solid black;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0px;
@@ -202,6 +208,18 @@ input[type="number"]:disabled {
     top: 5px;
 
 }
+.saveimg{
+    width:22px;
+}
+.profilebutton{
+    width:9em!important;
+}
+.editbutton{
+    width: 20px;
+}
+.pr0{
+    padding-right:0px!important;
+}
 
 
 
@@ -209,11 +227,140 @@ input[type="number"]:disabled {
    
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
-    .databackground{
-       
-        height: 790px;
     
+    .databackground {
+        background-image: url(/static/media/Profilebackground.ac275da9.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 90%;
+        height: 712px;
+        margin: 0 auto;
+        padding: 33px;
     }
+    .profilelogo {
+        background-image: url(/static/media/logo2.b82126f0.png);
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        border-radius: 50%;
+        top: -25px;
+        left: 15px;
+        background-size: 100% 100%;
+    }
+    .profiledesig {
+        font-size: 16px;
+        width: 235px!important;
+    }
+    .profilename {
+        font-size: 22px;
+        font-weight: 700;
+        margin-top: 4px;
+        line-height: 26px;
+    }
+    .bgdis {
+        width: 160px!important;
+        display: inline-block!important;
+        font-size: 12px!important;
+    }
+    .profiledesig > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        padding-left: 0px;
+        font-size : 18px!important;
+    }
+    .companyname > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        padding-left: 0px;
+        font-size : 18px!important;
+    }
+    .BuyerLogin2 {
+        border-radius: 25px !important;
+        height: 26px !important;
+    }
+    .pcontactbg {
+        background: yellow;
+        padding: 5px 10px;
+        line-height: 24px;
+        font-size: 12px;
+    }
+    .iconsw{
+        width:20px;
+    }
+    .bgdis2 {
+        width: 65%!important;
+        display: inline-block!important;
+        font-size: 12px!important;
+    }
+    .mr15 {
+        margin-right: 10px;
+    }
+    .font14 {
+        font-size: 12px;
+    }
+    .hrlinep2 {
+        color: black;
+        border-top: 0.5px solid;
+        width: 50%;
+        margin-top: 8px!important;
+        margin-bottom: 8px;
+    }
+    .font22 {
+        font-size: 18px;
+    }
+    .bdetailsheading {
+        font-size: 14px;
+    }
+    .pocbg1 {
+        background-color: rgba(236, 192, 1, 0.65);
+        padding-top: 10px;
+        padding-bottom: 1px;
+        width: 45%!important;
+        min-height: 168px!important;
+    }
+    .bgdis3 {
+        width: 100%!important;
+        display: inline-block!important;
+        font-size: 10px!important;
+    }
+    .pocbg2 {
+        background-color: rgba(236, 192, 1, 0.65);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 45%!important;
+        float: right!important;
+        min-height: 168px!important;
+    }
+    button {
+        font-size: 12px!important;
+    }
+    .profilebutton {
+        width: 10em!important;
+    }
+    .saveimg {
+        width: 16px;
+    }
+    .hrlinep3 {
+        width: 60%;
+        border-top: 0.5px solid black;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-left: 0px;
+    }
+    .noteprofile {
+        max-width: 220px;
+        margin: 6px auto;
+        font-size: 10px;
+        text-align: center;
+    }
+    .spinimage {
+        width: 250px;
+    }
+
+    
+
+    
+   
 
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
@@ -242,14 +389,20 @@ input[type="number"]:disabled {
         padding-left: 0px;
         font-size : 28px!important;
     }
+    .companyname > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        padding-left: 0px;
+        font-size : 28px!important;
+    }
     .BuyerLogin2 {
         border-radius: 25px !important;
         height: 40px !important;
     }
-    .companyname {
+    /* .companyname {
         font-size: 28px;
         font-weight: 600;
-    }
+    } */
     .profileline{
         color: black;
         border-top: 0.5px solid;
@@ -268,12 +421,12 @@ input[type="number"]:disabled {
         background: yellow;
         padding: 5px 10px;
         line-height: 42px;
-        font-size: 22px;
+        font-size: 16px;
     }
     .bgdis2 {
         width: 76%!important;
         display: inline-block!important;
-        font-size: 22px!important;
+        font-size: 16px!important;
     }
     .mt7 {
         margin-top: 10px;
@@ -296,6 +449,47 @@ input[type="number"]:disabled {
     .bdetailsheading {
         font-size: 22px;
     }
+    .pocbg1 > div > input[type="text"]:disabled {
+        background: transparent;
+        border: 2px;
+        font-size : 18px!important;
+        padding-left: 0px;
+        
+    }
+    .pocbg1 > div > input[type="email"]:disabled {
+        background: transparent;
+        border: 2px;
+        font-size : 18px!important;
+        padding-left: 0px;
+        
+    }
+    .pocbg1{
+        background-color: rgba(236, 192, 1, 0.65);
+        padding-top: 10px;
+        padding-bottom: 10px;
+    
+        width:45%!important;
+        min-height: 269px!important;
+    }
+    .pocbg2{
+        background-color: rgba(236, 192, 1, 0.65);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width:45%!important;
+        float:right!important;
+        min-height: 269px!important;
+    }
+    .noteprofile {
+        max-width: 330px;
+        margin: 10px auto;
+        font-size: 14px;
+        text-align: center;
+    }
+    .spinimage {
+        width: 440px;
+    }
+    .editbutton{
+        width: 25px;
+    }
    
-
 }

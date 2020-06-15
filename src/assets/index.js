@@ -56,12 +56,28 @@ import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
 import done from "./done.svg";
 import spin from "./spin.png";
-
-
+import wefticon from "./Weft.svg";
+import extraWefticon from "./extraWeft.svg";
+import warpweft from "./warpweft.svg";
+import addphoto from "./addphoto.svg";
+import materialdeleteforever from "./material-delete-forever.svg"
+import featheredit from "./feather-edit.svg"
+import warpicon from "./Warpicon.svg";
+import reedcount from "./Reedcount .svg";
+import dimensions from "./dimensions.svg";
 
 
 
 export default {
+  dimensions,
+  reedcount,
+  warpicon,
+  featheredit,
+  materialdeleteforever,
+  addphoto,
+  warpweft,
+  wefticon,
+  extraWefticon,
   addnewProduct,
   artistMainLogo,
   scissor,

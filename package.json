@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.10.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -14,6 +15,8 @@
     "i18next-browser-languagedetector": "^4.2.0",
     "i18next-http-backend": "^1.0.15",
     "jsonwebtoken": "^8.5.1",
+    "material-ui": "^1.0.0-beta.47",
+    "rc-steps": "^4.0.0",
     "react": "^16.13.1",
     "react-avatar-edit": "^0.8.3",
     "react-avatar-editor": "^11.0.9",
@@ -24,6 +27,7 @@
     "react-india-state-region-selector": "^6.1.0",
     "react-indian-state-region-selector": "^6.1.0",
     "react-inline-editing": "^1.0.10",
+    "react-modal": "^3.11.2",
     "react-player": "^2.0.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
@@ -32,6 +36,7 @@
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "rsuite": "^4.7.4",
     "validate.js": "^0.13.1",
     "validator": "^13.0.0"
   },

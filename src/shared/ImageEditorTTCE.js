@@ -4,10 +4,12 @@ import "tui-image-editor/dist/tui-image-editor.css";
 import ImageEditor from "@toast-ui/react-image-editor";
 import Button from "react-bootstrap/Button";
 import "./ImageEditorTTCE.css";
+import ReactModal from "react-modal";
 const icona = require("tui-image-editor/dist/svg/icon-a.svg");
 const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
 const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
 const icond = require("tui-image-editor/dist/svg/icon-d.svg");
+
 
 var customTheme = {
   "common.bi.image":
@@ -106,64 +108,77 @@ const myTheme = {
   "menu.disabledIcon.path": icona,
   "menu.hoverIcon.path": iconc,
 };
-function ImageEditorTTCE() {
-
-
-
+function ImageEditorTTCE(props) {
   
   const [imageSrc, setImageSrc] = useState("");
   let imageEditor = React.createRef();
+ 
+  const cancelUpdate = () =>{
+      props.cancelUpdate();
+  }
   const saveImageToDisk = () => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
     debugger;
     if (data) {
-      const mimeType = data.split(";")[0];
-      const extension = data.split(";")[0].split("/")[1];
-        this.props.aI(data, `image.${extension}`, mimeType, 1);
-      // this.setState({ preview });
-    //   download(data, `image.${extension}`, mimeType);
-    }
+                const mimeType = data.split(";")[0];
+                const extension = data.split(";")[0].split("/")[1];
+                 props.updateImage(data);
+                // this.setState({ preview });
+                //   download(data, `image.${extension}`, mimeType);
+              }
   };
   return (
-    <div className="home-page">
-      <div className="text-center">
-        <h1>Photo Editor</h1>
-        <Button className="button" onClick={saveImageToDisk}>
-          Set as Image1
-        </Button>
-        <Button className="button" onClick={saveImageToDisk}>
-          Set as Image2
-        </Button>
-        <Button className="button" onClick={saveImageToDisk}>
-          Set as Image3
-        </Button>
-      </div>
-      <ImageEditor
-        includeUI={{
-          loadImage: {
-            path: imageSrc,
-            name: "image",
-          },
-          theme: customTheme,
-          // menu: ["crop", "flip", "rotate", "draw", "shape", "text", "filter"],
-          menu: ["crop", "flip", "rotate", "filter"],
-          initMenu: "",
-          uiSize: {
-            height: `calc(100vh - 160px)`,
-          },
-          menuBarPosition: "bottom",
+    <div style={{ boxShadow: "1px 4px 9px" }}>
+      <form
+        style={{
+          background: "rgb(242,245,246)",
+          padding: "1rem",
         }}
-        cssMaxHeight={window.innerHeight}
-        cssMaxWidth={window.innerWidth}
-        selectionStyle={{
-          cornerSize: 20,
-          rotatingPointOffset: 70,
-        }}
-        usageStatistics={true}
-        ref={imageEditor}
-      />
-      {/* <img src={this.state.preview} alt="Preview" /> */}
+      >
+        <div className="form-group"></div>
+        <div className="home-page">
+          <div className="text-center"></div>
+          <ImageEditor
+            includeUI={{
+              loadImage: {
+                path: props.aI,
+                name: "image",
+              },
+              theme: customTheme,
+              // menu: ["crop", "flip", "rotate", "draw", "shape", "text", "filter"],
+              menu: ["crop", "flip", "rotate", "filter"],
+              initMenu: "",
+              uiSize: {
+                height: `calc(100vh - 160px)`,
+                // width: `calc(50vw - 160px)`,
+              },
+              imageSize: {
+                oldWidth: 100,
+                oldHeight: 100,
+                newWidth: 700,
+                newHeight: 700,
+              },
+              menuBarPosition: "bottom",
+            }}
+            cssMaxHeight={window.innerHeight}
+            cssMaxWidth={window.innerWidth}
+            selectionStyle={{
+              cornerSize: 20,
+              rotatingPointOffset: 70,
+            }}
+            usageStatistics={true}
+            ref={imageEditor}
+          />
+          <Button className="saveBtn" onClick={saveImageToDisk}>
+            Save
+          </Button>
+          <Button className="saveBtn cancelbtn" onClick={cancelUpdate}>
+            Cancel
+          </Button>
+          {/* <img src={this.state.preview} alt="Preview" /> */}
+        </div>
+      </form>
     </div>
   );
 }

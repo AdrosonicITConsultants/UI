@@ -11,7 +11,7 @@ import './buyerProfile.css';
 class BuyerProfile extends Component {
     constructor(props) {
         super(props);
-
+debugger;
         this.state = {
           isDesc: true,
           ischanged: false,
@@ -19,22 +19,21 @@ class BuyerProfile extends Component {
           isAcon: true,
           isBdetail: true,
           isPod: true,
-          isDaddress : true,
+          isDaddress: true,
           designation: this.props.user.designation,
           alternatemobno: this.props.user.alternateMobile,
-          gstno: this.props.user.buyerCompanyDetails.gstNo,
-          cinno: this.props.user.buyerCompanyDetails.cin,
+          gstno: this.props.user.companyDetails.gstNo,
+          cinno: this.props.user.companyDetails.cin,
           panno: this.props.user.pancard,
-          pocname : this.props.user.pointOfContact.firstName,
-          pocemail : this.props.user.pointOfContact.email,
-          pocmobile : this.props.user.pointOfContact.contactNo,
-          line1 : this.props.user.addressses[1].line1,
-          line2 : this.props.user.addressses[1].line2,
-          street :this.props.user.addressses[1].street,
-          city : this.props.user.addressses[1].city,
-          pincode : this.props.user.addressses[1].pincode,
-          state : this.props.user.addressses[1].state,                                                  
-         
+          pocname: this.props.user.pointOfContact.firstName,
+          pocemail: this.props.user.pointOfContact.email,
+          pocmobile: this.props.user.pointOfContact.contactNo,
+          line1: this.props.user.addressses[1].line1,
+          line2: this.props.user.addressses[1].line2,
+          street: this.props.user.addressses[1].street,
+          city: this.props.user.addressses[1].city,
+          pincode: this.props.user.addressses[1].pincode,
+          state: this.props.user.addressses[1].state,
         };
         
         this.handleEdit = this.handleEdit.bind(this);

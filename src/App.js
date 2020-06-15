@@ -13,6 +13,8 @@ import PrivateRoute from "../src/services/utils/PrivateRoute";
 import ArtistProfile from "../src/components/profile/artistProfile";
 import BuyerProfile from "../src/components/profile/buyerProfile";
 import AddProduct from "../src/components/Products/addProduct";
+import MyProfile from "../src/components/profile/myProfile";
+
 
 import i18next from "i18next";
 
@@ -32,7 +34,7 @@ function App() {
 
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
-          <PrivateRoute exact path="/MyProfile" component={BuyerProfile} />
+          <PrivateRoute exact path="/MyProfile" component={MyProfile} />
         </Switch>
       </Router>
     </React.Fragment>

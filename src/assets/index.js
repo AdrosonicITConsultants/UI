@@ -56,12 +56,14 @@ import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
 import done from "./done.svg";
 import spin from "./spin.png";
+import save from "./save.svg";
 
 
 
 
 
 export default {
+  save,
   addnewProduct,
   artistMainLogo,
   scissor,

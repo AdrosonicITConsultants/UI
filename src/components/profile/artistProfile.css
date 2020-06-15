@@ -1,0 +1,119 @@
+.Margintopcss{
+    margin-top:10px
+}
+.Aopbg{
+    background-image: url("../../assets/Profile_back.svg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    background-color: rgba(255, 182, 193, 0.22);
+}
+.aocbg1{
+    background-color: rgba(236, 1, 130, 0.2);;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:45%!important;
+    min-height: 220px!important;
+    box-shadow: 2px 2px 2px 2px #888888;
+}
+.cardtextfield > div > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+.cardtextfield > div > input[type="email"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+.aocbg2{
+    background-color: rgba(236, 1, 130, 0.2);;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:45%!important;
+    float:right!important;
+    min-height: 220px!important;
+    box-shadow: 2px 2px 2px 2px #888888;
+
+}
+.cardtextfield > div > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+.cardtextfield > div > input[type="email"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size : 14px!important;
+    padding-left: 0px;
+    
+}
+
+  .Profilecontainer {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 120px);
+    grid-gap: 2em;
+      place-items: center;
+      justify-content: center;
+      align-items: center;
+    margin: 2em auto 0;
+  }
+  .Profilecard {
+    /* background: #282f33; */
+    margin-bottom: 2em;
+    border-radius: 1.1em;
+  }
+  .profileimg {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: #add8e6 1px solid;
+    background: #fff;
+  }
+  @media (max-width: 550px) {
+    .Profilecontainer {
+      width: 90%;
+    }
+  }
+  /* ---------------------------- */
+  .profile-pic {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-pic:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.profile-pic span {
+    display: inline-block;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+}
+
+form input[type="file"] {
+          display: none;
+          cursor: pointer;
+ }

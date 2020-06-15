@@ -7,6 +7,8 @@ import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import './buyerProfile.css';
+import TTCEapi from '../../services/API/TTCEapi';
+
 
 class BuyerProfile extends Component {
     constructor(props) {
@@ -33,7 +35,16 @@ class BuyerProfile extends Component {
           street :this.props.user.addressses[1].street,
           city : this.props.user.addressses[1].city,
           pincode : this.props.user.addressses[1].pincode,
-          state : this.props.user.addressses[1].state,                                                  
+          state : this.props.user.addressses[1].state, 
+          countrydata : [],
+          countryid : this.props.user.addressses[1].country.id,
+          country : this.props.user.addressses[1].country.name,
+          companyname : this.props.user.companyDetails.companyName,
+          landmark : this.props.user.addressses[1].landmark,
+
+
+
+                                                 
          
         };
         
@@ -42,41 +53,112 @@ class BuyerProfile extends Component {
         this.handledetEdit = this.handledetEdit.bind(this);
         this.handleaddEdit = this.handleaddEdit.bind(this);
         this.handlepocEdit = this.handlepocEdit.bind(this);
+        this.checkSave = this.checkSave.bind(this);
+        this.handleCountry = this.handleCountry.bind(this);
+
+
 
 
         
       }
+      componentDidMount(){
+       
+         TTCEapi.getCountries().then((response)=>{
+          this.setState({countrydata : response.data.data},()=>{
+          });
+      });
+      }
+      handleCountry(e) {
+        // console.log(e.target.id);
+        var index = e.target.selectedIndex;
+        var optionElement = e.target.childNodes[index];
+        var option =  optionElement.getAttribute('countryid');
+        console.log(option);
+        
+        this.setState({ [e.target.name]: e.target.value , countryid : option}, ()=> {
+          console.log(this.state);  
+          
+        });
+        this.setState({
+            ischanged : true
+        });
+        // this.setState({
+        //     showValidationpass: false,
+        // });
+      }
     handleEdit(){
           this.setState({
               isDesc:!this.state.isDesc
-          })
-      }
+          },()=>{
+            this.checkSave();
+        });
+    }
     handleaddEdit(){
         this.setState({
             isDaddress:!this.state.isDaddress
-        })
+        },()=>{
+            this.checkSave();
+        });
     }
     handlepocEdit(){
         this.setState({
             isPod:!this.state.isPod
-        })
+        },()=>{
+            this.checkSave();
+        });
     }
-      handleconEdit(){
+    handleconEdit(){
         this.setState({
             isAcon:!this.state.isAcon
-        })
+        },()=>{
+            this.checkSave();
+        });
+        
     }
     handledetEdit(){
         this.setState({
             isBdetail:!this.state.isBdetail
-        })
-    }
-      handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-        this.setState({
-            ischanged : true
+            
+        },()=>{
+            this.checkSave();
         });
-      }
+        
+    }
+    handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+        ischanged : true
+    });
+    
+    }
+    checkSave(){
+        if(this.state.isDaddress && this.state.isDesc && this.state.isPod && this.state.isBdetail && this.state.ischanged && this.state.isAcon)
+        {
+            this.setState({
+                isButtonDisabled : false
+            });
+
+        }
+        else{
+            this.setState({
+                isButtonDisabled : true
+            });
+        }
+        
+    }
+    SaveDetails(){
+        alert("saveclicked");
+        console.log(this.state);
+        debugger;
+        TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
+            this.state.cinno, this.state.panno, this.state.logoname, this.state.adl1,
+            this.state.adl2, this.state.street, this.state.city, this.state.state, 
+            this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
+            this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
+            this.state.countryid).then((response) => {
+                    
+            });
+    }
     render() {
         return (
 
@@ -106,7 +188,7 @@ class BuyerProfile extends Component {
                                         <Row noGutters={true}>
                                                     {/* <Col sm = {{size: "1"}}></Col> */}
                                         
-                                                    <Col sm = {{size: "10"}} className= "profiledesig">
+                                                    <Col sm = {{size: "10"}} className= "profiledesig fw600">
                                                     
                                                         <input
                                                         type="text"
@@ -121,13 +203,13 @@ class BuyerProfile extends Component {
 
                                                         {this.state.isDesc ? <img
                                                                 src={logos.edit}
-                                                                className="editdesc"
+                                                                className="editdesc editbutton"
                                                                 style={{"cursor":"pointer"}}
                                                                 onClick={this.handleEdit}
                                                         ></img> : 
                                                         <img
                                                                 src={logos.done}
-                                                                className="checkdesc"
+                                                                className="checkdesc editbutton"
                                                                 style={{"cursor":"pointer"}}
                                                                 onClick={this.handleEdit}
                                                         ></img>}
@@ -138,8 +220,18 @@ class BuyerProfile extends Component {
                                         <Row noGutters={true}>
                                                     
                                                     <Col sm = {{size: "6"}} >
-                                                        <div  className= "companyname">
-                                                        {this.props.user.companyDetails.companyName},{" " + this.props.user.addressses[0].city}
+                                                        <div  className= "companyname fw600">
+                                                        <input
+                                                        type="text"
+                                                        id="companyname"
+                                                        className="form-control bgdis  BuyerLogin2"
+                                                        value= {this.state.companyname}
+                                                        placeholder = "companyname"
+                                                        disabled={this.state.isDesc} 
+                                                        name="companyname"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        />
+                                                        {/* {this.props.user.companyDetails.companyName} */}
 
                                                         </div>
                                                         <hr className="profileline"></hr>
@@ -148,10 +240,10 @@ class BuyerProfile extends Component {
                                                         </div>
                                                         <div className="font14 fw600 mt7">
                                                             {this.props.user.addressses[0].line1},
-                                                            {" " + this.props.user.addressses[0].line2},
-                                                            {" " + this.props.user.addressses[0].street},
-                                                            {" " + this.props.user.addressses[0].city},
-                                                            {" " + this.props.user.addressses[0].pincode},
+                                                            {" " + this.props.user.addressses[0].line2}
+                                                            {" " + this.props.user.addressses[0].street}
+                                                            {" " + this.props.user.addressses[0].city}
+                                                            {" " + this.props.user.addressses[0].pincode}
                                                             {" " + this.props.user.addressses[0].state}
 
                                                             
@@ -160,12 +252,12 @@ class BuyerProfile extends Component {
                                                         {this.props.user.addressses[0].country.name}
                                                         </div>
                                                     </Col>
-                                                    <Col sm = {{size: "6"}}>
+                                                    <Col sm = {{size: "6"}} className="pr0">
                                                         <div className="pcontactbg ">
                                                             <div className= "" >
                                                             <img
                                                                 src={logos.maillogo}
-                                                                className ="mr10"
+                                                                className ="mr10 iconsw"
                                                                 ></img>
                                                                 {this.props.user.email}
 
@@ -173,7 +265,7 @@ class BuyerProfile extends Component {
                                                             <div>
                                                             <img
                                                                 src={logos.call}
-                                                                className ="mr15" ></img>
+                                                                className ="mr15 iconsw" ></img>
                                                                 {this.props.user.mobile}
                                                                 (primary)
                                                             </div>
@@ -182,7 +274,7 @@ class BuyerProfile extends Component {
                                                         <div  className="pcontactbg mt7">
                                                         <img
                                                                 src={logos.call}
-                                                                className ="mr15" ></img>
+                                                                className ="mr15 iconsw" ></img>
                                                                 <input
                                                                     type="number"
                                                                     id="alternatemobno"
@@ -196,13 +288,13 @@ class BuyerProfile extends Component {
 
                                                                     {this.state.isAcon ? <img
                                                                             src={logos.edit}
-                                                                            className=""
+                                                                            className="editbutton"
                                                                             style={{"cursor":"pointer"}}
                                                                             onClick={this.handleconEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
-                                                                            className=""
+                                                                            className="editbutton"
                                                                             style={{"cursor":"pointer"}}
                                                                             onClick={this.handleconEdit}
                                                                     ></img>}
@@ -215,14 +307,14 @@ class BuyerProfile extends Component {
                                                 <div className="text-center font22 fw700">Brand Details 
                                                 &nbsp; {this.state.isBdetail ? <img
                                                                             src={logos.edit}
-                                                                            className=""
+                                                                            className="editbutton"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
                                                                             onClick={this.handledetEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
-                                                                            className=""
+                                                                            className="editbutton"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
                                                                             onClick={this.handledetEdit}
@@ -281,14 +373,14 @@ class BuyerProfile extends Component {
                                                 </div>
                                                 {this.state.isPod ? <img
                                                                             src={logos.edit}
-                                                                            className="poctick"
+                                                                            className="poctick editbutton"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
                                                                             onClick={this.handlepocEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
-                                                                            className="poctick"
+                                                                            className="poctick editbutton"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
                                                                             onClick={this.handlepocEdit}
@@ -351,14 +443,14 @@ class BuyerProfile extends Component {
                                                 </div>
                                                 {this.state.isDaddress ? <img
                                                                             src={logos.edit}
-                                                                            className="poctick"
+                                                                            className="poctick editbutton"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
                                                                             onClick={this.handleaddEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
-                                                                            className="poctick"
+                                                                            className="poctick editbutton"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
                                                                             onClick={this.handleaddEdit}
@@ -366,17 +458,21 @@ class BuyerProfile extends Component {
                                                 
                                                 <hr className="hrlinep3"></hr>
                                                 <div className="font16 fw600">
-                                                    {this.props.user.companyDetails.companyName}
+                                                    {this.state.companyname}
                                                 </div>
                                                 {this.state.isDaddress 
-                                                ? 
+                                                ? <div>
                                                     <div className="font14 fw600 mt7">
-                                                        {this.state.line1},
-                                                        {" " + this.state.line2},
-                                                        {" " + this.state.street},
-                                                        {" " + this.state.city},
-                                                        {" " + this.state.pincode},
+                                                        {this.state.line1}
+                                                        {" " + this.state.line2}
+                                                        {" " + this.state.street}
+                                                        {" " + this.state.city}
+                                                        {" " + this.state.pincode}
                                                         {" " + this.state.state}
+                                                    </div>
+                                                    <div className="font14 fw600 mt7">
+                                                    {this.state.country}
+                                                    </div>
                                                     </div>
                                                 :
                                                 <div>
@@ -435,14 +531,22 @@ class BuyerProfile extends Component {
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
                                                     <input
-                                                        type="number"
-                                                        id="alternatemobno"
+                                                    type="text"
+                                                    id="landmark"
+                                                    className="form-control bgdis3  BuyerLogin2"
+                                                    value= {this.state.landmark}
+                                                    placeholder = "landmark"
+                                                    name="landmark"
+                                                    onChange={(e) => this.handleChange(e)}
+                                                    />
+                                                    <select id="country"
                                                         className="form-control bgdis3  BuyerLogin2"
-                                                        value= {this.state.alternatemobno}
-                                                        placeholder = "alternatemobno" 
-                                                        name="alternatemobno"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        /> 
+                                                        name="country"
+                                                        value = {this.state.country}
+                                                        onChange={(e) => this.handleCountry(e)}  >
+                                                            {/* <option key = '0' clusterid = '-1'  value='Select Country'>Select Country</option> */}
+                                                        {this.state.countrydata.map((item) => <option key =  {item.id} countryid={item.id} value={item.name}>{item.name}</option>)}
+                                                    </select>
 
                                                 </div>
                                                 }
@@ -456,9 +560,15 @@ class BuyerProfile extends Component {
                                             <button
                                                 id ="savebutton"
                                                 disabled={this.state.isButtonDisabled}
-                                                className="blackButton"
+                                                className="blackButton profilebutton"
                                                 onClick={() => this.SaveDetails()}
                                             >
+                                                <img
+                                                                            src={logos.save}
+                                                                            className=" saveimg mr10"
+                                                                            style={{"cursor":"pointer" ,
+                                                                            }}
+                                                ></img>
                                                 Save Details
                                             </button>
                                         </Row>
@@ -476,14 +586,14 @@ class BuyerProfile extends Component {
                           </div>
                        </Col>
                    </Row>
-
+                   {console.log(this.props.user)}
                 </div>
 
                 </Container>
             </React.Fragment>
             // <div>
-            //      {console.log("user data")}
-            //      {console.log(this.props.user)}
+             
+               
             //      {"this is my buyerprofile page check console for variable"}
             
             // </div>
@@ -492,7 +602,7 @@ class BuyerProfile extends Component {
 }
 
 function mapStateToProps(state) {
- 
+ debugger;
     const { user } = state
     return { user };
 }

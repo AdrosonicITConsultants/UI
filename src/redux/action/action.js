@@ -9,7 +9,9 @@ export const loginStart = () => {
 };
 
 export const loginSuccess = (token, user, userTypeId) => {
+  debugger;
   return {
+    
     type: actionTypes.LOGIN_SUCCESS,
     token: token,
     user: user,

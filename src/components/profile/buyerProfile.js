@@ -15,7 +15,7 @@ import Footer from "../footer/footer";
 class BuyerProfile extends Component {
     constructor(props) {
         super(props);
-
+debugger;
         this.state = {
           isDesc: true,
           ischanged: false,

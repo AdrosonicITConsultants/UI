@@ -80,7 +80,9 @@ class NavbarComponent extends Component {
   };
 
   myProfile =() =>{
-    browserHistory.push("/MyProfile");
+   debugger;
+browserHistory.push("/MyProfile");
+    
   }
 
   logout= (event) =>{
@@ -154,7 +156,12 @@ class NavbarComponent extends Component {
                   <span className="navButtonImg">New custom design</span>
                 </button>
               ) : (
-                <button className="navButtonA navbarTransparent navbtn1">
+                <button
+                onClick={() => {
+browserHistory.push("/AddProduct");
+
+                }}
+                className="navButtonA navbarTransparent navbtn1">
                   <img
                     className="navButtonImgA"
                     src={logos.addnewProduct}

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import logos from "../../assets";
-import "./productcatelog.css";
+import "./product.css";
+
 
 
  class Product extends Component {

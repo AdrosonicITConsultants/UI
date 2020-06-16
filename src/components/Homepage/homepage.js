@@ -39,6 +39,9 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                      localStorage.getItem('homepageredirect') != null
                    ) {
                      num = parseInt(localStorage.getItem("homepageredirect"));
+                     this.setState({
+                       userpage : num,
+                     });
                      
                    }
                      switch (num) {

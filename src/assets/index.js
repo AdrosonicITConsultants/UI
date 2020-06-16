@@ -56,13 +56,51 @@ import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
 import done from "./done.svg";
 import spin from "./spin.png";
+import wefticon from "./Weft.svg";
+import extraWefticon from "./extraWeft.svg";
+import warpweft from "./warpweft.svg";
+import addphoto from "./addphoto.svg";
+import materialdeleteforever from "./material-delete-forever.svg"
+import featheredit from "./feather-edit.svg"
+import warpicon from "./Warpicon.svg";
+import reedcount from "./Reedcount .svg";
+import dimensions from "./dimensions.svg";
 import save from "./save.svg";
+import washAndCare1 from "./1.svg";
+import washAndCare2 from "./2.svg";
+import washAndCare3 from "./3.svg";
+import washAndCare4 from "./4.svg";
+import washAndCare5 from "./5.svg";
+import washAndCare6 from "./6.svg";
+import washAndCare7 from "./7.svg";
+import washAndCare8 from "./8.svg";
+import washAndCare9 from "./9.svg";
+import washAndCare10 from "./10.svg";
 
 
 
 
 
 export default {
+  washAndCare1,
+  washAndCare2,
+  washAndCare3,
+  washAndCare4,
+  washAndCare5,
+  washAndCare6,
+  washAndCare7,
+  washAndCare8,
+  washAndCare9,
+  washAndCare10,
+  dimensions,
+  reedcount,
+  warpicon,
+  featheredit,
+  materialdeleteforever,
+  addphoto,
+  warpweft,
+  wefticon,
+  extraWefticon,
   save,
   addnewProduct,
   artistMainLogo,

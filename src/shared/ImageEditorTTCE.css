@@ -23,8 +23,58 @@ margin-left: 25%;}
 
 }
 
-.tui-image-editor-header-logo {
+.tui-image-editor-header {
     display: none !important;
 
 }
+.tui-image-editor-container .tui-image-editor-header-buttons, .tui-image-editor-container .tui-image-editor-controls-buttons {
+    float: left !important;
+    margin: 8px;
+}
+
+.tui-image-editor-container .tui-image-editor-main {
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.saveBtn {
+    position: absolute;
+    top:15px !important;
+    left: 10px;
+    color: white !important;
+    background-color: #000000 !important;
+}
+.saveBtn:hover {
+    box-shadow: 0px 0px 15px -2px #000000;
+}
+
+.cancelbtn {
+   margin-left: 65px;
+}
  
+
+.ReactModal__Overlay {
+    position: fixed;
+    top: 10px !important;
+    left: 25% !important;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 50%;
+    z-index: 1001;
+    height: 0%;
+}
+
+.ReactModal__Content {
+   outline: none;
+}
+
+ 
+/* .tui-image-editor-container .tui-image-editor-wrap {
+    position: absolute;
+    overflow: hidden;
+} */

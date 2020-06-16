@@ -317,21 +317,23 @@ class TTCEapi {
       }
 
 
-  static updateBuyerProfile(companyname, gstno, cinno, panno, logoname, adl1,
-    adl2, street, city, state, country1, pincode, landmark, alternatemobno,
-     designation, pocmobile, pocemail, pocname, countryid)   {
+  static updateBuyerProfile(companyname, gstno, 
+    cinno, panno,line11, line22, street, city1,state, 
+    country1,pincode,landmark1, alternatemobno,
+    designation,pocmobile, pocemail,pocname,
+    countryid)   {
 
-    let url = ApiUrl + "/user/edit/profile";
+    let url = ApiUrl + "/user/edit/buyerProfile";
     var data = {
       address: {
-        city: city,
+        city: city1,
         country: {
           id: parseInt(countryid),
           name: country1
         },
-        line1: adl1,
-        line2: adl2,
-        landmark: landmark,      
+        line1: line11,
+        line2: line22,
+        landmark: landmark1,      
         street: street,        
         pincode: pincode,
         state: state
@@ -342,18 +344,17 @@ class TTCEapi {
         firstName: pocname
       },
       alternateMobile: alternatemobno,
-      companyDetails: {
+      buyerCompanyDetails: {
         cin: cinno,
         companyName: companyname,
-        gstNo: gstno,
-        logo: logoname
+        gstNo: gstno
       },
       designation: designation,    
       pancard: panno,
     
     };
     console.log(data);
-    debugger;
+    // debugger;
     
     var config = {
       headers: {
@@ -365,6 +366,12 @@ class TTCEapi {
       .put(url, data, config)
       .then((response) => {
         console.log(response);
+        if (response.data.valid)
+           { 
+          localStorage.removeItem("user");
+          const user = response.data.data;
+          localStorage.setItem("user", JSON.stringify(user));
+           }
         return response;
       })
       .catch((error) => {
@@ -376,6 +383,21 @@ class TTCEapi {
 
     static getClusters(){
     let url = ApiUrl + "/cluster/getAllClusters";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
+  static getProfile(){
+    let url = ApiUrl + "/user/myprofile";
 
     return axios
       .get(url)

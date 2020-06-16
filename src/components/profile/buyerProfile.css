@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 230px;
+    height: 300px;
 }
 .profileheading{
     font-size:50px;
@@ -42,10 +42,10 @@
     font-size: 20px;
     width:300px!important;
 }
-.bgdis{
-    width:80%!important;
+.bgdis {
+    width: 220px!important;
     display: inline-block!important;
-    font-size : 14px!important;  
+    font-size: 14px!important;
 }
 .bgdis2{
     width:70%!important;
@@ -227,7 +227,13 @@ input[type="number"]:disabled {
    
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
-    
+    .profilebackground {
+        background-image: url(/static/media/backprofile.6f7a9929.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 237px;
+    }
     .databackground {
         background-image: url(/static/media/Profilebackground.ac275da9.png);
         background-repeat: no-repeat;
@@ -379,7 +385,7 @@ input[type="number"]:disabled {
         line-height: 40px;
     }
     .bgdis {
-        width: 100%!important;
+        width: 270px!important;
         display: inline-block!important;
         font-size: 20px!important;
     }

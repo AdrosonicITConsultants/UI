@@ -80,9 +80,9 @@ class NavbarComponent extends Component {
   };
 
   myProfile =() =>{
-    if (this.props.user.userTypeId == 1){
+   debugger;
 browserHistory.push("/MyProfile");
-    } 
+    
   }
 
   logout= (event) =>{

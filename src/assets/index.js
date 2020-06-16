@@ -66,12 +66,32 @@ import warpicon from "./Warpicon.svg";
 import reedcount from "./Reedcount .svg";
 import dimensions from "./dimensions.svg";
 import save from "./save.svg";
+import washAndCare1 from "./1.svg";
+import washAndCare2 from "./2.svg";
+import washAndCare3 from "./3.svg";
+import washAndCare4 from "./4.svg";
+import washAndCare5 from "./5.svg";
+import washAndCare6 from "./6.svg";
+import washAndCare7 from "./7.svg";
+import washAndCare8 from "./8.svg";
+import washAndCare9 from "./9.svg";
+import washAndCare10 from "./10.svg";
 
 
 
 
 
 export default {
+  washAndCare1,
+  washAndCare2,
+  washAndCare3,
+  washAndCare4,
+  washAndCare5,
+  washAndCare6,
+  washAndCare7,
+  washAndCare8,
+  washAndCare9,
+  washAndCare10,
   dimensions,
   reedcount,
   warpicon,

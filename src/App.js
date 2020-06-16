@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/artist-registration" component={Artistregister} />
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
-          {/* <Route exact path="/addProduct" component={AddProduct} /> */}
+          <Route exact path="/addProduct" component={AddProduct} />
           
                     <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />

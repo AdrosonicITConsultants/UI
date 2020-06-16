@@ -152,7 +152,7 @@ export default class buyreg5 extends Component {
                   >
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    Enter your details to complete registeration
+                    Enter your details to complete registration
                   </span>
                 </Row>
                 {/* <br></br> */}
@@ -185,11 +185,10 @@ export default class buyreg5 extends Component {
                           id="adl1"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.adl1}
+                          value={this.state.adl1}
                           name="adl1"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        
                       </div>
                     </Col>
                   </Col>
@@ -208,12 +207,10 @@ export default class buyreg5 extends Component {
                           id="adl2"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.adl2}
-
+                          value={this.state.adl2}
                           name="adl2"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        
                       </div>
                     </Col>
                   </Col>
@@ -232,11 +229,10 @@ export default class buyreg5 extends Component {
                           id="street"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.street}
+                          value={this.state.street}
                           name="street"
                           onChange={(e) => this.handleChange(e)}
                         />
-                      
                       </div>
                     </Col>
                   </Col>
@@ -255,12 +251,10 @@ export default class buyreg5 extends Component {
                           id="city"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.city}
-
+                          value={this.state.city}
                           name="city"
                           onChange={(e) => this.handleChange(e)}
                         />
-                       
                       </div>
                     </Col>
                   </Col>
@@ -279,11 +273,10 @@ export default class buyreg5 extends Component {
                           id="state"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.state}
+                          value={this.state.state}
                           name="state"
                           onChange={(e) => this.handleChange(e)}
                         />
-                      
                       </div>
                     </Col>
                   </Col>
@@ -297,17 +290,27 @@ export default class buyreg5 extends Component {
                       </label>
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
-                        <select id="country"
+                        <select
+                          id="country"
                           className="form-control form2 BuyerLogin1"
                           name="country"
-                          value = {this.state.country}
-                          onChange={(e) => this.handleCountry(e)}  >
-                            <option key = '0' clusterid = '-1'  value='Select Country'>Select Country</option>
-                        {this.state.countrydata.map((item) => <option key =  {item.id} countryid={item.id} value={item.name}>{item.name}</option>)}
-                      </select>
-                        
+                          value={this.state.country}
+                          onChange={(e) => this.handleCountry(e)}
+                        >
+                          <option key="0" clusterid="-1" value="Select Country">
+                            Select Country
+                          </option>
+                          {this.state.countrydata.map((item) => (
+                            <option
+                              key={item.id}
+                              countryid={item.id}
+                              value={item.name}
+                            >
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
                       </div>
-                      
                     </Col>
                   </Col>
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
@@ -325,11 +328,10 @@ export default class buyreg5 extends Component {
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.pincode}
+                          value={this.state.pincode}
                           name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        
                       </div>
                     </Col>
                   </Col>
@@ -348,7 +350,7 @@ export default class buyreg5 extends Component {
                           id="landmark"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
-                          value = {this.state.landmark}
+                          value={this.state.landmark}
                           name="landmark"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -357,10 +359,12 @@ export default class buyreg5 extends Component {
                   </Col>
                 </Row>
                 {this.state.showValidationpass ? (
-                    <span className="bg-danger">please enter all  mandatory fields</span>
-                  ) : (
-                    <br />
-                  )} 
+                  <span className="bg-danger">
+                    please enter all mandatory fields
+                  </span>
+                ) : (
+                  <br />
+                )}
                 <div className="text-center" style={{ color: "#cc6868" }}>
                   <strong
                     className="requiredStar"
@@ -387,11 +391,10 @@ export default class buyreg5 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true} className= "mt30">
+                <Row noGutters={true} className="mt30">
                   <strong className="col-xs-12 text-center line7 ">
                     Help?
                   </strong>
-                 
                 </Row>
 
                 {/* <Row noGutters={true}>
@@ -399,7 +402,6 @@ export default class buyreg5 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-           
               </div>
             </Col>
           </React.Fragment>

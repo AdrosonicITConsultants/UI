@@ -99,8 +99,11 @@ export default class buyreg6 extends Component {
                     alt="TataTrusts logo"
                   ></img>
                 </Row>
-          <br></br>
-                <Row noGutters={true} className="text-left line32  fontplay font3">
+                <br></br>
+                <Row
+                  noGutters={true}
+                  className="text-left line32  fontplay font3"
+                >
                   {/*  */}
                   <span
                     style={{
@@ -112,7 +115,7 @@ export default class buyreg6 extends Component {
                   >
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    Enter your details to complete registeration
+                    Enter your details to complete registration
                   </span>
                 </Row>
                 <br></br>
@@ -187,10 +190,9 @@ export default class buyreg6 extends Component {
                     </Col>
                   </Col>
                 </Row>
-                
+
                 <br></br>
 
-               
                 <Row noGutters={true} className="text-center line312 font1">
                   <div
                     style={{
@@ -201,7 +203,13 @@ export default class buyreg6 extends Component {
                     }}
                     className="col-xs-12 text-center"
                   >
-                    <input type="checkbox" name="checkbox" value="check" id="agree" /> You hearby agree  to our
+                    <input
+                      type="checkbox"
+                      name="checkbox"
+                      value="check"
+                      id="agree"
+                    />{" "}
+                    You hearby agree to our
                     <a
                       style={{ cursor: "pointer", fontSize: "15px" }}
                       onClick={() => {
@@ -210,8 +218,6 @@ export default class buyreg6 extends Component {
                     >
                       Terms and condition
                     </a>
-                  
-                  
                   </div>
                 </Row>
                 <br></br>
@@ -230,12 +236,10 @@ export default class buyreg6 extends Component {
                 <br></br>
 
                 <Row noGutters={true} className="mt30">
-                {/* <span className="col-xs-1 col-md-1"></span> */}
+                  {/* <span className="col-xs-1 col-md-1"></span> */}
                   <strong className="col-xs-12 text-center line7 help">
                     Help?
                   </strong>
-                
-                 
                 </Row>
 
                 {/* <Row noGutters={true}>
@@ -243,7 +247,6 @@ export default class buyreg6 extends Component {
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
-                
               </div>
             </Col>
           </React.Fragment>

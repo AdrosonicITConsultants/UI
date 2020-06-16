@@ -9,7 +9,7 @@ export const loginStart = () => {
 };
 
 export const loginSuccess = (token, user, userTypeId) => {
-  debugger;
+  // debugger;
   return {
     
     type: actionTypes.LOGIN_SUCCESS,

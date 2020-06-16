@@ -303,7 +303,7 @@ export default class buyerRegister extends Component {
                  }
                  sendotp(emailid) {                
                    console.log(emailid);               
-                   debugger;
+                  //  debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
                       //  debugger;
@@ -323,10 +323,10 @@ export default class buyerRegister extends Component {
                  }
 
                  verifyOtp(emailid, otppin) {
-                   debugger;
+                  //  debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                       debugger;
+                      //  debugger;
                        if (response.data.valid) {
                          this.handler(1);
                        } else {

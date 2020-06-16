@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import './buyerProfile.css';
 import TTCEapi from '../../services/API/TTCEapi';
+import Footer from "../footer/footer";
+
 
 
 class BuyerProfile extends Component {
@@ -21,26 +23,27 @@ debugger;
           isAcon: true,
           isBdetail: true,
           isPod: true,
-          isDaddress: true,
-          designation: this.props.user.designation,
-          alternatemobno: this.props.user.alternateMobile,
-          gstno: this.props.user.companyDetails.gstNo,
-          cinno: this.props.user.companyDetails.cin,
-          panno: this.props.user.pancard,
-          pocname : this.props.user.pointOfContact.firstName,
-          pocemail : this.props.user.pointOfContact.email,
-          pocmobile : this.props.user.pointOfContact.contactNo,
-          line1 : this.props.user.addressses[1].line1,
-          line2 : this.props.user.addressses[1].line2,
-          street :this.props.user.addressses[1].street,
-          city : this.props.user.addressses[1].city,
-          pincode : this.props.user.addressses[1].pincode,
-          state : this.props.user.addressses[1].state, 
+          isDaddress : true,
+           designation: this.props.user.designation,
+           alternatemobno: this.props.user.alternateMobile,
+           gstno: this.props.user.companyDetails.gstNo,
+           cinno: this.props.user.companyDetails.cin,
+           panno: this.props.user.pancard,
+           pocname : this.props.user.pointOfContact.firstName,
+           pocemail : this.props.user.pointOfContact.email,
+           pocmobile : this.props.user.pointOfContact.contactNo,
+           line1 : this.props.user.addressses[1].line1,
+           line2 : this.props.user.addressses[1].line2,
+           street :this.props.user.addressses[1].street,
+           city : this.props.user.addressses[1].city,
+           pincode : this.props.user.addressses[1].pincode,
+           state : this.props.user.addressses[1].state, 
           countrydata : [],
-          countryid : this.props.user.addressses[1].country.id,
-          country : this.props.user.addressses[1].country.name,
-          companyname : this.props.user.companyDetails.companyName,
-          landmark : this.props.user.addressses[1].landmark,
+           countryid : this.props.user.addressses[1].country.id,
+           country : this.props.user.addressses[1].country.name,
+           companyname : this.props.user.companyDetails.companyName,
+           landmark : this.props.user.addressses[1].landmark,
+           showValidationconfirmpass : false
 
 
 
@@ -149,14 +152,15 @@ debugger;
     SaveDetails(){
         alert("saveclicked");
         console.log(this.state);
-        debugger;
+        // debugger;
         TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
-            this.state.cinno, this.state.panno, this.state.logoname, this.state.adl1,
-            this.state.adl2, this.state.street, this.state.city, this.state.state, 
+            this.state.cinno, this.state.panno, this.state.line1,
+            this.state.line2, this.state.street, this.state.city, this.state.state, 
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
             this.state.countryid).then((response) => {
-                    
+
+
             });
     }
     render() {
@@ -226,7 +230,7 @@ debugger;
                                                         id="companyname"
                                                         className="form-control bgdis  BuyerLogin2"
                                                         value= {this.state.companyname}
-                                                        placeholder = "companyname"
+                                                        placeholder = "company name"
                                                         disabled={this.state.isDesc} 
                                                         name="companyname"
                                                         onChange={(e) => this.handleChange(e)}
@@ -239,7 +243,7 @@ debugger;
                                                                 Registered Address
                                                         </div>
                                                         <div className="font14 fw600 mt7">
-                                                            {this.props.user.addressses[0].line1},
+                                                            {this.props.user.addressses[0].line1}
                                                             {" " + this.props.user.addressses[0].line2}
                                                             {" " + this.props.user.addressses[0].street}
                                                             {" " + this.props.user.addressses[0].city}
@@ -280,7 +284,7 @@ debugger;
                                                                     id="alternatemobno"
                                                                     className="form-control bgdis2  BuyerLogin2"
                                                                     value= {this.state.alternatemobno}
-                                                                    placeholder = "alternatemobno"
+                                                                    placeholder = "alternate mobile"
                                                                     disabled={this.state.isAcon} 
                                                                     name="alternatemobno"
                                                                     onChange={(e) => this.handleChange(e)}
@@ -309,7 +313,7 @@ debugger;
                                                                             src={logos.edit}
                                                                             className="editbutton"
                                                                             style={{"cursor":"pointer" ,
-                                                                        "position" : "absolute"}}
+                                                                            "position" : "absolute"}}
                                                                             onClick={this.handledetEdit}
                                                                     ></img> : 
                                                                     <img
@@ -327,7 +331,7 @@ debugger;
                                                         id="gstno"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value = {this.state.gstno}
-                                                        placeholder = "gstno"
+                                                        placeholder = "GST no"
                                                         disabled={this.state.isBdetail} 
                                                         name="gstno"
                                                         onChange={(e) => this.handleChange(e)}
@@ -343,7 +347,7 @@ debugger;
                                                         id="cinno"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value= {this.state.cinno}
-                                                        placeholder = "cinno"
+                                                        placeholder = "CIN no"
                                                         disabled={this.state.isBdetail} 
                                                         name="cinno"
                                                         onChange={(e) => this.handleChange(e)}
@@ -357,7 +361,7 @@ debugger;
                                                         id="panno"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value= {this.state.panno}
-                                                        placeholder = "panno"
+                                                        placeholder = "PAN no"
                                                         disabled={this.state.isBdetail} 
                                                         name="panno"
                                                         onChange={(e) => this.handleChange(e)}
@@ -396,7 +400,7 @@ debugger;
                                                         id="pocname"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value= {this.state.pocname}
-                                                        placeholder = "pocname"
+                                                        placeholder = "Name"
                                                         disabled={this.state.isPod} 
                                                         name="pocname"
                                                         onChange={(e) => this.handleChange(e)}
@@ -412,7 +416,7 @@ debugger;
                                                         id="pocmobile"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value= {this.state.pocmobile}
-                                                        placeholder = "pocmobile"
+                                                        placeholder = "Mobile"
                                                         disabled={this.state.isPod} 
                                                         name="pocmobile"
                                                         onChange={(e) => this.handleChange(e)}
@@ -428,7 +432,7 @@ debugger;
                                                         id="pocemail"
                                                         className="form-control bgdis3  BuyerLogin2"
                                                         value= {this.state.pocemail}
-                                                        placeholder = "pocemail"
+                                                        placeholder = "Email"
                                                         disabled={this.state.isPod} 
                                                         name="pocemail"
                                                         onChange={(e) => this.handleChange(e)}
@@ -469,6 +473,9 @@ debugger;
                                                         {" " + this.state.city}
                                                         {" " + this.state.pincode}
                                                         {" " + this.state.state}
+                                                        <br>
+                                                        </br>
+                                                        {this.state.landmark}
                                                     </div>
                                                     <div className="font14 fw600 mt7">
                                                     {this.state.country}
@@ -555,7 +562,11 @@ debugger;
                                         
                                         
                                         </Row>
-                                        <br></br>
+                                        {this.state.showValidationconfirmpass ? (
+                                            <span className="bg-danger">Enter mandatory fields</span>
+                                        ) : (
+                                            <br />
+                                        )}
                                         <Row noGutters={true} className="text-center ">
                                             <button
                                                 id ="savebutton"
@@ -586,7 +597,17 @@ debugger;
                           </div>
                        </Col>
                    </Row>
-                   {console.log(this.props.user)}
+                   <Row>
+                    <div>
+                    <img
+                        className="HomeBg3 internaldiv"
+                        src={logos.background3}
+                    ></img>
+                    </div>
+                </Row>
+                <Footer></Footer>
+
+                   {/* {console.log(this.props.user)} */}
                 </div>
 
                 </Container>
@@ -602,7 +623,7 @@ debugger;
 }
 
 function mapStateToProps(state) {
- debugger;
+//  debugger;
     const { user } = state
     return { user };
 }

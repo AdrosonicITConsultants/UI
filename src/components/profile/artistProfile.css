@@ -4,7 +4,7 @@
 .Aopbg{
     background-image: url("../../assets/Profile_back.svg"); 
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     width: 100%;
     background-color: rgba(255, 182, 193, 0.22);
 }
@@ -117,3 +117,22 @@ form input[type="file"] {
           display: none;
           cursor: pointer;
  }
+ .aprofilelogo{
+  background-image: url("../../assets/logo2.png");
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  margin : 0 auto;
+}
+.welcome{
+  font-size: 22px;
+  font-weight: 600;
+}
+.selected{
+  font-size: 22px;
+    font-weight: 600;
+}
+.notSelected{
+  font-size: 20px;
+}

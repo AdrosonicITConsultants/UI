@@ -12,6 +12,9 @@ class ArtistProfile extends Component {
         super(props);
 
         this.state = {
+          firstName : this.props.user.firstName,
+          lastName : this.props.user.lastName,
+          isProfile : true,
           isDesc: true,
           ischanged: false,
           isButtonDisabled: true,
@@ -30,7 +33,8 @@ class ArtistProfile extends Component {
           state : this.props.user.addressses[0].state,                                                  
          
         };
-        
+        this.handleDetail = this.handleDetail.bind(this);
+
         this.handleEdit = this.handleEdit.bind(this);
         this.handleconEdit = this.handleconEdit.bind(this);
         this.handledetEdit = this.handledetEdit.bind(this);
@@ -71,13 +75,50 @@ class ArtistProfile extends Component {
             ischanged : true
         });
       }
+      handleDetail(){
+        this.setState({
+            isProfile:!this.state.isProfile
+        })
+    }
     render() {
         return (
             <React.Fragment>
                 <NavbarComponent/>
                 <div className="Aopbg">
                     <Container >
-               
+                        <Row noGutters={true}>
+                        <div className="aprofilelogo">
+                           </div>
+                        </Row>
+                        <Row noGutters={true} className="text-center welcome">
+                           Welcome,{ " " +this.state.firstName + " " + this.state.lastName }
+                        </Row>
+                        <Row noGutters={true} className="text-center ">
+                           Manage your info,brand and bank details 
+                        </Row>
+                        <Row noGutters={true} className="mt30 ">
+                            <Col sm = {{size: "6"}} className="text-right">
+                               {this.state.isProfile 
+                               ?
+                               <u className="selected">My Details</u> 
+                                :
+                                <span className="notSelected"  onClick={this.handleDetail}>My Details</span>
+                                }
+                            </Col>
+                            <Col sm = {{size: "6"}} className="text-left">
+                            {this.state.isProfile
+                               ?
+                               <span className="notSelected" onClick={this.handleDetail}>Bank Details</span>
+                                :
+                                <u className="selected">Bank Details</u> 
+                                }
+                            </Col>
+                        </Row>
+                        <br>
+                        </br>
+                        {this.state.isProfile 
+                        ?
+
                 <Row noGutters={true} >
                                             <Col sm = {{size: "6"}} className="aocbg1" >
                                                 <div className="fw600 bdetailsheading">
@@ -240,13 +281,13 @@ class ArtistProfile extends Component {
                                               <Col sm={{size:"6"}}>
                                               <div class="Profilecontainer">
 
-<div class="card Profilecard">
-    <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/1.png" alt="Avatar for user 1"/>
-        
-    </div>
+                                            <div class="card Profilecard">
+                                                <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/1.png" alt="Avatar for user 1"/>
+                                                    
+                                                </div>
 
 
-</div>
+                                            </div>
                                               </Col>
                                             </Col>
                                             <Col sm = {{size: "6"}} className="aocbg2" >
@@ -338,22 +379,28 @@ class ArtistProfile extends Component {
                                                 <Col sm={{size:6}}>
                                                 <div class="Profilecontainer">
 
-<div class="card Profilecard">
-    <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/8.png" alt="Avatar for user 1"/>
-   
-		<div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div>
+                                                        <div class="card Profilecard">
+                                                            <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/8.png" alt="Avatar for user 1"/>
+                                                        
+                                                                <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div>
 
-    </div>
+                                                            </div>
 
 
-</div>
+                                                        </div>
                                                 </Col>
                                             </Col>
                                          
                                         
                                         </Row>
+                                        :
+                                        <Row noGutters={true}>
+                                            
+                                        </Row>
+                                                }
                                        
 </Container>
+{console.log(this.props.user)}
 </div>
             </React.Fragment>
             // <div>
@@ -366,7 +413,7 @@ class ArtistProfile extends Component {
 }
 
 function mapStateToProps(state) {
-    debugger;
+    // debugger;
     const { user } = state
     return { user };
 }

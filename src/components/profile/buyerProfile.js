@@ -150,7 +150,7 @@ debugger;
         
     }
     SaveDetails(){
-        alert("saveclicked");
+        
         console.log(this.state);
         // debugger;
         TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
@@ -159,7 +159,7 @@ debugger;
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
             this.state.countryid).then((response) => {
-
+                alert("Details successfully updated");
 
             });
     }

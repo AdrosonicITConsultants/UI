@@ -1,20 +1,28 @@
-.Margintopcss{
+/* .Margintopcss{
     margin-top:10px
-}
+} */
 .Aopbg{
-    background-image: url("../../assets/Profile_back.svg"); 
+    background: url("../../assets/backgroundpictureaop.svg"); 
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
-    background-color: rgba(255, 182, 193, 0.22);
+    background-color: #FAF5F5;
+    background-position: center;
+   
 }
 .aocbg1{
-    background-color: rgba(236, 1, 130, 0.2);;
+    background-color: white;
     padding-top: 10px;
     padding-bottom: 10px;
     width:45%!important;
     min-height: 220px!important;
     box-shadow: 2px 2px 2px 2px #888888;
+    height: 357px;
+}
+.aoctick{
+  top: 5px;
+  right: 5px;
+  height:27px;
 }
 .cardtextfield > div > input[type="text"]:disabled {
     background: transparent;
@@ -31,13 +39,14 @@
     
 }
 .aocbg2{
-    background-color: rgba(236, 1, 130, 0.2);;
+    background-color: white;
     padding-top: 10px;
     padding-bottom: 10px;
     width:45%!important;
     float:right!important;
     min-height: 220px!important;
     box-shadow: 2px 2px 2px 2px #888888;
+    height: 357px;
 
 }
 .cardtextfield > div > input[type="text"]:disabled {
@@ -53,6 +62,17 @@
     font-size : 14px!important;
     padding-left: 0px;
     
+}
+.letsbuildtext{
+font-size: 40px;
+    text-align: center;
+    margin-top: 16px;
+    font-weight: 700;
+    color: lightgrey;
+}
+.iconcss{
+  height: 25px;
+  margin-right: 10px;
 }
 
   .Profilecontainer {
@@ -135,4 +155,124 @@ form input[type="file"] {
 }
 .notSelected{
   font-size: 20px;
+}
+.bankdetails{
+  min-height: 200px!important;
+  background-color: white;
+  width: 700px;
+  margin: 0 auto;
+  
+  box-shadow: 0px 0px 19px -10px grey;
+}
+.bankicon{
+    width: 30px;
+    margin-right:20px;
+    vertical-align: text-top;
+}
+.bankheading{
+  font-size: 28px;
+  padding: 15px 10px 10px 20px ;
+}
+.poctick2{
+  top: 24px;
+    right: 73px;
+    height: 20px;
+}
+.bankhr{
+  margin-top: 0px!important;
+  margin-bottom: 0px!important;
+
+  border-top: 1px solid black;
+}
+.bankcontent{
+  padding: 15px 10px 10px 20px ;
+
+}
+.bankdethead{
+
+}
+.bankcontent > div > div > input[type="text"]:disabled,
+.digitalbank > div > input[type="text"]:disabled {
+  background: transparent;
+  border: 2px;
+  font-size : 14px!important;
+  padding-left: 0px;
+  
+}
+.gpayicon{
+  margin-top: 5px;
+  width: 53px;
+}
+
+.BuyerLogin21 {
+  border-radius: 0px!important;
+  height: 32px !important;
+}
+.vrlinebank {
+  border-left: 2px solid;
+  height: 20em;
+  margin-top: 2%;
+  position: absolute;
+  left: 50%;
+  /* margin-left: -3px; */
+  /* top: 0; */
+  color: #c7c7c7;
+}
+
+
+@media only screen and ( max-width: 480px ) {
+   
+}
+@media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+  .bankdetails {
+    min-height: 200px!important;
+    background-color: white;
+    width: 595px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 19px -10px grey;
+}
+.bankicon {
+  width: 24px;
+  margin-right: 20px;
+  vertical-align: text-top;
+}
+.bankheading {
+  font-size: 22px;
+  padding: 15px 10px 10px 20px;
+}
+.poctick2 {
+  top: 18px;
+  right: 38px;
+  height: 20px;
+}
+.BuyerLogin21 {
+  border-radius: 0px!important;
+  height: 28px !important;
+}
+.bankcontent {
+  padding: 15px 10px 17px 20px;
+}
+.vrlinebank {
+  border-left: 2px solid;
+  height: 18em;
+  margin-top: 3%;
+  position: absolute;
+  left: 50%;
+  /* margin-left: -3px; */
+  /* top: 0; */
+  color: #c7c7c7;
+}
+}
+@media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+   
+}
+@media only screen and ( min-width: 1200px ) {
+  .bankdetails {
+    min-height: 200px!important;
+    background-color: white;
+    width: 875px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 19px -10px grey;
+}
+
 }

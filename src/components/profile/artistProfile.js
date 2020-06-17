@@ -14,7 +14,19 @@ class ArtistProfile extends Component {
         this.state = {
           firstName : this.props.user.firstName,
           lastName : this.props.user.lastName,
-          isProfile : true,
+          isProfile : false,
+          isDetailsEdit : true,
+          accountno : "",
+          bankname : "" ,
+          branch : "" ,
+          ifsccode : "",
+          benificiaryname : "",
+          gpayupi : "",
+          paytmupi : "",
+          phonepeupi  : "",
+
+
+
           isDesc: true,
           ischanged: false,
           isButtonDisabled: true,
@@ -34,6 +46,7 @@ class ArtistProfile extends Component {
          
         };
         this.handleDetail = this.handleDetail.bind(this);
+        this.handlebdetEdit = this.handlebdetEdit.bind(this);
 
         this.handleEdit = this.handleEdit.bind(this);
         this.handleconEdit = this.handleconEdit.bind(this);
@@ -44,6 +57,11 @@ class ArtistProfile extends Component {
 
         
       }
+      handlebdetEdit(){
+        this.setState({
+            isDetailsEdit:!this.state.isDetailsEdit
+        })
+    }
     handleEdit(){
           this.setState({
               isDesc:!this.state.isDesc
@@ -122,11 +140,15 @@ class ArtistProfile extends Component {
                 <Row noGutters={true} >
                                             <Col sm = {{size: "6"}} className="aocbg1" >
                                                 <div className="fw600 bdetailsheading">
-                                                   Personal Details
+                                                <img
+                                                                            src={logos.personalicon}
+                                                                            className="iconcss"
+                                                                            onClick={this.handlepocEdit}
+                                                                    ></img>      Personal Details
                                                 </div>
                                                 {this.state.isAcon ? <img
-                                                                            src={logos.edit}
-                                                                            className="poctick"
+                                                                            src={logos.apedit}
+                                                                            className="aoctick"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
                                                                             onClick={this.handlepocEdit}
@@ -148,13 +170,13 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="pocname"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocname}
                                                         placeholder = "pocname"
                                                         disabled={this.state.isAcon} 
                                                         name="pocname"
                                                         onChange={(e) => this.handleChange(e)}
-                                                        /> 
+                                                       disabled /> 
                                                 
                                                 </div>
                                                 <div className="fw700 font14">
@@ -164,12 +186,13 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="email"
                                                         id="pocemail"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocemail}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isAcon} 
                                                         name="pocemail"
                                                         onChange={(e) => this.handleChange(e)}
+                                                        disabled
                                                         /> 
                                                     
                                                 </div>
@@ -180,12 +203,13 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="number"
                                                         id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocmobile}
                                                         placeholder = "pocemail"
                                                         disabled={this.state.isAcon} 
                                                         name="pocmobile"
                                                         onChange={(e) => this.handleChange(e)}
+                                                        disabled
                                                         /> 
                                                     
                                                 </div>
@@ -197,84 +221,21 @@ class ArtistProfile extends Component {
                                                     <div className="font14  mt7">
                                                         {this.state.line1},
                                                         {" " + this.state.line2},
-                                                        {" " + this.state.street},
-                                                        {" " + this.state.city},
-                                                        {" " + this.state.pincode},
-                                                        {" " + this.state.state}
+                                                       
                                                     </div>
                                                 :
                                                 <div>
                                                     <input
                                                         type="text"
                                                         id="line1"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.line1}
                                                         disabled={this.state.isAcon} 
                                                         placeholder = "line1"
                                                         name="line1"
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
-                                                         <input
-                                                        type="text"
-                                                        id="line2"
-                                                        className="form-control bgdis3 BuyerLogin2 Margintopcss"
-                                                        value= {this.state.line2}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "line2"
-                                                        name="line2"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        />
-                                                    <input
-                                                        type="text"
-                                                        id="street"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
-                                                        value= {this.state.street}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "street"     
-                                                        name="street"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        />
-                                                    <input
-                                                        type="text"
-                                                        id="city"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
-                                                        value= {this.state.city}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "city"         
-                                                        name="city"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        />
-                                                    <input
-                                                        type="number"
-                                                        id="pincode"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
-                                                        value= {this.state.pincode}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "pincode"   
-                                                        name="pincode"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        />
-                                                    <input
-                                                        type="text"
-                                                        id="state"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
-                                                        value= {this.state.state}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "state"
-                                                        name="state"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        />
-                                                    <input
-                                                        type="number"
-                                                        id="alternatemobno"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
-                                                        value= {this.state.alternatemobno}
-                                                        disabled={this.state.isAcon} 
-                                                        placeholder = "alternatemobno" 
-                                                        name="alternatemobno"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        /> 
-
+                                                        
                                                  </div>
                                                         }
                                               </Col>
@@ -292,11 +253,15 @@ class ArtistProfile extends Component {
                                             </Col>
                                             <Col sm = {{size: "6"}} className="aocbg2" >
                                                 <div className="fw600 bdetailsheading">
-                                                    Brand Details
+                                                <img
+                                                                            src={logos.brandicon}
+                                                                            className="iconcss"
+                                                                            onClick={this.handlepocEdit}
+                                                                    ></img>    Brand Details
                                                 </div>
                                                 {this.state.isBdetail ? <img
-                                                                            src={logos.edit}
-                                                                            className="poctick"
+                                                                            src={logos.apedit}
+                                                                            className="aoctick"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
                                                                             onClick={this.handlebEdit}
@@ -318,39 +283,40 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="pocname"
-                                                        className="form-control bgdis3  BuyerLogin2 Margintopcss"
+                                                        className="form-control bgdis3  BuyerLogin21 Margintopcss"
                                                         value= {this.state.pocname}
                                                         disabled={this.state.isBdetail} 
                                                         placeholder = "pocname"
                                                         name="pocname"
                                                         onChange={(e) => this.handleChange(e)}
+                                                        
                                                         />
                                                 
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    Mobile No.:
+                                                    Cluster:
                                                 </div>
                                                 <div>
                                                 <input
                                                         type="number"
                                                         id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocmobile}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isBdetail} 
                                                         name="pocmobile"
                                                         onChange={(e) => this.handleChange(e)}
-                                                        /> 
+                                                        disabled/> 
                                                     
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    Email Id:
+                                                    Product Category:
                                                 </div>
                                                 <div>
                                                 <input
-                                                        type="number"
+                                                        type="text"
                                                         id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocmobile}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isBdetail} 
@@ -366,7 +332,7 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="pocdesc"
-                                                        className="form-control bgdis3  BuyerLogin2"
+                                                        className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.pocdesc}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isBdetail} 
@@ -395,10 +361,221 @@ class ArtistProfile extends Component {
                                         </Row>
                                         :
                                         <Row noGutters={true}>
+                                            <Col sm = {{size: "1"}} ></Col>
+                                            <Col sm = {{size: "10"}}>
+                                                    <div className="bankdetails">
+                                                        <div className="bankheading">
+                                                        <img src={logos.bankicon} className="bankicon ">
+
+                                                        </img>
+                                                            Bank and Digital Payment Options
+                                                            {this.state.isDetailsEdit ? <img
+                                                                    src={logos.editblack}
+                                                                    className="poctick2 "
+                                                                    style={{"cursor":"pointer" ,
+                                                                    "position" : "absolute"}}
+                                                                    onClick={this.handlebdetEdit}
+                                                            ></img> : 
+                                                            <img
+                                                                    src={logos.done}
+                                                                    className="poctick2 "
+                                                                    style={{"cursor":"pointer",
+                                                                    "position" : "absolute"}}
+                                                                    onClick={this.handlebdetEdit}
+                                                            ></img>}
+                                                
+
+                                                        </div>
+                                                        <hr className="bankhr"></hr>
+                                                        <Row noGutters={true} className="bankcontent">
+                                                            <Col sm = {{size: "6"}}>
+                                                            <div className="font20">
+                                                                Bank Details
+                                                            </div>
+                                                            <br></br>
+                                                                                                        
+                                                            <div className="fw700 font14">
+                                                                Account Number
+                                                            </div>
+                                                <div>
+                                                <input
+                                                        type="number"
+                                                        id="accountno"
+                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        value= {this.state.accountno}
+                                                        placeholder = "Account no."
+                                                        disabled={this.state.isDetailsEdit} 
+                                                        name="accountno"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        /> 
+                                                
+                                                </div>
+                                                <div className="fw700 font14">
+                                                    Bank Name
+                                                </div>
+                                                <div>
+                                                <input
+                                                        type="text"
+                                                        id="bankname"
+                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        value= {this.state.bankname}
+                                                        placeholder = "Bank Name"
+                                                        disabled={this.state.isDetailsEdit} 
+                                                        name="bankname"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        /> 
+                                                    
+                                                </div>
+                                                <div className="fw700 font14">
+                                                    Benificiary Name
+                                                </div>
+                                                <div>
+                                                <input
+                                                        type="text"
+                                                        id="benificiaryname"
+                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        value= {this.state.benificiaryname}
+                                                        placeholder = "Benificiary Name"
+                                                        disabled={this.state.isDetailsEdit} 
+                                                        name="benificiaryname"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        /> 
+                                                    
+                                                </div>
+                                                <div className="fw700 font14">
+                                                    Branch
+                                                </div>
+                                                <div>
+                                                <input
+                                                        type="text"
+                                                        id="branch"
+                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        value= {this.state.branch}
+                                                        placeholder = "Branch"
+                                                        disabled={this.state.isDetailsEdit} 
+                                                        name="branch"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        /> 
+                                                    
+                                                </div>
+                                                <div className="fw700 font14">
+                                                    IFSC Code
+                                                </div>
+                                                <div>
+                                                <input
+                                                        type="text"
+                                                        id="ifsccode"
+                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        value= {this.state.ifsccode}
+                                                        placeholder = "IFSC Code"
+                                                        disabled={this.state.isDetailsEdit} 
+                                                        name="ifsccode"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        /> 
+                                                    
+                                                </div>
+                                                
+
+                                                            </Col>
+                                                            <Col sm = {{size: "6"}}>
+                                                            <div className="font20">
+                                                                Digital Payment Details
+                                                            </div>
+                                                            <br></br>
+                                                            <Row>
+
+                                                                <Col sm = {{size: "2"}}>
+                                                                
+                                                                <img src={logos.gpay} className="gpayicon"></img>
+
+                                                                </Col>
+                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <div className="fw700 font14">
+                                                                    Google Pay UPI Id
+                                                                </div>
+                                                                <div>
+                                                                <input
+                                                                        type="text"
+                                                                        id="gpayupi"
+                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        value= {this.state.gpayupi}
+                                                                        placeholder = "Gpay UPI."
+                                                                        disabled={this.state.isDetailsEdit} 
+                                                                        name="gpayupi"
+                                                                        onChange={(e) => this.handleChange(e)}
+                                                                        /> 
+                                                                
+                                                                </div>
+                                                                </Col>
+                                                                </Row>
+                                                            <Row>
+
+                                                                <Col sm = {{size: "2"}}>
+                                                                
+                                                                <img src={logos.paytm} className="gpayicon"></img>
+
+                                                                </Col>
+                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <div className="fw700 font14">
+                                                                    Paytm Registered Mobile Number
+                                                                </div>
+                                                                <div>
+                                                                <input
+                                                                        type="text"
+                                                                        id="paytmupi"
+                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        value= {this.state.paytmupi}
+                                                                        placeholder = "Paytm No."
+                                                                        disabled={this.state.isDetailsEdit} 
+                                                                        name="paytmupi"
+                                                                        onChange={(e) => this.handleChange(e)}
+                                                                        /> 
+                                                                
+                                                                </div>
+                                                                </Col>
+                                                                </Row>
+                                                                <Row>
+
+                                                                <Col sm = {{size: "2"}}>
+                                                                
+                                                                <img src={logos.phonepe} className="gpayicon"></img>
+
+                                                                </Col>
+                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <div className="fw700 font14">
+                                                                    Registered Number for PhonePe
+                                                                </div>
+                                                                <div>
+                                                                <input
+                                                                        type="text"
+                                                                        id="phonepeupi"
+                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        value= {this.state.phonepeupi}
+                                                                        placeholder = "PhonePe No."
+                                                                        disabled={this.state.isDetailsEdit} 
+                                                                        name="phonepeupi"
+                                                                        onChange={(e) => this.handleChange(e)}
+                                                                        /> 
+                                                                
+                                                                </div>
+                                                                </Col>
+                                                                </Row>
+                                                            
+
+                                                             
+                                                
+                                                                
+                                                            </Col>
+                                                            <div className="vrlinebank"></div>
+
+                                                        </Row>      
+                                                    </div>
+                                                    
+                                            </Col>
                                             
                                         </Row>
                                                 }
-                                       
+                       <Row noGutters={true}><Col className="letsbuildtext">Let's build the strong future!</Col></Row>                
 </Container>
 {console.log(this.props.user)}
 </div>

@@ -25,7 +25,10 @@ class ArtistProfile extends Component {
           paytmupi : "",
           phonepeupi  : "",
 
-
+          name: this.props.user.firstName +" "+ this.props.user.lastName,
+          mobile:this.props.user.mobile,
+          email:this.props.user.email,
+          
 
           isDesc: true,
           ischanged: false,
@@ -120,13 +123,13 @@ class ArtistProfile extends Component {
                                ?
                                <u className="selected">My Details</u> 
                                 :
-                                <span className="notSelected"  onClick={this.handleDetail}>My Details</span>
+                                <span className="notSelected" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>My Details</span>
                                 }
                             </Col>
                             <Col sm = {{size: "6"}} className="text-left">
                             {this.state.isProfile
                                ?
-                               <span className="notSelected" onClick={this.handleDetail}>Bank Details</span>
+                               <span className="notSelected" style={{"cursor":"pointer" }} onClick={this.handleDetail}>Bank Details</span>
                                 :
                                 <u className="selected">Bank Details</u> 
                                 }
@@ -161,22 +164,23 @@ class ArtistProfile extends Component {
                                                                             onClick={this.handlepocEdit}
                                                                     ></img>}
                                                 
-                                                <hr className="hrlinep3"></hr>
-                                                <Col sm = {{size: "6"}} className="cardtextfield" >
+                                                <hr className="hrlineaop3 "></hr>
+                                                <Col sm = {{size: "7"}} className="cardtextfield" >
                                                 <div className="fw700 font14">
                                                     Name:
                                                 </div>
                                                 <div>
-                                                <input
+                                                    {this.state.name}
+                                                {/* <input
                                                         type="text"
                                                         id="pocname"
                                                         className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocname}
+                                                        value= {this.state.name}
                                                         placeholder = "pocname"
                                                         disabled={this.state.isAcon} 
                                                         name="pocname"
                                                         onChange={(e) => this.handleChange(e)}
-                                                       disabled /> 
+                                                       disabled />  */}
                                                 
                                                 </div>
                                                 <div className="fw700 font14">
@@ -187,7 +191,7 @@ class ArtistProfile extends Component {
                                                         type="email"
                                                         id="pocemail"
                                                         className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocemail}
+                                                        value= {this.state.email}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isAcon} 
                                                         name="pocemail"
@@ -204,7 +208,7 @@ class ArtistProfile extends Component {
                                                         type="number"
                                                         id="pocmobile"
                                                         className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocmobile}
+                                                        value= {this.state.mobile}
                                                         placeholder = "pocemail"
                                                         disabled={this.state.isAcon} 
                                                         name="pocmobile"
@@ -239,7 +243,7 @@ class ArtistProfile extends Component {
                                                  </div>
                                                         }
                                               </Col>
-                                              <Col sm={{size:"6"}}>
+                                              <Col sm={{size:"5"}}>
                                               <div class="Profilecontainer">
 
                                             <div class="card Profilecard">
@@ -274,8 +278,8 @@ class ArtistProfile extends Component {
                                                                             onClick={this.handlebEdit}
                                                                     ></img>}
                                                 
-                                                <hr className="hrlinep3"></hr>
-                                                <Col sm={{size:6}} className="cardtextfield">
+                                                <hr className="hrlineaop3"></hr>
+                                                <Col sm={{size:7}} className="cardtextfield">
                                                 <div className="fw700 font14">
                                                     Name:
                                                 </div>
@@ -301,7 +305,7 @@ class ArtistProfile extends Component {
                                                         type="number"
                                                         id="pocmobile"
                                                         className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocmobile}
+                                                        value= {this.state.cluster}
                                                         placeholder = "pocmobile"
                                                         disabled={this.state.isBdetail} 
                                                         name="pocmobile"
@@ -342,13 +346,13 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 </Col>
-                                                <Col sm={{size:6}}>
+                                                <Col sm={{size:5}}>
                                                 <div class="Profilecontainer">
 
                                                         <div class="card Profilecard">
                                                             <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/8.png" alt="Avatar for user 1"/>
                                                         
-                                                                <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div>
+                                                                {/* <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div> */}
 
                                                             </div>
 
@@ -386,7 +390,7 @@ class ArtistProfile extends Component {
                                                 
 
                                                         </div>
-                                                        <hr className="bankhr"></hr>
+                                                        <hr className="hrlineaop3 "></hr>
                                                         <Row noGutters={true} className="bankcontent">
                                                             <Col sm = {{size: "6"}}>
                                                             <div className="font20">
@@ -597,4 +601,3 @@ function mapStateToProps(state) {
 
 const connectedLoginPage = connect(mapStateToProps)(ArtistProfile);
 export default connectedLoginPage;
-

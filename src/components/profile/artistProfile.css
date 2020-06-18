@@ -1,191 +1,195 @@
-/* .Margintopcss{
-    margin-top:10px
-} */
 .Aopbg{
-    background: url("../../assets/backgroundpictureaop.svg"); 
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100%;
-    background-color: #FAF5F5;
-    background-position: center;
-   
+  background: url("../../assets/backgroundpictureaop.svg"); 
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  background-color: #FAF5F5;
+  background-position: center;
+ 
+}
+.hrlineaop3 {
+  width: 100%;
+  border-top: 0.5px solid lightgrey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
 }
 .aocbg1{
-    background-color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width:45%!important;
-    min-height: 220px!important;
-    box-shadow: 2px 2px 2px 2px #888888;
-    height: 357px;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width:45%!important;
+  min-height: 220px!important;
+  box-shadow: 2px 2px 2px 2px #888888;
+  height: 340px;
 }
 .aoctick{
-  top: 5px;
-  right: 5px;
-  height:27px;
+top: 5px;
+right: 5px;
+height:27px;
 }
 .cardtextfield > div > input[type="text"]:disabled {
-    background: transparent;
-    border: 2px;
-    font-size : 14px!important;
-    padding-left: 0px;
-    
+  background: transparent;
+  border: 2px;
+  font-size : 14px!important;
+  padding-left: 0px;
+  
 }
 .cardtextfield > div > input[type="email"]:disabled {
-    background: transparent;
-    border: 2px;
-    font-size : 14px!important;
-    padding-left: 0px;
-    
+  background: transparent;
+  border: 2px;
+  font-size : 14px!important;
+  padding-left: 0px;
+  
 }
 .aocbg2{
-    background-color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width:45%!important;
-    float:right!important;
-    min-height: 220px!important;
-    box-shadow: 2px 2px 2px 2px #888888;
-    height: 357px;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width:45%!important;
+  float:right!important;
+  min-height: 220px!important;
+  box-shadow: 2px 2px 2px 2px #888888;
+  height: 340px;
 
 }
 .cardtextfield > div > input[type="text"]:disabled {
-    background: transparent;
-    border: 2px;
-    font-size : 14px!important;
-    padding-left: 0px;
-    
+  background: transparent;
+  border: 2px;
+  font-size : 14px!important;
+  padding-left: 0px;
+  
 }
 .cardtextfield > div > input[type="email"]:disabled {
-    background: transparent;
-    border: 2px;
-    font-size : 14px!important;
-    padding-left: 0px;
-    
+  background: transparent;
+  border: 2px;
+  font-size : 14px!important;
+  padding-left: 0px;
+  
 }
 .letsbuildtext{
 font-size: 40px;
-    text-align: center;
-    margin-top: 16px;
-    font-weight: 700;
-    color: lightgrey;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 700;
+  color: lightgrey;
 }
 .iconcss{
-  height: 25px;
-  margin-right: 10px;
+height: 25px;
+margin-right: 10px;
 }
 
+.Profilecontainer {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 120px);
+  grid-gap: 2em;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+  margin: 2em auto 0;
+}
+.Profilecard {
+  /* background: #282f33; */
+  margin-bottom: 2em;
+  border-radius: 1.1em;
+}
+.profileimg {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: #add8e6 1px solid;
+  background: #fff;
+}
+@media (max-width: 550px) {
   .Profilecontainer {
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 120px);
-    grid-gap: 2em;
-      place-items: center;
-      justify-content: center;
-      align-items: center;
-    margin: 2em auto 0;
+    width: 90%;
   }
-  .Profilecard {
-    /* background: #282f33; */
-    margin-bottom: 2em;
-    border-radius: 1.1em;
-  }
-  .profileimg {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: #add8e6 1px solid;
-    background: #fff;
-  }
-  @media (max-width: 550px) {
-    .Profilecontainer {
-      width: 90%;
-    }
-  }
-  /* ---------------------------- */
-  .profile-pic {
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply;
-    vertical-align: middle;
-    text-align: center;
-    color: transparent;
-    transition: all .3s ease;
-    text-decoration: none;
-    cursor: pointer;
+}
+/* ---------------------------- */
+.profile-pic {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  color: transparent;
+  transition: all .3s ease;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .profile-pic:hover {
-    background-color: rgba(0,0,0,.5);
-    z-index: 10000;
-    color: #fff;
-    transition: all .3s ease;
-    text-decoration: none;
+  background-color: rgba(0,0,0,.5);
+  z-index: 10000;
+  color: #fff;
+  transition: all .3s ease;
+  text-decoration: none;
 }
 
 .profile-pic span {
-    display: inline-block;
-    padding-top: 4.5em;
-    padding-bottom: 4.5em;
+  display: inline-block;
+  padding-top: 4.5em;
+  padding-bottom: 4.5em;
 }
 
 form input[type="file"] {
-          display: none;
-          cursor: pointer;
- }
- .aprofilelogo{
-  background-image: url("../../assets/logo2.png");
-  height: 140px;
-  width: 140px;
-  border-radius: 50%;
-  background-size: 100% 100%;
-  margin : 0 auto;
+        display: none;
+        cursor: pointer;
+}
+.aprofilelogo{
+background-image: url("../../assets/logo2.png");
+height: 140px;
+width: 140px;
+border-radius: 50%;
+background-size: 100% 100%;
+margin : 0 auto;
 }
 .welcome{
-  font-size: 22px;
-  font-weight: 600;
+font-size: 22px;
+font-weight: 600;
 }
 .selected{
-  font-size: 22px;
-    font-weight: 600;
+font-size: 22px;
+  font-weight: 600;
 }
 .notSelected{
-  font-size: 20px;
+font-size: 20px;
 }
 .bankdetails{
-  min-height: 200px!important;
-  background-color: white;
-  width: 700px;
-  margin: 0 auto;
-  
-  box-shadow: 0px 0px 19px -10px grey;
+min-height: 200px!important;
+background-color: white;
+width: 700px;
+margin: 0 auto;
+
+box-shadow: 0px 0px 19px -10px grey;
 }
 .bankicon{
-    width: 30px;
-    margin-right:20px;
-    vertical-align: text-top;
+  width: 30px;
+  margin-right:20px;
+  vertical-align: text-top;
 }
 .bankheading{
-  font-size: 28px;
-  padding: 15px 10px 10px 20px ;
+font-size: 28px;
+padding: 15px 10px 10px 20px ;
 }
 .poctick2{
-  top: 24px;
-    right: 73px;
-    height: 20px;
+top: 24px;
+  right: 73px;
+  height: 20px;
 }
 .bankhr{
-  margin-top: 0px!important;
-  margin-bottom: 0px!important;
+margin-top: 0px!important;
+margin-bottom: 0px!important;
 
-  border-top: 1px solid black;
+border-top: 1px solid black;
 }
 .bankcontent{
-  padding: 15px 10px 10px 20px ;
+padding: 15px 10px 10px 20px ;
 
 }
 .bankdethead{
@@ -193,86 +197,94 @@ form input[type="file"] {
 }
 .bankcontent > div > div > input[type="text"]:disabled,
 .digitalbank > div > input[type="text"]:disabled {
-  background: transparent;
-  border: 2px;
-  font-size : 14px!important;
-  padding-left: 0px;
-  
+background: transparent;
+border: 2px;
+font-size : 14px!important;
+padding-left: 0px;
+
 }
 .gpayicon{
-  margin-top: 5px;
-  width: 53px;
+margin-top: 5px;
+width: 53px;
 }
 
 .BuyerLogin21 {
-  border-radius: 0px!important;
-  height: 32px !important;
+border-radius: 0px!important;
+height: 32px !important;
 }
 .vrlinebank {
-  border-left: 2px solid;
-  height: 20em;
-  margin-top: 2%;
-  position: absolute;
-  left: 50%;
-  /* margin-left: -3px; */
-  /* top: 0; */
-  color: #c7c7c7;
+border-left: 2px solid;
+height: 20em;
+margin-top: 2%;
+position: absolute;
+left: 50%;
+/* margin-left: -3px; */
+/* top: 0; */
+color: #c7c7c7;
 }
 
 
 @media only screen and ( max-width: 480px ) {
-   
+ 
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
-  .bankdetails {
-    min-height: 200px!important;
-    background-color: white;
-    width: 595px;
-    margin: 0 auto;
-    box-shadow: 0px 0px 19px -10px grey;
+.bankdetails {
+  min-height: 200px!important;
+  background-color: white;
+  width: 595px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 19px -10px grey;
 }
 .bankicon {
-  width: 24px;
-  margin-right: 20px;
-  vertical-align: text-top;
+width: 24px;
+margin-right: 20px;
+vertical-align: text-top;
 }
 .bankheading {
-  font-size: 22px;
-  padding: 15px 10px 10px 20px;
+font-size: 22px;
+padding: 15px 10px 10px 20px;
 }
 .poctick2 {
-  top: 18px;
-  right: 38px;
-  height: 20px;
+top: 18px;
+right: 38px;
+height: 20px;
 }
 .BuyerLogin21 {
-  border-radius: 0px!important;
-  height: 28px !important;
+border-radius: 0px!important;
+height: 28px !important;
 }
 .bankcontent {
-  padding: 15px 10px 17px 20px;
+padding: 15px 10px 17px 20px;
 }
 .vrlinebank {
-  border-left: 2px solid;
-  height: 18em;
-  margin-top: 3%;
-  position: absolute;
-  left: 50%;
-  /* margin-left: -3px; */
-  /* top: 0; */
-  color: #c7c7c7;
+border-left: 2px solid;
+height: 18em;
+margin-top: 3%;
+position: absolute;
+left: 50%;
+/* margin-left: -3px; */
+/* top: 0; */
+color: #c7c7c7;
 }
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
-   
+ 
 }
 @media only screen and ( min-width: 1200px ) {
-  .bankdetails {
-    min-height: 200px!important;
-    background-color: white;
-    width: 875px;
-    margin: 0 auto;
-    box-shadow: 0px 0px 19px -10px grey;
+.bankdetails {
+  min-height: 200px!important;
+  background-color: white;
+  width: 875px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 19px -10px grey;
 }
 
+}
+@media only screen and ( max-width: 1024px ) and ( min-width: 767px ){
+  .aocbg1{
+    height:285px;
+  }
+  .aocbg2{
+    height: 285px;
+  }
 }

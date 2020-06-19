@@ -19,7 +19,7 @@
     border-radius: 10px;
     width: 90%;
     margin: 0 auto;
-    height:619px;
+    height:618px;
 }
 .font2{
     font-size: 15px;
@@ -118,15 +118,14 @@ body {
 #ck-button {
     font-family: var(--PlayfairFont);
     font-weight: normal;
-    margin:4px;
-    background-color:white;
-    border-radius:25px;
-    border:1px solid #D0D0D0;
-    overflow:auto;
-    display: inline-block; 
-    width: 125px;
-    margin:20px;
-   
+    margin: 4px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    display: inline-block;
+    width: 160px;
+    margin: 20px 5px 20px 5px;
 }
 
 #ck-button:hover {
@@ -200,7 +199,11 @@ body {
         background-color: #eee;
         border-radius: 5px;
         box-shadow: 4px 4px #ccc;
-      }
+}
+.BuyerLogin212 {
+    border-radius: 0px!important;
+    height: 104px !important;
+}
 
 
 @media only screen and ( max-width: 480px ) {
@@ -327,7 +330,7 @@ body {
         border-radius: 10px;
         width: 80%;
         margin: 0 auto;
-        height: 619px;
+        height: 618px;
     }
 
     

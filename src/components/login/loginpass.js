@@ -23,6 +23,7 @@ export default class buyerpass extends Component {
                  }
 
                  Login() {                  
+                   console.log(this.state);
                    if (this.state.password == "") {
                    this.showValidationpass();
                    } else {                  

@@ -245,6 +245,12 @@ export default class artreg5 extends Component {
                                  <span>{this.state.products[4].productDesc}</span>
                                </label>
                              </div>
+                             {/* <div id="ck-button">
+                               <label>
+                                 <input type="checkbox" value="3" id={this.state.products[5].id}/>
+                                 <span>{this.state.products[5].productDesc}</span>
+                               </label>
+                             </div> */}
                            </Row>
                            <br></br>
                            <Row

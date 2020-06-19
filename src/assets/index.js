@@ -52,6 +52,8 @@ import scissor from "./Icon feather-scissors.svg";
 import artistMainLogo from "./artistMainLogo.jpg";
 import addnewProduct from "./Add new Product icon.svg";
 import edit from "./Icon feather-edit-2.svg";
+import editblack from "./Icon feather-edit-1.svg";
+
 import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
 import done from "./done.svg";
@@ -78,6 +80,14 @@ import washAndCare9 from "./9.svg";
 import washAndCare10 from "./10.svg";
 import mtoicon from "./mto.svg"
 import isavailable from "./isavailable.svg"
+import bankicon from "./Icon material-account-balance.svg"
+import gpay from "./Gpay.svg"
+import phonepe from "./phone-pe.svg"
+import paytm from "./paytm.svg"
+import personalicon from "./Icon material-account-circle.svg";
+import brandicon from "./Icon material-branding-watermark.svg";
+import apedit from "./Icon feather-edit-1.svg";
+
 
 
 
@@ -86,6 +96,14 @@ import isavailable from "./isavailable.svg"
 export default {
   isavailable,
   mtoicon,
+  apedit,
+  personalicon,
+  brandicon,
+  gpay,
+  phonepe,
+  paytm,
+  editblack,
+  bankicon,
   washAndCare1,
   washAndCare2,
   washAndCare3,

@@ -241,16 +241,26 @@ class ArtistProfile extends Component {
                  this.state.selectedprods.push(item.id)
                  productSelected = productSelected + item.productDesc + ", "; 
                 }  
-                // productSelected = productSelected - ",";
-            console.log(this.state.selectedprods) ;
+            // console.log(this.state.selectedprods) ;
             this.setState({
                 prodsel : productSelected
-            },()=>{
-                console.log(this.state);
-                TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods);
-            })
+            });
             // document.getElementById("prodselected").innerHTML = productSelected;
-        });     
+        }); 
+        this.setState({
+            prodsel : productSelected
+        },()=>{
+            console.log(this.state.selectedprods) ;
+            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods);
+
+        });
+
+        // ()=>{
+        //     console.log("Brand APi called");
+
+        //     console.log(this.state);
+        //    
+        // }
         this.setState({
             isBdetail:!this.state.isBdetail
         })

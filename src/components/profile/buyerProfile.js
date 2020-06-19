@@ -150,7 +150,7 @@ debugger;
         
     }
     SaveDetails(){
-        
+        alert("saveclicked");
         console.log(this.state);
         // debugger;
         TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
@@ -159,7 +159,7 @@ debugger;
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
             this.state.countryid).then((response) => {
-                alert("Details successfully updated");
+
 
             });
     }
@@ -186,8 +186,21 @@ debugger;
                                     <Col sm = {{size: "10"}}>
                                         <Row noGutters={true}>
                                                     {/* <Col sm = {{size: "1"}}></Col> */}
-                                                    <Col sm = {{size: "10"}} className= "profilename">{this.props.user.firstName}<br></br>{this.props.user.lastName}</Col>
-                                                    
+                                                    <Col sm = {{size: "8"}} className= "profilename">{this.props.user.firstName}<br></br>{this.props.user.lastName}</Col>
+                                                    <Col sm = {{size: "4"}} className="ratingBuyer">
+                                                   {/* <div class="circle small" data-notfill="40" data-fill="60" hour style={{"--color":"black ","---color":"white"}}>
+                                                        <span><b>3.7</b></span>
+                                                        <div class="bar"></div>
+                                                    </div> */}
+                                                     <div class="wrapper">
+  <div class="c100 p40 blue">
+      <span><b>3.7</b></span>
+      <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+      </div>
+  </div></div>
+                                                    <p className="Ratingtext">Rating by Artisans</p></Col> 
                                         </Row>
                                         <Row noGutters={true}>
                                                     {/* <Col sm = {{size: "1"}}></Col> */}

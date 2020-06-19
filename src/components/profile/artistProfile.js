@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import "./artistProfile.css";
 import "./buyerProfile.css"
+import TTCEapi from '../../services/API/TTCEapi';
+import Footer from "../footer/footer";
+
 class ArtistProfile extends Component {
     constructor(props) {
         super(props);
@@ -14,8 +17,12 @@ class ArtistProfile extends Component {
         this.state = {
           firstName : this.props.user.firstName,
           lastName : this.props.user.lastName,
-          isProfile : false,
+          isProfile : true,
           isDetailsEdit : true,
+          isPdetail : true,
+          isBdetail: true,
+          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
+          selectedprods :[],          
           accountno : "",
           bankname : "" ,
           branch : "" ,
@@ -24,72 +31,231 @@ class ArtistProfile extends Component {
           gpayupi : "",
           paytmupi : "",
           phonepeupi  : "",
-
-          name: this.props.user.firstName +" "+ this.props.user.lastName,
+          line1 : "",
+          district : "",
+          pincode: "",
+          state : "",
+          rating : 1,   
+          brandname : "",
+          branddesc : "",
+          paymentAccountDetails : [],
           mobile:this.props.user.mobile,
           email:this.props.user.email,
-          
+          ratingclass: "p10",
+          prodsel : "",
 
-          isDesc: true,
-          ischanged: false,
-          isButtonDisabled: true,
-          isAcon: true,
-          isBdetail: true,
-          isPod: true,
-          isDaddress : true,
-          designation: this.props.user.designation,
-          alternatemobno: this.props.user.alternateMobile,
-          panno: this.props.user.pancard,
-          line1 : this.props.user.addressses[0].line1,
-          line2 : this.props.user.addressses[0].line2,
-          street :this.props.user.addressses[0].street,
-          city : this.props.user.addressses[0].city,
-          pincode : this.props.user.addressses[0].pincode,
-          state : this.props.user.addressses[0].state,                                                  
+        //   isDesc: true,
+        //   ischanged: false,
+        //   isButtonDisabled: true,
+        //   isAcon: true,
+        //   isBdetail: true,
+        //   isPod: true,
+        //   isDaddress : true,
+        //   designation: this.props.user.designation,
+        //   alternatemobno: this.props.user.alternateMobile,
+        //   panno: this.props.user.pancard,
+        //   line1 : this.props.user.addressses[0].line1,
+        //   line2 : this.props.user.addressses[0].line2,
+        //   street :this.props.user.addressses[0].street,
+        //   city : this.props.user.addressses[0].city,
+        //   pincode : this.props.user.addressses[0].pincode,
+        //   state : this.props.user.addressses[0].state,                                                  
          
         };
         this.handleDetail = this.handleDetail.bind(this);
         this.handlebdetEdit = this.handlebdetEdit.bind(this);
-
-        this.handleEdit = this.handleEdit.bind(this);
-        this.handleconEdit = this.handleconEdit.bind(this);
-        this.handledetEdit = this.handledetEdit.bind(this);
+        this.handlebdetEdit2 = this.handlebdetEdit2.bind(this);
+        this.handlePdetailEdit = this.handlePdetailEdit.bind(this);
+        this.handlePdetailEdit2 = this.handlePdetailEdit2.bind(this);
         this.handlebEdit = this.handlebEdit.bind(this);
-        this.handlepocEdit = this.handlepocEdit.bind(this);
+        this.handlebEdit2 = this.handlebEdit2.bind(this);
+
+
+
+
+        // this.handleEdit = this.handleEdit.bind(this);
+        // this.handleconEdit = this.handleconEdit.bind(this);
+        // this.handledetEdit = this.handledetEdit.bind(this);
+        // this.handlebEdit = this.handlebEdit.bind(this);
+        // this.handlepocEdit = this.handlepocEdit.bind(this);
 
 
         
       }
+      componentDidMount(){
+        TTCEapi.getProducts().then((response)=>{
+            this.setState({products : response.data.data},() => {
+              
+            //   console.log(this.state.products[0].productDesc);
+            });
+
+        });
+          TTCEapi.getProfile().then((response) => {
+            TTCEapi.getProducts().then((response1)=>{
+                this.setState({products : response1.data.data},() => {
+                    // console.log(response.data.data.userProductCategories.length)
+                    if(response.data.data.userProductCategories.length != 0)
+                    {   var prodselected = "";
+                      for (var  items in response.data.data.userProductCategories)
+                      {     prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
+                        //   console.log(response.data.data.userProductCategories[items].productCategoryId);
+                        //   console.log(this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc);
+                      }
+                      this.setState({
+                        prodsel : prodselected
+                    })
+                  }
+                  
+                //   console.log(this.state.products[0].productDesc);
+                });
+    
+            });
+             
+
+            
+            console.log("here");  
+            // console.log(response.data.data);
+            // console.log(response.data.data.user.rating);
+            if(response.data.data.user.rating != ""){
+                this.setState({ rating : parseFloat(response.data.data.user.rating) },()=>{
+                    // console.log( this.state);
+                    var percentage = "p" + this.state.rating*10;
+                    this.setState({ratingclass : percentage});
+                });
+            }
+            
+            if(response.data.data.user.paymentAccountDetails.length != 0)
+            {
+                // console.log(response.data.data.user.paymentAccountDetails);
+                for (var  items in response.data.data.user.paymentAccountDetails)
+                {
+                    console.log(response.data.data.user.paymentAccountDetails[items].accountType.id);
+                    switch(response.data.data.user.paymentAccountDetails[items].accountType.id){
+                        case 1:
+                            console.log("bank");   
+                            this.setState({
+                                accountno : parseInt(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile),
+                                bankname : response.data.data.user.paymentAccountDetails[items].bankName ,
+                                branch : response.data.data.user.paymentAccountDetails[items].branch ,
+                                ifsccode : response.data.data.user.paymentAccountDetails[items].ifsc,
+                                benificiaryname : response.data.data.user.paymentAccountDetails[items].name
+                            }); 
+                            break;
+                        case 2:
+                            console.log("gpayy");
+                            if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                            
+                                this.setState({
+                                    gpayupi : parseInt(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                }); 
+                            }
+                            
+                            break;
+                        case 3:
+                            // console.log(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile);
+                            if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                            
+                            this.setState({
+                                phonepeupi : parseInt(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile), 
+                            }); 
+                        }
+                            break;
+                        case 4:
+                            console.log("paytm");
+                            if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                                          
+                                this.setState({
+                                    paytmupi : parseInt(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                }); 
+                            }
+                            
+                            break;
+                    }
+                }
+                
+
+            }
+            // console.log("hfjdfink");
+            // console.log(response.data.data.user.companyDetails != null)
+            if(response.data.data.user.companyDetails != null){
+                this.setState({
+                    brandname : response.data.data.user.companyDetails.companyName ,
+                    branddesc :  response.data.data.user.companyDetails.desc,
+
+
+                })
+            }
+            
+            this.setState({
+                line1 : response.data.data.user.addressses[0].line1,
+                district : response.data.data.user.addressses[0].district,
+                pincode : response.data.data.user.addressses[0].pincode,
+                state :response.data.data.user.addressses[0].state ,
+
+            })
+            // console.log(response.data.data.user.addressses[0].district);
+
+          }, () =>{
+            //   console.log("hdsdj");
+            // console.log(this.state);
+            
+          })
+      }
+      handlePdetailEdit(){
+        this.setState({
+            isPdetail:!this.state.isPdetail
+        })
+     }
+     handlePdetailEdit2(){
+         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state).then((response)=>{
+
+         })
+        this.setState({
+            isPdetail:!this.state.isPdetail
+        })
+     }
       handlebdetEdit(){
         this.setState({
             isDetailsEdit:!this.state.isDetailsEdit
         })
     }
-    handleEdit(){
-          this.setState({
-              isDesc:!this.state.isDesc
-          })
-      }
-    handlebEdit(){
+    handlebdetEdit2(){
+        this.setState({
+            isDetailsEdit:!this.state.isDetailsEdit
+        })
+        TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
+            this.state.branch,this.state.ifsccode,this.state.benificiaryname,
+            this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+
+            });
+    }
+     handlebEdit(){
         this.setState({
             isBdetail:!this.state.isBdetail
         })
     }
-    handlepocEdit(){
-        this.setState({
-            isAcon:!this.state.isAcon
-        })
-    }
-      handleconEdit(){
-        this.setState({
-            isAcon:!this.state.isAcon
-        })
-    }
-    handledetEdit(){
+    handlebEdit2(){
+        var productSelected = "";
+        this.state.products.map((item) => { 
+            if(document.getElementById(item.id).checked){
+                 this.state.selectedprods.push(item.id)
+                 productSelected = productSelected + item.productDesc + ", "; 
+                }  
+                // productSelected = productSelected - ",";
+            console.log(this.state.selectedprods) ;
+            this.setState({
+                prodsel : productSelected
+            },()=>{
+                console.log(this.state);
+                TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods);
+            })
+            // document.getElementById("prodselected").innerHTML = productSelected;
+        });     
         this.setState({
             isBdetail:!this.state.isBdetail
         })
     }
+    
       handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
         this.setState({
@@ -97,6 +263,8 @@ class ArtistProfile extends Component {
         });
       }
       handleDetail(){
+        console.log("hdsdj");
+        console.log(this.state);
         this.setState({
             isProfile:!this.state.isProfile
         })
@@ -105,17 +273,33 @@ class ArtistProfile extends Component {
         return (
             <React.Fragment>
                 <NavbarComponent/>
+            
+                <div className="Aopbg2">
                 <div className="Aopbg">
+
                     <Container >
+                        <br></br>
                         <Row noGutters={true}>
-                        <div className="aprofilelogo">
-                           </div>
+                        <div className="wrapper">
+                            <div className={"c100 " + this.state.ratingclass + " blue artistrating"}  >
+                                <span><div className="aprofilelogo">
+                           </div></span>
+                                <div className="slice">
+                                    <div className="bar"></div>
+                                    <div className="fill"></div>
+                                </div>
+                            </div></div>
+                        {/* <div className="aprofilelogo">
+                           </div> */}
                         </Row>
                         <Row noGutters={true} className="text-center welcome">
                            Welcome,{ " " +this.state.firstName + " " + this.state.lastName }
                         </Row>
                         <Row noGutters={true} className="text-center ">
                            Manage your info,brand and bank details 
+                        </Row>
+                        <Row noGutters={true} className="text-center ">
+                           Artist Rating : {this.state.rating} / 10
                         </Row>
                         <Row noGutters={true} className="mt30 ">
                             <Col sm = {{size: "6"}} className="text-right">
@@ -140,91 +324,61 @@ class ArtistProfile extends Component {
                         {this.state.isProfile 
                         ?
 
-                <Row noGutters={true} >
+                <Row noGutters={true} className="detailsheight">
                                             <Col sm = {{size: "6"}} className="aocbg1" >
                                                 <div className="fw600 bdetailsheading">
-                                                <img
-                                                                            src={logos.personalicon}
-                                                                            className="iconcss"
-                                                                            onClick={this.handlepocEdit}
-                                                                    ></img>      Personal Details
+                                                    <img
+                                                                                src={logos.personalicon}
+                                                                                className="iconcss"
+                                                    ></img>
+                                                      Personal Details
                                                 </div>
-                                                {this.state.isAcon ? <img
+                                                {this.state.isPdetail ? <img
                                                                             src={logos.apedit}
                                                                             className="aoctick"
                                                                             style={{"cursor":"pointer" ,
                                                                         "position" : "absolute"}}
-                                                                            onClick={this.handlepocEdit}
+                                                                            onClick={this.handlePdetailEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
                                                                             className="poctick"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
-                                                                            onClick={this.handlepocEdit}
+                                                                            onClick={this.handlePdetailEdit2}
                                                                     ></img>}
                                                 
                                                 <hr className="hrlineaop3 "></hr>
                                                 <Col sm = {{size: "7"}} className="cardtextfield" >
-                                                <div className="fw700 font14">
-                                                    Name:
-                                                </div>
-                                                <div>
-                                                    {this.state.name}
-                                                {/* <input
-                                                        type="text"
-                                                        id="pocname"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.name}
-                                                        placeholder = "pocname"
-                                                        disabled={this.state.isAcon} 
-                                                        name="pocname"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                       disabled />  */}
-                                                
-                                                </div>
-                                                <div className="fw700 font14">
+                                                    <div className="fw700 font14 mt7">
+                                                        Name:
+                                                    </div>
+                                                    <div className="font14  mt7">
+                                                        {this.props.user.firstName + " " + this.props.user.lastName}                                               
+                                                    </div>
+                                                <div className="fw700 font14 mt7">
                                                    Email Id:
                                                 </div>
-                                                <div>
-                                                <input
-                                                        type="email"
-                                                        id="pocemail"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.email}
-                                                        placeholder = "pocmobile"
-                                                        disabled={this.state.isAcon} 
-                                                        name="pocemail"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        disabled
-                                                        /> 
-                                                    
+                                                <div className="font14  mt7">
+                                                   <p>{this.props.user.email}</p> 
                                                 </div>
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                     Mobile:
                                                 </div>
-                                                <div>
-                                                <input
-                                                        type="number"
-                                                        id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.mobile}
-                                                        placeholder = "pocemail"
-                                                        disabled={this.state.isAcon} 
-                                                        name="pocmobile"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        disabled
-                                                        /> 
-                                                    
+                                                <div className="font14  mt7">
+                                                {this.props.user.mobile}
                                                 </div>
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                     Address:
                                                 </div>
-                                                {this.state.isAcon 
+                                                {this.state.isPdetail
                                                 ? 
                                                     <div className="font14  mt7">
-                                                        {this.state.line1},
-                                                        {" " + this.state.line2},
+                                                        {this.state.line1}
+                                                        {" " + this.state.district },
+                                                        {" " + this.state.pincode }
+                                                        {" " + this.state.state }
+
                                                        
                                                     </div>
                                                 :
@@ -234,9 +388,39 @@ class ArtistProfile extends Component {
                                                         id="line1"
                                                         className="form-control bgdis3  BuyerLogin21"
                                                         value= {this.state.line1}
-                                                        disabled={this.state.isAcon} 
+                                                        disabled={this.state.isPdetail} 
                                                         placeholder = "line1"
                                                         name="line1"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        />
+                                                        <input
+                                                        type="text"
+                                                        id="district"
+                                                        className="form-control bgdis3  BuyerLogin21 mt7"
+                                                        value= {this.state.district}
+                                                        disabled={this.state.isPdetail} 
+                                                        placeholder = "district"
+                                                        name="district"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        />
+                                                        <input
+                                                        type="number"
+                                                        id="pincode"
+                                                        className="form-control bgdis3  BuyerLogin21 mt7"
+                                                        value= {this.state.pincode}
+                                                        disabled={this.state.isPdetail} 
+                                                        placeholder = "pincode"
+                                                        name="pincode"
+                                                        onChange={(e) => this.handleChange(e)}
+                                                        />
+                                                        <input
+                                                        type="text"
+                                                        id="state"
+                                                        className="form-control bgdis3  BuyerLogin21 mt7"
+                                                        value= {this.state.state}
+                                                        disabled={this.state.isPdetail} 
+                                                        placeholder = "state"
+                                                        name="state"
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
                                                         
@@ -260,89 +444,118 @@ class ArtistProfile extends Component {
                                                 <img
                                                                             src={logos.brandicon}
                                                                             className="iconcss"
-                                                                            onClick={this.handlepocEdit}
                                                                     ></img>    Brand Details
                                                 </div>
                                                 {this.state.isBdetail ? <img
                                                                             src={logos.apedit}
                                                                             className="aoctick"
                                                                             style={{"cursor":"pointer" ,
-                                                                        "position" : "absolute"}}
+                                                                            "position" : "absolute"}}
                                                                             onClick={this.handlebEdit}
+                                                                            
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
                                                                             className="poctick"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
-                                                                            onClick={this.handlebEdit}
+                                                                            onClick={this.handlebEdit2}
                                                                     ></img>}
                                                 
                                                 <hr className="hrlineaop3"></hr>
                                                 <Col sm={{size:7}} className="cardtextfield">
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                     Name:
                                                 </div>
                                                 <div>
                                                 <input
                                                         type="text"
-                                                        id="pocname"
-                                                        className="form-control bgdis3  BuyerLogin21 Margintopcss"
-                                                        value= {this.state.pocname}
+                                                        id="brandname"
+                                                        className=" font14 form-control   BuyerLogin21 Margintopcss"
+                                                        value= {this.state.brandname}
                                                         disabled={this.state.isBdetail} 
-                                                        placeholder = "pocname"
-                                                        name="pocname"
+                                                        placeholder = "brandname"
+                                                        name="brandname"
                                                         onChange={(e) => this.handleChange(e)}
                                                         
                                                         />
                                                 
                                                 </div>
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                     Cluster:
                                                 </div>
-                                                <div>
-                                                <input
-                                                        type="number"
-                                                        id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.cluster}
-                                                        placeholder = "pocmobile"
-                                                        disabled={this.state.isBdetail} 
-                                                        name="pocmobile"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        disabled/> 
+                                                <div className="font14  mt7" >
+                                                    {this.props.user.cluster.desc}
                                                     
                                                 </div>
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                     Product Category:
                                                 </div>
                                                 <div>
-                                                <input
-                                                        type="text"
-                                                        id="pocmobile"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocmobile}
-                                                        placeholder = "pocmobile"
-                                                        disabled={this.state.isBdetail} 
-                                                        name="pocmobile"
-                                                        onChange={(e) => this.handleChange(e)}
-                                                        /> 
-                                                    
+                                                    {this.state.isBdetail
+                                                    ?
+                                                    <div className="font14  mt7">
+                                                    {this.state.prodsel}
+                                                    </div>
+                                                
+                                                :
+                                                <div>
+                                                     <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="1" id={this.state.products[0].id}/>
+                                                        <span>{this.state.products[0].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="2" id={this.state.products[1].id}/>
+                                                        <span>{this.state.products[1].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="3" id={this.state.products[2].id}/>
+                                                        <span>{this.state.products[2].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="1" id={this.state.products[3].id}/>
+                                                        <span>{this.state.products[3].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="2" id={this.state.products[4].id}/>
+                                                        <span>{this.state.products[4].productDesc}</span>
+                                                    </label>
+                                                    </div>
+
+                                                    </div>
+                                                }
+                                                                                                       
                                                 </div>
-                                                <div className="fw700 font14">
+                                                <div className="fw700 font14 mt7">
                                                    Description:
                                                 </div>
                                                 <div>
-                                                <input
-                                                        type="text"
-                                                        id="pocdesc"
-                                                        className="form-control bgdis3  BuyerLogin21"
-                                                        value= {this.state.pocdesc}
-                                                        placeholder = "pocmobile"
+                                                {this.state.isBdetail 
+                                                ?   <div className="font14  mt7">
+                                                    {this.state.branddesc}
+                                                    </div>
+                                                :<div>
+                                                <textarea
+                                                        id="branddesc"
+                                                        className="form-control bgdis3  BuyerLogin212"
+                                                        value= {this.state.branddesc}
+                                                        placeholder = "branddesc"
                                                         disabled={this.state.isBdetail} 
-                                                        name="pocdesc"
+                                                        name="branddesc"
                                                         onChange={(e) => this.handleChange(e)}
                                                         /> 
+                                                       </div>
+
+                                                }
                                                     
                                                 </div>
                                                 </Col>
@@ -385,7 +598,7 @@ class ArtistProfile extends Component {
                                                                     className="poctick2 "
                                                                     style={{"cursor":"pointer",
                                                                     "position" : "absolute"}}
-                                                                    onClick={this.handlebdetEdit}
+                                                                    onClick={this.handlebdetEdit2}
                                                             ></img>}
                                                 
 
@@ -580,9 +793,15 @@ class ArtistProfile extends Component {
                                         </Row>
                                                 }
                        <Row noGutters={true}><Col className="letsbuildtext">Let's build the strong future!</Col></Row>                
+
 </Container>
-{console.log(this.props.user)}
+
 </div>
+{console.log(this.props.user)}
+                </div>
+                <Footer></Footer>
+
+
             </React.Fragment>
             // <div>
             //      {console.log("user data")}

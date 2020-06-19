@@ -3,8 +3,13 @@
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
+  height: 865px;
+  /* background-position: center; */
+ 
+}
+.Aopbg2{
+  width: 100%;
   background-color: #FAF5F5;
-  background-position: center;
  
 }
 .hrlineaop3 {
@@ -19,9 +24,9 @@
   padding-top: 10px;
   padding-bottom: 10px;
   width:45%!important;
-  min-height: 220px!important;
+  min-height: 325px!important;
   box-shadow: 2px 2px 2px 2px #888888;
-  height: 340px;
+  /* height: 340px; */
 }
 .aoctick{
 top: 5px;
@@ -31,7 +36,7 @@ height:27px;
 .cardtextfield > div > input[type="text"]:disabled {
   background: transparent;
   border: 2px;
-  font-size : 14px!important;
+  /* font-size : 14px!important; */
   padding-left: 0px;
   
 }
@@ -48,22 +53,20 @@ height:27px;
   padding-bottom: 10px;
   width:45%!important;
   float:right!important;
-  min-height: 220px!important;
+  min-height: 325px!important;
   box-shadow: 2px 2px 2px 2px #888888;
-  height: 340px;
+  /* height: 340px; */
 
 }
 .cardtextfield > div > input[type="text"]:disabled {
   background: transparent;
   border: 2px;
-  font-size : 14px!important;
   padding-left: 0px;
   
 }
 .cardtextfield > div > input[type="email"]:disabled {
   background: transparent;
   border: 2px;
-  font-size : 14px!important;
   padding-left: 0px;
   
 }
@@ -199,7 +202,7 @@ padding: 15px 10px 10px 20px ;
 .digitalbank > div > input[type="text"]:disabled {
 background: transparent;
 border: 2px;
-font-size : 14px!important;
+/* font-size : 14px!important; */
 padding-left: 0px;
 
 }
@@ -222,12 +225,54 @@ left: 50%;
 /* top: 0; */
 color: #c7c7c7;
 }
+.artistrating{
+  font-size: 140px!important;
+}
+.artistrating:after{
+  background-color: #FAF5F5!important;
+
+}
+.m00{
+  margin : 0px!important;
+  text-align :center;
+}
+.detailsheight{
+  height: 475px;
+}
 
 
 @media only screen and ( max-width: 480px ) {
  
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+  
+  .Aopbg{
+    background: url("../../assets/backgroundpictureaop.svg"); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 926px;
+    /* background-position: center; */
+   
+  }.aocbg2 {
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 45%!important;
+    float: right!important;
+    min-height: 290px!important;
+    box-shadow: 2px 2px 2px 2px #888888;
+    /* height: 340px; */
+}
+.aocbg1{
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width:45%!important;
+  min-height: 290px!important;
+  box-shadow: 2px 2px 2px 2px #888888;
+  /* height: 340px; */
+}
 .bankdetails {
   min-height: 200px!important;
   background-color: white;
@@ -271,6 +316,14 @@ color: #c7c7c7;
  
 }
 @media only screen and ( min-width: 1200px ) {
+  .Aopbg {
+    background: url(/static/media/backgroundpictureaop.b6f53b89.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 907px;
+    /* background-position: center; */
+}
 .bankdetails {
   min-height: 200px!important;
   background-color: white;
@@ -278,13 +331,38 @@ color: #c7c7c7;
   margin: 0 auto;
   box-shadow: 0px 0px 19px -10px grey;
 }
+.aocbg2 {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 45%!important;
+  float: right!important;
+  min-height: 410px!important;
+  box-shadow: 2px 2px 2px 2px #888888;
+  /* height: 340px; */
+}
+.aocbg1{
+background-color: white;
+padding-top: 10px;
+padding-bottom: 10px;
+width:45%!important;
+min-height: 410px!important;
+box-shadow: 2px 2px 2px 2px #888888;
+/* height: 340px; */
+}
+.detailsheight {
+  height: 510px;
+}
+.font14 {
+  font-size: 18px!important;
+}
 
 }
 @media only screen and ( max-width: 1024px ) and ( min-width: 767px ){
   .aocbg1{
-    height:285px;
+    min-height:285px!important;
   }
   .aocbg2{
-    height: 285px;
+    /* height: 285px; */
   }
 }

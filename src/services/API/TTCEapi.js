@@ -379,6 +379,147 @@ class TTCEapi {
 
       });
   }
+ static updatePersonalDetails(line1,district,pincode,state){
+  let url = ApiUrl + "/user/edit/artistProfile";
+  var data = {
+    country :{
+      id: 1,
+      name : "INDIA"
+    },
+    district : district,
+    line1 : line1,
+    pincode :pincode,
+    state : state 
+
+  }
+  console.log(data);
+    // debugger;
+    
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+        // "Authorization" : axios.defaults.headers.common['Authorization']
+      },
+    };
+    return axios
+      .put(url, data, config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.valid)
+           { 
+              console.log("Personal details updated");
+           }
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  
+
+
+ }
+
+ static updateBrandDetails(brandname,branddesc,selectedprods){
+  let url = ApiUrl + "/user/edit/artistBrandDetails";
+  var data = {
+    companyDetails : {
+      companyName : brandname,
+      desc : branddesc
+    },
+    productCategories : selectedprods
+   
+  }
+  console.log(data);
+    // debugger;
+    
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+        // "Authorization" : axios.defaults.headers.common['Authorization']
+      },
+    };
+    return axios
+      .put(url, data, config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.valid)
+           { 
+              console.log("Brand details updated");
+           }
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  
+
+
+ }
+
+  static updateBankDetails(accountno,bankname,branch,ifsccode,benificiaryname,gpayupi,paytmupi,phonepeupi){
+    let url = ApiUrl + "/user/edit/bankDetails";
+    var data = [
+      {
+        accNo_UPI_Mobile : accountno,
+        accountType : {
+          id : 1
+        },
+        bankName : bankname,
+        branch  : branch,
+        ifsc : ifsccode,
+        name : benificiaryname
+
+      },
+      {
+        accNo_UPI_Mobile : gpayupi,
+        accountType : {
+          id : 2
+        }
+
+      },
+      {
+        accNo_UPI_Mobile : phonepeupi,
+        accountType : {
+          id : 3
+        }
+
+      },
+      {
+        accNo_UPI_Mobile : paytmupi,
+        accountType : {
+          id : 4
+        }
+
+      }
+
+    ];
+    console.log(data);
+    // debugger;
+    
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+        // "Authorization" : axios.defaults.headers.common['Authorization']
+      },
+    };
+    return axios
+      .put(url, data, config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.valid)
+           { 
+              console.log("details updated");
+           }
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+
+  }
 
 
     static getClusters(){
@@ -387,6 +528,7 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
+
         console.log(response);
         return response;
       })
@@ -398,10 +540,14 @@ class TTCEapi {
 
   static getProfile(){
     let url = ApiUrl + "/user/myprofile";
-
     return axios
       .get(url)
       .then((response) => {
+        console.log("profiledata");
+        localStorage.removeItem("user");
+        const user = response.data.data.user;
+        localStorage.setItem("user", JSON.stringify(user));
+
         console.log(response);
         return response;
       })

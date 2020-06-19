@@ -51,18 +51,19 @@ import "./product.css";
                            In stock
                            <br />
                          </span>
-                         <span className="Qnty">
+                         {/* <span className="Qnty">
                            {5} Qnty
                            <br />
-                         </span>
+                         </span> */}
                        </>
                      ) : (
-                       <span className="outofstock">
-                         Out of
-                         <br />
-                         stock
-                         <br />
-                       </span>
+                     null
+                      //  <span className="outofstock">
+                      //    Out of
+                      //    <br />
+                      //    stock
+                      //    <br />
+                      //  </span>
                      )}
                    </div>
                  </Col>

@@ -44,7 +44,7 @@ class NavbarComponent extends Component {
 
   toggleHover(name) {
     console.log(name);
-  if (this.props.user.userTypeId == 2){
+  if (this.props.user.refRoleId == 2) {
     switch (name) {
       case "isfavHovered":
         this.setState({
@@ -71,6 +71,20 @@ class NavbarComponent extends Component {
         break;
     }
   }
+
+
+   if (this.props.user.refRoleId == 1) {
+     switch (name) {
+       case "isSearchClicked":
+         this.setState({
+           isSearchClicked: !this.state.isSearchClicked,
+         });
+         break;
+
+       default:
+         break;
+     }
+   }
   }
 
   toggleMobileMenu = () => {

@@ -128,6 +128,45 @@ class TTCEapi {
 
   //#endregion
 
+
+
+  
+
+
+   static uploadProduct(file1, file2 = null, file3 = null , productData) {
+     debugger;
+    let url = ApiUrl + "/product/uploadProduct";
+    var data = new FormData();
+    data.append("file1", file1);
+    data.append("file2", file2);
+    data.append("file3", file3);
+    data.append("productData", JSON.stringify(productData));
+
+
+    // var data = {
+    //   file1: file1,
+    //   file2: file2,
+    //   file3: file3,
+    //   productData: productData,
+    //   // pin: weaverPin,
+    // };
+    var config = {
+      headers: {
+         "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
   //#endregion
 
   //#region get methods
@@ -380,6 +419,26 @@ class TTCEapi {
       });
   }
 
+
+  static getProductUploadData() {
+    debugger;
+    let url = ApiUrl + "/product/getProductUploadData";
+    
+
+    return axios
+      .get(url)
+      .then((response) => {
+        debugger;
+        console.log(response);
+        localStorage.removeItem("ProductUploadData");      
+        localStorage.setItem('ProductUploadData', JSON.stringify(response.data.data));
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
     static getClusters(){
     let url = ApiUrl + "/cluster/getAllClusters";

@@ -44,7 +44,7 @@ export default class Footer extends Component {
                     style={{ marginLeft: "9px" }}
                     className="col-md-12 Ffont1 text-left"
                   >
-                    2020 CRAFT XCHANGE ALL RIGHTS RESERVED
+                    © 2020 CRAFT XCHANGE . ALL RIGHTS RESERVED.
                   </span>
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">

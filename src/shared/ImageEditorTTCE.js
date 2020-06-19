@@ -117,6 +117,7 @@ function ImageEditorTTCE(props) {
       props.cancelUpdate();
   }
   const saveImageToDisk = () => {
+    debugger;
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
     debugger;

@@ -76,12 +76,16 @@ import washAndCare7 from "./7.svg";
 import washAndCare8 from "./8.svg";
 import washAndCare9 from "./9.svg";
 import washAndCare10 from "./10.svg";
+import mtoicon from "./mto.svg"
+import isavailable from "./isavailable.svg"
 
 
 
 
 
 export default {
+  isavailable,
+  mtoicon,
   washAndCare1,
   washAndCare2,
   washAndCare3,

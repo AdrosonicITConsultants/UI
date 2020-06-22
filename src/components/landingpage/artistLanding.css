@@ -45,8 +45,8 @@
 }
 
 .artistbg1img{
-       width: 30%;
-    margin-top: 80px;
+     width: 32%;
+    margin-top: 70px;
 }
 .artistbg2{
    background-image: url(/static/media/artistbg2.6067a961.svg);
@@ -123,4 +123,8 @@
 }
 .mt50{
     margin-top:50px;
+}
+
+.mt160{
+    margin-top: 160px;
 }

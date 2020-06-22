@@ -14,7 +14,10 @@ if (env == "dev") {
 }
 
 class TTCEapi {
+
+  static ImageUrl = " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/"
   //#region post methods
+
 
   //#region registration
   static checkWeaverId(weaverId) {
@@ -558,6 +561,24 @@ class TTCEapi {
 
       });
 
+  }
+
+  static getArtitionProducts() {
+    
+    let url = ApiUrl + "/product/getArtitionProducts";
+
+    return axios
+      .get(url)
+      .then((response) => {
+       
+        console.log(response);
+        
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
   }
 
 

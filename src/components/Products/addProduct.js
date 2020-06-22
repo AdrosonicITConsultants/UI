@@ -342,6 +342,11 @@ else {
                    if (e.target.id == "productCode" || e.target.id ==  "description"){
                      this.setState({ [e.target.name]: e.target.value });
                    }
+                  else if (e.target.id =="productName"){
+                     var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+                     e.target.value = stripped;
+                     this.setState({ [e.target.name]: e.target.value });
+                   }
                    else {
                      var stripped = e.target.value.replace(/[^A-Z0-9]+/i, '');
                      e.target.value = stripped;
@@ -400,7 +405,7 @@ else {
       });
      return ;
   }
-  if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+                       if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
     customToast.error("Image name contains special characters.", {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: true,
@@ -2904,6 +2909,7 @@ console.log(productData);
                                      id="weight"
                                      className=" ProductTextBox"
                                      name="weight"
+                                     maxLength="10"
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                  </Col>

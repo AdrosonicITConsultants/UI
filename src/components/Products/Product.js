@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import logos from "../../assets";
 import "./product.css";
+import TTCEapi from "../../services/API/TTCEapi";
+
 
 
 
@@ -11,18 +13,20 @@ import "./product.css";
        console.log(Product);
    }
    render() {
-     let exclusive = false;
      debugger;
      const { productList } = this.props;
+     const ImageUrl = TTCEapi.ImageUrl;
+
      return (
        <React.Fragment>
          <div className="ProductCard col-6 mx-auto col-md-6 col-sm-6 col-lg-3 my-3">
            <Row className="mt10">
              <Col className="col-6 mx-auto col-md-6 col-sm-6 col-lg-6 my-3 PorductNameborder">
-               <span className="productName">Exquisite Trefoil Motifs</span>
+               {/* <span className="productName">Exquisite Trefoil Motifs</span> */}
+               <span className="productName">{productList.tag}</span>
              </Col>
              {/* for exclusive */}
-             {productList.exclusive ? (
+           {productList.productStatusId == 1 ? (
                <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3">
                  <div className="mt10">
                    <img style={{ float: "left" }} src={logos.scissor}></img>
@@ -45,26 +49,20 @@ import "./product.css";
                <>
                  <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3">
                    <div className="text-right mt10 lh15">
-                     {productList.inStock ? (
+                    
                        <>
                          <span className="instock">
                            In stock
                            <br />
+                           
                          </span>
+                         
                          {/* <span className="Qnty">
                            {5} Qnty
                            <br />
                          </span> */}
                        </>
-                     ) : (
-                     null
-                      //  <span className="outofstock">
-                      //    Out of
-                      //    <br />
-                      //    stock
-                      //    <br />
-                      //  </span>
-                     )}
+                    
                    </div>
                  </Col>
                  <div className="col-12 mx-auto col-sm-12 col-md-12 mt10 col-lg-12">
@@ -82,7 +80,10 @@ import "./product.css";
                <div className="Imagecontainer">
                  <img
                    className="ProductImage image"
-                   src={logos.coImageHovered}
+                  
+                   src={(productList.productImages.length > 0 ? ImageUrl + "Product/" + productList.id + "/" + productList.productImages[0].lable : logos.coImageHovered )}                 
+                   
+                
                  ></img>
                  <div class="middle">
                    <div

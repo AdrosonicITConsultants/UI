@@ -9,6 +9,9 @@ import "./artistProfile.css";
 import "./buyerProfile.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 class ArtistProfile extends Component {
     constructor(props) {
@@ -43,24 +46,12 @@ class ArtistProfile extends Component {
           email:this.props.user.email,
           ratingclass: "p10",
           prodsel : "",
+          selectedFile: [],
+          profilePic : "",
+          selectedBrandFile: [],
+          brandPic : "",
+          
 
-        //   isDesc: true,
-        //   ischanged: false,
-        //   isButtonDisabled: true,
-        //   isAcon: true,
-        //   isBdetail: true,
-        //   isPod: true,
-        //   isDaddress : true,
-        //   designation: this.props.user.designation,
-        //   alternatemobno: this.props.user.alternateMobile,
-        //   panno: this.props.user.pancard,
-        //   line1 : this.props.user.addressses[0].line1,
-        //   line2 : this.props.user.addressses[0].line2,
-        //   street :this.props.user.addressses[0].street,
-        //   city : this.props.user.addressses[0].city,
-        //   pincode : this.props.user.addressses[0].pincode,
-        //   state : this.props.user.addressses[0].state,                                                  
-         
         };
         this.handleDetail = this.handleDetail.bind(this);
         this.handlebdetEdit = this.handlebdetEdit.bind(this);
@@ -69,56 +60,40 @@ class ArtistProfile extends Component {
         this.handlePdetailEdit2 = this.handlePdetailEdit2.bind(this);
         this.handlebEdit = this.handlebEdit.bind(this);
         this.handlebEdit2 = this.handlebEdit2.bind(this);
-
-
-
-
-        // this.handleEdit = this.handleEdit.bind(this);
-        // this.handleconEdit = this.handleconEdit.bind(this);
-        // this.handledetEdit = this.handledetEdit.bind(this);
-        // this.handlebEdit = this.handlebEdit.bind(this);
-        // this.handlepocEdit = this.handlepocEdit.bind(this);
-
-
-        
+  
       }
       componentDidMount(){
         TTCEapi.getProducts().then((response)=>{
             this.setState({products : response.data.data},() => {
-              
-            //   console.log(this.state.products[0].productDesc);
             });
-
         });
-          TTCEapi.getProfile().then((response) => {
+        TTCEapi.getProfile().then((response) => {
             TTCEapi.getProducts().then((response1)=>{
                 this.setState({products : response1.data.data},() => {
-                    // console.log(response.data.data.userProductCategories.length)
                     if(response.data.data.userProductCategories.length != 0)
                     {   var prodselected = "";
                       for (var  items in response.data.data.userProductCategories)
                       {     prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
-                        //   console.log(response.data.data.userProductCategories[items].productCategoryId);
-                        //   console.log(this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc);
                       }
                       this.setState({
                         prodsel : prodselected
                     })
                   }
-                  
-                //   console.log(this.state.products[0].productDesc);
+
                 });
     
             });
-             
-
             
-            console.log("here");  
-            // console.log(response.data.data);
-            // console.log(response.data.data.user.rating);
-            if(response.data.data.user.rating != ""){
+            if(response.data.data.user.profilePic != null){
+                var profilePic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/ProfilePics/" + response.data.data.user.profilePic ;
+                this.setState({
+                    profilePic : profilePic,
+                });
+                console.log(profilePic);
+            }
+            if(response.data.data.user.rating != null){
                 this.setState({ rating : parseFloat(response.data.data.user.rating) },()=>{
-                    // console.log( this.state);
+
                     var percentage = "p" + this.state.rating*10;
                     this.setState({ratingclass : percentage});
                 });
@@ -126,7 +101,7 @@ class ArtistProfile extends Component {
             
             if(response.data.data.user.paymentAccountDetails.length != 0)
             {
-                // console.log(response.data.data.user.paymentAccountDetails);
+
                 for (var  items in response.data.data.user.paymentAccountDetails)
                 {
                     console.log(response.data.data.user.paymentAccountDetails[items].accountType.id);
@@ -178,6 +153,14 @@ class ArtistProfile extends Component {
             // console.log("hfjdfink");
             // console.log(response.data.data.user.companyDetails != null)
             if(response.data.data.user.companyDetails != null){
+                if(response.data.data.user.companyDetails.logo != null){
+                    var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
+                    this.setState({
+                        brandPic : brandPic,
+                    });
+                    console.log(brandPic);
+
+                }
                 this.setState({
                     brandname : response.data.data.user.companyDetails.companyName ,
                     branddesc :  response.data.data.user.companyDetails.desc,
@@ -207,7 +190,7 @@ class ArtistProfile extends Component {
         })
      }
      handlePdetailEdit2(){
-         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state).then((response)=>{
+         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile).then((response)=>{
 
          })
         this.setState({
@@ -231,7 +214,9 @@ class ArtistProfile extends Component {
     }
      handlebEdit(){
         this.setState({
-            isBdetail:!this.state.isBdetail
+            isBdetail:!this.state.isBdetail,
+            productSelected : []
+
         })
     }
     handlebEdit2(){
@@ -251,7 +236,7 @@ class ArtistProfile extends Component {
             prodsel : productSelected
         },()=>{
             console.log(this.state.selectedprods) ;
-            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods);
+            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile);
 
         });
 
@@ -279,7 +264,255 @@ class ArtistProfile extends Component {
             isProfile:!this.state.isProfile
         })
     }
+    fileChangedHandler = (event) => {
+        let filename = event.target.files[0];
+
+        if (filename != undefined) {
+          //  filename.name = filename.name.replace(/\s/g, '');
+            if (filename.size / 1024 / 1024 > 1) {    
+                customToast.error("Please upload product Image below 1MB.", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+              return ;
+            }
+            if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+              customToast.error("Image name contains special characters.", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+              return;
+            }
+         this.setState({
+           selectedFile: event.target.files[0],
+         },()=>{
+           console.log(this.state);
+         });
+
+         let reader = new FileReader();
+
+         reader.onloadend = () => {
+         let imagebytes = reader.result;               
+           this.setState({
+            //  selectedFile: { ...this.state.selectedFile },
+             imagePreviewUrl: imagebytes,
+           },()=>{
+                console.log(this.state);
+           });
+         };
+         if (event.target.files[0]) {
+         reader.readAsDataURL(event.target.files[0]);
+
+         }
+        }
+       };
+
+       fileChangedHandler2 = (event) => {
+        let filename = event.target.files[0];
+
+        if (filename != undefined) {
+          //  filename.name = filename.name.replace(/\s/g, '');
+            if (filename.size / 1024 / 1024 > 1) {    
+                customToast.error("Please upload product Image below 1MB.", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+              return ;
+            }
+            if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+              customToast.error("Image name contains special characters.", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+              return;
+            }
+         this.setState({
+           selectedBrandFile: event.target.files[0],
+         },()=>{
+            console.log("change brand img");
+           console.log(this.state);
+         });
+
+         let reader = new FileReader();
+
+         reader.onloadend = () => {
+         let imagebytes = reader.result;               
+           this.setState({
+            //  selectedFile: { ...this.state.selectedFile },
+             imagePreviewUrl2: imagebytes,
+           },()=>{
+                console.log(this.state);
+           });
+         };
+         if (event.target.files[0]) {
+         reader.readAsDataURL(event.target.files[0]);
+
+         }
+        }
+       };
+
+    //   resertImage(){
+    //   this.setState({
+    //     selectedFile : [],
+    //     imagePreviewUrl: logos.uploadphoto,
+    //   });
+    // }
     render() {
+        let  $imagePreview = (
+                <img
+                  onClick={() => {
+                    this.refs.fileUploader.click();
+                  }}
+                  className="profileImage"
+                  src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}
+                ></img>
+              );
+        let  $imagePreview2 = (
+        <img
+            onClick={() => {
+            this.refs.fileUploader2.click();
+            }}
+            className="profileImage"
+            src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}
+        ></img>
+        );
+              if (this.state.imagePreviewUrl) {
+                $imagePreview = (
+                  <div className="image-container img_wrp">
+                    <img
+                      className="profileImage"
+                      onClick={() => {
+                        this.refs.fileUploader.click();
+                      }}
+                      src={this.state.imagePreviewUrl}
+                      alt="icon"
+                      width="200"
+                    />{" "}
+                 
+                      {/* <img
+                        style={{ margin: "-3px", width:"14px" }}
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={() => {
+                          this.resertImage();
+                        }}
+                        
+                        src={logos.closelogo}
+                        aria-hidden="true"
+                      >
+                        
+                      </img> */}
+                 
+                  </div>
+                );
+              }
+              else{
+                {this.state.isPdetail
+                
+                ?
+                $imagePreview = (
+                    <img
+                    //   onClick={() => {
+                    //     this.refs.fileUploader.click();
+                    //   }}
+                      style={{
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      className = "profileImage"
+                      src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}
+                    ></img>
+                  )
+                :
+                $imagePreview = (
+                    <img
+                      onClick={() => {
+                        this.refs.fileUploader.click();
+                      }}
+                      style={{
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      className = "profileImage"
+
+                      src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}                    ></img>
+                  );
+    
+                }
+                
+              }
+        
+              if (this.state.imagePreviewUrl2) {
+                $imagePreview2 = (
+                  <div className="image-container img_wrp">
+                    <img
+                      className="profileImage"
+                      onClick={() => {
+                        this.refs.fileUploader2.click();
+                      }}
+                      src={this.state.imagePreviewUrl2}
+                      alt="icon"
+                      width="200"
+                    />{" "}
+                 
+                      {/* <img
+                        style={{ margin: "-3px", width:"14px" }}
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={() => {
+                          this.resertImage();
+                        }}
+                        
+                        src={logos.closelogo}
+                        aria-hidden="true"
+                      >
+                        
+                      </img> */}
+                 
+                  </div>
+                );
+              }
+              else{
+                {this.state.isBdetail
+                
+                ?
+                $imagePreview2 = (
+                    <img
+                    //   onClick={() => {
+                    //     this.refs.fileUploader.click();
+                    //   }}
+                      style={{
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      className = "profileImage"
+                      src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}
+                    ></img>
+                  )
+                :
+                $imagePreview2 = (
+                    <img
+                      onClick={() => {
+                        this.refs.fileUploader2.click();
+                      }}
+                      style={{
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      className = "profileImage"
+
+                      src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}                    ></img>
+                  );
+    
+                }
+                
+              }
+              
+
+       
+        
         return (
             <React.Fragment>
                 <NavbarComponent/>
@@ -441,8 +674,15 @@ class ArtistProfile extends Component {
                                               <div class="Profilecontainer">
 
                                             <div class="card Profilecard">
-                                                <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/1.png" alt="Avatar for user 1"/>
-                                                    
+                                            {$imagePreview}
+                                            <input
+                                                accept="image/png, image/jpeg"
+                                                onChange={this.fileChangedHandler}
+                                                type="file"
+                                                ref="fileUploader"
+                                                style={{ display: "none" }}
+                                            ></input>
+                                                                    
                                                 </div>
 
 
@@ -573,10 +813,14 @@ class ArtistProfile extends Component {
                                                 <div class="Profilecontainer">
 
                                                         <div class="card Profilecard">
-                                                            <img className="profileimg" src="https://codepen-chriscoyier-bucket.imgix.net/8.png" alt="Avatar for user 1"/>
-                                                        
-                                                                {/* <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div> */}
-
+                                                        {$imagePreview2}
+                                                        <input
+                                                            accept="image/png, image/jpeg"
+                                                            onChange={this.fileChangedHandler2}
+                                                            type="file"
+                                                            ref="fileUploader2"
+                                                            style={{ display: "none" }}
+                                                        ></input>
                                                             </div>
 
 

@@ -14,7 +14,10 @@ if (env == "dev") {
 }
 
 class TTCEapi {
+
+  static ImageUrl = " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/"
   //#region post methods
+
 
   //#region registration
   static checkWeaverId(weaverId) {
@@ -431,8 +434,9 @@ class TTCEapi {
 
       });
   }
- static updatePersonalDetails(line1,district,pincode,state){
+ static updatePersonalDetails(line1,district,pincode,state,selectedFile){
   let url = ApiUrl + "/user/edit/artistProfile";
+  var bodyFormData = new FormData();
   var data = {
     country :{
       id: 1,
@@ -442,19 +446,22 @@ class TTCEapi {
     line1 : line1,
     pincode :pincode,
     state : state 
-
   }
   console.log(data);
-    // debugger;
-    
+  console.log(selectedFile);
+  bodyFormData.append('address', JSON.stringify(data));
+  bodyFormData.append('profilePic', selectedFile); 
+  
+
+  // console.log(data);
     var config = {
       headers: {
-        "Content-type": "application/json",
-        // "Authorization" : axios.defaults.headers.common['Authorization']
+        "Content-type": "multipart/form-data",
       },
     };
+
     return axios
-      .put(url, data, config)
+      .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
         if (response.data.valid)
@@ -472,8 +479,9 @@ class TTCEapi {
 
  }
 
- static updateBrandDetails(brandname,branddesc,selectedprods){
+ static updateBrandDetails(brandname,branddesc,selectedprods,selectedBrandFile){
   let url = ApiUrl + "/user/edit/artistBrandDetails";
+  var bodyFormData = new FormData();
   var data = {
     companyDetails : {
       companyName : brandname,
@@ -483,16 +491,20 @@ class TTCEapi {
    
   }
   console.log(data);
-    // debugger;
-    
+  console.log(selectedBrandFile);
+  bodyFormData.append('editBrandDetails', JSON.stringify(data));
+  
+  bodyFormData.append('logo', selectedBrandFile); 
+  
+
     var config = {
       headers: {
-        "Content-type": "application/json",
-        // "Authorization" : axios.defaults.headers.common['Authorization']
+        "Content-type": "multipart/form-data",
       },
     };
+ 
     return axios
-      .put(url, data, config)
+      .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
         if (response.data.valid)
@@ -502,6 +514,7 @@ class TTCEapi {
         return response;
       })
       .catch((error) => {
+        console.log(error.response);
         return error.response;
 
       });
@@ -571,6 +584,24 @@ class TTCEapi {
 
       });
 
+  }
+
+  static getArtitionProducts() {
+    
+    let url = ApiUrl + "/product/getArtitionProducts";
+
+    return axios
+      .get(url)
+      .then((response) => {
+       
+        console.log(response);
+        
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
   }
 
 

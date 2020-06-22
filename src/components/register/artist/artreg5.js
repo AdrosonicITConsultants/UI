@@ -101,7 +101,8 @@ export default class artreg5 extends Component {
                 this.setState({
                   selectedFile : [],
                   imagePreviewUrl: logos.uploadphoto,
-                });}
+                });
+              }
 
                  handleChange(e) {
                    this.setState({ [e.target.name]: e.target.value });

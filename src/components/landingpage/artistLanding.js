@@ -7,6 +7,11 @@ import Productcatelog from "../Products/productcatelog"
 
 
  class artistLanding extends Component {
+
+
+
+
+  
     render() {
         return (
           <React.Fragment>
@@ -24,7 +29,8 @@ import Productcatelog from "../Products/productcatelog"
                       <Col className="text-center" sm={{ size: "4" }}>
                         <img
                           className="artistbg1img"
-                          src={logos.uploadphoto}
+                          // src={logos.uploadphoto}
+                          src=" https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Product/45/air-bnb-logo-png-2.png"
                         ></img>
                       </Col>
                       <Col sm={{ size: "4" }}></Col>
@@ -42,10 +48,10 @@ import Productcatelog from "../Products/productcatelog"
                 </Row>
                 <Row><Productcatelog></Productcatelog></Row>
 
-                <Row noGutters={true}>
+                {/* <Row noGutters={true}>
                   <div className="artistbg2"></div>
-                </Row>
-                <Row noGutters={true} className="">
+                </Row> */}
+                <Row noGutters={true} className="mt160">
                   <Col
                     sm={{ size: "4" }}
                     xs={{ size: "4" }}

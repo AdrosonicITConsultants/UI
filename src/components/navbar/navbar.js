@@ -3,6 +3,8 @@ import logos from "../../assets";
 import './navbar.css';
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
+import TTCEapi from "../../services/API/TTCEapi";
+
 
 
 
@@ -106,6 +108,7 @@ browserHistory.push("/MyProfile");
 
   render() {
    // debugger
+    const ImageUrl = TTCEapi.ImageUrl;
     let isAuthenticated =this.props.user !== null;
     let user = this.props.user;
     let userTypeId = user.refRoleId;
@@ -313,14 +316,12 @@ browserHistory.push("/AddProduct");
             <li className="menu-item">
               <a
                 href="#"
-                className={
-                  this.state.activeTabClassName === "/testslist" ||
-                  this.state.activeTabClassName === "/antibodies"
-                    ? "active"
-                    : ""
-                }
+               
               >
-                <img src={logos.usernamelogo}></img>
+                {userTypeId === 1 ?
+                  (user.profilePic != null ? <img className="navProfileA" src={ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic}></img> : <img src={logos.usernamelogo}></img>)
+             : <img src={logos.usernamelogo}></img>}
+               
               </a>
               <ol className="sub-menu">
                 <li
@@ -418,6 +419,8 @@ browserHistory.push("/AddProduct");
 
                function mapStateToProps(state) {
                  const {user}  = state
+                 console.log("User : ");
+                 console.log( user);
                  return { user };
                }
 

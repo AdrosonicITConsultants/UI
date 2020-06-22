@@ -342,6 +342,11 @@ else {
                    if (e.target.id == "productCode" || e.target.id ==  "description"){
                      this.setState({ [e.target.name]: e.target.value });
                    }
+                  else if (e.target.id =="productName"){
+                     var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+                     e.target.value = stripped;
+                     this.setState({ [e.target.name]: e.target.value });
+                   }
                    else {
                      var stripped = e.target.value.replace(/[^A-Z0-9]+/i, '');
                      e.target.value = stripped;
@@ -393,23 +398,23 @@ else {
                  
                      if (filename != undefined) {
                       //  filename.name = filename.name.replace(/\s/g, '');
-                      if (filename.size / 1024 / 1024 > 1) {    
-                          customToast.error("Please upload product Image below 1MB.", {
-                            position: toast.POSITION.TOP_RIGHT,
-                            autoClose: true,
-                          });
-                        return ;
-                      }
-                      if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-                        customToast.error("Image name contains special characters.", {
-                          position: toast.POSITION.TOP_RIGHT,
-                          autoClose: true,
-                        });
-                        return;
-                      }
-                        this.setState({
-                          ["selectedFile" + num]: event.target.files[0],
-                        });
+  if (filename.size / 1024 / 1024 > 1) {    
+      customToast.error("Please upload product Image below 1MB.", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+     return ;
+  }
+                       if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
+    customToast.error("Image name contains special characters.", {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: true,
+    });
+    return;
+  }
+    this.setState({
+      ["selectedFile" + num]: event.target.files[0],
+    });
                        let reader = new FileReader();
 
                        reader.onloadend = () => {
@@ -2904,6 +2909,7 @@ console.log(productData);
                                      id="weight"
                                      className=" ProductTextBox"
                                      name="weight"
+                                     maxLength="10"
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                  </Col>

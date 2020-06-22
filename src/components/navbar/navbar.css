@@ -69,6 +69,10 @@
 	box-shadow: 0px 0px 15px -2px #000000;
 }
 
+.navProfileA:hover{
+	box-shadow: 0px 0px 15px -2px #000000;
+}
+
 .navButtonImg {
 	/* margin-left: 10px; */
     margin-top: -3px;
@@ -352,6 +356,24 @@ background-color: #f1cece !important;
 .sub-menu .menu-item a {
 padding: 0 0.75rem;
 }
+
+.navProfileA {
+	width: 40px;
+    border-radius: 50%;
+    /* box-shadow: 6px 0px 31px -8px #ff9d9d; */
+	margin-top: -5px;
+	cursor: pointer !important;
+}
+
+
+.navProfileB {
+	width: 40px;
+    border-radius: 50%;
+    /* box-shadow: 6px 0px 31px -8px #ff9d9d; */
+	margin-top: -5px;
+	cursor: pointer !important;
+}
+
 
   @media screen and (max-width: 768px) {
 	  .sub-menu {

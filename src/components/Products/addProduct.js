@@ -393,23 +393,23 @@ else {
                  
                      if (filename != undefined) {
                       //  filename.name = filename.name.replace(/\s/g, '');
-  if (filename.size / 1024 / 1024 > 1) {    
-      customToast.error("Please upload product Image below 1MB.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
-     return ;
-  }
-  if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-    customToast.error("Image name contains special characters.", {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: true,
-    });
-    return;
-  }
-    this.setState({
-      ["selectedFile" + num]: event.target.files[0],
-    });
+                      if (filename.size / 1024 / 1024 > 1) {    
+                          customToast.error("Please upload product Image below 1MB.", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                        return ;
+                      }
+                      if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+                        customToast.error("Image name contains special characters.", {
+                          position: toast.POSITION.TOP_RIGHT,
+                          autoClose: true,
+                        });
+                        return;
+                      }
+                        this.setState({
+                          ["selectedFile" + num]: event.target.files[0],
+                        });
                        let reader = new FileReader();
 
                        reader.onloadend = () => {

@@ -54,7 +54,7 @@ export default class buyreg4 extends Component {
                        let imagebytes = reader.result;
 
                      this.setState({
-                       brandLogo :{ ...this.state.brandLogo , imagebytes},
+                       brandLogo :{ ...this.state.brandLogo},
                        imagePreviewUrl: imagebytes
                      });
                    };

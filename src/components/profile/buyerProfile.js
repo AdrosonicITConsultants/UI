@@ -9,6 +9,9 @@ import * as Actions from "../../redux/action/action";
 import './buyerProfile.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 
@@ -43,7 +46,9 @@ debugger;
            country : this.props.user.addressses[1].country.name,
            companyname : this.props.user.companyDetails.companyName,
            landmark : this.props.user.addressses[1].landmark,
-           showValidationconfirmpass : false
+           showValidationconfirmpass : false,
+           selectedBrandFile: [],
+           brandPic : "",
 
 
 
@@ -69,6 +74,20 @@ debugger;
          TTCEapi.getCountries().then((response)=>{
           this.setState({countrydata : response.data.data},()=>{
           });
+          TTCEapi.getProfile().then((response) => {
+            if(response.data.data.user.companyDetails != null){
+                if(response.data.data.user.companyDetails.logo != null){
+                    var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
+                    this.setState({
+                        brandPic : brandPic,
+                    });
+                    console.log(brandPic);
+
+                }
+            }
+
+          });
+
       });
       }
       handleCountry(e) {
@@ -158,12 +177,119 @@ debugger;
             this.state.line2, this.state.street, this.state.city, this.state.state, 
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
-            this.state.countryid).then((response) => {
+            this.state.countryid,this.state.selectedBrandFile).then((response) => {
+                this.setState({
+                    isButtonDisabled : true,
+                })
 
 
             });
     }
+    fileChangedHandler2 = (event) => {
+        let filename = event.target.files[0];
+
+        if (filename != undefined) {
+          //  filename.name = filename.name.replace(/\s/g, '');
+            if (filename.size / 1024 / 1024 > 1) {    
+                customToast.error("Please upload product Image below 1MB.", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+              return ;
+            }
+            if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+              customToast.error("Image name contains special characters.", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+              return;
+            }
+         this.setState({
+           selectedBrandFile: event.target.files[0],
+           isButtonDisabled : false
+         },()=>{
+            console.log("change brand img");
+           console.log(this.state);
+         });
+
+         let reader = new FileReader();
+
+         reader.onloadend = () => {
+         let imagebytes = reader.result;               
+           this.setState({
+            //  selectedFile: { ...this.state.selectedFile },
+             imagePreviewUrl2: imagebytes,
+           },()=>{
+                console.log(this.state);
+           });
+         };
+         if (event.target.files[0]) {
+         reader.readAsDataURL(event.target.files[0]);
+
+         }
+        }
+       }
     render() {
+        let  $imagePreview2 = (
+            <img
+                onClick={() => {
+                this.refs.fileUploader2.click();
+                }}
+                className="profileImage2"
+                src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}
+            ></img>
+            );
+            if (this.state.imagePreviewUrl2) {
+                $imagePreview2 = (
+                  <div className="image-container img_wrp">
+                    <img
+                      className="profileImage2"
+                      onClick={() => {
+                        this.refs.fileUploader2.click();
+                      }}
+                      src={this.state.imagePreviewUrl2}
+                      alt="icon"
+                      width="200"
+                    />{" "}
+                 
+                      {/* <img
+                        style={{ margin: "-3px", width:"14px" }}
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={() => {
+                          this.resertImage();
+                        }}
+                        
+                        src={logos.closelogo}
+                        aria-hidden="true"
+                      >
+                        
+                      </img> */}
+                 
+                  </div>
+                );
+              }
+              else{
+               
+               
+                $imagePreview2 = (
+                    <img
+                      onClick={() => {
+                        this.refs.fileUploader2.click();
+                      }}
+                      style={{
+                        width: "100px",
+                        cursor: "pointer",
+                      }}
+                      className = "profileImage2"
+
+                      src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}                    ></img>
+                  );
+    
+                
+                
+              }
         return (
 
             <React.Fragment>
@@ -179,6 +305,15 @@ debugger;
 
                             <Col sm = {{size: "10"}}>
                            <div className="profilelogo">
+                           {$imagePreview2}
+                                                        <input
+                                                            accept="image/png, image/jpeg"
+                                                            onChange={this.fileChangedHandler2}
+                                                            type="file"
+                                                            ref="fileUploader2"
+                                                            style={{ display: "none" }}
+                                                        ></input>
+                               
                            </div>
                            <div className= "databackground">
                                <Row noGutters={true}>
@@ -620,7 +755,7 @@ debugger;
                 </Row>
                 <Footer></Footer>
 
-                   {/* {console.log(this.props.user)} */}
+                   {console.log(this.props.user)}
                 </div>
 
                 </Container>

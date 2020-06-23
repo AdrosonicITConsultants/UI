@@ -50,7 +50,8 @@ export default class buyerRegister extends Component {
                      pocname : "",
                     pocemail : "",
                     pocmobile : "",
-                    countryid : -1,
+                    countryid : -1
+                    
 
                      
                    };
@@ -160,9 +161,15 @@ export default class buyerRegister extends Component {
                      { weblink: weblink, sociallink: sociallink },
                      () => {
                        console.log(this.state.weblink, this.state.sociallink);
-                          TTCEapi.registerBuyer(this.state.companyname,this.state.gstno,this.state.officeno,this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,this.state.adl1,
-                            this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.weblink, this.state.sociallink,this.state.firstname,
-                            this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation,this.state.password,this.state.emailid,this.state.pocmobile,this.state.pocemail,this.state.pocname,this.state.countryid).then(
+                          TTCEapi.registerBuyer(this.state.companyname,this.state.gstno,this.state.officeno,
+                            this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,
+                            this.state.adl1,this.state.adl2,this.state.street,this.state.city,
+                            this.state.state,this.state.country,this.state.pincode,this.state.landmark,
+                            this.state.weblink, this.state.sociallink,this.state.firstname,
+                            this.state.lastname,this.state.mobileno,this.state.alternatemobno,
+                            this.state.designation,this.state.password,this.state.emailid,
+                            this.state.pocmobile,this.state.pocemail,this.state.pocname,
+                            this.state.countryid).then(
                               (response) => {
                                 if (response.data.valid) {
                                   customToast.success("Registration is successful ", {

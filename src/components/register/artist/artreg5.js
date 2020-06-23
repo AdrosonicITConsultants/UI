@@ -27,7 +27,7 @@ export default class artreg5 extends Component {
                    debugger;
                    if(document.getElementById('agree').checked){
                     {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)}   console.log(this.state.selectedprods) }  )     }
-                      this.props.cr(this.state.selectedprods);
+                      this.props.cr(this.state.selectedprods,this.state.selectedFile);
                      
                    }
                    else{
@@ -55,8 +55,28 @@ export default class artreg5 extends Component {
                   }
                  
                  fileChangedHandler = (event) => {
+                  let filename = event.target.files[0];
+
+                  if (filename != undefined) {
+                    //  filename.name = filename.name.replace(/\s/g, '');
+                      if (filename.size / 1024 / 1024 > 1) {    
+                          customToast.error("Please upload product Image below 1MB.", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                        return ;
+                      }
+                      if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+                        customToast.error("Image name contains special characters.", {
+                          position: toast.POSITION.TOP_RIGHT,
+                          autoClose: true,
+                        });
+                        return;
+                      }
                    this.setState({
                      selectedFile: event.target.files[0],
+                   },()=>{
+                     console.log(this.state);
                    });
 
                    let reader = new FileReader();
@@ -64,21 +84,25 @@ export default class artreg5 extends Component {
                    reader.onloadend = () => {
                    let imagebytes = reader.result;               
                      this.setState({
-                       selectedFile: { ...this.state.selectedFile, imagebytes },
+                      //  selectedFile: { ...this.state.selectedFile },
                        imagePreviewUrl: imagebytes,
+                     },()=>{
+                          console.log(this.state);
                      });
                    };
                    if (event.target.files[0]) {
                    reader.readAsDataURL(event.target.files[0]);
 
                    }
+                  }
                  };
 
                 resertImage(){
                 this.setState({
                   selectedFile : [],
                   imagePreviewUrl: logos.uploadphoto,
-                });}
+                });
+              }
 
                  handleChange(e) {
                    this.setState({ [e.target.name]: e.target.value });

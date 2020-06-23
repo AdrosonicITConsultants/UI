@@ -358,11 +358,3 @@ box-shadow: 2px 2px 2px 2px #888888;
 }
 
 }
-@media only screen and ( max-width: 1024px ) and ( min-width: 767px ){
-  .aocbg1{
-    min-height:285px!important;
-  }
-  .aocbg2{
-    /* height: 285px; */
-  }
-}

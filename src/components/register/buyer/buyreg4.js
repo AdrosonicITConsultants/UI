@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import customToast from "../../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default class buyreg4 extends Component {
                  constructor() {
@@ -29,7 +32,8 @@ export default class buyreg4 extends Component {
                      });
                    } else {
                      this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,
-                      this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,this.state.pocmobile,this.state.pocemail,this.state.pocname)
+                      this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,
+                      this.state.pocmobile,this.state.pocemail,this.state.pocname)
                      this.props.handler(4);
                    }
                  }
@@ -46,26 +50,45 @@ export default class buyreg4 extends Component {
                  }
 
                  fileChangedHandler = (event) => {
-                   this.setState({
-                     brandLogo: event.target.files[0],
-                   });
-                  let reader = new FileReader();
-                   reader.onloadend = () => {
-                       let imagebytes = reader.result;
+                  let filename = event.target.files[0];
+                  if (filename != undefined) {
+                    if (filename.size / 1024 / 1024 > 1) {    
+                      customToast.error("Please upload product Image below 1MB.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    return ;
+                  }
+                  if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+                    customToast.error("Image name contains special characters.", {
+                      position: toast.POSITION.TOP_RIGHT,
+                      autoClose: true,
+                    });
+                    return;
+                  }
+                  this.setState({
+                    brandLogo: event.target.files[0],
+                  });
+                 let reader = new FileReader();
+                  reader.onloadend = () => {
+                      let imagebytes = reader.result;
 
-                     this.setState({
-                       brandLogo :{ ...this.state.brandLogo , imagebytes},
-                       imagePreviewUrl: imagebytes
-                     });
-                   };
-                
-                   if (event.target.files[0]) {
-                   //  reader.readAsDataURL(event.target.files[0]);
-                   this.refs.fileUploaderName.value = event.target.files[0].name;
-                   this.setState({
-                     logoname : event.target.files[0].name
-                   })
-                   }
+                    this.setState({
+                     //  brandLogo :{ ...this.state.brandLogo},
+                      imagePreviewUrl: imagebytes
+                    });
+                  };
+               
+                  if (event.target.files[0]) {
+                  //  reader.readAsDataURL(event.target.files[0]);
+                  this.refs.fileUploaderName.value = event.target.files[0].name;
+                  this.setState({
+                    logoname : event.target.files[0].name
+                  })
+                  }
+
+                  }
+                   
                  };
                  componentDidMount(){
                   this.setState({companyname : this.props.companyname ,

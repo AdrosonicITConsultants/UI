@@ -169,7 +169,7 @@ debugger;
         
     }
     SaveDetails(){
-        alert("saveclicked");
+        // alert("saveclicked");
         console.log(this.state);
         // debugger;
         TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
@@ -180,7 +180,11 @@ debugger;
             this.state.countryid,this.state.selectedBrandFile).then((response) => {
                 this.setState({
                     isButtonDisabled : true,
-                })
+                });
+                customToast.success("Details updated successfully", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
 
 
             });

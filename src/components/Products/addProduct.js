@@ -864,6 +864,7 @@ productData.reedCountId = this.state.reedCount;
      position: toast.POSITION.TOP_RIGHT,
      autoClose: true,
    });
+   this.Cancel();
   
  } else {
    customToast.error(response.data.errorMessage, {
@@ -1131,7 +1132,7 @@ console.log(productData);
                                          ref={this.basicDetails}
                                          className="text-right font13"
                                        >
-                                         Name of the product (50 characters)
+                                         Name of the product (40 characters)
                                        </span>
                                      </Col>{" "}
                                      <Col
@@ -1152,7 +1153,7 @@ console.log(productData);
                                          type="text"
                                          id="productName"
                                          className=" ProductTextBox"
-                                         name="productName"                                maxLength="20"        
+                                         name="productName"                                maxLength="40"        
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1168,7 +1169,7 @@ console.log(productData);
                                          placeholder="Product Code (Eg. NAG09_89)"
                                          className="ProductTextBox"
                                          name="productCode"
-                                         maxLength="40"
+                                         maxLength="20"
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}

@@ -1152,7 +1152,7 @@ console.log(productData);
                                          type="text"
                                          id="productName"
                                          className=" ProductTextBox"
-                                         name="productName"                                        
+                                         name="productName"                                maxLength="20"        
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1168,6 +1168,7 @@ console.log(productData);
                                          placeholder="Product Code (Eg. NAG09_89)"
                                          className="ProductTextBox"
                                          name="productCode"
+                                         maxLength="40"
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}

@@ -87,6 +87,28 @@ import paytm from "./paytm.svg"
 import personalicon from "./Icon material-account-circle.svg";
 import brandicon from "./Icon material-branding-watermark.svg";
 import apedit from "./Icon feather-edit-1.svg";
+import Maniabandhan from "./Maniabandhan.jpg";
+import Gopalpur from "./Gopalpur.JPG";
+import Vengtikari from "./Vengtikari.jpg";
+import Kamrup from "./Kamrup.JPG";
+import Nalbari from "./Nalbari.JPG";
+import Dimapur from "./Dimapur.JPG";
+
+import Fabric from "./Fabric.jpg";
+import Fashionacc from "./Fashionacc.jpg";
+import homeacc from "./homeacc.jpg";
+import saree from "./saree.jpg";
+import dupatta from "./dupatta.jpg";
+import stole from "./stole.jpg";
+
+import Ajrakhpur from "./Ajrakhpur-2.png";
+
+import Panda from "./Panda.jpg";
+import Sun from "./Sun.png";
+import Sun2 from "./Sun2.jpg";
+import Flower from "./Flower.png";
+import Boat from "./Boat.png";
+import Smile from "./Smile.jpg";
 
 
 
@@ -94,6 +116,27 @@ import apedit from "./Icon feather-edit-1.svg";
 
 
 export default {
+  Maniabandhan,
+  Gopalpur,
+  Vengtikari,
+  Kamrup,
+  Nalbari,
+  Dimapur,
+
+  Fabric,
+  Fashionacc,
+  homeacc,
+  saree,
+  dupatta,
+  stole,
+
+  Ajrakhpur,
+  Panda,
+  Sun,
+  Sun2,
+  Flower,
+  Boat,
+  Smile,
   isavailable,
   mtoicon,
   apedit,

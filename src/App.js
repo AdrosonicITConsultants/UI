@@ -14,6 +14,8 @@ import ArtistProfile from "../src/components/profile/artistProfile";
 import BuyerProfile from "../src/components/profile/buyerProfile";
 import AddProduct from "../src/components/Products/addProduct";
 import MyProfile from "../src/components/profile/myProfile";
+import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
+
 
 
 import i18next from "i18next";
@@ -35,6 +37,7 @@ function App() {
                     <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
+          <Route path="/Artisanself" component={ArtistSelfDesign} />
         </Switch>
       </Router>
     </React.Fragment>

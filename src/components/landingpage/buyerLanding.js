@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import { Row, Col, Container, Label } from "reactstrap";
 import "./landingpage.css";
 import logos from "../../assets";
+import { browserHistory } from "../../helpers/history";
 
 class buyerLanding extends Component {
   ExploreMore = (to) => {
     switch (to) {
       case "Self":
         console.log(to);
+        browserHistory.push("./Artisanself");
 
         break;
       case "New":

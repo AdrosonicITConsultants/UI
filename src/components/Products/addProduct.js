@@ -286,17 +286,15 @@ else {
                    console.log(option);       
                    if (option != -1)
                    {
+                    
                       this.setState({ [e.target.name]: option }, () => {
                         console.log(this.state);
+                        debugger;
                         this.setState(
                           {
-                            ["countOfYarn" + stateNumber]: this.state.yarns[
-                              this.state["yarn" + stateNumber]
-                            ].yarnType.manual
+                            ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
                               ? []
-                              : this.state.yarns[
-                                  this.state["yarn" + stateNumber]
-                                ].yarnType.yarnCounts,
+                              : this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.yarnCounts,
                                 ["yarnCount" + stateNumber] : ""
                           },
                           () => {}

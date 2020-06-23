@@ -518,12 +518,14 @@ position: relative;
     transition-duration: 0.3s;
     background-color:#F0F0F0;
     cursor: pointer;
+        margin-top: 8px !important;
+    margin-left: -15px !important;
    
   }
 
 .checkbox > input:checked {
     border: 1px solid white;
-    background-color: #41B883;
+    background-color: #3964d99e;
      outline: none;
 }
 

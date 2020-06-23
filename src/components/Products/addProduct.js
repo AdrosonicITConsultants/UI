@@ -1100,7 +1100,7 @@ console.log(productData);
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Basic Details</h4>
+                                   <h4 className="subHeading">Basic details</h4>
                                    <h6 className="subHeading_1">
                                      Add general details for the product
                                    </h6>
@@ -1328,7 +1328,7 @@ console.log(productData);
                                  >
                                    <div className="SubTopic "></div>{" "}
                                    <h5 className="subHeading2">
-                                     Add Weaves type
+                                     Add weaves type
                                    </h5>
                                    <h6 className="subHeading_2">
                                      Select the weave type used for the product
@@ -1346,7 +1346,7 @@ console.log(productData);
                                      ref={this.WeavesComplete}
                                      className="weaveselection"
                                    >
-                                     you can select multiple weave types
+                                     You can select multiple weave types
                                    </label>
                                  </Col>
                                </Row>
@@ -2259,7 +2259,7 @@ console.log(productData);
                                    )}
 
                                    <h4 className="subHeading">
-                                     Wash & Care Instructions
+                                     Wash & care instructions
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Select from the wash & care instructions
@@ -2632,7 +2632,7 @@ console.log(productData);
                                    )}
 
                                    <h4 className="subHeading">
-                                     Select Availability
+                                     Select availability
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Check the availability of the product
@@ -2809,6 +2809,7 @@ console.log(productData);
                                          id="GSMName"
                                          className=" ProductTextBox"
                                          name="GSMName"
+                                         maxLength="10"
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>
@@ -2859,7 +2860,7 @@ console.log(productData);
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Enter Weight</h4>
+                                   <h4 className="subHeading">Enter weight</h4>
                                    <h6 className="subHeading_1">
                                      Weight for the product
                                    </h6>

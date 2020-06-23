@@ -310,9 +310,12 @@ class TTCEapi {
 
     static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
       adl2,street,city,state,country1,pincode,landmark,weblink, sociallink,firstname,
-      lastname,mobileno,alternatemobno,designation,password,emailid,pocmobile,pocemail,pocname,countryid)    {
+      lastname,mobileno,alternatemobno,designation,password,emailid,pocmobile,pocemail,pocname,
+      countryid)    {
         
       let url = ApiUrl + "/register/user";
+      var bodyFormData = new FormData();
+        
           var data = {
               address : {
                 city: city,
@@ -338,8 +341,8 @@ class TTCEapi {
                   cin : cinno,
                   companyName : companyname,
                   contact : officeno,
-                  gstNo: gstno,
-                  logo: logoname
+                  gstNo: gstno
+                  
               },
               designation: designation,
               email : emailid,
@@ -353,13 +356,17 @@ class TTCEapi {
               websiteLink: weblink
           };
           console.log(data);
-          var config = {
-            headers: {
-              "Content-type": "application/json",
-            },
+          console.log(brandLogo);
+          bodyFormData.append('registerRequest', JSON.stringify(data));
+          bodyFormData.append('brandLogo', brandLogo); 
+
+        var config = {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
           };
           return axios
-            .post(url, data, config)
+            .post(url, bodyFormData, config)
             .then((response) => {
               debugger
               console.log(response);
@@ -376,7 +383,8 @@ class TTCEapi {
     cinno, panno,line11, line22, street, city1,state, 
     country1,pincode,landmark1, alternatemobno,
     designation,pocmobile, pocemail,pocname,
-    countryid)   {
+    countryid,selectedBrandFile)   {
+      var bodyFormData = new FormData();
 
     let url = ApiUrl + "/user/edit/buyerProfile";
     var data = {
@@ -409,16 +417,20 @@ class TTCEapi {
     
     };
     console.log(data);
-    // debugger;
-    
+  console.log(selectedBrandFile);
+  bodyFormData.append('profileDetails', JSON.stringify(data));
+  bodyFormData.append('logo', selectedBrandFile); 
+  
+
+  // console.log(data);
     var config = {
       headers: {
-        "Content-type": "application/json",
-        // "Authorization" : axios.defaults.headers.common['Authorization']
+        "Content-type": "multipart/form-data",
       },
     };
+
     return axios
-      .put(url, data, config)
+      .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
         if (response.data.valid)

@@ -4,9 +4,31 @@ import { Row, Col, Container, Label } from "reactstrap";
 import "./artistLanding.css";
 import logos from "../../assets";
 import Productcatelog from "../Products/productcatelog"
+import TTCEapi from "../../services/API/TTCEapi";
 
 
  class artistLanding extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brandPic : "",
+    };
+  }
+  componentDidMount(){
+    TTCEapi.getProfile().then((response)=>{
+      if(response.data.data.user.companyDetails != null){
+        if(response.data.data.user.companyDetails.logo != null){
+            var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
+            this.setState({
+                brandPic : brandPic,
+            });
+            console.log(brandPic);
+
+        }
+    }
+
+    });
+  }
 
 
 
@@ -28,9 +50,10 @@ import Productcatelog from "../Products/productcatelog"
                       <Col sm={{ size: "4" }}></Col>
                       <Col className="text-center" sm={{ size: "4" }}>
                         <img
-                          className="artistbg1img"
+                          className="artistbg1img profileImage"
                           // src={logos.uploadphoto}
-                          src=" https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Product/45/air-bnb-logo-png-2.png"
+                          src = {this.state.brandPic == "" ? "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Product/45/air-bnb-logo-png-2.png" :
+                          this.state.brandPic}
                         ></img>
                       </Col>
                       <Col sm={{ size: "4" }}></Col>

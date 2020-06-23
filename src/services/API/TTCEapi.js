@@ -252,61 +252,61 @@ class TTCEapi {
 
       });
   }
-  static registerArtist(weaverid,emailid,password,firstname,
-    lastname,pincode,cluster,district,state,mobileno,panno,
-    address1,selectedProducts,selectedFile)    {
-      debugger;
-      var bodyFormData = new FormData();
-        
-        let url = ApiUrl + "/register/user";
+    static registerArtist(weaverid,emailid,password,firstname,
+      lastname,pincode,cluster,district,state,mobileno,panno,
+      address1,selectedProducts,selectedFile)    {
+        debugger;
+        var bodyFormData = new FormData();
+          
+          let url = ApiUrl + "/register/user";
 
-        var data1 = {
-            address : {
-                country :{
-                  id: 1,
-                  name : "india"
-                },
-                district : district,
-                line1 : address1,
-                pincode :pincode,
-                state : state 
+          var data1 = {
+              address : {
+                  country :{
+                    id: 1,
+                    name : "india"
+                  },
+                  district : district,
+                  line1 : address1,
+                  pincode :pincode,
+                  state : state 
+              },
+              clusterId : parseInt(cluster),
+              email : emailid,
+              firstName : firstname,
+              lastName : lastname,
+              mobile : mobileno,
+              pancard : panno,
+              password: password,
+              refRoleId : 1,
+              productCategoryIds : selectedProducts,
+              weaverId:weaverid
+          };
+          console.log(data1);
+          console.log(selectedFile);
+          bodyFormData.append('registerRequest', JSON.stringify(data1));
+          bodyFormData.append('profilePic', selectedFile); 
+          
+        
+          // console.log(data);
+          var config = {
+            headers: {
+              "Content-type": "multipart/form-data",
             },
-            clusterId : parseInt(cluster),
-            email : emailid,
-            firstName : firstname,
-            lastName : lastname,
-            mobile : mobileno,
-            pancard : panno,
-            password: password,
-            refRoleId : 1,
-            productCategoryIds : selectedProducts,
-            weaverId:weaverid
-        };
-        console.log(data1);
-        console.log(selectedFile);
-        bodyFormData.append('registerRequest', JSON.stringify(data1));
-        bodyFormData.append('profilePic', selectedFile); 
-        
-      
-        // console.log(data);
-        var config = {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        };
-        return axios
-          .post(url, bodyFormData, config)
-          .then((response) => {
-            console.log(response);
-            debugger;
-            return response;
-          })
-          .catch((error) => {
-            debugger;
-            return error.response;
+          };
+          return axios
+            .post(url, bodyFormData, config)
+            .then((response) => {
+              console.log(response);
+              debugger;
+              return response;
+            })
+            .catch((error) => {
+              debugger;
+              return error.response;
 
-          });
-    }
+            });
+      }
 
     static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
       adl2,street,city,state,country1,pincode,landmark,weblink, sociallink,firstname,

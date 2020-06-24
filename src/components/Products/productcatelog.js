@@ -54,7 +54,7 @@ class productcatelog extends Component {
 
                         {/* <Col className="col-sm-4 col-md-4 hrline1"></Col> */}
                         <Col className="col-sm-9 col-md-9 col-9">
-                          <div class="separator text2PC">
+                          <div className="separator text2PC">
                             {items.products.length > 4 ? `Showing 4 of ${items.products.length}` : `Showing ${items.products.length} of ${items.products.length} `}
                             {" "}
                         

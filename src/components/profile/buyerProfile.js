@@ -178,7 +178,7 @@ debugger;
             this.state.line2, this.state.street, this.state.city, this.state.state, 
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
-            this.state.countryid,this.state.selectedBrandFile).then((response) => {
+            this.state.countryid,this.state.selectedBrandFile,this.state.removedlogo).then((response) => {
                 this.setState({
                     isButtonDisabled : true,
                 });
@@ -211,6 +211,8 @@ debugger;
             }
          this.setState({
            selectedBrandFile: event.target.files[0],
+           removedlogo : 2,
+
            isButtonDisabled : false
          },()=>{
             console.log("change brand img");
@@ -239,6 +241,7 @@ debugger;
           selectedFile : [],
           removedlogo : 1,
           imagePreviewUrl2: logos.uploadphoto,
+          isButtonDisabled : false
         });
       }
     render() {
@@ -265,12 +268,12 @@ debugger;
                     />{" "}
                  
                       <img
-                        style={{ margin: "-3px", width:"14px" }}
+                        style={{ margin: "2px -7px 1px 1px", width:"21px" ,opacity : "1"}}
                         type="button"
                         className="close"
                         aria-label="Close"
                         onClick={() => {
-                          this.resertImage();
+                          this.resertImage2();
                         }}
                         
                         src={logos.closelogo}
@@ -297,13 +300,17 @@ debugger;
                       className = "profileImage2"
 
                       src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}                    ></img>
-                      <img
-                        style={{ margin: "-3px", width:"14px" }}
+                      {this.state.brandPic == ""  
+                      ?
+                    <div/>
+                        :
+                        <img
+                        style={{ margin: "2px 13px 1px 1px", width:"21px" ,opacity : "1"}}
                         type="button"
                         className="close"
                         aria-label="Close"
                         onClick={() => {
-                          this.resertImage();
+                          this.resertImage2();
                         }}
                         
                         src={logos.closelogo}
@@ -311,6 +318,9 @@ debugger;
                       >
                         
                       </img>
+                        
+                        }
+                     
                       </div>
 
                   );

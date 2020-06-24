@@ -384,7 +384,7 @@ class TTCEapi {
     cinno, panno,line11, line22, street, city1,state, 
     country1,pincode,landmark1, alternatemobno,
     designation,pocmobile, pocemail,pocname,
-    countryid,selectedBrandFile)   {
+    countryid,selectedBrandFile,removedlogo)   {
       var bodyFormData = new FormData();
 
     let url = ApiUrl + "/user/edit/buyerProfile";
@@ -419,8 +419,21 @@ class TTCEapi {
     };
     console.log(data);
   console.log(selectedBrandFile);
+  console.log(removedlogo);
+
   bodyFormData.append('profileDetails', JSON.stringify(data));
-  bodyFormData.append('logo', selectedBrandFile); 
+  if(removedlogo == 1){
+    // bodyFormData.append('', selectedBrandFile); 
+    var f = new File([""], "");
+    bodyFormData.append('logo', f);
+      debugger;
+
+  }
+  if(removedlogo==2){
+    bodyFormData.append('logo',selectedBrandFile ); 
+
+  }
+  // bodyFormData.append('logo', selectedBrandFile); 
   
 
   // console.log(data);

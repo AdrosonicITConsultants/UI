@@ -412,7 +412,12 @@ class ArtistProfile extends Component {
                       alt="icon"
                       width="200"
                     />{" "}
-                 
+                  {this.state.isPdetail 
+                      
+                      ?
+                      <div/>
+                     
+                    :
                       <img
                         style={{ margin: "-3px", width:"14px" }}
                         type="button"
@@ -426,7 +431,7 @@ class ArtistProfile extends Component {
                         aria-hidden="true"
                       >
                         
-                      </img>
+                      </img>}
                  
                   </div>
                 );
@@ -496,22 +501,28 @@ class ArtistProfile extends Component {
                       alt="icon"
                       width="200"
                     />
-                    {/* {" "}
-                 
-                      <img
-                        style={{ margin: "-3px", width:"14px" }}
-                        type="button"
-                        className="close"
-                        aria-label="Close"
-                        onClick={() => {
-                          this.resertImage2();
-                        }}
-                        
-                        src={logos.closelogo}
-                        aria-hidden="true"
-                      >
-                        
-                      </img> */}
+                    {" "}
+                      {this.state.isBdetail 
+                      
+                      ?
+                      <div/>
+                     
+                    :
+                    <img
+                    style={{ margin: "-3px", width:"14px" }}
+                    type="button"
+                    className="close"
+                    aria-label="Close"
+                    onClick={() => {
+                      this.resertImage2();
+                    }}
+                    
+                    src={logos.closelogo}
+                    aria-hidden="true"
+                  >
+                    
+                  </img> }
+                      
                  
                   </div>
                 );

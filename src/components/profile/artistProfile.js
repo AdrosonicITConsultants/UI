@@ -24,7 +24,7 @@ class ArtistProfile extends Component {
           isDetailsEdit : true,
           isPdetail : true,
           isBdetail: true,
-          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
+          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
           selectedprods :[],          
           accountno : "",
           bankname : "" ,
@@ -50,6 +50,8 @@ class ArtistProfile extends Component {
           profilePic : "",
           selectedBrandFile: [],
           brandPic : "",
+          removedprofile : 0,
+          removedlogo : 0,
           
 
         };
@@ -73,7 +75,9 @@ class ArtistProfile extends Component {
                     if(response.data.data.userProductCategories.length != 0)
                     {   var prodselected = "";
                       for (var  items in response.data.data.userProductCategories)
-                      {     prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
+                      {     console.log(response.data.data.userProductCategories[items]);
+                        // document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
+                        prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
                       }
                       this.setState({
                         prodsel : prodselected
@@ -84,7 +88,7 @@ class ArtistProfile extends Component {
     
             });
             
-            if(response.data.data.user.profilePic != null){
+            if(response.data.data.user.profilePic != null && response.data.data.user.profilePic != ""){
                 var profilePic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/ProfilePics/" + response.data.data.user.profilePic ;
                 this.setState({
                     profilePic : profilePic,
@@ -190,7 +194,7 @@ class ArtistProfile extends Component {
         })
      }
      handlePdetailEdit2(){
-         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile).then((response)=>{
+         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile,this.state.removedprofile).then((response)=>{
 
          })
         this.setState({
@@ -217,6 +221,15 @@ class ArtistProfile extends Component {
             isBdetail:!this.state.isBdetail,
             productSelected : []
 
+        },()=>{
+          TTCEapi.getProfile().then((response)=>{
+            for (var  items in response.data.data.userProductCategories)
+                      {     console.log(response.data.data.userProductCategories[items]);
+                        document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
+                        // prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
+                      }
+
+          })
         })
     }
     handlebEdit2(){
@@ -236,7 +249,7 @@ class ArtistProfile extends Component {
             prodsel : productSelected
         },()=>{
             console.log(this.state.selectedprods) ;
-            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile);
+            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo);
 
         });
 
@@ -285,6 +298,8 @@ class ArtistProfile extends Component {
             }
          this.setState({
            selectedFile: event.target.files[0],
+           removedprofile :2 ,
+          
          },()=>{
            console.log(this.state);
          });
@@ -328,6 +343,7 @@ class ArtistProfile extends Component {
             }
          this.setState({
            selectedBrandFile: event.target.files[0],
+           removedlogo: 2
          },()=>{
             console.log("change brand img");
            console.log(this.state);
@@ -351,12 +367,20 @@ class ArtistProfile extends Component {
         }
        };
 
-    //   resertImage(){
-    //   this.setState({
-    //     selectedFile : [],
-    //     imagePreviewUrl: logos.uploadphoto,
-    //   });
-    // }
+      resertImage(){
+      this.setState({
+        selectedFile : [],
+        removedprofile : 1,
+        imagePreviewUrl: logos.uploadphoto,
+      });
+    }
+    resertImage2(){
+      this.setState({
+        selectedFile : [],
+        removedlogo : 1,
+        imagePreviewUrl2: logos.uploadphoto,
+      });
+    }
     render() {
         let  $imagePreview = (
                 <img
@@ -389,7 +413,7 @@ class ArtistProfile extends Component {
                       width="200"
                     />{" "}
                  
-                      {/* <img
+                      <img
                         style={{ margin: "-3px", width:"14px" }}
                         type="button"
                         className="close"
@@ -402,7 +426,7 @@ class ArtistProfile extends Component {
                         aria-hidden="true"
                       >
                         
-                      </img> */}
+                      </img>
                  
                   </div>
                 );
@@ -426,7 +450,7 @@ class ArtistProfile extends Component {
                   )
                 :
                 $imagePreview = (
-                    <img
+                    <div><img
                       onClick={() => {
                         this.refs.fileUploader.click();
                       }}
@@ -436,7 +460,24 @@ class ArtistProfile extends Component {
                       }}
                       className = "profileImage"
 
-                      src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}                    ></img>
+                      src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}  
+                                       ></img>
+                 
+                                       <img
+                                         style={{ margin: "22px 43px -3px -3px", width:"14px" }}
+                                         type="button"
+                                         className="close"
+                                         aria-label="Close"
+                                         onClick={() => {
+                                           this.resertImage();
+                                         }}
+                                         
+                                         src={logos.closelogo}
+                                         aria-hidden="true"
+                                       >
+                                         
+                                       </img>
+                                       </div>
                   );
     
                 }
@@ -454,15 +495,16 @@ class ArtistProfile extends Component {
                       src={this.state.imagePreviewUrl2}
                       alt="icon"
                       width="200"
-                    />{" "}
+                    />
+                    {/* {" "}
                  
-                      {/* <img
+                      <img
                         style={{ margin: "-3px", width:"14px" }}
                         type="button"
                         className="close"
                         aria-label="Close"
                         onClick={() => {
-                          this.resertImage();
+                          this.resertImage2();
                         }}
                         
                         src={logos.closelogo}
@@ -493,7 +535,7 @@ class ArtistProfile extends Component {
                   )
                 :
                 $imagePreview2 = (
-                    <img
+                    <div><img
                       onClick={() => {
                         this.refs.fileUploader2.click();
                       }}
@@ -503,7 +545,24 @@ class ArtistProfile extends Component {
                       }}
                       className = "profileImage"
 
-                      src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}                    ></img>
+                      src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}            
+                              ></img>
+                              <img
+                                         style={{ margin: "22px 43px -3px -3px", width:"14px" }}
+                                         type="button"
+                                         className="close"
+                                         aria-label="Close"
+                                         onClick={() => {
+                                           this.resertImage2();
+                                         }}
+                                         
+                                         src={logos.closelogo}
+                                         aria-hidden="true"
+                                       >
+                                         
+                                       </img>
+                                       </div>
+
                   );
     
                 }
@@ -778,6 +837,12 @@ class ArtistProfile extends Component {
                                                     <label>
                                                         <input type="checkbox" value="2" id={this.state.products[4].id}/>
                                                         <span>{this.state.products[4].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="3" id={this.state.products[5].id}/>
+                                                        <span>{this.state.products[5].productDesc}</span>
                                                     </label>
                                                     </div>
 

@@ -1152,7 +1152,8 @@ console.log(productData);
                                          type="text"
                                          id="productName"
                                          className=" ProductTextBox"
-                                         name="productName"                                maxLength="20"        
+                                         name="productName"                                
+                                         maxLength="20"        
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}

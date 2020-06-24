@@ -49,6 +49,7 @@ debugger;
            showValidationconfirmpass : false,
            selectedBrandFile: [],
            brandPic : "",
+           removedlogo : 0 ,
 
 
 
@@ -233,6 +234,13 @@ debugger;
          }
         }
        }
+       resertImage2(){
+        this.setState({
+          selectedFile : [],
+          removedlogo : 1,
+          imagePreviewUrl2: logos.uploadphoto,
+        });
+      }
     render() {
         let  $imagePreview2 = (
             <img
@@ -256,7 +264,7 @@ debugger;
                       width="200"
                     />{" "}
                  
-                      {/* <img
+                      <img
                         style={{ margin: "-3px", width:"14px" }}
                         type="button"
                         className="close"
@@ -269,7 +277,7 @@ debugger;
                         aria-hidden="true"
                       >
                         
-                      </img> */}
+                      </img>
                  
                   </div>
                 );
@@ -278,7 +286,7 @@ debugger;
                
                
                 $imagePreview2 = (
-                    <img
+                    <div>                    <img
                       onClick={() => {
                         this.refs.fileUploader2.click();
                       }}
@@ -289,6 +297,22 @@ debugger;
                       className = "profileImage2"
 
                       src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}                    ></img>
+                      <img
+                        style={{ margin: "-3px", width:"14px" }}
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={() => {
+                          this.resertImage();
+                        }}
+                        
+                        src={logos.closelogo}
+                        aria-hidden="true"
+                      >
+                        
+                      </img>
+                      </div>
+
                   );
     
                 

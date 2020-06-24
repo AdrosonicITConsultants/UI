@@ -384,18 +384,18 @@ class ArtistProfile extends Component {
     render() {
         let  $imagePreview = (
                 <img
-                  onClick={() => {
-                    this.refs.fileUploader.click();
-                  }}
+                  // onClick={() => {
+                  //   this.refs.fileUploader.click();
+                  // }}
                   className="profileImage"
                   src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}
                 ></img>
               );
         let  $imagePreview2 = (
         <img
-            onClick={() => {
-            this.refs.fileUploader2.click();
-            }}
+            // onClick={() => {
+            // this.refs.fileUploader2.click();
+            // }}
             className="profileImage"
             src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}
         ></img>
@@ -442,12 +442,12 @@ class ArtistProfile extends Component {
                 ?
                 $imagePreview = (
                     <img
-                    //   onClick={() => {
-                    //     this.refs.fileUploader.click();
-                    //   }}
+                      // onClick={() => {
+                      //   this.refs.fileUploader.click();
+                      // }}
                       style={{
-                        width: "100px",
-                        cursor: "pointer",
+                        width: "100px"
+                        // cursor: "pointer",
                       }}
                       className = "profileImage"
                       src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}
@@ -466,23 +466,23 @@ class ArtistProfile extends Component {
                       className = "profileImage"
 
                       src={this.state.profilePic == "" ? logos.uploadphoto : this.state.profilePic}  
-                                       ></img>
-                 
-                                       <img
-                                         style={{ margin: "22px 43px -3px -3px", width:"14px" }}
-                                         type="button"
-                                         className="close"
-                                         aria-label="Close"
-                                         onClick={() => {
-                                           this.resertImage();
-                                         }}
-                                         
-                                         src={logos.closelogo}
-                                         aria-hidden="true"
-                                       >
-                                         
-                                       </img>
-                                       </div>
+                      ></img>
+
+                      <img
+                        style={{ margin: "22px 43px -3px -3px", width:"14px" }}
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={() => {
+                          this.resertImage();
+                        }}
+                        
+                        src={logos.closelogo}
+                        aria-hidden="true"
+                      >
+                        
+                      </img>
+                      </div>
                   );
     
                 }
@@ -494,9 +494,9 @@ class ArtistProfile extends Component {
                   <div className="image-container img_wrp">
                     <img
                       className="profileImage"
-                      onClick={() => {
-                        this.refs.fileUploader2.click();
-                      }}
+                      // onClick={() => {
+                      //   this.refs.fileUploader2.click();
+                      // }}
                       src={this.state.imagePreviewUrl2}
                       alt="icon"
                       width="200"
@@ -537,8 +537,7 @@ class ArtistProfile extends Component {
                     //     this.refs.fileUploader.click();
                     //   }}
                       style={{
-                        width: "100px",
-                        cursor: "pointer",
+                        width: "100px"
                       }}
                       className = "profileImage"
                       src={this.state.brandPic == "" ? logos.uploadphoto : this.state.brandPic}

@@ -318,8 +318,11 @@ browserHistory.push("/AddProduct");
                 href="#"
                
               >
+                {console.log(user.profilePic!= "")}
+                {console.log(user.profilePic!= null)}
                 {userTypeId === 1 ?
-                  (user.profilePic != null ? <img className="navProfileA" src={ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic}></img> : <img src={logos.usernamelogo}></img>)
+              
+                  (  (user.profilePic != null && user.profilePic != "") ? <img className="navProfileA" src={ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic}></img> : <img src={logos.usernamelogo}></img>)
              : <img src={logos.usernamelogo}></img>}
                
               </a>

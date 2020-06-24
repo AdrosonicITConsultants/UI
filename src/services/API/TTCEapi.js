@@ -284,6 +284,7 @@ class TTCEapi {
           };
           console.log(data1);
           console.log(selectedFile);
+          debugger;
           bodyFormData.append('registerRequest', JSON.stringify(data1));
           bodyFormData.append('profilePic', selectedFile); 
           
@@ -446,7 +447,7 @@ class TTCEapi {
 
       });
   }
- static updatePersonalDetails(line1,district,pincode,state,selectedFile){
+ static updatePersonalDetails(line1,district,pincode,state,selectedFile,removedprofile){
   let url = ApiUrl + "/user/edit/artistProfile";
   var bodyFormData = new FormData();
   var data = {
@@ -462,7 +463,17 @@ class TTCEapi {
   console.log(data);
   console.log(selectedFile);
   bodyFormData.append('address', JSON.stringify(data));
-  bodyFormData.append('profilePic', selectedFile); 
+  console.log(removedprofile);
+  if(removedprofile==1){
+    var f = new File([""], "");
+    bodyFormData.append('profilePic', f);
+      debugger;
+
+  }
+  if(removedprofile==2){
+    bodyFormData.append('profilePic', selectedFile); 
+
+  }
   
 
   // console.log(data);
@@ -491,7 +502,7 @@ class TTCEapi {
 
  }
 
- static updateBrandDetails(brandname,branddesc,selectedprods,selectedBrandFile){
+ static updateBrandDetails(brandname,branddesc,selectedprods,selectedBrandFile,removedlogo){
   let url = ApiUrl + "/user/edit/artistBrandDetails";
   var bodyFormData = new FormData();
   var data = {
@@ -504,9 +515,21 @@ class TTCEapi {
   }
   console.log(data);
   console.log(selectedBrandFile);
-  bodyFormData.append('editBrandDetails', JSON.stringify(data));
+  console.log(removedlogo);
+
   
-  bodyFormData.append('logo', selectedBrandFile); 
+  bodyFormData.append('editBrandDetails', JSON.stringify(data));
+  if(removedlogo == 1){
+    // bodyFormData.append('', selectedBrandFile); 
+    var f = new File([""], "");
+    bodyFormData.append('logo', f);
+      debugger;
+
+  }
+  if(removedlogo==2){
+    bodyFormData.append('logo',selectedBrandFile ); 
+
+  }
   
 
     var config = {

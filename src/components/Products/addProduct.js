@@ -69,6 +69,7 @@ const initialState = {
   lengths: "",
   relatedProduct: [],
   savedrelatedProduct:[],
+  SaveDisabled:false
 };
 
 export default class addProduct extends Component {
@@ -583,7 +584,7 @@ relatedProductTemp[e.target.name] = option;
                    });
                  };
 
-                 Save = () => {
+                 Save = () => {                
                    let productData = {};
                     productData.careIds = [];
                     productData.weaveIds = [];
@@ -824,9 +825,13 @@ let relatedDimension = false;
 
  
  
+                   this.setState({
+                     SaveDisabled: true
+                   }, ()=>{                   
+                   })
  
- 
- 
+                   
+
  
  
  productData.tag = this.state.productName;
@@ -865,12 +870,17 @@ productData.reedCountId = this.state.reedCount;
      autoClose: true,
    });
    this.Cancel();
-  
+   this.setState({
+     SaveDisabled: false
+   })
  } else {
    customToast.error(response.data.errorMessage, {
      position: toast.POSITION.TOP_RIGHT,
      autoClose: true,
    });
+   this.setState({
+     SaveDisabled: false
+   })
  }
 
   });;
@@ -3053,6 +3063,7 @@ console.log(productData);
                                      <button
                                        onClick={this.Save}
                                        className="saveBtnProduct"
+                                       disabled={this.state.SaveDisabled}
                                      >
                                        Save
                                      </button>

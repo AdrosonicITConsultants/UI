@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css";
 import logos from "../../assets";
 import "react-toastify/dist/ReactToastify.css";
+import TTCEapi from "../../services/API/TTCEapi"
 
 export default class forgotpass2 extends Component {
     constructor() {
@@ -14,7 +15,7 @@ export default class forgotpass2 extends Component {
           showValidationconfirmpass: false,
           showUserName: true,
         };
-      }
+      }  
     
       operation() {
         debugger;
@@ -23,14 +24,16 @@ export default class forgotpass2 extends Component {
                 showValidationpass: !this.state.showValidationpass,
             });
           }
-          else if (this.state.confirmpass !== this.state.password ){                    
-              this.setState({
-                showValidationconfirmpass: !this.state.showValidationconfirmpass,
-              });
+        else if (TTCEapi.validatePass(this.state.password)) {
+          if (this.state.confirmpass !== this.state.password) {
+            this.setState({
+              showValidationconfirmpass: !this.state.showValidationconfirmpass,
+            });
           } else {
             this.props.pr(this.state.password);
-           
+
           }
+        }          
       }
 
       backoperation() {

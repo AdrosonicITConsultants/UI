@@ -2,6 +2,9 @@ import axios from "axios";
 import isEmail from "validator/lib/isEmail";
 import setAuthorizationtoken from "../utils/setAuthorizationtoken";
 import jwt from  "jsonwebtoken";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 var env = "dev";
 var ApiUrl = "http://101.53.156.143:8090";
@@ -18,6 +21,19 @@ class TTCEapi {
   static ImageUrl = " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/"
   //#region post methods
 
+  static validatePass(pass) {
+    const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
+    const isOk = re.test(pass);
+    // console.log(isOk);
+    if (!isOk) {
+      customToast.error("Please enter valid password with 8 characters.It should contain at least 1 Capital alphabet, number and special character.", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+      return false;
+    }
+    return true;
+  }
 
   //#region registration
   static checkWeaverId(weaverId) {

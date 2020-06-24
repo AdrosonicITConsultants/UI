@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
+import TTCEapi from "../../../services/API/TTCEapi"
+
 
 export default class artreg3 extends Component {
     constructor() {
@@ -13,23 +15,28 @@ export default class artreg3 extends Component {
           showValidationconfirmpass: false,
           showUserName: true,
         };
-      }
+      }      
     
-      operation() {
+      operation() 
+      {
         // debugger;
         if (this.state.password == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,
             });
-          }
-          else if (this.state.confirmpass !== this.state.password ){                    
+          }  
+        else if (TTCEapi.validatePass(this.state.password))    
+        {
+           if (this.state.confirmpass !== this.state.password )
+           { 
               this.setState({
                 showValidationconfirmpass: !this.state.showValidationconfirmpass,
               });
-          } else {
-            this.props.sp(this.state.password);
-            this.props.handler(3);
-          }
+            } else {
+             this.props.sp(this.state.password);
+             this.props.handler(3);
+           } 
+        }         
       }
 
       backoperation() {

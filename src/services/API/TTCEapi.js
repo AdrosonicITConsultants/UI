@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 var env = "dev";
-var ApiUrl = "http://101.53.156.143:8090";
+var ApiUrl = "http://101.53.153.96:8090";
 if (env == "dev") {
-  ApiUrl = "http://101.53.156.143:8090";
+  ApiUrl = "http://101.53.153.96:8090";
 } else if (env == "uat") {
  // ApiUrl = "http://63.34.28.175:8090/TEGAPI/services";
 } else if (env == "live") {

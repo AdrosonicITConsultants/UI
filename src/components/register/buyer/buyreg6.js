@@ -156,7 +156,7 @@ export default class buyreg6 extends Component {
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
-                          type="text"
+                          type="url"
                           id="weblink"
                           className="form-control reg6textbox BuyerLogin1"
                           //placeholder="firstname"
@@ -178,7 +178,7 @@ export default class buyreg6 extends Component {
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
-                          type="text"
+                          type="url"
                           id="sociallink"
                           className="form-control reg6textbox BuyerLogin1"
                           //placeholder="firstname"

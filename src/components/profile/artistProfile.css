@@ -7,6 +7,9 @@
   /* background-position: center; */
  
 }
+.ml20{
+  margin-left:20px!important;
+}
 .Aopbg2{
   width: 100%;
   background-color: #FAF5F5;
@@ -29,9 +32,9 @@
   /* height: 340px; */
 }
 .aoctick{
-top: 5px;
-right: 5px;
-height:27px;
+  top: 10px;
+  right: 10px;
+  height: 23px;
 }
 .cardtextfield > div > input[type="text"]:disabled {
   background: transparent;
@@ -157,11 +160,11 @@ font-size: 22px;
 font-weight: 600;
 }
 .selected{
-font-size: 22px;
-  font-weight: 600;
+font-size: 28px;
+  font-weight: 700;
 }
 .notSelected{
-font-size: 20px;
+font-size: 26px;
 }
 .bankdetails{
 min-height: 200px!important;
@@ -239,7 +242,9 @@ color: #c7c7c7;
 .detailsheight{
   height: 475px;
 }
-
+.widthdesc{
+  width: 350px;
+    }
 
 @media only screen and ( max-width: 480px ) {
  
@@ -311,17 +316,23 @@ left: 50%;
 /* top: 0; */
 color: #c7c7c7;
 }
+.widthdesc{
+  width: 270px;
+    }
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
  
 }
 @media only screen and ( min-width: 1200px ) {
+  .widthdesc{
+width: 400px;
+  }
   .Aopbg {
     background: url(/static/media/backgroundpictureaop.b6f53b89.svg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 907px;
+    height: 1000px;
     /* background-position: center; */
 }
 .bankdetails {
@@ -351,7 +362,7 @@ box-shadow: 2px 2px 2px 2px #888888;
 /* height: 340px; */
 }
 .detailsheight {
-  height: 510px;
+  height: 600px;
 }
 .font14 {
   font-size: 18px!important;

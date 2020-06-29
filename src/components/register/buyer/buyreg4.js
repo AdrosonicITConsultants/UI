@@ -5,6 +5,8 @@ import logos from "../../../assets"
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import isEmail from "validator/lib/isEmail";
+
 
 export default class buyreg4 extends Component {
                  constructor() {
@@ -20,17 +22,66 @@ export default class buyreg4 extends Component {
                     pocmobile : "",
                     showValidationpass: false,
                     brandLogo : [],
-                    logoname : ""
+                    logoname : "",
+                    message : "",
                    };
                  }
        
                  operation() {
                    debugger;
+                   const emailcheck = isEmail;
+                   console.log(emailcheck(this.state.pocemail));
+                   var flag = true; 
                    if (this.state.companyname == "" || this.state.panno == "") {
+                     flag = false ;
                      this.setState({
-                       showValidationpass: !this.state.showValidationpass,
+                       showValidationpass: true,
+                       message : "please fill mandatory fields"
+
                      });
-                   } else {
+                   } else if(this.state.panno.length > 10 || this.state.panno.length < 10)
+                          {                      flag = false ;
+
+                            this.setState({
+                              showValidationpass: true,
+                              message : "PAN number should be of 10 characters."
+                          });
+                
+                          
+                    }else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
+                          { flag = false;
+                            this.setState({
+                              showValidationpass: true,
+                              message : "GST number should be of 15 characters."
+                          });
+                
+                          
+                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21) && this.state.cinno != "")
+                          {                     
+
+                            this.setState({
+                              showValidationpass: true,
+                              message : "CIN should be of 21 characters."
+                          });
+                
+                          
+                    }else if (this.state.pocemail != "" && !emailcheck(this.state.pocemail))
+                     {
+                      this.setState({
+                        showValidationpass: true,
+                        message : "POC Email not valid."
+
+                      });
+                    }
+                     else if((parseFloat(this.state.pocmobile)>9999999999 || parseFloat(this.state.pocmobile)<1000000000) && this.state.pocmobile !="" )
+                     {
+                      this.setState({
+                        showValidationpass: true,
+                        message : "POC mobile number should be of 10 digits."
+                    });
+                    }
+                    else {
+
                      this.props.scd(this.state.companyname,this.state.gstno,this.state.officeno,
                       this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,
                       this.state.pocmobile,this.state.pocemail,this.state.pocname)
@@ -43,11 +94,37 @@ export default class buyreg4 extends Component {
                  }
 
                  handleChange(e) {
+                  if (e.target.id =="gstno"){
+                    var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+                    e.target.value = stripped;
+                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({
+                      showValidationpass: false,
+                    });
+                  }
+                  else if (e.target.id =="panno"){
+                    var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+                    e.target.value = stripped;
+                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({
+                      showValidationpass: false,
+                    });
+                  }
+                  else if (e.target.id =="cinno"){
+                    var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+                    e.target.value = stripped;
+                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({
+                      showValidationpass: false,
+                    });
+                  }
+                  else{
                    this.setState({ [e.target.name]: e.target.value });
                    this.setState({
                      showValidationpass: false,
                    });
                  }
+                }
 
                  fileChangedHandler = (event) => {
                   let filename = event.target.files[0];
@@ -220,7 +297,7 @@ export default class buyreg4 extends Component {
                                  <div className="inner-addon">
                                    {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
-                                     type="number"
+                                     type="text"
                                      id="gstno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="lastname"
@@ -262,11 +339,8 @@ export default class buyreg4 extends Component {
                                      }}
                                    />
                                    <img
-                                     style={{
-                                       position: "absolute",
-                                       top: "0.4em",
-                                       left: "16em",
-                                     }}
+                                  
+                                     className = "brandupload"
                                      src={logos.uploadlogo}
                                      onClick={() => {
                                        this.refs.fileUploader.click();
@@ -409,7 +483,7 @@ export default class buyreg4 extends Component {
                              </Col>
                            </Row>
                            {this.state.showValidationpass ? (
-                    <span className="bg-danger">please enter all  mandatory fields</span>
+                    <span className="bg-danger">{this.state.message}</span>
                   ) : (
                     <br />
                   )} 

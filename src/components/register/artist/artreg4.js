@@ -20,6 +20,7 @@ export default class artreg4 extends Component {
           address : "",
           clusterdata : [],
           clusterid : -1,
+          message : "please fill mandatory fields",
           showValidationpass: false,
           showValidationconfirmpass: false,
           showUserName: true,
@@ -29,10 +30,34 @@ export default class artreg4 extends Component {
      
       operation() {
         // debugger;
-        if (this.state.firstname == ""  || this.state.clusterid == -1) {
+        if (this.state.firstname == ""  || this.state.clusterid == -1 || this.state.pincode == "" || this.state.mobileno == "") {
             this.setState({
-                showValidationpass: !this.state.showValidationpass,
+                showValidationpass: true,
+                message : "please fill mandatory fields"
             });
+            console.log(this.state.panno.length);
+          }
+          else if(parseFloat(this.state.pincode)>999999 || parseFloat(this.state.pincode)<100000 )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "pincode should be of 6 digits."
+          });
+          }
+          else if(parseFloat(this.state.mobileno)>9999999999 || parseFloat(this.state.mobileno)<1000000000 )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "mobile number should be of 10 digits."
+          });
+          }
+          else if((this.state.panno.length > 10 || this.state.panno.length < 10) && this.state.panno != "")
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "pan number should be of 10 characters."
+          });
+
           }
           else {
             this.props.sd1(this.state.firstname,this.state.lastname,this.state.pincode,this.state.clusterid,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address,this.state.cluster)
@@ -62,10 +87,18 @@ export default class artreg4 extends Component {
           });
         }
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-        this.setState({
-            showValidationpass: false,
-        });
+        if (e.target.id =="panno"){
+          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value });
+        }
+        else{
+          this.setState({ [e.target.name]: e.target.value });
+          this.setState({
+              showValidationpass: false,
+          });
+        }
+      
       }
       componentDidMount(){
         console.log("here");
@@ -407,7 +440,7 @@ export default class artreg4 extends Component {
                 </Row>
                 {this.state.showValidationpass ? (
                           <span className="bg-danger text-center">
-                            please fill mandatory fields
+                            {this.state.message}
                           </span>
                         ) : (
                           <br />

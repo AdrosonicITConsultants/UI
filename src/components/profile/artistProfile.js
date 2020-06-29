@@ -52,6 +52,9 @@ class ArtistProfile extends Component {
           brandPic : "",
           removedprofile : 0,
           removedlogo : 0,
+          showValidationbank : false, 
+          showValidationaddress :false,
+          message : ""
           
 
         };
@@ -194,27 +197,56 @@ class ArtistProfile extends Component {
         })
      }
      handlePdetailEdit2(){
-         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile,this.state.removedprofile).then((response)=>{
+       if((parseFloat(this.state.pincode)>999999 || parseFloat(this.state.pincode)<100000 )&& this.state.pincode!= "")
+      {
+        this.setState({
+          showValidationaddress: true,
+          message : "pincode should be of 6 digits."
+      });
+      }
+      else{
+        TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile,this.state.removedprofile).then((response)=>{
 
-         })
-        this.setState({
-            isPdetail:!this.state.isPdetail
         })
-     }
-      handlebdetEdit(){
-        this.setState({
-            isDetailsEdit:!this.state.isDetailsEdit
-        })
+       this.setState({
+           isPdetail:!this.state.isPdetail
+       });
+      }
     }
-    handlebdetEdit2(){
-        this.setState({
-            isDetailsEdit:!this.state.isDetailsEdit
-        })
-        TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
-            this.state.branch,this.state.ifsccode,this.state.benificiaryname,
-            this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+     handlebdetEdit(){
+       this.setState({
+           isDetailsEdit:!this.state.isDetailsEdit
+       });
 
-            });
+      }
+         
+    
+    handlebdetEdit2(){
+   
+        if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) && this.state.paytmupi != "")
+          {
+            this.setState({
+              showValidationbank: true,
+              message : "paytm number should be of 10 digits."
+          });
+          }
+          else if((parseFloat(this.state.phonepeupi)>9999999999 || parseFloat(this.state.phonepeupi)<1000000000 ) && this.state.phonepeupi != "")
+          {
+            this.setState({
+              showValidationbank: true,
+              message : "phonepe number should be of 10 digits."
+          });
+          }else{
+            this.setState({
+              isDetailsEdit:!this.state.isDetailsEdit
+          });
+            TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
+              this.state.branch,this.state.ifsccode,this.state.benificiaryname,
+              this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+  
+              });
+          }
+      
     }
      handlebEdit(){
         this.setState({
@@ -240,35 +272,80 @@ class ArtistProfile extends Component {
                  productSelected = productSelected + item.productDesc + ", "; 
                 }  
             // console.log(this.state.selectedprods) ;
-            this.setState({
-                prodsel : productSelected
-            });
+            // this.setState({
+            //     prodsel : productSelected
+            // });
             // document.getElementById("prodselected").innerHTML = productSelected;
         }); 
-        this.setState({
-            prodsel : productSelected
-        },()=>{
-            console.log(this.state.selectedprods) ;
-            TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo);
+        
+          
+            this.setState({
+              prodsel : productSelected
+          },()=>{
+              console.log(this.state.selectedprods) ;
+              TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo);
+  
+          });
+  
+          this.setState({
+              isBdetail:!this.state.isBdetail
+          });
 
-        });
-
-        // ()=>{
-        //     console.log("Brand APi called");
-
-        //     console.log(this.state);
-        //    
-        // }
-        this.setState({
-            isBdetail:!this.state.isBdetail
-        })
+          
+       
     }
     
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        if (e.target.id =="ifsccode" ){
+          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value ,
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
+          });
+        }else if (e.target.id =="state"){
+          var stripped = e.target.value.replace(/[^A-Z\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value ,
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
+          });
+        }
+        else if (e.target.id =="bankname"){
+          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value ,
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
+          });
+        }else if (e.target.id =="benificiaryname"){
+          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value ,
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
+          });
+        }else if (e.target.id =="branch"){
+          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          e.target.value = stripped;
+          this.setState({ [e.target.name]: e.target.value ,
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
+          });
+        }else {
+          this.setState({ [e.target.name]: e.target.value });
         this.setState({
-            ischanged : true
+            ischanged : true,
+            showValidationbank: false,
+            showValidationaddress :false,
         });
+        }
+        
       }
       handleDetail(){
         console.log("hdsdj");
@@ -617,17 +694,17 @@ class ArtistProfile extends Component {
                             <Col sm = {{size: "6"}} className="text-right">
                                {this.state.isProfile 
                                ?
-                               <u className="selected">My Details</u> 
+                               <u className="selected fontplay">My Details</u> 
                                 :
-                                <span className="notSelected" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>My Details</span>
+                                <span className="notSelected fontplay" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>My Details</span>
                                 }
                             </Col>
                             <Col sm = {{size: "6"}} className="text-left">
                             {this.state.isProfile
                                ?
-                               <span className="notSelected" style={{"cursor":"pointer" }} onClick={this.handleDetail}>Bank Details</span>
+                               <span className="notSelected fontplay" style={{"cursor":"pointer" }} onClick={this.handleDetail}>Bank Details</span>
                                 :
-                                <u className="selected">Bank Details</u> 
+                                <u className="selected fontplay">Bank Details</u> 
                                 }
                             </Col>
                         </Row>
@@ -735,6 +812,16 @@ class ArtistProfile extends Component {
                                                         name="state"
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
+                                                        <Row noGutters={true} className="ml20">
+                                                        {this.state.showValidationaddress ? (
+                                                                      <span className="bg-danger text-center">
+                                                                        {this.state.message}
+                                                                      </span>
+                                                                    ) : (
+                                                                      <br />
+                                                                    )}
+
+                                                        </Row>
                                                         
                                                  </div>
                                                         }
@@ -865,13 +952,13 @@ class ArtistProfile extends Component {
                                                 </div>
                                                 <div>
                                                 {this.state.isBdetail 
-                                                ?   <div className="font14  mt7">
+                                                ?   <div className="font14  mt7 widthdesc">
                                                     {this.state.branddesc}
                                                     </div>
                                                 :<div>
                                                 <textarea
                                                         id="branddesc"
-                                                        className="form-control bgdis3  BuyerLogin212"
+                                                        className="form-control bgdis34  BuyerLogin212"
                                                         value= {this.state.branddesc}
                                                         placeholder = "branddesc"
                                                         disabled={this.state.isBdetail} 
@@ -947,7 +1034,7 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="number"
                                                         id="accountno"
-                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        className="form-control bgdis33  BuyerLogin21"
                                                         value= {this.state.accountno}
                                                         placeholder = "Account no."
                                                         disabled={this.state.isDetailsEdit} 
@@ -963,7 +1050,7 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="bankname"
-                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        className="form-control bgdis33 BuyerLogin21"
                                                         value= {this.state.bankname}
                                                         placeholder = "Bank Name"
                                                         disabled={this.state.isDetailsEdit} 
@@ -973,13 +1060,13 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    Benificiary Name
+                                                Beneficiary Name
                                                 </div>
                                                 <div>
                                                 <input
                                                         type="text"
                                                         id="benificiaryname"
-                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        className="form-control bgdis33  BuyerLogin21"
                                                         value= {this.state.benificiaryname}
                                                         placeholder = "Benificiary Name"
                                                         disabled={this.state.isDetailsEdit} 
@@ -995,7 +1082,7 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="branch"
-                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        className="form-control bgdis33  BuyerLogin21"
                                                         value= {this.state.branch}
                                                         placeholder = "Branch"
                                                         disabled={this.state.isDetailsEdit} 
@@ -1011,7 +1098,7 @@ class ArtistProfile extends Component {
                                                 <input
                                                         type="text"
                                                         id="ifsccode"
-                                                        className="form-control bgdis3  BuyerLogin21"
+                                                        className="form-control bgdis33  BuyerLogin21"
                                                         value= {this.state.ifsccode}
                                                         placeholder = "IFSC Code"
                                                         disabled={this.state.isDetailsEdit} 
@@ -1043,7 +1130,7 @@ class ArtistProfile extends Component {
                                                                 <input
                                                                         type="text"
                                                                         id="gpayupi"
-                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        className="form-control bgdis33  BuyerLogin21 borderRadius0"
                                                                         value= {this.state.gpayupi}
                                                                         placeholder = "Gpay UPI."
                                                                         disabled={this.state.isDetailsEdit} 
@@ -1067,9 +1154,9 @@ class ArtistProfile extends Component {
                                                                 </div>
                                                                 <div>
                                                                 <input
-                                                                        type="text"
+                                                                        type="number"
                                                                         id="paytmupi"
-                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        className="form-control bgdis33  BuyerLogin21 borderRadius0"
                                                                         value= {this.state.paytmupi}
                                                                         placeholder = "Paytm No."
                                                                         disabled={this.state.isDetailsEdit} 
@@ -1093,9 +1180,9 @@ class ArtistProfile extends Component {
                                                                 </div>
                                                                 <div>
                                                                 <input
-                                                                        type="text"
+                                                                        type="number"
                                                                         id="phonepeupi"
-                                                                        className="form-control bgdis3  BuyerLogin21 borderRadius0"
+                                                                        className="form-control bgdis33  BuyerLogin21 borderRadius0"
                                                                         value= {this.state.phonepeupi}
                                                                         placeholder = "PhonePe No."
                                                                         disabled={this.state.isDetailsEdit} 
@@ -1105,6 +1192,7 @@ class ArtistProfile extends Component {
                                                                 
                                                                 </div>
                                                                 </Col>
+                                                              
                                                                 </Row>
                                                             
 
@@ -1113,12 +1201,26 @@ class ArtistProfile extends Component {
                                                                 
                                                             </Col>
                                                             <div className="vrlinebank"></div>
+                                                           
+                                                            
+                                                        </Row>   
+                                                        <Row noGutters={true} className="text-center">
+                                                        {this.state.showValidationbank ? (
+                                                                      <span className="bg-danger text-center">
+                                                                        {this.state.message}
+                                                                      </span>
+                                                                    ) : (
+                                                                      <br />
+                                                                    )}
 
-                                                        </Row>      
+                                                        </Row>
+
+                                                        
+                                                        
                                                     </div>
                                                     
                                             </Col>
-                                            
+                                           
                                         </Row>
                                                 }
                        <Row noGutters={true}><Col className="letsbuildtext">Let's build the strong future!</Col></Row>                

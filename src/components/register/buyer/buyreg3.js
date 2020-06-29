@@ -13,6 +13,7 @@ export default class buyreg3 extends Component {
           alternatemobno : "",
           designation : "",
           showValidationpass: false,
+          message : "",
           
         };
       }
@@ -21,8 +22,24 @@ export default class buyreg3 extends Component {
         debugger;
         if (this.state.firstname == "" || this.state.mobileno == "") {
             this.setState({
-                showValidationpass: !this.state.showValidationpass,
+                showValidationpass: true,
+                message : "please fill mandatory fields"
+
             });
+          }
+          else if(parseFloat(this.state.mobileno)>9999999999 || parseFloat(this.state.mobileno)<1000000000 )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "mobile number should be of 10 digits."
+          });
+          }
+          else if(parseFloat(this.state.alternatemobno)>9999999999 || parseFloat(this.state.alternatemobno)<1000000000 )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "alternate mobile number should be of 10 digits."
+          });
           }
            else {
              this.props.spd(this.state.firstname,this.state.lastname,this.state.mobileno,this.state.alternatemobno,this.state.designation);
@@ -105,7 +122,6 @@ export default class buyreg3 extends Component {
                   <span
                     style={{
                       fontWeight: "bold",
-                      fontSize: "larger",
                       color: "var(--lightBlack)",
                     }}
                     className="col-xs-10 fontplay"
@@ -242,7 +258,7 @@ export default class buyreg3 extends Component {
                           id="designation"
                           className="form-control form2 BuyerLogin1"
                           value= {this.state.designation}
-
+                          maxLength = "17"
                           name="designation"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -253,7 +269,7 @@ export default class buyreg3 extends Component {
                 </Row>
                 <br></br>
                 {this.state.showValidationpass ? (
-                    <span className="bg-danger">please enter all  mandatory fields</span>
+                    <span className="bg-danger">{this.state.message}</span>
                   ) : (
                     <br />
                   )}           

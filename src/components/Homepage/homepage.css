@@ -271,7 +271,9 @@ body {
     left: 5px !important;
     
 }
-
+.bg-danger2{
+    color:red;
+background: transparent!important;    }
 .bg-danger{
 color:red;
 background-color: white !important;

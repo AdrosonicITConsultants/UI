@@ -161,6 +161,7 @@ body {
 #ck-button input:checked + span {
     /* background-color:#911; */
     color: green;
+    font-weight: 700;
 }
 
 .profileImage {

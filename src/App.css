@@ -19,7 +19,18 @@ body{
   /* background: var(--lightGreen) !important;
   color: var(--mainFont) !important;   */
 }
-
+.light {
+  font-weight: 300!important;
+}
+.regular {
+  font-weight: 400!important;
+}
+.bold {
+  font-weight: 700!important;
+}
+.black {
+  font-weight: 900!important;
+}
 .playfair {
   font-family: var(--PlayfairFont);
 }

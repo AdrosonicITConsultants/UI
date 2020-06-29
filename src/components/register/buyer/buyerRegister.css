@@ -1,9 +1,19 @@
 .ml-6{
     margin-left:48px;
 }
+.brandupload{
+    position: absolute;
+    top: 0.4em;
+    left: 16em;
+}
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
     .ml-6{
         margin-left:48px;
+    }
+    .brandupload{
+        position: absolute;
+        top: 0.4em;
+        left: 23em;
     }
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
@@ -11,7 +21,13 @@
         margin-left:48px;
     }
 }
-
+@media only screen and ( max-width: 1199px ) and ( min-width: 991px ){
+    .brandupload{
+        position: absolute;
+        top: 0.4em;
+        left: 14em;
+    }
+}
 .reg6text {
         color: grey;
     font-family: var(--LatoFont);

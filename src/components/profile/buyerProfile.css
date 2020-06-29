@@ -75,6 +75,16 @@
     display: inline-block!important;
     font-size : 14px!important;  
 }
+.bgdis34 {
+  width: 350px!important;
+  display: inline-block!important;
+  font-size: 18px!important;
+}
+.bgdis33{
+  width:80%!important;
+  display: inline-block!important;
+  font-size : 14px!important;  
+}
 .profiledesig > input[type="text"]:disabled {
     background: transparent;
     border: 2px;
@@ -145,7 +155,7 @@ input[type="number"]:disabled {
 .bdetail > div > input[type="text"]:disabled {
     background: transparent;
     border: 2px;
-    font-size : 14px!important;
+    font-size : 12px!important;
     padding-left: 12px;
     text-align: center;
 }
@@ -254,6 +264,25 @@ input[type="number"]:disabled {
    
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+  .bdetail > div > input[type="text"]:disabled{
+    background: transparent;
+    border: 2px;
+    font-size: 8px!important;
+    padding-left: 12px;
+    text-align: center;
+  }
+  .pocbg1 > div > input[type="text"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size: 10px!important;
+    padding-left: 0px;
+}
+  .pocbg1 > div > input[type="email"]:disabled {
+    background: transparent;
+    border: 2px;
+    font-size: 10px!important;
+    padding-left: 0px;
+}
   .profileImage2 {
     width: 90px!important;
     cursor: pointer;
@@ -322,7 +351,7 @@ input[type="number"]:disabled {
         background: yellow;
         padding: 5px 10px;
         line-height: 24px;
-        font-size: 12px;
+        font-size: 10px;
     }
     .iconsw{
         width:20px;
@@ -330,7 +359,7 @@ input[type="number"]:disabled {
     .bgdis2 {
         width: 65%!important;
         display: inline-block!important;
-        font-size: 12px!important;
+        font-size: 10px!important;
     }
     .mr15 {
         margin-right: 10px;
@@ -362,6 +391,16 @@ input[type="number"]:disabled {
         width: 100%!important;
         display: inline-block!important;
         font-size: 10px!important;
+    }
+    .bgdis34 {
+      width: 270px!important;
+      display: inline-block!important;
+      font-size: 18px!important;
+  }
+    .bgdis33 {
+      width: 100%!important;
+      display: inline-block!important;
+      font-size: 10px!important;
     }
     .pocbg2 {
         background-color: rgba(236, 192, 1, 0.65);
@@ -493,7 +532,7 @@ input[type="number"]:disabled {
     .bdetail > div > input[type="text"]:disabled {
         background: transparent;
         border: 2px;
-        font-size: 22px!important;
+        font-size: 17px!important;
         padding-left: 12px;
         text-align: center;
     }
@@ -502,6 +541,16 @@ input[type="number"]:disabled {
         display: inline-block!important;
         font-size: 18px!important;
     }
+    .bgdis34 {
+      width: 400px!important;
+      display: inline-block!important;
+      font-size: 18px!important;
+  }
+    .bgdis33 {
+      width: 75%!important;
+      display: inline-block!important;
+      font-size: 18px!important;
+  }
     .bdetailsheading {
         font-size: 22px;
     }
@@ -562,9 +611,9 @@ input[type="number"]:disabled {
   
   .pie, .c100 .bar, .c100.p51 .fill, .c100.p52 .fill, .c100.p53 .fill, .c100.p54 .fill, .c100.p55 .fill, .c100.p56 .fill, .c100.p57 .fill, .c100.p58 .fill, .c100.p59 .fill, .c100.p60 .fill, .c100.p61 .fill, .c100.p62 .fill, .c100.p63 .fill, .c100.p64 .fill, .c100.p65 .fill, .c100.p66 .fill, .c100.p67 .fill, .c100.p68 .fill, .c100.p69 .fill, .c100.p70 .fill, .c100.p71 .fill, .c100.p72 .fill, .c100.p73 .fill, .c100.p74 .fill, .c100.p75 .fill, .c100.p76 .fill, .c100.p77 .fill, .c100.p78 .fill, .c100.p79 .fill, .c100.p80 .fill, .c100.p81 .fill, .c100.p82 .fill, .c100.p83 .fill, .c100.p84 .fill, .c100.p85 .fill, .c100.p86 .fill, .c100.p87 .fill, .c100.p88 .fill, .c100.p89 .fill, .c100.p90 .fill, .c100.p91 .fill, .c100.p92 .fill, .c100.p93 .fill, .c100.p94 .fill, .c100.p95 .fill, .c100.p96 .fill, .c100.p97 .fill, .c100.p98 .fill, .c100.p99 .fill, .c100.p100 .fill {
     position: absolute;
-    border: 0.09em solid #000000;
-    width: 0.82em;
-    height: 0.82em;
+    border: 0.05em solid #000000;
+    width: 0.9em;
+    height: 0.9em;
     clip: rect(0em, 0.5em, 1em, 0em);
     border-radius: 50%;
     -moz-transform: rotate(0deg);

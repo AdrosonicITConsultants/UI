@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logos from "../../assets";
 import { Row, Col , Container, Button} from 'reactstrap';
-
+import isEmail from "validator/lib/isEmail";
 import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
@@ -47,6 +47,10 @@ debugger;
            companyname : this.props.user.companyDetails.companyName,
            landmark : this.props.user.addressses[1].landmark,
            showValidationconfirmpass : false,
+           showValidationBdetail : false,
+           showValidationPOCdetail : false,
+
+           message : "enter correct details",
            selectedBrandFile: [],
            brandPic : "",
            removedlogo : 0 ,
@@ -60,8 +64,12 @@ debugger;
         this.handleEdit = this.handleEdit.bind(this);
         this.handleconEdit = this.handleconEdit.bind(this);
         this.handledetEdit = this.handledetEdit.bind(this);
+        this.handledetEdit2 = this.handledetEdit2.bind(this);
+
         this.handleaddEdit = this.handleaddEdit.bind(this);
         this.handlepocEdit = this.handlepocEdit.bind(this);
+        this.handlepocEdit2 = this.handlepocEdit2.bind(this);
+
         this.checkSave = this.checkSave.bind(this);
         this.handleCountry = this.handleCountry.bind(this);
 
@@ -130,6 +138,32 @@ debugger;
             this.checkSave();
         });
     }
+    handlepocEdit2(){
+        const emailcheck = isEmail;
+
+        if (this.state.pocemail != "" && !emailcheck(this.state.pocemail))
+                     {
+                      this.setState({
+                        showValidationPOCdetail: true,
+                        message : "POC Email not valid."
+
+                      });
+                    }
+                     else if((parseFloat(this.state.pocmobile)>9999999999 || parseFloat(this.state.pocmobile)<1000000000) && this.state.pocmobile !="" )
+                     {
+                      this.setState({
+                        showValidationPOCdetail: true,
+                        message : "POC mobile number should be of 10 digits."
+                    });
+                    }else{
+                        this.setState({
+                            isPod:!this.state.isPod
+                        },()=>{
+                            this.checkSave();
+                        });
+                    }
+      
+    }
     handleconEdit(){
         this.setState({
             isAcon:!this.state.isAcon
@@ -147,12 +181,78 @@ debugger;
         });
         
     }
+    handledetEdit2(){
+                    if(this.state.panno.length > 10 || this.state.panno.length < 10)
+                          {                      
+                            this.setState({
+                                showValidationBdetail: true,
+                              message : "PAN number should be of 10 characters."
+                          });
+                
+                          
+                    }else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
+                          { 
+                            this.setState({
+                                showValidationBdetail: true,
+                              message : "GST number should be of 15 characters."
+                          });
+                
+                          
+                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21) && this.state.cinno != "")
+                          {                     
+
+                            this.setState({
+                                showValidationBdetail: true,
+                                message : "CIN should be of 21 characters."
+                          });
+                    }else{
+
+                            this.setState({
+                                isBdetail:!this.state.isBdetail
+                                
+                            },()=>{
+                                this.checkSave();
+                            });
+                          }
+          
+        
+    }
     handleChange(e) {
+        if (e.target.id =="gstno"){
+            var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+            e.target.value = stripped;
+            this.setState({ [e.target.name]: e.target.value });
+            this.setState({
+                ischanged : true,
+                showValidationBdetail : false,     
+                showValidationPOCdetail :false       });
+          }
+          else if (e.target.id =="panno"){
+            var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+            e.target.value = stripped;
+            this.setState({ [e.target.name]: e.target.value });
+            this.setState({
+                ischanged : true,
+                showValidationBdetail : false,   
+                showValidationPOCdetail :false         });
+          }
+          else if (e.target.id =="cinno"){
+            var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+            e.target.value = stripped;
+            this.setState({ [e.target.name]: e.target.value });
+            this.setState({
+                ischanged : true,
+                showValidationBdetail : false,  
+                showValidationPOCdetail :false          });
+          }
+          else{
     this.setState({ [e.target.name]: e.target.value });
     this.setState({
-        ischanged : true
+        ischanged : true,
+        showValidationBdetail : false,
+        showValidationPOCdetail :false
     });
-    
+}
     }
     checkSave(){
         if(this.state.isDaddress && this.state.isDesc && this.state.isPod && this.state.isBdetail && this.state.ischanged && this.state.isAcon)
@@ -430,11 +530,12 @@ debugger;
                                                         </div>
                                                         <div className="font14 fw600 mt7">
                                                             {this.props.user.addressses[0].line1}
-                                                            {" " + this.props.user.addressses[0].line2}
-                                                            {" " + this.props.user.addressses[0].street}
-                                                            {" " + this.props.user.addressses[0].city}
-                                                            {" " + this.props.user.addressses[0].pincode}
-                                                            {" " + this.props.user.addressses[0].state}
+                                                            {this.props.user.addressses[0].line2 != "" ? ", " + this.props.user.addressses[0].line2 : " "}
+                                                            {this.props.user.addressses[0].street != "" ? ", " + this.props.user.addressses[0].street : " "}
+                                                            {this.props.user.addressses[0].city != "" ? ", " + this.props.user.addressses[0].city : " "}
+                                                            {this.props.user.addressses[0].pincode != "" ? ", " + this.props.user.addressses[0].pincode : " "}
+                                                            {this.props.user.addressses[0].state != "" ? ", " + this.props.user.addressses[0].state : " "}
+                                                          
 
                                                             
                                                         </div>
@@ -499,15 +600,17 @@ debugger;
                                                                             src={logos.edit}
                                                                             className="editbutton"
                                                                             style={{"cursor":"pointer" ,
-                                                                            "position" : "absolute"}}
+                                                                            "position" : "absolute",
+                                                                            "left " : "282px"}}
                                                                             onClick={this.handledetEdit}
                                                                     ></img> : 
                                                                     <img
                                                                             src={logos.done}
                                                                             className="editbutton"
                                                                             style={{"cursor":"pointer",
-                                                                            "position" : "absolute"}}
-                                                                            onClick={this.handledetEdit}
+                                                                            "position" : "absolute",
+                                                                            "left " : "282px"}}
+                                                                            onClick={this.handledetEdit2}
                                                                     ></img>}
                                             </div>
                                             <Col sm = {{size: "4"}} className="bdetailsheading"> 
@@ -525,7 +628,7 @@ debugger;
 
                                             
                                             </Col>
-                                            <Col sm = {{size: "4"}} className="bdetailsheading"> 
+                                            <Col sm = {{size: "5"}} className="bdetailsheading"> 
                                             CIN N0.<br></br>
 
                                             <input
@@ -539,7 +642,7 @@ debugger;
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
                                             </Col>
-                                            <Col sm = {{size: "4"}} className="bdetailsheading">
+                                            <Col sm = {{size: "3"}} className="bdetailsheading">
                                             PAN N0.<br></br>
 
                                             <input
@@ -553,6 +656,16 @@ debugger;
                                                         onChange={(e) => this.handleChange(e)}
                                                         /> 
                                             </Col>
+                                            <Row noGutters={true} className="ml20">
+                                            {this.state.showValidationBdetail ? (
+                                                            <span className="bg-danger2 text-center">
+                                                            {this.state.message}
+                                                            </span>
+                                                        ) : (
+                                                            <br />
+                                                        )}
+
+                                            </Row>
 
                                         </Row>
                                         <hr className="hrlinep2"></hr>
@@ -573,7 +686,7 @@ debugger;
                                                                             className="poctick editbutton"
                                                                             style={{"cursor":"pointer",
                                                                             "position" : "absolute"}}
-                                                                            onClick={this.handlepocEdit}
+                                                                            onClick={this.handlepocEdit2}
                                                                     ></img>}
                                                 
                                                 <hr className="hrlinep3"></hr>
@@ -625,6 +738,14 @@ debugger;
                                                         /> 
                                                     
                                                 </div>
+                                                <Row noGutters={true} className="ml20">
+                                            {this.state.showValidationPOCdetail ? (
+                                                            <span className="bg-danger2 text-center">
+                                                            {this.state.message}
+                                                            </span>
+                                                        ) : (<div></div>) }
+
+                                            </Row>
                                             </Col>
                                             
                                             <Col sm = {{size: "6"}} className="pocbg2">
@@ -654,11 +775,11 @@ debugger;
                                                 ? <div>
                                                     <div className="font14 fw600 mt7">
                                                         {this.state.line1}
-                                                        {" " + this.state.line2}
-                                                        {" " + this.state.street}
-                                                        {" " + this.state.city}
-                                                        {" " + this.state.pincode}
-                                                        {" " + this.state.state}
+                                                        {this.state.line2 != "" ? ", " + this.state.line2 : ""}
+                                                        {this.state.street != "" ? ", " + this.state.street : ""}
+                                                        {this.state.city != "" ? ", " + this.state.city : ""}
+                                                        {this.state.pincode != "" ? ", " + this.state.pincode : ""}
+                                                        {this.state.state != "" ? ", " + this.state.state : ""}
                                                         <br>
                                                         </br>
                                                         {this.state.landmark}

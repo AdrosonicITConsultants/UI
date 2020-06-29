@@ -15,7 +15,7 @@ import BuyerProfile from "../src/components/profile/buyerProfile";
 import AddProduct from "../src/components/Products/addProduct";
 import MyProfile from "../src/components/profile/myProfile";
 import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
-
+import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
 
 
 import i18next from "i18next";
@@ -38,6 +38,8 @@ function App() {
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <Route path="/Artisanself" component={ArtistSelfDesign} />
+          <Route path="/Antaran" component={AntaranCoDesign} />
+          
         </Switch>
       </Router>
     </React.Fragment>

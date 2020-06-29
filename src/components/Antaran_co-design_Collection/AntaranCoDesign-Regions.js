@@ -5,65 +5,33 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './ArtisanselfDesign.css';
-import TTCEapi from '../../services/API/TTCEapi';
+import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 
-export default class ArtistSelfdesignRegions extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-     
-      cluster : [],
-      value : false,
-                                         
-     
-    };
-    
-  }
-  componentDidMount(){
-   
-     TTCEapi.getClusters().then((response)=>{
-      this.setState({cluster : response.data.data},()=>{
-          console.log(this.state.cluster);
-     
-          // console.log(this.props.user);
-      });
-  });
-  }
+export default class AntaranCoDesignRegion extends Component {
     render() {
         return (
          
            <Container>
-             {this.state.cluster ? ( ( this.state.cluster.map((data) => (
-                <Row noGutters="true">
-                {/* Card1 */}
-              <Col xs={12} sm={6} md={6}>
-                <div className="card Cardlayout">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text"> 
-                  {data.desc}
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
-              </Row>
-              ) ) 
-            )): null
-            }
-                
-            
-  
-    {/* <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+  <div class="row">
+      {/* Card1 */}
+    <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
+      <div className="card Cardlayout">
+      <div class="card-block">
+        <h4 class="card-title">Proud</h4>
+        <p class="card-text">Maniabandhan</p>
+      </div>
+      <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
+       <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
+    </div>
+    </div>
+  {/* Card2 */}
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
         <h4 class="card-title">Sober</h4>
@@ -78,7 +46,7 @@ export default class ArtistSelfdesignRegions extends Component {
         </div>
     </div>
     </div>
-  
+  {/* Card3 */}
   <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
@@ -94,11 +62,11 @@ export default class ArtistSelfdesignRegions extends Component {
         </div>
     </div>
     </div>
-</div>  
+</div>
 
-
+{/* --------------Row 2------------------ */}
 <div class="row rowmargintop">
-  
+      {/* Card1 */}
     <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
@@ -114,7 +82,7 @@ export default class ArtistSelfdesignRegions extends Component {
         </div>
     </div>
     </div>
- 
+  {/* Card2 */}
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
@@ -130,7 +98,7 @@ export default class ArtistSelfdesignRegions extends Component {
         </div>
     </div>
     </div>
- 
+  {/* Card3 */}
   <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
@@ -145,10 +113,10 @@ export default class ArtistSelfdesignRegions extends Component {
           </div>
         </div>
     </div>
-    </div> */}
+    </div>
     
    
-
+</div>
 {/* Row3 */}
 <Row noGutters="true" >
     <Col sm={{size:"5"}}>
@@ -161,7 +129,6 @@ export default class ArtistSelfdesignRegions extends Component {
     {/* <hr className="hrlineasd "></hr> */}
      </Col>
 </Row>
- 
 </Container> 
 
  )

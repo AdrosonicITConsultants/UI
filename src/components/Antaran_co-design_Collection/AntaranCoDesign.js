@@ -5,15 +5,14 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './ArtisanselfDesign.css';
+import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";
 import { memoryHistory, browserHistory } from "../../helpers/history";
-import ArtistSelfDesignCategories from './Artisanselfdesign-Categories';
-import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
-import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
-class ArtistSelfDesign extends Component {
+import AntaranCoDesignCategories from './AntaranCoDesign-Categories';
+import AntaranCoDesignNavbar from "./AntaranCoDesign-Navbar";
+class AntaranCoDesign extends Component {
     constructor(props) {
         super(props);
 
@@ -23,14 +22,7 @@ class ArtistSelfDesign extends Component {
         };
       
     }
-   
-     
-     
-    // handleSelect(){
-    //     this.setState({
-    //         isSelected:!this.state.isSelected
-    //     })
-    // }
+  
     render() {
         return (
             <React.Fragment>
@@ -40,23 +32,25 @@ class ArtistSelfDesign extends Component {
                     <Col sm={{size:"6"}} className="Col6">
                   <div noGutters="true">
                         <Col sm={{size:12}} className="Asdh1">
-                          <h1>  Artisan <br/> Self Design </h1>
+                          <h1>  Antaran <br/> Co-Design </h1>
                             <p>Collection</p>
+                                        <img
+                                        src={logos.logo2}></img>
                         </Col>
                     </div>
-             
+            
             
                   </Col>
                   <Col sm={{size:"6"}} >
                     
-                  <img className="Asdbg" src={logos.Ajrakhpur}  alt="Card image cap"/>
+                  <img className="Asdbg2" src={logos.Ajrakhpur1}  alt="Card image cap"/>
                   </Col></Row>
                   <Row noGutters="true">
                         <Col sm={{size:12}} className="ViewColtext">
                            <p>View Collection by</p> 
                             </Col>
             </Row>
-                  <ArtisanselfdesignNavbar/>
+                  <AntaranCoDesignNavbar/>
                   <Footer/>
               </Container>
              
@@ -66,4 +60,4 @@ class ArtistSelfDesign extends Component {
         )
     }
 }
-export default ArtistSelfDesign;
+export default AntaranCoDesign;

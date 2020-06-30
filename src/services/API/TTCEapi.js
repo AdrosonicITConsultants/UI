@@ -186,9 +186,63 @@ class TTCEapi {
 
       });
   }
+
+
+  static editProduct(file1, file2 = null, file3 = null, productData) {
+    debugger;
+    let url = ApiUrl + "/product/edit/product";
+    var data = new FormData();
+    data.append("file1", file1);
+    data.append("file2", file2);
+    data.append("file3", file3);
+    data.append("productData", JSON.stringify(productData));
+
+
+    // var data = {
+    //   file1: file1,
+    //   file2: file2,
+    //   file3: file3,
+    //   productData: productData,
+    //   // pin: weaverPin,
+    // };
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .put(url, data, config)
+      .then((response) => {
+
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
   //#endregion
 
   //#region get methods
+
+  static getProduct(id) {
+    let url = ApiUrl + "/product/getProduct/"+id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
+
+
     static getProducts(){
       let url = ApiUrl + "/product/getAllProducts";
 

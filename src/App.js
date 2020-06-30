@@ -13,6 +13,7 @@ import PrivateRoute from "../src/services/utils/PrivateRoute";
 import ArtistProfile from "../src/components/profile/artistProfile";
 import BuyerProfile from "../src/components/profile/buyerProfile";
 import AddProduct from "../src/components/Products/addProduct";
+import EditProduct from "../src/components/Products/editProduct";
 import MyProfile from "../src/components/profile/myProfile";
 import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
 import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
@@ -39,6 +40,8 @@ function App() {
           <PrivateRoute exact path="/ProductCategories" component={ProductCategories} />
 
           <Route path="/Artisanself" component={ArtistSelfDesign} />
+          <Route path="/EditProduct" component={EditProduct} />
+
           <Route path="/Antaran" component={AntaranCoDesign} />
           
         </Switch>

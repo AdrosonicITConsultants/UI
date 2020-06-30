@@ -67,7 +67,8 @@ export default class forgotpass2 extends Component {
               className="vcenter "
             >
               <div className="demoa text-center" noGutters={true}>
-                <br></br>
+                <br>
+                </br>
                 <Row noGutters={true} className="">
                   <div className="col-xs-6">
                     <img

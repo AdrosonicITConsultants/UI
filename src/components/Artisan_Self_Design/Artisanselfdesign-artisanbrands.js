@@ -28,12 +28,16 @@ import Footer from "../footer/footer";
         <React.Fragment>
           <Row noGutters="true">
             <Col sm={{size:"12"}}>
-            <select className="SelectCategory" id="Cluster">
-    <option value="1">All Cluster</option>
-    <option value="2">Brands</option>
-    <option value="3">Category</option>
-    <option value="4">Designs</option>
-  </select></Col>
+            <select  className="SelectCategory" >
+    <option value="1" selected disabled>All Cluster</option>
+<option value="2" >Maniabandhan</option>
+    <option value="3">Gopalpur</option>
+    <option value="4">Kamrup</option>
+    <option value="5">Nalbari</option>
+  </select>
+  
+  
+  </Col>
           </Row>
         {/* Row 1 */}
            <div class="row">
@@ -44,15 +48,27 @@ import Footer from "../footer/footer";
         <p class="card-text">Boat</p>
       </div>
       <img className="card-img-top-brand" src={logos.Boat}  alt="Card image cap"/>
+      <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
     </div>
     </div>
   {/* Card2 */}
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
       <div className="card Cardlayout">
       <div class="card-block">
-        <p class="card-text">FLower</p>
+        <p class="card-text">Rose</p>
       </div>
       <img className="card-img-top-brand" src={logos.Flower}  alt="Card image cap"/>
+      <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
     </div>
     </div>
   {/* Card3 */}
@@ -62,6 +78,12 @@ import Footer from "../footer/footer";
         <p class="card-text">Sun</p>
       </div>
       <img className="card-img-top-brand" src={logos.Sun}  alt="Card image cap"/>
+      <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
     </div>
     </div>
     </div>
@@ -74,6 +96,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Smile</p>
           </div>
           <img className="card-img-top-brand" src={logos.Smile}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
       {/* Card2 */}
@@ -83,6 +111,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Sunshine</p>
           </div>
           <img className="card-img-top-brand" src={logos.Sun2}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
       {/* Card3 */}
@@ -92,6 +126,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Panda</p>
           </div>
           <img className="card-img-top-brand" src={logos.Panda}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
         </div>
@@ -108,6 +148,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Sun</p>
           </div>
           <img className="card-img-top-brand" src={logos.Sun}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
       {/* Card2 */}
@@ -117,6 +163,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Panda</p>
           </div>
           <img className="card-img-top-brand" src={logos.Panda}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
       {/* Card3 */}
@@ -126,6 +178,12 @@ import Footer from "../footer/footer";
             <p class="card-text">Boat</p>
           </div>
           <img className="card-img-top-brand" src={logos.Boat}  alt="Card image cap"/>
+          <div class="effect-text">
+          <div class="effect-btn">
+            <h2>EXPLORE MORE</h2>
+            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
         </div>
         </div>
         </div>

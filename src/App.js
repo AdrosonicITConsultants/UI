@@ -16,7 +16,7 @@ import AddProduct from "../src/components/Products/addProduct";
 import EditProduct from "../src/components/Products/editProduct";
 import MyProfile from "../src/components/profile/myProfile";
 import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
-
+import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
 
 
 import i18next from "i18next";
@@ -41,6 +41,8 @@ function App() {
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />
 
+          <Route path="/Antaran" component={AntaranCoDesign} />
+          
         </Switch>
       </Router>
     </React.Fragment>

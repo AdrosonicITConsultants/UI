@@ -102,7 +102,7 @@ import dupatta from "./dupatta.jpg";
 import stole from "./stole.jpg";
 
 import Ajrakhpur from "./Ajrakhpur-2.png";
-
+import Ajrakhpur1 from "./Ajrakhpur-1.jpg";
 import Panda from "./Panda.jpg";
 import Sun from "./Sun.png";
 import Sun2 from "./Sun2.jpg";
@@ -116,6 +116,7 @@ import Smile from "./Smile.jpg";
 
 
 export default {
+  Ajrakhpur1,
   Maniabandhan,
   Gopalpur,
   Vengtikari,

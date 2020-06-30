@@ -1,13 +1,18 @@
 .Asdh1{
-    background-color: black;
+    /* background-color: black; */
     width: 100%;
-    height: 87vh;
+    height: 65vh;
     color: white;
+   margin-top: 130px;
+    
+}
+.asdthreadbg{
+    background-color: black;
     background-image: url("../../assets/Asdbg.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    
+        height: 87vh;
 }
 .Asdh1 h1{
     font-size: 70px;
@@ -27,7 +32,6 @@
     font-weight: 100;
     font-family: auto;
     
-   
 }
 .ViewColtext p{
       margin-top: 30px;
@@ -37,7 +41,7 @@
     color: lightslategray;
 }
 .Vcheading h1{
-    font-size: 37px;
+    font-size: 35px;
     /* font-weight: 700; */
     font-family: auto;
     text-align: left;
@@ -48,31 +52,28 @@
     color: Black !important;
     font-weight: 700; 
     text-align: left;
+    font-size: 37px;
 }
 .Asdbg{
     height: 87vh;
-    width: 100%;
+    /* width: 100%; */
 }
 .SelectCategory{
-    width: 96%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid lightgray;
-    font-size: 15px;
+  width: 96%;
+  padding: 13px 13px 13px 13px;
+  margin-bottom: 15px;
+  border: 1px solid lightgray;
+  font-size: 19px;
+  font-family: auto;
 }
 .SelectCategory option{
-    font-size: 15px;
-}
+  font-size: 25px;
+ }
 /* --------Artisian Self Design Region Css start------------ */
 .card-img-top{
     width: 50vh;
     height: 223px;
-    padding: 0px 5px 0px 5px;
-
-}
-.Cardlayout{
-    width: 50vh;
-    box-shadow: 2px 2px 4px 4px lightgrey;
+    /* padding: 0px 5px 0px 5px; */
 }
 .card-title{
 font-size: 17px;
@@ -111,17 +112,24 @@ font-family: auto;
   }
 @media only screen and ( max-width: 768px ) and ( min-width: 426px ){
     .Cardlayout{
-        width: 45vh;
+        width: 45vh !important;
            }
            .card-img-top{
             width: 45vh;
         }
         .Vcheading h1{
             font-size: 27px;}
+            .ExploreBtn{
+                width: 43vh !important;}
+        .btnexp2{
+            margin-right: 97px !important;
+        }
 }
 @media only screen and ( max-width: 1024px ) and ( min-width: 769px ){
     .Vcheading h1{
-        font-size: 35px;}
+        font-size: 35px;
+      margin-left: 10px;}
+    
 }
 /* --------Artisian Self Design Region Css End------------ */
 .Rowtop{
@@ -133,3 +141,90 @@ font-family: auto;
     height:170px;
     padding: 0px 5px 0px 5px;
 }
+/* ----------------Card hover----------------- */
+
+  .Cardlayout {
+    position: relative;
+    margin-bottom: 30px;
+    width: 50vh;
+    box-shadow: 2px 2px 4px 4px lightgrey;
+    overflow: hidden;
+    background-color: white;
+
+  }
+
+  .Cardlayout .effect-img {
+    position: relative;
+    font-size: 0;
+    overflow: hidden;
+  }
+  
+  .Cardlayout .effect-img img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: scale(1.2);
+    bottom: -25px;
+    transition: .5s;
+  }
+  
+  .Cardlayout:hover .effect-img img {
+    bottom: 0;
+  }
+  
+  .Cardlayout .effect-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, .2);
+    opacity: 0;
+    transition: .5s;
+  }
+  
+  .Cardlayout:hover .effect-text {
+    top: 0;
+    opacity: 1;
+  }
+  
+  
+  
+  .Cardlayout .effect-btn {
+    position: absolute;
+    width: 100%;
+    padding: 15px 7.5px;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+  }
+  
+  .Cardlayout .effect-text h2 {
+   
+    display: inline-block;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    float: left;
+    margin: 10px 0.5px 0px 6px;
+}
+  
+  .Cardlayout .effect-btn .btn {
+    position: relative;
+    display: inline-block;
+    float: right;
+    height: 35px;
+    padding: 7px 15px;
+    margin: 0 7.5px;
+    color: white;
+    /* background: #333333; */
+    text-decoration: none;
+    border: none;
+  }
+
+  
+
+  /* -----Dropdown css-------- */
+ 

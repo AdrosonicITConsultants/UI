@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@toast-ui/react-image-editor": "^1.2.0",
     "axios": "^0.19.2",
+    "base64-img": "^1.0.4",
     "bootstrap": "^3.4.1",
     "glamor": "^2.20.40",
     "i18next": "^19.4.5",

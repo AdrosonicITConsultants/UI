@@ -13,6 +13,7 @@ import PrivateRoute from "../src/services/utils/PrivateRoute";
 import ArtistProfile from "../src/components/profile/artistProfile";
 import BuyerProfile from "../src/components/profile/buyerProfile";
 import AddProduct from "../src/components/Products/addProduct";
+import EditProduct from "../src/components/Products/editProduct";
 import MyProfile from "../src/components/profile/myProfile";
 import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
 
@@ -38,6 +39,8 @@ function App() {
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <Route path="/Artisanself" component={ArtistSelfDesign} />
+          <Route path="/EditProduct" component={EditProduct} />
+
         </Switch>
       </Router>
     </React.Fragment>

@@ -174,11 +174,11 @@ browserHistory.push("/MyProfile");
                 </button>
               ) : (
                 <button
-                onClick={() => {
-browserHistory.push("/AddProduct");
-
-                }}
-                className="navButtonA navbarTransparent navbtn1">
+                  onClick={() => {
+                    browserHistory.push("/AddProduct");
+                  }}
+                  className="navButtonA navbarTransparent navbtn1"
+                >
                   <img
                     className="navButtonImgA"
                     src={logos.addnewProduct}
@@ -213,9 +213,7 @@ browserHistory.push("/AddProduct");
                       className="navButtonImg"
                       src={logos.myOrder}
                     ></img>
-                    <span
-                      className="myorder1 myorderwidth col-md-12 col-sm-12"
-                    >
+                    <span className="myorder1 myorderwidth col-md-12 col-sm-12">
                       My Orders
                     </span>
                   </>
@@ -314,17 +312,27 @@ browserHistory.push("/AddProduct");
               )}
             </li>
             <li className="menu-item">
-              <a
-                href="#"
-               
-              >
-                {console.log(user.profilePic!= "")}
-                {console.log(user.profilePic!= null)}
-                {userTypeId === 1 ?
-              
-                  (  (user.profilePic != null && user.profilePic != "") ? <img className="navProfileA" src={ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic}></img> : <img src={logos.usernamelogo}></img>)
-             : <img src={logos.usernamelogo}></img>}
-               
+              <a href="#">
+                {console.log(user.profilePic != "")}
+                {console.log(user.profilePic != null)}
+                {userTypeId === 1 ? (
+                  user.profilePic != null && user.profilePic != "" ? (
+                    <img
+                      className="navProfileA"
+                      src={
+                        ImageUrl +
+                        "User/" +
+                        user.id +
+                        "/ProfilePics/" +
+                        user.profilePic
+                      }
+                    ></img>
+                  ) : (
+                    <img src={logos.usernamelogo}></img>
+                  )
+                ) : (
+                  <img src={logos.usernamelogo}></img>
+                )}
               </a>
               <ol className="sub-menu">
                 <li
@@ -371,16 +379,19 @@ browserHistory.push("/AddProduct");
 
                   <a href="/">Transactions</a>
                 </li>
-                <li className="menu-item">
-                  <span className="col-md-2  col-xs-2  col-sm-2">
-                    <img
-                      style={{ width: "15px" }}
-                      src={logos.receipticonH}
-                    ></img>
-                  </span>
+                {userTypeId == 2 ? (
+                  <li className="menu-item">
+                    <span className="col-md-2  col-xs-2  col-sm-2">
+                      <img
+                        style={{ width: "15px" }}
+                        src={logos.receipticonH}
+                      ></img>
+                    </span>
 
-                  <a href="/">My orders</a>
-                </li>
+                    <a href="/">My orders</a>
+                  </li>
+                ) : null}
+
                 <li className="menu-item">
                   <span className="col-md-2  col-xs-2  col-sm-2">
                     <img

@@ -4,13 +4,16 @@ import { Row, Col } from "reactstrap";
 import logos from "../../assets";
 import "./product.css";
 import TTCEapi from "../../services/API/TTCEapi";
+import { browserHistory } from "../../helpers/history";
 
 
 
 
  class Product extends Component {
    editProduct = (Product)=>{
+     debugger;
        console.log(Product);
+     browserHistory.push("./EditProduct?ProductId=" + Product.id)
    }
    render() {
      debugger;
@@ -68,7 +71,7 @@ import TTCEapi from "../../services/API/TTCEapi";
                  <div className="col-12 mx-auto col-sm-12 col-md-12 mt10 col-lg-12">
                    <div className="hrline2PC "></div>
                    <img className="scissor" src={logos.scissor}></img>
-                   <span className="MadetoOrder">Made to order</span>
+                   <span className="MadetoOrder">Available</span>
                    <div className="hrline3PC"></div>
                  </div>
                </>
@@ -87,7 +90,7 @@ import TTCEapi from "../../services/API/TTCEapi";
                  ></img>
                  <div class="middle">
                    <div
-                     onClick={(productList) => this.editProduct(productList)}
+                     onClick={() => this.editProduct(productList)}
                      class="text"
                    >
                      Edit product

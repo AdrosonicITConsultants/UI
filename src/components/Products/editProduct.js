@@ -287,12 +287,11 @@ export default class addProduct extends Component {
                                             length: productData.length,
                                             width: productData.width,
                                           });
-
                                           productData.relProduct.map((prod) => {
                                             let relatedProductTemp = this.state.savedrelatedProduct.find(
                                               (e) =>
                                                 e.productTypeId ==
-                                                prod.productTypeid
+                                                prod.productTypeId
                                             );
                                             relatedProductTemp["length"] =
                                               prod.length;

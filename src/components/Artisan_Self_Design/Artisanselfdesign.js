@@ -57,9 +57,9 @@ class ArtistSelfDesign extends Component {
                             </Col>
             </Row>
                   <ArtisanselfdesignNavbar/>
-                  <Footer/>
               </Container>
-             
+              <Footer/>
+
              
                 </React.Fragment>
               

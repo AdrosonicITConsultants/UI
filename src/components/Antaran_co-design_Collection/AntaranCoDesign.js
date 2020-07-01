@@ -51,9 +51,9 @@ class AntaranCoDesign extends Component {
                             </Col>
             </Row>
                   <AntaranCoDesignNavbar/>
-                  <Footer/>
               </Container>
-             
+              <Footer/>
+
              
                 </React.Fragment>
               

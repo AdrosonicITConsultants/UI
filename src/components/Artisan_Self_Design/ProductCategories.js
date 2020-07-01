@@ -13,6 +13,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import ArtistSelfDesignCategories from './Artisanselfdesign-Categories';
 import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
 import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
+import TTCEapi from '../../services/API/TTCEapi';
 class ProductCategories extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,11 @@ class ProductCategories extends Component {
          
         };
       
+    }
+    componentDidMount(){
+        TTCEapi.getProductCategoryProducts(1).then((response)=>{
+
+        })
     }
 
     render() {

@@ -37,7 +37,7 @@ function App() {
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
-          <PrivateRoute exact path="/ProductCategories" component={ProductCategories} />
+          <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
 
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />

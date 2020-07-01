@@ -54,10 +54,7 @@ debugger;
            selectedBrandFile: [],
            brandPic : "",
            removedlogo : 0 ,
-
-
-
-                                                 
+                                                         
          
         };
         
@@ -182,15 +179,18 @@ debugger;
         
     }
     handledetEdit2(){
-                    if(this.state.panno.length > 10 || this.state.panno.length < 10)
+        var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+                    if(!regex.test(this.state.panno.toUpperCase()))
                           {                      
                             this.setState({
                                 showValidationBdetail: true,
-                              message : "PAN number should be of 10 characters."
+                              message : "Invalid PAN Number"
                           });
                 
                           
-                    }else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
+                    }
+                    
+                    else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
                           { 
                             this.setState({
                                 showValidationBdetail: true,
@@ -228,13 +228,14 @@ debugger;
                 showValidationPOCdetail :false       });
           }
           else if (e.target.id =="panno"){
-            var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
-            e.target.value = stripped;
-            this.setState({ [e.target.name]: e.target.value });
-            this.setState({
+             var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+             e.target.value = stripped;
+             this.setState({ [e.target.name]: e.target.value });
+             this.setState({
                 ischanged : true,
                 showValidationBdetail : false,   
                 showValidationPOCdetail :false         });
+               
           }
           else if (e.target.id =="cinno"){
             var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')

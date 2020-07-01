@@ -16,6 +16,7 @@ class buyerLanding extends Component {
         break;
       case "New":
         console.log(to);
+         browserHistory.push("./Antaran");
 
         break;
       default:

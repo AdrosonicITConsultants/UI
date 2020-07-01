@@ -52,7 +52,7 @@
     color: Black !important;
     font-weight: 700; 
     text-align: left;
-    font-size: 37px;
+    font-size: 39px;
 }
 .Asdbg{
     height: 87vh;
@@ -71,7 +71,7 @@
  }
 /* --------Artisian Self Design Region Css start------------ */
 .card-img-top{
-    width: 50vh;
+    width: 100%;
     height: 223px;
     /* padding: 0px 5px 0px 5px; */
 }
@@ -112,15 +112,15 @@ font-family: auto;
   }
 @media only screen and ( max-width: 768px ) and ( min-width: 426px ){
     .Cardlayout{
-        width: 45vh !important;
+        width: 100% !important;
            }
            .card-img-top{
-            width: 45vh;
+            width: 100%;
         }
         .Vcheading h1{
             font-size: 27px;}
             .ExploreBtn{
-                width: 43vh !important;}
+                width: 43% !important;}
         .btnexp2{
             margin-right: 97px !important;
         }
@@ -137,7 +137,7 @@ font-family: auto;
 }
 
 .card-img-top-brand{
-    width:40vh;
+    width:40%;
     height:170px;
     padding: 0px 5px 0px 5px;
 }
@@ -146,7 +146,7 @@ font-family: auto;
   .Cardlayout {
     position: relative;
     margin-bottom: 30px;
-    width: 50vh;
+    width: 95%;
     box-shadow: 2px 2px 4px 4px lightgrey;
     overflow: hidden;
     background-color: white;
@@ -180,7 +180,7 @@ font-family: auto;
     top: 50%;
     left: 0;
     text-align: center;
-    background: rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, .07);
     opacity: 0;
     transition: .5s;
   }

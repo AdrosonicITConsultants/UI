@@ -23,6 +23,9 @@ class ProductCategories extends Component {
         };
       
     }
+    componentWillMount(){
+        
+    }
     componentDidMount(){
         TTCEapi.getProductCategoryProducts(1).then((response)=>{
 

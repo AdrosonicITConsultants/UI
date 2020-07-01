@@ -19,7 +19,7 @@ import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfd
 import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
 import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
-import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
+// import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 
 function App() {
   
@@ -44,7 +44,7 @@ function App() {
           <Route path="/EditProduct" component={EditProduct} />
 
           <Route path="/Antaran" component={AntaranCoDesign} />
-          <Route path="/Product-Details" component={BuyersProductDetails} />
+          {/* <Route path="/Product-Details" component={BuyersProductDetails} /> */}
           
         </Switch>
       </Router>

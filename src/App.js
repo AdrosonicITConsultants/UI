@@ -19,6 +19,7 @@ import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/Anta
 
 
 import i18next from "i18next";
+import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 
 function App() {
   
@@ -39,6 +40,7 @@ function App() {
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/Antaran" component={AntaranCoDesign} />
+          <Route path="/Product-Details" component={BuyersProductDetails} />
           
         </Switch>
       </Router>

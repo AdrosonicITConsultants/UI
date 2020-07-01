@@ -36,10 +36,11 @@ export default class ArtistSelfdesignRegions extends Component {
         return (
          
            <Container>
-             {this.state.cluster ? ( ( this.state.cluster.map((data) => (
                 <Row noGutters="true">
                 {/* Card1 */}
-              <Col xs={12} sm={6} md={6}>
+             
+             {this.state.cluster ? ( ( this.state.cluster.map((data) => (
+              <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
                   <h4 class="card-title">Proud</h4>
@@ -56,11 +57,11 @@ export default class ArtistSelfdesignRegions extends Component {
                   </div>
               </div>
               </Col>
-              </Row>
               ) ) 
             )): null
             }
                 
+              </Row>
             
   
     {/* <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">

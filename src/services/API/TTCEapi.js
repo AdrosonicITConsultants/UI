@@ -704,7 +704,22 @@ class TTCEapi {
 
       });
   }
+ 
+  static getAllProducts(){
+    let url = ApiUrl + "/product/getAllProducts";
 
+    return axios
+      .get(url)
+      .then((response) => {
+
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
   static getProfile(){
     let url = ApiUrl + "/user/myprofile";
     return axios

@@ -6,13 +6,15 @@ import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import './ArtisanselfDesign.css';
+import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 
  class ArtistSelfDesignBrands extends Component {
       constructor(props){
       super(props);
       this.state = {
-        clicked : false
+        clicked : false,
+        cluster :[]
       }
     }
   
@@ -22,22 +24,36 @@ import Footer from "../footer/footer";
         clicked: true
       })
     }       
+    componentDidMount(){
+   
+      TTCEapi.getClusters().then((response)=>{
+       this.setState({cluster : response.data.data},()=>{
+           console.log(this.state.cluster);
+      
+           // console.log(this.props.user);
+       });
+   });
+   }
   
     render () {
+      let cluster = this.state.cluster;
+      let optionItems = cluster.map((cluster) =>
+              <option key={cluster.id}>{cluster.desc}</option>
+              );
       return (
         <React.Fragment>
           <Row noGutters="true">
+         
             <Col sm={{size:"12"}}>
-            <select  className="SelectCategory" >
-    <option value="1" selected disabled>All Cluster</option>
-<option value="2" >Maniabandhan</option>
-    <option value="3">Gopalpur</option>
-    <option value="4">Kamrup</option>
-    <option value="5">Nalbari</option>
-  </select>
+            <select  className="SelectCategory">
+           <option selected disabled> All Cluster</option>
+                {optionItems}
+            
+            </select>
   
   
   </Col>
+   
           </Row>
         {/* Row 1 */}
            <div class="row">

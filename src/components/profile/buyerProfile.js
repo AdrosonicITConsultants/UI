@@ -182,6 +182,8 @@ debugger;
         var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
         var alpha=/([A-Z]){1}([0-9]){5}([A-Z]){2}([0-9]){4}([A-Z]){3}([0-9]){6}$/;
         var gstval=/([0-9]){2}([A-Z0-9]){10}([0-9]){1}([A-Z]){1}([0-9]){1}$/;
+       
+
                     if(!regex.test(this.state.panno.toUpperCase()))
                           {                      
                             this.setState({
@@ -622,7 +624,7 @@ debugger;
                                                         type="text"
                                                         id="gstno"
                                                         className="form-control bgdis3  BuyerLogin2"
-                                                        value = {this.state.gstno}
+                                                        value = {this.state.gstno.toUpperCase()}
                                                         placeholder = "GST no"
                                                         disabled={this.state.isBdetail} 
                                                         name="gstno"
@@ -638,7 +640,7 @@ debugger;
                                                         type="text"
                                                         id="cinno"
                                                         className="form-control bgdis3  BuyerLogin2"
-                                                        value= {this.state.cinno}
+                                                        value= {this.state.cinno.toUpperCase()}
                                                         placeholder = "CIN no"
                                                         disabled={this.state.isBdetail} 
                                                         name="cinno"
@@ -652,7 +654,7 @@ debugger;
                                                         type="text"
                                                         id="panno"
                                                         className="form-control bgdis3  BuyerLogin2"
-                                                        value= {this.state.panno}
+                                                        value= {this.state.panno.toUpperCase()}
                                                         placeholder = "PAN no"
                                                         disabled={this.state.isBdetail} 
                                                         name="panno"

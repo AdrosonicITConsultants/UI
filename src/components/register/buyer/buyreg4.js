@@ -304,7 +304,7 @@ export default class buyreg4 extends Component {
                                      id="gstno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="lastname"
-                                     value = {this.state.gstno}
+                                     value = {this.state.gstno.toUpperCase()}
 
                                      name="gstno"
                                      onChange={(e) => this.handleChange(e)}
@@ -380,7 +380,7 @@ export default class buyreg4 extends Component {
                                      id="panno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     value = {this.state.panno}
+                                     value = {this.state.panno.toUpperCase()}
                                      name="panno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
@@ -403,7 +403,7 @@ export default class buyreg4 extends Component {
                                      id="cinno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     value = {this.state.cinno}
+                                     value = {this.state.cinno.toUpperCase()}
 
                                      name="cinno"
                                      onChange={(e) => this.handleChange(e)}

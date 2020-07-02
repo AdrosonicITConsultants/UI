@@ -180,6 +180,8 @@ debugger;
     }
     handledetEdit2(){
         var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+        var alpha=/([A-Z]){1}([0-9]){5}([A-Z]){2}([0-9]){4}([A-Z]){3}([0-9]){6}$/;
+        var gstval=/([0-9]){2}([A-Z0-9]){10}([0-9]){1}([A-Z]){1}([0-9]){1}$/;
                     if(!regex.test(this.state.panno.toUpperCase()))
                           {                      
                             this.setState({
@@ -190,20 +192,20 @@ debugger;
                           
                     }
                     
-                    else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
+                    else if((this.state.gstno.length > 15 || this.state.gstno.length < 15 || !gstval.test(this.state.gstno.toUpperCase()))  &&  this.state.gstno != "")
                           { 
                             this.setState({
                                 showValidationBdetail: true,
-                              message : "GST number should be of 15 characters."
+                              message : "Invalid GST Number"
                           });
                 
                           
-                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21) && this.state.cinno != "")
+                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21 || !alpha.test(this.state.cinno.toUpperCase())) && this.state.cinno != "")
                           {                     
 
                             this.setState({
                                 showValidationBdetail: true,
-                                message : "CIN should be of 21 characters."
+                                message : "Invalid CIN Number"
                           });
                     }else{
 
@@ -219,7 +221,7 @@ debugger;
     }
     handleChange(e) {
         if (e.target.id =="gstno"){
-            var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+            var stripped = e.target.value.replace(/[^A-Z0-9\sg\-]+/i, '')
             e.target.value = stripped;
             this.setState({ [e.target.name]: e.target.value });
             this.setState({

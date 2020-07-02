@@ -222,7 +222,44 @@ class ArtistProfile extends Component {
          
     
     handlebdetEdit2(){
-   
+      
+      var alpha=/([A-Za-z0-9])$/;
+      var char=/([A-Za-z])+$/;
+                  if(!alpha.test(this.state.benificiaryname))
+                        {                      
+                          this.setState({
+                            showValidationbank: true,
+                            message : "Invalid Beneficiary Name"
+                        });
+                                     
+                  }
+                 else if(!char.test(this.state.bankName))
+                  {                      
+                    this.setState({
+                        showValidationbank: true,
+                      message : "Invalid Bank Name"
+                  });
+        
+                  
+            }
+            else if(!char.test(this.state.branch))
+            {                      
+              this.setState({
+                showValidationbank: true,
+                message : "Invalid Branch Name"
+            });
+  
+            
+      }
+      else if(!alpha.test(this.state.ifsccode))
+      {                      
+        this.setState({
+          showValidationbank: true,
+          message : "Invalid Bank Name"
+      });
+
+      
+}
         if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) && this.state.paytmupi != "")
           {
             this.setState({
@@ -249,6 +286,7 @@ class ArtistProfile extends Component {
       
     }
      handlebEdit(){
+ 
         this.setState({
             isBdetail:!this.state.isBdetail,
             productSelected : []
@@ -314,7 +352,7 @@ class ArtistProfile extends Component {
           });
         }
         else if (e.target.id =="bankname"){
-          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          var stripped = e.target.value.replace(/[^A-Z\sg]+/i, '')
           e.target.value = stripped;
           this.setState({ [e.target.name]: e.target.value ,
             ischanged : true,
@@ -330,7 +368,7 @@ class ArtistProfile extends Component {
             showValidationaddress :false,
           });
         }else if (e.target.id =="branch"){
-          var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
+          var stripped = e.target.value.replace(/[^A-Z\sg]+/i, '')
           e.target.value = stripped;
           this.setState({ [e.target.name]: e.target.value ,
             ischanged : true,

@@ -3365,8 +3365,9 @@ console.log(productData);
                            </div>
                          </Row>
 
-                         <Footer></Footer>
                        </Container>
+                       <Footer></Footer>
+
                      </React.Fragment>
                    );
                  }

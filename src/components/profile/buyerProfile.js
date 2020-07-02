@@ -915,12 +915,13 @@ debugger;
                     ></img>
                     </div>
                 </Row>
-                <Footer></Footer>
 
                    {console.log(this.props.user)}
                 </div>
 
                 </Container>
+                <Footer></Footer>
+
             </React.Fragment>
             // <div>
              

@@ -17,10 +17,9 @@ import EditProduct from "../src/components/Products/editProduct";
 import MyProfile from "../src/components/profile/myProfile";
 import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfdesign";
 import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
-
-
 import i18next from "i18next";
-import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
+import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
+// import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 
 function App() {
   
@@ -36,14 +35,16 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
           
-                    <PrivateRoute exact path="/demo-video" component={videoPlayer} />
+          <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
+          <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
+
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />
 
           <Route path="/Antaran" component={AntaranCoDesign} />
-          <Route path="/Product-Details" component={BuyersProductDetails} />
+          {/* <Route path="/Product-Details" component={BuyersProductDetails} /> */}
           
         </Switch>
       </Router>

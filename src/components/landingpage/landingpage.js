@@ -41,8 +41,9 @@ switch (to) {
                 <BuyerLanding></BuyerLanding>
               )}
 
-              <Footer></Footer>
             </Container>
+                          <Footer></Footer>
+
           </React.Fragment>
         );
     }

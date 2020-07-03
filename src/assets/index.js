@@ -110,12 +110,12 @@ import Flower from "./Flower.png";
 import Boat from "./Boat.png";
 import Smile from "./Smile.jpg";
 
-
-
+import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
 
 
 
 export default {
+  AntaranCodesignIcon,
   Ajrakhpur1,
   Maniabandhan,
   Gopalpur,

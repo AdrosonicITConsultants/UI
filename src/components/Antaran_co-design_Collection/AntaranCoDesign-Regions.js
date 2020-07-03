@@ -17,11 +17,19 @@ export default class AntaranCoDesignRegion extends Component {
      
       cluster : [],
       value : false,
-                                         
+      visible: 6,                                 
      
     };
     
-  }
+    this.loadMore = this.loadMore.bind(this);
+    }
+  
+    loadMore() {
+      this.setState((prev) => {
+        return {visible: prev.visible + 6};
+      });
+    }
+  
   componentDidMount(){
    
      TTCEapi.getClusters().then((response)=>{
@@ -38,8 +46,8 @@ export default class AntaranCoDesignRegion extends Component {
            <Container>
                 <Row noGutters="true">
                 {/* Card1 */}
-             
-             {this.state.cluster ? ( ( this.state.cluster.map((data) => (
+               
+             {this.state.cluster ? ( ( this.state.cluster.slice(0,this.state.visible).map((data) => (
               <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
@@ -52,7 +60,7 @@ export default class AntaranCoDesignRegion extends Component {
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      <a class="btn" href="/Antaran/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>
@@ -147,24 +155,23 @@ export default class AntaranCoDesignRegion extends Component {
         </div>
     </div>
     </div> */}
-    
-   
+        {/* Row3 */}
 
-{/* Row3 */}
-<Row noGutters="true" >
-    <Col sm={{size:"5"}}>
-    {/* <hr className="hrlineasd "></hr> */}
-    </Col>
-    <Col sm={{size:"2"}} className="asdseemore">
-        {/* See More */}
-    </Col>
-    <Col sm={{size:"5"}}>
-    {/* <hr className="hrlineasd "></hr> */}
-     </Col>
-</Row>
- 
+        {this.state.visible < this.state.cluster.length &&
+ <Row noGutters="true" >
+ <Col sm={{size:"5"}}>
+ <hr className="hrlineasd "></hr>
+ </Col>
+ <Col sm={{size:"2"}} className="asdseemore">
+ <input type="button" onClick={this.loadMore} value="See More" style={{"border":"none"}}></input>
+ </Col>
+ <Col sm={{size:"5"}}>
+ <hr className="hrlineasd "></hr> </Col>
+</Row>          }
+   
 </Container> 
 
  )
     }
 }
+

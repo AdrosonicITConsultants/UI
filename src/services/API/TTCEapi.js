@@ -776,7 +776,23 @@ class TTCEapi {
 
       });
   }
- 
+  
+  static getFilteredArtisans(){
+    let url = ApiUrl + "/filter/getFilteredArtisans";
+
+    return axios
+      .get(url)
+      .then((response) => {
+
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
   static getAllProducts(){
     let url = ApiUrl + "/product/getAllProducts";
 

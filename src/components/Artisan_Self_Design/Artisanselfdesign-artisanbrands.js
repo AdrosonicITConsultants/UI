@@ -8,6 +8,7 @@ import * as Actions from "../../redux/action/action";
 import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
+import ArtisanCard from './ArtisanCard';
 
  class ArtistSelfDesignBrands extends Component {
       constructor(props){
@@ -16,7 +17,7 @@ import Footer from "../footer/footer";
         clicked : false,
         cluster :[],
         filterArtisian:[],
-        visible:6,
+        visible:3,
         clusterid : -1,
       }
       this.loadMore = this.loadMore.bind(this);
@@ -24,21 +25,11 @@ import Footer from "../footer/footer";
   
     loadMore() {
       this.setState((prev) => {
-        return {visible: prev.visible + 6};
+        return {visible: prev.visible + 3};
       });
     }
   
-  
-  
-  
-    // imageClick = () => {
-    //   console.log('Click');
-    //   this.setState({
-    //     clicked: true
-    //   })
-    // }       
-
-    handleCluster(e) {
+      handleCluster(e) {
       
       // console.log(e.target.id);
       var index = e.target.selectedIndex;
@@ -71,57 +62,52 @@ import Footer from "../footer/footer";
    }
   
     render () {
-      
+    
       return (
-        
+     
         <React.Fragment>
-          <Row noGutters="true">
+       <Row noGutters="true">
          
-            <Col sm={{size:"12"}}>
-            <select  className="SelectCategory"  onChange={(e) => this.handleCluster(e)}>
-           <option key = '0' clusterid = '-1' selected > All Cluster</option>
-         {this.state.cluster.map((data) => <option key =  {data.id} clusterid={data.id} value={data.desc}>{data.desc}</option>)}
-           
-            </select>  
-           </Col>
-   
-          </Row>
-
-          
-        {/* Row 1 */}
-           <div class="row">
-      {/* Card1 */}
-      {this.state.filterArtisian ?
-
-      
-         ( ( this.state.filterArtisian.slice(0,this.state.visible).map((data) => (
-      
-        <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
-         
-         <div className="card Cardlayout">
-         <div class="card-block">
-         <p class="card-text">{data.companyName ? <p>{data.companyName}</p>:<p>{data.firstName}</p>}</p>
-         </div>
+         <Col sm={{size:"12"}}>
+         <select  className="SelectCategory"  onChange={(e) => this.handleCluster(e)}>
+        <option key = '0' clusterid = '-1' selected > All Cluster</option>
+      {this.state.cluster.map((data) => <option key =  {data.id} clusterid={data.id} value={data.desc}>{data.desc}</option>)}
         
-         {data.logo ? <img className="card-img-top-brand" src={data.logo}  alt="Logo"/>:
-         data.profilePic ? <img className="card-img-top-brand" src={data.profilePic}  alt="Profile Img"/>  : 
-         <img className="card-img-top-brand" src={logos.panda}  alt="Default Img"/>
-         }
-         
-         <div class="effect-text">
-             <div class="effect-btn">
-               <h2>EXPLORE MORE</h2>
-               <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-             </div>
-           </div>
-       </div> 
-       </div>
-    
-    
-   ))
-   )): null
-   }
-        </div>
+         </select>  
+        </Col>
+
+       </Row>
+
+    {this.state.cluster ?
+this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
+  {console.log(data)}
+  if (this.state.clusterid==data.clusterId)
+  return (
+    <ArtisanCard
+    key={index}
+    companyName={data.companyName}
+    firstName={data.firstName}
+    logo={data.logo}
+    profilePic={data.profilePic}
+    />
+  );
+ })
+
+:null}
+{this.state.cluster? this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
+ if(this.state.clusterid==-1)
+ return(
+    <ArtisanCard
+    key={index}
+    companyName={data.companyName}
+    firstName={data.firstName}
+    logo={data.firstName}
+    profilePic={data.profilePic}
+    />
+ )
+}):null
+}
+  
     
     {/* load more */}
     {this.state.visible < this.state.filterArtisian.length &&

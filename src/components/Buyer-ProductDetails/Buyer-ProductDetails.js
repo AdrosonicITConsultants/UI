@@ -90,16 +90,14 @@ class BuyersProductDetails extends Component {
    <p style={{marginLeft:"15px", marginTop:"10px"}}>Product Code : PLOKIU998</p> 
   </Col>
 </Row>
-
-
-
-
-
-
-
 </Col>
 </Row>
 
+
+<Row noGutters="true">
+  <Col >
+  </Col>
+</Row>
 </Container>
            </React.Fragment>)
     }

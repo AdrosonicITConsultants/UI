@@ -59,7 +59,11 @@
     /* width: 100%; */
 }
 .SelectCategory{
+<<<<<<< HEAD
   width: 100%;
+=======
+  width: 98%;
+>>>>>>> eb93b95a86d05fd4c33ba018259ae0a5460ad44d
   padding: 13px 13px 13px 13px;
   margin-bottom: 40px;
   border: 1px solid lightgray;

@@ -114,16 +114,19 @@ import antaranCoDesignLogo from "./Antaran Co design Icon.svg"
 import catelogBackground from "./Cluster back ground .svg"
 import backdrop from "./backdrop-blur.svg"
 
-
-
+import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
 
 
 
 export default {
+<<<<<<< HEAD
   backdrop,
   catelogBackground,
   antaranCoDesignLogo,
   artisianSelfLogo,
+=======
+  AntaranCodesignIcon,
+>>>>>>> eb93b95a86d05fd4c33ba018259ae0a5460ad44d
   Ajrakhpur1,
   Maniabandhan,
   Gopalpur,

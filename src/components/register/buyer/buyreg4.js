@@ -32,6 +32,9 @@ export default class buyreg4 extends Component {
                    const emailcheck = isEmail;
                    console.log(emailcheck(this.state.pocemail));
                    var flag = true; 
+                   var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+                   var alpha=/([A-Z]){1}([0-9]){5}([A-Z]){2}([0-9]){4}([A-Z]){3}([0-9]){6}$/;
+                   var gstval=/([0-9]){2}([A-Z0-9]){10}([0-9]){1}([A-Z]){1}([0-9]){1}$/;
                    if (this.state.companyname == "" || this.state.panno == "") {
                      flag = false ;
                      this.setState({
@@ -39,29 +42,29 @@ export default class buyreg4 extends Component {
                        message : "please fill mandatory fields"
 
                      });
-                   } else if(this.state.panno.length > 10 || this.state.panno.length < 10)
-                          {                      flag = false ;
+                   } else  if(!regex.test(this.state.panno.toUpperCase()))
+                   {                       flag = false ;
 
                             this.setState({
                               showValidationpass: true,
-                              message : "PAN number should be of 10 characters."
+                              message : "Invalid PAN Number"
                           });
                 
                           
-                    }else if((this.state.gstno.length > 15 || this.state.gstno.length < 15)  &&  this.state.gstno != "")
-                          { flag = false;
+                    } else if((this.state.gstno.length > 15 || this.state.gstno.length < 15 || !gstval.test(this.state.gstno.toUpperCase()))  &&  this.state.gstno != "")
+                    {  flag = false;
                             this.setState({
                               showValidationpass: true,
-                              message : "GST number should be of 15 characters."
+                              message : "Invalid GST Number"
                           });
                 
                           
-                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21) && this.state.cinno != "")
-                          {                     
+                    } else if((this.state.cinno.length > 21 || this.state.cinno.length < 21 || !alpha.test(this.state.cinno.toUpperCase())) && this.state.cinno != "")
+                    {                   
 
                             this.setState({
                               showValidationpass: true,
-                              message : "CIN should be of 21 characters."
+                              message : "Invalid CIN Number"
                           });
                 
                           
@@ -301,7 +304,7 @@ export default class buyreg4 extends Component {
                                      id="gstno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="lastname"
-                                     value = {this.state.gstno}
+                                     value = {this.state.gstno.toUpperCase()}
 
                                      name="gstno"
                                      onChange={(e) => this.handleChange(e)}
@@ -377,7 +380,7 @@ export default class buyreg4 extends Component {
                                      id="panno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     value = {this.state.panno}
+                                     value = {this.state.panno.toUpperCase()}
                                      name="panno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
@@ -400,7 +403,7 @@ export default class buyreg4 extends Component {
                                      id="cinno"
                                      className="form-control form2 BuyerLogin1"
                                      //placeholder="address"
-                                     value = {this.state.cinno}
+                                     value = {this.state.cinno.toUpperCase()}
 
                                      name="cinno"
                                      onChange={(e) => this.handleChange(e)}

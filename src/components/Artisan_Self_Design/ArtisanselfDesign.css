@@ -59,12 +59,13 @@
     /* width: 100%; */
 }
 .SelectCategory{
-  width: 96%;
+  width: 100%;
   padding: 13px 13px 13px 13px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   border: 1px solid lightgray;
-  font-size: 19px;
+  font-size: 20px;
   font-family: auto;
+  border-radius: 4px;
 }
 .SelectCategory option{
   font-size: 25px;

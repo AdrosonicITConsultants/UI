@@ -29,15 +29,15 @@ import Footer from "../footer/footer";
           <Row noGutters="true">
             <Col sm={{size:"12"}}>
             <select  className="SelectCategory" >
-    <option value="1" selected disabled>All Cluster</option>
-<option value="2" >Maniabandhan</option>
-    <option value="3">Gopalpur</option>
-    <option value="4">Kamrup</option>
-    <option value="5">Nalbari</option>
-  </select>
+                <option value="1" selected disabled>All Cluster</option>
+                <option value="2" >Maniabandhan</option>
+                <option value="3">Gopalpur</option>
+                <option value="4">Kamrup</option>
+                <option value="5">Nalbari</option>
+          </select>
   
   
-  </Col>
+        </Col>
           </Row>
         {/* Row 1 */}
            <div class="row">

@@ -94,7 +94,6 @@ export default class artistRegister extends Component {
                            panno = {this.state.panno}
                            address = {this.state.address}
                            clustername = {this.state.clustername}
-
                          />
                        );
                        break;

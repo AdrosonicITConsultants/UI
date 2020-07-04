@@ -109,6 +109,10 @@ import Sun2 from "./Sun2.jpg";
 import Flower from "./Flower.png";
 import Boat from "./Boat.png";
 import Smile from "./Smile.jpg";
+import artisianSelfLogo from "./Artisan Self Design Icon.svg"
+import antaranCoDesignLogo from "./Antaran Co design Icon.svg"
+import catelogBackground from "./Cluster back ground .svg"
+import backdrop from "./backdrop-blur.svg"
 
 
 
@@ -116,6 +120,10 @@ import Smile from "./Smile.jpg";
 
 
 export default {
+  backdrop,
+  catelogBackground,
+  antaranCoDesignLogo,
+  artisianSelfLogo,
   Ajrakhpur1,
   Maniabandhan,
   Gopalpur,

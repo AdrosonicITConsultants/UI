@@ -115,10 +115,12 @@ import catelogBackground from "./Cluster back ground .svg"
 import backdrop from "./backdrop-blur.svg"
 
 import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
+import whitearrow from "./whitearrow.svg"
 
 
 
 export default {
+  whitearrow,
   backdrop,
   catelogBackground,
   antaranCoDesignLogo,

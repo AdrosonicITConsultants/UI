@@ -20,6 +20,7 @@ export class ProductsOfCatelog extends Component {
         this.state = {
             proddata : this.props.productData,
             isfavHovered :false,
+            imageurl : logos.dupatta,
          
         };
       
@@ -47,7 +48,7 @@ export class ProductsOfCatelog extends Component {
         return (
             <div className="card cpCardlayout ">
                     <div className="cpimagediv">
-                    <img className="cpimage" src={logos.dupatta}  alt="Card image cap"/>
+                    <img className="cpimage" src={this.state.imageurl}  alt="Card image cap"/>
                     <div className="cpyellowdiv">
                        <div className="descriptionbox">
                          {this.state.proddata.product_spe}
@@ -84,6 +85,8 @@ export class ProductsOfCatelog extends Component {
                      <Col md = {10} style={{"padding-left":"0px"}}>
                             <button className="generateEnquiry">
                             Generate enquiry
+                            <img className="cpwhitearrow" src={logos.whitearrow}></img>
+
                             </button>
                      </Col>
                      <Col md={2} className="cpwishlist">
@@ -104,7 +107,7 @@ export class ProductsOfCatelog extends Component {
                 )}
                   </Col>
                  </div>
-                 {console.log(this.state.proddata)}
+                 {/* {console.log(this.state.proddata)} */}
 
                 </div> 
                

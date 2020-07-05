@@ -241,12 +241,9 @@ class TTCEapi {
       });
   }
   static getProductCategoryProducts(id) {
+    console.log(id)
     let url = ApiUrl + "/product/getProductCategoryProducts/"+id;
-    // var config = {
-    //   headers: {
-    //     "Content-type": "multipart/form-data",
-    //   },
-    // };
+  
     return axios
       .get(url)
       .then((response) => {
@@ -259,6 +256,21 @@ class TTCEapi {
       });
   }
 
+  static getClusterProducts(id) {
+    console.log(id)
+    let url = ApiUrl + "/product/getClusterProducts/"+id;
+  
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
 
     static getProducts(){

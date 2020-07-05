@@ -5,7 +5,7 @@
     background-image: url("../../assets/Cluster\ back\ ground\ .svg");
     background-repeat: no-repeat;
     background-size: 100% auto;
-    margin-top: -100px;
+    margin-top: -75px;
 }
 .margin-cparrow {
     margin-top: 17px;
@@ -19,7 +19,7 @@
     color: grey;
 }
 .cpheadmargin{
-    margin-top:100px;
+    margin-top:102px;
 }
 .stockmargin{
     margin-left:1px!important;
@@ -52,8 +52,12 @@
     font-size: 9px;
     text-align: center;
     margin-top: 5px;
-    color: green;
+    color:#199351;
     font-weight: 300;
+}
+.cpwhitearrow{
+    width: 20px;
+    margin-left: 12px;
 }
 .in_stock{
     font-size: 9px;

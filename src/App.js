@@ -19,6 +19,8 @@ import ArtistSelfDesign from "../src/components/Artisan_Self_Design/Artisanselfd
 import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/AntaranCoDesign"
 import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
+import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
+
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 
 function App() {
@@ -39,6 +41,9 @@ function App() {
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
+          <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
+          {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
+
 
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />

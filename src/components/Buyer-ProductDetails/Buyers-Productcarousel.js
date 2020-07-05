@@ -24,21 +24,21 @@ import Footer from "../footer/footer";
 
            <ul class="thumbnails">
     <li>
-      <a href="#slide1"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg" /></a>
+      <a href="#slide1"><img src={logos.Kamrup} /></a>
     </li>
     <li>
-      <a href="#slide2"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw2.jpg" /></a>
+      <a href="#slide2"><img src={logos.Maniabandhan} /></a>
     </li>
     <li>
-      <a href="#slide3"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg" /></a>
+      <a href="#slide3"><img src={logos.Nalbari} /></a>
     </li>
     
   </ul> 
           
            <ul class="slides">
-    <li id="slide1"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg" alt="" /></li>
-    <li id="slide2"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw2.jpg" alt="" /></li>
-    <li id="slide3"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg" alt="" /></li>
+    <li id="slide1"><img src={logos.Kamrup}  alt="" /></li>
+    <li id="slide2"><img src={logos.Maniabandhan} alt="" /></li>
+    <li id="slide3"><img src={logos.Nalbari} alt="" /></li>
 
   </ul>
           

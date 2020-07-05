@@ -17,7 +17,7 @@ import ArtisanCard from './ArtisanCard';
         clicked : false,
         cluster :[],
         filterArtisian:[],
-        visible:3,
+        visible:6,
         clusterid : -1,
       }
       this.loadMore = this.loadMore.bind(this);
@@ -25,7 +25,7 @@ import ArtisanCard from './ArtisanCard';
   
     loadMore() {
       this.setState((prev) => {
-        return {visible: prev.visible + 3};
+        return {visible: prev.visible + 6};
       });
     }
   
@@ -110,8 +110,8 @@ this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
   
     
     {/* load more */}
-    {this.state.visible < this.state.filterArtisian.length &&
- <Row noGutters="true" >
+    {this.state.visible < this.state.filterArtisian.length ?
+( <Row noGutters="true" >
  <Col sm={{size:"5"}}>
  <hr className="hrlineasd "></hr>
  </Col>
@@ -120,7 +120,7 @@ this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
  </Col>
  <Col sm={{size:"5"}}>
  <hr className="hrlineasd "></hr> </Col>
-</Row>          }
+</Row>      ):null    }
        
         </React.Fragment>
       );

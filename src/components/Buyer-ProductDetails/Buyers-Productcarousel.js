@@ -1,0 +1,53 @@
+import React, { Component } from 'react'
+import logos from "../../assets";
+import { Row, Col , Container, Button} from 'reactstrap';
+import '../navbar/navbar.css';
+import NavbarComponent from "../navbar/navbar";
+import { connect } from "react-redux";
+import * as Actions from "../../redux/action/action";
+import './BPcarousel.css';
+import TTCEapi from '../../services/API/TTCEapi';
+import Footer from "../footer/footer";
+
+ class BPCarousel extends Component {
+     
+       
+  
+    render () {
+      
+      return (
+        
+        <React.Fragment>
+            <div class="BPDcontainer" >
+      
+       
+
+           <ul class="thumbnails">
+    <li>
+      <a href="#slide1"><img src={logos.Kamrup} /></a>
+    </li>
+    <li>
+      <a href="#slide2"><img src={logos.Maniabandhan} /></a>
+    </li>
+    <li>
+      <a href="#slide3"><img src={logos.Nalbari} /></a>
+    </li>
+    
+  </ul> 
+          
+           <ul class="slides">
+    <li id="slide1"><img src={logos.Kamrup}  alt="" /></li>
+    <li id="slide2"><img src={logos.Maniabandhan} alt="" /></li>
+    <li id="slide3"><img src={logos.Nalbari} alt="" /></li>
+
+  </ul>
+          
+       </div>
+        </React.Fragment>
+      );
+    }
+  
+  
+  
+    }
+export default BPCarousel;

@@ -22,6 +22,7 @@ import ProductCategories from './components/Artisan_Self_Design/ProductCategorie
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
 
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
+import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
       <Router history={browserHistory}>
         <ToastContainer></ToastContainer>
         <Switch>
+          <Route path="/wishlist" component={BPCarousel}/>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />

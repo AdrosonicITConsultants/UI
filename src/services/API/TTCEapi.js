@@ -272,6 +272,21 @@ class TTCEapi {
       });
   }
 
+  static getArtisianProducts(id) {
+    console.log(id)
+    let url = ApiUrl + "/product/getProductByArtisan/"+id;
+  
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
     static getProducts(){
       let url = ApiUrl + "/product/getAllProducts";

@@ -60,11 +60,13 @@ export class ProductsOfCatelog extends Component {
                     </div>
                  
                     <Row noGutters={true} className="cpdetails">
-                        <Col md = {8} className=" bold fontplay">
+                        <Col  className=" bold fontplay col-xs-8">
         <div className="productname">{this.state.proddata.code}</div> 
                         </Col>
-                        <Col md = {4} className="">
-                            <Row noGutters={true} className="stockmargin">
+                        <Col className="col-xs-4">
+                          {this.state.proddata.productStatusId == 1 
+                          ?
+                          <Row noGutters={true} className="stockmargin">
                                 <Col className="Available">
                                 Available 
                                 </Col>
@@ -76,21 +78,39 @@ export class ProductsOfCatelog extends Component {
                                 </Col>
                                 
                                 </Row>
+                        
+                        :
+                        <Row noGutters={true} className="stockmargin exclusive">
+                        <Col className="Exclusively">
+                        Exclusively
+                        </Col>
+                        <Col className=" Made_to_order">
+                        Made to order
+                        </Col>
+                        <Col className="text-center">
+                        <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        </Col>
+                        
+                        </Row>
+                        }
+                         
+                       
+                            
                         </Col>
                         </Row>
                  
                
                  <div>
                        <hr className="cpline"></hr>
-                     <Col md = {10} style={{"padding-left":"0px"}}>
+                     <Col style={{"padding-left":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry">
                             Generate enquiry
                             <img className="cpwhitearrow" src={logos.whitearrow}></img>
 
                             </button>
                      </Col>
-                     <Col md={2} className="cpwishlist">
-                     {this.state.isfavHovered ? (
+                     <Col  className="cpwishlist col-xs-2">
+                     {this.state.isfavHovered ? ( 
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}

@@ -71,7 +71,7 @@ class ProductRegions extends Component {
         });
     }
     backoperation(){
-        browserHistory.push(" /Artisanself"); 
+        browserHistory.push("/Artisanself"); 
     }    
     
 

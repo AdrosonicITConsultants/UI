@@ -21,6 +21,8 @@ import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
 
+import AntaranProductCategories from './components/Artisan_Self_Design/AntaranProductCategories';
+import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
 
@@ -44,6 +46,8 @@ function App() {
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
+          <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
+          <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
 

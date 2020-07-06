@@ -17,17 +17,17 @@ import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
 import ProductsOfCatelog from './ProductsOfCatelog';
-class ProductCategories extends Component {
+class AntaranProductRegions extends Component {
     
     constructor(props) {
         super(props);
 
         this.state = {
-            clusterdata : [],
-            clusterid : -1,
+            productCategoriesdata : [],
+            productCategoryid : -1,
             isfavHovered :false,
             dataload : false,
-            heading  : "Categories",
+            heading  : "Regions",
             products : [],
             cluster : "",
 
@@ -42,7 +42,7 @@ class ProductCategories extends Component {
         var option =  optionElement.getAttribute('clusterid');
         console.log(option);
         
-        this.setState({ [e.target.name]: e.target.value , clusterid : option}, ()=> {
+        this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
           console.log(this.state);
           
         });
@@ -54,27 +54,30 @@ class ProductCategories extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-        TTCEapi.getProductCategoryProducts(parseInt(params.categoryId)).then((response)=>{
-            console.log(response.data.data.products);
+        TTCEapi.getClusterProducts(parseInt(params.clusterid)).then((response)=>{
+            console.log(response.data.data);
             this.setState({
                 dataload : true,
-                heading : response.data.data.productCategory,
+                heading : response.data.data.cluster.desc,
                 products : response.data.data.products
                });
         });
-        TTCEapi.getClusters().then((response)=>{
-            this.setState({clusterdata : response.data.data});
+        TTCEapi.getProducts().then((response)=>{
+            console.log(response);
+            this.setState({productCategoriesdata : response.data.data},()=>{
+                console.log(this.state);
+            });
 
         });
     }
-    
     backoperation(){
-        browserHistory.push("/Artisanself/categories"); 
-    }  
+        browserHistory.push("/Artisanself"); 
+    }    
     
 
     render() {
         return (
+        
          
             <React.Fragment>
                    {this.state.dataload == true 
@@ -121,8 +124,8 @@ class ProductCategories extends Component {
                                  id="cluster"
                                  name="cluster" 
                                  onChange={(e) => this.handleCluster(e)}>
-                                    <option key = '0' clusterid = '-1'  value='Select Cluster'>View by Cluster</option>
-                                    {this.state.clusterdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.desc}>{item.desc}</option>)}
+                                    <option key = '0' clusterid = '-1'  value='Select Cluster'>View All Products</option>
+                                    {this.state.productCategoriesdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.productDesc}>{item.productDesc}</option>)}
                                 </select>
                         
                                 <br>
@@ -132,11 +135,11 @@ class ProductCategories extends Component {
                              </Row>
                              <Row noGutters="true"> 
                              {this.state.item1 = true} 
-
                                 {this.state.products.map((item) =>
                                 <div>
-                                    {this.state.clusterid == -1 
+                                    {this.state.productCategoryid == -1 
                                         ? 
+                                        
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
                                         <ProductsOfCatelog productData = {item}/>              
@@ -144,7 +147,7 @@ class ProductCategories extends Component {
                                         :
                                         
                                         <>
-                                        {this.state.clusterid == item.clusterId 
+                                        {this.state.productCategoryid == item.productType.productCategoryId
                                         ?
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
@@ -189,4 +192,4 @@ class ProductCategories extends Component {
         )
     }
 }
-export default ProductCategories;
+export default AntaranProductRegions;

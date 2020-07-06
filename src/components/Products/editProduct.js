@@ -155,23 +155,25 @@ export default class addProduct extends Component {
         
                    let params = queryString.parse(this.props.location.search)
                    TTCEapi.getProduct(params.ProductId).then((response) => {
+                     console.log('heree');
+                     console.log( response.data);
                      let productData =  response.data.data;
                      this.setProduct(productData);
                  })
                 }
- toDataUrl = (url, callback) => {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = () => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-          callback(reader.result);
-      };
-      reader.readAsDataURL(xhr.response);
-  };
-  xhr.open('GET', url);
-  xhr.responseType = 'blob';
-  xhr.send();
-};
+          toDataUrl = (url, callback) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    callback(reader.result);
+                };
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+          };
 
             setProduct(productData){
             

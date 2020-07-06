@@ -17,7 +17,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
 import ProductsOfCatelog from './ProductsOfCatelog';
-class ProductCategories extends Component {
+class AntaranProductCategories extends Component {
     
     constructor(props) {
         super(props);
@@ -189,4 +189,4 @@ class ProductCategories extends Component {
         )
     }
 }
-export default ProductCategories;
+export default AntaranProductCategories;

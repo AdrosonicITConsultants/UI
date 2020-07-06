@@ -42,6 +42,7 @@ class ArtistSelfDesign extends Component {
                         <Col sm={{size:12}} className="Asdh1">
                           <h1>  Artisan <br/> Self Design </h1>
                             <p>Collection</p>
+                            <p><img className="BPDAntaranlogo" src={logos.artisianSelfLogo}  alt=""/></p>
                         </Col>
                     </div>
              

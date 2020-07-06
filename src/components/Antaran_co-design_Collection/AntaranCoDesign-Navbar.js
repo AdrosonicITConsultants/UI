@@ -6,7 +6,6 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";

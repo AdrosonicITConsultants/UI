@@ -9,11 +9,11 @@
   }
 
   .BPDCol2 h1{
-    font-size: 38px;
+    font-size: 34px;
     }
   
 .BPDCol2 p {
-  font-size: 19px;
+  font-size: 17px;
   color: gray;
   font-family: none;
   letter-spacing: 0.1px;
@@ -24,7 +24,7 @@
   color: gray;
 }
 .BPDBrandname{
-  font-size: 21px;
+  font-size: 20px;
     font-weight: 600;
     color: midnightblue;
     /* height: 30px; */
@@ -98,6 +98,9 @@ html{
 scroll-behavior: smooth;
 }
 
+.weaveimgheight{
+  height: 16px;
+}
 .MoresareeBPD{
   text-align: center;
   font-weight: 600;
@@ -309,6 +312,12 @@ scroll-behavior: smooth;
   height: 20px;
   margin-top: -19px;
   margin-left: 189px;
+
+}
+.love-icon:hover {
+  transform: scale(1.1);
+transform-origin: 50% 50%;
+--heart-color: var(--heart-active-color);
 
 }
 .love-icon input {

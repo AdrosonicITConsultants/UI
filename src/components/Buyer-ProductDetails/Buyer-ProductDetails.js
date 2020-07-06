@@ -187,9 +187,18 @@ class BuyersProductDetails extends Component {
   </Col>
   <Col sm={2} className="BPDmarginright">
   <h3 className="GeneralDetailsh3 text-center" >Weave used</h3>
-    <p className="GeneralDetailsp text-center">a</p>
-    <p className="GeneralDetailsp text-center">a</p>
-    <p className="GeneralDetailsp text-center">a</p>
+    <p className="GeneralDetailsp text-center"> <img
+                                         className=" weaveimgheight"
+                                         src={logos.warpicon}
+                                       ></img></p><br/>
+    <p className="GeneralDetailsp text-center"> <img
+                                         className=" weaveimgheight "
+                                         src={logos.wefticon}
+                                       ></img></p><br/>
+    <p className="GeneralDetailsp text-center"> <img
+                                         className=" weaveimgheight"
+                                         src={logos.extraWefticon}
+                                       ></img></p>
   </Col>
   <Col sm={2} className="BPDmarginright">
   <h3 className="GeneralDetailsh3 text-center">Yarn</h3>

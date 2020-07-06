@@ -116,10 +116,12 @@ import backdrop from "./backdrop-blur.svg"
 
 import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
 import whitearrow from "./whitearrow.svg"
-
-
+import Nextarrow from './Nextarrow.png'
+import Antaranbgthread from "./Antaranbgthread.svg"
 
 export default {
+  Antaranbgthread,
+  Nextarrow,
   whitearrow,
   backdrop,
   catelogBackground,

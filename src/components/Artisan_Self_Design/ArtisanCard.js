@@ -34,7 +34,7 @@ import Footer from "../footer/footer";
          
       {/* Card1 */}
      
-        <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
+       <Col xs={12} sm={6} md={4}>
          
          <div className="card Cardlayout">
                 
@@ -52,7 +52,7 @@ import Footer from "../footer/footer";
              </div>
            </div>
        </div> 
-       </div>
+       </Col>
     
  
     

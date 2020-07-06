@@ -75,21 +75,21 @@ export default class ArtisanselfdesignNavbar extends Component {
             <React.Fragment>
                 <Container>
             <Row noGutters="true">
-            <Col sm={{size:2}} className="Vcheading">
+            <Col sm={{size:2}} xs={12} md={2} className="Vcheading">
                <Link to="/Artisanself"> <h1 className={
                        (this.state.selected == "Regions"
             ? "selectedNavbarTab"
             : "")
             } onClick={this.handleSelect}>Regions</h1></Link>
                 </Col>
-                <Col sm={{size:2}} className="Vcheading" style={{"marginLeft":"-11px"}}>
+                <Col sm={{size:2}} xs={12} md={2} className="Vcheading" style={{"marginLeft":"-11px"}}>
                 <Link to="/Artisanself/categories">  <h1 className={
                        (this.state.selected == "Categories"
             ? "selectedNavbarTab"
             : "")
             } onClick={this.handleSelect}>Categories</h1></Link>
                 </Col>
-                <Col sm={{size:4}} className="Vcheading" style={{"marginLeft":"15px"}}>
+                <Col sm={{size:4}}  xs={12} md={4} className="Vcheading" style={{"marginLeft":"15px"}}>
                 <Link to="/Artisanself/artisanbrands">  <h1 className={
                        (this.state.selected == "Artisan Brands"
             ? "selectedNavbarTab"

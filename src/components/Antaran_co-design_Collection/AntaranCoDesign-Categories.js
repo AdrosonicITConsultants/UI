@@ -6,7 +6,6 @@ import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from '../../services/API/TTCEapi';
-import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 class AntaranCoDesignCategories extends Component {

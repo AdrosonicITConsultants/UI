@@ -5,7 +5,6 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './AntaranCoDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 

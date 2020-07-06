@@ -19,7 +19,10 @@
   letter-spacing: 0.1px;
   text-align: justify;
 }
-
+.BPDmarginright{
+  border-right: 1px solid;
+  color: gray;
+}
 .BPDBrandname{
   font-size: 21px;
     font-weight: 600;

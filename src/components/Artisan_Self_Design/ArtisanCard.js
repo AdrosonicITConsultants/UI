@@ -10,7 +10,17 @@ import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 
  class ArtisanCard extends Component {
-     
+  constructor(props){
+    super(props);
+    this.state = {
+     logo:this.props.logo,
+     profilePic:this.props.profilePic,
+     logoUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/CompanyDetails/Logo/'+this.props.logo,
+     profilePicUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/ProfilePics/'+this.props.profilePic,
+     defaultimgUrl:logos.Smile,
+    }
+   
+  }
        
   
     render () {
@@ -18,7 +28,7 @@ import Footer from "../footer/footer";
       return (
         
         <React.Fragment>
-        
+        {console.log(this.state)}
           
         {/* Row 1 */}
          
@@ -27,26 +37,24 @@ import Footer from "../footer/footer";
         <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
          
          <div className="card Cardlayout">
-         <div class="card-block">
+                
+         {this.props.logo ? <img className="card-img-top-brand" src={this.state.logoUrl}  alt="Logo"/>:
+         this.props.profilePic ? <img className="card-img-top-brand" src={this.state.profilePicUrl}  alt="Profile Img"/>  : 
+         <img className="card-img-top-brand" src={this.state.defaultimgUrl}  alt="Default Img"/>
+         }
+          <div class="card-block cardaligntext">
          <p class="card-text">{this.props.companyName ? <p>{this.props.companyName}</p>:<p>{this.props.firstName}</p>}</p>
          </div>
-        
-         {this.props.logo ? <img className="card-img-top-brand" src={this.props.logo}  alt="Logo"/>:
-         this.props.profilePic ? <img className="card-img-top-brand" src={this.props.profilePic}  alt="Profile Img"/>  : 
-         <img className="card-img-top-brand" src={logos.panda}  alt="Default Img"/>
-         }
-         
          <div class="effect-text">
              <div class="effect-btn">
                <h2>EXPLORE MORE</h2>
-               <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+               <a class="btn" href={"Artisanself/artisanbrands/ArtisanProducts?artisanId="+this.props.artisanId}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
              </div>
            </div>
        </div> 
        </div>
     
  
-       
     
    
         </React.Fragment>

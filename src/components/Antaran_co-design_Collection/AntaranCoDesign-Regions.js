@@ -60,7 +60,7 @@ export default class AntaranCoDesignRegion extends Component {
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Antaran/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                  <a class="btn" href={"/Antaran/regions/ProductRegions?clusterid=" +data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>

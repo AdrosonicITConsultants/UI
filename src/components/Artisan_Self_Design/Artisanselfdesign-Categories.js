@@ -57,11 +57,11 @@ class ArtistSelfDesignCategories extends Component {
                   {data.productDesc}
                  </p>
                 </div>
-                <img className="card-img-top" src={logos.stole}  alt="Card image cap"/>
+                <img className="card-img-top" src={logos.saree}  alt="Card image cap"/>
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisanself/categories/ProductCategories?categoryId=categoryid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      <a class="btn" href={"/Artisanself/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>

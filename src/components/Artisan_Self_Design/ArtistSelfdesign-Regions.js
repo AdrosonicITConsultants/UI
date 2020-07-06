@@ -8,6 +8,7 @@ import * as Actions from "../../redux/action/action";
 import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
+import { browserHistory } from "../../helpers/history";
 
 export default class ArtistSelfdesignRegions extends Component {
   constructor(props) {
@@ -29,18 +30,25 @@ export default class ArtistSelfdesignRegions extends Component {
         return {visible: prev.visible + 6};
       });
     }
+    // ProductCatalog = (cluster)=>{
+    //   debugger;
+    //     console.log(cluster);
+    //   browserHistory.push("/Artisianself/regions/ProductRegions?clusterid=" + this.props.data.id )
+    // }
   
   componentDidMount(){
    
      TTCEapi.getClusters().then((response)=>{
       this.setState({cluster : response.data.data},()=>{
           console.log(this.state.cluster);
-     
+       
           // console.log(this.props.user);
       });
   });
   }
     render() {
+      // const { clusterid } = this.props;
+
         return (
          
            <Container>
@@ -48,6 +56,7 @@ export default class ArtistSelfdesignRegions extends Component {
                 {/* Card1 */}
                
              {this.state.cluster ? ( ( this.state.cluster.slice(0,this.state.visible).map((data) => (
+        
               <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
@@ -60,7 +69,8 @@ export default class ArtistSelfdesignRegions extends Component {
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      <a class="btn" href={"/Artisianself/regions/ProductRegions?clusterid=" + data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                    
                     </div>
                   </div>
               </div>

@@ -175,6 +175,41 @@ class BuyersProductDetails extends Component {
   </Col>
   <hr className="hrlineBPD "></hr>
 </Row>
+{/* -----------------------specification--------------------- */}
+<Row noGutters="true" >
+  <h2 className="DescheadingBPD" style={{marginLeft:"10px" , fontFamily:"auto"}}>Specifications</h2>
+  <Col sm={4} className="">
+    <h3 className="GeneralDetailsh3">Weave types used</h3>
+    <p className="GeneralDetailsp">Weft Ikat</p>
+    <p className="GeneralDetailsp">Loinloom Weaving</p>
+    <p className="GeneralDetailsp">Extra weft by Jacquard</p>
+    <p className="GeneralDetailsp">Plain weave</p>
+  </Col>
+  <Col sm={2} className="BPDmarginright">
+  <h3 className="GeneralDetailsh3 text-center" >Weave used</h3>
+    <p className="GeneralDetailsp text-center">a</p>
+    <p className="GeneralDetailsp text-center">a</p>
+    <p className="GeneralDetailsp text-center">a</p>
+  </Col>
+  <Col sm={2} className="BPDmarginright">
+  <h3 className="GeneralDetailsh3 text-center">Yarn</h3>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+  </Col>
+  <Col sm={2} className="BPDmarginright">
+    <h3 className="GeneralDetailsh3 text-center">Yarn Count</h3>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+  </Col>
+  <Col sm={2} className="BPDmarginright" >
+    <h3 className="GeneralDetailsh3 text-center">Dye used</h3>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center" >XYZ</p>
+  </Col>
+</Row>
 {/* -----------------Washcareinst--------------------- */}
 <Row noGutters="true">
 <h2 className="DescheadingBPD" style={{marginLeft:"10px" , fontFamily:"auto"}}>Wash and Care Instructions</h2>

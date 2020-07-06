@@ -20,6 +20,8 @@ import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/Anta
 import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
+import ArtisianProducts from './components/Artisan_Self_Design/ArtisianProducts';
+
 
 import AntaranProductCategories from './components/Artisan_Self_Design/AntaranProductCategories';
 import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
@@ -46,11 +48,13 @@ function App() {
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
+          <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
+
           <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-
+          /Artisanself/artisanbrands/ArtisanProducts
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />
 

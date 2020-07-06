@@ -57,6 +57,7 @@
 .Asdbg{
     height: 521px;
     /* width: 100%; */
+    float: right;
 }
 .SelectCategory{
   width: 100%;
@@ -90,7 +91,21 @@ font-family: auto;
     font-weight: 700;
     font-family: auto;
 }
+.overflownhidden{
+  overflow-x: hidden;
+}
+.headimgposter{
+  padding:0px!important;
+  overflow-x: hidden;
+}
+.card-text1{
+  font-size: 20px;
+  padding: 0px 0px 0px 0px;
+  font-weight: 700;
+  font-family: auto;
+  margin-top: 7px;
 
+}
 .hrlineasd {
     width: 100%;
     border-top: 2.5px solid grey;
@@ -139,14 +154,14 @@ font-family: auto;
 }
 
 .card-img-top-brand{
-  width: 40%; 
+  /* width: 40%;  */
   height: 170px;
   padding: 0px 5px 0px 5px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-  min-width: 194px;
+  /* width: 50%; */
+  max-width: 300px;
   margin-top: 12px;
 }
 .cardaligntext{
@@ -159,11 +174,12 @@ text-align: center;
 
   .Cardlayout {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 30px!important;
     width: 84%;
     box-shadow: 2px 2px 4px 4px lightgrey;
     overflow: hidden;
     background-color: white;
+    margin: auto;
 
   }
 

@@ -27,7 +27,7 @@ class AntaranCoDesign extends Component {
         return (
             <React.Fragment>
                 <NavbarComponent/>
-                <Container>
+                <Container className="overflownhidden">
                   <Row noGutters="true" className="asdthreadbg">
                     <Col sm={{size:"6"}} className="Col6">
                   <div noGutters="true">

@@ -106,11 +106,12 @@
     border-radius: 8px;
     /* opacity: 1; */
     backdrop-filter: blur(42px);
-    -webkit-backdrop-filter: blur(42px);
-    -webkit-filter: brightness(1);
+    /* -webkit-backdrop-filter: blur(42px);
+    -webkit-filter: brightness(1); */
 }
 .cpimage{
     width: 100%;
+    min-height: 240px;
 
 }
 .logoincard{

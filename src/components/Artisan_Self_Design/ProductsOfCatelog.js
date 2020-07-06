@@ -21,6 +21,9 @@ export class ProductsOfCatelog extends Component {
             proddata : this.props.productData,
             isfavHovered :false,
             imageurl : logos.dupatta,
+            imageUrl : TTCEapi.ImageUrl +"Product/"
+        
+
          
         };
       
@@ -48,7 +51,15 @@ export class ProductsOfCatelog extends Component {
         return (
             <div className="card cpCardlayout ">
                     <div className="cpimagediv">
-                    <img className="cpimage" src={this.state.imageurl}  alt="Card image cap"/>
+                    {this.state.proddata.productImages.length != 0 
+                                  ?
+                                  <img className="cpimage " src={this.state.imageUrl + this.state.proddata.productImages[0].productId + '/' + this.state.proddata.productImages[0].lable }  alt="Card image cap"/>
+
+                                :
+                                <img className="cpimage" src={this.state.imageurl}  alt="Card image cap"/>
+
+                                
+                                }
                     <div className="cpyellowdiv">
                        <div className="descriptionbox">
                          {this.state.proddata.product_spe}
@@ -61,10 +72,10 @@ export class ProductsOfCatelog extends Component {
                  
                     <Row noGutters={true} className="cpdetails">
                         <Col  className=" bold fontplay col-xs-8">
-        <div className="productname">{this.state.proddata.code}</div> 
+                          <div className="productname">{this.state.proddata.code}</div> 
                         </Col>
                         <Col className="col-xs-4">
-                          {this.state.proddata.productStatusId == 1 
+                          {this.state.proddata.productStatusId == 2 
                           ?
                           <Row noGutters={true} className="stockmargin">
                                 <Col className="Available">
@@ -74,7 +85,11 @@ export class ProductsOfCatelog extends Component {
                                 In Stock
                                 </Col>
                                 <Col className="text-center">
+                          
                                 <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+
+                                
+                            
                                 </Col>
                                 
                                 </Row>
@@ -102,7 +117,7 @@ export class ProductsOfCatelog extends Component {
                
                  <div>
                        <hr className="cpline"></hr>
-                     <Col style={{"padding-left":"0px"}} className = "col-xs-10">
+                     <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry">
                             Generate enquiry
                             <img className="cpwhitearrow" src={logos.whitearrow}></img>

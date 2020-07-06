@@ -43,7 +43,7 @@ import Footer from "../footer/footer";
          <img className="card-img-top-brand" src={this.state.defaultimgUrl}  alt="Default Img"/>
          }
           <div class="card-block cardaligntext">
-         <p class="card-text">{this.props.companyName ? <p>{this.props.companyName}</p>:<p>{this.props.firstName}</p>}</p>
+         <p class="card-text1">{this.props.companyName ? <p>{this.props.companyName}</p>:<p>{this.props.firstName}</p>}</p>
          </div>
          <div class="effect-text">
              <div class="effect-btn">

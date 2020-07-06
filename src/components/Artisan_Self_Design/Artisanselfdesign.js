@@ -35,7 +35,7 @@ class ArtistSelfDesign extends Component {
         return (
             <React.Fragment>
                 <NavbarComponent/>
-                <Container>
+                <Container className="overflownhidden">
                   <Row noGutters="true" className="asdthreadbg">
                     <Col sm={{size:"6"}} className="Col6">
                   <div noGutters="true">
@@ -47,7 +47,7 @@ class ArtistSelfDesign extends Component {
              
             
                   </Col>
-                  <Col sm={{size:"6"}} >
+                  <Col sm={{size:"6"}} className="headimgposter">
                     
                   <img className="Asdbg" src={logos.Ajrakhpur}  alt="Card image cap"/>
                   </Col></Row>

@@ -37,11 +37,11 @@ import Footer from "../footer/footer";
           
            <ul class="slides">
     <li id="slide1"><img src={logos.Kamrup}  alt="" />
-			    <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"15px",color:"silver"}}></i></a></li>
+			    <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
     <li id="slide2"><img src={logos.Maniabandhan} alt="" /> 
-			    <a className="next" href="#slide3"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"15px",color:"silver"}}></i></a></li>
+                    <a className="next" href="#slide3"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
     <li id="slide3"><img src={logos.Nalbari} alt="" />
-			    <a className="next" href="#slide1"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"15px",color:"silver"}}></i></a></li>
+              <a className="next" href="#slide1"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
 
   </ul>
           

@@ -71,9 +71,9 @@ import TTCEapi from "../../services/API/TTCEapi";
                 </Row>
                 <Row><Productcatelog></Productcatelog></Row>
 
-                {/* <Row noGutters={true}>
+                <Row noGutters={true}>
                   <div className="artistbg2"></div>
-                </Row> */}
+                </Row>
                 <Row noGutters={true} className="mt160">
                   <Col
                     sm={{ size: "4" }}

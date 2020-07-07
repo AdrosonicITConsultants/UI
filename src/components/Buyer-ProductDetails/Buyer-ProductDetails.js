@@ -202,23 +202,53 @@ class BuyersProductDetails extends Component {
   </Col>
   <Col sm={2} className="BPDmarginright">
   <h3 className="GeneralDetailsh3 text-center">Yarn</h3>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
   </Col>
   <Col sm={2} className="BPDmarginright">
     <h3 className="GeneralDetailsh3 text-center">Yarn Count</h3>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
   </Col>
-  <Col sm={2} className="BPDmarginright" >
+  <Col sm={2} className="" >
     <h3 className="GeneralDetailsh3 text-center">Dye used</h3>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
-    <p className="GeneralDetailsp text-center" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
   </Col>
 </Row>
+
+<Row noGutters="true" style={{marginTop:"86px"}}>
+  <Col xs={12} md={3} className="BPDmarginright" style={{textAlign:"center"}}>
+  <img src={logos.reedcount} className="specificationicon"/>
+  <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Reed Count</h3>
+  <p>XYZXYZ XY YZ</p>
+  </Col>
+  <Col xs={12} md={3} className="BPDmarginright BDPdetailscol" style={{textAlign:"center"}}>
+  <img src={logos.weight} className="specificationicon"/>
+  <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Weight</h3>
+  <p>SAREE <span  style={{marginLeft:"22px"}}>XYZ</span></p>
+  <hr className="hrspecBPD "></hr>
+  <p style={{marginTop:"-10px"}}>BLOUSE <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>XYZ</span></p>
+  </Col>
+  <Col xs={12} md={3} className="BPDmarginright"style={{textAlign:"center"}}>
+  <img src={logos.dimensions} className="specificationicon"/>
+  <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Dimensions L x W</h3>
+  <p>SAREE <span  style={{marginLeft:"22px"}}>XYZ x XYZ</span></p>
+  <hr className="hrspecBPD "></hr>
+  <p style={{marginTop:"-10px"}}>BLOUSE <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>XYZ x  XYZ</span></p>
+  </Col>
+  <Col xs={12} md={3} className=""style={{textAlign:"center"}}>
+  <img src={logos.GsmIcon} className="specificationicon"/>
+  <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>GSM (Gram per square meter)</h3>
+  <p>Fabric XYZgm</p>
+  
+  </Col>
+  
+</Row>
+<hr className="hrlineBPD "></hr>
 {/* -----------------Washcareinst--------------------- */}
 <Row noGutters="true">
 <h2 className="DescheadingBPD" style={{marginLeft:"10px" , fontFamily:"auto"}}>Wash and Care Instructions</h2>
@@ -405,6 +435,30 @@ class BuyersProductDetails extends Component {
   </Col>
   
 </Row>
+<Row noGutters={true}>
+                  <div className="artistbg2" style={{marginBottom:"-152px"}}></div>
+                </Row>
+                <Row noGutters={true} className="mt160">
+                  <Col
+                    sm={{ size: "4" }}
+                    xs={{ size: "4" }}
+                    md={{ size: "4" }}
+                    className="col-4 text-center"
+                  ></Col>
+                  <Col
+                    sm={{ size: "4" }}
+                    md={{ size: "4" }}
+                    xs={{ size: "4" }}
+                    className="artistbg3 col-4 text-center"
+                  ></Col>
+
+                  <Col
+                    sm={{ size: "4" }}
+                    md={{ size: "4" }}
+                    xs={{ size: "4" }}
+                    className="col-4 text-center"
+                  ></Col>
+                </Row>
 </Container>
            </React.Fragment>)
     }

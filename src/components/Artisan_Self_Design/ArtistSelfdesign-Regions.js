@@ -60,7 +60,7 @@ export default class ArtistSelfdesignRegions extends Component {
               <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
+                  <h4 class="card-title">{data.adjective}</h4>
                   <p class="card-text"> 
                   {data.desc}
                  </p>

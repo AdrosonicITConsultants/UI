@@ -57,7 +57,7 @@
     z-index: 1;
   }
   .slides img {
-    height: 528px;
+    height: 512px;
     -o-object-fit: cover;
        object-fit: cover;
     -o-object-position: top;

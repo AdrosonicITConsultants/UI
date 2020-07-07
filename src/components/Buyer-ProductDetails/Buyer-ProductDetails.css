@@ -22,6 +22,7 @@
 .BPDmarginright{
   border-right: 1px solid;
   color: gray;
+  height: 173px;
 }
 .BPDBrandname{
   font-size: 20px;
@@ -66,6 +67,12 @@
     border-top: 2.5px solid rgba(51, 51, 51, 0.84);;
     margin-top: -7px;
     text-align: center;
+}
+.hrspecBPD{
+  width: 150px;
+  border-top: 2.5px solid rgba(51, 51, 51, 0.84);;
+  margin-top: -7px;
+  text-align: center;
 }
 .Productdetailsh2{
   text-align: center;
@@ -131,6 +138,14 @@ scroll-behavior: smooth;
 
 .lottie.is-active {
   filter: none;
+}
+.bpdmgbt{
+  margin-bottom: 27px;
+}
+.specificationicon{
+  height: 55px;
+    /* max-width: 58px; */
+    object-fit: cover;
 }
 /* =================Card============= */
 .CardlayoutBDP{position: relative;

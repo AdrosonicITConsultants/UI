@@ -80,7 +80,7 @@ class ArtisianProducts extends Component {
         });
     }
     backoperation(){
-        browserHistory.push("/Artisanself"); 
+        browserHistory.push("/Artisanself/artisanbrands"); 
     }    
     
 

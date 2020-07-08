@@ -22,6 +22,7 @@ class productcatelog extends Component {
    
     TTCEapi.getArtitionProducts().then((response) => {
       if (response.data.data != null){
+        console.log(response.data.data);
         this.setState({ ProductListArtist: response.data.data }, () => { console.log(this.state) })
       }    
       //  this.setState({
@@ -65,7 +66,7 @@ class productcatelog extends Component {
                         </Col>
                         {/* <Col className="col-sm-4 col-md-4 hrline1"></Col> */}
                         <Col className="w10 col-sm-2 col-md-2 col-2 text-right">
-                          {items.products.length > 4 ? <span className="seemore">See More</span> : null}
+                          {items.products.length > 4 ? <span className="seemore"><a href ={"/products/" + "?categoryid="+ items.productCategory.id + "&userid=" + this.props.id}  >See More</a></span> : null}
                          
                         </Col>
                       </Row>

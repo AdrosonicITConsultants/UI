@@ -90,9 +90,6 @@ export default class addProduct extends Component {
                    this.fileUploader3 = React.createRef();
                    this.GSMNameComplete = React.createRef();
 
-                    
-                   
-                  
                    this.state = initialState;
                  }
 
@@ -106,7 +103,7 @@ export default class addProduct extends Component {
 
                  componentDidMount() {
                    console.log("did mount");
-
+                   console.log(this.state);
                    if (localStorage.getItem('ProductUploadData') != null) {
                      let response = JSON.parse(localStorage.getItem("ProductUploadData"))
                      this.setState(
@@ -156,58 +153,58 @@ export default class addProduct extends Component {
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
                    console.log(option);
-if(optionElement.innerHTML == "Fabric"){
-  this.setState({ showGSM: true});
-}
-else{
-  this.setState({ showGSM: false });
+                    if(optionElement.innerHTML == "Fabric"){
+                      this.setState({ showGSM: true});
+                    }
+                    else{
+                      this.setState({ showGSM: false });
 
-}
-if (option == -1){
+                    }
+                    if (option == -1){
 
-  this.setState(
-    {
-      productTypes: [],
-      relatedProduct: [],
-      savedrelatedProduct: [],
-      widths: [],
-      lengths: [],
-      productType: -1,
-      productTypeName: "",
-      [e.target.name]: parseInt(option),
-     
+                      this.setState(
+                        {
+                          productTypes: [],
+                          relatedProduct: [],
+                          savedrelatedProduct: [],
+                          widths: [],
+                          lengths: [],
+                          productType: -1,
+                          productTypeName: "",
+                          [e.target.name]: parseInt(option),
+                        
 
-    },
-    () => {
-      
-    }
-  );
-}
-else {
-  this.setState({ [e.target.name]: parseInt(option) }, () => {
-    console.log(this.state);
-    debugger;
+                        },
+                        () => {
+                          
+                        }
+                      );
+                    }
+                    else {
+                      this.setState({ [e.target.name]: parseInt(option) }, () => {
+                        console.log(this.state);
+                        debugger;
 
-    this.state.productCategories.filter((item) => {
-      if (item.id == this.state.productCategorie) {
-        this.setState(
-          {
-            productTypes: item.productTypes,
-            relatedProduct: [],
-            savedrelatedProduct: [],
-            widths: [],
-            lengths: [],
-            productType: "",
-            productTypeName: "",
-          },
-          () => {
-           
-          }
-        );
-      }
-    });
-  });
-}
+                        this.state.productCategories.filter((item) => {
+                          if (item.id == this.state.productCategorie) {
+                            this.setState(
+                              {
+                                productTypes: item.productTypes,
+                                relatedProduct: [],
+                                savedrelatedProduct: [],
+                                widths: [],
+                                lengths: [],
+                                productType: "",
+                                productTypeName: "",
+                              },
+                              () => {
+                              
+                              }
+                            );
+                          }
+                        });
+                      });
+                    }
   
                  }
 
@@ -736,7 +733,7 @@ relatedProductTemp[e.target.name] = option;
 
 
                               node =this.dimensionsComplete.current
-let relatedDimension = false;
+                              let relatedDimension = false;
                               this.state.savedrelatedProduct.map((item) => {
                                 if(item.length == undefined || item.length == -1 || item.width == undefined || item.width == -1 ){
                                   relatedDimension = true;
@@ -767,35 +764,35 @@ let relatedDimension = false;
 
                               
                                 node = this.washAndCare.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please select Wash & Care Instructions.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   node.scrollIntoView({
-     behavior: "smooth",
-     block: "center",
-     inline: "center",
-   });
-   return;
- }
+                                if (node.getAttribute("class") == "inComplete") {
+                                  customToast.error("Please select Wash & Care Instructions.", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                  });
+                                  node.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                    inline: "center",
+                                  });
+                                  return;
+                                }
 
                                 node = this.GSMNameComplete.current;
-;
- if (this.state.GSMName == "" && this.state.showGSM) {
-   customToast.error("Please enter description of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-    node.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "center",
-    });
-    return;
+                                ;
+                                if (this.state.GSMName == "" && this.state.showGSM) {
+                                  customToast.error("Please enter description of the Product.", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                  });
+                                  node.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                    inline: "center",
+                                  });
+                                  return;
 
-   return;
- }
+                                  return;
+                                }
 
  node = this.weightComplete.current;
  if (node.getAttribute("class") == "inComplete") {
@@ -811,15 +808,15 @@ let relatedDimension = false;
    return;
  }
 
- node = this.description.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please enter description of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
+                node = this.description.current;
+                if (node.getAttribute("class") == "inComplete") {
+                  customToast.error("Please enter description of the Product.", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
 
-   return;
- }
+                  return;
+                }
 
 
 
@@ -829,65 +826,75 @@ let relatedDimension = false;
                      SaveDisabled: true
                    }, ()=>{                   
                    })
- 
-                   
 
- 
- 
- productData.tag = this.state.productName;
- productData.code = this.state.productCode; 
- productData.productCategoryId = this.state.productCategorie;
- productData.productTypeId = this.state.productType;
- productData.productSpec = this.state.description;
- productData.weight = this.state.weight;
+                    
+                    productData.tag = this.state.productName;
+                    productData.code = this.state.productCode; 
+                    productData.productCategoryId = this.state.productCategorie;
+                    productData.productTypeId = this.state.productType;
+                    productData.productSpec = this.state.description;
+                    productData.weight = this.state.weight;
 
- productData.statusId = (this.state.isMTO ? 1 :2)
- productData.gsm = this.state.GSMName;
+                    productData.statusId = (this.state.isMTO ? 1 :2)
+                    productData.gsm = this.state.GSMName;
 
 
 
 
- productData.width = this.state.width;
- productData.length = this.state.length;
- debugger;
-productData.reedCountId = this.state.reedCount;
+                    productData.width = this.state.width;
+                    productData.length = this.state.length;
+                    debugger;
+                    productData.reedCountId = this.state.reedCount;
 
- this.state.wareAndCare.filter((item) => {
-   if(item.isChecked) {productData.careIds.push(item.id);}
- });
- this.state.weaves.filter((item) => {
-   if (item.isChecked) {
-     productData.weaveIds.push(item.id);
-   }
- });  
+                    this.state.wareAndCare.filter((item) => {
+                      if(item.isChecked) {productData.careIds.push(item.id);}
+                    });
+                    this.state.weaves.filter((item) => {
+                      if (item.isChecked) {
+                        productData.weaveIds.push(item.id);
+                      }
+                    });  
 
- productData.relatedProduct = this.state.savedrelatedProduct;
+                    productData.relatedProduct = this.state.savedrelatedProduct;
 
-  TTCEapi.uploadProduct(file1, file2, file3, productData).then((response) => {
- if (response.data.valid) {
-   customToast.success("Product added successfully!", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   this.Cancel();
-   this.setState({
-     SaveDisabled: false
-   })
- } else {
-   customToast.error(response.data.errorMessage, {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   this.setState({
-     SaveDisabled: false
-   })
- }
+                      TTCEapi.uploadProduct(file1, file2, file3, productData).then((response) => {
+                    if (response.data.valid) {
+                      customToast.success("Product added successfully!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.Cancel();
+                      this.setState({
+                        SaveDisabled: false,
+                        wareAndCare: [
+                          { id: 0, isChecked: false },
+                          { id: 1, isChecked: false },
+                          { id: 2, isChecked: false },
+                          { id: 3, isChecked: false },
+                          { id: 4, isChecked: false },
+                          { id: 5, isChecked: false },
+                          { id: 6, isChecked: false },
+                          { id: 7, isChecked: false },
+                          { id: 8, isChecked: false },
+                          { id: 9, isChecked: false },
+                          { id: 10, isChecked: false },
+                        ],
+                      })
+                    } else {
+                      customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.setState({
+                        SaveDisabled: false
+                      })
+                    }
 
-  });;
+                      });;
 
- 
+                    
 
-console.log(productData);
+                    console.log(productData);
                  };
 
                  Cancel = () => {

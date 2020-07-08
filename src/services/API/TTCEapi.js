@@ -240,6 +240,22 @@ class TTCEapi {
 
       });
   }
+
+  static getSimpleProduct(id) {
+    let url = ApiUrl + "/product/getSimpleProduct/"+id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
   static getProductCategoryProducts(id) {
     console.log(id)
     let url = ApiUrl + "/product/getProductCategoryProducts/"+id;
@@ -275,6 +291,21 @@ class TTCEapi {
   static getArtisianProducts(id) {
     console.log(id)
     let url = ApiUrl + "/product/getProductByArtisan/"+id;
+  
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+  static getArtisianProductCategory(userid , categoryid) {
+    console.log(userid,categoryid)
+    let url = ApiUrl + "/product/getProductCategoryAndArtisanProducts/"+categoryid +'/' + userid;
   
     return axios
       .get(url)

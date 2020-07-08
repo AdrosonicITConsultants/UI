@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
+import "./editProduct.css"
 
 const customStyles3 = {
   content: {
@@ -74,6 +75,7 @@ const initialState = {
   SaveDisabled:false,
   EditEnabled:false,
   componentMounted : false,
+  isEdit: false,
 };
 
 export default class addProduct extends Component {
@@ -104,7 +106,6 @@ export default class addProduct extends Component {
                      weaves: [...weaves],
                    });
                  };
-
                  componentDidMount() {
                    console.log("did mount");
                    this.myRefAddPhoto.current.scrollIntoView({
@@ -154,232 +155,247 @@ export default class addProduct extends Component {
            
         
                    let params = queryString.parse(this.props.location.search)
-                   TTCEapi.getProduct(params.ProductId).then((response) => {
+                   TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
                      console.log('heree');
                      console.log( response.data);
                      let productData =  response.data.data;
                      this.setProduct(productData);
                  })
                 }
-          toDataUrl = (url, callback) => {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = () => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    callback(reader.result);
+                toDataUrl = (url, callback) => {
+                  const xhr = new XMLHttpRequest();
+                  xhr.onload = () => {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                          callback(reader.result);
+                      };
+                      reader.readAsDataURL(xhr.response);
+                  };
+                  xhr.open('GET', url);
+                  xhr.responseType = 'blob';
+                  xhr.send();
                 };
-                reader.readAsDataURL(xhr.response);
-            };
-            xhr.open('GET', url);
-            xhr.responseType = 'blob';
-            xhr.send();
-          };
+                setProduct(productData){
+                
 
-            setProduct(productData){
-            
+                  productData.productImages.map((img, index) => {
+                
+                  this.toDataUrl(
+                      TTCEapi.ImageUrl +
+                        "Product/" +
+                        img.productId +
+                        "/" +
+                        img.lable,
+                      (myBase64) => {
+                        let filename = {};
+                        filename.name = img.lable;
+                      // console.log(myBase64); // myBase64 is the base64 string
+                        this.setState({
+                          ["imagePreviewUrl" + (index + 1)]: myBase64,
+                          isImageUploadComplete: true,
+                          ["selectedFile" + (index + 1)]: {
+                            filename,
+                            myBase64,
+                          },
+                        });
+                      }
+                    );
+                  });
 
-              productData.productImages.map((img, index) => {
-            
-               this.toDataUrl(
-                  TTCEapi.ImageUrl +
-                    "Product/" +
-                    img.productId +
-                    "/" +
-                    img.lable,
-                  (myBase64) => {
-                    let filename = {};
-                    filename.name = img.lable;
-                   // console.log(myBase64); // myBase64 is the base64 string
+                  let washandCareIDs = productData.productCares.map(
+                    (e) => e.productCareId
+                  );
+                  washandCareIDs.map((id) => {
+                    this.onselectWareAndCare(id);
+                  });
+
+                  let productWeavesIds = productData.productWeaves.map(
+                    (e) => e.weaveId
+                  );
+
+                  let { weaves } = this.state;
+                  productWeavesIds.map((id) => {
+                    weaves[id - 1].isChecked = true;
                     this.setState({
-                      ["imagePreviewUrl" + (index + 1)]: myBase64,
-                      isImageUploadComplete: true,
-                      ["selectedFile" + (index + 1)]: {
-                        filename,
-                        myBase64,
-                      },
+                      weaves: [...weaves],
                     });
+                  });
+                  
+                  let wareAndCare1= [
+                    { id: 0, isChecked: false },
+                    { id: 1, isChecked: false },
+                    { id: 2, isChecked: false },
+                    { id: 3, isChecked: false },
+                    { id: 4, isChecked: false },
+                    { id: 5, isChecked: false },
+                    { id: 6, isChecked: false },
+                    { id: 7, isChecked: false },
+                    { id: 8, isChecked: false },
+                    { id: 9, isChecked: false },
+                    { id: 10, isChecked: false },
+                  ];
+                  for(var  i=0; i < productData.productCares.length; i++ )
+                  { wareAndCare1[productData.productCares[i].productCareId].isChecked = true;
+                    console.log(productData.productCares[i].productCareId);
                   }
-                );
-              });
+                      this.setState(
+                        {
+                          isavailable:
+                            productData.productStatusId == 2 ? true : false,
+                          isMTO: productData.productStatusId == 2 ? false : true,
+                          weight: productData.weight,
+                          description: productData.productSpec,
+                          reedCount: productData.reedCountId,
+                          productCategorie: productData.productCategoryId,
+                          productName: productData.tag,
+                          productCode: productData.code,
+                          yarn1: productData.warpYarnId,
+                          yarn2: productData.weftYarnId,
+                          yarn3:
+                            productData.extraWeftYarnId != null
+                              ? productData.extraWeftYarnId
+                              : "",
+                          dye1: productData.warpDyeId,
+                          dye2: productData.weftDyeId,
+                          dye3:
+                            productData.extraWeftDyeId != null
+                              ? productData.extraWeftDyeId
+                              : "",
+                          showGSM: productData.gsm ? true : false,
+                          GSMName: productData.gsm ? productData.gsm : false,
+                          wareAndCare : wareAndCare1,
 
-               let washandCareIDs = productData.productCares.map(
-                 (e) => e.productCareId
-               );
-               washandCareIDs.map((id) => {
-                 this.onselectWareAndCare(id);
-               });
+                        },
+                        () => {
+                          // console.log("after all basic setup");
 
-               let productWeavesIds = productData.productWeaves.map(
-                 (e) => e.weaveId
-               );
-
-               let { weaves } = this.state;
-               productWeavesIds.map((id) => {
-                 weaves[id - 1].isChecked = true;
-                 this.setState({
-                   weaves: [...weaves],
-                 });
-               });
-              
-
-                  this.setState(
-                    {
-                      isavailable:
-                        productData.productStatusId == 2 ? true : false,
-                      isMTO: productData.productStatusId == 2 ? false : true,
-                      weight: productData.weight,
-                      description: productData.productSpec,
-                      reedCount: productData.reedCountId,
-                      productCategorie: productData.productCategoryId,
-                      productName: productData.tag,
-                      productCode: productData.code,
-                      yarn1: productData.warpYarnId,
-                      yarn2: productData.weftYarnId,
-                      yarn3:
-                        productData.extraWeftYarnId != null
-                          ? productData.extraWeftYarnId
-                          : "",
-                      dye1: productData.warpDyeId,
-                      dye2: productData.weftDyeId,
-                      dye3:
-                        productData.extraWeftDyeId != null
-                          ? productData.extraWeftDyeId
-                          : "",
-                      showGSM: productData.gsm ? true : false,
-                      GSMName: productData.gsm ? productData.gsm : false,
-                    },
-                    () => {
-                      // console.log("after all basic setup");
-
-                      // console.log(this.state);
-                      this.state.productCategories.filter((item) => {
-                        if (item.id == this.state.productCategorie) {
-                          debugger;
-                      
-                          this.setState(
-                            {
-                              productTypes: item.productTypes,
-                              productType: productData.productTypeId,
-                              productTypeName: item.productDesc,
-                            },
-                            () => {
-                              // console.log(this.state);
-
-                              this.state.productTypes.filter((item) => {
-                                if (item.id == this.state.productType) {
-                                  if (item.relatedProductType.length != 0) {
-                                    this.setState(
-                                      {
-                                        lengths: item.productLengths,
-                                        widths: item.productWidths,
-
-                                        relatedProduct: item.relatedProductType,
-                                        savedrelatedProduct: item.relatedProductType.map(
-                                          (e) => ({
-                                            productTypeId: e.id,
-                                          })
-                                        ),
-                                      },
-                                      () => {
-                                        //  console.log("after related");
-
-                                        //  console.log(this.state);
-                                        if (productData.relProduct.length > 0) {
-                                          this.setState({
-                                            length: productData.length,
-                                            width: productData.width,
-                                          });
-                                          productData.relProduct.map((prod) => {
-                                            let relatedProductTemp = this.state.savedrelatedProduct.find(
-                                              (e) =>
-                                                e.productTypeId ==
-                                                prod.productTypeId
-                                            );
-                                            relatedProductTemp["length"] =
-                                              prod.length;
-                                            relatedProductTemp["width"] =
-                                              prod.width;
-                                          });
-
-                                          this.setState({
-                                            savedrelatedProduct: this.state
-                                              .savedrelatedProduct,
-                                          });
-                                        } else {
-                                          this.setState({
-                                            length: productData.length,
-                                            width: productData.width,
-                                          });
-                                        }
-                                      }
-                                    );
-                                  } else {
-                                    this.setState(
-                                      {
-                                        lengths: item.productLengths,
-                                        widths: item.productWidths,
-
-                                        relatedProduct: [],
-                                        savedrelatedProduct: [],
-                                      },
-                                      () => {
-                                        //  console.log(this.state);
-                                      }
-                                    );
-                                  }
-                                }
-                              });
-
+                          // console.log(this.state);
+                          this.state.productCategories.filter((item) => {
+                            if (item.id == this.state.productCategorie) {
+                              debugger;
+                          
                               this.setState(
                                 {
-                                  countOfYarn1: this.state.yarns.find(
-                                    (eID) => eID.id == this.state.yarn1
-                                  ).yarnType.manual
-                                    ? []
-                                    : this.state.yarns.find(
-                                        (eID) => eID.id == this.state.yarn1
-                                      ).yarnType.yarnCounts,
-                                  yarnCount1: "",
-                                  countOfYarn2: this.state.yarns.find(
-                                    (eID) => eID.id == this.state.yarn2
-                                  ).yarnType.manual
-                                    ? []
-                                    : this.state.yarns.find(
-                                        (eID) => eID.id == this.state.yarn2
-                                      ).yarnType.yarnCounts,
-                                  yarnCount2: "",
-                                  countOfYarn3:
-                                    this.state.yarns.find(
-                                      (eID) => eID.id == this.state.yarn3
-                                    ) == undefined
-                                      ? []
-                                      : this.state.yarns.find(
-                                          (eID) => eID.id == this.state.yarn3
-                                        ).yarnType.yarnCounts,
-                                  yarnCount3: "",
+                                  productTypes: item.productTypes,
+                                  productType: productData.productTypeId,
+                                  productTypeName: item.productDesc,
                                 },
                                 () => {
-                                  this.setState({
-                                    yarnCount1: productData.warpYarnCount,
-                                    yarnCount2: productData.weftYarnCount,
-                                    yarnCount3: productData.extraWeftYarnCount,
-                                    length: productData.length,
-                                    width: productData.width,
-                                    componentMounted: true,
+                                  // console.log(this.state);
+
+                                  this.state.productTypes.filter((item) => {
+                                    if (item.id == this.state.productType) {
+                                      if (item.relatedProductType.length != 0) {
+                                        this.setState(
+                                          {
+                                            lengths: item.productLengths,
+                                            widths: item.productWidths,
+
+                                            relatedProduct: item.relatedProductType,
+                                            savedrelatedProduct: item.relatedProductType.map(
+                                              (e) => ({
+                                                productTypeId: e.id,
+                                              })
+                                            ),
+                                          },
+                                          () => {
+                                            //  console.log("after related");
+
+                                            //  console.log(this.state);
+                                            if (productData.relProduct.length > 0) {
+                                              this.setState({
+                                                length: productData.length,
+                                                width: productData.width,
+                                              });
+                                              productData.relProduct.map((prod) => {
+                                                let relatedProductTemp = this.state.savedrelatedProduct.find(
+                                                  (e) =>
+                                                    e.productTypeId ==
+                                                    prod.productTypeId
+                                                );
+                                                relatedProductTemp["length"] =
+                                                  prod.length;
+                                                relatedProductTemp["width"] =
+                                                  prod.width;
+                                              });
+
+                                              this.setState({
+                                                savedrelatedProduct: this.state
+                                                  .savedrelatedProduct,
+                                              });
+                                            } else {
+                                              this.setState({
+                                                length: productData.length,
+                                                width: productData.width,
+                                              });
+                                            }
+                                          }
+                                        );
+                                      } else {
+                                        this.setState(
+                                          {
+                                            lengths: item.productLengths,
+                                            widths: item.productWidths,
+
+                                            relatedProduct: [],
+                                            savedrelatedProduct: [],
+                                          },
+                                          () => {
+                                            //  console.log(this.state);
+                                          }
+                                        );
+                                      }
+                                    }
                                   });
+
+                                  this.setState(
+                                    {
+                                      countOfYarn1: this.state.yarns.find(
+                                        (eID) => eID.id == this.state.yarn1
+                                      ).yarnType.manual
+                                        ? []
+                                        : this.state.yarns.find(
+                                            (eID) => eID.id == this.state.yarn1
+                                          ).yarnType.yarnCounts,
+                                      yarnCount1: "",
+                                      countOfYarn2: this.state.yarns.find(
+                                        (eID) => eID.id == this.state.yarn2
+                                      ).yarnType.manual
+                                        ? []
+                                        : this.state.yarns.find(
+                                            (eID) => eID.id == this.state.yarn2
+                                          ).yarnType.yarnCounts,
+                                      yarnCount2: "",
+                                      countOfYarn3:
+                                        this.state.yarns.find(
+                                          (eID) => eID.id == this.state.yarn3
+                                        ) == undefined
+                                          ? []
+                                          : this.state.yarns.find(
+                                              (eID) => eID.id == this.state.yarn3
+                                            ).yarnType.yarnCounts,
+                                      yarnCount3: "",
+                                    },
+                                    () => {
+                                      this.setState({
+                                        yarnCount1: productData.warpYarnCount,
+                                        yarnCount2: productData.weftYarnCount,
+                                        yarnCount3: productData.extraWeftYarnCount,
+                                        length: productData.length,
+                                        width: productData.width,
+                                        componentMounted: true,
+                                      });
+                                    }
+                                  );
                                 }
                               );
                             }
-                          );
+                          });
                         }
-                      });
+                      );
+
+                    
                     }
-                  );
-
-                
-                }
-
-
                  handleproductCategories(e) {
                    // console.log(e.target.id);
                   
@@ -441,7 +457,6 @@ else {
 }
   
                  }
-
                  handleReedCounts(e) {
          
                    var index = e.target.selectedIndex;
@@ -452,7 +467,6 @@ else {
                 //     console.log(this.state);
                    });
                  }
-
                  handleproductTypes(e) {
                    
                    var index = e.target.selectedIndex;
@@ -509,7 +523,6 @@ else {
                      }
                    );
                  }
-
                  handleyarns(e, stateNumber) {
          
                    var index = e.target.selectedIndex;
@@ -544,7 +557,6 @@ else {
                    }
                     
                  }
-
                  handleDropdown(e) {
                
                    var index = e.target.selectedIndex;
@@ -555,7 +567,6 @@ else {
                 //     console.log(this.state);
                    });
                  }
-
                  handleDropdownCountOfYarn(e)
                   {
                    
@@ -567,7 +578,6 @@ else {
                   //    console.log(this.state);
                     });
                   }
-
                  handleChange(e) {
                    if (e.target.id == "productCode" || e.target.id ==  "description"){
                      this.setState({ [e.target.name]: e.target.value });
@@ -583,7 +593,7 @@ else {
                      this.setState({ [e.target.name]: e.target.value });
                    }                
                  }
-
+                 
                  //#region Image processing
                  resetImage(num) {
                    if (num == 3) {
@@ -619,8 +629,7 @@ else {
                      });
                    }
                  }
-
-                  fileChangedHandler = (event, num) => {
+                 fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
 
           
@@ -668,8 +677,7 @@ else {
                        }
                      }
                  };
-
-                  dataURLtoFile(dataurl, filename) {
+                 dataURLtoFile(dataurl, filename) {
  
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -682,8 +690,7 @@ else {
         }
         
         return new File([u8arr], filename, {type:mime});
-    }
-
+                 }
                  GenerateImage = (num) => {
                  
                    if (
@@ -772,33 +779,31 @@ else {
                    }
                  };
                  //#endregion
-
                  handlesavedrelatedProductDropdown = (e, id) =>{
- 
- var index = e.target.selectedIndex;
- var optionElement = e.target.childNodes[index];
- var option = optionElement.getAttribute("id");
- //console.log(option);
+
+                  var index = e.target.selectedIndex;
+                  var optionElement = e.target.childNodes[index];
+                  var option = optionElement.getAttribute("id");
+                  //console.log(option);
 
 
- let relatedProductTemp = this.state.savedrelatedProduct.find(
-   (e) => e.productTypeId == id
- );
-relatedProductTemp[e.target.name] = option;
+                  let relatedProductTemp = this.state.savedrelatedProduct.find(
+                    (e) => e.productTypeId == id
+                  );
+                  relatedProductTemp[e.target.name] = option;
 
- this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-   //console.log(this.state);
- });
+                  this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
+                    //console.log(this.state);
+                  });
 
 
-// let relatedProduct = [];
-// relatedProduct.Length  .e.target;
- 
-//  this.setState({ [e.target.name]: parseInt(option) }, () => {
-//    console.log(this.state);
-//  });
+                  // let relatedProduct = [];
+                  // relatedProduct.Length  .e.target;
+
+                  //  this.setState({ [e.target.name]: parseInt(option) }, () => {
+                  //    console.log(this.state);
+                  //  });
                  }
-
                  onselectWareAndCare = (i) => {
                    let { wareAndCare } = this.state;
                    wareAndCare[i].isChecked = !wareAndCare[i].isChecked;
@@ -814,7 +819,9 @@ relatedProductTemp[e.target.name] = option;
                      iswashAndCareComplete: ischecked,
                    });
                  };
-
+                 editenabled = () =>{
+                   this.setState({isEdit:true});
+                 }
                  Save = () => {                
                    let productData = {};
                     productData.productCares = [];
@@ -972,7 +979,7 @@ relatedProductTemp[e.target.name] = option;
 
 
                               node =this.dimensionsComplete.current
-let relatedDimension = false;
+                              let relatedDimension = false;
                               this.state.savedrelatedProduct.map((item) => {
                                 if(item.length == undefined || item.length == -1 || item.width == undefined || item.width == -1 ){
                                   relatedDimension = true;
@@ -1003,145 +1010,132 @@ let relatedDimension = false;
 
                               
                                 node = this.washAndCare.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please select Wash & Care Instructions.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   node.scrollIntoView({
-     behavior: "smooth",
-     block: "center",
-     inline: "center",
-   });
-   return;
- }
+                                  if (node.getAttribute("class") == "inComplete") {
+                                    customToast.error("Please select Wash & Care Instructions.", {
+                                      position: toast.POSITION.TOP_RIGHT,
+                                      autoClose: true,
+                                    });
+                                    node.scrollIntoView({
+                                      behavior: "smooth",
+                                      block: "center",
+                                      inline: "center",
+                                    });
+                                    return;
+                                  }
 
                                 node = this.GSMNameComplete.current;
-;
- if (this.state.GSMName == "" && this.state.showGSM) {
-   customToast.error("Please enter description of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-    node.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "center",
-    });
-    return;
+                            ;
+                            if (this.state.GSMName == "" && this.state.showGSM) {
+                              customToast.error("Please enter description of the Product.", {
+                                position: toast.POSITION.TOP_RIGHT,
+                                autoClose: true,
+                              });
+                                node.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "center",
+                                  inline: "center",
+                                });
+                                return;
 
-   return;
- }
+                              return;
+                            }
 
- node = this.weightComplete.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please enter weight of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   node.scrollIntoView({
-     behavior: "smooth",
-     block: "center",
-     inline: "center",
-   });
-   return;
- }
+                              node = this.weightComplete.current;
+                              if (node.getAttribute("class") == "inComplete") {
+                                customToast.error("Please enter weight of the Product.", {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  autoClose: true,
+                                });
+                                node.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "center",
+                                  inline: "center",
+                                });
+                                return;
+                              }
 
- node = this.description.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please enter description of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
+                              node = this.description.current;
+                              if (node.getAttribute("class") == "inComplete") {
+                                customToast.error("Please enter description of the Product.", {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  autoClose: true,
+                                });
 
-   return;
- }
+                                return;
+                              }
 
-
-
- 
- 
                    this.setState({
                      SaveDisabled: true
                    }, ()=>{                   
                    })
- 
-                   
 
                    let params = queryString.parse(this.props.location.search)
                  
-                     productData.id = params.ProductId           
- productData.tag = this.state.productName;
- productData.code = this.state.productCode; 
- productData.productCategoryId = this.state.productCategorie;
- productData.productTypeId = this.state.productType;
- productData.productSpec = this.state.description;
- productData.weight = this.state.weight;
+                      productData.id = params.ProductId           
+                      productData.tag = this.state.productName;
+                      productData.code = this.state.productCode; 
+                      productData.productCategoryId = this.state.productCategorie;
+                      productData.productTypeId = this.state.productType;
+                      productData.productSpec = this.state.description;
+                      productData.weight = this.state.weight;
 
- productData.productStatusId = this.state.isMTO ? 1 : 2;
- productData.gsm = this.state.GSMName;
+                      productData.productStatusId = this.state.isMTO ? 1 : 2;
+                      productData.gsm = this.state.GSMName;
+                      productData.width = this.state.width;
+                      productData.length = this.state.length;
+                      productData.reedCountId = this.state.reedCount;
 
+                    this.state.wareAndCare.filter((item) => {
+                      if(item.isChecked) {     
+                        productData.productCares.push({
+                          id: 0,
+                          productCareId: item.id,
+                          productId: productData.id,
+                        });}
+                    });
+                    //  this.state.weaves.filter((item) => {
+                    //    if (item.isChecked) {
+                    //      productData.productWeaves.push({
+                    //        id: 0,
+                    //        productId: productData.id,
+                    //        weaveId: item.id,
+                    //      });
+                    //    }
+                    //  });  
 
+                    productData.relProduct = this.state.savedrelatedProduct;
+                    debugger;
+                                      TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
+                    if (response.data.valid) {
+                      customToast.success("Product updated successfully!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.Cancel();
+                      this.setState({
+                        SaveDisabled: false
+                      })
+                    } else {
+                      customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.setState({
+                        SaveDisabled: false
+                      })
+                    }
 
+                      });;
 
- productData.width = this.state.width;
- productData.length = this.state.length;
+                    
 
-productData.reedCountId = this.state.reedCount;
-
- this.state.wareAndCare.filter((item) => {
-   if(item.isChecked) {     
-     productData.productCares.push({
-       id: 0,
-       productCareId: item.id,
-       productId: productData.id,
-     });}
- });
-//  this.state.weaves.filter((item) => {
-//    if (item.isChecked) {
-//      productData.productWeaves.push({
-//        id: 0,
-//        productId: productData.id,
-//        weaveId: item.id,
-//      });
-//    }
-//  });  
-
- productData.relProduct = this.state.savedrelatedProduct;
-debugger;
-                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
- if (response.data.valid) {
-   customToast.success("Product updated successfully!", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   this.Cancel();
-   this.setState({
-     SaveDisabled: false
-   })
- } else {
-   customToast.error(response.data.errorMessage, {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   this.setState({
-     SaveDisabled: false
-   })
- }
-
-  });;
-
- 
-
-console.log(productData);
+                    console.log(productData);
                  };
-
                  Cancel = () => {
                  
                  
                    browserHistory.push("./home")
                  };
-
                  ResetAll = () => {
                     window.location.reload(false);                  
 
@@ -1175,20 +1169,20 @@ console.log(productData);
 
                                    {/* <div class="loader"></div> */}
                                  </Col>
-                                 {this.state.componentMounted ? null : (
+                                 {/* {this.state.componentMounted ? null : ( */}
                                    <Col
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
                                      md={{ size: "2" }}
                                      className="col-2 right"
                                    >
-                                     <div class="spinner">
-                                       <div class="bounce1"></div>
-                                       <div class="bounce2"></div>
-                                       <div class="bounce3"></div>
-                                     </div>
+                                     <button
+                                      className="EditProductbutton"
+                                      disabled = {this.state.isEdit}
+                                      onClick={() => {this.editenabled()}}
+                                      >Edit</button>
                                    </Col>
-                                 )}
+                                 {/* )} */}
                                </Row>
                                <Row noGutters={true}>
                                  <Col
@@ -1242,7 +1236,9 @@ console.log(productData);
                                        xs={{ size: "4" }}
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
-                                     >
+                                     >{this.state.isEdit 
+                                     ?
+                                     <>
                                        {" "}
                                        <div>
                                          <div className="col-xs-12">
@@ -1264,6 +1260,14 @@ console.log(productData);
                                            ></input>
                                          </div>
                                        </div>
+                                       </>
+
+                                     :
+                                     <>
+                                     {console.log(this.state.selectedFile1.myBase64)}
+                                     </>
+                                    }
+                                      
                                      </Col>
                                      <Col
                                        sm={{ size: "4" }}
@@ -1271,7 +1275,10 @@ console.log(productData);
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
                                      >
-                                       {" "}
+                                       {this.state.isEdit
+                                       ?
+                                       <>
+                                        {" "}
                                        <div>
                                          {this.GenerateImage(2)}
 
@@ -1288,6 +1295,14 @@ console.log(productData);
                                            style={{ display: "none" }}
                                          ></input>
                                        </div>
+                                       </>
+                                      :
+                                      <>
+                                         {console.log(this.state.selectedFile2.myBase64 == undefined)}
+
+                                      </>
+                                      }
+                                      
                                      </Col>
                                      <Col
                                        sm={{ size: "4" }}
@@ -1295,6 +1310,9 @@ console.log(productData);
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
                                      >
+                                       {this.state.isEdit
+                                       ?
+                                       <>
                                        {" "}
                                        <div>
                                          {this.GenerateImage(3)}
@@ -1312,7 +1330,15 @@ console.log(productData);
                                            style={{ display: "none" }}
                                          ></input>
                                        </div>
-                                     </Col>
+
+                                       </>
+                                      :
+                                      <>
+                                       {console.log(this.state.selectedFile3)}
+
+                                      </>
+                                      }
+                                                                            </Col>
                                    </Row>
                                  </Col>
                                  <Col
@@ -1476,6 +1502,7 @@ console.log(productData);
                                        md={{ size: "6" }}
                                        className="col-6 text-right"
                                      >
+                                       {console.log(this.state)}
                                        <select
                                          id="productCategorie"
                                          className="productDropdown"

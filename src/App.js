@@ -27,6 +27,7 @@ import AntaranProductCategories from './components/Artisan_Self_Design/AntaranPr
 import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
+import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
 
 function App() {
   
@@ -42,16 +43,17 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
-          
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
-
+          <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
+          <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
+
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
           /Artisanself/artisanbrands/ArtisanProducts

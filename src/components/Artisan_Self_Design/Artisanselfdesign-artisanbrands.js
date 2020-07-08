@@ -9,6 +9,7 @@ import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 import ArtisanCard from './ArtisanCard';
+import BuyersProductDetails from '../Buyer-ProductDetails/Buyer-ProductDetails';
 
  class ArtistSelfDesignBrands extends Component {
       constructor(props){
@@ -91,10 +92,13 @@ this.state.filterArtisian.map((data,index) => {
     profilePic={data.profilePic}
     artisanId={data.artisanId}
     />
+ 
   );
  })
 
 :null}
+
+
 {this.state.cluster? this.state.filterArtisian.map((data,index) => {
  if(this.state.clusterid==-1)
  return(
@@ -109,6 +113,8 @@ this.state.filterArtisian.map((data,index) => {
  )
 }):null
 }
+
+
 </Row>
   
     

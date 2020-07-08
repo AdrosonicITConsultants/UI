@@ -2,12 +2,17 @@
   height: 45px;
 }
 .BPDAntaranlogo2{
-  height: 85px;
+  height: 60px;
+  float:left
 }
 .BPDCol2{
   font-family: auto;
   }
 
+.card-sizeBPd{
+  width: 100%;
+  height: 208px;
+}
   .BPDCol2 h1{
     font-size: 34px;
     }
@@ -18,6 +23,24 @@
   font-family: none;
   letter-spacing: 0.1px;
   text-align: justify;
+}
+
+.likeitbg {
+  background: url('../../assets/Like\ it\ backdrop.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center; */
+    width: 100%;
+    z-index: 1000;
+    /* height: 400px; */
+    /* opacity: 1.7; */
+    width: 100%;
+}
+.likeitbg h3{
+  font-size: 38px;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 800;
 }
 .BPDmarginright{
   border-right: 1px solid;
@@ -96,7 +119,7 @@ text-align: justify;
 }
 
 .GeneralDetailsp{
-  font-size: 17px;
+  font-size: 14px;
     font-weight: 600;
     color: rgba(51, 51, 51, 0.84);
     

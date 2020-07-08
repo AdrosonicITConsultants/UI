@@ -10,54 +10,179 @@ import './Buyer-ProductDetails.css';
 import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import BPCarousel from './Buyers-Productcarousel';
+import queryString from 'query-string';
+import SeeMoreProduct from './Seemoreproduct';
 class BuyersProductDetails extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props){
-      super(props);
-      this.state = {
-       
-      }
+    this.state = {
      
-      
+      ProductData : [],
+      getProductCategoryAndClusterProducts:[],
+      value : false,
+      filterArtisian:[],
+      clicked: true  ,
+      logo:this.props.logo,
+      profilePic:this.props.profilePic,
+      logoUrl:[],
+      profilePicUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/ProfilePics/'+this.props.profilePic,
+      defaultimgUrl:logos.Smile,             
+      visible:5
+    };
+    
     }
+  
+     
+  componentDidMount(){
+    let params = queryString.parse(this.props.location.search);
+  
+     TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
+          this.setState({ProductData :response.data.data},()=>{
+          console.log(this.state.ProductData);
+
+          this.setState({
+            dataload : true,
+                      });
+                      TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{
+                        this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
+                            console.log(this.state.getProductCategoryAndClusterProducts);
+                            
+
+                            // console.log(this.props.user);
+                        });
+                      });
+        
+      });
+  });
+  TTCEapi.getFilteredArtisans().then((response)=>{
+    this.setState({filterArtisian : response.data.data},()=>{
+        console.log(this.state.filterArtisian);
+        this.state.filterArtisian.map((data)=>{
+          this.setState({logoUrl:TTCEapi.ImageUrl+'User/'+data.artisanId+'/CompanyDetails/Logo/'+data.logo})
+          // logoUrl:TTCEapi.ImageUrl+'User/'+this.state.ProductData.artitionId+'/CompanyDetails/Logo/'+this.state.filterArtisian.logo,
+                    
+        })
+        // console.log(this.props.user);
+    });
+});
+
+
+  }
     render() {
         return (
 
            <React.Fragment>
+               {this.state.dataload == true 
+                   
+                   ? 
+                   <>
               <NavbarComponent/>
-              
+            
              <Container>
 <Row noGutters="true" id="#Top">
   <Col md={6} lg={6}sm={12} xs={12} style={{marginTop:"27px"}}>
-    <BPCarousel/>
+{/* 
+{this.state.ProductData.productImages ?this.state.ProductData.productImages.map((data)=>
+{
+  return(
+  <BPCarousel
+    
+  Image={data}
+   />
+  )
+}):null
+} */}
+   
+
+    <BPCarousel
+  Image={this.state.ProductData.productImages?this.state.ProductData.productImages:null}
+    />
   </Col>
   <Col  md={6} lg={6}sm={12} xs={12} className="BPDCol2">
-    <h1>Blue-Green Katan Silk-Banarasi</h1>
-    <h1>Handloon Dupatta</h1>
-  <p>Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.
-     Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.</p>
-   <Row noGutters="true">
+  {this.state.ProductData.tag ?   <h1>{this.state.ProductData.tag}</h1>:null}
+  {this.state.ProductData.productCategory ?  <h1>{this.state.ProductData.productCategory.productDesc}</h1> :null}
+  
+  {this.state.ProductData.product_spe ?
+<p>{this.state.ProductData.product_spe}</p>
+    :null}
+     {this.state.ProductData.madeWithAnthran==0?
+     <Row noGutters="true">
+     <Col sm={2}>  <img className="BPDAntaranlogo" src={logos.artisianSelfLogo}  alt="Card image cap"/></Col>
+     <Col sm={10} className="BPDBrandname">Artisian Co-Design Collection</Col>
+     <hr className="hrlineBPD "></hr>
+   </Row>
+     :
+     <Row noGutters="true">
      <Col sm={2}>  <img className="BPDAntaranlogo" src={logos.AntaranCodesignIcon}  alt="Card image cap"/></Col>
      <Col sm={10} className="BPDBrandname">Antaran Co-Design Collection</Col>
      <hr className="hrlineBPD "></hr>
    </Row>
+     }
+  
+    
    <Row noGutters="true" >
       <Col sm={12} className="BPDartisianame">
-        Artisan Brand : <span className="brandcolor">Chidiya</span>
+        Artisan Brand : 
+        {this.state.ProductData.brand ? <span className="brandcolor">
+          {this.state.ProductData.brand}</span>:null}
+         
       </Col>
     </Row>
     <Row noGutters="true">
-      <Col sm={3} className="BPDartisianame">
-      <img className="BPDAntaranlogo2" src={logos.Smile}  alt="Card image cap"/>
-      </Col>
-      <hr className="hrlineBPD "></hr>
-    </Row>
+   
+ {
+  this.state.filterArtisian.map((data) => {
+    // {console.log(data.logo)}
+    // {console.log(this.state.ProductData.artitionId)}
+  
+     
+   if(data.artisanId==this.state.ProductData.artitionId)
+   
+    return (
+    
+      <img className="BPDAntaranlogo2" src={TTCEapi.ImageUrl+'User/'+data.artisanId+'/CompanyDetails/Logo/'+data.logo}  alt="Logo"/>
+    
+      );
+      else if(data.artisanId!=this.state.ProductData.artitionId)
+      return("");
+    
+   })
+  
+  }
+    <Col sm={3} className="BPDartisianame">
+   
+    {/* <img className="BPDAntaranlogo2" src={this.state.defaultimgUrl}  alt="Logo"/> */}
+    </Col>
+ 
+   </Row>
+   <hr className="hrlineBPD "></hr>
+   
+
+  
+ 
+  
+
+
     <Row noGutters="true">
      <Col sm={12} className="BDPdetailscol">
-     <p >Region of origin :<span> Manibandhan, Odisha</span></p>
+     <p >Region of origin :
+     {this.state.ProductData.clusterName ? 
+     <span>{this.state.ProductData.clusterName}</span>
+     :null}
+      </p>
      <p>Material Used :<span> Cotton, Silk, Mulbary</span></p>
-     <p>Product Category :<span> Handloom Dupatta</span></p>
-     <p>Weight :<span> 100g</span></p>
+               <p>Product Category :
+               {this.state.ProductData.productCategory?
+                 <span>{this.state.ProductData.productCategory.productDesc}</span>
+                :null}
+               </p>
+               <p>Weight :
+               {this.state.ProductData.weight ?
+                <span> {this.state.ProductData.weight}g</span>
+                :null
+               }
+                </p>
      </Col>
      <p className="BPDSeemorelink">
      <a href="#productdetail">See all product details</a>
@@ -66,9 +191,15 @@ class BuyersProductDetails extends Component {
    
    </Row>
    <Row noGutters="true">
-     <Col sm={12} className="BPDStockstatus">
+     {this.state.ProductData.productStatusId=="2" ?
+      <Col sm={12} className="BPDStockstatus">
     Available <b>In Stock</b>
-     </Col>
+     </Col> :
+     <Col sm={12} className="BPDStockstatus" >
+      <b style={{color:"purple"}}>Exclusively</b>made to order
+      </Col>
+     }
+     
       </Row>
 
       <Row noGutters="true">
@@ -95,9 +226,10 @@ class BuyersProductDetails extends Component {
      <Col sm={6} >
      <div class="buttons" style={{border:"2px solid black"}}>
   <button class="bpdbutton -bg-white" style={{color:"black"}}>
-    <span className="Addtowishlisttext">Add to wish list</span>
+    <span className="Addtowishlisttext"> {this.state.clicked? 'Add to Wishlist' : 'Wishlisted'}</span>
+
   <span><div class="love-icon">
-  <input type="checkbox" id="like-toggle" />
+  <input type="checkbox" id="like-toggle" onClick= {() => this.setState({clicked: !this.state.clicked})} />
   <label for="like-toggle" class="heart"> </label>
   <div class="lines">
     <div class="line"></div>
@@ -120,7 +252,7 @@ class BuyersProductDetails extends Component {
 
 <Row noGutters="true">
   <Col xs={12} className="">
-   <p style={{marginLeft:"15px", marginTop:"10px"}} id="productdetail">Product Code : PLOKIU998</p> 
+   <p style={{marginLeft:"15px", marginTop:"10px"}} id="productdetail">Product Code : {this.state.ProductData.code ?this.state.ProductData.code:null}</p> 
   </Col>
 </Row>
 </Col>
@@ -138,8 +270,9 @@ class BuyersProductDetails extends Component {
 <Row noGutters="true" >
   <Col sm={12} className="BPDCol2">
   <h2 className="DescheadingBPD">Description</h2>
-  <p>Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.</p>
-  <p>Beautiful pure Katan silk dupatta in Blue-Green Dual color zari.!!</p>
+  {this.state.ProductData.product_spe ?
+<p>{this.state.ProductData.product_spe}</p>
+    :null}
   </Col>
   <hr className="hrlineBPD "></hr>
 </Row>
@@ -148,29 +281,29 @@ class BuyersProductDetails extends Component {
   <h2 className="DescheadingBPD" style={{marginLeft:"10px" , fontFamily:"auto"}}>General Details</h2>
   <Col sm={4} >
     <h3 className="GeneralDetailsh3">Name of Product</h3>
-    <p className="GeneralDetailsp">Peach Chanderi Kori silk saree</p>
+    <p className="GeneralDetailsp">{this.state.ProductData.tag?this.state.ProductData.tag:null}</p>
   </Col>
   <Col sm={4}>
   <h3 className="GeneralDetailsh3">Product Category</h3>
-    <p className="GeneralDetailsp">Handloom Saree</p>
+    <p className="GeneralDetailsp">{this.state.ProductData.productCategory?this.state.ProductData.productCategory.productDesc:null}</p>
   </Col>
   <Col sm={4}>
   <h3 className="GeneralDetailsh3">Region</h3>
-    <p className="GeneralDetailsp" style={{color:"#23527c"}}>Maniabandhan, Odisha</p>
+ <p className="GeneralDetailsp" style={{color:"#23527c"}}>{this.state.ProductData.clusterName?this.state.ProductData.clusterName:null}</p>
   </Col>
 </Row>
 <Row noGutters="true">
     <Col sm={4} >
     <h3 className="GeneralDetailsh3">Product Code</h3>
-    <p className="GeneralDetailsp">PCKSNAG1090</p>
+    <p className="GeneralDetailsp">{this.state.ProductData.code?this.state.ProductData.code:null}</p>
   </Col>
   <Col sm={4}>
   <h3 className="GeneralDetailsh3">Product Type</h3>
-    <p className="GeneralDetailsp">Saree with Blouse</p>
+    <p className="GeneralDetailsp">{this.state.ProductData.productType?this.state.ProductData.productType.productDesc:null}</p>
   </Col>
   <Col sm={4}>
   <h3 className="GeneralDetailsh3">Artisan Brand</h3>
-    <p className="GeneralDetailsp" style={{color:"#23527c"}}>Chidiya</p>
+    <p className="GeneralDetailsp" style={{color:"#23527c"}}>{this.state.ProductData.brand?this.state.ProductData.brand:null}</p>
    
   </Col>
   <hr className="hrlineBPD "></hr>
@@ -202,21 +335,21 @@ class BuyersProductDetails extends Component {
   </Col>
   <Col sm={2} className="BPDmarginright">
   <h3 className="GeneralDetailsh3 text-center">Yarn</h3>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.warpYarnCount?this.state.ProductData.warpYarnCount:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.weftYarnCount?this.state.ProductData.weftYarnCount:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.extraWeftYarnCount?this.state.ProductData.extraWeftYarnCount:null}</p>
   </Col>
   <Col sm={2} className="BPDmarginright">
     <h3 className="GeneralDetailsh3 text-center">Yarn Count</h3>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+               <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.warpYarnCount?this.state.ProductData.warpYarnCount:null}</p>
+               <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.weftYarnCount?this.state.ProductData.weftYarnCount:null}</p>
+               <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.extraWeftYarnCount?this.state.ProductData.extraWeftYarnCount:null}</p>
   </Col>
   <Col sm={2} className="" >
     <h3 className="GeneralDetailsh3 text-center">Dye used</h3>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >XYZ</p>
+               <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.warpDye?this.state.ProductData.warpDye.dyeDesc:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.weftDye?this.state.ProductData.weftDye.dyeDesc:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.extraWeftDye?this.state.ProductData.extraWeftDye.dyeDesc:null}</p>
   </Col>
 </Row>
 
@@ -224,28 +357,46 @@ class BuyersProductDetails extends Component {
   <Col xs={12} md={3} className="BPDmarginright" style={{textAlign:"center"}}>
   <img src={logos.reedcount} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Reed Count</h3>
-  <p>XYZXYZ XY YZ</p>
+               <p>{this.state.ProductData.reedCount?this.state.ProductData.reedCount.count:null}</p>
   </Col>
   <Col xs={12} md={3} className="BPDmarginright BDPdetailscol" style={{textAlign:"center"}}>
   <img src={logos.weight} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Weight</h3>
-  <p>SAREE <span  style={{marginLeft:"22px"}}>XYZ</span></p>
-  <hr className="hrspecBPD "></hr>
-  <p style={{marginTop:"-10px"}}>BLOUSE <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>XYZ</span></p>
-  </Col>
+               <p>{this.state.ProductData.productCategory?this.state.ProductData.productCategory.productDesc:null} <span  style={{marginLeft:"22px"}}>{this.state.ProductData.weight}</span></p>
+               {this.state.ProductData.productCategory ? <hr className="hrspecBPD "></hr>:null} 
+               {this.state.ProductData.relProduct[0] ?
+               <p style={{marginTop:"-10px"}}>{this.state.ProductData.relProduct[0].productTypeDesc} <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>{this.state.ProductData.weight}</span></p>
+  
+               :null} 
+ 
+ </Col>
   <Col xs={12} md={3} className="BPDmarginright"style={{textAlign:"center"}}>
   <img src={logos.dimensions} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Dimensions L x W</h3>
-  <p>SAREE <span  style={{marginLeft:"22px"}}>XYZ x XYZ</span></p>
-  <hr className="hrspecBPD "></hr>
-  <p style={{marginTop:"-10px"}}>BLOUSE <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>XYZ x  XYZ</span></p>
+  <p>{this.state.ProductData.productCategory?this.state.ProductData.productCategory.productDesc:null} <span  style={{marginLeft:"22px"}}>
+    {this.state.ProductData.relProduct[0] ? this.state.ProductData.relProduct[0].length:null} x {this.state.ProductData.relProduct[0]?this.state.ProductData.relProduct[0].width:null}
+    </span></p>
+    {this.state.ProductData.relProduct[0] ? 
+    <hr className="hrspecBPD "></hr>:null}
+
+{this.state.ProductData.relProduct[0] ? 
+
+ <p style={{marginTop:"-10px"}}>
+   {this.state.ProductData.relProduct?this.state.ProductData.relProduct[0].productTypeDesc:null}
+   <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>{this.state.ProductData.relProduct?this.state.ProductData.relProduct[0].length:null} x {this.state.ProductData.relProduct?this.state.ProductData.relProduct[0].width:null}</span>
+   </p>
+:null}
+ 
   </Col>
-  <Col xs={12} md={3} className=""style={{textAlign:"center"}}>
+  {this.state.ProductData.gsm=="false"? 
+   null
+  :<Col xs={12} md={3} className=""style={{textAlign:"center"}}>
   <img src={logos.GsmIcon} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>GSM (Gram per square meter)</h3>
-  <p>Fabric XYZgm</p>
+               <p>Fabric:{this.state.ProductData.gsm} gsm</p>
   
-  </Col>
+  </Col>}
+ 
   
 </Row>
 <hr className="hrlineBPD "></hr>
@@ -311,11 +462,13 @@ class BuyersProductDetails extends Component {
             <Col sm={1}></Col>
             </Row>  
             {/* ------------------like it ------------------ */}
-            <Row noGutters="true">
-              
-                <div className="likeitdiv">
-                  <h3>Like it ?</h3> </div>
-                   <div class="buttons" style={{width:"198px" , color:"black"}} >
+         
+
+            <Row noGutters="true" className="likeitbg text-center">
+            <h3>Like it ?</h3>
+               <Row noGutters="true">
+                 <Col xs={12}>
+                 <div class="buttons" style={{ color:"black" , border:"none", marginBottom:"10px"}} >
   <button class="bpdbutton -bg-white" style={{width:"198px" , color:"black"}}>
     <span style={{ color:"black"}}>Generate Enquiry</span>
         <div class="arrowPacman">
@@ -331,7 +484,9 @@ class BuyersProductDetails extends Component {
     </div>
   </button>
 
-</div>
+</div>               </Col>
+               </Row>
+                  
                
            
             </Row>
@@ -339,118 +494,43 @@ class BuyersProductDetails extends Component {
 
 <Row noGutters={true}>
   <Col sm={12}>
-    <h3 className="MoresareeBPD">More Sarees From Chidiya</h3>
+    <h3 className="MoresareeBPD">More Sarees From {this.state.ProductData.clusterName}</h3>
   </Col>
 </Row>
-<Row noGutters={true}>
-<Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col> 
- {/* card2 */}
- <Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
-              {/* card3 */}
-              <Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
-               {/* card4 */}
-               <Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
-               {/* card5 */}
-               <Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
-               {/* card3 */}
-               <Col xs={12} sm={4} md={2}>
-<div className="card CardlayoutBDP">
-                <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
-                  <p class="card-text-BDP"> 
-                  Maniabandhan
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Artisianself/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                  </div>
-              </div>
-              </Col>
+
+<Row noGutter={true}>
+  <Col xs={1}></Col>
+{/* <div className="col-sm-1 "></div> */}
+ {this.state.getProductCategoryAndClusterProducts.length > 0 ?
+  this.state.getProductCategoryAndClusterProducts.map((data) => {
+    return(
+    <>
+   
+    <Col md={2} xs={12} sm={2}>
+      <SeeMoreProduct
+     products={data.productImages}
+     clusterName={data.clusterName}
+      />
+  </Col>
+  
+   </>)
+   }):null
+  
+  }
+    <Col xs={1}></Col>
 </Row>
+
+
+
+
+
+
+
+
+
+
+
+
 
                         
 <Row noGutters="true">
@@ -485,6 +565,8 @@ class BuyersProductDetails extends Component {
                   ></Col>
                 </Row>
 </Container>
+</>:
+<> </>}
            </React.Fragment>)
     }
 }

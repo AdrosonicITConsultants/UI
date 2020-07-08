@@ -120,7 +120,7 @@ export class ProductsOfCatelog extends Component {
                      <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry">
                             Generate enquiry
-                            <img className="cpwhitearrow" src={logos.whitearrow}></img>
+                         <a href={"/Product-Details?productId="+this.props.productId}>   <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
 
                             </button>
                      </Col>

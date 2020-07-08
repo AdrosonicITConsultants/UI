@@ -335,6 +335,21 @@ class TTCEapi {
       });
   }
 
+  static getProductCategoryAndClusterProducts(productCategoryId,clusterId,productId) {
+    let url = ApiUrl + "/product/getProductCategoryAndClusterProducts/"+productCategoryId+"/"+clusterId+'/'+productId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
   static validateUsername(username, roleID) {
     let url = ApiUrl + "/login/validateusername?emailOrMobile=" + username + "&roleId=" + roleID;
 

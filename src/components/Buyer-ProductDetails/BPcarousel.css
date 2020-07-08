@@ -38,11 +38,14 @@
   }
   .thumbnails img {
     /* width: 30vmin; */
-    height: 75px;
-    -o-object-fit: cover;
-       object-fit: cover;
-    -o-object-position: top;
-       object-position: top;
+    /* height: 75px !important; */
+    -o-object-fit: contain !important;
+       object-fit: contain !important;
+    -o-object-position: top !important;
+       object-position: top !important;
+       margin-bottom: 18px !important;
+       max-height: 10%;
+       max-width: 77px !important;
   }
   
   .slides {
@@ -62,6 +65,8 @@
        object-fit: cover;
     -o-object-position: top;
        object-position: top;
+       max-height: 240px !important;
+    margin-top: 41px;
   }
   
   .slides li:target {

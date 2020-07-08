@@ -10,39 +10,125 @@ import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 
  class BPCarousel extends Component {
+   constructor(props){
+    super(props);
+    this.state = {
+     Image:this.props.Image,
+     ImageUrl:TTCEapi.ImageUrl+'Product/',
      
-       
+    }
+   
+  }
+  
   
     render () {
       
       return (
         
+        
         <React.Fragment>
+          
             <div class="BPDcontainer" >
-      
-       
+        
 
            <ul class="thumbnails">
-    <li>
-      <a href="#slide1"><img src={logos.Kamrup} /></a>
+             {this.state.Image==null?
+             <>
+             <li>
+      <a href="#slide1">
+      <img className=" " src={logos.Smile }  alt="Card image cap"/>
+        
+        </a>
     </li>
-    <li>
-      <a href="#slide2"><img src={logos.Maniabandhan} /></a>
+             </>
+             :
+             <>
+              { this.state.Image.length>0?
+      <li>
+      <a href="#slide1">
+      <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+        
+        </a>
     </li>
-    <li>
-      <a href="#slide3"><img src={logos.Nalbari} /></a>
-    </li>
+      :null}       
     
+    { this.state.Image.length>0?
+     <li>
+     <a href="#slide2">
+       {this.state.Image[1]? 
+       <img className=" " src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable }  alt="Card image cap"/>:null}
+     
+     </a>
+   </li>
+    :null}
+   
+     { this.state.Image.length>0? 
+       <li>
+       <a href="#slide3">
+         {this.state.Image[2]? 
+          <img className="" src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable }  alt="Card image cap"/>
+         :null}
+      
+         </a>
+     </li>
+     :null}
+  
+    
+             </>
+            }
+     
   </ul> 
           
            <ul class="slides">
-    <li id="slide1"><img src={logos.Kamrup}  alt="" />
-			    <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-    <li id="slide2"><img src={logos.Maniabandhan} alt="" /> 
-                    <a className="next" href="#slide3"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-    <li id="slide3"><img src={logos.Nalbari} alt="" />
-              <a className="next" href="#slide1"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
+             {this.state.Image==null?
+             <>
+             <li id="slide1">
+            <img className=" " src={logos.Smile}  alt="Card image cap"/>
+            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
+             
+             </>
+             :
+             <>
+              {this.state.Image[1]&&this.state.Image[0]||this.state.Image[2]&&this.state.Image[0]||this.state.Image[1]&&this.state.Image[2]&&this.state.Image[0]?
+            <li id="slide1">
+            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
+             :
+             this.state.Image[0]? 
+             <li id="slide1">
+             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+           </li>
+            
+             :null}
+         
+   
+         {this.state.Image[0]&&this.state.Image[1]||this.state.Image[0]&&this.state.Image[2]&&this.state.Image[1]?
+            <li id="slide1">
+            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
+             :
+             this.state.Image[1]? 
+             <li id="slide1">
+             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+           </li>
+            
+             :null}
 
+
+{this.state.Image[1]&&this.state.Image[2]||this.state.Image[0]&&this.state.Image[2]||this.state.Image[1]&&this.state.Image[0]&&this.state.Image[2]?
+            <li id="slide1">
+            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
+             :
+             this.state.Image[2]? 
+             <li id="slide1">
+             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
+           </li>
+            
+             :null}
+    
+             </>}
+          
   </ul>
           
        </div>

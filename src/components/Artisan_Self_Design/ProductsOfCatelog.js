@@ -28,6 +28,17 @@ export class ProductsOfCatelog extends Component {
         };
       
     }
+    generateEnquiry(id){
+      console.log("Generate Enquiry " + id);
+      browserHistory.push("/generateEnquiry"); 
+
+    }
+    productDescription(id){
+      console.log("Product Descriptiony " + id);
+      browserHistory.push("/Product-Details?productId=" + id); 
+
+
+    }
     toggleHover(name) {      
         switch (name) {
           case "isfavHovered":
@@ -50,7 +61,7 @@ export class ProductsOfCatelog extends Component {
     render() {
         return (
             <div className="card cpCardlayout ">
-                    <div className="cpimagediv">
+                    <div className="cpimagediv" style={{cursor:"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}}>
                     {this.state.proddata.productImages.length != 0 
                                   ?
                                   <img className="cpimage " src={this.state.imageUrl + this.state.proddata.productImages[0].productId + '/' + this.state.proddata.productImages[0].lable }  alt="Card image cap"/>
@@ -70,9 +81,9 @@ export class ProductsOfCatelog extends Component {
                     </div>
                     </div>
                  
-                    <Row noGutters={true} className="cpdetails">
+                    <Row noGutters={true} className="cpdetails" style={{"cursor":"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}} >
                         <Col  className=" bold fontplay col-xs-8">
-                          <div className="productname">{this.state.proddata.code}</div> 
+                          <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
                         <Col className="col-xs-4">
                           {this.state.proddata.productStatusId == 2 
@@ -118,9 +129,12 @@ export class ProductsOfCatelog extends Component {
                  <div>
                        <hr className="cpline"></hr>
                      <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
-                            <button className="generateEnquiry">
+                            <button className="generateEnquiry"
+                            onClick={()=>{this.generateEnquiry()}}
+                            >
                             Generate enquiry
-                         <a href={"/Product-Details?productId="+this.props.productId}>   <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
+                         <a href={"/generateEnquiry"}>
+                              <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
 
                             </button>
                      </Col>

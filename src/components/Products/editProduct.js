@@ -1265,6 +1265,12 @@ else {
                                      :
                                      <>
                                      {console.log(this.state.selectedFile1.myBase64)}
+                                     {this.state.selectedFile1.myBase64==undefined
+                                     ?
+                                     <></>
+                                        :
+                                        <img className="productImage" src={this.state.selectedFile1.myBase64}></img>
+                                        }
                                      </>
                                     }
                                       
@@ -1298,8 +1304,12 @@ else {
                                        </>
                                       :
                                       <>
-                                         {console.log(this.state.selectedFile2.myBase64 == undefined)}
-
+                                     {this.state.selectedFile2.myBase64==undefined
+                                     ?
+                                     <></>
+                                        :
+                                        <img className="productImage" src={this.state.selectedFile2.myBase64}></img>
+                                        } 
                                       </>
                                       }
                                       
@@ -1334,8 +1344,12 @@ else {
                                        </>
                                       :
                                       <>
-                                       {console.log(this.state.selectedFile3)}
-
+                                      {this.state.selectedFile3.myBase64==undefined
+                                     ?
+                                     <></>
+                                        :
+                                        <img className="productImage" src={this.state.selectedFile3.myBase64}></img>
+                                        } 
                                       </>
                                       }
                                                                             </Col>

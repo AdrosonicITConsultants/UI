@@ -8,7 +8,10 @@
 .BPDCol2{
   font-family: auto;
   }
-
+.Logobpdimg{
+  height: 40px;
+  width:auto;
+}
 .card-sizeBPd{
   width: 100%;
   height: 208px;

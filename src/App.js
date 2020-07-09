@@ -28,7 +28,7 @@ import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProdu
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
-
+import Notification from './components/Notification Count/Notification'
 function App() {
   
   return (
@@ -36,7 +36,8 @@ function App() {
       <Router history={browserHistory}>
         <ToastContainer></ToastContainer>
         <Switch>
-          <Route path="/wishlist" component={BPCarousel}/>
+         
+         <Route exact path="/Notification" component={Notification} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
@@ -56,7 +57,6 @@ function App() {
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-          /Artisanself/artisanbrands/ArtisanProducts
           <Route path="/Artisanself" component={ArtistSelfDesign} />
           <Route path="/EditProduct" component={EditProduct} />
 

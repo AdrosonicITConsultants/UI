@@ -28,7 +28,8 @@ class BuyersProductDetails extends Component {
       logoUrl:[],
       profilePicUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/ProfilePics/'+this.props.profilePic,
       defaultimgUrl:logos.Smile,             
-      visible:5
+      visible:5,
+      Artisiandata:[]
     };
     
     }
@@ -41,11 +42,16 @@ class BuyersProductDetails extends Component {
           this.setState({ProductData :response.data.data},()=>{
           console.log(this.state.ProductData);
 
-          this.setState({
-            dataload : true,
-                      });
+          
+                      TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
+                        this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
+                          console.log(this.state)
+                        })
+                        
+                      })
                       TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{
-                        this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
+                       
+                     this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
                             console.log(this.state.getProductCategoryAndClusterProducts);
                             
 
@@ -130,30 +136,29 @@ class BuyersProductDetails extends Component {
       </Col>
     </Row>
     <Row noGutters="true">
-   
- {
-  this.state.filterArtisian.map((data) => {
-    // {console.log(data.logo)}
-    // {console.log(this.state.ProductData.artitionId)}
   
-     
-   if(data.artisanId==this.state.ProductData.artitionId)
-   
-    return (
-    
-      <img className="BPDAntaranlogo2" src={TTCEapi.ImageUrl+'User/'+data.artisanId+'/CompanyDetails/Logo/'+data.logo}  alt="Logo"/>
-    
-      );
-      else if(data.artisanId!=this.state.ProductData.artitionId)
-      return("");
-    
-   })
-  
-  }
     <Col sm={3} className="BPDartisianame">
-   
-    {/* <img className="BPDAntaranlogo2" src={this.state.defaultimgUrl}  alt="Logo"/> */}
-    </Col>
+  {this.state.Artisiandata[0].logo==null?
+  <>
+  {this.state.Artisiandata[0].profilePic==null?
+             <>
+             <img className="Logobpdimg" src={logos.Smile}/>
+             </> 
+      :
+            <>
+            <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/ProfilePics/'+this.state.Artisiandata[0].profilePic}/>
+          </>  
+  }         
+  </>
+    :
+   <>
+               <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/CompanyDetails/Logo/'+this.state.Artisiandata[0].logo}/>
+
+   </>
+
+} 
+ 
+  </Col>
  
    </Row>
    <hr className="hrlineBPD "></hr>
@@ -171,7 +176,11 @@ class BuyersProductDetails extends Component {
      <span>{this.state.ProductData.clusterName}</span>
      :null}
       </p>
-     <p>Material Used :<span> Cotton, Silk, Mulbary</span></p>
+     <p>Material Used :<span> {this.state.ProductData.warpDye?this.state.ProductData.warpDye.dyeDesc:null},
+    
+{this.state.ProductData.weftDye?this.state.ProductData.weftDye.dyeDesc:null},
+    
+{this.state.ProductData.extraWeftDye?this.state.ProductData.extraWeftDye.dyeDesc:null}</span></p>
                <p>Product Category :
                {this.state.ProductData.productCategory?
                  <span>{this.state.ProductData.productCategory.productDesc}</span>
@@ -196,7 +205,7 @@ class BuyersProductDetails extends Component {
     Available <b>In Stock</b>
      </Col> :
      <Col sm={12} className="BPDStockstatus" >
-      <b style={{color:"purple"}}>Exclusively</b>made to order
+      <b style={{color:"purple"}}>Exclusively </b>made to order
       </Col>
      }
      
@@ -498,15 +507,15 @@ class BuyersProductDetails extends Component {
   </Col>
 </Row>
 
-<Row noGutter={true}>
-  <Col xs={1}></Col>
+<Row noGutter={true} >
+
 {/* <div className="col-sm-1 "></div> */}
  {this.state.getProductCategoryAndClusterProducts.length > 0 ?
   this.state.getProductCategoryAndClusterProducts.map((data) => {
     return(
     <>
    
-    <Col md={2} xs={12} sm={2}>
+    <Col md={2} xs={12} sm={2} >
       <SeeMoreProduct
      products={data.productImages}
      clusterName={data.clusterName}
@@ -517,7 +526,6 @@ class BuyersProductDetails extends Component {
    }):null
   
   }
-    <Col xs={1}></Col>
 </Row>
 
 

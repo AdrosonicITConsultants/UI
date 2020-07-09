@@ -31,103 +31,51 @@ import Footer from "../footer/footer";
             <div class="BPDcontainer" >
         
 
-           <ul class="thumbnails">
-             {this.state.Image==null?
-             <>
+            <ul class="thumbnails">
+              {this.state.Image[0]?
              <li>
-      <a href="#slide1">
-      <img className=" " src={logos.Smile }  alt="Card image cap"/>
-        
-        </a>
-    </li>
-             </>
-             :
-             <>
-              { this.state.Image.length>0?
-      <li>
-      <a href="#slide1">
-      <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-        
-        </a>
-    </li>
-      :null}       
-    
-    { this.state.Image.length>0?
-     <li>
-     <a href="#slide2">
-       {this.state.Image[1]? 
-       <img className=" " src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable }  alt="Card image cap"/>:null}
-     
-     </a>
-   </li>
-    :null}
-   
-     { this.state.Image.length>0? 
-       <li>
-       <a href="#slide3">
-         {this.state.Image[2]? 
-          <img className="" src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable }  alt="Card image cap"/>
-         :null}
-      
-         </a>
-     </li>
-     :null}
-  
-    
-             </>
+             <a href="#slide1"><img src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable } /></a>
+           </li>
+           : 
+           null  
             }
-     
-  </ul> 
+
+
+   
+   {this.state.Image[1]?
+             <li>
+             <a href="#slide2"><img src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable } /></a>
+           </li>
+           :
+           null  
+            }
+     {this.state.Image[2]?
+             <li>
+             <a href="#slide3"><img src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable } /></a>
+           </li>
+           :
+           null  
+            }
+   
+   
+  </ul>
           
            <ul class="slides">
-             {this.state.Image==null?
-             <>
-             <li id="slide1">
-            <img className=" " src={logos.Smile}  alt="Card image cap"/>
-            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-             
-             </>
-             :
-             <>
-              {this.state.Image[1]&&this.state.Image[0]||this.state.Image[2]&&this.state.Image[0]||this.state.Image[1]&&this.state.Image[2]&&this.state.Image[0]?
-            <li id="slide1">
-            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-             :
-             this.state.Image[0]? 
-             <li id="slide1">
-             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-           </li>
-            
-             :null}
          
-   
-         {this.state.Image[0]&&this.state.Image[1]||this.state.Image[0]&&this.state.Image[2]&&this.state.Image[1]?
-            <li id="slide1">
-            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-             :
-             this.state.Image[1]? 
-             <li id="slide1">
-             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-           </li>
-            
-             :null}
+{this.state.Image[0]?
+  <li id="slide1"> <div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable } alt="" /></div> </li>
+:null
+}
+{this.state.Image[1]?
+   <li id="slide2"><div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable } alt="" /></div> </li>
+:null
+}
+{this.state.Image[2]?
+   <li id="slide3"><div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable } alt="" /></div> </li>
+:null
+}
+  
 
-
-{this.state.Image[1]&&this.state.Image[2]||this.state.Image[0]&&this.state.Image[2]||this.state.Image[1]&&this.state.Image[0]&&this.state.Image[2]?
-            <li id="slide1">
-            <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-            <a className="next" href="#slide2"><i class="fa fa-angle-right fa-5x" aria-hidden="true" style={{padding:"11px",color:"silver",marginLeft:"-4px"}}></i></a></li>
-             :
-             this.state.Image[2]? 
-             <li id="slide1">
-             <img className=" " src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable }  alt="Card image cap"/>
-           </li>
-            
-             :null}
-    
-             </>}
           
   </ul>
           

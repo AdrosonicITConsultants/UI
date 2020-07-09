@@ -803,8 +803,10 @@ else {
                   //  this.setState({ [e.target.name]: parseInt(option) }, () => {
                   //    console.log(this.state);
                   //  });
-                 }
+                 } 
                  onselectWareAndCare = (i) => {
+                   if(this.state.isEdit == true)
+                   { 
                    let { wareAndCare } = this.state;
                    wareAndCare[i].isChecked = !wareAndCare[i].isChecked;
                    const elements = this.state.wareAndCare;
@@ -818,6 +820,7 @@ else {
                      wareAndCare: [...wareAndCare],
                      iswashAndCareComplete: ischecked,
                    });
+                   }
                  };
                  editenabled = () =>{
                    this.setState({isEdit:true});
@@ -1467,6 +1470,7 @@ else {
                                          name="productName"
                                          maxLength="40"
                                          value={this.state.productName}
+                                         disabled={!this.state.isEdit}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1484,6 +1488,7 @@ else {
                                          name="productCode"
                                          maxLength="20"
                                          value={this.state.productCode}
+                                         disabled={!this.state.isEdit}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1522,6 +1527,7 @@ else {
                                          className="productDropdown"
                                          name="productCategorie"
                                          value={this.state.productCategorie}
+                                         disabled={!this.state.isEdit}
                                          onChange={(e) =>
                                            this.handleproductCategories(e)
                                          }
@@ -1557,6 +1563,7 @@ else {
                                          className="productDropdown"
                                          name="productType"
                                          value={this.state.productType}
+                                         disabled={!this.state.isEdit}
                                          onChange={(e) =>
                                            this.handleproductTypes(e)
                                          }
@@ -1695,6 +1702,7 @@ else {
                                                <input
                                                  type="checkbox"
                                                  value={product.id}
+                                                 disabled={!this.state.isEdit}
                                                  checked={
                                                    product.isChecked
                                                      ? product.isChecked
@@ -1786,6 +1794,7 @@ else {
                                          id="yarn1"
                                          className="productDropdown"
                                          name="yarn1"
+                                         disabled={!this.state.isEdit}
                                          value={this.state.yarn1}
                                          onChange={(e) =>
                                            this.handleyarns(e, 1)
@@ -1818,6 +1827,7 @@ else {
                                            name="yarnCount1"
                                            placeholder="Enter the count of yarn"
                                            value={this.state.yarnCount1}
+                                           disabled={!this.state.isEdit}
                                            onChange={(e) =>
                                              this.handleChange(e)
                                            }
@@ -1827,6 +1837,8 @@ else {
                                            id="yarnCount1"
                                            className="productDropdown"
                                            name="yarnCount1"
+                                           disabled={!this.state.isEdit}
+
                                            value={this.state.yarnCount1}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
@@ -1858,6 +1870,8 @@ else {
                                          id="dye1"
                                          className="productDropdown"
                                          name="dye1"
+                                         disabled={!this.state.isEdit}
+
                                          value={this.state.dye1}
                                          onChange={(e) =>
                                            this.handleDropdown(e)
@@ -1904,6 +1918,8 @@ else {
                                          id="yarn2"
                                          className="productDropdown"
                                          name="yarn2"
+                                         disabled={!this.state.isEdit}
+
                                          value={this.state.yarn2}
                                          onChange={(e) =>
                                            this.handleyarns(e, 2)
@@ -1935,6 +1951,8 @@ else {
                                            className=" yarnProductTextBox"
                                            name="yarnCount2"
                                            placeholder="Enter the count of yarn"
+                                           disabled={!this.state.isEdit}
+
                                            value={this.state.yarnCount2}
                                            onChange={(e) =>
                                              this.handleChange(e)
@@ -1945,6 +1963,8 @@ else {
                                            id="yarnCount2"
                                            className="productDropdown"
                                            name="yarnCount2"
+                                           disabled={!this.state.isEdit}
+
                                            value={this.state.yarnCount2}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
@@ -1977,6 +1997,8 @@ else {
                                          className="productDropdown"
                                          name="dye2"
                                          value={this.state.dye2}
+                                         disabled={!this.state.isEdit}
+
                                          onChange={(e) =>
                                            this.handleDropdown(e)
                                          }
@@ -2025,6 +2047,8 @@ else {
                                        <select
                                          id="yarn3"
                                          className="productDropdown"
+                                         disabled={!this.state.isEdit}
+
                                          name="yarn3"
                                          value={this.state.yarn3}
                                          onChange={(e) =>
@@ -2055,6 +2079,8 @@ else {
                                            type="text"
                                            id="yarnCount3"
                                            className=" yarnProductTextBox"
+                                           disabled={!this.state.isEdit}
+
                                            name="yarnCount3"
                                            placeholder="Enter the count of yarn"
                                            value={this.state.yarnCount3}
@@ -2068,6 +2094,7 @@ else {
                                            className="productDropdown"
                                            name="yarnCount3"
                                            value={this.state.yarnCount3}
+                                           disabled={!this.state.isEdit}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
                                            }
@@ -2097,6 +2124,8 @@ else {
                                        <select
                                          id="dye3"
                                          className="productDropdown"
+                                         disabled={!this.state.isEdit}
+
                                          name="dye3"
                                          value={this.state.dye3}
                                          onChange={(e) =>
@@ -2179,6 +2208,8 @@ else {
                                      className="productDropdown"
                                      name="reedCount"
                                      value={this.state.reedCount}
+                                     disabled={!this.state.isEdit}
+
                                      onChange={(e) => this.handleReedCounts(e)}
                                    >
                                      <option
@@ -2303,6 +2334,8 @@ else {
                                          id="length"
                                          className="productDropdown"
                                          name="length"
+                                         disabled={!this.state.isEdit}
+
                                          value={this.state.length}
                                          onChange={(e) =>
                                            this.handleDropdownCountOfYarn(e)
@@ -2339,6 +2372,8 @@ else {
                                          id="width"
                                          className="productDropdown"
                                          name="width"
+                                         disabled={!this.state.isEdit}
+
                                          value={this.state.width}
                                          onChange={(e) =>
                                            this.handleDropdownCountOfYarn(e)
@@ -2408,6 +2443,8 @@ else {
                                          className="  ProductTextBox"
                                          name="width"
                                          placeholder="Enter width"
+                                         disabled={!this.state.isEdit}
+
                                          value={this.state.width}
                                          onChange={(e) => this.handleChange(e)}
                                        />
@@ -2444,6 +2481,8 @@ else {
                                                <select
                                                  id="length"
                                                  className="productDropdown"
+                                                 disabled={!this.state.isEdit}
+
                                                  name="length"
                                                  value={
                                                    this.state.savedrelatedProduct.find(
@@ -2494,6 +2533,8 @@ else {
                                                  id="width"
                                                  className="productDropdown"
                                                  name="width"
+                                                 disabled={!this.state.isEdit}
+
                                                  value={
                                                    this.state.savedrelatedProduct.find(
                                                      (e) =>
@@ -2599,8 +2640,11 @@ else {
                                      className="col-2"
                                    >
                                      <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(1)
+
+                                       onClick={() => {
+                                        this.onselectWareAndCare(1)
+                                      }
+                                         
                                        }
                                      >
                                        <img
@@ -2980,12 +3024,17 @@ else {
                                    md={{ size: "2" }}
                                    className="col-2"
                                  >
+                                   
                                    <div
                                      onClick={() => {
-                                       this.setState({
-                                         isavailable: this.state.isMTO,
-                                         isMTO: !this.state.isMTO,
-                                       });
+                                       if(this.state.isEdit==true)
+                                       {
+                                        this.setState({
+                                          isavailable: this.state.isMTO,
+                                          isMTO: !this.state.isMTO,
+                                        });
+                                       }
+                                      
                                      }}
                                    >
                                      <img
@@ -3015,10 +3064,14 @@ else {
                                  >
                                    <div
                                      onClick={() => {
-                                       this.setState({
-                                         isavailable: !this.state.isavailable,
-                                         isMTO: this.state.isavailable,
-                                       });
+                                      if(this.state.isEdit==true)
+                                      {
+                                        this.setState({
+                                          isavailable: !this.state.isavailable,
+                                          isMTO: this.state.isavailable,
+                                        });
+                                      }
+                                       
                                      }}
                                    >
                                      <img
@@ -3132,6 +3185,7 @@ else {
                                          className=" ProductTextBox"
                                          name="GSMName"
                                          maxLength="10"
+                                         disabled={!this.state.isEdit}
                                          value={this.state.GSMName}
                                          onChange={(e) => this.handleChange(e)}
                                        />
@@ -3234,6 +3288,8 @@ else {
                                      id="weight"
                                      className=" ProductTextBox"
                                      name="weight"
+                                     disabled={!this.state.isEdit}
+
                                      maxLength="10"
                                      value={this.state.weight}
                                      onChange={(e) => this.handleChange(e)}
@@ -3323,6 +3379,7 @@ else {
                                      id="description"
                                      className=" productTextArea"
                                      name="description"
+                                     disabled={!this.state.isEdit}
                                      value={this.state.description}
                                      onChange={(e) => this.handleChange(e)}
                                    />
@@ -3330,6 +3387,9 @@ else {
                                </Row>
                              </Row>
                              {/* //#endregion Describe the product*/}
+                             {this.state.isEdit
+                             ?
+                             
                              <Row className="washAndCareDiv mt30">
                                <Col
                                  sm={{ size: "2" }}
@@ -3353,8 +3413,7 @@ else {
                                      <button
                                        onClick={this.Cancel}
                                        className="cancelBtnProduct"
-                                     >
-                                       Cancel
+                                     >Cancel
                                      </button>
                                    </Col>
                                    <Col
@@ -3393,6 +3452,11 @@ else {
                                  className="col-2"
                                ></Col>
                              </Row>
+                             :
+
+                             <>
+                             </>
+                            }
                              <div className="hrlineforAddProduct"></div>
                              <Row noGutters={true} className="text-center">
                                <Col

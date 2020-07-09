@@ -233,8 +233,8 @@ class BuyersProductDetails extends Component {
 
      </Col>
      <Col sm={6} >
-     <div class="buttons" style={{border:"2px solid black"}}>
-  <button class="bpdbutton -bg-white" style={{color:"black"}}>
+     <div class="buttons">
+  <button class="bpdbutton -bg-white" style={{color:"black" , border:"2px solid black" }} >
     <span className="Addtowishlisttext"> {this.state.clicked? 'Add to Wishlist' : 'Wishlisted'}</span>
 
   <span><div class="love-icon">
@@ -509,7 +509,8 @@ class BuyersProductDetails extends Component {
 
 <Row noGutter={true} >
 
-{/* <div className="col-sm-1 "></div> */}
+<div className="col-sm-1 "></div>
+{console.log(this.state.getProductCategoryAndClusterProducts)}
  {this.state.getProductCategoryAndClusterProducts.length > 0 ?
   this.state.getProductCategoryAndClusterProducts.map((data) => {
     return(
@@ -517,8 +518,7 @@ class BuyersProductDetails extends Component {
    
     <Col md={2} xs={12} sm={2} >
       <SeeMoreProduct
-     products={data.productImages}
-     clusterName={data.clusterName}
+     product={data}
       />
   </Col>
   

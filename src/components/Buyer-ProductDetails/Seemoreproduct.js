@@ -15,43 +15,41 @@ export default class SeeMoreProduct extends Component {
         super(props);
     
         this.state = {
-         
-         products:this.props.products,
-         clusterName:this.props.clusterName,
+         product:this.props.product,
         };
         
         }
+        productopen(id){
+            browserHistory.push("/Product-Details?productId=" + id);
+            window.location.reload();
+        }
     render() {
-        // const { clusterid } = this.props;
-  console.log(this.props.products);
+   
           return (
-           
-           <div>
-
-        
-        {this.state.products.map((data)=>{
-    {console.log(data)}
-    
-return(
-
-<div className="card CardlayoutBDP">
+            
+                <div className="card CardlayoutBDP "
+                onClick={()=>{ this.productopen(this.state.product.id)}}>
                 <div class="card-block">
                   <p class="card-text-BDP"> 
-                  {this.state.clusterName}
+                  {this.state.product.tag}
                  </p>
                 </div>
-                <img className="card-sizeBPd" src={TTCEapi.ImageUrl+'Product/'+data.productId+'/'+data.lable} alt="Card image cap"/>
+                <div>
+                {this.state.product.productImages.length == 0
+                ?
+                <img className="card-sizeBPd" src={logos.Smile} alt="Card image cap"/> 
+                :
+                <img className="card-sizeBPd" src={TTCEapi.ImageUrl+'Product/'+this.state.product.productImages[0].productId+'/'+this.state.product.productImages[0].lable} alt="Card image cap"/> 
+
+                    }
+                </div>
                 <div class="effect-text">
                   
                   </div>
               </div>
               
 )       
+
     
-})}
-
-
-             </div>
-    )
 }
 }

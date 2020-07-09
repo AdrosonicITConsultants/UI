@@ -9,8 +9,9 @@
   font-family: auto;
   }
 .Logobpdimg{
-  height: 40px;
-  width:auto;
+  height: 75px;
+  margin-top: 10px;
+  width: auto;
 }
 .card-sizeBPd{
   width: 100%;
@@ -60,7 +61,7 @@
 .hrlineBPD {
   width: 100%;
   border-top: 0.5px solid lightgrey;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 10px;
   margin-left: 0px;
 }
@@ -244,15 +245,15 @@ scroll-behavior: smooth;
     -webkit-box-pack: center;
             justify-content: center;
             margin-left: -19px;
-            border: 2px solid black;
+            /* border: 2px solid black; */
   }
 }
-.buttons button {
+/* .buttons button {
   width: 86%;
-}
+} */
 @media (min-width: 560px) {
   .buttons button {
-    width: 100%;
+    width: 88%;
     height: 53px;
   }
 }

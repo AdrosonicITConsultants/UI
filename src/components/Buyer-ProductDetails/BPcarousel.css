@@ -51,14 +51,15 @@
     
     .slides {
       overflow: hidden;
-      width: 75vmin;
-      height: 100vmin;
+    width: 440px;
+    height: 603px;
     }
     .slides li {
-      width: 75vmin;
-      height: 100vmin;
-      position: absolute;
-      z-index: 1;
+      width: 400px;
+    height: 602px;
+    position: absolute;
+    z-index: 1;
+
     }
     .slides img {
       /* height: 512px;
@@ -72,7 +73,8 @@
     width: 100%;
     margin-top: 61px;
     background: aliceblue;
-    max-height: 500px;
+    max-height: 540px;
+    padding: 40px;
     }
     .ImgDivcar{
       height: 633px;

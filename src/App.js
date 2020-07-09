@@ -28,7 +28,8 @@ import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProdu
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
-import Wishlist from './components/Wishlist/Wishlist'
+import Wishlist from './components/Awishlist/Wishlist';
+import AddWishlist from './components/Awishlist/Addwishlist';
 
 function App() {
   
@@ -39,7 +40,6 @@ function App() {
         
         <Switch>
          
-        <Route  path="/wishlist" component={Wishlist} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
@@ -49,7 +49,7 @@ function App() {
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
-          <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
+          <PrivateRoute exact path="/Artisans-elf/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
@@ -64,7 +64,10 @@ function App() {
 
           <Route path="/Antaran" component={AntaranCoDesign} />
           <Route path="/Product-Details" component={BuyersProductDetails} />
-          
+          <Route   path="/wishlist" component={Wishlist} />
+          <Route   path="/addwishlist" component={AddWishlist} />
+
+
         </Switch>
       </Router>
     </React.Fragment>

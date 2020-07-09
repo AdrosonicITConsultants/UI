@@ -120,7 +120,12 @@ import Nextarrow from './Nextarrow.png'
 import Antaranbgthread from "./Antaranbgthread.svg"
 import weight  from "./weight .svg"
 import GsmIcon from "./Gsm Icon.svg"
+
+import wishlistthread from "./wishlist-thread.svg"
+import Iconfeatherhome from "./Icon feather-home.svg"
 export default {
+  Iconfeatherhome,
+  wishlistthread,
   GsmIcon,
   Antaranbgthread,
   weight ,

@@ -72,6 +72,7 @@
     width: 100%;
     margin-top: 61px;
     background: aliceblue;
+    max-height: 500px;
     }
     .ImgDivcar{
       height: 633px;

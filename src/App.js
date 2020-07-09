@@ -28,16 +28,18 @@ import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProdu
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
-import Notification from './components/Notification Count/Notification'
+import Wishlist from './components/Wishlist/Wishlist'
+
 function App() {
   
   return (
     <React.Fragment>
       <Router history={browserHistory}>
         <ToastContainer></ToastContainer>
+        
         <Switch>
          
-         <Route exact path="/Notification" component={Notification} />
+        <Route  path="/wishlist" component={Wishlist} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />

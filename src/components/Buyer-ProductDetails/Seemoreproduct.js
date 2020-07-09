@@ -21,10 +21,12 @@ export default class SeeMoreProduct extends Component {
         }
         productopen(id){
             browserHistory.push("/Product-Details?productId=" + id);
+            window.location.reload();
         }
     render() {
    
           return (
+            
                 <div className="card CardlayoutBDP "
                 onClick={()=>{ this.productopen(this.state.product.id)}}>
                 <div class="card-block">

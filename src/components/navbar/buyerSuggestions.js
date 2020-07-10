@@ -6,27 +6,15 @@ import axios from "axios";
 import logos from "../../assets";
 import "./suggestions.css";
 import * as Actions from "../../redux/action/action";
+import TTCEapi from "../../services/API/TTCEapi";
 
 var languages = [];
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-  let config = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("jwtToken"),
-      Accept: "application/json",
-    },
+  const response = await TTCEapi.getBuyerSuggestions(value);
 
-    params: {
-      str: value,
-    },
-  };
-  console.log(config);
-  const response = await axios.get(
-    "http://101.53.153.96:8090/search/getSuggestions",
-    config
-  );
   console.log(response);
   if (response.data.data == null) {
     languages = [];
@@ -45,13 +33,11 @@ const getSuggestions = async (value) => {
 
 const getSuggestionValue = (suggestion) => {
   console.log(suggestion.suggestion);
-  if(suggestion.suggestionType == "Global"){
+  if (suggestion.suggestionType == "Global") {
     return `${suggestion.suggestion}`;
-
-  }else{
+  } else {
     return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
   }
-  
 };
 
 // Use your imagination to render suggestions.

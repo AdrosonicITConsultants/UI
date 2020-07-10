@@ -3,6 +3,7 @@ import ImageEditorTTCE from "../../shared/ImageEditorTTCE";
 import ImageUpload from "../../shared/ImageUpload";
 import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
+import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
 import { Row, Col, Container, Label, Button } from "reactstrap";
 import logos from "../../assets";
@@ -15,6 +16,8 @@ import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
 import "./editProduct.css"
+import ModalComponent from "../modal/modal";
+import Modal from 'react-bootstrap/Modal'
 
 const customStyles3 = {
   content: {
@@ -32,6 +35,7 @@ const initialState = {
   modal1: false,
   modal2: false,
   modal3: false,
+  modal5: false,
   productName: "",
   showGSM: false,
   GSMName: "",
@@ -76,6 +80,8 @@ const initialState = {
   EditEnabled:false,
   componentMounted : false,
   isEdit: false,
+  modal :false,
+  producrid : 0,
 };
 
 export default class addProduct extends Component {
@@ -99,6 +105,11 @@ export default class addProduct extends Component {
                    this.state = initialState;
                  }
 
+                  handleClose = () => {this.setState({modal5 : false})};
+                  handleShow = () => {this.setState({modal5 : true})};
+                 edit(){
+                   this.setState({modal5:true});
+                 }
                  onAddingItem = (i) => (event) => {
                    let { weaves } = this.state;
                    weaves[i].isChecked = !weaves[i].isChecked;
@@ -156,6 +167,9 @@ export default class addProduct extends Component {
         
                    let params = queryString.parse(this.props.location.search)
                    TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                     this.setState({productid :params.ProductId },()=>{
+
+                     })
                      console.log('heree');
                      console.log( response.data);
                      let productData =  response.data.data;
@@ -212,8 +226,10 @@ export default class addProduct extends Component {
                 let productWeavesIds = productData.productWeaves.map(
                   (e) => e.weaveId
                 );
+                console.log(productWeavesIds);
 
                 let { weaves } = this.state;
+                console.log(weaves);
                 productWeavesIds.map((id) => {
                   weaves[id - 1].isChecked = true;
                   this.setState({
@@ -1109,7 +1125,7 @@ else {
 
                     productData.relProduct = this.state.savedrelatedProduct;
                     debugger;
-                                      TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
+                  TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       customToast.success("Product updated successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1137,16 +1153,32 @@ else {
                  };
                  Cancel = () => {
                  
-                  //  browserHistory.push("./home")
-                   window.location.replace("./home");
+                   browserHistory.push("./home")
+                  //  window.location.replace("./home");
                   
                  };
                  ResetAll = () => {
                     window.location.reload(false);                  
 
                  };
-
-                 render() {
+                 Delete = () => {
+                  console.log(this.state.productid);
+                  TTCEapi.deleteProduct(this.state.productid).then((response)=>{
+                    if(response.data.valid){
+                      customToast.success("Product deleted successfully!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.Cancel();
+                      this.setState({
+                        SaveDisabled: false
+                      })
+                    }
+                  })
+                 }
+                
+                          
+                render() {
                    return (
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
@@ -3424,12 +3456,12 @@ else {
                                      md={{ size: "4" }}
                                      className="col-4 text-center "
                                    >
-                                     <button
+                                     {/* <button
                                        onClick={this.ResetAll}
                                        className="resetBtnProduct"
                                      >
                                        Reset All
-                                     </button>
+                                     </button> */}
                                    </Col>
                                    <Col
                                      sm={{ size: "4" }}
@@ -3438,7 +3470,7 @@ else {
                                      className="col-4 text-left "
                                    >
                                      <button
-                                       onClick={this.Save}
+                                       onClick={() =>{ this.Save()}}
                                        className="saveBtnProduct"
                                        disabled={this.state.SaveDisabled}
                                      >
@@ -3522,11 +3554,51 @@ else {
                              </Row>
                            </div>
                          </Row>
+                         {/* <ReactModal
+                               isOpen={this.state.modal5}
+                               contentLabel="Minimal Modal Example"
+                               className="Modal"
+                               style={customStyles3}
+                               // onRequestClose={this.handleCloseWrongPasswordModal}
+                             >
+                                <div>
+                                  <Row noGutters={true}>
+                                    Are you sure you want to save changes
+                                  </Row>
+                                  <Row>
+                                    <Col sm={{size="8"}}>
+                                    </Col>
+                                    <Col sm={{size="8"}}>
+                                      cancel
+                                    </Col>
+                                    <Col sm={{size="8"}}>
+                                      Ok
+                                    </Col>
+                                  </Row>
+                                </div>
+                             </ReactModal> */}
+                              
+                        {/* <Modal show={this.state.modal5} onClick={()=>{this.handleClose()}}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Modal heading</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={()=>{this.handleClose()} }>
+                              Close
+                            </Button>
+                            <Button variant="primary" onClick={()=>{this.handleClose()}}>
+                              Save Changes
+                            </Button>
+                          </Modal.Footer>
+                        </Modal> */}
 
                        </Container>
                        <Footer></Footer>
+                      
+                   
 
                      </React.Fragment>
                    );
-                 }
-               }
+              }
+}

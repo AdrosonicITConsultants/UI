@@ -350,6 +350,65 @@ class TTCEapi {
       });
     }
 
+    static getProductsInWishlist(){
+      let url = ApiUrl + "/product/getProductsInWishlist";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
+
+    static deleteAllProductsInWishlist(){
+      let url = ApiUrl + "/product/deleteAllProductsInWishlist";
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
+
+    static deleteProductsInWishlist(productId){
+      let url = ApiUrl + "/product/deleteProductsInWishlist/"+productId;
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
+
+    static addToWishlist(productId){
+      let url = ApiUrl + "product/addToWishlist/"+productId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
   //#region login
   static sendOtpForgotpass(emailId, roleID) {
     let url = ApiUrl + "/forgotpassword/sendotp?email=" + emailId + "&roleId=" + roleID;

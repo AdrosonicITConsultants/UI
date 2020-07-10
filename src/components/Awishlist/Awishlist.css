@@ -26,7 +26,7 @@
 }
 
 .wishlistblack{
-    width: 152px;
+    width: auto;
     padding: 6px;
     margin-top: 31px;
     border-radius: 16px;
@@ -45,6 +45,154 @@
 
 
 /* ---------------------------------- */
-.addedwishlist{
-    
+.addedwishlist h1{
+    font-size: 27px;
+    font-weight: 600;
 }
+.clearmywishlist{
+    width: auto;
+    padding: 6px;
+    /* margin-top: 31px; */
+    border-radius: 16px;
+    border: 1px solid #cc0000;
+    color: #cc0000;
+    background: white;
+    letter-spacing: 0.5px;
+}
+
+.Totalitemsinwishlist{
+    float: left;
+    font-size: 19px;
+    font-weight: 300;
+
+}
+.wishlisthr{
+    width: 100%;
+    border-top: 1px solid;
+    /* margin-top: 50px; */
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+.wishlistcardbody{
+    box-shadow: 2px 2px 2px 2px lightgrey;
+    padding: 10px;
+    margin-top: 10px;
+
+    /* height: 130px; */
+}
+
+.Wishlistitemimg{
+    height: 124px;
+    width: 124px;
+    margin: auto;
+    max-height: 121px;
+   
+}
+.secondcolmargin{
+    margin-left: 16px;
+}
+.Wishlistitemimgdiv{
+        max-height: 100px;
+    /* width: auto; */
+    margin-bottom: 10px;
+}
+
+.wishlistitemcardtitle{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.Removefromwishlist{
+    font-size: 14px;
+    font-weight: 900;
+    color: rgb(218, 14, 14);
+    width: auto;
+    cursor: pointer;
+}
+
+
+.Descriptionitemp{
+    font-size: 16px;
+    font-family: auto;
+}
+
+.wishlistitembrand{
+    height: 30px;
+}
+.wishlistbrand{
+    color: cornflowerblue;
+    margin-left: 9px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.wishlistbrand2{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.Wishlistpcode{
+    color: forestgreen;
+    font-size: 15px;
+}
+.margintopcss{
+    margin-top: 10px;
+   
+}
+
+.Colfloatri{
+    float: right !important;
+}
+
+body {
+    /* Set "my-sec-counter" to 0 */
+    counter-reset: my-sec-counter;
+  }
+  
+  .srno p::before {
+    /* Increment "my-sec-counter" by 1 */
+    counter-increment: my-sec-counter;
+    content: " " counter(my-sec-counter) ". ";
+  }
+
+
+@media only screen and ( max-width: 767px ) {
+
+    .Colfloatri{
+  float: none !important;
+  text-align: center;
+}
+.Descriptionitemp{
+    text-align: center; 
+}
+.wishlistbrand{
+    text-align: center;
+}
+.colalign{
+    text-align: center;
+}
+
+.Wishlistpcode{
+    text-align: center;
+}
+.addedwishlist h1{
+    text-align: center;
+}
+.Wishlistitemimg {
+    height: 135px;
+    width: 270px;
+    margin: auto;
+    max-height: 136px;
+}
+.Wishlistitemimgdiv {
+    max-height: 121px;
+    /* width: auto; */
+    margin-bottom: 10px;
+    text-align: center;
+}
+}
+@media only screen and ( max-width: 1024px ) and ( min-width: 768px ){
+    .Removefromwishlist {
+        font-size: 13px;
+    }
+}
+

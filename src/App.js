@@ -20,10 +20,9 @@ import AntaranCoDesign from "../src/components/Antaran_co-design_Collection/Anta
 import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
-
+import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
-
 function App() {
   
   return (
@@ -38,7 +37,7 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
-          
+          <Route exact path="/detailSuggestions/:suggestion/:type/:total" component={DetailSuggestions}/>
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />

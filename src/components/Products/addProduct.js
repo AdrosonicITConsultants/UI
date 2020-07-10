@@ -491,6 +491,7 @@ else {
                                src={logos.featheredit}
                              ></img>
 
+
                              <img
                                className="productImageDelete"
                                onClick={() => {

@@ -28,6 +28,15 @@ export class ProductsOfCatelog extends Component {
         };
       
     }
+    handleAddtoWishlist(){
+      TTCEapi.addToWishlist(this.state.proddata.productImages[0].productId).then((response)=>{
+          this.setState({addToWishlist : response},()=>{
+              console.log(this.state.proddata.productImages[0].productId);
+       
+          });
+      });
+  }
+
     generateEnquiry(id){
       console.log("Generate Enquiry " + id);
       browserHistory.push("/generateEnquiry"); 
@@ -145,6 +154,7 @@ export class ProductsOfCatelog extends Component {
                     onMouseLeave={() => this.toggleHover("isfavHovered")}
                     className="navButtonImg2"
                     src={logos.heariconfilled}
+                    onClick={() => this.handleAddtoWishlist()}
                   ></img>
                 ) : (
                   <img

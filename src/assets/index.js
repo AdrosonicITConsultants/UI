@@ -123,7 +123,11 @@ import GsmIcon from "./Gsm Icon.svg"
 
 import wishlistthread from "./wishlist-thread.svg"
 import Iconfeatherhome from "./Icon feather-home.svg"
+import clearmywishlist from "./clear my wish list.svg"
+import removefromwishlist from "./remove from wishlist.svg"
 export default {
+  removefromwishlist,
+  clearmywishlist,
   Iconfeatherhome,
   wishlistthread,
   GsmIcon,

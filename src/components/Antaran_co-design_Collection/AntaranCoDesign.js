@@ -5,7 +5,6 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";
@@ -27,23 +26,22 @@ class AntaranCoDesign extends Component {
         return (
             <React.Fragment>
                 <NavbarComponent/>
-                <Container>
-                  <Row noGutters="true" className="asdthreadbg">
+                <Container className="overflownhidden">
+                  <Row noGutters="true" className="acdthreadbg">
                     <Col sm={{size:"6"}} className="Col6">
                   <div noGutters="true">
                         <Col sm={{size:12}} className="Asdh1">
                           <h1>  Antaran <br/> Co-Design </h1>
                             <p>Collection</p>
-                                        <img
-                                        src={logos.logo2}></img>
+                            <p><img className="BPDAntaranlogo" src={logos.antaranCoDesignLogo}  alt="Card image cap" style={{height:"47px"}}/></p>
                         </Col>
                     </div>
             
             
                   </Col>
-                  <Col sm={{size:"6"}} >
+                  <Col sm={{size:"6"}} className="headimgposter">
                     
-                  <img className="Asdbg2" src={logos.Ajrakhpur1}  alt="Card image cap"/>
+                  <img className="Asdbg" src={logos.Ajrakhpur1}  alt="Card image cap"/>
                   </Col></Row>
                   <Row noGutters="true">
                         <Col sm={{size:12}} className="ViewColtext">

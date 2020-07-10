@@ -17,7 +17,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
 import ProductsOfCatelog from './ProductsOfCatelog';
-class ProductCategories extends Component {
+class AntaranProductCategories extends Component {
     
     constructor(props) {
         super(props);
@@ -55,12 +55,12 @@ class ProductCategories extends Component {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.getProductCategoryProducts(parseInt(params.categoryId)).then((response)=>{
-            console.log(response.data.data.products);
-            this.setState({
-                dataload : true,
-                heading : response.data.data.productCategory,
-                products : response.data.data.products
-               });
+            // console.log(response.data.data.products);
+            // this.setState({
+            //     dataload : true,
+            //     heading : response.data.data.productCategory,
+            //     products : response.data.data.products
+            //    });
         });
         TTCEapi.getClusters().then((response)=>{
             this.setState({clusterdata : response.data.data});
@@ -189,4 +189,4 @@ class ProductCategories extends Component {
         )
     }
 }
-export default ProductCategories;
+export default AntaranProductCategories;

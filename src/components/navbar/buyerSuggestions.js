@@ -45,7 +45,13 @@ const getSuggestions = async (value) => {
 
 const getSuggestionValue = (suggestion) => {
   console.log(suggestion.suggestion);
-  return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
+  if(suggestion.suggestionType == "Global"){
+    return `${suggestion.suggestion}`;
+
+  }else{
+    return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
+  }
+  
 };
 
 // Use your imagination to render suggestions.
@@ -68,7 +74,7 @@ const renderSuggestion = (suggestion) => {
   if (suggestion.suggestionType == "Global") {
     return (
       <a
-        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}`}
+        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
       >
         <div className="custom-suggestion-row">{suggestion.suggestion}</div>
       </a>

@@ -31,7 +31,7 @@
     box-shadow: 2px 2px 4px 4px lightgrey;
     overflow: hidden;
     background-color: white;
-    margin-bottom: 30px;
+    margin-top: 30px;
     
 }
 .cpCardlayout:hover{
@@ -54,6 +54,20 @@
     margin-top: 5px;
     color:#199351;
     font-weight: 300;
+}
+.Exclusively{
+    font-size: 9px;
+    text-align: center;
+    margin-top: 5px;
+    color:#B501A1;
+    font-weight: 600;
+
+}
+.Made_to_order{
+    font-size: 9px;
+    text-align: center;
+    color:#3B8B91;
+    font-weight: 400;
 }
 .cpwhitearrow{
     width: 20px;
@@ -92,11 +106,12 @@
     border-radius: 8px;
     /* opacity: 1; */
     backdrop-filter: blur(42px);
-    -webkit-backdrop-filter: blur(42px);
-    -webkit-filter: brightness(1);
+    /* -webkit-backdrop-filter: blur(42px);
+    -webkit-filter: brightness(1); */
 }
 .cpimage{
     width: 100%;
+    min-height: 240px;
 
 }
 .logoincard{
@@ -105,6 +120,7 @@
 .cpdetails{
     width: 240px;
     margin: auto!important;
+    height:50px;
 }
 .cpline{
     margin-top:5px;

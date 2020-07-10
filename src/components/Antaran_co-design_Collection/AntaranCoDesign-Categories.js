@@ -6,7 +6,6 @@ import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from '../../services/API/TTCEapi';
-import './AntaranCoDesign.css';
 import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 class AntaranCoDesignCategories extends Component {
@@ -61,7 +60,7 @@ class AntaranCoDesignCategories extends Component {
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Antaran/categories/ProductCategories?categoryId=categoryid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      <a class="btn" href={"/Antaran/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>

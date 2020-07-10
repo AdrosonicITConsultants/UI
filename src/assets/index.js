@@ -53,7 +53,7 @@ import artistMainLogo from "./artistMainLogo.jpg";
 import addnewProduct from "./Add new Product icon.svg";
 import edit from "./Icon feather-edit-2.svg";
 import editblack from "./Icon feather-edit-1.svg";
-
+import artistbg2 from "./artistbg2.svg"
 import maillogo from "./material-email.svg";
 import call from "./Icon feather-phone.svg";
 import done from "./done.svg";
@@ -116,10 +116,20 @@ import backdrop from "./backdrop-blur.svg"
 
 import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
 import whitearrow from "./whitearrow.svg"
+import Nextarrow from './Nextarrow.png'
+import Antaranbgthread from "./Antaranbgthread.svg"
+import weight  from "./weight .svg"
+import GsmIcon from "./Gsm Icon.svg"
 
-
-
+import wishlistthread from "./wishlist-thread.svg"
+import Iconfeatherhome from "./Icon feather-home.svg"
 export default {
+  Iconfeatherhome,
+  wishlistthread,
+  GsmIcon,
+  Antaranbgthread,
+  weight ,
+  Nextarrow,
   whitearrow,
   backdrop,
   catelogBackground,
@@ -140,7 +150,7 @@ export default {
   saree,
   dupatta,
   stole,
-
+  artistbg2,
   Ajrakhpur,
   Panda,
   Sun,

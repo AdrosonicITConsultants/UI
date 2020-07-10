@@ -5,7 +5,6 @@ import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
-import './AntaranCoDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 
@@ -51,7 +50,7 @@ export default class AntaranCoDesignRegion extends Component {
               <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
-                  <h4 class="card-title">Proud</h4>
+                  <h4 class="card-title">{data.adjective}</h4>
                   <p class="card-text"> 
                   {data.desc}
                  </p>
@@ -60,7 +59,7 @@ export default class AntaranCoDesignRegion extends Component {
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href="/Antaran/regions/ProductRegions?clusterid=clusterid"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                  <a class="btn" href={"/Antaran/regions/ProductRegions?clusterid=" +data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>

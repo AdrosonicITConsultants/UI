@@ -37,6 +37,7 @@ import TTCEapi from "../../services/API/TTCEapi";
     render() {
         return (
           <React.Fragment>
+            {console.log(this.props.user)}
             <Row noGutters={true}>
               <div className="artistLanding">
                 <Row noGutters={true}>
@@ -69,11 +70,11 @@ import TTCEapi from "../../services/API/TTCEapi";
                     </span>
                   </Col>
                 </Row>
-                <Row><Productcatelog></Productcatelog></Row>
+                <Row><Productcatelog id={this.props.user.id}></Productcatelog></Row>
 
-                {/* <Row noGutters={true}>
+                <Row noGutters={true}>
                   <div className="artistbg2"></div>
-                </Row> */}
+                </Row>
                 <Row noGutters={true} className="mt160">
                   <Col
                     sm={{ size: "4" }}

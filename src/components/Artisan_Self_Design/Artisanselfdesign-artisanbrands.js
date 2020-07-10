@@ -9,6 +9,7 @@ import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 import ArtisanCard from './ArtisanCard';
+import BuyersProductDetails from '../Buyer-ProductDetails/Buyer-ProductDetails';
 
  class ArtistSelfDesignBrands extends Component {
       constructor(props){
@@ -19,6 +20,7 @@ import ArtisanCard from './ArtisanCard';
         filterArtisian:[],
         visible:6,
         clusterid : -1,
+        datafiltered:[],
       }
       this.loadMore = this.loadMore.bind(this);
     }
@@ -72,14 +74,13 @@ import ArtisanCard from './ArtisanCard';
          <select  className="SelectCategory"  onChange={(e) => this.handleCluster(e)}>
         <option key = '0' clusterid = '-1' selected > All Cluster</option>
       {this.state.cluster.map((data) => <option key =  {data.id} clusterid={data.id} value={data.desc}>{data.desc}</option>)}
-        
-         </select>  
+                 </select>  
         </Col>
 
        </Row>
-
+<Row noGutters="true">
     {this.state.cluster ?
-this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
+this.state.filterArtisian.map((data,index) => {
   {console.log(data)}
   if (this.state.clusterid==data.clusterId)
   return (
@@ -89,29 +90,40 @@ this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
     firstName={data.firstName}
     logo={data.logo}
     profilePic={data.profilePic}
+    artisanId={data.artisanId}
     />
+ 
   );
  })
 
 :null}
-{this.state.cluster? this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
+
+
+{this.state.cluster? this.state.filterArtisian.map((data,index) => {
  if(this.state.clusterid==-1)
  return(
     <ArtisanCard
     key={index}
     companyName={data.companyName}
     firstName={data.firstName}
-    logo={data.firstName}
+    logo={data.logo}
     profilePic={data.profilePic}
+    artisanId={data.artisanId}
     />
  )
 }):null
 }
+
+
+</Row>
   
     
     {/* load more */}
-    {this.state.visible < this.state.filterArtisian.length ?
-( <Row noGutters="true" >
+    {/* {this.state.visible < this.state.filterArtisian.length ?
+( 
+  // <p><button onClick={this.loadMore} value="See More">See More</button></p>)
+  
+<Row noGutters="true" >
  <Col sm={{size:"5"}}>
  <hr className="hrlineasd "></hr>
  </Col>
@@ -120,7 +132,9 @@ this.state.filterArtisian.slice(0,this.state.visible).map((data,index) => {
  </Col>
  <Col sm={{size:"5"}}>
  <hr className="hrlineasd "></hr> </Col>
-</Row>      ):null    }
+</Row>  )    
+:null    } */}
+
        
         </React.Fragment>
       );

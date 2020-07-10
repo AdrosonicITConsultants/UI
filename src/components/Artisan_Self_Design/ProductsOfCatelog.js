@@ -21,9 +21,23 @@ export class ProductsOfCatelog extends Component {
             proddata : this.props.productData,
             isfavHovered :false,
             imageurl : logos.dupatta,
+            imageUrl : TTCEapi.ImageUrl +"Product/"
+        
+
          
         };
       
+    }
+    generateEnquiry(id){
+      console.log("Generate Enquiry " + id);
+      browserHistory.push("/generateEnquiry"); 
+
+    }
+    productDescription(id){
+      console.log("Product Descriptiony " + id);
+      browserHistory.push("/Product-Details?productId=" + id); 
+
+
     }
     toggleHover(name) {      
         switch (name) {
@@ -47,8 +61,16 @@ export class ProductsOfCatelog extends Component {
     render() {
         return (
             <div className="card cpCardlayout ">
-                    <div className="cpimagediv">
-                    <img className="cpimage" src={this.state.imageurl}  alt="Card image cap"/>
+                    <div className="cpimagediv" style={{cursor:"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}}>
+                    {this.state.proddata.productImages.length != 0 
+                                  ?
+                                  <img className="cpimage " src={this.state.imageUrl + this.state.proddata.productImages[0].productId + '/' + this.state.proddata.productImages[0].lable }  alt="Card image cap"/>
+
+                                :
+                                <img className="cpimage" src={this.state.imageurl}  alt="Card image cap"/>
+
+                                
+                                }
                     <div className="cpyellowdiv">
                        <div className="descriptionbox">
                          {this.state.proddata.product_spe}
@@ -59,12 +81,14 @@ export class ProductsOfCatelog extends Component {
                     </div>
                     </div>
                  
-                    <Row noGutters={true} className="cpdetails">
-                        <Col md = {8} className=" bold fontplay">
-        <div className="productname">{this.state.proddata.code}</div> 
+                    <Row noGutters={true} className="cpdetails" style={{"cursor":"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}} >
+                        <Col  className=" bold fontplay col-xs-8">
+                          <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
-                        <Col md = {4} className="">
-                            <Row noGutters={true} className="stockmargin">
+                        <Col className="col-xs-4">
+                          {this.state.proddata.productStatusId == 2 
+                          ?
+                          <Row noGutters={true} className="stockmargin">
                                 <Col className="Available">
                                 Available 
                                 </Col>
@@ -72,25 +96,50 @@ export class ProductsOfCatelog extends Component {
                                 In Stock
                                 </Col>
                                 <Col className="text-center">
+                          
                                 <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+
+                                
+                            
                                 </Col>
                                 
                                 </Row>
+                        
+                        :
+                        <Row noGutters={true} className="stockmargin exclusive">
+                        <Col className="Exclusively">
+                        Exclusively
+                        </Col>
+                        <Col className=" Made_to_order">
+                        Made to order
+                        </Col>
+                        <Col className="text-center">
+                        <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        </Col>
+                        
+                        </Row>
+                        }
+                         
+                       
+                            
                         </Col>
                         </Row>
                  
                
                  <div>
                        <hr className="cpline"></hr>
-                     <Col md = {10} style={{"padding-left":"0px"}}>
-                            <button className="generateEnquiry">
+                     <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
+                            <button className="generateEnquiry"
+                            onClick={()=>{this.generateEnquiry()}}
+                            >
                             Generate enquiry
-                            <img className="cpwhitearrow" src={logos.whitearrow}></img>
+                         <a href={"/generateEnquiry"}>
+                              <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
 
                             </button>
                      </Col>
-                     <Col md={2} className="cpwishlist">
-                     {this.state.isfavHovered ? (
+                     <Col  className="cpwishlist col-xs-2">
+                     {this.state.isfavHovered ? ( 
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}

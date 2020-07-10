@@ -240,6 +240,35 @@ class TTCEapi {
 
       });
   }
+
+  static getSimpleProduct(id) {
+    let url = ApiUrl + "/product/getSimpleProduct/"+id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+  static deleteProduct(id) {
+    let url = ApiUrl + "/product/deleteProduct/"+id;
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
   static getProductCategoryProducts(id) {
     console.log(id)
     let url = ApiUrl + "/product/getProductCategoryProducts/"+id;
@@ -272,6 +301,36 @@ class TTCEapi {
       });
   }
 
+  static getArtisianProducts(id) {
+    console.log(id)
+    let url = ApiUrl + "/product/getProductByArtisan/"+id;
+  
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+  static getArtisianProductCategory(userid , categoryid) {
+    console.log(userid,categoryid)
+    let url = ApiUrl + "/product/getProductCategoryAndArtisanProducts/"+categoryid +'/' + userid;
+  
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
     static getProducts(){
       let url = ApiUrl + "/product/getAllProducts";
@@ -307,6 +366,21 @@ class TTCEapi {
   //#region login
   static sendOtpForgotpass(emailId, roleID) {
     let url = ApiUrl + "/forgotpassword/sendotp?email=" + emailId + "&roleId=" + roleID;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
+
+  static getProductCategoryAndClusterProducts(productCategoryId,clusterId,productId) {
+    let url = ApiUrl + "/product/getProductCategoryAndClusterProducts/"+productCategoryId+"/"+clusterId+'/'+productId;
 
     return axios
       .get(url)

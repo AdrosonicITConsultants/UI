@@ -2,26 +2,57 @@
   height: 45px;
 }
 .BPDAntaranlogo2{
-  height: 85px;
+  height: 60px;
+  float:left
 }
 .BPDCol2{
   font-family: auto;
   }
-
+.Logobpdimg{
+  height: 75px;
+  margin-top: 10px;
+  width: auto;
+}
+.card-sizeBPd{
+  width: 100%;
+  height: 208px;
+}
   .BPDCol2 h1{
-    font-size: 38px;
+    font-size: 34px;
     }
   
 .BPDCol2 p {
-  font-size: 19px;
+  font-size: 17px;
   color: gray;
   font-family: none;
   letter-spacing: 0.1px;
   text-align: justify;
 }
 
+.likeitbg {
+  background: url('../../assets/Like\ it\ backdrop.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center; */
+    width: 100%;
+    z-index: 1000;
+    /* height: 400px; */
+    /* opacity: 1.7; */
+    width: 100%;
+}
+.likeitbg h3{
+  font-size: 38px;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+.BPDmarginright{
+  border-right: 1px solid;
+  color: gray;
+  height: 173px;
+}
 .BPDBrandname{
-  font-size: 21px;
+  font-size: 20px;
     font-weight: 600;
     color: midnightblue;
     /* height: 30px; */
@@ -30,7 +61,7 @@
 .hrlineBPD {
   width: 100%;
   border-top: 0.5px solid lightgrey;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 10px;
   margin-left: 0px;
 }
@@ -64,6 +95,12 @@
     margin-top: -7px;
     text-align: center;
 }
+.hrspecBPD{
+  width: 150px;
+  border-top: 2.5px solid rgba(51, 51, 51, 0.84);;
+  margin-top: -7px;
+  text-align: center;
+}
 .Productdetailsh2{
   text-align: center;
   color: rgba(51, 51, 51, 0.84);
@@ -86,7 +123,7 @@ text-align: justify;
 }
 
 .GeneralDetailsp{
-  font-size: 17px;
+  font-size: 14px;
     font-weight: 600;
     color: rgba(51, 51, 51, 0.84);
     
@@ -95,6 +132,9 @@ html{
 scroll-behavior: smooth;
 }
 
+.weaveimgheight{
+  height: 16px;
+}
 .MoresareeBPD{
   text-align: center;
   font-weight: 600;
@@ -125,6 +165,14 @@ scroll-behavior: smooth;
 
 .lottie.is-active {
   filter: none;
+}
+.bpdmgbt{
+  margin-bottom: 27px;
+}
+.specificationicon{
+  height: 55px;
+    /* max-width: 58px; */
+    object-fit: cover;
 }
 /* =================Card============= */
 .CardlayoutBDP{position: relative;
@@ -197,15 +245,15 @@ scroll-behavior: smooth;
     -webkit-box-pack: center;
             justify-content: center;
             margin-left: -19px;
-            border: 2px solid black;
+            /* border: 2px solid black; */
   }
 }
-.buttons button {
+/* .buttons button {
   width: 86%;
-}
+} */
 @media (min-width: 560px) {
   .buttons button {
-    width: 100%;
+    width: 88%;
     height: 53px;
   }
 }
@@ -306,6 +354,12 @@ scroll-behavior: smooth;
   height: 20px;
   margin-top: -19px;
   margin-left: 189px;
+
+}
+.love-icon:hover {
+  transform: scale(1.1);
+transform-origin: 50% 50%;
+--heart-color: var(--heart-active-color);
 
 }
 .love-icon input {

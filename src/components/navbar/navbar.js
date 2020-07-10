@@ -253,12 +253,18 @@ browserHistory.push("/MyProfile");
             {userTypeId === 2 ? (
               <li className="menu-item">
                 {this.state.isfavHovered ? (
+                   <a
+                   href="/wishlist"
+                   className={
+                     this.state.activeTabClassName === "/" ? "active" : ""
+                   }
+                 >
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}
                     className="navButtonImg"
                     src={logos.heariconfilled}
-                  ></img>
+                  ></img></a>
                 ) : (
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}

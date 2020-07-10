@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Button, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-//import logo from '../../assets/TataTrustsNewLogo.png';
 
 const ModalComponent = (props) => (
     <Modal isOpen={props.modal} toggle={props.togglemodal}>

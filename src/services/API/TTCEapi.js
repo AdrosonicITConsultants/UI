@@ -255,7 +255,20 @@ class TTCEapi {
 
       });
   }
+  static deleteProduct(id) {
+    let url = ApiUrl + "/product/deleteProduct/"+id;
 
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
   static getProductCategoryProducts(id) {
     console.log(id)
     let url = ApiUrl + "/product/getProductCategoryProducts/"+id;

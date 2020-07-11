@@ -64,8 +64,8 @@ function App() {
 
           <Route path="/Antaran" component={AntaranCoDesign} />
           <Route path="/Product-Details" component={BuyersProductDetails} />
-          <Route   path="/wishlist" component={Wishlist} />
-          <Route   path="/addwishlist" component={AddWishlist} />
+          <Route   path="/wishlist" component={AddWishlist} />
+          {/* <Route   path="/addwishlist" component={AddWishlist} /> */}
 
 
         </Switch>

@@ -378,6 +378,21 @@ class TTCEapi {
       });
     }
 
+    static getProductIdsInWishlist(){
+      let url = ApiUrl + "/product/getProductIdsInWishlist";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
+
     static deleteAllProductsInWishlist(){
       let url = ApiUrl + "/product/deleteAllProductsInWishlist";
 
@@ -409,10 +424,10 @@ class TTCEapi {
     }
 
     static addToWishlist(productId){
-      let url = ApiUrl + "product/addToWishlist/"+productId;
-
+      let url = ApiUrl + "/product/addToWishlist/"+productId;
+      console.log(url);
     return axios
-      .get(url)
+      .post(url)
       .then((response) => {
         console.log(response);
         return response;

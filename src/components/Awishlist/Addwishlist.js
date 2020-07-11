@@ -16,8 +16,8 @@ class AddWishlist extends Component {
         this.state = {
             getProductsInWishlist:[],
             ImageUrl:TTCEapi.ImageUrl+'Product/',
-            deleteProductsInWishlist:[]
-
+            deleteProductsInWishlist:[],
+            pageLoad:false,
    
         };
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
@@ -27,22 +27,31 @@ class AddWishlist extends Component {
         browserHistory.push("/Home"); 
     }  
 
-    handleDeleteItem(){
+    handleDeleteItem(item){
+    if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
             this.setState({deleteProductsInWishlist : response.data},()=>{
                 console.log(this.state.deleteProductsInWishlist);
+                window.location.reload();
+            
          
             });
+        
         });
+    }
+      
     }
 
     handleDeleteAllItem(){
-        TTCEapi.deleteAllProductsInWishlist().then((response)=>{
-            this.setState({deleteAllProductsInWishlist : response.data},()=>{
-                console.log(this.state.deleteAllProductsInWishlist);
-             
+        if(window.confirm("Remove this item from wishlist?")){
+            TTCEapi.deleteAllProductsInWishlist().then((response)=>{
+                this.setState({deleteAllProductsInWishlist : response.data},()=>{
+                    console.log(this.state.deleteAllProductsInWishlist);
+                    window.location.reload();
+                });
             });
-        });
+        }
+      
     }
 
       componentDidMount(){
@@ -56,25 +65,24 @@ class AddWishlist extends Component {
       });
   }); 
 
- 
-
-
   }
 
     render() {
         return (
    
             <React.Fragment>
-              
-                  {
-         this.state.getProductsInWishlist.length >0 ?
-        
-     <>
-                  <NavbarComponent />
-                <Container>
-              <Row noGutters={true}>
              
-
+         
+     
+                  <NavbarComponent />
+                  {this.state.getProductsInWishlist.length==0?
+                  <Wishlist></Wishlist>:
+                  <>
+                  <body onload="window.location.reload()"></body>
+                <Container className="wishlistbg">
+              <Row noGutters={true}>
+          
+              
               <Col md = "1">
                         <img
                                     src={logos.backarrowicon}
@@ -115,8 +123,10 @@ class AddWishlist extends Component {
                     <Col sm={2} >
                         
                   <div className="Wishlistitemimgdiv">
-                      {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
+                      {data.product.productImages[0]?
                       <img className="Wishlistitemimg" src={this.state.ImageUrl + data.product.productImages[0].productId + '/' + data.product.productImages[0].lable }/>
+                        :null}
+                      {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
 
                      </div>
                     </Col>
@@ -203,10 +213,8 @@ class AddWishlist extends Component {
                
                   </Row> 
                   </Container>
-                  </>
-                  : <Wishlist />
-                  
-    }
+                  </>}
+     
                 </React.Fragment>
               
         )

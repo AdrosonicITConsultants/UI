@@ -27,7 +27,7 @@ class Wishlist extends Component {
         return (
          
             <React.Fragment>
-                <NavbarComponent />
+              
                 <Container>
               <Row noGutters={true}>
               <Col md = "1">

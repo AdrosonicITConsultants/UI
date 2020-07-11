@@ -19,6 +19,8 @@
     "material-ui": "^1.0.0-beta.47",
     "rc-steps": "^4.0.0",
     "react": "^16.13.1",
+    "react-autocomplete": "^1.8.1",
+    "react-autosuggest": "^10.0.2",
     "react-avatar-edit": "^0.8.3",
     "react-avatar-editor": "^11.0.9",
     "react-bootstrap": "^1.0.1",

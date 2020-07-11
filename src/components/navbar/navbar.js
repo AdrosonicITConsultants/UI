@@ -4,6 +4,7 @@ import './navbar.css';
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
+import ConnectedSuggestions from "./buyerSuggestions.js"
 
 
 
@@ -35,6 +36,7 @@ class NavbarComponent extends Component {
       ischatHovered: false,
       isfavHovered: false,
       isSearchClicked :false,
+      index: null,
 
     };
   }
@@ -66,6 +68,7 @@ class NavbarComponent extends Component {
       case "isSearchClicked":
         this.setState({
           isSearchClicked: !this.state.isSearchClicked,
+          // isSearchClicked: true,      
         });
         break;
 
@@ -80,6 +83,7 @@ class NavbarComponent extends Component {
        case "isSearchClicked":
          this.setState({
            isSearchClicked: !this.state.isSearchClicked,
+          //  isSearchClicked: true,       
          });
          break;
 
@@ -106,7 +110,9 @@ browserHistory.push("/MyProfile");
    
   }
 
+  
   render() {
+    const { results, value } = this.state;
    // debugger
     const ImageUrl = TTCEapi.ImageUrl;
     let isAuthenticated =this.props.user !== null;
@@ -126,18 +132,30 @@ browserHistory.push("/MyProfile");
                 src={logos.searchlogo}
                 className="searchIconinTextbox glyphicon"
               ></img>
-              <input
+               {/* <input
                 autoFocus
-                onBlur={() => this.toggleHover("isSearchClicked")}
+                // onBlur={() => this.toggleHover("isSearchClicked")}
                 type="text"
                 id="userName"
                 className="form-control searchTextbox "
                 placeholder="Username"
                 name="userName"
-                // onChange={(e) => this.handleChange(e)}
-              />
+                /> */}
+              <ConnectedSuggestions/>
             </div>
-          ) : null}
+            ) : null}
+          {/* {this.state.isSearchClicked ? (
+            <div className="searchbarNav inner-addon right-addon">
+              <button
+                onClick={() => {
+                  browserHistory.push("/home");
+                }}
+                img={logos.searchlogo}
+                // className=" inner-addon right-addon"
+                
+              ></button>
+            </div>
+            ) : null} */}
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             <li className="menu-item">
               {userTypeId === 2 ? (

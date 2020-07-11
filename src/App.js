@@ -30,7 +30,7 @@ import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
-
+import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 function App() {
   
   return (
@@ -46,6 +46,7 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
+          <Route exact path="/detailSuggestions/:suggestion/:type/:total" component={DetailSuggestions}/>
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />

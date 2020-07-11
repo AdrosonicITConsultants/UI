@@ -986,6 +986,33 @@ class TTCEapi {
 
       });
   }
+  
+  static async getBuyerSuggestions(value){
+    let config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+        Accept: "application/json",
+      },
+  
+      params: {
+        str: value,
+      },
+    };
+    console.log(config);
+    const response = await axios.get(
+      "http://101.53.153.96:8090/search/getSuggestions",
+      config
+    );
+    return response;
+  }
+
+  static async showBuyerSearchSuggestion(searchQuery,searchTypes){
+    let headers={ "Authorization": "Bearer "  + localStorage.getItem('jwtToken'), "Accept": "application/json" }
+    let temp ={pageNo: 1, searchString: searchQuery, searchType: 5 }
+    const response = await axios.post("http://101.53.153.96:8090/search/searchProducts", temp, headers)
+    return response;
+  }
+
   //#endregion
 
   //#endregion

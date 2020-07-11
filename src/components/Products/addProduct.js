@@ -488,6 +488,7 @@ export default class addProduct extends Component {
                                src={logos.featheredit}
                              ></img>
 
+
                              <img
                                className="productImageDelete"
                                onClick={() => {

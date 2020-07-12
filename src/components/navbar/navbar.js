@@ -266,12 +266,14 @@ browserHistory.push("/MyProfile");
                     src={logos.heariconfilled}
                   ></img></a>
                 ) : (
+                  <a
+                   href="/wishlist">
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}
                     className="navButtonImg"
                     src={logos.favoriteicon}
-                  ></img>
+                  ></img></a>
                 )}
               </li>
             ) : null}

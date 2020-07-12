@@ -21,6 +21,7 @@ class AddWishlist extends Component {
    
         };
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
+        this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
     }
 
     backoperation(){

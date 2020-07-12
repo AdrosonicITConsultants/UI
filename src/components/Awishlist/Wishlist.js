@@ -51,8 +51,8 @@ class Wishlist extends Component {
                    
                 </Row>
                 <Row noGutters={true}>
-                  <div style={{textAlign:"center"}}>
-                        <button className="wishlistblack"><img className="homeiconwishlist" onClick={() => this.backoperation()} src={logos.Iconfeatherhome}/> <span className="spanhome">Go to home page</span></button>
+                  <div style={{textAlign:"center"}}  onClick={() => this.backoperation()}>
+                        <button className="wishlistblack"><img className="homeiconwishlist" src={logos.Iconfeatherhome}/> <span className="spanhome">Go to home page</span></button>
                         </div>
                 </Row>
                 </Col>

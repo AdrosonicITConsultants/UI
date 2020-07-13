@@ -30,6 +30,13 @@ import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
 import BuyerSelfDesign from './components/Buyer_Self-Design/BuyerSelfDesign';
+// import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+import Customprod from './components/Custon Products/Customprod';
+import AddCustomprod from './components/Custon Products/AddCustomprod';
+// import BuyerSuggestions from './components/navbar/buyerSuggestions.js'
+// import BuyerDetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+// import ArtistSuggestions from './components/navbar/artistSuggestions.js';
+// import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 function App() {
   
   return (
@@ -46,6 +53,10 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
           <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
+          {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
+          {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
+          {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}
+          {/* <Route exact path="/artistDetailSuggestions/:suggestion/:type/:total" component={ArtistDetailSuggestions}/> */}
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
@@ -64,10 +75,12 @@ function App() {
           <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
 
-          <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
-          <PrivateRoute path="/Product-Details" component={BuyersProductDetails} />
-          <PrivateRoute path="/wishlist" component={AddWishlist} />
-          {/* <Route   path="/addwishlist" component={AddWishlist} /> */}
+          <Route   path="/Antaran" component={AntaranCoDesign} />
+          <Route   path="/Product-Details" component={BuyersProductDetails} />
+          <Route   path="/wishlist" component={AddWishlist} />
+          <Route   path="/Customprod" component={Customprod} />
+          <Route   path="/AddCustomprod" component={AddCustomprod} />
+          <Route   path="/wishlist" component={Wishlist} />
 
 
         </Switch>

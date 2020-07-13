@@ -190,6 +190,7 @@ export class ProductsOfCatelog extends Component {
                   ></img>
                   
                 ) : (
+                  
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import isEmail from "validator/lib/isEmail";
 import setAuthorizationtoken from "../utils/setAuthorizationtoken";
-import jwt from  "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -11,14 +11,14 @@ var ApiUrl = "http://101.53.153.96:8090";
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090";
 } else if (env == "uat") {
- // ApiUrl = "http://63.34.28.175:8090/TEGAPI/services";
+  // ApiUrl = "http://63.34.28.175:8090/TEGAPI/services";
 } else if (env == "live") {
- // ApiUrl = "https://www.bestforexrate.co.uk/TEGAPI/services";
+  // ApiUrl = "https://www.bestforexrate.co.uk/TEGAPI/services";
 }
 
 class TTCEapi {
-
-  static ImageUrl = " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/"
+  static ImageUrl =
+    " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   //#region post methods
 
   static validatePass(pass) {
@@ -26,10 +26,13 @@ class TTCEapi {
     const isOk = re.test(pass);
     // console.log(isOk);
     if (!isOk) {
-      customToast.error("Please enter valid password with 8 characters.It should contain at least 1 Capital alphabet, number and special character.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
+      customToast.error(
+        "Please enter valid password with 8 characters.It should contain at least 1 Capital alphabet, number and special character.",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        }
+      );
       return false;
     }
     return true;
@@ -40,7 +43,7 @@ class TTCEapi {
     let url = ApiUrl + "/register/verifyWeaverDetails";
     var data = {
       weaverId: weaverId,
-     // pin: weaverPin,
+      // pin: weaverPin,
     };
     var config = {
       headers: {
@@ -55,7 +58,6 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
@@ -78,7 +80,6 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
@@ -90,7 +91,7 @@ class TTCEapi {
     var data = {
       emailOrMobile: username,
       password: password,
-      roleId: roleID
+      roleId: roleID,
     };
     var config = {
       headers: {
@@ -100,25 +101,24 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-           if (response.data.valid)
-           { localStorage.clear();
+        if (response.data.valid) {
+          localStorage.clear();
           sessionStorage.clear();
           // remove user from local storage to log user out
           localStorage.removeItem("user");
           localStorage.removeItem("jwtToken");
           const token = response.data.data.acctoken;
           const user = response.data.data.user;
-          localStorage.setItem('jwtToken', token);
+          localStorage.setItem("jwtToken", token);
           localStorage.setItem("user", JSON.stringify(user));
           setAuthorizationtoken(token);
-          
-      //  console.log(jwt.decode(token));
-    }
+
+          //  console.log(jwt.decode(token));
+        }
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
@@ -141,26 +141,19 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
   //#endregion
 
-
-
-  
-
-
-   static uploadProduct(file1, file2 = null, file3 = null , productData) {
-     debugger;
+  static uploadProduct(file1, file2 = null, file3 = null, productData) {
+    debugger;
     let url = ApiUrl + "/product/uploadProduct";
     var data = new FormData();
     data.append("file1", file1);
     data.append("file2", file2);
     data.append("file3", file3);
     data.append("productData", JSON.stringify(productData));
-
 
     // var data = {
     //   file1: file1,
@@ -171,22 +164,19 @@ class TTCEapi {
     // };
     var config = {
       headers: {
-         "Content-type": "multipart/form-data",
+        "Content-type": "multipart/form-data",
       },
     };
     return axios
       .post(url, data, config)
       .then((response) => {
-
         console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-
 
   static editProduct(file1, file2 = null, file3 = null, productData) {
     debugger;
@@ -196,7 +186,6 @@ class TTCEapi {
     data.append("file2", file2);
     data.append("file3", file3);
     data.append("productData", JSON.stringify(productData));
-
 
     // var data = {
     //   file1: file1,
@@ -213,13 +202,11 @@ class TTCEapi {
     return axios
       .put(url, data, config)
       .then((response) => {
-
         console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
   //#endregion
@@ -227,7 +214,7 @@ class TTCEapi {
   //#region get methods
 
   static getProduct(id) {
-    let url = ApiUrl + "/product/getProduct/"+id;
+    let url = ApiUrl + "/product/getProduct/" + id;
 
     return axios
       .get(url)
@@ -237,12 +224,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
   static getSimpleProduct(id) {
-    let url = ApiUrl + "/product/getSimpleProduct/"+id;
+    let url = ApiUrl + "/product/getSimpleProduct/" + id;
 
     return axios
       .get(url)
@@ -252,11 +238,10 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
   static deleteProduct(id) {
-    let url = ApiUrl + "/product/deleteProduct/"+id;
+    let url = ApiUrl + "/product/deleteProduct/" + id;
 
     return axios
       .delete(url)
@@ -266,13 +251,12 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
   static getProductCategoryProducts(id) {
-    console.log(id)
-    let url = ApiUrl + "/product/getProductCategoryProducts/"+id;
-  
+    console.log(id);
+    let url = ApiUrl + "/product/getProductCategoryProducts/" + id;
+
     return axios
       .get(url)
       .then((response) => {
@@ -281,14 +265,13 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
   static getClusterProducts(id) {
-    console.log(id)
-    let url = ApiUrl + "/product/getClusterProducts/"+id;
-  
+    console.log(id);
+    let url = ApiUrl + "/product/getClusterProducts/" + id;
+
     return axios
       .get(url)
       .then((response) => {
@@ -297,14 +280,13 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
   static getArtisianProducts(id) {
-    console.log(id)
-    let url = ApiUrl + "/product/getProductByArtisan/"+id;
-  
+    console.log(id);
+    let url = ApiUrl + "/product/getProductByArtisan/" + id;
+
     return axios
       .get(url)
       .then((response) => {
@@ -313,13 +295,17 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-  static getArtisianProductCategory(userid , categoryid) {
-    console.log(userid,categoryid)
-    let url = ApiUrl + "/product/getProductCategoryAndArtisanProducts/"+categoryid +'/' + userid;
-  
+  static getArtisianProductCategory(userid, categoryid) {
+    console.log(userid, categoryid);
+    let url =
+      ApiUrl +
+      "/product/getProductCategoryAndArtisanProducts/" +
+      categoryid +
+      "/" +
+      userid;
+
     return axios
       .get(url)
       .then((response) => {
@@ -328,12 +314,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
-    static getProducts(){
-      let url = ApiUrl + "/product/getAllProducts";
+  static getProducts() {
+    let url = ApiUrl + "/product/getAllProducts";
 
     return axios
       .get(url)
@@ -343,13 +328,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-
-    static getCountries(){
-      let url = ApiUrl + "/register/getAllCountries";
+  static getCountries() {
+    let url = ApiUrl + "/register/getAllCountries";
 
     return axios
       .get(url)
@@ -359,12 +342,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-    static getProductsInWishlist(){
-      let url = ApiUrl + "/product/getProductsInWishlist";
+  static getProductsInWishlist() {
+    let url = ApiUrl + "/product/getProductsInWishlist";
 
     return axios
       .get(url)
@@ -374,12 +356,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-    static getProductIdsInWishlist(){
-      let url = ApiUrl + "/product/getProductIdsInWishlist";
+  static getProductIdsInWishlist() {
+    let url = ApiUrl + "/product/getProductIdsInWishlist";
 
     return axios
       .get(url)
@@ -389,12 +370,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-    static deleteAllProductsInWishlist(){
-      let url = ApiUrl + "/product/deleteAllProductsInWishlist";
+  static deleteAllProductsInWishlist() {
+    let url = ApiUrl + "/product/deleteAllProductsInWishlist";
 
     return axios
       .delete(url)
@@ -404,12 +384,11 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-    static deleteProductsInWishlist(productId){
-      let url = ApiUrl + "/product/deleteProductsInWishlist/"+productId;
+  static deleteProductsInWishlist(productId) {
+    let url = ApiUrl + "/product/deleteProductsInWishlist/" + productId;
 
     return axios
       .delete(url)
@@ -419,13 +398,12 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
 
-    static addToWishlist(productId){
-      let url = ApiUrl + "/product/addToWishlist/"+productId;
-      console.log(url);
+  static addToWishlist(productId) {
+    let url = ApiUrl + "/product/addToWishlist/" + productId;
+    console.log(url);
     return axios
       .post(url)
       .then((response) => {
@@ -434,12 +412,12 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
-    }
+  }
   //#region login
   static sendOtpForgotpass(emailId, roleID) {
-    let url = ApiUrl + "/forgotpassword/sendotp?email=" + emailId + "&roleId=" + roleID;
+    let url =
+      ApiUrl + "/forgotpassword/sendotp?email=" + emailId + "&roleId=" + roleID;
 
     return axios
       .get(url)
@@ -449,12 +427,22 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
-  static getProductCategoryAndClusterProducts(productCategoryId,clusterId,productId) {
-    let url = ApiUrl + "/product/getProductCategoryAndClusterProducts/"+productCategoryId+"/"+clusterId+'/'+productId;
+  static getProductCategoryAndClusterProducts(
+    productCategoryId,
+    clusterId,
+    productId
+  ) {
+    let url =
+      ApiUrl +
+      "/product/getProductCategoryAndClusterProducts/" +
+      productCategoryId +
+      "/" +
+      clusterId +
+      "/" +
+      productId;
 
     return axios
       .get(url)
@@ -464,12 +452,16 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
   static validateUsername(username, roleID) {
-    let url = ApiUrl + "/login/validateusername?emailOrMobile=" + username + "&roleId=" + roleID;
+    let url =
+      ApiUrl +
+      "/login/validateusername?emailOrMobile=" +
+      username +
+      "&roleId=" +
+      roleID;
 
     return axios
       .get(url)
@@ -479,7 +471,6 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
@@ -497,143 +488,191 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-    static registerArtist(weaverid,emailid,password,firstname,
-      lastname,pincode,cluster,district,state,mobileno,panno,
-      address1,selectedProducts,selectedFile)    {
+  static registerArtist(
+    weaverid,
+    emailid,
+    password,
+    firstname,
+    lastname,
+    pincode,
+    cluster,
+    district,
+    state,
+    mobileno,
+    panno,
+    address1,
+    selectedProducts,
+    selectedFile
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/register/user";
+
+    var data1 = {
+      address: {
+        country: {
+          id: 1,
+          name: "india",
+        },
+        district: district,
+        line1: address1,
+        pincode: pincode,
+        state: state,
+      },
+      clusterId: parseInt(cluster),
+      email: emailid,
+      firstName: firstname,
+      lastName: lastname,
+      mobile: mobileno,
+      pancard: panno,
+      password: password,
+      refRoleId: 1,
+      productCategoryIds: selectedProducts,
+      weaverId: weaverid,
+    };
+    console.log(data1);
+    console.log(selectedFile);
+    debugger;
+    bodyFormData.append("registerRequest", JSON.stringify(data1));
+    bodyFormData.append("profilePic", selectedFile);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
         debugger;
-        var bodyFormData = new FormData();
-          
-          let url = ApiUrl + "/register/user";
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
 
-          var data1 = {
-              address : {
-                  country :{
-                    id: 1,
-                    name : "india"
-                  },
-                  district : district,
-                  line1 : address1,
-                  pincode :pincode,
-                  state : state 
-              },
-              clusterId : parseInt(cluster),
-              email : emailid,
-              firstName : firstname,
-              lastName : lastname,
-              mobile : mobileno,
-              pancard : panno,
-              password: password,
-              refRoleId : 1,
-              productCategoryIds : selectedProducts,
-              weaverId:weaverid
-          };
-          console.log(data1);
-          console.log(selectedFile);
-          debugger;
-          bodyFormData.append('registerRequest', JSON.stringify(data1));
-          bodyFormData.append('profilePic', selectedFile); 
-          
-        
-          // console.log(data);
-          var config = {
-            headers: {
-              "Content-type": "multipart/form-data",
-            },
-          };
-          return axios
-            .post(url, bodyFormData, config)
-            .then((response) => {
-              console.log(response);
-              debugger;
-              return response;
-            })
-            .catch((error) => {
-              debugger;
-              return error.response;
+  static registerBuyer(
+    companyname,
+    gstno,
+    officeno,
+    brandLogo,
+    cinno,
+    panno,
+    logoname,
+    adl1,
+    adl2,
+    street,
+    city,
+    state,
+    country1,
+    pincode,
+    landmark,
+    weblink,
+    sociallink,
+    firstname,
+    lastname,
+    mobileno,
+    alternatemobno,
+    designation,
+    password,
+    emailid,
+    pocmobile,
+    pocemail,
+    pocname,
+    countryid
+  ) {
+    let url = ApiUrl + "/register/user";
+    var bodyFormData = new FormData();
 
-            });
-      }
+    var data = {
+      address: {
+        city: city,
+        country: {
+          id: parseInt(countryid),
+          name: country1,
+        },
+        landmark: landmark,
+        line2: adl2,
+        street: street,
+        line1: adl1,
+        pincode: pincode,
+        state: state,
+      },
+      buyerPointOfContact: {
+        contactNo: pocmobile,
+        email: pocemail,
+        firstName: pocname,
+      },
+      alternateMobile: alternatemobno,
+      companyDetails: {
+        cin: cinno,
+        companyName: companyname,
+        contact: officeno,
+        gstNo: gstno,
+      },
+      designation: designation,
+      email: emailid,
+      firstName: firstname,
+      lastName: lastname,
+      mobile: mobileno,
+      pancard: panno,
+      password: password,
+      refRoleId: 2,
+      socialMediaLink: sociallink,
+      websiteLink: weblink,
+    };
+    console.log(data);
+    console.log(brandLogo);
+    bodyFormData.append("registerRequest", JSON.stringify(data));
+    bodyFormData.append("brandLogo", brandLogo);
 
-    static registerBuyer(companyname,gstno,officeno,brandLogo,cinno,panno,logoname,adl1,
-      adl2,street,city,state,country1,pincode,landmark,weblink, sociallink,firstname,
-      lastname,mobileno,alternatemobno,designation,password,emailid,pocmobile,pocemail,pocname,
-      countryid)    {
-        
-      let url = ApiUrl + "/register/user";
-      var bodyFormData = new FormData();
-        
-          var data = {
-              address : {
-                city: city,
-                country: {
-                  id : parseInt(countryid),
-                  name : country1
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        debugger;
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
-                },
-                landmark: landmark,
-                line2: adl2,                               
-                street: street,
-                line1 : adl1,
-                pincode :pincode,
-                state : state 
-              },
-              buyerPointOfContact: {
-                contactNo: pocmobile,
-                email: pocemail,
-                firstName : pocname
-              },
-              alternateMobile: alternatemobno,
-              companyDetails : {
-                  cin : cinno,
-                  companyName : companyname,
-                  contact : officeno,
-                  gstNo: gstno
-                  
-              },
-              designation: designation,
-              email : emailid,
-              firstName : firstname,
-              lastName : lastname,
-              mobile : mobileno,
-              pancard : panno,
-              password: password,
-              refRoleId : 2,
-              socialMediaLink: sociallink,  
-              websiteLink: weblink
-          };
-          console.log(data);
-          console.log(brandLogo);
-          bodyFormData.append('registerRequest', JSON.stringify(data));
-          bodyFormData.append('brandLogo', brandLogo); 
-
-        var config = {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-          };
-          return axios
-            .post(url, bodyFormData, config)
-            .then((response) => {
-              debugger
-              console.log(response);
-              return response;
-            })
-            .catch((error) => {
-              
-              return error.response;
-            });
-      }
-
-
-  static updateBuyerProfile(companyname, gstno, 
-    cinno, panno,line11, line22, street, city1,state, 
-    country1,pincode,landmark1, alternatemobno,
-    designation,pocmobile, pocemail,pocname,
-    countryid,selectedBrandFile,removedlogo)   {
-      var bodyFormData = new FormData();
+  static updateBuyerProfile(
+    companyname,
+    gstno,
+    cinno,
+    panno,
+    line11,
+    line22,
+    street,
+    city1,
+    state,
+    country1,
+    pincode,
+    landmark1,
+    alternatemobno,
+    designation,
+    pocmobile,
+    pocemail,
+    pocname,
+    countryid,
+    selectedBrandFile,
+    removedlogo
+  ) {
+    var bodyFormData = new FormData();
 
     let url = ApiUrl + "/user/edit/buyerProfile";
     var data = {
@@ -641,50 +680,46 @@ class TTCEapi {
         city: city1,
         country: {
           id: parseInt(countryid),
-          name: country1
+          name: country1,
         },
         line1: line11,
         line2: line22,
-        landmark: landmark1,      
-        street: street,        
+        landmark: landmark1,
+        street: street,
         pincode: pincode,
-        state: state
+        state: state,
       },
       buyerPointOfContact: {
         contactNo: pocmobile,
         email: pocemail,
-        firstName: pocname
+        firstName: pocname,
       },
       alternateMobile: alternatemobno,
       buyerCompanyDetails: {
         cin: cinno,
         companyName: companyname,
-        gstNo: gstno
+        gstNo: gstno,
       },
-      designation: designation,    
+      designation: designation,
       pancard: panno,
-    
     };
     console.log(data);
-  console.log(selectedBrandFile);
-  console.log(removedlogo);
+    console.log(selectedBrandFile);
+    console.log(removedlogo);
 
-  bodyFormData.append('profileDetails', JSON.stringify(data));
-  if(removedlogo == 1){
-    // bodyFormData.append('', selectedBrandFile); 
-    var f = new File([""], "");
-    bodyFormData.append('logo', f);
+    bodyFormData.append("profileDetails", JSON.stringify(data));
+    if (removedlogo == 1) {
+      // bodyFormData.append('', selectedBrandFile);
+      var f = new File([""], "");
+      bodyFormData.append("logo", f);
       debugger;
+    }
+    if (removedlogo == 2) {
+      bodyFormData.append("logo", selectedBrandFile);
+    }
+    // bodyFormData.append('logo', selectedBrandFile);
 
-  }
-  if(removedlogo==2){
-    bodyFormData.append('logo',selectedBrandFile ); 
-
-  }
-  // bodyFormData.append('logo', selectedBrandFile); 
-  
-
-  // console.log(data);
+    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -695,49 +730,51 @@ class TTCEapi {
       .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
-        if (response.data.valid)
-           { 
+        if (response.data.valid) {
           localStorage.removeItem("user");
           const user = response.data.data;
           localStorage.setItem("user", JSON.stringify(user));
-           }
+        }
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
- static updatePersonalDetails(line1,district,pincode,state,selectedFile,removedprofile){
-  let url = ApiUrl + "/user/edit/artistProfile";
-  var bodyFormData = new FormData();
-  var data = {
-    country :{
-      id: 1,
-      name : "INDIA"
-    },
-    district : district,
-    line1 : line1,
-    pincode :pincode,
-    state : state 
-  }
-  console.log(data);
-  console.log(selectedFile);
-  bodyFormData.append('address', JSON.stringify(data));
-  console.log(removedprofile);
-  if(removedprofile==1){
-    var f = new File([""], "");
-    bodyFormData.append('profilePic', f);
+  static updatePersonalDetails(
+    line1,
+    district,
+    pincode,
+    state,
+    selectedFile,
+    removedprofile
+  ) {
+    let url = ApiUrl + "/user/edit/artistProfile";
+    var bodyFormData = new FormData();
+    var data = {
+      country: {
+        id: 1,
+        name: "INDIA",
+      },
+      district: district,
+      line1: line1,
+      pincode: pincode,
+      state: state,
+    };
+    console.log(data);
+    console.log(selectedFile);
+    bodyFormData.append("address", JSON.stringify(data));
+    console.log(removedprofile);
+    if (removedprofile == 1) {
+      var f = new File([""], "");
+      bodyFormData.append("profilePic", f);
       debugger;
+    }
+    if (removedprofile == 2) {
+      bodyFormData.append("profilePic", selectedFile);
+    }
 
-  }
-  if(removedprofile==2){
-    bodyFormData.append('profilePic', selectedFile); 
-
-  }
-  
-
-  // console.log(data);
+    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -748,117 +785,112 @@ class TTCEapi {
       .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
-        if (response.data.valid)
-           { 
-              console.log("Personal details updated");
-           }
+        if (response.data.valid) {
+          console.log("Personal details updated");
+        }
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
-  
-
-
- }
-
- static updateBrandDetails(brandname,branddesc,selectedprods,selectedBrandFile,removedlogo){
-  let url = ApiUrl + "/user/edit/artistBrandDetails";
-  var bodyFormData = new FormData();
-  var data = {
-    companyDetails : {
-      companyName : brandname,
-      desc : branddesc
-    },
-    productCategories : selectedprods
-   
   }
-  console.log(data);
-  console.log(selectedBrandFile);
-  console.log(removedlogo);
 
-  
-  bodyFormData.append('editBrandDetails', JSON.stringify(data));
-  if(removedlogo == 1){
-    // bodyFormData.append('', selectedBrandFile); 
-    var f = new File([""], "");
-    bodyFormData.append('logo', f);
+  static updateBrandDetails(
+    brandname,
+    branddesc,
+    selectedprods,
+    selectedBrandFile,
+    removedlogo
+  ) {
+    let url = ApiUrl + "/user/edit/artistBrandDetails";
+    var bodyFormData = new FormData();
+    var data = {
+      companyDetails: {
+        companyName: brandname,
+        desc: branddesc,
+      },
+      productCategories: selectedprods,
+    };
+    console.log(data);
+    console.log(selectedBrandFile);
+    console.log(removedlogo);
+
+    bodyFormData.append("editBrandDetails", JSON.stringify(data));
+    if (removedlogo == 1) {
+      // bodyFormData.append('', selectedBrandFile);
+      var f = new File([""], "");
+      bodyFormData.append("logo", f);
       debugger;
-
-  }
-  if(removedlogo==2){
-    bodyFormData.append('logo',selectedBrandFile ); 
-
-  }
-  
+    }
+    if (removedlogo == 2) {
+      bodyFormData.append("logo", selectedBrandFile);
+    }
 
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
       },
     };
- 
+
     return axios
       .put(url, bodyFormData, config)
       .then((response) => {
         console.log(response);
-        if (response.data.valid)
-           { 
-              console.log("Brand details updated");
-           }
+        if (response.data.valid) {
+          console.log("Brand details updated");
+        }
         return response;
       })
       .catch((error) => {
         console.log(error.response);
         return error.response;
-
       });
-  
+  }
 
-
- }
-
-  static updateBankDetails(accountno,bankname,branch,ifsccode,benificiaryname,gpayupi,paytmupi,phonepeupi){
+  static updateBankDetails(
+    accountno,
+    bankname,
+    branch,
+    ifsccode,
+    benificiaryname,
+    gpayupi,
+    paytmupi,
+    phonepeupi
+  ) {
     let url = ApiUrl + "/user/edit/bankDetails";
     var data = [
       {
-        accNo_UPI_Mobile : accountno,
-        accountType : {
-          id : 1
+        accNo_UPI_Mobile: accountno,
+        accountType: {
+          id: 1,
         },
-        bankName : bankname,
-        branch  : branch,
-        ifsc : ifsccode,
-        name : benificiaryname
-
+        bankName: bankname,
+        branch: branch,
+        ifsc: ifsccode,
+        name: benificiaryname,
       },
       {
-        accNo_UPI_Mobile : gpayupi,
-        accountType : {
-          id : 2
-        }
-
+        accNo_UPI_Mobile: gpayupi,
+        accountType: {
+          id: 2,
+        },
       },
       {
-        accNo_UPI_Mobile : phonepeupi,
-        accountType : {
-          id : 3
-        }
-
+        accNo_UPI_Mobile: phonepeupi,
+        accountType: {
+          id: 3,
+        },
       },
       {
-        accNo_UPI_Mobile : paytmupi,
-        accountType : {
-          id : 4
-        }
-
-      }
-
+        accNo_UPI_Mobile: paytmupi,
+        accountType: {
+          id: 4,
+        },
+      },
     ];
     console.log(data);
     // debugger;
-    
+
     var config = {
       headers: {
         "Content-type": "application/json",
@@ -869,29 +901,23 @@ class TTCEapi {
       .put(url, data, config)
       .then((response) => {
         console.log(response);
-        if (response.data.valid)
-           { 
-              console.log("details updated");
-           }
+        if (response.data.valid) {
+          console.log("details updated");
+        }
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
-
   }
 
   static getArtitionProducts() {
-    
     let url = ApiUrl + "/product/getArtitionProducts";
 
     return axios
       .get(url)
       .then((response) => {
-       
         console.log(response);
-        
 
         return response;
       })
@@ -900,19 +926,20 @@ class TTCEapi {
       });
   }
 
-
   static getProductUploadData() {
     debugger;
     let url = ApiUrl + "/product/getProductUploadData";
-    
 
     return axios
       .get(url)
       .then((response) => {
         debugger;
         console.log(response);
-        localStorage.removeItem("ProductUploadData");      
-        localStorage.setItem('ProductUploadData', JSON.stringify(response.data.data));
+        localStorage.removeItem("ProductUploadData");
+        localStorage.setItem(
+          "ProductUploadData",
+          JSON.stringify(response.data.data)
+        );
 
         return response;
       })
@@ -921,54 +948,48 @@ class TTCEapi {
       });
   }
 
-    static getClusters(){
+  static getClusters() {
     let url = ApiUrl + "/cluster/getAllClusters";
 
     return axios
       .get(url)
       .then((response) => {
-
         console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-  
-  static getFilteredArtisans(){
+
+  static getFilteredArtisans() {
     let url = ApiUrl + "/filter/getFilteredArtisans";
 
     return axios
       .get(url)
       .then((response) => {
-
         console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
 
-  static getAllProducts(){
+  static getAllProducts() {
     let url = ApiUrl + "/product/getAllProducts";
 
     return axios
       .get(url)
       .then((response) => {
-
         console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-  static getProfile(){
+  static getProfile() {
     let url = ApiUrl + "/user/myprofile";
     return axios
       .get(url)
@@ -983,17 +1004,16 @@ class TTCEapi {
       })
       .catch((error) => {
         return error.response;
-
       });
   }
-  
-  static async getBuyerSuggestions(value){
+
+  static async getBuyerSuggestions(value) {
     let config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwtToken"),
         Accept: "application/json",
       },
-  
+
       params: {
         str: value,
       },
@@ -1006,10 +1026,50 @@ class TTCEapi {
     return response;
   }
 
-  static async showBuyerSearchSuggestion(searchQuery,searchTypes){
-    let headers={ "Authorization": "Bearer "  + localStorage.getItem('jwtToken'), "Accept": "application/json" }
-    let temp ={pageNo: 1, searchString: searchQuery, searchType: 5 }
-    const response = await axios.post("http://101.53.153.96:8090/search/searchProducts", temp, headers)
+  static async showBuyerSearchSuggestion(searchQuery, searchTypes) {
+    let headers = {
+      Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+      Accept: "application/json",
+    };
+    let temp = { pageNo: 1, searchString: searchQuery, searchType: 5 };
+    const response = await axios.post(
+      "http://101.53.153.96:8090/search/searchProducts",
+      temp,
+      headers
+    );
+    return response;
+  }
+
+  static async getArtistSuggestions(value) {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+        Accept: "application/json",
+      },
+
+      params: {
+        str: value,
+      },
+    };
+    console.log(config);
+    const response = await axios.get(
+      "http://101.53.153.96:8090/search/getArtisanSuggestions",
+      config
+    );
+    return response;
+  }
+
+  static async showArtistSearchSuggestion(searchQuery, searchTypes) {
+    let headers = {
+      Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+      Accept: "application/json",
+    };
+    let temp = { pageNo: 1, searchString: searchQuery, searchType: 5 };
+    const response = await axios.post(
+      "http://101.53.153.96:8090/search/searchArtisanProducts",
+      temp,
+      headers
+    );
     return response;
   }
 

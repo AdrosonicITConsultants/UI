@@ -8,7 +8,7 @@ import "./suggestions.css";
 import TTCEapi from "../../services/API/TTCEapi";
 import { Container } from "reactstrap";
 
-class BuyerDetailSuggestions extends Component {
+class ArtistDetailSuggestions extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,10 +17,11 @@ class BuyerDetailSuggestions extends Component {
   }
 
   async callapi(searchQuery, searchTypes) {
-    const response = await TTCEapi.showBuyerSearchSuggestion(
+    const response = await TTCEapi.showArtistSearchSuggestion(
       searchQuery,
       searchTypes
     );
+    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     console.log(response);
   }
 
@@ -53,10 +54,8 @@ class BuyerDetailSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  console.log("User : ");
-  console.log(user);
   return { user };
 }
 
-const BuyerConnectedDetailSuggestions = connect(mapStateToProps)(BuyerDetailSuggestions);
-export default BuyerConnectedDetailSuggestions;
+const ArtistConnectedDetailSuggestions = connect(mapStateToProps)(ArtistDetailSuggestions);
+export default ArtistConnectedDetailSuggestions;

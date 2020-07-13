@@ -30,7 +30,10 @@ import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
-import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+import BuyerSuggestions from './components/navbar/buyerSuggestions.js'
+import BuyerDetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+import ArtistSuggestions from './components/navbar/artistSuggestions.js';
+import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 function App() {
   
   return (
@@ -46,7 +49,10 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
-          <Route exact path="/detailSuggestions/:suggestion/:type/:total" component={DetailSuggestions}/>
+          <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/>
+          <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/>
+          <Route exact path="/artistSuggestions" component={ArtistSuggestions}/>
+          <Route exact path="/artistDetailSuggestions/:suggestion/:type/:total" component={ArtistDetailSuggestions}/>
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />

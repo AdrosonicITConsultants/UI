@@ -21,6 +21,7 @@ class AddWishlist extends Component {
    
         };
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
+        this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
     }
 
     backoperation(){
@@ -58,7 +59,7 @@ class AddWishlist extends Component {
    
      TTCEapi.getProductsInWishlist().then((response)=>{
       this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist);
+          console.log(this.state.getProductsInWishlist.length);
          
          
           // console.log(this.props.user);
@@ -95,7 +96,7 @@ class AddWishlist extends Component {
                     <h1 > Your Wish list</h1>
                      <Row noGutter={true}>
                          <Col md ="6" >
-                            <p style={{float:"left"}} className="Totalitemsinwishlist">Total Items</p> 
+                  <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items: {this.state.getProductsInWishlist.length}</p> 
                          </Col>
                          <Col md ="6"  onClick={() => this.handleDeleteAllItem()} >
                              <p style={{float:"right"}}>
@@ -109,11 +110,11 @@ class AddWishlist extends Component {
             
                      {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => ( 
               <>
-           
+      
                <div>
                     <Card className="wishlistcardbody">
                         <Row noGutters={true}>
-                            <Col sm={12}className="srno">
+                            <Col sm={12} className="srno">
                             <p></p>
                             </Col>
                         </Row>

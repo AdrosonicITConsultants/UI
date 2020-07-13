@@ -150,17 +150,14 @@
 }
 
 body {
-    /* Set "my-sec-counter" to 0 */
-    counter-reset: my-sec-counter;
+    counter-reset: section;
   }
   
   .srno p::before {
-    /* Increment "my-sec-counter" by 1 */
-    counter-increment: my-sec-counter;
-    content: " " counter(my-sec-counter) ". ";
+    counter-increment: section;
+    content: " " counter(section) " ";
   }
-
-
+  
 @media only screen and ( max-width: 767px ) {
 
     .Colfloatri{

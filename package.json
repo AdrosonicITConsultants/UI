@@ -24,6 +24,7 @@
     "react-avatar-edit": "^0.8.3",
     "react-avatar-editor": "^11.0.9",
     "react-bootstrap": "^1.0.1",
+    "react-bootstrap-modal": "^4.2.0",
     "react-btn-checkbox": "0.0.2",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.0",

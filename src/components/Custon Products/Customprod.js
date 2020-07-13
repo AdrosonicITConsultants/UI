@@ -4,11 +4,9 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import '../navbar/navbar.css';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import NavbarComponent from "../navbar/navbar";
-import "./Awishlist.css";
-import { withRouter } from 'react-router'
+import "./Customprod.css"
 
-
-class Wishlist extends Component {
+class Customprod extends Component {
     
     constructor(props) {
         super(props);
@@ -20,10 +18,8 @@ class Wishlist extends Component {
         };
       
     }
-    
     backoperation(){
-        // browserHistory.push("/Home"); 
-        this.props.history.goBack()
+        browserHistory.push("/home"); 
     }  
     
 
@@ -38,27 +34,29 @@ class Wishlist extends Component {
                         <img
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
-                                    onClick={() => this.backoperation}
+                                     onClick={() => this.backoperation()}
                                 ></img>
                        
                        </Col>
 
-                <Col md='10'className="emptyhrwishlist">
-                    <h1 > Your Wish list is empty</h1>
+                <Col md='10'className="emptyhrcustom">
+                    <h1 > Your unique custom designs appears here</h1>
 
-                <p>Not added anything yet</p>    
-                <Row noGutters={true}>
+                <p>No custom product added yet</p>    
+                <Row noGutters={true} className="emptycustomtbg">
                    
-                        <div className="heartwishlistbg">
-
+                        <div className="Emptymakeittext" >
+                            Make it & take it
+                            <p>Try adding a new custom product to</p>
+                            <p>Create your unique design</p>
                         </div>
-                   
-                </Row>
-                <Row noGutters={true}>
-                  <div style={{textAlign:"center"}}  onClick={() => this.backoperation()}>
-                        <button className="wishlistblack"><img className="homeiconwishlist" src={logos.Iconfeatherhome}/> <span className="spanhome">Go to home page</span></button>
+                        <div style={{textAlign:"center"}}  onClick={() => this.backoperation()}>
+                        <button className="wishlistblack"><img className="homeiconwishlist" src={logos.whitecustomdesignicon}/> <span className="spanhome">Create my own design</span></button>
                         </div>
                 </Row>
+                {/* <Row noGutters={true}>
+                  
+                </Row> */}
                 </Col>
                   </Row> 
                   </Container>
@@ -67,4 +65,4 @@ class Wishlist extends Component {
         )
     }
 }
-export default Wishlist;
+export default Customprod;

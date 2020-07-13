@@ -125,7 +125,13 @@ import wishlistthread from "./wishlist-thread.svg"
 import Iconfeatherhome from "./Icon feather-home.svg"
 import clearmywishlist from "./clear my wish list.svg"
 import removefromwishlist from "./remove from wishlist.svg"
+import CustomDesignIcons from "./Custom Design Icons.svg"
+import Iconfeatheredit3 from "./Icon feather-edit-3.png"
+import whitecustomdesignicon from "./white custom design icon for black button .svg"
 export default {
+  whitecustomdesignicon,
+  Iconfeatheredit3,
+  CustomDesignIcons,
   removefromwishlist,
   clearmywishlist,
   Iconfeatherhome,

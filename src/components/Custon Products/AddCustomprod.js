@@ -5,71 +5,38 @@ import '../navbar/navbar.css';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from '../../services/API/TTCEapi';
 import NavbarComponent from "../navbar/navbar";
-import "./Awishlist.css"
-import Wishlist from './Wishlist';
-import { withRouter } from 'react-router'
+import Customprod from './Customprod';
+import { Footer } from 'rsuite';
+import { withRouter } from 'react-router';
 
 
-class AddWishlist extends Component {
+class AddCustomprod extends Component {
     
     constructor(props) {
         super(props);
 
         this.state = {
-            getProductsInWishlist:[],
+            buyergetAllProducts:[],
             ImageUrl:TTCEapi.ImageUrl+'Product/',
-            deleteProductsInWishlist:[],
-            pageLoad:false,
    
         };
-        this.handleDeleteItem = this.handleDeleteItem.bind(this);
-        this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+      
     }
 
     backoperation(){
         browserHistory.push("/home"); 
     }  
-
-    handleDeleteItem(item){
-    if(window.confirm("Remove this item from wishlist?")){
-        TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
-            this.setState({deleteProductsInWishlist : response.data},()=>{
-                console.log(this.state.deleteProductsInWishlist);
-                window.location.reload();
-            
-         
-            });
-        
-        });
-    }
-      
-    }
-
-    handleDeleteAllItem(){
-        if(window.confirm("Remove this item from wishlist?")){
-            TTCEapi.deleteAllProductsInWishlist().then((response)=>{
-                this.setState({deleteAllProductsInWishlist : response.data},()=>{
-                    console.log(this.state.deleteAllProductsInWishlist);
-                    window.location.reload();
-                });
-            });
-        }
-      
-    }
-
-      componentDidMount(){
    
-     TTCEapi.getProductsInWishlist().then((response)=>{
-      this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist.length);
-         
-         
-          // console.log(this.props.user);
-      });
-  }); 
-
-  }
-
+    componentDidMount(){
+   
+        TTCEapi.buyergetAllProducts().then((response)=>{
+         this.setState({buyergetAllProducts : response.data.data},()=>{
+             console.log(this.state.buyergetAllProducts);
+          
+             // console.log(this.props.user);
+         });
+     });
+     }
     render() {
         return (
    
@@ -78,9 +45,11 @@ class AddWishlist extends Component {
          
      
                   <NavbarComponent />
-                  {this.state.getProductsInWishlist.length==0?
-                  <Wishlist></Wishlist>:
-                  <>
+                  
+                  {this.state.buyergetAllProducts.length==0?
+              <Customprod />  :
+               
+                 <>
                   <body onload="window.location.reload()"></body>
                 <Container className="wishlistbg">
               <Row noGutters={true}>
@@ -96,24 +65,23 @@ class AddWishlist extends Component {
                        
                        </Col>
                 <Col md='10'className="addedwishlist">
-                    <h1 > Your Wish list</h1>
+                    <h1 > Your custom products</h1>
                      <Row noGutter={true}>
                          <Col md ="6" >
-                  <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items: {this.state.getProductsInWishlist.length}</p> 
+                  <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items:{this.state.buyergetAllProducts.length} </p> 
                          </Col>
-                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()} >
+                         <Col md ="6"  >
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
-                              <span className="spanhome">Clear my wishlist</span></button>
+                              <span className="spanhome">Clear my designs</span></button>
 
                              </p>
                          </Col>
                          <hr className="hrlineasd "></hr>
                      </Row>
-            
-                     {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => ( 
+                     {this.state.buyergetAllProducts ? ( ( this.state.buyergetAllProducts.map((data) => ( 
               <>
-      
+                    
                <div>
                     <Card className="wishlistcardbody">
                         <Row noGutters={true}>
@@ -127,9 +95,12 @@ class AddWishlist extends Component {
                     <Col sm={2} >
                         
                   <div className="Wishlistitemimgdiv">
-                      {data.product.productImages[0]?
-                      <img className="Wishlistitemimg" src={this.state.ImageUrl + data.product.productImages[0].productId + '/' + data.product.productImages[0].lable }/>
-                        :null}
+                        {data.productImages[0].productId? 
+                  <img className="Wishlistitemimg" src={this.state.ImageUrl + data.productImages[0].productId + '/' + data.productImages[0].lable }/>
+                            :
+                            <img className="Wishlistitemimg" src={logos.Smile} />
+                        }
+                      
                       {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
 
                      </div>
@@ -137,39 +108,33 @@ class AddWishlist extends Component {
 {/* col 2 */}
                      <Col sm={6} className="secondcolmargin"> 
                      <Row noGutters={true}>
-                            <Col sm={12}>
-                           <h1 className="wishlistitemcardtitle">{data.product.tag}</h1> 
+                            <Col sm={12} className="">
+                           <h1 className="addedcustom">{data.productCategory.productDesc}/
+                           <span style={{color:"grey"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
+                           {data.warpDye?
+                            data.warpDye.dyeDesc:null} X <span></span>
+                           {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
+                          
                             </Col>
                      </Row>
                      <Row  noGutters={true}> 
                          <Col sm={12}>
-                             <p className="Descriptionitemp">
-                           
-                                 {data.product.product_spe}</p>
+                             <p className="Descriptionitemp"  numberOfLines={1}  >{data.product_spec}
+                           </p>
                          </Col>
                      </Row>
                      <Row  noGutters={true}>
-                         <Col sm={6} className="colalign" style={{borderRight:"1px solid gray"}}>
-                                {data.product.madeWithAnthran==0? 
-                                <img className="wishlistitembrand" src={logos.artisianSelfLogo}/>
-                                :
-                                <img className="wishlistitembrand" src={logos.antaranCoDesignLogo}/>
-                                }
-                           
-
-                            <span className="wishlistbrand">{data.product.clusterName} //</span>
-                            <span className="wishlistbrand2">{data.product.brand}</span>
-                         </Col>
-                         <Col sm={6} className="Wishlistpcode">
-                           <span>Product Code :</span> <span><b>{data.product.code}</b></span>
+                        
+                         <Col sm={12} className="Wishlistpcode">
+                     <span>Date created :</span> <span><b><time datetime="1914-12-20T08:0">{data.createdOn} </time> </b></span>
                          </Col>
                      </Row>
                        </Col> 
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem()}>
-                            Remove from wish list <img src={logos.removefromwishlist}/>
+                         <Col sm={12}  className="Editprodmodify">
+                            View & modify product <img className="editimgicon" src={logos.Iconfeatheredit3}/>
                             </Col>
                              </Row>  
                         <Row noGutters={true}>
@@ -195,15 +160,15 @@ class AddWishlist extends Component {
                             </Row>
                             <Row noGutters={true}>
                                 <Col sm={12} >
-                                {data.product.productStatusId==2?
-                               <p className="Wishlistpcode margintopcss"><b>Available in </b>Stock</p>
+                               
+                               {/* <p className="Wishlistpcode margintopcss"><b>Available in </b>Stock</p> */}
  
-                            :
                             
+{/*                             
                             <p className="Wishlistpcode margintopcss">     
                             <b style={{color:"purple"}}>Exclusively </b>made to order
-                            </p>
-                            }
+                            </p> */}
+                            
                                 </Col>
                             </Row>
                        </Col>
@@ -218,12 +183,18 @@ class AddWishlist extends Component {
                 </Col>
                
                   </Row> 
+                  <Row>
+                      <div className="timelessstorybg">
+
+                      </div>
+                  </Row>
                   </Container>
-                  </>}
+                    <Footer/>
+                     </>}
      
                 </React.Fragment>
               
         )
     }
 }
-export default AddWishlist;
+export default AddCustomprod;

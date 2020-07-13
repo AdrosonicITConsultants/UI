@@ -27,6 +27,10 @@
   font-family: none;
   letter-spacing: 0.1px;
   text-align: justify;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 355px;
 }
 
 .likeitbg {

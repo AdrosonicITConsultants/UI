@@ -56,7 +56,6 @@ class ProductRegions extends Component {
         
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-
         TTCEapi.getClusterProducts(parseInt(params.clusterid)).then((response)=>{
             switch(parseInt(params.clusterid))
             {

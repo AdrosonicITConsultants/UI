@@ -56,3 +56,22 @@
     margin-left: 10rem;
     margin-top: 5px;
 }
+.headingsearch{
+    font-size: 45px;
+}
+.filteronsearch{
+    border: 1px solid #666666;
+    padding: 10px;
+    font-size: 15px;
+}
+.padding15{
+    padding:15px
+}
+.logosearch{
+    width: 26px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+.padding0{
+    padding: 0px!important;
+}

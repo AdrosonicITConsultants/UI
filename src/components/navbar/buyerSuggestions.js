@@ -60,7 +60,7 @@ const renderSuggestion = (suggestion) => {
   if (suggestion.suggestionType == "Global") {
     return (
       <a
-        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        href={`/detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
       >
         <div className="custom-suggestion-row">{suggestion.suggestion}</div>
       </a>
@@ -68,7 +68,7 @@ const renderSuggestion = (suggestion) => {
   } else {
     return (
       <a
-        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        href={`/detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
       >
         <div className="custom-suggestion-row">
           {suggestion.suggestion} in {suggestion.suggestionType}

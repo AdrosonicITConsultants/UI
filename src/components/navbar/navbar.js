@@ -186,7 +186,10 @@ browserHistory.push("/MyProfile");
             </li>
             <li className="menu-item">
               {userTypeId === 2 ? (
-                <button className="navButton navbarTransparent navbtn1">
+                <button className="navButton navbarTransparent navbtn1"
+                onClick={() => {
+                  browserHistory.push("/buyer-custom-design");
+                }}>
                   <img className="navButtonImg" src={logos.navbarbtn1}></img>
                   <span className="navButtonImg">New custom design</span>
                 </button>

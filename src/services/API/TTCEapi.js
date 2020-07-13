@@ -161,14 +161,6 @@ class TTCEapi {
     data.append("file3", file3);
     data.append("productData", JSON.stringify(productData));
 
-
-    // var data = {
-    //   file1: file1,
-    //   file2: file2,
-    //   file3: file3,
-    //   productData: productData,
-    //   // pin: weaverPin,
-    // };
     var config = {
       headers: {
          "Content-type": "multipart/form-data",
@@ -187,7 +179,33 @@ class TTCEapi {
       });
   }
 
+  static buyerpUploadDesign(file1, file2 = null, file3 = null , productData) {
+    debugger;
+   let url = ApiUrl + "/buyerCustomProduct/uploadProduct";
+   var data = new FormData();
+   data.append("file1", file1);
+   data.append("file2", file2);
+   data.append("file3", file3);
+   data.append("productData", JSON.stringify(productData));
 
+   var config = {
+     headers: {
+        "Content-type": "multipart/form-data",
+     },
+   };
+   return axios
+     .post(url, data, config)
+     .then((response) => {
+      console.log("efjjfi");
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+      console.log("efwdwdwdjjfi");
+       return error.response;
+
+     });
+ }
   static editProduct(file1, file2 = null, file3 = null, productData) {
     debugger;
     let url = ApiUrl + "/product/edit/product";
@@ -1006,11 +1024,27 @@ class TTCEapi {
     return response;
   }
 
-  static async showBuyerSearchSuggestion(searchQuery,searchTypes){
-    let headers={ "Authorization": "Bearer "  + localStorage.getItem('jwtToken'), "Accept": "application/json" }
-    let temp ={pageNo: 1, searchString: searchQuery, searchType: 5 }
-    const response = await axios.post("http://101.53.153.96:8090/search/searchProducts", temp, headers)
-    return response;
+  static showBuyerSearchSuggestion(searchQuery,searchTypes){
+     let url = ApiUrl + "/search/searchProducts";
+    var data = {
+      pageNo: 1,
+      searchString: searchQuery,
+      searchType : parseInt(searchTypes)
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
   }
 
   //#endregion

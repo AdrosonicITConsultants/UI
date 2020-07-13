@@ -21,8 +21,6 @@ import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
 import ArtisianProducts from './components/Artisan_Self_Design/ArtisianProducts';
-
-
 import AntaranProductCategories from './components/Artisan_Self_Design/AntaranProductCategories';
 import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
@@ -30,7 +28,8 @@ import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel
 import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
-import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+import DetailSuggestions from'./components/navbar/DetailSuggestions';
+import BuyerSelfDesign from './components/Buyer_Self-Design/BuyerSelfDesign';
 function App() {
   
   return (
@@ -46,26 +45,28 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
-          <Route exact path="/detailSuggestions/:suggestion/:type/:total" component={DetailSuggestions}/>
+          <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
-          <PrivateRoute exact path="/Artisans-elf/categories/ProductCategories" component={ProductCategories} />
+          <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
+          <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
+
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-          <Route path="/Artisanself" component={ArtistSelfDesign} />
-          <Route path="/EditProduct" component={EditProduct} />
+          <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
+          <PrivateRoute path="/EditProduct" component={EditProduct} />
 
-          <Route path="/Antaran" component={AntaranCoDesign} />
-          <Route path="/Product-Details" component={BuyersProductDetails} />
-          <Route   path="/wishlist" component={AddWishlist} />
+          <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
+          <PrivateRoute path="/Product-Details" component={BuyersProductDetails} />
+          <PrivateRoute path="/wishlist" component={AddWishlist} />
           {/* <Route   path="/addwishlist" component={AddWishlist} /> */}
 
 

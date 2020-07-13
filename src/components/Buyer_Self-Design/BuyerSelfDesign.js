@@ -3,21 +3,15 @@ import ImageEditorTTCE from "../../shared/ImageEditorTTCE";
 import ImageUpload from "../../shared/ImageUpload";
 import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
-import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
 import { Row, Col, Container, Label, Button } from "reactstrap";
-import logos from "../../assets";
+import logos from "../../../src/assets";
 import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import queryString from 'query-string';
-import base64Img from "base64-img";
-import "./editProduct.css"
-import ModalComponent from "../modal/modal";
-import Modal from 'react-bootstrap/Modal'
 
 const customStyles3 = {
   content: {
@@ -35,33 +29,14 @@ const initialState = {
   modal1: false,
   modal2: false,
   modal3: false,
-  modal5: false,
-  productName: "",
   showGSM: false,
   GSMName: "",
   weight: "",
   description: "",
-  productCode: "",
   clusterdata: [],
   product_care_id: [],
-  wareAndCare: [
-    { id: 0, isChecked: false },
-    { id: 1, isChecked: false },
-    { id: 2, isChecked: false },
-    { id: 3, isChecked: false },
-    { id: 4, isChecked: false },
-    { id: 5, isChecked: false },
-    { id: 6, isChecked: false },
-    { id: 7, isChecked: false },
-    { id: 8, isChecked: false },
-    { id: 9, isChecked: false },
-    { id: 10, isChecked: false },
-  ],
-  iswashAndCareComplete: false,
   isBasicComplete: false,
   isImageUploadComplete: false,
-  isavailable: false,
-  isMTO: true,
   productCategories: [],
   productTypes: [],
   productTypeName : "",
@@ -76,22 +51,15 @@ const initialState = {
   lengths: "",
   relatedProduct: [],
   savedrelatedProduct:[],
-  SaveDisabled:false,
-  EditEnabled:false,
-  componentMounted : false,
-  isEdit: false,
-  modal :false,
-  producrid : 0,
+  SaveDisabled:false
 };
 
-export default class addProduct extends Component {
+export default class BuyerSelfDesign extends Component {
                  constructor(props) {
                    super(props);
                    this.myRefAddPhoto = React.createRef();  
                    this.basicDetails = React.createRef();
                    this.basicDetailsComplete = React.createRef();  
-                   this.washAndCare = React.createRef();  
-                   this.weightComplete = React.createRef();
                    this.WeavesComplete = React.createRef();  
                    this.description = React.createRef();  
                    this.warpweftComplete = React.createRef(); 
@@ -100,16 +68,11 @@ export default class addProduct extends Component {
                    this.fileUploader1 = React.createRef(); 
                    this.fileUploader2 = React.createRef(); 
                    this.fileUploader3 = React.createRef();
-                   this.GSMNameComplete = React.createRef(); 
-                  
+                   this.GSMNameComplete = React.createRef();
+
                    this.state = initialState;
                  }
 
-                  handleClose = () => {this.setState({modal5 : false})};
-                  handleShow = () => {this.setState({modal5 : true})};
-                 confirmSave(){
-                   this.setState({modal5:true});
-                 }
                  onAddingItem = (i) => (event) => {
                    let { weaves } = this.state;
                    weaves[i].isChecked = !weaves[i].isChecked;
@@ -117,13 +80,10 @@ export default class addProduct extends Component {
                      weaves: [...weaves],
                    });
                  };
+
                  componentDidMount() {
                    console.log("did mount");
-                   this.myRefAddPhoto.current.scrollIntoView({
-                     behavior: "smooth",
-                     block: "center",
-                     inline: "center",
-                   });
+                   console.log(this.state);
                    if (localStorage.getItem('ProductUploadData') != null) {
                      let response = JSON.parse(localStorage.getItem("ProductUploadData"))
                      this.setState(
@@ -163,333 +123,88 @@ export default class addProduct extends Component {
                        );
                      });  
                    }
-           
-        
-                   let params = queryString.parse(this.props.location.search)
-                   TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
-                     this.setState({productid :params.ProductId },()=>{
+                                   
+                 }
 
-                     })
-                     console.log('heree');
-                     console.log( response.data);
-                     let productData =  response.data.data;
-                     this.setProduct(productData);
-                 })
-                }
-                toDataUrl = (url, callback) => {
-                  const xhr = new XMLHttpRequest();
-                  xhr.onload = () => {
-                      const reader = new FileReader();
-                      reader.onloadend = () => {
-                          callback(reader.result);
-                      };
-                      reader.readAsDataURL(xhr.response);
-                  };
-                  xhr.open('GET', url);
-                  xhr.responseType = 'blob';
-                  xhr.send();
-                };
-                setProduct(productData){
-              
-
-                productData.productImages.map((img, index) => {
-              
-                this.toDataUrl(
-                    TTCEapi.ImageUrl +
-                      "Product/" +
-                      img.productId +
-                      "/" +
-                      img.lable,
-                    (myBase64) => {
-                      let filename = {};
-                      filename.name = img.lable;
-                    // console.log(myBase64); // myBase64 is the base64 string
-                      this.setState({
-                        ["imagePreviewUrl" + (index + 1)]: myBase64,
-                        isImageUploadComplete: true,
-                        ["selectedFile" + (index + 1)]: {
-                          filename,
-                          myBase64,
-                        },
-                      });
-                    }
-                  );
-                });
-
-                let washandCareIDs = productData.productCares.map(
-                  (e) => e.productCareId
-                );
-                washandCareIDs.map((id) => {
-                  this.onselectWareAndCare(id);
-                });
-
-                let productWeavesIds = productData.productWeaves.map(
-                  (e) => e.weaveId
-                );
-                console.log(productWeavesIds);
-
-                let { weaves } = this.state;
-                console.log(weaves);
-                productWeavesIds.map((id) => {
-                  weaves[id - 1].isChecked = true;
-                  this.setState({
-                    weaves: [...weaves],
-                  });
-                });
-                
-                let wareAndCare1= [
-                  { id: 0, isChecked: false },
-                  { id: 1, isChecked: false },
-                  { id: 2, isChecked: false },
-                  { id: 3, isChecked: false },
-                  { id: 4, isChecked: false },
-                  { id: 5, isChecked: false },
-                  { id: 6, isChecked: false },
-                  { id: 7, isChecked: false },
-                  { id: 8, isChecked: false },
-                  { id: 9, isChecked: false },
-                  { id: 10, isChecked: false },
-                ];
-                for(var  i=0; i < productData.productCares.length; i++ )
-                { wareAndCare1[productData.productCares[i].productCareId].isChecked = true;
-                  console.log(productData.productCares[i].productCareId);
-                }
-                    this.setState(
-                      {
-                        isavailable:
-                          productData.productStatusId == 2 ? true : false,
-                        isMTO: productData.productStatusId == 2 ? false : true,
-                        weight: productData.weight,
-                        description: productData.productSpec,
-                        reedCount: productData.reedCountId,
-                        productCategorie: productData.productCategoryId,
-                        productName: productData.tag,
-                        productCode: productData.code,
-                        yarn1: productData.warpYarnId,
-                        yarn2: productData.weftYarnId,
-                        yarn3:
-                          productData.extraWeftYarnId != null
-                            ? productData.extraWeftYarnId
-                            : "",
-                        dye1: productData.warpDyeId,
-                        dye2: productData.weftDyeId,
-                        dye3:
-                          productData.extraWeftDyeId != null
-                            ? productData.extraWeftDyeId
-                            : "",
-                        showGSM: productData.gsm ? true : false,
-                        GSMName: productData.gsm ? productData.gsm : false,
-                        wareAndCare : wareAndCare1,
-                        iswashAndCareComplete: true,
-
-                      },
-                      () => {
-                        // console.log("after all basic setup");
-
-                        // console.log(this.state);
-                        this.state.productCategories.filter((item) => {
-                          if (item.id == this.state.productCategorie) {
-                            debugger;
-                        
-                            this.setState(
-                              {
-                                productTypes: item.productTypes,
-                                productType: productData.productTypeId,
-                                productTypeName: item.productDesc,
-                              },
-                              () => {
-                                // console.log(this.state);
-
-                                this.state.productTypes.filter((item) => {
-                                  if (item.id == this.state.productType) {
-                                    if (item.relatedProductType.length != 0) {
-                                      this.setState(
-                                        {
-                                          lengths: item.productLengths,
-                                          widths: item.productWidths,
-
-                                          relatedProduct: item.relatedProductType,
-                                          savedrelatedProduct: item.relatedProductType.map(
-                                            (e) => ({
-                                              productTypeId: e.id,
-                                            })
-                                          ),
-                                        },
-                                        () => {
-                                          //  console.log("after related");
-
-                                          //  console.log(this.state);
-                                          if (productData.relProduct.length > 0) {
-                                            this.setState({
-                                              length: productData.length,
-                                              width: productData.width,
-                                            });
-                                            productData.relProduct.map((prod) => {
-                                              let relatedProductTemp = this.state.savedrelatedProduct.find(
-                                                (e) =>
-                                                  e.productTypeId ==
-                                                  prod.productTypeId
-                                              );
-                                              relatedProductTemp["length"] =
-                                                prod.length;
-                                              relatedProductTemp["width"] =
-                                                prod.width;
-                                            });
-
-                                            this.setState({
-                                              savedrelatedProduct: this.state
-                                                .savedrelatedProduct,
-                                            });
-                                          } else {
-                                            this.setState({
-                                              length: productData.length,
-                                              width: productData.width,
-                                            });
-                                          }
-                                        }
-                                      );
-                                    } else {
-                                      this.setState(
-                                        {
-                                          lengths: item.productLengths,
-                                          widths: item.productWidths,
-
-                                          relatedProduct: [],
-                                          savedrelatedProduct: [],
-                                        },
-                                        () => {
-                                          //  console.log(this.state);
-                                        }
-                                      );
-                                    }
-                                  }
-                                });
-
-                                this.setState(
-                                  {
-                                    countOfYarn1: this.state.yarns.find(
-                                      (eID) => eID.id == this.state.yarn1
-                                    ).yarnType.manual
-                                      ? []
-                                      : this.state.yarns.find(
-                                          (eID) => eID.id == this.state.yarn1
-                                        ).yarnType.yarnCounts,
-                                    yarnCount1: "",
-                                    countOfYarn2: this.state.yarns.find(
-                                      (eID) => eID.id == this.state.yarn2
-                                    ).yarnType.manual
-                                      ? []
-                                      : this.state.yarns.find(
-                                          (eID) => eID.id == this.state.yarn2
-                                        ).yarnType.yarnCounts,
-                                    yarnCount2: "",
-                                    countOfYarn3:
-                                      this.state.yarns.find(
-                                        (eID) => eID.id == this.state.yarn3
-                                      ) == undefined
-                                        ? []
-                                        : this.state.yarns.find(
-                                            (eID) => eID.id == this.state.yarn3
-                                          ).yarnType.yarnCounts,
-                                    yarnCount3: "",
-                                  },
-                                  () => {
-                                    this.setState({
-                                      yarnCount1: productData.warpYarnCount,
-                                      yarnCount2: productData.weftYarnCount,
-                                      yarnCount3: productData.extraWeftYarnCount,
-                                      length: productData.length,
-                                      width: productData.width,
-                                      componentMounted: true,
-                                    });
-                                  }
-                                );
-                              }
-                            );
-                          }
-                        });
-                      }
-                    );
-
-                  
-                  }
                  handleproductCategories(e) {
                    // console.log(e.target.id);
-                  
+                   debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
                    console.log(option);
-if(optionElement.innerHTML == "Fabric"){
-  this.setState({ showGSM: true});
-}
-else{
-  this.setState({ showGSM: false });
+                    if(optionElement.innerHTML == "Fabric"){
+                      this.setState({ showGSM: true});
+                    }
+                    else{
+                      this.setState({ showGSM: false });
 
-}
-if (option == -1){
+                    }
+                    if (option == -1){
 
-  this.setState(
-    {
-      productTypes: [],
-      relatedProduct: [],
-      savedrelatedProduct: [],
-      widths: [],
-      lengths: [],
-      productType: -1,
-      productTypeName: "",
-      [e.target.name]: parseInt(option),
-     
+                      this.setState(
+                        {
+                          productTypes: [],
+                          relatedProduct: [],
+                          savedrelatedProduct: [],
+                          widths: [],
+                          lengths: [],
+                          productType: -1,
+                          productTypeName: "",
+                          [e.target.name]: parseInt(option),
+                        
 
-    },
-    () => {
-      
-    }
-  );
-}
-else {
-  this.setState({ [e.target.name]: parseInt(option) }, () => {
-    console.log(this.state);
-  
+                        },
+                        () => {
+                          
+                        }
+                      );
+                    }
+                    else {
+                      this.setState({ [e.target.name]: parseInt(option) }, () => {
+                        console.log(this.state);
+                        debugger;
 
-    this.state.productCategories.filter((item) => {
-      if (item.id == this.state.productCategorie) {
-        this.setState(
-          {
-            productTypes: item.productTypes,
-            relatedProduct: [],
-            savedrelatedProduct: [],
-            widths: [],
-            lengths: [],
-            productType: "",
-            productTypeName: "",
-          },
-          () => {
-           
-          }
-        );
-      }
-    });
-  });
-}
+                        this.state.productCategories.filter((item) => {
+                          if (item.id == this.state.productCategorie) {
+                            this.setState(
+                              {
+                                productTypes: item.productTypes,
+                                relatedProduct: [],
+                                savedrelatedProduct: [],
+                                widths: [],
+                                lengths: [],
+                                productType: "",
+                                productTypeName: "",
+                              },
+                              () => {
+                              
+                              }
+                            );
+                          }
+                        });
+                      });
+                    }
   
                  }
+
                  handleReedCounts(e) {
-         
+                   debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                 //  console.log(option);
+                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
+                     console.log(this.state);
                    });
                  }
+
                  handleproductTypes(e) {
-                   
+                   debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                  // console.log(option);
+                   console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -517,7 +232,7 @@ else {
                                  ),
                                },
                                () => {
-                                // console.log(this.state);
+                                 console.log(this.state);
                                }
                              );
                            } else {
@@ -531,7 +246,7 @@ else {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                  // console.log(this.state);
+                                   console.log(this.state);
                                }
                              );
                            }
@@ -540,18 +255,19 @@ else {
                      }
                    );
                  }
+
                  handleyarns(e, stateNumber) {
-         
+                   debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                  // console.log(option);       
+                   console.log(option);       
                    if (option != -1)
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                      //  console.log(this.state);
-                     
+                        console.log(this.state);
+                        debugger;
                         this.setState(
                           {
                             ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
@@ -574,27 +290,30 @@ else {
                    }
                     
                  }
+
                  handleDropdown(e) {
-               
+                   debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                //   console.log(option);
+                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
+                     console.log(this.state);
                    });
                  }
+
                  handleDropdownCountOfYarn(e)
                   {
-                   
+                    debugger;
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                   // console.log(option);
+                    console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                  //    console.log(this.state);
+                      console.log(this.state);
                     });
                   }
+
                  handleChange(e) {
                    if (e.target.id == "productCode" || e.target.id ==  "description"){
                      this.setState({ [e.target.name]: e.target.value });
@@ -610,7 +329,7 @@ else {
                      this.setState({ [e.target.name]: e.target.value });
                    }                
                  }
-                 
+
                  //#region Image processing
                  resetImage(num) {
                    if (num == 3) {
@@ -646,10 +365,11 @@ else {
                      });
                    }
                  }
-                 fileChangedHandler = (event, num) => {
+
+                  fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
 
-          
+                   debugger;
 
                  
                      if (filename != undefined) {
@@ -685,7 +405,7 @@ else {
                              isImageUploadComplete: true,
                            },
                            () => {
-                          //   console.log(this.state);
+                             console.log(this.state);
                            }
                          );
                        };
@@ -694,7 +414,8 @@ else {
                        }
                      }
                  };
-                 dataURLtoFile(dataurl, filename) {
+
+                  dataURLtoFile(dataurl, filename) {
  
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -707,9 +428,10 @@ else {
         }
         
         return new File([u8arr], filename, {type:mime});
-                 }
+    }
+
                  GenerateImage = (num) => {
-                 
+                   //  debugger;
                    if (
                      num == 1 ||
                      this.state["imagePreviewUrl" + (num - 1)] != null
@@ -745,6 +467,7 @@ else {
                                }}
                                src={logos.featheredit}
                              ></img>
+
 
                              <img
                                className="productImageDelete"
@@ -796,56 +519,38 @@ else {
                    }
                  };
                  //#endregion
+
                  handlesavedrelatedProductDropdown = (e, id) =>{
+ 
+ var index = e.target.selectedIndex;
+ var optionElement = e.target.childNodes[index];
+ var option = optionElement.getAttribute("id");
+ console.log(option);
+ debugger;
 
-                  var index = e.target.selectedIndex;
-                  var optionElement = e.target.childNodes[index];
-                  var option = optionElement.getAttribute("id");
-                  //console.log(option);
+ let relatedProductTemp = this.state.savedrelatedProduct.find(
+   (e) => e.productTypeId == id
+ );
+relatedProductTemp[e.target.name] = option;
+
+ this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
+   console.log(this.state);
+ });
 
 
-                  let relatedProductTemp = this.state.savedrelatedProduct.find(
-                    (e) => e.productTypeId == id
-                  );
-                  relatedProductTemp[e.target.name] = option;
-
-                  this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-                    //console.log(this.state);
-                  });
-
-
-                  // let relatedProduct = [];
-                  // relatedProduct.Length  .e.target;
-
-                  //  this.setState({ [e.target.name]: parseInt(option) }, () => {
-                  //    console.log(this.state);
-                  //  });
-                 } 
-                 onselectWareAndCare = (i) => {
-                   if(this.state.isEdit == true)
-                   { 
-                   let { wareAndCare } = this.state;
-                   wareAndCare[i].isChecked = !wareAndCare[i].isChecked;
-                   const elements = this.state.wareAndCare;
-                   let ischecked = false;
-                   for (const [index, value] of elements.entries()) {
-                     if (value.isChecked == true) {
-                       ischecked = true;
-                     }
-                   }
-                   this.setState({
-                     wareAndCare: [...wareAndCare],
-                     iswashAndCareComplete: ischecked,
-                   },()=>{console.log(this.state)});
-                   }
-                 };
-                 editenabled = () =>{
-                   this.setState({isEdit:true});
+// let relatedProduct = [];
+// relatedProduct.Length  .e.target;
+ 
+//  this.setState({ [e.target.name]: parseInt(option) }, () => {
+//    console.log(this.state);
+//  });
                  }
+
+
                  Save = () => {                
                    let productData = {};
-                    productData.productCares = [];
-                    productData.productWeaves = [];
+                    // productData.careIds = [];
+                    productData.weaveIds = [];
                       let file2, file3;
 
 
@@ -864,8 +569,6 @@ else {
                       
                     return ;
                   }
-                
-                  
               let file1 = this.dataURLtoFile(
                 this.state.imagePreviewUrl1,
                 this.state.selectedFile1.filename.name
@@ -905,15 +608,11 @@ else {
 
                               this.state.weaves.filter((item) => {
                                 if (item.isChecked) {
-                                  productData.productWeaves.push({
-                                    id: 0,
-                                    productId: productData.id,
-                                    weaveId: item.id,
-                                  });
+                                  productData.weaveIds.push(item.id);
                                 }
                               });                                
 
-                              if (productData.productWeaves.length == 0) {
+                              if (productData.weaveIds.length == 0){
                                 customToast.error(
                                   "Please Add Weaves type of the Product.",
                                   {
@@ -921,11 +620,12 @@ else {
                                     autoClose: true,
                                   }
                                 );
-                                this.WeavesComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
+                                 this.WeavesComplete.current.scrollIntoView({
+                                   behavior: "smooth",
+                                   block: "center",
+                                   inline: "center",
+                                 });
+                               ;
                                 return;
                               }
 
@@ -1029,105 +729,63 @@ else {
                               }
 
                               
-                                node = this.washAndCare.current;
-                                  if (node.getAttribute("class") == "inComplete") {
-                                    customToast.error("Please select Wash & Care Instructions.", {
-                                      position: toast.POSITION.TOP_RIGHT,
-                                      autoClose: true,
-                                    });
-                                    node.scrollIntoView({
-                                      behavior: "smooth",
-                                      block: "center",
-                                      inline: "center",
-                                    });
-                                    return;
-                                  }
 
                                 node = this.GSMNameComplete.current;
-                            ;
-                            if (this.state.GSMName == "" && this.state.showGSM) {
-                              customToast.error("Please enter description of the Product.", {
-                                position: toast.POSITION.TOP_RIGHT,
-                                autoClose: true,
-                              });
-                                node.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
+                                ;
+                                if (this.state.GSMName == "" && this.state.showGSM) {
+                                  customToast.error("Please enter description of the Product.", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                  });
+                                  node.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                    inline: "center",
+                                  });
+                                  return;
 
-                              return;
-                            }
+                                  return;
+                                }
 
-                              node = this.weightComplete.current;
-                              if (node.getAttribute("class") == "inComplete") {
-                                customToast.error("Please enter weight of the Product.", {
-                                  position: toast.POSITION.TOP_RIGHT,
-                                  autoClose: true,
-                                });
-                                node.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
 
-                              node = this.description.current;
-                              if (node.getAttribute("class") == "inComplete") {
-                                customToast.error("Please enter description of the Product.", {
-                                  position: toast.POSITION.TOP_RIGHT,
-                                  autoClose: true,
-                                });
 
-                                return;
-                              }
+                node = this.description.current;
+                if (node.getAttribute("class") == "inComplete") {
+                  customToast.error("Please enter description of the Product.", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
 
+                  return;
+                }
+
+
+
+ 
+ 
                    this.setState({
                      SaveDisabled: true
                    }, ()=>{                   
                    })
 
-                   let params = queryString.parse(this.props.location.search)
-                 
-                      productData.id = params.ProductId           
-                      productData.tag = this.state.productName;
-                      productData.code = this.state.productCode; 
-                      productData.productCategoryId = this.state.productCategorie;
-                      productData.productTypeId = this.state.productType;
-                      productData.productSpec = this.state.description;
-                      productData.weight = this.state.weight;
+                    
 
-                      productData.productStatusId = this.state.isMTO ? 1 : 2;
-                      productData.gsm = this.state.GSMName;
-                      productData.width = this.state.width;
-                      productData.length = this.state.length;
-                      productData.reedCountId = this.state.reedCount;
+                    productData.productCategoryId = this.state.productCategorie;
+                    productData.productTypeId = this.state.productType;
+                    productData.productSpec = this.state.description;
+                    productData.gsm = this.state.GSMName;
+                    productData.width = this.state.width;
+                    productData.length = this.state.length;
+                    productData.reedCountId = this.state.reedCount;
+                    this.state.weaves.filter((item) => {
+                      if (item.isChecked) {
+                        productData.weaveIds.push(item.id);
+                      }
+                    });  
 
-                    this.state.wareAndCare.filter((item) => {
-                      if(item.isChecked) {     
-                        productData.productCares.push({
-                          id: 0,
-                          productCareId: item.id,
-                          productId: productData.id,
-                        });}
-                    });
-                    //  this.state.weaves.filter((item) => {
-                    //    if (item.isChecked) {
-                    //      productData.productWeaves.push({
-                    //        id: 0,
-                    //        productId: productData.id,
-                    //        weaveId: item.id,
-                    //      });
-                    //    }
-                    //  });  
-
-                    productData.relProduct = this.state.savedrelatedProduct;
-                    debugger;
-                  TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
+                    TTCEapi.buyerpUploadDesign(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
-                      customToast.success("Product updated successfully!", {
+                      customToast.success("Product added successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -1145,40 +803,25 @@ else {
                       })
                     }
 
-                      });;
+                      });
 
                     
 
                     console.log(productData);
                  };
+
                  Cancel = () => {
+                   debugger;
                  
                    browserHistory.push("./home")
-                  //  window.location.replace("./home");
-                  
                  };
+
                  ResetAll = () => {
                     window.location.reload(false);                  
 
                  };
-                 Delete = () => {
-                  console.log(this.state.productid);
-                  TTCEapi.deleteProduct(this.state.productid).then((response)=>{
-                    if(response.data.valid){
-                      customToast.success("Product deleted successfully!", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: true,
-                      });
-                      this.Cancel();
-                      this.setState({
-                        SaveDisabled: false
-                      })
-                    }
-                  })
-                 }
-                
-                          
-                render() {
+
+                 render() {
                    return (
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
@@ -1195,31 +838,15 @@ else {
                                    className="col-1 "
                                  ></Col>{" "}
                                  <Col
-                                   sm={{ size: "9" }}
-                                   xs={{ size: "9" }}
-                                   md={{ size: "9" }}
-                                   className="col-9"
+                                   sm={{ size: "11" }}
+                                   xs={{ size: "11" }}
+                                   md={{ size: "11" }}
+                                   className="col-11"
                                  >
                                    <h1 className="mainheading">
-                                     {this.state.productName}
+                                     Add a new product
                                    </h1>
-
-                                   {/* <div class="loader"></div> */}
                                  </Col>
-                                 {/* {this.state.componentMounted ? null : ( */}
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2 right"
-                                   >
-                                     <button
-                                      className="EditProductbutton"
-                                      disabled = {this.state.isEdit}
-                                      onClick={() => {this.editenabled()}}
-                                      >Edit</button>
-                                   </Col>
-                                 {/* )} */}
                                </Row>
                                <Row noGutters={true}>
                                  <Col
@@ -1273,9 +900,7 @@ else {
                                        xs={{ size: "4" }}
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
-                                     >{this.state.isEdit 
-                                     ?
-                                     <>
+                                     >
                                        {" "}
                                        <div>
                                          <div className="col-xs-12">
@@ -1297,20 +922,6 @@ else {
                                            ></input>
                                          </div>
                                        </div>
-                                       </>
-
-                                     :
-                                     <>
-                                     {console.log(this.state.selectedFile1.myBase64)}
-                                     {this.state.selectedFile1.myBase64==undefined
-                                     ?
-                                     <></>
-                                        :
-                                        <img className="productImage" src={this.state.selectedFile1.myBase64}></img>
-                                        }
-                                     </>
-                                    }
-                                      
                                      </Col>
                                      <Col
                                        sm={{ size: "4" }}
@@ -1318,10 +929,7 @@ else {
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
                                      >
-                                       {this.state.isEdit
-                                       ?
-                                       <>
-                                        {" "}
+                                       {" "}
                                        <div>
                                          {this.GenerateImage(2)}
 
@@ -1338,18 +946,6 @@ else {
                                            style={{ display: "none" }}
                                          ></input>
                                        </div>
-                                       </>
-                                      :
-                                      <>
-                                     {this.state.selectedFile2.myBase64==undefined
-                                     ?
-                                     <></>
-                                        :
-                                        <img className="productImage" src={this.state.selectedFile2.myBase64}></img>
-                                        } 
-                                      </>
-                                      }
-                                      
                                      </Col>
                                      <Col
                                        sm={{ size: "4" }}
@@ -1357,9 +953,6 @@ else {
                                        md={{ size: "4" }}
                                        className="col-4 text-center"
                                      >
-                                       {this.state.isEdit
-                                       ?
-                                       <>
                                        {" "}
                                        <div>
                                          {this.GenerateImage(3)}
@@ -1377,19 +970,7 @@ else {
                                            style={{ display: "none" }}
                                          ></input>
                                        </div>
-
-                                       </>
-                                      :
-                                      <>
-                                      {this.state.selectedFile3.myBase64==undefined
-                                     ?
-                                     <></>
-                                        :
-                                        <img className="productImage" src={this.state.selectedFile3.myBase64}></img>
-                                        } 
-                                      </>
-                                      }
-                                                                            </Col>
+                                     </Col>
                                    </Row>
                                  </Col>
                                  <Col
@@ -1429,21 +1010,21 @@ else {
                                    md={{ size: "11" }}
                                    className="col-11"
                                  >
-                                   {this.state.productName == "" ||
-                                   this.state.productCode == "" ||
+                                   {
                                    this.state.productCategorie === undefined ||
                                    this.state.productType === undefined ||
                                    this.state.productCategorie == -1 ||
                                    this.state.productType == "" ||
                                    this.state.productType == -1 ? (
                                      <div
-                                       ref={this.basicDetailsComplete}
+                                         ref={this.basicDetailsComplete}
                                        id="basicDetails"
                                        className="inComplete"
                                      ></div>
                                    ) : (
                                      <div
-                                       ref={this.basicDetailsComplete}
+                                         ref={this.basicDetailsComplete}
+
                                        id="basicDetails"
                                        className="Complete"
                                      ></div>
@@ -1456,7 +1037,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row noGutters={true}>
+                               {/* <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1501,10 +1082,7 @@ else {
                                          type="text"
                                          id="productName"
                                          className=" ProductTextBox"
-                                         name="productName"
-                                         maxLength="40"
-                                         value={this.state.productName}
-                                         disabled={!this.state.isEdit}
+                                         name="productName"                                maxLength="40"        
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1521,8 +1099,6 @@ else {
                                          className="ProductTextBox"
                                          name="productCode"
                                          maxLength="20"
-                                         value={this.state.productCode}
-                                         disabled={!this.state.isEdit}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>{" "}
@@ -1534,7 +1110,7 @@ else {
                                    md={{ size: "2" }}
                                    className="col-2 "
                                  ></Col>{" "}
-                               </Row>
+                               </Row> */}
                                <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "2" }}
@@ -1555,13 +1131,11 @@ else {
                                        md={{ size: "6" }}
                                        className="col-6 text-right"
                                      >
-                                       {console.log(this.state)}
                                        <select
                                          id="productCategorie"
                                          className="productDropdown"
                                          name="productCategorie"
                                          value={this.state.productCategorie}
-                                         disabled={!this.state.isEdit}
                                          onChange={(e) =>
                                            this.handleproductCategories(e)
                                          }
@@ -1597,7 +1171,6 @@ else {
                                          className="productDropdown"
                                          name="productType"
                                          value={this.state.productType}
-                                         disabled={!this.state.isEdit}
                                          onChange={(e) =>
                                            this.handleproductTypes(e)
                                          }
@@ -1736,7 +1309,6 @@ else {
                                                <input
                                                  type="checkbox"
                                                  value={product.id}
-                                                 disabled={!this.state.isEdit}
                                                  checked={
                                                    product.isChecked
                                                      ? product.isChecked
@@ -1828,7 +1400,6 @@ else {
                                          id="yarn1"
                                          className="productDropdown"
                                          name="yarn1"
-                                         disabled={!this.state.isEdit}
                                          value={this.state.yarn1}
                                          onChange={(e) =>
                                            this.handleyarns(e, 1)
@@ -1860,8 +1431,6 @@ else {
                                            className=" yarnProductTextBox"
                                            name="yarnCount1"
                                            placeholder="Enter the count of yarn"
-                                           value={this.state.yarnCount1}
-                                           disabled={!this.state.isEdit}
                                            onChange={(e) =>
                                              this.handleChange(e)
                                            }
@@ -1871,8 +1440,6 @@ else {
                                            id="yarnCount1"
                                            className="productDropdown"
                                            name="yarnCount1"
-                                           disabled={!this.state.isEdit}
-
                                            value={this.state.yarnCount1}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
@@ -1904,8 +1471,6 @@ else {
                                          id="dye1"
                                          className="productDropdown"
                                          name="dye1"
-                                         disabled={!this.state.isEdit}
-
                                          value={this.state.dye1}
                                          onChange={(e) =>
                                            this.handleDropdown(e)
@@ -1952,8 +1517,6 @@ else {
                                          id="yarn2"
                                          className="productDropdown"
                                          name="yarn2"
-                                         disabled={!this.state.isEdit}
-
                                          value={this.state.yarn2}
                                          onChange={(e) =>
                                            this.handleyarns(e, 2)
@@ -1985,9 +1548,6 @@ else {
                                            className=" yarnProductTextBox"
                                            name="yarnCount2"
                                            placeholder="Enter the count of yarn"
-                                           disabled={!this.state.isEdit}
-
-                                           value={this.state.yarnCount2}
                                            onChange={(e) =>
                                              this.handleChange(e)
                                            }
@@ -1997,8 +1557,6 @@ else {
                                            id="yarnCount2"
                                            className="productDropdown"
                                            name="yarnCount2"
-                                           disabled={!this.state.isEdit}
-
                                            value={this.state.yarnCount2}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
@@ -2031,8 +1589,6 @@ else {
                                          className="productDropdown"
                                          name="dye2"
                                          value={this.state.dye2}
-                                         disabled={!this.state.isEdit}
-
                                          onChange={(e) =>
                                            this.handleDropdown(e)
                                          }
@@ -2081,8 +1637,6 @@ else {
                                        <select
                                          id="yarn3"
                                          className="productDropdown"
-                                         disabled={!this.state.isEdit}
-
                                          name="yarn3"
                                          value={this.state.yarn3}
                                          onChange={(e) =>
@@ -2113,11 +1667,8 @@ else {
                                            type="text"
                                            id="yarnCount3"
                                            className=" yarnProductTextBox"
-                                           disabled={!this.state.isEdit}
-
                                            name="yarnCount3"
                                            placeholder="Enter the count of yarn"
-                                           value={this.state.yarnCount3}
                                            onChange={(e) =>
                                              this.handleChange(e)
                                            }
@@ -2128,7 +1679,6 @@ else {
                                            className="productDropdown"
                                            name="yarnCount3"
                                            value={this.state.yarnCount3}
-                                           disabled={!this.state.isEdit}
                                            onChange={(e) =>
                                              this.handleDropdownCountOfYarn(e)
                                            }
@@ -2158,8 +1708,6 @@ else {
                                        <select
                                          id="dye3"
                                          className="productDropdown"
-                                         disabled={!this.state.isEdit}
-
                                          name="dye3"
                                          value={this.state.dye3}
                                          onChange={(e) =>
@@ -2242,8 +1790,6 @@ else {
                                      className="productDropdown"
                                      name="reedCount"
                                      value={this.state.reedCount}
-                                     disabled={!this.state.isEdit}
-
                                      onChange={(e) => this.handleReedCounts(e)}
                                    >
                                      <option
@@ -2368,8 +1914,6 @@ else {
                                          id="length"
                                          className="productDropdown"
                                          name="length"
-                                         disabled={!this.state.isEdit}
-
                                          value={this.state.length}
                                          onChange={(e) =>
                                            this.handleDropdownCountOfYarn(e)
@@ -2406,8 +1950,6 @@ else {
                                          id="width"
                                          className="productDropdown"
                                          name="width"
-                                         disabled={!this.state.isEdit}
-
                                          value={this.state.width}
                                          onChange={(e) =>
                                            this.handleDropdownCountOfYarn(e)
@@ -2459,7 +2001,6 @@ else {
                                          className="  ProductTextBox"
                                          name="length"
                                          placeholder="Enter length"
-                                         value={this.state.length}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>
@@ -2477,9 +2018,6 @@ else {
                                          className="  ProductTextBox"
                                          name="width"
                                          placeholder="Enter width"
-                                         disabled={!this.state.isEdit}
-
-                                         value={this.state.width}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>
@@ -2515,8 +2053,6 @@ else {
                                                <select
                                                  id="length"
                                                  className="productDropdown"
-                                                 disabled={!this.state.isEdit}
-
                                                  name="length"
                                                  value={
                                                    this.state.savedrelatedProduct.find(
@@ -2567,8 +2103,6 @@ else {
                                                  id="width"
                                                  className="productDropdown"
                                                  name="width"
-                                                 disabled={!this.state.isEdit}
-
                                                  value={
                                                    this.state.savedrelatedProduct.find(
                                                      (e) =>
@@ -2625,535 +2159,7 @@ else {
                              </Row>
                              {/* //#endregion Product specificcaions */}
 
-                             {/* //#region Product wash and care */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
-                                 <Col
-                                   className="text-center"
-                                   sm={{ size: "1" }}
-                                   xs={{ size: "1" }}
-                                   md={{ size: "1" }}
-                                   className="col-1 "
-                                 ></Col>{" "}
-                                 <Col
-                                   sm={{ size: "11" }}
-                                   xs={{ size: "11" }}
-                                   md={{ size: "11" }}
-                                   className="col-11"
-                                 >
-                                   {this.state.iswashAndCareComplete ? (
-                                     <div
-                                       id="washAndCare"
-                                       className="Complete"
-                                       ref={this.washAndCare}
-                                     ></div>
-                                   ) : (
-                                     <div
-                                       id="washAndCare"
-                                       className="inComplete"
-                                       ref={this.washAndCare}
-                                     ></div>
-                                   )}
-
-                                   <h4 className="subHeading">
-                                     Wash & care instructions
-                                   </h4>
-                                   <h6 className="subHeading_1">
-                                     Select from the wash & care instructions
-                                     for the product
-                                   </h6>
-                                 </Col>
-                               </Row>
-
-                               <Row noGutters={true} className="washAndCareDiv">
-                                 <Row className="washAndCareDiv">
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-
-                                       onClick={() => {
-                                        this.onselectWareAndCare(1)
-                                      }
-                                         
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[1].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare1}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[1].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Gentle Hand Wash with soft liquid
-                                         detergent
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(2)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[2].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare2}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[2].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Machine wash with cold water
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(3)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[3].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare3}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[3].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Do not bleach
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(4)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[4].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare4}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[4].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Machine wash with 40 Degree water level
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(5)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[5].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare5}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[5].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Dry Clean Only
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(6)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[6].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare6}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[6].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Wash Separately
-                                       </label>
-                                     </div>
-                                   </Col>
-                                 </Row>
-                                 <Row className="mt30 washAndCareDiv">
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   ></Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(7)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[7].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare7}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[7].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Put starch for better crease
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(8)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[8].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare8}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[8].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Normal wash before stitching
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(9)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[9].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare9}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[9].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         No need to wash before stitching
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   >
-                                     <div
-                                       onClick={() =>
-                                         this.onselectWareAndCare(10)
-                                       }
-                                     >
-                                       <img
-                                         className={`washAndCareImage ${
-                                           this.state.wareAndCare[10].isChecked
-                                             ? "selectedWareandCare"
-                                             : "unselectedWareandCare"
-                                         }`}
-                                         src={logos.washAndCare10}
-                                       ></img>
-                                       <label
-                                         className={` ${
-                                           this.state.wareAndCare[10].isChecked
-                                             ? "selectedWareAndCareColor"
-                                             : ""
-                                         }`}
-                                       >
-                                         Pre Washed & Pre Shrunk
-                                       </label>
-                                     </div>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
-                                     md={{ size: "2" }}
-                                     className="col-2"
-                                   ></Col>
-                                 </Row>
-                               </Row>
-                               <Row noGutters={true} className="text-center">
-                                 <Col
-                                   sm={{ size: "12" }}
-                                   xs={{ size: "12" }}
-                                   md={{ size: "12" }}
-                                   className="col-12 text-center"
-                                 >
-                                   <div className="hrlineforAddProduct"></div>
-                                 </Col>
-                                 {/* <Button> next</Button> */}
-                               </Row>
-                             </Row>
-                             {/* //#endregion Product wash and care */}
-
-                             {/* //#region availability */}
-
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
-                                 <Col
-                                   className="text-center"
-                                   sm={{ size: "1" }}
-                                   xs={{ size: "1" }}
-                                   md={{ size: "1" }}
-                                   className="col-1 "
-                                 ></Col>{" "}
-                                 <Col
-                                   sm={{ size: "11" }}
-                                   xs={{ size: "11" }}
-                                   md={{ size: "11" }}
-                                   className="col-11"
-                                 >
-                                   {this.state.isMTO ||
-                                   this.state.isavailable ? (
-                                     <div
-                                       id="availability"
-                                       className="Complete"
-                                     ></div>
-                                   ) : (
-                                     <div
-                                       id="availability"
-                                       className="inComplete"
-                                     ></div>
-                                   )}
-
-                                   <h4 className="subHeading">
-                                     Select availability
-                                   </h4>
-                                   <h6 className="subHeading_1">
-                                     Check the availability of the product
-                                   </h6>
-                                 </Col>
-                               </Row>
-                               <Row className="washAndCareDiv mt30">
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 >
-                                   
-                                   <div
-                                     onClick={() => {
-                                       if(this.state.isEdit==true)
-                                       {
-                                        this.setState({
-                                          isavailable: this.state.isMTO,
-                                          isMTO: !this.state.isMTO,
-                                        });
-                                       }
-                                      
-                                     }}
-                                   >
-                                     <img
-                                       className={`washAndCareImage ${
-                                         this.state.isMTO
-                                           ? "selectedWareandCare"
-                                           : "unselectedWareandCare"
-                                       }`}
-                                       src={logos.mtoicon}
-                                     ></img>
-                                     <label
-                                       className={` ${
-                                         this.state.isMTO
-                                           ? "selectedWareAndCareColor"
-                                           : ""
-                                       }`}
-                                     >
-                                       Made to order
-                                     </label>
-                                   </div>
-                                 </Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 >
-                                   <div
-                                     onClick={() => {
-                                      if(this.state.isEdit==true)
-                                      {
-                                        this.setState({
-                                          isavailable: !this.state.isavailable,
-                                          isMTO: this.state.isavailable,
-                                        });
-                                      }
-                                       
-                                     }}
-                                   >
-                                     <img
-                                       className={`washAndCareImage ${
-                                         this.state.isavailable
-                                           ? "selectedWareandCare"
-                                           : "unselectedWareandCare"
-                                       }`}
-                                       src={logos.isavailable}
-                                     ></img>
-                                     <label
-                                       className={` ${
-                                         this.state.isavailable
-                                           ? "selectedWareAndCareColor"
-                                           : ""
-                                       }`}
-                                     >
-                                       Available in stock
-                                     </label>
-                                   </div>
-                                 </Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
-                                 ></Col>
-                               </Row>
-                               <Row noGutters={true} className="text-center">
-                                 <Col
-                                   sm={{ size: "12" }}
-                                   xs={{ size: "12" }}
-                                   md={{ size: "12" }}
-                                   className="col-12 text-center"
-                                 >
-                                   <div className="hrlineforAddProduct"></div>
-                                 </Col>
-                                 {/* <Button> next</Button> */}
-                               </Row>{" "}
-                             </Row>
-
-                             {/* //#endregion availability */}
+                          
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
@@ -3219,16 +2225,11 @@ else {
                                          className=" ProductTextBox"
                                          name="GSMName"
                                          maxLength="10"
-                                         disabled={!this.state.isEdit}
-                                         value={this.state.GSMName}
                                          onChange={(e) => this.handleChange(e)}
                                        />
                                      </Col>
                                    </Row>
-                                   <Row
-                                     noGutters={true}
-                                     className="text-center"
-                                   >
+                                   <Row noGutters={true} className="text-center">
                                      <Col
                                        sm={{ size: "12" }}
                                        xs={{ size: "12" }}
@@ -3244,111 +2245,7 @@ else {
                                </>
                              ) : null}
 
-                             {/* //#region Enter Weight */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
-                                 <Col
-                                   className="text-center"
-                                   sm={{ size: "1" }}
-                                   xs={{ size: "1" }}
-                                   md={{ size: "1" }}
-                                   className="col-1 "
-                                 ></Col>{" "}
-                                 <Col
-                                   sm={{ size: "11" }}
-                                   xs={{ size: "11" }}
-                                   md={{ size: "11" }}
-                                   className="col-11"
-                                 >
-                                   {this.state.weight == "" ? (
-                                     <div
-                                       id="weightComplete"
-                                       className="inComplete"
-                                       ref={this.weightComplete}
-                                     ></div>
-                                   ) : (
-                                     <div
-                                       id="weightComplete"
-                                       className="Complete"
-                                       ref={this.weightComplete}
-                                     ></div>
-                                   )}
-
-                                   <h4 className="subHeading">Enter weight</h4>
-                                   <h6 className="subHeading_1">
-                                     Weight for the product
-                                   </h6>
-                                 </Col>
-                               </Row>
-                               <Row className="mt30">
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 >
-                                   <span className="ml-160 font13">
-                                     Weight (10 Characters)
-                                   </span>
-                                 </Col>
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 ></Col>
-                               </Row>
-                               <Row className="">
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 >
-                                   <input
-                                     type="text"
-                                     id="weight"
-                                     className=" ProductTextBox"
-                                     name="weight"
-                                     disabled={!this.state.isEdit}
-
-                                     maxLength="10"
-                                     value={this.state.weight}
-                                     onChange={(e) => this.handleChange(e)}
-                                   />
-                                 </Col>
-                                 <Col
-                                   sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
-                                   md={{ size: "4" }}
-                                   className="col-4 text-center"
-                                 ></Col>
-                               </Row>
-                               <Row noGutters={true} className="text-center">
-                                 <Col
-                                   sm={{ size: "12" }}
-                                   xs={{ size: "12" }}
-                                   md={{ size: "12" }}
-                                   className="col-12 text-center"
-                                 >
-                                   <div className="hrlineforAddProduct"></div>
-                                 </Col>
-                                 {/* <Button> next</Button> */}
-                               </Row>
-                             </Row>
-                             {/* //#endregion Enter Weight*/}
+                          
 
                              {/* //#region Describe the product */}
                              <Row noGutters={true} className="mt60">
@@ -3413,17 +2310,12 @@ else {
                                      id="description"
                                      className=" productTextArea"
                                      name="description"
-                                     disabled={!this.state.isEdit}
-                                     value={this.state.description}
                                      onChange={(e) => this.handleChange(e)}
                                    />
                                  </Col>
                                </Row>
                              </Row>
                              {/* //#endregion Describe the product*/}
-                             {this.state.isEdit
-                             ?
-                             
                              <Row className="washAndCareDiv mt30">
                                <Col
                                  sm={{ size: "2" }}
@@ -3447,7 +2339,8 @@ else {
                                      <button
                                        onClick={this.Cancel}
                                        className="cancelBtnProduct"
-                                     >Cancel
+                                     >
+                                       Cancel
                                      </button>
                                    </Col>
                                    <Col
@@ -3456,12 +2349,12 @@ else {
                                      md={{ size: "4" }}
                                      className="col-4 text-center "
                                    >
-                                     {/* <button
+                                     <button
                                        onClick={this.ResetAll}
                                        className="resetBtnProduct"
                                      >
                                        Reset All
-                                     </button> */}
+                                     </button>
                                    </Col>
                                    <Col
                                      sm={{ size: "4" }}
@@ -3470,7 +2363,7 @@ else {
                                      className="col-4 text-left "
                                    >
                                      <button
-                                       onClick={() =>{ this.Save()}}
+                                       onClick={this.Save}
                                        className="saveBtnProduct"
                                        disabled={this.state.SaveDisabled}
                                      >
@@ -3486,60 +2379,6 @@ else {
                                  className="col-2"
                                ></Col>
                              </Row>
-                             :
-
-                             <>
-                             <Row className="washAndCareDiv mt30">
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                               <Col
-                                 sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
-                                 md={{ size: "8" }}
-                                 className="col-2"
-                               >
-                                 <Row>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <button
-                                       onClick={this.Delete}
-                                       className="cancelBtnProduct"
-                                     >Delete
-                                     </button>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <button
-                                       onClick={this.editenabled}
-                                       className="editbutton11"
-                                     >
-                                       Edit
-                                     </button>
-                                   </Col>
-                                   
-                                 </Row>
-                               </Col>
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                             </Row>
-                             </>
-                            }
                              <div className="hrlineforAddProduct"></div>
                              <Row noGutters={true} className="text-center">
                                <Col
@@ -3554,51 +2393,11 @@ else {
                              </Row>
                            </div>
                          </Row>
-                         <ReactModal
-                               isOpen={this.state.modal5}
-                               contentLabel="Minimal Modal Example"
-                               className="Modal"
-                               style={customStyles3}
-                               // onRequestClose={this.handleCloseWrongPasswordModal}
-                             >
-                                <div className="modalconfirm">
-                                  <Row noGutters={true} className="text-center font20">
-                                    Are you sure you want to save changes
-                                  </Row>
-                                  <Row noGutters={true}>  
-                                    <Col sm={{size:"8"}}>
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      cancel
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      Ok
-                                    </Col>
-                                  </Row>
-                                </div>
-                             </ReactModal>
-                              
-                        {/* <Modal show={this.state.modal5} onClick={()=>{this.handleClose()}}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={()=>{this.handleClose()} }>
-                              Close
-                            </Button>
-                            <Button variant="primary" onClick={()=>{this.handleClose()}}>
-                              Save Changes
-                            </Button>
-                          </Modal.Footer>
-                        </Modal> */}
 
                        </Container>
                        <Footer></Footer>
-                      
-                   
 
                      </React.Fragment>
                    );
-              }
-}
+                 }
+               }

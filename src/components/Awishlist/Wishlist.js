@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logos from "../../assets";
 import { Row, Col , Container, Button} from 'reactstrap';
 import '../navbar/navbar.css';
+import TTCEapi from '../../services/API/TTCEapi';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css";
@@ -22,8 +23,8 @@ class Wishlist extends Component {
     }
     
     backoperation(){
-        // browserHistory.push("/Home"); 
-        this.props.history.goBack()
+         browserHistory.push("/home"); 
+        
     }  
     
 
@@ -38,7 +39,7 @@ class Wishlist extends Component {
                         <img
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
-                                    onClick={() => this.backoperation}
+                                    onClick={() => this.backoperation()}
                                 ></img>
                        
                        </Col>

@@ -146,6 +146,16 @@
     cursor: pointer !important;
     width: 20px !important;
 }
+
+.navButtonImg2:hover{
+    /* transform: scale(1.1);
+    transform-origin: 50% 50%; */
+    /* --heart-color: var(--heart-active-color); */
+    background-image: url("../../assets/heart-filled.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  
+}
 .cpwishlist{
     padding: 0px!important;
     margin-top: 5px;

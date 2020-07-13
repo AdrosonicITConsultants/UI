@@ -9,7 +9,6 @@ import Customprod from './Customprod';
 import { Footer } from 'rsuite';
 import { withRouter } from 'react-router';
 
-
 class AddCustomprod extends Component {
     
     constructor(props) {
@@ -17,16 +16,27 @@ class AddCustomprod extends Component {
 
         this.state = {
             buyergetAllProducts:[],
-            ImageUrl:TTCEapi.ImageUrl+'Product/',
+            ImageUrl:TTCEapi.ImageUrl+'CustomProduct/',
+            deleteAllProductsInbuyerCustom:[]
    
         };
-      
+        this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
     }
 
     backoperation(){
         browserHistory.push("/home"); 
     }  
-   
+    handleDeleteAllItem(){
+        if(window.confirm("Remove this item from wishlist?")){
+            TTCEapi.deleteAllProductsInbuyerCustom().then((response)=>{
+                this.setState({deleteAllProductsInbuyerCustom : response.data},()=>{
+                    console.log(this.state.deleteAllProductsInbuyerCustom);
+                    window.location.reload();
+                });
+            });
+        }
+      
+    }
     componentDidMount(){
    
         TTCEapi.buyergetAllProducts().then((response)=>{
@@ -70,7 +80,7 @@ class AddCustomprod extends Component {
                          <Col md ="6" >
                   <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items:{this.state.buyergetAllProducts.length} </p> 
                          </Col>
-                         <Col md ="6"  >
+                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()}>
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
                               <span className="spanhome">Clear my designs</span></button>

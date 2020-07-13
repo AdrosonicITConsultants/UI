@@ -408,6 +408,21 @@ class TTCEapi {
       });
     }
 
+    static deleteAllProductsInbuyerCustom(){
+      let url = ApiUrl + "/buyerCustomProduct/deleteAllProducts";
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+    }
+
     static deleteProductsInWishlist(productId){
       let url = ApiUrl + "/product/deleteProductsInWishlist/"+productId;
 

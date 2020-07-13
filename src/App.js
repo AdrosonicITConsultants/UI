@@ -70,7 +70,7 @@ function App() {
           <Route   path="/wishlist" component={AddWishlist} />
           <Route   path="/Customprod" component={Customprod} />
           <Route   path="/AddCustomprod" component={AddCustomprod} />
-          {/* <Route   path="/addwishlist" component={AddWishlist} /> */}
+          <Route   path="/wishlist" component={Wishlist} />
 
 
         </Switch>

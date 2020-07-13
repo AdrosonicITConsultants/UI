@@ -22,8 +22,8 @@ class AddWishlist extends Component {
             pageLoad:false,
    
         };
-        this.handleDeleteItem = this.handleDeleteItem.bind(this);
-        this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+        this.handleDeleteItem = this.handleDeleteItem.bind(this);   
+     this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
     }
 
     backoperation(){
@@ -91,7 +91,7 @@ class AddWishlist extends Component {
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
                                     //  onClick={() => this.backoperation()}
-                                    onClick={() => this.props.history.go(-1)}
+                                     onClick={() => this.props.history.go(-1)}
                                 ></img>
                        
                        </Col>

@@ -21,8 +21,6 @@ import i18next from "i18next";
 import ProductCategories from './components/Artisan_Self_Design/ProductCategories';
 import ProductRegions from './components/Artisan_Self_Design/ProductRegions';
 import ArtisianProducts from './components/Artisan_Self_Design/ArtisianProducts';
-
-
 import AntaranProductCategories from './components/Artisan_Self_Design/AntaranProductCategories';
 import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
@@ -33,6 +31,10 @@ import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import Customprod from './components/Custon Products/Customprod';
 import AddCustomprod from './components/Custon Products/AddCustomprod';
+import BuyerSuggestions from './components/navbar/buyerSuggestions.js'
+import BuyerDetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
+import ArtistSuggestions from './components/navbar/artistSuggestions.js';
+import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 function App() {
   
   return (
@@ -48,7 +50,10 @@ function App() {
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
-          <Route exact path="/detailSuggestions/:suggestion/:type/:total" component={DetailSuggestions}/>
+          <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/>
+          <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/>
+          <Route exact path="/artistSuggestions" component={ArtistSuggestions}/>
+          <Route exact path="/artistDetailSuggestions/:suggestion/:type/:total" component={ArtistDetailSuggestions}/>
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />

@@ -4,7 +4,7 @@ import './navbar.css';
 import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
-import ConnectedSuggestions from "./buyerSuggestions.js"
+import BuyerConnectedSuggestions from "./buyerSuggestions.js"
 
 
 
@@ -23,6 +23,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { browserHistory } from '../../helpers/history';
+import ArtistConnectedSuggestions from './artistSuggestions';
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -141,7 +142,13 @@ browserHistory.push("/MyProfile");
                 placeholder="Username"
                 name="userName"
                 /> */}
-              <ConnectedSuggestions/>
+              {
+                userTypeId == 2 ? (
+                  <BuyerConnectedSuggestions/>
+                ):
+                (<ArtistConnectedSuggestions/>)
+              }
+              
             </div>
             ) : null}
           {/* {this.state.isSearchClicked ? (

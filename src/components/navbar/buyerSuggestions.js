@@ -14,7 +14,6 @@ const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   const response = await TTCEapi.getBuyerSuggestions(value);
-
   console.log(response);
   if (response.data.data == null) {
     languages = [];
@@ -42,45 +41,10 @@ const getSuggestionValue = (suggestion) => {
 
 // Use your imagination to render suggestions.
 
-const renderSuggestion = (suggestion) => {
-  if (suggestion.suggestion == "No Suggestion Found") {
-    return (
-      <div className="showingnoresults">
-        <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
-        <p> "0 Results found"</p>
-        <p>
-          {" "}
-          "Please check your spelling. <br />
-          Or try searching something like “saree”, “dupatta” etc."
-        </p>
-      </div>
-      // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
-    );
-  }
-  if (suggestion.suggestionType == "Global") {
-    return (
-      <a
-        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-      >
-        <div className="custom-suggestion-row">{suggestion.suggestion}</div>
-      </a>
-    );
-  } else {
-    return (
-      <a
-        href={`/detailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-      >
-        <div className="custom-suggestion-row">
-          {suggestion.suggestion} in {suggestion.suggestionType}
-        </div>
-      </a>
-    );
-  }
-};
 {
   /* <a href={"./detailSuggestions?params="+suggestion.suggestion+"&id="suggestion.suggestionTypeId}><div className="custom-suggestion-row">{suggestion.suggestion} in {suggestion.suggestionType}</div></a> */
 }
-class Suggestions extends Component {
+class BuyerSuggestions extends Component {
   constructor() {
     super();
     this.state = {
@@ -88,6 +52,108 @@ class Suggestions extends Component {
       suggestions: [],
     };
   }
+  renderSuggestion = (suggestion) => {
+    if (suggestion.suggestion == "No Suggestion Found") {
+      return (
+        <div className="showingnoresults">
+          <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
+          <p> "0 Results found"</p>
+          <p>
+            {" "}
+            "Please check your spelling. <br />
+            Or try searching something like “saree”, “dupatta” etc."
+          </p>
+        </div>
+        // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
+      );
+    }
+    var tempDisplay = suggestion.suggestion;
+    var input = this.state.value;
+    tempDisplay = tempDisplay.toLowerCase();
+    input = input.toLowerCase();
+    var startIndex = tempDisplay.indexOf(input);
+    var endIndex = startIndex + input.length;
+    var startingThinString =
+      startIndex != 0 ? tempDisplay.substring(0, startIndex) : "";
+    var boldString = tempDisplay.substring(startIndex, endIndex);
+    var endingThinString =
+      endIndex != tempDisplay.length
+        ? tempDisplay.substring(endIndex, tempDisplay.length)
+        : "";
+    console.log(
+      "************************************** New Loop Starting Here ***********************"
+    );
+    console.log("Input String ============", input);
+    console.log("tempDisplay ============", tempDisplay);
+    console.log("startIndex ============", startIndex);
+    console.log("endIndex ============", endIndex);
+    console.log("Start Thin String ------------", startingThinString);
+    console.log("End Thin String ------------", endingThinString);
+    console.log(
+      "************************************** New Loop Ending Here ***********************"
+    );
+
+    if (suggestion.suggestionType == "Global") {
+      return (
+        <a
+          style={{ color: "black" }}
+          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        >
+          <div className="custom-suggestion-row">
+            {startingThinString}
+            <b>{boldString}</b>
+            {endingThinString}
+          </div>
+        </a>
+      );
+    } else {
+      return (
+        <a
+          style={{ color: "black" }}
+          a
+          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        >
+          <div className="custom-suggestion-row">
+            {startingThinString}
+            <b>{boldString}</b>
+            {endingThinString} in {suggestion.suggestionType}
+          </div>
+        </a>
+      );
+    }
+  };
+
+  //   var input = this.state.value
+  //   var splitSuggestions = suggestion["suggestion"].split(input)
+
+  //   for(let i=0; i< splitSuggestions.length; i++){
+  //     splitSuggestions[i] = splitSuggestions[i]+"<b>"+input+"</b>"
+  //   }
+  //   console.log("------------------")
+  //   console.log(suggestion["suggestion"].replace(input,'<b>'+input+'</b>'))
+  //   if (suggestion.suggestionType == "Global") {
+  //     return (
+
+  //       <a style={{"color": "black"}}
+  //         href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+  //       >
+  //         {/* <div className="custom-suggestion-row">{suggestion.suggestion}</div> */}
+  //         <div className="custom-suggestion-row">{suggestion["suggestion"].replace(input,'<b>'+input.bold()+'</b>')}</div>
+
+  //       </a>
+  //     );
+  //   } else {
+  //     return (
+  //       <a style={{"color": "black"}}
+  //         href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+  //       >
+  //         <div className="custom-suggestion-row">
+  //         {suggestion["suggestion"].replace(input,'<b>'+input.bold()+'</b>')} in {suggestion.suggestionType}
+  //         </div>
+  //       </a>
+  //     );
+  //   }
+  // };
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
@@ -118,24 +184,20 @@ class Suggestions extends Component {
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
           ></img>
+          <input
+            style={{
+              border: "none",
+              marginLeft: "18px",
+              width: "-webkit-fill-available",
+              height: "-webkit-fill-available",
+            }}
+            {...inputProps}
+          />
+          {/* <i  class="fa fa-times"  style={{paddingLeft: "90%", fontSize: "xx-large", color: "black"}}></i>
+            {/* <a href="./home">
+          <i  class="fa fa-times"  style={{paddingLeft: "90%", fontSize: "xx-large", color: "black"}}></i>
+           </a> */}
         </div>
-        <a href="./home">
-          <img
-            className="searchbarNav inner-addon right-addon"
-            style={{ width: "15px", marginLeft: "90%", marginTop: "35px" }}
-            src={logos.logouticon}
-          ></img>
-        </a>
-
-        <input
-          style={{
-            border: "none",
-            marginLeft: "18px",
-            width: "-webkit-fill-available",
-            height: "-webkit-fill-available",
-          }}
-          {...inputProps}
-        />
       </div>
     );
     return (
@@ -145,7 +207,7 @@ class Suggestions extends Component {
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
+          renderSuggestion={this.renderSuggestion}
           renderInputComponent={renderInputComponent}
           inputProps={inputProps}
         />
@@ -161,5 +223,5 @@ function mapStateToProps(state) {
   return { user };
 }
 
-const ConnectedSuggestions = connect(mapStateToProps)(Suggestions);
-export default ConnectedSuggestions;
+const BuyerConnectedSuggestions = connect(mapStateToProps)(BuyerSuggestions);
+export default BuyerConnectedSuggestions;

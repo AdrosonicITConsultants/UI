@@ -65,17 +65,16 @@ export class ProductsOfCatelog extends Component {
      if(this.state.productIdsInWishlist.indexOf(this.state.proddata.id)!=-1)
      {
        this.setState({
-         isAddedtoWishlist:true,
-         
+         isAddedtoWishlist:true
        })
      }
     }
-  //    TTCEapi.getProductsInWishlist().then((response)=>{
-  //     this.setState({getProductsInWishlist : response.data.data},()=>{
-  //         console.log(this.state.getProductsInWishlist);
+     TTCEapi.getProductsInWishlist().then((response)=>{
+      this.setState({getProductsInWishlist : response.data.data},()=>{
+          console.log(this.state.getProductsInWishlist);
          
-  //     });
-  // }); 
+      });
+  }); 
     }
     toggleHover(name) {      
         switch (name) {

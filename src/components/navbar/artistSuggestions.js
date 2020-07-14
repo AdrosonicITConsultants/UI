@@ -14,8 +14,7 @@ const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   const response = await TTCEapi.getArtistSuggestions(value);
-
-  console.log(response);
+    console.log(response);
   if (response.data.data == null) {
     languages = [];
   } else {
@@ -42,76 +41,9 @@ const getSuggestionValue = (suggestion) => {
 
 // Use your imagination to render suggestions.
 
-const renderSuggestion = (suggestion) => {
-  if (suggestion.suggestion == "No Suggestion Found") {
-    return (
-      <div className="showingnoresults">
-        <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
-        <p> "0 Results found"</p>
-        <p>
-          {" "}
-          "Please check your spelling. <br />
-          Or try searching something like “saree”, “dupatta” etc."
-        </p>
-      </div>
-      // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
-    );
-  }
-  var tempDisplay = suggestion.suggestion;
-  var input = this.state.value;
-  tempDisplay = tempDisplay.toLowerCase();
-  input = input.toLowerCase();
-  var startIndex = tempDisplay.indexOf(input);
-  var endIndex = startIndex + input.length;
-  var startingThinString =
-    startIndex != 0 ? tempDisplay.substring(0, startIndex) : "";
-  var boldString = tempDisplay.substring(startIndex, endIndex);
-  var endingThinString =
-    endIndex != tempDisplay.length
-      ? tempDisplay.substring(endIndex, tempDisplay.length)
-      : "";
-
-  if (suggestion.plainSuggestion == "1") {
-    return (
-      <a
-        href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-      >
-        <div className="custom-suggestion-row kiran">
-          {startingThinString}
-          <b>{boldString}</b>
-          {endingThinString}
-        </div>
-      </a>
-    );
-  }
-  if (suggestion.suggestionDetail == "1") {
-    return (
-      <a
-        href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-      >
-        <div className="custom-suggestion-row kiran">
-          {" "}
-          {startingThinString}
-          <b>{boldString}</b>
-          {endingThinString} in <b>{suggestion.suggestionDetail}</b>
-        </div>
-      </a>
-    );
-  } else {
-    return (
-      <a
-        href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-      >
-        <div className="custom-suggestion-row">
-          {startingThinString}
-          <b>{boldString}</b>
-          {endingThinString} in <b>{suggestion.suggestionType}</b>
-        </div>
-      </a>
-    );
-  }
-};
-
+{
+  /* <a href={"./detailSuggestions?params="+suggestion.suggestion+"&id="suggestion.suggestionTypeId}><div className="custom-suggestion-row">{suggestion.suggestion} in {suggestion.suggestionType}</div></a> */
+}
 class ArtistSuggestions extends Component {
   constructor() {
     super();
@@ -120,12 +52,85 @@ class ArtistSuggestions extends Component {
       suggestions: [],
     };
   }
+  renderSuggestion = (suggestion) => {
+    if (suggestion.suggestion == "No Suggestion Found") {
+      return (
+        <div className="showingnoresults">
+          <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
+          <p> "0 Results found"</p>
+          <p>
+            {" "}
+            "Please check your spelling. <br />
+            Or try searching something like “saree”, “dupatta” etc."
+          </p>
+        </div>
+        // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
+      );
+    }
+    var tempDisplay = suggestion.suggestion;
+    var input = this.state.value;
+    tempDisplay = tempDisplay.toLowerCase();
+    input = input.toLowerCase();
+    var startIndex = tempDisplay.indexOf(input);
+    var endIndex = startIndex + input.length;
+    var startingThinString =
+      startIndex != 0 ? tempDisplay.substring(0, startIndex) : "";
+    var boldString = tempDisplay.substring(startIndex, endIndex);
+    var endingThinString =
+      endIndex != tempDisplay.length
+        ? tempDisplay.substring(endIndex, tempDisplay.length)
+        : "";
+
+    if (suggestion.plainSuggestion == "1") {
+      return (
+        <a
+          style={{ color: "black" }}
+          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        >
+          <div className="custom-suggestion-row">
+            {startingThinString}
+            <b>{boldString}</b>
+            {endingThinString}
+          </div>
+        </a>
+      );
+    } if (suggestion.suggestionDetail == "1") {
+            return (
+              <a
+                href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+              >
+                <div className="custom-suggestion-row kiran">
+                  {" "}
+                  {startingThinString}
+                  <b>{boldString}</b>
+                  {endingThinString} in <b>{suggestion.suggestionDetail}</b>
+                </div>
+              </a>
+            );
+          }
+    else {
+      return (
+        <a
+          style={{ color: "black" }}
+          a
+          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+        >
+          <div className="custom-suggestion-row">
+            {startingThinString}
+            <b>{boldString}</b>
+            {endingThinString} in <b>{suggestion.suggestionType}</b>
+          </div>
+        </a>
+      );
+    }
+  };
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
     });
   };
   onSuggestionsFetchRequested = async ({ value }) => {
+    console.log("Calling key pressing function");
     this.setState({
       suggestions: await getSuggestions(value),
     });
@@ -150,6 +155,7 @@ class ArtistSuggestions extends Component {
         }
       },
     };
+
     const renderInputComponent = (inputProps) => (
       <div>
         <div className="searchbarNav inner-addon left-addon">
@@ -164,7 +170,6 @@ class ArtistSuggestions extends Component {
               src={logos.closelogo}
             ></img>
           </a>
-
           <input
             style={{
               border: "none",
@@ -173,7 +178,8 @@ class ArtistSuggestions extends Component {
               height: "-webkit-fill-available",
             }}
             {...inputProps}
-          />
+          ></input>
+          
         </div>
       </div>
     );
@@ -184,7 +190,7 @@ class ArtistSuggestions extends Component {
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
+          renderSuggestion={this.renderSuggestion}
           renderInputComponent={renderInputComponent}
           inputProps={inputProps}
         />
@@ -195,6 +201,8 @@ class ArtistSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
+  console.log("User : ");
+  console.log(user);
   return { user };
 }
 

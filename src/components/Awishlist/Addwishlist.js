@@ -8,7 +8,7 @@ import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
 import Footer from "../footer/footer";
-
+import { withRouter } from 'react-router'
 
 
 class AddWishlist extends Component {
@@ -31,10 +31,6 @@ class AddWishlist extends Component {
         browserHistory.push("/home"); 
     }  
 
-    productopen(id){
-        browserHistory.push("/Product-Details?productId=" + id);
-        window.location.reload();
-    }
     handleDeleteItem(item){
     if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
@@ -66,7 +62,7 @@ class AddWishlist extends Component {
    
      TTCEapi.getProductsInWishlist().then((response)=>{
       this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist);
+          console.log(this.state.getProductsInWishlist.length);
          
          
           // console.log(this.props.user);
@@ -96,7 +92,7 @@ class AddWishlist extends Component {
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
                                     //  onClick={() => this.backoperation()}
-                                    //  onClick={() => this.props.history.go(-1)}
+                                     onClick={() => this.props.history.go(-1)}
                                 ></img>
                        
                        </Col>
@@ -120,7 +116,7 @@ class AddWishlist extends Component {
               <>
       
                <div>
-                    <Card className="wishlistcardbody"  onClick={()=>{ this.productopen(data.product.id)}}>
+                    <Card className="wishlistcardbody">
                         <Row noGutters={true}>
                             <Col sm={12} className="srno">
                             <p></p>

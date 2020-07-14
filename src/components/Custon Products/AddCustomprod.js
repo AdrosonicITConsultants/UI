@@ -7,7 +7,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import NavbarComponent from "../navbar/navbar";
 import Customprod from './Customprod';
 import Footer from "../footer/footer";
-// import Moment from 'react-moment';
+import Moment from 'react-moment';
 class AddCustomprod extends Component {
     
     constructor(props) {
@@ -67,9 +67,9 @@ class AddCustomprod extends Component {
               <Col md = "1">
                         <img
                                     src={logos.backarrowicon}
-                                    className="margin-cparrow cparrowsize glyphicon"
-                                    //  onClick={() => this.backoperation()}
-                                    // onClick={() => this.props.history.go(-1)}
+                                     className="margin-cparrow cparrowsize glyphicon"
+                                     onClick={() => this.backoperation()}
+                                    //  onClick={() => this.props.history.go(-1)}
                                 ></img>
                        
                        </Col>
@@ -137,9 +137,9 @@ class AddCustomprod extends Component {
                         
                          <Col sm={12} className="Wishlistpcode">
                      <span>Date created :</span> <span><b>
-                     {/* <Moment format="YYYY/MM/DD">
+                     <Moment format="YYYY/MM/DD">
                             {data.createdOn}
-                             </Moment> */}
+                             </Moment>
                           </b></span>
                     
                          </Col>

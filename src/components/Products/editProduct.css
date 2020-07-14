@@ -10,3 +10,7 @@
 .EditProductbutton[disabled]{
     background: grey;
 }
+.modalconfirm{
+    border: 1px solid black;
+    background: white;
+}

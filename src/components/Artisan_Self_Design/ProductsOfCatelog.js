@@ -21,17 +21,19 @@ export class ProductsOfCatelog extends Component {
             proddata : this.props.productData,
             isfavHovered :false,
             imageurl : logos.dupatta,
-            imageUrl : TTCEapi.ImageUrl +"Product/"
-        
-
-         
+            imageUrl : TTCEapi.ImageUrl +"Product/",
+            isAddedtoWishlist:false,
+            productIdsInWishlist:this.props.productIdsInWishlist,
+            addToWishlist:null,
+            deleteProductsInWishlist:[]
         };
-      
+        this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
+      console.log(this.props);
     }
-    handleAddtoWishlist(){
-      TTCEapi.addToWishlist(this.state.proddata.productImages[0].productId).then((response)=>{
-          this.setState({addToWishlist : response},()=>{
-              console.log(this.state.proddata.productImages[0].productId);
+    handleAddtoWishlist(id){
+      TTCEapi.addToWishlist(id).then((response)=>{
+          this.setState({isAddedtoWishlist : response.data.valid},()=>{
+              console.log(this.state.isAddedtoWishlist);
        
           });
       });
@@ -46,7 +48,34 @@ export class ProductsOfCatelog extends Component {
       console.log("Product Descriptiony " + id);
       browserHistory.push("/Product-Details?productId=" + id); 
 
-
+    }
+    handleRemovefromWishlist(id){
+      TTCEapi.deleteProductsInWishlist(id).then((response)=>{
+          console.log(response);   
+          if(response.data.data=="Successfull"){
+            this.setState({isAddedtoWishlist:false})
+          }
+        
+          
+    
+    });
+    }
+    componentDidMount(){
+      if(this.state.productIdsInWishlist){
+     if(this.state.productIdsInWishlist.indexOf(this.state.proddata.id)!=-1)
+     {
+       this.setState({
+         isAddedtoWishlist:true,
+         
+       })
+     }
+    }
+  //    TTCEapi.getProductsInWishlist().then((response)=>{
+  //     this.setState({getProductsInWishlist : response.data.data},()=>{
+  //         console.log(this.state.getProductsInWishlist);
+         
+  //     });
+  // }); 
     }
     toggleHover(name) {      
         switch (name) {
@@ -147,21 +176,28 @@ export class ProductsOfCatelog extends Component {
 
                             </button>
                      </Col>
+
                      <Col  className="cpwishlist col-xs-2">
-                     {this.state.isfavHovered ? ( 
+                       
+                     {(this.state.isAddedtoWishlist )? ( 
+                       
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}
                     className="navButtonImg2"
                     src={logos.heariconfilled}
-                    onClick={() => this.handleAddtoWishlist()}
+                    onClick={() => this.handleRemovefromWishlist(this.state.proddata.id)}
+                    // onClick={() => this.handleRemovefromWishlist(this.state.proddata.id)}
                   ></img>
+                  
                 ) : (
+                  
                   <img
                     onMouseEnter={() => this.toggleHover("isfavHovered")}
                     onMouseLeave={() => this.toggleHover("isfavHovered")}
                     className="navButtonImg2"
                     src={logos.favoriteicon}
+                    onClick={() => this.handleAddtoWishlist(this.state.proddata.id)}
                   ></img>
                 )}
                   </Col>

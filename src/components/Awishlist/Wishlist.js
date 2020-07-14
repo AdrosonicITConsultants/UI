@@ -6,6 +6,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css";
+import { withRouter } from 'react-router'
 import Footer from "../footer/footer";
 
 
@@ -32,7 +33,7 @@ class Wishlist extends Component {
         return (
          
             <React.Fragment>
-                <body onload="window.location.reload()"></body>
+              
                 <Container>
               <Row noGutters={true}>
               <Col md = "1">

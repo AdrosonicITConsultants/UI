@@ -75,11 +75,11 @@ function App() {
           <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
 
-          <Route exact path="/Antaran" component={AntaranCoDesign} />
-          <Route   exact path="/Product-Details" component={BuyersProductDetails} />
-          <Route   exact path="/wishlist" component={AddWishlist} />
+          <Route   path="/Antaran" component={AntaranCoDesign} />
+          <Route   path="/Product-Details" component={BuyersProductDetails} />
+          <Route   path="/wishlist" component={AddWishlist} />
           {/* <Route   path="/Customprod" component={Customprod} /> */}
-          <Route   exact path="/Customprod" component={AddCustomprod} />
+          <Route   path="/Customprod" component={AddCustomprod} />
           {/* <Route   path="/wishlist" component={Wishlist} /> */}
 
 

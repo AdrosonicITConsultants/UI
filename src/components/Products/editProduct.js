@@ -107,7 +107,7 @@ export default class addProduct extends Component {
 
                   handleClose = () => {this.setState({modal5 : false})};
                   handleShow = () => {this.setState({modal5 : true})};
-                 edit(){
+                 confirmSave(){
                    this.setState({modal5:true});
                  }
                  onAddingItem = (i) => (event) => {
@@ -3554,29 +3554,29 @@ else {
                              </Row>
                            </div>
                          </Row>
-                         {/* <ReactModal
+                         <ReactModal
                                isOpen={this.state.modal5}
                                contentLabel="Minimal Modal Example"
                                className="Modal"
                                style={customStyles3}
                                // onRequestClose={this.handleCloseWrongPasswordModal}
                              >
-                                <div>
-                                  <Row noGutters={true}>
+                                <div className="modalconfirm">
+                                  <Row noGutters={true} className="text-center font20">
                                     Are you sure you want to save changes
                                   </Row>
-                                  <Row>
-                                    <Col sm={{size="8"}}>
+                                  <Row noGutters={true}>  
+                                    <Col sm={{size:"8"}}>
                                     </Col>
-                                    <Col sm={{size="8"}}>
+                                    <Col sm={{size:"2"}}>
                                       cancel
                                     </Col>
-                                    <Col sm={{size="8"}}>
+                                    <Col sm={{size:"2"}}>
                                       Ok
                                     </Col>
                                   </Row>
                                 </div>
-                             </ReactModal> */}
+                             </ReactModal>
                               
                         {/* <Modal show={this.state.modal5} onClick={()=>{this.handleClose()}}>
                           <Modal.Header closeButton>

@@ -21,17 +21,6 @@
     font-size: 34px;
     }
   
-.onclickwish{
-  margin-left: 7px;
- 
-}    
-.navButtonImg21 {
-  margin-left: 2px;
-  margin-top: 4px;
-  margin-right: 10px;
-  cursor: pointer !important;
-  width: 30px !important;
-}
 .BPDCol2 p {
   font-size: 17px;
   color: gray;
@@ -359,23 +348,12 @@ scroll-behavior: smooth;
   }
 .Addtowishlisttext{
   color:black !important;
-  font-family: 15px !important;
+  font-family: 15px;
   font-weight: 700;
 }
 .love-icon {
   --heart-color: black;
- 
-  --bg-color: white;
-  position: relative;
-  width: 20px;
-  height: 20px;
-  margin-top: -19px;
-  margin-left: 189px;
-
-}
-.love-icon-active {
-  --heart-color: red;
- 
+  --heart-active-color: Red;
   --bg-color: white;
   position: relative;
   width: 20px;

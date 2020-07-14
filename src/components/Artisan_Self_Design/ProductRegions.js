@@ -16,7 +16,7 @@ import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
-import ProductsOfCatelog from './ProductsOfCatelog';
+import ProductsOfCatelog from "./ProductsOfCatelog"
 class ProductRegions extends Component {
     
     constructor(props) {
@@ -31,7 +31,7 @@ class ProductRegions extends Component {
             products : [],
             cluster : "",
             description:"",
-
+            getProductIdsInWishlist:[]
          
         };
       
@@ -56,7 +56,6 @@ class ProductRegions extends Component {
         
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-
         TTCEapi.getClusterProducts(parseInt(params.clusterid)).then((response)=>{
             switch(parseInt(params.clusterid))
             {
@@ -91,6 +90,16 @@ class ProductRegions extends Component {
                 products : response.data.data.products
                });
         });
+     
+            TTCEapi.getProductIdsInWishlist().then((response)=>{
+                var item=this.state.getProductIdsInWishlist
+                this.setState({getProductIdsInWishlist : response.data.data},()=>{
+                    console.log(this.state.getProductIdsInWishlist);
+                    console.log(this.state.getProductIdsInWishlist.indexOf(12))
+             
+                });
+            });
+        
         TTCEapi.getProducts().then((response)=>{
             console.log(response);
             this.setState({productCategoriesdata : response.data.data},()=>{
@@ -167,11 +176,14 @@ class ProductRegions extends Component {
                                 <div>
                                     {this.state.productCategoryid == -1 
                                         ? 
-                                        
+                                      
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
-                                        <ProductsOfCatelog productData = {item}/>              
+                                              
+                                        <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>  
+                                                
                                         </Col>  
+                                        // {this.state.getProductIdsInWishlist}
                                         :
                                         
                                         <>
@@ -179,7 +191,10 @@ class ProductRegions extends Component {
                                         ?
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
-                                        <ProductsOfCatelog productData = {item}/>              
+
+                                        <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>    
+                                {console.log(item)};
+
                                         </Col>
                                         :
                                         <>

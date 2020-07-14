@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="135" height="135" viewBox="0 0 135 135">
+  <g id="Group_1280" data-name="Group 1280" transform="translate(-1022 -6735)">
+    <circle id="Ellipse_237" data-name="Ellipse 237" cx="67.5" cy="67.5" r="67.5" transform="translate(1022 6735)" fill="#fff"/>
+    <g id="Group_1240" data-name="Group 1240">
+      <g id="Icon_feather-shopping-bag" data-name="Icon feather-shopping-bag" transform="translate(1051.102 6761.898)">
+        <path id="Path_1552" data-name="Path 1552" d="M15.884,3,4.5,18.179V71.3a7.589,7.589,0,0,0,7.589,7.589H65.215A7.589,7.589,0,0,0,72.8,71.3V18.179L61.42,3Z" transform="translate(0 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_1553" data-name="Path 1553" d="M4.5,9H72.8" transform="translate(0 9.179)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_1554" data-name="Path 1554" d="M42.357,15A15.179,15.179,0,0,1,12,15" transform="translate(11.473 18.357)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <path id="Path_1551" data-name="Path 1551" d="M563.933,13376.732l9.815,9.33,17.685-16.811" transform="translate(512.067 -6555.196)" fill="none" stroke="#72ae4e" stroke-linecap="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

@@ -58,32 +58,29 @@ const renderSuggestion = (suggestion) => {
     );
   }
   var tempDisplay = suggestion.suggestion;
-    var input = this.state.value
-    tempDisplay = tempDisplay.toLowerCase();
-    input = input.toLowerCase();
-    var startIndex = tempDisplay.indexOf(input)
-    var endIndex = startIndex + input.length
-    var startingThinString = (startIndex != 0) ? tempDisplay.substring(0,startIndex) : ""
-    var boldString = tempDisplay.substring(startIndex,endIndex)
-    var endingThinString = (endIndex != tempDisplay.length) ? tempDisplay.substring(endIndex,tempDisplay.length): ""
-    console.log("************************************** New Loop Starting Here ***********************")
-    console.log("Input String ============", input)
-    console.log("tempDisplay ============", tempDisplay)
-    console.log("startIndex ============", startIndex)
-    console.log("endIndex ============", endIndex)
-    console.log("Start Thin String ------------", startingThinString)
-    console.log("End Thin String ------------", endingThinString)
-    console.log("************************************** New Loop Ending Here ***********************")
+  var input = this.state.value;
+  tempDisplay = tempDisplay.toLowerCase();
+  input = input.toLowerCase();
+  var startIndex = tempDisplay.indexOf(input);
+  var endIndex = startIndex + input.length;
+  var startingThinString =
+    startIndex != 0 ? tempDisplay.substring(0, startIndex) : "";
+  var boldString = tempDisplay.substring(startIndex, endIndex);
+  var endingThinString =
+    endIndex != tempDisplay.length
+      ? tempDisplay.substring(endIndex, tempDisplay.length)
+      : "";
 
   if (suggestion.plainSuggestion == "1") {
     return (
       <a
         href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
       >
-        <div className="custom-suggestion-row kiran">{startingThinString}
-            <b>{boldString}</b>
-            {endingThinString}
-          </div>
+        <div className="custom-suggestion-row kiran">
+          {startingThinString}
+          <b>{boldString}</b>
+          {endingThinString}
+        </div>
       </a>
     );
   }
@@ -95,8 +92,8 @@ const renderSuggestion = (suggestion) => {
         <div className="custom-suggestion-row kiran">
           {" "}
           {startingThinString}
-            <b>{boldString}</b>
-            {endingThinString} in {suggestion.suggestionDetail}
+          <b>{boldString}</b>
+          {endingThinString} in <b>{suggestion.suggestionDetail}</b>
         </div>
       </a>
     );
@@ -106,37 +103,15 @@ const renderSuggestion = (suggestion) => {
         href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
       >
         <div className="custom-suggestion-row">
-        {startingThinString}
-            <b>{boldString}</b>
-            {endingThinString} in {suggestion.suggestionType}
+          {startingThinString}
+          <b>{boldString}</b>
+          {endingThinString} in <b>{suggestion.suggestionType}</b>
         </div>
       </a>
     );
   }
 };
-//   if (suggestion.suggestionType == "Global") {
-//     return (
-//       <a
-//         href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-//       >
-//         <div className="custom-suggestion-row">{suggestion.suggestion}</div>
-//       </a>
-//     );
-//   } else {
-//     return (
-//       <a
-//         href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-//       >
-//         <div className="custom-suggestion-row">
-//           {suggestion.suggestion} in {suggestion.suggestionType}
-//         </div>
-//       </a>
-//     );
-//   }
-// };
-{
-  /* <a href={"./detailSuggestions?params="+suggestion.suggestion+"&id="suggestion.suggestionTypeId}><div className="custom-suggestion-row">{suggestion.suggestion} in {suggestion.suggestionType}</div></a> */
-}
+
 class ArtistSuggestions extends Component {
   constructor() {
     super();
@@ -167,6 +142,13 @@ class ArtistSuggestions extends Component {
       placeholder: "Search",
       value,
       onChange: this.onChange,
+      onKeyPress: (e) => {
+        if (e.charCode == 13) {
+          console.log("-------------");
+          console.log(e.charCode);
+          this.onSuggestionsFetchRequested({ value: this.state.value });
+        }
+      },
     };
     const renderInputComponent = (inputProps) => (
       <div>
@@ -175,18 +157,24 @@ class ArtistSuggestions extends Component {
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
           ></img>
-       
+          <a href="./home">
+            <img
+              className="searchbarNav inner-addon right-addon"
+              style={{ width: "15px", left: "90%", top: "3rem" }}
+              src={logos.closelogo}
+            ></img>
+          </a>
 
-        <input
-          style={{
-            border: "none",
-            marginLeft: "18px",
-            width: "-webkit-fill-available",
-            height: "-webkit-fill-available",
-          }}
-          {...inputProps}
-        />
-      </div>
+          <input
+            style={{
+              border: "none",
+              marginLeft: "18px",
+              width: "-webkit-fill-available",
+              height: "-webkit-fill-available",
+            }}
+            {...inputProps}
+          />
+        </div>
       </div>
     );
     return (

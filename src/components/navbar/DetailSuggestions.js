@@ -20,9 +20,10 @@ export default class DetailSuggestions extends Component {
     super(props);
 
     this.state = {
-            dataload : true,    
+            dataload : false,    
             resultsCount: 0,
             products : [],
+            getProductIdsInWishlist :[]
     };
   }
 
@@ -37,7 +38,6 @@ export default class DetailSuggestions extends Component {
                 products : response.data.data,
                 resultsCount : response.data.data.length,
                 searchWord : params.search,
-                dataload : true,
                 both : 1,
                 antaran : 1,
 
@@ -47,6 +47,14 @@ export default class DetailSuggestions extends Component {
              }
 
         });
+        TTCEapi.getProductIdsInWishlist().then((response)=>{
+          var item=this.state.getProductIdsInWishlist
+          this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
+              console.log(this.state.getProductIdsInWishlist);
+              console.log(this.state.getProductIdsInWishlist.indexOf(12))
+       
+          });
+      });
 
 
         }
@@ -57,7 +65,10 @@ export default class DetailSuggestions extends Component {
     
     return (
       <React.Fragment>
-        <NavbarComponent />
+           {this.state.dataload == true 
+           ?
+           <>
+           <NavbarComponent />
         <Container>
           <Row noGutters={true} >
             <Col  className="headingsearch col-xs-12 bold">
@@ -112,7 +123,7 @@ export default class DetailSuggestions extends Component {
                                       
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
-                                        <ProductsOfSearch productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>     
+                                        <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>     
                                         </Col>  
                                         :
                                         <>
@@ -121,7 +132,7 @@ export default class DetailSuggestions extends Component {
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
 
-                                          <ProductsOfSearch productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>    
+                                          <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>    
                                             {console.log(item)};
 
                                         </Col>
@@ -160,6 +171,12 @@ export default class DetailSuggestions extends Component {
         </Container>
 <Footer></Footer>
       
+           </>
+           :
+           <>
+           </>
+        }
+        
       </React.Fragment>
     );
   }

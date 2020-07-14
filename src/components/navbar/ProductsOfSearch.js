@@ -16,20 +16,20 @@ import TTCEapi from '../../services/API/TTCEapi';
 export class ProductsOfSearch extends Component {
     constructor(props) {
         super(props);
-
+        console.log(this.props);
         this.state = {
+            
             proddata : this.props.productData,
             imagename :this.props.productData.images.split(",")[0],
             isfavHovered :false,
             imageurl : logos.dupatta,
             imageUrl : TTCEapi.ImageUrl +"Product/",
-            isAddedtoWishlist:false,
-            productIdsInWishlist:this.props.productIdsInWishlist,
+            isAddedtoWishlist: this.props.productIdsInWishlist,
             addToWishlist:null,
             deleteProductsInWishlist:[]
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
-      console.log(this.props);
+    //   console.log(this.props);
     }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
@@ -56,28 +56,10 @@ export class ProductsOfSearch extends Component {
           if(response.data.data=="Successfull"){
             this.setState({isAddedtoWishlist:false})
           }
-        
-          
-    
     });
     }
     componentDidMount(){
-      if(this.state.productIdsInWishlist){
-     if(this.state.productIdsInWishlist.indexOf(this.state.proddata.id)!=-1)
-     {
-       this.setState({
-         isAddedtoWishlist:true
-       })
-     }
-    }
-     TTCEapi.getProductsInWishlist().then((response)=>{
-      this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist);
-         
-      });
-  }); 
-
-  console.log(this.state.proddata.images.split(",")[0])
+        // console.log(this.state);
     }
 
 

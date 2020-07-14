@@ -8,7 +8,7 @@ import NavbarComponent from "../navbar/navbar";
 import Customprod from './Customprod';
 import { Footer } from 'rsuite';
 import { withRouter } from 'react-router';
-
+import Moment from 'react-moment';
 class AddCustomprod extends Component {
     
     constructor(props) {
@@ -91,6 +91,7 @@ class AddCustomprod extends Component {
                      </Row>
                      {this.state.buyergetAllProducts ? ( ( this.state.buyergetAllProducts.map((data) => ( 
               <>
+              
                     
                <div>
                     <Card className="wishlistcardbody">
@@ -136,7 +137,12 @@ class AddCustomprod extends Component {
                      <Row  noGutters={true}>
                         
                          <Col sm={12} className="Wishlistpcode">
-                     <span>Date created :</span> <span><b><time datetime="1914-12-20T08:0">{data.createdOn} </time> </b></span>
+                     <span>Date created :</span> <span><b>
+                     <Moment format="YYYY/MM/DD">
+                            {data.createdOn}
+                             </Moment>
+                          </b></span>
+                    
                          </Col>
                      </Row>
                        </Col> 

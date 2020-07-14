@@ -6,6 +6,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import NavbarComponent from "../navbar/navbar";
 import "./Customprod.css";
 import { withRouter } from 'react-router';
+import Footer from "../footer/footer";
 
 class Customprod extends Component {
     
@@ -61,6 +62,7 @@ class Customprod extends Component {
                 </Col>
                   </Row> 
                   </Container>
+                  <Footer />
                 </React.Fragment>
               
         )

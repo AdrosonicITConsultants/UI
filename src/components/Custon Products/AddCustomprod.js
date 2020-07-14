@@ -6,7 +6,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from '../../services/API/TTCEapi';
 import NavbarComponent from "../navbar/navbar";
 import Customprod from './Customprod';
-import { Footer } from 'rsuite';
+import Footer from "../footer/footer";
 import { withRouter } from 'react-router';
 import Moment from 'react-moment';
 class AddCustomprod extends Component {
@@ -205,9 +205,9 @@ class AddCustomprod extends Component {
                       </div>
                   </Row>
                   </Container>
-                    <Footer/>
+                 
                      </>}
-     
+                     <Footer/>
                 </React.Fragment>
               
         )

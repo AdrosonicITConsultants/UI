@@ -78,9 +78,9 @@ function App() {
           <Route   path="/Antaran" component={AntaranCoDesign} />
           <Route   path="/Product-Details" component={BuyersProductDetails} />
           <Route   path="/wishlist" component={AddWishlist} />
-          <Route   path="/Customprod" component={Customprod} />
-          <Route   path="/AddCustomprod" component={AddCustomprod} />
-          <Route   path="/wishlist" component={Wishlist} />
+          {/* <Route   path="/Customprod" component={Customprod} /> */}
+          <Route   path="/Customprod" component={AddCustomprod} />
+          {/* <Route   path="/wishlist" component={Wishlist} /> */}
 
 
         </Switch>

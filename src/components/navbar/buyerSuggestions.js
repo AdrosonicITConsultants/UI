@@ -80,18 +80,6 @@ class BuyerSuggestions extends Component {
       endIndex != tempDisplay.length
         ? tempDisplay.substring(endIndex, tempDisplay.length)
         : "";
-    console.log(
-      "************************************** New Loop Starting Here ***********************"
-    );
-    console.log("Input String ============", input);
-    console.log("tempDisplay ============", tempDisplay);
-    console.log("startIndex ============", startIndex);
-    console.log("endIndex ============", endIndex);
-    console.log("Start Thin String ------------", startingThinString);
-    console.log("End Thin String ------------", endingThinString);
-    console.log(
-      "************************************** New Loop Ending Here ***********************"
-    );
 
     if (suggestion.suggestionType == "Global") {
       return (
@@ -117,50 +105,19 @@ class BuyerSuggestions extends Component {
           <div className="custom-suggestion-row">
             {startingThinString}
             <b>{boldString}</b>
-            {endingThinString} in {suggestion.suggestionType}
+            {endingThinString} in <b>{suggestion.suggestionType}</b>
           </div>
         </a>
       );
     }
   };
-
-  //   var input = this.state.value
-  //   var splitSuggestions = suggestion["suggestion"].split(input)
-
-  //   for(let i=0; i< splitSuggestions.length; i++){
-  //     splitSuggestions[i] = splitSuggestions[i]+"<b>"+input+"</b>"
-  //   }
-  //   console.log("------------------")
-  //   console.log(suggestion["suggestion"].replace(input,'<b>'+input+'</b>'))
-  //   if (suggestion.suggestionType == "Global") {
-  //     return (
-
-  //       <a style={{"color": "black"}}
-  //         href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-  //       >
-  //         {/* <div className="custom-suggestion-row">{suggestion.suggestion}</div> */}
-  //         <div className="custom-suggestion-row">{suggestion["suggestion"].replace(input,'<b>'+input.bold()+'</b>')}</div>
-
-  //       </a>
-  //     );
-  //   } else {
-  //     return (
-  //       <a style={{"color": "black"}}
-  //         href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
-  //       >
-  //         <div className="custom-suggestion-row">
-  //         {suggestion["suggestion"].replace(input,'<b>'+input.bold()+'</b>')} in {suggestion.suggestionType}
-  //         </div>
-  //       </a>
-  //     );
-  //   }
-  // };
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue,
     });
   };
   onSuggestionsFetchRequested = async ({ value }) => {
+    console.log("Calling key pressing function");
     this.setState({
       suggestions: await getSuggestions(value),
     });
@@ -177,7 +134,15 @@ class BuyerSuggestions extends Component {
       placeholder: "Search",
       value,
       onChange: this.onChange,
+      onKeyPress: (e) => {
+        if (e.charCode == 13) {
+          console.log("-------------");
+          console.log(e.charCode);
+          this.onSuggestionsFetchRequested({ value: this.state.value });
+        }
+      },
     };
+
     const renderInputComponent = (inputProps) => (
       <div>
         <div className="searchbarNav inner-addon left-addon">
@@ -185,6 +150,13 @@ class BuyerSuggestions extends Component {
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
           ></img>
+          <a href="./home">
+            <img
+              className="searchbarNav inner-addon right-addon"
+              style={{ width: "15px", left: "90%", top: "3rem" }}
+              src={logos.closelogo}
+            ></img>
+          </a>
           <input
             style={{
               border: "none",
@@ -193,11 +165,8 @@ class BuyerSuggestions extends Component {
               height: "-webkit-fill-available",
             }}
             {...inputProps}
-          />
-          {/* <i  class="fa fa-times"  style={{paddingLeft: "90%", fontSize: "xx-large", color: "black"}}></i>
-            {/* <a href="./home">
-          <i  class="fa fa-times"  style={{paddingLeft: "90%", fontSize: "xx-large", color: "black"}}></i>
-           </a> */}
+          ></input>
+          
         </div>
       </div>
     );

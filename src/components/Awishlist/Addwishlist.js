@@ -7,6 +7,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
+import Footer from "../footer/footer";
 import { withRouter } from 'react-router'
 
 
@@ -218,8 +219,11 @@ class AddWishlist extends Component {
                 </Col>
                
                   </Row> 
+                 
                   </Container>
+                  {/* <Footer/> */}
                   </>}
+                 
      
                 </React.Fragment>
               

@@ -7,6 +7,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css";
 import { withRouter } from 'react-router'
+import Footer from "../footer/footer";
 
 
 class Wishlist extends Component {
@@ -63,6 +64,7 @@ class Wishlist extends Component {
                 </Col>
                   </Row> 
                   </Container>
+                  <Footer/>
                 </React.Fragment>
               
         )

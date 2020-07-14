@@ -424,6 +424,18 @@ browserHistory.push("/MyProfile");
                     <a href="/">My orders</a>
                   </li>
                 ) : null}
+                 {userTypeId == 2 ? (
+                  <li className="menu-item">
+                    <span className="col-md-2  col-xs-2  col-sm-2">
+                      <img
+                        style={{ width: "15px" }}
+                        src={logos.CustomDesignIcons}
+                      ></img>
+                    </span>
+
+                    <a href="/Customprod">Custom Design</a>
+                  </li>
+                ) : null}
 
                 <li className="menu-item">
                   <span className="col-md-2  col-xs-2  col-sm-2">

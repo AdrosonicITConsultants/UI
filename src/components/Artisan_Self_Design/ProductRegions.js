@@ -16,7 +16,7 @@ import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
-import ProductsOfCatelog from './ProductsOfCatelog';
+import ProductsOfCatelog from "./ProductsOfCatelog"
 class ProductRegions extends Component {
     
     constructor(props) {

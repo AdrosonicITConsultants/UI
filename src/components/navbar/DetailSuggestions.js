@@ -11,6 +11,7 @@ import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 import { Row, Col , Container, Button} from 'reactstrap';
 import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
+import ProductsOfSearch  from './ProductsOfSearch'
 
 
 
@@ -111,7 +112,7 @@ export default class DetailSuggestions extends Component {
                                       
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
-                                        <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>     
+                                        <ProductsOfSearch productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>     
                                         </Col>  
                                         :
                                         <>
@@ -120,7 +121,7 @@ export default class DetailSuggestions extends Component {
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
 
-                                          <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>    
+                                          <ProductsOfSearch productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>    
                                             {console.log(item)};
 
                                         </Col>
@@ -152,6 +153,8 @@ export default class DetailSuggestions extends Component {
                 
               </Col>
             </Row>
+
+            <br></br>        <br></br>        <br></br>        <br></br>
 
 
         </Container>

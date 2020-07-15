@@ -137,8 +137,9 @@ class BuyerSuggestions extends Component {
       onKeyPress: (e) => {
         if (e.charCode == 13) {
           console.log("-------------");
-          console.log(e.charCode);
-          this.onSuggestionsFetchRequested({ value: this.state.value });
+          console.log(languages);
+          window.location.href = `/detailSuggestions?search=${this.state.value}&type=5`
+          //this.onSuggestionsFetchRequested({ value: this.state.value });
         }
       },
     };

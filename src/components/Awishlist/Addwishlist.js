@@ -38,7 +38,7 @@ class AddWishlist extends Component {
     handleDeleteItem(item){
         if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
-            this.setState({deleteProductsInWishlist : response},()=>{
+            this.setState({deleteProductsInWishlist : response.data},()=>{
                 console.log(this.state.deleteProductsInWishlist);
                 window.location.reload();
             
@@ -53,7 +53,7 @@ class AddWishlist extends Component {
     handleDeleteAllItem(){
         if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
-                this.setState({deleteAllProductsInWishlist : response},()=>{
+                this.setState({deleteAllProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteAllProductsInWishlist);
                     window.location.reload();
                 });

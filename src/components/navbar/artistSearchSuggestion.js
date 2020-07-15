@@ -21,7 +21,6 @@ class ArtistDetailSuggestions extends Component {
       searchQuery,
       searchTypes
     );
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
     console.log(response);
   }
 
@@ -54,6 +53,8 @@ class ArtistDetailSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
+  console.log("User : ");
+  console.log(user);
   return { user };
 }
 

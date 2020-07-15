@@ -8,6 +8,9 @@ import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
 import Footer from "../footer/footer";
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 
@@ -35,15 +38,29 @@ class AddWishlist extends Component {
         browserHistory.push("/Product-Details?productId=" + id);
         window.location.reload();
     }
-    handleDeleteItem(item){
+    handleDeleteItem(id){
         if(window.confirm("Remove this item from wishlist?")){
-        TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
-            this.setState({deleteProductsInWishlist : response.data},()=>{
-                console.log(this.state.deleteProductsInWishlist);
-                window.location.reload();
-            
-         
-            });
+        TTCEapi.deleteProductsInWishlist(id).then((response)=>{
+            if (response.data.valid) {
+                customToast.success("Product removed from wishlist!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+                this.setState({deleteProductsInWishlist : response.data},()=>{
+                    console.log(this.state.deleteProductsInWishlist);
+                    // window.location.reload();
+                    this.componentDidMount();
+                
+             
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
         
         });
     }
@@ -118,7 +135,7 @@ class AddWishlist extends Component {
             
                      {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => ( 
               <>
-      
+        {console.log(data)}
                <div>
                     <Card className="wishlistcardbody" >
                         <Row noGutters={true}>
@@ -173,7 +190,7 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem()}>
+                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem(data.product.id)}>
                             Remove from wish list <img src={logos.removefromwishlist}/>
                             </Col>
                              </Row>  

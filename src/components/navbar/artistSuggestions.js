@@ -85,7 +85,7 @@ class ArtistSuggestions extends Component {
       return (
         <a
           style={{ color: "black" }}
-          href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -97,7 +97,7 @@ class ArtistSuggestions extends Component {
     } if (suggestion.suggestionDetail == "1") {
             return (
               <a
-                href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+              href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
               >
                 <div className="custom-suggestion-row kiran">
                   {" "}
@@ -113,7 +113,7 @@ class ArtistSuggestions extends Component {
         <a
           style={{ color: "black" }}
           a
-          href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -151,7 +151,7 @@ class ArtistSuggestions extends Component {
         if (e.charCode == 13) {
           console.log("-------------");
           console.log(languages);
-          window.location.href = `/artistDetailSuggestions?search=${this.state.value}&type=5`
+          window.location.href = `/A-detailSuggestions?search=${this.state.value}&type=5`
           //this.onSuggestionsFetchRequested({ value: this.state.value });
         }
       },

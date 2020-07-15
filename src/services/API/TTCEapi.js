@@ -1098,6 +1098,48 @@ class TTCEapi {
       });
   }
 
+  static async getArtistSuggestions(value) {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+        Accept: "application/json",
+      },
+
+      params: {
+        str: value,
+      },
+    };
+    console.log(config);
+    const response = await axios.get(
+      "http://101.53.153.96:8090/search/getArtisanSuggestions",
+      config
+    );
+    return response;
+  }
+
+
+  static showArtistSearchSuggestion(searchQuery,searchTypes){
+    let url = ApiUrl + "/search/searchArtisanProducts";
+   var data = {
+     pageNo: 1,
+     searchString: searchQuery,
+     searchType : parseInt(searchTypes)
+   };
+   var config = {
+     headers: {
+       "Content-type": "application/json",
+     },
+   };
+   return axios
+     .post(url, data, config)
+     .then((response) => {
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+       return error.response;
+     });
+ }
   //#endregion
 
   //#endregion

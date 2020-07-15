@@ -37,6 +37,7 @@ import AddCustomprod from './components/Custon Products/AddCustomprod';
 // import BuyerDetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 // import ArtistSuggestions from './components/navbar/artistSuggestions.js';
 // import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
+import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 function App() {
   
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
           <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
+          <Route exact path="/artistDetailSuggestions" component={ArtistDetailSuggestions}/>
           {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
           {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
           {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}

@@ -85,7 +85,7 @@ class ArtistSuggestions extends Component {
       return (
         <a
           style={{ color: "black" }}
-          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+          href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -113,7 +113,7 @@ class ArtistSuggestions extends Component {
         <a
           style={{ color: "black" }}
           a
-          href={`/buyerDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
+          href={`/artistDetailSuggestions/${suggestion.suggestion}/${suggestion.suggestionType}/${languages.length}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -150,8 +150,9 @@ class ArtistSuggestions extends Component {
       onKeyPress: (e) => {
         if (e.charCode == 13) {
           console.log("-------------");
-          console.log(e.charCode);
-          this.onSuggestionsFetchRequested({ value: this.state.value });
+          console.log(languages);
+          window.location.href = `/artistDetailSuggestions?search=${this.state.value}&type=5`
+          //this.onSuggestionsFetchRequested({ value: this.state.value });
         }
       },
     };

@@ -17,7 +17,7 @@ class BuyersProductDetails extends Component {
     super(props);
 
     this.state = {
-     
+      isfavHovered :false,
       ProductData : [],
       getProductCategoryAndClusterProducts:[],
       value : false,
@@ -29,38 +29,81 @@ class BuyersProductDetails extends Component {
       profilePicUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/ProfilePics/'+this.props.profilePic,
       defaultimgUrl:logos.Smile,             
       visible:5,
-      Artisiandata:[]
+      Artisiandata:[],
+      getProductIdsInWishlist:[],
+      isAddedtoWishlist:false,
+      addToWishlist:null,
+      deleteProductsInWishlist:[]
     };
-    
+    this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
     }
+    handleAddtoWishlist(id){
+      TTCEapi.addToWishlist(id).then((response)=>{
+          this.setState({isAddedtoWishlist : response.data.valid,clicked: !this.state.clicked},()=>{
+              console.log(this.state.isAddedtoWishlist);
+       
+          });
+      });
+  }
+  handleRemovefromWishlist(id){
+    TTCEapi.deleteProductsInWishlist(id).then((response)=>{
+        console.log(response);   
+        if(response.data.data=="Successfull"){
+          this.setState({isAddedtoWishlist:false})
+        }
+             
   
-     
+  });
+  }
   componentDidMount(){
     let params = queryString.parse(this.props.location.search);
-  
-     TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
-          this.setState({ProductData :response.data.data},()=>{
-          console.log(this.state.ProductData);
+     
+    TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
+      this.setState({ProductData :response.data.data},()=>{
+      console.log(this.state.ProductData.id);
 
-          
-                      TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
-                        this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
-                          console.log(this.state)
-                        })
+      
+                  TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
+                    this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
+                      console.log(this.state)
+                    })
+                    
+                  })
+                  TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{
+                   
+                 this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
+                        console.log(this.state.getProductCategoryAndClusterProducts);
                         
-                      })
-                      TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{
-                       
-                     this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
-                            console.log(this.state.getProductCategoryAndClusterProducts);
-                            
 
-                            // console.log(this.props.user);
-                        });
-                      });
-        
-      });
+                        // console.log(this.props.user);
+                    });
+                  });
+                  
+                  TTCEapi.getProductIdsInWishlist().then((response)=>{
+                    var item=this.state.getProductIdsInWishlist
+                    this.setState({getProductIdsInWishlist : response.data.data},()=>{
+                        console.log(this.state.getProductIdsInWishlist);
+                        console.log(this.state.ProductData.id);
+                        if(this.state.getProductIdsInWishlist){
+                          if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
+                          // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
+                          {
+                            this.setState({
+                              isAddedtoWishlist:true,
+                              
+                            })
+                          }
+                         }
+                    
+                        // console.log(this.state.getProductIdsInWishlist.indexOf(12))
+                  
+                    });
+                  });
   });
+});
+    
+  // console.log(this.state.productIdsInWishlist.indexOf(this.state.getProductIdsInWishlist.id)!=-1);
+  
   TTCEapi.getFilteredArtisans().then((response)=>{
     this.setState({filterArtisian : response.data.data},()=>{
         console.log(this.state.filterArtisian);
@@ -75,6 +118,24 @@ class BuyersProductDetails extends Component {
 
 
   }
+  toggleHover(name) {      
+    switch (name) {
+      case "isfavHovered":
+        this.setState({
+          isfavHovered: !this.state.isfavHovered,
+        });
+        break;
+      case "isnotificationHovered":
+        this.setState({
+          isnotificationHovered: !this.state.isnotificationHovered,
+        });
+        break;
+      
+      default:
+        break;
+    }
+  
+}
     render() {
         return (
 
@@ -234,25 +295,35 @@ class BuyersProductDetails extends Component {
      </Col>
      <Col sm={6} >
      <div class="buttons">
-  <button class="bpdbutton -bg-white" style={{color:"black" , border:"2px solid black" }} >
-    <span className="Addtowishlisttext"> {this.state.clicked? 'Add to Wishlist' : 'Wishlisted'}</span>
-
-  <span><div class="love-icon">
-  <input type="checkbox" id="like-toggle" onClick= {() => this.setState({clicked: !this.state.clicked})} />
-  <label for="like-toggle" class="heart"> </label>
-  <div class="lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
-  <div class="ring"></div>
-</div></span>  
+  <button  >
+    <span className="Addtowishlisttext"> {!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
+    <span className="onclickwish">
+    {(this.state.isAddedtoWishlist )? ( 
+                       
+                       <img
+                         onMouseEnter={() => this.toggleHover("isfavHovered")}
+                         onMouseLeave={() => this.toggleHover("isfavHovered")}
+                         className="navButtonImg21"
+                         src={logos.heariconfilled}
+                         onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}
+                        
+                       ></img>
+                       
+                     ) : (
+                       
+                       <img
+                         onMouseEnter={() => this.toggleHover("isfavHovered")}
+                         onMouseLeave={() => this.toggleHover("isfavHovered")}
+                         className="navButtonImg21"
+                         src={logos.favoriteicon}
+                         onClick={() => this.handleAddtoWishlist(this.state.ProductData.id)}
+                       ></img>
+                     )}
+       </span>
   </button>
+  </div>
+  
 
-</div>
 
     
 

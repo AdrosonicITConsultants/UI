@@ -23,6 +23,9 @@ class Customprod extends Component {
         browserHistory.push("/home"); 
     }  
     
+    custompage(){
+        browserHistory.push("/buyer-custom-design"); 
+    }
 
     render() {
         return (
@@ -51,7 +54,7 @@ class Customprod extends Component {
                             <p>Try adding a new custom product to</p>
                             <p>Create your unique design</p>
                         </div>
-                        <div style={{textAlign:"center"}}  onClick={() => this.backoperation()}>
+                        <div style={{textAlign:"center"}}  onClick={() => this.custompage()}>
                         <button className="wishlistblack"><img className="homeiconwishlist" src={logos.whitecustomdesignicon}/> <span className="spanhome">Create my own design</span></button>
                         </div>
                 </Row>

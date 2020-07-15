@@ -60,7 +60,7 @@ class BuyersProductDetails extends Component {
      
     TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
       this.setState({ProductData :response.data.data},()=>{
-      console.log(this.state.ProductData.id);
+      console.log(this.state.ProductData);
 
       
                   TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
@@ -192,7 +192,7 @@ class BuyersProductDetails extends Component {
       <Col sm={12} className="BPDartisianame">
         Artisan Brand : 
         {this.state.ProductData.brand ? <span className="brandcolor">
-          {this.state.ProductData.brand}</span>:null}
+          {this.state.ProductData.brand}</span>: this.state.ProductData.artistName}
          
       </Col>
     </Row>

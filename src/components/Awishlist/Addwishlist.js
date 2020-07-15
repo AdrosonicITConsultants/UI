@@ -8,7 +8,7 @@ import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
 import Footer from "../footer/footer";
-import { withRouter } from 'react-router'
+
 
 
 class AddWishlist extends Component {
@@ -31,10 +31,14 @@ class AddWishlist extends Component {
         browserHistory.push("/home"); 
     }  
 
+    productopen(id){
+        browserHistory.push("/Product-Details?productId=" + id);
+        window.location.reload();
+    }
     handleDeleteItem(item){
-    if(window.confirm("Remove this item from wishlist?")){
+        if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
-            this.setState({deleteProductsInWishlist : response.data},()=>{
+            this.setState({deleteProductsInWishlist : response},()=>{
                 console.log(this.state.deleteProductsInWishlist);
                 window.location.reload();
             
@@ -49,7 +53,7 @@ class AddWishlist extends Component {
     handleDeleteAllItem(){
         if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
-                this.setState({deleteAllProductsInWishlist : response.data},()=>{
+                this.setState({deleteAllProductsInWishlist : response},()=>{
                     console.log(this.state.deleteAllProductsInWishlist);
                     window.location.reload();
                 });
@@ -62,7 +66,7 @@ class AddWishlist extends Component {
    
      TTCEapi.getProductsInWishlist().then((response)=>{
       this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist.length);
+          console.log(this.state.getProductsInWishlist);
          
          
           // console.log(this.props.user);
@@ -92,7 +96,7 @@ class AddWishlist extends Component {
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
                                     //  onClick={() => this.backoperation()}
-                                     onClick={() => this.props.history.go(-1)}
+                                    //  onClick={() => this.props.history.go(-1)}
                                 ></img>
                        
                        </Col>
@@ -116,7 +120,7 @@ class AddWishlist extends Component {
               <>
       
                <div>
-                    <Card className="wishlistcardbody">
+                    <Card className="wishlistcardbody" >
                         <Row noGutters={true}>
                             <Col sm={12} className="srno">
                             <p></p>
@@ -129,7 +133,7 @@ class AddWishlist extends Component {
                         
                   <div className="Wishlistitemimgdiv">
                       {data.product.productImages[0]?
-                      <img className="Wishlistitemimg" src={this.state.ImageUrl + data.product.productImages[0].productId + '/' + data.product.productImages[0].lable }/>
+                      <img className="Wishlistitemimg"  onClick={()=>{ this.productopen(data.product.id)}} src={this.state.ImageUrl + data.product.productImages[0].productId + '/' + data.product.productImages[0].lable }/>
                         :null}
                       {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
 

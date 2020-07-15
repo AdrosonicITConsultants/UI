@@ -158,6 +158,7 @@ export default class addProduct extends Component {
                            dyes: response.data.data.dyes,
                          },
                          () => {
+                           
 
                          }
                        );

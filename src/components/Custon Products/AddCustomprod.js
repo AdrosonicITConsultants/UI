@@ -204,9 +204,10 @@ class AddCustomprod extends Component {
                       </div>
                   </Row>
                   </Container>
-                 
-                     </>}
-                     <Footer/>
+                  <Footer/>
+                     </>
+                     }
+                    
                 </React.Fragment>
               
         )

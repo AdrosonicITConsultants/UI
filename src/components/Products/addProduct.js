@@ -116,6 +116,19 @@ export default class addProduct extends Component {
                          reedCounts: response.reedCounts,
                          yarns: response.yarns,
                          dyes: response.dyes,
+                         wareAndCare: [
+                          { id: 0, isChecked: false },
+                          { id: 1, isChecked: false },
+                          { id: 2, isChecked: false },
+                          { id: 3, isChecked: false },
+                          { id: 4, isChecked: false },
+                          { id: 5, isChecked: false },
+                          { id: 6, isChecked: false },
+                          { id: 7, isChecked: false },
+                          { id: 8, isChecked: false },
+                          { id: 9, isChecked: false },
+                          { id: 10, isChecked: false },
+                        ],
                        },
                        () => {
 
@@ -795,19 +808,19 @@ relatedProductTemp[e.target.name] = option;
                                   return;
                                 }
 
- node = this.weightComplete.current;
- if (node.getAttribute("class") == "inComplete") {
-   customToast.error("Please enter weight of the Product.", {
-     position: toast.POSITION.TOP_RIGHT,
-     autoClose: true,
-   });
-   node.scrollIntoView({
-     behavior: "smooth",
-     block: "center",
-     inline: "center",
-   });
-   return;
- }
+                              node = this.weightComplete.current;
+                              if (node.getAttribute("class") == "inComplete") {
+                                customToast.error("Please enter weight of the Product.", {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  autoClose: true,
+                                });
+                                node.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "center",
+                                  inline: "center",
+                                });
+                                return;
+                              }
 
                 node = this.description.current;
                 if (node.getAttribute("class") == "inComplete") {
@@ -859,6 +872,7 @@ relatedProductTemp[e.target.name] = option;
                     productData.relatedProduct = this.state.savedrelatedProduct;
 
                       TTCEapi.uploadProduct(file1, file2, file3, productData).then((response) => {
+                        console.log(response)
                     if (response.data.valid) {
                       customToast.success("Product added successfully!", {
                         position: toast.POSITION.TOP_RIGHT,

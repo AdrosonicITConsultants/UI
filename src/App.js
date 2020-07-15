@@ -37,6 +37,8 @@ import AddCustomprod from './components/Custon Products/AddCustomprod';
 // import BuyerDetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 // import ArtistSuggestions from './components/navbar/artistSuggestions.js';
 // import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
+import AlertModal from './components/modal/AlertModal'
+import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 function App() {
   
   return (
@@ -45,7 +47,7 @@ function App() {
         <ToastContainer></ToastContainer>
         
         <Switch>
-         
+       
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
@@ -53,6 +55,7 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
           <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
+          <Route exact path="/artistDetailSuggestions" component={ArtistDetailSuggestions}/>
           {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
           {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
           {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}
@@ -80,7 +83,7 @@ function App() {
           <Route   path="/wishlist" component={AddWishlist} />
           {/* <Route   path="/Customprod" component={Customprod} /> */}
           <Route   path="/Customprod" component={AddCustomprod} />
-          {/* <Route   path="/wishlist" component={Wishlist} /> */}
+          <Route   path="/wishlist" component={AlertModal} />
 
 
         </Switch>

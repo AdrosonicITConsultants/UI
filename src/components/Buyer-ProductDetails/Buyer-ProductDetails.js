@@ -294,34 +294,44 @@ class BuyersProductDetails extends Component {
 
      </Col>
      <Col sm={6} >
-     <div class="buttons">
-  <button  >
-    <span className="Addtowishlisttext"> {!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
-    <span className="onclickwish">
+    
+ 
     {(this.state.isAddedtoWishlist )? ( 
-                       
-                       <img
+       <div class="buttons">
+                       <button  onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}>
+                         <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
+                           <span  className="onclickwish">
+                           <img
                          onMouseEnter={() => this.toggleHover("isfavHovered")}
                          onMouseLeave={() => this.toggleHover("isfavHovered")}
                          className="navButtonImg21"
                          src={logos.heariconfilled}
-                         onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}
+                        
                         
                        ></img>
+                              </span>
+                       </button>
+                      </div>
                        
                      ) : (
-                       
-                       <img
-                         onMouseEnter={() => this.toggleHover("isfavHovered")}
-                         onMouseLeave={() => this.toggleHover("isfavHovered")}
-                         className="navButtonImg21"
-                         src={logos.favoriteicon}
-                         onClick={() => this.handleAddtoWishlist(this.state.ProductData.id)}
-                       ></img>
+                      <div class="buttons">
+                      <button  onClick={() => this.handleAddtoWishlist(this.state.ProductData.id)}>
+                      <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
+                        <span  className="onclickwish">
+                        <img
+                      onMouseEnter={() => this.toggleHover("isfavHovered")}
+                      onMouseLeave={() => this.toggleHover("isfavHovered")}
+                      className="navButtonImg21"
+                      src={logos.favoriteicon}
+                     
+                     
+                    ></img>
+                           </span>
+                    </button>
+                       </div>
                      )}
-       </span>
-  </button>
-  </div>
+     
+ 
   
 
 

@@ -856,7 +856,7 @@ class TTCEapi {
     var data = {
       companyDetails: {
         companyName: brandname,
-        desc: branddesc,
+        desc: branddesc
       },
       productCategories: selectedprods,
     };

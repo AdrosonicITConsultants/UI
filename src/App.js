@@ -29,7 +29,7 @@ import ArtisianProductCategories, { ArtisianProductCategory } from "./components
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
-import BuyerSelfDesign from './components/Buyer_Self-Design/BuyerSelfDesign';
+import BuyerSelfDesign from './components/Buyer-Custom-Design/BuyerSelfDesign';
 // import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import Customprod from './components/Custon Products/Customprod';
 import AddCustomprod from './components/Custon Products/AddCustomprod';

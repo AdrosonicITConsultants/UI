@@ -176,13 +176,36 @@ class ArtistProfile extends Component {
                 })
             }
             
-            this.setState({
-                line1 : response.data.data.user.addressses[0].line1,
-                district : response.data.data.user.addressses[0].district,
-                pincode : response.data.data.user.addressses[0].pincode,
-                state :response.data.data.user.addressses[0].state ,
+            // this.setState({
+            //     line1 : response.data.data.user.addressses[0].line1,
+            //     district : response.data.data.user.addressses[0].district,
+            //     pincode : response.data.data.user.addressses[0].pincode,
+            //     state :response.data.data.user.addressses[0].state ,
 
+            // })
+            if(response.data.data.user.addressses[0].district != null)
+            {
+              this.setState({
+                district : response.data.data.user.addressses[0].district,
             })
+            }
+            if(response.data.data.user.addressses[0].line1 != null)
+            {
+              this.setState({
+                line1 : response.data.data.user.addressses[0].line1,            })
+            }
+            if(response.data.data.user.addressses[0].pincode != null)
+            {
+              this.setState({
+                pincode : response.data.data.user.addressses[0].pincode,
+            })
+            }
+            if(response.data.data.user.addressses[0].state != null)
+            {
+              this.setState({
+                state :response.data.data.user.addressses[0].state ,
+            })
+            }
             // console.log(response.data.data.user.addressses[0].district);
 
           }, () =>{
@@ -206,6 +229,18 @@ class ArtistProfile extends Component {
       }
       else{
         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile,this.state.removedprofile).then((response)=>{
+          if (response.data.valid) {
+            customToast.success("Personal data updated !", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+          }
+          else{
+            customToast.error(response.data.errorMessage, {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+          }
 
         })
        this.setState({
@@ -221,7 +256,7 @@ class ArtistProfile extends Component {
       }
          
     
-    handlebdetEdit2(){
+      handlebdetEdit2(){
       
       var alpha=/([A-Za-z0-9])$/;
       var char=/([A-Za-z])+$/;
@@ -280,6 +315,21 @@ class ArtistProfile extends Component {
             TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
               this.state.branch,this.state.ifsccode,this.state.benificiaryname,
               this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+                if (response.data.valid) {
+                  customToast.success("Bank details updated !", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                }
+                else{
+                  
+                  customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                  
+                }
+
   
               });
           }
@@ -321,7 +371,22 @@ class ArtistProfile extends Component {
               prodsel : productSelected
           },()=>{
               console.log(this.state.selectedprods) ;
-              TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo);
+              TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo).then((response)=>{
+                if (response.data.valid) {
+                  customToast.success("Brand data updated !", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                }
+                else{
+                  
+                  customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                  
+                }
+              });
   
           });
   
@@ -802,7 +867,7 @@ class ArtistProfile extends Component {
                                                 ? 
                                                     <div className="font14  mt7">
                                                         {this.state.line1}
-                                                        {" " + this.state.district },
+                                                        {" " + this.state.district }
                                                         {" " + this.state.pincode }
                                                         {" " + this.state.state }
 

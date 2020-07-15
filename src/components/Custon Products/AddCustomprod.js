@@ -149,6 +149,7 @@ class AddCustomprod extends Component {
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
                          <Col sm={12}  className="Editprodmodify">
+                            
                             View & modify product <img className="editimgicon" src={logos.Iconfeatheredit3}/>
                             </Col>
                              </Row>  

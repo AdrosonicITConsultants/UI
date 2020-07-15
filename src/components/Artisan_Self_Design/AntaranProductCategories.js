@@ -55,12 +55,12 @@ class AntaranProductCategories extends Component {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.getProductCategoryProducts(parseInt(params.categoryId)).then((response)=>{
-            // console.log(response.data.data.products);
-            // this.setState({
-            //     dataload : true,
-            //     heading : response.data.data.productCategory,
-            //     products : response.data.data.products
-            //    });
+            console.log(response.data.data.products);
+            this.setState({
+                dataload : true,
+                heading : response.data.data.productCategory,
+                products : response.data.data.products
+               });
         });
         TTCEapi.getClusters().then((response)=>{
             this.setState({clusterdata : response.data.data});
@@ -69,7 +69,7 @@ class AntaranProductCategories extends Component {
     }
     
     backoperation(){
-        browserHistory.push("/Artisanself/categories"); 
+        browserHistory.push("/Antaran/categories/"); 
     }  
     
 

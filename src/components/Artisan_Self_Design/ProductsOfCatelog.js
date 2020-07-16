@@ -12,7 +12,38 @@ import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
 import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
 import "./ProductCategories.css"
+class Popup extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+  
+    popupHeader:"Looks like you don't have an account"
+  };
+}
 
+ refreshPage(){ 
+  window.location.reload(); 
+}
+render() {
+  var headerStyle = {
+    color:'red',
+    fontWeight:'bold',
+    fontSize: 20
+  }
+  return (
+    
+    <div className='popup'>
+      <div className='popup_inner'>
+     <div style={headerStyle}>
+     Hello
+        </div>
+        {/* <button onClick={this.props.closePopup} */}
+        <button onClick={this.props.refreshPage}>close me</button>
+      </div>
+    </div>
+  );
+}
+}
 export class ProductsOfCatelog extends Component {
     constructor(props) {
         super(props);

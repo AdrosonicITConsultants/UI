@@ -216,3 +216,33 @@ body {
     }
 }
 
+/* ------------------------------Modal------------------------------------ */
+.ModalHeader {
+    font-size: 33px;
+    color: red;
+    text-align: center;
+    font-weight: 500;
+}
+.okbtn{
+    height: 29px;
+    width: 100px;
+    font-size: 17px;
+    font-weight: bold;
+    /* bottom: 0; */
+    /* margin-bottom: 100px; */
+    /* margin-left: 10px; */
+    margin-top: 95px;
+    margin-right: 10px;
+}
+
+.cancelbtn{
+    height: 29px;
+    width: 100px;
+    font-size: 17px;
+    font-weight: bold;
+    /* bottom: 0; */
+    /* margin-bottom: 100px; */
+    /* margin-left: 10px; */
+    margin-top: 95px;
+   
+}

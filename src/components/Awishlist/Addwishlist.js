@@ -8,7 +8,8 @@ import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
 import Footer from "../footer/footer";
-
+import Modal from "react-modal";
+import AlertRemoveItem from './AlertRemoveItem';
 
 
 class AddWishlist extends Component {
@@ -21,22 +22,35 @@ class AddWishlist extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             deleteProductsInWishlist:[],
             pageLoad:false,
+            modalIsOpen: false,
    
         };
         this.handleDeleteItem = this.handleDeleteItem.bind(this);   
      this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+     this.openModal = this.openModal.bind(this);
+   
     }
 
     backoperation(){
         browserHistory.push("/home"); 
     }  
-
+    openModal() {
+        this.setState({ modalIsOpen: true });
+      }
+    
+      cancelItem() {
+        browserHistory.push("/wishlist");
+      }
+      closeModal() {
+        this.setState({ modalIsOpen: false });
+      }
     productopen(id){
         browserHistory.push("/Product-Details?productId=" + id);
         window.location.reload();
     }
     handleDeleteItem(item){
-        if(window.confirm("Remove this item from wishlist?")){
+        // this.setState({ modalIsOpen: true });
+        // if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
             this.setState({deleteProductsInWishlist : response.data},()=>{
                 console.log(this.state.deleteProductsInWishlist);
@@ -46,12 +60,13 @@ class AddWishlist extends Component {
             });
         
         });
-    }
+    // }
       
     }
 
     handleDeleteAllItem(){
         if(window.confirm("Remove this item from wishlist?")){
+            
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
                 this.setState({deleteAllProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteAllProductsInWishlist);
@@ -106,7 +121,7 @@ class AddWishlist extends Component {
                          <Col md ="6" >
                   <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items: {this.state.getProductsInWishlist.length}</p> 
                          </Col>
-                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()} >
+                         <Col md ="6"  onClick={() => this.openModal()} >
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
                               <span className="spanhome">Clear my wishlist</span></button>
@@ -173,7 +188,7 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem()}>
+                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.openModal()}>
                             Remove from wish list <img src={logos.removefromwishlist}/>
                             </Col>
                              </Row>  

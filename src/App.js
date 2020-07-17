@@ -29,7 +29,8 @@ import ArtisianProductCategories, { ArtisianProductCategory } from "./components
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
-import BuyerSelfDesign from './components/Buyer_Self-Design/BuyerSelfDesign';
+import DetailSuggestionsArtist from './components/navbar/ArtisanDetailSuggestions.js';
+import BuyerSelfDesign from './components/Buyer-Custom-Design/BuyerSelfDesign';
 // import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import Customprod from './components/Custon Products/Customprod';
 import AddCustomprod from './components/Custon Products/AddCustomprod';
@@ -38,7 +39,8 @@ import AddCustomprod from './components/Custon Products/AddCustomprod';
 // import ArtistSuggestions from './components/navbar/artistSuggestions.js';
 // import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
-import AlertModal from './components/modal/AlertModal';
+
+
 function App() {
   
   return (
@@ -54,7 +56,8 @@ function App() {
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
           <Route exact path="/addProduct" component={AddProduct} />
           <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
-          <Route exact path="/artistDetailSuggestions" component={ArtistDetailSuggestions}/>
+          <Route exact path="/A-detailSuggestions" component={DetailSuggestionsArtist}/>
+         {/* <Route exact path="/artistDetailSuggestions" component={ArtistDetailSuggestions}/> */}
           {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
           {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
           {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}
@@ -76,7 +79,7 @@ function App() {
           <Route  exact path="/Product-Details" component={BuyersProductDetails} />
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />
-          <Route  exact path="/Modal" component={AlertModal} />
+         
 
          
         </Switch>

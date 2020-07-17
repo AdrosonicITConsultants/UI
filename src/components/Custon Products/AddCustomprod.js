@@ -8,6 +8,9 @@ import NavbarComponent from "../navbar/navbar";
 import Customprod from './Customprod';
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
+import HoldPopup from '../ModalComponent/ModalHold';
+import Popup from '../ModalComponent/EnguiryModal';
+import SuccessPopup from '../ModalComponent/SuccessModal';
 class AddCustomprod extends Component {
     
     constructor(props) {
@@ -16,12 +19,33 @@ class AddCustomprod extends Component {
         this.state = {
             buyergetAllProducts:[],
             ImageUrl:TTCEapi.ImageUrl+'CustomProduct/',
-            deleteAllProductsInbuyerCustom:[]
-   
+            deleteAllProductsInbuyerCustom:[],
+            pageLoad:false,
+            showPopup: false,
+          header:"Welcome",
+          generateEnquiry:null,
+          isLoadingEnquiry:false,
+          modalIsOpen: false,
+          isCustom:true,
         };
         this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+        this.generateEnquiry = this.generateEnquiry.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
+    closeModal() {
+        this.setState({ modalIsOpen: false });
 
+      }
+    generateEnquiry(item){
+        this.setState({ modalIsOpen: true });
+        TTCEapi.generateEnquiry(item,true).then((response)=>{
+      this.setState({generateEnquiry : response.data.data},()=>{
+        
+          console.log(this.state.generateEnquiry);
+          
+      });
+  });
+}
     backoperation(){
         browserHistory.push("/home"); 
     }  
@@ -149,13 +173,16 @@ class AddCustomprod extends Component {
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
                          <Col sm={12}  className="Editprodmodify">
+                            
                             View & modify product <img className="editimgicon" src={logos.Iconfeatheredit3}/>
                             </Col>
                              </Row>  
                         <Row noGutters={true}>
                             <Col sm={12} >
                             <div class="buttons">
-                        <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}} >
+                        <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}}  onClick={() => this.generateEnquiry(data.id)}>
+                      {console.log(data.id)}
+              
                             <span>Enquiry Now</span>
                                 <div class="arrowPacman">
                             <div class="arrowPacman-clip">
@@ -192,6 +219,39 @@ class AddCustomprod extends Component {
           
                     </Card>
                     </div>
+       
+                    {this.state.modalIsOpen?
+                  <HoldPopup isOpen={this.state.modalIsOpen}/>
+                :null}
+
+                { this.state.generateEnquiry ?
+                <>
+                   { this.state.generateEnquiry.ifExists== true ? 
+                <Popup
+                EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                productName={this.state.generateEnquiry.productName}
+                productId={data.id}
+                isCustom={this.state.isCustom}
+                />
+                 :
+                        (
+                            // this.state.isLoadingEnquiry ?
+                //    <HoldPopup/>
+                   
+
+                 <SuccessPopup
+                 EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                 productName={this.state.generateEnquiry.productName}
+                 productId={data.id}
+                 />
+                         ) } </>
+             
+               
+                :
+              null
+                }
+
+
                     </>  ) ) 
                  )): null
                  }
@@ -203,6 +263,9 @@ class AddCustomprod extends Component {
 
                       </div>
                   </Row>
+              
+                 
+     
                   </Container>
                   <Footer/>
                      </>

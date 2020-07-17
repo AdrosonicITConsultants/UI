@@ -5,7 +5,7 @@ import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 import "../landingpage/landingpage.css";
 import { Row, Col, Container, Label, Button } from "reactstrap";
-import logos from "../../../src/assets";
+import logos from "../../assets";
 import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
 import { memoryHistory, browserHistory } from "../../helpers/history";

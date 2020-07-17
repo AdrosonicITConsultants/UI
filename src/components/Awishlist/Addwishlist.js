@@ -8,9 +8,13 @@ import NavbarComponent from "../navbar/navbar";
 import "./Awishlist.css"
 import Wishlist from './Wishlist';
 import Footer from "../footer/footer";
-import Modal from "react-modal";
-import AlertRemoveItem from './AlertRemoveItem';
-
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import HoldPopup from '../ModalComponent/ModalHold';
+import Popup from '../ModalComponent/EnguiryModal';
+import SuccessPopup from '../ModalComponent/SuccessModal';
+// import Popup from './EnguiryModal';
 
 class AddWishlist extends Component {
     
@@ -22,51 +26,78 @@ class AddWishlist extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             deleteProductsInWishlist:[],
             pageLoad:false,
-            modalIsOpen: false,
+            showPopup: false,
+          header:"Welcome",
+          generateEnquiry:null,
+          isLoadingEnquiry:false,
+          modalIsOpen: false,
+          isCustom:false,
    
         };
-        this.handleDeleteItem = this.handleDeleteItem.bind(this);   
-     this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
-     this.openModal = this.openModal.bind(this);
-   
+    //     this.handleDeleteItem = this.handleDeleteItem.bind(this);   
+    //  this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+     this.generateEnquiry = this.generateEnquiry.bind(this);
+     this.closeModal = this.closeModal.bind(this);
     }
 
     backoperation(){
         browserHistory.push("/home"); 
     }  
-    openModal() {
-        this.setState({ modalIsOpen: true });
-      }
-    
-      cancelItem() {
-        browserHistory.push("/wishlist");
-      }
-      closeModal() {
+    closeModal() {
         this.setState({ modalIsOpen: false });
       }
     productopen(id){
         browserHistory.push("/Product-Details?productId=" + id);
         window.location.reload();
     }
-    handleDeleteItem(item){
-        // this.setState({ modalIsOpen: true });
-        // if(window.confirm("Remove this item from wishlist?")){
-        TTCEapi.deleteProductsInWishlist(this.state.getProductsInWishlist[0].product.id).then((response)=>{
-            this.setState({deleteProductsInWishlist : response.data},()=>{
-                console.log(this.state.deleteProductsInWishlist);
-                window.location.reload();
+    togglePopup() {
+        this.setState({
+          showPopup: !this.state.showPopup
+        });
+      }
+
+    generateEnquiry(item){
+        this.setState({ modalIsOpen: true });
+              TTCEapi.generateEnquiry(item,false).then((response)=>{
+            this.setState({generateEnquiry : response.data.data},()=>{
             
-         
+                console.log(this.state.generateEnquiry);
+                
             });
+        });
+    }
+  
+    handleDeleteItem(id){
+        if(window.confirm("Remove this item from wishlist?")){
+        TTCEapi.deleteProductsInWishlist(id).then((response)=>{
+            if (response.data.valid) {
+                customToast.success("Product removed from wishlist!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+                this.setState({deleteProductsInWishlist : response.data},()=>{
+                    console.log(this.state.deleteProductsInWishlist);
+                    window.location.reload();
+                    // this.componentDidMount();
+                
+             
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
         
         });
-    // }
+    }
       
     }
 
     handleDeleteAllItem(){
         if(window.confirm("Remove this item from wishlist?")){
-            
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
                 this.setState({deleteAllProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteAllProductsInWishlist);
@@ -83,8 +114,6 @@ class AddWishlist extends Component {
       this.setState({getProductsInWishlist : response.data.data},()=>{
           console.log(this.state.getProductsInWishlist);
          
-         
-          // console.log(this.props.user);
       });
   }); 
 
@@ -101,8 +130,10 @@ class AddWishlist extends Component {
                   {this.state.getProductsInWishlist.length==0?
                   <Wishlist></Wishlist>:
                   <>
-                  <body onload="window.location.reload()"></body>
+                  {/* <body onload="window.location.reload()"></body> */}
+                  
                 <Container className="wishlistbg">
+            
               <Row noGutters={true}>
           
               
@@ -121,7 +152,7 @@ class AddWishlist extends Component {
                          <Col md ="6" >
                   <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items: {this.state.getProductsInWishlist.length}</p> 
                          </Col>
-                         <Col md ="6"  onClick={() => this.openModal()} >
+                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()} >
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
                               <span className="spanhome">Clear my wishlist</span></button>
@@ -133,7 +164,7 @@ class AddWishlist extends Component {
             
                      {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => ( 
               <>
-      
+        {/* {console.log(data)} */}
                <div>
                     <Card className="wishlistcardbody" >
                         <Row noGutters={true}>
@@ -188,14 +219,16 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.openModal()}>
-                            Remove from wish list <img src={logos.removefromwishlist}/>
+                         <Col sm={12}  className="Removefromwishlist" >
+                            Remove from wish list <img src={logos.removefromwishlist} onClick={() => this.handleDeleteItem(data.product.id)}/>
                             </Col>
                              </Row>  
                         <Row noGutters={true}>
                             <Col sm={12} >
-                            <div class="buttons">
-                        <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}} >
+                            <div class="buttons" >
+                        <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}} 
+                        onClick={() => this.generateEnquiry(data.product.id)}>
+                            
                             <span>Enquiry Now</span>
                                 <div class="arrowPacman">
                             <div class="arrowPacman-clip">
@@ -217,10 +250,8 @@ class AddWishlist extends Component {
                                 <Col sm={12} >
                                 {data.product.productStatusId==2?
                                <p className="Wishlistpcode margintopcss"><b>Available in </b>Stock</p>
- 
-                            :
-                            
-                            <p className="Wishlistpcode margintopcss">     
+                                         :
+                                <p className="Wishlistpcode margintopcss">     
                             <b style={{color:"purple"}}>Exclusively </b>made to order
                             </p>
                             }
@@ -232,6 +263,35 @@ class AddWishlist extends Component {
           
                     </Card>
                     </div>
+                    {this.state.modalIsOpen?
+                  <HoldPopup isOpen={this.state.modalIsOpen}/>
+                :null}
+
+                { this.state.generateEnquiry ?
+                <>
+                   { this.state.generateEnquiry.ifExists== true ? 
+                <Popup
+                EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                productName={this.state.generateEnquiry.productName}
+                productId={data.product.id}
+                />
+                 :
+                        (
+                            // this.state.isLoadingEnquiry ?
+                //    <HoldPopup/>
+                   
+
+                 <SuccessPopup
+                 EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                 productName={this.state.generateEnquiry.productName}
+                 productId={data.product.id}
+                 />
+                         ) } </>
+             
+               
+                :
+              null
+                }
                     </>  ) ) 
                  )): null
                  }
@@ -239,9 +299,12 @@ class AddWishlist extends Component {
                
                   </Row> 
                  
+            
+                
                   </Container>
                   {/* <Footer/> */}
                   </>}
+                 
                  
      
                 </React.Fragment>

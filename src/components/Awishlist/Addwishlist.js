@@ -60,7 +60,7 @@ class AddWishlist extends Component {
         this.setState({ modalIsOpen: true });
               TTCEapi.generateEnquiry(item,false).then((response)=>{
             this.setState({generateEnquiry : response.data.data},()=>{
-            
+                this.setState({ modalIsOpen: false });
                 console.log(this.state.generateEnquiry);
                 
             });

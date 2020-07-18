@@ -39,6 +39,7 @@ class AddCustomprod extends Component {
     generateEnquiry(item){
         this.setState({ modalIsOpen: true });
         TTCEapi.generateEnquiry(item,true).then((response)=>{
+            this.setState({ modalIsOpen: false });
       this.setState({generateEnquiry : response.data.data},()=>{
         
           console.log(this.state.generateEnquiry);

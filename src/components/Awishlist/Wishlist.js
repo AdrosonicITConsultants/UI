@@ -39,7 +39,7 @@ class Wishlist extends Component {
                         <img
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
-                                    onClick={() => this.backoperation()}
+                                    onClick={() =>  browserHistory.push("/home") }
                                 ></img>
                        
                        </Col>

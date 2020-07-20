@@ -29,6 +29,7 @@ export default class artreg4 extends Component {
       }
      
       operation() {
+        var pin=/([1-9]){1}([0-9]){5}$/;
         // debugger;
         if (this.state.firstname == ""  || this.state.clusterid == -1 || this.state.pincode == "" || this.state.mobileno == "") {
             this.setState({
@@ -37,7 +38,7 @@ export default class artreg4 extends Component {
             });
             console.log(this.state.panno.length);
           }
-          else if(parseFloat(this.state.pincode)>999999 || parseFloat(this.state.pincode)<100000 )
+          else if(!pin.test(this.state.pincode) || this.state.pincode.length != 6)
           {
             this.setState({
               showValidationpass: true,

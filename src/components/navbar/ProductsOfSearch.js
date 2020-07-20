@@ -12,7 +12,12 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 // import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
 // import "./ProductCategories.css"
-
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import HoldPopup from '../ModalComponent/ModalHold';
+import Popup from '../ModalComponent/EnguiryModal';
+import SuccessPopup from '../ModalComponent/SuccessModal';
 export class ProductsOfSearch extends Component {
     constructor(props) {
         super(props);
@@ -26,25 +31,51 @@ export class ProductsOfSearch extends Component {
             imageUrl : TTCEapi.ImageUrl +"Product/",
             isAddedtoWishlist: this.props.productIdsInWishlist,
             addToWishlist:null,
-            deleteProductsInWishlist:[]
+            deleteProductsInWishlist:[],
+            isLoadingEnquiry:false,
+            modalIsOpen: false,
+            isCustom:false,
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
     //   console.log(this.props);
+    this.generateEnquiry = this.generateEnquiry.bind(this);
+        // this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+    closeModal() {
+      this.setState({ modalIsOpen: false });
     }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
+        if (response.data.valid) {
+          customToast.success("Product added to wishlist!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           this.setState({isAddedtoWishlist : response.data.valid},()=>{
               console.log(this.state.isAddedtoWishlist);
        
           });
+        }
+        else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
       });
   }
 
-    generateEnquiry(id){
-      console.log("Generate Enquiry " + id);
-      browserHistory.push("/generateEnquiry"); 
-
-    }
+  generateEnquiry(item){
+    this.setState({ modalIsOpen: true });
+    TTCEapi.generateEnquiry(item,false).then((response)=>{
+  this.setState({generateEnquiry : response.data.data},()=>{
+    this.setState({ modalIsOpen: false });
+      console.log(this.state.generateEnquiry);
+      
+  });
+});
+}
     productDescription(id){
       console.log("Product Descriptiony " + id);
       browserHistory.push("/Product-Details?productId=" + id); 
@@ -55,9 +86,21 @@ export class ProductsOfSearch extends Component {
           console.log(response);   
           if(response.data.data=="Successfull"){
             this.setState({isAddedtoWishlist:false})
-          }
-    });
-    }
+            customToast.success("Product removed from wishlist!", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            })
+              }
+              else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
+        });
+        }
+    
     componentDidMount(){
         // console.log(this.state);
     }
@@ -84,6 +127,7 @@ export class ProductsOfSearch extends Component {
     
     render() {
         return (
+          <React.Fragment>
             <div className="card cpCardlayout ">
                     <div className="cpimagediv" style={{cursor:"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}}>
                     {this.state.imagename != "" 
@@ -155,7 +199,7 @@ export class ProductsOfSearch extends Component {
                        <hr className="cpline"></hr>
                      <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry"
-                            onClick={()=>{this.generateEnquiry()}}
+                             onClick={() => this.generateEnquiry(this.state.proddata.id)}
                             >
                             Generate enquiry
                          <a href={"/generateEnquiry"}>
@@ -190,9 +234,39 @@ export class ProductsOfSearch extends Component {
                   </Col>
                  </div>
                  {/* {console.log(this.state.proddata)} */}
-
+                
                 </div> 
+                {this.state.modalIsOpen?
+                  <HoldPopup    isOpen={this.state.modalIsOpen}/>
+                :null}
+              
+                { this.state.generateEnquiry ?
                
+                  <>
+                     { this.state.generateEnquiry.ifExists== true ? 
+                     
+                     <Popup 
+                         closeModal={this.closeModal}
+                        EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                        productName={this.state.generateEnquiry.productName}
+                        productId={this.state.proddata.id}
+                        isCustom={this.state.isCustom}
+                     /> :
+                          (
+                      
+                     <SuccessPopup 
+                     EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                     productName={this.state.generateEnquiry.productName}
+                     productId={this.state.proddata.id}
+                     />
+  
+                           ) } </>
+               
+                 
+                  :
+                null
+                  }
+                   </React.Fragment>
         )
     }
 }

@@ -98,7 +98,7 @@ class AntaranProductRegions extends Component {
         });
     }
     backoperation(){
-        browserHistory.push("/Artisanself"); 
+        browserHistory.push("/Antaran"); 
     }    
     
 

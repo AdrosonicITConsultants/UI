@@ -11,7 +11,14 @@ import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import BPCarousel from './Buyers-Productcarousel';
 import queryString from 'query-string';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import SeeMoreProduct from './Seemoreproduct';
+import Popup from '../ModalComponent/EnguiryModal';
+import SuccessPopup from '../ModalComponent/SuccessModal';
+import HoldPopup from '../ModalComponent/ModalHold';
+
 class BuyersProductDetails extends Component {
   constructor(props) {
     super(props);
@@ -33,26 +40,76 @@ class BuyersProductDetails extends Component {
       getProductIdsInWishlist:[],
       isAddedtoWishlist:false,
       addToWishlist:null,
-      deleteProductsInWishlist:[]
+      deleteProductsInWishlist:[],
+      pageLoad:false,
+      showPopup: false,
+    header:"Welcome",
+    generateEnquiry:null,
+    isLoadingEnquiry:false,
+    modalIsOpen: false,
+    isCustom:false,
     };
     this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
-    }
+    this.generateEnquiry = this.generateEnquiry.bind(this);
+    this.closeModal = this.closeModal.bind(this);  
+  }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
+        if (response.data.valid) {
+          customToast.success("Product added to wishlist!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           this.setState({isAddedtoWishlist : response.data.valid,clicked: !this.state.clicked},()=>{
               console.log(this.state.isAddedtoWishlist);
        
           });
+        }
+          else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
       });
   }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+  generateEnquiry(item){
+    this.setState({ modalIsOpen: true });
+          TTCEapi.generateEnquiry(item,false).then((response)=>{
+            this.setState({ modalIsOpen: false });
+        this.setState({generateEnquiry : response.data.data},()=>{
+          
+            console.log(this.state.generateEnquiry);
+            
+        });
+    });
+}
   handleRemovefromWishlist(id){
     TTCEapi.deleteProductsInWishlist(id).then((response)=>{
         console.log(response);   
         if(response.data.data=="Successfull"){
           this.setState({isAddedtoWishlist:false})
-        }
-             
-  
+        
+        customToast.success("Product removed from wishlist!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        })      
+      }
+      else{
+        customToast.error(response.data.errorMessage, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
+    }
+   
   });
   }
   componentDidMount(){
@@ -274,7 +331,7 @@ class BuyersProductDetails extends Component {
 
       <Row noGutters="true">
      <Col sm={6} >
-     <div class="buttons">
+     <div class="buttons"  onClick={() => this.generateEnquiry(this.state.ProductData.id)}>
   <button class="bpdbutton -bg-yellow">
     <span>Generate Enquiry</span>
         <div class="arrowPacman">
@@ -291,6 +348,8 @@ class BuyersProductDetails extends Component {
   </button>
 
 </div>
+
+                 
 
      </Col>
      <Col sm={6} >
@@ -330,13 +389,7 @@ class BuyersProductDetails extends Component {
                     </button>
                        </div>
                      )}
-     
- 
   
-
-
-    
-
      </Col>
       </Row>
 
@@ -559,7 +612,7 @@ class BuyersProductDetails extends Component {
                <Row noGutters="true">
                  <Col xs={12}>
                  <div class="buttons" style={{ color:"black" , border:"none", marginBottom:"10px"}} >
-  <button class="bpdbutton -bg-white" style={{width:"198px" , color:"black"}}>
+  <button class="bpdbutton -bg-white" style={{width:"198px" , color:"black"}} onClick={() => this.generateEnquiry(this.state.ProductData.id)}>
     <span style={{ color:"black"}}>Generate Enquiry</span>
         <div class="arrowPacman">
       <div class="arrowPacman-clip">
@@ -608,20 +661,7 @@ class BuyersProductDetails extends Component {
   
   }
 </Row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
+                   
 <Row noGutters="true">
   <Col xs={12}  className="backtotopbdp">
   <a href="#Top">Go back to Top <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i></a>
@@ -653,6 +693,36 @@ class BuyersProductDetails extends Component {
                     className="col-4 text-center"
                   ></Col>
                 </Row>
+                {this.state.modalIsOpen?
+                  <HoldPopup isOpen={this.state.modalIsOpen}/>
+                :null}
+
+                { this.state.generateEnquiry ?
+                <>
+                   { this.state.generateEnquiry.ifExists== true ? 
+                <Popup
+                EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                productName={this.state.generateEnquiry.productName}
+                productId={this.state.ProductData.id}
+                isCustom={this.state.isCustom}
+                />
+                 :
+                        (
+                            // this.state.isLoadingEnquiry ?
+                //    <HoldPopup/>
+                   
+
+                 <SuccessPopup
+                 EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                 productName={this.state.generateEnquiry.productName}
+                 productId={this.state.ProductData.id}
+                 />
+                         ) } </>
+             
+               
+                :
+              null
+                }      
 </Container>
 <Footer></Footer>
 </>:

@@ -31,6 +31,7 @@ import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
 import DetailSuggestionsArtist from './components/navbar/ArtisanDetailSuggestions.js';
 import BuyerSelfDesign from './components/Buyer-Custom-Design/BuyerSelfDesign';
+import EditBuyerDesign from './components/Buyer-Custom-Design/EditbuyerDesign'
 // import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import Customprod from './components/Custon Products/Customprod';
 import AddCustomprod from './components/Custon Products/AddCustomprod';
@@ -41,6 +42,9 @@ import AddCustomprod from './components/Custon Products/AddCustomprod';
 import AlertModal from './components/modal/AlertModal'
 import NotificationBuyerConnected from './components/navbar/notificationBuyerCount.js'
 import BuyerNotifications from './components/navbar/buyerNotify.js'
+import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
+
+
 function App() {
   
   return (
@@ -49,7 +53,6 @@ function App() {
         <ToastContainer></ToastContainer>
         
         <Switch>
-       
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
@@ -75,21 +78,21 @@ function App() {
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
           <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
+          
+          <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
 
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
           <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
+          <Route  exact path="/Antaran" component={AntaranCoDesign} />
+          <Route  exact path="/Product-Details" component={BuyersProductDetails} />
+          <Route  exact path="/wishlist" component={AddWishlist} />
+          <Route  exact path="/Customprod" component={AddCustomprod} />
+         
 
-          <Route   path="/Antaran" component={AntaranCoDesign} />
-          <Route   path="/Product-Details" component={BuyersProductDetails} />
-          <Route   path="/wishlist" component={AddWishlist} />
-          {/* <Route   path="/Customprod" component={Customprod} /> */}
-          <Route   path="/Customprod" component={AddCustomprod} />
-          <Route   path="/wishlist" component={AlertModal} />
-
-
+         
         </Switch>
       </Router>
     </React.Fragment>

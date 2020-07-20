@@ -25,6 +25,7 @@
     "react-avatar-editor": "^11.0.9",
     "react-bootstrap": "^1.0.1",
     "react-btn-checkbox": "0.0.2",
+    "react-delay": "^0.1.0",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.0",
     "react-india-state-region-selector": "^6.1.0",

@@ -11,7 +11,13 @@ import ArtistSelfDesignCategories from './Artisanselfdesign-Categories';
 import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
 import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import "./ProductCategories.css"
+import HoldPopup from '../ModalComponent/ModalHold';
+import Popup from '../ModalComponent/EnguiryModal';
+import SuccessPopup from '../ModalComponent/SuccessModal';
 
 export class ProductsOfCatelog extends Component {
     constructor(props) {
@@ -25,25 +31,63 @@ export class ProductsOfCatelog extends Component {
             isAddedtoWishlist:false,
             productIdsInWishlist:this.props.productIdsInWishlist,
             addToWishlist:null,
-            deleteProductsInWishlist:[]
+            deleteProductsInWishlist:[],
+             generateEnquiry:null,
+             isLoadingEnquiry:false,
+             modalIsOpen: false,
+             isCustom:false,
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
-      console.log(this.props);
+        this.generateEnquiry = this.generateEnquiry.bind(this);
+        // this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+
+      // console.log(this.props);
     }
-    handleAddtoWishlist(id){
-      TTCEapi.addToWishlist(id).then((response)=>{
-          this.setState({isAddedtoWishlist : response.data.valid},()=>{
-              console.log(this.state.isAddedtoWishlist);
+    closeModal() {
+      this.setState({ modalIsOpen: false });
+    }
+    // openModal() {
+    //   this.setState({ modalIsOpen: true });
+    // }
+  
+
+  handleAddtoWishlist(id){
+   
+    TTCEapi.addToWishlist(id).then((response)=>{
+        if (response.data.valid) {
+            customToast.success("Product added to wishlist!", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+            this.setState({isAddedtoWishlist : response.data.valid},()=>{
+                console.log(this.state.isAddedtoWishlist);
+            });
+        }
+        else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
        
-          });
-      });
-  }
+    
+    });
 
-    generateEnquiry(id){
-      console.log("Generate Enquiry " + id);
-      browserHistory.push("/generateEnquiry"); 
-
-    }
+  
+}
+ 
+  generateEnquiry(item){
+    this.setState({ modalIsOpen: true });
+    TTCEapi.generateEnquiry(item,false).then((response)=>{
+  this.setState({generateEnquiry : response.data.data},()=>{
+    this.setState({ modalIsOpen: false });
+      console.log(this.state.generateEnquiry);
+      
+  });
+});
+}
+  
     productDescription(id){
       console.log("Product Descriptiony " + id);
       browserHistory.push("/Product-Details?productId=" + id); 
@@ -53,13 +97,27 @@ export class ProductsOfCatelog extends Component {
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
           console.log(response);   
           if(response.data.data=="Successfull"){
+
             this.setState({isAddedtoWishlist:false})
-          }
         
-          
-    
+        customToast.success("Product removed from wishlist!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        })
+          }
+          else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+       
     });
     }
+
+  
+
+  
     componentDidMount(){
       if(this.state.productIdsInWishlist){
      if(this.state.productIdsInWishlist.indexOf(this.state.proddata.id)!=-1)
@@ -70,12 +128,7 @@ export class ProductsOfCatelog extends Component {
        })
      }
     }
-  //    TTCEapi.getProductsInWishlist().then((response)=>{
-  //     this.setState({getProductsInWishlist : response.data.data},()=>{
-  //         console.log(this.state.getProductsInWishlist);
-         
-  //     });
-  // }); 
+  
     }
     toggleHover(name) {      
         switch (name) {
@@ -98,7 +151,9 @@ export class ProductsOfCatelog extends Component {
     
     render() {
         return (
+          <React.Fragment>
             <div className="card cpCardlayout ">
+        
                     <div className="cpimagediv" style={{cursor:"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}}>
                     {this.state.proddata.productImages.length != 0 
                                   ?
@@ -119,7 +174,11 @@ export class ProductsOfCatelog extends Component {
                     </div>
                     </div>
                  
-                    <Row noGutters={true} className="cpdetails" style={{"cursor":"pointer"}} onClick={()=>{this.productDescription(this.state.proddata.id)}} >
+                    <Row noGutters={true} className="cpdetails" style={{"cursor":"pointer"}} 
+                    onClick={()=>{this.productDescription(this.state.proddata.id)}} 
+                    onClick={() => {
+                      this.setState({ modalIsOpen: true });
+                    }}>
                         <Col  className=" bold fontplay col-xs-8">
                           <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
@@ -168,10 +227,12 @@ export class ProductsOfCatelog extends Component {
                        <hr className="cpline"></hr>
                      <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry"
-                            onClick={()=>{this.generateEnquiry()}}
+                             onClick={() => this.generateEnquiry(this.state.proddata.id)}
+                            // onClick={() => this.generateEnquiry(this.state.proddata.id)}
                             >
+                            
                             Generate enquiry
-                         <a href={"/generateEnquiry"}>
+                         <a >
                               <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
 
                             </button>
@@ -205,7 +266,37 @@ export class ProductsOfCatelog extends Component {
                  {/* {console.log(this.state.proddata)} */}
 
                 </div> 
+                {this.state.modalIsOpen?
+                  <HoldPopup    isOpen={this.state.modalIsOpen}/>
+                :null}
+              
+                { this.state.generateEnquiry ?
                
+                  <>
+                     { this.state.generateEnquiry.ifExists== true ? 
+                     
+                     <Popup 
+                         closeModal={this.closeModal}
+                        EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                        productName={this.state.generateEnquiry.productName}
+                        productId={this.state.proddata.id}
+                        isCustom={this.state.isCustom}
+                     /> :
+                          (
+                      
+                     <SuccessPopup 
+                     EnquiryCode={this.state.generateEnquiry.enquiry.code}
+                     productName={this.state.generateEnquiry.productName}
+                     productId={this.state.proddata.id}
+                     />
+  
+                           ) } </>
+               
+                 
+                  :
+                null
+                  }
+                </React.Fragment>
         )
     }
 }

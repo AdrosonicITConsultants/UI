@@ -7,6 +7,8 @@ import logos from "../../assets";
 import "./suggestions.css";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
+import { Container } from "reactstrap";
+import { placeholder } from "glamor";
 
 var languages = [];
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -14,11 +16,12 @@ const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   const response = await TTCEapi.getArtistSuggestions(value);
-    console.log(response);
+  console.log(response);
   if (response.data.data == null) {
     languages = [];
   } else {
-    languages = response.data.data;
+    languages = response.data.data.slice(0,9);
+    languages.unshift({ suggestion: "Suggestions", inputVal: value })
   }
   if (languages.length == 0) {
     languages = [{ suggestion: "No Suggestion Found", inputVal: value }];
@@ -32,6 +35,7 @@ const getSuggestions = async (value) => {
 
 const getSuggestionValue = (suggestion) => {
   console.log(suggestion.suggestion);
+
   if (suggestion.suggestionType == "Global") {
     return `${suggestion.suggestion}`;
   } else {
@@ -52,21 +56,48 @@ class ArtistSuggestions extends Component {
       suggestions: [],
     };
   }
+
   renderSuggestion = (suggestion) => {
-    if (suggestion.suggestion == "No Suggestion Found") {
+    if(suggestion.suggestion == "Suggestions"){
       return (
-        <div className="showingnoresults">
-          <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
-          <p> "0 Results found"</p>
-          <p>
-            {" "}
-            "Please check your spelling. <br />
-            Or try searching something like “saree”, “dupatta” etc."
-          </p>
+          <div
+            style={{
+              fontSize: "xx-large",
+              paddingLeft: "1rem" ,
+              paddingTop: "1rem",
+            }}
+          >
+            {"Suggestions"}
+          </div>
+      );
+    } else if (suggestion.suggestion == "No Suggestion Found") {
+      return (
+        <div>
+          <div
+            style={{
+              fontSize: "xx-large",
+              paddingLeft: "3rem",
+              paddingTop: "1rem",
+            }}
+          >
+            {"Suggestions"}
+          </div>
+
+          <div
+            style={{
+              marginLeft: "4rem",
+              paddingTop: "1rem",
+              paddingBottom: "3rem",
+              color: "darkgray",
+              fontSize: "large",
+            }}
+          >
+            No Results Found. Try Checking Your Spelling.
+          </div>
         </div>
-        // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
       );
     }
+   
     var tempDisplay = suggestion.suggestion;
     var input = this.state.value;
     tempDisplay = tempDisplay.toLowerCase();
@@ -80,7 +111,20 @@ class ArtistSuggestions extends Component {
       endIndex != tempDisplay.length
         ? tempDisplay.substring(endIndex, tempDisplay.length)
         : "";
-
+    if (suggestion.suggestionDetail == "1") {
+      return (
+        <a
+          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
+        >
+          <div className="custom-suggestion-row">
+            {" "}
+            {startingThinString}
+            <b>{boldString}</b>
+            {endingThinString} in <b>{suggestion.suggestionDetail}</b>
+          </div>
+        </a>
+      );
+    }
     if (suggestion.plainSuggestion == "1") {
       return (
         <a
@@ -94,25 +138,10 @@ class ArtistSuggestions extends Component {
           </div>
         </a>
       );
-    } if (suggestion.suggestionDetail == "1") {
-            return (
-              <a
-              href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
-              >
-                <div className="custom-suggestion-row kiran">
-                  {" "}
-                  {startingThinString}
-                  <b>{boldString}</b>
-                  {endingThinString} in <b>{suggestion.suggestionDetail}</b>
-                </div>
-              </a>
-            );
-          }
-    else {
+    } else {
       return (
         <a
           style={{ color: "black" }}
-          a
           href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
@@ -122,7 +151,9 @@ class ArtistSuggestions extends Component {
           </div>
         </a>
       );
+      
     }
+    
   };
   onChange = (event, { newValue }) => {
     this.setState({
@@ -134,6 +165,7 @@ class ArtistSuggestions extends Component {
     this.setState({
       suggestions: await getSuggestions(value),
     });
+    console.log("************************************************", this.state.suggestions)
   };
   onSuggestionsClearRequested = () => {
     this.setState({
@@ -144,14 +176,14 @@ class ArtistSuggestions extends Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-      placeholder: "Search",
+      placeholder: "Search products, codes, product type, weaves, category",
       value,
       onChange: this.onChange,
       onKeyPress: (e) => {
         if (e.charCode == 13) {
           console.log("-------------");
           console.log(languages);
-          window.location.href = `/A-detailSuggestions?search=${this.state.value}&type=5`
+          window.location.href = `/A-detailSuggestions?search=${this.state.value}&type=5`;
           //this.onSuggestionsFetchRequested({ value: this.state.value });
         }
       },
@@ -177,15 +209,18 @@ class ArtistSuggestions extends Component {
               marginLeft: "18px",
               width: "-webkit-fill-available",
               height: "-webkit-fill-available",
+              fontSize: "25px"
+              // letterSpacing: "1px",
             }}
             {...inputProps}
           ></input>
-          
         </div>
       </div>
     );
     return (
+      
       <div>
+        
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

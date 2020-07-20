@@ -12,6 +12,7 @@ import Footer from "../footer/footer";
 import { Row, Col , Container, Button} from 'reactstrap';
 import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
+import { ArtisanProductOfSearch } from "./ArtisanProductOfSearch";
 
 
 
@@ -123,7 +124,7 @@ export default class DetailSuggestionsArtist extends Component {
                                       
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
-                                        <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>     
+                                        <ArtisanProductOfSearch productData = {item} />     
                                         </Col>  
                                         :
                                         <>
@@ -132,7 +133,7 @@ export default class DetailSuggestionsArtist extends Component {
                                         <Col xs={12} sm={6} md={4}>
                                             {this.state.item1 = false}
 
-                                          <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>    
+                                          <ArtisanProductOfSearch productData = {item} />    
                                             {console.log(item)};
 
                                         </Col>

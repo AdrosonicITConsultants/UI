@@ -442,6 +442,7 @@ debugger;
                     <br></br>
                     
                    <div className="profileheading fontplay">My Profile</div>
+               
                    <br></br>
                    <Row noGutters={true}>
                         <Col sm = {{size: "1"}}></Col>
@@ -909,7 +910,9 @@ debugger;
                           </div>
                        </Col>
                    </Row>
-                   <Row>
+                  
+                   </div>
+                   <Row noGutters={true}>
                     <div>
                     <img
                         className="HomeBg3 internaldiv"
@@ -918,10 +921,11 @@ debugger;
                     </div>
                 </Row>
 
-                   {console.log(this.props.user)}
-                </div>
+                
+              
 
                 </Container>
+
                 <Footer></Footer>
 
             </React.Fragment>

@@ -31,6 +31,7 @@ import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
 import DetailSuggestionsArtist from './components/navbar/ArtisanDetailSuggestions.js';
 import BuyerSelfDesign from './components/Buyer-Custom-Design/BuyerSelfDesign';
+import EditBuyerDesign from './components/Buyer-Custom-Design/EditbuyerDesign'
 // import DetailSuggestions from'./components/navbar/buyerSearchSuggestion.js';
 import Customprod from './components/Custon Products/Customprod';
 import AddCustomprod from './components/Custon Products/AddCustomprod';
@@ -72,6 +73,8 @@ function App() {
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
           <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
+          
+          <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
 
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}

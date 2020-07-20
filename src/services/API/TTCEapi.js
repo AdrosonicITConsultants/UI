@@ -200,25 +200,45 @@ class TTCEapi {
  }
   static editProduct(file1, file2 = null, file3 = null, productData) {
     debugger;
+    console.log(productData);
     let url = ApiUrl + "/product/edit/product";
     var data = new FormData();
     data.append("file1", file1);
     data.append("file2", file2);
     data.append("file3", file3);
     data.append("productData", JSON.stringify(productData));
-
-    // var data = {
-    //   file1: file1,
-    //   file2: file2,
-    //   file3: file3,
-    //   productData: productData,
-    //   // pin: weaverPin,
-    // };
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
       },
     };
+    return axios
+      .put(url, data, config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+
+  static editCustomProduct(file1, file2 = null, file3 = null, productData) {
+    debugger;
+    let url = ApiUrl + "/buyerCustomProduct/edit/product";
+    var data = new FormData();
+    data.append("file1", file1);
+    data.append("file2", file2);
+    data.append("file3", file3);
+    data.append("productData", JSON.stringify(productData));
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    console.log(data);
+    console.log(productData);
     return axios
       .put(url, data, config)
       .then((response) => {
@@ -260,8 +280,39 @@ class TTCEapi {
         return error.response;
       });
   }
+
+  static getbuyerSimpleProduct(id) {
+    let url = ApiUrl + "/buyerCustomProduct/getSimpleProduct/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+
+
   static deleteProduct(id) {
     let url = ApiUrl + "/product/deleteProduct/" + id;
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static deleteCustomProduct(id) {
+    let url = ApiUrl + "/buyerCustomProduct/deleteProduct/" + id;
 
     return axios
       .delete(url)

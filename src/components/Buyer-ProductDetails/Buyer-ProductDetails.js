@@ -52,6 +52,7 @@ class BuyersProductDetails extends Component {
   }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
+        
           this.setState({isAddedtoWishlist : response.data.valid,clicked: !this.state.clicked},()=>{
               console.log(this.state.isAddedtoWishlist);
        

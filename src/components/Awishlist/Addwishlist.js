@@ -141,7 +141,7 @@ class AddWishlist extends Component {
                         <img
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
-                                    //  onClick={() => this.backoperation()}
+                                     onClick={() => this.backoperation()}
                                     //  onClick={() => this.props.history.go(-1)}
                                 ></img>
                        

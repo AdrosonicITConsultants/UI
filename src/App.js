@@ -74,15 +74,12 @@ function App() {
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
           <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
-<<<<<<< HEAD
           
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
 
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-=======
->>>>>>> 6b99fffdef774fd66b092858dc32e38f5e89cd25
           <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
           <Route  exact path="/Antaran" component={AntaranCoDesign} />

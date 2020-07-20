@@ -260,6 +260,10 @@ class ArtistProfile extends Component {
       
       var alpha=/([A-Za-z0-9])$/;
       var char=/([A-Za-z])+$/;
+      var gpayvalidation=/^[ A-Za-z0-9_@./#&+-]*$/;
+      var numeric=/([0-9])$/;
+
+
                   if(!alpha.test(this.state.benificiaryname))
                         {                      
                           this.setState({
@@ -268,6 +272,7 @@ class ArtistProfile extends Component {
                         });
                                      
                   }
+                  
                  else if(!char.test(this.state.bankName))
                   {                      
                     this.setState({
@@ -295,20 +300,30 @@ class ArtistProfile extends Component {
 
       
 }
-        if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) && this.state.paytmupi != "")
+        if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) ||!numeric.test(this.state.paytmupi) && this.state.paytmupi != "")
           {
             this.setState({
               showValidationbank: true,
-              message : "paytm number should be of 10 digits."
+              message : "Invalid paytm number"
           });
           }
-          else if((parseFloat(this.state.phonepeupi)>9999999999 || parseFloat(this.state.phonepeupi)<1000000000 ) && this.state.phonepeupi != "")
+          else if((parseFloat(this.state.phonepeupi)>9999999999 || parseFloat(this.state.phonepeupi)<1000000000 ) || !numeric.test(this.state.phonepeupi) && this.state.phonepeupi != "" )
           {
             this.setState({
               showValidationbank: true,
-              message : "phonepe number should be of 10 digits."
+              message : "Invalid phonepe number"
           });
-          }else{
+          }
+          else if(!gpayvalidation.test(this.state.gpayupi))
+                  {                      
+                    this.setState({
+                        showValidationbank: true,
+                      message : "Invalid GPay number"
+                  });
+        
+                  
+            }
+          else{
             this.setState({
               isDetailsEdit:!this.state.isDetailsEdit
           });

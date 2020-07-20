@@ -19,17 +19,29 @@ export default class buyreg5 extends Component {
           landmark : "",    
           showValidationpass: false,
           countrydata : [],
+          message : "please fill mandatory fields",
           
         };
       }
 
       operation() {
-        debugger;
-        if (this.state.adl1 == "" || this.state.country == "" || this.state.pincode == "") {
+        var pin=/([1-9]){1}([0-9]){5}$/;
+       
+    
+      if (this.state.adl1 == "" || this.state.countryid == -1  ||  this.state.pincode == "") {
             this.setState({
-                showValidationpass: !this.state.showValidationpass,
+              showValidationpass: true,
+              message : "please fill mandatory fields"
             });
-          }else {
+          }
+          else if(!pin.test(this.state.pincode) || this.state.pincode.length != 6   )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "pincode should be of 6 digits."
+          });
+          }
+          else {
             this.props.sad(this.state.adl1,this.state.adl2,this.state.street,this.state.city,this.state.state,this.state.country,this.state.pincode,this.state.landmark,this.state.countryid)
             this.props.handler(5);
           }
@@ -324,12 +336,13 @@ export default class buyreg5 extends Component {
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
-                          type="text"
+                          type="number"
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
                           //placeholder="firstname"
                           value={this.state.pincode}
                           name="pincode"
+                          maxlength="6"
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -358,13 +371,20 @@ export default class buyreg5 extends Component {
                     </Col>
                   </Col>
                 </Row>
-                {this.state.showValidationpass ? (
+                {/* {this.state.showValidationpass ? (
                   <span className="bg-danger">
                     please enter all mandatory fields
                   </span>
                 ) : (
                   <br />
-                )}
+                )} */}
+                 {this.state.showValidationpass ? (
+                          <span className="bg-danger text-center">
+                            {this.state.message}
+                          </span>
+                        ) : (
+                          <br />
+                        )}
                 <div className="text-center" style={{ color: "#cc6868" }}>
                   <strong
                     className="requiredStar"

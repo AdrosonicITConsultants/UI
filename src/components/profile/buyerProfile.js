@@ -179,10 +179,21 @@ debugger;
         
     }
     handledetEdit2(){
+        var pincode=/([0-9]){6}$/;
+        if(parseFloat(this.state.pincode).length < 7 && !pincode.test(this.state.pincode) )
+          {
+            this.setState({
+              showValidationpass: true,
+              message : "pincode should be of 6 digits."
+          });
+          }
+    }
+
+    handledetEdit2(){
         var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
         var alpha=/([A-Z]){1}([0-9]){5}([A-Z]){2}([0-9]){4}([A-Z]){3}([0-9]){6}$/;
         var gstval=/([0-9]){2}([A-Z0-9]){10}([0-9]){1}([A-Z]){1}([0-9]){1}$/;
-        
+       
 
                     if(!regex.test(this.state.panno.toUpperCase()))
                           {                      

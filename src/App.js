@@ -39,6 +39,8 @@ import AddCustomprod from './components/Custon Products/AddCustomprod';
 // import ArtistSuggestions from './components/navbar/artistSuggestions.js';
 // import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 import AlertModal from './components/modal/AlertModal'
+import NotificationBuyerConnected from './components/navbar/notificationBuyerCount.js'
+import BuyerNotifications from './components/navbar/buyerNotify.js'
 function App() {
   
   return (
@@ -56,7 +58,8 @@ function App() {
           <Route exact path="/addProduct" component={AddProduct} />
           <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
           <Route exact path="/A-detailSuggestions" component={DetailSuggestionsArtist}/>
-         {/* <Route exact path="/artistDetailSuggestions" component={ArtistDetailSuggestions}/> */}
+          <Route exact path="/B-NotificationCount" component={NotificationBuyerConnected}/>
+          <Route exact path="/B-Notifications" component={BuyerNotifications}/>
           {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
           {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
           {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}

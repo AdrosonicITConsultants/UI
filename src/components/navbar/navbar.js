@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
 import BuyerConnectedSuggestions from "./buyerSuggestions.js"
-
+import NotificationBuyerConnected from "./notificationBuyerCount.js"
 
 
 
@@ -310,20 +310,38 @@ browserHistory.push("/MyProfile");
             </li>
 
             <li className="menu-item">
+            {
+            userTypeId == 2 ? (
+              <NotificationBuyerConnected/>
+            ):
+            (<NotificationBuyerConnected/>)
+          } 
               {this.state.isnotificationHovered ? (
+                <a
+                href="/B-Notifications"
+                className={
+                  this.state.activeTabClassName === "/" ? "active" : ""
+                }
+              >
                 <img
                   onMouseEnter={() => this.toggleHover("isnotificationHovered")}
                   onMouseLeave={() => this.toggleHover("isnotificationHovered")}
                   className="navButtonImg"
                   src={logos.belliconfilled}
-                ></img>
+                ></img></a>
               ) : (
+                <a
+                href="/B-Notifications"
+                className={
+                  this.state.activeTabClassName === "/" ? "active" : ""
+                }
+              >
                 <img
                   onMouseEnter={() => this.toggleHover("isnotificationHovered")}
                   onMouseLeave={() => this.toggleHover("isnotificationHovered")}
                   className="navButtonImg"
                   src={logos.notificationsicon}
-                ></img>
+                ></img></a>
               )}
               {userTypeId === 1 ? (
                 <span className="myorder col-md-12 col-sm-12">

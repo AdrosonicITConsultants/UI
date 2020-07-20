@@ -500,6 +500,34 @@ class TTCEapi {
         return error.response;
       });
   }
+
+  static generateEnquiry(productId,isCustom) {
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static generateEnquiryTrue(productId,isCustom) {
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   //#region login
   static sendOtpForgotpass(emailId, roleID) {
     let url =

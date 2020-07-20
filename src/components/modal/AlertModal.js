@@ -1,43 +1,72 @@
-// import React from "react";
-// import { render } from "react-dom";
-// import "react-responsive-modal/styles.css";
-// import { Modal } from "react-responsive-modal";
-
-// const styles = {
-//   fontFamily: "sans-serif",
-//   textAlign: "center"
-// };
-
-// export default class AlertModal extends React.Component {
-//   state = {
-//     open: false
-//   };
-
-//   onOpenModal = () => {
-//     this.setState({ open: true });
-//   };
-
-//   onCloseModal = () => {
-//     this.setState({ open: false });
-//   };
-
-//   render() {
-//     const { open } = this.state;
-//     return (
-//       <div style={styles}>
-//         <h2>react-responsive-modal</h2>
-//         <button onClick={this.onOpenModal}>Open modal</button>
-//         <Modal open={open} onClose={this.onCloseModal}>
-//           <h2>Simple centered modal</h2>
-//           <p>
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-//             pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
-//             hendrerit risus, sed porttitor quam.
-//           </p>
-//         </Modal>
-//       </div>
-//     );
-//   }
-// }
-
-
+import React, { Component } from "react";
+import Modal from "react-modal";
+import Wishlist from "../Awishlist/Wishlist";
+import AlertRemoveItem from "../Awishlist/AlertRemoveItem";
+import "./AlertModal.css"
+    class Popup extends React.Component {
+        constructor(props) {
+        super(props);
+        this.state = {
+        
+          popupHeader:"Looks like you don't have an account"
+        };
+      }
+      
+       refreshPage(){ 
+        window.location.reload(); 
+      }
+      render() {
+        var headerStyle = {
+          color:'red',
+          fontWeight:'bold',
+          fontSize: 20
+        }
+        return (
+          
+          <div className='popup'>
+            <div className='popup_inner'>
+           <div style={headerStyle}>
+           Hello
+              </div>
+              {/* <button onClick={this.props.closePopup} */}
+              <button onClick={this.props.refreshPage}>close me</button>
+            </div>
+          </div>
+        );
+      }
+    }
+    export default class AlertModal extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          showPopup: false,
+          header:"Welcome"
+        };
+      }
+      togglePopup() {
+        this.setState({
+          showPopup: !this.state.showPopup
+        });
+      }
+     
+      render() {
+        return (
+          <div>
+            <h1>hihi</h1>
+        
+            <button onClick={this.togglePopup.bind(this)}>show popup</button>
+           
+            
+            {this.state.showPopup ? 
+              <Popup
+                text='Popup window text'
+                refreshPage={this.togglePopup.bind(this)}
+              />
+              : null
+            }
+          </div>
+        );
+      }
+    };
+    
+    

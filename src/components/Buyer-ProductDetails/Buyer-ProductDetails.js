@@ -11,6 +11,9 @@ import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import BPCarousel from './Buyers-Productcarousel';
 import queryString from 'query-string';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import SeeMoreProduct from './Seemoreproduct';
 import Popup from '../ModalComponent/EnguiryModal';
 import SuccessPopup from '../ModalComponent/SuccessModal';
@@ -52,11 +55,22 @@ class BuyersProductDetails extends Component {
   }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
-        
+        if (response.data.valid) {
+          customToast.success("Product added to wishlist!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           this.setState({isAddedtoWishlist : response.data.valid,clicked: !this.state.clicked},()=>{
               console.log(this.state.isAddedtoWishlist);
        
           });
+        }
+          else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
       });
   }
   togglePopup() {
@@ -83,9 +97,19 @@ class BuyersProductDetails extends Component {
         console.log(response);   
         if(response.data.data=="Successfull"){
           this.setState({isAddedtoWishlist:false})
-        }
-             
-  
+        
+        customToast.success("Product removed from wishlist!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        })      
+      }
+      else{
+        customToast.error(response.data.errorMessage, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
+    }
+   
   });
   }
   componentDidMount(){

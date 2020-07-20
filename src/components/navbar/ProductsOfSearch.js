@@ -12,6 +12,9 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 // import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
 // import "./ProductCategories.css"
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import HoldPopup from '../ModalComponent/ModalHold';
 import Popup from '../ModalComponent/EnguiryModal';
 import SuccessPopup from '../ModalComponent/SuccessModal';
@@ -44,10 +47,22 @@ export class ProductsOfSearch extends Component {
     }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
+        if (response.data.valid) {
+          customToast.success("Product added to wishlist!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           this.setState({isAddedtoWishlist : response.data.valid},()=>{
               console.log(this.state.isAddedtoWishlist);
        
           });
+        }
+        else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
       });
   }
 
@@ -71,9 +86,21 @@ export class ProductsOfSearch extends Component {
           console.log(response);   
           if(response.data.data=="Successfull"){
             this.setState({isAddedtoWishlist:false})
-          }
-    });
-    }
+            customToast.success("Product removed from wishlist!", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            })
+              }
+              else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
+        });
+        }
+    
     componentDidMount(){
         // console.log(this.state);
     }

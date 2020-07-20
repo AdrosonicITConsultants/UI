@@ -11,6 +11,9 @@ import ArtistSelfDesignCategories from './Artisanselfdesign-Categories';
 import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
 import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
 import TTCEapi from '../../services/API/TTCEapi';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import "./ProductCategories.css"
 import HoldPopup from '../ModalComponent/ModalHold';
 import Popup from '../ModalComponent/EnguiryModal';
@@ -47,14 +50,32 @@ export class ProductsOfCatelog extends Component {
     // openModal() {
     //   this.setState({ modalIsOpen: true });
     // }
-    handleAddtoWishlist(id){
-      TTCEapi.addToWishlist(id).then((response)=>{
-          this.setState({isAddedtoWishlist : response.data.valid},()=>{
-              console.log(this.state.isAddedtoWishlist);
+  
+
+  handleAddtoWishlist(id){
+   
+    TTCEapi.addToWishlist(id).then((response)=>{
+        if (response.data.valid) {
+            customToast.success("Product added to wishlist!", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+            this.setState({isAddedtoWishlist : response.data.valid},()=>{
+                console.log(this.state.isAddedtoWishlist);
+            });
+        }
+        else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
        
-          });
-      });
-  }
+    
+    });
+
+  
+}
  
   generateEnquiry(item){
     this.setState({ modalIsOpen: true });
@@ -76,13 +97,26 @@ export class ProductsOfCatelog extends Component {
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
           console.log(response);   
           if(response.data.data=="Successfull"){
+
             this.setState({isAddedtoWishlist:false})
-          }
         
-          
-    
+        customToast.success("Product removed from wishlist!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        })
+          }
+          else{
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+       
     });
     }
+
+  
+
   
     componentDidMount(){
       if(this.state.productIdsInWishlist){

@@ -65,8 +65,8 @@ class AddCustomprod extends Component {
     componentDidMount(){
    
         TTCEapi.buyergetAllProducts().then((response)=>{
-         this.setState({buyergetAllProducts : response.data.data},()=>{
-            dataload : true,
+         this.setState({ dataload : true,buyergetAllProducts : response.data.data},()=>{
+          
              console.log(this.state.buyergetAllProducts);
           
              // console.log(this.props.user);

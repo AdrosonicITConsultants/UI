@@ -73,9 +73,10 @@
   /* --------------------------------- */
 
   .Modalh1 h1{
-    font-size: 36px;
+    font-size: 30px;
     color: darkgoldenrod;
     font-family: none;
+    margin-top: 10px;
   }
 
 .Modalh2 h1{
@@ -83,18 +84,56 @@
   color: green;
   font-family: none;
   font-weight: bold;
-  margin-top: 108px !important;
+  /* margin-top: 108px !important; */
 }
 
   .cancelmodal {
-    width: 119px;
+    width: 158px;
     border: 2px solid rgb(0 0 0 / 29%);
     border-radius: 29px;
     height: 41px;
     /* float: right; */
     font-size: 18px;
 }
+.closebtn{
+  font-size: 20px;
+    padding: 0px 10px 0px 0px;
+    cursor: pointer;
+    color: slategrey;
+}
 
+.Generateenqbtn{
+  height: 40px;
+    width: 239px;
+    border-radius: 36px;
+    font-size: 16px;
+    background: black;
+    color: white;
+    border: 1px;
+    padding: 9px;
+    margin-top: 10px;
+}
+.ExtEnquirybtn {
+  width: 189px;
+  border: 2px solid cornflowerblue;
+  border-radius: 29px;
+  height: 41px;
+  float: left;
+  color: wheat;
+  font-size: 15px;
+  background: transparent;
+  font-weight: 600;
+  background: rgb(63 127 242);
+}
+
+.stat1{
+  color: dimgrey;
+  /* margin-top: -10px; */
+}
+.stat2{
+  color: dimgrey;
+  margin-top: -10px;
+}
     .ExtEnquirymodal {
             width: 189px;
             border: 2px solid cornflowerblue;
@@ -115,74 +154,84 @@
     font-size: 38px;
     color: darkgoldenrod;
     font-family: none;
+    margin-top: 10px;
   }
+  /* @media only screen and (max-width: 600px) and (min-width: 400px) */
+ 
 
   @media only screen and ( max-width: 767px ) {
     .popup_inner {
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 25%;
-        bottom: 25%;
-        margin: auto;
-        background: white;
-        height: -moz-fit-content;
-        height: 487px;
-        overflow: hidden;
-        width: 300px;
-      }
-      .popup_inner_hold{
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 25%;
-        bottom: 25%;
-        margin: auto;
-        background: white;
-        height: -moz-fit-content;
-        overflow: hidden;
-        width: 300px;
-          height: 487px !important;
-      }
-      .popup_inner_success{
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 25%;
-        bottom: 25%;
-        margin: auto;
-        background: white;
-        height: -moz-fit-content;
-        overflow: hidden;
-        width: 300px;
-          height: 487px !important;
-      }
-      .Modalh1 h1 {
-        font-size: 26px !important;
-      }
-      .Modalh2 h1 {
-        font-size: 26px !important;
-      }
-  
-
-      .Modalnewenq {
-        font-size: 30px !important;
-      }
-      .ExtEnquirymodal {
-      
-        float: none !important;
-        color: cornflowerblue;
-        font-size: 13px;
-        background: transparent;
-        font-weight: 600;
-        margin-top: 10px !important;
-        
-      }
-      .cancelmodal {
-       
-        float: none !important;
-        font-size: 13px;
+      position: absolute;
+      left: 0%;
+      right: 0%;
+      top: 25%;
+      bottom: 25%;
+      margin: auto;
+      background: white;
+      height: -moz-fit-content;
+      height: 487px;
+      overflow: hidden;
+      width: 300px;
     }
+   .Generateenqbtn{
+      font-size: 15px;
+    }
+    .popup_inner_hold{
+      position: absolute;
+      left: 0%;
+      right: 0%;
+      top: 25%;
+      bottom: 25%;
+      margin: auto;
+      background: white;
+      height: -moz-fit-content;
+      overflow: hidden;
+      width: 300px;
+        height: 487px !important;
+    }
+    .popup_inner_success{
+      position: absolute;
+      left: 0%;
+      right: 0%;
+      top: 25%;
+      bottom: 25%;
+      margin: auto;
+      background: white;
+      height: -moz-fit-content;
+      overflow: hidden;
+      width: 300px;
+        height: 487px !important;
+    }
+    .Modalh1 h1 {
+      font-size: 26px !important;
+    }
+    .Modalh2 h1 {
+      font-size: 26px !important;
+    }
+
+    .ExtEnquirybtn{
+      margin-left: 18% !important;
+      /* margin-right: 50%; */
+      margin-top: 10px !important;
+      }
+    .Modalnewenq {
+      font-size: 30px !important;
+    }
+    .ExtEnquirymodal {
+    
+      float: none !important;
+      color: cornflowerblue;
+      font-size: 13px;
+      background: transparent;
+      font-weight: 600;
+      margin-top: 10px !important;
+      
+    }
+    .cancelmodal {
+     
+      float: none !important;
+      font-size: 13px;
   }
 
-  
+ 
+}

@@ -52,6 +52,12 @@ export default class Popup extends React.Component {
       <div className='popup'>
           
         <div className='popup_inner'>
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.refreshPage()}>X</h1>
+            </Col>
+  
+        </Row>
       <Row noGutters={true}>
           <Col sm={12} className="Modalh1" style={{textAlign:"center"}}>
             <h1>Enquiry for this product has been already generated</h1>
@@ -74,24 +80,12 @@ export default class Popup extends React.Component {
       <Row noGutters={true} style={{textAlign:"center"}}>
           <Col>
           <h1 className="Modalnewenq">You want to generate a new enquiry ?</h1>
-          <p> <div class="buttons">
-                        <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}}
-                        onClick={() => this.generateEnquiry(this.state.productId)} >
-                            <span>Enquiry Now</span>
-                                <div class="arrowPacman">
-                            <div class="arrowPacman-clip">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
-                                </svg>
-                                
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="white"/>
-                                </svg>
-                            </div>
-                            </div>
-                        </button>
+          <p> 
+          <button  className="Generateenqbtn" onClick={() => this.generateEnquiry(this.state.productId)}>
+            Generate New Enquiry
+            </button>
 
-                            </div></p>
+                           </p>
           </Col>
       </Row>
           {/* <button onClick={this.props.closePopup} */}

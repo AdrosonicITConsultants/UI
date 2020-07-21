@@ -132,7 +132,7 @@
       .slides img {
           height: 412px;
           max-height: 412px !important;
-          width: 74%;
+          width: 74% !important;
       }
       }
       @media only screen and (max-width: 768px) {

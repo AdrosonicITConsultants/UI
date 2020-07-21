@@ -569,3 +569,12 @@ transform-origin: 50% 50%;
     transform: scale(1.5);
   }
 }
+
+@media only screen and (max-width: 425px) {
+
+  .buttons .button{
+    width: 100% !important;
+    margin-bottom: 10px !important;
+  }
+
+}

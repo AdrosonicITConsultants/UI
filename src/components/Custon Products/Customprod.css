@@ -52,7 +52,6 @@
 .Emptymakeittext
 {
     text-align: center;
-    font-family: playfair;
     font-size: 60px;
     color: #f32222;
 
@@ -60,9 +59,9 @@
 .Emptymakeittext p
 {
 text-align: center;
-    font-size: 21px;
+    font-size: 19px;
     color: black;
-    font-family: playfair;
+   margin-top: -10px;
 }
 @media only screen and ( max-width: 767px ) {
     .emptyhrcustom h1 {

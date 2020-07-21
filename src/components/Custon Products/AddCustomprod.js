@@ -22,6 +22,7 @@ class AddCustomprod extends Component {
             deleteAllProductsInbuyerCustom:[],
             pageLoad:false,
             showPopup: false,
+            dataload : false,
           header:"Welcome",
           generateEnquiry:null,
           isLoadingEnquiry:false,
@@ -65,6 +66,7 @@ class AddCustomprod extends Component {
    
         TTCEapi.buyergetAllProducts().then((response)=>{
          this.setState({buyergetAllProducts : response.data.data},()=>{
+            dataload : true,
              console.log(this.state.buyergetAllProducts);
           
              // console.log(this.props.user);
@@ -76,7 +78,10 @@ class AddCustomprod extends Component {
    
             <React.Fragment>
              
-         
+             {this.state.dataload == true 
+                  
+                   ? 
+                   <> 
      
                   <NavbarComponent />
                   
@@ -272,7 +277,9 @@ class AddCustomprod extends Component {
                   <Footer/>
                      </>
                      }
-                    
+                    </>
+                   
+                   :null}
                 </React.Fragment>
               
         )

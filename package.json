@@ -33,6 +33,7 @@
     "react-inline-editing": "^1.0.10",
     "react-modal": "^3.11.2",
     "react-moment": "^0.9.7",
+    "react-notification-badge": "^1.5.1",
     "react-player": "^2.0.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

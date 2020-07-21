@@ -164,6 +164,7 @@ class BuyerSuggestions extends Component {
               marginLeft: "18px",
               width: "-webkit-fill-available",
               height: "-webkit-fill-available",
+              fontSize: "36px"
             }}
             {...inputProps}
           ></input>

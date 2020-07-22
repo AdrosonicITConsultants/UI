@@ -44,15 +44,15 @@ class Customprod extends Component {
                        </Col>
 
                 <Col md='10'className="emptyhrcustom">
-                    <h1 > Your unique custom designs appears here</h1>
+                    <h1 > Your unique custom design appears here</h1>
 
                 <p>No custom product added yet</p>    
                 <Row noGutters={true} className="emptycustomtbg">
                    
-                        <div className="Emptymakeittext" >
-                            Make it & take it
+                        <div className="Emptymakeittext fontplay" >
+                            Make it & take it!
                             <p>Try adding a new custom product to</p>
-                            <p>Create your unique design</p>
+                            <p>create your unique design</p>
                         </div>
                         <div style={{textAlign:"center"}}  onClick={() => this.custompage()}>
                         <button className="wishlistblack"><img className="homeiconwishlist" src={logos.whitecustomdesignicon}/> <span className="spanhome">Create my own design</span></button>

@@ -34,7 +34,7 @@
 .wishlistblack{
     width: auto;
     padding: 6px;
-    margin-top: 31px;
+    margin-top: 11px;
     border-radius: 16px;
     border: 2px solid black;
     color: white;
@@ -120,10 +120,10 @@
 
 .Descriptionitemp{
     font-size: 16px;
-    font-family: auto;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: var(--lato);
     max-width: 355px;
 }
 
@@ -144,6 +144,8 @@
 .Wishlistpcode{
     color: forestgreen;
     font-size: 15px;
+    font-family: var(--lato);
+    /* font-weight: la; */
 }
 .margintopcss{
     margin-top: 10px;

@@ -43,6 +43,8 @@ import AlertModal from './components/modal/AlertModal'
 import NotificationBuyerConnected from './components/navbar/notificationBuyerCount.js'
 import BuyerNotifications from './components/navbar/buyerNotify.js'
 import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
+import SuccessPopup from './components/ModalComponent/SuccessModal';
+import Popup from './components/ModalComponent/EnguiryModal';
 
 
 function App() {
@@ -90,7 +92,7 @@ function App() {
           <Route  exact path="/Product-Details" component={BuyersProductDetails} />
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />
-         
+          <Route  exact path="/Modal" component={SuccessPopup} />
 
          
         </Switch>

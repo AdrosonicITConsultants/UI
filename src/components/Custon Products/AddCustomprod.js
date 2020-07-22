@@ -22,6 +22,7 @@ class AddCustomprod extends Component {
             deleteAllProductsInbuyerCustom:[],
             pageLoad:false,
             showPopup: false,
+            dataload : false,
           header:"Welcome",
           generateEnquiry:null,
           isLoadingEnquiry:false,
@@ -64,7 +65,8 @@ class AddCustomprod extends Component {
     componentDidMount(){
    
         TTCEapi.buyergetAllProducts().then((response)=>{
-         this.setState({buyergetAllProducts : response.data.data},()=>{
+         this.setState({ dataload : true,buyergetAllProducts : response.data.data},()=>{
+          
              console.log(this.state.buyergetAllProducts);
           
              // console.log(this.props.user);
@@ -76,7 +78,10 @@ class AddCustomprod extends Component {
    
             <React.Fragment>
              
-         
+             {this.state.dataload == true 
+                  
+                   ? 
+                   <> 
      
                   <NavbarComponent />
                   
@@ -145,7 +150,7 @@ class AddCustomprod extends Component {
                      <Row noGutters={true}>
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
+                           <span style={{color:"grey",fontWeight:"400"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
                            {data.warpDye?
                             data.warpDye.dyeDesc:null} X <span></span>
                            {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
@@ -272,7 +277,9 @@ class AddCustomprod extends Component {
                   <Footer/>
                      </>
                      }
-                    
+                    </>
+                   
+                   :null}
                 </React.Fragment>
               
         )

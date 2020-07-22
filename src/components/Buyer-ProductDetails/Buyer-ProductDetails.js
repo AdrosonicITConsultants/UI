@@ -206,18 +206,6 @@ class BuyersProductDetails extends Component {
              <Container>
 <Row noGutters="true" id="#Top">
   <Col md={6} lg={6}sm={12} xs={12} style={{marginTop:"27px"}}>
-{/* 
-{this.state.ProductData.productImages ?this.state.ProductData.productImages.map((data)=>
-{
-  return(
-  <BPCarousel
-    
-  Image={data}
-   />
-  )
-}):null
-} */}
-   
 
     <BPCarousel
   Image={this.state.ProductData.productImages?this.state.ProductData.productImages:null}
@@ -357,7 +345,7 @@ class BuyersProductDetails extends Component {
  
     {(this.state.isAddedtoWishlist )? ( 
        <div class="buttons">
-                       <button  onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}>
+                       <button   onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}>
                          <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
                            <span  className="onclickwish">
                            <img

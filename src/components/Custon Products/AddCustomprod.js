@@ -159,7 +159,7 @@ class AddCustomprod extends Component {
                      </Row>
                      <Row  noGutters={true}> 
                          <Col sm={12}>
-                             <p className="Descriptionitemp"  numberOfLines={1}  >{data.product_spec}
+                             <p className="Descriptionipara"  numberOfLines={2}  >{data.product_spec}
                            </p>
                          </Col>
                      </Row>
@@ -167,7 +167,7 @@ class AddCustomprod extends Component {
                         
                          <Col sm={12} className="Wishlistpcode">
                      <span>Date created :</span> <span><b>
-                     <Moment format="YYYY/MM/DD">
+                     <Moment format="YYYY-MM-DD">
                             {data.createdOn}
                              </Moment>
                           </b></span>

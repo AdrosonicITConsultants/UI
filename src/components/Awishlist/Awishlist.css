@@ -92,7 +92,7 @@
     height: 124px;
     width: 124px;
     margin: auto;
-    max-height: 121px;
+    max-height: 111px;
    
 }
 .secondcolmargin{
@@ -127,6 +127,17 @@
     max-width: 355px;
 }
 
+.Descriptionipara{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-family: var(--PlayfairFont);
+    letter-spacing: 0.7px;
+    /* font-size: 15px; */
+}
+
+
 .wishlistitembrand{
     height: 20px;
 }
@@ -143,10 +154,11 @@
 
 .Wishlistpcode{
     color: forestgreen;
-    font-size: 15px;
+    font-size: 14px;
     font-family: var(--lato);
-    /* font-weight: la; */
+    font-weight: normal;
 }
+
 .margintopcss{
     margin-top: 10px;
    

@@ -237,7 +237,10 @@ class BuyersProductDetails extends Component {
       <Col sm={12} className="BPDartisianame">
         Artisan Brand : 
         {this.state.ProductData.brand ? <span className="brandcolor">
-          {this.state.ProductData.brand}</span>: this.state.ProductData.artistName}
+          {this.state.ProductData.brand}</span>: this.state.ProductData.artistName
+          ? <span className="brandcolor">{this.state.ProductData.artistName} </span>: 
+          <span className="brandcolor"> Not Available </span>
+          }
          
       </Col>
     </Row>

@@ -22,7 +22,7 @@ export default class buyerRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 5,
+                     userpage: 0,
                      emailid: "",
                      password: "",
                      firstname: "",

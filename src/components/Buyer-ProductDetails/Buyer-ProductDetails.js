@@ -349,8 +349,7 @@ class BuyersProductDetails extends Component {
                          <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
                            <span  className="onclickwish">
                            <img
-                         onMouseEnter={() => this.toggleHover("isfavHovered")}
-                         onMouseLeave={() => this.toggleHover("isfavHovered")}
+                         
                          className="navButtonImg21"
                          src={logos.heariconfilled}
                         
@@ -363,11 +362,9 @@ class BuyersProductDetails extends Component {
                      ) : (
                       <div class="buttons">
                       <button  onClick={() => this.handleAddtoWishlist(this.state.ProductData.id)}>
-                      <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
+                      <span style={{fontSize:"17px"}}>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
                         <span  className="onclickwish">
                         <img
-                      onMouseEnter={() => this.toggleHover("isfavHovered")}
-                      onMouseLeave={() => this.toggleHover("isfavHovered")}
                       className="navButtonImg21"
                       src={logos.favoriteicon}
                      
@@ -494,7 +491,7 @@ class BuyersProductDetails extends Component {
   <img src={logos.weight} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Weight</h3>
                <p>{this.state.ProductData.productCategory?this.state.ProductData.productCategory.productDesc:null} <span  style={{marginLeft:"22px"}}>{this.state.ProductData.weight}</span></p>
-               {this.state.ProductData.productCategory ? <hr className="hrspecBPD "></hr>:null} 
+               {this.state.ProductData.relProduct[0] ? <hr className="hrspecBPD "></hr>:null} 
                {this.state.ProductData.relProduct[0] ?
                <p style={{marginTop:"-10px"}}>{this.state.ProductData.relProduct[0].productTypeDesc} <span  style={{marginLeft:"22px" , marginTop:"-10px"}}>{this.state.ProductData.weight}</span></p>
   
@@ -505,7 +502,10 @@ class BuyersProductDetails extends Component {
   <img src={logos.dimensions} className="specificationicon"/>
   <h3 className="GeneralDetailsh3 text-center" style={{color:"black"}}>Dimensions L x W</h3>
   <p>{this.state.ProductData.productCategory?this.state.ProductData.productCategory.productDesc:null} <span  style={{marginLeft:"22px"}}>
-    {this.state.ProductData.relProduct[0] ? this.state.ProductData.relProduct[0].length:null} x {this.state.ProductData.relProduct[0]?this.state.ProductData.relProduct[0].width:null}
+    {this.state.ProductData.relProduct[0] ? this.state.ProductData.relProduct[0].length:null} 
+    
+    {this.state.ProductData.relProduct[0]?  <span> x </span> :null}
+    {this.state.ProductData.relProduct[0]?this.state.ProductData.relProduct[0].width:null}
     </span></p>
     {this.state.ProductData.relProduct[0] ? 
     <hr className="hrspecBPD "></hr>:null}

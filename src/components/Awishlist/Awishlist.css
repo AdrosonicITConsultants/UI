@@ -128,16 +128,16 @@
 }
 
 .wishlistitembrand{
-    height: 30px;
+    height: 20px;
 }
 .wishlistbrand{
     color: cornflowerblue;
     margin-left: 9px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
 }
 .wishlistbrand2{
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 600;
 }
 

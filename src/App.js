@@ -74,7 +74,7 @@ function App() {
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
-          <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
+
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
@@ -88,7 +88,7 @@ function App() {
 
           <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
-          <Route  exact path="/Antaran" component={AntaranCoDesign} />
+          <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
           <Route  exact path="/Product-Details" component={BuyersProductDetails} />
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />

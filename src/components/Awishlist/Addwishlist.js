@@ -195,18 +195,18 @@ class AddWishlist extends Component {
                      <Row  noGutters={true}> 
                          <Col sm={12}>
                              <p className="Descriptionitemp">
-                           
-                                 {data.product.product_spe}</p>
+                            {data.product.product_spe}</p>
                          </Col>
                      </Row>
                      <Row  noGutters={true}>
                          <Col sm={6} className="colalign" style={{borderRight:"1px solid gray"}}>
+                             <span>
                                 {data.product.madeWithAnthran==0? 
                                 <img className="wishlistitembrand" src={logos.artisianSelfLogo}/>
                                 :
                                 <img className="wishlistitembrand" src={logos.antaranCoDesignLogo}/>
                                 }
-                           
+                           </span>
 
                             <span className="wishlistbrand">{data.product.clusterName} //</span>
                             <span className="wishlistbrand2">{data.product.brand}</span>
@@ -219,8 +219,8 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" >
-                            Remove from wish list <img src={logos.removefromwishlist} onClick={() => this.handleDeleteItem(data.product.id)}/>
+                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem(data.product.id)} >
+                            Remove from wish list <img src={logos.removefromwishlist} />
                             </Col>
                              </Row>  
                         <Row noGutters={true}>

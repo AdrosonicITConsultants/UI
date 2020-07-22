@@ -25,7 +25,7 @@ export default class buyreg5 extends Component {
       }
 
       operation() {
-        var pin=/([1-9]){1}([0-9]){5}$/;
+        var pin=/([1-9])$/;
        
     
       if (this.state.adl1 == "" || this.state.countryid == -1  ||  this.state.pincode == "") {

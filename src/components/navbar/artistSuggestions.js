@@ -21,12 +21,13 @@ const getSuggestions = async (value) => {
     languages = [];
   } else {
     languages = response.data.data.slice(0,9);
-    languages.unshift({ suggestion: "Suggestions", inputVal: value })
+    
   }
   if (languages.length == 0) {
     languages = [{ suggestion: "No Suggestion Found", inputVal: value }];
     return languages;
   } else {
+    languages.unshift({ suggestion: "Suggestions", inputVal: value })
     return inputLength === 0
       ? []
       : languages.filter((lang) => lang["suggestion"]);

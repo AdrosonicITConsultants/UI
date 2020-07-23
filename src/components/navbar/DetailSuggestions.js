@@ -50,8 +50,8 @@ export default class DetailSuggestions extends Component {
         TTCEapi.getProductIdsInWishlist().then((response)=>{
           var item=this.state.getProductIdsInWishlist
           this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
-              console.log(this.state.getProductIdsInWishlist);
-              console.log(this.state.getProductIdsInWishlist.indexOf(12))
+              // console.log(this.state.getProductIdsInWishlist);
+              // console.log(this.state.getProductIdsInWishlist.indexOf(12))
        
           });
       });

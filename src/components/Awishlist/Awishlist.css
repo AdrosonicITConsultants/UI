@@ -132,7 +132,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    font-family: var(--PlayfairFont);
+    /* font-family: var(--PlayfairFont); */
     letter-spacing: 0.7px;
     /* font-size: 15px; */
 }
@@ -154,9 +154,9 @@
 
 .Wishlistpcode{
     color: forestgreen;
-    font-size: 14px;
+    font-size: 13px;
     font-family: var(--lato);
-    font-weight: normal;
+    font-weight: lighter;
 }
 
 .margintopcss{

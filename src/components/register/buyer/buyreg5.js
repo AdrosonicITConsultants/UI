@@ -34,11 +34,11 @@ export default class buyreg5 extends Component {
               message : "please fill mandatory fields"
             });
           }
-          else if(!pin.test(this.state.pincode) || this.state.pincode.length != 6   )
+          else if(!pin.test(this.state.pincode)   )
           {
             this.setState({
               showValidationpass: true,
-              message : "pincode should be of 6 digits."
+              message : "Invalid Pincode."
           });
           }
           else {

@@ -132,7 +132,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    /* font-family: var(--PlayfairFont); */
+    /* font-family: var(--la); */
     letter-spacing: 0.7px;
     /* font-size: 15px; */
 }

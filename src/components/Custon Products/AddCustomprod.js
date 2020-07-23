@@ -159,7 +159,7 @@ class AddCustomprod extends Component {
                      </Row>
                      <Row  noGutters={true}> 
                          <Col sm={12}>
-                             <p className="Descriptionipara"  numberOfLines={2}  >{data.product_spec}
+                             <p className="Descriptionipara regular"  numberOfLines={2}  >{data.product_spec}
                            </p>
                          </Col>
                      </Row>

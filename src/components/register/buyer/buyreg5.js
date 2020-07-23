@@ -25,7 +25,7 @@ export default class buyreg5 extends Component {
       }
 
       operation() {
-        var pin=/([1-9])$/;
+        var pin=/([0-9])$/;
        
     
       if (this.state.adl1 == "" || this.state.countryid == -1  ||  this.state.pincode == "") {
@@ -342,7 +342,7 @@ export default class buyreg5 extends Component {
                           //placeholder="firstname"
                           value={this.state.pincode}
                           name="pincode"
-                          maxlength="6"
+                          // maxlength="6"
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>

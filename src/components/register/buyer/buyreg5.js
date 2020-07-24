@@ -25,7 +25,7 @@ export default class buyreg5 extends Component {
       }
 
       operation() {
-        var pin=/([1-9])$/;
+        var pin=/([0-9])$/;
        
     
       if (this.state.adl1 == "" || this.state.countryid == -1  ||  this.state.pincode == "") {
@@ -34,11 +34,11 @@ export default class buyreg5 extends Component {
               message : "please fill mandatory fields"
             });
           }
-          else if(!pin.test(this.state.pincode) || this.state.pincode.length != 6   )
+          else if(!pin.test(this.state.pincode)   )
           {
             this.setState({
               showValidationpass: true,
-              message : "pincode should be of 6 digits."
+              message : "Invalid Pincode."
           });
           }
           else {
@@ -342,7 +342,7 @@ export default class buyreg5 extends Component {
                           //placeholder="firstname"
                           value={this.state.pincode}
                           name="pincode"
-                          maxlength="6"
+                          // maxlength="6"
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>

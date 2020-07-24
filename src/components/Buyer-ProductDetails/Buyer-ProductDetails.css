@@ -103,7 +103,7 @@
 .BPDSeemorelink a{
   color: #337ab7;
   text-decoration: none;
-  float: right;
+  /* float: right; */
   font-size: 18px;
 }
 .hrproductBPD{
@@ -166,6 +166,7 @@ scroll-behavior: smooth;
   text-decoration: none;
   font-size: 18px;
   font-weight: 600;
+  margin-top: 10px;
 }
 .BDPWashcare{
   color: cornflowerblue;
@@ -576,6 +577,14 @@ transform-origin: 50% 50%;
   .buttons .button{
     width: 100% !important;
     margin-bottom: 10px !important;
+  }
+  .BPDcontainer {
+    width: fit-content !important;
+  }
+  .Wishlistpdbtn{
+    height: 50px !important;
+    margin-top: 20px !important;
+    width: 100% !important;
   }
 
 }

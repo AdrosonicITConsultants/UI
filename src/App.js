@@ -45,6 +45,7 @@ import BuyerNotifications from './components/navbar/buyerNotify.js'
 import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.js';
 import SuccessPopup from './components/ModalComponent/SuccessModal';
 import Popup from './components/ModalComponent/EnguiryModal';
+import AllEnquiryList from './components/ArtistEnquiries/AllEnquiryList';
 
 
 function App() {
@@ -82,6 +83,8 @@ function App() {
           <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
           
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
+          <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
+
 
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}

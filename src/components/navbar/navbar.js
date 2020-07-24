@@ -6,7 +6,7 @@ import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
 import BuyerConnectedSuggestions from "./buyerSuggestions.js"
 import NotificationBuyerConnected from "./notificationBuyerCount.js"
-
+import ANavEnquiries from "../ArtistEnquiries/ANavEnquiry"
 
 
 import {
@@ -38,8 +38,11 @@ class NavbarComponent extends Component {
       isfavHovered: false,
       isSearchClicked :false,
       index: null,
+      enquiryopen: false,
 
     };
+    this.myenquiries = this.myenquiries.bind(this);
+
   }
   toggle = () => {
     this.setState({
@@ -105,6 +108,16 @@ class NavbarComponent extends Component {
 browserHistory.push("/MyProfile");
     
   }
+  myenquiries() {
+    browserHistory.push("/enquiriesList")
+    //  debugger;
+    //  console.log("Clicked");
+    //  this.setState({enquiryopen : !this.state.enquiryopen},()=>{
+    //    console.log(this.state.enquiryopen);
+
+    //  });
+     
+   }
 
   logout= (event) =>{
    this.props.dispatch(Actions.logout());
@@ -349,9 +362,10 @@ browserHistory.push("/MyProfile");
                 </span>
               ) : null}
             </li>
+
             <li className="menu-item">
               {userTypeId === 2 ? (
-                <button className="navButton navbtn2" style={{ width: "11em" }}>
+                <button className="navButton navbtn2" style={{ width: "11em" }} >
                   <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My Enquiries</span>
                 </button>
@@ -359,16 +373,25 @@ browserHistory.push("/MyProfile");
                 <button
                   className="navButtonA navbtn2A"
                   style={{ width: "11em" }}
+                  onClick={this.myenquiries}
                 >
                   <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My Enquiries</span>
                 </button>
               )}
+              {this.state.enquiryopen
+              ?
+              <div className="artistenquiries">
+                 <ANavEnquiries></ANavEnquiries>
+              </div>
+              :
+              <div>
+              </div>}
             </li>
+
             <li className="menu-item">
               <a href="#">
-                {console.log(user.profilePic != "")}
-                {console.log(user.profilePic != null)}
+
                 {userTypeId === 1 ? (
                   user.profilePic != null && user.profilePic != "" ? (
                     <img

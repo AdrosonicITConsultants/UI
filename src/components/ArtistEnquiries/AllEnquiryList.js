@@ -23,7 +23,7 @@ export class AllEnquiryList extends Component {
             <React.Fragment>
                 <NavbarComponent/>
                 <Container>
-                <Row noGutters={true} className="cpheadmarginenquiries">
+                <Row noGutters={true} className="">
                            <Col sm = "1">
                            <img
                                        src={logos.backarrowicon}

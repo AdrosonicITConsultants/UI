@@ -4,7 +4,9 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-import "./AllEnquiryList.css"
+import "./AllEnquiryList.css";
+import TTCEapi from '../../services/API/TTCEapi';
+
 
 
 
@@ -17,14 +19,23 @@ export class AllEnquiryList extends Component {
         this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
         this.changeRequestbtn = this.changeRequestbtn.bind(this);
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
-        
+        this.handleMoqEdit = this.handleMoqEdit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
         this.state = {
             selected:"BuyerDetails",
             buyersDetail: true,
             moqDetail: false,
             proformaDetails: false,
             qualityCheck:false,
-            changeRequest:false,
+            changeRequest:false, 
+            getMoqDeliveryTimes:[],
+            moqId : -1,
+            isMoqdetail:true,
+            moq:0,
+            ppu:0,
+            deliveryDesc:"",
+            additionalInfo:"ssss",
            
         }
     }
@@ -102,26 +113,65 @@ export class AllEnquiryList extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     } 
+    handleCluster(e) {
+      
+        // console.log(e.target.id);
+        var index = e.target.selectedIndex;
+        var optionElement = e.target.childNodes[index];
+        var option =  optionElement.getAttribute('moqId');
+        console.log(option);
+        
+        // this.setState({ [e.target.name]: e.target.value,moqId:option }, ()=> {
+        //   console.log(this.state.moqId);
+         
+          
+        // });
+      }
+
+      handleMoqEdit(){
+        
+            this.setState({
+                isMoqdetail:!this.state.isMoqdetail
+                
+            },()=>{
+                // this.checkSave();
+            });
+            
+        
+      }
+
+      
+
+      handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value }, () => {
+          console.log(this.state.moq);
+        });
+    }
+
+    componentDidMount(){
+   
+        TTCEapi.getMoqDeliveryTimes().then((response)=>{
+         this.setState({getMoqDeliveryTimes : response.data.data},()=>{
+             console.log(this.state.getMoqDeliveryTimes);
+        
+             // console.log(this.props.user);
+         });
+     });
+     
+     }
+
+
     render() {
         return (
             <React.Fragment>
                 <NavbarComponent/>
                 <Container>
                 <Row noGutters={true} className="cpheadmarginenquiries">
-                           <Col sm = "1">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                                   ></img>
-                          
-                          </Col>
-                          <Col sm="10" >
-                               <Row noGutters={true} className ="cp1heading bold fontplay ">
-                                   <Col md="12">
-                                        All Enquiries
-                                       </Col>
-                               </Row>
+                         
+                          <Col sm="12" >
+                             
                                <Row noGutters={true}>
                                     <Row noGutters={true}>
                                     <Col sm={1}>
@@ -251,15 +301,37 @@ export class AllEnquiryList extends Component {
                                                                 :null}
            {/* --------------------------------Buyer Detail----------------------------------------------                                                          */}
             {/* -------------------MOQ------------------------------------------------------------------------------ */}
-
+           
                                                             {this.state.moqDetail ?  
+                                                            
                                                             <>
+                                                             {this.state.isMoqdetail ? <img
+                                                                            src={logos.apedit}
+                                                                            className="aoctick"
+                                                                            style={{"cursor":"pointer" ,
+                                                                                 "position" : "absolute"}}
+                                                                            onClick={this.handleMoqEdit}
+                                                                    ></img> : 
+                                                                    <img
+                                                                            src={logos.done}
+                                                                            className="poctick"
+                                                                            style={{"cursor":"pointer",
+                                                                            "position" : "absolute"}}
+                                                                            onClick={this.handleMoqEdit}
+                                                                    ></img>}
                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                     <Col sm={6} className="Moqh1">
                                                                         Min Order Qnty:
                                                                     </Col>
                                                                     <Col sm={6} className="Moqh2">
-                                                                        70
+                                                                       <input 
+                                                                       id="moq"
+                                                                       className="width200 alignbox" 
+                                                                       type="number"
+                                                                       disabled={this.state.isMoqdetail} 
+                                                                        value={this.state.moq}
+                                                                        name="moq"
+                                                                        onChange={this.handleChange}/> 
                                                                     </Col>
                                                                 </Row>
 
@@ -268,7 +340,17 @@ export class AllEnquiryList extends Component {
                                                                      Price/unit:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
-                                                                 <i class="fa fa-inr" aria-hidden="true"></i>  7000
+                                                                 <i class="fa fa-inr" aria-hidden="true"></i> 
+                                                                 <input 
+                                                                 id="ppu"
+                                                                 className="width200 alignbox2"
+                                                                  type="number"
+                                                                  disabled={this.state.isMoqdetail} 
+                                                                   value={this.state.ppu}
+                                                                   name="ppu"
+                                                                   onChange={this.handleChange}
+                                                                   /> 
+                                                                  
                                                                  </Col>
                                                              </Row>
 
@@ -277,14 +359,23 @@ export class AllEnquiryList extends Component {
                                                                     Estimated delivery date:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2select">
-                                                                 <select name="cars" id="EDD" className="Moqh2selectheight">
-                                                                    <option value="edd1">immediate</option>
-                                                                    <option value="edd2">45 days from time of advance payment</option>
-                                                                    <option value="edd3">60 days from time of advance payment</option>
-                                                                    <option value="edd4">75 days from time of advance payment</option>
-                                                                    <option value="edd4">90 days from time of advance payment</option>
-
-                                                                    </select>
+                                                            
+                                                                    <select
+                                                                      disabled={this.state.isMoqdetail} 
+                                                                      value={this.state.deliveryDesc}
+                                                                    className="Moqh2selectheight" 
+                                                                    name="deliveryDesc"
+                                                                     onChange={(e) => this.handleCluster(e)}
+                                                                     onChange={this.handleChange}>
+                                                                         <option key = '0' moqId = '-1' selected >Select</option>
+                                                                         {this.state.getMoqDeliveryTimes.map((data) => 
+                                                                          <option id="deliveryTimeId" key ={data.id} 
+                                                                          moqId={data.id} 
+                                                                        
+                                                                          value={data.deliveryDesc}>
+                                                                              {data.deliveryDesc}
+                                                                              </option>)}
+                                                                 </select>  
                                                                  </Col>
                                                              </Row>
 
@@ -292,7 +383,14 @@ export class AllEnquiryList extends Component {
                                                                  <Col sm={12} className="Moqh1">
                                                                     Additional Note:
                                                                  </Col>
-                                                                 <p className="Moqh1p">aaaaaaaaaaaaaaaa ggga</p>
+                                                                 <p className="Moqh1p">
+                                                                     <textarea id="additionalInfo " 
+                                                                     name="additionalInfo"
+                                                                     value={this.state.additionalInfo}
+                                                                       disabled={this.state.isMoqdetail} 
+                                                                       onChange={this.handleChange}
+                                                                     className="width100p "></textarea>
+                                                                 </p>
                                                              </Row>
 
                                                              <Row noGutters={true} className=" Allenqlistbtnmt2">

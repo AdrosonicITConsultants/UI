@@ -402,6 +402,20 @@ class TTCEapi {
       });
   }
 
+  static getMoqDeliveryTimes() {
+    let url = ApiUrl + "/enquiry/getMoqDeliveryTimes";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getCountries() {
     let url = ApiUrl + "/register/getAllCountries";
 

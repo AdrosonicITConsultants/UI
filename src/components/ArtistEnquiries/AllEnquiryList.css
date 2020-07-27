@@ -105,13 +105,42 @@
     font-weight: 700;
 
 }
-
+.width100p:disabled{
+    border: transparent;
+    background-color: transparent;
+}
 .BDp{
     color: grey;
     font-size: 14px;
     font-weight: 700;
     overflow: hidden;
 }
+.width200{
+    width: 200px;
+}
+.width100p{
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.alignbox{
+    margin-left: 23px;
+    height: 34px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox2{
+    height: 34px;
+    margin-left: 10px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox3{
+    border: transparent;
+    width: 100%;
+    background: white;
+}
+
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;
@@ -163,6 +192,9 @@
         font-size: 13px;
 
     }  
+    .width200{
+        width: 150px;
+    }
    
 }
 @media screen and (max-width:767px){

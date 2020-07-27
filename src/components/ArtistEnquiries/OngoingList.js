@@ -1,0 +1,249 @@
+import React, { Component } from 'react'
+import { memoryHistory, browserHistory } from "../../helpers/history";
+import { Row, Col , Container, Button} from 'reactstrap';
+import { connect } from "react-redux";
+import NavbarComponent from "../navbar/navbar";
+import logos from "../../assets";
+import "./AllEnquiryList.css"
+import TTCEapi from '../../services/API/TTCEapi';
+import Moment from 'react-moment';
+
+
+export class OngoingList extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            enquiryStagesMTO :[],
+            stage: 3,
+            openEnquiries: [],
+            productCategories: [],
+            yarns : [],
+            enquiryStagesAvailable:[]
+
+        }
+        
+
+    }      
+    componentDidMount(){
+        TTCEapi.getProductUploadData().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response);
+                this.setState({productCategories: response.data.data.productCategories,
+                    yarns: response.data.data.yarns },()=>{
+                        TTCEapi.getOpenEnquiries().then((response1)=>{
+                            if(response1.data.valid)
+                            {
+                                console.log(response1.data.data);
+                                this.setState({openEnquiries:response1.data.data, dataload:true});
+                            }
+                        })
+                    });
+            }
+        })
+        TTCEapi.getEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesMTO:response.data.data})
+            }
+        })
+        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesAvailable:response.data.data})
+            }
+        })
+        
+        
+    } 
+    render() {
+        return (
+            <React.Fragment>
+                {this.state.dataload
+                ?
+                <>
+                {this.state.openEnquiries.map((item)=> 
+                <>
+                <hr></hr>
+                <Row noGutters={true}>
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                        <Row noGutters={true}>
+                            <Col sm="9">
+                                <div className="imageinlist"> 
+                                    <div className="imageinlist1"> 
+                                    {
+                                        item.productType === "Product"
+                                        ?
+                                        <img src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+
+                                        :
+                                        <img src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+
+
+                                    }
+
+                                    </div>
+                                    <a href="/" className="leEnqprodName">{item.productName}</a>
+                                    {/* <span ></span> */}
+                                    
+                                </div>
+                                <div>
+                                  <div noGutters={true} >
+                                      <Col className="leEnqid bold">
+                                      Enquiry Id : {item.enquiryCode}
+                                      </Col>
+                                  </div>
+                                  <div noGutters={true} >
+                                      <Col >
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.productCategoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.weftYarnId - 1 ].yarnDesc}  
+                                        {item.extraWeftYarnId > 0 
+                                        ?
+                                        <>
+                                        X  {this.state.yarns[item.extraWeftYarnId - 1 ].yarnDesc}
+                                        </>
+                                        :
+                                            <></>
+                                        }</span> 
+                                      </Col>
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          {item.productType === "Product"
+                                          ?
+                                          <>
+                                          Product Code : {item.productCode}   
+                                          </>
+                                          :
+                                          <>
+                                          Product Code : NA  
+                                          </>
+                                          }
+                                                                            
+                                      </Col>
+                                  </div>
+                               
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodtype ">
+                                          {item.productStatusId==2? "Available in stock"   : "Made to order"   }
+                                                                  
+                                      </Col>
+
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqbrandname ">{item.companyName}</span>                                   
+                                      </Col>
+                                  </div>
+                                </div>
+                            </Col>
+                            <Col sm="3" className="text-right">
+                                <div noGutters={true} >
+                                      <Col className="leEnqOrderAmount ">
+                                      Order Amount
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqAmount bold">
+                                        {item.totalAmount > 0 ? "₹"+ item.totalAmount : "NA"} 
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidDateStarted">
+                                      Date Started : 
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.startedOn}
+                                        </Moment>
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidLastUpdated">
+                                      Last Updated : 
+                                      <Moment format="YYYY-MM-DD">
+                                     {item.lastUpdated}
+                                        </Moment>
+                                        
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidEstDelivery">
+                                      Est. Date of delivery : 
+                                      {item.excpectedDate != null 
+                                      ?
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.excpectedDate}
+                                        </Moment>
+                                      :
+                                      "NA"
+                                      }
+                                      
+                                      </Col>
+                                </div>
+
+                                
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 leEnqstatus bold">
+                           Enquiry Status
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.productStatusId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesAvailable.map((item) => <li key={item.id} className={this.state.stage == item.id ? "is-active": " "} >{item.desc}</li> )     }
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesMTO.map((item) => <li key={item.id} className={this.state.stage == item.id ? "is-active": " "} >{item.desc}</li> )     }
+                            </ul>
+                                }
+
+                            </div>
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="col-xs-12 text-center leEnqshowmore">
+                        <a>show more details</a>
+                    </Col>
+                </Row>
+
+                <div className="colorbardiv">      
+                          <img src={logos.colorbar} className="colorbarimg"></img>
+                </div>
+                </>
+                )}
+                </>
+            :
+            <></>
+            }
+            
+                </React.Fragment>
+        )
+    }
+}
+
+export default OngoingList

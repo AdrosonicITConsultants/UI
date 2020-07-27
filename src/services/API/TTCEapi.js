@@ -1236,6 +1236,36 @@ class TTCEapi {
       });
   }
 
+  static getEnquirStagesforAvailable() {
+    let url = ApiUrl + "/enquiry/getEnquiryStagesForAvailableProduct";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getOpenEnquiries() {
+    let url = ApiUrl + "/enquiry/getOpenEnquiries";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   //#endregion
 }
 export default TTCEapi;

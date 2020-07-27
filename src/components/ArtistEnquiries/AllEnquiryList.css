@@ -19,14 +19,14 @@
     border: 1.5px solid black;
     width: 110px;
     top: 93px;
-    left: -20px;
+    left: 0px;
 }
 .selctedoptionhr2{
     position: absolute;
     border: 1.5px solid black;
     width: 116px;
     top: 93px;
-    left: 122px;
+    left: 142px;
 }
 .imageinlist{
     width: 140px;
@@ -112,6 +112,11 @@ font-size: 13px;
 }
 .progressbarfont{
     font-size: 10px;
+}
+
+.leEnqshowmore{
+    cursor: pointer;
+    color: black!important;
 }
 /* ///////////////////ProgressBAr////////////////////////// */
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {

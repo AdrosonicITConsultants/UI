@@ -46,7 +46,7 @@ import ArtistDetailSuggestions from './components/navbar/artistSearchSuggestion.
 import SuccessPopup from './components/ModalComponent/SuccessModal';
 import Popup from './components/ModalComponent/EnguiryModal';
 import AllEnquiryList from './components/ArtistEnquiries/AllEnquiryList';
-
+import SingleEnquiry from "./components/ArtistEnquiries/SingleEnquiry";
 
 function App() {
   
@@ -84,6 +84,7 @@ function App() {
           
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
+          <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
 
 
 

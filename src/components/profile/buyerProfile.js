@@ -508,7 +508,8 @@ debugger;
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
 
-                                                        {this.state.isDesc ? <img
+                                                        {this.state.isDesc ? 
+                                                        <img
                                                                 src={logos.edit}
                                                                 className="editdesc editbutton"
                                                                 style={{"cursor":"pointer"}}

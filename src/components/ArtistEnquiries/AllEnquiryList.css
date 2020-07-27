@@ -290,12 +290,93 @@ font-size: 13px;
     font-weight: 700;
 
 }
-
+.width100p:disabled{
+    border: transparent;
+    background-color: transparent;
+}
 .BDp{
-    color: grey;
+    color: darkslategrey;
     font-size: 14px;
-    font-weight: 700;
+    /* font-weight: 700; */
     overflow: hidden;
+}
+.width200{
+    width: 200px;
+}
+.width100p{
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.alignbox{
+    margin-left: 23px;
+    height: 34px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox:disabled{
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+.alignbox2{
+    height: 34px;
+    margin-left: 10px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox2:disabled{
+    border: 1px solid transparent;
+    background: transparent;
+}
+.alignbox3{
+    border: transparent;
+    width: 100%;
+    background: white;
+}
+.savemoqbtn:disabled{
+    background-color: grey;
+}
+.sendmoqbtn:disabled{
+    background-color: grey;
+}
+
+.PIinput{
+    width: 90%;
+    height: 39px;
+    background: whitesmoke;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-top: 6px;
+}
+
+.PIcolmt{
+    margin-top: 75px;
+}
+
+.PIcol2mt{
+    margin-top: 35px;
+}
+.currencyinput {
+    border: 1px inset #ccc;
+    padding-bottom: 1px;
+}
+.currencyinput input {
+    border: 0;
+}
+
+.rssymbol{
+    position: absolute;
+    /* margin-bottom: 10px; */
+    margin-top: 9px;
+    padding: 6px;
+}
+.previewandpi{
+    width: 34%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: 1px;
+    margin-top: 10%;
 }
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
@@ -348,6 +429,9 @@ font-size: 13px;
         font-size: 13px;
 
     }  
+    .width200{
+        width: 150px;
+    }
    
 }
 @media screen and (max-width:767px){
@@ -387,7 +471,7 @@ font-size: 13px;
     }
     .sendmoqbtn{
         position: none;
-        margin-left: 100px;
+        margin-left: 30px;
     
     }
     .BdImgCol{

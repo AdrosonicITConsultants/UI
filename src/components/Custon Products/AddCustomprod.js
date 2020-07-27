@@ -52,14 +52,16 @@ class AddCustomprod extends Component {
         browserHistory.push("/home"); 
     }  
     handleDeleteAllItem(){
-        if(window.confirm("Remove this item from wishlist?")){
+        // if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInbuyerCustom().then((response)=>{
                 this.setState({deleteAllProductsInbuyerCustom : response.data},()=>{
                     console.log(this.state.deleteAllProductsInbuyerCustom);
+                    document.getElementById('id01').style.display='none';
                     window.location.reload();
                 });
             });
-        }
+            
+        // }
       
     }
     componentDidMount(){
@@ -73,6 +75,14 @@ class AddCustomprod extends Component {
          });
      });
      }
+
+     ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+
+       ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
     render() {
         return (
    
@@ -109,13 +119,27 @@ class AddCustomprod extends Component {
                          <Col md ="6" >
                   <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items:{this.state.buyergetAllProducts.length} </p> 
                          </Col>
-                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()}>
+                       
+                         <Col md ="6"   onClick={this.ToggleDelete}>
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
                               <span className="spanhome">Clear my designs</span></button>
 
                              </p>
                          </Col>
+                         <div id="id01" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to clear designs ?</h3>
+                                <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
+                                <span onClick={() => this.handleDeleteAllItem()} className="deleteModalOkayButton">Clear</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                      
                          <hr className="hrlineasd "></hr>
                      </Row>
                      {this.state.buyergetAllProducts ? ( ( this.state.buyergetAllProducts.map((data) => ( 
@@ -150,9 +174,11 @@ class AddCustomprod extends Component {
                      <Row noGutters={true}>
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey",fontWeight:"400"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
+                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftDye? data.weftDye.dyeDesc:null} 
                            {data.warpDye?
-                            data.warpDye.dyeDesc:null} X <span></span>
+                           " X":null}  <span></span>
+                           {data.warpDye?
+                            data.warpDye.dyeDesc:null}  {data.extraWeftDye? " X":null} <span></span>
                            {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
                           
                             </Col>

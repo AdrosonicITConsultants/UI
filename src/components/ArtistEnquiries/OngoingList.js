@@ -227,7 +227,7 @@ export class OngoingList extends Component {
                 </Row>
                 <Row>
                     <Col className="col-xs-12 text-center leEnqshowmore">
-                        <a>show more details</a>
+                        <a href={"/"} className="leEnqshowmore">show more details</a>
                     </Col>
                 </Row>
 

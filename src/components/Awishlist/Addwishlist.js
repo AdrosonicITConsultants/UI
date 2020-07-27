@@ -68,7 +68,7 @@ class AddWishlist extends Component {
     }
   
     handleDeleteItem(id){
-        if(window.confirm("Remove this item from wishlist?")){
+        // if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(id).then((response)=>{
             if (response.data.valid) {
                 customToast.success("Product removed from wishlist!", {
@@ -77,6 +77,7 @@ class AddWishlist extends Component {
                 });
                 this.setState({deleteProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteProductsInWishlist);
+                    document.getElementById('id02').style.display='none';
                     window.location.reload();
                     // this.componentDidMount();
                 
@@ -92,21 +93,38 @@ class AddWishlist extends Component {
            
         
         });
-    }
+    // }
       
     }
 
     handleDeleteAllItem(){
-        if(window.confirm("Remove this item from wishlist?")){
+        // if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
                 this.setState({deleteAllProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteAllProductsInWishlist);
+                    document.getElementById('id01').style.display='none';
                     window.location.reload();
                 });
             });
-        }
+        // }
       
     }
+
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+
+       ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
+
+       ToggleDelete1 = () => {
+        document.getElementById('id02').style.display='block';
+       }
+
+       ToggleDeleteClose1 = () => {
+        document.getElementById('id02').style.display='none';
+       }
 
       componentDidMount(){
    
@@ -152,13 +170,25 @@ class AddWishlist extends Component {
                          <Col md ="6" >
                   <p style={{float:"left"}} className="Totalitemsinwishlist" id="pageNumbers">Total Items: {this.state.getProductsInWishlist.length}</p> 
                          </Col>
-                         <Col md ="6"  onClick={() => this.handleDeleteAllItem()} >
+                         <Col md ="6" onClick={this.ToggleDelete}>
                              <p style={{float:"right"}}>
                              <button className="clearmywishlist"><img className="homeiconwishlist" src={logos.clearmywishlist}/>
                               <span className="spanhome">Clear my wishlist</span></button>
 
                              </p>
                          </Col>
+                         <div id="id01" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to clear wishlist ?</h3>
+                                <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
+                                <span onClick={() => this.handleDeleteAllItem()} className="deleteModalOkayButton">Clear</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
                          <hr className="hrlineasd "></hr>
                      </Row>
             
@@ -219,9 +249,22 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.handleDeleteItem(data.product.id)} >
+                         <Col sm={12}  className="Removefromwishlist" onClick={this.ToggleDelete1} >
                             Remove from wish list <img src={logos.removefromwishlist} />
                             </Col>
+                            <div id="id02" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to remove from wishlist ?</h3>
+                                <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span onClick={() => this.handleDeleteItem(data.product.id)} className="deleteModalOkayButton">Remove</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+
                              </Row>  
                         <Row noGutters={true}>
                             <Col sm={12} >

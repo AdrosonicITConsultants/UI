@@ -69,7 +69,8 @@ export default class AntaranCoDesignNavbar extends Component {
             } onClick={this.handleSelect}>Regions</h1></Link>
                 </Col>
                 <Col sm={{size:2}} className="Vcheading">
-                <Link to="/Antaran/categories">  <h1 className={
+                <Link to="/Antaran/categories"> 
+                 <h1 className={
                        (this.state.selected == "Categories"
             ? "selectedNavbarTab"
             : "")

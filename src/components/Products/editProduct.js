@@ -5,9 +5,9 @@ import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
-import { Row, Col, Container, Label, Button } from "reactstrap";
+import { Row, Col, Container, Label, Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import logos from "../../assets";
-import ReactModal from "react-modal";
+// import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import customToast from "../../shared/customToast";
@@ -16,8 +16,8 @@ import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
 import "./editProduct.css"
-import ModalComponent from "../modal/modal";
-import Modal from 'react-bootstrap/Modal'
+// import ModalComponent from "../modal/modal";
+// import Modal from 'react-bootstrap/Modal'
 
 const customStyles3 = {
   content: {
@@ -82,6 +82,7 @@ const initialState = {
   isEdit: false,
   modal :false,
   producrid : 0,
+  modalDelete : true,
 };
 
 export default class addProduct extends Component {
@@ -768,7 +769,7 @@ else {
                              ></img>
                            </div>
                            <Row className="ImageEditor">
-                             <ReactModal
+                             {/* <ReactModal
                                isOpen={this.state["modal" + num]}
                                contentLabel="Minimal Modal Example"
                                className="Modal"
@@ -789,7 +790,7 @@ else {
                                    })
                                  }
                                ></ImageEditorTTCE>
-                             </ReactModal>
+                             </ReactModal> */}
                            </Row>
                          </div>
                        );
@@ -1144,6 +1145,7 @@ else {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
+                      document.getElementById('id02').style.display='none';
                       this.Cancel();
                       this.setState({
                         SaveDisabled: false
@@ -1182,14 +1184,30 @@ else {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
+                      document.getElementById('id01').style.display='none';
                       this.Cancel();
                       this.setState({
                         SaveDisabled: false
                       })
                     }
                   })
+                 }   
+                 
+                 ToggleDelete = () => {
+                  document.getElementById('id01').style.display='block';
                  }
-                
+
+                 ToggleDeleteClose = () => {
+                  document.getElementById('id01').style.display='none';
+                 }
+
+                 ToggleSave = () => {
+                  document.getElementById('id02').style.display='block';
+                 }
+
+                 ToggleSaveClose = () => {
+                  document.getElementById('id02').style.display='none';
+                 }
                           
                 render() {
                    return (
@@ -3481,13 +3499,29 @@ else {
                                      md={{ size: "4" }}
                                      className="col-4 text-left "
                                    >
+                                     <div class="w3-container">
                                      <button
-                                       onClick={() =>{ this.Save()}}
+                                       onClick={this.ToggleSave}
                                        className="saveBtnProduct"
                                        disabled={this.state.SaveDisabled}
                                      >
                                        Save
                                      </button>
+
+                                     <div id="id02" class="w3-modal">
+                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div class="w3-container">
+                                          <h3 className="deleteModalHeader">Are you sure you want to save ?</h3>
+                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                          <div className="deleteModalButtonOuterDiv">
+                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
+                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton">Save</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     </div>
+                                    </div>
+
                                    </Col>
                                  </Row>
                                </Col>
@@ -3521,11 +3555,30 @@ else {
                                      md={{ size: "6" }}
                                      className="col-4 text-center "
                                    >
+                                     <div class="w3-container">
                                      <button
-                                       onClick={this.Delete}
+                                      onClick={this.ToggleDelete}
                                        className="cancelBtnProduct"
                                      >Delete
                                      </button>
+                                    
+                                     <div id="id01" class="w3-modal">
+                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div class="w3-container">
+                                          {/* <span 
+                                          onClick={this.ToggleDeleteClose} 
+                                          class="w3-button w3-display-topright">x</span> */}
+                                          <h3 className="deleteModalHeader">Are you sure you want to delete ?</h3>
+                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                          <div className="deleteModalButtonOuterDiv">
+                                            <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
+                                            <span onClick={this.Delete} className="deleteModalOkayButton">Delete</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     </div>
+                                    </div>
+
                                    </Col>
                                    <Col
                                      sm={{ size: "6" }}
@@ -3566,50 +3619,9 @@ else {
                              </Row>
                            </div>
                          </Row>
-                         <ReactModal
-                               isOpen={this.state.modal5}
-                               contentLabel="Minimal Modal Example"
-                               className="Modal"
-                               style={customStyles3}
-                               // onRequestClose={this.handleCloseWrongPasswordModal}
-                             >
-                                <div className="modalconfirm">
-                                  <Row noGutters={true} className="text-center font20">
-                                    Are you sure you want to save changes
-                                  </Row>
-                                  <Row noGutters={true}>  
-                                    <Col sm={{size:"8"}}>
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      cancel
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      Ok
-                                    </Col>
-                                  </Row>
-                                </div>
-                             </ReactModal>
-                              
-                        {/* <Modal show={this.state.modal5} onClick={()=>{this.handleClose()}}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={()=>{this.handleClose()} }>
-                              Close
-                            </Button>
-                            <Button variant="primary" onClick={()=>{this.handleClose()}}>
-                              Save Changes
-                            </Button>
-                          </Modal.Footer>
-                        </Modal> */}
-
                        </Container>
                        <Footer></Footer>
-                      
-                   
-
+        
                      </React.Fragment>
                    );
               }

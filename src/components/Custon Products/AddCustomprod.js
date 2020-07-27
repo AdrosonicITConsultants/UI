@@ -150,9 +150,11 @@ class AddCustomprod extends Component {
                      <Row noGutters={true}>
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey",fontWeight:"400"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
+                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftDye? data.weftDye.dyeDesc:null} 
                            {data.warpDye?
-                            data.warpDye.dyeDesc:null} X <span></span>
+                           " X":null}  <span></span>
+                           {data.warpDye?
+                            data.warpDye.dyeDesc:null}  {data.extraWeftDye? " X":null} <span></span>
                            {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
                           
                             </Col>

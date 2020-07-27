@@ -1,6 +1,186 @@
-.cpheadmarginenquiries{
+.navoncon{
+    width: 132px;
+    float: left;
+    font-size: 20px;
+    cursor: pointer;
+}
+.oncoselected{
     
 }
+.onconotselected{
+
+}
+.enquiryoptionhr{
+    width: 90%;
+    margin-top: 10px!important;
+}
+.selctedoptionhr{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 110px;
+    top: 93px;
+    left: -20px;
+}
+.selctedoptionhr2{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 116px;
+    top: 93px;
+    left: 122px;
+}
+.imageinlist{
+    width: 140px;
+    float: left;
+    text-align: center;
+    font-size: 12px;
+}
+.imageinlist1{
+    width: 120px;
+    height: 120px;
+    overflow-y: hidden;
+    margin: 0 auto ;
+    margin-bottom: 10px;
+}
+.enquiryimage{
+    width: 100%;
+}
+.leEnqid{
+    font-size: 22px;
+}
+.leEnqspun{
+    font-size: 18px;
+    color: #8e8e8e;
+
+}
+.leEnqprodName{
+    color: blue;
+
+}
+.leEnqtype{
+    font-size: 18px;
+}
+.leEnqprodcode{
+    font-size: 16px;
+    color: #8e8e8e;
+}
+.leEnqprodtype{
+color: magenta;
+font-size: 13px;
+
+}
+.leEnqprodbn{
+    color: black;
+    font-size: 13px;
+}
+.leEnqbrandname{
+    color: blue;
+    font-size: 13px;
+}
+.leEnqOrderAmount{
+    font-size: 12px;
+    color: #8e8e8e;
+}
+.leEnqAmount{
+    font-size: 35px;
+
+}
+.leEnqidDateStarted{
+    font-size: 13px;
+    color: #8e8e8e;
+
+}
+.leEnqidLastUpdated{
+    font-size: 13px;
+    color: rgb(73, 233, 81);
+
+}
+.leEnqidEstDelivery{
+    font-size: 13px;
+    color: cyan;
+
+}
+.leEnqstatus{
+    font-size: 22px;
+
+}
+.colorbarimg{
+    width:100%;
+}
+.colorbardiv{
+    height: 10px;
+    overflow-y: hidden;
+}
+.progressbarfont{
+    font-size: 10px;
+}
+/* ///////////////////ProgressBAr////////////////////////// */
+.multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
+    /* content: counter(stepNum); */
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
+    background-color: #ededed;
+  }
+  
+  .multi-steps {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .multi-steps > li {
+    /* counter-increment: stepNum; */
+    text-align: center;
+    display: table-cell;
+    position: relative;
+    color: green;
+  }
+  .multi-steps > li:before {
+    /* content: "\f00c";
+    content: "\2713;";
+    content: "\10003";
+    content: "\10004"; */
+    content: no-close-quote;
+    display: block;
+    margin: 0 auto 14px;
+    background-color:green;
+    width: 14px;
+    height: 14px;
+    line-height: 32px;
+    text-align: center;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: green;
+    border-radius: 50%;
+  }
+  .multi-steps > li:after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: green;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    z-index: -1;
+  }
+  .multi-steps > li:last-child:after {
+    display: none;
+  }
+  .multi-steps > li.is-active:before {
+    background-color: green;
+    border-color: green;
+  }
+  .multi-steps > li.is-active ~ li {
+    color: #808080;
+  }
+  .multi-steps > li.is-active ~ li:before {
+    background-color: #ededed;
+    border-color: #ededed;
+  }
+  
+
+/* ///////////////////ProgressBAr////////////////////////// */
 
 .Allenqlistbtn{
     width: 100%;
@@ -110,9 +290,9 @@
     background-color: transparent;
 }
 .BDp{
-    color: grey;
+    color: darkslategrey;
     font-size: 14px;
-    font-weight: 700;
+    /* font-weight: 700; */
     overflow: hidden;
 }
 .width200{
@@ -129,18 +309,70 @@
     border: 1px solid lightgrey;
 }
 
+.alignbox:disabled{
+    border: 1px solid transparent;
+    background-color: transparent;
+}
 .alignbox2{
     height: 34px;
     margin-left: 10px;
     border: 1px solid lightgrey;
 }
 
+.alignbox2:disabled{
+    border: 1px solid transparent;
+    background: transparent;
+}
 .alignbox3{
     border: transparent;
     width: 100%;
     background: white;
 }
+.savemoqbtn:disabled{
+    background-color: grey;
+}
+.sendmoqbtn:disabled{
+    background-color: grey;
+}
 
+.PIinput{
+    width: 90%;
+    height: 39px;
+    background: whitesmoke;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-top: 6px;
+}
+
+.PIcolmt{
+    margin-top: 75px;
+}
+
+.PIcol2mt{
+    margin-top: 35px;
+}
+.currencyinput {
+    border: 1px inset #ccc;
+    padding-bottom: 1px;
+}
+.currencyinput input {
+    border: 0;
+}
+
+.rssymbol{
+    position: absolute;
+    /* margin-bottom: 10px; */
+    margin-top: 9px;
+    padding: 6px;
+}
+.previewandpi{
+    width: 34%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: 1px;
+    margin-top: 10%;
+}
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;
@@ -234,7 +466,7 @@
     }
     .sendmoqbtn{
         position: none;
-        margin-left: 100px;
+        margin-left: 30px;
     
     }
     .BdImgCol{

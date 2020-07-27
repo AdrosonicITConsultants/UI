@@ -113,6 +113,7 @@ import artisianSelfLogo from "./Artisan Self Design Icon.svg"
 import antaranCoDesignLogo from "./Antaran Co design Icon.svg"
 import catelogBackground from "./Cluster back ground .svg"
 import backdrop from "./backdrop-blur.svg"
+import colorbar from "./topcolorbar.svg"
 
 import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
 import whitearrow from "./whitearrow.svg"
@@ -129,6 +130,7 @@ import CustomDesignIcons from "./Custom Design Icons.svg"
 import Iconfeatheredit3 from "./Icon feather-edit-3.png"
 import whitecustomdesignicon from "./white custom design icon for black button .svg"
 export default {
+  colorbar,
   whitecustomdesignicon,
   Iconfeatheredit3,
   CustomDesignIcons,

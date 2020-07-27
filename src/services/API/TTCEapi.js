@@ -1221,6 +1221,21 @@ class TTCEapi {
  }
   //#endregion
 
+  static getEnquirStages() {
+    let url = ApiUrl + "/enquiry/getEnquiryStages";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   //#endregion
 }
 export default TTCEapi;

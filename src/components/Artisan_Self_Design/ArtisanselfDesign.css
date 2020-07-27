@@ -49,7 +49,7 @@
     color: lightslategray;
 }
 .Vcheading h1{
-    font-size: 35px;
+    font-size: 30px;
     /* font-weight: 700; */
     font-family: auto;
     text-align: left;
@@ -79,6 +79,97 @@
 .SelectCategory option{
   font-size: 25px;
  }
+ @media (max-width: 767px) and (min-width:431px) {
+  .Cardlayout {
+    width: 80% !important;
+  }
+  .card-img-top {
+    width: 100% !important;
+    object-fit: cover;
+  }
+  .asdthreadbg{
+    height: 267px !important;
+  }
+  .Asdh1 h1 {
+    font-size: 40px !important;
+  }
+  .Asdh1 p {
+    font-size: 26px;
+  }
+  .BPDAntaranlogo{
+    height: 34px !important;
+  }
+  .Asdh1 {
+    margin-top: 3px;
+  }
+  .Asdbg {
+    height: 265px;
+    width: 100%;
+    float: none;
+}
+.ViewColtext p {
+  margin-top: -43px;
+  color: b;
+}
+.selectedNavbarTab {
+  color: black !important;
+}
+.Vcheading h1 {
+  color: black;
+  font-size: 25px;
+}
+.Artisianleft{
+  margin-left: -10px !important;
+}
+.colorWhite h1{
+  color: white !important;
+}
+ }
+
+
+ @media (max-width: 430px) {
+  .asdthreadbg{
+    height: 267px !important;
+  }
+  .Asdh1 h1 {
+    font-size: 40px !important;
+  }
+  .Asdh1 p {
+    font-size: 26px;
+  }
+  .BPDAntaranlogo{
+    height: 34px !important;
+  }
+  .Asdh1 {
+    margin-top: 3px;
+  }
+  .Asdbg {
+    height: 265px;
+    width: 100%;
+    float: none;
+}
+.ViewColtext p {
+  margin-top: -43px;
+  color: white;
+}
+.selectedNavbarTab {
+  color: #ff9d9d !important;
+}
+.Vcheading h1 {
+  color: black;
+  font-size: 25px;
+}
+.Artisianleft{
+  margin-left: -10px !important;
+}
+.Cardlayout {
+  width: 77% !important;
+}
+.card-img-top {
+  min-width: 0px !important;
+  width: 100% !important;
+}
+}
 /* --------Artisian Self Design Region Css start------------ */
 .card-img-top{
   width: auto;
@@ -135,7 +226,7 @@ font-family: auto;
     text-transform: uppercase;
     border: 1px solid transparent;
   }
-@media only screen and ( max-width: 768px ) and ( min-width: 426px ){
+/* @media only screen and ( max-width: 768px ) and ( min-width: 767px ){
     .Cardlayout{
         width: 100% !important;
            }
@@ -149,13 +240,14 @@ font-family: auto;
         .btnexp2{
             margin-right: 97px !important;
         }
-}
+} */
 @media only screen and ( max-width: 1024px ) and ( min-width: 769px ){
     .Vcheading h1{
         font-size: 29px;
       margin-left: 10px;}
     
 }
+
 /* --------Artisian Self Design Region Css End------------ */
 .Rowtop{
     margin-top: 30px;

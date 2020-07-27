@@ -1,0 +1,391 @@
+.navoncon{
+    width: 132px;
+    float: left;
+    font-size: 20px;
+    cursor: pointer;
+}
+.oncoselected{
+    
+}
+.onconotselected{
+
+}
+.enquiryoptionhr{
+    width: 90%;
+    margin-top: 10px!important;
+}
+.selctedoptionhr{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 110px;
+    top: 93px;
+    left: -20px;
+}
+.selctedoptionhr2{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 116px;
+    top: 93px;
+    left: 122px;
+}
+.imageinlist{
+    width: 140px;
+    float: left;
+    text-align: center;
+    font-size: 12px;
+}
+.imageinlist1{
+    width: 120px;
+    height: 120px;
+    overflow-y: hidden;
+    margin: 0 auto ;
+    margin-bottom: 10px;
+}
+.enquiryimage{
+    width: 100%;
+}
+.leEnqid{
+    font-size: 22px;
+}
+.leEnqspun{
+    font-size: 18px;
+    color: #8e8e8e;
+
+}
+.leEnqprodName{
+    color: blue;
+
+}
+.leEnqtype{
+    font-size: 18px;
+}
+.leEnqprodcode{
+    font-size: 16px;
+    color: #8e8e8e;
+}
+.leEnqprodtype{
+color: magenta;
+font-size: 13px;
+
+}
+.leEnqprodbn{
+    color: black;
+    font-size: 13px;
+}
+.leEnqbrandname{
+    color: blue;
+    font-size: 13px;
+}
+.leEnqOrderAmount{
+    font-size: 12px;
+    color: #8e8e8e;
+}
+.leEnqAmount{
+    font-size: 35px;
+
+}
+.leEnqidDateStarted{
+    font-size: 13px;
+    color: #8e8e8e;
+
+}
+.leEnqidLastUpdated{
+    font-size: 13px;
+    color: rgb(73, 233, 81);
+
+}
+.leEnqidEstDelivery{
+    font-size: 13px;
+    color: cyan;
+
+}
+.leEnqstatus{
+    font-size: 22px;
+
+}
+.colorbarimg{
+    width:100%;
+}
+.colorbardiv{
+    height: 10px;
+    overflow-y: hidden;
+}
+.progressbarfont{
+    font-size: 10px;
+}
+/* ///////////////////ProgressBAr////////////////////////// */
+.multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
+    /* content: counter(stepNum); */
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
+    background-color: #ededed;
+  }
+  
+  .multi-steps {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .multi-steps > li {
+    /* counter-increment: stepNum; */
+    text-align: center;
+    display: table-cell;
+    position: relative;
+    color: green;
+  }
+  .multi-steps > li:before {
+    /* content: "\f00c";
+    content: "\2713;";
+    content: "\10003";
+    content: "\10004"; */
+    content: no-close-quote;
+    display: block;
+    margin: 0 auto 14px;
+    background-color:green;
+    width: 14px;
+    height: 14px;
+    line-height: 32px;
+    text-align: center;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: green;
+    border-radius: 50%;
+  }
+  .multi-steps > li:after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: green;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    z-index: -1;
+  }
+  .multi-steps > li:last-child:after {
+    display: none;
+  }
+  .multi-steps > li.is-active:before {
+    background-color: green;
+    border-color: green;
+  }
+  .multi-steps > li.is-active ~ li {
+    color: #808080;
+  }
+  .multi-steps > li.is-active ~ li:before {
+    background-color: #ededed;
+    border-color: #ededed;
+  }
+  
+
+/* ///////////////////ProgressBAr////////////////////////// */
+
+.Allenqlistbtn{
+    width: 100%;
+    text-align: center;
+    color: goldenrod;
+    font-size: 15px;
+    background: white;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    height: 50px;
+    padding: 12px;
+}
+
+.Allenqlistbtn2{
+    width: 100%;
+    text-align: center;
+    color: brown;
+    font-size: 17px;
+    background: pink;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    height: 50px;
+    padding: 12px;
+    font-weight: bold;
+}
+.moqdetailCard{
+    /* text-align: center; */
+    box-shadow: 0px 3px 15px 0px #d8d6d6;
+    padding: 10px;
+}
+
+.Allenqlistbtnmt{
+    margin-top: 50px;
+}
+
+.Allenqlistbtnmt2{
+    margin-top: 20px;
+}
+.Moqh1{
+    font-size: 25px;
+    color: goldenrod;
+    font-weight: 600;
+}
+.Moqh2{
+    font-size: 25px;
+    color: black;
+    font-weight: 600;
+}
+.Moqh2select{
+    font-size: 15px;
+}
+.Moqh2selectheight {
+     height: 34px;
+     border: 1px solid lightgrey;
+     font-weight: 700;
+    }  
+.Moqh1p{
+    padding: 17px;
+    font-size: 15px;
+}
+.savemoqbtn{
+    color: white;
+    font-size: 15px;
+    /* position: absolute; */
+    float: right;
+    padding: 5px;
+    width: 70px;
+    border-radius: 32px;
+    border: 1px solid lightblue;
+    background: rgb(30 144 255 / 88%);
+}
+.sendmoqbtn{
+    color: white;
+    font-size: 15px;
+    /* position: absolute; */
+    /* left: 0; */
+    padding: 5px;
+    width: 70px;
+    border-radius: 32px;
+    border: 1px solid lightblue;
+    background: rgb(51 0 255 / 88%);;
+}
+
+.BuyerDetailsh1{
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.BdImg{
+    height: 76px;
+    border-radius: 52px;
+    width: 76px;
+    margin-top: 12px;
+    /* margin: 10px; */
+    /* padding: 0px 0px 0px 0px; */
+    margin-bottom: 16px;
+}
+.BDh1{
+    
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.BDp{
+    color: grey;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+}
+@media screen and (max-width:1200px) and (min-width:990px){
+    .Allenqlistbtn {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Allenqlistbtn2 {
+        font-size: 13px;
+        height: 53px;
+    }
+   .Moqh2selectheight {  
+    height: 34px;
+    width: 241px;
+    font-size: 12px;
+
+    }
+    .Moqh1{
+        font-size: 16px;
+    }
+    .Moqh2{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:991px) and (min-width:768px){
+    .Moqh2selectheight {
+        height: 34px;
+        width: 174px;
+        font-size: 9px;
+    } 
+    .Allenqlistbtn {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Allenqlistbtn2 {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Moqh1{
+        font-size: 16px;
+    }
+    .Moqh2{
+        font-size: 16px;
+    } 
+    .BDh1{
+        font-size: 15px;
+    }
+    
+    .BDp{
+        font-size: 13px;
+
+    }  
+   
+}
+@media screen and (max-width:767px){
+.moqdetailCard{
+    text-align: center;
+}
+.Moqh1{
+    font-size: 16px;
+}
+.Moqh2{
+    font-size: 16px;
+} 
+.Moqh2selectheight {
+    height: 34px;
+    width: 211px;
+    font-size: 10px;
+} 
+.savemoqbtn{
+    /* position: absolute; */
+    margin-right: 100px;
+
+}
+.sendmoqbtn{
+    /* position: absolute; */
+    margin-left: 100px;
+
+}
+.BdImgCol{
+    text-align: center;
+}
+}
+@media screen and (max-width:320px){
+    .savemoqbtn{
+        position: none;
+        margin-right: 49px !important;
+    
+    }
+    .sendmoqbtn{
+        position: none;
+        margin-left: 100px;
+    
+    }
+    .BdImgCol{
+        text-align: center;
+    }
+}

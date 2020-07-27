@@ -301,11 +301,14 @@ class BuyersProductDetails extends Component {
                 :null
                }
                 </p>
-     </Col>
-     <p className="BPDSeemorelink">
+                <p className="BPDSeemorelink">
      <a href="#productdetail">See all product details</a>
-     <hr className="hrlineBPD "></hr>
-     </p>
+     
+     </p>   
+
+     </Col>
+     <hr className="hrlineBPD "></hr>     
+    
    
    </Row>
    <Row noGutters="true">
@@ -347,7 +350,7 @@ class BuyersProductDetails extends Component {
     
  
     {(this.state.isAddedtoWishlist )? ( 
-       <div class="buttons">
+       <div class="buttons Wishlistpdbtn">
                        <button   onClick={() => this.handleRemovefromWishlist(this.state.ProductData.id)}>
                          <span>{!this.state.isAddedtoWishlist? 'Add to Wishlist' : 'Wishlisted'}</span>
                            <span  className="onclickwish">
@@ -625,17 +628,18 @@ class BuyersProductDetails extends Component {
            
             </Row>
 {/* -------------------More saree--------------------------- */}
-
-<Row noGutters={true}>
+{this.state.getProductCategoryAndClusterProducts.length > 0 ? 
+  <Row noGutters={true}>
   <Col sm={12}>
     <h3 className="MoresareeBPD">More Sarees From {this.state.ProductData.clusterName}</h3>
   </Col>
 </Row>
+  :null}
 
 <Row noGutter={true} >
 
 <div className="col-sm-1 "></div>
-{console.log(this.state.getProductCategoryAndClusterProducts)}
+{/* {console.log(this.state.getProductCategoryAndClusterProducts)} */}
  {this.state.getProductCategoryAndClusterProducts.length > 0 ?
   this.state.getProductCategoryAndClusterProducts.map((data) => {
     return(
@@ -648,7 +652,8 @@ class BuyersProductDetails extends Component {
   </Col>
   
    </>)
-   }):null
+   }):
+  null
   
   }
 </Row>

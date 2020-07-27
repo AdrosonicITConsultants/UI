@@ -72,7 +72,16 @@
 .navProfileA:hover{
 	box-shadow: 0px 0px 15px -2px #000000;
 }
+.artistenquiries{
+	right: -90px;
+    position: absolute;
+    width: 565px;
+    top: 73px;
+	border: 0.5px solid #000000;
+	background-color: white;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
 
+}
 .navButtonImg {
 	/* margin-left: 10px; */
     margin-top: -3px;

@@ -345,8 +345,9 @@ font-size: 13px;
     height: 39px;
     background: whitesmoke;
     border: 1px solid transparent;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     margin-top: 6px;
+    /* margin-left: 17px; */
 }
 
 .PIcolmt{
@@ -365,19 +366,40 @@ font-size: 13px;
 }
 
 .rssymbol{
-    position: absolute;
-    /* margin-bottom: 10px; */
-    margin-top: 9px;
-    padding: 6px;
+    border: 1px solid transparent;
+    padding: 10px;
+    background: whitesmoke;
+
+}
+.rssymboldis{
+    border: 1px solid transparent;
+    padding: 10px;
+    background: transparent;
+
 }
 .previewandpi{
-    width: 34%;
+    width: 38%;
     padding: 10px;
     background: black;
     color: white;
     border: 1px;
     margin-top: 10%;
+    font-size: 16px;
+    border-radius: 5px;
 }
+
+.PIbuttonicon{
+    height: 18px;
+    margin-right: 10px;
+}
+.rsinputboxwidth{
+    width: 82%;
+}
+.PIinput:disabled{
+    background-color: transparent;
+}
+
+
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;
@@ -462,6 +484,8 @@ font-size: 13px;
 .BdImgCol{
     text-align: center;
 }
+.previewandpi{
+    width: 60%;}
 }
 @media screen and (max-width:320px){
     .savemoqbtn{
@@ -477,4 +501,8 @@ font-size: 13px;
     .BdImgCol{
         text-align: center;
     }
+    .previewandpi{
+        width: 70%;}
+    
+   
 }

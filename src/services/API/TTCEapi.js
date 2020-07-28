@@ -432,6 +432,20 @@ class TTCEapi {
       });
   } 
  
+  static getPi(enquiryId) {
+    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+ 
 
   static getEnquiryMoq(enquiryId) {
     let url = ApiUrl + "/enquiry/getEnquiry/{enquiryId}?enquiryId="+ enquiryId;
@@ -446,6 +460,7 @@ class TTCEapi {
         return error.response;
       });
   } 
+  
 
   static getCountries() {
     let url = ApiUrl + "/register/getAllCountries";
@@ -1117,7 +1132,43 @@ class TTCEapi {
         return error.response;
       });
   } 
-
+  // enquiry/savePi/{enquiryId}?enquiryId=698
+  static savePi(
+    enquiryId,
+   cgst,
+   dod,
+   hsncode,
+   rpu,
+   quantity,
+   sgst,
+   
+    ) {
+    let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
+   var data =
+    {
+      cgst: cgst,
+      expectedDateOfDelivery: dod,
+      hsn: hsncode,
+      ppu: rpu,
+      quantity:quantity,
+      sgst:sgst
+    }
+   console.log(data)
+   var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+    return axios
+      .post(url,data,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
   static sendMoq(
     enquiryId,

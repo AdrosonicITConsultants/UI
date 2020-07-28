@@ -129,7 +129,9 @@ import removefromwishlist from "./remove from wishlist.svg"
 import CustomDesignIcons from "./Custom Design Icons.svg"
 import Iconfeatheredit3 from "./Icon feather-edit-3.png"
 import whitecustomdesignicon from "./white custom design icon for black button .svg"
+import PIbtnicon from "./Icon material-view-column.svg"
 export default {
+  PIbtnicon,
   colorbar,
   whitecustomdesignicon,
   Iconfeatheredit3,

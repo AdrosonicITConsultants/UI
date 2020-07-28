@@ -23,7 +23,7 @@ export class SingleEnquiry extends Component {
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
         this.handleMoqEdit = this.handleMoqEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-
+        this.handlePiEdit= this.handlePiEdit.bind(this);
         this.state = {
             selected:"BuyerDetails",
             buyersDetail: true,
@@ -33,15 +33,24 @@ export class SingleEnquiry extends Component {
             changeRequest:false, 
             getMoqDeliveryTimes:[],
             showValidationMoq:false,
+            showValidationPi:false,
             isMoqdetail:true,
+            isPidetail:true,
             moq:0,
             ppu:0,
             deliveryDesc:-1,
             additionalInfo:"",
             getMoq:[],
+            getPi:[],
             dataload : false,
             isSend:-1,
             ImageUrl:TTCEapi.ImageUrl+'Product/',
+            quantity:0,
+            rpu:0,
+            dod :"",
+            cgst:0,
+            sgst:0,
+            hsncode:0,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -119,6 +128,7 @@ export class SingleEnquiry extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     } 
+
     handleCluster(e) {
       
         // console.log(e.target.id);
@@ -146,7 +156,18 @@ export class SingleEnquiry extends Component {
         
       }
 
+      handlePiEdit(){
+        
+        this.setState({
+            isPidetail:!this.state.isPidetail
+            
+        },()=>{
+            // this.checkSave();
+        });
+        
     
+  }
+
       handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
@@ -189,7 +210,51 @@ export class SingleEnquiry extends Component {
       
       }
     } 
+    savePIDetails(){
+        if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
+            if(document.getElementById('agree').checked){
+                let params = queryString.parse(this.props.location.search);
+                console.log(params);
+                TTCEapi.savePi(
+                    params.code,
+                    this.state.cgst,
+                    this.state.dod ,
+                    this.state.hsncode,
+                    this.state.rpu,
+                    this.state.quality,
+                    this.state.sgst,
+                  
+                   ).then((response)=>{
+                    this.setState({savePi : response.data,
+                        isPidetail:!this.state.isPidetail,
+                        showValidationPi: false,
+                    },()=>{
+                    // console.log(this.state);
+                   
+                    });
+                    customToast.success("PI Details saved successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                });
+            }
+            else{
+                customToast.error("Please agree to T&C", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            }
+         
 
+      else{
+        this.setState({
+            showValidationPi: true,
+        //   message : "Invalid PAN Number"
+      });
+      
+      }
+    } 
     sendMoqDetails(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -212,6 +277,8 @@ export class SingleEnquiry extends Component {
               });
         });
     } 
+
+ 
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -259,6 +326,36 @@ export class SingleEnquiry extends Component {
         });
     });
      
+
+    TTCEapi.getPi(params.code).then((response)=>{
+        // console.log(response)
+        if(response.data.data==null){
+            this.setState({
+                getPi : 0,
+                quantity:0,
+                rpu:0,
+                dod:"",
+                hsncode:0,
+                cgst:0,
+                sgst:0,
+            })
+        }
+        else {
+        this.setState({
+            getPi : response.data.data,
+            quantity:response.data.data.quantity,
+            rpu:response.data.data.ppu,
+            dod:response.data.data.date,
+            hsncode:response.data.data.hsn,
+            cgst:response.data.data.cgst,
+            sgst:response.data.data.sgst,
+      },()=>{
+         console.log(this.state.getPi);
+       
+        });
+    }
+       
+    });
      }
 
      
@@ -533,7 +630,7 @@ export class SingleEnquiry extends Component {
                                                                  <Col sm={6} >
                                                                  {this.state.isSend== 1?
                                                                  <button className="savemoqbtn"
-                                                                 onClick={() => this.saveMoqDetails()} disabled >Save</button>
+                                                                  disabled >Save</button>
                                                                 
                                                                 :
                                                                 <button className="savemoqbtn"
@@ -559,35 +656,92 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                           <Row noGutters={true} className="PIcolmt">
+                                                         {this.state.isSend==0?    
+                                                          null
+                                                            :
+                                                            <>  {this.state.isPidetail ? <img
+                                                                src={logos.apedit}
+                                                                className="aoctick"
+                                                                style={{"cursor":"pointer" ,
+                                                                     "position" : "absolute"}}
+                                                                onClick={this.handlePiEdit}
+                                                        ></img> : 
+                                                       null} </>
+                                                           }   
+                                                           <Row noGutters={true} className="PIcolmt BdImgCol">
                                                                <Col sm={6} >
                                                                    <label>Quantity</label>
                                                                    <br/>
-                                                               <input className="PIinput" type="number"/>
+                                                               <input 
+                                                               className="PIinput"
+                                                                type="number"
+                                                                disabled={this.state.isPidetail}
+                                                                value={this.state.quantity }
+                                                                name="quantity"
+                                                                onChange={this.handleChange}
+                                                                />
                                                                </Col>
                                                                <Col sm={6}>
-                                                               <label>Rate per unit(or metre)</label>
+                                                               <label >Rate per unit(or metre)</label>
                                                                <br/>
                                                                {/* <input className="PIinput" type="number"/> */}
-                                                             <span className="rssymbol"><i class="fa fa-inr" aria-hidden="true"></i></span><input type="text" name="currency" className="PIinput" />
+                                                             <span 
+                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                                             disabled={this.state.isPidetail}>
+                                                            <i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                             <input type="number"  className="PIinput rsinputboxwidth"
+                                                             disabled={this.state.isPidetail}
+                                                             value={this.state.rpu }
+                                                             name="rpu"
+                                                             onChange={this.handleChange} />
                                                                </Col>
                                                            </Row>
 
-                                                           <Row noGutters={true} className="PIcol2mt">
+                                                           <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                            <Col sm={6}>
                                                            <label>Expected date of delivery</label>
                                                            <br/>
-                                                               <input className="PIinput" type="date"/>
+                                                               <input className="PIinput" type="date"
+                                                               disabled={this.state.isPidetail}
+                                                               value={this.state.dod }
+                                                               name="dod"
+                                                               onChange={this.handleChange}/>
                                                         
                                                            </Col>
                                                            <Col sm={6}>
                                                            <label>HSN Code</label>
                                                            <br/>
-                                                               <input className="PIinput" type="text"/>
+                                                               <input className="PIinput" type="number"
+                                                               disabled={this.state.isPidetail}
+                                                               value={this.state.hsncode }
+                                                               name="hsncode"
+                                                               onChange={this.handleChange}/>
                                                            </Col>
                                                        </Row>
 
-                                                       <Row noGutters={true} className="PIcol2mt">
+                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                                           <Col sm={6}>
+                                                           <label>CGST</label>
+                                                           <br/>
+                                                               <input className="PIinput" type="number"
+                                                               disabled={this.state.isPidetail}
+                                                               value={this.state.cgst }
+                                                               name="cgst"
+                                                               onChange={this.handleChange}/>
+                                                        
+                                                           </Col>
+                                                           <Col sm={6}>
+                                                           <label>SGST</label>
+                                                           <br/>
+                                                               <input className="PIinput" type="number"
+                                                               disabled={this.state.isPidetail}
+                                                               value={this.state.sgst }
+                                                               name="sgst"
+                                                               onChange={this.handleChange}/>
+                                                           </Col>
+                                                       </Row>
+
+                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                            <Col sm={12}>
                                                            <input type="checkbox" name="checkbox" value="check" id="agree" style={{marginRight:"5px"}} /> 
                                                             Agree to <a
@@ -601,14 +755,23 @@ export class SingleEnquiry extends Component {
                               
                                                            </Col>
                                                        </Row>
-
+                                                       <p className="text-center">
+                                                             {this.state.showValidationPi ? (
+                                            <span className="bg-danger">All fields are Mandatory</span>
+                                        ) : (
+                                            <br />
+                                        )}
+                                                             </p>
                                                        <Row noGutters={true}>
                                                            <Col sm={12} className="text-center">
-                                                                <button className="previewandpi">Preview and send PI</button>
+                                                                <button className="previewandpi" onClick={() => this.savePIDetails()}>
+                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>  Preview and send PI</button>
                                                            </Col>
+                                                          
                                                        </Row>
+                                                      
                                                             </>:null}
-                                                           
+                                         {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                             <h6>change....</h6>
                                                             </div>:null}

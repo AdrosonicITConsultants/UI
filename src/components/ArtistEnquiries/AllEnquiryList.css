@@ -19,14 +19,14 @@
     border: 1.5px solid black;
     width: 110px;
     top: 93px;
-    left: 0px;
+    left: -20px;
 }
 .selctedoptionhr2{
     position: absolute;
     border: 1.5px solid black;
     width: 116px;
     top: 93px;
-    left: 142px;
+    left: 122px;
 }
 .imageinlist{
     width: 140px;

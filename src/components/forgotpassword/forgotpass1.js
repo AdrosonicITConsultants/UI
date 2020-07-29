@@ -103,9 +103,9 @@ export default class forgotpass1 extends Component {
                          lg={{ size: "6" }}
                          className="vcenter "
                        >
-                         <div className="demoa text-center" noGutters={true}>
+                         <div className="demoa text-center"  >
                            <br></br>
-                           <Row noGutters={true} className="">
+                           <Row   className="">
                              <div className="col-xs-6">
                                <img
                                  src={logos.backarrowicon}
@@ -135,7 +135,7 @@ export default class forgotpass1 extends Component {
                            </Row>
                            <br></br>
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line32 font3"
                            >
                              <span className="col-xs-1"></span>
@@ -145,7 +145,7 @@ export default class forgotpass1 extends Component {
                              </span>
                            </Row>
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-1"></div>
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
@@ -174,7 +174,7 @@ export default class forgotpass1 extends Component {
                              </div>
                            </Row>
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="blackButton"
@@ -186,7 +186,7 @@ export default class forgotpass1 extends Component {
                              </div>
                            </Row>
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-1"></div>
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
@@ -215,7 +215,7 @@ export default class forgotpass1 extends Component {
                              </div>
                            </Row>
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="blackButton"
@@ -231,7 +231,7 @@ export default class forgotpass1 extends Component {
                            <br />
                            <hr className="hrline"></hr>
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line311 font3"
                            >
                              <span className="col-xs-2"></span>
@@ -241,7 +241,7 @@ export default class forgotpass1 extends Component {
                            </Row>
 
                            <br />
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="whiteButton"
@@ -253,14 +253,14 @@ export default class forgotpass1 extends Component {
                            </Row>
 
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line6 mt37"
                            >
                              Change language
                              <img src={logos.language} className="ml-5"></img>
                            </Row>
 
-                           {/* <Row noGutters={true}>
+                           {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>

@@ -402,6 +402,66 @@ class TTCEapi {
       });
   }
 
+  static getMoqDeliveryTimes() {
+    let url = ApiUrl + "/enquiry/getMoqDeliveryTimes";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+ 
+
+  static getMoq(enquiryId) {
+    let url = ApiUrl + "/enquiry/getMoq/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+ 
+  static getPi(enquiryId) {
+    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+ 
+
+  static getEnquiryMoq(enquiryId) {
+    let url = ApiUrl + "/enquiry/getEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+  
+
   static getCountries() {
     let url = ApiUrl + "/register/getAllCountries";
 
@@ -502,7 +562,7 @@ class TTCEapi {
   }
 
   static generateEnquiry(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
     console.log(url);
     return axios
       .post(url)
@@ -516,7 +576,7 @@ class TTCEapi {
   }
 
   static generateEnquiryTrue(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
     console.log(url);
     return axios
       .post(url)
@@ -1039,6 +1099,110 @@ class TTCEapi {
       });
   }
 
+
+  static saveMoq(
+    enquiryId,
+    additionalInfo,
+    deliveryDesc,
+    moq,
+    ppu,
+   
+    ) {
+    let url = ApiUrl + "/enquiry/saveMoq/{enquiryId}?enquiryId="+ enquiryId;
+   var data =
+    {
+      additionalInfo: additionalInfo,
+      deliveryTimeId: deliveryDesc,
+      moq: moq,
+      ppu: ppu
+    }
+   console.log(data)
+   var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+    return axios
+      .post(url,data,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+  // enquiry/savePi/{enquiryId}?enquiryId=698
+  static savePi(
+    enquiryId,
+   cgst,
+   dod,
+   hsncode,
+   rpu,
+   quantity,
+   sgst,
+   
+    ) {
+    let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
+   var data =
+    {
+      cgst: cgst,
+      expectedDateOfDelivery: dod,
+      hsn: hsncode,
+      ppu: rpu,
+      quantity:quantity,
+      sgst:sgst
+    }
+   console.log(data)
+   var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+    return axios
+      .post(url,data,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static sendMoq(
+    enquiryId,
+    additionalInfo,
+    deliveryDesc,
+    moq,
+    ppu,
+   
+    ) {
+    let url = ApiUrl + "/enquiry/sendMoq/{enquiryId}?enquiryId="+ enquiryId;
+   var data =
+    {
+      additionalInfo: additionalInfo,
+      deliveryTimeId: deliveryDesc,
+      moq: moq,
+      ppu: ppu
+    }
+   console.log(data)
+   var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+    return axios
+      .post(url,data,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
   static getArtitionProducts() {
     let url = ApiUrl + "/product/getArtitionProducts";
 
@@ -1222,7 +1386,22 @@ class TTCEapi {
   //#endregion
 
   static getEnquirStages() {
-    let url = ApiUrl + "/enquiry/getEnquiryStages";
+    let url = ApiUrl + "/enquiry/getAllEnquiryStages";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+ 
+  static getEnquirStagesforAvailable() {
+    let url = ApiUrl + "/enquiry/getEnquiryStagesForAvailableProduct";
 
     return axios
       .get(url)
@@ -1238,12 +1417,45 @@ class TTCEapi {
 
   static getAllNotifications() {
     let url = ApiUrl + "/notification/getAllNotifications";
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static getOpenEnquiries() {
+    let url = ApiUrl + "/enquiry/getOpenEnquiries";
 
     return axios
       .get(url)
       .then((response) => {
         console.log(response);
 
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static progressUpdate(stageid, id) {
+    let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;
+    var data = {
+      
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+        console.log(response);
         return response;
       })
       .catch((error) => {

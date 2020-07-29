@@ -222,7 +222,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                      <React.Fragment>
                        <div className="homeimg">
                          <Container>
-                           <Row noGutters={true} className="mt-5">
+                           <Row   className="mt-5">
                              <Col
                                xs={{ size: "0" }}
                                sm={{ size: "5" }}

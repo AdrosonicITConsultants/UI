@@ -19,14 +19,14 @@
     border: 1.5px solid black;
     width: 110px;
     top: 93px;
-    left: -20px;
+    left: 0px;
 }
 .selctedoptionhr2{
     position: absolute;
     border: 1.5px solid black;
     width: 116px;
     top: 93px;
-    left: 122px;
+    left: 142px;
 }
 .imageinlist{
     width: 140px;
@@ -112,6 +112,13 @@ font-size: 13px;
 }
 .progressbarfont{
     font-size: 10px;
+}
+
+.leEnqshowmore{
+    cursor: pointer;
+    /* color: black!important; */
+    margin-bottom: 6px;
+    font-size: 15px;
 }
 /* ///////////////////ProgressBAr////////////////////////// */
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
@@ -285,12 +292,169 @@ font-size: 13px;
     font-weight: 700;
 
 }
-
+.width100p:disabled{
+    border: transparent;
+    background-color: transparent;
+}
 .BDp{
-    color: grey;
+    color: darkslategrey;
     font-size: 14px;
-    font-weight: 700;
+    /* font-weight: 700; */
     overflow: hidden;
+}
+.width200{
+    width: 200px;
+}
+.width100p{
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.alignbox{
+    margin-left: 23px;
+    height: 34px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox:disabled{
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+.alignbox2{
+    height: 34px;
+    margin-left: 10px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox2:disabled{
+    border: 1px solid transparent;
+    background: transparent;
+}
+.alignbox3{
+    border: transparent;
+    width: 100%;
+    background: white;
+}
+.savemoqbtn:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
+.sendmoqbtn:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
+
+.PIinput{
+    width: 90%;
+    height: 39px;
+    background: whitesmoke;
+    border: 1px solid transparent;
+    /* border-radius: 5px; */
+    margin-top: 6px;
+    /* margin-left: 17px; */
+}
+
+.PIcolmt{
+    margin-top: 75px;
+}
+
+.PIcol2mt{
+    margin-top: 35px;
+}
+.currencyinput {
+    border: 1px inset #ccc;
+    padding-bottom: 1px;
+}
+.currencyinput input {
+    border: 0;
+}
+
+.rssymbol{
+    border: 1px solid transparent;
+    padding: 10px;
+    background: whitesmoke;
+
+}
+.rssymboldis{
+    border: 1px solid transparent;
+    padding: 10px;
+    background: whitesmoke;
+
+}
+.previewandpi{
+    width: 38%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: 1px;
+    margin-top: 5%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.marginBottompage{
+    margin-bottom: 50px;
+}
+.PIbuttonicon{
+    height: 18px;
+    margin-right: 10px;
+}
+.rsinputboxwidth{
+    width: 82%;
+}
+.PIinput:disabled{
+    background-color: whitesmoke !important;
+}
+
+
+.modalBoxSizeCS{
+    width: 300px;
+}
+.CSheading{
+    background: black;
+    height: 39px;
+    font-size: 17px;
+    padding: 6px;
+    color: white;
+    font-weight: 300;
+}
+.cWhite{
+    color:white;
+}
+.greenButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid green;
+    float: left;
+    background: green;
+    border-radius: 50%;
+
+}
+.blueButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid blue;
+    float: left;
+    background:white;
+    border-radius: 50%;
+
+}
+.greyButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    float: left;
+    background:white;
+    border-radius: 50%;
+}
+.markCompletedButton{
+    background: white;
+    border: 1px solid blue;
+    color: blue;
+    padding: 5px 10px;
+}
+.mb7{
+    margin-bottom: 7px;
 }
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
@@ -343,6 +507,9 @@ font-size: 13px;
         font-size: 13px;
 
     }  
+    .width200{
+        width: 150px;
+    }
    
 }
 @media screen and (max-width:767px){
@@ -373,6 +540,8 @@ font-size: 13px;
 .BdImgCol{
     text-align: center;
 }
+.previewandpi{
+    width: 60%;}
 }
 @media screen and (max-width:320px){
     .savemoqbtn{
@@ -382,10 +551,14 @@ font-size: 13px;
     }
     .sendmoqbtn{
         position: none;
-        margin-left: 100px;
+        margin-left: 30px;
     
     }
     .BdImgCol{
         text-align: center;
     }
+    .previewandpi{
+        width: 70%;}
+    
+   
 }

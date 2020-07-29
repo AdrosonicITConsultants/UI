@@ -92,9 +92,9 @@ export default class buyreg3 extends Component {
               lg={{ size: "8" }}
               className="vcenter1 "
             >
-              <div className="demoab text-center" noGutters={true}>
+              <div className="demoab text-center"  >
                 <br></br>
-                <Row noGutters={true} className="">
+                <Row   className="">
                   <div className="col-xs-7">
                     <img
                       src={logos.backarrowicon}
@@ -117,7 +117,7 @@ export default class buyreg3 extends Component {
                 </Row>
 
                 <br></br>
-                <Row noGutters={true} className="text-center line32 font3">
+                <Row   className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span
                     style={{
@@ -132,7 +132,7 @@ export default class buyreg3 extends Component {
                   </span>
                 </Row>
                 <br></br>
-                <Row noGutters={true}>
+                <Row  >
                   <span
                     style={{ fontWeight: "600" }}
                     className="col-xs-10 line32 text-left ml-6 font3 fontplay"
@@ -144,7 +144,7 @@ export default class buyreg3 extends Component {
                 </Row>
                 <br />
 
-                <Row noGutters={true}>
+                <Row  >
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
                     <Col
                       xs={{ size: "11", offset: "1" }}
@@ -286,7 +286,7 @@ export default class buyreg3 extends Component {
                 <div className="text-center">Next up :Company Details</div>
                 <br></br>
 
-                <Row noGutters={true}>
+                <Row  >
                   <div className="col-xs-12 text-center">
                     <button
                       className="blackButton"
@@ -296,7 +296,7 @@ export default class buyreg3 extends Component {
                     </button>
                   </div>
                 </Row>
-                <Row noGutters={true} className="mt30"> 
+                <Row   className="mt30"> 
                   <strong className="col-xs-12 text-center line7 ">
                     Help?
                   </strong>
@@ -309,7 +309,7 @@ export default class buyreg3 extends Component {
                   </span> */}
                 </Row>
 
-                {/* <Row noGutters={true}>
+                {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>

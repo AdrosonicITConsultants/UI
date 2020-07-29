@@ -257,7 +257,7 @@ export default class artistRegister extends Component {
                      <React.Fragment>
                        <div className="registerimg">
                          <Container>
-                           <Row noGutters={true} className="mt-5">
+                           <Row   className="mt-5">
                              {this.renderSection(this.state.userpage)}
                            </Row>
                          </Container>

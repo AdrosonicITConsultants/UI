@@ -4,13 +4,13 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-import "./AllEnquiryList.css"
+import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-import OngoingList from './OngoingList';
-import CompletedList from './CompletedList';
+import OngoingList from './BuyerOngoingList';
+import CompletedList from './BuyerCompletedList';
 
 
-export class AllEnquiryList extends Component {
+export class BuyerAllEnquiryList extends Component {
     constructor(props) {
         super(props);
     

@@ -139,7 +139,15 @@ import notifyImage6 from "./notifyImage6.svg";
 import notifyImage7 from "./notifyImage7.svg";
 import notifyFooterBanner from "./notifyFooterBanner.svg";
 
+import PIbtnicon from "./Icon material-view-column.svg"
+import Iconpaymentinvoice from "./Icon payment-invoice.svg"
+import chatwhite from "./chat white.svg"
+import downloadpdficon from "./download pdf icon.svg"
 export default {
+  downloadpdficon,
+  chatwhite,
+  Iconpaymentinvoice,
+  PIbtnicon,
   colorbar,
   whitecustomdesignicon,
   Iconfeatheredit3,

@@ -110,12 +110,12 @@ browserHistory.push("/MyProfile");
   }
   myenquiries() {
     browserHistory.push("/enquiriesList")
-    //  debugger;
-    //  console.log("Clicked");
-    //  this.setState({enquiryopen : !this.state.enquiryopen},()=>{
-    //    console.log(this.state.enquiryopen);
-
-    //  });
+   
+     
+   }
+   myenquiriesBuyer() {
+    browserHistory.push("/buyerEnquiriesList")
+   
      
    }
 
@@ -365,7 +365,8 @@ browserHistory.push("/MyProfile");
 
             <li className="menu-item">
               {userTypeId === 2 ? (
-                <button className="navButton navbtn2" style={{ width: "11em" }} >
+                <button className="navButton navbtn2" style={{ width: "11em" }}
+                    onClick={this.myenquiriesBuyer} >
                   <img className="navButtonImg1" src={logos.receipticon}></img>
                   <span className="navButtonImg">My Enquiries</span>
                 </button>

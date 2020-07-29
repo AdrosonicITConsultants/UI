@@ -5,9 +5,9 @@ import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
-import { Row, Col, Container, Label, Button } from "reactstrap";
+import { Row, Col, Container, Label, Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import logos from "../../assets";
-import ReactModal from "react-modal";
+// import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import customToast from "../../shared/customToast";
@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
-// import "./editProduct.css"
+import "./editProduct.css"
 // import ModalComponent from "../modal/modal";
 // import Modal from 'react-bootstrap/Modal'
 
@@ -44,6 +44,19 @@ const initialState = {
   productCode: "",
   clusterdata: [],
   product_care_id: [],
+  wareAndCare: [
+    { id: 0, isChecked: false },
+    { id: 1, isChecked: false },
+    { id: 2, isChecked: false },
+    { id: 3, isChecked: false },
+    { id: 4, isChecked: false },
+    { id: 5, isChecked: false },
+    { id: 6, isChecked: false },
+    { id: 7, isChecked: false },
+    { id: 8, isChecked: false },
+    { id: 9, isChecked: false },
+    { id: 10, isChecked: false },
+  ],
   iswashAndCareComplete: false,
   isBasicComplete: false,
   isImageUploadComplete: false,
@@ -69,14 +82,17 @@ const initialState = {
   isEdit: false,
   modal :false,
   producrid : 0,
+  modalDelete : true,
 };
 
-export default class EditBuyerDesign extends Component {
+export default class artisanProductCatelog extends Component {
                  constructor(props) {
                    super(props);
                    this.myRefAddPhoto = React.createRef();  
                    this.basicDetails = React.createRef();
                    this.basicDetailsComplete = React.createRef();  
+                   this.washAndCare = React.createRef();  
+                   this.weightComplete = React.createRef();
                    this.WeavesComplete = React.createRef();  
                    this.description = React.createRef();  
                    this.warpweftComplete = React.createRef(); 
@@ -86,6 +102,7 @@ export default class EditBuyerDesign extends Component {
                    this.fileUploader2 = React.createRef(); 
                    this.fileUploader3 = React.createRef();
                    this.GSMNameComplete = React.createRef(); 
+                  
                    this.state = initialState;
                  }
 
@@ -123,8 +140,8 @@ export default class EditBuyerDesign extends Component {
                        },
                        () => {
                         let params = queryString.parse(this.props.location.search)
-                        TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
-                          this.setState({ productid : params.productId },()=>{
+                        TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                          this.setState({productid :params.ProductId },()=>{
      
                           })
                           console.log('heree');
@@ -154,8 +171,8 @@ export default class EditBuyerDesign extends Component {
                          },
                          () => {console.log("stateset");
                          let params = queryString.parse(this.props.location.search)
-                         TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
-                           this.setState({productid :params.productId },()=>{
+                         TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                           this.setState({productid :params.ProductId },()=>{
       
                            })
                            console.log('heree');
@@ -190,13 +207,13 @@ export default class EditBuyerDesign extends Component {
               
 
                 productData.productImages.map((img, index) => {
-                 
+              
                 this.toDataUrl(
                     TTCEapi.ImageUrl +
-                      "CustomProduct/" +
+                      "Product/" +
                       img.productId +
                       "/" +
-                      img.lable  ,
+                      img.lable,
                     (myBase64) => {
                       let filename = {};
                       filename.name = img.lable;
@@ -213,7 +230,12 @@ export default class EditBuyerDesign extends Component {
                   );
                 });
 
-               
+                let washandCareIDs = productData.productCares.map(
+                  (e) => e.productCareId
+                );
+                washandCareIDs.map((id) => {
+                  this.onselectWareAndCare(id);
+                });
 
                 let productWeavesIds = productData.productWeaves.map(
                   (e) => e.weaveId
@@ -228,15 +250,35 @@ export default class EditBuyerDesign extends Component {
                     weaves: [...weaves],
                   });
                 });
-         
+                
+                let wareAndCare1= [
+                  { id: 0, isChecked: false },
+                  { id: 1, isChecked: false },
+                  { id: 2, isChecked: false },
+                  { id: 3, isChecked: false },
+                  { id: 4, isChecked: false },
+                  { id: 5, isChecked: false },
+                  { id: 6, isChecked: false },
+                  { id: 7, isChecked: false },
+                  { id: 8, isChecked: false },
+                  { id: 9, isChecked: false },
+                  { id: 10, isChecked: false },
+                ];
+                for(var  i=0; i < productData.productCares.length; i++ )
+                { wareAndCare1[productData.productCares[i].productCareId].isChecked = true;
+                  console.log(productData.productCares[i].productCareId);
+                }
                     this.setState(
                       {
                         isavailable:
-                        productData.productStatusId == 2 ? true : false,
+                          productData.productStatusId == 2 ? true : false,
+                        isMTO: productData.productStatusId == 2 ? false : true,
+                        weight: productData.weight,
                         description: productData.productSpec,
                         reedCount: productData.reedCountId,
                         productCategorie: productData.productCategoryId,
-                    
+                        productName: productData.tag,
+                        productCode: productData.code,
                         yarn1: productData.warpYarnId,
                         yarn2: productData.weftYarnId,
                         yarn3:
@@ -251,11 +293,14 @@ export default class EditBuyerDesign extends Component {
                             : "",
                         showGSM: productData.gsm ? true : false,
                         GSMName: productData.gsm ? productData.gsm : false,
-                       
+                        wareAndCare : wareAndCare1,
+                        iswashAndCareComplete: true,
 
                       },
                       () => {
-                       
+                        // console.log("after all basic setup");
+
+                        // console.log(this.state);
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
                             debugger;
@@ -724,7 +769,7 @@ else {
                              ></img>
                            </div>
                            <Row className="ImageEditor">
-                             <ReactModal
+                             {/* <ReactModal
                                isOpen={this.state["modal" + num]}
                                contentLabel="Minimal Modal Example"
                                className="Modal"
@@ -745,7 +790,7 @@ else {
                                    })
                                  }
                                ></ImageEditorTTCE>
-                             </ReactModal>
+                             </ReactModal> */}
                            </Row>
                          </div>
                        );
@@ -813,7 +858,8 @@ else {
                  }
                  Save = () => {                
                    let productData = {};
-                   productData.productWeaves = [];
+                    productData.productCares = [];
+                    productData.productWeaves = [];
                       let file2, file3;
 
 
@@ -870,13 +916,11 @@ else {
 
                           
 
-                        let params1 = queryString.parse(this.props.location.search)
-                 
-                        productData.id = params1.productId       
+
                               this.state.weaves.filter((item) => {
                                 if (item.isChecked) {
                                   productData.productWeaves.push({
-                                    id: 1,
+                                    id: 0,
                                     productId: productData.id,
                                     weaveId: item.id,
                                   });
@@ -999,7 +1043,19 @@ else {
                               }
 
                               
-                               
+                                node = this.washAndCare.current;
+                                  if (node.getAttribute("class") == "inComplete") {
+                                    customToast.error("Please select Wash & Care Instructions.", {
+                                      position: toast.POSITION.TOP_RIGHT,
+                                      autoClose: true,
+                                    });
+                                    node.scrollIntoView({
+                                      behavior: "smooth",
+                                      block: "center",
+                                      inline: "center",
+                                    });
+                                    return;
+                                  }
 
                                 node = this.GSMNameComplete.current;
                             ;
@@ -1018,7 +1074,19 @@ else {
                               return;
                             }
 
-                             
+                              node = this.weightComplete.current;
+                              if (node.getAttribute("class") == "inComplete") {
+                                customToast.error("Please enter weight of the Product.", {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  autoClose: true,
+                                });
+                                node.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "center",
+                                  inline: "center",
+                                });
+                                return;
+                              }
 
                               node = this.description.current;
                               if (node.getAttribute("class") == "inComplete") {
@@ -1037,19 +1105,28 @@ else {
 
                    let params = queryString.parse(this.props.location.search)
                  
-                      productData.id = params.productId           
+                      productData.id = params.ProductId           
+                      productData.tag = this.state.productName;
+                      productData.code = this.state.productCode; 
                       productData.productCategoryId = this.state.productCategorie;
                       productData.productTypeId = this.state.productType;
                       productData.productSpec = this.state.description;
-                      // productData.productStatusId = GSMthis.state.isMTO ? 1 : 2;
+                      productData.weight = this.state.weight;
+
+                      productData.productStatusId = this.state.isMTO ? 1 : 2;
                       productData.gsm = this.state.GSMName;
+                      productData.width = this.state.width;
                       productData.length = this.state.length;
                       productData.reedCountId = this.state.reedCount;
-                      productData.weight = this.state.weight;
-                      productData.width = this.state.width;
-                      productData.reedCountId = this.state.reedCount;
 
-                    
+                    this.state.wareAndCare.filter((item) => {
+                      if(item.isChecked) {     
+                        productData.productCares.push({
+                          id: 0,
+                          productCareId: item.id,
+                          productId: productData.id,
+                        });}
+                    });
                     //  this.state.weaves.filter((item) => {
                     //    if (item.isChecked) {
                     //      productData.productWeaves.push({
@@ -1060,8 +1137,9 @@ else {
                     //    }
                     //  });  
 
+                    productData.relProduct = this.state.savedrelatedProduct;
                     debugger;
-                  TTCEapi.editCustomProduct(file1, file2, file3, productData).then((response) => {
+                  TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       customToast.success("Product updated successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1090,7 +1168,7 @@ else {
                  };
                  Cancel = () => {
                  
-                   browserHistory.push("/Customprod")
+                   browserHistory.push("./home")
                   //  window.location.replace("./home");
                   
                  };
@@ -1100,7 +1178,7 @@ else {
                  };
                  Delete = () => {
                   console.log(this.state.productid);
-                  TTCEapi.deleteCustomProduct(this.state.productid).then((response)=>{
+                  TTCEapi.deleteProduct(this.state.productid).then((response)=>{
                     if(response.data.valid){
                       customToast.success("Product deleted successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1113,8 +1191,8 @@ else {
                       })
                     }
                   })
-                 }
-
+                 }   
+                 
                  ToggleDelete = () => {
                   document.getElementById('id01').style.display='block';
                  }
@@ -1130,18 +1208,17 @@ else {
                  ToggleSaveClose = () => {
                   document.getElementById('id02').style.display='none';
                  }
-                
                           
                 render() {
                    return (
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
                        <Container>
-                         <Row  >
+                         <Row noGutters={true}>
                            <div className="artistLanding">
                              {/* //#region Add Image */}
-                             <Row  >
-                               <Row  >
+                             <Row noGutters={true}>
+                               <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1167,15 +1244,15 @@ else {
                                      md={{ size: "2" }}
                                      className="col-2 right"
                                    >
-                                     <button
+                                     {/* <button
                                       className="EditProductbutton"
                                       disabled = {this.state.isEdit}
                                       onClick={() => {this.editenabled()}}
-                                      >Edit</button>
+                                      >Edit</button> */}
                                    </Col>
                                  {/* )} */}
                                </Row>
-                               <Row  >
+                               <Row noGutters={true}>
                                  <Col
                                    className="tet-center"
                                    sm={{ size: "1" }}
@@ -1208,7 +1285,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1221,7 +1298,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
@@ -1352,7 +1429,7 @@ else {
                                    className="col-2 "
                                  ></Col>
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1367,8 +1444,8 @@ else {
                              {/* //#endregion Add Image */}
 
                              {/* //#region Product details */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1382,7 +1459,8 @@ else {
                                    md={{ size: "11" }}
                                    className="col-11"
                                  >
-                                   {
+                                   {this.state.productName == "" ||
+                                   this.state.productCode == "" ||
                                    this.state.productCategorie === undefined ||
                                    this.state.productType === undefined ||
                                    this.state.productCategorie == -1 ||
@@ -1408,9 +1486,7 @@ else {
                                  </Col>
                                </Row>
 
-                            <br></br>
-                              
-                               <Row  >
+                               <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1423,7 +1499,86 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}>
+                                     <Col
+                                       sm={{ size: "6" }}
+                                       xs={{ size: "6" }}
+                                       md={{ size: "6" }}
+                                       className="col-6 text-center mt30 "
+                                     >
+                                       <span
+                                         ref={this.basicDetails}
+                                         className="text-right font13"
+                                       >
+                                         Name of the product (40 characters)
+                                       </span>
+                                     </Col>{" "}
+                                     <Col
+                                       sm={{ size: "6" }}
+                                       xs={{ size: "6" }}
+                                       md={{ size: "6" }}
+                                       className="col-6 text-left"
+                                     ></Col>{" "}
+                                   </Row>
+                                   <Row noGutters={true}>
+                                     <Col
+                                       sm={{ size: "6" }}
+                                       xs={{ size: "6" }}
+                                       md={{ size: "6" }}
+                                       className="col-6 text-right "
+                                     >
+                                       <input
+                                         type="text"
+                                         id="productName"
+                                         className=" ProductTextBox"
+                                         name="productName"
+                                         maxLength="40"
+                                         value={this.state.productName}
+                                         disabled={!this.state.isEdit}
+                                         onChange={(e) => this.handleChange(e)}
+                                       />
+                                     </Col>{" "}
+                                     <Col
+                                       sm={{ size: "6" }}
+                                       xs={{ size: "6" }}
+                                       md={{ size: "6" }}
+                                       className="col-6 text-left"
+                                     >
+                                       <input
+                                         type="text"
+                                         id="productCode"
+                                         placeholder="Product Code (Eg. NAG09_89)"
+                                         className="ProductTextBox"
+                                         name="productCode"
+                                         maxLength="20"
+                                         value={this.state.productCode}
+                                         disabled={!this.state.isEdit}
+                                         onChange={(e) => this.handleChange(e)}
+                                       />
+                                     </Col>{" "}
+                                   </Row>
+                                 </Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2 "
+                                 ></Col>{" "}
+                               </Row>
+                               <Row noGutters={true}>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2 "
+                                 ></Col>{" "}
+                                 <Col
+                                   sm={{ size: "8" }}
+                                   xs={{ size: "8" }}
+                                   md={{ size: "8" }}
+                                   className="col-8"
+                                 >
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1506,7 +1661,7 @@ else {
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1521,8 +1676,8 @@ else {
                              {/* //#endregion Product details */}
 
                              {/* //#region Product specificcaions */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1546,7 +1701,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1568,7 +1723,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1583,7 +1738,7 @@ else {
                                    </label>
                                  </Col>
                                </Row>
-                               <Row   className="">
+                               <Row noGutters={true} className="">
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
@@ -1629,7 +1784,7 @@ else {
                                    </Row>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1651,7 +1806,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1664,7 +1819,7 @@ else {
                                  </Col>{" "}
                                </Row>
 
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2063,7 +2218,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true} className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2099,7 +2254,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2147,7 +2302,7 @@ else {
                                  ></Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true} className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2183,7 +2338,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2486,7 +2641,7 @@ else {
                                  </>
                                ) : null}
 
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2500,12 +2655,540 @@ else {
                              </Row>
                              {/* //#endregion Product specificcaions */}
 
-                            
+                             {/* //#region Product wash and care */}
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
+                                 <Col
+                                   className="text-center"
+                                   sm={{ size: "1" }}
+                                   xs={{ size: "1" }}
+                                   md={{ size: "1" }}
+                                   className="col-1 "
+                                 ></Col>{" "}
+                                 <Col
+                                   sm={{ size: "11" }}
+                                   xs={{ size: "11" }}
+                                   md={{ size: "11" }}
+                                   className="col-11"
+                                 >
+                                   {this.state.iswashAndCareComplete ? (
+                                     <div
+                                       id="washAndCare"
+                                       className="Complete"
+                                       ref={this.washAndCare}
+                                     ></div>
+                                   ) : (
+                                     <div
+                                       id="washAndCare"
+                                       className="inComplete"
+                                       ref={this.washAndCare}
+                                     ></div>
+                                   )}
+
+                                   <h4 className="subHeading">
+                                     Wash & care instructions
+                                   </h4>
+                                   <h6 className="subHeading_1">
+                                     Select from the wash & care instructions
+                                     for the product
+                                   </h6>
+                                 </Col>
+                               </Row>
+
+                               <Row noGutters={true} className="washAndCareDiv">
+                                 <Row className="washAndCareDiv">
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+
+                                       onClick={() => {
+                                        this.onselectWareAndCare(1)
+                                      }
+                                         
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[1].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare1}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[1].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Gentle Hand Wash with soft liquid
+                                         detergent
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(2)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[2].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare2}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[2].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Machine wash with cold water
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(3)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[3].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare3}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[3].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Do not bleach
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(4)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[4].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare4}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[4].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Machine wash with 40 Degree water level
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(5)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[5].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare5}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[5].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Dry Clean Only
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(6)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[6].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare6}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[6].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Wash Separately
+                                       </label>
+                                     </div>
+                                   </Col>
+                                 </Row>
+                                 <Row className="mt30 washAndCareDiv">
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   ></Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(7)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[7].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare7}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[7].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Put starch for better crease
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(8)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[8].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare8}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[8].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Normal wash before stitching
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(9)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[9].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare9}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[9].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         No need to wash before stitching
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   >
+                                     <div
+                                       onClick={() =>
+                                         this.onselectWareAndCare(10)
+                                       }
+                                     >
+                                       <img
+                                         className={`washAndCareImage ${
+                                           this.state.wareAndCare[10].isChecked
+                                             ? "selectedWareandCare"
+                                             : "unselectedWareandCare"
+                                         }`}
+                                         src={logos.washAndCare10}
+                                       ></img>
+                                       <label
+                                         className={` ${
+                                           this.state.wareAndCare[10].isChecked
+                                             ? "selectedWareAndCareColor"
+                                             : ""
+                                         }`}
+                                       >
+                                         Pre Washed & Pre Shrunk
+                                       </label>
+                                     </div>
+                                   </Col>
+                                   <Col
+                                     sm={{ size: "2" }}
+                                     xs={{ size: "2" }}
+                                     md={{ size: "2" }}
+                                     className="col-2"
+                                   ></Col>
+                                 </Row>
+                               </Row>
+                               <Row noGutters={true} className="text-center">
+                                 <Col
+                                   sm={{ size: "12" }}
+                                   xs={{ size: "12" }}
+                                   md={{ size: "12" }}
+                                   className="col-12 text-center"
+                                 >
+                                   <div className="hrlineforAddProduct"></div>
+                                 </Col>
+                                 {/* <Button> next</Button> */}
+                               </Row>
+                             </Row>
+                             {/* //#endregion Product wash and care */}
+
+                             {/* //#region availability */}
+
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
+                                 <Col
+                                   className="text-center"
+                                   sm={{ size: "1" }}
+                                   xs={{ size: "1" }}
+                                   md={{ size: "1" }}
+                                   className="col-1 "
+                                 ></Col>{" "}
+                                 <Col
+                                   sm={{ size: "11" }}
+                                   xs={{ size: "11" }}
+                                   md={{ size: "11" }}
+                                   className="col-11"
+                                 >
+                                   {this.state.isMTO ||
+                                   this.state.isavailable ? (
+                                     <div
+                                       id="availability"
+                                       className="Complete"
+                                     ></div>
+                                   ) : (
+                                     <div
+                                       id="availability"
+                                       className="inComplete"
+                                     ></div>
+                                   )}
+
+                                   <h4 className="subHeading">
+                                     Select availability
+                                   </h4>
+                                   <h6 className="subHeading_1">
+                                     Check the availability of the product
+                                   </h6>
+                                 </Col>
+                               </Row>
+                               <Row className="washAndCareDiv mt30">
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 >
+                                   
+                                   <div
+                                     onClick={() => {
+                                       if(this.state.isEdit==true)
+                                       {
+                                        this.setState({
+                                          isavailable: this.state.isMTO,
+                                          isMTO: !this.state.isMTO,
+                                        });
+                                       }
+                                      
+                                     }}
+                                   >
+                                     <img
+                                       className={`washAndCareImage ${
+                                         this.state.isMTO
+                                           ? "selectedWareandCare"
+                                           : "unselectedWareandCare"
+                                       }`}
+                                       src={logos.mtoicon}
+                                     ></img>
+                                     <label
+                                       className={` ${
+                                         this.state.isMTO
+                                           ? "selectedWareAndCareColor"
+                                           : ""
+                                       }`}
+                                     >
+                                       Made to order
+                                     </label>
+                                   </div>
+                                 </Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 >
+                                   <div
+                                     onClick={() => {
+                                      if(this.state.isEdit==true)
+                                      {
+                                        this.setState({
+                                          isavailable: !this.state.isavailable,
+                                          isMTO: this.state.isavailable,
+                                        });
+                                      }
+                                       
+                                     }}
+                                   >
+                                     <img
+                                       className={`washAndCareImage ${
+                                         this.state.isavailable
+                                           ? "selectedWareandCare"
+                                           : "unselectedWareandCare"
+                                       }`}
+                                       src={logos.isavailable}
+                                     ></img>
+                                     <label
+                                       className={` ${
+                                         this.state.isavailable
+                                           ? "selectedWareAndCareColor"
+                                           : ""
+                                       }`}
+                                     >
+                                       Available in stock
+                                     </label>
+                                   </div>
+                                 </Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   xs={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className="col-2"
+                                 ></Col>
+                               </Row>
+                               <Row noGutters={true} className="text-center">
+                                 <Col
+                                   sm={{ size: "12" }}
+                                   xs={{ size: "12" }}
+                                   md={{ size: "12" }}
+                                   className="col-12 text-center"
+                                 >
+                                   <div className="hrlineforAddProduct"></div>
+                                 </Col>
+                                 {/* <Button> next</Button> */}
+                               </Row>{" "}
+                             </Row>
+
+                             {/* //#endregion availability */}
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
-                                 <Row   className="mt60">
-                                   <Row  >
+                                 <Row noGutters={true} className="mt60">
+                                   <Row noGutters={true}>
                                      <Col
                                        className="text-center"
                                        sm={{ size: "1" }}
@@ -2573,7 +3256,7 @@ else {
                                      </Col>
                                    </Row>
                                    <Row
-                                      
+                                     noGutters={true}
                                      className="text-center"
                                    >
                                      <Col
@@ -2591,10 +3274,115 @@ else {
                                </>
                              ) : null}
 
-                            
+                             {/* //#region Enter Weight */}
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
+                                 <Col
+                                   className="text-center"
+                                   sm={{ size: "1" }}
+                                   xs={{ size: "1" }}
+                                   md={{ size: "1" }}
+                                   className="col-1 "
+                                 ></Col>{" "}
+                                 <Col
+                                   sm={{ size: "11" }}
+                                   xs={{ size: "11" }}
+                                   md={{ size: "11" }}
+                                   className="col-11"
+                                 >
+                                   {this.state.weight == "" ? (
+                                     <div
+                                       id="weightComplete"
+                                       className="inComplete"
+                                       ref={this.weightComplete}
+                                     ></div>
+                                   ) : (
+                                     <div
+                                       id="weightComplete"
+                                       className="Complete"
+                                       ref={this.weightComplete}
+                                     ></div>
+                                   )}
+
+                                   <h4 className="subHeading">Enter weight</h4>
+                                   <h6 className="subHeading_1">
+                                     Weight for the product
+                                   </h6>
+                                 </Col>
+                               </Row>
+                               <Row className="mt30">
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 >
+                                   <span className="ml-160 font13">
+                                     Weight (10 Characters)
+                                   </span>
+                                 </Col>
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 ></Col>
+                               </Row>
+                               <Row className="">
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 >
+                                   <input
+                                     type="text"
+                                     id="weight"
+                                     className=" ProductTextBox"
+                                     name="weight"
+                                     disabled={!this.state.isEdit}
+
+                                     maxLength="10"
+                                     value={this.state.weight}
+                                     onChange={(e) => this.handleChange(e)}
+                                   />
+                                 </Col>
+                                 <Col
+                                   sm={{ size: "4" }}
+                                   xs={{ size: "4" }}
+                                   md={{ size: "4" }}
+                                   className="col-4 text-center"
+                                 ></Col>
+                               </Row>
+                               <Row noGutters={true} className="text-center">
+                                 <Col
+                                   sm={{ size: "12" }}
+                                   xs={{ size: "12" }}
+                                   md={{ size: "12" }}
+                                   className="col-12 text-center"
+                                 >
+                                   <div className="hrlineforAddProduct"></div>
+                                 </Col>
+                                 {/* <Button> next</Button> */}
+                               </Row>
+                             </Row>
+                             {/* //#endregion Enter Weight*/}
+
                              {/* //#region Describe the product */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -2663,159 +3451,9 @@ else {
                                </Row>
                              </Row>
                              {/* //#endregion Describe the product*/}
-                             {this.state.isEdit
-                             ?
-                             
-                             <Row className="washAndCareDiv mt30">
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                               <Col
-                                 sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
-                                 md={{ size: "8" }}
-                                 className="col-2"
-                               >
-                                 <Row>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-right "
-                                   >
-                                     <button
-                                       onClick={this.Cancel}
-                                       className="cancelBtnProduct"
-                                     >Cancel
-                                     </button>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-center "
-                                   >
-                                     {/* <button
-                                       onClick={this.ResetAll}
-                                       className="resetBtnProduct"
-                                     >
-                                       Reset All
-                                     </button> */}
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-left "
-                                   >
-                                     <div class="w3-container">
-                                     <button
-                                       onClick={this.ToggleSave}
-                                       className="saveBtnProduct"
-                                       disabled={this.state.SaveDisabled}
-                                     >
-                                       Save
-                                     </button>
-
-                                     <div id="id02" class="w3-modal">
-                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
-                                        <div class="w3-container">
-                                          <h3 className="deleteModalHeader">Are you sure you want to save ?</h3>
-                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
-                                          <div className="deleteModalButtonOuterDiv">
-                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton">Save</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                     </div>
-                                    </div>
-
-                                   </Col>
-                                 </Row>
-                               </Col>
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                             </Row>
-                             :
-
-                             <>
-                             <Row className="washAndCareDiv mt30">
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                               <Col
-                                 sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
-                                 md={{ size: "8" }}
-                                 className="col-2"
-                               >
-                                 <Row>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <div class="w3-container">
-                                     <button
-                                       onClick={this.ToggleDelete}
-                                       className="cancelBtnProduct"
-                                     >Delete
-                                     </button>
-
-                                     <div id="id01" class="w3-modal">
-                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
-                                        <div class="w3-container">
-                                          <h3 className="deleteModalHeader">Are you sure you want to delete ?</h3>
-                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
-                                          <div className="deleteModalButtonOuterDiv">
-                                            <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={this.Delete} className="deleteModalOkayButton">Delete</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                     </div>
-                                    </div>
-
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <button
-                                       onClick={this.editenabled}
-                                       className="editbutton11"
-                                     >
-                                       Edit
-                                     </button>
-                                   </Col>
-                                   
-                                 </Row>
-                               </Col>
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                             </Row>
-                             </>
-                            }
+                             /
                              <div className="hrlineforAddProduct"></div>
-                             <Row   className="text-center">
+                             <Row noGutters={true} className="text-center">
                                <Col
                                  sm={{ size: "12" }}
                                  xs={{ size: "12" }}
@@ -2828,50 +3466,9 @@ else {
                              </Row>
                            </div>
                          </Row>
-                         {/* <ReactModal
-                               isOpen={this.state.modal5}
-                               contentLabel="Minimal Modal Example"
-                               className="Modal"
-                               style={customStyles3}
-                               // onRequestClose={this.handleCloseWrongPasswordModal}
-                             >
-                                <div className="modalconfirm">
-                                  <Row   className="text-center font20">
-                                    Are you sure you want to save changes
-                                  </Row>
-                                  <Row  >  
-                                    <Col sm={{size:"8"}}>
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      cancel
-                                    </Col>
-                                    <Col sm={{size:"2"}}>
-                                      Ok
-                                    </Col>
-                                  </Row>
-                                </div>
-                             </ReactModal> */}
-                              
-                        {/* <Modal show={this.state.modal5} onClick={()=>{this.handleClose()}}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={()=>{this.handleClose()} }>
-                              Close
-                            </Button>
-                            <Button variant="primary" onClick={()=>{this.handleClose()}}>
-                              Save Changes
-                            </Button>
-                          </Modal.Footer>
-                        </Modal> */}
-
                        </Container>
                        <Footer></Footer>
-                      
-                   
-
+        
                      </React.Fragment>
                    );
               }

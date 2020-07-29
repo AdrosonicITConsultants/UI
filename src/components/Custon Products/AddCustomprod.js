@@ -101,7 +101,7 @@ class AddCustomprod extends Component {
                  <>
                   <body onload="window.location.reload()"></body>
                 <Container className="wishlistbg">
-              <Row noGutters={true}>
+              <Row  >
           
               
               <Col md = "1">
@@ -148,12 +148,12 @@ class AddCustomprod extends Component {
                     
                <div>
                     <Card className="wishlistcardbody">
-                        <Row noGutters={true}>
+                        <Row  >
                             <Col sm={12} className="srno">
                             <p></p>
                             </Col>
                         </Row>
-                    <Row noGutters={true}>
+                    <Row  >
                         
 {/* Col 1                         */}
                     <Col sm={2} >
@@ -171,23 +171,25 @@ class AddCustomprod extends Component {
                     </Col>
 {/* col 2 */}
                      <Col sm={6} className="secondcolmargin"> 
-                     <Row noGutters={true}>
+                     <Row  >
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey",fontWeight:"400"}}>  {data.weftDye? data.weftDye.dyeDesc:null} X <span></span>
+                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftDye? data.weftDye.dyeDesc:null} 
                            {data.warpDye?
-                            data.warpDye.dyeDesc:null} X <span></span>
+                           " X":null}  <span></span>
+                           {data.warpDye?
+                            data.warpDye.dyeDesc:null}  {data.extraWeftDye? " X":null} <span></span>
                            {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
                           
                             </Col>
                      </Row>
-                     <Row  noGutters={true}> 
+                     <Row   > 
                          <Col sm={12}>
                              <p className="Descriptionipara regular"  numberOfLines={2}  >{data.product_spec}
                            </p>
                          </Col>
                      </Row>
-                     <Row  noGutters={true}>
+                     <Row   >
                         
                          <Col sm={12} className="Wishlistpcode">
                      <span>Date created :</span> <span><b>
@@ -201,14 +203,14 @@ class AddCustomprod extends Component {
                        </Col> 
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
-                         <Row noGutters={true}>
+                         <Row  >
                          <Col sm={12}  className="Editprodmodify">
                             <a href = {"/editBuyerProduct?productId=" + data.id}>
                             View & modify product <img className="editimgicon" src={logos.Iconfeatheredit3}/>
                             </a>
                             </Col>
                              </Row>  
-                        <Row noGutters={true}>
+                        <Row  >
                             <Col sm={12} >
                             <div class="buttons">
                         <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}}  onClick={() => this.generateEnquiry(data.id)}>
@@ -231,7 +233,7 @@ class AddCustomprod extends Component {
                             </div>
                             </Col>
                             </Row>
-                            <Row noGutters={true}>
+                            <Row  >
                                 <Col sm={12} >
                                
                                {/* <p className="Wishlistpcode margintopcss"><b>Available in </b>Stock</p> */}

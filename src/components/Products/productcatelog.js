@@ -48,7 +48,7 @@ class productcatelog extends Component {
                 return (
                   <>
                     <div className="ProductList col-12 mx-auto col-md-12 col-lg-12 my-10">
-                      <Row style={{ margin: "20px", marginTop:"50px" }} noGutters={true}>
+                      <Row style={{ margin: "20px", marginTop:"50px" }}  >
                         <Col className="col-sm-1 col-md-1 col-1">
                           <span className="text1PC">{items.productCategory.productDesc}</span>
                         </Col>
@@ -73,7 +73,7 @@ class productcatelog extends Component {
                       <Row
                         className="ProductListMargin"
                         style={{ margin: "20px" }}
-                        noGutters={true}
+                      
                       >                        
                         {items.products.map((product, index) => { return index < 4 ?                          
                             <Product

@@ -79,10 +79,10 @@ import changeLang from "../../../services/utils/changeLang"
                        >
                          <div
                            className="demoa demoabAnimation text-center"
-                           noGutters={true}
+                            
                          >
                            <br></br>
-                           <Row noGutters={true} className="">
+                           <Row   className="">
                              <div className="col-xs-6">
                                <img
                                  src={logos.backarrowicon}
@@ -110,7 +110,7 @@ import changeLang from "../../../services/utils/changeLang"
                            <br />
                            <br />
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line32 font3"
                            >
                              <span className="col-xs-1"></span>
@@ -119,7 +119,7 @@ import changeLang from "../../../services/utils/changeLang"
                              </span>
                            </Row>
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-1"></div>
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
@@ -146,13 +146,13 @@ import changeLang from "../../../services/utils/changeLang"
                                </div>
                              </div>
                            </Row>
-                           {/* <Row noGutters={true} className="text-center line32 font3">
+                           {/* <Row   className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10 fontplay">
                     Enter your 4 digit pin provided along with weaver ID{" "}
                   </span>
                 </Row> */}
-                           {/* <Row noGutters={true}>
+                           {/* <Row  >
                   <div className="col-xs-1"></div>
                   <div className="form-group col-xs-10 ">
                     <label className="control-label"></label>
@@ -179,7 +179,7 @@ import changeLang from "../../../services/utils/changeLang"
                 </Row> */}
                            <br />
                            <br />
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="blackButton"
@@ -194,7 +194,7 @@ import changeLang from "../../../services/utils/changeLang"
                            <br />
                            <hr className="hrline"></hr>
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line32 font3"
                            >
                              <span className="col-xs-2"></span>
@@ -205,7 +205,7 @@ import changeLang from "../../../services/utils/changeLang"
 
                            <br />
 
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="whiteButton"
@@ -235,7 +235,7 @@ import changeLang from "../../../services/utils/changeLang"
                                English
                              </Button>
                            </ButtonGroup> */}
-                           <Row noGutters={true} className="mt7">
+                           <Row   className="mt7">
                              {/* <span className="col-xs-3 text-center line7 font6">
                     Help?
                   </span> */}

@@ -1,0 +1,115 @@
+import React, { Component } from 'react'
+import { memoryHistory, browserHistory } from "../../helpers/history";
+import { Row, Col , Container, Button} from 'reactstrap';
+import { connect } from "react-redux";
+import NavbarComponent from "../navbar/navbar";
+import logos from "../../assets";
+import "../ArtistEnquiries/AllEnquiryList.css"
+import TTCEapi from '../../services/API/TTCEapi';
+import OngoingList from './BuyerOngoingList';
+import CompletedList from './BuyerCompletedList';
+
+
+export class BuyerAllEnquiryList extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            ongoingEnquiry:true,
+            enquiryStagesMTO :[],
+            stage: 3,
+            openEnquiries: [],
+
+        }
+        this.completed = this.completed.bind(this);
+        this.ongoing = this.ongoing.bind(this);
+
+
+    }      
+    completed(){
+        this.setState({ongoingEnquiry:false})
+    }  
+    ongoing(){
+        this.setState({ongoingEnquiry:true})
+    }        
+    backoperation(){
+        browserHistory.push("/home"); 
+    }
+    
+    render() {
+        return (
+            <React.Fragment>
+                <NavbarComponent/>
+                <Container>
+                <Row noGutters={true} className="">
+                           <Col sm = "1" className="col-xs-2">
+                           <img
+                                       src={logos.backarrowicon}
+                                       className="margin-cparrow cparrowsize glyphicon"
+                                        onClick={() => this.backoperation()}
+                            ></img>
+                          
+                          </Col>
+                          <Col sm="10" className="col-xs-9">
+                               <Row noGutters={true} className ="cp1heading bold fontplay ">
+                                   <Col md="12" className="col-xs-12">
+                                        All Enquiries
+                                       </Col>
+                               </Row>
+                               <Row noGutters={true} className="mt20">
+                                   {this.state.ongoingEnquiry
+                                   ?
+                                    <>
+                                     <Col className="navoncon oncoselected bold">
+                                       <span onClick={this.ongoing }>Ongoing</span> 
+                                       <hr className="selctedoptionhr"></hr>
+                                    </Col>
+                                    <Col className="navoncon onconotselected light">
+                                       <span onClick={this.completed }>Completed</span> 
+                                    </Col>
+                                    </>
+                                    :
+                                    <>
+                                     <Col className="navoncon onconotselected light">
+                                     <span onClick={this.ongoing }>Ongoing</span> 
+                                    </Col>
+                                    <Col className="navoncon oncoselected bold">
+                                    <span onClick={this.completed }>Completed</span> 
+                                    <hr className="selctedoptionhr2"></hr>
+
+                                    </Col>
+                                    </>
+                                    }
+                                   
+                               </Row>
+                               
+                          </Col>                            
+                </Row>
+                <Row>
+                    <hr className="enquiryoptionhr"></hr>
+                </Row>
+                {
+                    this.state.ongoingEnquiry
+                    ?
+                    <>
+                    <OngoingList></OngoingList>
+                    </>
+                    :
+                    <>
+                    <CompletedList></CompletedList>
+                    </>
+                }
+                </Container>
+            </React.Fragment>
+        )
+    }
+}
+
+function mapStateToProps(state) {
+    // debugger;
+    const { user } = state
+    return { user };
+}
+
+const connectedLoginPage = connect(mapStateToProps)(AllEnquiryList);
+export default connectedLoginPage;

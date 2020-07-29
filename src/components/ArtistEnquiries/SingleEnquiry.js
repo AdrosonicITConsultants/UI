@@ -239,6 +239,7 @@ export class SingleEnquiry extends Component {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
+                      browserHistory.push("/Preview");
                 });
             }
             else{
@@ -247,6 +248,7 @@ export class SingleEnquiry extends Component {
                     autoClose: true,
                   });
             }
+           
             }
          
 
@@ -271,7 +273,7 @@ export class SingleEnquiry extends Component {
           
            ).then((response)=>{
             this.setState({sendMoq : response.data,
-                isMoqdetail:!this.state.isMoqdetail},()=>{
+                isMoqdetail:true},()=>{
             // console.log(this.state);
            
             });
@@ -368,7 +370,9 @@ export class SingleEnquiry extends Component {
                 console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
+            
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                            console.log(response.data);
                             this.setState({getEnquiryMoq : response.data.data,progressid: response.data.data[0].enquiryStageId,dataload:true},()=>{
                                 console.log(this.state);
                            
@@ -560,7 +564,7 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 ">
@@ -582,7 +586,11 @@ export class SingleEnquiry extends Component {
                            </Col>
                        </Row>
                     </Col>
-                </Row >
+                </Row>
+                <Row noGutters={true}>
+                    <button></button>
+
+                </Row>
                
                 </>
                 )}

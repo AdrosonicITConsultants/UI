@@ -152,7 +152,7 @@ export class PreviewInvoice extends Component {
     {/* ------------------------------------- */}
    <tr> 
      <td>
-     <h3 className="snopi srwidth">01</h3>
+     <h3 className="snopi srwidth margintopsr">01</h3>
         </td>
      <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Red katan -400m</h3>

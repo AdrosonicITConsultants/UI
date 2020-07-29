@@ -4,7 +4,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 
@@ -20,7 +19,7 @@ export class OngoingList extends Component {
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
-            dataload:false
+            dataload:true
 
         }
         

@@ -87,6 +87,8 @@ function App() {
           
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
+          <PrivateRoute exact path="/BuyerenquiriesList" component={AllEnquiryList} />
+          <PrivateRoute exact path="/buyerEnquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
 

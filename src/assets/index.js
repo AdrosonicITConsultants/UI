@@ -131,7 +131,11 @@ import Iconfeatheredit3 from "./Icon feather-edit-3.png"
 import whitecustomdesignicon from "./white custom design icon for black button .svg"
 import PIbtnicon from "./Icon material-view-column.svg"
 import Iconpaymentinvoice from "./Icon payment-invoice.svg"
+import chatwhite from "./chat white.svg"
+import downloadpdficon from "./download pdf icon.svg"
 export default {
+  downloadpdficon,
+  chatwhite,
   Iconpaymentinvoice,
   PIbtnicon,
   colorbar,

@@ -562,7 +562,7 @@ class TTCEapi {
   }
 
   static generateEnquiry(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
     console.log(url);
     return axios
       .post(url)
@@ -576,7 +576,7 @@ class TTCEapi {
   }
 
   static generateEnquiryTrue(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom;
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
     console.log(url);
     return axios
       .post(url)
@@ -1386,7 +1386,7 @@ class TTCEapi {
   //#endregion
 
   static getEnquirStages() {
-    let url = ApiUrl + "/enquiry/get10EnquiryStages";
+    let url = ApiUrl + "/enquiry/getAllEnquiryStages";
 
     return axios
       .get(url)

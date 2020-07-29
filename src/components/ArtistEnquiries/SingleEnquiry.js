@@ -47,17 +47,17 @@ export class SingleEnquiry extends Component {
             dataload : false,
             isSend:-1,
             ImageUrl:TTCEapi.ImageUrl+'Product/',
-            quantity:0,
-            rpu:0,
-            dod :"",
-            cgst:0,
-            sgst:0,
-            hsncode:0,
-            progressid:5,
+            progressid:3,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
 
+       ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
     buyersDetailsbtn(){
       
         this.setState((prevState) => {
@@ -275,13 +275,14 @@ export class SingleEnquiry extends Component {
             this.setState({sendMoq : response.data,
                 isMoqdetail:true},()=>{
             // console.log(this.state);
-           
+            this.componentDidMount();
             });
             customToast.success("MOQ Details send successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
         });
+      
     } 
     else{
         this.setState({
@@ -372,8 +373,24 @@ export class SingleEnquiry extends Component {
                     yarns: response.data.data.yarns },()=>{
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-                            console.log(response.data);
-                            this.setState({getEnquiryMoq : response.data.data,progressid: response.data.data[0].enquiryStageId,dataload:true},()=>{
+                            var nextProgressid = 0;
+                            if(response.data.data[0].productStatusId == 2)
+                            {
+                                    if(response.data.data[0].enquiryStageId == 3)
+                                    {
+                                        nextProgressid = 11;
+                                    }
+                                    else{
+                                        nextProgressid =response.data.data[0].enquiryStageId + 1;
+                                    }
+                            }
+                            else{
+                                nextProgressid =response.data.data[0].enquiryStageId + 1;
+                            }
+                            this.setState({getEnquiryMoq : response.data.data,
+                                progressid: response.data.data[0].enquiryStageId,
+                                Progressidnext : nextProgressid,
+                                dataload:true},()=>{
                                 console.log(this.state);
                            
                             });
@@ -587,8 +604,81 @@ export class SingleEnquiry extends Component {
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true}>
-                    <button></button>
+                <Row noGutters={true} className="text-center">
+                    <button
+                      className="blackButton"
+                      onClick={this.ToggleDelete}
+                    >
+                      Change Status
+                    </button>
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                    Change Status
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={this.ToggleDeleteClose} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {item.productStatusId === 2
+                                ?
+                                <>
+                                 {this.state.enquiryStagesAvailable.map((item1) => 
+                                    item1.id > 3 
+                                    ?
+                                    <Col className="col-xs-12 mb7">
+                                         {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+
+                                    {item1.desc}
+                                    </Col>
+                                    :
+                                    <>
+                                    </>
+                                 )}   
+                                </>
+                                :
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                                    item1.id > 3
+                                    ?
+                                    <Col className="col-xs-12 mb7">
+                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+
+                                    {/* <div className="greenButtonstatus">
+                                    </div> */}
+                                    {item1.desc}
+                                    </Col>
+                                    :
+                                    <>
+                                    </>
+                                 )} 
+                                </>
+                                }
+                                
+                               
+                            </Row>
+                            <br></br>
+                            <Row noGutters={true}>
+                            <button className="markCompletedButton"
+                                >
+                                Mark Completed
+                                </button>
+                            </Row>
+                            <br></br>
+                            
+                        </div>
+                        </div>
+                    </div>
 
                 </Row>
                
@@ -889,7 +979,7 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                         {this.state.isSend==1?    
+                                                         {this.state.getPi.isSend==1?    
                                                           null
                                                             :
                                                             <>  {this.state.isPidetail ? <img

@@ -69,6 +69,13 @@ margin-top: 15px;
     font-size: 35px;
     color: rgb(39 39 231 / 84%);
 }
+
+.yetdodecide{
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    color: rgb(39 39 231 / 84%);
+}
 .advpaidamt{
     text-align: center;
     font-size: 9px;
@@ -171,15 +178,15 @@ margin-left: 25px;
     /* margin-left: 9px; */
     margin-right: 10px;
     font-size: 16px;
-    color: black;
+    color: white;
     border: 1px solid;
-    background: transparent;
+    background-color: rgb(185, 12, 92);
     font-weight: 700;
     cursor: pointer;
 
 }
 .Raiseinvbtn{
-    width: 200px;
+    width: 263px;
     height: 50px;
     border-radius: 30px;
     margin-bottom: 20px;
@@ -187,7 +194,7 @@ margin-left: 25px;
     /* font-size: 16px; */
     color: white;
     border: 1px solid transparent;
-    background: rgb(23 23 221 / 90%);
+    background: rgb( 25, 67, 206);
     font-weight: 700;
     cursor: pointer;
 }
@@ -199,10 +206,18 @@ margin-left: 25px;
 }
 
 .belowprevtext{
-    font-size: 18px;
+    font-size: 16px;
     color: grey;
     font-weight: 500;
-    margin-bottom: 29px;
+    margin-bottom: 10px;
+}
+
+.Qtyandhsn{
+    width: 100px;
+}
+
+.MarginLeft10{
+    margin-left: 10px;
 }
 /* ------------Table------- */
 table, th, td {
@@ -219,7 +234,7 @@ table, th, td {
     width: 19%;
   }
   .gdwidth{
-    width: 348px;
+    width: 246px;
   }
   .srwidth{
     width: 50px;

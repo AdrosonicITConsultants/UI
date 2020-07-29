@@ -337,9 +337,11 @@ font-size: 13px;
 }
 .savemoqbtn:disabled{
     background-color: grey;
+    opacity: 0.5;
 }
 .sendmoqbtn:disabled{
     background-color: grey;
+    opacity: 0.5;
 }
 
 .PIinput{
@@ -405,6 +407,55 @@ font-size: 13px;
 }
 
 
+.modalBoxSizeCS{
+    width: 300px;
+}
+.CSheading{
+    background: black;
+    height: 39px;
+    font-size: 17px;
+    padding: 6px;
+    color: white;
+    font-weight: 300;
+}
+.cWhite{
+    color:white;
+}
+.greenButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid green;
+    float: left;
+    background: green;
+    border-radius: 50%;
+
+}
+.blueButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid blue;
+    float: left;
+    background:white;
+    border-radius: 50%;
+
+}
+.greyButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    float: left;
+    background:white;
+    border-radius: 50%;
+}
+.markCompletedButton{
+    background: white;
+    border: 1px solid blue;
+    color: blue;
+    padding: 5px 10px;
+}
+.mb7{
+    margin-bottom: 7px;
+}
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;

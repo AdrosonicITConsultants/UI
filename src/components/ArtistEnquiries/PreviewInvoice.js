@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
@@ -10,36 +12,56 @@ import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import Moment from 'react-moment';
+import moment from 'moment';
 import Footer from '../footer/footer';
 
+const ref = React.createRef();
 
 export class PreviewInvoice extends Component {
     constructor(props) {
         super(props);
-    
-        this.state = {
-            
+        var today = new Date(),
+         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
+        this.state = {
+            time: '',
+          currentDate: date
         }
         
-
     } 
+ 
+    componentDidMount() {
+        var date = moment()
+          .utcOffset('+05:30')
+          .format(' hh:mm A');
+        this.setState({ time: date });
+      }
+    
+    
+    
     render(){
         return(
             
 <React.Fragment>
     <Container>
 
-
-    <Row noGutters={true} className="margintopInv">
-        <Row noGutters={true}>
-            <Col className="col-xs-12"> <button className="Raiseinvbtn" style={{float:"right"}}><img className="InvImg" src={logos.Iconpaymentinvoice}/> Raise Invoice</button></Col>
-        </Row>
-    <Col className="col-xs-12 btncol  belowprevtext">
-        Below preview of the invoice will be available for buyer
-    </Col>
-</Row>
+    {/* <Pdf targetRef={ref} filename="code-example.pdf">
+        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+      </Pdf> */}
+{/* --------------------------------------Invoice---------------------------------------------------------- */}
+<div ref={ref} style={{width: '100%', height: "100%"}} >
+   <Row noGutters={true}>
+       <Col className="col-xs-6">
+       <p className="  belowprevtext">  Received at :  {this.state.time} on  { this.state.currentDate }</p>
+</Col>
+<Col className="col-xs-6" >
+<Pdf targetRef={ref} filename="code-example.pdf">
+{({ toPdf }) => 
+<p className=" belowprevtext" style={{float:"right"}} onClick={toPdf}><img src={logos.downloadpdficon} className="InvImg" /> Download this invoice in pdf</p>
+}
+      </Pdf>
+</Col>
+   </Row>
 <Row className="MainPIRow " >
 {/* -----------------------------------------text------------------------------------- */}
 
@@ -108,7 +130,7 @@ export class PreviewInvoice extends Component {
          <p className="PaymentTerm">Payment Terms: Advance</p> 
        <p className="againstpi">'Advance Against PI'</p>
        </td>
-    <td><p className="thirtyperadv">30%</p> 
+    <td><p className="yetdodecide">Yet to be decided</p> 
        <p className="advpaidamt">Advance paid of Total amount</p>
        </td>
     <td className="tdwidth">
@@ -139,10 +161,13 @@ export class PreviewInvoice extends Component {
      <td>
      <h3 className="snopi gdwidth">Goods Description</h3>
         </td>
-     <td className="">
+        <td  >
+     <h3 className="snopi">HSN Code</h3>
+        </td>
+     <td className="Qtyandhsn">
      <h3 className="snopi">Quantity</h3>
      </td>
-     <td>
+     <td className="Qtyandhsn">
      <h3 className="snopi rpu">Rate/per unit</h3>
      </td>
      <td>
@@ -175,6 +200,9 @@ export class PreviewInvoice extends Component {
      </div>
      <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
         </td>
+        <td >
+     <p className="snopi wraptext">BYUW345</p>
+     </td>
      <td >
      <p className="snopi wraptext">14</p>
      </td>
@@ -182,7 +210,7 @@ export class PreviewInvoice extends Component {
      <p className="snopi rpu wraptext">2700</p>
      </td>
      <td>
-     <p className="snopi wraptext">5555j8577</p>
+     <p className="snopi wraptext">55558577</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -198,6 +226,9 @@ export class PreviewInvoice extends Component {
      <td >
      <h3 className="snopi wraptext">14</h3>
      <h3 className="snopi wraptext">14</h3>
+     </td>
+     <td >
+     <p className="snopi wraptext">14</p>
      </td>
      <td>
      <h3 className="snopi wraptextrpu">2700</h3>
@@ -216,8 +247,11 @@ export class PreviewInvoice extends Component {
      <td>
      <h3 className="freightch snopi"><b>Total</b></h3>
         </td>
+        <td >
+     <h3 className="snopi wraptext">14</h3>
+     </td>
      <td className="">
-     <h3 className="snopi wraptext"><b>14</b></h3>
+     <h3 className="snopi wraptext">14</h3>
      </td>
      <td>
      <h3 className="snopi wraptext rpu"></h3>
@@ -242,6 +276,9 @@ export class PreviewInvoice extends Component {
 
 
         </td>
+        <td >
+     <p className="snopi wraptext">14</p>
+     </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
      </td>
@@ -260,6 +297,9 @@ export class PreviewInvoice extends Component {
      <td>
      <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">12.09.20</span></h3>
         </td>
+        <td >
+     <p className="snopi wraptext">14</p>
+     </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
      </td>
@@ -284,13 +324,16 @@ export class PreviewInvoice extends Component {
          All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
      </Col>
  </Row>
+ </div>
  {/* ------------------------------buttons------------------------------- */}
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
-<span><button className="gobacktoeditdet">Go back to edit details</button> 
- <button className="Raiseinvbtn"><img className="InvImg" src={logos.Iconpaymentinvoice}/> Raise Invoice</button></span>
+<span><button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
+ <button className="Raiseinvbtn"> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
+ <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p>
      </Col>
  </Row>
+{/* -------------------------------------------------------------------------- */}
 
 </Container>
 <Footer/>

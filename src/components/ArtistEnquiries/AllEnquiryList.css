@@ -19,14 +19,14 @@
     border: 1.5px solid black;
     width: 110px;
     top: 93px;
-    left: 0px;
+    left: -20px;
 }
 .selctedoptionhr2{
     position: absolute;
     border: 1.5px solid black;
     width: 116px;
     top: 93px;
-    left: 142px;
+    left: 122px;
 }
 .imageinlist{
     width: 140px;
@@ -374,7 +374,7 @@ font-size: 13px;
 .rssymboldis{
     border: 1px solid transparent;
     padding: 10px;
-    background: transparent;
+    background: whitesmoke;
 
 }
 .previewandpi{
@@ -383,11 +383,14 @@ font-size: 13px;
     background: black;
     color: white;
     border: 1px;
-    margin-top: 10%;
+    margin-top: 5%;
     font-size: 16px;
     border-radius: 5px;
 }
 
+.marginBottompage{
+    margin-bottom: 50px;
+}
 .PIbuttonicon{
     height: 18px;
     margin-right: 10px;
@@ -396,7 +399,7 @@ font-size: 13px;
     width: 82%;
 }
 .PIinput:disabled{
-    background-color: transparent;
+    background-color: whitesmoke !important;
 }
 
 

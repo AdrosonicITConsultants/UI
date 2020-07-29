@@ -59,6 +59,9 @@ export class OngoingList extends Component {
         
         
     } 
+    individualpage(id){
+        browserHistory.push("/enquiryDetails?code=" + id)
+    }
     render() {
         return (
             <React.Fragment>
@@ -212,11 +215,11 @@ export class OngoingList extends Component {
                             {item.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item) => <li key={item.id} className={this.state.stage == item.id ? "is-active": " "} >{item.desc}</li> )     }
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item) => <li key={item.id} className={this.state.stage == item.id ? "is-active": " "} >{item.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                                 }
 
@@ -227,7 +230,7 @@ export class OngoingList extends Component {
                 </Row>
                 <Row>
                     <Col className="col-xs-12 text-center leEnqshowmore">
-                        <a href={"/"} className="leEnqshowmore">show more details</a>
+                        <a  onClick={()=>this.individualpage(item.enquiryId)} className="leEnqshowmore">show more details</a>
                     </Col>
                 </Row>
 

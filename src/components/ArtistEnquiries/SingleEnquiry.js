@@ -11,6 +11,8 @@ import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import Moment from 'react-moment';
+
 
 export class SingleEnquiry extends Component {
     constructor() {
@@ -37,7 +39,7 @@ export class SingleEnquiry extends Component {
             isMoqdetail:true,
             isPidetail:true,
             moq:0,
-            ppu:0,
+            ppu:"",
             deliveryDesc:-1,
             additionalInfo:"",
             getMoq:[],
@@ -126,7 +128,7 @@ export class SingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/home"); 
+        browserHistory.push("/enquiriesList"); 
     } 
 
     handleCluster(e) {
@@ -256,6 +258,7 @@ export class SingleEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
+        if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(
@@ -277,7 +280,14 @@ export class SingleEnquiry extends Component {
               });
         });
     } 
-
+    else{
+        this.setState({
+            showValidationMoq: true,
+        //   message : "Invalid PAN Number"
+      });
+      
+      }
+    }
  
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
@@ -287,11 +297,11 @@ export class SingleEnquiry extends Component {
             if(response.data.data==null){
                 this.setState({
                 moq:0,
-                ppu:0,
+                ppu:"0",
                 deliveryDesc:-1,
                 additionalInfo:"",
                 isSend:-1,
-                 dataload : true,
+                //  dataload : true,
                 })
             }
             else {
@@ -303,7 +313,7 @@ export class SingleEnquiry extends Component {
                 deliveryDesc:response.data.data.deliveryTimeId,
                 additionalInfo:response.data.data.additionalInfo,
                 isSend:response.data.data.isSend,
-                 dataload : true,
+                //  dataload : true,
           },()=>{
             //  console.log(this.state.getxyz);
            
@@ -319,12 +329,6 @@ export class SingleEnquiry extends Component {
          });
      });
 
-     TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-        this.setState({getEnquiryMoq : response.data.data},()=>{
-            // console.log(this.state.getEnquiryMoq[0].email);
-       
-        });
-    });
      
 
     TTCEapi.getPi(params.code).then((response)=>{
@@ -356,6 +360,35 @@ export class SingleEnquiry extends Component {
     }
        
     });
+       TTCEapi.getProductUploadData().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response);
+                this.setState({productCategories: response.data.data.productCategories,
+                    yarns: response.data.data.yarns },()=>{
+                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                            this.setState({getEnquiryMoq : response.data.data,dataload:true},()=>{
+                                console.log(this.state.getEnquiryMoq);
+                           
+                            });
+                        });
+                    });
+            }
+        })
+        TTCEapi.getEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesMTO:response.data.data})
+            }
+        })
+        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesAvailable:response.data.data})
+            }
+        })
      }
 
      
@@ -369,8 +402,192 @@ export class SingleEnquiry extends Component {
                    <>
                 <NavbarComponent/>
                 <Container>
-               
+                <Row noGutters={true} className="">
+                           <Col sm = "1" className="col-xs-2">
+                           <img
+                                       src={logos.backarrowicon}
+                                       className="margin-cparrow cparrowsize glyphicon"
+                                        onClick={() => this.backoperation()}
+                            ></img>
+                          
+                          </Col>
+                          <Col sm="10" className="col-xs-9">
+                               <Row noGutters={true} className ="cp1heading bold  ">
+                                   <Col md="12" className="col-xs-12">
+                                        Enquiry Id : {this.state.getEnquiryMoq[0].enquiryCode}
+                                       </Col>
+                               </Row>
+                          </Col>                            
+                </Row>
+                <br></br>
+                    <>
+                    {this.state.getEnquiryMoq.map((item)=> 
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                        <Row noGutters={true}>
+                            <Col sm="9">
+                                <div className="imageinlist"> 
+                                    <div className="imageinlist1"> 
+                                    {
+                                        item.productType === "Product"
+                                        ?
+                                        <img src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+
+                                        :
+                                        <img src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+
+
+                                    }
+
+                                    </div>
+                                    <a href="/" className="leEnqprodName">{item.productName}</a>
+                                    {/* <span ></span> */}
+                                    
+                                </div>
+                                <div>
+                                  {/* <div noGutters={true} >
+                                      <Col className="leEnqid bold">
+                                      Enquiry Id : {item.enquiryCode}
+                                      </Col>
+                                  </div> */}
+                                  <div noGutters={true} >
+                                      <Col >
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.productCategoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.weftYarnId - 1 ].yarnDesc}  
+                                        {item.extraWeftYarnId > 0 
+                                        ?
+                                        <>
+                                        X  {this.state.yarns[item.extraWeftYarnId - 1 ].yarnDesc}
+                                        </>
+                                        :
+                                            <></>
+                                        }</span> 
+                                      </Col>
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          {item.productType === "Product"
+                                          ?
+                                          <>
+                                          Product Code : {item.productCode}   
+                                          </>
+                                          :
+                                          <>
+                                          Product Code : NA  
+                                          </>
+                                          }
+                                                                            
+                                      </Col>
+                                  </div>
                                
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodtype ">
+                                          {item.productStatusId==2? "Available in stock"   : "Made to order"   }
+                                                                  
+                                      </Col>
+
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqbrandname ">{item.companyName}</span>                                   
+                                      </Col>
+                                  </div>
+                                </div>
+                            </Col>
+                            <Col sm="3" className="text-right">
+                                <div noGutters={true} >
+                                      <Col className="leEnqOrderAmount ">
+                                      Order Amount
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqAmount bold">
+                                        {item.totalAmount > 0 ? "₹"+ item.totalAmount : "NA"} 
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidDateStarted">
+                                      Date Started : 
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.startedOn}
+                                        </Moment>
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidLastUpdated">
+                                      Last Updated : 
+                                      <Moment format="YYYY-MM-DD">
+                                     {item.lastUpdated}
+                                        </Moment>
+                                        
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidEstDelivery">
+                                      Est. Date of delivery : 
+                                      {item.excpectedDate != null 
+                                      ?
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.excpectedDate}
+                                        </Moment>
+                                      :
+                                      "NA"
+                                      }
+                                      
+                                      </Col>
+                                </div>
+
+                                
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 leEnqstatus bold">
+                           Enquiry Status
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.productStatusId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.enquiryStageId  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.enquiryStageId  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            </ul>
+                                }
+
+                            </div>
+                           
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row >
+               
+                </>
+                )}
+                    </>
+                <br></br>
+
+                               <br></br>
                                <Row noGutters={true}>
                                     <Row noGutters={true}>
                                     <Col sm={1}>
@@ -439,7 +656,11 @@ export class SingleEnquiry extends Component {
                                                                <Row noGutters={true}>
                                                                    <Col sm={12} className="col-xs-12 BdImgCol">
                                                                        {/* <img  className="BdImg" src={logos.Dimapur}/> */}
-                                                                       <img className="BdImg" src={this.state.ImageUrl + data.productId + '/' + data.productImages } />
+                                                                       {data.logo?
+                                                                     <img className="Logobpdimg" src={this.state.ImageUrl+'User/'+data.productId+'/CompanyDetails/Logo/'+data.logo}/>
+                                                                         :
+                                                                         <img className="BdImg" src={this.state.ImageUrl + data.productId + '/' + data.productImages } />
+                                                                        }
                                                                        </Col>
                                                                </Row>
                                                                <Row noGutters={true} className="BdImgCol">
@@ -510,6 +731,7 @@ export class SingleEnquiry extends Component {
                                                                     </Col>
                                                                    
                                                                 </Row>
+                                                                <p className="marginBottompage"></p>
                                                                </>    ) ) 
                                                                     )): null
                                                                     }
@@ -559,7 +781,7 @@ export class SingleEnquiry extends Component {
                                                                  <input 
                                                                  id="ppu"
                                                                  className="width200 alignbox2"
-                                                                  type="number"
+                                                                  type="text"
                                                                   disabled={this.state.isMoqdetail} 
                                                                   value={this.state.ppu}
                                                                    name="ppu"
@@ -605,7 +827,7 @@ export class SingleEnquiry extends Component {
                                                              </Row>
 
                                                              <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={12} className="Moqh1">
+                                                                 <Col sm={12} className="Moqh1 ">
                                                                     Additional Note:
                                                                  </Col>
                                                                  <p className="Moqh1p">
@@ -649,6 +871,7 @@ export class SingleEnquiry extends Component {
                                                                  }
                                                                  </Col>
                                                              </Row>
+                                                             <p className="marginBottompage"></p>
                                                              </>
 
                                                                 :null}
@@ -656,7 +879,7 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                         {this.state.isSend==0?    
+                                                         {this.state.isSend==1?    
                                                           null
                                                             :
                                                             <>  {this.state.isPidetail ? <img
@@ -721,7 +944,7 @@ export class SingleEnquiry extends Component {
 
                                                        <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                            <Col sm={6}>
-                                                           <label>CGST</label>
+                                                           <label>CGST %</label>
                                                            <br/>
                                                                <input className="PIinput" type="number"
                                                                disabled={this.state.isPidetail}
@@ -731,7 +954,7 @@ export class SingleEnquiry extends Component {
                                                         
                                                            </Col>
                                                            <Col sm={6}>
-                                                           <label>SGST</label>
+                                                           <label>SGST %</label>
                                                            <br/>
                                                                <input className="PIinput" type="number"
                                                                disabled={this.state.isPidetail}
@@ -743,7 +966,10 @@ export class SingleEnquiry extends Component {
 
                                                        <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                            <Col sm={12}>
-                                                           <input type="checkbox" name="checkbox" value="check" id="agree" style={{marginRight:"5px"}} /> 
+                                                           <input type="checkbox" name="checkbox" value="check" id="agree"
+                                                          
+                                                           style={{marginRight:"5px"}} 
+                                                          /> 
                                                             Agree to <a
                                                                 style={{ cursor: "pointer", fontSize: "15px" }}
                                                                 onClick={() => {
@@ -769,7 +995,7 @@ export class SingleEnquiry extends Component {
                                                            </Col>
                                                           
                                                        </Row>
-                                                      
+                                                       <p className="marginBottompage"></p>
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>

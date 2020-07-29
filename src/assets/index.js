@@ -129,6 +129,16 @@ import removefromwishlist from "./remove from wishlist.svg"
 import CustomDesignIcons from "./Custom Design Icons.svg"
 import Iconfeatheredit3 from "./Icon feather-edit-3.png"
 import whitecustomdesignicon from "./white custom design icon for black button .svg"
+
+import notifyImage1 from "./notifyImage1.svg";
+import notifyImage2 from "./notifyImage2.svg";
+import notifyImage3 from "./notifyImage3.svg";
+import notifyImage4 from "./notifyImage4.svg";
+import notifyImage5 from "./notifyImage5.svg";
+import notifyImage6 from "./notifyImage6.svg";
+import notifyImage7 from "./notifyImage7.svg";
+import notifyFooterBanner from "./notifyFooterBanner.svg";
+
 export default {
   colorbar,
   whitecustomdesignicon,
@@ -258,4 +268,12 @@ export default {
   closelogo,
   tickLogo,
   homepagebgtemp,
+  notifyImage1,
+  notifyImage2,
+  notifyImage3,
+  notifyImage4,
+  notifyImage5,
+  notifyImage6,
+  notifyImage7,
+  notifyFooterBanner,
 };

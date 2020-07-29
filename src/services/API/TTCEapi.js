@@ -1236,6 +1236,21 @@ class TTCEapi {
       });
   }
 
+  static getAllNotifications() {
+    let url = ApiUrl + "/notification/getAllNotifications";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   //#endregion
 }
 export default TTCEapi;

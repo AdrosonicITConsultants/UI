@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logos from "../../assets";
-import { Row, Col, Container, Card, CardBody } from "reactstrap";
+import { Row, Col, Container, Card, CardBody, Spinner } from "reactstrap";
 import "../navbar/navbar.css";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from "../../services/API/TTCEapi";
@@ -11,19 +11,30 @@ import Footer from "../footer/footer";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import './buyerNotify.css';
 
 class BuyerNotifications extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      notificationData: []
+    };
   }
 
   backoperation() {
     browserHistory.push("/home");
   }
 
-  componentDidMount() {}
+  componentDidMount(){
+    TTCEapi.getAllNotifications().then((response)=>{
+        if(response.data.valid)
+        {
+          this.setState({notificationData:response.data.data.getAllNotifications});
+          console.log(this.state.notificationData);
+        }
+    })
+  }
 
   render() {
     return (
@@ -48,13 +59,10 @@ class BuyerNotifications extends Component {
                 <p> 10 New Notifications</p>
                 <p style={{ float: "right" }}>
                               {/* <button className="clearmywishlist"> */}
-                              <a style={{ float: "right" }}> <img
-                                  className="homeiconwishlist"
-                                  src={logos.clearmywishlist}
-                                />
-                                <span className="spanhome">
-                                  Mark All As Read
-                                </span></a> 
+                              <span className="notifyCircleRed">O</span>
+                                <span className="spanhome notifyReadRed">
+                                Mark all as read
+                                </span>
                               {/* </button> */}
                             </p>
                 <Row noGutter={true}>
@@ -66,53 +74,257 @@ class BuyerNotifications extends Component {
                     ></p>
                     
                   </Col>
-                  <hr className="hrlineasd "></hr>
+                  <hr className="hrBuyerNotify"></hr>
                 </Row>
+                </Col>
+            </Row>
 
-                {/* {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => (  */}
-                <>
-                  <div>
-                    <Card className="wishlistcardbody">
-                      <Row noGutters={true}>
-                        <Col sm={12} className="srno">
-                        
-                        </Col>
-                      </Row>
-                      <Row noGutters={true}>
-                        {/* Col 1                         */}
-                        <Col sm={2}>
-                          <div className="Wishlistitemimgdiv"></div>
-                        </Col>
-                        {/* col 2 */}
-                        <Col sm={6} className="secondcolmargin">
-                          <Row noGutters={true}>
-                            <Col sm={12}>
-                              <h1 className="wishlistitemcardtitle"></h1>
-                            </Col>
-                          </Row>
-                          <Row noGutters={true}>
-                            <Col sm={12}>
-                              <p className="Descriptionitemp"></p>
-                            </Col>
-                          </Row>
-                        </Col>
-                        {/* Col 3 */}
-                        <Col sm={3} className="Colfloatri">
-                          <Row noGutters={true}></Row>
-                          <Row noGutters={true}>
-                            <Col sm={12}>
-                              <div class="buttons"></div>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                    </Card>
-                  </div>
-                </>
+            <Row noGutters={true}>
+              <Col md="12"> 
+                <Card className="notificationCardbody">
+
+                  {/* <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage1" src={logos.notifyImage1}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      </div>
+                      <div>
+                        <span className="notifyResponse">RESPONSE</span>
+                        <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row>   
+
+                  <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage1" src={logos.notifyImage2}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                        <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      </div>
+                      <div>
+                        <span className="notifyResponse">RESPONSE</span>
+                        <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row> 
+
+                  <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage3" src={logos.notifyImage3}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                        <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                        <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      </div>
+                      <div>
+                        <span className="notifyResponse">Pro Forma Invoice : <span className="notifyGreenColor">Received</span></span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row>
+
+                  <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage1" src={logos.notifyImage4}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                        <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                        <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      </div>
+                      <div>
+                        <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row>
+
+                  <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage3" src={logos.notifyImage5}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                        <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                        <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      </div>
+                      <div>
+                        <span className="notifyResponse">Transaction : Advance Payment : <span className="notifyGreenColor">Approved</span></span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row>
+
+                  <Row noGutters={true} className="notifyRowOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage3" src={logos.notifyImage6}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">Titli</span></span>
+                        <span className="notifyProductName1">Product : <span className="notifyBrandName1">Ikat Weave Red and White Saree</span></span>
+                      </div>
+                      <div>
+                        <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : In Packing</span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCircle">O</span>
+                      <span className="spanhome notifyRead">Mark as read</span>
+                    </Col>
+
+                  </Row> */}
+
+                  { this.state.notificationData ? this.state.notificationData.map((data) => {
+                    
+                    if(data.customProduct === "Custom Product") {
+                      return <Row noGutters={true} className="notifyRowWhiteOuter">
+                      <Col md={1} className="notifyRemoveColRight">
+                      <img  className="notifyImage3" src={logos.notifyImage7}/>
+                      </Col>
+                      <Col md={9} className="notifyRemoveColPadding">
+                        <div>
+                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                          <span className="notifyEnquiryCustomwhite">CUSTOM DESIGN</span>
+                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                        </div>
+                        <div>
+                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                        </div>
+                      </Col>
+                      <Col md={2} className="notifyRemoveColLeft text-right">
+                        <span className="notifyCirclewhite">O</span>
+                        <span className="spanhome notifyReadwhite">Mark as unread</span>
+                      </Col>
+  
+                    </Row> 
+                    }
+                    else {
+                      return <Row noGutters={true} className="notifyRowWhiteOuter">
+                      <Col md={1} className="notifyRemoveColRight">
+                      <img  className="notifyImage3" src={logos.notifyImage7}/>
+                      </Col>
+                      <Col md={9} className="notifyRemoveColPadding">
+                        <div>
+                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                        </div>
+                        <div>
+                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                        </div>
+                      </Col>
+                      <Col md={2} className="notifyRemoveColLeft text-right">
+                        <span className="notifyCirclewhite">O</span>
+                        <span className="spanhome notifyReadwhite">Mark as unread</span>
+                      </Col>
+  
+                    </Row> 
+                    }
+                    
+                  })
+                  
+                : <Spinner color="dark" /> }
+
+                  {/* <Row noGutters={true} className="notifyRowWhiteOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage3" src={logos.notifyImage7}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNowhite">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">Titli</span></span>
+                        <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">Ikat Weave Red and White Saree</span></span>
+                      </div>
+                      <div>
+                        <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : In Packing</span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCirclewhite">O</span>
+                      <span className="spanhome notifyReadwhite">Mark as unread</span>
+                    </Col>
+
+                  </Row>
+
+                  <Row noGutters={true} className="notifyRowWhiteOuter">
+                    <Col md={1} className="notifyRemoveColRight">
+                    <img  className="notifyImage3" src={logos.notifyImage7}/>
+                    </Col>
+                    <Col md={9} className="notifyRemoveColPadding">
+                      <div>
+                        <span className="notifyEnquiryNowhite">Enquiry ID : AS-VB-BU-234563</span>
+                        <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">Titli</span></span>
+                        <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">Ikat Weave Red and White Saree</span></span>
+                      </div>
+                      <div>
+                        <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : Stopped</span>                        
+                      </div>
+                    </Col>
+                    <Col md={2} className="notifyRemoveColLeft text-right">
+                      <span className="notifyCirclewhite">O</span>
+                      <span className="spanhome notifyReadwhite">Mark as unread</span>
+                    </Col>
+
+                  </Row> */}
+
+
+
+
+                </Card>
+              
               </Col>
             </Row>
+
+            <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
           </Container>
-          {/* <Footer/> */}
+          <Footer/>
         </>
       </React.Fragment>
     );

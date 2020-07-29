@@ -15,14 +15,26 @@ class NotificationBuyerCount extends Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      notificationCount: 0
+    };
   }
+
+  componentDidMount(){
+    TTCEapi.getAllNotifications().then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(response.data.data);
+            this.setState({notificationCount:response.data.data.count})
+        }
+    })
+  } 
 
   render() {
     return (
       <div>
         <div>
-          <NotificationBadge  count="10" effect={Effect.ROTATE_X}
+          <NotificationBadge  count={this.state.notificationCount} effect={Effect.ROTATE_X}
           />
         </div>
       </div>

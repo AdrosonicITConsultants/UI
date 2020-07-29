@@ -76,7 +76,7 @@ export class ProductOfArtisian extends Component {
             
                     </div>
                  
-                    <Row noGutters={true} className="cpdetails1">
+                    <Row    className="cpdetails1">
                         <Col  className=" bold fontplay col-xs-12">
                           <div className="productname1">{this.state.proddata.tag}</div> 
                         </Col>
@@ -87,7 +87,7 @@ export class ProductOfArtisian extends Component {
                             <div className="col-xs-6">
                                 {this.state.proddata.productStatusId == 2 
                                 ?
-                                    <Row noGutters={true} className="stockmargin">
+                                    <Row    className="stockmargin">
                                         <Col className="Available1">
                                         Available 
                                         </Col>
@@ -96,7 +96,7 @@ export class ProductOfArtisian extends Component {
                                         </Col>
                                     </Row>
                                 :
-                                    <Row noGutters={true} className="stockmargin exclusive">
+                                    <Row    className="stockmargin exclusive">
                                         <Col className="Exclusively1">
                                         Exclusively
                                         </Col>

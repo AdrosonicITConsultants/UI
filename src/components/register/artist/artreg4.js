@@ -159,9 +159,9 @@ export default class artreg4 extends Component {
               lg={{ size: "8" }}
               className="vcenter1 "
             >
-              <div className="demoab text-center" noGutters={true}>
+              <div className="demoab text-center"  >
                 <br></br>
-                <Row noGutters={true} className="">
+                <Row   className="">
                   <div className="col-xs-7">
                     <img
                       src={logos.backarrowicon}
@@ -183,7 +183,7 @@ export default class artreg4 extends Component {
                   ></img>
                 </Row>
 
-                <Row noGutters={true} className="text-center line32 font3">
+                <Row   className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10">
                     {/* <img src={logos.locklogo}   
@@ -192,7 +192,7 @@ export default class artreg4 extends Component {
                   </span>
                 </Row>
                 <br></br>
-                <Row noGutters={true}>
+                <Row  >
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
                     <Col
                       xs={{ size: "11", offset: "1" }}
@@ -458,7 +458,7 @@ export default class artreg4 extends Component {
                 </div>
                 <hr className="hrline2"></hr>
 
-                <Row noGutters={true}>
+                <Row  >
                   <div className="col-xs-12 text-center">
                     <button
                       className="blackButton"
@@ -470,17 +470,17 @@ export default class artreg4 extends Component {
                 </Row>
                 
 
-                <Row noGutters={true} className="text-center line312 font2 mt17">
+                <Row   className="text-center line312 font2 mt17">
                   <span className="col-xs-2"></span>
                   <span className="col-xs-8">Need Help? </span>
                 </Row>
 
-                <Row noGutters={true} className="text-center line6 ">
+                <Row   className="text-center line6 ">
                   Change language
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
 
-                {/* <Row noGutters={true}>
+                {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>

@@ -26,22 +26,22 @@ export default class roleselect extends Component {
 
         return(
             <React.Fragment> 
-                 <div className="demo" noGutters={true}>
-                                <Row noGutters={true} className="text-center">
+                 <div className="demo"  >
+                                <Row   className="text-center">
                         <img src={logos.mainlogo} alt="TataTrusts logo" className="logohome"></img>
                                 </Row>
                                 
-                                <Row noGutters={true} className="text-center line31 font4 fontplay">
+                                <Row   className="text-center line31 font4 fontplay">
                                     What describes you the best?
                                 
                                 </Row>
                                
-                                <Row noGutters={true} className="selectorrow text-center">
+                                <Row   className="selectorrow text-center">
                                     <div className="box1" onClick={() => this.artistopen()}>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                 <img src={logos.buyerlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
-                                        <Row noGutters={true} className="text-center font3">
+                                        <Row   className="text-center font3">
                                             Artisan
                                         </Row>
 <br/>
@@ -54,10 +54,10 @@ export default class roleselect extends Component {
                                     </div>
                        
                                     <div className="box3 " onClick={() => this.buyeropen()}>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                 <img src={logos.buyerlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
-                                        <Row noGutters={true} className="text-center font3">
+                                        <Row   className="text-center font3">
                                             Buyer
                                         </Row>
                             <br />
@@ -65,13 +65,13 @@ export default class roleselect extends Component {
 
 
                                 </Row>
-                                <Row noGutters={true} className="text-center line5 font3">
+                                <Row   className="text-center line5 font3">
                                     Help?
                                 </Row>
                   
               
                 
-                                <Row noGutters={true} className="text-center  mt37">
+                                <Row   className="text-center  mt37">
                                     Privacy Policy
                                     
                                 </Row>

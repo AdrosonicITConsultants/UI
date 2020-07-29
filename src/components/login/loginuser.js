@@ -52,7 +52,7 @@ export default class buyeruser extends Component {
       <React.Fragment>
         <div className="demo" noGutters={true}>
           <br></br>
-          <Row noGutters={true} className="">
+          <Row   className="">
             <div className="col-xs-6">
               <img
                 src={logos.backarrowicon}
@@ -72,7 +72,7 @@ export default class buyeruser extends Component {
           <br />
           <br />
           <br />
-          <Row noGutters={true}>
+          <Row  >
             <span className="col-xs-4"></span>
             {this.props.userpage == 1 ? (
               <div className="col-xs-4 text-center">
@@ -104,13 +104,13 @@ export default class buyeruser extends Component {
 
           <br />
           <div>
-            <Row noGutters={true}>
+            <Row  >
               <span className="col-xs-1"></span>
               <span className="col-xs-10 text-center font13">
                 Enter your registered mobile number or email id
               </span>
             </Row>
-            <Row noGutters={true}>
+            <Row  >
               <div className="col-xs-1"></div>
               <div className="form-group col-xs-10">
                 <label className="control-label"></label>
@@ -137,7 +137,7 @@ export default class buyeruser extends Component {
             </Row>
           </div>
           <br />
-          <Row noGutters={true}>
+          <Row  >
             <div className="col-xs-12 text-center">
               <button
                 className="blackButton"
@@ -150,7 +150,7 @@ export default class buyeruser extends Component {
           </Row>
           <br />         
           <br />
-          {/* <Row noGutters={true}>
+          {/* <Row  >
                 <div className="col-xs-12 text-center">
                   <h2>Or</h2>
                 </div>
@@ -158,7 +158,7 @@ export default class buyeruser extends Component {
 
               <br />
 
-              <Row noGutters={true}>
+              <Row  >
                 <div className="col-xs-12 text-center">
                   <h2>google login</h2>
                 </div>
@@ -167,7 +167,7 @@ export default class buyeruser extends Component {
             className="hrline"
             style={{ bordertop: "2px solid #d8d9da !important" }}
           ></hr>
-          <Row noGutters={true}>
+          <Row  >
             <div className="col-xs-12 text-center font13">
               {this.props.userpage == 1 ? (
                 <div>
@@ -183,7 +183,7 @@ export default class buyeruser extends Component {
             </div>
           </Row>
 <br/>
-          <Row noGutters={true} className="mt30 pb10">
+          <Row   className="mt30 pb10">
             <strong className="col-xs-3 text-center line7 font6">Help?</strong>
             <span className="col-xs-4"></span>
             <span

@@ -128,9 +128,9 @@ export default class buyreg5 extends Component {
               lg={{ size: "8" }}
               className="vcenter1 "
             >
-              <div className="demoab text-center" noGutters={true}>
+              <div className="demoab text-center"  >
                 <br></br>
-                <Row noGutters={true} className="">
+                <Row   className="">
                   <div className="col-xs-7">
                     <img
                       src={logos.backarrowicon}
@@ -152,7 +152,7 @@ export default class buyreg5 extends Component {
                   ></img>
                 </Row>
                 <br></br>
-                <Row noGutters={true} className="text-left line32  font3">
+                <Row   className="text-left line32  font3">
                   {/* <span className="col-xs-1"></span> */}
                   <span
                     style={{
@@ -169,7 +169,7 @@ export default class buyreg5 extends Component {
                 </Row>
                 {/* <br></br> */}
 
-                <Row noGutters={true}>
+                <Row  >
                   <span
                     style={{ fontWeight: "600" }}
                     className="col-xs-10 line32 text-left ml-6 font3 fontplay"
@@ -180,7 +180,7 @@ export default class buyreg5 extends Component {
                   </span>
                 </Row>
                 <br />
-                <Row noGutters={true}>
+                <Row  >
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
                     <Col
                       xs={{ size: "11", offset: "1" }}
@@ -397,7 +397,7 @@ export default class buyreg5 extends Component {
                 <hr className="hrline2"></hr>
                 <div className="text-center">Next up :Website Link</div>
 
-                <Row noGutters={true}>
+                <Row  >
                   <div className="col-xs-12 text-center">
                     <button
                       className="blackButton"

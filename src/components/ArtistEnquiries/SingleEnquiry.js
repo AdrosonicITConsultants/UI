@@ -455,7 +455,7 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 ">
@@ -476,6 +476,10 @@ export class SingleEnquiry extends Component {
                            </Col>
                        </Row>
                     </Col>
+                </Row>
+                <Row noGutters={true}>
+                    <button></button>
+
                 </Row>
                
                 </>

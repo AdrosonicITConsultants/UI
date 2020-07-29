@@ -1335,7 +1335,7 @@ class TTCEapi {
   //#endregion
 
   static getEnquirStages() {
-    let url = ApiUrl + "/enquiry/getEnquiryStages";
+    let url = ApiUrl + "/enquiry/get10EnquiryStages";
 
     return axios
       .get(url)

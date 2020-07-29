@@ -1348,7 +1348,7 @@ class TTCEapi {
         return error.response;
       });
   }
-
+ 
   static getEnquirStagesforAvailable() {
     let url = ApiUrl + "/enquiry/getEnquiryStagesForAvailableProduct";
 
@@ -1372,6 +1372,26 @@ class TTCEapi {
       .then((response) => {
         console.log(response);
 
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static progressUpdate(stageid, id) {
+    let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;
+    var data = {
+      
+    };
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url, data, config)
+      .then((response) => {
+        console.log(response);
         return response;
       })
       .catch((error) => {

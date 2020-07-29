@@ -186,10 +186,10 @@ export default class artreg5 extends Component {
                        >
                          <div
                            className="demoab demoabAnimation text-center"
-                           noGutters={true}
+                            
                          >
                            <br></br>
-                           <Row noGutters={true} className="">
+                           <Row   className="">
                              <div className="col-xs-7">
                                <img
                                  src={logos.backarrowicon}
@@ -211,7 +211,7 @@ export default class artreg5 extends Component {
                              ></img>
                            </Row>
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line32 font3"
                            ></Row>
                            <br></br>
@@ -236,7 +236,7 @@ export default class artreg5 extends Component {
                            >
                              Select category of product you make
                            </div>
-                           <Row noGutters={true}>
+                           <Row  >
                              <div id="ck-button">
                                <label>
                                  <input type="checkbox" value="1" id={this.state.products[0].id}/>
@@ -256,7 +256,7 @@ export default class artreg5 extends Component {
                                </label>
                              </div>
                            </Row>
-                           <Row noGutters={true}>
+                           <Row  >
                              <div id="ck-button">
                                <label>
                                  <input type="checkbox" value="1" id={this.state.products[3].id}/>
@@ -278,7 +278,7 @@ export default class artreg5 extends Component {
                            </Row>
                            <br></br>
                            <Row
-                             noGutters={true}
+                              
                              className="text-center line312 font1"
                            >
                              <div
@@ -302,7 +302,7 @@ export default class artreg5 extends Component {
                                </div>
                            </Row>
                            <br />
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="blackButton"
@@ -314,14 +314,14 @@ export default class artreg5 extends Component {
                            </Row>
                            
 
-                           <Row noGutters={true} className="text-center mt57">
+                           <Row   className="text-center mt57">
                              
                              <div className="col-xs-12 line312 font2">
                                Need Help?{" "}
                              </div>
                              
                            </Row>
-                           <Row noGutters={true} className="text-center mt7">
+                           <Row   className="text-center mt7">
                              <div
                                className="col-xs-12 line6"
                               //  style={{ float: "right" }}
@@ -331,7 +331,7 @@ export default class artreg5 extends Component {
                                <img src={logos.language} className="ml-5"></img>
                              </div>
                            </Row>
-                           {/* <Row noGutters={true}>
+                           {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>

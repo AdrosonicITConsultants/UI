@@ -60,9 +60,9 @@ export default class buyerpass extends Component {
                  render() {
                    return (
                      <React.Fragment>
-                       <div className="demo" noGutters={true}>
+                       <div className="demo"  >
                          <br></br>
-                         <Row noGutters={true} className="">
+                         <Row   className="">
                            <div className="col-xs-6">
                              <img
                                src={logos.backarrowicon}
@@ -81,7 +81,7 @@ export default class buyerpass extends Component {
                          <br />
                          <br />
                          <br />
-                         <Row noGutters={true}>
+                         <Row  >
                            <span className="col-xs-4"></span>
                            {this.props.userpage == 2 ? (
                              <div className="col-xs-4 text-center">
@@ -113,13 +113,13 @@ export default class buyerpass extends Component {
 
                          <br />
                          <div>
-                           <Row noGutters={true}>
+                           <Row  >
                              <span className="col-xs-1"></span>
                              <span className="col-xs-10 text-center font13">
                                Enter your password
                              </span>
                            </Row>
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-1"></div>
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
@@ -139,7 +139,7 @@ export default class buyerpass extends Component {
                                </div>
                              </div>
                            </Row>
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-11 text-right">
                                {this.state.showValidation ? (
                                  <span className="bg-danger" style={{float:"left", marginLeft:"35px"}}>
@@ -159,7 +159,7 @@ export default class buyerpass extends Component {
                            </Row>
                          </div>
                          <br></br>
-                         <Row noGutters={true}>
+                         <Row  >
                            <div className="col-xs-12 text-center">
                              <button
                                className="blackButton"
@@ -171,7 +171,7 @@ export default class buyerpass extends Component {
                          </Row>
 <br/>
                          <br />
-                         {/* <Row noGutters={true}>
+                         {/* <Row  >
                 <div className="col-xs-12 text-center">
                   <h2>Or</h2>
                 </div>
@@ -179,13 +179,13 @@ export default class buyerpass extends Component {
 
               <br />
 
-              <Row noGutters={true}>
+              <Row  >
                 <div className="col-xs-12 text-center">
                   <h2>google login</h2>
                 </div>
               </Row> */}
                          <hr className="hrline"></hr>
-                         <Row noGutters={true}>
+                         <Row  >
                            <div className="col-xs-12 text-center font13">
                              {this.props.userpage == 2 ? (
                                <div>
@@ -203,7 +203,7 @@ export default class buyerpass extends Component {
                            </div>
                          </Row>
 
-                         <Row noGutters={true} className="mt50">
+                         <Row   className="mt50">
                            <strong className="col-xs-3 text-center line7 font6">
                              Help?
                            </strong>

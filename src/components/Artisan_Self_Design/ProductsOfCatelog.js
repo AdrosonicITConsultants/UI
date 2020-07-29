@@ -174,7 +174,7 @@ export class ProductsOfCatelog extends Component {
                     </div>
                     </div>
                  
-                    <Row noGutters={true} className="cpdetails" style={{"cursor":"pointer"}} 
+                    <Row    className="cpdetails" style={{"cursor":"pointer"}} 
                     onClick={()=>{this.productDescription(this.state.proddata.id)}} 
                     onClick={() => {
                       this.setState({ modalIsOpen: true });
@@ -185,7 +185,7 @@ export class ProductsOfCatelog extends Component {
                         <Col className="col-xs-4">
                           {this.state.proddata.productStatusId == 2 
                           ?
-                          <Row noGutters={true} className="stockmargin">
+                          <Row    className="stockmargin">
                                 <Col className="Available">
                                 Available 
                                 </Col>
@@ -203,7 +203,7 @@ export class ProductsOfCatelog extends Component {
                                 </Row>
                         
                         :
-                        <Row noGutters={true} className="stockmargin exclusive">
+                        <Row    className="stockmargin exclusive">
                         <Col className="Exclusively">
                         Exclusively
                         </Col>

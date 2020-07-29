@@ -76,9 +76,9 @@ export default class buyreg6 extends Component {
               lg={{ size: "8" }}
               className="vcenter1 "
             >
-              <div className="demoab text-center" noGutters={true}>
+              <div className="demoab text-center"  >
                 <br></br>
-                <Row noGutters={true} className="">
+                <Row   className="">
                   <div className="col-xs-7">
                     <img
                       src={logos.backarrowicon}
@@ -101,7 +101,7 @@ export default class buyreg6 extends Component {
                 </Row>
                 <br></br>
                 <Row
-                  noGutters={true}
+                   
                   className="text-left line32  fontplay font3"
                 >
                   {/*  */}
@@ -119,7 +119,7 @@ export default class buyreg6 extends Component {
                   </span>
                 </Row>
                 <br></br>
-                <Row noGutters={true}>
+                <Row  >
                   <span className="col-xs-1"></span>
                   <span
                     style={{ fontWeight: "600" }}
@@ -132,7 +132,7 @@ export default class buyreg6 extends Component {
                 </Row>
                 <br></br>
 
-                <Row noGutters={true}>
+                <Row  >
                   <div className="col-xs-12 text-center reg6text font2">
                     you can{" "}
                     <text style={{ color: "var(--mainBlue)" }}>skip</text> this
@@ -144,7 +144,7 @@ export default class buyreg6 extends Component {
                 </Row>
                 <br></br>
 
-                <Row noGutters={true}>
+                <Row  >
                   <Col xs={{ size: "12" }}>
                     <Col
                       xs={{ size: "12" }}
@@ -193,7 +193,7 @@ export default class buyreg6 extends Component {
 
                 <br></br>
 
-                <Row noGutters={true} className="text-center line312 font1">
+                <Row   className="text-center line312 font1">
                   <div
                     style={{
                       fontFamily: "var(--LatoFont)",
@@ -221,7 +221,7 @@ export default class buyreg6 extends Component {
                   </div>
                 </Row>
                 <br></br>
-                <Row noGutters={true}>
+                <Row  >
                   <div className="col-xs-12 text-center">
                     <button
                       className="blackButton"
@@ -235,14 +235,14 @@ export default class buyreg6 extends Component {
                 </Row>
                 <br></br>
 
-                <Row noGutters={true} className="mt30">
+                <Row   className="mt30">
                   {/* <span className="col-xs-1 col-md-1"></span> */}
                   <strong className="col-xs-12 text-center line7 help">
                     Help?
                   </strong>
                 </Row>
 
-                {/* <Row noGutters={true}>
+                {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
             <span className="col-xs-5"></span>
             <span className="col-xs-4 text-center">Privacy policy</span>

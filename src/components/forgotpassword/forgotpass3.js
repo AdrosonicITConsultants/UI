@@ -92,9 +92,9 @@ export default class forgotpass3 extends Component {
                          lg={{ size: "6" }}
                          className="vcenter "
                        >
-                         <div className="demoa text-center" noGutters={true}>
+                         <div className="demoa text-center"  >
                            <br></br>
-                           <Row noGutters={true} className="">
+                           <Row   className="">
                              <div className="col-xs-6">
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
@@ -152,7 +152,7 @@ export default class forgotpass3 extends Component {
                            </Row>
                            <br />
                            <br />
-                           <Row noGutters={true}>
+                           <Row  >
                              <div className="col-xs-12 text-center">
                                <button
                                  className="greenButton"

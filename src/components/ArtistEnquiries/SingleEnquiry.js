@@ -44,7 +44,8 @@ export class SingleEnquiry extends Component {
             dataload : false,
             isSend:-1,
             ImageUrl:TTCEapi.ImageUrl+'Product/',
-            progressid:3,
+            progressid:1,
+            Progressidnext:2,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -54,6 +55,30 @@ export class SingleEnquiry extends Component {
 
        ToggleDeleteClose = () => {
         document.getElementById('id01').style.display='none';
+       }
+
+       stateupdate = () => {
+        this.ToggleDeleteClose();
+        let params = queryString.parse(this.props.location.search);
+
+        TTCEapi.progressUpdate(parseInt(this.state.Progressidnext) , parseInt(params.code)).then((response)=>{
+            if(response.data.valid)
+            {   customToast.success("Product Status Updated", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+                this.componentDidMount();
+                console.log("updated");
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+        });
+        this.componentDidMount();
+        
        }
     buyersDetailsbtn(){
       
@@ -501,12 +526,17 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                 <Row noGutters={true} className="text-center">
-                    <button
-                      className="blackButton"
-                      onClick={this.ToggleDelete}
+                    {this.state.progressid < 3 ? 
+                     <></>
+                   :
+                   <button
+                     className="blackButton"
+                     onClick={this.ToggleDelete}
                     >
-                      Change Status
-                    </button>
+                     Change Status
+                   </button>
+                     }   
+                   
                     <div id="id01" class="w3-modal">
                         <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
                             <div>
@@ -529,9 +559,9 @@ export class SingleEnquiry extends Component {
                                     item1.id > 3 
                                     ?
                                     <Col className="col-xs-12 mb7">
-                                         {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
 
                                     {item1.desc}
                                     </Col>
@@ -566,6 +596,7 @@ export class SingleEnquiry extends Component {
                             <br></br>
                             <Row noGutters={true}>
                             <button className="markCompletedButton"
+                            onClick={this.stateupdate}                           
                                 >
                                 Mark Completed
                                 </button>

@@ -455,7 +455,7 @@ debugger;
                    <div className="profileheading fontplay">My Profile</div>
                
                    <br></br>
-                   <Row noGutters={true}>
+                   <Row  >
                         <Col sm = {{size: "1"}}></Col>
 
                             <Col sm = {{size: "10"}}>
@@ -471,10 +471,10 @@ debugger;
                                
                            </div>
                            <div className= "databackground">
-                               <Row noGutters={true}>
+                               <Row  >
                                     <Col sm = {{size: "1"}}></Col>
                                     <Col sm = {{size: "10"}}>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                                     {/* <Col sm = {{size: "1"}}></Col> */}
                                                     <Col sm = {{size: "8"}} className= "profilename">{this.props.user.firstName}<br></br>{this.props.user.lastName}</Col>
                                                     <Col sm = {{size: "4"}} className="ratingBuyer">
@@ -492,7 +492,7 @@ debugger;
   </div></div>
                                                     <p className="Ratingtext">Rating by Artisans</p></Col> 
                                         </Row>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                                     {/* <Col sm = {{size: "1"}}></Col> */}
                                         
                                                     <Col sm = {{size: "10"}} className= "profiledesig fw600">
@@ -525,7 +525,7 @@ debugger;
                                                         {/* {this.props.user.designation}</Col> */}
                                                         </Col>
                                         </Row>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                                     
                                                     <Col sm = {{size: "6"}} >
                                                         <div  className= "companyname fw600">
@@ -611,7 +611,7 @@ debugger;
                                                     </Col>
                                         </Row>
                                         <hr className="hrlinep2"></hr>
-                                        <Row noGutters={true} className="text-center bdetail fw600">
+                                        <Row   className="text-center bdetail fw600">
                                           
                                                 <div className="text-center font22 fw700">Brand Details 
                                                 &nbsp; {this.state.isBdetail ? <img
@@ -674,7 +674,7 @@ debugger;
                                                         onChange={(e) => this.handleChange(e)}
                                                         /> 
                                             </Col>
-                                            <Row noGutters={true} className="ml20">
+                                            <Row   className="ml20">
                                             {this.state.showValidationBdetail ? (
                                                             <span className="bg-danger2 text-center">
                                                             {this.state.message}
@@ -687,7 +687,7 @@ debugger;
 
                                         </Row>
                                         <hr className="hrlinep2"></hr>
-                                        <Row noGutters={true}>
+                                        <Row  >
                                             <Col sm = {{size: "6"}} className="pocbg1" >
                                                 <div className="fw600 bdetailsheading">
                                                     Point of Contact
@@ -756,7 +756,7 @@ debugger;
                                                         /> 
                                                     
                                                 </div>
-                                                <Row noGutters={true} className="ml20">
+                                                <Row   className="ml20">
                                             {this.state.showValidationPOCdetail ? (
                                                             <span className="bg-danger2 text-center">
                                                             {this.state.message}
@@ -892,7 +892,7 @@ debugger;
                                         ) : (
                                             <br />
                                         )}
-                                        <Row noGutters={true} className="text-center ">
+                                        <Row   className="text-center ">
                                             <button
                                                 id ="savebutton"
                                                 disabled={this.state.isButtonDisabled}
@@ -909,12 +909,12 @@ debugger;
                                             </button>
                                         </Row>
                                         
-                                        <Row noGutters={true}>
+                                        <Row  >
                                             <div className="noteprofile">
                                                 Please Note In case of change of non editable field, please feel free <span className = " ">to reach out to our support team.</span>
                                             </div>
                                         </Row>
-                                         <Row noGutters={true} className="text-center">
+                                         <Row   className="text-center">
                                             <img className="spinimage" src = {logos.spin}></img>
                                         </Row>
                                     </Col>
@@ -924,7 +924,7 @@ debugger;
                    </Row>
                   
                    </div>
-                   <Row noGutters={true}>
+                   <Row  >
                     <div>
                     <img
                         className="HomeBg3 internaldiv"

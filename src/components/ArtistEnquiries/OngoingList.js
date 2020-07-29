@@ -19,7 +19,8 @@ export class OngoingList extends Component {
             openEnquiries: [],
             productCategories: [],
             yarns : [],
-            enquiryStagesAvailable:[]
+            enquiryStagesAvailable:[],
+            dataload:true
 
         }
         
@@ -71,26 +72,27 @@ export class OngoingList extends Component {
                 {this.state.openEnquiries.map((item)=> 
                 <>
                 <hr></hr>
-                <Row noGutters={true}>
+                <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col sm="9">
-                                <div className="imageinlist"> 
+                                <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
                                         item.productType === "Product"
                                         ?
-                                        <img src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
-
+                                        <a href={"/showArtisanProduct?ProductId="+item.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
                                         :
-                                        <img src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
-
+                                        <a href={"/showBuyerProduct?productId="+item.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
 
                                     }
 
                                     </div>
-                                    <a href="/" className="leEnqprodName">{item.productName}</a>
+                                    
+                                    <a href={"/showArtisanProduct?ProductId="+item.productId } className="leEnqprodName">{item.productName}</a>
                                     {/* <span ></span> */}
                                     
                                 </div>

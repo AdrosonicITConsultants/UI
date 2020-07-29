@@ -48,6 +48,8 @@ import Popup from './components/ModalComponent/EnguiryModal';
 import AllEnquiryList from './components/ArtistEnquiries/AllEnquiryList';
 import SingleEnquiry from "./components/ArtistEnquiries/SingleEnquiry";
 import { PreviewInvoice } from './components/ArtistEnquiries/PreviewInvoice';
+import buyerProductTempelate from './components/Buyer-Custom-Design/buyerProductTempelate';
+import artisanProductCatelog from './components/Products/artisanProductCatelog';
 
 function App() {
   
@@ -88,7 +90,8 @@ function App() {
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
 
-
+          <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
+          <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 

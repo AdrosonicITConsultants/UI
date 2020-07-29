@@ -53,6 +53,7 @@ export class SingleEnquiry extends Component {
             cgst:0,
             sgst:0,
             hsncode:0,
+            progressid:5,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -301,6 +302,7 @@ export class SingleEnquiry extends Component {
                 deliveryDesc:-1,
                 additionalInfo:"",
                 isSend:-1,
+                
                 //  dataload : true,
                 })
             }
@@ -367,8 +369,8 @@ export class SingleEnquiry extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-                            this.setState({getEnquiryMoq : response.data.data,dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
+                            this.setState({getEnquiryMoq : response.data.data,progressid: response.data.data[0].enquiryStageId,dataload:true},()=>{
+                                console.log(this.state);
                            
                             });
                         });
@@ -433,18 +435,18 @@ export class SingleEnquiry extends Component {
                                     {
                                         item.productType === "Product"
                                         ?
-                                        <img src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
-
+                                        <a href={"/showArtisanProduct?ProductId="+item.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
                                         :
-                                        <img src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
-
+                                        <a href={"/showBuyerProduct?productId="+item.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
 
                                     }
 
                                     </div>
-                                    <a href="/" className="leEnqprodName">{item.productName}</a>
-                                    {/* <span ></span> */}
                                     
+                                    <a href={"/showArtisanProduct?ProductId="+item.productId } className="leEnqprodName">{item.productName}</a>
+                                    {/* <span ></span> */}
                                 </div>
                                 <div>
                                   {/* <div noGutters={true} >
@@ -567,11 +569,11 @@ export class SingleEnquiry extends Component {
                             {item.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.enquiryStageId  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.enquiryStageId  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                                 }
 

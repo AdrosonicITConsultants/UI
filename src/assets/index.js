@@ -130,7 +130,9 @@ import CustomDesignIcons from "./Custom Design Icons.svg"
 import Iconfeatheredit3 from "./Icon feather-edit-3.png"
 import whitecustomdesignicon from "./white custom design icon for black button .svg"
 import PIbtnicon from "./Icon material-view-column.svg"
+import Iconpaymentinvoice from "./Icon payment-invoice.svg"
 export default {
+  Iconpaymentinvoice,
   PIbtnicon,
   colorbar,
   whitecustomdesignicon,

@@ -71,7 +71,7 @@ const initialState = {
   producrid : 0,
 };
 
-export default class EditBuyerDesign extends Component {
+export default class buyerProductTempelate extends Component {
                  constructor(props) {
                    super(props);
                    this.myRefAddPhoto = React.createRef();  
@@ -1137,11 +1137,11 @@ else {
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
                        <Container>
-                         <Row  >
+                         <Row noGutters={true}>
                            <div className="artistLanding">
                              {/* //#region Add Image */}
-                             <Row  >
-                               <Row  >
+                             <Row noGutters={true}>
+                               <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1167,15 +1167,15 @@ else {
                                      md={{ size: "2" }}
                                      className="col-2 right"
                                    >
-                                     <button
+                                     {/* <button
                                       className="EditProductbutton"
                                       disabled = {this.state.isEdit}
                                       onClick={() => {this.editenabled()}}
-                                      >Edit</button>
+                                      >Edit</button> */}
                                    </Col>
                                  {/* )} */}
                                </Row>
-                               <Row  >
+                               <Row noGutters={true}>
                                  <Col
                                    className="tet-center"
                                    sm={{ size: "1" }}
@@ -1208,7 +1208,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1221,7 +1221,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
@@ -1352,7 +1352,7 @@ else {
                                    className="col-2 "
                                  ></Col>
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1367,8 +1367,8 @@ else {
                              {/* //#endregion Add Image */}
 
                              {/* //#region Product details */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1410,7 +1410,7 @@ else {
 
                             <br></br>
                               
-                               <Row  >
+                               <Row noGutters={true}>
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1423,7 +1423,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1506,7 +1506,7 @@ else {
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1521,8 +1521,8 @@ else {
                              {/* //#endregion Product details */}
 
                              {/* //#region Product specificcaions */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1546,7 +1546,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1568,7 +1568,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1583,7 +1583,7 @@ else {
                                    </label>
                                  </Col>
                                </Row>
-                               <Row   className="">
+                               <Row noGutters={true} className="">
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
@@ -1629,7 +1629,7 @@ else {
                                    </Row>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1651,7 +1651,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true} className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1664,7 +1664,7 @@ else {
                                  </Col>{" "}
                                </Row>
 
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2063,7 +2063,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true} className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2099,7 +2099,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2147,7 +2147,7 @@ else {
                                  ></Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true} className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2183,7 +2183,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2486,7 +2486,7 @@ else {
                                  </>
                                ) : null}
 
-                               <Row   className="text-center">
+                               <Row noGutters={true} className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2504,8 +2504,8 @@ else {
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
-                                 <Row   className="mt60">
-                                   <Row  >
+                                 <Row noGutters={true} className="mt60">
+                                   <Row noGutters={true}>
                                      <Col
                                        className="text-center"
                                        sm={{ size: "1" }}
@@ -2573,7 +2573,7 @@ else {
                                      </Col>
                                    </Row>
                                    <Row
-                                      
+                                     noGutters={true}
                                      className="text-center"
                                    >
                                      <Col
@@ -2593,8 +2593,8 @@ else {
 
                             
                              {/* //#region Describe the product */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true} className="mt60">
+                               <Row noGutters={true}>
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -2662,160 +2662,9 @@ else {
                                  </Col>
                                </Row>
                              </Row>
-                             {/* //#endregion Describe the product*/}
-                             {this.state.isEdit
-                             ?
                              
-                             <Row className="washAndCareDiv mt30">
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                               <Col
-                                 sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
-                                 md={{ size: "8" }}
-                                 className="col-2"
-                               >
-                                 <Row>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-right "
-                                   >
-                                     <button
-                                       onClick={this.Cancel}
-                                       className="cancelBtnProduct"
-                                     >Cancel
-                                     </button>
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-center "
-                                   >
-                                     {/* <button
-                                       onClick={this.ResetAll}
-                                       className="resetBtnProduct"
-                                     >
-                                       Reset All
-                                     </button> */}
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "4" }}
-                                     xs={{ size: "4" }}
-                                     md={{ size: "4" }}
-                                     className="col-4 text-left "
-                                   >
-                                     <div class="w3-container">
-                                     <button
-                                       onClick={this.ToggleSave}
-                                       className="saveBtnProduct"
-                                       disabled={this.state.SaveDisabled}
-                                     >
-                                       Save
-                                     </button>
-
-                                     <div id="id02" class="w3-modal">
-                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
-                                        <div class="w3-container">
-                                          <h3 className="deleteModalHeader">Are you sure you want to save ?</h3>
-                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
-                                          <div className="deleteModalButtonOuterDiv">
-                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton">Save</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                     </div>
-                                    </div>
-
-                                   </Col>
-                                 </Row>
-                               </Col>
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                             </Row>
-                             :
-
-                             <>
-                             <Row className="washAndCareDiv mt30">
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                               <Col
-                                 sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
-                                 md={{ size: "8" }}
-                                 className="col-2"
-                               >
-                                 <Row>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <div class="w3-container">
-                                     <button
-                                       onClick={this.ToggleDelete}
-                                       className="cancelBtnProduct"
-                                     >Delete
-                                     </button>
-
-                                     <div id="id01" class="w3-modal">
-                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
-                                        <div class="w3-container">
-                                          <h3 className="deleteModalHeader">Are you sure you want to delete ?</h3>
-                                          <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
-                                          <div className="deleteModalButtonOuterDiv">
-                                            <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={this.Delete} className="deleteModalOkayButton">Delete</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                     </div>
-                                    </div>
-
-                                   </Col>
-                                   <Col
-                                     sm={{ size: "6" }}
-                                     xs={{ size: "6" }}
-                                     md={{ size: "6" }}
-                                     className="col-4 text-center "
-                                   >
-                                     <button
-                                       onClick={this.editenabled}
-                                       className="editbutton11"
-                                     >
-                                       Edit
-                                     </button>
-                                   </Col>
-                                   
-                                 </Row>
-                               </Col>
-                               <Col
-                                 sm={{ size: "2" }}
-                                 xs={{ size: "2" }}
-                                 md={{ size: "2" }}
-                                 className="col-2"
-                               ></Col>
-                             </Row>
-                             </>
-                            }
                              <div className="hrlineforAddProduct"></div>
-                             <Row   className="text-center">
+                             <Row noGutters={true} className="text-center">
                                <Col
                                  sm={{ size: "12" }}
                                  xs={{ size: "12" }}
@@ -2836,10 +2685,10 @@ else {
                                // onRequestClose={this.handleCloseWrongPasswordModal}
                              >
                                 <div className="modalconfirm">
-                                  <Row   className="text-center font20">
+                                  <Row noGutters={true} className="text-center font20">
                                     Are you sure you want to save changes
                                   </Row>
-                                  <Row  >  
+                                  <Row noGutters={true}>  
                                     <Col sm={{size:"8"}}>
                                     </Col>
                                     <Col sm={{size:"2"}}>

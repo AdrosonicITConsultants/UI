@@ -11,6 +11,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
+import Footer from '../footer/footer';
 
 
 export class PreviewInvoice extends Component {
@@ -29,20 +30,34 @@ export class PreviewInvoice extends Component {
             
 <React.Fragment>
     <Container>
-<Row className="MainPIRow margintopInv" >
-<Col sm={12}>
-<Row noGutters={true} className="Invoicemb" >
- Invoice Number : 00
+
+
+    <Row noGutters={true} className="margintopInv">
+        <Row noGutters={true}>
+            <Col className="col-xs-12"> <button className="Raiseinvbtn" style={{float:"right"}}><img className="InvImg" src={logos.Iconpaymentinvoice}/> Raise Invoice</button></Col>
+        </Row>
+    <Col className="col-xs-12 btncol  belowprevtext">
+        Below preview of the invoice will be available for buyer
+    </Col>
 </Row>
+<Row className="MainPIRow " >
+{/* -----------------------------------------text------------------------------------- */}
+
+{/* -----------------------------------------text------------------------------------- */}
+<Row noGutters={true} className="Invoicemb" >
+    <Col className="col-xs-12"> Invoice Number : 00
+</Col>
+</Row>
+
 {/* --------------------------------------------------col 6-6-------------------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col sm={6} className=" col-xs-6 Invoicebr">
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
-       <Col sm={4} className=" col-xs-4">
+       <Col sm={4} className=" col-xs-5">
            <img src={logos.Smile} className="Pilogoimg"></img>
        </Col>
-       <Col sm={8} className=" col-xs-8 ">
+       <Col sm={8} className=" col-xs-7 ">
           <b className="Ttbrand">Chidiya</b> 
            <p className="subttbrand"> Maniabandhan,Orissa</p>
           <p className="subttbrand">address</p>
@@ -57,13 +72,13 @@ export class PreviewInvoice extends Component {
    </Row>
     </Col>
 
-    <Col sm={6} className=" col-xs-6 Invoicebr ">
+    <Col sm={6} className=" col-xs-6  ">
    <b className="origintxt">Buyer</b>
    <Row noGutters={true}>
-       <Col sm={4} className=" col-xs-4">
+       <Col sm={4} className=" col-xs-5">
            <img src={logos.Smile} className="Pilogoimg"></img>
        </Col>
-       <Col sm={8} className=" col-xs-8 ">
+       <Col sm={8} className=" col-xs-7 ">
           <b className="Ttbrand">Chidiya & b</b> 
           <br/>
           <b className="RAcss subttbrand">Registered Address:</b>
@@ -82,8 +97,8 @@ export class PreviewInvoice extends Component {
 
    
 </Row>
-</Col>
-</Row>
+
+
 {/* --------------------------------------------------col 6-6-------------------------------------------------- */}
 <Row noGutters={true} className="">
  
@@ -140,34 +155,34 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi srwidth">01</h3>
         </td>
      <td className="tdmarginleft">
-     <h3 className="snopi gdwidth" style={{textAlign:"left"}}>Red katan -400m</h3>
+     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Red katan -400m</h3>
      <p>- WEFT X WARP X EXTRA WEFT</p>
-            <div className="descyarnpi">
+            <div className="descyarnpi wraptext">
                 -Yarn: XYZ XYZ x XYZ <br/>
                 -Yarn Count: XYZ XYZ x XYZ <br/>
                 -Dye Used: XYZ XYZ x XYZ 
             </div>
-     <p className="RAcss">- Reed Count : <span className="rcred">XYZ</span></p>
+     <p className="RAcss">- Reed Count : <span className="rcred wraptext">XYZ</span></p>
      <p>-Weight :</p>
-     <div className="sbred">
+     <div className="sbred wraptext">
          Saree: XYZ <br/>
          Blouse: XYZ
      </div>
      <p>-Dimension :</p>
-     <div className="sbred">
+     <div className="sbred wraptext">
          Saree: XYZ <br/>
          Blouse: XYZ
      </div>
      <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
         </td>
      <td >
-     <h3 className="snopi">14</h3>
+     <p className="snopi wraptext">14</p>
      </td>
      <td>
-     <h3 className="snopi rpu">2700</h3>
+     <p className="snopi rpu wraptext">2700</p>
      </td>
      <td>
-     <h3 className="snopi">5555577</h3>
+     <p className="snopi wraptext">5555j8577</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -176,25 +191,109 @@ export class PreviewInvoice extends Component {
      
         </td>
      <td>
-     <h3 className="snopi gdwidth" style={{textAlign:"left",marginLeft:"25px"}}>Freight Charges <span>(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}}><span>SCGT</span><b> @ 123</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}}><span>CGST</span><b> @ 123</b></p>
+     <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ 123</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ 123</b></p>
         </td>
      <td >
-     <h3 className="snopi">14</h3>
+     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext">14</h3>
      </td>
      <td>
-     <h3 className="snopi rpu">2700</h3>
+     <h3 className="snopi wraptextrpu">2700</h3>
+     <h3 className="snopi wraptext rpu">2700</h3>
      </td>
      <td>
-     <h3 className="snopi">5555577</h3>
+     <h3 className="snopi wraptext">5555577</h3>
+     <h3 className="snopi wraptext">5555577</h3>
+     </td>
+   </tr>
+   {/* -------------------------------------------total------------------------------------------ */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><b>Total</b></h3>
+        </td>
+     <td className="">
+     <h3 className="snopi wraptext"><b>14</b></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext">   <i class="fa fa-inr" aria-hidden="true"></i> 12345678</h3>
+     </td>
+   </tr>
+   {/* --------------------------------total tr end---------------------------------------------- */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><b>Account Details:</b></h3>
+     <br/>
+     <h3 className="freightch snopi"><b>Axis Bank Ltd.</b></h3>
+     
+      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">555555555</span></h3>
+      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">555555555</span></h3>
+      <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">555555555</span></h3>
+
+
+        </td>
+     <td className="">
+     <h3 className="snopi wraptext"><b></b></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext"></h3>
+     </td>
+   </tr>
+   {/* -----------------------------edd--------------------------------------- */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">12.09.20</span></h3>
+        </td>
+     <td className="">
+     <h3 className="snopi wraptext"><b></b></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext"></h3>
      </td>
    </tr>
  </table>
  
  </Row>
+ </Row>
+
+ <Row noGutters={true} className="margintoppdisc">
+     <Col className="col-xs-9 ">
+     <span className="ACcnodet"><b className="Discheading">Disclaimer : </b>The price is excluding tax and delivery charges. These will be included in final invoice.</span>    
+     </Col>
+
+     <Col className="col-xs-3 allamtInd">
+         All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+     </Col>
+ </Row>
+ {/* ------------------------------buttons------------------------------- */}
+ <Row noGutters={true} className="margintoppdisc">
+     <Col className="col-xs-12 btncol">
+<span><button className="gobacktoeditdet">Go back to edit details</button> 
+ <button className="Raiseinvbtn"><img className="InvImg" src={logos.Iconpaymentinvoice}/> Raise Invoice</button></span>
+     </Col>
+ </Row>
 
 </Container>
+<Footer/>
 </React.Fragment>
         )
     }

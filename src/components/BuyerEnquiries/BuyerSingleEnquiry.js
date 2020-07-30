@@ -5,7 +5,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-import "./AllEnquiryList.css";
+// import "./AllEnquiryList.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -17,7 +17,7 @@ import Footer from "../footer/footer";
 
 
 
-export class SingleEnquiry extends Component {
+export class BuyerSingleEnquiry extends Component {
     constructor() {
         super();
 
@@ -536,7 +536,7 @@ export class SingleEnquiry extends Component {
                                
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodtype ">
-                                          {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
+                                      {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
                                           {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
                                           {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
                                                                   
@@ -1174,6 +1174,6 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(SingleEnquiry);
+const connectedLoginPage = connect(mapStateToProps)(BuyerSingleEnquiry);
 export default connectedLoginPage;
 

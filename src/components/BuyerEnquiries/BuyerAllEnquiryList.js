@@ -111,5 +111,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(AllEnquiryList);
+const connectedLoginPage = connect(mapStateToProps)(BuyerAllEnquiryList);
 export default connectedLoginPage;

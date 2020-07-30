@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logos from "../../assets";
-import { Row, Col, Container, Card, CardBody, Spinner } from "reactstrap";
+import { Row, Col, Container, Card, CardBody } from "reactstrap";
 import "../navbar/navbar.css";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from "../../services/API/TTCEapi";
@@ -18,7 +18,9 @@ class BuyerNotifications extends Component {
     super(props);
 
     this.state = {
-      notificationData: []
+      notificationData: [],
+      notificationTypeId: [],
+      loading: true,
     };
   }
 
@@ -27,10 +29,25 @@ class BuyerNotifications extends Component {
   }
 
   componentDidMount(){
+
+    TTCEapi.getAllNotificationTypes().then((response)=>{
+      if(response.data.valid)
+      {
+        this.setState({
+          notificationTypeId: response.data.data,
+          loading: false
+        });
+        console.log(response.data.data);
+      }
+    });
+
     TTCEapi.getAllNotifications().then((response)=>{
         if(response.data.valid)
         {
-          this.setState({notificationData:response.data.data.getAllNotifications});
+          this.setState({
+            notificationData: response.data.data.getAllNotifications,
+            loading: false
+          });
           console.log(this.state.notificationData);
         }
     })
@@ -78,6 +95,8 @@ class BuyerNotifications extends Component {
                 </Row>
                 </Col>
             </Row>
+            
+            {this.state.loading === true ? <div class="loader">Loading...</div> : 
 
             <Row noGutters={true}>
               <Col md="12"> 
@@ -213,57 +232,109 @@ class BuyerNotifications extends Component {
 
                   </Row> */}
 
-                  { this.state.notificationData ? this.state.notificationData.map((data) => {
-                    
-                    if(data.customProduct === "Custom Product") {
-                      return <Row noGutters={true} className="notifyRowWhiteOuter">
-                      <Col md={1} className="notifyRemoveColRight">
-                      <img  className="notifyImage3" src={logos.notifyImage7}/>
-                      </Col>
-                      <Col md={9} className="notifyRemoveColPadding">
-                        <div>
-                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
-                          <span className="notifyEnquiryCustomwhite">CUSTOM DESIGN</span>
-                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
-                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
-                        </div>
-                        <div>
-                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
-                        </div>
-                      </Col>
-                      <Col md={2} className="notifyRemoveColLeft text-right">
-                        <span className="notifyCirclewhite">O</span>
-                        <span className="spanhome notifyReadwhite">Mark as unread</span>
-                      </Col>
-  
-                    </Row> 
+                  { this.state.notificationTypeId ? this.state.notificationTypeId.map((typeData) => {
+              
+                  return  this.state.notificationData ? this.state.notificationData.map((data) => {
+
+                    if(typeData.id === data.notificationTypeId) {
+                      if(typeData.id === 1) {
+                        if(data.customProduct === "Custom Product") {
+                          return <Row noGutters={true} className="notifyRowWhiteOuter">
+                          <Col md={1} className="notifyRemoveColRight">
+                          <img  className="notifyImage3" src={logos.notifyImage7}/>
+                          </Col>
+                          <Col md={9} className="notifyRemoveColPadding">
+                            <div>
+                              <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                              <span className="notifyEnquiryCustomwhite">CUSTOM DESIGN</span>
+                              <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                              <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                            </div>
+                            <div>
+                              <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                            </div>
+                          </Col>
+                          <Col md={2} className="notifyRemoveColLeft text-right">
+                            <span className="notifyCirclewhite">O</span>
+                            <span className="spanhome notifyReadwhite">Mark as unread</span>
+                          </Col>
+      
+                        </Row> 
+                        }
+                        else {
+                          return <Row noGutters={true} className="notifyRowWhiteOuter">
+                          <Col md={1} className="notifyRemoveColRight">
+                          <img  className="notifyImage3" src={logos.notifyImage7}/>
+                          </Col>
+                          <Col md={9} className="notifyRemoveColPadding">
+                            <div>
+                              <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                              <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                              <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                            </div>
+                            <div>
+                              <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                            </div>
+                          </Col>
+                          <Col md={2} className="notifyRemoveColLeft text-right">
+                            <span className="notifyCirclewhite">O</span>
+                            <span className="spanhome notifyReadwhite">Mark as unread</span>
+                          </Col>
+      
+                        </Row> 
+                        }
+                      }
+                      else if(typeData.id === 2 || typeData.id === 3) {
+                      return  <Row noGutters={true} className="notifyRowOuter">
+                          <Col md={1} className="notifyRemoveColRight">
+                          <img  className="notifyImage1" src={logos.notifyImage4}/>
+                          </Col>
+                          <Col md={9} className="notifyRemoveColPadding">
+                            <div>
+                              <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                              <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                              <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                              <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                            </div>
+                            <div>
+                              <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                            </div>
+                          </Col>
+                          <Col md={2} className="notifyRemoveColLeft text-right">
+                            <span className="notifyCircle">O</span>
+                            <span className="spanhome notifyRead">Mark as read</span>
+                          </Col>
+
+                        </Row>
+                      }
+                      else if(typeData.id === 4) {
+                      return  <Row noGutters={true} className="notifyRowOuter">
+                          <Col md={1} className="notifyRemoveColRight">
+                          <img  className="notifyImage1" src={logos.notifyImage4}/>
+                          </Col>
+                          <Col md={9} className="notifyRemoveColPadding">
+                            <div>
+                              <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                              <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                              <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                              <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                            </div>
+                            <div>
+                              <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                            </div>
+                          </Col>
+                          <Col md={2} className="notifyRemoveColLeft text-right">
+                            <span className="notifyCircle">O</span>
+                            <span className="spanhome notifyRead">Mark as read</span>
+                          </Col>
+
+                        </Row>
+                      }
+                      
                     }
-                    else {
-                      return <Row noGutters={true} className="notifyRowWhiteOuter">
-                      <Col md={1} className="notifyRemoveColRight">
-                      <img  className="notifyImage3" src={logos.notifyImage7}/>
-                      </Col>
-                      <Col md={9} className="notifyRemoveColPadding">
-                        <div>
-                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
-                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
-                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
-                        </div>
-                        <div>
-                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
-                        </div>
-                      </Col>
-                      <Col md={2} className="notifyRemoveColLeft text-right">
-                        <span className="notifyCirclewhite">O</span>
-                        <span className="spanhome notifyReadwhite">Mark as unread</span>
-                      </Col>
-  
-                    </Row> 
-                    }
-                    
-                  })
-                  
-                : <Spinner color="dark" /> }
+              
+                  }) : <div class="loader">Loading...</div> 
+                }) : <div class="loader">Loading...</div> }
 
                   {/* <Row noGutters={true} className="notifyRowWhiteOuter">
                     <Col md={1} className="notifyRemoveColRight">
@@ -314,7 +385,7 @@ class BuyerNotifications extends Component {
               
               </Col>
             </Row>
-
+            }
             <Row>
             <div>
               <img

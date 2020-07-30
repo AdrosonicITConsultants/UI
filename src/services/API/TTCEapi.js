@@ -1420,14 +1420,25 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
+
+  static getAllNotificationTypes() {
+    let url = ApiUrl + "/notification/getAllNotificationTypes";
+    return axios
+      .get(url)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getOpenEnquiries() {
     let url = ApiUrl + "/enquiry/getOpenEnquiries";
 

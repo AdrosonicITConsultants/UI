@@ -8,6 +8,8 @@ import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import OngoingList from './OngoingList';
 import CompletedList from './CompletedList';
+import Footer from "../footer/footer";
+
 
 
 export class AllEnquiryList extends Component {
@@ -99,7 +101,16 @@ export class AllEnquiryList extends Component {
                     <CompletedList></CompletedList>
                     </>
                 }
+                 <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
                 </Container>
+                <Footer></Footer>
             </React.Fragment>
         )
     }

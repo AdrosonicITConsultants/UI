@@ -12,6 +12,9 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
+// import { Footer } from 'rsuite';
+import Footer from "../footer/footer";
+
 
 
 export class SingleEnquiry extends Component {
@@ -399,22 +402,23 @@ export class SingleEnquiry extends Component {
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
                             var nextProgressid = 0;
-                            if(response.data.data[0].productStatusId == 2)
+                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
                             {
-                                    if(response.data.data[0].enquiryStageId == 3)
+                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
                                     {
                                         nextProgressid = 11;
                                     }
                                     else{
-                                        nextProgressid =response.data.data[0].enquiryStageId + 1;
+                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
                                     }
                             }
                             else{
-                                nextProgressid =response.data.data[0].enquiryStageId + 1;
+                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
                             }
                             this.setState({getEnquiryMoq : response.data.data,
-                                progressid: response.data.data[0].enquiryStageId,
+                                progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
                                 Progressidnext : nextProgressid,
+                                userid : response.data.data[0].userId,
                                 dataload:true},()=>{
                                 console.log(this.state);
                            
@@ -462,7 +466,7 @@ export class SingleEnquiry extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold  ">
                                    <Col md="12" className="col-xs-12">
-                                        Enquiry Id : {this.state.getEnquiryMoq[0].enquiryCode}
+                                        Enquiry Id : {this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                        </Col>
                                </Row>
                           </Col>                            
@@ -479,35 +483,35 @@ export class SingleEnquiry extends Component {
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.productType === "Product"
+                                        item.openEnquiriesResponse.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
-                                        <a href={"/showBuyerProduct?productId="+item.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
 
                                     }
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.productId } className="leEnqprodName">{item.productName}</a>
+                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
                                   {/* <div noGutters={true} >
                                       <Col className="leEnqid bold">
-                                      Enquiry Id : {item.enquiryCode}
+                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
                                       </Col>
                                   </div> */}
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.weftYarnId - 1 ].yarnDesc}  
-                                        {item.extraWeftYarnId > 0 
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.extraWeftYarnId - 1 ].yarnDesc}
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
                                         </>
                                         :
                                             <></>
@@ -516,10 +520,10 @@ export class SingleEnquiry extends Component {
                                   </div>
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
-                                          {item.productType === "Product"
+                                          {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.productCode}   
+                                          Product Code : {item.openEnquiriesResponse.productCode}   
                                           </>
                                           :
                                           <>
@@ -532,17 +536,17 @@ export class SingleEnquiry extends Component {
                                
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodtype ">
-                                          {item.productStatusId==2? "Available in stock"   : "Made to order"   }
+                                          {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : "Made to order"   }
                                                                   
                                       </Col>
 
                                   </div>
-                                  <div noGutters={true} className="" >
+                                  {/* <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
                                       </Col>
-                                  </div>
+                                  </div> */}
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -553,14 +557,14 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqAmount bold">
-                                        {item.totalAmount > 0 ? "₹"+ item.totalAmount : "NA"} 
+                                        {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
                                       <Moment format="YYYY-MM-DD">
-                                        {item.startedOn}
+                                        {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
                                 </div>
@@ -568,7 +572,7 @@ export class SingleEnquiry extends Component {
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
                                       <Moment format="YYYY-MM-DD">
-                                     {item.lastUpdated}
+                                     {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
                                       </Col>
@@ -576,10 +580,10 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
                                       Est. Date of delivery : 
-                                      {item.excpectedDate != null 
+                                      {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="YYYY-MM-DD">
-                                        {item.excpectedDate}
+                                        {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
                                       "NA"
@@ -612,7 +616,7 @@ export class SingleEnquiry extends Component {
                            <Col className="col-xs-12 ">
                            <div className="progressbarfont">
                             <br /><br />
-                            {item.productStatusId === 2
+                            {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
                               {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
@@ -656,7 +660,7 @@ export class SingleEnquiry extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {item.productStatusId === 2
+                                {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>
                                  {this.state.enquiryStagesAvailable.map((item1) => 
@@ -787,10 +791,10 @@ export class SingleEnquiry extends Component {
                                                                <Row noGutters={true}>
                                                                    <Col sm={12} className="col-xs-12 BdImgCol">
                                                                        {/* <img  className="BdImg" src={logos.Dimapur}/> */}
-                                                                       {data.logo?
-                                                                     <img className="Logobpdimg" src={this.state.ImageUrl+'User/'+data.productId+'/CompanyDetails/Logo/'+data.logo}/>
+                                                                       {data.openEnquiriesResponse.logo?
+                                                                     <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
                                                                          :
-                                                                         <img className="BdImg" src={this.state.ImageUrl + data.productId + '/' + data.productImages } />
+                                                                         <img className="BdImg" src={logos.Smile} />
                                                                         }
                                                                        </Col>
                                                                </Row>
@@ -799,7 +803,7 @@ export class SingleEnquiry extends Component {
                                                                     Brand Name:
                                                                     </Col>
                                                                     <Col sm={6} className="">
-                                                                    {data.companyName ? data.companyName : "NA"}   
+                                                                    {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
                                                                     </Col>
                                                                 </Row>
                                                                 <Row noGutters={true} className="BdImgCol">
@@ -807,7 +811,7 @@ export class SingleEnquiry extends Component {
                                                                    Name:
                                                                     </Col>
                                                                     <Col sm={6} className="">
-                                                                       {data.firstName} <span></span> {data.lastName ? data.lastName :"" }
+                                                                       {data.openEnquiriesResponse.firstName} <span></span> {data.openEnquiriesResponse.lastName ? data.openEnquiriesResponse.lastName :"" }
                                                                     </Col>
                                                                 </Row>
                                                                 <Row noGutters={true} className="BdImgCol">
@@ -815,7 +819,7 @@ export class SingleEnquiry extends Component {
                                                                     Email Id:
                                                                     </Col>
                                                                     <Col sm={6} className="">
-                                                                    {data.email}
+                                                                    {data.openEnquiriesResponse.email}
                                                                     </Col>
                                                                 </Row>
                                                                 <Row noGutters={true} className="BdImgCol">
@@ -823,7 +827,7 @@ export class SingleEnquiry extends Component {
                                                                       Phone No:
                                                                     </Col>
                                                                     <Col sm={6} className="">
-                                                                    {data.mobile}
+                                                                    {data.openEnquiriesResponse.mobile}
                                                                     </Col>
                                                                 </Row>
                                                                 <Row noGutters={true} className="BdImgCol">
@@ -831,7 +835,7 @@ export class SingleEnquiry extends Component {
                                                                     Alternate Phone Number:
                                                                     </Col>
                                                                     <Col sm={6} className="">
-                                                                    {data.alternateMobile ? data.alternateMobile : "NA"}
+                                                                    {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
                                                                     </Col>
                                                                     <hr className="hrlineasd "></hr>
                                                                 </Row>
@@ -839,26 +843,26 @@ export class SingleEnquiry extends Component {
                                                                     <Col sm={4} className="">
                                                                    <h1 className="BDh1">Delivery address</h1>
                                                                    <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
-                                                                   {data.line1}
-                                                                    {data.line2 != "" ? ", " + data.line2 : ""}
-                                                                    {data.street != "" ? ", " + data.street : ""}
-                                                                    {data.city != "" ? ", " + data.city : ""}
-                                                                    {data.pincode != "" ? ", " + data.pincode : ""}
-                                                                    {data.state != "" ? ", " + data.state : ""}
+                                                                   {data.openEnquiriesResponse.line1}
+                                                                    {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""}
+                                                                    {data.openEnquiriesResponse.street != "" ? ", " + data.openEnquiriesResponse.street : ""}
+                                                                    {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""}
+                                                                    {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
+                                                                    {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
                                                                     <br>
                                                                     </br>
-                                                                       {data.landmark}
+                                                                       {data.openEnquiriesResponse.landmark}
                                                                        </p>
                                                                     </Col>
                                                                     <Col sm={5} className="">
                                                                     <h1 className="BDh1">POC details</h1>
-                                                                  <p className="BDp">Name : {data.pocFirstName} {data.pocLastName ? data.pocLastName :""}</p>
-                                                                  <p  className="BDp">Email Id : {data.pocEmail ? data.pocEmail:""}</p>
-                                                                  <p  className="BDp">Phone Number : {data.pocContact ?data.pocContact:"" }</p>
+                                                                  <p className="BDp">Name : {data.openEnquiriesResponse.pocFirstName} {data.openEnquiriesResponse.pocLastName ? data.openEnquiriesResponse.pocLastName :""}</p>
+                                                                  <p  className="BDp">Email Id : {data.openEnquiriesResponse.pocEmail ? data.openEnquiriesResponse.pocEmail:""}</p>
+                                                                  <p  className="BDp">Phone Number : {data.openEnquiriesResponse.pocContact ?data.openEnquiriesResponse.pocContact:"" }</p>
                                                                     </Col>
                                                                     <Col sm={3} className="">
                                                                     <h1 className="BDh1">GST Number</h1>
-                                                                    <p  className="BDp" style={{overflow:"visible"}}>{data.gst}</p>
+                                                                    <p  className="BDp" style={{overflow:"visible"}}>{data.openEnquiriesResponse.gst}</p>
                                                                     </Col>
                                                                    
                                                                 </Row>
@@ -1143,8 +1147,16 @@ export class SingleEnquiry extends Component {
   
   
                                </Row>
-                         
+                               <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
                 </Container>
+                <Footer/>
                 </> :
                 <> </>}
             </React.Fragment>

@@ -34,8 +34,9 @@ export class OngoingList extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getOpenEnquiries().then((response1)=>{
+                            console.log("")
                             if(response1.data.valid)
-                            {
+                            {   console.log("heree");
                                 console.log(response1.data.data);
                                 this.setState({openEnquiries:response1.data.data, dataload:true});
                             }
@@ -80,36 +81,36 @@ export class OngoingList extends Component {
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.productType === "Product"
+                                        item.openEnquiriesResponse.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
-                                        <a href={"/showBuyerProduct?productId="+item.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.productId + "/" + item.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
 
                                     }
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.productId } className="leEnqprodName">{item.productName}</a>
+                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                     {/* <span ></span> */}
                                     
                                 </div>
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold">
-                                      Enquiry Id : {item.enquiryCode}
+                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.weftYarnId - 1 ].yarnDesc}  
-                                        {item.extraWeftYarnId > 0 
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.extraWeftYarnId - 1 ].yarnDesc}
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
                                         </>
                                         :
                                             <></>
@@ -118,10 +119,10 @@ export class OngoingList extends Component {
                                   </div>
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
-                                          {item.productType === "Product"
+                                          {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.productCode}   
+                                          Product Code : {item.openEnquiriesResponse.productCode}   
                                           </>
                                           :
                                           <>
@@ -134,7 +135,7 @@ export class OngoingList extends Component {
                                
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodtype ">
-                                          {item.productStatusId==2? "Available in stock"   : "Made to order"   }
+                                          {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : "Made to order"   }
                                                                   
                                       </Col>
 
@@ -142,7 +143,7 @@ export class OngoingList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -155,14 +156,14 @@ export class OngoingList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqAmount bold">
-                                        {item.totalAmount > 0 ? "₹"+ item.totalAmount : "NA"} 
+                                        {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
                                       <Moment format="YYYY-MM-DD">
-                                        {item.startedOn}
+                                        {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
                                 </div>
@@ -170,7 +171,7 @@ export class OngoingList extends Component {
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
                                       <Moment format="YYYY-MM-DD">
-                                     {item.lastUpdated}
+                                     {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
                                       </Col>
@@ -178,10 +179,10 @@ export class OngoingList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
                                       Est. Date of delivery : 
-                                      {item.excpectedDate != null 
+                                      {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="YYYY-MM-DD">
-                                        {item.excpectedDate}
+                                        {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
                                       "NA"
@@ -214,14 +215,14 @@ export class OngoingList extends Component {
                            <Col className="col-xs-12 ">
                            <div className="progressbarfont">
                             <br /><br />
-                            {item.productStatusId === 2
+                            {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
                             </ul>
                                 }
 
@@ -232,7 +233,7 @@ export class OngoingList extends Component {
                 </Row>
                 <Row>
                     <Col className="col-xs-12 text-center leEnqshowmore">
-                        <a  onClick={()=>this.individualpage(item.enquiryId)} className="leEnqshowmore">show more details</a>
+                        <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details</a>
                     </Col>
                 </Row>
 

@@ -135,7 +135,9 @@ export class OngoingList extends Component {
                                
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodtype ">
-                                          {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : "Made to order"   }
+                                          {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
                                                                   
                                       </Col>
 
@@ -143,7 +145,7 @@ export class OngoingList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.brandName}</span>                                   
                                       </Col>
                                   </div>
                                 </div>

@@ -52,6 +52,7 @@ import buyerProductTempelate from './components/Buyer-Custom-Design/buyerProduct
 import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
 import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
+import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
 
 function App() {
   
@@ -89,10 +90,11 @@ function App() {
           
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
-          <PrivateRoute exact path="/BuyerenquiriesList" component={AllEnquiryList} />
-          <PrivateRoute exact path="/buyerEnquiriesList" component={AllEnquiryList} />
+          <PrivateRoute exact path="/BuyerenquiriesList" component={BuyerAllEnquiryList} />
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
           <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} />
+          <PrivateRoute exact path="/buyerEnquiryDetails" component={BuyerSingleEnquiry} />
+
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 

@@ -6,7 +6,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-import "./PreviewInvoice.css";
+// import "./PreviewInvoice.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -22,7 +22,7 @@ const options = {
     unit: 'in',
     format: [1500,1000]
 };
-export class PreviewInvoice extends Component {
+export class BuyerPreviewInvoice extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
@@ -54,17 +54,18 @@ export class PreviewInvoice extends Component {
         {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
       </Pdf> */}
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
-<div >
-    <Row noGutters={true}>
-        <Col className="col-xs-12" >
-        
-        <button className="Raiseinvbtn" style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></Col>
-    </Row>
-   <Row noGutters={true}>
-       <Col className="col-xs-12">
-       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
+<div  ref={ref}  style={{width: "100%", height: "100%"}} >
+   <Row noGutters={true} style={{marginTop:"15px"}}>
+       <Col className="col-xs-6">
+       <p className="  belowprevtext">  Received at :  {this.state.time} on  { this.state.currentDate }</p>
 </Col>
-
+<Col className="col-xs-6" >
+<ReactToPdf targetRef={ref} filename="code-example.pdf"  options={options} x={.5} y={.5} scale={0.8}>
+{({ toPdf }) => 
+<p className=" belowprevtext" style={{float:"right"}} onClick={toPdf}><img src={logos.downloadpdficon} className="InvImg" /> Download this invoice in pdf</p>
+}
+      </ReactToPdf>
+</Col>
    </Row>
 <Row className="MainPIRow " >
 {/* -----------------------------------------text------------------------------------- */}
@@ -332,9 +333,9 @@ export class PreviewInvoice extends Component {
  {/* ------------------------------buttons------------------------------- */}
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
-<span><button className="gobacktoeditdetart">Go Back to edit details</button> 
- <button className="Raiseinvbtn"><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
- {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
+<span><button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
+ <button className="Raiseinvbtn"> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
+ <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p>
      </Col>
  </Row>
 {/* -------------------------------------------------------------------------- */}
@@ -352,5 +353,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(PreviewInvoice);
+const connectedLoginPage = connect(mapStateToProps)(BuyerPreviewInvoice);
 export default connectedLoginPage;

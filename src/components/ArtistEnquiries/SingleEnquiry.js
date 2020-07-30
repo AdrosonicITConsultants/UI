@@ -52,6 +52,13 @@ export class SingleEnquiry extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             progressid:1,
             Progressidnext:2,
+            cgst:0,
+            sgst:0,
+            hsncode:0,
+            quantity:0,
+            dod:"",
+            rpu:"",
+            
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -252,7 +259,7 @@ export class SingleEnquiry extends Component {
                     this.state.dod ,
                     this.state.hsncode,
                     this.state.rpu,
-                    this.state.quality,
+                    this.state.quantity,
                     this.state.sgst,
                   
                    ).then((response)=>{
@@ -267,7 +274,7 @@ export class SingleEnquiry extends Component {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                      browserHistory.push("/Preview");
+                    //   browserHistory.push("/Preview");
                 });
             }
             else{
@@ -1122,7 +1129,7 @@ export class SingleEnquiry extends Component {
                                         ) : (
                                             <br />
                                         )}
-                                                             </p>
+                                           </p>
                                                        <Row noGutters={true}>
                                                            <Col sm={12} className="text-center">
                                                                 <button className="previewandpi" onClick={() => this.savePIDetails()}>
@@ -1130,6 +1137,8 @@ export class SingleEnquiry extends Component {
                                                            </Col>
                                                           
                                                        </Row>
+
+                                
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}

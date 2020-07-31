@@ -41,12 +41,12 @@ class AddCustomprod extends Component {
    
       generateEnquiry(item){
         this.setState({ modalIsOpen: true });
-          TTCEapi.ifEnquiryExists(item,false).then((response)=>{
+          TTCEapi.ifEnquiryExists(item,true).then((response)=>{
         this.setState({ifEnquiryExists : response.data.data},()=>{
           // this.setState({ modalIsOpen: false });
             console.log(this.state.ifEnquiryExists);
             if(this.state.ifEnquiryExists.ifExists ==false){
-              TTCEapi.generateEnquiry(item,false).then((response)=>{
+              TTCEapi.generateEnquiry(item,true).then((response)=>{
                 this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
                                console.log(this.state.generateEnquiry);
                               });

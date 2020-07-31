@@ -274,8 +274,10 @@ class BuyerNotifications extends Component {
                           if(data.customProduct === "Custom Product") {
                             return  <Row noGutters={true} className="notifyRowOuter">
                             <Col md={1} className="notifyRemoveColRight">
-                            {data.notificationTypeId === 1 ? 
+                            {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
                             <img  className="notifyImage3" src={logos.notifyImage6}/> :
+                            data.notificationTypeId === 4 ? 
+                            <img  className="notifyImage1" src={logos.notifyImage3}/> :
                             <img  className="notifyImage1" src={logos.notifyImage4}/> }
                             </Col>
                             <Col md={9} className="notifyRemoveColPadding">
@@ -285,7 +287,7 @@ class BuyerNotifications extends Component {
                                 <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
                                 <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
                               </div>
-                              {data.notificationTypeId === 1 ? 
+                              {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
                               <div>
                                 <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
                               </div>
@@ -305,8 +307,10 @@ class BuyerNotifications extends Component {
                           else {
                             return <Row noGutters={true} className="notifyRowOuter">
                             <Col md={1} className="notifyRemoveColRight">
-                            {data.notificationTypeId === 1 ? 
-                            <img  className="notifyImage3" src={logos.notifyImage6}/> : 
+                            {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
+                            <img  className="notifyImage3" src={logos.notifyImage6}/> :
+                            data.notificationTypeId === 4 ? 
+                            <img  className="notifyImage1" src={logos.notifyImage3}/> :
                             <img  className="notifyImage1" src={logos.notifyImage4}/> }
                             </Col>
                             <Col md={9} className="notifyRemoveColPadding">
@@ -315,7 +319,7 @@ class BuyerNotifications extends Component {
                                 <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
                                 <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
                               </div>
-                             {data.notificationTypeId === 1 ? 
+                             {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
                               <div>
                                 <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
                               </div>

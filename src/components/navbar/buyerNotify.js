@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logos from "../../assets";
-import { Row, Col, Container, Card, CardBody, Spinner } from "reactstrap";
+import { Row, Col, Container, Card, CardBody } from "reactstrap";
 import "../navbar/navbar.css";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from "../../services/API/TTCEapi";
@@ -18,7 +18,10 @@ class BuyerNotifications extends Component {
     super(props);
 
     this.state = {
-      notificationData: []
+      notificationData: [],
+      notificationTypeId: [],
+      loading: true,
+      newCount: 0
     };
   }
 
@@ -27,13 +30,58 @@ class BuyerNotifications extends Component {
   }
 
   componentDidMount(){
+
+    TTCEapi.getAllNotificationTypes().then((response)=>{
+      if(response.data.valid)
+      {
+        this.setState({
+          notificationTypeId: response.data.data,
+          loading: false
+        });
+        console.log(response.data.data);
+      }
+    });
+
     TTCEapi.getAllNotifications().then((response)=>{
         if(response.data.valid)
         {
-          this.setState({notificationData:response.data.data.getAllNotifications});
+          // var count = 0;
+          // for(var i = 0; i < response.data.data.getAllNotifications.length; i++) {
+          //   if(response.data.data.getAllNotifications[i].seen === 0) {
+          //     count = count + 1;
+          //   }
+          // }
+          // console.log(count);
+          this.setState({
+            notificationData: response.data.data.getAllNotifications,
+            newCount: response.data.data.count,
+            loading: false
+          });
           console.log(this.state.notificationData);
         }
-    })
+    });
+  }
+
+  notificationSeenfunction = (id) => {
+    console.log(id);
+
+    TTCEapi.updateNotificationSeen(id).then((response)=>{
+      if(response.data.valid)
+      {
+        window.location.reload();
+        console.log(response.data.data);
+      }
+    });
+  }
+
+  markAllReadFunction = () => {
+    TTCEapi.markAllReadNotification().then((response)=>{
+      if(response.data.valid)
+      {
+        window.location.reload();
+        console.log(response.data.data);
+      }
+    });
   }
 
   render() {
@@ -56,11 +104,11 @@ class BuyerNotifications extends Component {
               </Col>
               <Col md="10" className="addedwishlist">
                 <h1> Your Notifications</h1>
-                <p> 10 New Notifications</p>
+                <p> {this.state.newCount} New Notifications</p>
                 <p style={{ float: "right" }}>
                               {/* <button className="clearmywishlist"> */}
                               <span className="notifyCircleRed">O</span>
-                                <span className="spanhome notifyReadRed">
+                                <span className="spanhome notifyReadRed" onClick={this.markAllReadFunction}>
                                 Mark all as read
                                 </span>
                               {/* </button> */}
@@ -78,7 +126,10 @@ class BuyerNotifications extends Component {
                 </Row>
                 </Col>
             </Row>
-
+            
+            {this.state.loading === true ? <div class="loader">Loading...</div> : 
+             
+             this.state.notificationData.length !== 0 ?
             <Row noGutters={true}>
               <Col md="12"> 
                 <Card className="notificationCardbody">
@@ -213,57 +264,245 @@ class BuyerNotifications extends Component {
 
                   </Row> */}
 
-                  { this.state.notificationData ? this.state.notificationData.map((data) => {
-                    
-                    if(data.customProduct === "Custom Product") {
-                      return <Row noGutters={true} className="notifyRowWhiteOuter">
-                      <Col md={1} className="notifyRemoveColRight">
-                      <img  className="notifyImage3" src={logos.notifyImage7}/>
-                      </Col>
-                      <Col md={9} className="notifyRemoveColPadding">
-                        <div>
-                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
-                          <span className="notifyEnquiryCustomwhite">CUSTOM DESIGN</span>
-                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
-                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
-                        </div>
-                        <div>
-                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
-                        </div>
-                      </Col>
-                      <Col md={2} className="notifyRemoveColLeft text-right">
-                        <span className="notifyCirclewhite">O</span>
-                        <span className="spanhome notifyReadwhite">Mark as unread</span>
-                      </Col>
+                  { 
+                  this.state.notificationData ? this.state.notificationData.map((data) => {
+                  return this.state.notificationTypeId ? this.state.notificationTypeId.map((typeData) => {
+            
+                   if(typeData.id === data.notificationTypeId) {
+                      if(data.seen === 0) {
+                       
+                          if(data.customProduct === "Custom Product") {
+                            return  <Row noGutters={true} className="notifyRowOuter">
+                            <Col md={1} className="notifyRemoveColRight">
+                            {data.notificationTypeId === 1 ? 
+                            <img  className="notifyImage3" src={logos.notifyImage6}/> :
+                            <img  className="notifyImage1" src={logos.notifyImage4}/> }
+                            </Col>
+                            <Col md={9} className="notifyRemoveColPadding">
+                              <div>
+                                <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
+                                <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                                <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                                <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
+                              </div>
+                              {data.notificationTypeId === 1 ? 
+                              <div>
+                                <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
+                              </div>
+                              :
+                              <div>
+                                <span className="notifyResponse">{data.type}</span>                        
+                              </div>
+                             }
+                            </Col>
+                            <Col md={2} className="notifyRemoveColLeft text-right">
+                              <span className="notifyCircle">O</span>
+                              <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                            </Col>
+        
+                          </Row> 
+                          }
+                          else {
+                            return <Row noGutters={true} className="notifyRowOuter">
+                            <Col md={1} className="notifyRemoveColRight">
+                            {data.notificationTypeId === 1 ? 
+                            <img  className="notifyImage3" src={logos.notifyImage6}/> : 
+                            <img  className="notifyImage1" src={logos.notifyImage4}/> }
+                            </Col>
+                            <Col md={9} className="notifyRemoveColPadding">
+                              <div>
+                                <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
+                                <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                                <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
+                              </div>
+                             {data.notificationTypeId === 1 ? 
+                              <div>
+                                <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
+                              </div>
+                              :
+                              <div>
+                                <span className="notifyResponse">{data.type}</span>                        
+                              </div>
+                             }
+                            </Col>
+                            <Col md={2} className="notifyRemoveColLeft text-right">
+                              <span className="notifyCircle">O</span>
+                              <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                            </Col>
+        
+                          </Row> 
+                          }
+                        
+                     
+                        // if(data.customProduct === "Custom Product") {
+                        // return  <Row noGutters={true} className="notifyRowOuter">
+                        //     <Col md={1} className="notifyRemoveColRight">
+                        //     <img  className="notifyImage1" src={logos.notifyImage4}/>
+                        //     </Col>
+                        //     <Col md={9} className="notifyRemoveColPadding">
+                        //       <div>
+                        //         <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
+                        //         <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                        //         <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">{data.companyName}</span></span>
+                        //         <span className="notifyProductName">{data.productDesc}</span>
+                        //       </div>
+                        //       <div>
+                        //         <span className="notifyResponse">{data.type}</span>                        
+                        //       </div>
+                        //     </Col>
+                        //     <Col md={2} className="notifyRemoveColLeft text-right">
+                        //       <span className="notifyCircle">O</span>
+                        //       <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                        //     </Col>
   
-                    </Row> 
-                    }
-                    else {
-                      return <Row noGutters={true} className="notifyRowWhiteOuter">
-                      <Col md={1} className="notifyRemoveColRight">
-                      <img  className="notifyImage3" src={logos.notifyImage7}/>
-                      </Col>
-                      <Col md={9} className="notifyRemoveColPadding">
-                        <div>
-                          <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
-                          <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
-                          <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
-                        </div>
-                        <div>
-                          <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
-                        </div>
-                      </Col>
-                      <Col md={2} className="notifyRemoveColLeft text-right">
-                        <span className="notifyCirclewhite">O</span>
-                        <span className="spanhome notifyReadwhite">Mark as unread</span>
-                      </Col>
+                        //   </Row>
+                        // }
+                        // else {
+                        //   return  <Row noGutters={true} className="notifyRowOuter">
+                        //     <Col md={1} className="notifyRemoveColRight">
+                        //     <img  className="notifyImage1" src={logos.notifyImage4}/>
+                        //     </Col>
+                        //     <Col md={9} className="notifyRemoveColPadding">
+                        //       <div>
+                        //         <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
+                        //         <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">{data.companyName}</span></span>
+                        //         <span className="notifyProductName">{data.productDesc}</span>
+                        //       </div>
+                        //       <div>
+                        //         <span className="notifyResponse">{data.type}</span>                        
+                        //       </div>
+                        //     </Col>
+                        //     <Col md={2} className="notifyRemoveColLeft text-right">
+                        //       <span className="notifyCircle">O</span>
+                        //       <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                        //     </Col>
   
-                    </Row> 
+                        //   </Row>
+                        // }
+                      
+                      //   if(typeData.id === 4) {
+                      //   return  <Row noGutters={true} className="notifyRowOuter">
+                      //       <Col md={1} className="notifyRemoveColRight">
+                      //       <img  className="notifyImage1" src={logos.notifyImage4}/>
+                      //       </Col>
+                      //       <Col md={9} className="notifyRemoveColPadding">
+                      //         <div>
+                      //           <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                      //           <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                      //           <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                      //           <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                      //         </div>
+                      //         <div>
+                      //           <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                      //         </div>
+                      //       </Col>
+                      //       <Col md={2} className="notifyRemoveColLeft text-right">
+                      //         <span className="notifyCircle">O</span>
+                      //         <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                      //       </Col>
+  
+                      //     </Row>
+                      //  }
+                      }
+                    //   else {
+                    //   if(typeData.id === 1) {
+                    //     if(data.customProduct === "Custom Product") {
+                    //       return <Row noGutters={true} className="notifyRowWhiteOuter">
+                    //       <Col md={1} className="notifyRemoveColRight">
+                    //       <img  className="notifyImage3" src={logos.notifyImage7}/>
+                    //       </Col>
+                    //       <Col md={9} className="notifyRemoveColPadding">
+                    //         <div>
+                    //           <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                    //           <span className="notifyEnquiryCustomwhite">CUSTOM DESIGN</span>
+                    //           <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                    //           <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                    //         </div>
+                    //         <div>
+                    //           <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                    //         </div>
+                    //       </Col>
+                    //       <Col md={2} className="notifyRemoveColLeft text-right">
+                    //         <span className="notifyCirclewhite">O</span>
+                    //         <span className="spanhome notifyReadwhite" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as unread</span>
+                    //       </Col>
+      
+                    //     </Row> 
+                    //     }
+                    //     else {
+                    //       return <Row noGutters={true} className="notifyRowWhiteOuter">
+                    //       <Col md={1} className="notifyRemoveColRight">
+                    //       <img  className="notifyImage3" src={logos.notifyImage7}/>
+                    //       </Col>
+                    //       <Col md={9} className="notifyRemoveColPadding">
+                    //         <div>
+                    //           <span className="notifyEnquiryNowhite">Enquiry ID : {data.code}</span>
+                    //           <span className="notifyProductName1white">Artisan Brand : <span className="notifyBrandName1white">{data.companyName}</span></span>
+                    //           <span className="notifyProductName1white">Product : <span className="notifyBrandName1white">{data.productDesc}</span></span>
+                    //         </div>
+                    //         <div>
+                    //           <span className="notifyStatusCircleBlack"></span><span className="notifyResponsewhite notifyStatusLeft">Status Update : {data.type}</span>                        
+                    //         </div>
+                    //       </Col>
+                    //       <Col md={2} className="notifyRemoveColLeft text-right">
+                    //         <span className="notifyCirclewhite">O</span>
+                    //         <span className="spanhome notifyReadwhite" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as unread</span>
+                    //       </Col>
+      
+                    //     </Row> 
+                    //     }
+                    //   }
+                    //   else if(typeData.id === 2 || typeData.id === 3) {
+                    //   return  <Row noGutters={true} className="notifyRowOuter">
+                    //       <Col md={1} className="notifyRemoveColRight">
+                    //       <img  className="notifyImage1" src={logos.notifyImage4}/>
+                    //       </Col>
+                    //       <Col md={9} className="notifyRemoveColPadding">
+                    //         <div>
+                    //           <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                    //           <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                    //           <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                    //           <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                    //         </div>
+                    //         <div>
+                    //           <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                    //         </div>
+                    //       </Col>
+                    //       <Col md={2} className="notifyRemoveColLeft text-right">
+                    //         <span className="notifyCircle">O</span>
+                    //         <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                    //       </Col>
+
+                    //     </Row>
+                    //   }
+                    //   else if(typeData.id === 4) {
+                    //   return  <Row noGutters={true} className="notifyRowOuter">
+                    //       <Col md={1} className="notifyRemoveColRight">
+                    //       <img  className="notifyImage1" src={logos.notifyImage4}/>
+                    //       </Col>
+                    //       <Col md={9} className="notifyRemoveColPadding">
+                    //         <div>
+                    //           <span className="notifyEnquiryNo">Enquiry ID : AS-VB-BU-234563</span>
+                    //           <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
+                    //           <span className="notifyBrand">Artisan Brand : <span className="notifyBrandName">Titli</span></span>
+                    //           <span className="notifyProductName">RED-BLUE KATAN SILK SAREE</span>
+                    //         </div>
+                    //         <div>
+                    //           <span className="notifyResponse">MOQ <span className="notifyBrand">80 Minimum</span></span>                        
+                    //         </div>
+                    //       </Col>
+                    //       <Col md={2} className="notifyRemoveColLeft text-right">
+                    //         <span className="notifyCircle">O</span>
+                    //         <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                    //       </Col>
+
+                    //     </Row>
+                    //  }
+                    // }
                     }
-                    
-                  })
-                  
-                : <Spinner color="dark" /> }
+              
+              }) : <div class="loader">Loading...</div> 
+                }) : <div class="loader">Loading...</div> }
 
                   {/* <Row noGutters={true} className="notifyRowWhiteOuter">
                     <Col md={1} className="notifyRemoveColRight">
@@ -314,7 +553,7 @@ class BuyerNotifications extends Component {
               
               </Col>
             </Row>
-
+            : <div className="noNotificationStyle">No new notifications</div>}
             <Row>
             <div>
               <img

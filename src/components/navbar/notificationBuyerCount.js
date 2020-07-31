@@ -24,8 +24,7 @@ class NotificationBuyerCount extends Component {
     TTCEapi.getAllNotifications().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
-            this.setState({notificationCount:response.data.data.count})
+          this.setState({notificationCount:response.data.data.count})
         }
     })
   } 

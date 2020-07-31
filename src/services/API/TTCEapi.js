@@ -1420,14 +1420,25 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
+
+  static getAllNotificationTypes() {
+    let url = ApiUrl + "/notification/getAllNotificationTypes";
+    return axios
+      .get(url)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getOpenEnquiries() {
     let url = ApiUrl + "/enquiry/getOpenEnquiries";
 
@@ -1462,6 +1473,43 @@ class TTCEapi {
         return error.response;
       });
   }
+
+  static updateNotificationSeen(id){
+   let url = ApiUrl + "/notification/markAsRead/{notificationId}?notificationId=" + id;
+   console.log(url);
+   var config = {
+     headers: {
+       "Content-type": "application/json",
+     },
+   };
+   return axios
+     .post(url)
+     .then((response) => {
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+       return error.response;
+     });
+ }
+
+ static markAllReadNotification(){
+  let url = ApiUrl + "/notification/markAllAsRead";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 
   //#endregion
 }

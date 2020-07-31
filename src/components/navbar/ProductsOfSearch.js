@@ -36,6 +36,7 @@ export class ProductsOfSearch extends Component {
             modalIsOpen: false,
             isCustom:false,
             ifEnquiryExists:null,
+            enqgen:false,
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
     //   console.log(this.props);
@@ -80,21 +81,19 @@ export class ProductsOfSearch extends Component {
 
 generateEnquiry(item){
   this.setState({ modalIsOpen: true });
-    TTCEapi.ifEnquiryExists(item).then((response)=>{
+    TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
     // this.setState({ modalIsOpen: false });
       console.log(this.state.ifEnquiryExists);
-      
+      if(this.state.ifEnquiryExists.ifExists ==false){
+        TTCEapi.generateEnquiry(item,false).then((response)=>{
+          this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
+                         console.log(this.state.generateEnquiry);
+                        });
+        });
+      }
   });
-  if(this.state.ifEnquiryExists.ifExists ==false){
-    TTCEapi.generateEnquiry(item,false).then((response)=>{
-      this.setState({generateEnquiry : response.data.data},()=>{
-        this.setState({ modalIsOpen: false });
-          console.log(this.state.generateEnquiry);
-          
-      });
-    });
-  }
+  
 });
 }
     productDescription(id){
@@ -261,26 +260,26 @@ generateEnquiry(item){
                   <HoldPopup    isOpen={this.state.modalIsOpen}/>
                 :null}
               
-                { this.state.generateEnquiry ?
+                { this.state.ifEnquiryExists ?
                
                   <>
-                     { this.state.generateEnquiry.ifExists== true ? 
+                     { this.state.ifEnquiryExists.ifExists== true ? 
                      
                      <Popup 
                          closeModal={this.closeModal}
                          EnquiryCode={this.state.ifEnquiryExists.code}
-                         productName={this.state.generateEnquiry.productName}
+                         productName={this.state.ifEnquiryExists.productName}
                         productId={this.state.proddata.id}
                         isCustom={this.state.isCustom}
                      /> :
                           (
-                      
+                            this.state.enqgen ? 
                      <SuccessPopup 
-                     EnquiryCode={this.state.generateEnquiry.code}
+                     EnquiryCode={this.state.generateEnquiry.enquiry.code}
                      productName={this.state.generateEnquiry.productName}
                      productId={this.state.proddata.id}
                      />
-  
+                     : null
                            ) } </>
                
                  

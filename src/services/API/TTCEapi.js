@@ -574,9 +574,9 @@ class TTCEapi {
         return error.response;
       });
   }
-
-  static ifEnquiryExists(productId) {
-    let url = ApiUrl + "/enquiry/ifEnquiryExists/{productId}?productId=" +productId ;
+  // enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=41&isCustom=true
+  static ifEnquiryExists(productId,isCustom) {
+    let url = ApiUrl + "/enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=" +productId +"&isCustom="+isCustom;
     console.log(url);
     return axios
       .get(url)

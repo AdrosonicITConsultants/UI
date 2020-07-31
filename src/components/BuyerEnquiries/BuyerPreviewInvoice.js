@@ -41,8 +41,12 @@ export class BuyerPreviewInvoice extends Component {
           .format(' hh:mm A');
         this.setState({ time: date });
       }
-    
-    
+      BacktoPreview(){
+    this.props.bp();
+    }
+    proceedtoadvancepay(){
+        browserHistory.push("/payadvance")
+    }
     
     render(){
         return(
@@ -334,7 +338,7 @@ export class BuyerPreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span><button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
- <button className="Raiseinvbtn"> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
+ <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
  <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p>
      </Col>
  </Row>

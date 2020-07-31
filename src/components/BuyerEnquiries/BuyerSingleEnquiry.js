@@ -941,7 +941,7 @@ export class BuyerSingleEnquiry extends Component {
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
                                                             <> 
-                                                          <h1>Received MOQ</h1>
+                                                          <h1 className="receivedmoqh1">Received MOQ</h1>
                                                          <Row noGutters={true} style={{overflow:"auto"}}>
                                                         <table className="MOqtable" style={{width:"100%"}}>
                                                             <tr className="borderleftblue">

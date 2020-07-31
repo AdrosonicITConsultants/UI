@@ -270,7 +270,7 @@ class AddCustomprod extends Component {
                 <>
                    { this.state.ifEnquiryExists.ifExists== true ? 
                 <Popup
-                EnquiryCode={this.state.ifEnquiryExists.enquiry.code}
+                EnquiryCode={this.state.ifEnquiryExists.code}
                 productName={this.state.ifEnquiryExists.productName}
                 productId={data.id}
                 isCustom={this.state.isCustom}

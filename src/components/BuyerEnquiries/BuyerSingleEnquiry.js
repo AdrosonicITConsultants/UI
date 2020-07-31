@@ -1,4 +1,5 @@
 
+
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
@@ -14,6 +15,7 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
+import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 
 
 
@@ -52,9 +54,23 @@ export class BuyerSingleEnquiry extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             progressid:1,
             Progressidnext:2,
+            accountno : "NA",
+            bankname : "NA" ,
+            branch : "NA" ,
+            ifsccode : "NA",
+            benificiaryname : "NA",
+            gpayupi : "NA",
+            paytmupi : "NA",
+            phonepeupi  : "NA",
+          readmore:false,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
+    readmoreNote(){
+        this.setState({
+        readmore:!this.state.readmore
+        })
+        }
     ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
        }
@@ -157,7 +173,7 @@ export class BuyerSingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/enquiriesList"); 
+        browserHistory.push("/buyerEnquiriesList"); 
     } 
 
     handleCluster(e) {
@@ -401,6 +417,57 @@ export class BuyerSingleEnquiry extends Component {
                     yarns: response.data.data.yarns },()=>{
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                            if(response.data.data[0].paymentAccountDetails.length != 0)
+                            {
+                                
+                                for (var  items in response.data.data[0].paymentAccountDetails)
+                                {
+                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
+                                    switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
+                                        case 1:
+                                            console.log("bank");   
+                                            this.setState({
+                                                accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
+                                                bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
+                                                branch : response.data.data[0].paymentAccountDetails[items].branch ,
+                                                ifsccode : response.data.data[0].paymentAccountDetails[items].ifsc,
+                                                benificiaryname : response.data.data[0].paymentAccountDetails[items].name
+                                            }); 
+                                            break;
+                                        case 2:
+                                            console.log("gpayy");
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                            
+                                                this.setState({
+                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                }); 
+                                            }
+                                            
+                                            break;
+                                        case 3:
+                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                            
+                                            this.setState({
+                                                phonepeupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                            }); 
+                                        }
+                                            break;
+                                        case 4:
+                                            console.log("paytm");
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                                                          
+                                                this.setState({
+                                                    paytmupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                }); 
+                                            }
+                                            
+                                            break;
+                                    }
+                                }
+                                
+                
+                            }
                             var nextProgressid = 0;
                             if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
                             {
@@ -635,90 +702,7 @@ export class BuyerSingleEnquiry extends Component {
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 ? 
-                     <></>
-                   :
-                   <button
-                     className="blackButton"
-                     onClick={this.ToggleDelete}
-                    >
-                     Change Status
-                   </button>
-                     }   
-                   
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                    Change Status
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={this.ToggleDeleteClose} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <>
-                                 {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.id > 3 
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )}   
-                                </>
-                                :
-                                <>
-                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                    item1.id > 3
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {/* <div className="greenButtonstatus">
-                                    </div> */}
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )} 
-                                </>
-                                }
-                                
-                               
-                            </Row>
-                            <br></br>
-                            <Row noGutters={true}>
-                            <button className="markCompletedButton"
-                            onClick={this.stateupdate}                           
-                                >
-                                Mark Completed
-                                </button>
-                            </Row>
-                            <br></br>
-                            
-                        </div>
-                        </div>
-                    </div>
-
-                </Row>
-               
+           
                 </>
                 )}
                     </>
@@ -737,7 +721,7 @@ export class BuyerSingleEnquiry extends Component {
                                                          : "Allenqlistbtn")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
-                                            Buyer's Detail
+                                            Artisan's Detail
                                             </Col>
                                             <Col sm={2} 
                                             className={
@@ -782,375 +766,319 @@ export class BuyerSingleEnquiry extends Component {
                                     </Row>
 
                                                        <Row noGutters={true}>
-                                                           <Col sm={2}></Col>
-                                                                    <Col sm={8}>
+                                                           <Col sm={1}></Col>
+                                                          
            {/* --------------------------------Buyer Detail----------------------------------------------  */}
                                                                 {this.state.buyersDetail ? 
+                                                                             
                                                                 <>
-                                                                  {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
+                                                                <Col sm={10}>
+                                                                {( this.state.getEnquiryMoq[0].openEnquiriesResponse.isMoqSend != null || this.state.getEnquiryMoq[0].openEnquiriesResponse.productType == "Product")
+                                                                ?
+                                                                <>
+                                                                {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
                                                                 
-                                                                 <>
-                                                               <Row noGutters={true}>
-                                                                   <Col sm={12} className="col-xs-12 BdImgCol">
-                                                                       {/* <img  className="BdImg" src={logos.Dimapur}/> */}
-                                                                       {data.openEnquiriesResponse.logo?
-                                                                     <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
-                                                                         :
-                                                                         <img className="BdImg" src={logos.Smile} />
-                                                                        }
-                                                                       </Col>
+                                                                <>
+                                                              <Row noGutters={true}>
+                                                                  <Col sm={12} className="col-xs-12 BdImgCol">
+                                                                      {/* <img  className="BdImg" src={logos.Dimapur}/> */}
+                                                                      {data.openEnquiriesResponse.logo?
+                                                                    <img className="Logobpdimg profileImage" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
+                                                                        :
+                                                                        <img className="BdImg profileImage" src={logos.Smile} />
+                                                                       }
+                                                                      </Col>
+                                                              </Row>
+                                                              <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                   Brand Name:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
+                                                                   </Col>
                                                                </Row>
                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Brand Name:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                  Name:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                      {data.openEnquiriesResponse.firstName} <span></span> {data.openEnquiriesResponse.lastName ? data.openEnquiriesResponse.lastName :"" }
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                   Email Id:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.email}
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                     Phone No:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.mobile}
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="">
+                                                                   {/* <Col sm={6} className="BuyerDetailsh1">
+                                                                   Alternate Phone Number:
+                                                                   </Col>
+                                                                   <Col sm={6} className="">
+                                                                   {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
+                                                                   </Col> */}
+                                                                   <hr className="hrlineasd1 "></hr>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="">
+                                                                  <h1 className="BDh1">Delivery address</h1>
+                                                                  <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
+                                                                  {data.openEnquiriesResponse.line1}
+                                                                   {/* {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""} */}
+                                                                   {data.openEnquiriesResponse.district != "" ? ", " + data.openEnquiriesResponse.district : ""}
+                                                                   {/* {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""} */}
+                                                                   {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
+                                                                   {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
+                                                                   <br>
+                                                                   </br>
+                                                                      {data.openEnquiriesResponse.landmark}
+                                                                      </p>
+                                                                   </Col>
+                                                                   <Col sm={4} className="">
+                                                                   <h1 className="BDh1">Bank & Account Details</h1>
+                                                                   <p  className="BDp">Cluster : {data.clusterName}</p>
+                                                                   <p  className="BDp">Account Number :{this.state.accountno} </p>
+                                                                   <p  className="BDp">Bank Name :{this.state.bankname}</p>
+                                                                   <p  className="BDp">Beneficiary Name : {this.state.benificiaryname}</p>
+                                                                   <p  className="BDp">Branch Name : {this.state.branch}</p>
+                                                                   <p  className="BDp">IFSC Code :{this.state.ifsccode}</p>
+
+                                                                   </Col>
+                                                                   <Col sm={5} className="">
+                                                                   <h1 className="BDh1">  </h1>
+                                                                   <Row>
+                                                                       <Col sm = {{size: "2"}}>
+
+                                                                               <img src={logos.gpay} className="gpayicon mt0"></img>
+
+                                                                               </Col>
+                                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                                               <div className="font141">
+                                                                                   Google Pay UPI Id
+                                                                               </div>
+                                                                               <div>
+                                                                               {this.state.gpayupi}
+                                                                               </div>
+                                                                               </Col>
+                                                                               </Row>   
+                                                                               <Row>
+
+                                                               <Col sm = {{size: "2"}}>
+                                                               
+                                                               <img src={logos.paytm} className="gpayicon mt0"></img>
+
+                                                               </Col>
+                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                               <div className="font141">
+                                                                   Paytm Registered Mobile Number
+                                                               </div>
+                                                               <div>
+                                                               {this.state.paytmupi}
+                                                               
+                                                               </div>
+                                                               </Col>
+                                                               </Row>
+                                                               <Row>
+
+                                                               <Col sm = {{size: "2"}}>
+                                                               
+                                                               <img src={logos.phonepe} className="gpayicon mt0"></img>
+
+                                                               </Col>
+                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                               <div className=" font141">
+                                                                   Registered Number for PhonePe
+                                                               </div>
+                                                               <div>
+                                                               {this.state.phonepeupi}
+                                                               </div>
+                                                               </Col>
+                                                             
+                                                               </Row>
+                                                           
+                                                                </Col>
+                                                                  
+                                                               </Row>
+
+                                                               <p className="marginBottompage"></p>
+                                                              </>    ) ) 
+                                                                   )): null
+                                                                   }
+                                                                </>
+                                                                :
+                                                                <>
+                                                                <Row>
+                                                                    <br></br>
+                                                                    <br></br>
+                                                                    <br></br>   
+                                                                    <Col className="col-xs-12 text-center font14">
+                                                                        Artisan not finalised for this Custom Product yet.
                                                                     </Col>
                                                                 </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                   Name:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                       {data.openEnquiriesResponse.firstName} <span></span> {data.openEnquiriesResponse.lastName ? data.openEnquiriesResponse.lastName :"" }
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Email Id:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.email}
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                      Phone No:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.mobile}
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Alternate Phone Number:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
-                                                                    </Col>
-                                                                    <hr className="hrlineasd "></hr>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={4} className="">
-                                                                   <h1 className="BDh1">Delivery address</h1>
-                                                                   <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
-                                                                   {data.openEnquiriesResponse.line1}
-                                                                    {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""}
-                                                                    {data.openEnquiriesResponse.street != "" ? ", " + data.openEnquiriesResponse.street : ""}
-                                                                    {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""}
-                                                                    {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
-                                                                    {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
-                                                                    <br>
-                                                                    </br>
-                                                                       {data.openEnquiriesResponse.landmark}
-                                                                       </p>
-                                                                    </Col>
-                                                                    <Col sm={5} className="">
-                                                                    <h1 className="BDh1">POC details</h1>
-                                                                  <p className="BDp">Name : {data.openEnquiriesResponse.pocFirstName} {data.openEnquiriesResponse.pocLastName ? data.openEnquiriesResponse.pocLastName :""}</p>
-                                                                  <p  className="BDp">Email Id : {data.openEnquiriesResponse.pocEmail ? data.openEnquiriesResponse.pocEmail:""}</p>
-                                                                  <p  className="BDp">Phone Number : {data.openEnquiriesResponse.pocContact ?data.openEnquiriesResponse.pocContact:"" }</p>
-                                                                    </Col>
-                                                                    <Col sm={3} className="">
-                                                                    <h1 className="BDh1">GST Number</h1>
-                                                                    <p  className="BDp" style={{overflow:"visible"}}>{data.openEnquiriesResponse.gst}</p>
-                                                                    </Col>
-                                                                   
-                                                                </Row>
-                                                                <p className="marginBottompage"></p>
-                                                               </>    ) ) 
-                                                                    )): null
-                                                                    }
-                                                </>
-                                                                :null}
+                                                                </>
+                                                                }
+                                                                </Col>
+                                                                </>
+                                                                : null
+                                                                }
            {/* --------------------------------Buyer Detail end----------------------------------------------                                                          */}
             {/* -------------------MOQ start------------------------------------------------------------------------------ */}
            
                                                             {this.state.moqDetail ?  
                                                             
                                                             <>
-                                                        {this.state.isSend==1?    
-                                                          null
-                                                            :
-                                                            <>  {this.state.isMoqdetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handleMoqEdit}
-                                                        ></img> : 
-                                                       null} </>
-                                                           }
-
-                                                                <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
-                                                                    <Col sm={6} className="Moqh1">
-                                                                        Min Order Qnty:
+                                                            {/* <Col sm={1}></Col> */}
+                                                            <Col sm={10}>
+                                                            <> 
+                                                          <h1>Received MOQ</h1>
+                                                         <Row noGutters={true} style={{overflow:"auto"}}>
+                                                        <table className="MOqtable" style={{width:"100%"}}>
+                                                            <tr className="borderleftblue">
+                                                            <td >
+                                                                <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 " sm={12} md={4} >
+                                                                        <img src={logos.Fabric} className="Receivemoqbrandimg"></img>
                                                                     </Col>
-                                                                    <Col sm={6} className="Moqh2">
-                                                                       <input 
-                                                                       id="moq"
-                                                                       className="width200 alignbox" 
-                                                                       type="number"
-                                                                       disabled={this.state.isMoqdetail} 
-                                                                        value={this.state.moq }
-                                                                        name="moq"
-                                                                        onChange={this.handleChange}/> 
+
+                                                                    <Col className="col-xs-12 colright" sm={12} md={8}>
+                                                                       <p className="Artisianbrandh">Artisian Brand :<span style={{color:"cornflowerblue"}}> Chidiya</span> </p>
+                                                                        <span className="regionmoq"> Region,orissa</span>
                                                                     </Col>
                                                                 </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 tdclasscss">
+                                                                        <p className="theading">MOQ</p>
+                                                                            300
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">Price/unit(or m)</p>
+                                                            <i class="fa fa-inr" aria-hidden="true"></i>
+                                                                                   300
+                                                                    </Col>
+                                                                </Row>
+                                                             </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">ETA Delivery</p>
+                                                                            300 Days
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true} onClick={() => this.readmoreNote()}>
+                                                            <Col className="col-xs-12 readmored" >
+                                                            <p className="receading"  >Received</p>
+                                                            {this.state.readmore ? <>Collapse  <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i> </>:
+                                                            <> Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></>
+                                                            }
+                                                                           
 
-                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={6} className="Moqh1">
-                                                                     Price/unit:
-                                                                 </Col>
-                                                                 <Col sm={6} className="Moqh2">
-                                                                 <i class="fa fa-inr" aria-hidden="true"></i> 
-                                                                 <input 
-                                                                 id="ppu"
-                                                                 className="width200 alignbox2"
-                                                                  type="text"
-                                                                  disabled={this.state.isMoqdetail} 
-                                                                  value={this.state.ppu}
-                                                                   name="ppu"
-                                                                   onChange={this.handleChange}
-                                                                   /> 
-                                                                  
-                                                                 </Col>
-                                                             </Row>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            {this.state.readmore?
+                                                            ""
+                                                            :
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                           
+                                                            <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            }
+                                                           
+                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} >
+                                                            <Row noGutters={true} >
+                                                                     <Col className="col-xs-12 ">
+                                                                     <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                                 Accept
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                        </tr>
+                                                       
+                                                        </table>
+                                                        {/* -----------readmore-------------- */}
+                                                                 {this.state.readmore ? 
+                                                                  <div className="readmorediv">
+                                                                  <p><b>Note from Artisan</b></p>
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                  </div>
+                                                                 :null}
+                                                             
+                                                              
+                                                          
+                                                        </Row>  
+                                                          </>
 
-                                                             <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={6} className="Moqh1">
-                                                                    Estimated delivery date:
-                                                                 </Col>
-                                                                 <Col sm={6} className="Moqh2select">
-                                                                                        <select
-                                                                                        id="productCategorie"
-                                                                                        className="Moqh2selectheight" 
-                                                                                        name="deliveryDesc"
-                                                                                        value={this.state.deliveryDesc}
-                                                                                        disabled={this.state.isMoqdetail} 
-                                                                                        onChange={this.handleChange}
-                                                                                    >
-                                                                                        <option
-                                                                                        key="0"
-                                                                                        deliveryDesc = '-1'
-                                                                                        value="Select"
-                                                                                        >
-                                                                                        Select
-                                                                                        </option>
-                                                                                        {this.state.getMoqDeliveryTimes.map(
-                                                                                        (data) => (
-                                                                                            <option
-                                                                                            key={data.deliveryDesc}
-                                                                                            deliveryDesc={data.id}
-                                                                                            value= {data.id}
-                                                                                                >
-                                                                                            {data.deliveryDesc}
-                                                                                            </option>
-                                                                                        )
-                                                                                        )}
-                                                                                    </select>
-                                                                 </Col>
-                                                             </Row>
 
-                                                             <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={12} className="Moqh1 ">
-                                                                    Additional Note:
-                                                                 </Col>
-                                                                 <p className="Moqh1p">
-                                                                     <textarea id="additionalInfo " 
-                                                                     name="additionalInfo"
-                                                                     value={this.state.additionalInfo}
-                                                                       disabled={this.state.isMoqdetail} 
-                                                                       onChange={this.handleChange}
-                                                                     className="width100p "></textarea>
-                                                                 </p>
-                                                             </Row>
-                                                             <p className="text-center">
-                                                             {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
-                                        ) : (
-                                            <br />
-                                        )}
-                                                             </p>
-                                                            
-                                                             <Row noGutters={true} className=" Allenqlistbtnmt2">
-                                                               
-                                                                 <Col sm={6} >
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="savemoqbtn"
-                                                                  disabled >Save</button>
-                                                                
-                                                                :
-                                                                <button className="savemoqbtn"
-                                                                    onClick={() => this.saveMoqDetails()} >Save</button>}
-                                                                    
-                                                                 </Col>
-                                                                 <Col sm={6} className="">
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                  disabled >Send</button>
-                                                                   : 
-                                                                   <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                   >Send</button>
-                                                                 }
-                                                                 </Col>
-                                                             </Row>
-                                                             <p className="marginBottompage"></p>
-                                                             </>
-
+                                                            </Col>
+                                                       </>
                                                                 :null}
                      {/* -------------------MOQ------------------------------------------------------------------------------ */}
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                         {this.state.getPi.isSend==1?    
-                                                          null
-                                                            :
-                                                            <>  {this.state.isPidetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handlePiEdit}
-                                                        ></img> : 
-                                                       null} </>
-                                                           }   
-                                                           <Row noGutters={true} className="PIcolmt BdImgCol">
-                                                               <Col sm={6} >
-                                                                   <label>Quantity</label>
-                                                                   <br/>
-                                                               <input 
-                                                               className="PIinput"
-                                                                type="number"
-                                                                disabled={this.state.isPidetail}
-                                                                value={this.state.quantity }
-                                                                name="quantity"
-                                                                onChange={this.handleChange}
-                                                                />
-                                                               </Col>
-                                                               <Col sm={6}>
-                                                               <label >Rate per unit(or metre)</label>
-                                                               <br/>
-                                                               {/* <input className="PIinput" type="number"/> */}
-                                                             <span 
-                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                             disabled={this.state.isPidetail}>
-                                                            <i class="fa fa-inr" aria-hidden="true"></i></span>
-                                                             <input type="number"  className="PIinput rsinputboxwidth"
-                                                             disabled={this.state.isPidetail}
-                                                             value={this.state.rpu }
-                                                             name="rpu"
-                                                             onChange={this.handleChange} />
-                                                               </Col>
-                                                           </Row>
-
-                                                           <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>Expected date of delivery</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="date"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.dod }
-                                                               name="dod"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>HSN Code</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.hsncode }
-                                                               name="hsncode"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
-
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>CGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.cgst }
-                                                               name="cgst"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>SGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.sgst }
-                                                               name="sgst"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
-
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={12}>
-                                                           <input type="checkbox" name="checkbox" value="check" id="agree"
-                                                          
-                                                           style={{marginRight:"5px"}} 
-                                                          /> 
-                                                            Agree to <a
-                                                                style={{ cursor: "pointer", fontSize: "15px" }}
-                                                                onClick={() => {
-                                                                alert("clicked");
-                                                                }}
-                                                            >
-                                                                terms & condition
-                                                            </a>
-                              
-                                                           </Col>
-                                                       </Row>
-                                                       <p className="text-center">
-                                                             {this.state.showValidationPi ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
-                                        ) : (
-                                            <br />
-                                        )}
-                                                             </p>
-                                                       <Row noGutters={true}>
-                                                           <Col sm={12} className="text-center">
-                                                                <button className="previewandpi" onClick={() => this.savePIDetails()}>
-                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>  Preview and send PI</button>
-                                                           </Col>
-                                                          
-                                                       </Row>
-                                                       <p className="marginBottompage"></p>
+                                                            {/* <Col sm={1}></Col> */}
+                                                            <Col sm={10}>
+                                                                <BuyerPreviewInvoice/>
+                                                            </Col>
+                                                         
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
-                                                            {this.state.changeRequest ?  <div>
-                                                            <h6>change....</h6>
-                                                            </div>:null}
+                                                            {this.state.changeRequest ?  
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                                <div>
 
-                                                            {this.state.qualityCheck ?  <div>
-                                                            <h6>qualityCheck...</h6>
-                                                            </div>:null}
-                                                            
+                                                            <h6>change....</h6>
+                                                            </div>
                                                             </Col>
-                                                            <Col sm={2}></Col>
+                                                            </>:null}
+
+                                                            {this.state.qualityCheck ? 
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                             <div>
+                                                            <h6>qualityCheck...</h6>
+                                                            </div>
+                                                            </Col>
+                                                            </>
+                                                            :null}
+                                                            
+                                                            
+                                                            
                                                      </Row>
   
   
                                </Row>
                                <Row>
-            <div>
+            <div> 
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
@@ -1173,7 +1101,3 @@ function mapStateToProps(state) {
     const { user } = state
     return { user };
 }
-
-const connectedLoginPage = connect(mapStateToProps)(BuyerSingleEnquiry);
-export default connectedLoginPage;
-

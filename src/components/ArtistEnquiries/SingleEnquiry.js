@@ -805,6 +805,7 @@ export class SingleEnquiry extends Component {
            {/* --------------------------------Buyer Detail----------------------------------------------  */}
                                                                 {this.state.buyersDetail ? 
                                                                 <>
+                                                                
                                                                   {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
                                                                 
                                                                  <>
@@ -812,9 +813,9 @@ export class SingleEnquiry extends Component {
                                                                    <Col sm={12} className="col-xs-12 BdImgCol">
                                                                        {/* <img  className="BdImg" src={logos.Dimapur}/> */}
                                                                        {data.openEnquiriesResponse.logo?
-                                                                     <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
+                                                                     <img className="Logobpdimg profileImage" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
                                                                          :
-                                                                         <img className="BdImg" src={logos.Smile} />
+                                                                         <img className="BdImg profileImage" src={logos.Smile} />
                                                                         }
                                                                        </Col>
                                                                </Row>

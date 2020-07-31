@@ -51,10 +51,10 @@ import { PreviewInvoice } from './components/ArtistEnquiries/PreviewInvoice';
 import buyerProductTempelate from './components/Buyer-Custom-Design/buyerProductTempelate';
 import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
-import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
-import { BuyerAdvancePayment } from './components/Abcd/BuyerAdvancePayment';
 
+import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
+import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
 function App() {
   
   return (
@@ -93,7 +93,7 @@ function App() {
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/BuyerenquiriesList" component={BuyerAllEnquiryList} />
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
-          <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} />
+          {/* <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} /> */}
           <PrivateRoute exact path="/buyerEnquiryDetails" component={BuyerSingleEnquiry} />
 
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
@@ -102,7 +102,7 @@ function App() {
 
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
           <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
-          <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} />
+          {/* <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} /> */}
 
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}

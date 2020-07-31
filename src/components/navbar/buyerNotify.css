@@ -68,6 +68,7 @@
     color: #ffffff;
     font-size: 15px;
     font-weight: 200;
+    cursor: pointer;
 }
 
 .notifyCircleRed {
@@ -80,6 +81,7 @@
     color: rgb(212, 19, 13);
     font-size: 15px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .notifyImage1 {
@@ -159,6 +161,7 @@
     color: #545454;
     font-size: 15px;
     font-weight: 200;
+    cursor: pointer;
 }
 
 .notifyCirclewhite {
@@ -231,4 +234,13 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.noNotificationStyle {
+    color: #3B2977;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

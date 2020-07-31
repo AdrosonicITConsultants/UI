@@ -52,6 +52,15 @@ export class BuyerSingleEnquiry extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             progressid:1,
             Progressidnext:2,
+            accountno : "NA",
+            bankname : "NA" ,
+            branch : "NA" ,
+            ifsccode : "NA",
+            benificiaryname : "NA",
+            gpayupi : "NA",
+            paytmupi : "NA",
+            phonepeupi  : "NA",
+          
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -157,7 +166,7 @@ export class BuyerSingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/enquiriesList"); 
+        browserHistory.push("/buyerEnquiriesList"); 
     } 
 
     handleCluster(e) {
@@ -401,6 +410,57 @@ export class BuyerSingleEnquiry extends Component {
                     yarns: response.data.data.yarns },()=>{
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                            if(response.data.data[0].paymentAccountDetails.length != 0)
+                            {
+                                
+                                for (var  items in response.data.data[0].paymentAccountDetails)
+                                {
+                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
+                                    switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
+                                        case 1:
+                                            console.log("bank");   
+                                            this.setState({
+                                                accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
+                                                bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
+                                                branch : response.data.data[0].paymentAccountDetails[items].branch ,
+                                                ifsccode : response.data.data[0].paymentAccountDetails[items].ifsc,
+                                                benificiaryname : response.data.data[0].paymentAccountDetails[items].name
+                                            }); 
+                                            break;
+                                        case 2:
+                                            console.log("gpayy");
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                            
+                                                this.setState({
+                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                }); 
+                                            }
+                                            
+                                            break;
+                                        case 3:
+                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                            
+                                            this.setState({
+                                                phonepeupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                            }); 
+                                        }
+                                            break;
+                                        case 4:
+                                            console.log("paytm");
+                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
+                                                                          
+                                                this.setState({
+                                                    paytmupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                }); 
+                                            }
+                                            
+                                            break;
+                                    }
+                                }
+                                
+                
+                            }
                             var nextProgressid = 0;
                             if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
                             {
@@ -635,90 +695,7 @@ export class BuyerSingleEnquiry extends Component {
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 ? 
-                     <></>
-                   :
-                   <button
-                     className="blackButton"
-                     onClick={this.ToggleDelete}
-                    >
-                     Change Status
-                   </button>
-                     }   
-                   
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                    Change Status
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={this.ToggleDeleteClose} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <>
-                                 {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.id > 3 
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )}   
-                                </>
-                                :
-                                <>
-                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                    item1.id > 3
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {/* <div className="greenButtonstatus">
-                                    </div> */}
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )} 
-                                </>
-                                }
-                                
-                               
-                            </Row>
-                            <br></br>
-                            <Row noGutters={true}>
-                            <button className="markCompletedButton"
-                            onClick={this.stateupdate}                           
-                                >
-                                Mark Completed
-                                </button>
-                            </Row>
-                            <br></br>
-                            
-                        </div>
-                        </div>
-                    </div>
-
-                </Row>
-               
+           
                 </>
                 )}
                     </>
@@ -737,7 +714,7 @@ export class BuyerSingleEnquiry extends Component {
                                                          : "Allenqlistbtn")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
-                                            Buyer's Detail
+                                            Artisan's Detail
                                             </Col>
                                             <Col sm={2} 
                                             className={
@@ -782,104 +759,180 @@ export class BuyerSingleEnquiry extends Component {
                                     </Row>
 
                                                        <Row noGutters={true}>
-                                                           <Col sm={2}></Col>
-                                                                    <Col sm={8}>
+                                                           <Col sm={1}></Col>
+                                                          
            {/* --------------------------------Buyer Detail----------------------------------------------  */}
                                                                 {this.state.buyersDetail ? 
+                                                                             
                                                                 <>
-                                                                  {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
+                                                                <Col sm={10}>
+                                                                {( this.state.getEnquiryMoq[0].openEnquiriesResponse.isMoqSend != null || this.state.getEnquiryMoq[0].openEnquiriesResponse.productType == "Product")
+                                                                ?
+                                                                <>
+                                                                {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
                                                                 
-                                                                 <>
-                                                               <Row noGutters={true}>
-                                                                   <Col sm={12} className="col-xs-12 BdImgCol">
-                                                                       {/* <img  className="BdImg" src={logos.Dimapur}/> */}
-                                                                       {data.openEnquiriesResponse.logo?
-                                                                     <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
-                                                                         :
-                                                                         <img className="BdImg" src={logos.Smile} />
-                                                                        }
-                                                                       </Col>
+                                                                <>
+                                                              <Row noGutters={true}>
+                                                                  <Col sm={12} className="col-xs-12 BdImgCol">
+                                                                      {/* <img  className="BdImg" src={logos.Dimapur}/> */}
+                                                                      {data.openEnquiriesResponse.logo?
+                                                                    <img className="Logobpdimg profileImage" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
+                                                                        :
+                                                                        <img className="BdImg profileImage" src={logos.Smile} />
+                                                                       }
+                                                                      </Col>
+                                                              </Row>
+                                                              <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                   Brand Name:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
+                                                                   </Col>
                                                                </Row>
                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Brand Name:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                  Name:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                      {data.openEnquiriesResponse.firstName} <span></span> {data.openEnquiriesResponse.lastName ? data.openEnquiriesResponse.lastName :"" }
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                   Email Id:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.email}
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="BuyerDetailsh1">
+                                                                     Phone No:
+                                                                   </Col>
+                                                                   <Col sm={8} className="">
+                                                                   {data.openEnquiriesResponse.mobile}
+                                                                   </Col>
+                                                               </Row>
+                                                               <Row noGutters={true} className="">
+                                                                   {/* <Col sm={6} className="BuyerDetailsh1">
+                                                                   Alternate Phone Number:
+                                                                   </Col>
+                                                                   <Col sm={6} className="">
+                                                                   {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
+                                                                   </Col> */}
+                                                                   <hr className="hrlineasd1 "></hr>
+                                                               </Row>
+                                                               <Row noGutters={true} className="BdImgCol">
+                                                                   <Col sm={3} className="">
+                                                                  <h1 className="BDh1">Delivery address</h1>
+                                                                  <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
+                                                                  {data.openEnquiriesResponse.line1}
+                                                                   {/* {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""} */}
+                                                                   {data.openEnquiriesResponse.district != "" ? ", " + data.openEnquiriesResponse.district : ""}
+                                                                   {/* {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""} */}
+                                                                   {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
+                                                                   {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
+                                                                   <br>
+                                                                   </br>
+                                                                      {data.openEnquiriesResponse.landmark}
+                                                                      </p>
+                                                                   </Col>
+                                                                   <Col sm={4} className="">
+                                                                   <h1 className="BDh1">Bank & Account Details</h1>
+                                                                   <p  className="BDp">Cluster : {data.clusterName}</p>
+                                                                   <p  className="BDp">Account Number :{this.state.accountno} </p>
+                                                                   <p  className="BDp">Bank Name :{this.state.bankname}</p>
+                                                                   <p  className="BDp">Beneficiary Name : {this.state.benificiaryname}</p>
+                                                                   <p  className="BDp">Branch Name : {this.state.branch}</p>
+                                                                   <p  className="BDp">IFSC Code :{this.state.ifsccode}</p>
+
+                                                                   </Col>
+                                                                   <Col sm={5} className="">
+                                                                   <h1 className="BDh1">  </h1>
+                                                                   <Row>
+                                                                       <Col sm = {{size: "2"}}>
+
+                                                                               <img src={logos.gpay} className="gpayicon mt0"></img>
+
+                                                                               </Col>
+                                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                                               <div className="font141">
+                                                                                   Google Pay UPI Id
+                                                                               </div>
+                                                                               <div>
+                                                                               {this.state.gpayupi}
+                                                                               </div>
+                                                                               </Col>
+                                                                               </Row>   
+                                                                               <Row>
+
+                                                               <Col sm = {{size: "2"}}>
+                                                               
+                                                               <img src={logos.paytm} className="gpayicon mt0"></img>
+
+                                                               </Col>
+                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                               <div className="font141">
+                                                                   Paytm Registered Mobile Number
+                                                               </div>
+                                                               <div>
+                                                               {this.state.paytmupi}
+                                                               
+                                                               </div>
+                                                               </Col>
+                                                               </Row>
+                                                               <Row>
+
+                                                               <Col sm = {{size: "2"}}>
+                                                               
+                                                               <img src={logos.phonepe} className="gpayicon mt0"></img>
+
+                                                               </Col>
+                                                               <Col sm = {{size: "9"}} className="digitalbank">
+                                                               <div className=" font141">
+                                                                   Registered Number for PhonePe
+                                                               </div>
+                                                               <div>
+                                                               {this.state.phonepeupi}
+                                                               </div>
+                                                               </Col>
+                                                             
+                                                               </Row>
+                                                           
+                                                                </Col>
+                                                                  
+                                                               </Row>
+
+                                                               <p className="marginBottompage"></p>
+                                                              </>    ) ) 
+                                                                   )): null
+                                                                   }
+                                                                </>
+                                                                :
+                                                                <>
+                                                                <Row>
+                                                                    <br></br>
+                                                                    <br></br>
+                                                                    <br></br>   
+                                                                    <Col className="col-xs-12 text-center font14">
+                                                                        Artisan not finalised for this Custom Product yet.
                                                                     </Col>
                                                                 </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                   Name:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                       {data.openEnquiriesResponse.firstName} <span></span> {data.openEnquiriesResponse.lastName ? data.openEnquiriesResponse.lastName :"" }
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Email Id:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.email}
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                      Phone No:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.mobile}
-                                                                    </Col>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={6} className="BuyerDetailsh1">
-                                                                    Alternate Phone Number:
-                                                                    </Col>
-                                                                    <Col sm={6} className="">
-                                                                    {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
-                                                                    </Col>
-                                                                    <hr className="hrlineasd "></hr>
-                                                                </Row>
-                                                                <Row noGutters={true} className="BdImgCol">
-                                                                    <Col sm={4} className="">
-                                                                   <h1 className="BDh1">Delivery address</h1>
-                                                                   <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
-                                                                   {data.openEnquiriesResponse.line1}
-                                                                    {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""}
-                                                                    {data.openEnquiriesResponse.street != "" ? ", " + data.openEnquiriesResponse.street : ""}
-                                                                    {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""}
-                                                                    {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
-                                                                    {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
-                                                                    <br>
-                                                                    </br>
-                                                                       {data.openEnquiriesResponse.landmark}
-                                                                       </p>
-                                                                    </Col>
-                                                                    <Col sm={5} className="">
-                                                                    <h1 className="BDh1">POC details</h1>
-                                                                  <p className="BDp">Name : {data.openEnquiriesResponse.pocFirstName} {data.openEnquiriesResponse.pocLastName ? data.openEnquiriesResponse.pocLastName :""}</p>
-                                                                  <p  className="BDp">Email Id : {data.openEnquiriesResponse.pocEmail ? data.openEnquiriesResponse.pocEmail:""}</p>
-                                                                  <p  className="BDp">Phone Number : {data.openEnquiriesResponse.pocContact ?data.openEnquiriesResponse.pocContact:"" }</p>
-                                                                    </Col>
-                                                                    <Col sm={3} className="">
-                                                                    <h1 className="BDh1">GST Number</h1>
-                                                                    <p  className="BDp" style={{overflow:"visible"}}>{data.openEnquiriesResponse.gst}</p>
-                                                                    </Col>
-                                                                   
-                                                                </Row>
-                                                                <p className="marginBottompage"></p>
-                                                               </>    ) ) 
-                                                                    )): null
-                                                                    }
-                                                </>
-                                                                :null}
+                                                                </>
+                                                                }
+                                                                </Col>
+                                                                </>
+                                                                : null
+                                                                }
            {/* --------------------------------Buyer Detail end----------------------------------------------                                                          */}
             {/* -------------------MOQ start------------------------------------------------------------------------------ */}
            
                                                             {this.state.moqDetail ?  
                                                             
                                                             <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
                                                         {this.state.isSend==1?    
                                                           null
                                                             :
@@ -1009,6 +1062,7 @@ export class BuyerSingleEnquiry extends Component {
                                                                  </Col>
                                                              </Row>
                                                              <p className="marginBottompage"></p>
+                                                             </Col>
                                                              </>
 
                                                                 :null}
@@ -1016,6 +1070,8 @@ export class BuyerSingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
                                                          {this.state.getPi.isSend==1?    
                                                           null
                                                             :
@@ -1133,24 +1189,39 @@ export class BuyerSingleEnquiry extends Component {
                                                           
                                                        </Row>
                                                        <p className="marginBottompage"></p>
+                                                       </Col>
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
-                                                            {this.state.changeRequest ?  <div>
-                                                            <h6>change....</h6>
-                                                            </div>:null}
+                                                            {this.state.changeRequest ?  
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                                <div>
 
-                                                            {this.state.qualityCheck ?  <div>
-                                                            <h6>qualityCheck...</h6>
-                                                            </div>:null}
-                                                            
+                                                            <h6>change....</h6>
+                                                            </div>
                                                             </Col>
-                                                            <Col sm={2}></Col>
+                                                            </>:null}
+
+                                                            {this.state.qualityCheck ? 
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                             <div>
+                                                            <h6>qualityCheck...</h6>
+                                                            </div>
+                                                            </Col>
+                                                            </>
+                                                            :null}
+                                                            
+                                                            
+                                                            
                                                      </Row>
   
   
                                </Row>
                                <Row>
-            <div>
+            <div> 
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}

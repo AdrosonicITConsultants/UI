@@ -39,7 +39,7 @@ export default class SuccessPopup extends React.Component {
         <Row noGutters={true}>
             <Col sm={12} className="Modalh2" style={{textAlign:"center"}}>
               <h1 style={{marginTop:"40px"}}>Enquiry is generated successfully!</h1>
-              <p> Enquiry Id : <b style={{fontSize:"23px"}}>44444 {this.state.EnquiryCode}</b>  </p>
+              <p> Enquiry Id : <b style={{fontSize:"23px"}}>{this.state.EnquiryCode}</b>  </p>
               <p className="stat1"> Please Refer <b>Ongoing enquiry</b></p>
                <p className="stat2">tab to track your enquiry</p> 
             </Col>

@@ -8,7 +8,7 @@ import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import OngoingList from './BuyerOngoingList';
 import CompletedList from './BuyerCompletedList';
-
+import "./buyerenquiry.css"
 
 export class BuyerAllEnquiryList extends Component {
     constructor(props) {

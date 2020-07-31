@@ -246,7 +246,12 @@ export class OngoingList extends Component {
                 )}
                 </>
             :
-            <></>
+            <>
+            <Row noGutters={true}>
+                <Col className="col-xs-12 text-center">
+                Loading Please Wait....
+                </Col>
+                </Row></>
             }
             
                 </React.Fragment>

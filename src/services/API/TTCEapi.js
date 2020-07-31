@@ -575,6 +575,20 @@ class TTCEapi {
       });
   }
 
+  static ifEnquiryExists(productId) {
+    let url = ApiUrl + "/enquiry/ifEnquiryExists/{productId}?productId=" +productId ;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static generateEnquiryTrue(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
     console.log(url);

@@ -53,6 +53,7 @@ import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
 import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
+import { BuyerAdvancePayment } from './components/Abcd/BuyerAdvancePayment';
 
 function App() {
   
@@ -101,6 +102,8 @@ function App() {
 
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
           <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
+          <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} />
+
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 

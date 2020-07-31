@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
-import { Row, Col , Container, Button} from 'reactstrap';
+import { Row, Col , Container, Button, Collapse} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
@@ -32,8 +32,8 @@ export class BuyerSingleEnquiry extends Component {
         this.state = {
             selected:"proformaDetails",
             buyersDetail: false,
-            moqDetail: false,
-            proformaDetails: true,
+            moqDetail: true,
+            proformaDetails: false,
             qualityCheck:false,
             changeRequest:false, 
             getMoqDeliveryTimes:[],
@@ -52,6 +52,7 @@ export class BuyerSingleEnquiry extends Component {
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             progressid:1,
             Progressidnext:2,
+            readmore:false,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -175,6 +176,13 @@ export class BuyerSingleEnquiry extends Component {
         //   console.log(this.state.moq);
         });
     }
+
+    readmoreNote(){
+    this.setState({
+    readmore:!this.state.readmore
+    })
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -192,7 +200,7 @@ export class BuyerSingleEnquiry extends Component {
                                                          : "Allenqlistbtn")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
-                                            Buyer's Detail
+                                            Artisan Detail
                                             </Col>
                                             <Col sm={2} 
                                             className={
@@ -250,7 +258,99 @@ export class BuyerSingleEnquiry extends Component {
            
                                                             {this.state.moqDetail ?  
                                                             
-                                                          <> MOQ</>
+                                                          <> 
+                                                          <h1>Received MOQ</h1>
+                                                         <Row noGutters={true} style={{overflow:"auto"}}>
+                                                        <table className="MOqtable" style={{width:"100%"}}>
+                                                            <tr className="borderleftblue">
+                                                            <td >
+                                                                <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 " sm={12} md={4} >
+                                                                        <img src={logos.Fabric} className="Receivemoqbrandimg"></img>
+                                                                    </Col>
+
+                                                                    <Col className="col-xs-12 colright" sm={12} md={8}>
+                                                                       <p className="Artisianbrandh">Artisian Brand :<span style={{color:"cornflowerblue"}}> Chidiya</span> </p>
+                                                                        <span className="regionmoq"> Region,orissa</span>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 tdclasscss">
+                                                                        <p className="theading">MOQ</p>
+                                                                            300
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">Price/unit(or m)</p>
+                                                            <i class="fa fa-inr" aria-hidden="true"></i>
+                                                                                   300
+                                                                    </Col>
+                                                                </Row>
+                                                             </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">ETA Delivery</p>
+                                                                            300 Days
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true} onClick={() => this.readmoreNote()}>
+                                                            <Col className="col-xs-12 readmored" >
+                                                            <p className="receading"  >Received</p>
+                                                            {this.state.readmore ? <>Collapse  <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i> </>:
+                                                            <> Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></>
+                                                            }
+                                                                           
+
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            {this.state.readmore?
+                                                            ""
+                                                            :
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                           
+                                                            <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            }
+                                                           
+                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} >
+                                                            <Row noGutters={true} >
+                                                                     <Col className="col-xs-12 ">
+                                                                     <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                                 Accept
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                        </tr>
+                                                       
+                                                        </table>
+                                                        {/* -----------readmore-------------- */}
+                                                                 {this.state.readmore ? 
+                                                                  <div className="readmorediv">
+                                                                  <p><b>Note from Artisan</b></p>
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                  </div>
+                                                                 :null}
+                                                             
+                                                              
+                                                          
+                                                        </Row>  
+                                                          </>
 
                                                                 :null}
                      {/* -------------------MOQ------------------------------------------------------------------------------ */}

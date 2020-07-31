@@ -325,7 +325,7 @@ export class BuyerPreviewInvoice extends Component {
      <span className="ACcnodet"><b className="Discheading">Disclaimer : </b>The price is excluding tax and delivery charges. These will be included in final invoice.</span>    
      </Col>
 
-     <Col className="col-xs-3 allamtInd">
+     <Col className="col-xs-3 allamtInd" style={{fontSize:"13px"}}>
          All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
      </Col>
  </Row>

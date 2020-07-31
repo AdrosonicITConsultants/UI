@@ -15,31 +15,19 @@ import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
 
-
-const ref = React.createRef();
-const options = {
-    orientation: 'landscape',
-    unit: 'in',
-    format: [1500,1000]
-};
 export class PreviewInvoice extends Component {
     constructor(props) {
         super(props);
-        var today = new Date(),
-         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
-
-        this.state = {
-            time: '',
-          currentDate: date
-        }
+       
         
     } 
  
+    BacktoPreview(){
+    this.props.bp();
+    }
+
     componentDidMount() {
-        var date = moment()
-          .utcOffset('+05:30')
-          .format(' hh:mm A');
-        this.setState({ time: date });
+     
       }
     
     
@@ -58,7 +46,7 @@ export class PreviewInvoice extends Component {
     <Row noGutters={true}>
         <Col className="col-xs-12" >
         
-        <button className="Raiseinvbtn" style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></Col>
+        <button className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></Col>
     </Row>
    <Row noGutters={true}>
        <Col className="col-xs-12">
@@ -141,11 +129,11 @@ export class PreviewInvoice extends Component {
     <p className="PaymentTerm">Delivery Terms</p>
     <p className="yetpaysts">Yet to be dispatched after payment of final amount</p>
     </td>
-    <td>
+    <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
        <p className="againstpi">AD-567-77-888</p>
     </td>
-    <td>
+    <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: 19.2.2020</p> 
        <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. 66666666666</p>
     </td>
@@ -332,7 +320,7 @@ export class PreviewInvoice extends Component {
  {/* ------------------------------buttons------------------------------- */}
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
-<span><button className="gobacktoeditdetart">Go Back to edit details</button> 
+<span><button className="gobacktoeditdetart"  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
  <button className="Raiseinvbtn"><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
  {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>

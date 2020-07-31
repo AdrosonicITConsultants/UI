@@ -14,13 +14,14 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
+import { PreviewInvoice } from './PreviewInvoice';
 
 
 
 export class SingleEnquiry extends Component {
     constructor() {
         super();
-
+        this.backPI = this.backPI.bind(this);
         this.buyersDetailsbtn = this.buyersDetailsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
         this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
@@ -58,6 +59,7 @@ export class SingleEnquiry extends Component {
             quantity:0,
             dod:"",
             rpu:"",
+            preview:0,
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -167,6 +169,12 @@ export class SingleEnquiry extends Component {
         browserHistory.push("/enquiriesList"); 
     } 
 
+    backPI(){
+        this.setState({
+            preview:0,
+        })
+    }
+
     handleCluster(e) {
       
         // console.log(e.target.id);
@@ -215,7 +223,7 @@ export class SingleEnquiry extends Component {
     }
 
     saveMoqDetails(){
-        if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
+        if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -263,9 +271,11 @@ export class SingleEnquiry extends Component {
                     this.state.sgst,
                   
                    ).then((response)=>{
+                       if(response.data.valid){
                     this.setState({savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
+                        preview:1,
                     },()=>{
                     // console.log(this.state);
                    
@@ -275,7 +285,8 @@ export class SingleEnquiry extends Component {
                         autoClose: true,
                       });
                     //   browserHistory.push("/Preview");
-                });
+              }  });
+        
             }
             else{
                 customToast.error("Please agree to T&C", {
@@ -952,6 +963,7 @@ export class SingleEnquiry extends Component {
                                                                                         key="0"
                                                                                         deliveryDesc = '-1'
                                                                                         value="Select"
+                                                                                        selected="true" disabled="disabled"
                                                                                         >
                                                                                         Select
                                                                                         </option>
@@ -1023,7 +1035,9 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                         {this.state.getPi.isSend==1?    
+                                                            {this.state.preview==0?
+                                                            <>
+                                                                    {this.state.getPi.isSend==1?    
                                                           null
                                                             :
                                                             <>  {this.state.isPidetail ? <img
@@ -1139,13 +1153,18 @@ export class SingleEnquiry extends Component {
                                                            </Col>
                                                           
                                                        </Row>
+                                                            </>
+                                                            :<>
+                                                  <PreviewInvoice 
+                                                  bp={this.backPI}
+                                                  />
 
-                                
+                                                       </>}
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
-                                                            <h6>change....</h6>
+                                                          
                                                             </div>:null}
 
                                                             {this.state.qualityCheck ?  <div>

@@ -1,4 +1,5 @@
 
+
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
@@ -14,7 +15,8 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
-
+import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
+import "./BuyerSingleEnquiry.css";
 
 
 export class BuyerSingleEnquiry extends Component {
@@ -60,11 +62,16 @@ export class BuyerSingleEnquiry extends Component {
             gpayupi : "NA",
             paytmupi : "NA",
             phonepeupi  : "NA",
-          
+          readmore:false,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
-    ToggleDelete = () => {
+    readmoreNote(){
+        this.setState({
+        readmore:!this.state.readmore
+        })
+        }
+       ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
        }
 
@@ -519,6 +526,24 @@ export class BuyerSingleEnquiry extends Component {
         })
      }
 
+    acceptMOQModalShow = () => {
+        document.getElementById('acceptMOQModal').style.display='block';
+    }
+
+    acceptMOQModalClose = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+    }
+
+    buyerMOQAccept = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+
+        document.getElementById('confirmMOQModal').style.display='block';
+    }
+
+    buyerMOQAcceptClose = () => {
+        document.getElementById('confirmMOQModal').style.display='none';
+    }
+
      
 
     render() {
@@ -972,265 +997,211 @@ export class BuyerSingleEnquiry extends Component {
                                                             {this.state.moqDetail ?  
                                                             
                                                             <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                        {this.state.isSend==1?    
-                                                          null
-                                                            :
-                                                            <>  {this.state.isMoqdetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handleMoqEdit}
-                                                        ></img> : 
-                                                       null} </>
-                                                           }
-
-                                                                <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
-                                                                    <Col sm={6} className="Moqh1">
-                                                                        Min Order Qnty:
+                                                            {/* <Col sm={1}></Col> */}
+                                                            <Col sm={10}>
+                                                            <> 
+                                                          <h1 className="receivedmoqh1">Received MOQ</h1>
+                                                         <Row noGutters={true} style={{overflow:"auto"}}>
+                                                        <table className="MOqtable" style={{width:"100%"}}>
+                                                            <tr className="borderleftblue">
+                                                            <td >
+                                                                <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 " sm={12} md={4} >
+                                                                        <img src={logos.Fabric} className="Receivemoqbrandimg"></img>
                                                                     </Col>
-                                                                    <Col sm={6} className="Moqh2">
-                                                                       <input 
-                                                                       id="moq"
-                                                                       className="width200 alignbox" 
-                                                                       type="number"
-                                                                       disabled={this.state.isMoqdetail} 
-                                                                        value={this.state.moq }
-                                                                        name="moq"
-                                                                        onChange={this.handleChange}/> 
+
+                                                                    <Col className="col-xs-12 colright" sm={12} md={8}>
+                                                                       <p className="Artisianbrandh">Artisian Brand :<span style={{color:"cornflowerblue"}}> Chidiya</span> </p>
+                                                                        <span className="regionmoq"> Region,orissa</span>
                                                                     </Col>
                                                                 </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                                     <Col className="col-xs-12 tdclasscss">
+                                                                        <p className="theading">MOQ</p>
+                                                                            300
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">Price/unit(or m)</p>
+                                                            <i class="fa fa-inr" aria-hidden="true"></i>
+                                                                                   300
+                                                                    </Col>
+                                                                </Row>
+                                                             </td>
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                            <p className="theading">ETA Delivery</p>
+                                                                            300 Days
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            <td>
+                                                            <Row noGutters={true} onClick={() => this.readmoreNote()}>
+                                                            <Col className="col-xs-12 readmored" >
+                                                            <p className="receading"  >Received</p>
+                                                            {this.state.readmore ? <>Collapse  <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i> </>:
+                                                            <> Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></>
+                                                            }
+                                                                           
 
-                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={6} className="Moqh1">
-                                                                     Price/unit:
-                                                                 </Col>
-                                                                 <Col sm={6} className="Moqh2">
-                                                                 <i class="fa fa-inr" aria-hidden="true"></i> 
-                                                                 <input 
-                                                                 id="ppu"
-                                                                 className="width200 alignbox2"
-                                                                  type="text"
-                                                                  disabled={this.state.isMoqdetail} 
-                                                                  value={this.state.ppu}
-                                                                   name="ppu"
-                                                                   onChange={this.handleChange}
-                                                                   /> 
-                                                                  
-                                                                 </Col>
-                                                             </Row>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            {this.state.readmore?
+                                                            ""
+                                                            :
+                                                            <td>
+                                                            <Row noGutters={true}>
+                                                            <Col className="col-xs-12 tdclasscss">
+                                                           
+                                                            <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
+                                                                    </Col>
+                                                                </Row>
+                                                            </td>
+                                                            }
+                                                           
+                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={this.acceptMOQModalShow}>
+                                                            <Row noGutters={true} >
+                                                                <Col className="col-xs-12 ">
+                                                                <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                                Accept
+                                                                </Col>
+                                                            </Row>
+                                                            </td>
 
-                                                             <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={6} className="Moqh1">
-                                                                    Estimated delivery date:
-                                                                 </Col>
-                                                                 <Col sm={6} className="Moqh2select">
-                                                                                        <select
-                                                                                        id="productCategorie"
-                                                                                        className="Moqh2selectheight" 
-                                                                                        name="deliveryDesc"
-                                                                                        value={this.state.deliveryDesc}
-                                                                                        disabled={this.state.isMoqdetail} 
-                                                                                        onChange={this.handleChange}
-                                                                                    >
-                                                                                        <option
-                                                                                        key="0"
-                                                                                        deliveryDesc = '-1'
-                                                                                        value="Select"
-                                                                                        >
-                                                                                        Select
-                                                                                        </option>
-                                                                                        {this.state.getMoqDeliveryTimes.map(
-                                                                                        (data) => (
-                                                                                            <option
-                                                                                            key={data.deliveryDesc}
-                                                                                            deliveryDesc={data.id}
-                                                                                            value= {data.id}
-                                                                                                >
-                                                                                            {data.deliveryDesc}
-                                                                                            </option>
-                                                                                        )
-                                                                                        )}
-                                                                                    </select>
-                                                                 </Col>
-                                                             </Row>
+                                                            <div id="acceptMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader">Are you sure ?</div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId">AN-SA-987659</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalTerms">Terms Decided</div>
+                                                                        <table className="buyerMOQAcceptModalTable">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">MOQ</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">300</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">Price/unit(or m)</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">₹ 30000.00</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">45 Days</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalBrand">Artisan Brand: </span>
+                                                                            <span className="buyerMOQAcceptModalBrandName">Matsar</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalState">Maniabandha, Orissa</div>
+                                                                        <hr className="buyerMOQAcceptModalHr"/>
+                                                                        <div className="buyerMOQAcceptModalDesc">
+                                                                            MOQ once accepted cannot be changed further.<br/>
+                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
+                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            tab to track your enquiry.
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={this.buyerMOQAccept} className="buyerMOQAcceptModalOkayButton">Ok</span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
 
-                                                             <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
-                                                                 <Col sm={12} className="Moqh1 ">
-                                                                    Additional Note:
-                                                                 </Col>
-                                                                 <p className="Moqh1p">
-                                                                     <textarea id="additionalInfo " 
-                                                                     name="additionalInfo"
-                                                                     value={this.state.additionalInfo}
-                                                                       disabled={this.state.isMoqdetail} 
-                                                                       onChange={this.handleChange}
-                                                                     className="width100p "></textarea>
-                                                                 </p>
-                                                             </Row>
-                                                             <p className="text-center">
-                                                             {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
-                                        ) : (
-                                            <br />
-                                        )}
-                                                             </p>
-                                                            
-                                                             <Row noGutters={true} className=" Allenqlistbtnmt2">
-                                                               
-                                                                 <Col sm={6} >
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="savemoqbtn"
-                                                                  disabled >Save</button>
-                                                                
-                                                                :
-                                                                <button className="savemoqbtn"
-                                                                    onClick={() => this.saveMoqDetails()} >Save</button>}
-                                                                    
-                                                                 </Col>
-                                                                 <Col sm={6} className="">
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                  disabled >Send</button>
-                                                                   : 
-                                                                   <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                   >Send</button>
-                                                                 }
-                                                                 </Col>
-                                                             </Row>
-                                                             <p className="marginBottompage"></p>
-                                                             </Col>
-                                                             </>
+                                                            <div id="confirmMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQConfirmModalHeader">MOQ is accepted !</div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId">AN-SA-987659</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalTerms">Terms Decided</div>
+                                                                        <table className="buyerMOQAcceptModalTable">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">MOQ</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">300</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">Price/unit(or m)</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">₹ 30000.00</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">45 Days</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        
+                                                                        <div className="buyerMOQConfirmModalEnquiryChatButton">Go to this enquiry chat</div>
+                                                                        
+                                                                        <div className="buyerMOQConfirmModalDesc">
+                                                                            MOQ once accepted cannot be changed further.<br/>
+                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
+                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            tab to track your enquiry.
+                                                                        </div>
+                                                                        <div className="buyerMOQConfirmModalButtonOuter">
+                                                                            <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span>
+                                                                            <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </tr>
+                                                       
+                                                        </table>
+                                                        {/* -----------readmore-------------- */}
+                                                                 {this.state.readmore ? 
+                                                                  <div className="readmorediv">
+                                                                  <p><b>Note from Artisan</b></p>
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                   This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                                                  </div>
+                                                                 :null}
+                                                             
+                                                              
+                                                          
+                                                        </Row>  
+                                                          </>
 
+
+                                                            </Col>
+                                                       </>
                                                                 :null}
                      {/* -------------------MOQ------------------------------------------------------------------------------ */}
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                         {this.state.getPi.isSend==1?    
-                                                          null
-                                                            :
-                                                            <>  {this.state.isPidetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handlePiEdit}
-                                                        ></img> : 
-                                                       null} </>
-                                                           }   
-                                                           <Row noGutters={true} className="PIcolmt BdImgCol">
-                                                               <Col sm={6} >
-                                                                   <label>Quantity</label>
-                                                                   <br/>
-                                                               <input 
-                                                               className="PIinput"
-                                                                type="number"
-                                                                disabled={this.state.isPidetail}
-                                                                value={this.state.quantity }
-                                                                name="quantity"
-                                                                onChange={this.handleChange}
-                                                                />
-                                                               </Col>
-                                                               <Col sm={6}>
-                                                               <label >Rate per unit(or metre)</label>
-                                                               <br/>
-                                                               {/* <input className="PIinput" type="number"/> */}
-                                                             <span 
-                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                             disabled={this.state.isPidetail}>
-                                                            <i class="fa fa-inr" aria-hidden="true"></i></span>
-                                                             <input type="number"  className="PIinput rsinputboxwidth"
-                                                             disabled={this.state.isPidetail}
-                                                             value={this.state.rpu }
-                                                             name="rpu"
-                                                             onChange={this.handleChange} />
-                                                               </Col>
-                                                           </Row>
-
-                                                           <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>Expected date of delivery</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="date"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.dod }
-                                                               name="dod"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>HSN Code</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.hsncode }
-                                                               name="hsncode"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
-
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>CGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.cgst }
-                                                               name="cgst"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>SGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.sgst }
-                                                               name="sgst"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
-
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={12}>
-                                                           <input type="checkbox" name="checkbox" value="check" id="agree"
-                                                          
-                                                           style={{marginRight:"5px"}} 
-                                                          /> 
-                                                            Agree to <a
-                                                                style={{ cursor: "pointer", fontSize: "15px" }}
-                                                                onClick={() => {
-                                                                alert("clicked");
-                                                                }}
-                                                            >
-                                                                terms & condition
-                                                            </a>
-                              
-                                                           </Col>
-                                                       </Row>
-                                                       <p className="text-center">
-                                                             {this.state.showValidationPi ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
-                                        ) : (
-                                            <br />
-                                        )}
-                                                             </p>
-                                                       <Row noGutters={true}>
-                                                           <Col sm={12} className="text-center">
-                                                                <button className="previewandpi" onClick={() => this.savePIDetails()}>
-                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>  Preview and send PI</button>
-                                                           </Col>
-                                                          
-                                                       </Row>
-                                                       <p className="marginBottompage"></p>
-                                                       </Col>
+                                                            {/* <Col sm={1}></Col> */}
+                                                            <Col sm={10}>
+                                                                <BuyerPreviewInvoice/>
+                                                            </Col>
+                                                         
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  
@@ -1285,7 +1256,3 @@ function mapStateToProps(state) {
     const { user } = state
     return { user };
 }
-
-const connectedLoginPage = connect(mapStateToProps)(BuyerSingleEnquiry);
-export default connectedLoginPage;
-

@@ -41,8 +41,12 @@ export class BuyerPreviewInvoice extends Component {
           .format(' hh:mm A');
         this.setState({ time: date });
       }
-    
-    
+      BacktoPreview(){
+    this.props.bp();
+    }
+    proceedtoadvancepay(){
+        browserHistory.push("/payadvance")
+    }
     
     render(){
         return(
@@ -325,7 +329,7 @@ export class BuyerPreviewInvoice extends Component {
      <span className="ACcnodet"><b className="Discheading">Disclaimer : </b>The price is excluding tax and delivery charges. These will be included in final invoice.</span>    
      </Col>
 
-     <Col className="col-xs-3 allamtInd">
+     <Col className="col-xs-3 allamtInd" style={{fontSize:"13px"}}>
          All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
      </Col>
  </Row>
@@ -334,7 +338,7 @@ export class BuyerPreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span><button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
- <button className="Raiseinvbtn"> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
+ <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
  <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p>
      </Col>
  </Row>

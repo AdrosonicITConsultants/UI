@@ -45,9 +45,11 @@ class BuyersProductDetails extends Component {
       showPopup: false,
     header:"Welcome",
     generateEnquiry:null,
+    ifEnquiryExists:null,
     isLoadingEnquiry:false,
     modalIsOpen: false,
     isCustom:false,
+    enqgen:false,
     };
     this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
     this.generateEnquiry = this.generateEnquiry.bind(this);
@@ -81,16 +83,33 @@ class BuyersProductDetails extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-  generateEnquiry(item){
-    this.setState({ modalIsOpen: true });
-          TTCEapi.generateEnquiry(item,false).then((response)=>{
-            this.setState({ modalIsOpen: false });
-        this.setState({generateEnquiry : response.data.data},()=>{
+//   generateEnquiry(item){
+//     this.setState({ modalIsOpen: true });
+//           TTCEapi.generateEnquiry(item,false).then((response)=>{
+//             this.setState({ modalIsOpen: false });
+//         this.setState({generateEnquiry : response.data.data},()=>{
           
-            console.log(this.state.generateEnquiry);
+//             console.log(this.state.generateEnquiry);
             
+//         });
+//     });
+// }
+generateEnquiry(item){
+  this.setState({ modalIsOpen: true });
+    TTCEapi.ifEnquiryExists(item,false).then((response)=>{
+  this.setState({ifEnquiryExists : response.data.data},()=>{
+    // this.setState({ modalIsOpen: false });
+      console.log(this.state.ifEnquiryExists);
+      if(this.state.ifEnquiryExists.ifExists ==false){
+            TTCEapi.generateEnquiry(item,false).then((response)=>{
+          this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
+                         console.log(this.state.generateEnquiry);
+                        });
         });
-    });
+      }
+  });
+  
+});
 }
   handleRemovefromWishlist(id){
     TTCEapi.deleteProductsInWishlist(id).then((response)=>{
@@ -396,7 +415,7 @@ class BuyersProductDetails extends Component {
 <Row noGutters="true">
   <Col sm={12}>
   <h2 className="Productdetailsh2" id="productdetail">Product Details</h2>
-  <hr className="hrproductBPD "></hr>
+  {/* <hr className="hrproductBPD "></hr> */}
   </Col>
 </Row>
 
@@ -440,7 +459,7 @@ class BuyersProductDetails extends Component {
     <p className="GeneralDetailsp" style={{color:"#23527c"}}>{this.state.ProductData.brand?this.state.ProductData.brand:null}</p>
    
   </Col>
-  <hr className="hrlineBPD "></hr>
+  <hr className="hrlineBPD " style={{marginTop:"90px"}}></hr>
 </Row>
 {/* -----------------------specification--------------------- */}
 <Row noGutters="true" >
@@ -693,26 +712,26 @@ class BuyersProductDetails extends Component {
                   <HoldPopup isOpen={this.state.modalIsOpen}/>
                 :null}
 
-                { this.state.generateEnquiry ?
+                { this.state.ifEnquiryExists ?
                 <>
-                   { this.state.generateEnquiry.ifExists== true ? 
+                   { this.state.ifEnquiryExists.ifExists== true ? 
                 <Popup
-                EnquiryCode={this.state.generateEnquiry.enquiry.code}
-                productName={this.state.generateEnquiry.productName}
+                EnquiryCode={this.state.ifEnquiryExists.code}
+                productName={this.state.ifEnquiryExists.productName}
                 productId={this.state.ProductData.id}
                 isCustom={this.state.isCustom}
                 />
                  :
                         (
-                            // this.state.isLoadingEnquiry ?
-                //    <HoldPopup/>
+                           
                    
-
+                this.state.enqgen ? 
                  <SuccessPopup
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
                  productName={this.state.generateEnquiry.productName}
                  productId={this.state.ProductData.id}
                  />
+                 : null
                          ) } </>
              
                

@@ -231,6 +231,9 @@ font-size: 13px;
     color: goldenrod;
     font-weight: 600;
 }
+.Moqbuyerh1{
+color: rgb(133, 196, 36) !important;
+}
 .Moqh2{
     font-size: 25px;
     color: black;
@@ -282,6 +285,7 @@ font-size: 13px;
     border-radius: 52px;
     width: 76px;
     margin-top: 12px;
+    max-height: 55px;
     /* margin: 10px; */
     /* padding: 0px 0px 0px 0px; */
     margin-bottom: 16px;
@@ -456,6 +460,20 @@ font-size: 13px;
 .mb7{
     margin-bottom: 7px;
 }
+
+.rowmaxheight{
+    max-height: 84px;
+    height: 84px;
+
+}
+.recmoqcol1{
+    width: 300px;
+}
+.recmoqcol2{
+    width: 90px;
+    overflow: auto;
+}
+
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;

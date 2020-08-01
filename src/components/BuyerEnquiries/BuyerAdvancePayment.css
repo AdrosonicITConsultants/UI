@@ -171,7 +171,7 @@ th, td {
     text-align: center;
 }
 .recheading{
-  font-size: 10px;
+  font-size: 7px;
     color: grey;
 }
 .readmored{
@@ -209,6 +209,9 @@ th, td {
 .receivedmoqh1{
   font-size: 17px;
     font-weight: bold;
+}
+.receading{
+  font-size: 9px;
 }
 @media screen and (max-width:970px){
   .Artisianbrandh {

@@ -560,6 +560,36 @@ class TTCEapi {
         return error.response;
       });
   }
+    // /enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId=1057&moqId=39&artisanId=130
+
+  static MoqSelected(enquiryId,moqId,artisanId) {
+    let url = ApiUrl + "/enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId="+enquiryId+"&moqId="+moqId +"&artisanId="+artisanId;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getMoqs(enquiryId) {
+    let url = ApiUrl + "/enquiry/getMoqs/{enquiryId}?enquiryId=" +enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
 
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
@@ -1146,7 +1176,8 @@ class TTCEapi {
         return error.response;
       });
   } 
-  // enquiry/savePi/{enquiryId}?enquiryId=698
+
+
   static savePi(
     enquiryId,
    cgst,

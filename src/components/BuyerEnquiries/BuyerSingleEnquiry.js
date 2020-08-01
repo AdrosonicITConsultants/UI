@@ -62,7 +62,9 @@ export class BuyerSingleEnquiry extends Component {
             gpayupi : "NA",
             paytmupi : "NA",
             phonepeupi  : "NA",
-          readmore:false,
+             readmore:false,
+             getMoqs:[],
+             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -487,7 +489,7 @@ export class BuyerSingleEnquiry extends Component {
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
-                                console.log(this.state);
+                                // console.log(this.state);
                            
                             });
                         });
@@ -497,20 +499,42 @@ export class BuyerSingleEnquiry extends Component {
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
+
             }
         })
+
+        TTCEapi.getMoqs(params.code).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getMoqs:response.data.data})
+                // console.log(this.state.getMoqs);
+
+            }
+        })
+
      }
 
-     
+AcceptMoq(moqId,artisanId){
+    let params = queryString.parse(this.props.location.search);
+        console.log(params);
+    TTCEapi.MoqSelected(params.code,moqId,artisanId).then((response)=>{
+        if(response.data.valid)
+        {
+            this.setState({MoqSelected:response.data.data})
+            console.log(this.state.MoqSelected);
+
+        }
+    })
+}     
 
     render() {
         return (
@@ -935,10 +959,15 @@ export class BuyerSingleEnquiry extends Component {
            {/* --------------------------------Buyer Detail end----------------------------------------------                                                          */}
             {/* -------------------MOQ start------------------------------------------------------------------------------ */}
            
+                                                                
+                                                               
                                                             {this.state.moqDetail ?  
                                                             
                                                             <>
-                                                            {/* <Col sm={1}></Col> */}
+                                                              {this.state.getMoqs ? ( ( this.state.getMoqs.map((data) => (
+                                                                
+                                                                <> 
+                                                                         {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
                                                             <> 
                                                           <h1 className="receivedmoqh1">Received MOQ</h1>
@@ -948,12 +977,17 @@ export class BuyerSingleEnquiry extends Component {
                                                             <td >
                                                                 <Row noGutters={true}>
                                                                      <Col className="col-xs-12 " sm={12} md={4} >
-                                                                        <img src={logos.Fabric} className="Receivemoqbrandimg"></img>
+                                                                     {data.logo?
+                                                                    <img className="Receivemoqbrandimg" src={TTCEapi.ImageUrl+'User/'+data.artisanId+'/CompanyDetails/Logo/'+data.logo}/>
+                                                                        :
+                                                                        <img className="BdImg profileImage" src={logos.Smile} />
+                                                                       }
+                                                                        {/* <img src={logos.Fabric} className=""></img> */}
                                                                     </Col>
 
                                                                     <Col className="col-xs-12 colright" sm={12} md={8}>
-                                                                       <p className="Artisianbrandh">Artisian Brand :<span style={{color:"cornflowerblue"}}> Chidiya</span> </p>
-                                                                        <span className="regionmoq"> Region,orissa</span>
+                                                              <p className="Artisianbrandh">Artisian Brand :<span style={{color:"cornflowerblue"}}> {data.brand}</span> </p>
+                                                                        <span className="regionmoq"> {data.clusterName}</span>
                                                                     </Col>
                                                                 </Row>
                                                             </td>
@@ -961,7 +995,7 @@ export class BuyerSingleEnquiry extends Component {
                                                             <Row noGutters={true}>
                                                                      <Col className="col-xs-12 tdclasscss">
                                                                         <p className="theading">MOQ</p>
-                                                                            300
+                                                                           {data.moq.moq}
                                                                     </Col>
                                                                 </Row>
                                                             </td>
@@ -969,8 +1003,8 @@ export class BuyerSingleEnquiry extends Component {
                                                             <Row noGutters={true}>
                                                             <Col className="col-xs-12 tdclasscss">
                                                             <p className="theading">Price/unit(or m)</p>
-                                                            <i class="fa fa-inr" aria-hidden="true"></i>
-                                                                                   300
+                                                            {/* <i class="fa fa-inr" aria-hidden="true"></i> */}
+                                                            {data.moq.ppu}
                                                                     </Col>
                                                                 </Row>
                                                              </td>
@@ -978,14 +1012,22 @@ export class BuyerSingleEnquiry extends Component {
                                                             <Row noGutters={true}>
                                                             <Col className="col-xs-12 tdclasscss">
                                                             <p className="theading">ETA Delivery</p>
-                                                                            300 Days
+                                                            {data.moq.deliveryTimeId} Days
                                                                     </Col>
                                                                 </Row>
                                                             </td>
                                                             <td>
                                                             <Row noGutters={true} onClick={() => this.readmoreNote()}>
                                                             <Col className="col-xs-12 readmored" >
-                                                            <p className="receading"  >Received</p>
+
+                                                              <p className="recheading"  >Received
+                                                              <Moment format=" DD-MM-YYYY">
+                                                              {data.moq.createdOn}
+                                                                </Moment> :
+                                                              <Moment format=" h:mm a">
+                                                              {data.moq.createdOn}
+                                                                </Moment>
+                                                              </p>
                                                             {this.state.readmore ? <>Collapse  <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i> </>:
                                                             <> Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></>
                                                             }
@@ -1007,7 +1049,7 @@ export class BuyerSingleEnquiry extends Component {
                                                             </td>
                                                             }
                                                            
-                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} >
+                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={() => this.AcceptMoq(data.moq.id,data.artisanId)} >
                                                             <Row noGutters={true} >
                                                                      <Col className="col-xs-12 ">
                                                                      <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
@@ -1036,7 +1078,15 @@ export class BuyerSingleEnquiry extends Component {
 
 
                                                             </Col>
+                                                                
+                                                                 </>    ) ) 
+                                                                )): null
+                                                                }
+                                                   
                                                        </>
+
+                                                          
+                                                      
                                                                 :null}
                      {/* -------------------MOQ------------------------------------------------------------------------------ */}
 

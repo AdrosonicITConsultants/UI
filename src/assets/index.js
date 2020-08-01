@@ -143,7 +143,13 @@ import PIbtnicon from "./Icon material-view-column.svg"
 import Iconpaymentinvoice from "./Icon payment-invoice.svg"
 import chatwhite from "./chat white.svg"
 import downloadpdficon from "./download pdf icon.svg"
+import chatbubble from "./white chat bubble for button.svg"
+import  completedenq from "./order delivered.svg"
+import cancelenq from "./Cancel Enquiry icon - red.svg"
 export default {
+  cancelenq,
+  chatbubble,
+  completedenq,
   downloadpdficon,
   chatwhite,
   Iconpaymentinvoice,

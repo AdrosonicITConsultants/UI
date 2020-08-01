@@ -1511,6 +1511,26 @@ class TTCEapi {
     });
 }
 
+
+static markEnquiryClosed(id){
+  let url = ApiUrl + "/enquiry/markEnquiryCompleted/{enquiryId}?enquiryId=" + id;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+      
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

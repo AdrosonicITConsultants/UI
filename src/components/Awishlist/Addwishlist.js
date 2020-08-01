@@ -59,17 +59,15 @@ class AddWishlist extends Component {
 
       generateEnquiry(item){
         this.setState({ modalIsOpen: true });
-          TTCEapi.ifEnquiryExists(item).then((response)=>{
+          TTCEapi.ifEnquiryExists(item,false).then((response)=>{
         this.setState({ifEnquiryExists : response.data.data},()=>{
           // this.setState({ modalIsOpen: false });
             console.log(this.state.ifEnquiryExists);
             if(this.state.ifEnquiryExists.ifExists ==false){
               TTCEapi.generateEnquiry(item,false).then((response)=>{
                 this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                 
-                    console.log(this.state.generateEnquiry);
-                    
-                });
+                               console.log(this.state.generateEnquiry);
+                              });
               });
             }
         });
@@ -136,7 +134,7 @@ class AddWishlist extends Component {
         document.getElementById('id02').style.display='none';
        }
 
-      componentDidMount(){
+    componentDidMount(){
    
      TTCEapi.getProductsInWishlist().then((response)=>{
       this.setState({getProductsInWishlist : response.data.data},()=>{
@@ -325,7 +323,7 @@ class AddWishlist extends Component {
                    { this.state.ifEnquiryExists.ifExists== true ? 
                 <Popup
                 EnquiryCode={this.state.ifEnquiryExists.code}
-                // productName={this.state.generateEnquiry.productName}
+                productName={this.state.ifEnquiryExists.productName}
                 productId={data.product.id}
                 isCustom={this.state.isCustom}
                 />

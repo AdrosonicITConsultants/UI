@@ -99,7 +99,7 @@ function App() {
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
-
+          <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
           <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
           {/* <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} /> */}

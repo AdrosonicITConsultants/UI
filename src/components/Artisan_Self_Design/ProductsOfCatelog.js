@@ -41,19 +41,13 @@ export class ProductsOfCatelog extends Component {
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
         this.generateEnquiry = this.generateEnquiry.bind(this);
-        // this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-
-      // console.log(this.props);
+        
     }
     closeModal() {
       this.setState({ modalIsOpen: false });
     }
-    // openModal() {
-    //   this.setState({ modalIsOpen: true });
-    // }
-  
-
+   
   handleAddtoWishlist(id){
    
     TTCEapi.addToWishlist(id).then((response)=>{
@@ -76,43 +70,27 @@ export class ProductsOfCatelog extends Component {
     
     });
 
-  
 }
 
 
 
 generateEnquiry(item){
   this.setState({ modalIsOpen: true });
-    TTCEapi.ifEnquiryExists(item).then((response)=>{
+    TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
     // this.setState({ modalIsOpen: false });
       console.log(this.state.ifEnquiryExists);
       if(this.state.ifEnquiryExists.ifExists ==false){
         TTCEapi.generateEnquiry(item,false).then((response)=>{
           this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-           
-              console.log(this.state.generateEnquiry);
-              
-          });
+                         console.log(this.state.generateEnquiry);
+                        });
         });
       }
   });
   
 });
 }
- 
-//   generateEnquiry(item){
-//     this.setState({ modalIsOpen: true });
-//     TTCEapi.generateEnquiry(item,false).then((response)=>{
-//   this.setState({generateEnquiry : response.data.data},()=>{
-//     this.setState({ modalIsOpen: false });
-//       console.log(this.state.generateEnquiry);
-      
-//   });
-// });
-// }
-
-
   
     productDescription(id){
       console.log("Product Descriptiony " + id);
@@ -304,7 +282,7 @@ generateEnquiry(item){
                      <Popup 
                          closeModal={this.closeModal}
                         EnquiryCode={this.state.ifEnquiryExists.code}
-                        // productName={this.state.generateEnquiry.productName}
+                        productName={this.state.ifEnquiryExists.productName}
                         productId={this.state.proddata.id}
                         isCustom={this.state.isCustom}
 

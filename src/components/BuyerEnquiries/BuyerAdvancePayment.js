@@ -89,7 +89,7 @@ export class BuyerAdvancePayment extends Component {
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
+                                        // onClick={() => this.backoperation()}
                             ></img>
                           
                           </Col>

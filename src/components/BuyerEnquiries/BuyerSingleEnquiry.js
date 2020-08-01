@@ -16,7 +16,7 @@ import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
-
+import "./BuyerSingleEnquiry.css";
 
 
 export class BuyerSingleEnquiry extends Component {
@@ -71,7 +71,7 @@ export class BuyerSingleEnquiry extends Component {
         readmore:!this.state.readmore
         })
         }
-    ToggleDelete = () => {
+       ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
        }
 
@@ -509,6 +509,24 @@ export class BuyerSingleEnquiry extends Component {
             }
         })
      }
+
+    acceptMOQModalShow = () => {
+        document.getElementById('acceptMOQModal').style.display='block';
+    }
+
+    acceptMOQModalClose = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+    }
+
+    buyerMOQAccept = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+
+        document.getElementById('confirmMOQModal').style.display='block';
+    }
+
+    buyerMOQAcceptClose = () => {
+        document.getElementById('confirmMOQModal').style.display='none';
+    }
 
      
 
@@ -1007,14 +1025,110 @@ export class BuyerSingleEnquiry extends Component {
                                                             </td>
                                                             }
                                                            
-                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} >
+                                                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={this.acceptMOQModalShow}>
                                                             <Row noGutters={true} >
-                                                                     <Col className="col-xs-12 ">
-                                                                     <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
-                                                                 Accept
+                                                                <Col className="col-xs-12 ">
+                                                                <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                                Accept
+                                                                </Col>
+                                                            </Row>
+                                                            </td>
+
+                                                            <div id="acceptMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader">Are you sure ?</div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId">AN-SA-987659</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalTerms">Terms Decided</div>
+                                                                        <table className="buyerMOQAcceptModalTable">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">MOQ</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">300</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">Price/unit(or m)</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">₹ 30000.00</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">45 Days</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalBrand">Artisan Brand: </span>
+                                                                            <span className="buyerMOQAcceptModalBrandName">Matsar</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalState">Maniabandha, Orissa</div>
+                                                                        <hr className="buyerMOQAcceptModalHr"/>
+                                                                        <div className="buyerMOQAcceptModalDesc">
+                                                                            MOQ once accepted cannot be changed further.<br/>
+                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
+                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            tab to track your enquiry.
+                                                                        </div>
                                                                     </Col>
                                                                 </Row>
-                                                            </td>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={this.buyerMOQAccept} className="buyerMOQAcceptModalOkayButton">Ok</span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+                                                            <div id="confirmMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQConfirmModalHeader">MOQ is accepted !</div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId">AN-SA-987659</span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalTerms">Terms Decided</div>
+                                                                        <table className="buyerMOQAcceptModalTable">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">MOQ</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">300</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">Price/unit(or m)</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">₹ 30000.00</p>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">45 Days</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        
+                                                                        <div className="buyerMOQConfirmModalEnquiryChatButton">Go to this enquiry chat</div>
+                                                                        
+                                                                        <div className="buyerMOQConfirmModalDesc">
+                                                                            MOQ once accepted cannot be changed further.<br/>
+                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
+                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            tab to track your enquiry.
+                                                                        </div>
+                                                                        <div className="buyerMOQConfirmModalButtonOuter">
+                                                                            <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span>
+                                                                            <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                         </tr>
                                                        
                                                         </table>

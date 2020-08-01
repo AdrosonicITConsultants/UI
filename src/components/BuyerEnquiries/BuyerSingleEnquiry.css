@@ -1,0 +1,172 @@
+.buyerMOQAcceptModalOuter {
+    text-align: center;
+    padding: 30px 30px 10px 30px;
+}
+
+.buyerMOQAcceptModalHeader {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.buyerMOQAcceptModalEnquiryDiv {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.buyerMOQAcceptModalEnquiry {
+    color: #868686;
+    margin: 10px;
+}
+
+.buyerMOQAcceptModalEnquiryId {
+    font-weight: 600;
+    margin: 10px;
+}
+
+.buyerMOQAcceptModalTerms {
+    color: #868686;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.buyerMOQAcceptModalTable {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #D0D0D0;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buyerMOQAcceptModalTable td {
+    padding: 5px;
+}
+
+.buyerMOQAcceptModalpBottom {
+    margin-bottom: 0px !important;
+    color: #FD9D27;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.buyerMOQAcceptModalTableContent {
+    color: #888888;
+    font-size: 16px;
+}
+
+.buyerMOQAcceptModalBrand {
+    font-weight: 600;
+    margin: 5px;
+}
+
+.buyerMOQAcceptModalBrandName {
+    color: #0076FF;
+    font-weight: 600;
+}
+
+.buyerMOQAcceptModalState {
+    color: #868686;
+    font-size: 18px;
+}
+
+.buyerMOQAcceptModalHr {
+    border-top: 1px solid #D0D0D0 !important;
+}
+
+.buyerMOQAcceptModalContainer {
+    padding: 0px !important;
+}
+
+.buyerMOQAcceptModalDesc {
+    color: #ACACAC;
+    font-size: 15px;
+}
+
+.buyerMOQAcceptModalDescSpan {
+    color: #838383;
+    font-weight: 600;
+}
+
+.buyerMOQAcceptModalButtonOuter {
+    text-align: right;
+    padding: 20px 35px 30px 30px;
+}
+
+.buyerMOQAcceptModalOkayButton {
+    border: 1px solid #11A227;
+    background-color: #11A227;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.buyerMOQConfirmModalCancelButton {
+    font-size: 18px;
+    color: #838383;
+    padding: 6px 23px;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-weight: 600;
+    border: 2px solid #838383;
+}
+
+.buyerMOQAcceptModalCancelButton {
+    font-size: 18px;
+    color: #838383;
+    padding: 6px 23px;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+.buyerMOQConfirmModalHeader {
+    font-size: 30px;
+    font-weight: 600;
+    color: #23A331;
+}
+
+.buyerMOQConfirmModalButtonOuter {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.buyerMOQConfirmModalpBottom {
+    margin-bottom: 0px !important;
+    color: #2B71D1;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.buyerMOQConfirmModalOkayButton {
+    border: 1px solid #4582F5;
+    background-color: #4582F5;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.buyerMOQConfirmModalEnquiryChatButton {
+    border: 1px solid #B9005C;
+    background-color: #B9005C;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.buyerMOQConfirmModalDesc {
+    color: #ACACAC;
+    font-size: 15px;
+    margin-bottom: 30px;
+}

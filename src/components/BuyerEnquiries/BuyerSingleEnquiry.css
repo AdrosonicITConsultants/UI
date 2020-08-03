@@ -170,3 +170,11 @@
     font-size: 15px;
     margin-bottom: 30px;
 }
+
+.acceptmoqbtnDisable {
+    background-color: rgb(130 130 130);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}

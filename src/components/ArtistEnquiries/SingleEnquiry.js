@@ -1071,10 +1071,16 @@ export class SingleEnquiry extends Component {
                                                                <label >Rate per unit(or metre)</label>
                                                                <br/>
                                                                {/* <input className="PIinput" type="number"/> */}
-                                                             <span 
+                                                             {/* <span 
                                                              className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                             disabled={this.state.isPidetail}>
-                                                            <i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                             disabled={this.state.isPidetail}> */}
+                                                                 <select name="cars" id="cars" 
+                                                                 className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                                                 disabled={this.state.isPidetail}>
+                                                                    <option value="volvo">₹</option>
+                                                                    <option value="saab">$</option>
+                                                                </select>
+                                                           {/* </span> */}
                                                              <input type="number"  className="PIinput rsinputboxwidth"
                                                              disabled={this.state.isPidetail}
                                                              value={this.state.rpu }
@@ -1162,6 +1168,8 @@ export class SingleEnquiry extends Component {
                                                             :<>
                                                   <PreviewInvoice 
                                                   bp={this.backPI}
+                                                 enquiryId={this.state.getPi.enquiryId}
+                                                 enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                                   />
 
                                                        </>}

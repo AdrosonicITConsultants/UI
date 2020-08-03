@@ -18,16 +18,30 @@ import Footer from '../footer/footer';
 export class PreviewInvoice extends Component {
     constructor(props) {
         super(props);
-       
-        
-    } 
+        this.state = {
+          enquiryId:this.props.enquiryId,
+          enquiryCode:this.props.enquiryCode,
+          previewPI:[],
+          previewPiOrder:[],
+          buyerCustomProduct:[]
+        };
+      }
  
     BacktoPreview(){
     this.props.bp();
     }
 
     componentDidMount() {
-     
+        TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({previewPI:response.data.data,
+                previewPiOrder:response.data.data.piOrder,
+                buyerCustomProduct:response.data.data.buyerCustomProduct})
+            }
+            console.log(this.state.previewPiOrder.date);
+        })
       }
     
     
@@ -131,11 +145,11 @@ export class PreviewInvoice extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">AD-567-77-888</p>
+    <p className="againstpi">{this.state.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
-    <p className="PaymentTerm">Date: 19.2.2020</p> 
-       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. 66666666666</p>
+    <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.id}</p>
     </td>
   </tr>
 </table>
@@ -193,13 +207,13 @@ export class PreviewInvoice extends Component {
      <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
         </td>
         <td >
-     <p className="snopi wraptext">BYUW345</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">2700</p>
+     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
      <p className="snopi wraptext">55558577</p>
@@ -212,8 +226,8 @@ export class PreviewInvoice extends Component {
         </td>
      <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ 123</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ 123</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
         </td>
      <td >
      <h3 className="snopi wraptext">14</h3>
@@ -240,16 +254,16 @@ export class PreviewInvoice extends Component {
      <h3 className="freightch snopi"><b>Total</b></h3>
         </td>
         <td >
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td className="">
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">   <i class="fa fa-inr" aria-hidden="true"></i> 12345678</h3>
+     <h3 className="snopi wraptext">  {this.state.previewPiOrder.totalAmount}</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -269,7 +283,7 @@ export class PreviewInvoice extends Component {
 
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
@@ -287,10 +301,10 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">12.09.20</span></h3>
+     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>

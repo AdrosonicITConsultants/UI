@@ -1257,12 +1257,6 @@ MoqSimpleProductSelected(moqId){
                                               </>
                                              :null} */}
 
-                            <TeamToggle
-                              data={data.artisanId}
-                              key={key}
-                              getcollapseId={this.getcollapseId.bind(this)}
-                              collapseId={this.state.collapseId}
-                            />
                                                {/* ----------------Accepting Readmore ends------------------    */}
                                           
                                      </Row>

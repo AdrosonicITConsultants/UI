@@ -38,7 +38,10 @@ export class BuyerOngoingList extends Component {
                             if(response1.data.valid)
                             {   console.log("heree");
                                 console.log(response1.data.data);
-                                this.setState({openEnquiries:response1.data.data, dataload:true});
+                                this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
+                                    console.log(this.state);
+                                });
+
                             }
                         })
                     });
@@ -71,7 +74,9 @@ export class BuyerOngoingList extends Component {
                 ?
                 <>
                 {this.state.openEnquiries.map((item)=> 
+
                 <>
+                
                 <hr></hr>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
@@ -83,7 +88,7 @@ export class BuyerOngoingList extends Component {
                                     {
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
+                                         <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
                                         <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
@@ -222,10 +227,12 @@ export class BuyerOngoingList extends Component {
                             ?
                             <ul className="list-unstyled multi-steps">
                               {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              <li >Completed</li>
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
                               {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              <li >Completed</li>
                             </ul>
                                 }
 

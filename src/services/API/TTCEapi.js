@@ -419,7 +419,7 @@ class TTCEapi {
  
 
   static getMoq(enquiryId) {
-    let url = ApiUrl + "/enquiry/getMoq/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getMoq/{enquiryId}?enquiryId="+enquiryId;
 
     return axios
       .get(url)
@@ -433,8 +433,7 @@ class TTCEapi {
   } 
  
   static getPi(enquiryId) {
-    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+ enquiryId;
-
+    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+enquiryId;
     return axios
       .get(url)
       .then((response) => {
@@ -564,6 +563,21 @@ class TTCEapi {
 
   static MoqSelected(enquiryId,moqId,artisanId) {
     let url = ApiUrl + "/enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId="+enquiryId+"&moqId="+moqId +"&artisanId="+artisanId;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId=1080&moqId=39
+  static MoqSimpleProductSelected(enquiryId,moqId) {
+    let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId="+enquiryId+"&moqId="+moqId;
     console.log(url);
     return axios
       .post(url)
@@ -1179,7 +1193,7 @@ class TTCEapi {
 
 
   static savePi(
-    enquiryId,
+  enquiryId,
    cgst,
    dod,
    hsncode,
@@ -1556,6 +1570,26 @@ class TTCEapi {
     });
 }
 
+
+static markEnquiryClosed(id){
+  let url = ApiUrl + "/enquiry/markEnquiryCompleted/{enquiryId}?enquiryId=" + id;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+      
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

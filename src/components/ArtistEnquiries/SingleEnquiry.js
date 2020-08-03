@@ -654,7 +654,7 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                 <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 ? 
+                    {this.state.progressid < 3 || this.state.progressid == 14? 
                      <></>
                    :
                    <button

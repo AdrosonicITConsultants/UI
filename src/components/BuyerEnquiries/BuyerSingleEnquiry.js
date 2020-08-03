@@ -304,6 +304,22 @@ export class BuyerSingleEnquiry extends Component {
       
       }
     } 
+    markcompleted(){
+        console.log("clicked");
+        let params = queryString.parse(this.props.location.search);
+        console.log(params);
+        TTCEapi.markEnquiryClosed(params.code).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Enquiry closed!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                  browserHistory.push("/buyerEnquiriesList"); 
+
+            }
+        });
+    }
     sendMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
@@ -707,10 +723,12 @@ export class BuyerSingleEnquiry extends Component {
                             ?
                             <ul className="list-unstyled multi-steps">
                               {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <li >Completed</li>
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
                               {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              <li >Completed</li>
                             </ul>
                                 }
 
@@ -718,6 +736,29 @@ export class BuyerSingleEnquiry extends Component {
                            
                            </Col>
                        </Row>
+                    </Col>
+                </Row>
+                <br></br>
+                <Row>
+                    <Col className="col-xs-6">
+                    <button className=" closedEnquirybtn"
+                    onClick={()=>{this.markcompleted()}}
+                                       >
+                                <img src={logos.cancelenq} className="closeenqimg"></img>
+                                Close Enquiry
+                                </button>
+                    </Col>
+                    {/* <Col className="col-xs-2"></Col> */}
+                    <Col className="col-xs-6">
+                    <button className="completedenqButton"
+                                       onClick={()=>{this.markcompleted()}}
+                                       disabled = {this.state.progressid != 14}
+
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Mark order Delivered
+                                </button>
                     </Col>
                 </Row>
            

@@ -21,7 +21,8 @@ class BuyerNotifications extends Component {
       notificationData: [],
       notificationTypeId: [],
       loading: true,
-      newCount: 0
+      newCount: 0,
+      userRoleId: 0
     };
   }
 
@@ -60,6 +61,14 @@ class BuyerNotifications extends Component {
           console.log(this.state.notificationData);
         }
     });
+
+    var userData = [];
+    userData = JSON.parse(localStorage.getItem('user'));
+
+    this.setState({
+      userRoleId: userData.refRoleId
+    })
+
   }
 
   notificationSeenfunction = (id) => {
@@ -105,14 +114,15 @@ class BuyerNotifications extends Component {
               <Col md="10" className="addedwishlist">
                 <h1> Your Notifications</h1>
                 <p> {this.state.newCount} New Notifications</p>
+                {this.state.newCount === 0 ? null : 
                 <p style={{ float: "right" }}>
-                              {/* <button className="clearmywishlist"> */}
-                              <span className="notifyCircleRed">O</span>
-                                <span className="spanhome notifyReadRed" onClick={this.markAllReadFunction}>
-                                Mark all as read
-                                </span>
-                              {/* </button> */}
-                            </p>
+                  {/* <button className="clearmywishlist"> */}
+                  <span className="notifyCircleRed">O</span>
+                    <span className="spanhome notifyReadRed" onClick={this.markAllReadFunction}>
+                    Mark all as read
+                    </span>
+                  {/* </button> */}
+                </p> }
                 <Row noGutter={true}>
                   <Col md="6">
                     <p
@@ -271,7 +281,6 @@ class BuyerNotifications extends Component {
                    if(typeData.id === data.notificationTypeId) {
                       if(data.seen === 0) {
                        
-                          if(data.customProduct === "Custom Product") {
                             return  <Row noGutters={true} className="notifyRowOuter">
                             <Col md={1} className="notifyRemoveColRight">
                             {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
@@ -283,19 +292,23 @@ class BuyerNotifications extends Component {
                             <Col md={9} className="notifyRemoveColPadding">
                               <div>
                                 <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
-                                <span className="notifyEnquiryCustom">CUSTOM DESIGN</span>
-                                <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                                {data.customProduct === "Custom Product" ? 
+                                <span className="notifyEnquiryCustom">CUSTOM DESIGN</span> : null }
+                                {this.state.userRoleId === 1 ? 
+                                data.companyName !== "" ? 
+                                <span className="notifyProductName1">Buyer Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                              : <span className="notifyProductName1">Buyer Brand : <span className="notifyBrandName1">NA</span></span> 
+                              : 
+                              data.companyName !== "" ? 
+                              <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                              : <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">NA</span></span>  }
+
                                 <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
                               </div>
-                              {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
                               <div>
                                 <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
                               </div>
-                              :
-                              <div>
-                                <span className="notifyResponse">{data.type}</span>                        
-                              </div>
-                             }
+                            
                             </Col>
                             <Col md={2} className="notifyRemoveColLeft text-right">
                               <span className="notifyCircle">O</span>
@@ -303,39 +316,33 @@ class BuyerNotifications extends Component {
                             </Col>
         
                           </Row> 
-                          }
-                          else {
-                            return <Row noGutters={true} className="notifyRowOuter">
-                            <Col md={1} className="notifyRemoveColRight">
-                            {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
-                            <img  className="notifyImage3" src={logos.notifyImage6}/> :
-                            data.notificationTypeId === 4 ? 
-                            <img  className="notifyImage1" src={logos.notifyImage3}/> :
-                            <img  className="notifyImage1" src={logos.notifyImage4}/> }
-                            </Col>
-                            <Col md={9} className="notifyRemoveColPadding">
-                              <div>
-                                <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
-                                <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
-                                <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
-                              </div>
-                             {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
-                              <div>
-                                <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
-                              </div>
-                              :
-                              <div>
-                                <span className="notifyResponse">{data.type}</span>                        
-                              </div>
-                             }
-                            </Col>
-                            <Col md={2} className="notifyRemoveColLeft text-right">
-                              <span className="notifyCircle">O</span>
-                              <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
-                            </Col>
+                       
+                          // else {
+                          //   return <Row noGutters={true} className="notifyRowOuter">
+                          //   <Col md={1} className="notifyRemoveColRight">
+                          //   {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
+                          //   <img  className="notifyImage3" src={logos.notifyImage6}/> :
+                          //   data.notificationTypeId === 4 ? 
+                          //   <img  className="notifyImage1" src={logos.notifyImage3}/> :
+                          //   <img  className="notifyImage1" src={logos.notifyImage4}/> }
+                          //   </Col>
+                          //   <Col md={9} className="notifyRemoveColPadding">
+                          //     <div>
+                          //       <span className="notifyEnquiryNo">Enquiry ID : {data.code}</span>
+                          //       <span className="notifyProductName1">Artisan Brand : <span className="notifyBrandName1">{data.companyName}</span></span>
+                          //       <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
+                          //     </div>
+                          //     <div>
+                          //       <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
+                          //     </div>
+                          //   </Col>
+                          //   <Col md={2} className="notifyRemoveColLeft text-right">
+                          //     <span className="notifyCircle">O</span>
+                          //     <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                          //   </Col>
         
-                          </Row> 
-                          }
+                          // </Row> 
+                          // }
                         
                      
                         // if(data.customProduct === "Custom Product") {
@@ -573,4 +580,5 @@ class BuyerNotifications extends Component {
     );
   }
 }
+
 export default BuyerNotifications;

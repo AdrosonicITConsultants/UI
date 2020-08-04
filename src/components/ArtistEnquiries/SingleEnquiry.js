@@ -1170,11 +1170,13 @@ export class SingleEnquiry extends Component {
                                                   bp={this.backPI}
                                                  enquiryId={this.state.getPi.enquiryId}
                                                  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
-                                                  />
+                                                                       />
 
                                                        </>}
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
+
+                                       
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                           

@@ -34,6 +34,7 @@ class BuyersProductDetails extends Component {
       profilePic:this.props.profilePic,
       logoUrl:[],
       profilePicUrl:TTCEapi.ImageUrl+'User/'+this.props.artisanId+'/ProfilePics/'+this.props.profilePic,
+      
       defaultimgUrl:logos.Smile,             
       visible:5,
       Artisiandata:[],

@@ -621,7 +621,7 @@ class TTCEapi {
 
 
   static generateEnquiry(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
+    let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
     console.log(url);
     return axios
       .post(url)

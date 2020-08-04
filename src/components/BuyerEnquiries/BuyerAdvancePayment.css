@@ -150,11 +150,13 @@ th, td {
 }
 .Artisianbrandh{
   font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 }
 .Receivemoqbrandimg{
-  height: 64px;
-    padding: 2px;
+  height: 60px;
+  padding: 2px;
+  width: 60px;
+  border-radius: 64px;
 }
 .regionmoq{
   font-weight: 400;
@@ -171,7 +173,7 @@ th, td {
     text-align: center;
 }
 .recheading{
-  font-size: 10px;
+  font-size: 7px;
     color: grey;
 }
 .readmored{
@@ -206,9 +208,38 @@ th, td {
   padding: 15px 2px 2px 17px;
   border: 1px solid rgb(211 211 211 / 18%);
 }
+.acceptingloader{
+  border-left: 3px solid darkblue !important;
+  /* padding: 15px 2px 2px 17px; */
+  /* background-color: rgb(133, 196, 36); */
+  text-align: center;
+  font-size: 20px;
+  height: 50px;
+  padding: 9px;
+  color: black;
+  font-weight: bold;
+  opacity: 0.7;
+  background-image: linear-gradient(to right, rgb(133 196 36) , rgb(133 196 36 / 43%));
+}
+
+.acceptedloader{
+  border-left: 3px solid darkblue !important;
+  /* padding: 15px 2px 2px 17px; */
+  background-color: rgb(133, 196, 36);
+  text-align: center;
+  font-size: 20px;
+  height: 50px;
+  padding: 9px;
+  color: black;
+  font-weight: bold;
+  opacity: 0.7;
+}
 .receivedmoqh1{
   font-size: 17px;
     font-weight: bold;
+}
+.receading{
+  font-size: 9px;
 }
 @media screen and (max-width:970px){
   .Artisianbrandh {

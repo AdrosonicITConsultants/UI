@@ -70,6 +70,17 @@ export class OngoingList extends Component {
                 {this.state.dataload
                 ?
                 <>
+                {this.state.openEnquiries.length == 0 
+                ?
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-12 text-center">
+                        No Open Enquiries.
+                    </Col>
+                </Row>
+                </>
+                :
+                <>
                 {this.state.openEnquiries.map((item)=> 
                 <>
                 <hr></hr>
@@ -245,13 +256,17 @@ export class OngoingList extends Component {
                 </>
                 )}
                 </>
+                }
+                
+                </>
             :
             <>
-            <Row noGutters={true}>
+                <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
                 Loading Please Wait....
                 </Col>
-                </Row></>
+                </Row>
+                </>
             }
             
                 </React.Fragment>

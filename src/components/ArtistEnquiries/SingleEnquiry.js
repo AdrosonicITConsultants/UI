@@ -44,7 +44,7 @@ export class SingleEnquiry extends Component {
             isPidetail:true,
             moq:0,
             ppu:"",
-            deliveryDesc:-1,
+            deliveryDesc:1,
             additionalInfo:"",
             getMoq:[],
             getPi:[],
@@ -223,6 +223,7 @@ export class SingleEnquiry extends Component {
     }
 
     saveMoqDetails(){
+        
         if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
             console.log(params);
@@ -234,20 +235,21 @@ export class SingleEnquiry extends Component {
                 this.state.ppu,
               
                ).then((response)=>{
+                   if(response.data.valid){
                 this.setState({saveMoq : response.data,
                     isMoqdetail:!this.state.isMoqdetail,
                     showValidationMoq: false,
                 },()=>{
-                // console.log(this.state);
+                console.log(this.state.saveMoq);
                
                 });
                 customToast.success("MOQ Details saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-            });
+         } });
         }
-
+       
       else{
         this.setState({
             showValidationMoq: true,
@@ -270,7 +272,8 @@ export class SingleEnquiry extends Component {
                     this.state.quantity,
                     this.state.sgst,
                   
-                   ).then((response)=>{
+                   ).then((response)=>
+                   {
                        if(response.data.valid){
                     this.setState({savePi : response.data,
                         isPidetail:!this.state.isPidetail,
@@ -307,7 +310,7 @@ export class SingleEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
-        if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
+        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(
@@ -318,16 +321,18 @@ export class SingleEnquiry extends Component {
             this.state.ppu,
           
            ).then((response)=>{
+               console.log(response);
+               if(response.data.valid){
             this.setState({sendMoq : response.data,
-                isMoqdetail:true},()=>{
-            // console.log(this.state);
+                isMoqdetail:true,showValidationMoq: false},()=>{
+            console.log(this.state.sendMoq);
             this.componentDidMount();
             });
-            customToast.success("MOQ Details send successfully", {
+            customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-        });
+          }  });
       
     } 
     else{
@@ -348,7 +353,7 @@ export class SingleEnquiry extends Component {
                 this.setState({
                 moq:0,
                 ppu:"0",
-                deliveryDesc:-1,
+                deliveryDesc:1,
                 additionalInfo:"",
                 isSend:-1,
                 
@@ -359,14 +364,14 @@ export class SingleEnquiry extends Component {
             this.setState({
                 // getxyz:response.data,
                 getMoq : response.data.data,
-                moq:response.data.data.moq,
-                ppu:response.data.data.ppu,
-                deliveryDesc:response.data.data.deliveryTimeId,
-                additionalInfo:response.data.data.additionalInfo,
-                isSend:response.data.data.isSend,
+                moq:response.data.data.moq.moq,
+                ppu:response.data.data.moq.ppu,
+                deliveryDesc:response.data.data.moq.deliveryTimeId,
+                additionalInfo:response.data.data.moq.additionalInfo,
+                isSend:response.data.data.moq.isSend,
                 //  dataload : true,
           },()=>{
-            //  console.log(this.state.getxyz);
+             console.log(this.state.getMoq);
            
             });
         }
@@ -919,7 +924,7 @@ export class SingleEnquiry extends Component {
                                                                     <Col sm={6} className="Moqh2">
                                                                        <input 
                                                                        id="moq"
-                                                                       className="width200 alignbox" 
+                                                                        className="width200 alignbox" 
                                                                        type="number"
                                                                        disabled={this.state.isMoqdetail} 
                                                                         value={this.state.moq }
@@ -928,15 +933,15 @@ export class SingleEnquiry extends Component {
                                                                     </Col>
                                                                 </Row>
 
-                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
+                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                  <Col sm={6} className="Moqh1">
                                                                      Price/unit:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
-                                                                 <i class="fa fa-inr" aria-hidden="true"></i> 
+                                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
                                                                  <input 
                                                                  id="ppu"
-                                                                 className="width200 alignbox2"
+                                                                 className="width200 alignbox"
                                                                   type="text"
                                                                   disabled={this.state.isMoqdetail} 
                                                                   value={this.state.ppu}
@@ -962,7 +967,7 @@ export class SingleEnquiry extends Component {
                                                                                     >
                                                                                         <option
                                                                                         key="0"
-                                                                                        deliveryDesc = '-1'
+                                                                                        deliveryDesc = '1'
                                                                                         value="Select"
                                                                                         selected="true" disabled="disabled"
                                                                                         >
@@ -998,7 +1003,7 @@ export class SingleEnquiry extends Component {
                                                              </Row>
                                                              <p className="text-center">
                                                              {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
+                                            <span className="bg-danger">please fill mandatory fields</span>
                                         ) : (
                                             <br />
                                         )}
@@ -1018,8 +1023,7 @@ export class SingleEnquiry extends Component {
                                                                  </Col>
                                                                  <Col sm={6} className="">
                                                                  {this.state.isSend== 1?
-                                                                 <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
+                                                                 <button className="sendmoqbtn"                    
                                                                   disabled >Send</button>
                                                                    : 
                                                                    <button className="sendmoqbtn"
@@ -1032,7 +1036,7 @@ export class SingleEnquiry extends Component {
                                                              </>
 
                                                                 :null}
-                     {/* -------------------MOQ------------------------------------------------------------------------------ */}
+                     {/* -------------------MOQ ends------------------------------------------------------------------------------ */}
 
                                                             {this.state.proformaDetails ? 
                                                             <>

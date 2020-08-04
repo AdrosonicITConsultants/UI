@@ -8,7 +8,9 @@ import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import OngoingList from './BuyerOngoingList';
 import CompletedList from './BuyerCompletedList';
-import "./buyerenquiry.css"
+import "./buyerenquiry.css";
+import Footer from "../footer/footer";
+
 
 export class BuyerAllEnquiryList extends Component {
     constructor(props) {
@@ -99,7 +101,14 @@ export class BuyerAllEnquiryList extends Component {
                     <CompletedList></CompletedList>
                     </>
                 }
+                <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
                 </Container>
+                <Footer></Footer>
             </React.Fragment>
         )
     }

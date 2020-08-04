@@ -456,6 +456,21 @@ font-size: 13px;
 .mb7{
     margin-bottom: 7px;
 }
+
+.multi-steps > li.stop:before {
+    background-color: red;
+    border-color: red;
+}
+.multi-steps > li.stop {
+    color :red!important;
+}
+.multi-steps > li.closedenq:before {
+    background-color: red!important;
+    border-color: red!important;
+}
+.multi-steps > li.closedenq {
+    color: red!important;
+}
 @media screen and (max-width:1200px) and (min-width:990px){
     .Allenqlistbtn {
         font-size: 13px;

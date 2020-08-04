@@ -835,11 +835,11 @@ relatedProductTemp[e.target.name] = option;
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
                        <Container>
-                         <Row noGutters={true}>
+                         <Row >
                            <div className="artistLanding">
                              {/* //#region Add Image */}
-                             <Row noGutters={true}>
-                               <Row noGutters={true}>
+                             <Row >
+                               <Row >
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -857,7 +857,7 @@ relatedProductTemp[e.target.name] = option;
                                    </h1>
                                  </Col>
                                </Row>
-                               <Row noGutters={true}>
+                               <Row >
                                  <Col
                                    className="tet-center"
                                    sm={{ size: "1" }}
@@ -890,7 +890,7 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row  className="mt30">
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -903,7 +903,7 @@ relatedProductTemp[e.target.name] = option;
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row >
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
@@ -989,7 +989,7 @@ relatedProductTemp[e.target.name] = option;
                                    className="col-2 "
                                  ></Col>
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row  className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1004,8 +1004,8 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Add Image */}
 
                              {/* //#region Product details */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row  className="mt60">
+                               <Row >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1046,7 +1046,7 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               {/* <Row noGutters={true}>
+                               {/* <Row >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1059,7 +1059,7 @@ relatedProductTemp[e.target.name] = option;
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1080,7 +1080,7 @@ relatedProductTemp[e.target.name] = option;
                                        className="col-6 text-left"
                                      ></Col>{" "}
                                    </Row>
-                                   <Row noGutters={true}>
+                                   <Row >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1120,7 +1120,7 @@ relatedProductTemp[e.target.name] = option;
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row> */}
-                               <Row noGutters={true}>
+                               <Row >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1133,7 +1133,7 @@ relatedProductTemp[e.target.name] = option;
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1213,7 +1213,7 @@ relatedProductTemp[e.target.name] = option;
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row  className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1228,8 +1228,8 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Product details */}
 
                              {/* //#region Product specificcaions */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row  className="mt60">
+                               <Row >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1253,7 +1253,7 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row  className="mt15">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1275,7 +1275,7 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row  className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1290,7 +1290,7 @@ relatedProductTemp[e.target.name] = option;
                                    </label>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="">
+                               <Row  className="">
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
@@ -1335,7 +1335,7 @@ relatedProductTemp[e.target.name] = option;
                                    </Row>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row  className="mt30">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1357,7 +1357,7 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row  className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1370,7 +1370,7 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>{" "}
                                </Row>
 
-                               <Row noGutters={true} className="mt30">
+                               <Row  className="mt30">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1745,7 +1745,7 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               <Row noGutters={true} className="mt100">
+                               <Row  className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1781,7 +1781,7 @@ relatedProductTemp[e.target.name] = option;
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row  className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -1827,7 +1827,7 @@ relatedProductTemp[e.target.name] = option;
                                  ></Col>
                                </Row>
 
-                               <Row noGutters={true} className="mt100">
+                               <Row  className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1863,7 +1863,7 @@ relatedProductTemp[e.target.name] = option;
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row  className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2154,7 +2154,7 @@ relatedProductTemp[e.target.name] = option;
                                  </>
                                ) : null}
 
-                               <Row noGutters={true} className="text-center">
+                               <Row  className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2172,8 +2172,8 @@ relatedProductTemp[e.target.name] = option;
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
-                                 <Row noGutters={true} className="mt60">
-                                   <Row noGutters={true}>
+                                 <Row  className="mt60">
+                                   <Row >
                                      <Col
                                        className="text-center"
                                        sm={{ size: "1" }}
@@ -2238,7 +2238,7 @@ relatedProductTemp[e.target.name] = option;
                                        />
                                      </Col>
                                    </Row>
-                                   <Row noGutters={true} className="text-center">
+                                   <Row  className="text-center">
                                      <Col
                                        sm={{ size: "12" }}
                                        xs={{ size: "12" }}
@@ -2257,8 +2257,8 @@ relatedProductTemp[e.target.name] = option;
                           
 
                              {/* //#region Describe the product */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row  className="mt60">
+                               <Row >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -2404,7 +2404,7 @@ relatedProductTemp[e.target.name] = option;
                                ></Col>
                              </Row>
                              <div className="hrlineforAddProduct"></div>
-                             <Row noGutters={true} className="text-center">
+                             <Row  className="text-center">
                                <Col
                                  sm={{ size: "12" }}
                                  xs={{ size: "12" }}

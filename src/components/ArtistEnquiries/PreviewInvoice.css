@@ -25,7 +25,9 @@
     margin-top: 4%;
 }
 .Pilogoimg{
-    height: 95px;
+    height: 81px;
+    border-radius: 113px;
+    width: 81px;
 }
 .Ttbrand{
     font-size: 20px;

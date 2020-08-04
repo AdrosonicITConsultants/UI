@@ -1243,6 +1243,48 @@ class TTCEapi {
         return error.response;
       });
   }
+  
+// http://101.53.153.96:8090/enquiry/sendPi/{enquiryId}?enquiryId=1107
+
+static sendPI(
+  enquiryId,
+  cgst,
+  expectedDateOfDelivery,
+  hsn,
+  ppu,
+  quantity,
+  sgst
+ 
+  ) {
+  let url = ApiUrl + "/enquiry/sendPi/{enquiryId}?enquiryId="+ enquiryId;
+ var data =
+  {
+ cgst:cgst,
+  expectedDateOfDelivery:expectedDateOfDelivery,
+  hsn:hsn,
+  ppu:ppu,
+  quantity:quantity,
+  sgst:sgst
+ 
+  }
+ console.log(data)
+ var config = {
+  headers: {
+    "Content-type": "application/json",
+  },
+};
+  return axios
+    .post(url,data,config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
+
+
 
   static sendMoq(
     enquiryId,

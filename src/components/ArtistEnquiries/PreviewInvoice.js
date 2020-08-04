@@ -18,16 +18,38 @@ import Footer from '../footer/footer';
 export class PreviewInvoice extends Component {
     constructor(props) {
         super(props);
-       
-        
-    } 
+        this.state = {
+          enquiryId:this.props.enquiryId,
+          enquiryCode:this.props.enquiryCode,
+          previewPI:[],
+          previewPiOrder:[],
+          buyerCustomProduct:[],
+          paymentDetails:[],
+          artisanUser:[],
+          addressses:[]
+        };
+      }
  
     BacktoPreview(){
     this.props.bp();
     }
 
     componentDidMount() {
-     
+        TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({dataload : true,
+                previewPI:response.data.data,
+                previewPiOrder:response.data.data.piOrder,
+                buyerCustomProduct:response.data.data.buyerCustomProduct,
+                paymentDetails:response.data.data.paymentDetails,
+                artisanUser:response.data.data.artisanUser,
+                // addressses:response.data.data.artisanUser.addressses 
+            })
+            }
+            console.log(this.state.addressses);
+        })
       }
     
     
@@ -36,6 +58,10 @@ export class PreviewInvoice extends Component {
         return(
             
 <React.Fragment>
+{this.state.dataload == true 
+                  
+                  ? 
+                  <> 
     {/* <Container> */}
 
     {/* <Pdf targetRef={ref} filename="code-example.pdf">
@@ -69,19 +95,46 @@ export class PreviewInvoice extends Component {
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
-           <img src={logos.Smile} className="Pilogoimg"></img>
+           {/* <img src={TTCEapi.ImageUrl +
+                        "User/" +
+                        user.id +
+                        "/ProfilePics/" +
+                        user.profilePic} className="Pilogoimg"></img> */}
        </Col>
        <Col sm={8} className=" col-xs-7 ">
           <b className="Ttbrand">Chidiya</b> 
-           <p className="subttbrand"> Maniabandhan,Orissa</p>
-          <p className="subttbrand">address</p>
-           <p className="subttbrand fontplay"> Bikesh Singh</p>
+           <p className="subttbrand"> {this.state.artisanUser.cluster?
+           this.state.artisanUser.cluster.desc:
+           "NA"
+           }</p>
+          <p className="subttbrand">  
+         
+          {/* {this.state.addressses[0].line1} */}
+            {/* {this.state.artisanUser.addressses[0].line2 != "" ? ", " + this.state.artisanUser.addressses[0].line2: ""}
+            {this.state.artisanUser.addressses[0].street != "" ? ", " + this.state.artisanUser.addressses[0].street : ""}
+             {this.state.artisanUser.addressses[0].city != "" ? ", " + this.state.artisanUser.addressses[0].city : ""}
+            {this.state.artisanUser.addressses[0].pincode != "" ? ", " + this.state.artisanUser.addressses[0].pincode : ""}
+             {this.state.artisanUser.addressses[0].state != "" ? ", " + this.state.artisanUser.addressses[0].state : ""} */}
+            
+             </p>
+
+           <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
+           this.state.artisanUser.firstName:
+           "NA"
+           }  {this.state.artisanUser.lastName?
+            this.state.artisanUser.lastName:
+            "NA"
+            }</p>
           
        </Col>
    </Row>
    <Row noGutters={true}>
        <Col sm={12} >
-           <b className="Mobnumpi">Mobile Number : 8888888888</b>
+           <b className="Mobnumpi">Mobile Number : {this.state.artisanUser.mobile?
+            this.state.artisanUser.mobile:
+            this.state.artisanUser.alternateMobile?
+            this.state.artisanUser.alternateMobile : "NA"
+            }</b>
        </Col>
    </Row>
     </Col>
@@ -131,11 +184,11 @@ export class PreviewInvoice extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">AD-567-77-888</p>
+    <p className="againstpi">{this.state.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
-    <p className="PaymentTerm">Date: 19.2.2020</p> 
-       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. 66666666666</p>
+    <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.id}</p>
     </td>
   </tr>
 </table>
@@ -172,37 +225,37 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi srwidth margintopsr">01</h3>
         </td>
      <td className="tdmarginleft">
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Red katan -400m</h3>
-     <p>- WEFT X WARP X EXTRA WEFT</p>
+    <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>{this.state.buyerCustomProduct.productCategory.productDesc} -{this.state.buyerCustomProduct.length}</h3>
+     <p>- {this.state.buyerCustomProduct.weftDye.dyeDesc } X  {this.state.buyerCustomProduct.warpDye.dyeDesc } {this.state.buyerCustomProduct.extraWeftDye?"X":"" } {this.state.buyerCustomProduct.extraWeftDye?this.state.buyerCustomProduct.extraWeftDye:"" }</p>
             <div className="descyarnpi wraptext">
-                -Yarn: XYZ XYZ x XYZ <br/>
-                -Yarn Count: XYZ XYZ x XYZ <br/>
-                -Dye Used: XYZ XYZ x XYZ 
+                -Yarn: {this.state.buyerCustomProduct.weftYarn.yarnDesc} X {this.state.buyerCustomProduct.warpYarn.yarnDesc} {this.state.buyerCustomProduct.extraWeftYarn?"X" : ""} {this.state.buyerCustomProduct.extraWeftYarn?this.state.buyerCustomProduct.extraWeftYarn : ""} <br/> 
+                -Yarn Count: {this.state.buyerCustomProduct.weftYarnCount} X {this.state.buyerCustomProduct.warpYarnCount} {this.state.buyerCustomProduct.extraWeftYarnCount ? "X":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
+                -Dye Used: {this.state.buyerCustomProduct.weftDye.dyeDesc} X  {this.state.buyerCustomProduct.warpDye.dyeDesc} {this.state.buyerCustomProduct.extraWeftDye?"X":""} {this.state.buyerCustomProduct.extraWeftDye? this.state.buyerCustomProduct.extraWeftDye:""} 
             </div>
-     <p className="RAcss">- Reed Count : <span className="rcred wraptext">XYZ</span></p>
+        <p className="RAcss">- Reed Count : <span className="rcred wraptext">{this.state.buyerCustomProduct.reedCount?this.state.buyerCustomProduct.reedCount.count:"NA"}</span></p>
      <p>-Weight :</p>
      <div className="sbred wraptext">
-         Saree: XYZ <br/>
+     {this.state.buyerCustomProduct.productCategory.productDesc}: {this.state.buyerCustomProduct.weight?this.state.buyerCustomProduct.weight:"NA"} <br/>
          Blouse: XYZ
      </div>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-         Saree: XYZ <br/>
+     {this.state.buyerCustomProduct.productCategory.productDesc}: XYZ <br/>
          Blouse: XYZ
      </div>
-     <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
+     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} {this.state.buyerCustomProduct.gsm}</span></p>
         </td>
         <td >
-     <p className="snopi wraptext">BYUW345</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">2700</p>
+     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">55558577</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -212,23 +265,23 @@ export class PreviewInvoice extends Component {
         </td>
      <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ 123</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ 123</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
         </td>
      <td >
-     <h3 className="snopi wraptext">14</h3>
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td>
-     <h3 className="snopi wraptextrpu">2700</h3>
-     <h3 className="snopi wraptext rpu">2700</h3>
+     <h3 className="snopi wraptextrpu"></h3>
+     <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">5555577</h3>
-     <h3 className="snopi wraptext">5555577</h3>
+     <h3 className="snopi wraptext">{this.state.previewPiOrder.sgst}</h3>
+     <h3 className="snopi wraptext">{this.state.previewPiOrder.cgst}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -240,16 +293,16 @@ export class PreviewInvoice extends Component {
      <h3 className="freightch snopi"><b>Total</b></h3>
         </td>
         <td >
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td className="">
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">   <i class="fa fa-inr" aria-hidden="true"></i> 12345678</h3>
+     <h3 className="snopi wraptext">  {this.state.previewPiOrder.totalAmount}</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -260,16 +313,24 @@ export class PreviewInvoice extends Component {
      <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-     <h3 className="freightch snopi"><b>Axis Bank Ltd.</b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
      
-      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">555555555</span></h3>
-      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">555555555</span></h3>
-      <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">555555555</span></h3>
+      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
+       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
+          
+          </span></h3>
+      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
+      {this.state.paymentDetails[0]?
+          <> {this.state.paymentDetails[0].ifsc}</>
+        :
+        "NA"}
+          </span></h3>
+      <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3>
 
 
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
@@ -287,10 +348,10 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">12.09.20</span></h3>
+     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
@@ -329,6 +390,7 @@ export class PreviewInvoice extends Component {
 
 {/* </Container> */}
 {/* <Footer/> */}
+</> :<></>}
 </React.Fragment>
         )
     }

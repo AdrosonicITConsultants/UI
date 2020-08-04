@@ -431,7 +431,26 @@ export class BuyerSingleEnquiry extends Component {
         
         TTCEapi.getMoqDeliveryTimes().then((response)=>{
          this.setState({getMoqDeliveryTimes : response.data.data},()=>{
-            //  console.log(this.state.getMoqDeliveryTimes);
+             console.log(this.state.getMoqDeliveryTimes);
+             console.log("MOQ delivery Time");
+            TTCEapi.getMoqs(params.code).then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log("bhabhkkkk");
+                    console.log(response.data.data.length);
+                    if(response.data.data.length==0)
+                    {
+                        this.setState({getMoqs:response.data.data,moqavailable:false})
+    
+                    }
+                  else{
+                    this.setState({getMoqs:response.data.data,moqavailable:true})
+                  }
+                    console.log(this.state.getMoqs);
+                    
+    
+                }
+            })
         
          });
      });
@@ -568,23 +587,7 @@ export class BuyerSingleEnquiry extends Component {
             }
         })
 
-        TTCEapi.getMoqs(params.code).then((response)=>{
-            if(response.data.valid)
-            {
-                console.log("bhabhkkkk");
-                console.log(response.data.data.length);
-                if(response.data.data.length==0)
-                {
-                    this.setState({getMoqs:response.data.data,moqavailable:false})
-
-                }
-              else{
-                this.setState({getMoqs:response.data.data,moqavailable:true})
-              }
-                console.log(this.state.getMoqs);
-
-            }
-        })
+       
 
     //    this.state.readmore.map((data) => ( this.setState({data:false})) )
 
@@ -1133,7 +1136,8 @@ MoqSimpleProductSelected(moqId){
                                         <>
                                             {this.state.moqavailable?
                                                 <>
-                                                  
+                                                {console.log("Moq available")}
+                                                  {console.log(this.state.moqavailable)}
                       <>
                                             <Row noGutters={true}>
                                                 <Col sm={1}></Col>
@@ -1195,7 +1199,7 @@ MoqSimpleProductSelected(moqId){
                                         <Row noGutters={true}>
                                         <Col className="col-xs-12 tdclasscss">
                                         <p className="theading">ETA Delivery</p>
-                                        {data.moq.deliveryTimeId} Days
+                                        {this.state.getMoqDeliveryTimes[data.moq.deliveryTimeId-1].days} Days
                                                 </Col>
                                             </Row>
                                         </td>
@@ -1421,8 +1425,22 @@ MoqSimpleProductSelected(moqId){
                                 </>
                                 :
                                 <> 
-                                {/* if not a custom product if statement */}  
-                                    { this.state.getMoqs[0].accepted == false ?
+                                {/* if not a custom product if statement */}
+                                {this.state.getMoqs.length==0?
+                                <>
+                                
+                                <Row>
+                                                                    <br></br>
+                                                                    <br></br>
+                                                                    <br></br>   
+                                                                    <Col className="col-xs-12 text-center font14">
+                                                                    No Moq is Available
+                                                                    </Col>
+                                                                </Row>
+                                </>
+                            :<>
+                            
+                            { this.state.getMoqs[0].accepted == false ?
                                       <>
                                        {console.log("single not accept ")}
                                              {this.state.moqavailable?
@@ -1489,7 +1507,7 @@ MoqSimpleProductSelected(moqId){
                                     <Row noGutters={true}>
                                     <Col className="col-xs-12 tdclasscss">
                                     <p className="theading">ETA Delivery</p>
-                                    {data.moq.deliveryTimeId} Days
+                                    {this.state.getMoqDeliveryTimes[data.moq.deliveryTimeId-1].days} Days
                                             </Col>
                                         </Row>
                                     </td>
@@ -1505,15 +1523,20 @@ MoqSimpleProductSelected(moqId){
                                     {data.moq.createdOn}
                                         </Moment>
                                     </p>
-                                    {this.state.readmore ? <>Collapse  <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i> </>:
-                                    <> Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></>
-                                    }
-                                                
+                                    {this.state.collapseId == data.artisanId ?
+                                        <div onClick={() => this.toggleArrow(data.artisanId)}>  
+                                       
+                                        Collapse <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i>  
+                                        </div> : 
+                                        <div onClick={() => this.toggleArrow(data.artisanId)}>  
+                                       
+                                       Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
+                                        </div> }          
 
                                         </Col>
                                     </Row>
                                 </td>
-                                {this.state.readmore?
+                                {this.state.collapseId == data.artisanId?
                                 ""
                                 :
                                 <td>
@@ -1526,7 +1549,7 @@ MoqSimpleProductSelected(moqId){
                                 </td>
                                 }
                             
-                            <td className={this.state.readmore? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={this.acceptMOQModalShow}>
+                            <td className={this.state.collapseId == data.artisanId? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={this.acceptMOQModalShow}>
                                                             <Row noGutters={true} >
                                                                 <Col className="col-xs-12 ">
                                                                 <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
@@ -1557,7 +1580,7 @@ MoqSimpleProductSelected(moqId){
                                                                                 </td>
                                                                                 <td>
                                                                                     <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
-                                                                                    <p className="buyerMOQAcceptModalpBottom">{data.moq.deliveryTimeId} Days</p>
+                                                                                    <p className="buyerMOQAcceptModalpBottom">{this.state.getMoqDeliveryTimes[data.moq.deliveryTimeId-1].days} Days</p>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -1610,7 +1633,7 @@ MoqSimpleProductSelected(moqId){
                                                                                 </td>
                                                                                 <td>
                                                                                     <p className="buyerMOQAcceptModalTableContent">ETA Delivery</p>
-                                                                                    <p className="buyerMOQConfirmModalpBottom">{data.moq.deliveryTimeId} Days</p>
+                                                                                    <p className="buyerMOQConfirmModalpBottom">{this.state.getMoqDeliveryTimes[data.moq.deliveryTimeId-1].days} Days</p>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -1636,7 +1659,7 @@ MoqSimpleProductSelected(moqId){
 
                                                 </table>
 
-                                {this.state.readmore ? 
+                                {this.state.collapseId == data.artisanId ? 
                                     <>
                                         <div className="readmorediv">
                                         <p><b>Note from Artisan</b></p>
@@ -1773,6 +1796,8 @@ MoqSimpleProductSelected(moqId){
                                       </>
                                          }
                                 
+                            </>}  
+                                  
                              
                                 </>
                                     }

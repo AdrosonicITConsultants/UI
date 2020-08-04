@@ -603,6 +603,21 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/previewPI/{enquiryId}?enquiryId=1106
+
+  static previewPI(enquiryId) {
+    let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" +enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
   static getMoqs(enquiryId) {
     let url = ApiUrl + "/enquiry/getMoqs/{enquiryId}?enquiryId=" +enquiryId;

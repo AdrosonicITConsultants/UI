@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
 
-
 const ref = React.createRef();
 const options = {
     orientation: 'landscape',
@@ -30,20 +29,37 @@ export class BuyerPreviewInvoice extends Component {
 
         this.state = {
             time: '',
-          currentDate: date
+            currentDate: date,
+            enquiryCode: this.props.enquiryCode
         }
         
     } 
  
-    componentDidMount() {
+    componentDidMount() { 
+        console.log(this.state.enquiryCode);
+
+        TTCEapi.getBuyerPreviewPI(this.state.enquiryCode).then((response)=>{
+            if(response.data.valid)
+            {
+                // this.setState({
+                // notificationTypeId: response.data.data,
+                // loading: false
+                // });
+                console.log(response.data.data);
+            }
+        });
+
+        
         var date = moment()
           .utcOffset('+05:30')
           .format(' hh:mm A');
         this.setState({ time: date });
-      }
-      BacktoPreview(){
-    this.props.bp();
     }
+      
+    BacktoPreview(){
+        this.props.bp();
+    }
+
     proceedtoadvancepay(){
         browserHistory.push("/payadvance")
     }

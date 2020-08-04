@@ -1610,6 +1610,24 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
+
+static getBuyerPreviewPI(code){
+  let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" + code;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .get(url)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

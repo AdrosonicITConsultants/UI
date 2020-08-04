@@ -47,6 +47,8 @@ import SuccessPopup from './components/ModalComponent/SuccessModal';
 import Popup from './components/ModalComponent/EnguiryModal';
 import AllEnquiryList from './components/ArtistEnquiries/AllEnquiryList';
 import SingleEnquiry from "./components/ArtistEnquiries/SingleEnquiry";
+import SingleCompletedEnquiry from "./components/ArtistEnquiries/SingleCompletedEnquiry";
+
 import { PreviewInvoice } from './components/ArtistEnquiries/PreviewInvoice';
 import buyerProductTempelate from './components/Buyer-Custom-Design/buyerProductTempelate';
 import artisanProductCatelog from './components/Products/artisanProductCatelog';
@@ -56,6 +58,7 @@ import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiry
 
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
 import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
+import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
 function App() {
   
   return (
@@ -94,8 +97,12 @@ function App() {
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/buyerEnquiriesList" component={BuyerAllEnquiryList} />
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
+          <PrivateRoute exact path="/closedEnquiryDetails" component={SingleCompletedEnquiry} />
+
           {/* <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} /> */}
           <PrivateRoute exact path="/buyerEnquiryDetails" component={BuyerSingleEnquiry} />
+          <PrivateRoute exact path="/closedBuyerEnquiryDetails" component={ClosedBuyerSingleEnquiry} />
+
 
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />

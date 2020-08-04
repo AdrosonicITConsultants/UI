@@ -461,6 +461,20 @@ color: rgb(133, 196, 36) !important;
     margin-bottom: 7px;
 }
 
+.multi-steps > li.stop:before {
+    background-color: red;
+    border-color: red;
+}
+.multi-steps > li.stop {
+    color :red!important;
+}
+.multi-steps > li.closedenq:before {
+    background-color: red!important;
+    border-color: red!important;
+}
+.multi-steps > li.closedenq {
+    color: red!important;
+}
 .rowmaxheight{
     max-height: 84px;
     height: 84px;

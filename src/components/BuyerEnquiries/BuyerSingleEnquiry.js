@@ -72,6 +72,7 @@ export class BuyerSingleEnquiry extends Component {
              collapseId: -1,
              collapseIdNew: -1,
              disableCheckId: "",
+             enquiryCode: "",
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -398,6 +399,7 @@ export class BuyerSingleEnquiry extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
+        this.state.enquiryCode = params.code;
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){
@@ -1813,7 +1815,8 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
-                                                                <BuyerPreviewInvoice/>
+                                                                <BuyerPreviewInvoice enquiryCode={this.state.enquiryCode} 
+                                                                enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
                                                             </Col>
                                                          
                                                             </>:null}

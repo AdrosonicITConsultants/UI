@@ -21,6 +21,7 @@ const options = {
     unit: 'in',
     format: [1500,1000]
 };
+
 export class BuyerPreviewInvoice extends Component {
     constructor(props) {
         super(props);
@@ -29,8 +30,17 @@ export class BuyerPreviewInvoice extends Component {
 
         this.state = {
             time: '',
+            dataload: false,
             currentDate: date,
-            enquiryCode: this.props.enquiryCode
+            enquiryCode: this.props.enquiryCode,
+            enquiryId: this.props.enquiryId,
+            previewPI:[],
+            previewPiOrder:[],
+            buyerCustomProduct:[],
+            paymentDetails:[],
+            artisanUser:[],
+            addressses:[],
+            buyerDetails:[],
         }
         
     } 
@@ -41,12 +51,34 @@ export class BuyerPreviewInvoice extends Component {
         TTCEapi.getBuyerPreviewPI(this.state.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
-                // this.setState({
-                // notificationTypeId: response.data.data,
-                // loading: false
-                // });
-                console.log(response.data.data);
+                if(response.data.data.productCustom === false) {
+                    this.setState({
+                        previewPI:response.data.data,
+                        previewPiOrder:response.data.data.piOrder,
+                        paymentDetails:response.data.data.paymentDetails,
+                        artisanUser:response.data.data.artisanUser,
+                        addressses:response.data.data.artisanUser.addressses, 
+                        buyerDetails: response.data.data.generatedBy,
+                        product: response.data.data.product,
+                        dataload : true,
+                    })
+                }
+                else {
+                    this.setState({
+                        previewPI:response.data.data,
+                        previewPiOrder:response.data.data.piOrder,
+                        paymentDetails:response.data.data.paymentDetails,
+                        artisanUser:response.data.data.artisanUser,
+                        addressses:response.data.data.artisanUser.addressses, 
+                        buyerDetails: response.data.data.generatedBy,
+                        product: response.data.data.buyerCustomProduct,
+                        dataload : true,
+                    })
+                }
+                
             }
+
+            console.log(response.data.data);
         });
 
         
@@ -74,6 +106,8 @@ export class BuyerPreviewInvoice extends Component {
         {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
       </Pdf> */}
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
+
+{this.state.dataload === true && this.state.previewPiOrder.isSend === 1 ?
 <div  ref={ref}  style={{width: "100%", height: "100%"}} >
    <Row noGutters={true} style={{marginTop:"15px"}}>
        <Col className="col-xs-6">
@@ -92,7 +126,7 @@ export class BuyerPreviewInvoice extends Component {
 
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
-    <Col className="col-xs-12"> Invoice Number : 00
+    <Col className="col-xs-12"> Invoice Number : {this.state.previewPiOrder.id}
 </Col>
 </Row>
 
@@ -102,19 +136,25 @@ export class BuyerPreviewInvoice extends Component {
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
-           <img src={logos.Smile} className="Pilogoimg"></img>
+           {this.state.artisanUser.companyDetails.logo ? 
+           <img src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo} className="Pilogoimg"></img>
+           :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-          <b className="Ttbrand">Chidiya</b> 
-           <p className="subttbrand"> Maniabandhan,Orissa</p>
-          <p className="subttbrand">address</p>
-           <p className="subttbrand fontplay"> Bikesh Singh</p>
+<b className="Ttbrand">{this.state.artisanUser.companyDetails.companyName}</b> 
+           <p className="subttbrand">{this.state.artisanUser.cluster?
+           this.state.artisanUser.cluster.desc: "NA"}</p>
+<p className="subttbrand">{this.state.addressses[0].line1} {this.state.addressses[0].line2}
+{this.state.addressses[0].street} {this.state.addressses[0].city} {this.state.addressses[0].pincode}
+{this.state.addressses[0].state} {this.state.addressses[0].country.name}</p>
+<p className="subttbrand fontplay">{this.state.artisanUser.firstName} {this.state.artisanUser.lastName}</p>
           
        </Col>
    </Row>
    <Row noGutters={true}>
        <Col sm={12} >
-           <b className="Mobnumpi">Mobile Number : 8888888888</b>
+<b className="Mobnumpi">Mobile Number : {this.state.artisanUser.mobile ? this.state.artisanUser.mobile : 
+this.state.artisanUser.alternateMobile ? this.state.artisanUser.alternateMobile : "NA"}</b>
        </Col>
    </Row>
     </Col>
@@ -123,21 +163,26 @@ export class BuyerPreviewInvoice extends Component {
    <b className="origintxt">Buyer</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
-           <img src={logos.Smile} className="Pilogoimg"></img>
+       {this.state.buyerDetails.companyDetails.logo ? 
+           <img src={TTCEapi.ImageUrl+'User/'+this.state.buyerDetails.id+'/CompanyDetails/Logo/'+this.state.buyerDetails.companyDetails.logo} className="Pilogoimg"></img>
+           :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-          <b className="Ttbrand">Chidiya & b</b> 
+          <b className="Ttbrand">{this.state.buyerDetails.companyDetails.companyName}</b> 
           <br/>
           <b className="RAcss subttbrand">Registered Address:</b>
-          <p className="subttbrand">address</p>
+<p className="subttbrand">
+    {this.state.buyerDetails.addressses[0].line1} {this.state.buyerDetails.addressses[0].line2} {this.state.buyerDetails.addressses[0].street} {this.state.buyerDetails.addressses[0].pincode} {this.state.buyerDetails.addressses[0].state}  {this.state.buyerDetails.addressses[0].country.name}
+</p>
           {/* <p className="subttbrand">address</p> */}
-           <p className="subttbrand fontplay"> Bikesh Singh</p>
+           <p className="subttbrand fontplay">{this.state.buyerDetails.firstName} {this.state.buyerDetails.lastName}</p>
           
        </Col>
    </Row>
    <Row noGutters={true}>
        <Col sm={12} >
-           <b className="Mobnumpi">Mobile Number : 8888888888</b>
+           <b className="Mobnumpi">Mobile Number : {this.state.buyerDetails.mobile ? this.state.buyerDetails.mobile : 
+this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobile : "NA"}</b>
        </Col>
    </Row>
     </Col>
@@ -164,11 +209,11 @@ export class BuyerPreviewInvoice extends Component {
     </td>
     <td>
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">AD-567-77-888</p>
+<p className="againstpi">{this.state.enquiryId}</p>
     </td>
     <td>
-    <p className="PaymentTerm">Date: 19.2.2020</p> 
-       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. 66666666666</p>
+           <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+           <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId}</p>
     </td>
   </tr>
 </table>
@@ -226,16 +271,16 @@ export class BuyerPreviewInvoice extends Component {
      <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
         </td>
         <td >
-     <p className="snopi wraptext">BYUW345</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">2700</p>
+     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">55558577</p>
+           <p id="amountId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -245,23 +290,23 @@ export class BuyerPreviewInvoice extends Component {
         </td>
      <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ 123</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ 123</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
         </td>
      <td >
-     <h3 className="snopi wraptext">14</h3>
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td>
-     <h3 className="snopi wraptextrpu">2700</h3>
-     <h3 className="snopi wraptext rpu">2700</h3>
+     <h3 className="snopi wraptextrpu"></h3>
+     <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">5555577</h3>
-     <h3 className="snopi wraptext">5555577</h3>
+     <h3 id="sgstId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100}</h3>
+     <h3 id="cgstId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -273,16 +318,19 @@ export class BuyerPreviewInvoice extends Component {
      <h3 className="freightch snopi"><b>Total</b></h3>
         </td>
         <td >
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td className="">
-     <h3 className="snopi wraptext">14</h3>
+     <h3 className="snopi wraptext"></h3>
      </td>
      <td>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">   <i class="fa fa-inr" aria-hidden="true"></i> 12345678</h3>
+     <h3 className="snopi wraptext">  
+      {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
+           {this.state.previewPiOrder.totalAmount + (this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) + 
+           (this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)}</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -293,16 +341,16 @@ export class BuyerPreviewInvoice extends Component {
      <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-     <h3 className="freightch snopi"><b>Axis Bank Ltd.</b></h3>
+     <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
      
-      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">555555555</span></h3>
-      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">555555555</span></h3>
-      <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">555555555</span></h3>
+      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">{this.state.paymentDetails[0].accNo_UPI_Mobile}</span></h3>
+      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">{this.state.paymentDetails[0].ifsc}</span></h3>
+           <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3>
 
 
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
@@ -320,10 +368,10 @@ export class BuyerPreviewInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">12.09.20</span></h3>
+     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
         </td>
         <td >
-     <p className="snopi wraptext">14</p>
+     <p className="snopi wraptext"></p>
      </td>
      <td className="">
      <h3 className="snopi wraptext"><b></b></h3>
@@ -350,6 +398,7 @@ export class BuyerPreviewInvoice extends Component {
      </Col>
  </Row>
  </div>
+ : null }
  {/* ------------------------------buttons------------------------------- */}
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">

@@ -19,7 +19,7 @@ export class PreviewInvoice extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          enquiryId:this.props.enquiryId,
+          enquiryId: this.props.enquiryId,
           dataload : false,
           enquiryCode:this.props.enquiryCode,
           expectedDateOfDelivery:this.props.expectedDateOfDelivery,
@@ -37,7 +37,7 @@ export class PreviewInvoice extends Component {
           generatedBy:[],
           productCategory:[],
           companyDetails:[],
-         
+          sendPI: false
         };
       }
     
@@ -47,35 +47,39 @@ export class PreviewInvoice extends Component {
     }
 
     componentDidMount() {
+     
         TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-                console.log("ffffind")
-                console.log(response.data.data);
-                
-                    this.setState({
-                    
-                        previewPI:response.data.data,
-                        buyerDetails: response.data.data.generatedBy,
-                        previewPiOrder:response.data.data.piOrder,
-                        buyerCustomProduct:response.data.data.buyerCustomProduct,
-                        paymentDetails:response.data.data.paymentDetails,
-                        artisanUser:response.data.data.artisanUser,
-                        generatedBy:response.data.data.generatedBy,
-                        // productCategory:response.data.data.buyerCustomProduct.productCategory,
-                        // companyDetails:response.data.data.artisanUser.companyDetails,
-                        dataload : true,
-        
-                    })
-            
-            
-            }
-            // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
-        })
+          if(response.data.valid)
+          {
+              console.log("ffffind")
+              console.log(response.data.data);
+              
+                  this.setState({
+                  
+                      previewPI:response.data.data,
+                      buyerDetails: response.data.data.generatedBy,
+                      previewPiOrder:response.data.data.piOrder,
+                      buyerCustomProduct:response.data.data.buyerCustomProduct,
+                      paymentDetails:response.data.data.paymentDetails,
+                      artisanUser:response.data.data.artisanUser,
+                      generatedBy:response.data.data.generatedBy,
+                      // productCategory:response.data.data.buyerCustomProduct.productCategory,
+                      // companyDetails:response.data.data.artisanUser.companyDetails,
+                      dataload : true,
+      
+                  })
+          
+          
+          }
+          // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
+      })
+             
       }
     
       sendPI(){
-        
+         this.setState({
+           sendPI: true
+         })
        
         TTCEapi.sendPI(
             this.state.enquiryId,
@@ -99,7 +103,17 @@ export class PreviewInvoice extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-          }  });
+          } 
+        else{
+          this.setState({
+            sendPI: true
+          })
+          customToast.error(response.data.errorMessage , {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
+        }
+        });
       
     } 
     
@@ -120,7 +134,7 @@ export class PreviewInvoice extends Component {
     <Row noGutters={true}>
         <Col className="col-xs-12" >
         
-        <button   onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}
+        <button  disabled={this.state.sendPI} onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}
         
         ><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></Col>
     </Row>
@@ -509,7 +523,7 @@ export class PreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span><button className="gobacktoeditdetart"  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
- <button className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
+ <button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
  {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
  </Row>

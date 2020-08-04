@@ -59,7 +59,9 @@ export class SingleEnquiry extends Component {
             quantity:0,
             dod:"",
             rpu:"",
-            preview:0,
+            preview: false,
+            sendButtonClick: false,
+            enquiryId: 0,
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -171,7 +173,7 @@ export class SingleEnquiry extends Component {
 
     backPI(){
         this.setState({
-            preview:0,
+            preview: false,
         })
     }
 
@@ -275,8 +277,10 @@ export class SingleEnquiry extends Component {
                    ).then((response)=>
                    {
                        if(response.data.valid){
-                           
-                          this.setState({  preview:1,savePi : response.data,
+                        this.state.preview = true;   
+                        this.setState({  
+                        preview: true,
+                        savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
                       
@@ -311,6 +315,9 @@ export class SingleEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
+        this.setState({
+            sendButtonClick: true
+        })
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -323,7 +330,7 @@ export class SingleEnquiry extends Component {
           
            ).then((response)=>{
                console.log(response);
-               if(response.data.valid){
+            if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
             console.log(this.state.sendMoq);
@@ -333,7 +340,17 @@ export class SingleEnquiry extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-          }  });
+          }
+          else {
+            this.setState({
+                sendButtonClick: false
+            })
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+          }  
+        });
       
     } 
     else{
@@ -348,6 +365,10 @@ export class SingleEnquiry extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
+
+        this.setState({
+            enquiryId: params.code
+        })
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){
@@ -1027,7 +1048,7 @@ export class SingleEnquiry extends Component {
                                                                  <button className="sendmoqbtn"                    
                                                                   disabled >Send</button>
                                                                    : 
-                                                                   <button className="sendmoqbtn"
+                                                                   <button className="sendmoqbtn" disabled={this.state.sendButtonClick}
                                                                    onClick={() => this.sendMoqDetails()}
                                                                    >Send</button>
                                                                  }
@@ -1041,7 +1062,7 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                            {this.state.preview==0?
+                                                            {this.state.preview === false ?
                                                             <>
                                                                     {this.state.getPi.isSend==1?    
                                                           null
@@ -1170,7 +1191,7 @@ export class SingleEnquiry extends Component {
                                                             :<>
                                                   <PreviewInvoice 
                                                   bp={this.backPI}
-                                                 enquiryId={this.state.getPi.enquiryId}
+                                                 enquiryId={this.state.enquiryId}
                                                  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                                  expectedDateOfDelivery={this.state.dod}
                                                  hsn={this.state.hsncode}
@@ -1187,7 +1208,7 @@ export class SingleEnquiry extends Component {
                                                             {this.state.changeRequest ?  <div>
                                                                 <PreviewInvoice 
                                                   bp={this.backPI}
-                                                 enquiryId={this.state.getPi.enquiryId}
+                                                 enquiryId={this.state.enquiryId}
                                                  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                                  expectedDateOfDelivery={this.state.dod}
                                                  hsn={this.state.hsncode}

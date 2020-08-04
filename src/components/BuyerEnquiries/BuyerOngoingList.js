@@ -273,6 +273,7 @@ export class BuyerOngoingList extends Component {
                 Loading Please Wait....
                 </Col>
                 </Row>
+               
             </>
             }
             

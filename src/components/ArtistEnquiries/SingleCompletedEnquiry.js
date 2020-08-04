@@ -18,7 +18,7 @@ import { PreviewInvoice } from './PreviewInvoice';
 
 
 
-export class SingleCompletedEnquiry extends Component {
+export class SingleEnquiry extends Component {
     constructor() {
         super();
         this.backPI = this.backPI.bind(this);
@@ -44,7 +44,7 @@ export class SingleCompletedEnquiry extends Component {
             isPidetail:true,
             moq:0,
             ppu:"",
-            deliveryDesc:-1,
+            deliveryDesc:1,
             additionalInfo:"",
             getMoq:[],
             getPi:[],
@@ -223,6 +223,7 @@ export class SingleCompletedEnquiry extends Component {
     }
 
     saveMoqDetails(){
+        
         if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
             console.log(params);
@@ -234,20 +235,21 @@ export class SingleCompletedEnquiry extends Component {
                 this.state.ppu,
               
                ).then((response)=>{
+                   if(response.data.valid){
                 this.setState({saveMoq : response.data,
                     isMoqdetail:!this.state.isMoqdetail,
                     showValidationMoq: false,
                 },()=>{
-                // console.log(this.state);
+                console.log(this.state.saveMoq);
                
                 });
                 customToast.success("MOQ Details saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-            });
+         } });
         }
-
+       
       else{
         this.setState({
             showValidationMoq: true,
@@ -270,7 +272,8 @@ export class SingleCompletedEnquiry extends Component {
                     this.state.quantity,
                     this.state.sgst,
                   
-                   ).then((response)=>{
+                   ).then((response)=>
+                   {
                        if(response.data.valid){
                     this.setState({savePi : response.data,
                         isPidetail:!this.state.isPidetail,
@@ -307,7 +310,7 @@ export class SingleCompletedEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
-        if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
+        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(
@@ -318,16 +321,18 @@ export class SingleCompletedEnquiry extends Component {
             this.state.ppu,
           
            ).then((response)=>{
+               console.log(response);
+               if(response.data.valid){
             this.setState({sendMoq : response.data,
-                isMoqdetail:true},()=>{
-            // console.log(this.state);
+                isMoqdetail:true,showValidationMoq: false},()=>{
+            console.log(this.state.sendMoq);
             this.componentDidMount();
             });
-            customToast.success("MOQ Details send successfully", {
+            customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-        });
+          }  });
       
     } 
     else{
@@ -348,7 +353,7 @@ export class SingleCompletedEnquiry extends Component {
                 this.setState({
                 moq:0,
                 ppu:"0",
-                deliveryDesc:-1,
+                deliveryDesc:1,
                 additionalInfo:"",
                 isSend:-1,
                 
@@ -359,14 +364,14 @@ export class SingleCompletedEnquiry extends Component {
             this.setState({
                 // getxyz:response.data,
                 getMoq : response.data.data,
-                moq:response.data.data.moq,
-                ppu:response.data.data.ppu,
-                deliveryDesc:response.data.data.deliveryTimeId,
-                additionalInfo:response.data.data.additionalInfo,
-                isSend:response.data.data.isSend,
+                moq:response.data.data.moq.moq,
+                ppu:response.data.data.moq.ppu,
+                deliveryDesc:response.data.data.moq.deliveryTimeId,
+                additionalInfo:response.data.data.moq.additionalInfo,
+                isSend:response.data.data.moq.isSend,
                 //  dataload : true,
           },()=>{
-            //  console.log(this.state.getxyz);
+             console.log(this.state.getMoq);
            
             });
         }
@@ -669,12 +674,11 @@ export class SingleCompletedEnquiry extends Component {
                                 }
 
                             </div>
-                           
                            </Col>
                        </Row>
                     </Col>
                 </Row>
-              
+            
                 </>
                 )}
                     </>
@@ -840,14 +844,8 @@ export class SingleCompletedEnquiry extends Component {
                                                         {this.state.isSend==1?    
                                                           null
                                                             :
-                                                            <>  {this.state.isMoqdetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handleMoqEdit}
-                                                        ></img> : 
-                                                       null} </>
+                                                            <>  
+                                                             </>
                                                            }
 
                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
@@ -857,7 +855,7 @@ export class SingleCompletedEnquiry extends Component {
                                                                     <Col sm={6} className="Moqh2">
                                                                        <input 
                                                                        id="moq"
-                                                                       className="width200 alignbox" 
+                                                                        className="width200 alignbox" 
                                                                        type="number"
                                                                        disabled={this.state.isMoqdetail} 
                                                                         value={this.state.moq }
@@ -866,15 +864,15 @@ export class SingleCompletedEnquiry extends Component {
                                                                     </Col>
                                                                 </Row>
 
-                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
+                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                  <Col sm={6} className="Moqh1">
                                                                      Price/unit:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
-                                                                 <i class="fa fa-inr" aria-hidden="true"></i> 
+                                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
                                                                  <input 
                                                                  id="ppu"
-                                                                 className="width200 alignbox2"
+                                                                 className="width200 alignbox"
                                                                   type="text"
                                                                   disabled={this.state.isMoqdetail} 
                                                                   value={this.state.ppu}
@@ -900,7 +898,7 @@ export class SingleCompletedEnquiry extends Component {
                                                                                     >
                                                                                         <option
                                                                                         key="0"
-                                                                                        deliveryDesc = '-1'
+                                                                                        deliveryDesc = '1'
                                                                                         value="Select"
                                                                                         selected="true" disabled="disabled"
                                                                                         >
@@ -936,41 +934,17 @@ export class SingleCompletedEnquiry extends Component {
                                                              </Row>
                                                              <p className="text-center">
                                                              {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
+                                            <span className="bg-danger">please fill mandatory fields</span>
                                         ) : (
                                             <br />
                                         )}
                                                              </p>
                                                             
-                                                             <Row noGutters={true} className=" Allenqlistbtnmt2">
-                                                               
-                                                                 <Col sm={6} >
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="savemoqbtn"
-                                                                  disabled >Save</button>
-                                                                
-                                                                :
-                                                                <button className="savemoqbtn"
-                                                                    onClick={() => this.saveMoqDetails()} >Save</button>}
-                                                                    
-                                                                 </Col>
-                                                                 <Col sm={6} className="">
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                  disabled >Send</button>
-                                                                   : 
-                                                                   <button className="sendmoqbtn"
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                   >Send</button>
-                                                                 }
-                                                                 </Col>
-                                                             </Row>
-                                                             <p className="marginBottompage"></p>
+                                                          <p className="marginBottompage"></p>
                                                              </>
 
                                                                 :null}
-                     {/* -------------------MOQ------------------------------------------------------------------------------ */}
+                     {/* -------------------MOQ ends------------------------------------------------------------------------------ */}
 
                                                             {this.state.proformaDetails ? 
                                                             <>
@@ -1005,10 +979,16 @@ export class SingleCompletedEnquiry extends Component {
                                                                <label >Rate per unit(or metre)</label>
                                                                <br/>
                                                                {/* <input className="PIinput" type="number"/> */}
-                                                             <span 
+                                                             {/* <span 
                                                              className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                             disabled={this.state.isPidetail}>
-                                                            <i class="fa fa-inr" aria-hidden="true"></i></span>
+                                                             disabled={this.state.isPidetail}> */}
+                                                                 <select name="cars" id="cars" 
+                                                                 className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                                                 disabled={this.state.isPidetail}>
+                                                                    <option value="volvo">₹</option>
+                                                                    <option value="saab">$</option>
+                                                                </select>
+                                                           {/* </span> */}
                                                              <input type="number"  className="PIinput rsinputboxwidth"
                                                              disabled={this.state.isPidetail}
                                                              value={this.state.rpu }
@@ -1096,11 +1076,15 @@ export class SingleCompletedEnquiry extends Component {
                                                             :<>
                                                   <PreviewInvoice 
                                                   bp={this.backPI}
-                                                  />
+                                                 enquiryId={this.state.getPi.enquiryId}
+                                                 enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                                                       />
 
                                                        </>}
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
+
+                                       
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                           
@@ -1141,6 +1125,6 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(SingleCompletedEnquiry);
+const connectedLoginPage = connect(mapStateToProps)(SingleEnquiry);
 export default connectedLoginPage;
 

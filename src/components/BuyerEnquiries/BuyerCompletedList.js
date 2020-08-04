@@ -65,7 +65,7 @@ export class BuyerCompletedList extends Component {
         
     } 
     individualpage(id){
-        browserHistory.push("/buyerEnquiryDetails?code=" + id)
+        browserHistory.push("/closedBuyerEnquiryDetails?code=" + id)
     }
     render() {
         return (
@@ -273,7 +273,14 @@ export class BuyerCompletedList extends Component {
                 )}
                 </>
             :
-            <></>
+            <>
+            
+                <Row noGutters={true}>
+                <Col className="col-xs-12 text-center">
+                Loading Please Wait....
+                </Col>
+                </Row>
+            </>
             }
             
                 </React.Fragment>

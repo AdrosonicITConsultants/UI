@@ -58,6 +58,7 @@ import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiry
 
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
 import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
+import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
 function App() {
   
   return (
@@ -100,6 +101,8 @@ function App() {
 
           {/* <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} /> */}
           <PrivateRoute exact path="/buyerEnquiryDetails" component={BuyerSingleEnquiry} />
+          <PrivateRoute exact path="/closedBuyerEnquiryDetails" component={ClosedBuyerSingleEnquiry} />
+
 
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />

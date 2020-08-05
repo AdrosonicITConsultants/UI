@@ -74,6 +74,8 @@ export class BuyerSingleEnquiry extends Component {
              disableCheckId: "",
              enquiryCode: "",
              MoqSelected : [],
+             selectedArtisanId: 0,
+             selectedMOQId: 0,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -602,7 +604,9 @@ AcceptMoq(moqId,artisanId){
 
     this.setState({ 
         collapseNew: !this.state.collapseNew,
-        disableCheckId: artisanId
+        disableCheckId: artisanId,
+        selectedArtisanId: artisanId,
+        selectedMOQId: moqId,
     }, () => {
         this.getcollapseIdNew(artisanId);
         this.setState({ showNew: !this.state.showNew });
@@ -1333,7 +1337,10 @@ MoqSimpleProductSelected(moqId){
                                         </>
                                         :
                                         <>
-                                        <Row noGutters={true} >  
+                                        {this.state.getMoqs  ? this.state.getMoqs.map((data,key) => {
+                                         return   data.accepted === true ?
+                                       
+                                              <Row noGutters={true} >  
                                                     {/* <Col sm={1}></Col>                                         */}
                                                 <Col sm={10}>
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
@@ -1346,7 +1353,7 @@ MoqSimpleProductSelected(moqId){
                                                 className="width200 alignbox" 
                                                 type="number"
                                                 disabled={this.state.isMoqdetail} 
-                                                    value={this.state.MoqSelected.moq}
+                                                    value={data.moq.moq}
                                                     name="moq"
                                                     onChange={this.handleChange}/> 
                                                 </Col>
@@ -1363,7 +1370,7 @@ MoqSimpleProductSelected(moqId){
                                                 className="width200 alignbox2"
                                                 type="text"
                                                 disabled={this.state.isMoqdetail} 
-                                                value={this.state.MoqSelected.ppu}
+                                                value={data.moq.ppu}
                                                 name="ppu"
                                                 onChange={this.handleChange}
                                                 /> 
@@ -1380,7 +1387,7 @@ MoqSimpleProductSelected(moqId){
                                                     id="productCategorie"
                                                     className="Moqh2selectheight" 
                                                     name="deliveryDesc"
-                                                    value={this.state.MoqSelected.deliveryTimeId}
+                                                    value={data.moq.deliveryTimeId}
                                                     disabled={this.state.isMoqdetail} 
                                                     onChange={this.handleChange}
                                                     style={{opacity:"1"}}
@@ -1415,7 +1422,7 @@ MoqSimpleProductSelected(moqId){
                                                         <p className="Moqh1p">
                                                         <textarea id="additionalInfo " 
                                                         name="additionalInfo"
-                                                        value={this.state.MoqSelected.additionalInfo}
+                                                        value={data.moq.additionalInfo}
                                                         disabled={this.state.isMoqdetail} 
                                                         onChange={this.handleChange}
                                                         className="width100p "></textarea>
@@ -1425,6 +1432,8 @@ MoqSimpleProductSelected(moqId){
                                                         </Col>    
                                                         {/* <Col sm={1}></Col>   */}
                                                         </Row>
+
+                                                   : null  } ) : null}
                                         </>   
                                         }
                                 </>

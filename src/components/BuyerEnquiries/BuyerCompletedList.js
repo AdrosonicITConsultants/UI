@@ -65,7 +65,7 @@ export class BuyerCompletedList extends Component {
         
     } 
     individualpage(id){
-        browserHistory.push("/buyerEnquiryDetails?code=" + id)
+        browserHistory.push("/closedBuyerEnquiryDetails?code=" + id)
     }
     render() {
         return (
@@ -226,14 +226,33 @@ export class BuyerCompletedList extends Component {
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 3
+                                ?
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
                               <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                              {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
                               <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                              
                             </ul>
+                            
                                 }
 
                             </div>
@@ -254,7 +273,14 @@ export class BuyerCompletedList extends Component {
                 )}
                 </>
             :
-            <></>
+            <>
+            
+                <Row noGutters={true}>
+                <Col className="col-xs-12 text-center">
+                Loading Please Wait....
+                </Col>
+                </Row>
+            </>
             }
             
                 </React.Fragment>

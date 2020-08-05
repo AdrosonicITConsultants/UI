@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
@@ -19,7 +17,7 @@ import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 import "./BuyerSingleEnquiry.css";
 
 
-export class BuyerSingleEnquiry extends Component {
+export class ClosedBuyerSingleEnquiry extends Component {
     constructor() {
         super();
 
@@ -72,7 +70,6 @@ export class BuyerSingleEnquiry extends Component {
              collapseId: -1,
              collapseIdNew: -1,
              disableCheckId: "",
-             enquiryCode: "",
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -399,7 +396,6 @@ export class BuyerSingleEnquiry extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-        this.state.enquiryCode = params.code;
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){
@@ -495,7 +491,7 @@ export class BuyerSingleEnquiry extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
-                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                        TTCEapi.getCompletedEnquiry(params.code).then((response)=>{
                             if(response.data.data[0].paymentAccountDetails.length != 0)
                             {
                                 
@@ -854,46 +850,44 @@ MoqSimpleProductSelected(moqId){
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
-                            <li >Completed</li>
+                                {item.openEnquiriesResponse.enquiryStageId == 3
+                                ?
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
+                              <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                              {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
                               <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                              
                             </ul>
+                            
                                 }
 
                             </div>
+                          
                            
                            </Col>
                        </Row>
                     </Col>
                 </Row>
                 <br></br>
-                <Row>
-                    <Col className="col-xs-6">
-                    <button className=" closedEnquirybtn"
-                    onClick={()=>{this.markcompleted()}}
-                                       >
-                                <img src={logos.cancelenq} className="closeenqimg"></img>
-                                Close Enquiry
-                                </button>
-                    </Col>
-                    {/* <Col className="col-xs-2"></Col> */}
-                    <Col className="col-xs-6">
-                    <button className="completedenqButton"
-                                       onClick={()=>{this.markcompleted()}}
-                                       disabled = {this.state.progressid != 14}
-
-                                       >
-                                       <img src={logos.completedenq} className="completeenqimg" 
-                                       ></img>
-                                Mark order Delivered
-                                </button>
-                    </Col>
-                </Row>
-           
+            
                 </>
                 )}
                     </>
@@ -1815,8 +1809,7 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
-                                                                <BuyerPreviewInvoice enquiryCode={this.state.enquiryCode} 
-                                                                enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
+                                                                <BuyerPreviewInvoice/>
                                                             </Col>
                                                          
                                                             </>:null}

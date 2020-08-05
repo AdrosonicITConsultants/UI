@@ -460,6 +460,20 @@ class TTCEapi {
       });
   } 
   
+  static getCompletedEnquiry(enquiryId) {
+    let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
 
   static getCountries() {
     let url = ApiUrl + "/register/getAllCountries";

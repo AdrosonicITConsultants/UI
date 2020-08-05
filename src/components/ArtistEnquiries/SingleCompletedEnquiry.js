@@ -59,9 +59,7 @@ export class SingleEnquiry extends Component {
             quantity:0,
             dod:"",
             rpu:"",
-            preview: false,
-            sendButtonClick: false,
-            enquiryId: 0,
+            preview:0,
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -173,7 +171,7 @@ export class SingleEnquiry extends Component {
 
     backPI(){
         this.setState({
-            preview: false,
+            preview:0,
         })
     }
 
@@ -277,15 +275,12 @@ export class SingleEnquiry extends Component {
                    ).then((response)=>
                    {
                        if(response.data.valid){
-                        this.state.preview = true;   
-                        this.setState({  
-                        preview: true,
-                        savePi : response.data,
+                    this.setState({savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
-                      
+                        preview:1,
                     },()=>{
-                    console.log(this.preview);
+                    // console.log(this.state);
                    
                     });
                     customToast.success("PI Details saved successfully", {
@@ -315,9 +310,6 @@ export class SingleEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
-        this.setState({
-            sendButtonClick: true
-        })
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -330,7 +322,7 @@ export class SingleEnquiry extends Component {
           
            ).then((response)=>{
                console.log(response);
-            if(response.data.valid){
+               if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
             console.log(this.state.sendMoq);
@@ -340,17 +332,7 @@ export class SingleEnquiry extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-          }
-          else {
-            this.setState({
-                sendButtonClick: false
-            })
-            customToast.error(response.data.errorMessage, {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-          }  
-        });
+          }  });
       
     } 
     else{
@@ -365,10 +347,6 @@ export class SingleEnquiry extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-
-        this.setState({
-            enquiryId: params.code
-        })
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){
@@ -391,7 +369,7 @@ export class SingleEnquiry extends Component {
                 deliveryDesc:response.data.data.moq.deliveryTimeId,
                 additionalInfo:response.data.data.moq.additionalInfo,
                 isSend:response.data.data.moq.isSend,
-                 dataload : true,
+                //  dataload : true,
           },()=>{
              console.log(this.state.getMoq);
            
@@ -445,7 +423,7 @@ export class SingleEnquiry extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
-                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
+                        TTCEapi.getCompletedEnquiry(params.code).then((response)=>{
                             var nextProgressid = 0;
                             if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
                             {
@@ -666,104 +644,41 @@ export class SingleEnquiry extends Component {
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 3
+                                ?
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
+                              <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                              {item.openEnquiriesResponse.enquiryStageId == 14
+                              ?
+                              <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                              
                             </ul>
+                            
                                 }
 
                             </div>
-                           
                            </Col>
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 14? 
-                     <></>
-                   :
-                   <button
-                     className="blackButton"
-                     onClick={this.ToggleDelete}
-                    >
-                     Change Status
-                   </button>
-                     }   
-                   
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                    Change Status
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={this.ToggleDeleteClose} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <>
-                                 {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.id > 3 
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )}   
-                                </>
-                                :
-                                <>
-                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                    item1.id > 3
-                                    ?
-                                    <Col className="col-xs-12 mb7">
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {/* <div className="greenButtonstatus">
-                                    </div> */}
-                                    {item1.desc}
-                                    </Col>
-                                    :
-                                    <>
-                                    </>
-                                 )} 
-                                </>
-                                }
-                                
-                               
-                            </Row>
-                            <br></br>
-                            <Row noGutters={true}>
-                            <button className="markCompletedButton"
-                            onClick={this.stateupdate}                           
-                                >
-                                Mark Completed
-                                </button>
-                            </Row>
-                            <br></br>
-                            
-                        </div>
-                        </div>
-                    </div>
-
-                </Row>
-               
+            
                 </>
                 )}
                     </>
@@ -929,14 +844,8 @@ export class SingleEnquiry extends Component {
                                                         {this.state.isSend==1?    
                                                           null
                                                             :
-                                                            <>  {this.state.isMoqdetail ? <img
-                                                                src={logos.apedit}
-                                                                className="aoctick"
-                                                                style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
-                                                                onClick={this.handleMoqEdit}
-                                                        ></img> : 
-                                                       null} </>
+                                                            <>  
+                                                             </>
                                                            }
 
                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
@@ -1031,30 +940,7 @@ export class SingleEnquiry extends Component {
                                         )}
                                                              </p>
                                                             
-                                                             <Row noGutters={true} className=" Allenqlistbtnmt2">
-                                                               
-                                                                 <Col sm={6} >
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="savemoqbtn"
-                                                                  disabled >Save</button>
-                                                                
-                                                                :
-                                                                <button className="savemoqbtn"
-                                                                    onClick={() => this.saveMoqDetails()} >Save</button>}
-                                                                    
-                                                                 </Col>
-                                                                 <Col sm={6} className="">
-                                                                 {this.state.isSend== 1?
-                                                                 <button className="sendmoqbtn"                    
-                                                                  disabled >Send</button>
-                                                                   : 
-                                                                   <button className="sendmoqbtn" disabled={this.state.sendButtonClick}
-                                                                   onClick={() => this.sendMoqDetails()}
-                                                                   >Send</button>
-                                                                 }
-                                                                 </Col>
-                                                             </Row>
-                                                             <p className="marginBottompage"></p>
+                                                          <p className="marginBottompage"></p>
                                                              </>
 
                                                                 :null}
@@ -1062,7 +948,7 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                            {this.state.preview === false ?
+                                                            {this.state.preview==0?
                                                             <>
                                                                     {this.state.getPi.isSend==1?    
                                                           null
@@ -1181,9 +1067,8 @@ export class SingleEnquiry extends Component {
                                            </p>
                                                        <Row noGutters={true}>
                                                            <Col sm={12} className="text-center">
-                                                               
                                                                 <button className="previewandpi" onClick={() => this.savePIDetails()}>
-                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
+                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>  Preview and send PI</button>
                                                            </Col>
                                                           
                                                        </Row>
@@ -1191,22 +1076,18 @@ export class SingleEnquiry extends Component {
                                                             :<>
                                                   <PreviewInvoice 
                                                   bp={this.backPI}
-                                                 enquiryId={this.state.enquiryId}
+                                                 enquiryId={this.state.getPi.enquiryId}
                                                  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
-                                                 expectedDateOfDelivery={this.state.dod}
-                                                 hsn={this.state.hsncode}
-                                                 ppu={this.state.ppu}
-                                                 quantity={this.state.quantity}
-                                                 sgst={this.state.sgst}
-                                                 cgst={this.state.cgst}
-                                                  />
+                                                                       />
 
                                                        </>}
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
+
+                                       
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
-                                                               
+                                                          
                                                             </div>:null}
 
                                                             {this.state.qualityCheck ?  <div>

@@ -36,6 +36,7 @@
     border: 0;
     border-top: 1px solid #ccc;
     width: 68%;
+    margin: 7px auto;
 }
 button:focus{
  /* border-color:transparent!important; */

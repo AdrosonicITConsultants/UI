@@ -74,6 +74,8 @@ export class BuyerSingleEnquiry extends Component {
              disableCheckId: "",
              enquiryCode: "",
              MoqSelected : [],
+             selectArtisianId:0,
+             selectMoqId:0,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -602,7 +604,9 @@ AcceptMoq(moqId,artisanId){
 
     this.setState({ 
         collapseNew: !this.state.collapseNew,
-        disableCheckId: artisanId
+        disableCheckId: artisanId,
+        selectArtisianId:artisanId,
+        selectMoqId:moqId,
     }, () => {
         this.getcollapseIdNew(artisanId);
         this.setState({ showNew: !this.state.showNew });
@@ -1333,6 +1337,12 @@ MoqSimpleProductSelected(moqId){
                                         </>
                                         :
                                         <>
+                                      {this.state.selectArtisianId == this.state.getMoqs.artisanId && this.state.selectMoqId == this.state.getMoqs.moq
+                                      ?
+                                      <>
+                                      
+                                      </>
+                                    :null}
                                         <Row noGutters={true} >  
                                                     {/* <Col sm={1}></Col>                                         */}
                                                 <Col sm={10}>

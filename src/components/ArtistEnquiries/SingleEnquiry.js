@@ -1206,17 +1206,7 @@ export class SingleEnquiry extends Component {
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
-                                                                <PreviewInvoice 
-                                                  bp={this.backPI}
-                                                 enquiryId={this.state.enquiryId}
-                                                 enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
-                                                 expectedDateOfDelivery={this.state.dod}
-                                                 hsn={this.state.hsncode}
-                                                 ppu={this.state.ppu}
-                                                 quantity={this.state.quantity}
-                                                 sgst={this.state.sgst}
-                                                 cgst={this.state.cgst}
-                                                  /> 
+                                                               
                                                             </div>:null}
 
                                                             {this.state.qualityCheck ?  <div>

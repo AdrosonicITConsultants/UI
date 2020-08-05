@@ -15,6 +15,10 @@
 
 }
 
+.Raiseinvbtn:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
 .margintopsr{
     margin-top: -108px;
 }

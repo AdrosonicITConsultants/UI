@@ -37,7 +37,7 @@ export class PreviewInvoice extends Component {
           generatedBy:[],
           productCategory:[],
           companyDetails:[],
-         
+          buttonDisable:false
         };
       }
     
@@ -76,7 +76,7 @@ export class PreviewInvoice extends Component {
     
       sendPI(){
         
-       
+        this.setState({buttonDisable:true});
         TTCEapi.sendPI(
             this.state.enquiryId,
             this.state.cgst,
@@ -110,6 +110,8 @@ export class PreviewInvoice extends Component {
 <React.Fragment>
     {this.state.dataload?<>
    
+   {this.state.previewPI.productCustom===true?
+   <>
     {/* <Container> */}
 
     {/* <Pdf targetRef={ref} filename="code-example.pdf">
@@ -120,7 +122,7 @@ export class PreviewInvoice extends Component {
     <Row noGutters={true}>
         <Col className="col-xs-12" >
         
-        <button   onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}
+        <button disabled = {this.state.buttonDisable}  onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}
         
         ><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></Col>
     </Row>
@@ -329,8 +331,19 @@ export class PreviewInvoice extends Component {
 
 
 <td className="tdmarginleft">
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Red katan -400m</h3>
-     <p>- WEFT X WARP X EXTRA WEFT</p>
+     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>
+       {this.state.buyerCustomProduct!=null?
+       <>
+            {this.state.buyerCustomProduct.productType?this.state.buyerCustomProduct.productType.productDesc:""} -{this.state.buyerCustomProduct.length} 
+
+       </>:"NA"}
+     </h3>
+     {/* <p>- WEFT X WARP X EXTRA WEFT</p> */}
+     {}
+     {this.state.buyerCustomProduct!=null?
+       <>
+    <p>- WEFT X WARP X EXTRA WEFT</p>
+       </>:"NA"}
             <div className="descyarnpi wraptext">
                 -Yarn: XYZ XYZ x XYZ <br/>
                 -Yarn Count: XYZ XYZ x XYZ <br/>
@@ -509,7 +522,7 @@ export class PreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span><button className="gobacktoeditdetart"  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
- <button className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
+ <button className="Raiseinvbtn" disabled = {this.state.buttonDisable} onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button></span>
  {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
  </Row>
@@ -517,6 +530,13 @@ export class PreviewInvoice extends Component {
 
 {/* </Container> */}
 {/* <Footer/> */}
+</>:<>
+{/* if product is not custom product */}
+
+
+</>}
+
+
 </>
     :<></>}
 </React.Fragment>

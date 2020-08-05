@@ -60,7 +60,7 @@ export class SingleEnquiry extends Component {
             dod:"",
             rpu:"",
             preview:0,
-            
+            buttonDisable:false
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -275,13 +275,12 @@ export class SingleEnquiry extends Component {
                    ).then((response)=>
                    {
                        if(response.data.valid){
-                           
-                          this.setState({  preview:1,savePi : response.data,
+                    this.setState({preview:1,savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
-                      
+                        
                     },()=>{
-                    console.log(this.preview);
+                    // console.log(this.state);
                    
                     });
                     customToast.success("PI Details saved successfully", {
@@ -310,10 +309,15 @@ export class SingleEnquiry extends Component {
       
       }
     } 
+
+  
+    
+
     sendMoqDetails(){
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
+        this.setState({buttonDisable:true});
         TTCEapi.sendMoq(
             params.code,
             this.state.additionalInfo,
@@ -370,7 +374,7 @@ export class SingleEnquiry extends Component {
                 deliveryDesc:response.data.data.moq.deliveryTimeId,
                 additionalInfo:response.data.data.moq.additionalInfo,
                 isSend:response.data.data.moq.isSend,
-                 dataload : true,
+                //  dataload : true,
           },()=>{
              console.log(this.state.getMoq);
            
@@ -1028,6 +1032,8 @@ export class SingleEnquiry extends Component {
                                                                   disabled >Send</button>
                                                                    : 
                                                                    <button className="sendmoqbtn"
+                                                                   disabled = {this.state.buttonDisable}
+                                                                 
                                                                    onClick={() => this.sendMoqDetails()}
                                                                    >Send</button>
                                                                  }
@@ -1160,14 +1166,14 @@ export class SingleEnquiry extends Component {
                                            </p>
                                                        <Row noGutters={true}>
                                                            <Col sm={12} className="text-center">
-                                                               
                                                                 <button className="previewandpi" onClick={() => this.savePIDetails()}>
-                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
+                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>  Preview and send PI</button>
                                                            </Col>
                                                           
                                                        </Row>
                                                             </>
-                                                            :<>
+                                                            :
+                                                            
                                                   <PreviewInvoice 
                                                   bp={this.backPI}
                                                  enquiryId={this.state.getPi.enquiryId}
@@ -1180,22 +1186,16 @@ export class SingleEnquiry extends Component {
                                                  cgst={this.state.cgst}
                                                   />
 
-                                                       </>}
+                                                       }
                                                        <p className="marginBottompage"></p>
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
-                                                                <PreviewInvoice 
-                                                  bp={this.backPI}
-                                                 enquiryId={this.state.getPi.enquiryId}
-                                                 enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
-                                                 expectedDateOfDelivery={this.state.dod}
-                                                 hsn={this.state.hsncode}
-                                                 ppu={this.state.ppu}
-                                                 quantity={this.state.quantity}
-                                                 sgst={this.state.sgst}
-                                                 cgst={this.state.cgst}
-                                                  /> 
+                                                                {/* <button className="sendmoqbtn"
+                                                                   disabled = {this.state.buttonDisable}
+                                                                 
+                                                                   onClick={() => this.sendMoqDetails()}
+                                                                   >Send</button> */}
                                                             </div>:null}
 
                                                             {this.state.qualityCheck ?  <div>

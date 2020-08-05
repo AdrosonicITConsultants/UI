@@ -219,14 +219,14 @@ export class SingleEnquiry extends Component {
       handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
-        this.setState({ [name]: value }, () => {
+        this.setState({ [name]: value,showValidationMoq: false }, () => {
         //   console.log(this.state.moq);
         });
     }
 
     saveMoqDetails(){
         
-        if(this.state.moq && this.state.deliveryDesc && this.state.ppu&&  this.state.additionalInfo){
+        if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -315,10 +315,12 @@ export class SingleEnquiry extends Component {
       }
     } 
     sendMoqDetails(){
-        this.setState({
-            sendButtonClick: true
-        })
-        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu &&  this.state.additionalInfo){
+      
+        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu ){
+            this.setState({
+                sendButtonClick: true
+
+            })
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(

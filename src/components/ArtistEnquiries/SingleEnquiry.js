@@ -391,7 +391,7 @@ export class SingleEnquiry extends Component {
                 deliveryDesc:response.data.data.moq.deliveryTimeId,
                 additionalInfo:response.data.data.moq.additionalInfo,
                 isSend:response.data.data.moq.isSend,
-                 dataload : true,
+                 
           },()=>{
              console.log(this.state.getMoq);
            

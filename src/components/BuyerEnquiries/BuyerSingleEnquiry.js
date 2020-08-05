@@ -73,6 +73,7 @@ export class BuyerSingleEnquiry extends Component {
              collapseIdNew: -1,
              disableCheckId: "",
              enquiryCode: "",
+             MoqSelected : [],
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -620,6 +621,8 @@ AcceptMoq(moqId,artisanId){
                  this.componentDidMount()
             }.bind(this), 3000)
             console.log(this.state.MoqSelected);
+
+
 
         }
     })
@@ -1343,7 +1346,7 @@ MoqSimpleProductSelected(moqId){
                                                 className="width200 alignbox" 
                                                 type="number"
                                                 disabled={this.state.isMoqdetail} 
-                                                    value={this.state.getMoqs[0].moq.moq}
+                                                    value={this.state.MoqSelected.moq}
                                                     name="moq"
                                                     onChange={this.handleChange}/> 
                                                 </Col>
@@ -1360,7 +1363,7 @@ MoqSimpleProductSelected(moqId){
                                                 className="width200 alignbox2"
                                                 type="text"
                                                 disabled={this.state.isMoqdetail} 
-                                                value={this.state.getMoqs[0].moq.ppu}
+                                                value={this.state.MoqSelected.ppu}
                                                 name="ppu"
                                                 onChange={this.handleChange}
                                                 /> 
@@ -1377,7 +1380,7 @@ MoqSimpleProductSelected(moqId){
                                                     id="productCategorie"
                                                     className="Moqh2selectheight" 
                                                     name="deliveryDesc"
-                                                    value={this.state.getMoqs[0].moq.deliveryTimeId}
+                                                    value={this.state.MoqSelected.deliveryTimeId}
                                                     disabled={this.state.isMoqdetail} 
                                                     onChange={this.handleChange}
                                                     style={{opacity:"1"}}
@@ -1412,7 +1415,7 @@ MoqSimpleProductSelected(moqId){
                                                         <p className="Moqh1p">
                                                         <textarea id="additionalInfo " 
                                                         name="additionalInfo"
-                                                        value={this.state.getMoqs[0].moq.additionalInfo}
+                                                        value={this.state.MoqSelected.additionalInfo}
                                                         disabled={this.state.isMoqdetail} 
                                                         onChange={this.handleChange}
                                                         className="width100p "></textarea>
@@ -1716,7 +1719,7 @@ MoqSimpleProductSelected(moqId){
                                                 className="width200 alignbox" 
                                                 type="number"
                                                 disabled={this.state.isMoqdetail} 
-                                                    value={this.state.getMoqs[0].moq.moq}
+                                                value={this.state.getMoqs[0].moq.moq}
                                                     name="moq"
                                                     onChange={this.handleChange}/> 
                                                 </Col>

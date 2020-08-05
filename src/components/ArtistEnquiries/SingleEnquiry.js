@@ -226,7 +226,7 @@ export class SingleEnquiry extends Component {
 
     saveMoqDetails(){
         
-        if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
+        if(this.state.moq && this.state.deliveryDesc && this.state.ppu&&  this.state.additionalInfo){
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -318,7 +318,7 @@ export class SingleEnquiry extends Component {
         this.setState({
             sendButtonClick: true
         })
-        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
+        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu &&  this.state.additionalInfo){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(

@@ -24,7 +24,7 @@ const getSuggestions = async (value) => {
     
   }
   if (languages.length == 0) {
-    languages = [{ suggestion: "No Suggestion Found", inputVal: value }];
+    languages = [{ suggestion: "No Suggestion Found", inputVal: 0 }];
     return languages;
   } else {
     languages.unshift({ suggestion: "Suggestions", inputVal: value })
@@ -35,13 +35,19 @@ const getSuggestions = async (value) => {
 };
 
 const getSuggestionValue = (suggestion) => {
-  console.log(suggestion.suggestion);
+  console.log(suggestion.suggestionType);
+  if(suggestion.suggestionType == undefined)
+  {
 
-  if (suggestion.suggestionType == "Global") {
-    return `${suggestion.suggestion}`;
-  } else {
-    return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
   }
+  else{
+    if (suggestion.suggestionType == "Global") {
+      return `${suggestion.suggestion}`;
+    } else {
+      return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
+    }
+  }
+ 
 };
 
 // Use your imagination to render suggestions.
@@ -115,7 +121,7 @@ class ArtistSuggestions extends Component {
     if (suggestion.suggestionDetail == "1") {
       return (
         <a
-          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
+          href={`/A-detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
             {" "}
@@ -130,7 +136,7 @@ class ArtistSuggestions extends Component {
       return (
         <a
           style={{ color: "black" }}
-          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
+          href={`/A-detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -143,7 +149,7 @@ class ArtistSuggestions extends Component {
       return (
         <a
           style={{ color: "black" }}
-          href={`/A-detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
+          href={`/A-detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
         >
           <div className="custom-suggestion-row">
             {startingThinString}
@@ -173,6 +179,9 @@ class ArtistSuggestions extends Component {
       suggestions: [],
     });
   };
+  closesearch = () => {
+    this.props.cs();
+  }
   render() {
     const { value, suggestions } = this.state;
 
@@ -184,8 +193,11 @@ class ArtistSuggestions extends Component {
         if (e.charCode == 13) {
           console.log("-------------");
           console.log(languages);
-          window.location.href = `/A-detailSuggestions?search=${this.state.value}&type=5`;
+          window.location.href = `/A-detailSuggestions?search=${encodeURIComponent(this.state.value)}&type=5`;
           //this.onSuggestionsFetchRequested({ value: this.state.value });
+        }
+        else{
+          console.log("no operation");
         }
       },
     };
@@ -197,13 +209,13 @@ class ArtistSuggestions extends Component {
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
           ></img>
-          <a href="./home">
             <img
               className="searchbarNav inner-addon right-addon"
               style={{ width: "15px", left: "90%", top: "3rem" }}
               src={logos.closelogo}
+              onClick={()=>{this.closesearch()}}
             ></img>
-          </a>
+       
           <input
             style={{
               border: "none",

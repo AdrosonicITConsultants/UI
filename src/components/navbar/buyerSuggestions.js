@@ -127,6 +127,9 @@ class BuyerSuggestions extends Component {
       suggestions: [],
     });
   };
+  closesearch = () => {
+    this.props.cs();
+  }
   render() {
     const { value, suggestions } = this.state;
 
@@ -151,13 +154,12 @@ class BuyerSuggestions extends Component {
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
           ></img>
-          <a href="./home">
-            <img
+          <img
               className="searchbarNav inner-addon right-addon"
               style={{ width: "15px", left: "90%", top: "3rem" }}
               src={logos.closelogo}
+              onClick={()=>{this.closesearch()}}
             ></img>
-          </a>
           <input
             style={{
               border: "none",

@@ -33,6 +33,7 @@ export default class DetailSuggestionsArtist extends Component {
         console.log(params);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type).then((response)=>{
+             console.log(response);
              if(response.data.valid == true)
              {
                this.setState({
@@ -43,7 +44,15 @@ export default class DetailSuggestionsArtist extends Component {
                 antaran : 1,
 
               },()=>{
-                console.log(this.state)
+                console.log(this.state.searchWord)
+              })
+             }
+             else{
+              this.setState({
+                
+                searchWord : params.search,
+                
+
               })
              }
 
@@ -51,8 +60,6 @@ export default class DetailSuggestionsArtist extends Component {
         TTCEapi.getProductIdsInWishlist().then((response)=>{
           var item=this.state.getProductIdsInWishlist
           this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
-              console.log(this.state.getProductIdsInWishlist);
-              console.log(this.state.getProductIdsInWishlist.indexOf(12))
        
           });
       });
@@ -70,6 +77,9 @@ export default class DetailSuggestionsArtist extends Component {
            ?
            <>
            <NavbarComponent />
+           {this.state.resultsCount > 0 
+           ?
+          
         <Container>
           <Row noGutters={true} >
             <Col  className="headingsearch col-xs-12 bold">
@@ -170,6 +180,36 @@ export default class DetailSuggestionsArtist extends Component {
 
 
         </Container>
+        :
+        
+        <Container>
+                                    <Row noGutters={true}>
+                                      <br>
+                                      </br>
+                                      <br>
+                                      </br>
+                                      <Col className='col-xs-12 font30 bold text-center'>
+                                  Your search "{this.state.searchWord}" returned no results!
+                                  
+                                  
+                                      </Col>
+                                     
+                                      <Col className='col-xs-12  text-center'>
+                                      <br></br>
+                                        0 Results found
+                                        <br></br>
+                                        <br></br>
+                                      </Col>
+                                      
+                                      <Col className='col-xs-12  light text-center'>
+                                       Please check your spelling. Or try searching
+                                      </Col>
+                                      <Col className='col-xs-12 light text-center'>
+                                       something like "saree", "duppatta" etc.
+                                      </Col>
+                                    </Row>
+        </Container>
+        }
 <Footer></Footer>
       
            </>

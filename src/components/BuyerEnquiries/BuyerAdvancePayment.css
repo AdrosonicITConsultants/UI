@@ -62,6 +62,17 @@
      text-align: center;
      margin-top: 1px;
  }
+
+ .totalamtpay2{
+   color:rgb(102, 136, 255) !important;
+ }
+
+ .Accdetailstxt{
+  font-size: 14px;
+  text-align: center;
+  margin-top: 35px;
+  font-weight: bolder;
+ }
  .orderamthead{
      font-size: 10px;
      color: gray;
@@ -106,6 +117,44 @@
 
  }
 
+ .advpayimg{
+  height: 91px !important;
+  width: 90px !important;
+ }
+
+ .fontsize16pa{
+   font-size: 16px !important;
+ }
+
+ .hrlineadvpay{  
+   width: 100%;
+ border-top: 2.5px solid rgb(192 192 192 / 22%);
+ /* margin-top: 50px; */
+ margin-bottom: 10px;
+ margin-left: 0px;
+}
+
+.gpaypthmphonepaysize{
+  font-size: 12px;
+    font-weight: bold;
+    color: gray;
+}
+
+.pinknote{
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: deeppink;
+}
+.bluenote{
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: cornflowerblue;
+}
+.uploadtractionbtnfloat{
+  float: right !important;
+}
  @media screen and (max-width:767px){
    .aligncenter{
     text-align: -webkit-center;
@@ -131,6 +180,26 @@
   font-size: 17px;
   text-align: center;
   margin-top: 35px;
+}
+.advpayimg{
+  height: 91px !important;
+  width: 90px !important;
+ }
+
+ .fontsize16pa{
+   font-size: 11px !important;
+ }
+ .payadvhead{
+   font-size: 13px;
+ }
+ .cparrowsize {
+  width: 21px!important;
+}
+.fontheadingadv{
+  font-size:14px
+}
+.uploadtractionbtnfloat{
+  float: none !important;
 }
  }
  

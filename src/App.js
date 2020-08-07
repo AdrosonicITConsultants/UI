@@ -59,6 +59,8 @@ import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiry
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
 import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
 import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
+import { BuyerAdvancePayment2 } from './components/BuyerEnquiries/BuyerAdvancePayment2';
+import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePayment3';
 function App() {
   
   return (
@@ -108,6 +110,10 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
+          <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} />
+          <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
+
+          
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
           <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
           {/* <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} /> */}

@@ -17,7 +17,7 @@ import Moment from 'react-moment';
 
 import Footer from '../footer/footer';
 
-export class BuyerAdvancePayment extends Component {
+export class BuyerAdvancePayment3 extends Component {
     constructor() {
         super();
         
@@ -31,7 +31,6 @@ export class BuyerAdvancePayment extends Component {
             select30:true,
             select50:false,
             dataload:false,
-            enquiryCode:"",
 
                    }
     }
@@ -39,10 +38,6 @@ export class BuyerAdvancePayment extends Component {
     
     BacktoPreview(){
     this.props.bp();
-    }
-
-    proceedtopay(){
-        browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
     }
 
     select20(){
@@ -84,7 +79,6 @@ export class BuyerAdvancePayment extends Component {
     componentDidMount() {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-        this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
@@ -194,7 +188,7 @@ export class BuyerAdvancePayment extends Component {
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        // onClick={() => this.backoperation()}
+                                        
                             ></img>
                           
                           </Col>
@@ -226,7 +220,7 @@ export class BuyerAdvancePayment extends Component {
 
                                     </div>
                                     
-                                    {/* <span ></span> */}
+                                   
                                 </div>
                                 <div>
                                   <div noGutters={true} >
@@ -354,7 +348,7 @@ export class BuyerAdvancePayment extends Component {
 <Row noGutters={true} className="margintoprow" style={{textAlign:"center"}}>
 
     <Col className="col-xs-12">
-        <button className="proccedwithadvpaybtn" onClick={() => this.proceedtopay()}>Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+        <button className="proccedwithadvpaybtn">Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
 </button>
     </Col>
 </Row>
@@ -394,5 +388,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment);
+const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment3);
 export default connectedLoginPage;

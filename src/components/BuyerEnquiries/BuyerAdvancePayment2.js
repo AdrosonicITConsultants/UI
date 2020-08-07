@@ -17,7 +17,7 @@ import Moment from 'react-moment';
 
 import Footer from '../footer/footer';
 
-export class BuyerAdvancePayment extends Component {
+export class BuyerAdvancePayment2 extends Component {
     constructor() {
         super();
         
@@ -41,8 +41,8 @@ export class BuyerAdvancePayment extends Component {
     this.props.bp();
     }
 
-    proceedtopay(){
-        browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
+    uploadReceiptandSend(){
+        browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
     }
 
     select20(){
@@ -194,7 +194,7 @@ export class BuyerAdvancePayment extends Component {
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        // onClick={() => this.backoperation()}
+                                        
                             ></img>
                           
                           </Col>
@@ -226,7 +226,7 @@ export class BuyerAdvancePayment extends Component {
 
                                     </div>
                                     
-                                    {/* <span ></span> */}
+                                   
                                 </div>
                                 <div>
                                   <div noGutters={true} >
@@ -274,10 +274,12 @@ export class BuyerAdvancePayment extends Component {
             <div class="Total-square-container">
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
-              <h3 className="totalamtpay"><span > 
-                   <i class="fa fa-inr" aria-hidden="true"></i> 1111.00</span>
+              <h3 className="totalamtpay totalamtpay2" ><span > 
+                   <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 1111.00</span>
                     </h3>
-
+                    {/* <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span> */}
+     
+  
                 </div>
                 </div>
              
@@ -285,83 +287,179 @@ export class BuyerAdvancePayment extends Component {
   </Row>
 
   <Row  noGutters={true}>
-      <Col className="col-xs-12 selectpercenttext">
-          Select the % of the total amount (as per PI) you wish to pay below
+      <Col className="col-xs-12 Accdetailstxt">
+          Account Details: <br/>
+          Bikesh Singh
+      </Col>
+  </Row>
+
+  <Row  noGutters={true}>
+      <Col className="col-xs-12 Accdetailstxt">
+          Axis Bank Ltd,Maniabandhan <br/>
+          Account No. <span style={{color:"darkgrey"}}>123456</span>    <br/>
+          IFSC CODE: <span style={{color:"darkgrey"}}>123456</span>
+      </Col>
+  </Row>
+  <Row>
+      <Col className="col-xs-5">
+      </Col>
+      <Col className="col-xs-2">
+      <hr className="hrlineadvpay "></hr>
+
+      </Col>
+      <Col className="col-xs-5">
       </Col>
   </Row>
   {/* ----------------------BoX--------------------- */}
 
   <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-3 ">
+  <Col className="col-xs-2 ">
          
       </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container "  
-      className={
-               (this.state.selected == "select20"
-                 ? "borderbox"
-                 : "")
-               }
-               onClick={this.select20}>
-                <div class="Select20-square ">
-                20
+      <Col className="col-xs-12 " sm={3}>
+      
+                <Row>
+                <Col sm = {{size: "3"}}>
+
+                <img src={logos.gpay} className="gpayicon mt0"></img>
+
+                </Col>
+                <Col sm = {{size: "9"}} className="digitalbank">
+                <div className="gpaypthmphonepaysize">
+                Google Pay UPI Id
                 </div>
+                <div>
+                a
+                {/* {this.state.gpayupi} */}
                 </div>
+                </Col>
+                </Row> 
+       
       </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select30"
-          ? "borderbox"
-          : "")
-        }
-        
-        onClick={this.select30}
-        >
-                <div class="Select30-square">
-                30
+
+      <Col className="col-xs-12 " sm={3}>
+      <Row>
+                <Col sm = {{size: "3"}}>
+
+                <img src={logos.paytm} className="gpayicon mt0"></img>
+
+                </Col>
+                <Col sm = {{size: "9"}} className="digitalbank">
+                <div className="gpaypthmphonepaysize">
+                Paytm Registered Mobile Number
                 </div>
+                <div>
+                a
+                {/* {this.state.gpayupi} */}
                 </div>
+                </Col>
+                </Row> 
       </Col>
-      <Col className="col-xs-12 " sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select50"
-          ? "borderbox"
-          : "")
-        }
-        onClick={this.select50}>
-                <div class="Select50-square">
-                50
+
+      <Col className="col-xs-12 " sm={3}>
+                <Row>
+                <Col sm = {{size: "3"}}>
+
+                <img src={logos.phonepe} className="gpayicon mt0"></img>
+
+                </Col>
+                <Col sm = {{size: "9"}} className="digitalbank ">
+                <div className="gpaypthmphonepaysize">
+                Registered Number for PhonePay
                 </div>
+                <div>
+                a
+                {/* {this.state.gpayupi} */}
                 </div>
+                </Col>
+                </Row> 
       </Col>
-      <Col className="col-xs-3 ">
+      {/* <Col className="col-xs-1 ">
          
-      </Col>
+      </Col> */}
   </Row>
   {/* ----------------------BoX End--------------------- */}
 
 <Row noGutters={true} className="margintoprow">
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="selectpercenttext">  Calculated amount you pay as a advanceed : <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span>
-     
-                </span>
-    </Col>
+<Col className="col-xs-2 ">
+         
+      </Col>
+         <Col className="col-xs-12 " sm={3}>
+         
+                  
+          
+         </Col>
+   
+         <Col className="col-xs-12 " sm={3}>
+         <Row noGutters={true} className="pinknote">
+             Please make sure that the uploaded images are sharp and bright with proper text visiblity
+             and clear handwriting.     
+        </Row> 
+         </Col>
+
+         <Col className="col-xs-12 " sm={3}>
+         <Row noGutters={true} className="pinknote">
+                
+        </Row> 
+         </Col>
+   
+        
+
 </Row>
 
 
-<Row noGutters={true} className="margintoprow" style={{textAlign:"center"}}>
+<Row noGutters={true} className="margintoprow">
+{/* <Col className="col-xs-2 ">
+         
+      </Col> */}
+    
+         <Row noGutters={true} className="bluenote">
+         <Col className="col-xs-1 ">
+         
+         </Col>
+             <Col className="col-xs-12" sm={6}>
+             <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
+         onClick={() => this.uploadReceiptandSend()}>
+        <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
+        Upload transaction receipt 
+            </button>
+             </Col>
+             <Col className="col-xs-12" sm={3}>
+             Image file formats & <br/> .pdf only.Upto 5Mb Max. 
+             </Col>
 
-    <Col className="col-xs-12">
-        <button className="proccedwithadvpaybtn" onClick={() => this.proceedtopay()}>Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
-</button>
-    </Col>
+       
+   
+        </Row> 
+        
+
+         {/* <Col className="col-xs-12 " sm={3}>
+         <Row noGutters={true} className="pinknote">
+                
+        </Row> 
+         </Col> */}
+   
+        
+
 </Row>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-    <p>   <span className="selectpercenttext">  The maximum time limit for completing this transaction is 10 Days <br/>
+    <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  
+    The maximum time limit for completing this transaction is 10 Days <br/>
       after generating this enquiry.
                 </span></p>
     </Col>
@@ -369,7 +467,7 @@ export class BuyerAdvancePayment extends Component {
 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="reporttt">  The following will be notified to Artisan & Administration team at Tata Trusts
+      <span className="reporttt">  It will be notified to Artisan for confirmation & the Administration team at Tata Trusts
      
                 </span>
                
@@ -394,5 +492,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment);
+const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment2);
 export default connectedLoginPage;

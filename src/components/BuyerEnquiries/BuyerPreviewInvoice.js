@@ -60,6 +60,7 @@ export class BuyerPreviewInvoice extends Component {
  
     componentDidMount() { 
         console.log(this.state.enquiryCode);
+        console.log(this.state.enquiryId);
 
         TTCEapi.getBuyerPreviewPI(this.state.enquiryCode).then((response)=>{
             if(response.data.valid)
@@ -120,7 +121,7 @@ export class BuyerPreviewInvoice extends Component {
     }
 
     proceedtoadvancepay(){
-        browserHistory.push("/payadvance")
+        browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
     
     render(){

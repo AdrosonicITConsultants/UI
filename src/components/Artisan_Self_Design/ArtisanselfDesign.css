@@ -6,6 +6,9 @@
    margin-top: 93px;
     
 }
+.container0{
+  min-height:0px!important;
+}
 .asdthreadbg{
     background-color: black;
     background-image: url("../../assets/Asdbg.svg");

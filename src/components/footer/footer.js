@@ -9,10 +9,11 @@ import logos from "../../assets"
 export default class Footer extends Component {
     render() {
         return (
+          <>
           
 
             <div className="footerblack ">
-            <Container>
+            <Container className='footerContainer'>
               <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span
@@ -100,6 +101,7 @@ export default class Footer extends Component {
               </Container>
 
             </div>
+            </>
         );
     }
 }

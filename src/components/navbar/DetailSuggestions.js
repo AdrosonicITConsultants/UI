@@ -23,7 +23,10 @@ export default class DetailSuggestions extends Component {
             dataload : false,    
             resultsCount: 0,
             products : [],
-            getProductIdsInWishlist :[]
+            getProductIdsInWishlist :[],
+            selfProduct : 0 ,
+            antaranProduct: 0 ,
+
     };
   }
 
@@ -39,10 +42,30 @@ export default class DetailSuggestions extends Component {
                 resultsCount : response.data.data.length,
                 searchWord : params.search,
                 both : 1,
-                antaran : 1,
+                antaran : 0,
 
               },()=>{
                 console.log(this.state)
+                var self = 0 ;
+                for ( var item in this.state.products )
+                {
+                  if(this.state.products[item].madeWithAnthran == 0)
+                  {
+                    self = self + 1;
+                  }
+                }
+                var antaran = parseInt(this.state.resultsCount - self )
+                this.setState({selfProduct : self , antaranProduct : antaran },()=>{
+                  console.log(this.state);
+                });
+              })
+             }
+             else{
+              this.setState({
+                
+                searchWord : params.search,
+                
+
               })
              }
 
@@ -69,6 +92,8 @@ export default class DetailSuggestions extends Component {
            ?
            <>
            <NavbarComponent />
+           {this.state.resultsCount > 0 
+           ?
         <Container>
           <Row noGutters={true} >
             <Col  className="headingsearch col-xs-12 bold">
@@ -76,7 +101,14 @@ export default class DetailSuggestions extends Component {
 
             </Col>
             <Col  className="font20 col-xs-12 light">
-            Showing {" "+ this.state.resultsCount} results
+            Showing 
+            {" "}
+            {this.state.both == 1 ? this.state.resultsCount : null } 
+            {this.state.antaran == 1 ? this.state.antaranProduct : null } 
+            {(this.state.antaran == 0 && this.state.both == 0)  ? this.state.selfProduct : null } 
+
+            {" "}
+             results
 
             </Col>
             </Row>
@@ -86,18 +118,18 @@ export default class DetailSuggestions extends Component {
               Filter according to design collections
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Male" name="gender" onClick={()=>{this.setState({both : 0, antaran :1})}}/>
+            <input type="radio" value="Male" name="gender" checked={this.state.antaran == 1} onClick={()=>{this.setState({both : 0, antaran :1})}}/>
             <img src={logos.antaranCoDesignLogo} className="logosearch"></img>Show only Antaran Co-Design
 
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Female" name="gender" onClick={()=>{this.setState({both : 0, antaran:0})}}/> 
+            <input type="radio" value="Female" name="gender"  checked={this.state.antaran == 0 && this.state.both == 0 } onClick={()=>{this.setState({both : 0, antaran:0})}}/> 
             <img src={logos.artisianSelfLogo} className="logosearch"></img>Show only Artisan Self Design
 
 
             </Col>
             <Col className="col-sm-2 padding0">
-            <input type="radio" value="Other" name="gender" onClick={()=>{this.setState({both : 1})}}/> Show both
+            <input type="radio" value="Other" name="gender" onClick={()=>{this.setState({both : 1})}} checked={this.state.both == 1} /> Show both
 
             </Col>
             </Col>
@@ -169,6 +201,35 @@ export default class DetailSuggestions extends Component {
 
 
         </Container>
+                :
+            <Container>
+                                    <Row noGutters={true}>
+                                      <br>
+                                      </br>
+                                      <br>
+                                      </br>
+                                      <Col className='col-xs-12 font30 bold text-center'>
+                                  Your search "{this.state.searchWord}" returned no results!
+                                  
+                                  
+                                      </Col>
+                                     
+                                      <Col className='col-xs-12  text-center'>
+                                      <br></br>
+                                        0 Results found
+                                        <br></br>
+                                        <br></br>
+                                      </Col>
+                                      
+                                      <Col className='col-xs-12  light text-center'>
+                                       Please check your spelling. Or try searching
+                                      </Col>
+                                      <Col className='col-xs-12 light text-center'>
+                                       something like "saree", "duppatta" etc.
+                                      </Col>
+                                    </Row>
+        </Container>
+        }
 <Footer></Footer>
       
            </>

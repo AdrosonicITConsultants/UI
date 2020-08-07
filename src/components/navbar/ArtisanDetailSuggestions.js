@@ -97,18 +97,18 @@ export default class DetailSuggestionsArtist extends Component {
               Filter according to design collections
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Male" name="gender" onClick={()=>{this.setState({both : 0, antaran :1})}}/>
+            <input type="radio" value="Male" name="gender" checked={this.state.antaran == 1} onClick={()=>{this.setState({both : 0, antaran :1})}}/>
             <img src={logos.antaranCoDesignLogo} className="logosearch"></img>Show only Antaran Co-Design
 
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Female" name="gender" onClick={()=>{this.setState({both : 0, antaran:0})}}/> 
+            <input type="radio" value="Female" name="gender" checked={this.state.antaran == 0 && this.state.both == 0 } onClick={()=>{this.setState({both : 0, antaran:0})}}/> 
             <img src={logos.artisianSelfLogo} className="logosearch"></img>Show only Artisan Self Design
 
 
             </Col>
             <Col className="col-sm-2 padding0">
-            <input type="radio" value="Other" name="gender" onClick={()=>{this.setState({both : 1})}}/> Show both
+            <input type="radio" value="Other" name="gender" onClick={()=>{this.setState({both : 1})}} checked={this.state.both == 1} /> Show both
 
             </Col>
             </Col>

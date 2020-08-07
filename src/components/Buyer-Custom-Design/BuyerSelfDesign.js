@@ -790,10 +790,11 @@ relatedProductTemp[e.target.name] = option;
                         autoClose: true,
                       });
                       document.getElementById('id02').style.display='none';
-                      this.Cancel();
                       this.setState({
                         SaveDisabled: false
                       })
+                      browserHistory.push("./Customprod")
+
                     } else {
                       customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,

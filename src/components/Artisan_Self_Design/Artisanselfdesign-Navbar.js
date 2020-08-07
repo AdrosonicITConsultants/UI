@@ -73,7 +73,7 @@ export default class ArtisanselfdesignNavbar extends Component {
     render() {
         return (
             <React.Fragment>
-                <Container>
+                <Container className="container0">
             <Row noGutters="true">
             <Col sm={{size:2}} xs={2} md={2} className="Vcheading colorWhite">
                <Link to="/Artisanself"> <h1 className={

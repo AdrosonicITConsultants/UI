@@ -20,8 +20,7 @@ const getSuggestions = async (value) => {
   if (response.data.data == null) {
     languages = [];
   } else {
-    languages = response.data.data.slice(0,9);
-    
+    languages = response.data.data.slice(0,10);   
   }
   if (languages.length == 0) {
     languages = [{ suggestion: "No Suggestion Found", inputVal: 0 }];
@@ -104,6 +103,7 @@ class ArtistSuggestions extends Component {
         </div>
       );
     }
+    
    
     var tempDisplay = suggestion.suggestion;
     var input = this.state.value;
@@ -193,8 +193,11 @@ class ArtistSuggestions extends Component {
         if (e.charCode == 13) {
           console.log("-------------");
           console.log(languages);
+          if(this.state.value!="")
+          {
           window.location.href = `/A-detailSuggestions?search=${encodeURIComponent(this.state.value)}&type=5`;
           //this.onSuggestionsFetchRequested({ value: this.state.value });
+          }
         }
         else{
           console.log("no operation");

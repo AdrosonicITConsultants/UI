@@ -18,12 +18,13 @@ const getSuggestions = async (value) => {
   if (response.data.data == null) {
     languages = [];
   } else {
-    languages = response.data.data;
+    languages = response.data.data.slice(0,10);
   }
   if (languages.length == 0) {
     languages = [{ suggestion: "No Suggestion Found", inputVal: value }];
     return languages;
   } else {
+    languages.unshift({ suggestion: "Suggestions", inputVal: value })
     return inputLength === 0
       ? []
       : languages.filter((lang) => lang["suggestion"]);
@@ -32,7 +33,11 @@ const getSuggestions = async (value) => {
 
 const getSuggestionValue = (suggestion) => {
   console.log(suggestion.suggestion);
-  if (suggestion.suggestionType == "Global") {
+  if(suggestion.suggestionType == undefined)
+  {
+
+  }
+  else if (suggestion.suggestionType == "Global") {
     return `${suggestion.suggestion}`;
   } else {
     return `${suggestion.suggestion} in ${suggestion.suggestionType}`;
@@ -53,18 +58,43 @@ class BuyerSuggestions extends Component {
     };
   }
   renderSuggestion = (suggestion) => {
-    if (suggestion.suggestion == "No Suggestion Found") {
+    if(suggestion.suggestion == "Suggestions"){
       return (
-        <div className="showingnoresults">
-          <h2>Your Search "{suggestion.inputVal}"Returned No Results</h2>
-          <p> "0 Results found"</p>
-          <p>
-            {" "}
-            "Please check your spelling. <br />
-            Or try searching something like “saree”, “dupatta” etc."
-          </p>
+          <div
+            style={{
+              fontSize: "xx-large",
+              paddingLeft: "1rem" ,
+              paddingTop: "1rem",
+            }}
+          >
+            {"Suggestions"}
+          </div>
+      );
+    } else if (suggestion.suggestion == "No Suggestion Found") {
+      return (
+        <div>
+          <div
+            style={{
+              fontSize: "xx-large",
+              paddingLeft: "3rem",
+              paddingTop: "1rem",
+            }}
+          >
+            {"Suggestions"}
+          </div>
+
+          <div
+            style={{
+              marginLeft: "4rem",
+              paddingTop: "1rem",
+              paddingBottom: "3rem",
+              color: "darkgray",
+              fontSize: "large",
+            }}
+          >
+            No Results Found. Try Checking Your Spelling.
+          </div>
         </div>
-        // return <a href={`/noSuggestions/${suggestion.inputVal}`}><div className="custom-suggestion-row">No Suggestions</div></a>
       );
     }
     var tempDisplay = suggestion.suggestion;
@@ -81,35 +111,49 @@ class BuyerSuggestions extends Component {
         ? tempDisplay.substring(endIndex, tempDisplay.length)
         : "";
 
-    if (suggestion.suggestionType == "Global") {
-      return (
-        <a
-          style={{ color: "black" }}
-          href={`/detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
-          >
-          <div className="custom-suggestion-row">
-            {startingThinString}
-            <b>{boldString}</b>
-            {endingThinString}
-          </div>
-        </a>
-      );
-    } else {
-      return (
-       
-          <a
-                    style={{ color: "black" }}
-
-        href={`/detailSuggestions?search=${suggestion.suggestion}&type=${suggestion.suggestionTypeId}`}
-      >
-          <div className="custom-suggestion-row">
-            {startingThinString}
-            <b>{boldString}</b>
-            {endingThinString} in <b>{suggestion.suggestionType}</b>
-          </div>
-        </a>
-      );
-    }
+        if (suggestion.suggestionDetail == "1") {
+          return (
+            <a
+              href={`/detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
+            >
+              <div className="custom-suggestion-row">
+                {" "}
+                {startingThinString}
+                <b>{boldString}</b>
+                {endingThinString} in <b>{suggestion.suggestionDetail}</b>
+              </div>
+            </a>
+          );
+        }
+        if (suggestion.plainSuggestion == "1") {
+          return (
+            <a
+              style={{ color: "black" }}
+              href={`/detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
+            >
+              <div className="custom-suggestion-row">
+                {startingThinString}
+                <b>{boldString}</b>
+                {endingThinString}
+              </div>
+            </a>
+          );
+        } else {
+          return (
+            <a
+              style={{ color: "black" }}
+              href={`/detailSuggestions?search=${encodeURIComponent(suggestion.suggestion)}&type=${suggestion.suggestionTypeId}`}
+            >
+              <div className="custom-suggestion-row">
+                {startingThinString}
+                <b>{boldString}</b>
+                {endingThinString} in <b>{suggestion.suggestionType}</b>
+              </div>
+            </a>
+          );
+          
+        }
+        
   };
   onChange = (event, { newValue }) => {
     this.setState({
@@ -134,15 +178,21 @@ class BuyerSuggestions extends Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-      placeholder: "Search",
+      placeholder: "Search products, codes, product type, weaves, category",
       value,
       onChange: this.onChange,
       onKeyPress: (e) => {
         if (e.charCode == 13) {
           console.log("-------------");
           console.log(languages);
-          window.location.href = `/detailSuggestions?search=${this.state.value}&type=5`
+          if(this.state.value!="")
+          {
+          window.location.href = `/detailSuggestions?search=${encodeURIComponent(this.state.value)}&type=5`;
           //this.onSuggestionsFetchRequested({ value: this.state.value });
+          }
+        }
+        else{
+          console.log("no operation");
         }
       },
     };

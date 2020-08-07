@@ -521,7 +521,7 @@ export class BuyerSingleEnquiry extends Component {
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
-                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                    gpayupi : response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile, 
                                                 }); 
                                             }
                                             

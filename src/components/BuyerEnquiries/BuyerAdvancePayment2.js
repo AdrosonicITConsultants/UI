@@ -21,17 +21,17 @@ export class BuyerAdvancePayment2 extends Component {
     constructor() {
         super();
         
-        this.select20= this.select20.bind(this);
+      
         this.select30= this.select30.bind(this);
         this.select50= this.select50.bind(this);
 
         this.state = {
-            selected:"select20",
-            select20:false,
+            selected:"select30",
             select30:true,
             select50:false,
             dataload:false,
             enquiryCode:"",
+            upload:true,
 
                    }
     }
@@ -45,17 +45,7 @@ export class BuyerAdvancePayment2 extends Component {
         browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
     }
 
-    select20(){
-        this.setState((prevState) => {
-            return{
-             selected: "select20",
-             select20:true,
-             select30:false,
-             select50:false,
-         
-            };
-        });
-    }
+  
 
     select30(){
         this.setState((prevState) => {
@@ -170,11 +160,22 @@ export class BuyerAdvancePayment2 extends Component {
                     });
             }
         })
-     
+        // document.getElementById('acceptMOQModal').style.display='none';
+        // document.getElementById('confirmMOQModal').style.display='block';
+
       }
     
-    
-    
+      acceptMOQModalShow = () => {
+        document.getElementById('acceptMOQModal').style.display='block';
+    }
+
+    acceptMOQModalClose = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+    }
+
+    goBack(){
+        browserHistory.push("/payadvance?code="+this.state.enquiryCode)
+    }
     render(){
         return(
             
@@ -194,7 +195,7 @@ export class BuyerAdvancePayment2 extends Component {
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        
+                                       onClick={() => this.goBack()}
                             ></img>
                           
                           </Col>
@@ -313,12 +314,10 @@ export class BuyerAdvancePayment2 extends Component {
   {/* ----------------------BoX--------------------- */}
 
   <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-2 ">
-         
-      </Col>
-      <Col className="col-xs-12 " sm={3}>
+ 
+      <Col className="col-xs-12 " sm={4}>
       
-                <Row>
+                <Row className="bankiconborderright">
                 <Col sm = {{size: "3"}}>
 
                 <img src={logos.gpay} className="gpayicon mt0"></img>
@@ -337,8 +336,8 @@ export class BuyerAdvancePayment2 extends Component {
        
       </Col>
 
-      <Col className="col-xs-12 " sm={3}>
-      <Row>
+      <Col className="col-xs-12 " sm={4}>
+      <Row className="bankiconborderright">
                 <Col sm = {{size: "3"}}>
 
                 <img src={logos.paytm} className="gpayicon mt0"></img>
@@ -356,7 +355,7 @@ export class BuyerAdvancePayment2 extends Component {
                 </Row> 
       </Col>
 
-      <Col className="col-xs-12 " sm={3}>
+      <Col className="col-xs-12 " sm={4}>
                 <Row>
                 <Col sm = {{size: "3"}}>
 
@@ -374,41 +373,20 @@ export class BuyerAdvancePayment2 extends Component {
                 </Col>
                 </Row> 
       </Col>
-      {/* <Col className="col-xs-1 ">
-         
-      </Col> */}
+  
+     
   </Row>
   {/* ----------------------BoX End--------------------- */}
 
-<Row noGutters={true} className="margintoprow">
-<Col className="col-xs-2 ">
-         
-      </Col>
-         <Col className="col-xs-12 " sm={3}>
-         
-                  
-          
-         </Col>
-   
-         <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-             Please make sure that the uploaded images are sharp and bright with proper text visiblity
-             and clear handwriting.     
-        </Row> 
-         </Col>
-
-         <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-                
-        </Row> 
-         </Col>
-   
-        
-
-</Row>
-
-
-<Row noGutters={true} className="margintoprow">
+<Row noGutters={true}>
+            <Col className="col-xs-12 pinknote" style={{textAlign:"center"}}>
+            Please make sure that the uploaded images are <br/> sharp and bright with proper text visiblity
+             and <br/>clear handwriting. 
+             
+            </Col>
+  </Row>
+{this.state.upload?
+    <Row noGutters={true} className="margintoprow aligncenter">
 {/* <Col className="col-xs-2 ">
          
       </Col> */}
@@ -417,44 +395,38 @@ export class BuyerAdvancePayment2 extends Component {
          <Col className="col-xs-1 ">
          
          </Col>
-             <Col className="col-xs-12" sm={6}>
+             <Col className="col-xs-12 aligncenter" sm={6}>
              <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
-         onClick={() => this.uploadReceiptandSend()}>
+         onClick={this.acceptMOQModalShow}
+         >
         <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
         Upload transaction receipt 
             </button>
              </Col>
-             <Col className="col-xs-12" sm={3}>
+             <Col className="col-xs-12 aligncenter" sm={3}>
              Image file formats & <br/> .pdf only.Upto 5Mb Max. 
              </Col>
 
        
    
         </Row> 
-        
-
-         {/* <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-                
-        </Row> 
-         </Col> */}
-   
-        
-
+  
 </Row>
-
-
-
-
-
-
-
-
-
-
-
-
-
+:
+<Row noGutters={true} className="margintoprow aligncenter">
+<Col className="col-xs-12 " style={{textAlign:"center"}}>
+         <button className="uploadroundbtn"><i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> </button> 
+         <b className="uploadreceiptname">name of receipt</b>
+         <br/>
+         <button className="uploadconfirmbtn" 
+         onClick={() => this.uploadReceiptandSend()}>
+             <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
+        Upload and send for confirmation 
+            </button>
+      </Col>
+    
+</Row>
+}
 
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
@@ -473,12 +445,50 @@ export class BuyerAdvancePayment2 extends Component {
                
     </Col>
 </Row>
+{/* _________________________________________Modal_________________________________________________ */}
+                                            <div id="acceptMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+                                                                    <Col className="col-xs-12 fontplay">
+                                                                        Uploading your receipt
+                                                                        <br/>
+                                                                        <div class="loading-bar">
+                                                                            <div class="fuzzy"></div>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                
+                                                                <Row noGutters={true}>
+                                                                <Col className="col-xs-12" style={{textAlign:"center"}}>
+                                                                <button onClick={this.acceptMOQModalClose} className="uploadInbgbtn">
+                                                                 Upload in background
+                                                             </button>
+                                                                  
+                                                                </Col>
+                                                                </Row>
+                                                                                                                                 
+                                                                
+                                                            </div>
+                                                            </div>
+                                                </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
 <br/>
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
 
                 </>:null}
+                <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
 </Container>
 
 </React.Fragment>

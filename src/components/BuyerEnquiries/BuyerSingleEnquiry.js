@@ -76,6 +76,7 @@ export class BuyerSingleEnquiry extends Component {
              MoqSelected : [],
              selectedArtisanId: 0,
              selectedMOQId: 0,
+             modalOksend:false,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -641,6 +642,7 @@ AcceptMoq(moqId,artisanId){
 
 
 MoqSimpleProductSelected(moqId){
+    this.setState({ modalOksend:true})
     let params = queryString.parse(this.props.location.search);
         console.log(params);
     TTCEapi.MoqSimpleProductSelected(params.code,moqId).then((response)=>{
@@ -653,6 +655,13 @@ MoqSimpleProductSelected(moqId){
             console.log(this.state.MoqSimpleProductSelected);
 
         }
+        else{
+            this.setState({
+                modalOksend:true
+            })
+        }
+
+
     })
 } 
 
@@ -1632,6 +1641,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                     <span >
                                                                         <button
+                                                                        disabled={this.state.modalOksend}
                                                                     onClick={() => this.MoqSimpleProductSelected(data.moq.id)}
                                                                     className="buyerMOQAcceptModalOkayButton">Ok</button></span>
                                                                 </div>

@@ -51,6 +51,7 @@ export class PreviewInvoice extends Component {
             customweftYarn:[],
             customwarpYarn:[],
             customextraWeftYarn:[],
+            gobackButtonClick:false
         };
       }
     
@@ -117,7 +118,8 @@ export class PreviewInvoice extends Component {
     
       sendPI(){
          this.setState({
-           sendPI: true
+           sendPI: true,
+            gobackButtonClick:true,
          })
        
         TTCEapi.sendPI(
@@ -145,7 +147,8 @@ export class PreviewInvoice extends Component {
           } 
         else{
           this.setState({
-            sendPI: true
+            sendPI: true,
+            gobackButtonClick:true
           })
           customToast.error(response.data.errorMessage , {
             position: toast.POSITION.TOP_RIGHT,
@@ -169,8 +172,7 @@ export class PreviewInvoice extends Component {
         <Col className="col-xs-12" >
        
         {this.state.piSend === 1?
-        <button  disabled={this.state.sendPI}  className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}} disabled><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
-        :
+    ""        :
         <button  disabled={this.state.sendPI} onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
     }
         </Col>
@@ -616,13 +618,21 @@ export class PreviewInvoice extends Component {
  </Row>
  </div>
  {/* ------------------------------buttons------------------------------- */}
+ 
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span>
-<button className="gobacktoeditdetart"  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
-{this.state.piSend === 1?
-  <button disabled={this.state.sendPI} className="Raiseinvbtn" disabled><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
 
+
+
+  {this.state.piSend=== 1  ?
+""
+:
+<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
+}
+
+{this.state.piSend === 1?
+""
 :
 <button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
 

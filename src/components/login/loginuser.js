@@ -19,8 +19,8 @@ export default class buyeruser extends Component {
     showValidation: !this.state.showValidation,
   });
 }
-  operation() {
-    debugger;
+operation = (event) => {
+  event.preventDefault();
     if (this.state.userName == "") {
      this.showValidation();
     } else {
@@ -103,6 +103,7 @@ export default class buyeruser extends Component {
           <br />
 
           <br />
+          <form onSubmit={this.operation}>
           <div>
             <Row  >
               <span className="col-xs-1"></span>
@@ -128,7 +129,7 @@ export default class buyeruser extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidation ? (
-                    <span className="bg-danger">please enter valid userID</span>
+                    <div className="bg-danger text-center loginUserErrorTop">Please enter valid userID</div>
                   ) : (
                     <br />
                   )}
@@ -142,12 +143,13 @@ export default class buyeruser extends Component {
               <button
                 className="blackButton"
                 // onClick={() => this.operation()}
-                onClick={() => this.operation()}
+                // onClick={() => this.operation()}
               >
                 Next
               </button>
             </div>
           </Row>
+          </form>
           <br />         
           <br />
           {/* <Row  >
@@ -171,12 +173,12 @@ export default class buyeruser extends Component {
             <div className="col-xs-12 text-center font13">
               {this.props.userpage == 1 ? (
                 <div>
-                  new user <a href="/buyer-registration">click here</a> to
+                  New user <a href="/buyer-registration">click here</a> to
                   register.
                 </div>
               ) : (
                 <div>
-                  new user <a href="/artist-registration">click here</a> to
+                  New user <a href="/artist-registration">click here</a> to
                   register.
                 </div>
               )}

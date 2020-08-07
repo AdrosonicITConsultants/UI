@@ -17,12 +17,13 @@ export default class buyerpass extends Component {
                  }
 
                  showValidationpass(){
-  this.setState({
-    showValidation: !this.state.showValidation,
-  });
+                  this.setState({
+                    showValidation: !this.state.showValidation,
+                  });
                  }
 
-                 Login() {                  
+                 Login = (event) => {
+                  event.preventDefault();
                    console.log(this.state);
                    if (this.state.password == "") {
                    this.showValidationpass();
@@ -112,6 +113,7 @@ export default class buyerpass extends Component {
                          <br />
 
                          <br />
+                         <form onSubmit={this.Login}>
                          <div>
                            <Row  >
                              <span className="col-xs-1"></span>
@@ -163,12 +165,13 @@ export default class buyerpass extends Component {
                            <div className="col-xs-12 text-center">
                              <button
                                className="blackButton"
-                               onClick={() => this.Login()}
+                              //  onClick={() => this.Login()}
                              >
                                Login
                              </button>
                            </div>
                          </Row>
+                         </form>
 <br/>
                          <br />
                          {/* <Row  >

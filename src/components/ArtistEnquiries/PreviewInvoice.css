@@ -207,6 +207,11 @@ margin-left: 25px;
     font-weight: 700;
     cursor: pointer;
 }
+
+.gobacktoeditdetart:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
 .Raiseinvbtn{
     width: 263px;
     height: 50px;

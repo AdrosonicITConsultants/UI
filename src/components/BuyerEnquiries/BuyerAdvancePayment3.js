@@ -185,11 +185,11 @@ export class BuyerAdvancePayment3 extends Component {
 
                         <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-1">
-                           <img
+                           {/* <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
                                         
-                            ></img>
+                            ></img> */}
                           
                           </Col>
                           <Col sm = "11" className="col-xs-11  ">
@@ -263,110 +263,24 @@ export class BuyerAdvancePayment3 extends Component {
                 </>
                 )}
 
-  <Row noGutters={true}>
-            <Col className="col-xs-12">
-            <div class="Total-square-container">
-                <div class="Total-square">
-                <p className="orderamthead">Order amount</p>
-              <h3 className="totalamtpay"><span > 
-                   <i class="fa fa-inr" aria-hidden="true"></i> 1111.00</span>
-                    </h3>
 
-                </div>
-                </div>
-             
-            </Col>
-  </Row>
-
-  <Row  noGutters={true}>
-      <Col className="col-xs-12 selectpercenttext">
-          Select the % of the total amount (as per PI) you wish to pay below
-      </Col>
-  </Row>
-  {/* ----------------------BoX--------------------- */}
-
-  <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-3 ">
-         
-      </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container "  
-      className={
-               (this.state.selected == "select20"
-                 ? "borderbox"
-                 : "")
-               }
-               onClick={this.select20}>
-                <div class="Select20-square ">
-                20
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select30"
-          ? "borderbox"
-          : "")
-        }
-        
-        onClick={this.select30}
-        >
-                <div class="Select30-square">
-                30
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-12 " sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select50"
-          ? "borderbox"
-          : "")
-        }
-        onClick={this.select50}>
-                <div class="Select50-square">
-                50
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-3 ">
-         
-      </Col>
-  </Row>
-  {/* ----------------------BoX End--------------------- */}
-
-<Row noGutters={true} className="margintoprow">
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="selectpercenttext">  Calculated amount you pay as a advanceed : <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span>
-     
-                </span>
-    </Col>
-</Row>
-
-
-<Row noGutters={true} className="margintoprow" style={{textAlign:"center"}}>
-
-    <Col className="col-xs-12">
-        <button className="proccedwithadvpaybtn">Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
-</button>
-    </Col>
-</Row>
 
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-    <p>   <span className="selectpercenttext">  The maximum time limit for completing this transaction is 10 Days <br/>
-      after generating this enquiry.
+    <p>   <span className="selectpercenttext">  Thank you! Your receipt has been uploaded successfully and Artisan is notified. <br/>
+      The acceptance will be notified within 3 maximum days from now.
                 </span></p>
     </Col>
 </Row>
 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="reporttt">  The following will be notified to Artisan & Administration team at Tata Trusts
-     
-                </span>
-               
+    <button className="proccedwithadvpaybtn viewtractionbtnwidth" 
+        
+         >
+        <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
+        View this transaction
+            </button>
     </Col>
 </Row>
 <br/>
@@ -375,6 +289,14 @@ export class BuyerAdvancePayment3 extends Component {
                 </div>
 
                 </>:null}
+                <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
 </Container>
 
 </React.Fragment>

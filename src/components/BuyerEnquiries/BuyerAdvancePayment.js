@@ -21,13 +21,13 @@ export class BuyerAdvancePayment extends Component {
     constructor() {
         super();
         
-        this.select20= this.select20.bind(this);
+        // this.select20= this.select20.bind(this);
         this.select30= this.select30.bind(this);
         this.select50= this.select50.bind(this);
 
         this.state = {
-            selected:"select20",
-            select20:false,
+            selected:"select30",
+            // select20:false,
             select30:true,
             select50:false,
             dataload:false,
@@ -45,17 +45,17 @@ export class BuyerAdvancePayment extends Component {
         browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
     }
 
-    select20(){
-        this.setState((prevState) => {
-            return{
-             selected: "select20",
-             select20:true,
-             select30:false,
-             select50:false,
+    // select20(){
+    //     this.setState((prevState) => {
+    //         return{
+    //          selected: "select20",
+    //          select20:true,
+    //          select30:false,
+    //          select50:false,
          
-            };
-        });
-    }
+    //         };
+    //     });
+    // }
 
     select30(){
         this.setState((prevState) => {
@@ -173,7 +173,9 @@ export class BuyerAdvancePayment extends Component {
      
       }
     
-    
+      backoperation(){
+          browserHistory.push("/buyerEnquiryDetails?code="+this.state.enquiryCode)
+      }
     
     render(){
         return(
@@ -194,7 +196,7 @@ export class BuyerAdvancePayment extends Component {
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        // onClick={() => this.backoperation()}
+                                        onClick={() => this.backoperation()}
                             ></img>
                           
                           </Col>
@@ -292,22 +294,10 @@ export class BuyerAdvancePayment extends Component {
   {/* ----------------------BoX--------------------- */}
 
   <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-3 ">
+  <Col className="col-xs-4 ">
          
       </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container "  
-      className={
-               (this.state.selected == "select20"
-                 ? "borderbox"
-                 : "")
-               }
-               onClick={this.select20}>
-                <div class="Select20-square ">
-                20
-                </div>
-                </div>
-      </Col>
+     
       <Col className="col-xs-12 alignbottom" sm={2}>
       <div class="Select-square-container"
       className={
@@ -318,7 +308,7 @@ export class BuyerAdvancePayment extends Component {
         
         onClick={this.select30}
         >
-                <div class="Select30-square">
+                <div class="Select20-square">
                 30
                 </div>
                 </div>
@@ -381,6 +371,14 @@ export class BuyerAdvancePayment extends Component {
                 </div>
 
                 </>:null}
+                <Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
 </Container>
 
 </React.Fragment>

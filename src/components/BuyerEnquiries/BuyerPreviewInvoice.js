@@ -55,6 +55,7 @@ export class BuyerPreviewInvoice extends Component {
               customextraWeftYarn:[],
               availableInStock:0
         }
+        // this.backPI = this.backPI.bind(this);
         
     } 
  
@@ -123,7 +124,12 @@ export class BuyerPreviewInvoice extends Component {
     proceedtoadvancepay(){
         browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
-    
+
+  //   backPI(){
+  //     this.setState({
+  //         preview: false,
+  //     })
+  // }
     render(){
         return(
             

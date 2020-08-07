@@ -85,6 +85,13 @@ export class BuyerSingleEnquiry extends Component {
     //     })
     //     }
     
+    ToggleSave = () => {
+        document.getElementById('id02').style.display='block';
+       }
+
+       ToggleSaveClose = () => {
+        document.getElementById('id02').style.display='none';
+       }
     getcollapseId = activecollapse => {
         if (activecollapse !== this.state.collapseId) {
           this.setState({
@@ -881,11 +888,25 @@ MoqSimpleProductSelected(moqId){
                 <Row>
                     <Col className="col-xs-6">
                     <button className=" closedEnquirybtn"
-                    onClick={()=>{this.markcompleted()}}
+                     onClick={this.ToggleSave}
+                    
                                        >
                                 <img src={logos.cancelenq} className="closeenqimg"></img>
                                 Close Enquiry
                                 </button>
+                                    <div id="id02" class="w3-modal">
+                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div class="w3-container">
+                                          <h3 className="deleteModalHeader">Are you sure you want to close this enquiry ?</h3>
+                                          <p className="deleteModalPara"></p>
+                                          <div className="deleteModalButtonOuterDiv">
+                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
+                                            <span onClick={()=>{this.markcompleted()}} className="saveModalOkayButton">Yes</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     </div>
+                                    
                     </Col>
                     {/* <Col className="col-xs-2"></Col> */}
                     <Col className="col-xs-6">

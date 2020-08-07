@@ -68,6 +68,7 @@ class ArtistProfile extends Component {
   
       }
       componentDidMount(){
+        console.log("dsds");
         TTCEapi.getProducts().then((response)=>{
             this.setState({products : response.data.data},() => {
             });
@@ -218,8 +219,8 @@ class ArtistProfile extends Component {
         this.setState({
             isPdetail:!this.state.isPdetail
         })
-     }
-     handlePdetailEdit2(){
+      }
+      handlePdetailEdit2(){
        if((parseFloat(this.state.pincode)>999999 || parseFloat(this.state.pincode)<100000 )&& this.state.pincode!= "")
       {
         this.setState({
@@ -241,178 +242,174 @@ class ArtistProfile extends Component {
               autoClose: true,
             });
           }
-
         })
        this.setState({
            isPdetail:!this.state.isPdetail
        });
       }
-    }
-     handlebdetEdit(){
-       this.setState({
-           isDetailsEdit:!this.state.isDetailsEdit
-       });
+      }
+      handlebdetEdit(){
+        this.setState({
+            isDetailsEdit:!this.state.isDetailsEdit
+        });
 
       }
-         
-    
       handlebdetEdit2(){
-      
-      var alpha=/([A-Za-z0-9])$/;
-      var char=/([A-Za-z])+$/;
-      var gpayvalidation=/^[ A-Za-z0-9_@./#&+-]*$/;
-      var numeric=/([0-9])$/;
-
-
-                  if(!alpha.test(this.state.benificiaryname))
-                        {                      
-                          this.setState({
-                            showValidationbank: true,
-                            message : "Invalid Beneficiary Name"
-                        });
-                                     
-                  }
-                  
-                 else if(!char.test(this.state.bankName))
-                  {                      
-                    this.setState({
-                        showValidationbank: true,
-                      message : "Invalid Bank Name"
-                  });
         
-                  
-            }
-            else if(!char.test(this.state.branch))
-            {                      
+        var alpha=/([A-Za-z0-9])$/;
+        var char=/([A-Za-z])+$/;
+        var gpayvalidation=/^[ A-Za-z0-9_@./#&+-]*$/;
+        var numeric=/([0-9])$/;
+
+
+                    if(!alpha.test(this.state.benificiaryname))
+                          {                      
+                            this.setState({
+                              showValidationbank: true,
+                              message : "Invalid Beneficiary Name"
+                          });
+                                      
+                    }
+                    
+                  else if(!char.test(this.state.bankName))
+                    {                      
+                      this.setState({
+                          showValidationbank: true,
+                        message : "Invalid Bank Name"
+                    });
+          
+                    
+              }
+              else if(!char.test(this.state.branch))
+              {                      
+                this.setState({
+                  showValidationbank: true,
+                  message : "Invalid Branch Name"
+              });
+    
+              
+        }
+        else if(!alpha.test(this.state.ifsccode))
+        {                      
+          this.setState({
+            showValidationbank: true,
+            message : "Invalid Bank Name"
+        });
+
+        
+  }
+          if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) ||!numeric.test(this.state.paytmupi) && this.state.paytmupi != "")
+            {
               this.setState({
                 showValidationbank: true,
-                message : "Invalid Branch Name"
+                message : "Invalid paytm number"
             });
-  
-            
-      }
-      else if(!alpha.test(this.state.ifsccode))
-      {                      
-        this.setState({
-          showValidationbank: true,
-          message : "Invalid Bank Name"
-      });
-
-      
-}
-        if((parseFloat(this.state.paytmupi)>9999999999 || parseFloat(this.state.paytmupi)<1000000000 ) ||!numeric.test(this.state.paytmupi) && this.state.paytmupi != "")
-          {
-            this.setState({
-              showValidationbank: true,
-              message : "Invalid paytm number"
-          });
-          }
-          else if((parseFloat(this.state.phonepeupi)>9999999999 || parseFloat(this.state.phonepeupi)<1000000000 ) || !numeric.test(this.state.phonepeupi) && this.state.phonepeupi != "" )
-          {
-            this.setState({
-              showValidationbank: true,
-              message : "Invalid phonepe number"
-          });
-          }
-          else if(!gpayvalidation.test(this.state.gpayupi))
-                  {                      
-                    this.setState({
-                        showValidationbank: true,
-                      message : "Invalid GPay number"
-                  });
-        
-                  
             }
-          else{
-            this.setState({
-              isDetailsEdit:!this.state.isDetailsEdit
-          });
-            TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
-              this.state.branch,this.state.ifsccode,this.state.benificiaryname,
-              this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
-                if (response.data.valid) {
-                  customToast.success("Bank details updated !", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                }
-                else{
-                  
-                  customToast.error(response.data.errorMessage, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                  
-                }
-
-  
-              });
-          }
-      
-    }
-     handlebEdit(){
- 
-        this.setState({
-            isBdetail:!this.state.isBdetail,
-            productSelected : []
-
-        },()=>{
-          TTCEapi.getProfile().then((response)=>{
-            for (var  items in response.data.data.userProductCategories)
-                      {     console.log(response.data.data.userProductCategories[items]);
-                        document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
-                        // prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
-                      }
-
-          })
-        })
-    }
-    handlebEdit2(){
-        var productSelected = "";
-        this.state.products.map((item) => { 
-            if(document.getElementById(item.id).checked){
-                 this.state.selectedprods.push(item.id)
-                 productSelected = productSelected + item.productDesc + ", "; 
-                }  
-            // console.log(this.state.selectedprods) ;
-            // this.setState({
-            //     prodsel : productSelected
-            // });
-            // document.getElementById("prodselected").innerHTML = productSelected;
-        }); 
-        
+            else if((parseFloat(this.state.phonepeupi)>9999999999 || parseFloat(this.state.phonepeupi)<1000000000 ) || !numeric.test(this.state.phonepeupi) && this.state.phonepeupi != "" )
+            {
+              this.setState({
+                showValidationbank: true,
+                message : "Invalid phonepe number"
+            });
+            }
+            else if(!gpayvalidation.test(this.state.gpayupi))
+                    {                      
+                      this.setState({
+                          showValidationbank: true,
+                        message : "Invalid GPay number"
+                    });
           
-            this.setState({
-              prodsel : productSelected
-          },()=>{
-              console.log(this.state.selectedprods) ;
-              TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo).then((response)=>{
-                if (response.data.valid) {
-                  customToast.success("Brand data updated !", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                }
-                else{
-                  
-                  customToast.error(response.data.errorMessage, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                  
-                }
-              });
-  
-          });
+                    
+              }
+            else{
+              this.setState({
+                isDetailsEdit:!this.state.isDetailsEdit
+            });
+              TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
+                this.state.branch,this.state.ifsccode,this.state.benificiaryname,
+                this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+                  if (response.data.valid) {
+                    customToast.success("Bank details updated !", {
+                      position: toast.POSITION.TOP_RIGHT,
+                      autoClose: true,
+                    });
+                  }
+                  else{
+                    
+                    customToast.error(response.data.errorMessage, {
+                      position: toast.POSITION.TOP_RIGHT,
+                      autoClose: true,
+                    });
+                    
+                  }
+
+    
+                });
+            }
+        
+      }
+      handlebEdit(){
   
           this.setState({
-              isBdetail:!this.state.isBdetail
-          });
+              isBdetail:!this.state.isBdetail,
+              productSelected : []
 
+          },()=>{
+            TTCEapi.getProfile().then((response)=>{
+              for (var  items in response.data.data.userProductCategories)
+                        {     console.log(response.data.data.userProductCategories[items]);
+                          document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
+                          // prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
+                        }
+
+            })
+          })
+      }
+      handlebEdit2(){
+          var productSelected = "";
+          this.state.products.map((item) => { 
+              if(document.getElementById(item.id).checked){
+                  this.state.selectedprods.push(item.id)
+                  productSelected = productSelected + item.productDesc + ", "; 
+                  }  
+              // console.log(this.state.selectedprods) ;
+              // this.setState({
+              //     prodsel : productSelected
+              // });
+              // document.getElementById("prodselected").innerHTML = productSelected;
+          }); 
           
-       
-    }
+            
+              this.setState({
+                prodsel : productSelected
+            },()=>{
+                console.log(this.state.selectedprods) ;
+                TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo).then((response)=>{
+                  if (response.data.valid) {
+                    customToast.success("Brand data updated !", {
+                      position: toast.POSITION.TOP_RIGHT,
+                      autoClose: true,
+                    });
+                  }
+                  else{
+                    
+                    customToast.error(response.data.errorMessage, {
+                      position: toast.POSITION.TOP_RIGHT,
+                      autoClose: true,
+                    });
+                    
+                  }
+                });
     
+            });
+    
+            this.setState({
+                isBdetail:!this.state.isBdetail
+            });
+
+            
+        
+      }
       handleChange(e) {
         if (e.target.id =="ifsccode" ){
           var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
@@ -471,111 +468,109 @@ class ArtistProfile extends Component {
         this.setState({
             isProfile:!this.state.isProfile
         })
-    }
-    fileChangedHandler = (event) => {
-        let filename = event.target.files[0];
+      }
+      fileChangedHandler = (event) => {
+          let filename = event.target.files[0];
 
-        if (filename != undefined) {
-          //  filename.name = filename.name.replace(/\s/g, '');
-            if (filename.size / 1024 / 1024 > 1) {    
-                customToast.error("Please upload product Image below 1MB.", {
+          if (filename != undefined) {
+            //  filename.name = filename.name.replace(/\s/g, '');
+              if (filename.size / 1024 / 1024 > 1) {    
+                  customToast.error("Please upload product Image below 1MB.", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                return ;
+              }
+              if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+                customToast.error("Image name contains special characters.", {
                   position: toast.POSITION.TOP_RIGHT,
                   autoClose: true,
                 });
-              return ;
-            }
-            if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-              customToast.error("Image name contains special characters.", {
+                return;
+              }
+          this.setState({
+            selectedFile: event.target.files[0],
+            removedprofile :2 ,
+            
+          },()=>{
+            console.log(this.state);
+          });
+
+          let reader = new FileReader();
+
+          reader.onloadend = () => {
+          let imagebytes = reader.result;               
+            this.setState({
+              //  selectedFile: { ...this.state.selectedFile },
+              imagePreviewUrl: imagebytes,
+            },()=>{
+                  console.log(this.state);
+            });
+          };
+          if (event.target.files[0]) {
+          reader.readAsDataURL(event.target.files[0]);
+
+          }
+          }
+      };
+      fileChangedHandler2 = (event) => {
+      let filename = event.target.files[0];
+
+      if (filename != undefined) {
+        //  filename.name = filename.name.replace(/\s/g, '');
+          if (filename.size / 1024 / 1024 > 1) {    
+              customToast.error("Please upload product Image below 1MB.", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-              return;
-            }
-         this.setState({
-           selectedFile: event.target.files[0],
-           removedprofile :2 ,
-          
-         },()=>{
-           console.log(this.state);
-         });
+            return ;
+          }
+          if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+            customToast.error("Image name contains special characters.", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+            return;
+          }
+        this.setState({
+          selectedBrandFile: event.target.files[0],
+          removedlogo: 2
+        },()=>{
+          console.log("change brand img");
+          console.log(this.state);
+        });
 
-         let reader = new FileReader();
+        let reader = new FileReader();
 
-         reader.onloadend = () => {
-         let imagebytes = reader.result;               
-           this.setState({
-            //  selectedFile: { ...this.state.selectedFile },
-             imagePreviewUrl: imagebytes,
-           },()=>{
-                console.log(this.state);
-           });
-         };
-         if (event.target.files[0]) {
-         reader.readAsDataURL(event.target.files[0]);
+        reader.onloadend = () => {
+        let imagebytes = reader.result;               
+          this.setState({
+          //  selectedFile: { ...this.state.selectedFile },
+            imagePreviewUrl2: imagebytes,
+          },()=>{
+              console.log(this.state);
+          });
+        };
+        if (event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
 
-         }
         }
-       };
-
-       fileChangedHandler2 = (event) => {
-        let filename = event.target.files[0];
-
-        if (filename != undefined) {
-          //  filename.name = filename.name.replace(/\s/g, '');
-            if (filename.size / 1024 / 1024 > 1) {    
-                customToast.error("Please upload product Image below 1MB.", {
-                  position: toast.POSITION.TOP_RIGHT,
-                  autoClose: true,
-                });
-              return ;
-            }
-            if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-              customToast.error("Image name contains special characters.", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-              return;
-            }
-         this.setState({
-           selectedBrandFile: event.target.files[0],
-           removedlogo: 2
-         },()=>{
-            console.log("change brand img");
-           console.log(this.state);
-         });
-
-         let reader = new FileReader();
-
-         reader.onloadend = () => {
-         let imagebytes = reader.result;               
-           this.setState({
-            //  selectedFile: { ...this.state.selectedFile },
-             imagePreviewUrl2: imagebytes,
-           },()=>{
-                console.log(this.state);
-           });
-         };
-         if (event.target.files[0]) {
-         reader.readAsDataURL(event.target.files[0]);
-
-         }
-        }
-       };
-
+      }
+      };
       resertImage(){
       this.setState({
         selectedFile : [],
         removedprofile : 1,
         imagePreviewUrl: logos.uploadphoto,
       });
-    }
-    resertImage2(){
-      this.setState({
-        selectedFile : [],
-        removedlogo : 1,
-        imagePreviewUrl2: logos.uploadphoto,
-      });
-    }
+      }
+      resertImage2(){
+        this.setState({
+          selectedFile : [],
+          removedlogo : 1,
+          imagePreviewUrl2: logos.uploadphoto,
+        });
+      }
     render() {
         let  $imagePreview = (
                 <img
@@ -790,6 +785,9 @@ class ArtistProfile extends Component {
                         <div className="wrapper">
                             <div className={"c100 " + this.state.ratingclass + " blue artistrating"}  >
                                 <span><div className="aprofilelogo">
+                                  <img src=
+                                  {this.props.user.profilePic == "" || this.props.user.profilePic == null ?  logos.Smile : TTCEapi.ImageUrl + "User/" + this.props.user.id + "/ProfilePics/" + this.props.user.profilePic }
+                                   className="profileImage21"></img>
                            </div></span>
                                 <div className="slice">
                                     <div className="bar"></div>

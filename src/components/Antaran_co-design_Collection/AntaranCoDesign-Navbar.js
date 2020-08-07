@@ -21,6 +21,8 @@ export default class AntaranCoDesignNavbar extends Component {
           isSelected : false,
           selected:"Regions"
         };
+        this.handleSelect = this.handleSelect.bind(this);
+
     }
     componentDidMount() {
         switch (browserHistory.location.pathname) {
@@ -59,7 +61,7 @@ export default class AntaranCoDesignNavbar extends Component {
     render() {
         return (
             <React.Fragment>
-                <Container>
+                <Container className="container0">
             <Row noGutters="true">
             <Col sm={{size:2}} className="Vcheading">
                <Link to="/Antaran"> <h1 className={

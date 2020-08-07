@@ -61,7 +61,9 @@ export class SingleEnquiry extends Component {
             rpu:"",
             preview: false,
             sendButtonClick: false,
+            saveButtonClick:false,
             enquiryId: 0,
+            piSend:0,
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -114,6 +116,7 @@ export class SingleEnquiry extends Component {
     }
 
     moqDetailsbtn(){
+
         this.setState((prevState) => {
             return{
              selected: "moqDetails",
@@ -129,6 +132,7 @@ export class SingleEnquiry extends Component {
 
         proformaDetailsbtn(){
         this.setState((prevState) => {
+            this.componentDidMount()
             return{
                 selected:"proformaDetails",
                 proformaDetails: true,
@@ -219,7 +223,7 @@ export class SingleEnquiry extends Component {
       handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
-        this.setState({ [name]: value }, () => {
+        this.setState({ [name]: value,showValidationMoq: false }, () => {
         //   console.log(this.state.moq);
         });
     }
@@ -227,6 +231,7 @@ export class SingleEnquiry extends Component {
     saveMoqDetails(){
         
         if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
+          
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -309,16 +314,20 @@ export class SingleEnquiry extends Component {
       else{
         this.setState({
             showValidationPi: true,
+           
         //   message : "Invalid PAN Number"
       });
       
       }
     } 
     sendMoqDetails(){
-        this.setState({
-            sendButtonClick: true
-        })
-        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
+      
+        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu ){
+            this.setState({
+                sendButtonClick: true,
+                saveButtonClick:true
+                  
+            })
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         TTCEapi.sendMoq(
@@ -333,8 +342,10 @@ export class SingleEnquiry extends Component {
             if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
+                    this.componentDidMount();
             console.log(this.state.sendMoq);
-            this.componentDidMount();
+
+            
             });
             customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -343,7 +354,8 @@ export class SingleEnquiry extends Component {
           }
           else {
             this.setState({
-                sendButtonClick: false
+                sendButtonClick: false,
+                saveButtonClick:false
             })
             customToast.error(response.data.errorMessage, {
                 position: toast.POSITION.TOP_RIGHT,
@@ -431,7 +443,9 @@ export class SingleEnquiry extends Component {
             hsncode:response.data.data.hsn,
             cgst:response.data.data.cgst,
             sgst:response.data.data.sgst,
+            piSend:response.data.data.isSend,
       },()=>{
+         
          console.log(this.state.getPi);
        
         });
@@ -1040,6 +1054,7 @@ export class SingleEnquiry extends Component {
                                                                 
                                                                 :
                                                                 <button className="savemoqbtn"
+                                                                disabled={this.state.saveButtonClick}
                                                                     onClick={() => this.saveMoqDetails()} >Save</button>}
                                                                     
                                                                  </Col>
@@ -1062,9 +1077,14 @@ export class SingleEnquiry extends Component {
 
                                                             {this.state.proformaDetails ? 
                                                             <>
+                                                            { this.state.isSend== 1  && this.state.getMoq.accepted== true
+                                                            ?
+                                                        <>
+                                                       
                                                             {this.state.preview === false ?
                                                             <>
-                                                                    {this.state.getPi.isSend==1?    
+                                                         
+                                                         {this.state.getPi.isSend==1?    
                                                           null
                                                             :
                                                             <>  {this.state.isPidetail ? <img
@@ -1195,14 +1215,27 @@ export class SingleEnquiry extends Component {
                                                  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                                  expectedDateOfDelivery={this.state.dod}
                                                  hsn={this.state.hsncode}
-                                                 ppu={this.state.ppu}
+                                                 rpu={this.state.rpu}
                                                  quantity={this.state.quantity}
                                                  sgst={this.state.sgst}
                                                  cgst={this.state.cgst}
+                                                 piSend={this.state.piSend}
                                                   />
 
                                                        </>}
                                                        <p className="marginBottompage"></p>
+                                                       </>:
+                                                        <>
+                                                        
+                                                            <Row>
+                                                            <br></br>
+                                                            <br></br>
+                                                            <br></br>   
+                                                            <Col className="col-xs-12 text-center font14">
+                                                           MOQ Details are Not submitted / accepted yet.
+                                                            </Col>
+                                                            </Row>
+                                                        </>}
                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>

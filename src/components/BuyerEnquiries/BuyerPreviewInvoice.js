@@ -41,38 +41,66 @@ export class BuyerPreviewInvoice extends Component {
             artisanUser:[],
             addressses:[],
             buyerDetails:[],
+            weftDye:[],
+            warpDye:[],
+            extraWeftDye:[],
+            weftYarn:[],
+            warpYarn:[],
+              extraWeftYarn:[],
+              customweftDye:[],
+              customwarpDye:[],
+              customextraWeftDye:[],
+              customweftYarn:[],
+              customwarpYarn:[],
+              customextraWeftYarn:[],
+              availableInStock:0
         }
         
     } 
  
     componentDidMount() { 
         console.log(this.state.enquiryCode);
+        console.log(this.state.enquiryId);
 
         TTCEapi.getBuyerPreviewPI(this.state.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
+               
+
                 if(response.data.data.productCustom === false) {
                     this.setState({
-                        previewPI:response.data.data,
-                        previewPiOrder:response.data.data.piOrder,
-                        paymentDetails:response.data.data.paymentDetails,
-                        artisanUser:response.data.data.artisanUser,
-                        addressses:response.data.data.artisanUser.addressses, 
-                        buyerDetails: response.data.data.generatedBy,
-                        product: response.data.data.product,
-                        dataload : true,
+                    previewPI:response.data.data,
+                  buyerDetails: response.data.data.generatedBy,
+                  previewPiOrder:response.data.data.piOrder,
+                  buyerCustomProduct:response.data.data.buyerCustomProduct,
+                  paymentDetails:response.data.data.paymentDetails,
+                  artisanUser:response.data.data.artisanUser,
+                  generatedBy:response.data.data.generatedBy,
+                  weftDye:response.data.data.product.weftDye,
+                  warpDye:response.data.data.product.warpDye,
+                  extraWeftDye:response.data.data.product.extraWeftDye,
+                  weftYarn:response.data.data.product.weftYarn,
+                  warpYarn:response.data.data.product.warpYarn,
+                  extraWeftYarn:response.data.data.product.extraWeftYarn,
+                  dataload : true,
                     })
                 }
                 else {
                     this.setState({
-                        previewPI:response.data.data,
-                        previewPiOrder:response.data.data.piOrder,
-                        paymentDetails:response.data.data.paymentDetails,
-                        artisanUser:response.data.data.artisanUser,
-                        addressses:response.data.data.artisanUser.addressses, 
-                        buyerDetails: response.data.data.generatedBy,
-                        product: response.data.data.buyerCustomProduct,
-                        dataload : true,
+                     previewPI:response.data.data,
+                  buyerDetails: response.data.data.generatedBy,
+                  previewPiOrder:response.data.data.piOrder,
+                  buyerCustomProduct:response.data.data.buyerCustomProduct,
+                  paymentDetails:response.data.data.paymentDetails,
+                  artisanUser:response.data.data.artisanUser,
+                  generatedBy:response.data.data.generatedBy,
+                  customweftDye:response.data.data.buyerCustomProduct.weftDye,
+                  customwarpDye:response.data.data.buyerCustomProduct.warpDye,
+                  customextraWeftDye:response.data.data.buyerCustomProduct.extraWeftDye,
+                  customweftYarn:response.data.data.buyerCustomProduct.weftYarn,
+                  customwarpYarn:response.data.data.buyerCustomProduct.warpYarn,
+                  customextraWeftYarn:response.data.data.buyerCustomProduct.extraWeftYarn,
+                  dataload : true, 
                     })
                 }
                 
@@ -93,7 +121,7 @@ export class BuyerPreviewInvoice extends Component {
     }
 
     proceedtoadvancepay(){
-        browserHistory.push("/payadvance")
+        browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
     
     render(){
@@ -108,6 +136,7 @@ export class BuyerPreviewInvoice extends Component {
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 
 {this.state.dataload === true && this.state.previewPiOrder.isSend === 1 ?
+<>
 <div  ref={ref}  style={{width: "100%", height: "100%"}} >
    <Row noGutters={true} style={{marginTop:"15px"}}>
        <Col className="col-xs-6">
@@ -132,6 +161,8 @@ export class BuyerPreviewInvoice extends Component {
 
 {/* --------------------------------------------------col 6-6-------------------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
+{this.state.artisanUser? 
+<>
     <Col sm={6} className=" col-xs-6 Invoicebr">
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
@@ -141,48 +172,80 @@ export class BuyerPreviewInvoice extends Component {
            :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-<b className="Ttbrand">{this.state.artisanUser.companyDetails.companyName}</b> 
-           <p className="subttbrand">{this.state.artisanUser.cluster?
-           this.state.artisanUser.cluster.desc: "NA"}</p>
-<p className="subttbrand">{this.state.addressses[0].line1} {this.state.addressses[0].line2}
-{this.state.addressses[0].street} {this.state.addressses[0].city} {this.state.addressses[0].pincode}
-{this.state.addressses[0].state} {this.state.addressses[0].country.name}</p>
-<p className="subttbrand fontplay">{this.state.artisanUser.firstName} {this.state.artisanUser.lastName}</p>
+    <b className="Ttbrand"> {this.state.artisanUser.companyDetails?this.state.artisanUser.companyDetails.companyName:""}</b> 
+           <p className="subttbrand"> {this.state.artisanUser.cluster?
+           this.state.artisanUser.cluster.desc:
+           "NA"
+           }</p>
+          <p className="subttbrand">
+         
+          {this.state.artisanUser.addressses[0].line1}
+    {this.state.artisanUser.addressses[0].line2} 
+    {this.state.artisanUser.addressses[0].street}
+    {this.state.artisanUser.addressses[0].pincode} 
+    {this.state.artisanUser.addressses[0].state}  {this.state.artisanUser.addressses[0].country.name}
+          
+          </p>
+          <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
+           this.state.artisanUser.firstName:
+           "NA"
+           }  {this.state.artisanUser.lastName?
+            this.state.artisanUser.lastName:
+            "NA"
+            }</p>
           
        </Col>
    </Row>
    <Row noGutters={true}>
-       <Col sm={12} >
-<b className="Mobnumpi">Mobile Number : {this.state.artisanUser.mobile ? this.state.artisanUser.mobile : 
-this.state.artisanUser.alternateMobile ? this.state.artisanUser.alternateMobile : "NA"}</b>
+   <Col sm={12} >
+           <b className="Mobnumpi">Mobile Number : {this.state.artisanUser.mobile?
+            this.state.artisanUser.mobile:
+            this.state.artisanUser.alternateMobile?
+            this.state.artisanUser.alternateMobile : "NA"
+            }</b>
        </Col>
    </Row>
     </Col>
+  </>  :""}
 
-    <Col sm={6} className=" col-xs-6  ">
+    
+  <Col sm={6} className=" col-xs-6  ">
    <b className="origintxt">Buyer</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
+
+     
+        
        {this.state.buyerDetails.companyDetails.logo ? 
            <img src={TTCEapi.ImageUrl+'User/'+this.state.buyerDetails.id+'/CompanyDetails/Logo/'+this.state.buyerDetails.companyDetails.logo} className="Pilogoimg"></img>
            :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-          <b className="Ttbrand">{this.state.buyerDetails.companyDetails.companyName}</b> 
+        <b className="Ttbrand">{this.state.generatedBy.companyDetails.companyName}</b> 
           <br/>
           <b className="RAcss subttbrand">Registered Address:</b>
-<p className="subttbrand">
-    {this.state.buyerDetails.addressses[0].line1} {this.state.buyerDetails.addressses[0].line2} {this.state.buyerDetails.addressses[0].street} {this.state.buyerDetails.addressses[0].pincode} {this.state.buyerDetails.addressses[0].state}  {this.state.buyerDetails.addressses[0].country.name}
-</p>
-          {/* <p className="subttbrand">address</p> */}
-           <p className="subttbrand fontplay">{this.state.buyerDetails.firstName} {this.state.buyerDetails.lastName}</p>
+          <p className="subttbrand"> 
+          {this.state.buyerDetails.addressses[0].line1}
+    {this.state.buyerDetails.addressses[0].line2} 
+    {this.state.buyerDetails.addressses[0].street}
+    {this.state.buyerDetails.addressses[0].pincode}
+    {this.state.buyerDetails.addressses[0].state}  {this.state.buyerDetails.addressses[0].country.name}
+          </p>
+         
+          <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
+           this.state.generatedBy.firstName:
+           "NA"
+           }  {this.state.generatedBy.lastName?
+            this.state.generatedBy.lastName:
+            "NA"
+            }</p>
+            
           
        </Col>
    </Row>
    <Row noGutters={true}>
        <Col sm={12} >
-           <b className="Mobnumpi">Mobile Number : {this.state.buyerDetails.mobile ? this.state.buyerDetails.mobile : 
-this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobile : "NA"}</b>
+        <b className="Mobnumpi">Mobile Number : {this.state.generatedBy.mobile?this.state.generatedBy.mobile:this.state.generatedBy.alternateMobile?this.state.generatedBy.alternateMobile:""}</b>
        </Col>
    </Row>
     </Col>
@@ -249,27 +312,120 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <td>
      <h3 className="snopi srwidth margintopsr">01</h3>
         </td>
-     <td className="tdmarginleft">
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Red katan -400m</h3>
-     <p>- WEFT X WARP X EXTRA WEFT</p>
-            <div className="descyarnpi wraptext">
-                -Yarn: XYZ XYZ x XYZ <br/>
-                -Yarn Count: XYZ XYZ x XYZ <br/>
-                -Dye Used: XYZ XYZ x XYZ 
-            </div>
-     <p className="RAcss">- Reed Count : <span className="rcred wraptext">XYZ</span></p>
+
+
+     
+{/* receipt */}
+
+{this.state.previewPI.productCustom === false && this.state.dataload?
+<>
+{console.log("Product  Simple")}
+<>
+
+<td className="tdmarginleft">
+  
+     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>{this.state.previewPI.product.productCategoryDesc} -{this.state.previewPI.product.length}</h3>
+     <p>- {this.state.weftDye?this.state.weftDye.dyeDesc:""}  {this.state.warpDye?"X":""} {this.state.warpDye?this.state.warpDye.dyeDesc:""} {this.state.extraWeftDye && this.state.warpDye? <>X</> :""} {this.state.extraWeftDye ? this.state.extraWeftDye.dyeDesc:""}</p>
+           
+            <p className="descyarnpi wraptext">
+            -Yarn: {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} x {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
+                -Yarn Count: {this.state.weftYarnCount} {this.state.warpYarnCount && this.state.weftYarnCount ?"x":""} {this.state.warpYarnCount} {this.state.extraWeftYarnCount ? "x":""} {this.state.extraWeftYarnCount ? this.state.extraWeftYarnCount:""} <br/>
+                -Dye Used: {this.state.weftDye.dyeDesc} 
+                {this.state.warpDye.dyeDesc && this.state.weftDye.dyeDesc?" x ":""}  
+                 {this.state.warpDye.dyeDesc}
+                  {this.state.extraWeftDye?"x":""}
+                   {this.state.extraWeftDye?
+                    this.state.extraWeftDye.dyeDesc
+                    :""} 
+                </p>
+     <p className="RAcss">- Reed Count : <span className="rcred wraptext">{this.state.previewPI.product.reedCount?this.state.previewPI.product.reedCount.count:"NA"}</span></p>
      <p>-Weight :</p>
      <div className="sbred wraptext">
-         Saree: XYZ <br/>
-         Blouse: XYZ
+     {this.state.previewPI.product.productCategoryDesc}: {this.state.previewPI.product.weight?this.state.previewPI.product.weight:"NA"} <br/>
+        
+        {this.state.previewPI.product.relProduct.length > 0?
+        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
+          :
+
+          ""}
+       
+     </div>
+     <br/>
+     <p>-Dimension :</p>
+     <div className="sbred wraptext">
+     {this.state.previewPI.product.productCategoryDesc}: {this.state.previewPI.product.length?this.state.previewPI.product.length:""} 
+     {this.state.previewPI.product.width?" x ":""}
+     {this.state.previewPI.product.width?this.state.previewPI.product.width:""}
+      <br/>
+         {this.state.previewPI.product.relProduct.length > 0?
+        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].length?this.state.previewPI.product.relProduct[0].length:""} 
+        {this.state.previewPI.product.relProduct[0].length && this.state.previewPI.product.relProduct[0].width?"x":"" } {this.state.previewPI.product.relProduct[0].width?this.state.previewPI.product.relProduct[0].width:""}</>
+          :
+          
+          ""}
+     </div>
+         <p>-GSM Value : <span className="rcred">{this.state.previewPI.product.productCategoryDesc} {this.state.previewPI.product.gsm? this.state.previewPI.product.gsm:""}</span></p>
+        </td>
+</>
+
+  
+        </>
+        :
+        <>
+        {console.log("Product  custom")}
+        <td className="tdmarginleft">
+     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>{this.state.buyerCustomProduct.productCategory.productDesc} -{this.state.buyerCustomProduct.length}</h3>
+     <p>- {this.state.customweftDye?this.state.customweftDye.dyeDesc:""} {this.state.customwarpDye?"X":""} {this.state.customwarpDye?this.state.customwarpDye.dyeDesc:""} {this.state.customextraWeftDye && this.state.customwarpDye? <>X</> :""} {this.state.customextraWeftDye ? this.state.customextraWeftDye.dyeDesc:""}</p>
+    <p className="descyarnpi wraptext" >
+    -Yarn: {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} x {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
+    -Yarn Count: {this.state.customweftYarnCount} {this.state.customwarpYarnCount && this.state.customweftYarnCount ?"x":""} {this.state.customwarpYarnCount} {this.state.customextraWeftYarnCount ? "x":""} {this.state.customextraWeftYarnCount ? this.state.customextraWeftYarnCount:""} <br/>
+    -Dye Used: {this.state.customweftDye.dyeDesc} {this.state.customwarpDye.dyeDesc && this.state.customweftDye?"x":""}   {this.state.customwarpDye.dyeDesc} {this.state.customextraWeftDye?"x":""}
+     {this.state.customextraWeftDye?  this.state.customextraWeftDye.dyeDesc
+     :
+     this.state.customextraWeftDye?  this.state.customextraWeftDye:""
+     } 
+      </p> 
+
+     {this.state.customweftYarnCount}
+     {/* <div className="descyarnpi wraptext">
+
+-Yarn: {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} x {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
+-Yarn Count: {this.state.customweftYarnCount} {this.state.customwarpYarnCount && this.state.customweftYarnCount ?"x":""} {this.state.customwarpYarnCount} {this.state.customextraWeftYarnCount ? "x":""} {this.state.customextraWeftYarnCount ? this.state.customextraWeftYarnCount:""} <br/>
+-Dye Used: {this.state.customweftDye} {this.state.customwarpDye && this.state.customweftDye?"x":""}   {this.state.customwarpDye} {this.state.customextraWeftDye?"x":""} {this.state.customextraWeftDye? this.state.customextraWeftDye:""} 
+</div> */}
+     <p className="RAcss">- Reed Count : <span className="rcred wraptext">{this.state.buyerCustomProduct.reedCount?this.state.buyerCustomProduct.reedCount.count:"NA"}</span></p>
+     <p>-Weight :</p>
+     <div className="sbred wraptext">
+     {this.state.buyerCustomProduct.productCategory.productDesc}: {this.state.buyerCustomProduct.weight?this.state.buyerCustomProduct.weight:"NA"} <br/>
+        
+     {this.state.buyerCustomProduct.relProduct.length > 0?
+        <>  
+        {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].weight !=null?this.state.buyerCustomProduct.relProduct[0].weight:"NA"}</>
+          :
+
+          ""}
      </div>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-         Saree: XYZ <br/>
-         Blouse: XYZ
+     {this.state.buyerCustomProduct.productCategory.productDesc}: XYZ <br/>
+    
+     {this.state.buyerCustomProduct.relProduct.length > 0?
+        <>  {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].length?this.state.buyerCustomProduct.relProduct[0].length:""} 
+        {this.state.buyerCustomProduct.relProduct[0].length && this.state.buyerCustomProduct.relProduct[0].width?"x":"" } {this.state.buyerCustomProduct.relProduct[0].width?this.state.buyerCustomProduct.relProduct[0].width:""}</>
+          :
+          
+          ""}
+
      </div>
-     <p>-GSM Value : <span className="rcred">Saree XYZ</span></p>
+     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} XYZ</span></p>
         </td>
+        </>
+}
+
+
+
+
+
         <td >
      <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
@@ -280,7 +436,7 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-           <p id="amountId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -288,7 +444,7 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <td>
      
         </td>
-     <td>
+        <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
      <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
      <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
@@ -305,12 +461,12 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 id="sgstId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100}</h3>
-     <h3 id="cgstId" className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100}</h3>
+<h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100}</h3>
+     <h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
-   <tr>
+    <tr>
      <td>
      <h3 className="snopi srwidth "></h3>
         </td>
@@ -327,10 +483,8 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  
-      {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
-           {this.state.previewPiOrder.totalAmount + (this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) + 
-           (this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)}</h3>
+     <h3 className="snopi wraptext">  {this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100) }</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -338,17 +492,43 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <td>
      <h3 className="snopi srwidth "></h3>
         </td>
-     <td>
+
+        {this.state.paymentDetails?
+        <>
+         <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-     <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
      
-      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">{this.state.paymentDetails[0].accNo_UPI_Mobile}</span></h3>
-      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">{this.state.paymentDetails[0].ifsc}</span></h3>
-           <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3>
+      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
+       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
+          
+          </span></h3>
+      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
+      {this.state.paymentDetails[0]?
+          <> {this.state.paymentDetails[0].ifsc}</>
+        :
+        "NA"}
+          </span></h3>
+      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
 
 
         </td>
+        
+        </>:<>
+        <td>
+     <h3 className="freightch snopi"><b>Account Details:</b></h3>
+     
+     <h3 className="freightch snopi"><b>Bank:NA</b></h3>
+     
+      <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">NA</span></h3>
+      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">NA</span></h3>
+      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">NA</span></h3> */}
+
+
+        </td>
+        </>}
+     
         <td >
      <p className="snopi wraptext"></p>
      </td>
@@ -393,17 +573,39 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
      <span className="ACcnodet"><b className="Discheading">Disclaimer : </b>The price is excluding tax and delivery charges. These will be included in final invoice.</span>    
      </Col>
 
-     <Col className="col-xs-3 allamtInd" style={{fontSize:"13px"}}>
+     <Col className="col-xs-3 allamtInd">
          All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
      </Col>
  </Row>
  </div>
- : null }
+
  {/* ------------------------------buttons------------------------------- */}
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
-<span><button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
- <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button></span>
+<span>
+    <button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
+{this.state.previewPI.productCustom == false?
+<>
+{this.state.previewPI.product.productStatusId==2 ? "":
+ <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+
+}
+</>
+:
+<>
+{this.state.buyerCustomProduct.productStatusId==2?""
+:
+<button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+
+}
+</>
+}
+
+
+
+
+</span>
+
  <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p>
      </Col>
  </Row>
@@ -411,6 +613,18 @@ this.state.buyerDetails.alternateMobile ? this.state.buyerDetails.alternateMobil
 
 {/* </Container> */}
 {/* <Footer/> */}
+</>
+: 
+
+<Row>
+<br></br>
+<br></br>
+ <br></br>   
+<Col className="col-xs-12 text-center font14">
+ PI Details not Received for this product.
+</Col>
+ </Row>
+}
 </React.Fragment>
         )
     }

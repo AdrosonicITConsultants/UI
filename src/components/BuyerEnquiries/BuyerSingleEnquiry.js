@@ -521,7 +521,7 @@ export class BuyerSingleEnquiry extends Component {
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
-                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
+                                                    gpayupi : response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile, 
                                                 }); 
                                             }
                                             
@@ -1284,10 +1284,7 @@ MoqSimpleProductSelected(moqId){
                                            <>
                                               <div className="readmorediv">
                                               <p><b>Note from Artisan</b></p>
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                              {data.moq.additionalInfo?data.moq.additionalInfo:""}
                                               </div>
                                               </>
                                              :null}
@@ -1301,10 +1298,7 @@ MoqSimpleProductSelected(moqId){
                                              </div>
                                               <div className="readmorediv">
                                               <p><b>Note from Artisan</b></p>
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                               This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                              {data.moq.additionalInfo?data.moq.additionalInfo:""}
                                               </div>
                                               </>
                                              :null }
@@ -1615,9 +1609,10 @@ MoqSimpleProductSelected(moqId){
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
-                                                                    <span 
+                                                                    <span >
+                                                                        <button
                                                                     onClick={() => this.MoqSimpleProductSelected(data.moq.id)}
-                                                                    className="buyerMOQAcceptModalOkayButton">Ok</span>
+                                                                    className="buyerMOQAcceptModalOkayButton">Ok</button></span>
                                                                 </div>
                                                                 </div>
                                                             </div>
@@ -1677,10 +1672,8 @@ MoqSimpleProductSelected(moqId){
                                     <>
                                         <div className="readmorediv">
                                         <p><b>Note from Artisan</b></p>
-                                        This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                        This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                        This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
-                                        This is a note from artisan  This is a note from artisan  This is a note from artisan  This is a note from artisan
+                                        {data.moq.additionalInfo?data.moq.additionalInfo:""}
+
                                         </div>
                                         </>
                                         :null}
@@ -1827,7 +1820,8 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
-                                                                <BuyerPreviewInvoice enquiryCode={this.state.enquiryCode} 
+                                                                <BuyerPreviewInvoice 
+                                                                enquiryCode={this.state.enquiryCode} 
                                                                 enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
                                                             </Col>
                                                          
@@ -1837,9 +1831,7 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                                <input type="text"
-                                                                
-                                                                value={this.state.moq }/>
+                                                               
                                                            
 
                                                             </Col>

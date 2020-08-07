@@ -42,6 +42,8 @@ class NavbarComponent extends Component {
 
     };
     this.myenquiries = this.myenquiries.bind(this);
+    this.closesearch = this.closesearch.bind(this);
+
 
   }
   toggle = () => {
@@ -124,7 +126,9 @@ browserHistory.push("/MyProfile");
    
   }
 
-  
+  closesearch(){
+    this.setState({isSearchClicked : !this.state.isSearchClicked})
+  }
   render() {
     const { results, value } = this.state;
    // debugger
@@ -157,9 +161,9 @@ browserHistory.push("/MyProfile");
                 /> */}
               {
                 userTypeId == 2 ? (
-                  <BuyerConnectedSuggestions/>
+                  <BuyerConnectedSuggestions cs= {this.closesearch}/>
                 ):
-                (<ArtistConnectedSuggestions/>)
+                (<ArtistConnectedSuggestions cs= {this.closesearch}/>)
               }
               
             </div>

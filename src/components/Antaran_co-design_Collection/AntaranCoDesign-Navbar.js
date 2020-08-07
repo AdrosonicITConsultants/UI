@@ -19,8 +19,10 @@ export default class AntaranCoDesignNavbar extends Component {
 
         this.state = {
           isSelected : false,
-          selected:"Regions"
+          selected:"Regions",
+
         };
+        this.handleSelect = this.handleSelect.bind(this);
     }
     componentDidMount() {
         switch (browserHistory.location.pathname) {

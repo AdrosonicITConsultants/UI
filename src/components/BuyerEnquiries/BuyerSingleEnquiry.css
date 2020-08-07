@@ -101,6 +101,11 @@
     cursor: pointer;
 }
 
+.buyerMOQAcceptModalOkayButton:disabled{
+    background-color: gray;
+    opacity: 0.5;
+}
+
 .buyerMOQConfirmModalCancelButton {
     font-size: 18px;
     color: #838383;

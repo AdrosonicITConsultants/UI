@@ -342,7 +342,9 @@ export class SingleEnquiry extends Component {
             if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
+                    this.componentDidMount();
             console.log(this.state.sendMoq);
+
             
             });
             customToast.success("MOQ Details sent successfully", {

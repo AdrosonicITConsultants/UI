@@ -281,8 +281,36 @@ class TTCEapi {
       });
   }
 
+  static getSimpleHistoryProduct(id) {
+    let url = ApiUrl + "/product/getProductHistory/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getbuyerSimpleProduct(id) {
     let url = ApiUrl + "/buyerCustomProduct/getSimpleProduct/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getbuyerSimpleHistoryProduct(id) {
+    let url = ApiUrl + "/buyerCustomProduct/getProductHistory/" + id;
 
     return axios
       .get(url)

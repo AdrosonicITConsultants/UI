@@ -123,15 +123,31 @@ export default class buyerProductTempelate extends Component {
                        },
                        () => {
                         let params = queryString.parse(this.props.location.search)
-                        TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
-                          this.setState({ productid : params.productId },()=>{
-     
-                          })
-                          console.log('heree');
-                          console.log( response.data);
-                          let productData =  response.data.data;
-                          this.setProduct(productData);
-                      })
+                        if(params.ProductHistoryId == undefined)
+                        {
+                          TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
+                            this.setState({ productid : params.productId ,history:false},()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                        }
+                        else{
+                          TTCEapi.getbuyerSimpleHistoryProduct(params.ProductHistoryId).then((response) => {
+                            this.setState({ productid : params.productId,history:true },()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                        }
+                            
+                       
 
                        }
                      );
@@ -154,15 +170,30 @@ export default class buyerProductTempelate extends Component {
                          },
                          () => {console.log("stateset");
                          let params = queryString.parse(this.props.location.search)
-                         TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
-                           this.setState({productid :params.productId },()=>{
-      
-                           })
-                           console.log('heree');
-                           console.log( response.data);
-                           let productData =  response.data.data;
-                           this.setProduct(productData);
-                       })
+                         if(params.ProductHistoryId == undefined)
+                         {
+                          TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
+                            this.setState({productid :params.productId,history:false },()=>{
+       
+                            })
+                            console.log('normalCustomProduct');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                         }
+                         else{
+                          TTCEapi.getbuyerSimpleHistoryProduct(params.ProductHistoryId).then((response) => {
+                            this.setState({productid :params.productId,history:true },()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                         }
+                        
                            
 
                          }
@@ -188,31 +219,60 @@ export default class buyerProductTempelate extends Component {
                 };
                 setProduct(productData){
               
-
-                productData.productImages.map((img, index) => {
+                  if(this.state.history)
+                  {
+                    productData.productImages.map((img, index) => {
                  
-                this.toDataUrl(
-                    TTCEapi.ImageUrl +
-                      "CustomProduct/" +
-                      img.productId +
-                      "/" +
-                      img.lable  ,
-                    (myBase64) => {
-                      let filename = {};
-                      filename.name = img.lable;
-                    // console.log(myBase64); // myBase64 is the base64 string
-                      this.setState({
-                        ["imagePreviewUrl" + (index + 1)]: myBase64,
-                        isImageUploadComplete: true,
-                        ["selectedFile" + (index + 1)]: {
-                          filename,
-                          myBase64,
-                        },
+                      this.toDataUrl(
+                          TTCEapi.ImageUrl +
+                            "HistoryCustomProduct/" +
+                            img.productHistoryId +
+                            "/" +
+                            img.lable  ,
+                          (myBase64) => {
+                            let filename = {};
+                            filename.name = img.lable;
+                          // console.log(myBase64); // myBase64 is the base64 string
+                            this.setState({
+                              ["imagePreviewUrl" + (index + 1)]: myBase64,
+                              isImageUploadComplete: true,
+                              ["selectedFile" + (index + 1)]: {
+                                filename,
+                                myBase64,
+                              },
+                            });
+                          }
+                        );
                       });
-                    }
-                  );
-                });
-
+      
+                  }
+                  else{
+                    productData.productImages.map((img, index) => {
+                 
+                      this.toDataUrl(
+                          TTCEapi.ImageUrl +
+                            "CustomProduct/" +
+                            img.productId +
+                            "/" +
+                            img.lable  ,
+                          (myBase64) => {
+                            let filename = {};
+                            filename.name = img.lable;
+                          // console.log(myBase64); // myBase64 is the base64 string
+                            this.setState({
+                              ["imagePreviewUrl" + (index + 1)]: myBase64,
+                              isImageUploadComplete: true,
+                              ["selectedFile" + (index + 1)]: {
+                                filename,
+                                myBase64,
+                              },
+                            });
+                          }
+                        );
+                      });
+      
+                  }
+               
                
 
                 let productWeavesIds = productData.productWeaves.map(

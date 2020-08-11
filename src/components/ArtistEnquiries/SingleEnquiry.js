@@ -236,12 +236,14 @@ export class SingleEnquiry extends Component {
         });
     }
 
+    
+
     saveMoqDetails(){
-        this.setState({
-            saveButtonClick:true
-          })
-        if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
-           
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
+            this.setState({
+                saveButtonClick:true
+              })
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -277,7 +279,8 @@ export class SingleEnquiry extends Component {
       }
     } 
     savePIDetails(){
-        if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)&& regex.test(this.state.cgst)&& regex.test(this.state.sgst)){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 console.log(params);
@@ -333,7 +336,8 @@ export class SingleEnquiry extends Component {
     } 
     sendMoqDetails(){
       
-        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu ){
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
             this.setState({
                 sendButtonClick: true,
                 saveButtonClick:true
@@ -1340,6 +1344,7 @@ export class SingleEnquiry extends Component {
                                                                 :
                                                                 <button className="savemoqbtn"
                                                                 disabled={this.state.saveButtonClick}
+                                                                onkeypress='validate(event)'
                                                                     onClick={() => this.saveMoqDetails()} >Save</button>}
                                                                     
                                                                  </Col>
@@ -1350,6 +1355,7 @@ export class SingleEnquiry extends Component {
                                                                    : 
                                                                    <button className="sendmoqbtn" disabled={this.state.sendButtonClick}
                                                                    onClick={() => this.sendMoqDetails()}
+                                                                   onkeypress='validate(event)'
                                                                    >Send</button>
                                                                  }
                                                                  </Col>

@@ -276,7 +276,20 @@ export class BuyerSingleEnquiry extends Component {
         //   console.log(this.state.moq);
         });
     }
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+    ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
 
+       ToggleDelete1 = () => {
+        document.getElementById('id02').style.display='block';
+       }
+
+       ToggleDeleteClose1 = () => {
+        document.getElementById('id02').style.display='none';
+       }
     saveMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
@@ -311,6 +324,36 @@ export class BuyerSingleEnquiry extends Component {
       
       }
     } 
+    handleDeleteItem(id){
+        // if(window.confirm("Remove this item from wishlist?")){
+        TTCEapi.deleteMoq(id).then((response)=>{
+            if (response.data.valid) {
+                customToast.success("MOQ removed!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+                this.setState({deleteMoq : response.data},()=>{
+                    console.log(this.state.deleteMoq);
+                    document.getElementById('id02').style.display='none';
+                    this.componentDidMount();
+                    // this.componentDidMount();
+                
+             
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
+        
+        });
+    // }
+      
+    }
+    
     savePIDetails(){
         if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
             if(document.getElementById('agree').checked){
@@ -703,22 +746,7 @@ MoqSimpleProductSelected(moqId){
     }
 
      
-//   handleReadmore(id){
-  
-//     let items = [...this.state.readmore];
-  
-//     let item = {...items[id]};
-  
-//     item = !item;
-    
-//     items[id] = item;
-   
-//     this.setState({readmore}),()=>{
-//         console.log(this.state.readmore[id]);
-//     };
-    
 
-//   }
     render() {
         return (
             <React.Fragment>
@@ -1363,6 +1391,9 @@ MoqSimpleProductSelected(moqId){
 
                             {this.state.moqDetail? 
                             <>
+                            {this.state.getMoqs.length > 0 ?
+                            <>
+                           
                             {this.state.getEnquiryMoq[0].openEnquiriesResponse.productType=="Custom Product"?
                                 <>
                                   { this.state.getEnquiryMoq[0].openEnquiriesResponse.isMoqSend == null ?
@@ -1469,9 +1500,25 @@ MoqSimpleProductSelected(moqId){
                                         <Row noGutters={true}>
                                         <Col className="col-xs-12 tdclasscss">
                                        
-                                        <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
+                                        <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
+                                        onClick={this.ToggleDelete1}></i>
                                                 </Col>
                                             </Row>
+
+                                            <div id="id02" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span 
+                                onClick={() => this.handleDeleteItem(data.moq.id)}
+                                 className="deleteModalOkayButton">Delete</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+
                                         </td>
                                         }
                                        
@@ -1775,9 +1822,24 @@ MoqSimpleProductSelected(moqId){
                                 <Row noGutters={true}>
                                 <Col className="col-xs-12 tdclasscss">
                             
-                                <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
-                                        </Col>
-                                    </Row>
+                                <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
+                                        onClick={this.ToggleDelete1}></i>
+                                                </Col>
+                                            </Row>
+
+                                            <div id="id02" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span 
+                                onClick={() => this.handleDeleteItem(data.moq.id)}
+                                 className="deleteModalOkayButton">Delete</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
                                 </td>
                                 }
                             
@@ -2033,6 +2095,20 @@ MoqSimpleProductSelected(moqId){
                              
                                 </>
                                     }
+
+
+                            </>
+                            :
+                            <>
+                            <Row>
+                                                        <br></br>
+                                                        <br></br>
+                                                         <br></br>   
+                                                        <Col className="col-xs-12 text-center font14">
+                                                         MOQ Details not Received for this product.
+                                                        </Col>
+                                                         </Row>
+                            </>}
                             </>
                             :
                             <>

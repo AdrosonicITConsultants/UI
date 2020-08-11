@@ -12,7 +12,7 @@
   .Total-square{
     background-color: white;
     border: 1px solid ;
-    width: 199px;
+    width: auto;
     height: auto;
   }
 
@@ -61,6 +61,7 @@
  .totalamtpay{
      text-align: center;
      margin-top: 1px;
+     padding: 0px 5px 0px 5px;
  }
 
  .totalamtpay2{
@@ -105,6 +106,7 @@
     background: black;
     color: white;
     padding: 10px;
+    cursor: pointer;
     /* width: 41%; */
  }
 
@@ -226,6 +228,16 @@
 	animation: load 3s ease-out infinite;
 }
 
+/* myfile button */
+.myfilebtn{
+  font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
 @keyframes load {
 	from {
 		width: 0;
@@ -234,7 +246,7 @@
 		width: 100%;
 	}
 }
- @media screen and (max-width:767px){
+ @media screen and (max-width:768px){
    .aligncenter{
     text-align: -webkit-center;
    

@@ -17,7 +17,7 @@ import Moment from 'react-moment';
 
 import Footer from '../footer/footer';
 
-export class BuyerAdvancePayment2 extends Component {
+export default class BuyerAdvancePayment2 extends Component {
     constructor() {
         super();
         
@@ -29,7 +29,7 @@ export class BuyerAdvancePayment2 extends Component {
             selected:"select30",
             select30:true,
             select50:false,
-            dataload:false,
+            dataload:true,
             enquiryCode:"",
             upload:true,
 
@@ -41,9 +41,9 @@ export class BuyerAdvancePayment2 extends Component {
     this.props.bp();
     }
 
-    uploadReceiptandSend(){
-        browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
-    }
+    // uploadReceiptandSend(){
+    //     browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
+    // }
 
   
 
@@ -71,99 +71,7 @@ export class BuyerAdvancePayment2 extends Component {
         });
     }
 
-    componentDidMount() {
-        let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        this.state.enquiryCode = params.code;
-        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-            
-                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-                            if(response.data.data[0].paymentAccountDetails.length != 0)
-                            {
-                                
-                                for (var  items in response.data.data[0].paymentAccountDetails)
-                                {
-                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
-                                    switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
-                                        case 1:
-                                            console.log("bank");   
-                                            this.setState({
-                                                accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
-                                                bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
-                                                branch : response.data.data[0].paymentAccountDetails[items].branch ,
-                                                ifsccode : response.data.data[0].paymentAccountDetails[items].ifsc,
-                                                benificiaryname : response.data.data[0].paymentAccountDetails[items].name
-                                            }); 
-                                            break;
-                                        case 2:
-                                            console.log("gpayy");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                                this.setState({
-                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                        case 3:
-                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                            this.setState({
-                                                phonepeupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                            }); 
-                                        }
-                                            break;
-                                        case 4:
-                                            console.log("paytm");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                                                          
-                                                this.setState({
-                                                    paytmupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                    }
-                                }
-                                
-                
-                            }
-                            var nextProgressid = 0;
-                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
-                            {
-                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                    {
-                                        nextProgressid = 11;
-                                    }
-                                    else{
-                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                    }
-                            }
-                            else{
-                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                            }
-                            this.setState({getEnquiryMoq : response.data.data,
-                                progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
-                                Progressidnext : nextProgressid,
-                                userid : response.data.data[0].userId,
-                                dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
-                           
-                            });
-                        });
-                    });
-            }
-        })
-        // document.getElementById('acceptMOQModal').style.display='none';
-        // document.getElementById('confirmMOQModal').style.display='block';
-
-      }
+   
     
       acceptMOQModalShow = () => {
         document.getElementById('acceptMOQModal').style.display='block';
@@ -177,6 +85,8 @@ export class BuyerAdvancePayment2 extends Component {
         browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
     render(){
+
+
         return(
             
 <React.Fragment>
@@ -185,28 +95,25 @@ export class BuyerAdvancePayment2 extends Component {
 <>
 
 
-                        
-
-                          {this.state.getEnquiryMoq.map((item)=> 
-                <>
-
                         <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-1">
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                       onClick={() => this.goBack()}
+                                       onClick={() => this.BacktoPreview()}
                             ></img>
                           
                           </Col>
                           <Col sm = "11" className="col-xs-11  ">
-                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id: {item.openEnquiriesResponse.enquiryCode} </b></h3>
+                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id:
+                             {this.props.FullCode}
+                              </b></h3>
                           
                           </Col>
                           </Row>
                           <hr className="hrlineadvpay "></hr>
 
-                <Row noGutters={true} className="mt-7">
+                          <Row noGutters={true} className="mt-7">
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
@@ -215,34 +122,34 @@ export class BuyerAdvancePayment2 extends Component {
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.openEnquiriesResponse.productType === "Product"
+                                        this.props.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showArtisanProduct?ProductId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"Product/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
                                         :
-                                        <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showBuyerProduct?productId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
 
                                     }
 
                                     </div>
                                     
-                                   
+                                    {/* <span ></span> */}
                                 </div>
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold payadvhead">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      Enquiry Id : {this.props.enquiryCode}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold fontsize16pa ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun fontsize16pa"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
-                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                      <span className="leEnqtype bold fontsize16pa ">{this.props.productDesc} </span> 
+                                       <span className="leEnqspun fontsize16pa"> / {this.props.yarnDesc}  X  {this.props.weftYarnId}  
+                                        {this.props.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                        X {this.props.extraWeftYarnIds?this.props.extraWeftYarnIds:""}
                                         </>
                                         :
                                             <></>
@@ -255,7 +162,7 @@ export class BuyerAdvancePayment2 extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn bold">Artisan Brand : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{this.props.companyName}</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -267,16 +174,18 @@ export class BuyerAdvancePayment2 extends Component {
                     
                 </Row>
             
-                </>
-                )}
 
+                          
   <Row noGutters={true}>
             <Col className="col-xs-12">
             <div class="Total-square-container">
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay totalamtpay2" ><span > 
-                   <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 1111.00</span>
+    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i>
+
+     {this.props.calulatedAmount}
+     </span>
                     </h3>
                     {/* <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span> */}
      
@@ -286,19 +195,20 @@ export class BuyerAdvancePayment2 extends Component {
              
             </Col>
   </Row>
+ 
 
   <Row  noGutters={true}>
       <Col className="col-xs-12 Accdetailstxt">
           Account Details: <br/>
-          Bikesh Singh
+          {this.props.firstName ? this.props.firstName:"NA"} {this.props.lastName ? this.props.lastName:""}
       </Col>
   </Row>
 
   <Row  noGutters={true}>
       <Col className="col-xs-12 Accdetailstxt">
-          Axis Bank Ltd,Maniabandhan <br/>
-          Account No. <span style={{color:"darkgrey"}}>123456</span>    <br/>
-          IFSC CODE: <span style={{color:"darkgrey"}}>123456</span>
+      {this.props.bankName?this.props.bankName:"NA"} <br/>
+          Account No. <span style={{color:"darkgrey"}}>{this.props.accNo ? this.props.accNo:"NA"}</span>    <br/>
+          IFSC CODE: <span style={{color:"darkgrey"}}>{this.props.ifscCode ? this.props.ifscCode : "NA"}</span>
       </Col>
   </Row>
   <Row>
@@ -328,8 +238,8 @@ export class BuyerAdvancePayment2 extends Component {
                 Google Pay UPI Id
                 </div>
                 <div>
-                a
-                {/* {this.state.gpayupi} */}
+                {this.props.gpay ? this.props.gpay :"NA"}
+                
                 </div>
                 </Col>
                 </Row> 
@@ -348,8 +258,8 @@ export class BuyerAdvancePayment2 extends Component {
                 Paytm Registered Mobile Number
                 </div>
                 <div>
-                a
-                {/* {this.state.gpayupi} */}
+                {this.props.paytm ? this.props.paytm :"NA"}
+                
                 </div>
                 </Col>
                 </Row> 
@@ -367,7 +277,7 @@ export class BuyerAdvancePayment2 extends Component {
                 Registered Number for PhonePay
                 </div>
                 <div>
-                a
+                {this.props.phonePay ? this.props.phonePay :""}
                 {/* {this.state.gpayupi} */}
                 </div>
                 </Col>
@@ -385,6 +295,10 @@ export class BuyerAdvancePayment2 extends Component {
              
             </Col>
   </Row>
+  
+  
+
+
 {this.state.upload?
     <Row noGutters={true} className="margintoprow aligncenter">
 {/* <Col className="col-xs-2 ">
@@ -396,55 +310,66 @@ export class BuyerAdvancePayment2 extends Component {
          
          </Col>
              <Col className="col-xs-12 aligncenter" sm={6}>
-             <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
-         onClick={this.acceptMOQModalShow}
-         >
-        <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
+             {/* <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
+                onClick={this.acceptMOQModalShow}
+                onClick={() => this.uploadReceiptandSend()}
+                 >
+       
+        <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/>
         Upload transaction receipt 
-            </button>
+            </button> */}
+        
+        <div style={{cursor:"pointer"}}
+        
+         >
+        <button className="proccedwithadvpaybtn uploadtractionbtnfloat">
+             <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+             Upload transaction receipt </button>
+        <input type="file"  className=" myfilebtn"  />
+        </div>
+
              </Col>
              <Col className="col-xs-12 aligncenter" sm={3}>
              Image file formats & <br/> .pdf only.Upto 5Mb Max. 
              </Col>
-
-       
-   
+               
         </Row> 
   
-</Row>
-:
-<Row noGutters={true} className="margintoprow aligncenter">
-<Col className="col-xs-12 " style={{textAlign:"center"}}>
-         <button className="uploadroundbtn"><i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> </button> 
-         <b className="uploadreceiptname">name of receipt</b>
-         <br/>
-         <button className="uploadconfirmbtn" 
-         onClick={() => this.uploadReceiptandSend()}>
-             <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
-        Upload and send for confirmation 
-            </button>
-      </Col>
-    
-</Row>
-}
+            </Row>
+            :
+            <Row noGutters={true} className="margintoprow aligncenter">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                    <button className="uploadroundbtn"><i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> </button> 
+                    <b className="uploadreceiptname">name of receipt</b>
+                    <br/>
+                    <button className="uploadconfirmbtn" 
+                    
+                    onClick={() => this.uploadReceiptandSend()}>
+                        <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
+                    Upload and send for confirmation 
+                        </button>
+                </Col>
+                
+            </Row>
+            }
+{/* <button  onClick={this.acceptMOQModalShow}>abcd</button> */}
+        <Row noGutters={true} style={{marginTop:"10px"}}>
+            <Col className="col-xs-12" style={{textAlign:"center"}}>
+            <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  
+            The maximum time limit for completing this transaction is 10 Days <br/>
+            after generating this enquiry.
+                        </span></p>
+            </Col>
+        </Row>
 
-<Row noGutters={true} style={{marginTop:"10px"}}>
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-    <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  
-    The maximum time limit for completing this transaction is 10 Days <br/>
-      after generating this enquiry.
-                </span></p>
-    </Col>
-</Row>
-
-<Row noGutters={true} className="margintoprow">
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="reporttt">  It will be notified to Artisan for confirmation & the Administration team at Tata Trusts
-     
-                </span>
-               
-    </Col>
-</Row>
+        <Row noGutters={true} className="margintoprow">
+            <Col className="col-xs-12" style={{textAlign:"center"}}>
+            <span className="reporttt">  It will be notified to Artisan for confirmation & the Administration team at Tata Trusts
+            
+                        </span>
+                    
+            </Col>
+        </Row>
 {/* _________________________________________Modal_________________________________________________ */}
                                             <div id="acceptMOQModal" class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
@@ -453,6 +378,7 @@ export class BuyerAdvancePayment2 extends Component {
                                                                     <Col className="col-xs-12 fontplay">
                                                                         Uploading your receipt
                                                                         <br/>
+                                                                        <img src={logos.rotatingshapes} style={{height:"40px",marginTop:"10px"}}/>
                                                                         <div class="loading-bar">
                                                                             <div class="fuzzy"></div>
                                                                         </div>
@@ -462,7 +388,7 @@ export class BuyerAdvancePayment2 extends Component {
                                                                 <Row noGutters={true}>
                                                                 <Col className="col-xs-12" style={{textAlign:"center"}}>
                                                                 <button onClick={this.acceptMOQModalClose} className="uploadInbgbtn">
-                                                                 Upload in background
+                                                                <img src={logos.backupload} style={{height:"12px",marginRight:"8px"}}/>  Upload in background
                                                              </button>
                                                                   
                                                                 </Col>
@@ -481,14 +407,7 @@ export class BuyerAdvancePayment2 extends Component {
                 </div>
 
                 </>:null}
-                <Row>
-            <div>
-              <img
-                className="notifyFooterBanner internaldiv"
-                src={logos.notifyFooterBanner}
-              ></img>
-            </div>
-          </Row> 
+               
 </Container>
 
 </React.Fragment>
@@ -496,11 +415,5 @@ export class BuyerAdvancePayment2 extends Component {
     }
     
 }
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment2);
-export default connectedLoginPage;
+

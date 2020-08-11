@@ -53,7 +53,7 @@ import TTCEapi from "../../services/API/TTCEapi";
                         <img
                           className="artistbg1img profileImage"
                           // src={logos.uploadphoto}
-                          src = {this.state.brandPic == "" ? "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Product/45/air-bnb-logo-png-2.png" :
+                          src = {this.state.brandPic == "" ? logos.Smile :
                           this.state.brandPic}
                         ></img>
                       </Col>

@@ -174,6 +174,7 @@ export class BuyerAdvancePayment3 extends Component {
             
 <React.Fragment>
 <Container>
+<NavbarComponent />
     {this.state.dataload?
 <>
 
@@ -263,7 +264,11 @@ export class BuyerAdvancePayment3 extends Component {
                 </>
                 )}
 
-
+<Row noGutters={true} style={{marginTop:"10px"}}>
+<Col className="col-xs-12" style={{textAlign:"center",marginBottom:"20px"}}>
+    <img src={logos.greentick} style={{height:"100px"}}/>
+     </Col>
+</Row>
 
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
@@ -278,7 +283,7 @@ export class BuyerAdvancePayment3 extends Component {
     <button className="proccedwithadvpaybtn viewtractionbtnwidth" 
         
          >
-        <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
+        <img src={logos.whitetransaction} style={{marginRight:"11px",height:"20px"}}/>          
         View this transaction
             </button>
     </Col>

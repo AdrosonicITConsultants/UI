@@ -55,19 +55,18 @@ import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
 // import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
-
+import BuyerAdvancePayment from "./components/BuyerEnquiries/BuyerAdvancePayment"
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
-import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
 import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
-import { BuyerAdvancePayment2 } from './components/BuyerEnquiries/BuyerAdvancePayment2';
 import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePayment3';
+import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePayment2' 
 function App() {
   
   return (
     <React.Fragment>
       <Router history={browserHistory}>
         <ToastContainer></ToastContainer>
-        
+       
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
@@ -110,7 +109,7 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
-          <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} />
+          {/* <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} /> */}
           <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 
           

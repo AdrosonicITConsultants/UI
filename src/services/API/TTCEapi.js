@@ -559,6 +559,23 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/deleteMoq/{moqId}?moqId=13
+
+
+  static deleteMoq(moqId){
+    let url = ApiUrl + "/enquiry/deleteMoq/{moqId}?moqId="+moqId;
+
+  return axios
+    .delete(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
 
   static addToWishlist(productId) {
     let url = ApiUrl + "/product/addToWishlist/" + productId;
@@ -832,6 +849,58 @@ class TTCEapi {
         return error.response;
       });
   }
+
+
+
+  static advancedPayment(
+    enquiryId,
+    invoiceId,
+    paidAmount,
+    percentage,
+    pid,
+    totalAmount
+
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/enquiry/advancedPayment";
+
+    var payment = {
+    
+      enquiryId:enquiryId,
+      invoiceId:invoiceId,
+      paidAmount:paidAmount,
+      percentage:percentage,
+      pid:pid,
+      totalAmount:totalAmount,
+    };
+    console.log(payment);
+    // console.log(selectedFile);
+    debugger;
+    bodyFormData.append("registerRequest", JSON.stringify(payment));
+    // bodyFormData.append("paymentFile", selectedFile);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
+        debugger;
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
+
+
 
   static registerBuyer(
     companyname,

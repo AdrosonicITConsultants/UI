@@ -4,7 +4,6 @@ import ReactToPdf from "react-to-pdf";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
-import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import "./BuyerAdvancePayment.css";
 import queryString from 'query-string';
@@ -14,48 +13,51 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
 import Moment from 'react-moment';
-
+import NavbarComponent from "../navbar/navbar";
 import Footer from '../footer/footer';
+import BuyerAdvancePayment2 from "./BuyerAdvancePayment2"
 
-export class BuyerAdvancePayment extends Component {
+export default class BuyerAdvancePayment extends Component {
     constructor() {
         super();
         
         // this.select20= this.select20.bind(this);
         this.select30= this.select30.bind(this);
         this.select50= this.select50.bind(this);
-
+        this.backPI = this.backPI.bind(this);
         this.state = {
             selected:"select30",
-            // select20:false,
             select30:true,
             select50:false,
             dataload:false,
             enquiryCode:"",
+            percent:"30%",
+            totalAmount:"",
+            calulatedAmount:0,
+            nextPage:false,
+            gpay:"",
+            phonePay:"",
+            paytm:"",
+            ifscCode:"",
+            accNo:"",
+            bankName:"",
+            firstName:"",
+            lastName:""
 
                    }
     }
  
-    
+   
     BacktoPreview(){
     this.props.bp();
     }
 
     proceedtopay(){
-        browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
+        // browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
+        this.setState({nextPage:true})
     }
 
-    // select20(){
-    //     this.setState((prevState) => {
-    //         return{
-    //          selected: "select20",
-    //          select20:true,
-    //          select30:false,
-    //          select50:false,
-         
-    //         };
-    //     });
-    // }
+  
 
     select30(){
         this.setState((prevState) => {
@@ -64,7 +66,8 @@ export class BuyerAdvancePayment extends Component {
              select20:false,
              select30:true,
              select50:false,
-         
+             percent:"30%",
+             calulatedAmount:((this.state.totalAmount * 30)/100),
             };
         });
     }
@@ -76,11 +79,18 @@ export class BuyerAdvancePayment extends Component {
              select20:false,
              select30:false,
              select50:true,
+             percent:"50%",
+             calulatedAmount:(this.state.totalAmount * 50)/100,
          
             };
         });
     }
-
+    backPI(){
+        this.setState({
+            nextPage:false
+           
+        })
+    }
     componentDidMount() {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -171,6 +181,75 @@ export class BuyerAdvancePayment extends Component {
             }
         })
      
+    
+            TTCEapi.getBuyerPreviewPI(params.code).then((response)=>{
+                if(response.data.valid)
+                {
+                    var totalAmount=response.data.data.piOrder.totalAmount+(response.data.data.piOrder.totalAmount * response.data.data.piOrder.sgst / 100)+
+                     (response.data.data.piOrder.totalAmount * response.data.data.piOrder.cgst / 100);
+                     totalAmount = totalAmount.toFixed(2);
+
+                    if(response.data.data.productCustom === false) {
+                        this.setState({
+                        previewPI:response.data.data,
+                      buyerDetails: response.data.data.generatedBy,
+                      previewPiOrder:response.data.data.piOrder,
+                      buyerCustomProduct:response.data.data.buyerCustomProduct,
+                      paymentDetails:response.data.data.paymentDetails,
+                      gpay:response.data.data.paymentDetails[1].accNo_UPI_Mobile,
+                      phonePay:response.data.data.paymentDetails[2].accNo_UPI_Mobile,
+                      paytm:response.data.data.paymentDetails[3].accNo_UPI_Mobile,
+                      ifscCode:response.data.data.paymentDetails[0].ifsc,
+                      accNo:response.data.data.paymentDetails[0].accNo_UPI_Mobile,
+                      bankName:response.data.data.paymentDetails[0].bankName,
+                      artisanUser:response.data.data.artisanUser,
+                      firstName:response.data.data.artisanUser.firstName,
+                      lastName:response.data.data.artisanUser.lastName,
+                      generatedBy:response.data.data.generatedBy,
+                      weftDye:response.data.data.product.weftDye,
+                      warpDye:response.data.data.product.warpDye,
+                      extraWeftDye:response.data.data.product.extraWeftDye,
+                      weftYarn:response.data.data.product.weftYarn,
+                      warpYarn:response.data.data.product.warpYarn,
+                      extraWeftYarn:response.data.data.product.extraWeftYarn,
+                     totalAmount:totalAmount,
+                     calulatedAmount:totalAmount * 0.3,
+                        })
+                    }
+                    else {
+                        this.setState({
+                        previewPI:response.data.data,
+                      buyerDetails: response.data.data.generatedBy,
+                      previewPiOrder:response.data.data.piOrder,
+                      buyerCustomProduct:response.data.data.buyerCustomProduct,
+                      paymentDetails:response.data.data.paymentDetails,
+                      gpay:response.data.data.paymentDetails[1].accNo_UPI_Mobile,
+                      phonePay:response.data.data.paymentDetails[2].accNo_UPI_Mobile,
+                      paytm:response.data.data.paymentDetails[3].accNo_UPI_Mobile,
+                      ifscCode:response.data.data.paymentDetails[0].ifsc,
+                      accNo:response.data.data.paymentDetails[0].accNo_UPI_Mobile,
+                      bankName:response.data.data.paymentDetails[0].bankName,
+                      artisanUser:response.data.data.artisanUser,
+                      firstName:response.data.data.artisanUser.firstName,
+                      lastName:response.data.data.artisanUser.lastName,
+                      generatedBy:response.data.data.generatedBy,
+                      customweftDye:response.data.data.buyerCustomProduct.weftDye,
+                      customwarpDye:response.data.data.buyerCustomProduct.warpDye,
+                      customextraWeftDye:response.data.data.buyerCustomProduct.extraWeftDye,
+                      customweftYarn:response.data.data.buyerCustomProduct.weftYarn,
+                      customwarpYarn:response.data.data.buyerCustomProduct.warpYarn,
+                      customextraWeftYarn:response.data.data.buyerCustomProduct.extraWeftYarn,
+                      totalAmount:totalAmount,
+                      calulatedAmount:totalAmount * 0.3,
+                        })
+                    }
+                    
+                }
+    
+                console.log(response.data.data);
+            });
+
+
       }
     
       backoperation(){
@@ -182,7 +261,10 @@ export class BuyerAdvancePayment extends Component {
             
 <React.Fragment>
 <Container>
+<NavbarComponent />
     {this.state.dataload?
+<>
+{this.state.nextPage==false ?
 <>
 
 
@@ -256,7 +338,7 @@ export class BuyerAdvancePayment extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn bold">Artisan Brand : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -271,13 +353,19 @@ export class BuyerAdvancePayment extends Component {
                 </>
                 )}
 
-  <Row noGutters={true}>
+
+
+{/* ------------------------------------------------------------------------------------------------------------------------- */}
+
+<Row noGutters={true}>
             <Col className="col-xs-12">
             <div class="Total-square-container">
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay"><span > 
-                   <i class="fa fa-inr" aria-hidden="true"></i> 1111.00</span>
+                   <i class="fa fa-inr" aria-hidden="true"></i>
+                  {this.state.totalAmount}
+                    </span>
                     </h3>
 
                 </div>
@@ -285,6 +373,9 @@ export class BuyerAdvancePayment extends Component {
              
             </Col>
   </Row>
+
+
+
 
   <Row  noGutters={true}>
       <Col className="col-xs-12 selectpercenttext">
@@ -334,7 +425,9 @@ export class BuyerAdvancePayment extends Component {
 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="selectpercenttext">  Calculated amount you pay as a advanceed : <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span>
+      <span className="selectpercenttext">  Calculated amount you pay as a advanceed : 
+      <span className="advtotal">
+    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> {this.state.calulatedAmount}</span>
      
                 </span>
     </Col>
@@ -344,7 +437,9 @@ export class BuyerAdvancePayment extends Component {
 <Row noGutters={true} className="margintoprow" style={{textAlign:"center"}}>
 
     <Col className="col-xs-12">
-        <button className="proccedwithadvpaybtn" onClick={() => this.proceedtopay()}>Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+        <button className="proccedwithadvpaybtn" 
+        onClick={() => this.proceedtopay()}>Proceed with {this.state.percent} 
+       <span></span> advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
 </button>
     </Col>
 </Row>
@@ -370,8 +465,63 @@ export class BuyerAdvancePayment extends Component {
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
 
-                </>:null}
-                <Row>
+                </>:
+                //  {this.state.getEnquiryMoq.map((item)=> 
+                //     <></>
+               // )}
+
+    
+                <>
+{this.state.getEnquiryMoq.map((item)=> 
+                     <>
+
+                {this.state.calulatedAmount?
+                 <BuyerAdvancePayment2
+                 bp={this.backPI}
+                 productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
+                 yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
+                 weftYarnId ={this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc:""}
+                 extraWeftYarnId ={item.openEnquiriesResponse.extraWeftYarnId?item.openEnquiriesResponse.extraWeftYarnId:""}
+                 extraWeftYarnIds = {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ] ?this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc:""}
+                 productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
+                 companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
+                 productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
+                 productImages={item.openEnquiriesResponse.productImages}
+                 enquiryCode={item.openEnquiriesResponse.enquiryCode}
+                 FullCode={item.openEnquiriesResponse.enquiryCode}
+                 calulatedAmount={this.state.calulatedAmount}
+                 gpay={this.state.gpay?this.state.gpay:"NA"}
+                 phonePay={this.state.phonePay?this.state.phonePay:"NA"}
+                 paytm={this.state.paytm}
+                 ifscCode={this.state.ifscCode}
+                 accNo={this.state.accNo}
+                 bankName={this.state.bankName}
+                 firstName={this.state.firstName}
+                 lastName={this.state.lastName}
+                 
+                  />
+                  
+                  :
+                  ""
+                }
+               
+
+               </>
+               )}
+                </>
+                
+                }
+                </>
+:
+null
+}
+
+             
+
+{/* ---------------------------------------------------------------------------------------------------------------------------------- */}
+
+
+<Row>
             <div>
               <img
                 className="notifyFooterBanner internaldiv"
@@ -386,11 +536,3 @@ export class BuyerAdvancePayment extends Component {
     }
     
 }
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
-
-const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment);
-export default connectedLoginPage;

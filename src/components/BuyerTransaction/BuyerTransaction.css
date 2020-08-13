@@ -45,7 +45,7 @@
     font-size: 12px;
     font-weight: 600;
     color: darkgrey;
-    padding: 5px;
+   
 }
 
 .proformainvId{
@@ -116,6 +116,7 @@
     }
     .proformacol{
         font-size: 7px;
+        padding: 5px;
     }
     .proformainvIdtext{
         font-size: 6px;  
@@ -128,7 +129,7 @@
 
 @media only screen and ( max-width: 1024px ) and (min-width:993px){
     .fontsizenav{
-font-size: 16px;
+    font-size: 16px;
     }
     .selctedoptiotransnhr {
         /* position: absolute; */

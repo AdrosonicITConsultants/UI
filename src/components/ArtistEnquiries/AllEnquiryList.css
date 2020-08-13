@@ -1,0 +1,597 @@
+.navoncon{
+    width: 132px;
+    float: left;
+    font-size: 20px;
+    cursor: pointer;
+}
+.oncoselected{
+    
+}
+.onconotselected{
+
+}
+.enquiryoptionhr{
+    width: 90%;
+    margin-top: 10px!important;
+}
+.selctedoptionhr{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 110px;
+    top: 93px;
+    left: 0px;
+}
+.selctedoptionhr2{
+    position: absolute;
+    border: 1.5px solid black;
+    width: 116px;
+    top: 93px;
+    left: 142px;
+}
+.imageinlist{
+    width: 140px;
+    float: left;
+    text-align: center;
+    font-size: 12px;
+}
+.imageinlist1{
+    width: 120px;
+    height: 120px;
+    overflow-y: hidden;
+    margin: 0 auto ;
+    margin-bottom: 10px;
+}
+.enquiryimage{
+    width: 100%;
+}
+.leEnqid{
+    font-size: 22px;
+}
+.leEnqspun{
+    font-size: 18px;
+    color: #8e8e8e;
+
+}
+.leEnqprodName{
+    color: blue;
+
+}
+.leEnqtype{
+    font-size: 18px;
+}
+.leEnqprodcode{
+    font-size: 16px;
+    color: #8e8e8e;
+}
+.leEnqprodtype{
+color: magenta;
+font-size: 13px;
+
+}
+.leEnqprodbn{
+    color: black;
+    font-size: 13px;
+}
+.leEnqbrandname{
+    color: blue;
+    font-size: 13px;
+}
+.leEnqOrderAmount{
+    font-size: 12px;
+    color: #8e8e8e;
+}
+.leEnqAmount{
+    font-size: 35px;
+
+}
+.leEnqidDateStarted{
+    font-size: 13px;
+    color: #8e8e8e;
+
+}
+.leEnqidLastUpdated{
+    font-size: 13px;
+    color: rgb(73, 233, 81);
+
+}
+.leEnqidEstDelivery{
+    font-size: 13px;
+    color: cyan;
+
+}
+.leEnqstatus{
+    font-size: 22px;
+
+}
+.colorbarimg{
+    width:100%;
+}
+.colorbardiv{
+    height: 10px;
+    overflow-y: hidden;
+}
+.progressbarfont{
+    font-size: 10px;
+}
+
+.leEnqshowmore{
+    cursor: pointer;
+    /* color: black!important; */
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+/* ///////////////////ProgressBAr////////////////////////// */
+.multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
+    /* content: counter(stepNum); */
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
+    background-color: #ededed;
+  }
+  
+  .multi-steps {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .multi-steps > li {
+    /* counter-increment: stepNum; */
+    text-align: center;
+    display: table-cell;
+    position: relative;
+    color: green;
+  }
+  .multi-steps > li:before {
+    /* content: "\f00c";
+    content: "\2713;";
+    content: "\10003";
+    content: "\10004"; */
+    content: no-close-quote;
+    display: block;
+    margin: 0 auto 14px;
+    background-color:green;
+    width: 14px;
+    height: 14px;
+    line-height: 32px;
+    text-align: center;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: green;
+    border-radius: 50%;
+  }
+  .multi-steps > li:after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: green;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    z-index: -1;
+  }
+  .multi-steps > li:last-child:after {
+    display: none;
+  }
+  .multi-steps > li.is-active:before {
+    background-color: green;
+    border-color: green;
+  }
+  .multi-steps > li.is-active ~ li {
+    color: #808080;
+  }
+  .multi-steps > li.is-active ~ li:before {
+    background-color: #ededed;
+    border-color: #ededed;
+  }
+  
+
+/* ///////////////////ProgressBAr////////////////////////// */
+
+.Allenqlistbtn{
+    width: 100%;
+    text-align: center;
+    color: goldenrod;
+    font-size: 15px;
+    background: white;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    height: 50px;
+    padding: 12px;
+}
+
+.Allenqlistbtn2{
+    width: 100%;
+    text-align: center;
+    color: brown;
+    font-size: 17px;
+    background: pink;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    height: 50px;
+    padding: 12px;
+    font-weight: bold;
+}
+.moqdetailCard{
+    /* text-align: center; */
+    box-shadow: 0px 3px 15px 0px #d8d6d6;
+    padding: 10px;
+}
+
+.Allenqlistbtnmt{
+    margin-top: 50px;
+}
+
+.Allenqlistbtnmt2{
+    margin-top: 20px;
+}
+.Moqh1{
+    font-size: 25px;
+    color: goldenrod;
+    font-weight: 600;
+}
+.Moqbuyerh1{
+color: rgb(133, 196, 36) !important;
+}
+.Moqh2{
+    font-size: 25px;
+    color: black;
+    font-weight: 600;
+}
+.Moqh2select{
+    font-size: 15px;
+}
+.Moqh2selectheight {
+     height: 34px;
+     border: 1px solid lightgrey;
+     font-weight: 700;
+    }  
+.Moqh1p{
+    padding: 17px;
+    font-size: 15px;
+}
+.savemoqbtn{
+    color: white;
+    font-size: 15px;
+    /* position: absolute; */
+    float: right;
+    padding: 5px;
+    width: 70px;
+    border-radius: 32px;
+    border: 1px solid lightblue;
+    background: rgb(30 144 255 / 88%);
+}
+.sendmoqbtn{
+    color: white;
+    font-size: 15px;
+    /* position: absolute; */
+    /* left: 0; */
+    padding: 5px;
+    width: 70px;
+    border-radius: 32px;
+    border: 1px solid lightblue;
+    background: rgb(51 0 255 / 88%);;
+}
+
+.BuyerDetailsh1{
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.BdImg{
+    height: 76px;
+    border-radius: 52px;
+    width: 76px;
+    margin-top: 12px;
+    max-height: 55px;
+    /* margin: 10px; */
+    /* padding: 0px 0px 0px 0px; */
+    margin-bottom: 16px;
+}
+.BDh1{
+    
+    font-size: 18px;
+    font-weight: 700;
+
+}
+.width100p:disabled{
+    border: transparent;
+    background-color: transparent;
+}
+.BDp{
+    color: darkslategrey;
+    font-size: 14px;
+    /* font-weight: 700; */
+    overflow: hidden;
+}
+.width200{
+    width: 200px;
+}
+.width100p{
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.alignbox{
+    margin-left: 23px;
+    height: 34px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox:disabled{
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+.alignbox2{
+    height: 34px;
+    margin-left: 10px;
+    border: 1px solid lightgrey;
+}
+
+.alignbox2:disabled{
+    border: 1px solid transparent;
+    background: transparent;
+}
+.alignbox3{
+    border: transparent;
+    width: 100%;
+    background: white;
+}
+.savemoqbtn:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
+.sendmoqbtn:disabled{
+    background-color: grey;
+    opacity: 0.5;
+}
+
+
+.PIinput{
+    width: 90%;
+    height: 39px;
+    background: whitesmoke;
+    border: 1px solid transparent;
+    /* border-radius: 5px; */
+    margin-top: 6px;
+    /* margin-left: 17px; */
+}
+
+.PIcolmt{
+    margin-top: 75px;
+}
+
+.PIcol2mt{
+    margin-top: 35px;
+}
+.currencyinput {
+    border: 1px inset #ccc;
+    padding-bottom: 1px;
+}
+.currencyinput input {
+    border: 0;
+}
+
+.rssymbol{
+    border: 1px solid transparent;
+    padding: 10px;
+    background: whitesmoke;
+
+}
+.rssymboldis{
+    border: 1px solid transparent;
+    padding: 10px;
+    background: whitesmoke;
+
+}
+.previewandpi{
+    width: 38%;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: 1px;
+    margin-top: 5%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.marginBottompage{
+    margin-bottom: 50px;
+}
+.PIbuttonicon{
+    height: 18px;
+    margin-right: 10px;
+}
+.rsinputboxwidth{
+    width: 74%;
+}
+.PIinput:disabled{
+    background-color: whitesmoke !important;
+}
+
+
+.modalBoxSizeCS{
+    width: 300px;
+}
+.CSheading{
+    background: black;
+    height: 39px;
+    font-size: 17px;
+    padding: 6px;
+    color: white;
+    font-weight: 300;
+}
+.cWhite{
+    color:white;
+}
+.greenButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid green;
+    float: left;
+    background: green;
+    border-radius: 50%;
+
+}
+.blueButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid blue;
+    float: left;
+    background:white;
+    border-radius: 50%;
+
+}
+.greyButtonstatus{
+    width: 20px;
+    height: 20px;
+    border: 2px solid grey;
+    float: left;
+    background:white;
+    border-radius: 50%;
+}
+.markCompletedButton{
+    background: white;
+    border: 1px solid blue;
+    color: blue;
+    padding: 5px 10px;
+}
+.mb7{
+    margin-bottom: 7px;
+}
+
+.multi-steps > li.stop:before {
+    background-color: red;
+    border-color: red;
+}
+.multi-steps > li.stop {
+    color :red!important;
+}
+.multi-steps > li.closedenq:before {
+    background-color: red!important;
+    border-color: red!important;
+}
+.multi-steps > li.closedenq {
+    color: red!important;
+}
+.rowmaxheight{
+    max-height: 84px;
+    height: 84px;
+
+}
+.recmoqcol1{
+    width: 300px;
+}
+.recmoqcol2{
+    width: 90px;
+    overflow: auto;
+}
+
+@media screen and (max-width:1200px) and (min-width:990px){
+    .Allenqlistbtn {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Allenqlistbtn2 {
+        font-size: 13px;
+        height: 53px;
+    }
+   .Moqh2selectheight {  
+    height: 34px;
+    width: 241px;
+    font-size: 12px;
+
+    }
+    .Moqh1{
+        font-size: 16px;
+    }
+    .Moqh2{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:991px) and (min-width:768px){
+    .Moqh2selectheight {
+        height: 34px;
+        width: 174px;
+        font-size: 9px;
+    } 
+    .Allenqlistbtn {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Allenqlistbtn2 {
+        font-size: 13px;
+        height: 53px;
+    }
+    .Moqh1{
+        font-size: 16px;
+    }
+    .Moqh2{
+        font-size: 16px;
+    } 
+    .BDh1{
+        font-size: 15px;
+    }
+    
+    .BDp{
+        font-size: 13px;
+
+    }  
+    .width200{
+        width: 150px;
+    }
+   
+}
+@media screen and (max-width:767px){
+.moqdetailCard{
+    text-align: center;
+}
+.Moqh1{
+    font-size: 16px;
+}
+.Moqh2{
+    font-size: 16px;
+} 
+.Moqh2selectheight {
+    height: 34px;
+    width: 211px;
+    font-size: 10px;
+} 
+.savemoqbtn{
+    /* position: absolute; */
+    margin-right: 100px;
+
+}
+.sendmoqbtn{
+    /* position: absolute; */
+    margin-left: 100px;
+
+}
+.BdImgCol{
+    text-align: center;
+}
+.previewandpi{
+    width: 60%;}
+}
+@media screen and (max-width:320px){
+    .savemoqbtn{
+        position: none;
+        margin-right: 49px !important;
+    
+    }
+    .sendmoqbtn{
+        position: none;
+        margin-left: 30px;
+    
+    }
+    .BdImgCol{
+        text-align: center;
+    }
+    .previewandpi{
+        width: 70%;}
+    
+   
+}

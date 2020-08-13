@@ -1,0 +1,231 @@
+.emptyhrwishlist h1{
+    text-align: center;
+    font-size: 47px;
+    color:  #D6D6D6;
+    /* opacity: 0.6; */
+}
+
+.emptyhrwishlist p{
+    text-align: center;
+    font-size: 16px;
+    color:  black;
+    /* opacity: 0.6; */
+}
+
+.heartwishlistbg{
+    background: url("../../assets/wishlist-thread.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 321px;
+    /* margin: auto; */
+    margin-top: 17px;
+    /* width: 100%; */
+    width: auto;
+    max-height: 321px;
+}
+
+.wishlistbg{
+    background: url("../../assets/wishlist\ background.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.wishlistblack{
+    width: auto;
+    padding: 6px;
+    margin-top: 11px;
+    border-radius: 16px;
+    border: 2px solid black;
+    color: white;
+    background: black;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.homeiconwishlist{
+    height: 18px;
+}
+.spanhome{
+    margin-left: 5px;
+}
+
+
+/* ---------------------------------- */
+.addedwishlist h1{
+    font-size: 27px;
+    font-weight: 600;
+}
+.clearmywishlist{
+    width: auto;
+    padding: 6px;
+    /* margin-top: 31px; */
+    border-radius: 16px;
+    border: 1px solid #cc0000;
+    color: #cc0000;
+    background: white;
+    letter-spacing: 0.5px;
+}
+
+.Totalitemsinwishlist{
+    float: left;
+    font-size: 19px;
+    font-weight: 300;
+
+}
+.wishlisthr{
+    width: 100%;
+    border-top: 1px solid;
+    /* margin-top: 50px; */
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+.wishlistcardbody{
+    box-shadow: 2px 2px 2px 2px lightgrey;
+    padding: 10px;
+    margin-top: 10px;
+    background: white;
+    /* height: 130px; */
+}
+
+.Wishlistitemimg{
+    height: 124px;
+    width: 124px;
+    margin: auto;
+    max-height: 111px;
+   
+}
+.secondcolmargin{
+    margin-left: 16px;
+}
+.Wishlistitemimgdiv{
+        max-height: 100px;
+    /* width: auto; */
+    margin-bottom: 10px;
+}
+
+.wishlistitemcardtitle{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.Removefromwishlist{
+    font-size: 14px;
+    font-weight: 900;
+    color: rgb(218, 14, 14);
+    width: auto;
+    cursor: pointer;
+}
+
+
+.Descriptionitemp{
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--lato);
+    max-width: 355px;
+}
+
+.Descriptionipara{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    /* font-family: var(--la); */
+    letter-spacing: 0.7px;
+    /* font-size: 15px; */
+}
+
+
+.wishlistitembrand{
+    height: 20px;
+}
+.wishlistbrand{
+    color: cornflowerblue;
+    margin-left: 9px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.wishlistbrand2{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.Wishlistpcode{
+    color: forestgreen;
+    font-size: 13px;
+    font-family: var(--lato);
+    font-weight: lighter;
+}
+
+.margintopcss{
+    margin-top: 10px;
+   
+}
+
+.Colfloatri{
+    float: right !important;
+}
+
+body {
+    counter-reset: section;
+  }
+  
+  .srno p::before {
+    counter-increment: section;
+    content: " " counter(section) " ";
+  }
+  
+@media only screen and ( max-width: 767px ) {
+
+    .Colfloatri{
+  float: none !important;
+  text-align: center;
+}
+.Descriptionitemp{
+    text-align: center; 
+}
+.wishlistbrand{
+    text-align: center;
+}
+.colalign{
+    text-align: center;
+}
+
+.Wishlistpcode{
+    text-align: center;
+}
+.addedwishlist h1{
+    text-align: center;
+}
+.Wishlistitemimg {
+    height: 135px;
+    width: 270px;
+    margin: auto;
+    max-height: 136px;
+}
+.Wishlistitemimgdiv {
+    max-height: 121px;
+    /* width: auto; */
+    margin-bottom: 10px;
+    text-align: center;
+}
+.emptyhrwishlist h1 {
+    font-size: 28px;
+   
+}
+.heartwishlistbg {
+    height: 250px;
+    
+}
+}
+@media only screen and ( max-width: 1024px ) and ( min-width: 768px ){
+    .Removefromwishlist {
+        font-size: 13px;
+    }
+    .emptyhrwishlist h1 {
+        font-size: 36px;
+       
+    }
+}

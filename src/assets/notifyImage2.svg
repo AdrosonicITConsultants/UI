@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.234" height="44.629" viewBox="0 0 33.234 44.629">
+  <g id="Group_1652" data-name="Group 1652" transform="translate(-77.75 -586.469)">
+    <g id="Group_1549" data-name="Group 1549" transform="translate(7 18)">
+      <g id="Group_1548" data-name="Group 1548" transform="translate(71.5 569.5)">
+        <line id="Line_1603" data-name="Line 1603" x2="12.582" y2="20.513" transform="translate(18.871)" fill="none" stroke="#eadbff" stroke-linecap="round" stroke-width="1.5"/>
+        <line id="Line_1604" data-name="Line 1604" x2="29.164" transform="translate(0 27.449)" fill="none" stroke="#eadbff" stroke-linecap="round" stroke-width="1.5"/>
+        <g id="Polygon_64" data-name="Polygon 64" transform="translate(2.5 3.5)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11.5,0,23,19H0Z" stroke="none"/>
+          <path d="M 11.5 0 L 0 19 L 23 19 L 11.5 0 M 11.5 -1.5 C 12.02482986450195 -1.5 12.51148986816406 -1.225700378417969 12.7832498550415 -0.7766990661621094 L 24.28325080871582 18.22330093383789 C 24.5636100769043 18.68650054931641 24.57258033752441 19.26485061645508 24.30672073364258 19.73653030395508 C 24.04087066650391 20.20820999145508 23.54143905639648 20.5 23 20.5 L 0 20.5 C -0.5414390563964844 20.5 -1.040870666503906 20.20820999145508 -1.306720733642578 19.73653030395508 C -1.572580337524414 19.26485061645508 -1.563610076904297 18.68650054931641 -1.28325080871582 18.22330093383789 L 10.2167501449585 -0.7766990661621094 C 10.48851013183594 -1.225700378417969 10.97517013549805 -1.5 11.5 -1.5 Z" stroke="none" fill="#eadbff"/>
+        </g>
+        <g id="Ellipse_348" data-name="Ellipse 348" transform="translate(9.5 11.5)" fill="none" stroke="#eadbff" stroke-width="1.5">
+          <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+          <circle cx="4.5" cy="4.5" r="3.75" fill="none"/>
+        </g>
+      </g>
+      <path id="Icon_awesome-exchange-alt" data-name="Icon awesome-exchange-alt" d="M0,7.825V7.269a.833.833,0,0,1,.833-.833h12.5V4.77a.834.834,0,0,1,1.422-.589l2.777,2.777a.833.833,0,0,1,0,1.178l-2.777,2.777a.834.834,0,0,1-1.422-.589V8.658H.833A.833.833,0,0,1,0,7.825ZM16.94,13.1H4.443V11.435a.834.834,0,0,0-1.422-.589L.244,13.623a.833.833,0,0,0,0,1.178l2.777,2.777a.834.834,0,0,0,1.422-.589V15.323h12.5a.833.833,0,0,0,.833-.833v-.555A.833.833,0,0,0,16.94,13.1Z" transform="translate(76.556 595.012)" fill="none" stroke="#eadbff" stroke-width="0.5"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+.margin-login {
+    font-weight: 600;
+    margin-top: 0.3em;   
+    font-family: var(--PlayfairFont);
+}
+
+.margin-registertext {
+    font-weight: 600;
+    margin-top: 0.1em;   
+    font-family: var(--PlayfairFont);
+}
+
+.margin-roletext{
+    float: left;
+    margin-left: 37%;
+    margin-top: -0.5em;
+    color: grey;
+     font-family: var(--LatoFont);
+}
+.margin-roletext1{
+    float: left;
+    margin-left: 22%;
+    margin-top: -0.5em;
+    color: grey;
+     font-family: var(--LatoFont);
+}
+
+button:focus{
+ /* border-color:transparent!important; */
+ outline:none;
+}
+.margin-roletext2 {
+    float: left;
+    margin-left: -41%;
+    margin-top: 18%;
+    color: grey;
+    font-family: var(--LatoFont);
+}
+.margin-arrow {
+    margin-top: 1.3em;
+    margin-left: 0em;
+}
+
+.SkipButtonVideo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 50px;
+    background: var(--mainFont);
+    color: var(--lightFont);
+    box-shadow: 0px 0px 25px 5px #ccc;
+}
+
+.loginUserErrorTop {
+    margin-top: 20px;
+}
+

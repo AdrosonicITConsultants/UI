@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79" height="81" viewBox="0 0 79 81">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#ffd23c"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_1760" data-name="Group 1760" transform="translate(-917 -821)">
+    <g id="Polygon_66" data-name="Polygon 66" transform="translate(939 821)" fill="#1fcb60">
+      <path d="M 41.12947845458984 35.5 L 0.8705216646194458 35.5 L 21 0.9923228621482849 L 41.12947845458984 35.5 Z" stroke="none"/>
+      <path d="M 21 1.984634399414062 L 1.741039276123047 35 L 40.25896072387695 35 L 21 1.984634399414062 M 21 0 L 42 36 L 0 36 L 21 0 Z" stroke="none" fill="#1fcb60"/>
+    </g>
+    <circle id="Ellipse_533" data-name="Ellipse 533" cx="23.5" cy="23.5" r="23.5" transform="translate(949 842)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_1106" data-name="Rectangle 1106" width="43" height="43" transform="translate(917 859)" fill="#87affa"/>
+  </g>
+</svg>

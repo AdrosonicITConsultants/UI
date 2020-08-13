@@ -1,0 +1,356 @@
+.registerimg{
+    background-image: url("../../../assets/calculator_bg-scaled-e1584353976962-2048x1362.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    min-height:100vh;
+  }
+  .demoa{
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    height:590px;
+    width: 400px;
+}
+.demoab{
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    height:618px;
+}
+.font2{
+    font-size: 15px;
+}
+.font3{
+
+    font-size: 20px;
+}
+
+.mr-5{
+    margin-right: 35px!important;
+}
+.font5{
+    font-size: 35px;
+}
+.userLogo {
+    width: 35px;
+}
+.mt7{
+    margin-top:7px;
+}
+.ionickeylogo {
+    width: 40px;
+}
+.maillogo{
+    width: 38px;
+}
+.otplogo{
+    width: 40px;
+}
+.locklogo1{
+    width: 20px;
+}
+/* align glyph */
+.left-addon2 .glyphicon  { left:  6px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon2 input  { padding-left:  48px; }
+.right-addon input { padding-right: 30px; }
+
+/* enable absolute positioning */
+.inner-addon2 {
+    position: relative;
+  }
+  
+  /* style glyph */
+  .inner-addon2 .glyphicon {
+    position: absolute;
+    padding: 9px;
+    pointer-events: none;
+  }
+  .BuyerLogin1{
+    border-radius: 25px !important;
+    height: 2.5em !important;
+}
+.vcenter1 {
+    display: inline-block;
+    vertical-align: middle;
+    float: none!important;
+}
+.fullscreen1{
+    height:100vh;
+}
+.logoreg3wid{
+   width: 30%!important;
+    margin-left: 4em;
+}
+.form-group1{
+    margin-bottom: 5px;
+}
+.form-group11{
+    margin-bottom: 5px;
+}
+.padform{
+    padding-left: 50px;
+}
+.requiredStar{
+    font-size: 30px;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 2px;
+    font-family: var(--LatoFont);
+    color: #e85555;
+}
+
+
+
+div label input {
+   margin-right:100px;
+}
+body {
+    font-family:sans-serif;
+}
+
+#ck-button {
+    font-family: var(--PlayfairFont);
+    font-weight: normal;
+    margin: 4px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    display: inline-block;
+    width: 160px;
+    margin: 20px 5px 20px 5px;
+}
+
+#ck-button:hover {
+    background:lightgreen;
+}
+
+
+
+#ck-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+    cursor: pointer;
+    font-weight: 500;
+    color: grey;
+}
+.img_wrp {
+  display: inline-block;
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#ck-button label input {
+    position:absolute;
+    top:-20px;
+    display: none;
+}
+
+#ck-button input:checked + span {
+    /* background-color:#911; */
+    color: green;
+    font-weight: 700;
+}
+
+.profileImage {
+   width: 100px;
+    
+    /* cursor: pointer; */
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 31px -8px #ff9d9d;
+}
+.mt77{
+   margin-top: 77px;
+}
+.mt23{
+    margin-top: 23px;
+}
+.mt17{
+    margin-top: 17px;
+}
+.resetsuccessfulText {
+    color: var(--mainGreen);
+    font-size: 20px;
+    font-family: var(--LatoFont);
+}
+
+.emailconfirmationText {
+    color: var(--lightFont);
+}
+
+.boxDropdown {
+        width: 120px;
+        height: 30px;
+        border: 1px solid #999;
+        font-size: 18px;
+        color: #1c87c9;
+        background-color: #eee;
+        border-radius: 5px;
+        box-shadow: 4px 4px #ccc;
+}
+.BuyerLogin212 {
+    border-radius: 0px!important;
+    height: 104px !important;
+}
+
+
+@media only screen and ( max-width: 480px ) {
+   
+    .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:100%;
+        height:auto;
+    }
+    .fullscreen1{
+        height:0vh;
+    }
+    .logoreg3wid {
+        width: 40%!important;
+        margin-left: 0px;
+    }
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:100%;
+        height:auto;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 30%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
+    }
+}
+@media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+        height:auto;
+    }
+    .fullscreen1{
+        height:0vh;
+    }
+    .vcenter1 {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 32%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
+    }
+    .logoreg3wid {
+        width: 40%!important;
+        margin-left: 0px;
+    }
+
+}
+
+
+@media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+
+    .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+    }
+    .vcenter {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .vcenter1 {
+        display: block;
+        /* vertical-align: middle; */
+        float: none!important;
+    }
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        margin: 30px auto;
+        width:400px;
+        height:auto;
+    }
+    .fullscreen1{
+        height:0vh;
+    }
+    .margin-roletext1 {
+        float: left;
+        margin-left: 33%;
+        margin-top: -0.5em;
+        color: grey;
+        font-family: var(--LatoFont);
+    }
+    .logoreg3wid {
+        width: 40%!important;
+        margin-left: 0px;
+    }
+   
+}
+@media only screen and ( min-width: 1200px ) {
+    
+    .demoa{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        width: 400px;
+        margin: 0 auto;
+        height: 590px;
+    }
+    .demoab{
+        /* margin-top:100px; */
+        background-color: white;
+        border-radius: 10px;
+        width: 80%;
+        margin: 0 auto;
+        height: 618px;
+    }
+
+    
+    /* .vrline{
+        border-left: 2px solid;
+        height: 1.5em;
+        margin-top: -15%;
+        position: absolute;
+        left: 45%;
+        /* margin-left: -3px; */
+        /* top: 0; */
+        /* color: #c7c7c7;
+    } */ 
+    .margin-roletext1{
+        float: left;
+        margin-left: 21%;
+        margin-top: -0.5em;
+        color: grey;
+         font-family: var(--LatoFont);
+    }
+
+}

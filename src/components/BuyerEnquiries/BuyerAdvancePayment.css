@@ -1,0 +1,447 @@
+.margintoprow{
+    margin-top: 36px;
+}
+
+.Total-square-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .Total-square{
+    background-color: white;
+    border: 1px solid ;
+    width: auto;
+    height: auto;
+  }
+
+  .Select-square-container{
+      margin-top: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .Select20-square{
+   background-color: rgb(101, 152, 41);
+    border: 1px solid;
+    width: 95px;
+    height: 81px;
+    padding: 18px 30px 23px 32px;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+
+  }
+  .Select30-square{
+    background-color: rgb(158, 158, 158);
+    border: 1px solid;
+    width: 95px;
+    height: 81px;
+    padding: 18px 30px 23px 32px;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+ 
+  }
+  .Select50-square{
+    background-color: rgb(182, 143, 11);
+    border: 1px solid;
+    width: 95px;
+    height: 81px;
+    padding: 18px 30px 23px 32px;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+
+  }
+ .totalamtpay{
+     text-align: center;
+     margin-top: 1px;
+     padding: 0px 5px 0px 5px;
+ }
+
+ .totalamtpay2{
+   color:rgb(102, 136, 255) !important;
+ }
+.uploadconfirmbtn:disabled{
+  background-color: gray;
+  opacity: 0.5;
+}
+ .Accdetailstxt{
+  font-size: 14px;
+  text-align: center;
+  margin-top: 35px;
+  font-weight: bolder;
+ }
+ .orderamthead{
+     font-size: 10px;
+     color: gray;
+     padding: 3px;
+    margin-bottom: 0px;
+ }
+ .selectpercenttext{
+     color: gray;
+     font-size: 14px;
+     text-align: center;
+     margin-top: 35px;
+ }
+ .borderbox{
+    border: 4px solid rgb(186,186,186);
+    width: fit-content;
+    padding: 3px;
+    border-radius: 5px;
+ }
+ .advtotal{
+    border: 1px solid rgb(25, 67, 206);
+    padding: 10px;
+    font-size: 20px;
+    color: rgb(102, 136, 255);
+    width: auto;
+ }
+ .proccedwithadvpaybtn{
+    border: 1px solid;
+    border-radius: 25px;
+    height: 40px;
+    background: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    /* width: 41%; */
+ }
+ [type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+  background: black;
+  border: none;
+  border-radius: 45px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Rubik', sans-serif;
+  font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  vertical-align: middle;
+  /* float: right; */
+}
+
+
+
+ .reporttt{
+    color: gray;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+    font-weight: bold;
+
+ }
+
+ .advpayimg{
+  height: 91px !important;
+  width: 90px !important;
+ }
+
+ .fontsize16pa{
+   font-size: 16px !important;
+ }
+
+ .hrlineadvpay{  
+   width: 100%;
+ border-top: 2.5px solid rgb(192 192 192 / 22%);
+ /* margin-top: 50px; */
+ margin-bottom: 10px;
+ margin-left: 0px;
+}
+
+.gpaypthmphonepaysize{
+  font-size: 12px;
+    font-weight: bold;
+    color: gray;
+}
+
+.pinknote{
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: deeppink;
+}
+.bluenote{
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: cornflowerblue;
+}
+.uploadtractionbtnfloat{
+  float: right !important;
+}
+.viewtractionbtnwidth{
+  width: 24%;
+}
+.bankiconborderright{
+  border-right: 1px solid grey;
+}
+.modalBoxTop {
+  margin-top: 130px;
+}
+.uploadroundbtn{
+  background: black;
+  color: white;
+  border: 1px;
+  border-radius: 24px;
+  height: 42px;
+  width: 42px;
+  text-align: center;
+  padding: 11px 1px 2px 6px !important;
+  margin-bottom: 10px;
+}
+.uploadreceiptname{
+  font-size: 17px;
+    margin-left: 6px;
+    color: cornflowerblue;
+}
+.uploadconfirmbtn {
+  border: 2px solid rgb(0 0 255 / 75%);
+  color: rgb(0 0 255 / 75%);
+  background: white;
+  padding: 7px;
+  border-radius: 20px;
+  margin-top: 15px;
+  width: auto;
+}
+.uploadingreceiptheading{
+  font-size: 22px;
+    color: grey;
+}
+.uploadInbgbtn{
+  background: transparent;
+  border: 1px solid;
+  border-radius: 22px;
+  padding: 5px;
+  margin-bottom: 25px;
+  font-size: 12px;
+}
+
+.loading-bar {
+	height: 1rem;
+	width: auto;
+	max-width: 500px;
+	min-width: 200px;
+	margin: 2rem 0;
+	padding: .15rem .05rem .05rem .15rem;
+	
+}
+.loading-bar,
+.loading-bar div {
+	border-radius: 1000px;
+}
+.thin {
+	padding: .35rem!important;
+}
+
+.fuzzy {
+	height: 100%;
+  background-image: linear-gradient(-90deg, #dff0d8, #22bd4b);
+	box-shadow: 0 .1em 1em .1em #88645245;
+	animation: load 3s ease-out infinite;
+}
+
+/* myfile button */
+.myfilebtn{
+  /* font-size: 100px; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+@keyframes load {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+ @media screen and (max-width:768px){
+   .aligncenter{
+    text-align: -webkit-center;
+   
+   }
+   .viewtractionbtnwidth{
+    width: 40%;
+  }
+   .alignbottom{
+    margin-bottom: 20px;
+   }
+   .proccedwithadvpaybtn{
+     width: auto;
+     font-size: 12px;
+   }
+   .advtotal {
+    border: 1px solid rgb(25, 67, 206);
+    padding: 3px;
+    font-size: 17px;
+    color: rgb(102, 136, 255);
+    width: auto;
+    display: inline-flex;
+}
+.selectpercenttext {
+  color: gray;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 35px;
+}
+.advpayimg{
+  height: 91px !important;
+  width: 90px !important;
+ }
+
+ .fontsize16pa{
+   font-size: 11px !important;
+ }
+ .payadvhead{
+   font-size: 13px;
+ }
+ .cparrowsize {
+  width: 21px!important;
+}
+.fontheadingadv{
+  font-size:14px
+}
+.uploadtractionbtnfloat{
+  float: none !important;
+}
+ }
+ 
+ /* ------------------------------------------ */
+ .MOqtable td tr{
+  border: 1px solid lightgray;
+  /* border-right: 1px; */
+  /* margin-left: -1px; */
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  /* text-align: left;     */
+}
+.borderleftblue{
+  border-left: 5px solid darkblue;
+}
+.Artisianbrandh{
+  font-weight: bold;
+    font-size: 14px;
+}
+.Receivemoqbrandimg{
+  height: 60px;
+  padding: 2px;
+  width: 60px;
+  border-radius: 64px;
+}
+.regionmoq{
+  font-weight: 400;
+    color: grey;
+}
+.theading{
+  font-size: 12px;
+  color: grey;
+}
+.tdclasscss{
+  color: cornflowerblue;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+.recheading{
+  font-size: 7px;
+    color: grey;
+}
+.readmored{
+  color: dimgrey;
+    font-size: 15px;
+    cursor: pointer;
+    width: 133px !important;
+}
+.acceptmoqbtn{
+  background-color: rgb(133, 196, 36);
+  color: white;
+  font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.acceptmoqbtnlg{
+  background-color: rgb(133, 196, 36);
+  color: white;
+  font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 138px;
+    height: 60px;
+  
+}
+.accepticon{
+    margin-right: 10px;
+}
+
+.readmorediv{
+  border-left: 3px solid darkblue !important;
+  padding: 15px 2px 2px 17px;
+  border: 1px solid rgb(211 211 211 / 18%);
+}
+.acceptingloader{
+  border-left: 3px solid darkblue !important;
+  /* padding: 15px 2px 2px 17px; */
+  /* background-color: rgb(133, 196, 36); */
+  text-align: center;
+  font-size: 20px;
+  height: 50px;
+  padding: 9px;
+  color: black;
+  font-weight: bold;
+  opacity: 0.7;
+  background-image: linear-gradient(to right, rgb(133 196 36) , rgb(133 196 36 / 43%));
+}
+
+.acceptedloader{
+  border-left: 3px solid darkblue !important;
+  /* padding: 15px 2px 2px 17px; */
+  background-color: rgb(133, 196, 36);
+  text-align: center;
+  font-size: 20px;
+  height: 50px;
+  padding: 9px;
+  color: black;
+  font-weight: bold;
+  opacity: 0.7;
+}
+.receivedmoqh1{
+  font-size: 17px;
+    font-weight: bold;
+}
+.receading{
+  font-size: 9px;
+}
+@media screen and (max-width:970px){
+  .Artisianbrandh {
+    font-size: 12px;
+}
+.Receivemoqbrandimg{
+  height: 50px;
+  }
+  .colright{
+    text-align: -webkit-right;
+  }
+}

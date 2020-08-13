@@ -1,0 +1,78 @@
+.Editprodmodify {
+    font-size: 13px;
+    font-weight: 600;
+    color: black;
+    width: auto;
+    cursor: pointer;
+}
+.editimgicon{
+    height: 16px;
+    margin: auto;
+}
+.emptyhrcustom h1 {
+    text-align: center;
+    font-size: 37px;
+    color: #D6D6D6;
+    /* opacity: 0.6; */
+}
+.emptyhrcustom p {
+    text-align: center;
+    font-size: 16px;
+    color: black;
+    /* opacity: 0.6; */
+}
+.addedcustom  {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+.timelessstorybg{
+    background: url('../../assets/time\ less\ story\ for\ custom\ design\ list\ on\ bottom.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    z-index: 1000;
+    height: 239px;
+    /* opacity: 1.7; */
+    margin-top: 10px;
+}
+.emptycustomtbg{
+    background: url("../../assets/Thread\ empty\ custom\ list\ .svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 321px;
+   margin-bottom: 18px;
+    margin-top: 17px;
+    /* width: 100%; */
+    margin-top: 70px;
+    width: auto;
+    max-height: 321px;
+}
+.Emptymakeittext
+{
+    text-align: center;
+    font-size: 60px;
+    color: #f32222;
+
+}
+.Emptymakeittext p
+{
+text-align: center;
+    font-size: 19px;
+    color: black;
+   margin-top: -10px;
+}
+@media only screen and ( max-width: 767px ) {
+    .emptyhrcustom h1 {
+        font-size: 24px;
+    } 
+    .Emptymakeittext{
+        font-size: 40px;
+}
+.Emptymakeittext p
+{
+text-align: center;
+    font-size: 14px;
+}
+}

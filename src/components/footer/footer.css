@@ -1,0 +1,31 @@
+.footerblack{
+    background-color: var(--mainBlack);
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    color: var(--mainFont);
+    padding: 20px;
+}
+.footerContainer{
+min-height: 0px!important;
+}
+.Ffont1 {
+    font-size: 11px;
+}
+
+.Ffont2 {
+    font-size: 9px;
+    color: var(--lightFont);
+}
+.font30{
+    font-size: 30px!important;
+}
+.iconWidth {
+    width: 60px !important;
+}
+
+
+.Ffont3 {
+    font-size: 11px;
+    color: var(--lightFont);
+}

@@ -1,0 +1,167 @@
+.cp1heading{
+    font-size: 40px;
+}
+.cpbackground{
+    background-image: url("../../assets/Cluster\ back\ ground\ .svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    margin-top: -75px;
+}
+.margin-cparrow {
+    margin-top: 17px;
+    margin-right: 15px;
+}
+.cparrowsize {
+    width: 44px!important;
+}
+.cpproduct{
+    font-size: 36px;
+    color: grey;
+}
+.cpheadmargin{
+    margin-top:102px;
+}
+.stockmargin{
+    margin-left:1px!important;
+}
+.cpCardlayout {
+    /* position: relative; */
+    margin: auto;
+    width: 240px;
+    box-shadow: 2px 2px 4px 4px lightgrey;
+    overflow: hidden;
+    background-color: white;
+    margin-top: 30px;
+    
+}
+.cpCardlayout:hover{
+    box-shadow:10px 10px 25px 5px #ccc;
+     transform:scale(1.05);
+    transition: all 0.3s ease-in;
+    z-index: 1000;
+
+}
+.descriptionbox{
+    height: 160px;
+    overflow-y: hidden;
+}
+.ml7{
+    margin-left: 7px;
+}
+.Available{
+    font-size: 9px;
+    text-align: center;
+    margin-top: 5px;
+    color:#199351;
+    font-weight: 300;
+}
+.Exclusively{
+    font-size: 9px;
+    text-align: center;
+    margin-top: 5px;
+    color:#B501A1;
+    font-weight: 600;
+
+}
+.Made_to_order{
+    font-size: 9px;
+    text-align: center;
+    color:#3B8B91;
+    font-weight: 400;
+}
+.cpwhitearrow{
+    width: 20px;
+    margin-left: 12px;
+}
+.in_stock{
+    font-size: 9px;
+    text-align: center;
+    color: green;
+    font-weight: 400;
+}
+.cpimagediv{
+    width: 240px;
+    height: 240px;
+    overflow: hidden;
+}
+.cpimagediv:hover .cpimage{
+    transform: scale(1.1);
+  transform-origin: 50% 50%;
+}
+.cpimagediv:hover .cpyellowdiv{
+   opacity: 1;
+}
+.cpyellowdiv{
+
+    vertical-align: middle;
+    padding: 10px 15px 10px 15px;
+    opacity: 0;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 200px;
+    width: 200px;
+    /* background-image:url("../../assets/backdrop-blur.svg") ; */
+    background: #EAEAEA 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    /* opacity: 1; */
+    backdrop-filter: blur(42px);
+    /* -webkit-backdrop-filter: blur(42px);
+    -webkit-filter: brightness(1); */
+}
+.cpimage{
+    width: 100%;
+    min-height: 240px;
+
+}
+.logoincard{
+    width: 26px;
+}
+.cpdetails{
+    width: 240px;
+    margin: auto!important;
+    height:50px;
+}
+.cpline{
+    margin-top:5px;
+    margin-bottom:0px;
+}
+.generateEnquiry{
+    width: 100%;
+    background-color: black;
+    color: white;
+    margin-bottom: 0px;
+    border: none;
+    height: 42px;
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: 18px;
+    text-align: left;
+
+}
+.navButtonImg2 {
+    margin-left: 2px;
+    margin-top: 4px;
+    margin-right: 10px;
+    cursor: pointer !important;
+    width: 20px !important;
+}
+
+.navButtonImg2:hover{
+    /* transform: scale(1.1);
+    transform-origin: 50% 50%; */
+    /* --heart-color: var(--heart-active-color); */
+    background-image: url("../../assets/heart-filled.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  
+}
+.cpwishlist{
+    padding: 0px!important;
+    margin-top: 5px;
+}
+.productname{
+    font-size: 16px;
+    margin-top: 8px;
+}
+

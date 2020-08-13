@@ -396,6 +396,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
+        this.state.enquiryCode = params.code;
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){
@@ -932,7 +933,7 @@ MoqSimpleProductSelected(moqId){
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                 </div>
                                 <div>

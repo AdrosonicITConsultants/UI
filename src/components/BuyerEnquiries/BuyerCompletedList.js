@@ -73,6 +73,17 @@ export class BuyerCompletedList extends Component {
                 {this.state.dataload
                 ?
                 <>
+                {this.state.openEnquiries.length == 0 
+                ?
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                        No Completed Enquiries.
+                    </Col>
+                </Row>
+                </>
+                :
+                <>
                 {this.state.openEnquiries.map((item)=> 
 
                 <>
@@ -290,7 +301,7 @@ export class BuyerCompletedList extends Component {
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                    
                                 </div>
@@ -465,6 +476,8 @@ export class BuyerCompletedList extends Component {
                 </div>
                 </>
                 )}
+                </>
+    }
                 </>
             :
             <>

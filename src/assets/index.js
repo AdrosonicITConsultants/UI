@@ -152,7 +152,14 @@ import backupload from "./back upload.svg"
 import Iconfeatherupload from "./Icon feather-upload.svg"
 import whitetransaction from "./white transaction.svg"
 import rotatingshapes from "./rotating shapes.svg"
+
+import recent from "./recent.svg"
+import finpay from "./fin pay.svg"
+import redenquiry from "./red enquiry.svg"
 export default {
+  redenquiry,
+  finpay,
+  recent,
   rotatingshapes,
   whitetransaction,
   Iconfeatherupload,

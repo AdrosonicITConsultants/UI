@@ -477,7 +477,7 @@ export class PreviewInvoice extends Component {
      <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
+     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -502,8 +502,8 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-<h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100}</h3>
-     <h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100}</h3>
+<h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -524,8 +524,8 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
-     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100) }</h3>
+     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}

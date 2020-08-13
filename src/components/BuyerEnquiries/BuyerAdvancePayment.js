@@ -16,6 +16,8 @@ import Moment from 'react-moment';
 import NavbarComponent from "../navbar/navbar";
 import Footer from '../footer/footer';
 import BuyerAdvancePayment2 from "./BuyerAdvancePayment2"
+import BuyerAdvancePayment3 from "./BuyerAdvancePayment3"
+
 
 export default class BuyerAdvancePayment extends Component {
     constructor() {
@@ -31,7 +33,7 @@ export default class BuyerAdvancePayment extends Component {
             select50:false,
             dataload:false,
             enquiryCode:"",
-            percent:"30%",
+            percent:"30",
             totalAmount:"",
             calulatedAmount:0,
             nextPage:false,
@@ -42,7 +44,11 @@ export default class BuyerAdvancePayment extends Component {
             accNo:"",
             bankName:"",
             firstName:"",
-            lastName:""
+            lastName:"",
+            getAdvancedPaymentStatus:[],
+            getAdvancedPaymentReceipt:[],
+            receiptId:"",
+            receiptlabel:""
 
                    }
     }
@@ -66,7 +72,7 @@ export default class BuyerAdvancePayment extends Component {
              select20:false,
              select30:true,
              select50:false,
-             percent:"30%",
+             percent:"30",
              calulatedAmount:((this.state.totalAmount * 30)/100),
             };
         });
@@ -79,7 +85,7 @@ export default class BuyerAdvancePayment extends Component {
              select20:false,
              select30:false,
              select50:true,
-             percent:"50%",
+             percent:"50",
              calulatedAmount:(this.state.totalAmount * 50)/100,
          
             };
@@ -94,6 +100,9 @@ export default class BuyerAdvancePayment extends Component {
     componentDidMount() {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
+        console.log(this.state.getAdvancedPaymentReceipt);
+        console.log(this.state.getAdvancedPaymentReceipt.id);
+        console.log(this.state.getAdvancedPaymentReceipt.label)
         this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
@@ -191,6 +200,7 @@ export default class BuyerAdvancePayment extends Component {
 
                     if(response.data.data.productCustom === false) {
                         this.setState({
+                            
                         previewPI:response.data.data,
                       buyerDetails: response.data.data.generatedBy,
                       previewPiOrder:response.data.data.piOrder,
@@ -249,7 +259,29 @@ export default class BuyerAdvancePayment extends Component {
                 console.log(response.data.data);
             });
 
+            TTCEapi.getAdvancedPaymentStatus(params.code).then((response)=>{
+             
+                this.setState({getAdvancedPaymentStatus : response.data.data},()=>{
+                    console.log(this.state.getAdvancedPaymentStatus);
 
+                });
+            });
+            TTCEapi.getAdvancedPaymentReceipt(params.code).then((response)=>{
+                if(response.data.valid)
+            {
+                // this.componentDidMount();
+                this.setState({getAdvancedPaymentReceipt : response.data.data,
+                    receiptId:response.data.data.paymentId,
+                    receiptlabel:response.data.data.label
+                  
+                },()=>{
+                    console.log(this.state.getAdvancedPaymentReceipt);
+                   console.log(this.state.getAdvancedPaymentReceipt.paymentId);
+                   console.log(this.state.getAdvancedPaymentReceipt.label)
+
+                });
+            }
+            });
       }
     
       backoperation(){
@@ -263,7 +295,13 @@ export default class BuyerAdvancePayment extends Component {
 <Container>
 <NavbarComponent />
     {this.state.dataload?
+    
 <>
+
+
+{this.state.getAdvancedPaymentStatus === null || this.state.getAdvancedPaymentStatus.status === 2 ?
+<>
+
 {this.state.nextPage==false ?
 <>
 
@@ -363,7 +401,7 @@ export default class BuyerAdvancePayment extends Component {
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay"><span > 
-                   <i class="fa fa-inr" aria-hidden="true"></i>
+                   <i class="fa fa-inr" aria-hidden="true" style={{marginRight:'5px'}}></i>
                   {this.state.totalAmount}
                     </span>
                     </h3>
@@ -427,7 +465,7 @@ export default class BuyerAdvancePayment extends Component {
     <Col className="col-xs-12" style={{textAlign:"center"}}>
       <span className="selectpercenttext">  Calculated amount you pay as a advanceed : 
       <span className="advtotal">
-    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> {this.state.calulatedAmount}</span>
+    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> {(this.state.calulatedAmount).toFixed(2)}</span>
      
                 </span>
     </Col>
@@ -438,7 +476,7 @@ export default class BuyerAdvancePayment extends Component {
 
     <Col className="col-xs-12">
         <button className="proccedwithadvpaybtn" 
-        onClick={() => this.proceedtopay()}>Proceed with {this.state.percent} 
+        onClick={() => this.proceedtopay()}>Proceed with {this.state.percent}% 
        <span></span> advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
 </button>
     </Col>
@@ -488,7 +526,7 @@ export default class BuyerAdvancePayment extends Component {
                  productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
                  productImages={item.openEnquiriesResponse.productImages}
                  enquiryCode={item.openEnquiriesResponse.enquiryCode}
-                 FullCode={item.openEnquiriesResponse.enquiryCode}
+                //  FullCode={item.openEnquiriesResponse.enquiryCode}
                  calulatedAmount={this.state.calulatedAmount}
                  gpay={this.state.gpay?this.state.gpay:"NA"}
                  phonePay={this.state.phonePay?this.state.phonePay:"NA"}
@@ -498,7 +536,12 @@ export default class BuyerAdvancePayment extends Component {
                  bankName={this.state.bankName}
                  firstName={this.state.firstName}
                  lastName={this.state.lastName}
-                 
+                 enquiryId={this.state.previewPiOrder.enquiryId}
+                 percent={this.state.percent} 
+                 totalAmount={this.state.totalAmount}
+                 pid={this.state.previewPiOrder.id}
+                 receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
+                receiptlabel={this.state.getAdvancedPaymentReceipt.label}
                   />
                   
                   :
@@ -511,6 +554,69 @@ export default class BuyerAdvancePayment extends Component {
                 </>
                 
                 }
+</>
+:
+<>
+{this.state.getAdvancedPaymentStatus.status === 0 ?
+<>
+
+{this.state.getEnquiryMoq.map((item)=> 
+<BuyerAdvancePayment3
+productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
+productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
+productImages={item.openEnquiriesResponse.productImages}
+enquiryCode={item.openEnquiriesResponse.enquiryCode}
+productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
+yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
+weftYarnId ={this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc:""}
+extraWeftYarnId ={item.openEnquiriesResponse.extraWeftYarnId?item.openEnquiriesResponse.extraWeftYarnId:""}
+companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
+receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
+receiptlabel={this.state.getAdvancedPaymentReceipt.label}
+enquiryId={this.state.previewPiOrder.enquiryId}
+/>
+ )}
+</>
+:
+<>
+{this.state.getAdvancedPaymentStatus.status === 1 ?
+<>
+{this.state.getEnquiryMoq.map((item)=> 
+<BuyerAdvancePayment3
+productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
+productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
+productImages={item.openEnquiriesResponse.productImages}
+enquiryCode={item.openEnquiriesResponse.enquiryCode}
+productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
+yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
+weftYarnId ={this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc:""}
+extraWeftYarnId ={item.openEnquiriesResponse.extraWeftYarnId?item.openEnquiriesResponse.extraWeftYarnId:""}
+companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
+receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
+receiptlabel={this.state.getAdvancedPaymentReceipt.label}
+enquiryId={this.state.previewPiOrder.enquiryId}
+/>
+ )}
+</>
+:
+<>
+</>}
+</>
+}
+</>
+
+
+
+}
+
+<Row>
+            <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
+          </Row> 
                 </>
 :
 null
@@ -521,16 +627,8 @@ null
 {/* ---------------------------------------------------------------------------------------------------------------------------------- */}
 
 
-<Row>
-            <div>
-              <img
-                className="notifyFooterBanner internaldiv"
-                src={logos.notifyFooterBanner}
-              ></img>
-            </div>
-          </Row> 
-</Container>
 
+</Container>
 </React.Fragment>
         )
     }

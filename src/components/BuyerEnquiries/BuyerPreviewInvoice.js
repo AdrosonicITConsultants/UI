@@ -449,7 +449,7 @@ export class BuyerPreviewInvoice extends Component {
      <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{this.state.previewPiOrder.totalAmount}</p>
+     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -474,8 +474,8 @@ export class BuyerPreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-<h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100}</h3>
-     <h3 className="snopi wraptext">{this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100}</h3>
+<h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -497,8 +497,8 @@ export class BuyerPreviewInvoice extends Component {
      </td>
      <td>
      <h3 className="snopi wraptext">  
-     {this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
-     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100) }</h3>
+     {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2)}</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -600,14 +600,16 @@ export class BuyerPreviewInvoice extends Component {
     <button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
 {this.state.previewPI.productCustom == false?
 <>
-{this.state.previewPI.product.productStatusId==2 ? "":
+{this.state.previewPI.product.productStatusId==2 ?  <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+:
  <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
 
 }
 </>
 :
 <>
-{this.state.buyerCustomProduct.productStatusId==2?""
+{this.state.buyerCustomProduct.productStatusId==2?<button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+
 :
 <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
 

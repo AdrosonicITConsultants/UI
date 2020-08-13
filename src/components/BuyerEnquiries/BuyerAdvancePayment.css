@@ -67,7 +67,10 @@
  .totalamtpay2{
    color:rgb(102, 136, 255) !important;
  }
-
+.uploadconfirmbtn:disabled{
+  background-color: gray;
+  opacity: 0.5;
+}
  .Accdetailstxt{
   font-size: 14px;
   text-align: center;
@@ -109,6 +112,33 @@
     cursor: pointer;
     /* width: 41%; */
  }
+ [type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+  background: black;
+  border: none;
+  border-radius: 45px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Rubik', sans-serif;
+  font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  vertical-align: middle;
+  /* float: right; */
+}
+
+
 
  .reporttt{
     color: gray;
@@ -168,14 +198,14 @@
 }
 .uploadroundbtn{
   background: black;
-    color: white;
-    border: 1px;
-    border-radius: 31px;
-    height: 40px;
-    width: 42px;
-    text-align: center;
-    /* padding: 12px; */
-    margin-bottom: 10px;
+  color: white;
+  border: 1px;
+  border-radius: 24px;
+  height: 42px;
+  width: 42px;
+  text-align: center;
+  padding: 11px 1px 2px 6px !important;
+  margin-bottom: 10px;
 }
 .uploadreceiptname{
   font-size: 17px;
@@ -230,7 +260,7 @@
 
 /* myfile button */
 .myfilebtn{
-  font-size: 100px;
+  /* font-size: 100px; */
     position: absolute;
     left: 0;
     top: 0;

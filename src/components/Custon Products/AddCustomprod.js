@@ -274,6 +274,8 @@ class AddCustomprod extends Component {
                 productName={this.state.ifEnquiryExists.productName}
                 productId={data.id}
                 isCustom={this.state.isCustom}
+                enquiryId={this.state.ifEnquiryExists.enquiryId}
+
                 />
                  :
                         (
@@ -285,6 +287,7 @@ class AddCustomprod extends Component {
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
                  productName={this.state.generateEnquiry.productName}
                  productId={data.id}
+                 enquiryId={this.state.generateEnquiry.enquiry.id}
                  />
                  : null
                          ) } </>

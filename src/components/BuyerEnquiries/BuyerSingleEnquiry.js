@@ -1942,9 +1942,10 @@ MoqSimpleProductSelected(moqId){
                                                                             <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
                                                                             tab to track your enquiry.
                                                                         </div>
-                                                                        <div className="buyerMOQConfirmModalButtonOuter">
-                                                                            <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span>
-                                                                            <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span>
+                                                                        <div className="buyerMOQConfirmModalButtonOuter" style={{textAlign:"center"}}>
+                                                                            {/* <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span> */}
+                                                                            {/* <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span> */}
+                                                                            <span onClick={this.buyerMOQAcceptClose}  className="buyerMOQConfirmModalCancelButton">Close</span>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>

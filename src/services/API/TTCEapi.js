@@ -21,6 +21,10 @@ class TTCEapi {
     " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   //#region post methods
 
+  static ReceiptUrl = 
+            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+
+
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
     const isOk = re.test(pass);
@@ -895,6 +899,7 @@ class TTCEapi {
 
 
   static advancedPayment(
+    formData,
     enquiryId,
     invoiceId,
     paidAmount,
@@ -909,19 +914,22 @@ class TTCEapi {
     let url = ApiUrl + "/enquiry/advancedPayment";
 
     var payment = {
-    
+      // formData,
       enquiryId:enquiryId,
       invoiceId:invoiceId,
       paidAmount:paidAmount,
-      percentage:percentage,
+      percentage:parseInt(percentage),
       pid:pid,
-      totalAmount:totalAmount,
+      totalAmount:parseInt(totalAmount),
     };
-    console.log(payment);
+    // var paymentFile=formData
+    
+    console.log(JSON.stringify(payment));
+    console.log(formData);
     // console.log(selectedFile);
     debugger;
-    bodyFormData.append("registerRequest", JSON.stringify(payment));
-    // bodyFormData.append("paymentFile", selectedFile);
+    bodyFormData.append("payment",JSON.stringify(payment));
+    bodyFormData.append("file", formData);
 
     // console.log(data);
     var config = {
@@ -1711,8 +1719,37 @@ static sendPI(
       });
   }
 
+  // /enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId=1205
 
+  static getAdvancedPaymentReceipt(enquiryId) {
+    let url = ApiUrl + "/enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId="+enquiryId;
 
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getAdvancedPaymentStatus(enquiryId) {
+    let url = ApiUrl + "/enquiry/getAdvancedPaymentStatus?enquiryId="+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
   static progressUpdate(stageid, id) {
     let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;

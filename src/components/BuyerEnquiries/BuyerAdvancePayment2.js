@@ -16,23 +16,26 @@ import moment from 'moment';
 import Moment from 'react-moment';
 
 import Footer from '../footer/footer';
+import { BuyerAdvancePayment3 } from './BuyerAdvancePayment3';
+import BuyerAdvancePayment from './BuyerAdvancePayment';
 
 export default class BuyerAdvancePayment2 extends Component {
     constructor() {
+        var min=1; 
+        var max=100;  
         super();
-        
-      
-        this.select30= this.select30.bind(this);
-        this.select50= this.select50.bind(this);
-
+        this.onFileChange= this.onFileChange.bind(this);
+        this.uploadReceiptandSend= this.uploadReceiptandSend.bind(this);
         this.state = {
-            selected:"select30",
-            select30:true,
-            select50:false,
             dataload:true,
             enquiryCode:"",
             upload:true,
-
+            success:false,
+            selectedFile:null,
+            selectedFileName:"",
+            uploadButtonClick:false,
+            random: Math.floor(Math.random() * (+max - +min)) + +min,
+          
                    }
     }
  
@@ -41,38 +44,78 @@ export default class BuyerAdvancePayment2 extends Component {
     this.props.bp();
     }
 
-    // uploadReceiptandSend(){
-    //     browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
-    // }
+   
+    uploadReceiptandSend(){
+        this.setState({
+            uploadButtonClick:true
+          })
+    document.getElementById('acceptMOQModal').style.display='block';
+                
+        const formData = new FormData(); 
+        formData.append( 
+          "myFile", 
+          this.state.selectedFile, 
+          this.state.selectedFile.name 
+        );
+       
+        console.log(this.state.selectedFile); 
+        TTCEapi.advancedPayment(
+            this.state.selectedFile,
+            this.props.enquiryId,
+            this.state.random,
+            this.props.calulatedAmount,
+            this.props.percent,
+            this.props.pid,
+            this.props.totalAmount
+            ).then((response)=>{
+            
+            if(response.data.valid){ 
+                document.getElementById('acceptMOQModal').style.display='none';
+
+                this.setState({  
+               success:true
+              
+            },()=>{
+                console.log(response)
+           
+            });
+          
+      }
+      else{
+        document.getElementById('acceptMOQModal').style.display='none';
+
+        this.setState({
+            uploadButtonClick:false
+      });
+      customToast.error(response.data.errorMessage, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+      
+      }
+        })
+      
+    }
 
   
-
-    select30(){
-        this.setState((prevState) => {
-            return{
-             selected: "select30",
-             select20:false,
-             select30:true,
-             select50:false,
-         
-            };
-        });
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
     }
 
-    select50(){
-        this.setState((prevState) => {
-            return{
-             selected: "select50",
-             select20:false,
-             select30:false,
-             select50:true,
-         
-            };
-        });
+    componentDidMount(){
+        console.log(this.props.enquiryId);
+        console.log(this.props.receiptId);
+        console.log(this.props.receiptlabel)
     }
-
-   
-    
       acceptMOQModalShow = () => {
         document.getElementById('acceptMOQModal').style.display='block';
     }
@@ -94,6 +137,9 @@ export default class BuyerAdvancePayment2 extends Component {
     {this.state.dataload?
 <>
 
+        {this.state.success == false?
+        <>
+        
 
                         <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-1">
@@ -106,7 +152,7 @@ export default class BuyerAdvancePayment2 extends Component {
                           </Col>
                           <Col sm = "11" className="col-xs-11  ">
                          <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id:
-                             {this.props.FullCode}
+                             {this.props.enquiryCode}
                               </b></h3>
                           
                           </Col>
@@ -182,13 +228,12 @@ export default class BuyerAdvancePayment2 extends Component {
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay totalamtpay2" ><span > 
-    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i>
+    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)",marginRight:"5px"}} aria-hidden="true"></i>
 
      {this.props.calulatedAmount}
      </span>
                     </h3>
-                    {/* <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span> */}
-     
+    
   
                 </div>
                 </div>
@@ -227,7 +272,7 @@ export default class BuyerAdvancePayment2 extends Component {
  
       <Col className="col-xs-12 " sm={4}>
       
-                <Row className="bankiconborderright">
+                <Row className="bankiconborderright ">
                 <Col sm = {{size: "3"}}>
 
                 <img src={logos.gpay} className="gpayicon mt0"></img>
@@ -296,15 +341,11 @@ export default class BuyerAdvancePayment2 extends Component {
             </Col>
   </Row>
   
-  
 
 
 {this.state.upload?
     <Row noGutters={true} className="margintoprow aligncenter">
-{/* <Col className="col-xs-2 ">
-         
-      </Col> */}
-    
+
          <Row noGutters={true} className="bluenote">
          <Col className="col-xs-1 ">
          
@@ -315,19 +356,17 @@ export default class BuyerAdvancePayment2 extends Component {
                 onClick={() => this.uploadReceiptandSend()}
                  >
        
-        <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/>
-        Upload transaction receipt 
-            </button> */}
+                <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/>
+                Upload transaction receipt 
+                    </button> */}
+                
         
-        <div style={{cursor:"pointer"}}
-        
-         >
-        <button className="proccedwithadvpaybtn uploadtractionbtnfloat">
-             <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
-             Upload transaction receipt </button>
-        <input type="file"  className=" myfilebtn"  />
-        </div>
 
+        <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+       onChange={this.onFileChange}
+        />
+        <label for="file" className="uploadtractionbtnfloat" ><img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+             Upload transaction receipt </label>
              </Col>
              <Col className="col-xs-12 aligncenter" sm={3}>
              Image file formats & <br/> .pdf only.Upto 5Mb Max. 
@@ -337,21 +376,46 @@ export default class BuyerAdvancePayment2 extends Component {
   
             </Row>
             :
+            <>
             <Row noGutters={true} className="margintoprow aligncenter">
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
-                    <button className="uploadroundbtn"><i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> </button> 
-                    <b className="uploadreceiptname">name of receipt</b>
+                    {/* <button className="uploadroundbtn" >
+                    <input type="file"  className=" " onChange={this.onFileChange} />
+                    <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> 
+                    </button>  */}
+                    <input type="file" id="file" accept=".png, .jpg, .jpeg" onChange={this.onFileChange} />
+                    <label for="file" className="uploadroundbtn" >
+                    <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+                     </label>
+                      <b className="uploadreceiptname">{this.state.selectedFileName}</b>
                     <br/>
+                    <div>
+                    <button className="uploadconfirmbtn" 
+                    disabled={this.state.uploadButtonClick}
+                    onClick={() => this.uploadReceiptandSend()}>
+                        <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
+                    Upload and send for confirmation 
+                        </button>
+                        </div>
+                    
+                </Col>
+                
+            </Row>
+            {/* <Row noGutters={true} className="margintoprow aligncenter">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+            </Col>
+            <div>
                     <button className="uploadconfirmbtn" 
                     
                     onClick={() => this.uploadReceiptandSend()}>
                         <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
                     Upload and send for confirmation 
                         </button>
-                </Col>
-                
-            </Row>
+                        </div>
+                </Row> */}
+          </>
             }
+            
 {/* <button  onClick={this.acceptMOQModalShow}>abcd</button> */}
         <Row noGutters={true} style={{marginTop:"10px"}}>
             <Col className="col-xs-12" style={{textAlign:"center"}}>
@@ -371,6 +435,7 @@ export default class BuyerAdvancePayment2 extends Component {
             </Col>
         </Row>
 {/* _________________________________________Modal_________________________________________________ */}
+                                          
                                             <div id="acceptMOQModal" class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
@@ -405,9 +470,32 @@ export default class BuyerAdvancePayment2 extends Component {
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
+                
+                </>
+        :
+        <>
+        {window.location.reload()}
+{/* <BuyerAdvancePayment3
+productType={ this.props.productType}
+productId={this.props.productId}
+productImages={this.props.productImages}
+enquiryCode={this.props.enquiryCode}
+enquiryId={ this.props.enquiryId}
+productDesc={this.props.productDesc}
+yarnDesc={this.props.yarnDesc}
+weftYarnId={this.props.weftYarnId}
+extraWeftYarnId={this.props.extraWeftYarnId}
+companyName={this.props.companyName}
+receiptId={this.props.receiptId}
+receiptlabel={this.props.receiptlabel}
+/> */}
 
+        </>
+        }
                 </>:null}
-               
+                
+    
+                                        
 </Container>
 
 </React.Fragment>
@@ -415,5 +503,4 @@ export default class BuyerAdvancePayment2 extends Component {
     }
     
 }
-
 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.5" height="41.973" viewBox="0 0 34.5 41.973">
+  <g id="Group_1786" data-name="Group 1786" transform="translate(-209.5 -698.5)">
+    <path id="Icon_material-payment" data-name="Icon material-payment" d="M30,6H6A2.977,2.977,0,0,0,3.015,9L3,27a2.99,2.99,0,0,0,3,3H30a2.99,2.99,0,0,0,3-3V9A2.99,2.99,0,0,0,30,6Zm0,21H6V18H30Zm0-15H6V9H30Z" transform="translate(206.5 699.091)"/>
+    <line id="Line_1750" data-name="Line 1750" y2="41" transform="translate(243.5 698.5)" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="2"/>
+    <g id="Group_1703" data-name="Group 1703" transform="translate(440 1189) rotate(180)">
+      <line id="Line_1748" data-name="Line 1748" x1="29" transform="translate(200.5 453.5)" fill="none" stroke="#16a21a" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2104" data-name="Path 2104" d="M-22333.5-13252.5l6.219-4.277" transform="translate(22534 13706)" fill="none" stroke="#16a21a" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2105" data-name="Path 2105" d="M-22333.5-13256.777l6.219,4.277" transform="translate(22534 13710.277)" fill="none" stroke="#16a21a" stroke-linecap="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

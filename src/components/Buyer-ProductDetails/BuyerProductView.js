@@ -19,7 +19,7 @@ import Popup from '../ModalComponent/EnguiryModal';
 import SuccessPopup from '../ModalComponent/SuccessModal';
 import HoldPopup from '../ModalComponent/ModalHold';
 
-class BuyersProductDetails extends Component {
+class BuyersProductView extends Component {
   constructor(props) {
     super(props);
 
@@ -51,6 +51,7 @@ class BuyersProductDetails extends Component {
     modalIsOpen: false,
     isCustom:false,
     enqgen:false,
+    history : true,
     };
     this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
     this.generateEnquiry = this.generateEnquiry.bind(this);
@@ -134,50 +135,88 @@ generateEnquiry(item){
   }
   componentDidMount(){
     let params = queryString.parse(this.props.location.search);
-     
-    TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
-      this.setState({ProductData :response.data.data},()=>{
-      console.log(this.state.ProductData);
-
-      
-                  TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
-                    this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
-                      console.log(this.state)
-                    })
-                    
-                  })
-                  TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{
-                   
-                 this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
-                        console.log(this.state.getProductCategoryAndClusterProducts);
-                        
-
-                        // console.log(this.props.user);
-                    });
-                  });
-                  
-                  TTCEapi.getProductIdsInWishlist().then((response)=>{
-                    var item=this.state.getProductIdsInWishlist
-                    this.setState({getProductIdsInWishlist : response.data.data},()=>{
-                        console.log(this.state.getProductIdsInWishlist);
-                        console.log(this.state.ProductData.id);
-                        if(this.state.getProductIdsInWishlist){
-                          if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
-                          // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
-                          {
-                            this.setState({
-                              isAddedtoWishlist:true,
-                              
-                            })
-                          }
-                         }
-                    
-                        // console.log(this.state.getProductIdsInWishlist.indexOf(12))
-                  
-                    });
-                  });
-  });
+     if(params.ProductHistoryId == null)
+     {  
+        TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
+            this.setState({ProductData :response.data.data,history : false},()=>{
+            console.log(this.state.ProductData);
+             TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
+                this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
+                  console.log(this.state)
+                })
+                
+              })
+              TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.id).then((response)=>{
+               
+             this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
+                    console.log(this.state.getProductCategoryAndClusterProducts);
+                });
+              });
+              
+              TTCEapi.getProductIdsInWishlist().then((response)=>{
+                var item=this.state.getProductIdsInWishlist
+                this.setState({getProductIdsInWishlist : response.data.data},()=>{
+                    console.log(this.state.getProductIdsInWishlist);
+                    console.log(this.state.ProductData.id);
+                    if(this.state.getProductIdsInWishlist){
+                      if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
+                      // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
+                      {
+                        this.setState({
+                          isAddedtoWishlist:true,
+                          
+                        })
+                      }
+                     }
+                
+                    // console.log(this.state.getProductIdsInWishlist.indexOf(12))
+              
+                });
+              });
 });
+});
+     }
+     else{
+        TTCEapi.getHistoryProduct(parseInt(params.ProductHistoryId)).then((response)=>{
+            this.setState({ProductData :response.data.data,history : true},()=>{
+            console.log(this.state.ProductData);
+             TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
+                this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
+                  console.log(this.state)
+                })
+                
+              })
+              TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.parentProductId).then((response)=>{
+               
+             this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
+                    console.log(this.state.getProductCategoryAndClusterProducts);
+                });
+              });
+              
+              TTCEapi.getProductIdsInWishlist().then((response)=>{
+                var item=this.state.getProductIdsInWishlist
+                this.setState({getProductIdsInWishlist : response.data.data},()=>{
+                    console.log(this.state.getProductIdsInWishlist);
+                    console.log(this.state.ProductData.id);
+                    if(this.state.getProductIdsInWishlist){
+                      if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
+                      // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
+                      {
+                        this.setState({
+                          isAddedtoWishlist:true,
+                          
+                        })
+                      }
+                     }
+                
+                    // console.log(this.state.getProductIdsInWishlist.indexOf(12))
+              
+                });
+              });
+});
+});
+     }
+ 
     
   // console.log(this.state.productIdsInWishlist.indexOf(this.state.getProductIdsInWishlist.id)!=-1);
   
@@ -228,7 +267,8 @@ generateEnquiry(item){
   <Col md={6} lg={6}sm={12} xs={12} style={{marginTop:"27px"}}>
 
     <BPCarousel
-  Image={this.state.ProductData.productImages?this.state.ProductData.productImages:null}
+  Image={this.state.ProductData.productImages?this.state.ProductData.productImages:null} 
+  history = {this.state.history}
     />
   </Col>
   <Col  md={6} lg={6}sm={12} xs={12} className="BPDCol2">
@@ -273,29 +313,23 @@ generateEnquiry(item){
              <>
              <img className="Logobpdimg" src={logos.Smile}/>
              </> 
-      :
+            :
             <>
-            <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/ProfilePics/'+this.state.Artisiandata[0].profilePic}/>
-          </>  
-  }         
-  </>
-    :
-   <>
-               <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/CompanyDetails/Logo/'+this.state.Artisiandata[0].logo}/>
-
-   </>
+                <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/ProfilePics/'+this.state.Artisiandata[0].profilePic}/>
+            </>  
+            }         
+            </>
+             :
+            <>
+                <img className="Logobpdimg" src={TTCEapi.ImageUrl+'User/'+this.state.Artisiandata[0].artisanId+'/CompanyDetails/Logo/'+this.state.Artisiandata[0].logo}/>
+            </>
 
 } 
  
   </Col>
  
    </Row>
-   <hr className="hrlineBPD "></hr>
-   
-
-  
- 
-  
+   <hr className="hrlineBPD "></hr>  
 
 
     <Row noGutters="true">
@@ -307,9 +341,9 @@ generateEnquiry(item){
       </p>
      <p>Material Used :<span> {this.state.ProductData.warpDye?this.state.ProductData.warpDye.dyeDesc:null},
     
-{this.state.ProductData.weftDye?this.state.ProductData.weftDye.dyeDesc:null},
+            {this.state.ProductData.weftDye?this.state.ProductData.weftDye.dyeDesc:null},
     
-{this.state.ProductData.extraWeftDye?this.state.ProductData.extraWeftDye.dyeDesc:null}</span></p>
+                {this.state.ProductData.extraWeftDye?this.state.ProductData.extraWeftDye.dyeDesc:null}</span></p>
                <p>Product Category :
                {this.state.ProductData.productCategory?
                  <span>{this.state.ProductData.productCategory.productDesc}</span>
@@ -342,7 +376,7 @@ generateEnquiry(item){
      }
      
       </Row>
-
+{/* 
       <Row noGutters="true">
      <Col sm={6} >
      <div class="buttons"  onClick={() => this.generateEnquiry(this.state.ProductData.id)}>
@@ -402,7 +436,7 @@ generateEnquiry(item){
                      )}
   
      </Col>
-      </Row>
+      </Row> */}
 
 <Row noGutters="true">
   <Col xs={12} className="">
@@ -412,14 +446,12 @@ generateEnquiry(item){
 </Col>
 </Row>
 
-
 <Row noGutters="true">
   <Col sm={12}>
   <h2 className="Productdetailsh2" id="productdetail">Product Details</h2>
   {/* <hr className="hrproductBPD "></hr> */}
   </Col>
 </Row>
-
 
 <Row noGutters="true" >
   <Col sm={12} className="BPDCol2">
@@ -617,75 +649,16 @@ generateEnquiry(item){
                                        </p>
             </Col>
             <Col sm={1}></Col>
-            </Row>  
-            {/* ------------------like it ------------------ */}
-         
-
-            <Row noGutters="true" className="likeitbg text-center">
-            <h3>Like it ?</h3>
-               <Row noGutters="true">
-                 <Col xs={12}>
-                 <div class="buttons" style={{ color:"black" , border:"none", marginBottom:"10px"}} >
-  <button class="bpdbutton -bg-white" style={{width:"198px" , color:"black"}} onClick={() => this.generateEnquiry(this.state.ProductData.id)}>
-    <span style={{ color:"black"}}>Generate Enquiry</span>
-        <div class="arrowPacman">
-      <div class="arrowPacman-clip">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="black"/>
-        </svg>
-        
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.10081 0L5.88245 1.23617L10.7016 6.12576H0V7.87423H10.7016L5.88245 12.7638L7.10081 14L14 7L7.10081 0Z" fill="black"/>
-        </svg>
-      </div>
-    </div>
-  </button>
-
-</div>               </Col>
-               </Row>
-                  
-               
-           
+            </Row> 
+                                        
+            <Row noGutters="true">
+            <Col xs={12}  className="backtotopbdp">
+            <a href="#Top">Go back to Top <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i></a>
+            <hr className="hrlineBPD "></hr>
+            </Col>
+            
             </Row>
-{/* -------------------More saree--------------------------- */}
-{this.state.getProductCategoryAndClusterProducts.length > 0 ? 
-  <Row noGutters={true}>
-  <Col sm={12}>
-    <h3 className="MoresareeBPD">More Sarees From {this.state.ProductData.clusterName}</h3>
-  </Col>
-</Row>
-  :null}
-
-<Row noGutter={true} >
-
-<div className="col-sm-1 "></div>
-{/* {console.log(this.state.getProductCategoryAndClusterProducts)} */}
- {this.state.getProductCategoryAndClusterProducts.length > 0 ?
-  this.state.getProductCategoryAndClusterProducts.map((data) => {
-    return(
-    <>
-   
-    <Col md={2} xs={12} sm={2} >
-      <SeeMoreProduct
-     product={data}
-      />
-  </Col>
-  
-   </>)
-   }):
-  null
-  
-  }
-</Row>
-                   
-<Row noGutters="true">
-  <Col xs={12}  className="backtotopbdp">
-  <a href="#Top">Go back to Top <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i></a>
-  <hr className="hrlineBPD "></hr>
-  </Col>
-  
-</Row>
-<Row noGutters={true}>
+            <Row noGutters={true}>
                   <div className="artistbg2" style={{marginBottom:"-152px"}}></div>
                 </Row>
                 <Row noGutters={true} className="mt160">
@@ -747,4 +720,4 @@ generateEnquiry(item){
     }
 }
 
-export default BuyersProductDetails;
+export default BuyersProductView;

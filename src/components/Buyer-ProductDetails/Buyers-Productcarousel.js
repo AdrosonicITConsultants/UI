@@ -10,11 +10,14 @@ import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 
  class BPCarousel extends Component {
+   
    constructor(props){
     super(props);
+    console.log(this.props.Image)
     this.state = {
      Image:this.props.Image,
-     ImageUrl:TTCEapi.ImageUrl+'Product/',
+     ImageUrl:this.props.history == true ? TTCEapi.ImageUrl+'HistoryProduct/' + this.props.Image[0].productHistoryId :  TTCEapi.ImageUrl+'Product/' + this.props.Image[0].productId,
+     history : this.props.history,
      
     }
    
@@ -34,7 +37,7 @@ import Footer from "../footer/footer";
             <ul class="thumbnails">
               {this.state.Image[0]?
              <li>
-             <a href="#slide1"><img src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable } /></a>
+             <a href="#slide1"><img src={this.state.ImageUrl +  '/' + this.state.Image[0].lable } /></a>
            </li>
            : 
            null  
@@ -44,14 +47,14 @@ import Footer from "../footer/footer";
    
    {this.state.Image[1]?
              <li>
-             <a href="#slide2"><img src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable } /></a>
+             <a href="#slide2"><img src={this.state.ImageUrl  + '/' + this.state.Image[1].lable } /></a>
            </li>
            :
            null  
             }
      {this.state.Image[2]?
              <li>
-             <a href="#slide3"><img src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable } /></a>
+             <a href="#slide3"><img src={this.state.ImageUrl  + '/' + this.state.Image[2].lable } /></a>
            </li>
            :
            null  
@@ -63,15 +66,15 @@ import Footer from "../footer/footer";
            <ul class="slides">
          
 {this.state.Image[0]?
-  <li id="slide1"> <div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[0].productId + '/' + this.state.Image[0].lable } alt="" /></div> </li>
+  <li id="slide1"> <div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[0].lable } alt="" /></div> </li>
 :null
 }
 {this.state.Image[1]?
-   <li id="slide2"><div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[1].productId + '/' + this.state.Image[1].lable } alt="" /></div> </li>
+   <li id="slide2"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[1].lable } alt="" /></div> </li>
 :null
 }
 {this.state.Image[2]?
-   <li id="slide3"><div className="ImgDivcar"><img src={this.state.ImageUrl + this.state.Image[2].productId + '/' + this.state.Image[2].lable } alt="" /></div> </li>
+   <li id="slide3"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[2].lable } alt="" /></div> </li>
 :null
 }
   

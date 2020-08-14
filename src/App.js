@@ -62,6 +62,7 @@ import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePa
 import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePayment2' 
 import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';
 import { BuyerRecentList } from './components/BuyerTransaction/BuyerRecentList';
+import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView"
 function App() {
   
   return (
@@ -130,6 +131,8 @@ function App() {
           <PrivateRoute path="/EditProduct" component={EditProduct} />
           <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
           <Route  exact path="/Product-Details" component={BuyersProductDetails} />
+          <Route  exact path="/showBArtisanProduct" component={BuyerProductview} />
+
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />
           <Route  exact path="/Modal" component={SuccessPopup} />

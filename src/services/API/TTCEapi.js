@@ -272,7 +272,7 @@ class TTCEapi {
   }
 
     static getHistoryProduct(id) {
-    let url = ApiUrl + "/product/getProductHistoryBuyer/35";
+    let url = ApiUrl + "/product/getProductHistoryBuyer/" + id;
 
     return axios
       .get(url)

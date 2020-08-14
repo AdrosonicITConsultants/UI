@@ -409,14 +409,14 @@ export class PreviewInvoice extends Component {
        </>
          }  
        </h3>
-     <p>- WEFT X WARP X EXTRA WEFT</p> 
+       <p>- WARP X WEFT X EXTRA WEFT</p>
      {this.state.history
      ?
-    <>
+     <>
      <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1].yarnDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.yarns[this.state.previewPI.productHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.productHistory.weftYarnCount} X {this.state.previewPI.productHistory.warpYarnCount}{this.state.previewPI.productHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.productHistory.extraWeftYarnCount ? this.state.previewPI.productHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1].dyeDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.dyes[this.state.previewPI.productHistory.extraWeftDyeId-1].dyeDesc: ""}
+     -Yarn: {this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.yarns[this.state.previewPI.productHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
+      -Yarn Count: {this.state.previewPI.productHistory.warpYarnCount} X {this.state.previewPI.productHistory.weftYarnCount}{this.state.previewPI.productHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.productHistory.extraWeftYarnCount ? this.state.previewPI.productHistory.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.dyes[this.state.previewPI.productHistory.extraWeftDyeId-1].dyeDesc: ""}
 
       </p>
     </>
@@ -424,11 +424,10 @@ export class PreviewInvoice extends Component {
     <>
      <p className="descyarnpi wraptext">
 
-      -Yarn: {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} x {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
-      -Yarn Count: {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.weftYarnCount && this.state.previewPI.product.warpYarnCount ?"x":""} {this.state.previewPI.product.warpYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.weftDye.dyeDesc} 
-      {this.state.warpDye.dyeDesc && this.state.weftDye.dyeDesc?" x ":""}  
-      {this.state.warpDye.dyeDesc}
+      -Yarn: {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} x {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
+      -Yarn Count: {this.state.previewPI.product.warpYarnCount} {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.warpDye.dyeDesc} 
+      {this.state.weftDye.dyeDesc}
         {this.state.extraWeftDye?"x":""}
         {this.state.extraWeftDye?
           this.state.extraWeftDye.dyeDesc
@@ -513,22 +512,24 @@ export class PreviewInvoice extends Component {
         {console.log("Product  custom")}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
+     <p>- WARP X WEFT X EXTRA WEFT</p>  
      {this.state.customhistory
      ?
     <>
+    
     <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1].yarnDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.yarns[this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.buyerCustomProductHistory.weftYarnCount} X {this.state.previewPI.buyerCustomProductHistory.warpYarnCount}{this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1].dyeDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.dyes[this.state.previewPI.buyerCustomProductHistory.extraWeftDyeId-1].dyeDesc: ""}
+     -Yarn: {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.yarns[this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
+      -Yarn Count: {this.state.previewPI.buyerCustomProductHistory.warpYarnCount} X {this.state.previewPI.buyerCustomProductHistory.weftYarnCount}{this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.dyes[this.state.previewPI.buyerCustomProductHistory.extraWeftDyeId-1].dyeDesc: ""}
 
       </p>
     </>
     :
     <>
-     <p>- WARP X WEFT X EXTRA WEFT</p>    <p className="descyarnpi wraptext" >
+      <p className="descyarnpi wraptext" >
     -Yarn: {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} x {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
-    -Yarn Count: {this.state.buyerCustomProduct.weftYarnCount} {this.state.buyerCustomProduct.warpYarnCount && this.state.buyerCustomProduct.weftYarnCount ?"x":""} {this.state.buyerCustomProduct.warpYarnCount} {this.state.buyerCustomProduct.extraWeftYarnCount ? "x":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
-    -Dye Used: {this.state.customweftDye.dyeDesc} {this.state.customwarpDye.dyeDesc && this.state.customweftDye?"x":""}   {this.state.customwarpDye.dyeDesc} {this.state.customextraWeftDye?"x":""}
+    -Yarn Count: {this.state.buyerCustomProduct.warpYarnCount} {this.state.buyerCustomProduct.weftYarnCount && this.state.buyerCustomProduct.warpYarnCount ?"x":""} {this.state.buyerCustomProduct.weftYarnCount} {this.state.buyerCustomProduct.extraWeftYarnCount ? "x":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
+    -Dye Used: {this.state.customwarpDye.dyeDesc}   {this.state.customweftDye.dyeDesc} {this.state.customextraWeftDye?"x":""}
      {this.state.customextraWeftDye?  this.state.customextraWeftDye.dyeDesc
      :
      this.state.customextraWeftDye?  this.state.customextraWeftDye:""

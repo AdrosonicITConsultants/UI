@@ -156,7 +156,9 @@ import rotatingshapes from "./rotating shapes.svg"
 import recent from "./recent.svg"
 import finpay from "./fin pay.svg"
 import redenquiry from "./red enquiry.svg"
+import viewrec from "./view rec.svg"
 export default {
+  viewrec,
   redenquiry,
   finpay,
   recent,

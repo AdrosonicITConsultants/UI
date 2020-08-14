@@ -260,11 +260,13 @@ export default class BuyerAdvancePayment extends Component {
             });
 
             TTCEapi.getAdvancedPaymentStatus(params.code).then((response)=>{
-             
+                if(response.data.valid)
+                {
                 this.setState({getAdvancedPaymentStatus : response.data.data},()=>{
                     console.log(this.state.getAdvancedPaymentStatus);
 
                 });
+            }
             });
             TTCEapi.getAdvancedPaymentReceipt(params.code).then((response)=>{
                 if(response.data.valid)

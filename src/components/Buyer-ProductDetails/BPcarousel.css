@@ -77,8 +77,9 @@
     padding: 40px;
     }
     .ImgDivcar{
-      height: 633px;
+      height: 612px;
       width: 400px;
+      background: aliceblue;
 
     }
     
@@ -131,8 +132,12 @@
     @media only screen and (max-width: 1024px) {
       .slides img {
           height: 412px;
-          max-height: 412px !important;
-          width: 74% !important;
+          max-height: 412px ;
+          width: 70% ;
+         
+      }
+      .ImgDivcar {
+        background: none;
       }
       }
       @media only screen and (max-width: 768px) {
@@ -143,4 +148,9 @@
           .slides img {
               height: 412px;
       }
+    
       }
+   
+    
+
+   

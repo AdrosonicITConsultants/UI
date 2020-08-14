@@ -24,12 +24,7 @@ export class BuyerRecentList extends Component {
         }
        
     }      
-    completed(){
-        this.setState({ongoingEnquiry:false})
-    }  
-    ongoing(){
-        this.setState({ongoingEnquiry:true})
-    }        
+          
     backoperation(){
         browserHistory.push("/home"); 
     }
@@ -57,25 +52,26 @@ export class BuyerRecentList extends Component {
                 <Col className="col-xs-3 paymentreceiptup" sm="2">
                 Advance Payment Receipt uploaded
                 </Col>
-                <Col className="col-xs-3 proformacol" sm="3">
-                50% payment received against pro forma Invoice for enquiry Id: <b className="colorinv">AS-778</b>
+                <Col className="col-xs-3 proformacol" sm="2">
+                50% payment received against Invoice for enquiry Id: <b className="colorinv">AS-778</b>
                 <br/>
-                <span><b className="proformainvId">Pro Forma Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span>
+                <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span>
                 </Col>
-                <Col className="col-xs-3" sm="2">
-                a
+                <Col className="col-xs-3 payack" sm="2">
+                Payment Ackn is done by Artisian
                 </Col>
                 <Col className="col-xs-3 boldrs" sm="1">
                 ₹ 11111
                 </Col>
-                <Col className="col-xs-3" sm="1">
-                a
+                <Col className="col-xs-3 viewreceipt" sm="2">
+                <span><img src={logos.viewrec} className="receipticon"/> View Receipt</span>
                 </Col>
                 <Col className="col-xs-3" sm="1" style={{textAlign:"center"}}>
                 <img src={logos.redenquiry} className="gotoiconsize"/>
                 <p className="gotoenqu"> Go to this enquiry</p>
                 </Col>
               </Row>
+              
               <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
 
                

@@ -1,12 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { Row, Col, Container, Label } from "reactstrap";
 import "./landingpage.css";
 import logos from "../../assets";
 import { browserHistory } from "../../helpers/history";
+import CMSApi from '../../services/API/CMSApi';
+
+var buyerLandingBg = {};
+var cardBg1 = {};
+var cardBg2 = {};
+var cardBase = {};
+var artisanBg = {};
+var artisanExtendedBg = {};
+var antaranBg = {};
+var antaranExtendedBg = {};
 
 class buyerLanding extends Component {
+
+  constructor(props) {
+    super(props);
+
+      this.state = {
+        buyerPageData : "",
+        showBuyerPage : false,
+      };
+  }
+
   ExploreMore = (to) => {
     switch (to) {
       case "Self":
@@ -22,14 +41,68 @@ class buyerLanding extends Component {
       default:
         break;
     }
-  };
+  }
+
+  componentDidMount () {
+    CMSApi.getPages(27).then((response)=>{
+      if(response)
+      {
+          console.log(response.data.acf);
+          this.setState({
+            buyerPageData : response.data.acf
+          })
+          this.setHomeBgImage();
+      }
+    })
+   }
+
+   setHomeBgImage = () => {
+    buyerLandingBg = {
+      backgroundImage: "url(" + this.state.buyerPageData.background_image + ")"
+    };
+
+    cardBg1 = {
+      backgroundImage: "url(" + this.state.buyerPageData.card_background_1 + ")"
+    }
+
+    cardBg2 = {
+      backgroundImage: "url(" + this.state.buyerPageData.card_background_2 + ")"
+    }
+
+    cardBase = {
+      backgroundImage: "url(" + this.state.buyerPageData.card_base + ")"
+    }
+
+    artisanBg = {
+      backgroundImage: "url(" + this.state.buyerPageData.artisan_background + ")"
+    }
+
+    artisanExtendedBg = {
+      backgroundImage: "url(" + this.state.buyerPageData.artisan_background_extended + ")"
+    }
+
+    antaranBg = {
+      backgroundImage: "url(" + this.state.buyerPageData.antaran_background + ")"
+    }
+
+    antaranExtendedBg = {
+      backgroundImage: "url(" + this.state.buyerPageData.antaran_background_extended + ")"
+    }
+
+
+    this.setState({
+      showBuyerPage : true
+    })
+   }
 
   render() {
     return (
+    
       <React.Fragment>
-     
+      {this.state.showBuyerPage ?
+      <div>
           <Row noGutters={true}>
-            <div className="homeDivmain">
+            <div className="homeDivmain" style={buyerLandingBg}>
               <br></br>
 
               <Row noGutters={true} className="topmarginHome">
@@ -37,12 +110,10 @@ class buyerLanding extends Component {
                 <Col sm={{ size: "6" }}>
                   <div>
                     <h2 className="textline1">
-                      Timeless pieces of Indian handicrafts
+                      {this.state.buyerPageData.title}
                     </h2>
                     <h6 className="textline2">
-                      Legacies touch every nook and corner of the country, and
-                      there are distinct ones which are evergreen, full of pride
-                      and joy of traditions.
+                    {this.state.buyerPageData.paragraph}
                     </h6>
                   </div>
                 </Col>
@@ -51,18 +122,16 @@ class buyerLanding extends Component {
                 <Col sm={{ size: "1" }} className="center"></Col>
                 <Col sm={{ size: "10" }}>
                   <div className="carousal">
-                    <div className="carousalbg">
+                    <div className="carousalbg" style={cardBg1}>
                       <p className="carousaltext1">
-                        Browse the latest collection of
+                      {this.state.buyerPageData.card_header}
                       </p>
-                      <p className="carousaltext2">Brocades of Benaras</p>
+                      <p className="carousaltext2">{this.state.buyerPageData.card_title}</p>
                       <p className="carousaltext3">
-                        Beautifully handcrafted collection from Varanasi’s
-                        traditional handlooms, spun to the sound of holy Ganga
-                        river.
+                      {this.state.buyerPageData.card_para}
                       </p>
                     </div>
-                    <div className="carousalbg2"></div>
+                    <div className="carousalbg2" style={cardBg2}></div>
                   </div>
                 </Col>
                 <Col sm={{ size: "1" }} className="center"></Col>
@@ -71,7 +140,7 @@ class buyerLanding extends Component {
           </Row>
 
           <Row noGutters={true}>
-            <div className="homeDiv2">
+            <div className="homeDiv2" style={cardBase}>
               <Row noGutters={true}>
                 <Col sm={{ size: "12" }} className="text-center choosefromtext">
                   <span>Choose from</span>
@@ -81,11 +150,11 @@ class buyerLanding extends Component {
               <Row noGutters={true}>
                 <Col sm={{ size: "6" }} className="center">
                   <div className="mainDivTransitionleft">
-                    <div className="Homebg2div1 artistunHover">
+                    <div className="Homebg2div1 artistunHover" style={artisanBg}>
                       <p>Artisan</p> <p>self design</p>
                     </div>
                     <div className="Homebg2div4">
-                      <div className="artistHover">
+                      <div className="artistHover" style={artisanExtendedBg}>
                         <Label
                           style={{ left: "-2px" }}
                           onClick={() => this.ExploreMore("Self")}
@@ -96,36 +165,20 @@ class buyerLanding extends Component {
                         <h3>Artisan</h3> <h3>self design</h3>
                         <hr className="hrline1"></hr>
                         <br />
-                        <div className="textline3">
-                          <p>
-                            Choose from the production ready designs which speak
-                            the
-                          </p>
-                          <p> tradition & legacy from their own cluster and</p>
-                          <p>history of master craftsmanship</p>
+                        <div className="textline3" style={{marginLeft: '30px'}}>
+                        {this.state.buyerPageData.artisan_para}
                         </div>
                       </div>
 
-                      <div className="textline4">
-                        <p>
-                          This collection from the very own artisans’ evergreen
-                          <br></br> styles and traditions. It is still classic
-                          yet compliments<br></br>
-                          the modern outfits and stands apart.
-                        </p>
-                        <p className="margin30">
-                          The products from artisans speak the value and legacy
-                          <br></br> of their own respective clusters and
-                          culture. It is as
-                          <br></br> elegant as strong.
-                        </p>
+                      <div className="textline4" style={{marginLeft: '50px'}}>
+                      {this.state.buyerPageData.artisan_sub_para}
                       </div>
                     </div>
                   </div>
                 </Col>
                 <Col sm={{ size: "6" }} className="center">
                   <div className="mainDivTransitionright">
-                    <div className="Homebg2div2 counHover">
+                    <div className="Homebg2div2 counHover" style={antaranBg}>
                       {" "}
                       <p>Antaran</p>
                       <p>co-design</p>
@@ -133,7 +186,7 @@ class buyerLanding extends Component {
                     </div>
 
                     <div className="Homebg2div3">
-                      <div className="coHover">
+                      <div className="coHover" style={antaranExtendedBg}>
                         <Label
                           onClick={() => this.ExploreMore("New")}
                           className="exploremore"
@@ -143,29 +196,13 @@ class buyerLanding extends Component {
                         <p>Antaran</p> <p>co-design collection</p>
                         <hr className="hrlineLeft"></hr>
                         <br />
-                        <div className="textline3">
-                          <p>
-                            Choose from the production ready designs which speak
-                            the
-                          </p>
-                          <p> tradition & legacy from their own cluster and</p>
-                          <p>history of master craftsmanship</p>
+                        <div className="textline3" style={{marginRight: '30px'}}>
+                        {this.state.buyerPageData.antaran_para}
                         </div>
                       </div>
 
-                      <div className="textline4">
-                        <p>
-                          This collection from the very own artisans’ evergreen
-                          <br></br> styles and traditions. It is still classic
-                          yet compliments<br></br>
-                          the modern outfits and stands apart.
-                        </p>
-                        <p className="margin30">
-                          The products from artisans speak the value and legacy
-                          <br></br> of their own respective clusters and
-                          culture. It is as
-                          <br></br> elegant as strong.
-                        </p>
+                      <div className="textline4" style={{marginRight: '50px'}}>
+                      {this.state.buyerPageData.antaran_sub_para}
                       </div>
                     </div>
                   </div>
@@ -178,11 +215,7 @@ class buyerLanding extends Component {
             <Col className="internaldiv homeDiv3 text-center reviewtext">
               <div className="text1">And our Artisan say that</div>
               <img className="quote" src={logos.quoteicon}></img>
-              <span>... it helped provided us a platform to show case</span>
-              <br></br>
-              <span>our talent, ritual roots, traditions and earn our</span>
-              <br></br>
-              <span>daily bread, It was magical</span>{" "}
+              {this.state.buyerPageData.quote_message}
               <img className="quote" src={logos.quoteiconend}></img>
             </Col>
           </Row>
@@ -194,8 +227,10 @@ class buyerLanding extends Component {
               ></img>
             </div>
           </Row>
-   
+          </div>
+          : null }
       </React.Fragment>
+    
     );
   }
 }

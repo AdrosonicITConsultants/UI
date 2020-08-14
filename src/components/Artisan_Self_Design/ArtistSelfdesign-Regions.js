@@ -9,6 +9,7 @@ import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 import { browserHistory } from "../../helpers/history";
+import CMSApi from '../../services/API/CMSApi';
 
 export default class ArtistSelfdesignRegions extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ export default class ArtistSelfdesignRegions extends Component {
      
       cluster : [],
       value : false,
-      visible: 6,                                 
+      visible: 6,   
+      regionData : [],                              
      
     };
     
@@ -37,12 +39,20 @@ export default class ArtistSelfdesignRegions extends Component {
     // }
   
   componentDidMount(){
+     
+    CMSApi.getRegions().then((response)=>{
+      if(response)
+      {
+        console.log(response.data);
+        this.setState({
+          regionData : response.data
+        })
+      }
+    });
    
      TTCEapi.getClusters().then((response)=>{
       this.setState({cluster : response.data.data},()=>{
           console.log(this.state.cluster);
-       
-          // console.log(this.props.user);
       });
   });
   }
@@ -55,17 +65,20 @@ export default class ArtistSelfdesignRegions extends Component {
                 <Row noGutters="true">
                 {/* Card1 */}
                
-             {this.state.cluster ? ( ( this.state.cluster.slice(0,this.state.visible).map((data) => (
-        
-              <Col xs={12} sm={6} md={4}>
-                <div className="card Cardlayout">
+             {this.state.cluster ? this.state.cluster.slice(0,this.state.visible).map((data) => {
+            return  this.state.regionData ? this.state.regionData.map((regionData) => {
+                  
+              if(data.id === parseInt(regionData.acf.cluster_id)) {
+
+            return  <Col xs={12} sm={6} md={4}>
+              <div className="card Cardlayout">
                 <div class="card-block">
-                  <h4 class="card-title">{data.adjective}</h4>
+                  <h4 class="card-title">{regionData.acf.header}</h4>
                   <p class="card-text"> 
-                  {data.desc}
+                  {regionData.title.rendered}
                  </p>
                 </div>
-                <img className="card-img-top" src={logos.Maniabandhan}  alt="Card image cap"/>
+                <img className="card-img-top" src={regionData.acf.image}  alt="Card image cap"/>
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
@@ -75,97 +88,12 @@ export default class ArtistSelfdesignRegions extends Component {
                   </div>
               </div>
               </Col>
-              ) ) 
-            )): null
-            }
+
+                }
+               }) : <h2 className="text-center">Loading.....</h2>  
+              }) : null }
                 
               </Row>
-            
-  
-    {/* <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-      <div className="card Cardlayout">
-      <div class="card-block">
-        <h4 class="card-title">Sober</h4>
-        <p class="card-text">Gopalpur</p>
-      </div>
-      <img className="card-img-top" src={logos.Gopalpur}  alt="Card image cap"/>
-       <div class="effect-text">
-          <div class="effect-btn">
-            <h2>EXPLORE MORE</h2>
-            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-          </div>
-        </div>
-    </div>
-    </div>
-  
-  <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
-      <div className="card Cardlayout">
-      <div class="card-block">
-        <h4 class="card-title">Colorful</h4>
-        <p class="card-text">Venkatagiri</p>
-      </div>
-      <img className="card-img-top" src={logos.Vengtikari}  alt="Card image cap"/>
-       <div class="effect-text">
-          <div class="effect-btn">
-            <h2>EXPLORE MORE</h2>
-            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-          </div>
-        </div>
-    </div>
-    </div>
-</div>  
-
-
-<div class="row rowmargintop">
-  
-    <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
-      <div className="card Cardlayout">
-      <div class="card-block">
-        <h4 class="card-title">Calm</h4>
-        <p class="card-text">Kamrup</p>
-      </div>
-      <img className="card-img-top" src={logos.Kamrup}  alt="Card image cap"/>
-       <div class="effect-text">
-          <div class="effect-btn">
-            <h2>EXPLORE MORE</h2>
-            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-          </div>
-        </div>
-    </div>
-    </div>
- 
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-      <div className="card Cardlayout">
-      <div class="card-block">
-        <h4 class="card-title">Cultural</h4>
-        <p class="card-text">Nalbari</p>
-      </div>
-      <img className="card-img-top" src={logos.Nalbari}  alt="Card image cap"/>
-       <div class="effect-text">
-          <div class="effect-btn">
-            <h2>EXPLORE MORE</h2>
-            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-          </div>
-        </div>
-    </div>
-    </div>
- 
-  <div class="col-xs-12  col-sm-4 col-md-4 col-lg-4">
-      <div className="card Cardlayout">
-      <div class="card-block">
-        <h4 class="card-title">Musical</h4>
-        <p class="card-text">Dimapur</p>
-      </div>
-      <img className="card-img-top" src={logos.Dimapur}  alt="Card image cap"/>
-       <div class="effect-text">
-          <div class="effect-btn">
-            <h2>EXPLORE MORE</h2>
-            <a class="btn" href="#"><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-          </div>
-        </div>
-    </div>
-    </div> */}
-        {/* Row3 */}
 
         {this.state.visible < this.state.cluster.length &&
  <Row noGutters="true" >

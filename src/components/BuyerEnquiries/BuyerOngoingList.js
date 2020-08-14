@@ -8,11 +8,10 @@ import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 
-
 export class BuyerOngoingList extends Component {
+    
     constructor(props) {
         super(props);
-    
         this.state = {
             enquiryStagesMTO :[],
             stage: 3,
@@ -20,13 +19,65 @@ export class BuyerOngoingList extends Component {
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
-            dataload:false
-
+            dataload:false,
         }
+    }
+    
+    // findPosition = (obj) => {
+    //     var currenttop = 0; 
+    //     if (obj.offsetParent) { 
+    //         do { 
+    //             currenttop += obj.offsetTop; 
+    //         } while ((obj = obj.offsetParent)); 
+    //         return [currenttop]; 
+    //     }
+    // }
+    
+    // scrollToFunction = (scrollId) => {
+    //     if(this.scrollDiv !== undefined) {
         
+    //     this.scrollDiv.current.scrollIntoView({ behavior: "smooth" });
+    //     }
 
-    }      
+    //     // this.refs[scrollId].scrollIntoView({block: 'end', behavior: 'smooth'});
+
+    //     // window.scrollTo(0, this.findPosition(document.getElementById('#scrollId'+scrollId))); 
+
+    //     // var elem = document.getElementById("scrollID"); 
+    //     // console.log(elem);
+    //     // elem.scrollIntoView(); 
+        
+            
+    //     // $('html,body').animate({
+    //     //   scrollTop: $('#scrollId'+scrollId).offset().top},
+    //     // 'slow');
+
+
+
+    //     // document.getElementById('scrollId'+scrollId).scrollTop += 10;
+    //     // const list = [];
+    //     // const refs = list.reduce((acc, value) => {
+    //     //     acc[value.id] = React.createRef();
+    //     //     return acc;
+    //     // }, {});
+
+    //     // refs[scrollId].current.scrollIntoView({
+    //     //     behavior: 'smooth',
+    //     //     block: 'start',
+    //     // });
+    // }
+
     componentDidMount(){
+
+        // var scrollId = 0;
+        // scrollId = localStorage.getItem("seeMoreId");
+        
+        // console.log(scrollId);
+
+        // if(scrollId !== null) {
+        //      this.scrollToFunction(scrollId);
+        // }
+
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
@@ -63,10 +114,13 @@ export class BuyerOngoingList extends Component {
         })
         
         
-    } 
-    individualpage(id){
-        browserHistory.push("/buyerEnquiryDetails?code=" + id)
     }
+
+    // individualpage(id){
+    //     localStorage.setItem("seeMoreId", id);
+    //     browserHistory.push("/buyerEnquiryDetails?code=" + id);
+    // }
+    
     render() {
         return (
             <React.Fragment>
@@ -91,6 +145,7 @@ export class BuyerOngoingList extends Component {
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
+                        {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                             <Row noGutters={true}>
                                 <Col sm="9">
                                     <div className="imageinlist" > 

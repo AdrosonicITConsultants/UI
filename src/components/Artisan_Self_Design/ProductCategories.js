@@ -17,6 +17,8 @@ import TTCEapi from '../../services/API/TTCEapi';
 import queryString from 'query-string';
 import "./ProductCategories.css"
 import ProductsOfCatelog from './ProductsOfCatelog';
+import CMSApi from '../../services/API/CMSApi';
+
 class ProductCategories extends Component {
     
     constructor(props) {
@@ -30,8 +32,9 @@ class ProductCategories extends Component {
             heading  : "Categories",
             products : [],
             cluster : "",
-
-         
+            categoryData : [],
+            categoryTitle : "",
+            categoryDesc : "",         
         };
       
     }
@@ -53,7 +56,29 @@ class ProductCategories extends Component {
     }
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
+
+        CMSApi.getCategories().then((response)=>{
+
+            if(response)
+            {
+              console.log(response.data);
+              this.setState({
+                categoryData : response.data,
+                clusterID : params.clusterid,
+              })
+            }
+
+            return this.state.categoryData ? this.state.categoryData.map((data) => {
+                if(data.acf.category_id == params.categoryId) {
+                    this.setState ({
+                        categoryTitle : data.title.rendered,
+                        categoryDesc : data.acf.description
+                    })
+                }
+            }) : null
+
+        });
+
         TTCEapi.getProductCategoryProducts(parseInt(params.categoryId)).then((response)=>{
             console.log(response.data.data.products);
             this.setState({
@@ -96,15 +121,14 @@ class ProductCategories extends Component {
                         <Col md="10">
                             <Row noGutters={true} className ="cp1heading bold fontplay">
                                 <Col md="12">
-                                    {this.state.heading}
+                                    {this.state.categoryTitle}
                                 </Col>
                             </Row>
                             <Row noGutters={true} className="mt20"> 
                                 <Col  
                                 md={{ size: "8" }}
                                 lg={{ size: "8" }} className="light">
-                                    Browse the authentic arts of Maniabandha Cluster ranging long back.
-                                    Browse the authentic arts of Maniabandha.
+                                    {this.state.categoryDesc}
                                 </Col>
                             </Row>
                             <hr></hr>

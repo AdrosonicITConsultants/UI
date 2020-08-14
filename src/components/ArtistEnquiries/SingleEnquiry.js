@@ -280,7 +280,7 @@ export class SingleEnquiry extends Component {
     } 
     savePIDetails(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)&& regex.test(this.state.cgst)&& regex.test(this.state.sgst)){
+        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 console.log(params);
@@ -1078,16 +1078,16 @@ export class SingleEnquiry extends Component {
                                     <Col sm={1}>
      
                                             </Col>
-                                            <Col sm={2}  
+                                            <Col sm={3}  
                                             className={
                                                 (this.state.selected == "BuyerDetails"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
+                                                     ? "Allenqlistbtn2 ml60"
+                                                         : "Allenqlistbtn ml60")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
                                             Buyer's Detail
                                             </Col>
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                             className={
                                                 (this.state.selected == "moqDetails"
                                                      ? "Allenqlistbtn2"
@@ -1097,7 +1097,7 @@ export class SingleEnquiry extends Component {
                                             MOQ Detail 
                                             </Col>
 
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                               className={
                                                 (this.state.selected == "proformaDetails"
                                                      ? "Allenqlistbtn2"
@@ -1106,7 +1106,7 @@ export class SingleEnquiry extends Component {
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            <Col sm={2} 
+                                            {/* <Col sm={3} 
                                               className={
                                                 (this.state.selected == "changeRequest"
                                                      ? "Allenqlistbtn2"
@@ -1123,11 +1123,12 @@ export class SingleEnquiry extends Component {
                                                      }
                                             onClick={this.qualityCheckbtn}>
                                            Quality Check 
-                                            </Col>
-                                            <Col sm={1}>
+                                            </Col> */}
+                                            {/* <Col sm={1}>
                                             
-                                            </Col>
+                                            </Col> */}
                                     </Row>
+                                    <br></br>
 
                                                        <Row noGutters={true}>
                                                            <Col sm={2}></Col>
@@ -1458,7 +1459,7 @@ export class SingleEnquiry extends Component {
                                                     </Col>
                                                     </Row>
 
-                                                    <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                                    {/* <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                     <Col sm={6}>
                                                     <label>CGST %</label>
                                                     <br/>
@@ -1478,7 +1479,7 @@ export class SingleEnquiry extends Component {
                                                         name="sgst"
                                                         onChange={this.handleChange}/>
                                                     </Col>
-                                                    </Row>
+                                                    </Row> */}
                                                     <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                             <Col sm={12}>
                                                             <input type="checkbox" name="checkbox" value="check" id="agree"

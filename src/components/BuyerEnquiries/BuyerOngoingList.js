@@ -164,7 +164,7 @@ export class BuyerOngoingList extends Component {
                                     <div noGutters={true} className="" >
                                         <Col className="leEnqprodcode ">
                                             <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                            <span className="leEnqbrandname ">{item.brandName == "" ? "NA" : item.brandName }</span>                                   
+                                            <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                         </Col>
                                     </div>
                                     </div>
@@ -331,7 +331,7 @@ export class BuyerOngoingList extends Component {
                                     <div noGutters={true} className="" >
                                         <Col className="leEnqprodcode ">
                                             <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                            <span className="leEnqbrandname ">{item.brandName == "" ? "NA" : item.brandName }</span>                                   
+                                            <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                         </Col>
                                     </div>
                                     </div>

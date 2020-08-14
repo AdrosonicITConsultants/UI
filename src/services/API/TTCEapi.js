@@ -1353,12 +1353,12 @@ class TTCEapi {
     let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
    var data =
     {
-      cgst: cgst,
+      cgst: 0,
       expectedDateOfDelivery: dod,
       hsn: hsncode,
       ppu: rpu,
       quantity:quantity,
-      sgst:sgst
+      sgst:0
     }
    console.log(data)
    var config = {
@@ -1392,12 +1392,12 @@ static sendPI(
   let url = ApiUrl + "/enquiry/sendPi/{enquiryId}?enquiryId="+ enquiryId;
  var data =
   {
- cgst:cgst,
+ cgst:0,
   expectedDateOfDelivery:expectedDateOfDelivery,
   hsn:hsn,
   ppu:ppu,
   quantity:quantity,
-  sgst:sgst
+  sgst:0
  
   }
  console.log(data)

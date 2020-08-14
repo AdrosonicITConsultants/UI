@@ -57,7 +57,7 @@ import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInv
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
 import BuyerAdvancePayment from "./components/BuyerEnquiries/BuyerAdvancePayment"
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
-import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
+import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleCompletedEnquiry';
 import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePayment3';
 import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePayment2' 
 import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';

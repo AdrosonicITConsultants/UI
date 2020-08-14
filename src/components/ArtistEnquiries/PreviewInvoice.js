@@ -221,7 +221,8 @@ export class PreviewInvoice extends Component {
 
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
-    <Col className="col-xs-12"> Invoice Number : {this.state.previewPiOrder.id}
+    <Col className="col-xs-12"> Proforma Invoice 
+    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 

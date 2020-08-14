@@ -280,7 +280,7 @@ export class BuyerOngoingList extends Component {
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                        
                                     </div>

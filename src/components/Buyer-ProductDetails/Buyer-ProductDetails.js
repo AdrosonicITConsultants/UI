@@ -135,7 +135,7 @@ generateEnquiry(item){
   componentDidMount(){
     let params = queryString.parse(this.props.location.search);
      
-    TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
+    TTCEapi.getHistoryProduct(parseInt(params.productId)).then((response)=>{
       this.setState({ProductData :response.data.data},()=>{
       console.log(this.state.ProductData);
 

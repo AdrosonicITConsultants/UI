@@ -312,6 +312,7 @@ export class SingleEnquiry extends Component {
     sendMoqDetails(){
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
+        this.state.enquiryCode = params.code;
         console.log(params);
         TTCEapi.sendMoq(
             params.code,
@@ -725,7 +726,7 @@ export class SingleEnquiry extends Component {
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                     
                                 </div>

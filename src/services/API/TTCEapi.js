@@ -271,6 +271,20 @@ class TTCEapi {
       });
   }
 
+    static getHistoryProduct(id) {
+    let url = ApiUrl + "/product/getProductHistoryBuyer/35";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getSimpleProduct(id) {
     let url = ApiUrl + "/product/getSimpleProduct/" + id;
 

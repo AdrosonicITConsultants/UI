@@ -70,6 +70,17 @@ export class CompletedList extends Component {
                 {this.state.dataload
                 ?
                 <>
+                {this.state.openEnquiries.length == 0 
+                ?
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                        No Open Enquiries.
+                    </Col>
+                </Row>
+                </>
+                :
+                <>
                 {this.state.openEnquiries.map((item)=> 
                 <>
                  {item.openEnquiriesResponse.historyProductId == null
@@ -104,7 +115,9 @@ export class CompletedList extends Component {
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      <div dangerouslySetInnerHTML={{ __html: item.openEnquiriesResponse.enquiryCode }} />
+
+                                      {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
@@ -284,7 +297,7 @@ export class CompletedList extends Component {
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                     
                                 </div>
@@ -460,6 +473,8 @@ export class CompletedList extends Component {
                 </div>
                 </>
                 )}
+                </>
+    }
                 </>
             :
             <>

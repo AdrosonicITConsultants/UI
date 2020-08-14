@@ -116,10 +116,10 @@ export class BuyerOngoingList extends Component {
         
     }
 
-    // individualpage(id){
-    //     localStorage.setItem("seeMoreId", id);
-    //     browserHistory.push("/buyerEnquiryDetails?code=" + id);
-    // }
+    individualpage(id){
+        // localStorage.setItem("seeMoreId", id);
+        browserHistory.push("/buyerEnquiryDetails?code=" + id);
+    }
     
     render() {
         return (

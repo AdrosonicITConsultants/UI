@@ -162,7 +162,7 @@ export class CompletedList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.brandName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -349,7 +349,7 @@ export class CompletedList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.brandName}</span>                                   
+                                          <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                       </Col>
                                   </div>
                                 </div>

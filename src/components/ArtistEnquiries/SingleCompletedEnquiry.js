@@ -902,16 +902,16 @@ export class SingleEnquiry extends Component {
                                     <Col sm={1}>
      
                                             </Col>
-                                            <Col sm={2}  
+                                            <Col sm={3}  
                                             className={
                                                 (this.state.selected == "BuyerDetails"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
+                                                     ? "Allenqlistbtn2 ml60"
+                                                         : "Allenqlistbtn ml60")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
                                             Buyer's Detail
                                             </Col>
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                             className={
                                                 (this.state.selected == "moqDetails"
                                                      ? "Allenqlistbtn2"
@@ -921,7 +921,7 @@ export class SingleEnquiry extends Component {
                                             MOQ Detail 
                                             </Col>
 
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                               className={
                                                 (this.state.selected == "proformaDetails"
                                                      ? "Allenqlistbtn2"
@@ -930,7 +930,7 @@ export class SingleEnquiry extends Component {
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            <Col sm={2} 
+                                            {/* <Col sm={3} 
                                               className={
                                                 (this.state.selected == "changeRequest"
                                                      ? "Allenqlistbtn2"
@@ -947,11 +947,12 @@ export class SingleEnquiry extends Component {
                                                      }
                                             onClick={this.qualityCheckbtn}>
                                            Quality Check 
-                                            </Col>
-                                            <Col sm={1}>
+                                            </Col> */}
+                                            {/* <Col sm={1}>
                                             
-                                            </Col>
+                                            </Col> */}
                                     </Row>
+                                    <br></br>
 
                                                        <Row noGutters={true}>
                                                            <Col sm={2}></Col>

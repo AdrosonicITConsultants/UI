@@ -183,12 +183,12 @@ class AddCustomprod extends Component {
                      <Row  >
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftDye? data.weftDye.dyeDesc:null} 
-                           {data.warpDye?
+                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftYarn? data.weftYarn.yarnDesc:null} 
+                           {data.warpYarn?
                            " X":null}  <span></span>
-                           {data.warpDye?
-                            data.warpDye.dyeDesc:null}  {data.extraWeftDye? " X":null} <span></span>
-                           {data.extraWeftDye? data.extraWeftDye.dyeDesc:null}</span></h1> 
+                           {data.warpYarn?
+                            data.warpYarn.yarnDesc:null}  {data.extraWeftYarn? " X":null} <span></span>
+                           {data.extraWeftYarn? data.extraWeftYarn.yarnDesc:null}</span></h1> 
                           
                             </Col>
                      </Row>
@@ -274,6 +274,8 @@ class AddCustomprod extends Component {
                 productName={this.state.ifEnquiryExists.productName}
                 productId={data.id}
                 isCustom={this.state.isCustom}
+                enquiryId={this.state.ifEnquiryExists.enquiryId}
+
                 />
                  :
                         (
@@ -285,6 +287,7 @@ class AddCustomprod extends Component {
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
                  productName={this.state.generateEnquiry.productName}
                  productId={data.id}
+                 enquiryId={this.state.generateEnquiry.enquiry.id}
                  />
                  : null
                          ) } </>

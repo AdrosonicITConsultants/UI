@@ -146,7 +146,27 @@ import downloadpdficon from "./download pdf icon.svg"
 import chatbubble from "./white chat bubble for button.svg"
 import  completedenq from "./order delivered.svg"
 import cancelenq from "./Cancel Enquiry icon - red.svg"
+
+import greentick from "./done-success.svg"
+import backupload from "./back upload.svg"
+import Iconfeatherupload from "./Icon feather-upload.svg"
+import whitetransaction from "./white transaction.svg"
+import rotatingshapes from "./rotating shapes.svg"
+
+import recent from "./recent.svg"
+import finpay from "./fin pay.svg"
+import redenquiry from "./red enquiry.svg"
+import viewrec from "./view rec.svg"
 export default {
+  viewrec,
+  redenquiry,
+  finpay,
+  recent,
+  rotatingshapes,
+  whitetransaction,
+  Iconfeatherupload,
+  backupload,
+  greentick,
   cancelenq,
   chatbubble,
   completedenq,

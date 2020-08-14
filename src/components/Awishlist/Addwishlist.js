@@ -326,6 +326,7 @@ class AddWishlist extends Component {
                 productName={this.state.ifEnquiryExists.productName}
                 productId={data.product.id}
                 isCustom={this.state.isCustom}
+                enquiryId={this.state.ifEnquiryExists.enquiryId}
                 />
                  :
                         (
@@ -337,6 +338,7 @@ class AddWishlist extends Component {
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
                  productName={this.state.generateEnquiry.productName}
                  productId={data.product.id}
+                 enquiryId={this.state.generateEnquiry.enquiry.id}
                  />
                  : null
                          ) } </>

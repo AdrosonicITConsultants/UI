@@ -16,23 +16,26 @@ import moment from 'moment';
 import Moment from 'react-moment';
 
 import Footer from '../footer/footer';
+import { BuyerAdvancePayment3 } from './BuyerAdvancePayment3';
+import BuyerAdvancePayment from './BuyerAdvancePayment';
 
-export class BuyerAdvancePayment2 extends Component {
+export default class BuyerAdvancePayment2 extends Component {
     constructor() {
+        var min=1; 
+        var max=100;  
         super();
-        
-        this.select20= this.select20.bind(this);
-        this.select30= this.select30.bind(this);
-        this.select50= this.select50.bind(this);
-
+        this.onFileChange= this.onFileChange.bind(this);
+        this.uploadReceiptandSend= this.uploadReceiptandSend.bind(this);
         this.state = {
-            selected:"select20",
-            select20:false,
-            select30:true,
-            select50:false,
-            dataload:false,
+            dataload:true,
             enquiryCode:"",
-
+            upload:true,
+            success:false,
+            selectedFile:null,
+            selectedFileName:"",
+            uploadButtonClick:false,
+            random: Math.floor(Math.random() * (+max - +min)) + +min,
+          
                    }
     }
  
@@ -41,141 +44,92 @@ export class BuyerAdvancePayment2 extends Component {
     this.props.bp();
     }
 
+   
     uploadReceiptandSend(){
-        browserHistory.push("/uploadReceiptandSend?code="+this.state.enquiryCode)
-    }
-
-    select20(){
-        this.setState((prevState) => {
-            return{
-             selected: "select20",
-             select20:true,
-             select30:false,
-             select50:false,
-         
-            };
-        });
-    }
-
-    select30(){
-        this.setState((prevState) => {
-            return{
-             selected: "select30",
-             select20:false,
-             select30:true,
-             select50:false,
-         
-            };
-        });
-    }
-
-    select50(){
-        this.setState((prevState) => {
-            return{
-             selected: "select50",
-             select20:false,
-             select30:false,
-             select50:true,
-         
-            };
-        });
-    }
-
-    componentDidMount() {
-        let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        this.state.enquiryCode = params.code;
-        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-            
-                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-                            if(response.data.data[0].paymentAccountDetails.length != 0)
-                            {
-                                
-                                for (var  items in response.data.data[0].paymentAccountDetails)
-                                {
-                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
-                                    switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
-                                        case 1:
-                                            console.log("bank");   
-                                            this.setState({
-                                                accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
-                                                bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
-                                                branch : response.data.data[0].paymentAccountDetails[items].branch ,
-                                                ifsccode : response.data.data[0].paymentAccountDetails[items].ifsc,
-                                                benificiaryname : response.data.data[0].paymentAccountDetails[items].name
-                                            }); 
-                                            break;
-                                        case 2:
-                                            console.log("gpayy");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                                this.setState({
-                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                        case 3:
-                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                            this.setState({
-                                                phonepeupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                            }); 
-                                        }
-                                            break;
-                                        case 4:
-                                            console.log("paytm");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                                                          
-                                                this.setState({
-                                                    paytmupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                    }
-                                }
-                                
+        this.setState({
+            uploadButtonClick:true
+          })
+    document.getElementById('acceptMOQModal').style.display='block';
                 
-                            }
-                            var nextProgressid = 0;
-                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
-                            {
-                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                    {
-                                        nextProgressid = 11;
-                                    }
-                                    else{
-                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                    }
-                            }
-                            else{
-                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                            }
-                            this.setState({getEnquiryMoq : response.data.data,
-                                progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
-                                Progressidnext : nextProgressid,
-                                userid : response.data.data[0].userId,
-                                dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
-                           
-                            });
-                        });
-                    });
-            }
-        })
-     
+        const formData = new FormData(); 
+        formData.append( 
+          "myFile", 
+          this.state.selectedFile, 
+          this.state.selectedFile.name 
+        );
+       
+        console.log(this.state.selectedFile); 
+        TTCEapi.advancedPayment(
+            this.state.selectedFile,
+            this.props.enquiryId,
+            this.state.random,
+            this.props.calulatedAmount,
+            this.props.percent,
+            this.props.pid,
+            this.props.totalAmount
+            ).then((response)=>{
+            
+            if(response.data.valid){ 
+                document.getElementById('acceptMOQModal').style.display='none';
+
+                this.setState({  
+               success:true
+              
+            },()=>{
+                console.log(response)
+           
+            });
+          
       }
-    
-    
-    
+      else{
+        document.getElementById('acceptMOQModal').style.display='none';
+
+        this.setState({
+            uploadButtonClick:false
+      });
+      customToast.error(response.data.errorMessage, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+      
+      }
+        })
+      
+    }
+
+  
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
+    }
+
+    componentDidMount(){
+        console.log(this.props.enquiryId);
+        console.log(this.props.receiptId);
+        console.log(this.props.receiptlabel)
+    }
+      acceptMOQModalShow = () => {
+        document.getElementById('acceptMOQModal').style.display='block';
+    }
+
+    acceptMOQModalClose = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+    }
+
+    goBack(){
+        browserHistory.push("/payadvance?code="+this.state.enquiryCode)
+    }
     render(){
+
+
         return(
             
 <React.Fragment>
@@ -183,29 +137,29 @@ export class BuyerAdvancePayment2 extends Component {
     {this.state.dataload?
 <>
 
-
-                        
-
-                          {this.state.getEnquiryMoq.map((item)=> 
-                <>
+        {this.state.success == false?
+        <>
+        
 
                         <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-1">
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        
+                                       onClick={() => this.BacktoPreview()}
                             ></img>
                           
                           </Col>
                           <Col sm = "11" className="col-xs-11  ">
-                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id: {item.openEnquiriesResponse.enquiryCode} </b></h3>
+                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id:
+                             {this.props.enquiryCode}
+                              </b></h3>
                           
                           </Col>
                           </Row>
                           <hr className="hrlineadvpay "></hr>
 
-                <Row noGutters={true} className="mt-7">
+                          <Row noGutters={true} className="mt-7">
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
@@ -214,34 +168,34 @@ export class BuyerAdvancePayment2 extends Component {
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.openEnquiriesResponse.productType === "Product"
+                                        this.props.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showArtisanProduct?ProductId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"Product/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
                                         :
-                                        <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showBuyerProduct?productId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
 
                                     }
 
                                     </div>
                                     
-                                   
+                                    {/* <span ></span> */}
                                 </div>
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold payadvhead">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      Enquiry Id : {this.props.enquiryCode}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold fontsize16pa ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun fontsize16pa"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
-                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                      <span className="leEnqtype bold fontsize16pa ">{this.props.productDesc} </span> 
+                                       <span className="leEnqspun fontsize16pa"> / {this.props.yarnDesc}  X  {this.props.weftYarnId}  
+                                        {this.props.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                        X {this.props.extraWeftYarnIds?this.props.extraWeftYarnIds:""}
                                         </>
                                         :
                                             <></>
@@ -254,7 +208,7 @@ export class BuyerAdvancePayment2 extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn bold">Artisan Brand : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{this.props.companyName}</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -266,38 +220,40 @@ export class BuyerAdvancePayment2 extends Component {
                     
                 </Row>
             
-                </>
-                )}
 
+                          
   <Row noGutters={true}>
             <Col className="col-xs-12">
             <div class="Total-square-container">
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay totalamtpay2" ><span > 
-                   <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 1111.00</span>
+    <i class="fa fa-inr" style={{color:"rgb(26, 68, 206)",marginRight:"5px"}} aria-hidden="true"></i>
+
+     {this.props.calulatedAmount}
+     </span>
                     </h3>
-                    {/* <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span> */}
-     
+    
   
                 </div>
                 </div>
              
             </Col>
   </Row>
+ 
 
   <Row  noGutters={true}>
       <Col className="col-xs-12 Accdetailstxt">
           Account Details: <br/>
-          Bikesh Singh
+          {this.props.firstName ? this.props.firstName:"NA"} {this.props.lastName ? this.props.lastName:""}
       </Col>
   </Row>
 
   <Row  noGutters={true}>
       <Col className="col-xs-12 Accdetailstxt">
-          Axis Bank Ltd,Maniabandhan <br/>
-          Account No. <span style={{color:"darkgrey"}}>123456</span>    <br/>
-          IFSC CODE: <span style={{color:"darkgrey"}}>123456</span>
+      {this.props.bankName?this.props.bankName:"NA"} <br/>
+          Account No. <span style={{color:"darkgrey"}}>{this.props.accNo ? this.props.accNo:"NA"}</span>    <br/>
+          IFSC CODE: <span style={{color:"darkgrey"}}>{this.props.ifscCode ? this.props.ifscCode : "NA"}</span>
       </Col>
   </Row>
   <Row>
@@ -313,12 +269,10 @@ export class BuyerAdvancePayment2 extends Component {
   {/* ----------------------BoX--------------------- */}
 
   <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-2 ">
-         
-      </Col>
-      <Col className="col-xs-12 " sm={3}>
+ 
+      <Col className="col-xs-12 " sm={4}>
       
-                <Row>
+                <Row className="bankiconborderright ">
                 <Col sm = {{size: "3"}}>
 
                 <img src={logos.gpay} className="gpayicon mt0"></img>
@@ -329,16 +283,16 @@ export class BuyerAdvancePayment2 extends Component {
                 Google Pay UPI Id
                 </div>
                 <div>
-                a
-                {/* {this.state.gpayupi} */}
+                {this.props.gpay ? this.props.gpay :"NA"}
+                
                 </div>
                 </Col>
                 </Row> 
        
       </Col>
 
-      <Col className="col-xs-12 " sm={3}>
-      <Row>
+      <Col className="col-xs-12 " sm={4}>
+      <Row className="bankiconborderright">
                 <Col sm = {{size: "3"}}>
 
                 <img src={logos.paytm} className="gpayicon mt0"></img>
@@ -349,14 +303,14 @@ export class BuyerAdvancePayment2 extends Component {
                 Paytm Registered Mobile Number
                 </div>
                 <div>
-                a
-                {/* {this.state.gpayupi} */}
+                {this.props.paytm ? this.props.paytm :"NA"}
+                
                 </div>
                 </Col>
                 </Row> 
       </Col>
 
-      <Col className="col-xs-12 " sm={3}>
+      <Col className="col-xs-12 " sm={4}>
                 <Row>
                 <Col sm = {{size: "3"}}>
 
@@ -368,117 +322,180 @@ export class BuyerAdvancePayment2 extends Component {
                 Registered Number for PhonePay
                 </div>
                 <div>
-                a
+                {this.props.phonePay ? this.props.phonePay :""}
                 {/* {this.state.gpayupi} */}
                 </div>
                 </Col>
                 </Row> 
       </Col>
-      {/* <Col className="col-xs-1 ">
-         
-      </Col> */}
+  
+     
   </Row>
   {/* ----------------------BoX End--------------------- */}
 
-<Row noGutters={true} className="margintoprow">
-<Col className="col-xs-2 ">
-         
-      </Col>
-         <Col className="col-xs-12 " sm={3}>
-         
-                  
-          
-         </Col>
-   
-         <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-             Please make sure that the uploaded images are sharp and bright with proper text visiblity
-             and clear handwriting.     
-        </Row> 
-         </Col>
-
-         <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-                
-        </Row> 
-         </Col>
-   
-        
-
-</Row>
+<Row noGutters={true}>
+            <Col className="col-xs-12 pinknote" style={{textAlign:"center"}}>
+            Please make sure that the uploaded images are <br/> sharp and bright with proper text visiblity
+             and <br/>clear handwriting. 
+             
+            </Col>
+  </Row>
+  
 
 
-<Row noGutters={true} className="margintoprow">
-{/* <Col className="col-xs-2 ">
-         
-      </Col> */}
-    
+{this.state.upload?
+    <Row noGutters={true} className="margintoprow aligncenter">
+
          <Row noGutters={true} className="bluenote">
          <Col className="col-xs-1 ">
          
          </Col>
-             <Col className="col-xs-12" sm={6}>
-             <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
-         onClick={() => this.uploadReceiptandSend()}>
-        <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i>           
-        Upload transaction receipt 
-            </button>
+             <Col className="col-xs-12 aligncenter" sm={6}>
+             {/* <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
+                onClick={this.acceptMOQModalShow}
+                onClick={() => this.uploadReceiptandSend()}
+                 >
+       
+                <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/>
+                Upload transaction receipt 
+                    </button> */}
+                
+        
+
+        <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+       onChange={this.onFileChange}
+        />
+        <label for="file" className="uploadtractionbtnfloat" ><img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+             Upload transaction receipt </label>
              </Col>
-             <Col className="col-xs-12" sm={3}>
+             <Col className="col-xs-12 aligncenter" sm={3}>
              Image file formats & <br/> .pdf only.Upto 5Mb Max. 
              </Col>
-
-       
-   
-        </Row> 
-        
-
-         {/* <Col className="col-xs-12 " sm={3}>
-         <Row noGutters={true} className="pinknote">
-                
-        </Row> 
-         </Col> */}
-   
-        
-
-</Row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<Row noGutters={true} style={{marginTop:"10px"}}>
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-    <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  
-    The maximum time limit for completing this transaction is 10 Days <br/>
-      after generating this enquiry.
-                </span></p>
-    </Col>
-</Row>
-
-<Row noGutters={true} className="margintoprow">
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="reporttt">  It will be notified to Artisan for confirmation & the Administration team at Tata Trusts
-     
-                </span>
                
-    </Col>
-</Row>
+        </Row> 
+  
+            </Row>
+            :
+            <>
+            <Row noGutters={true} className="margintoprow aligncenter">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                    {/* <button className="uploadroundbtn" >
+                    <input type="file"  className=" " onChange={this.onFileChange} />
+                    <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> 
+                    </button>  */}
+                    <input type="file" id="file" accept=".png, .jpg, .jpeg" onChange={this.onFileChange} />
+                    <label for="file" className="uploadroundbtn" >
+                    <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+                     </label>
+                      <b className="uploadreceiptname">{this.state.selectedFileName}</b>
+                    <br/>
+                    <div>
+                    <button className="uploadconfirmbtn" 
+                    disabled={this.state.uploadButtonClick}
+                    onClick={() => this.uploadReceiptandSend()}>
+                        <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
+                    Upload and send for confirmation 
+                        </button>
+                        </div>
+                    
+                </Col>
+                
+            </Row>
+            {/* <Row noGutters={true} className="margintoprow aligncenter">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+            </Col>
+            <div>
+                    <button className="uploadconfirmbtn" 
+                    
+                    onClick={() => this.uploadReceiptandSend()}>
+                        <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
+                    Upload and send for confirmation 
+                        </button>
+                        </div>
+                </Row> */}
+          </>
+            }
+            
+{/* <button  onClick={this.acceptMOQModalShow}>abcd</button> */}
+        <Row noGutters={true} style={{marginTop:"10px"}}>
+            <Col className="col-xs-12" style={{textAlign:"center"}}>
+            <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  
+            The maximum time limit for completing this transaction is 10 Days <br/>
+            after generating this enquiry.
+                        </span></p>
+            </Col>
+        </Row>
+
+        <Row noGutters={true} className="margintoprow">
+            <Col className="col-xs-12" style={{textAlign:"center"}}>
+            <span className="reporttt">  It will be notified to Artisan for confirmation & the Administration team at Tata Trusts
+            
+                        </span>
+                    
+            </Col>
+        </Row>
+{/* _________________________________________Modal_________________________________________________ */}
+                                          
+                                            <div id="acceptMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+                                                                    <Col className="col-xs-12 fontplay">
+                                                                        Uploading your receipt
+                                                                        <br/>
+                                                                        <img src={logos.rotatingshapes} style={{height:"40px",marginTop:"10px"}}/>
+                                                                        <div class="loading-bar">
+                                                                            <div class="fuzzy"></div>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                
+                                                                <Row noGutters={true}>
+                                                                <Col className="col-xs-12" style={{textAlign:"center"}}>
+                                                                <button onClick={this.acceptMOQModalClose} className="uploadInbgbtn">
+                                                                <img src={logos.backupload} style={{height:"12px",marginRight:"8px"}}/>  Upload in background
+                                                             </button>
+                                                                  
+                                                                </Col>
+                                                                </Row>
+                                                                                                                                 
+                                                                
+                                                            </div>
+                                                            </div>
+                                                </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
 <br/>
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
+                
+                </>
+        :
+        <>
+        {window.location.reload()}
+{/* <BuyerAdvancePayment3
+productType={ this.props.productType}
+productId={this.props.productId}
+productImages={this.props.productImages}
+enquiryCode={this.props.enquiryCode}
+enquiryId={ this.props.enquiryId}
+productDesc={this.props.productDesc}
+yarnDesc={this.props.yarnDesc}
+weftYarnId={this.props.weftYarnId}
+extraWeftYarnId={this.props.extraWeftYarnId}
+companyName={this.props.companyName}
+receiptId={this.props.receiptId}
+receiptlabel={this.props.receiptlabel}
+/> */}
 
+        </>
+        }
                 </>:null}
+                
+    
+                                        
 </Container>
 
 </React.Fragment>
@@ -486,11 +503,4 @@ export class BuyerAdvancePayment2 extends Component {
     }
     
 }
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerAdvancePayment2);
-export default connectedLoginPage;

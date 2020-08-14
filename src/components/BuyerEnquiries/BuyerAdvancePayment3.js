@@ -21,155 +21,32 @@ export class BuyerAdvancePayment3 extends Component {
     constructor() {
         super();
         
-        this.select20= this.select20.bind(this);
-        this.select30= this.select30.bind(this);
-        this.select50= this.select50.bind(this);
 
         this.state = {
-            selected:"select20",
-            select20:false,
-            select30:true,
-            select50:false,
-            dataload:false,
+           
+            dataload:true,
+            enquiryCode:"",
+            enquiryId:"",
+            receiptId:"",
+            receiptlabel:""
 
                    }
     }
  
     
     BacktoPreview(){
-    this.props.bp();
+    browserHistory.push("/buyerEnquiryDetails?code="+this.props.enquiryId)
     }
-
-    select20(){
-        this.setState((prevState) => {
-            return{
-             selected: "select20",
-             select20:true,
-             select30:false,
-             select50:false,
-         
-            };
-        });
-    }
-
-    select30(){
-        this.setState((prevState) => {
-            return{
-             selected: "select30",
-             select20:false,
-             select30:true,
-             select50:false,
-         
-            };
-        });
-    }
-
-    select50(){
-        this.setState((prevState) => {
-            return{
-             selected: "select50",
-             select20:false,
-             select30:false,
-             select50:true,
-         
-            };
-        });
-    }
-
-    componentDidMount() {
-        let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-            
-                        TTCEapi.getEnquiryMoq(params.code).then((response)=>{
-                            if(response.data.data[0].paymentAccountDetails.length != 0)
-                            {
-                                
-                                for (var  items in response.data.data[0].paymentAccountDetails)
-                                {
-                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
-                                    switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
-                                        case 1:
-                                            console.log("bank");   
-                                            this.setState({
-                                                accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
-                                                bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
-                                                branch : response.data.data[0].paymentAccountDetails[items].branch ,
-                                                ifsccode : response.data.data[0].paymentAccountDetails[items].ifsc,
-                                                benificiaryname : response.data.data[0].paymentAccountDetails[items].name
-                                            }); 
-                                            break;
-                                        case 2:
-                                            console.log("gpayy");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                                this.setState({
-                                                    gpayupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                        case 3:
-                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                            
-                                            this.setState({
-                                                phonepeupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                            }); 
-                                        }
-                                            break;
-                                        case 4:
-                                            console.log("paytm");
-                                            if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
-                                                                          
-                                                this.setState({
-                                                    paytmupi : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile), 
-                                                }); 
-                                            }
-                                            
-                                            break;
-                                    }
-                                }
-                                
-                
-                            }
-                            var nextProgressid = 0;
-                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
-                            {
-                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                    {
-                                        nextProgressid = 11;
-                                    }
-                                    else{
-                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                    }
-                            }
-                            else{
-                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                            }
-                            this.setState({getEnquiryMoq : response.data.data,
-                                progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
-                                Progressidnext : nextProgressid,
-                                userid : response.data.data[0].userId,
-                                dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
-                           
-                            });
-                        });
-                    });
-            }
-        })
-     
-      }
-    
-    
+    // componentDidMount(){
+    //     console.log(this.props.enquiryId);
+    //     console.log(this.props.receiptId);
+    //     console.log(this.props.receiptlabel)
+    // }
+  
     
     render(){
+        let prop=this.props;
+        console.log(prop);
         return(
             
 <React.Fragment>
@@ -178,28 +55,25 @@ export class BuyerAdvancePayment3 extends Component {
 <>
 
 
-                        
-
-                          {this.state.getEnquiryMoq.map((item)=> 
-                <>
-
-                        <Row noGutters={true} className="">
+<Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-1">
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
-                                        
+                                       onClick={() => this.BacktoPreview()}
                             ></img>
                           
                           </Col>
                           <Col sm = "11" className="col-xs-11  ">
-                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id: {item.openEnquiriesResponse.enquiryCode} </b></h3>
+                         <h3 className="fontheadingadv"><b>Advance Payment for Enquiry id:
+                             {this.props.enquiryCode}
+                              </b></h3>
                           
                           </Col>
                           </Row>
                           <hr className="hrlineadvpay "></hr>
 
-                <Row noGutters={true} className="mt-7">
+                          <Row noGutters={true} className="mt-7">
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
@@ -208,34 +82,34 @@ export class BuyerAdvancePayment3 extends Component {
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.openEnquiriesResponse.productType === "Product"
+                                        this.props.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showArtisanProduct?ProductId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"Product/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
                                         :
-                                        <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
+                                        <a href={"/showBuyerProduct?productId="+this.props.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + this.props.productId + "/" + this.props.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
 
                                     }
 
                                     </div>
                                     
-                                   
+                                    {/* <span ></span> */}
                                 </div>
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold payadvhead">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      Enquiry Id : {this.props.enquiryCode}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold fontsize16pa ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun fontsize16pa"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
-                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                      <span className="leEnqtype bold fontsize16pa ">{this.props.productDesc} </span> 
+                                       <span className="leEnqspun fontsize16pa"> / {this.props.yarnDesc}  X  {this.props.weftYarnId}  
+                                        {this.props.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                        X {this.props.extraWeftYarnIds?this.props.extraWeftYarnIds:""}
                                         </>
                                         :
                                             <></>
@@ -248,7 +122,7 @@ export class BuyerAdvancePayment3 extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn bold">Artisan Brand : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                          <span className="leEnqbrandname ">{this.props.companyName}</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -259,122 +133,51 @@ export class BuyerAdvancePayment3 extends Component {
 
                     
                 </Row>
-            
-                </>
-                )}
 
-  <Row noGutters={true}>
-            <Col className="col-xs-12">
-            <div class="Total-square-container">
-                <div class="Total-square">
-                <p className="orderamthead">Order amount</p>
-              <h3 className="totalamtpay"><span > 
-                   <i class="fa fa-inr" aria-hidden="true"></i> 1111.00</span>
-                    </h3>
-
-                </div>
-                </div>
-             
-            </Col>
-  </Row>
-
-  <Row  noGutters={true}>
-      <Col className="col-xs-12 selectpercenttext">
-          Select the % of the total amount (as per PI) you wish to pay below
-      </Col>
-  </Row>
-  {/* ----------------------BoX--------------------- */}
-
-  <Row  noGutters={true} className="margintoprow aligncenter">
-  <Col className="col-xs-3 ">
-         
-      </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container "  
-      className={
-               (this.state.selected == "select20"
-                 ? "borderbox"
-                 : "")
-               }
-               onClick={this.select20}>
-                <div class="Select20-square ">
-                20
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-12 alignbottom" sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select30"
-          ? "borderbox"
-          : "")
-        }
-        
-        onClick={this.select30}
-        >
-                <div class="Select30-square">
-                30
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-12 " sm={2}>
-      <div class="Select-square-container"
-      className={
-        (this.state.selected == "select50"
-          ? "borderbox"
-          : "")
-        }
-        onClick={this.select50}>
-                <div class="Select50-square">
-                50
-                </div>
-                </div>
-      </Col>
-      <Col className="col-xs-3 ">
-         
-      </Col>
-  </Row>
-  {/* ----------------------BoX End--------------------- */}
-
-<Row noGutters={true} className="margintoprow">
-    <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="selectpercenttext">  Calculated amount you pay as a advanceed : <span className="advtotal"><i class="fa fa-inr" style={{color:"rgb(26, 68, 206)"}} aria-hidden="true"></i> 44444444</span>
-     
-                </span>
-    </Col>
-</Row>
-
-
-<Row noGutters={true} className="margintoprow" style={{textAlign:"center"}}>
-
-    <Col className="col-xs-12">
-        <button className="proccedwithadvpaybtn">Proceed with 30% advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
-</button>
-    </Col>
+                
+<Row noGutters={true} style={{marginTop:"10px"}}>
+<Col className="col-xs-12" style={{textAlign:"center",marginBottom:"20px"}}>
+    <img src={logos.greentick} style={{height:"100px"}}/>
+     </Col>
 </Row>
 
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-    <p>   <span className="selectpercenttext">  The maximum time limit for completing this transaction is 10 Days <br/>
-      after generating this enquiry.
+    <p>   <span className="selectpercenttext">  Thank you! Your receipt has been uploaded successfully and Artisan is notified. <br/>
+    The acceptance will be notified within 3 maximum days from now.
                 </span></p>
     </Col>
 </Row>
 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="reporttt">  The following will be notified to Artisan & Administration team at Tata Trusts
-     
-                </span>
-               
+    
+
+
+         {/* <a href={"/payadvance?code="+this.props.enquiryCode }>
+         <img  src={TTCEapi.ReceiptUrl + this.props.receiptId + "/" + this.props.receiptlabel}
+       >
+
+         </img>
+                                         </a>  */}
+
+<a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
+<button className="proccedwithadvpaybtn viewtractionbtnwidth"  >
+            
+        <img src={logos.whitetransaction} style={{marginRight:"11px",height:"20px"}}/>          
+        View this transaction
+            </button>
+    </a>
+
     </Col>
 </Row>
 <br/>
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
-
+               
                 </>:null}
+               
 </Container>
 
 </React.Fragment>

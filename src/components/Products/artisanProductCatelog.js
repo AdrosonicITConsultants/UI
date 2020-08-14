@@ -140,15 +140,31 @@ export default class artisanProductCatelog extends Component {
                        },
                        () => {
                         let params = queryString.parse(this.props.location.search)
-                        TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
-                          this.setState({productid :params.ProductId },()=>{
-     
-                          })
-                          console.log('heree');
-                          console.log( response.data);
-                          let productData =  response.data.data;
-                          this.setProduct(productData);
-                      })
+                        console.log(params.ProductHistoryId == undefined);
+                        if(params.ProductHistoryId == undefined)
+                        {
+                          TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                            this.setState({productid :params.ProductId,history:false },()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                        }
+                        else{
+                          TTCEapi.getSimpleHistoryProduct(params.ProductHistoryId).then((response) => {
+                            this.setState({productid :params.ProductId,history:true },()=>{
+       
+                            })
+                            console.log('historyproduct');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                        }
+                       
 
                        }
                      );
@@ -171,15 +187,30 @@ export default class artisanProductCatelog extends Component {
                          },
                          () => {console.log("stateset");
                          let params = queryString.parse(this.props.location.search)
-                         TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
-                           this.setState({productid :params.ProductId },()=>{
-      
-                           })
-                           console.log('heree');
-                           console.log( response.data);
-                           let productData =  response.data.data;
-                           this.setProduct(productData);
-                       })
+                         if(params.ProductHistoryId == undefined)
+                         {
+                          TTCEapi.getSimpleHistoryProduct(params.ProductId).then((response) => {
+                            this.setState({productid :params.ProductId,history : true },()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                         }
+                         else{
+                          TTCEapi.getSimpleHistoryProduct(params.ProductId).then((response) => {
+                            this.setState({productid :params.ProductId ,history : false},()=>{
+       
+                            })
+                            console.log('heree');
+                            console.log( response.data);
+                            let productData =  response.data.data;
+                            this.setProduct(productData);
+                        })
+                         }
+                         
                            
 
                          }
@@ -205,31 +236,58 @@ export default class artisanProductCatelog extends Component {
                 };
                 setProduct(productData){
               
-
-                productData.productImages.map((img, index) => {
-              
-                this.toDataUrl(
-                    TTCEapi.ImageUrl +
-                      "Product/" +
-                      img.productId +
-                      "/" +
-                      img.lable,
-                    (myBase64) => {
-                      let filename = {};
-                      filename.name = img.lable;
-                    // console.log(myBase64); // myBase64 is the base64 string
-                      this.setState({
-                        ["imagePreviewUrl" + (index + 1)]: myBase64,
-                        isImageUploadComplete: true,
-                        ["selectedFile" + (index + 1)]: {
-                          filename,
-                          myBase64,
-                        },
-                      });
-                    }
-                  );
-                });
-
+                if(this.state.history)
+                {
+                  productData.productImages.map((img, index) => {
+                    this.toDataUrl(
+                        TTCEapi.ImageUrl +
+                          "HistoryProduct/" +
+                          img.productHistoryId +
+                          "/" +
+                          img.lable,
+                        (myBase64) => {
+                          let filename = {};
+                          filename.name = img.lable;
+                        // console.log(myBase64); // myBase64 is the base64 string
+                          this.setState({
+                            ["imagePreviewUrl" + (index + 1)]: myBase64,
+                            isImageUploadComplete: true,
+                            ["selectedFile" + (index + 1)]: {
+                              filename,
+                              myBase64,
+                            },
+                          });
+                        }
+                      );
+                    });
+    
+                }
+                else{
+                  productData.productImages.map((img, index) => {
+                    this.toDataUrl(
+                        TTCEapi.ImageUrl +
+                          "Product/" +
+                          img.productId +
+                          "/" +
+                          img.lable,
+                        (myBase64) => {
+                          let filename = {};
+                          filename.name = img.lable;
+                        // console.log(myBase64); // myBase64 is the base64 string
+                          this.setState({
+                            ["imagePreviewUrl" + (index + 1)]: myBase64,
+                            isImageUploadComplete: true,
+                            ["selectedFile" + (index + 1)]: {
+                              filename,
+                              myBase64,
+                            },
+                          });
+                        }
+                      );
+                    });
+    
+                }
+               
                 let washandCareIDs = productData.productCares.map(
                   (e) => e.productCareId
                 );
@@ -1585,7 +1643,7 @@ else {
                                        md={{ size: "6" }}
                                        className="col-6 text-right"
                                      >
-                                       {console.log(this.state)}
+                                      
                                        <select
                                          id="productCategorie"
                                          className="productDropdown"

@@ -55,19 +55,21 @@ import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
 // import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
-
+import BuyerAdvancePayment from "./components/BuyerEnquiries/BuyerAdvancePayment"
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
-import { BuyerAdvancePayment } from './components/BuyerEnquiries/BuyerAdvancePayment';
-import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/ClosedBuyerSingleEnquiry';
-import { BuyerAdvancePayment2 } from './components/BuyerEnquiries/BuyerAdvancePayment2';
+import { ClosedBuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleCompletedEnquiry';
 import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePayment3';
+import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePayment2' 
+import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';
+import { BuyerRecentList } from './components/BuyerTransaction/BuyerRecentList';
+import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView"
 function App() {
   
   return (
     <React.Fragment>
       <Router history={browserHistory}>
         <ToastContainer></ToastContainer>
-        
+       
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
@@ -98,6 +100,10 @@ function App() {
           <PrivateRoute exact path="/editBuyerProduct" component={EditBuyerDesign} />
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/buyerEnquiriesList" component={BuyerAllEnquiryList} />
+          <PrivateRoute exact path="/buyerTransactionList" component={BuyerAllTransactionList} />
+          <PrivateRoute exact path="/buyerRecentTransactionList" component={BuyerRecentList} />
+
+
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
           <PrivateRoute exact path="/closedEnquiryDetails" component={SingleCompletedEnquiry} />
 
@@ -110,7 +116,7 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
-          <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} />
+          {/* <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} /> */}
           <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 
           
@@ -125,6 +131,8 @@ function App() {
           <PrivateRoute path="/EditProduct" component={EditProduct} />
           <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
           <Route  exact path="/Product-Details" component={BuyersProductDetails} />
+          <Route  exact path="/showBArtisanProduct" component={BuyerProductview} />
+
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />
           <Route  exact path="/Modal" component={SuccessPopup} />

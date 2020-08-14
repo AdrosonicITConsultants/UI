@@ -61,9 +61,10 @@ export class SingleEnquiry extends Component {
             rpu:"",
             preview: false,
             sendButtonClick: false,
-            saveButtonClick:false,
+            saveButtonClick:true,
             enquiryId: 0,
             piSend:0,
+           
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -178,6 +179,8 @@ export class SingleEnquiry extends Component {
     backPI(){
         this.setState({
             preview: false,
+            isPidetail:true
+           
         })
     }
 
@@ -199,7 +202,12 @@ export class SingleEnquiry extends Component {
       handleMoqEdit(){
         
             this.setState({
-                isMoqdetail:!this.state.isMoqdetail
+                saveButtonClick: !this.state.saveButtonClick,
+                isMoqdetail:!this.state.isMoqdetail,
+               
+                   
+                      
+                
                 
             },()=>{
                 // this.checkSave();
@@ -228,10 +236,14 @@ export class SingleEnquiry extends Component {
         });
     }
 
+    
+
     saveMoqDetails(){
-        
-        if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
-          
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
+            this.setState({
+                saveButtonClick:true
+              })
             let params = queryString.parse(this.props.location.search);
             console.log(params);
             TTCEapi.saveMoq(
@@ -260,13 +272,15 @@ export class SingleEnquiry extends Component {
       else{
         this.setState({
             showValidationMoq: true,
+            saveButtonClick:false
         //   message : "Invalid PAN Number"
       });
       
       }
     } 
     savePIDetails(){
-        if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 console.log(params);
@@ -322,7 +336,8 @@ export class SingleEnquiry extends Component {
     } 
     sendMoqDetails(){
       
-        if(this.state.moq  && this.state.deliveryDesc && this.state.ppu ){
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
             this.setState({
                 sendButtonClick: true,
                 saveButtonClick:true
@@ -461,19 +476,38 @@ export class SingleEnquiry extends Component {
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
                             var nextProgressid = 0;
-                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
+                            if(response.data.data[0].openEnquiriesResponse.historyProductId == null )
                             {
-                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                    {
-                                        nextProgressid = 11;
-                                    }
-                                    else{
-                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                    }
+                                if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
+                                {
+                                        if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                        {
+                                            nextProgressid = 11;
+                                        }
+                                        else{
+                                            nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                        }
+                                }
+                                else{
+                                    nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                }
                             }
                             else{
-                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                if(response.data.data[0].openEnquiriesResponse.productStatusHistoryId == 2)
+                                {
+                                        if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                        {
+                                            nextProgressid = 11;
+                                        }
+                                        else{
+                                            nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                        }
+                                }
+                                else{
+                                    nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                }
                             }
+                            
                             this.setState({getEnquiryMoq : response.data.data,
                                 progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
                                 Progressidnext : nextProgressid,
@@ -534,7 +568,10 @@ export class SingleEnquiry extends Component {
                     <>
                     {this.state.getEnquiryMoq.map((item)=> 
                 <>
-                <Row noGutters={true}>
+                {item.openEnquiriesResponse.historyProductId == null
+                ?
+                 <>
+                  <Row noGutters={true}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
@@ -779,6 +816,258 @@ export class SingleEnquiry extends Component {
                 </Row>
                
                 </>
+                :
+                <>
+               
+                 <Row noGutters={true}>
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                        <Row noGutters={true}>
+                            <Col sm="9">
+                                <div className="imageinlist"> 
+                                <div className="imageinlist1"> 
+                                    {
+                                        item.openEnquiriesResponse.productType === "Product"
+                                        ?
+                                        <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
+                                        :
+                                        <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
+
+                                    }
+
+                                    </div>
+                                    
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    {/* <span ></span> */}
+                                    
+                                </div>
+                                <div>
+                                  {/* <div noGutters={true} >
+                                      <Col className="leEnqid bold">
+                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      </Col>
+                                  </div> */}
+                                  <div noGutters={true} >
+                                  <Col >
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                        ?
+                                        <>
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnHistoryId - 1 ].yarnDesc}
+                                        </>
+                                        :
+                                            <></>
+                                        }</span> 
+                                      </Col>
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          {item.openEnquiriesResponse.productType === "Product"
+                                          ?
+                                          <>
+                                          Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                          </>
+                                          :
+                                          <>
+                                          Product Code : NA  
+                                          </>
+                                          }
+                                                                            
+                                      </Col>
+                                  </div>
+                               
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodtype ">
+                                          {item.openEnquiriesResponse.productStatusHistoryId==2? "Available in stock"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==1? "Made to order"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==null? "Requested Custom Design"   : ""   }
+                                                              
+                                      </Col>
+
+                                  </div>
+                                  {/* <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                      </Col>
+                                  </div> */}
+                                </div>
+                            </Col>
+                            <Col sm="3" className="text-right">
+                                <div noGutters={true} >
+                                      <Col className="leEnqOrderAmount ">
+                                      Order Amount
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqAmount bold">
+                                        {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidDateStarted">
+                                      Date Started : 
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.openEnquiriesResponse.startedOn}
+                                        </Moment>
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidLastUpdated">
+                                      Last Updated : 
+                                      <Moment format="YYYY-MM-DD">
+                                     {item.openEnquiriesResponse.lastUpdated}
+                                        </Moment>
+                                        
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidEstDelivery">
+                                      Est. Date of delivery : 
+                                      {item.openEnquiriesResponse.excpectedDate != null 
+                                      ?
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.openEnquiriesResponse.excpectedDate}
+                                        </Moment>
+                                      :
+                                      "NA"
+                                      }
+                                      
+                                      </Col>
+                                </div>
+
+                                
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 leEnqstatus bold">
+                           Enquiry Status
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="mt7">
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.openEnquiriesResponse.productStatusHistoryId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            </ul>
+                                }
+
+                            </div>
+                           
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="text-center">
+                    {this.state.progressid < 3 || this.state.progressid == 14? 
+                     <></>
+                   :
+                   <button
+                     className="blackButton"
+                     onClick={this.ToggleDelete}
+                    >
+                     Change Status
+                   </button>
+                     }   
+                   
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                    Change Status
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={this.ToggleDeleteClose} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                                ?
+                                <>
+                                 {this.state.enquiryStagesAvailable.map((item1) => 
+                                    item1.id > 3 
+                                    ?
+                                    <Col className="col-xs-12 mb7">
+                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
+
+                                    {item1.desc}
+                                    </Col>
+                                    :
+                                    <>
+                                    </>
+                                 )}   
+                                </>
+                                :
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                                    item1.id > 3
+                                    ?
+                                    <Col className="col-xs-12 mb7">
+                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+
+                                    {/* <div className="greenButtonstatus">
+                                    </div> */}
+                                    {item1.desc}
+                                    </Col>
+                                    :
+                                    <>
+                                    </>
+                                 )} 
+                                </>
+                                }
+                                
+                               
+                            </Row>
+                            <br></br>
+                            <Row noGutters={true}>
+                            <button className="markCompletedButton"
+                            onClick={this.stateupdate}                           
+                                >
+                                Mark Completed
+                                </button>
+                            </Row>
+                            <br></br>
+                            
+                        </div>
+                        </div>
+                    </div>
+
+                </Row>
+               
+                </>
+                 }
+               
+                </>
                 )}
                     </>
                 <br></br>
@@ -789,16 +1078,16 @@ export class SingleEnquiry extends Component {
                                     <Col sm={1}>
      
                                             </Col>
-                                            <Col sm={2}  
+                                            <Col sm={3}  
                                             className={
                                                 (this.state.selected == "BuyerDetails"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
+                                                     ? "Allenqlistbtn2 ml60"
+                                                         : "Allenqlistbtn ml60")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
                                             Buyer's Detail
                                             </Col>
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                             className={
                                                 (this.state.selected == "moqDetails"
                                                      ? "Allenqlistbtn2"
@@ -808,7 +1097,7 @@ export class SingleEnquiry extends Component {
                                             MOQ Detail 
                                             </Col>
 
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                               className={
                                                 (this.state.selected == "proformaDetails"
                                                      ? "Allenqlistbtn2"
@@ -817,7 +1106,7 @@ export class SingleEnquiry extends Component {
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            <Col sm={2} 
+                                            {/* <Col sm={3} 
                                               className={
                                                 (this.state.selected == "changeRequest"
                                                      ? "Allenqlistbtn2"
@@ -834,11 +1123,12 @@ export class SingleEnquiry extends Component {
                                                      }
                                             onClick={this.qualityCheckbtn}>
                                            Quality Check 
-                                            </Col>
-                                            <Col sm={1}>
+                                            </Col> */}
+                                            {/* <Col sm={1}>
                                             
-                                            </Col>
+                                            </Col> */}
                                     </Row>
+                                    <br></br>
 
                                                        <Row noGutters={true}>
                                                            <Col sm={2}></Col>
@@ -1055,6 +1345,7 @@ export class SingleEnquiry extends Component {
                                                                 :
                                                                 <button className="savemoqbtn"
                                                                 disabled={this.state.saveButtonClick}
+                                                                onkeypress='validate(event)'
                                                                     onClick={() => this.saveMoqDetails()} >Save</button>}
                                                                     
                                                                  </Col>
@@ -1065,6 +1356,7 @@ export class SingleEnquiry extends Component {
                                                                    : 
                                                                    <button className="sendmoqbtn" disabled={this.state.sendButtonClick}
                                                                    onClick={() => this.sendMoqDetails()}
+                                                                   onkeypress='validate(event)'
                                                                    >Send</button>
                                                                  }
                                                                  </Col>
@@ -1076,167 +1368,194 @@ export class SingleEnquiry extends Component {
                      {/* -------------------MOQ ends------------------------------------------------------------------------------ */}
 
                                                             {this.state.proformaDetails ? 
+        
                                                             <>
-                                                            { this.state.isSend== 1  && this.state.getMoq.accepted== true
-                                                            ?
-                                                        <>
-                                                       
-                                                            {this.state.preview === false ?
-                                                            <>
-                                                         
-                                                         {this.state.getPi.isSend==1?    
-                                                          null
+                                        {this.state.piSend === 1?
+                                        <PreviewInvoice 
+                                        bp={this.backPI}
+                                        enquiryId={this.state.enquiryId}
+                                        enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                        expectedDateOfDelivery={this.state.dod}
+                                        hsn={this.state.hsncode}
+                                        rpu={this.state.rpu}
+                                        quantity={this.state.quantity}
+                                        sgst={this.state.sgst}
+                                        cgst={this.state.cgst}
+                                        piSend={this.state.piSend}
+                                        />
+                                        :
+                                        <>
+                                        { this.state.isSend== 1  && this.state.getMoq.accepted== true
+                                                ?
+                                                <>
+                                     {this.state.preview === false? <>
+                                     
+                                     
+                                                 {this.state.piSend==1?    
+                                                        null
                                                             :
                                                             <>  {this.state.isPidetail ? <img
                                                                 src={logos.apedit}
                                                                 className="aoctick"
                                                                 style={{"cursor":"pointer" ,
-                                                                     "position" : "absolute"}}
+                                                                    "position" : "absolute"}}
                                                                 onClick={this.handlePiEdit}
                                                         ></img> : 
-                                                       null} </>
-                                                           }   
-                                                           <Row noGutters={true} className="PIcolmt BdImgCol">
-                                                               <Col sm={6} >
-                                                                   <label>Quantity</label>
-                                                                   <br/>
-                                                               <input 
-                                                               className="PIinput"
-                                                                type="number"
-                                                                disabled={this.state.isPidetail}
-                                                                value={this.state.quantity }
-                                                                name="quantity"
-                                                                onChange={this.handleChange}
-                                                                />
-                                                               </Col>
-                                                               <Col sm={6}>
-                                                               <label >Rate per unit(or metre)</label>
-                                                               <br/>
-                                                               {/* <input className="PIinput" type="number"/> */}
-                                                             {/* <span 
-                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                             disabled={this.state.isPidetail}> */}
-                                                                 <select name="cars" id="cars" 
-                                                                 className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                                 disabled={this.state.isPidetail}>
-                                                                    <option value="volvo">₹</option>
-                                                                    <option value="saab">$</option>
-                                                                </select>
-                                                           {/* </span> */}
-                                                             <input type="number"  className="PIinput rsinputboxwidth"
-                                                             disabled={this.state.isPidetail}
-                                                             value={this.state.rpu }
-                                                             name="rpu"
-                                                             onChange={this.handleChange} />
-                                                               </Col>
-                                                           </Row>
+                                                        null} </>
+                                                        }
+                                                    <Row noGutters={true} className="PIcolmt BdImgCol">
+                                                        <Col sm={6} >
+                                                            <label>Quantity</label>
+                                                            <br/>
+                                                        <input 
+                                                        className="PIinput"
+                                                            type="number"
+                                                            disabled={this.state.isPidetail}
+                                                            value={this.state.quantity }
+                                                            name="quantity"
+                                                            onChange={this.handleChange}
+                                                            />
+                                                        </Col>
+                                                        <Col sm={6}>
+                                                        <label >Rate per unit(or metre)</label>
+                                                        <br/>
+                                                        {/* <input className="PIinput" type="number"/> */}
+                                                        {/* <span 
+                                                        className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                                        disabled={this.state.isPidetail}> */}
+                                                            <select name="cars" id="cars" 
+                                                            className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                                            disabled={this.state.isPidetail}>
+                                                                <option value="volvo">₹</option>
+                                                                <option value="saab">$</option>
+                                                            </select>
+                                                    {/* </span> */}
+                                                        <input type="number"  className="PIinput rsinputboxwidth"
+                                                        disabled={this.state.isPidetail}
+                                                        value={this.state.rpu }
+                                                        name="rpu"
+                                                        onChange={this.handleChange} />
+                                                        </Col>
+                                                    </Row>
+                                                    <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                                    <Col sm={6}>
+                                                    <label>Expected date of delivery</label>
+                                                    <br/>
+                                                        <input className="PIinput" type="date"
+                                                        disabled={this.state.isPidetail}
+                                                        value={this.state.dod }
+                                                        name="dod"
+                                                        onChange={this.handleChange}/>
 
-                                                           <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>Expected date of delivery</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="date"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.dod }
-                                                               name="dod"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>HSN Code</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.hsncode }
-                                                               name="hsncode"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
+                                                    </Col>
+                                                    <Col sm={6}>
+                                                    <label>HSN Code</label>
+                                                    <br/>
+                                                        <input className="PIinput" type="number"
+                                                        disabled={this.state.isPidetail}
+                                                        value={this.state.hsncode }
+                                                        name="hsncode"
+                                                        onChange={this.handleChange}/>
+                                                    </Col>
+                                                    </Row>
 
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={6}>
-                                                           <label>CGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.cgst }
-                                                               name="cgst"
-                                                               onChange={this.handleChange}/>
-                                                        
-                                                           </Col>
-                                                           <Col sm={6}>
-                                                           <label>SGST %</label>
-                                                           <br/>
-                                                               <input className="PIinput" type="number"
-                                                               disabled={this.state.isPidetail}
-                                                               value={this.state.sgst }
-                                                               name="sgst"
-                                                               onChange={this.handleChange}/>
-                                                           </Col>
-                                                       </Row>
+                                                    {/* <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                                    <Col sm={6}>
+                                                    <label>CGST %</label>
+                                                    <br/>
+                                                        <input className="PIinput" type="number"
+                                                        disabled={this.state.isPidetail}
+                                                        value={this.state.cgst }
+                                                        name="cgst"
+                                                        onChange={this.handleChange}/>
 
-                                                       <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                           <Col sm={12}>
-                                                           <input type="checkbox" name="checkbox" value="check" id="agree"
-                                                          
-                                                           style={{marginRight:"5px"}} 
-                                                          /> 
-                                                            Agree to <a
-                                                                style={{ cursor: "pointer", fontSize: "15px" }}
-                                                                onClick={() => {
-                                                                alert("clicked");
-                                                                }}
-                                                            >
-                                                                terms & condition
-                                                            </a>
-                              
-                                                           </Col>
-                                                       </Row>
-                                                       <p className="text-center">
-                                                             {this.state.showValidationPi ? (
-                                            <span className="bg-danger">All fields are Mandatory</span>
-                                        ) : (
-                                            <br />
-                                        )}
-                                           </p>
-                                                       <Row noGutters={true}>
-                                                           <Col sm={12} className="text-center">
-                                                               
-                                                                <button className="previewandpi" onClick={() => this.savePIDetails()}>
-                                                                  <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
-                                                           </Col>
-                                                          
-                                                       </Row>
-                                                            </>
-                                                            :<>
-                                                  <PreviewInvoice 
-                                                  bp={this.backPI}
-                                                 enquiryId={this.state.enquiryId}
-                                                 enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
-                                                 expectedDateOfDelivery={this.state.dod}
-                                                 hsn={this.state.hsncode}
-                                                 rpu={this.state.rpu}
-                                                 quantity={this.state.quantity}
-                                                 sgst={this.state.sgst}
-                                                 cgst={this.state.cgst}
-                                                 piSend={this.state.piSend}
-                                                  />
+                                                    </Col>
+                                                    <Col sm={6}>
+                                                    <label>SGST %</label>
+                                                    <br/>
+                                                        <input className="PIinput" type="number"
+                                                        disabled={this.state.isPidetail}
+                                                        value={this.state.sgst }
+                                                        name="sgst"
+                                                        onChange={this.handleChange}/>
+                                                    </Col>
+                                                    </Row> */}
+                                                    <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                                            <Col sm={12}>
+                                                            <input type="checkbox" name="checkbox" value="check" id="agree"
+                                                            
+                                                            style={{marginRight:"5px"}} 
+                                                            /> 
+                                                                Agree to <a
+                                                                    style={{ cursor: "pointer", fontSize: "15px" }}
+                                                                    onClick={() => {
+                                                                    alert("clicked");
+                                                                    }}
+                                                                >
+                                                                    terms & condition
+                                                                </a>
 
-                                                       </>}
-                                                       <p className="marginBottompage"></p>
-                                                       </>:
-                                                        <>
-                                                        
-                                                            <Row>
-                                                            <br></br>
-                                                            <br></br>
-                                                            <br></br>   
-                                                            <Col className="col-xs-12 text-center font14">
-                                                           MOQ Details are Not submitted / accepted yet.
                                                             </Col>
                                                             </Row>
-                                                        </>}
-                                                            </>:null}
+                                                            <p className="text-center">
+                                                    {this.state.showValidationPi ? (
+                                                <span className="bg-danger">All fields are Mandatory</span>
+                                                ) : (
+                                                <br />
+                                                )}
+                                                </p>
+                                                <Row noGutters={true}>
+                                                <Col sm={12} className="text-center">
+                                                    
+                                                        <button className="previewandpi" onClick={() => this.savePIDetails()}>
+                                                        <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
+                                                </Col>
+                                                
+                                                </Row>
+
+                                                </>
+                                                :
+                                                <PreviewInvoice 
+                                                bp={this.backPI}
+                                                enquiryId={this.state.enquiryId}
+                                                enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                />
+                                            
+}
+                                     
+
+
+
+</>:<>
+                                                    <Row>
+                                                 <br></br>
+                                                <br></br>
+                                                <br></br>   
+                                                <Col className="col-xs-12 text-center font14">
+                                            MOQ Details are Not submitted / accepted yet.
+                                                 </Col>
+                                                </Row>
+                                     
+                                     </>}
+
+
+
+                                     
+                                     
+                                     
+                                     
+                                        </>
+                                        }
+                                                        
+
+                                                             </>:null}
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                                

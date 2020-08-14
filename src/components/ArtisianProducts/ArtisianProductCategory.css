@@ -1,6 +1,7 @@
 .cpdetails {
     width: 240px;
     margin: auto!important;
+    overflow-y: hidden;
     
 }
 .productname1 {

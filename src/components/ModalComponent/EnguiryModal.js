@@ -18,12 +18,13 @@ export default class Popup extends React.Component {
      productId:this.props.productId,
      modalIsOpen: false,
      isCustom:this.props.isCustom,
+     enquiryId:this.props.enquiryId
     };
     this.closeModal = this.closeModal.bind(this);
   }
   
-  refreshPage(){ 
-    window.location.reload(); 
+  ViewEnquiry(){
+    browserHistory.push("/buyerEnquiryDetails?code="+this.state.enquiryId)
   }
   closeModal() {
     this.setState({ modalIsOpen: false });
@@ -36,7 +37,7 @@ export default class Popup extends React.Component {
     TTCEapi.generateEnquiry(item,this.state.isCustom).then((response)=>{
   this.setState({generateEnquiry : response.data.data},()=>{
     this.setState({ modalIsOpen: false });
-      // console.log(this.state.generateEnquiry);
+      console.log(this.state.generateEnquiry);
       
   });
 });
@@ -71,7 +72,7 @@ export default class Popup extends React.Component {
           <button  className="cancelmodal" onClick={() => this.refreshPage()}>Cancel</button>
           </Col>
           <Col sm={6}>
-          <button  className="ExtEnquirymodal"  >View Existing Enquiry</button>
+          <button  className="ExtEnquirymodal" onClick={() => this.ViewEnquiry()} >View Existing Enquiry</button>
           </Col>
       </Row>
       <hr></hr>
@@ -105,7 +106,7 @@ export default class Popup extends React.Component {
                          <SuccessPopup
                          EnquiryCode={this.state.generateEnquiry.enquiry.code}
                          productName={this.state.generateEnquiry.productName}
-                       
+                         enquiryId={this.state.generateEnquiry.enquiry.id}
                          />
                      :
                          null } </>

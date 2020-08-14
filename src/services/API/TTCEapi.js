@@ -21,6 +21,10 @@ class TTCEapi {
     " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   //#region post methods
 
+  static ReceiptUrl = 
+            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+
+
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
     const isOk = re.test(pass);
@@ -267,6 +271,20 @@ class TTCEapi {
       });
   }
 
+    static getHistoryProduct(id) {
+    let url = ApiUrl + "/product/getProductHistoryBuyer/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getSimpleProduct(id) {
     let url = ApiUrl + "/product/getSimpleProduct/" + id;
 
@@ -281,8 +299,36 @@ class TTCEapi {
       });
   }
 
+  static getSimpleHistoryProduct(id) {
+    let url = ApiUrl + "/product/getProductHistory/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getbuyerSimpleProduct(id) {
     let url = ApiUrl + "/buyerCustomProduct/getSimpleProduct/" + id;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getbuyerSimpleHistoryProduct(id) {
+    let url = ApiUrl + "/buyerCustomProduct/getProductHistory/" + id;
 
     return axios
       .get(url)
@@ -559,6 +605,23 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/deleteMoq/{moqId}?moqId=13
+
+
+  static deleteMoq(moqId){
+    let url = ApiUrl + "/enquiry/deleteMoq/{moqId}?moqId="+moqId;
+
+  return axios
+    .delete(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
 
   static addToWishlist(productId) {
     let url = ApiUrl + "/product/addToWishlist/" + productId;
@@ -832,6 +895,62 @@ class TTCEapi {
         return error.response;
       });
   }
+
+
+
+  static advancedPayment(
+    formData,
+    enquiryId,
+    invoiceId,
+    paidAmount,
+    percentage,
+    pid,
+    totalAmount
+
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/enquiry/advancedPayment";
+
+    var payment = {
+      // formData,
+      enquiryId:enquiryId,
+      invoiceId:invoiceId,
+      paidAmount:paidAmount,
+      percentage:parseInt(percentage),
+      pid:pid,
+      totalAmount:parseInt(totalAmount),
+    };
+    // var paymentFile=formData
+    
+    console.log(JSON.stringify(payment));
+    console.log(formData);
+    // console.log(selectedFile);
+    debugger;
+    bodyFormData.append("payment",JSON.stringify(payment));
+    bodyFormData.append("file", formData);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
+        debugger;
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
+
+
 
   static registerBuyer(
     companyname,
@@ -1234,12 +1353,12 @@ class TTCEapi {
     let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
    var data =
     {
-      cgst: cgst,
+      cgst: 0,
       expectedDateOfDelivery: dod,
       hsn: hsncode,
       ppu: rpu,
       quantity:quantity,
-      sgst:sgst
+      sgst:0
     }
    console.log(data)
    var config = {
@@ -1273,12 +1392,12 @@ static sendPI(
   let url = ApiUrl + "/enquiry/sendPi/{enquiryId}?enquiryId="+ enquiryId;
  var data =
   {
- cgst:cgst,
+ cgst:0,
   expectedDateOfDelivery:expectedDateOfDelivery,
   hsn:hsn,
   ppu:ppu,
   quantity:quantity,
-  sgst:sgst
+  sgst:0
  
   }
  console.log(data)
@@ -1600,8 +1719,37 @@ static sendPI(
       });
   }
 
+  // /enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId=1205
 
+  static getAdvancedPaymentReceipt(enquiryId) {
+    let url = ApiUrl + "/enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId="+enquiryId;
 
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getAdvancedPaymentStatus(enquiryId) {
+    let url = ApiUrl + "/enquiry/getAdvancedPaymentStatus?enquiryId="+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
   static progressUpdate(stageid, id) {
     let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;

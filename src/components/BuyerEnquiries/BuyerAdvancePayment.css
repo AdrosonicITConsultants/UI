@@ -12,7 +12,7 @@
   .Total-square{
     background-color: white;
     border: 1px solid ;
-    width: 199px;
+    width: auto;
     height: auto;
   }
 
@@ -61,12 +61,16 @@
  .totalamtpay{
      text-align: center;
      margin-top: 1px;
+     padding: 0px 5px 0px 5px;
  }
 
  .totalamtpay2{
    color:rgb(102, 136, 255) !important;
  }
-
+.uploadconfirmbtn:disabled{
+  background-color: gray;
+  opacity: 0.5;
+}
  .Accdetailstxt{
   font-size: 14px;
   text-align: center;
@@ -105,8 +109,36 @@
     background: black;
     color: white;
     padding: 10px;
-    width: 41%;
+    cursor: pointer;
+    /* width: 41%; */
  }
+ [type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+  background: black;
+  border: none;
+  border-radius: 45px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Rubik', sans-serif;
+  font-size: inherit;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  vertical-align: middle;
+  /* float: right; */
+}
+
+
 
  .reporttt{
     color: gray;
@@ -155,11 +187,103 @@
 .uploadtractionbtnfloat{
   float: right !important;
 }
- @media screen and (max-width:767px){
+.viewtractionbtnwidth{
+  width: 24%;
+}
+.bankiconborderright{
+  border-right: 1px solid grey;
+}
+.modalBoxTop {
+  margin-top: 130px;
+}
+.uploadroundbtn{
+  background: black;
+  color: white;
+  border: 1px;
+  border-radius: 24px;
+  height: 42px;
+  width: 42px;
+  text-align: center;
+  padding: 11px 1px 2px 6px !important;
+  margin-bottom: 10px;
+}
+.uploadreceiptname{
+  font-size: 17px;
+    margin-left: 6px;
+    color: cornflowerblue;
+}
+.uploadconfirmbtn {
+  border: 2px solid rgb(0 0 255 / 75%);
+  color: rgb(0 0 255 / 75%);
+  background: white;
+  padding: 7px;
+  border-radius: 20px;
+  margin-top: 15px;
+  width: auto;
+}
+.uploadingreceiptheading{
+  font-size: 22px;
+    color: grey;
+}
+.uploadInbgbtn{
+  background: transparent;
+  border: 1px solid;
+  border-radius: 22px;
+  padding: 5px;
+  margin-bottom: 25px;
+  font-size: 12px;
+}
+
+.loading-bar {
+	height: 1rem;
+	width: auto;
+	max-width: 500px;
+	min-width: 200px;
+	margin: 2rem 0;
+	padding: .15rem .05rem .05rem .15rem;
+	
+}
+.loading-bar,
+.loading-bar div {
+	border-radius: 1000px;
+}
+.thin {
+	padding: .35rem!important;
+}
+
+.fuzzy {
+	height: 100%;
+  background-image: linear-gradient(-90deg, #dff0d8, #22bd4b);
+	box-shadow: 0 .1em 1em .1em #88645245;
+	animation: load 3s ease-out infinite;
+}
+
+/* myfile button */
+.myfilebtn{
+  /* font-size: 100px; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+@keyframes load {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+ @media screen and (max-width:768px){
    .aligncenter{
     text-align: -webkit-center;
    
    }
+   .viewtractionbtnwidth{
+    width: 40%;
+  }
    .alignbottom{
     margin-bottom: 20px;
    }
@@ -177,7 +301,7 @@
 }
 .selectpercenttext {
   color: gray;
-  font-size: 17px;
+  font-size: 15px;
   text-align: center;
   margin-top: 35px;
 }

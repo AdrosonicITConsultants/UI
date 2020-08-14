@@ -12,14 +12,17 @@ export default class SuccessPopup extends React.Component {
     this.state = {
         EnquiryCode:this.props.EnquiryCode,
         productName:this.props.productName,
-        isLoading:true
-    };
+        isLoading:true,
+        enquiryId:this.props.enquiryId
+      };
   }
   
   refreshPage(){ 
     window.location.reload(); 
   }
-
+  viewEnquiry(){
+    browserHistory.push("/buyerEnquiryDetails?code="+this.state.enquiryId)
+  }
 
   render() {
    
@@ -50,7 +53,7 @@ export default class SuccessPopup extends React.Component {
             <button  className="cancelmodal" onClick={() => this.refreshPage()}>Close</button>
             </Col>
             <Col sm={6} xs={12}>
-            <button  className="ExtEnquirybtn"  >View Enquiry</button>
+            <button  className="ExtEnquirybtn" onClick={() => this.viewEnquiry()} >View Enquiry</button>
             </Col>
         </Row>
         </div>

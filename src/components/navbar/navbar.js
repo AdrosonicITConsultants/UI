@@ -459,7 +459,7 @@ browserHistory.push("/MyProfile");
                     ></img>
                   </span>
 
-                  <a href="/">Transactions</a>
+                  <a href="/buyerTransactionList">Transactions</a>
                 </li>
                 {userTypeId == 2 ? (
                   <li className="menu-item">

@@ -41,10 +41,24 @@ export default class DetailSuggestionsArtist extends Component {
                 resultsCount : response.data.data.length,
                 searchWord : params.search,
                 both : 1,
-                antaran : 1,
+                antaran : 0,
 
               },()=>{
-                console.log(this.state.searchWord)
+                console.log(this.state.searchWord);
+                console.log(this.state)
+                var self = 0 ;
+                for ( var item in this.state.products )
+                {
+                  if(this.state.products[item].madeWithAnthran == 0)
+                  {
+                    self = self + 1;
+                  }
+                }
+                var antaran = parseInt(this.state.resultsCount - self )
+                this.setState({selfProduct : self , antaranProduct : antaran },()=>{
+                  console.log(this.state);
+                });
+
               })
              }
              else{
@@ -87,7 +101,15 @@ export default class DetailSuggestionsArtist extends Component {
 
             </Col>
             <Col  className="font20 col-xs-12 light">
-            Showing {" "+ this.state.resultsCount} results
+            Showing 
+            {" "}
+            {this.state.both == 1 ? this.state.resultsCount : null } 
+            {this.state.antaran == 1 ? this.state.antaranProduct : null } 
+            {(this.state.antaran == 0 && this.state.both == 0)  ? this.state.selfProduct : null } 
+
+            {" "}
+             results
+
 
             </Col>
             </Row>

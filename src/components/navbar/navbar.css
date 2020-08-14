@@ -235,7 +235,7 @@ background-color:#000000;
 .menu {
 background: #ffffff;
 height: 8rem;
-z-index: 1001;
+z-index: 999;
 position: sticky;
 top: 0;
 

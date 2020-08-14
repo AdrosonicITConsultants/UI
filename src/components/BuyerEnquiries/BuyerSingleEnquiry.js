@@ -76,6 +76,7 @@ export class BuyerSingleEnquiry extends Component {
              MoqSelected : [],
              selectedArtisanId: 0,
              selectedMOQId: 0,
+             modalOksend:false,
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -85,6 +86,13 @@ export class BuyerSingleEnquiry extends Component {
     //     })
     //     }
     
+    ToggleSave = () => {
+        document.getElementById('id02').style.display='block';
+       }
+
+       ToggleSaveClose = () => {
+        document.getElementById('id02').style.display='none';
+       }
     getcollapseId = activecollapse => {
         if (activecollapse !== this.state.collapseId) {
           this.setState({
@@ -268,7 +276,20 @@ export class BuyerSingleEnquiry extends Component {
         //   console.log(this.state.moq);
         });
     }
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+    ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
 
+       ToggleDelete1 = () => {
+        document.getElementById('id02').style.display='block';
+       }
+
+       ToggleDeleteClose1 = () => {
+        document.getElementById('id02').style.display='none';
+       }
     saveMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
@@ -303,6 +324,36 @@ export class BuyerSingleEnquiry extends Component {
       
       }
     } 
+    handleDeleteItem(id){
+        // if(window.confirm("Remove this item from wishlist?")){
+        TTCEapi.deleteMoq(id).then((response)=>{
+            if (response.data.valid) {
+                customToast.success("MOQ removed!", {
+                  position: toast.POSITION.TOP_RIGHT,
+                  autoClose: true,
+                });
+                this.setState({deleteMoq : response.data},()=>{
+                    console.log(this.state.deleteMoq);
+                    document.getElementById('id02').style.display='none';
+                    this.componentDidMount();
+                    // this.componentDidMount();
+                
+             
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+           
+        
+        });
+    // }
+      
+    }
+    
     savePIDetails(){
         if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
             if(document.getElementById('agree').checked){
@@ -551,18 +602,36 @@ export class BuyerSingleEnquiry extends Component {
                 
                             }
                             var nextProgressid = 0;
-                            if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
+                            if(response.data.data[0].openEnquiriesResponse.historyProductId == null )
                             {
-                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                    {
-                                        nextProgressid = 11;
-                                    }
-                                    else{
-                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                    }
+                                if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
+                                {
+                                        if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                        {
+                                            nextProgressid = 11;
+                                        }
+                                        else{
+                                            nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                        }
+                                }
+                                else{
+                                    nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                }
                             }
                             else{
-                                nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                if(response.data.data[0].openEnquiriesResponse.productStatusHistoryId == 2)
+                                {
+                                        if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                        {
+                                            nextProgressid = 11;
+                                        }
+                                        else{
+                                            nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                        }
+                                }
+                                else{
+                                    nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                }
                             }
                             this.setState({getEnquiryMoq : response.data.data,
                                 progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
@@ -634,6 +703,7 @@ AcceptMoq(moqId,artisanId){
 
 
 MoqSimpleProductSelected(moqId){
+    this.setState({ modalOksend:true})
     let params = queryString.parse(this.props.location.search);
         console.log(params);
     TTCEapi.MoqSimpleProductSelected(params.code,moqId).then((response)=>{
@@ -646,6 +716,13 @@ MoqSimpleProductSelected(moqId){
             console.log(this.state.MoqSimpleProductSelected);
 
         }
+        else{
+            this.setState({
+                modalOksend:true
+            })
+        }
+
+
     })
 } 
 
@@ -669,22 +746,7 @@ MoqSimpleProductSelected(moqId){
     }
 
      
-//   handleReadmore(id){
-  
-//     let items = [...this.state.readmore];
-  
-//     let item = {...items[id]};
-  
-//     item = !item;
-    
-//     items[id] = item;
-   
-//     this.setState({readmore}),()=>{
-//         console.log(this.state.readmore[id]);
-//     };
-    
 
-//   }
     render() {
         return (
             <React.Fragment>
@@ -714,6 +776,9 @@ MoqSimpleProductSelected(moqId){
                 <br></br>
                     <>
                     {this.state.getEnquiryMoq.map((item)=> 
+                <>
+                {item.openEnquiriesResponse.historyProductId == null
+                ?
                 <>
                 <Row noGutters={true}>
                     <Col className="col-xs-1"></Col>
@@ -877,15 +942,202 @@ MoqSimpleProductSelected(moqId){
                        </Row>
                     </Col>
                 </Row>
-                <br></br>
+               
+                </>
+                :
+                <>
+               
+                <Row noGutters={true}>
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                        <Row noGutters={true}>
+                            <Col sm="9">
+                                <div className="imageinlist"> 
+                                <div className="imageinlist1"> 
+                                    {
+                                        item.openEnquiriesResponse.productType === "Product"
+                                        ?
+                                        <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
+                                        :
+                                        <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                        </a>
+
+                                    }
+
+                                    </div>
+                                    
+                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    {/* <span ></span> */}
+                                    
+                                </div>
+                                <div>
+                                  {/* <div noGutters={true} >
+                                      <Col className="leEnqid bold">
+                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      </Col>
+                                  </div> */}
+                                  <div noGutters={true} >
+                                  <Col >
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                        ?
+                                        <>
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnHistoryId - 1 ].yarnDesc}
+                                        </>
+                                        :
+                                            <></>
+                                        }</span> 
+                                      </Col>
+                                  </div>
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          {item.openEnquiriesResponse.productType === "Product"
+                                          ?
+                                          <>
+                                          Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                          </>
+                                          :
+                                          <>
+                                          Product Code : NA  
+                                          </>
+                                          }
+                                                                            
+                                      </Col>
+                                  </div>
+                               
+                                  <div noGutters={true} className="" >
+                                      <Col className="leEnqprodtype ">
+                                      {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==2? "Available in stock"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==1? "Made to order"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==null? "Requested Custom Design"   : ""   }
+                                                                   
+                                      </Col>
+
+                                  </div>
+                                  {/* <div noGutters={true} className="" >
+                                      <Col className="leEnqprodcode ">
+                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
+                                      </Col>
+                                  </div> */}
+                                </div>
+                            </Col>
+                            <Col sm="3" className="text-right">
+                                <div noGutters={true} >
+                                      <Col className="leEnqOrderAmount ">
+                                      Order Amount
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqAmount bold">
+                                        {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidDateStarted">
+                                      Date Started : 
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.openEnquiriesResponse.startedOn}
+                                        </Moment>
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidLastUpdated">
+                                      Last Updated : 
+                                      <Moment format="YYYY-MM-DD">
+                                     {item.openEnquiriesResponse.lastUpdated}
+                                        </Moment>
+                                        
+                                      </Col>
+                                </div>
+                                <div noGutters={true} >
+                                      <Col className="leEnqidEstDelivery">
+                                      Est. Date of delivery : 
+                                      {item.openEnquiriesResponse.excpectedDate != null 
+                                      ?
+                                      <Moment format="YYYY-MM-DD">
+                                        {item.openEnquiriesResponse.excpectedDate}
+                                        </Moment>
+                                      :
+                                      "NA"
+                                      }
+                                      
+                                      </Col>
+                                </div>
+
+                                
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    
+                </Row>
+                <Row noGutters={true} className="mt7">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 leEnqstatus bold">
+                           Enquiry Status
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+                <Row noGutters={true} className="mt7">
+                    <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.openEnquiriesResponse.productStatusHistoryId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <li >Completed</li>
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                              <li >Completed</li>
+                            </ul>
+                                }
+
+                            </div>
+                           
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
+               
+                </>
+    }
+
+                 <br></br>
                 <Row>
                     <Col className="col-xs-6">
                     <button className=" closedEnquirybtn"
-                    onClick={()=>{this.markcompleted()}}
+                     onClick={this.ToggleSave}
+                    
                                        >
                                 <img src={logos.cancelenq} className="closeenqimg"></img>
                                 Close Enquiry
                                 </button>
+                                    <div id="id02" class="w3-modal">
+                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div class="w3-container">
+                                          <h3 className="deleteModalHeader">Are you sure you want to close this enquiry ?</h3>
+                                          <p className="deleteModalPara"></p>
+                                          <div className="deleteModalButtonOuterDiv">
+                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
+                                            <span onClick={()=>{this.markcompleted()}} className="saveModalOkayButton">Yes</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     </div>
+                                    
                     </Col>
                     {/* <Col className="col-xs-2"></Col> */}
                     <Col className="col-xs-6">
@@ -912,16 +1164,16 @@ MoqSimpleProductSelected(moqId){
                                     <Col sm={1}>
      
                                             </Col>
-                                            <Col sm={2}  
+                                            <Col sm={3}  
                                             className={
                                                 (this.state.selected == "BuyerDetails"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
+                                                     ? "Allenqlistbtn2 ml60"
+                                                         : "Allenqlistbtn ml60")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
-                                            Artisan's Detail
+                                            Buyer's Detail
                                             </Col>
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                             className={
                                                 (this.state.selected == "moqDetails"
                                                      ? "Allenqlistbtn2"
@@ -931,7 +1183,7 @@ MoqSimpleProductSelected(moqId){
                                             MOQ Detail 
                                             </Col>
 
-                                            <Col sm={2} 
+                                            <Col sm={3} 
                                               className={
                                                 (this.state.selected == "proformaDetails"
                                                      ? "Allenqlistbtn2"
@@ -940,7 +1192,7 @@ MoqSimpleProductSelected(moqId){
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            <Col sm={2} 
+                                            {/* <Col sm={3} 
                                               className={
                                                 (this.state.selected == "changeRequest"
                                                      ? "Allenqlistbtn2"
@@ -957,11 +1209,12 @@ MoqSimpleProductSelected(moqId){
                                                      }
                                             onClick={this.qualityCheckbtn}>
                                            Quality Check 
-                                            </Col>
-                                            <Col sm={1}>
+                                            </Col> */}
+                                            {/* <Col sm={1}>
                                             
-                                            </Col>
+                                            </Col> */}
                                     </Row>
+                                    <br></br>
 
                                                        <Row noGutters={true}>
                                                            <Col sm={1}></Col>
@@ -1139,6 +1392,9 @@ MoqSimpleProductSelected(moqId){
 
                             {this.state.moqDetail? 
                             <>
+                            {this.state.getMoqs.length > 0 ?
+                            <>
+                           
                             {this.state.getEnquiryMoq[0].openEnquiriesResponse.productType=="Custom Product"?
                                 <>
                                   { this.state.getEnquiryMoq[0].openEnquiriesResponse.isMoqSend == null ?
@@ -1245,9 +1501,25 @@ MoqSimpleProductSelected(moqId){
                                         <Row noGutters={true}>
                                         <Col className="col-xs-12 tdclasscss">
                                        
-                                        <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
+                                        <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
+                                        onClick={this.ToggleDelete1}></i>
                                                 </Col>
                                             </Row>
+
+                                            <div id="id02" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span 
+                                onClick={() => this.handleDeleteItem(data.moq.id)}
+                                 className="deleteModalOkayButton">Delete</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+
                                         </td>
                                         }
                                        
@@ -1551,9 +1823,24 @@ MoqSimpleProductSelected(moqId){
                                 <Row noGutters={true}>
                                 <Col className="col-xs-12 tdclasscss">
                             
-                                <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}></i>
-                                        </Col>
-                                    </Row>
+                                <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
+                                        onClick={this.ToggleDelete1}></i>
+                                                </Col>
+                                            </Row>
+
+                                            <div id="id02" class="w3-modal">
+                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                            <div class="w3-container">
+                                <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
+                                <div className="deleteModalButtonOuterDiv">
+                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span 
+                                onClick={() => this.handleDeleteItem(data.moq.id)}
+                                 className="deleteModalOkayButton">Delete</span>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
                                 </td>
                                 }
                             
@@ -1611,6 +1898,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                     <span >
                                                                         <button
+                                                                        disabled={this.state.modalOksend}
                                                                     onClick={() => this.MoqSimpleProductSelected(data.moq.id)}
                                                                     className="buyerMOQAcceptModalOkayButton">Ok</button></span>
                                                                 </div>
@@ -1655,9 +1943,10 @@ MoqSimpleProductSelected(moqId){
                                                                             <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
                                                                             tab to track your enquiry.
                                                                         </div>
-                                                                        <div className="buyerMOQConfirmModalButtonOuter">
-                                                                            <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span>
-                                                                            <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span>
+                                                                        <div className="buyerMOQConfirmModalButtonOuter" style={{textAlign:"center"}}>
+                                                                            {/* <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span> */}
+                                                                            {/* <span className="buyerMOQConfirmModalOkayButton">View Enquiry</span> */}
+                                                                            <span onClick={this.buyerMOQAcceptClose}  className="buyerMOQConfirmModalCancelButton">Close</span>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>
@@ -1808,6 +2097,20 @@ MoqSimpleProductSelected(moqId){
                              
                                 </>
                                     }
+
+
+                            </>
+                            :
+                            <>
+                            <Row>
+                                                        <br></br>
+                                                        <br></br>
+                                                         <br></br>   
+                                                        <Col className="col-xs-12 text-center font14">
+                                                         MOQ Details not Received for this product.
+                                                        </Col>
+                                                         </Row>
+                            </>}
                             </>
                             :
                             <>

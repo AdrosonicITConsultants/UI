@@ -41,7 +41,9 @@ body{
 .App {
   text-align: center;
 }
-
+h3{
+  margin-top:10px!important;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

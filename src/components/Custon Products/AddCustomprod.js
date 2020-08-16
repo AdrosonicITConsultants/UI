@@ -183,11 +183,11 @@ class AddCustomprod extends Component {
                      <Row  >
                             <Col sm={12} className="">
                            <h1 className="addedcustom">{data.productCategory.productDesc}/
-                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.weftYarn? data.weftYarn.yarnDesc:null} 
-                           {data.warpYarn?
+                           <span style={{color:"grey",fontWeight:"400",fontSize:"15px"}}>  {data.warpYarn? data.warpYarn.yarnDesc:null} 
+                           {data.weftYarn?
                            " X":null}  <span></span>
-                           {data.warpYarn?
-                            data.warpYarn.yarnDesc:null}  {data.extraWeftYarn? " X":null} <span></span>
+                           {data.weftYarn?
+                            data.weftYarn.yarnDesc:null}  {data.extraWeftYarn? " X":null} <span></span>
                            {data.extraWeftYarn? data.extraWeftYarn.yarnDesc:null}</span></h1> 
                           
                             </Col>

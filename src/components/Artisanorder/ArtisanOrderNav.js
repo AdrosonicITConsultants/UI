@@ -8,10 +8,10 @@ import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import "../BuyerEnquiries/buyerenquiry.css";
 import Footer from "../footer/footer";
-import BuyerOngoingOrder from './BuyerOngoingOrder';
+import ArtisanOngoingOrder from './ArtisanOngoingOrder';
 
 
-export class BuyerOrderNav extends Component {
+export class ArtisanOrderNav extends Component {
     constructor(props) {
         super(props);
     
@@ -91,7 +91,7 @@ export class BuyerOrderNav extends Component {
                     ?
                     <>
                     {/* <OngoingList></OngoingList> */}
-                    <BuyerOngoingOrder></BuyerOngoingOrder>
+                    <ArtisanOngoingOrder></ArtisanOngoingOrder>
                     </>
                     :
                     <>
@@ -117,5 +117,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerOrderNav);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanOrderNav);
 export default connectedLoginPage;

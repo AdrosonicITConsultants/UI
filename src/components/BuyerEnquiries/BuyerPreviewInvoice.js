@@ -1,3 +1,6 @@
+/* global jsPDF */
+/* global html2canvas */
+/* global $ */
 import React, { Component } from 'react'
 import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
@@ -14,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
+// import jsPDF from 'jsPDF';
 
 const ref = React.createRef();
 const options = {
@@ -151,6 +155,63 @@ export class BuyerPreviewInvoice extends Component {
         browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
 
+    downloadPdfFunction = () => {
+
+      // html2canvas(document.getElementById("contentPDF")).then(function(canvas) {
+      //     var img = canvas.toDataURL("image/png");
+      //     // var img1 = canvas.toDataURL("image/jpg");
+      //     var doc = new jsPDF();
+      //     doc.addImage(img, 'JPEG' , 20,20); 
+      //     // doc.addImage(img1, 'JPEG' , 20,20);
+      //     var specialElementHandlers = { 
+      //       '#editor': function (element, renderer) { 
+      //           return true; 
+      //       } 
+      //     };
+      //     doc.fromHTML(document.getElementById("contentPDF"), 15, 15, { 
+      //       'width': 190, 
+      //       'elementHandlers': specialElementHandlers 
+      //     });
+      //     doc.save("testDoc.pdf");
+      // })
+
+      var doc = new jsPDF('p', 'pt', 'tabloid'); 
+      var source = $('#contentPDF')[0];
+      var specialElementHandlers = { 
+        '#bypassme': function (element, renderer) { 
+            return true; 
+        } 
+      }
+      var margins = {
+        top: 50,
+        left: 40,
+        width: 1220
+      }
+      doc.fromHTML(
+        source 
+        , margins.left
+        , margins.top
+        , {
+          'width': margins.width 
+          , 'elementHandlers': specialElementHandlers
+        },
+        function (dispose) {
+          doc.save('html2pdf.pdf');
+        }); 
+
+        // doc.table(
+        //   source 
+        //   , margins.left
+        //   , margins.top
+        //   , {
+        //     'width': margins.width 
+        //     , 'elementHandlers': specialElementHandlers
+        // },
+        // function (dispose) {
+        //   doc.save('html2pdf.pdf');
+        // });
+    }
+
   //   backPI(){
   //     this.setState({
   //         preview: false,
@@ -169,17 +230,22 @@ export class BuyerPreviewInvoice extends Component {
 
 {this.state.dataload === true && this.state.previewPiOrder.isSend === 1 ?
 <>
-<div  ref={ref}  style={{width: "100%", height: "100%"}} >
+
+{/* <p className=" belowprevtext" style={{float:"right"}} onClick={this.downloadPdfFunction}>
+  <img src={logos.downloadpdficon} className="InvImg" /> 
+  Download this invoice in pdf</p> */}
+
+<div style={{width: "100%", height: "100%"}} id="contentPDF">
    <Row noGutters={true} style={{marginTop:"15px"}}>
        <Col className="col-xs-6">
        <p className="  belowprevtext">  Received at :  {this.state.time} on  { this.state.currentDate }</p>
 </Col>
 <Col className="col-xs-6" >
-<ReactToPdf targetRef={ref} filename="code-example.pdf"  options={options} x={.5} y={.5} scale={0.8}>
+{/* <ReactToPdf targetRef={ref} filename="code-example.pdf"  options={options} x={.5} y={.5} scale={0.8}>
 {({ toPdf }) => 
 <p className=" belowprevtext" style={{float:"right"}} onClick={toPdf}><img src={logos.downloadpdficon} className="InvImg" /> Download this invoice in pdf</p>
 }
-      </ReactToPdf>
+      </ReactToPdf> */}
 </Col>
    </Row>
 <Row className="MainPIRow " >

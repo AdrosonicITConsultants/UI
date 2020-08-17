@@ -8,6 +8,8 @@ import * as Actions from "../../redux/action/action";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
+import CMSApi from '../../services/API/CMSApi';
+
 class AntaranCoDesignCategories extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +18,8 @@ class AntaranCoDesignCategories extends Component {
      
       products : [],
       value : false,
-        visible:6,                                 
-     
+      visible:6,                                 
+      categoryData : [],
     };
     
   
@@ -31,6 +33,16 @@ class AntaranCoDesignCategories extends Component {
     }
 
   componentDidMount(){
+
+    CMSApi.getCategories().then((response)=>{
+      if(response)
+      {
+        console.log(response.data);
+        this.setState({
+          categoryData : response.data
+        })
+      }
+    });
    
      TTCEapi.getAllProducts().then((response)=>{
       this.setState({products : response.data.data},()=>{
@@ -48,15 +60,17 @@ class AntaranCoDesignCategories extends Component {
            <Row noGutters="true">
                 {/* Card1 */}
              
-             {this.state.products ? ( ( this.state.products.slice(0,this.state.visible).map((data) => (
-              <Col xs={12} sm={6} md={4}>
+             {this.state.products ? this.state.products.slice(0,this.state.visible).map((data) => {
+               return this.state.categoryData ? this.state.categoryData.map((categoryData) => {
+                if(data.id === parseInt(categoryData.acf.category_id)) {
+              return <Col xs={12} sm={6} md={4}>
                 <div className="card Cardlayout">
                 <div class="card-block">
                   <p class="card-text"> 
-                  {data.productDesc}
+                  {categoryData.title.rendered}
                  </p>
                 </div>
-                <img className="card-img-top" src={logos.stole}  alt="Card image cap"/>
+                <img className="card-img-top" src={categoryData.acf.image}  alt="Card image cap"/>
                 <div class="effect-text">
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
@@ -65,9 +79,10 @@ class AntaranCoDesignCategories extends Component {
                   </div>
               </div>
               </Col>
-              ) ) 
-            )): null
             }
+          }) : <h2 className="text-center">Loading.....</h2>  
+          }): null
+         }
                 
               </Row>
             

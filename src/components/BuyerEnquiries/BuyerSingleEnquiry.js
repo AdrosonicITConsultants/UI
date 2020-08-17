@@ -17,6 +17,7 @@ import Moment from 'react-moment';
 import Footer from "../footer/footer";
 import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 import "./BuyerSingleEnquiry.css";
+import { BuyerPIPrintTable } from './BuyerPIPrintTable';
 
 
 export class BuyerSingleEnquiry extends Component {
@@ -2123,7 +2124,7 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
-                                                                <BuyerPreviewInvoice 
+                                                                <BuyerPIPrintTable 
                                                                 enquiryCode={this.state.enquiryCode} 
                                                                 enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
                                                             </Col>

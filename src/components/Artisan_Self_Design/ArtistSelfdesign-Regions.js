@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col , Container, Button , Card,CardTitle,CardBody} from 'reactstrap';
-import logos from "../../assets";
 import '../navbar/navbar.css';
 import NavbarComponent from "../navbar/navbar";
 import { connect } from "react-redux";

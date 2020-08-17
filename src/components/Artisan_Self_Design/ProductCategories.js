@@ -34,7 +34,8 @@ class ProductCategories extends Component {
             cluster : "",
             categoryData : [],
             categoryTitle : "",
-            categoryDesc : "",         
+            categoryDesc : "",
+            clusterID : "",         
         };
       
     }
@@ -50,7 +51,7 @@ class ProductCategories extends Component {
           
         });
         
-      }
+    }
     componentWillMount(){
 
     }

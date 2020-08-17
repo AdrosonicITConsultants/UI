@@ -113,7 +113,6 @@ export class BuyerOngoingList extends Component {
             }
         })
         
-        
     }
 
     individualpage(id){

@@ -470,9 +470,19 @@ browserHistory.push("/MyProfile");
                       ></img>
                     </span>
 
-                    <a href="/">My orders</a>
+                    <a href="/buyerOrders">My orders</a>
                   </li>
-                ) : null}
+                ) : 
+                <li className="menu-item">
+                    <span className="col-md-2  col-xs-2  col-sm-2">
+                      <img
+                        style={{ width: "15px" }}
+                        src={logos.receipticonH}
+                      ></img>
+                    </span>
+
+                    <a href="/artisanOrders">My orders</a>
+                  </li>}
                  {userTypeId == 2 ? (
                   <li className="menu-item">
                     <span className="col-md-2  col-xs-2  col-sm-2">

@@ -466,7 +466,7 @@ export class BuyerCompletedList extends Component {
                  }
                  <Row>
                     <Col className="col-xs-12 text-center leEnqshowmore">
-                        <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details</a>
+                        <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
                     </Col>
                 </Row>
 

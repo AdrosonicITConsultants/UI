@@ -696,6 +696,80 @@ class TTCEapi {
       });
   }
 
+  // /transaction/getTransactionStatus
+  static getTransactionStatus() {
+    let url = ApiUrl + "/transaction/getTransactionStatus";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /transaction/getTransactionActions
+  static getTransactionActions() {
+    let url = ApiUrl + "/transaction/getTransactionActions";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /transaction/getOngoingTransaction
+  static getOngoingTransaction() {
+    let url = ApiUrl + "/transaction/getOngoingTransaction";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /transaction/getCompletedTransaction
+  static getCompletedTransaction() {
+    let url = ApiUrl + "/transaction/getCompletedTransaction";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1391&status=2
+
+  static validateAdvancePaymentFromArtisan(enquiryId,status) {
+    let url = ApiUrl + "/enquiry/validateAdvancePaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
+    console.log(url);
+    return axios
+      .put(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
 
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";

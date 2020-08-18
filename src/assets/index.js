@@ -157,7 +157,25 @@ import recent from "./recent.svg"
 import finpay from "./fin pay.svg"
 import redenquiry from "./red enquiry.svg"
 import viewrec from "./view rec.svg"
+import pfi2 from "./pfi 2.svg"
+import pfi1 from "./pfi 1.svg"
+import uploadagain from "./upload again.svg"
+import received from "./received.svg"
+import accept from "./accept.svg"
+import cancel from "./cancel.svg"
+import uploaddelreceipt from "./upload del receipt.svg"
+import notifybuyer from "./notify buyer .svg"
+import viewReceipt from "./view Receipt.svg"
 export default {
+  viewReceipt,
+  notifybuyer,
+  uploaddelreceipt,
+  accept,
+  cancel,
+  received,
+  uploadagain,
+  pfi1,
+  pfi2,
   viewrec,
   redenquiry,
   finpay,

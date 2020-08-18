@@ -694,6 +694,8 @@ generateEnquiry(item){
                 productName={this.state.ifEnquiryExists.productName}
                 productId={this.state.ProductData.id}
                 isCustom={this.state.isCustom}
+                enquiryId={this.state.ifEnquiryExists.enquiryId}
+
                 />
                  :
                         (
@@ -704,6 +706,8 @@ generateEnquiry(item){
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
                  productName={this.state.generateEnquiry.productName}
                  productId={this.state.ProductData.id}
+                 enquiryId={this.state.generateEnquiry.enquiry.id}
+
                  />
                  : null
                          ) } </>

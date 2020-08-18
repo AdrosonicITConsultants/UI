@@ -451,16 +451,29 @@ browserHistory.push("/MyProfile");
                     My Profile
                   </a>
                 </li>
+                {userTypeId == 2 ? (
+                   <li className="menu-item">
+                   <span className="col-md-2  col-xs-2  col-sm-2">
+                     <img
+                       style={{ width: "15px" }}
+                       src={logos.cashregistericon}
+                     ></img>
+                   </span>
+ 
+                   <a href="/buyerTransactionList">Transactions</a>
+                 </li>
+                ) : 
                 <li className="menu-item">
-                  <span className="col-md-2  col-xs-2  col-sm-2">
-                    <img
-                      style={{ width: "15px" }}
-                      src={logos.cashregistericon}
-                    ></img>
-                  </span>
+                <span className="col-md-2  col-xs-2  col-sm-2">
+                  <img
+                    style={{ width: "15px" }}
+                    src={logos.cashregistericon}
+                  ></img>
+                </span>
 
-                  <a href="/buyerTransactionList">Transactions</a>
-                </li>
+                <a href="/TransactionList">Transactions</a>
+              </li>}
+               
                 {userTypeId == 2 ? (
                   <li className="menu-item">
                     <span className="col-md-2  col-xs-2  col-sm-2">

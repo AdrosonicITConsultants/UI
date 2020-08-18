@@ -6,15 +6,12 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 // import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
-import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
 
 
 
-export class BuyerHistoryList extends Component {
+export class ArtisanHistoryList extends Component {
     constructor(props) {
         super(props);
  
@@ -100,20 +97,20 @@ export class BuyerHistoryList extends Component {
     render() {
         return (
             <React.Fragment>
-                    {this.state.dataload ?
-                        this.state.getCompletedTransaction.length==0?
-                        <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center">
-                        No History.
-                    </Col>
-                </Row>
-                :
-                <Container>
-                
-                <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-                {this.state.getCompletedTransaction.map((item)=> 
-                    <>
-                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
+            {this.state.dataload ?
+                this.state.getCompletedTransaction.length==0?
+                <Row noGutters={true}>
+            <Col className="col-xs-12  text-center">
+                No History
+            </Col>
+        </Row>
+        :
+        <Container>
+        
+        <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
+        {this.state.getCompletedTransaction.map((item)=> 
+            <>
+            {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -122,7 +119,7 @@ export class BuyerHistoryList extends Component {
 </Moment>
 <Moment format=" h:mm A">
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
- </Moment>
+</Moment>
 
 {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
 </Col>
@@ -145,87 +142,103 @@ this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
 {/* Advance Payment Receipt uploaded */}
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].artisanText} } />
 
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2">
 50% payment received against Invoice for enquiry Id: <b className="colorinv">
-    {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
+{item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 {/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-    {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
-    <span><img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/> <p style={{marginTop:"5px"}}>View Invoice</p></span>
+{this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
+<span><img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/> <p style={{marginTop:"5px"}}>View Invoice</p></span>
 :
-<span><img src={logos.viewrec} className="receipticon"/> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon"  /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
-<Col className="col-xs-3 uplodagaintext" sm="1">
-
+<Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
+{/* <p>Accept or Reject</p>
+<span><img src={logos.accept} className="acceptrejecticon"/> <img src={logos.cancel}className="acceptrejecticon mlbtn"/></span> */}
 {this.state.getTransactionActions.map((data)=> 
 <>
-
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction)} */}
 {
-    item.transactionOngoing.isActionCompleted == 0 ?
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
-    data.id == 1 || data.id == 2 ?
-    <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
-        <img src={logos.uploadagain} className="uplodagainicon"/>
-     <p style={{marginTop:"5px"}}>upload again</p></span>
-    // <>
-    // <span>
-    //   <input type="file" id="file" accept=".png, .jpg, .jpeg" style={{background:"transparent"}}/>
-    //   <label for="file" className="uplodagainicon" style={{background:"transparent",float:"right",marginTop:"-10px"}}>
-    //   <img src={logos.uploadagain} className="uplodagainicon"/>
-      
-    //   </label>
-    //   <p  style={{textAlign:"justify",marginTop:"30px"}} >upload again</p>
-     
-    //   </span>
-    //   </>
-    :
-    data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
-   
-     : 
-    ""
-    
-     :
-    ""
+item.transactionOngoing.isActionCompleted == 0 ?
+this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
+data.id == 3?
+<>
+<p>Accept or Reject</p>
+<span><img src={logos.accept} className="acceptrejecticon" 
+ disabled={this.state.acceptButtonClick}
+    onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}/> 
+<img src={logos.cancel}className="acceptrejecticon mlbtn"
+  disabled={this.state.rejectButtonClick}
+ onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,2)} /></span>
+
+</>
+:
+data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
+
+<>
+<p>Notify buyer again</p>
+<img src={logos.notifybuyer} className="acceptrejecticon"/> 
+
+</>
+:
+data.id==4 ?
+<>
+<p>upload delivery challan</p>
+<img src={logos.accept} className="acceptrejecticon"/> 
+</>
+:
+data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
+<p style={{marginTop:"5px"}}>Mark Received</p></span>:
+data.id == 1 || data.id == 2? 
+<>     
+<p>upload again</p>
+<img src={logos.uploadagain} className="acceptrejecticon" />
+</>
+:""
+: 
+""
+
+:
+""
 }
 </>
 )}
+
 </Col>
 <Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}>
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col>
 </Row>
-  <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-  </>
-                )}
-              
-            
+<hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
+</>
+        )}
+      
+    
 
-               
-                </Container>
-              :
-              <Container>
-                  <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center">
-                       Loading data ..
-                    </Col>
-                </Row>
-                  </Container>}
-            </React.Fragment>
+       
+        </Container>
+      :
+      <Container>
+          <Row noGutters={true}>
+            <Col className="col-xs-12  text-center">
+               Loading data ..
+            </Col>
+        </Row>
+          </Container>}
+    </React.Fragment>
         )
     }
 }
@@ -236,5 +249,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerHistoryList);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanHistoryList);
 export default connectedLoginPage;

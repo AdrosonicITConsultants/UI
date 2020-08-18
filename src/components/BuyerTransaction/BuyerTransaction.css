@@ -87,21 +87,35 @@
 }
    
 .viewreceipt{
-    font-size: 13px;
-    font-size: 600;
-    font-weight: 600;
+    font-size: 9px;
+    font-weight: 500;
     color: darkgrey;
     text-align: center;
     /* margin-left: 5px; */
     cursor: pointer;
 }
 .receipticon{
-    height: 20px;
+    height: 25px;
     width: auto;
-    max-width: 20px; 
+    max-width: 25px; 
     cursor: pointer; 
+    text-align: center;
+ 
 }
-
+.uplodagainicon{
+    height: 23px;
+    width: auto;
+    max-width: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.uplodagaintext{
+    font-size: 10px;
+    font-weight: 600;
+    color: cornflowerblue;
+    text-align: center;
+  
+}
 @media only screen and ( max-width: 992px ) {
     .navoncontr {
       font-size: 11px;

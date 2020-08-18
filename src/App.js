@@ -63,6 +63,9 @@ import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePaymen
 import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';
 import { BuyerRecentList } from './components/BuyerTransaction/BuyerRecentList';
 import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView"
+import { ArtisanAllTransactionList } from './components/ArtisanTransactions/ArtisanAllTransactionList';
+import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecentList';
+import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
 function App() {
   
   return (
@@ -101,6 +104,12 @@ function App() {
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/buyerEnquiriesList" component={BuyerAllEnquiryList} />
           <PrivateRoute exact path="/buyerTransactionList" component={BuyerAllTransactionList} />
+          <PrivateRoute exact path="/TransactionList" component={ArtisanAllTransactionList} />
+          <PrivateRoute exact path="/RecentList" component={ArtisanRecentList} />
+          <PrivateRoute exact path="/historyList" component={ArtisanHistoryList} />
+
+
+
           <PrivateRoute exact path="/buyerRecentTransactionList" component={BuyerRecentList} />
 
 

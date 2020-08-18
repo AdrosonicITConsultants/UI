@@ -13,24 +13,31 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import ArtistSelfDesignCategories from './Artisanselfdesign-Categories';
 import ArtistSelfDesignBrands from './Artisanselfdesign-artisanbrands';
 import ArtisanselfdesignNavbar from "./Artisanselfdesign-Navbar";
+import CMSApi from '../../services/API/CMSApi';
+
 class ArtistSelfDesign extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
           isSelected : false,
-         
+          artisanSelfDesignBg : "",
         };
       
     }
    
-     
-     
-    // handleSelect(){
-    //     this.setState({
-    //         isSelected:!this.state.isSelected
-    //     })
-    // }
+    componentDidMount () {
+      CMSApi.getPages(132).then((response)=>{
+        if(response)
+        {
+          console.log(response.data.acf);
+          this.setState({
+            artisanSelfDesignBg : response.data.acf.background_image
+          })
+        }
+      })
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -49,8 +56,10 @@ class ArtistSelfDesign extends Component {
             
                   </Col>
                   <Col sm={{size:"6"}} className="headimgposter">
+                  {this.state.artisanSelfDesignBg ?
+                    <img className="Asdbg" src={this.state.artisanSelfDesignBg}  alt="Card image cap"/>
+                  : null }
                     
-                  <img className="Asdbg" src={logos.Ajrakhpur}  alt="Card image cap"/>
                   </Col></Row>
                   <Row noGutters="true">
                         <Col sm={{size:12}} className="ViewColtext">

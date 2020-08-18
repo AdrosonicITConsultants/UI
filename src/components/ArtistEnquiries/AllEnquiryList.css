@@ -47,8 +47,11 @@
 .leEnqid{
     font-size: 22px;
 }
+.lesmallEnqid{
+    font-size: 14px;
+}
 .leEnqspun{
-    font-size: 18px;
+    font-size: 14px;
     color: #8e8e8e;
 
 }
@@ -116,9 +119,12 @@ font-size: 13px;
 
 .leEnqshowmore{
     cursor: pointer;
-    /* color: black!important; */
+    color: black!important;
     margin-bottom: 6px;
     font-size: 15px;
+}
+.showmorearrow{
+    width:13px;
 }
 /* ///////////////////ProgressBAr////////////////////////// */
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {

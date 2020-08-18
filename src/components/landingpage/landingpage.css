@@ -238,12 +238,12 @@ font-size: xx-large;
 }
 
 .artistunHover {
-    background-image: url("../../assets/Artisanself\ combined\ layers.png");  
+    /* background-image: url("../../assets/Artisanself\ combined\ layers.png");   */
     background-size: 100% 100%;
 }
 
 .artistHover {
-    background-image: url("../../assets/Self\ Design\ hovered\ backdrop\ combined.png"); 
+    /* background-image: url("../../assets/Self\ Design\ hovered\ backdrop\ combined.png");  */
     height: 275px;
     width: 103%;
     padding: 15px;
@@ -253,7 +253,7 @@ background-size: 100% 100%;
 }
 
 .coHover {
-    background-image: url("../../assets/Co\ Design\ -\ hovered\ Expansion.png");  
+    /* background-image: url("../../assets/Co\ Design\ -\ hovered\ Expansion.png");   */
     height: 275px;
     width: 103%;
     padding: 15px;
@@ -262,19 +262,19 @@ background-size: 100% 100%;
 }
 
 .counHover {
-    background-image: url("../../assets/co\ design\ combined.png");  
+    /* background-image: url("../../assets/co\ design\ combined.png");   */
     background-position: 4% 3%;
     /* background-size: 100% 100%; */
 }
 
 .carousalbg {
-     background-image: url("../../assets/Brocades\ -\ carousel\ cover\ shadow.png");  
-     width: 45%;
-     float: left;
-     height: 100%;
-     background-size: 170% 100%;
-         background-position: 35% 50%;
-         font-family: var(--LatoFont);
+     /* background-image: url("../../assets/Brocades\ -\ carousel\ cover\ shadow.png");   */
+    width: 45%;
+    float: left;
+    height: 100%;
+    background-size: 170% 100%;
+    background-position: 35% 50%;
+    font-family: var(--LatoFont);
     padding: 10px;
 
 }
@@ -283,12 +283,12 @@ background-size: 100% 100%;
      margin-top: 370px;
  }
 .carousalbg2{
-    background-image: url("../../assets/Coromandel\ art\ set\ -\ middle\ layer.png");  
-     width: 55%;
-     float: right;
-     height: 100%;
-     background-size: 103% 106%;
-         background-position: 35% 50%;
+    /* background-image: url("../../assets/Coromandel\ art\ set\ -\ middle\ layer.png");   */
+    width: 55%;
+    float: right;
+    height: 100%;
+    background-size: 103% 106%;
+    background-position: 35% 50%;
 }
 .carousal{
 /* background-color: white; */
@@ -357,7 +357,7 @@ background-color: black;
 }
 
 .homeDivmain {
-   background-image: url("../../assets/Backround1Home\ .png");  
+   /* background-image: url("../../assets/Backround1Home\ .png");   */
     /* float: left;
     position: absolute; */
     /* left: 10%;
@@ -371,7 +371,7 @@ background-color: black;
 }
 
 .homeDiv2{
-     background-image: url("../../assets/Backround2Home\ .png");  
+     /* background-image: url("../../assets/Backround2Home\ .png");   */
     /* float: left;
     position: absolute; */
     /* left: 10%;

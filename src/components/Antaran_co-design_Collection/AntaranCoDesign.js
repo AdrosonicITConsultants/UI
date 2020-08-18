@@ -11,15 +11,29 @@ import PrivateRoute from "../../services/utils/PrivateRoute";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import AntaranCoDesignCategories from './AntaranCoDesign-Categories';
 import AntaranCoDesignNavbar from "./AntaranCoDesign-Navbar";
+import CMSApi from '../../services/API/CMSApi';
+
 class AntaranCoDesign extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
           isSelected : false,
-         
+          antaranCoDesignBg : "",
         };
       
+    }
+
+    componentDidMount () {
+      CMSApi.getPages(142).then((response)=>{
+        if(response)
+        {
+          console.log(response.data.acf);
+          this.setState({
+            antaranCoDesignBg : response.data.acf.background_image
+          })
+        }
+      })
     }
   
     render() {
@@ -40,8 +54,9 @@ class AntaranCoDesign extends Component {
             
                   </Col>
                   <Col sm={{size:"6"}} className="headimgposter">
-                    
-                  <img className="Asdbg" src={logos.Ajrakhpur1}  alt="Card image cap"/>
+                  {this.state.antaranCoDesignBg ?
+                    <img className="Asdbg" src={this.state.antaranCoDesignBg}  alt="Card image cap"/>
+                  : null }
                   </Col></Row>
                   <Row noGutters="true">
                         <Col sm={{size:12}} className="ViewColtext">

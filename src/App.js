@@ -66,6 +66,8 @@ import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView
 import { ArtisanAllTransactionList } from './components/ArtisanTransactions/ArtisanAllTransactionList';
 import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecentList';
 import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
+import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
+import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
 function App() {
   
   return (
@@ -84,16 +86,11 @@ function App() {
           <Route exact path="/A-detailSuggestions" component={DetailSuggestionsArtist}/>
           <Route exact path="/B-NotificationCount" component={NotificationBuyerConnected}/>
           <Route exact path="/B-Notifications" component={BuyerNotifications}/>
-          {/* <Route exact path="/buyerSuggestions" component={BuyerSuggestions}/> */}
-          {/* <Route exact path="/buyerDetailSuggestions/:suggestion/:type/:total" component={BuyerDetailSuggestions}/> */}
-          {/* <Route exact path="/artistSuggestions" component={ArtistSuggestions}/> */}
-          {/* <Route exact path="/artistDetailSuggestions/:suggestion/:type/:total" component={ArtistDetailSuggestions}/> */}
           <PrivateRoute exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
           <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
           <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
-
           <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
           <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
           <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
@@ -115,8 +112,6 @@ function App() {
 
           <PrivateRoute exact path="/enquiryDetails" component={SingleEnquiry} />
           <PrivateRoute exact path="/closedEnquiryDetails" component={SingleCompletedEnquiry} />
-
-          {/* <PrivateRoute exact path="/buyersenquiryDetails" component={BuyerSingleEnquiry} /> */}
           <PrivateRoute exact path="/buyerEnquiryDetails" component={BuyerSingleEnquiry} />
           <PrivateRoute exact path="/closedBuyerEnquiryDetails" component={ClosedBuyerSingleEnquiry} />
 
@@ -131,8 +126,14 @@ function App() {
           
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
           <PrivateRoute exact path="/showBuyerProduct" component={buyerProductTempelate} />
-          {/* <PrivateRoute exact path="/buyerAdvancePay" component={BuyerAdvancePayment} /> */}
+          {/* ORDER ROUTES */}
+          <PrivateRoute exact path="/buyerOrders" component={BuyerOrderNav} />
+          <PrivateRoute exact path="/artisanOrders" component={ArtisanOrderNav} />
 
+          {/* <PrivateRoute exact path="/buyerOrders" component={buyerProductTempelate} /> */}
+
+
+          {/* /ORDER ROUTES */}
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 

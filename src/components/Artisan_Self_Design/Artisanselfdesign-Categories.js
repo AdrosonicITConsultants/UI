@@ -9,6 +9,8 @@ import * as Actions from "../../redux/action/action";
 import './ArtisanselfDesign.css';
 import Footer from "../footer/footer";
 import { memoryHistory, browserHistory } from "../../helpers/history";
+import CMSApi from '../../services/API/CMSApi';
+
 class ArtistSelfDesignCategories extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,8 @@ class ArtistSelfDesignCategories extends Component {
      
       products : [],
       value : false,
-        visible:6,                                 
+      visible:6,   
+      categoryData : [],                              
      
     };
     
@@ -32,15 +35,25 @@ class ArtistSelfDesignCategories extends Component {
     }
 
   componentDidMount(){
+
+    CMSApi.getCategories().then((response)=>{
+      if(response)
+      {
+        console.log(response.data);
+        this.setState({
+          categoryData : response.data
+        })
+      }
+    });
    
-     TTCEapi.getAllProducts().then((response)=>{
+    TTCEapi.getAllProducts().then((response)=>{
       this.setState({products : response.data.data},()=>{
           console.log(this.state.products);
-     
-          // console.log(this.props.user);
       });
-  });
+    });
+
   }
+
     render() {
         return (
 
@@ -49,25 +62,28 @@ class ArtistSelfDesignCategories extends Component {
            <Row noGutters="true">
                 {/* Card1 */}
              
-             {this.state.products ? ( ( this.state.products.slice(0,this.state.visible).map((data) => (
-              <Col xs={12} sm={6} md={4}>
-                <div className="card Cardlayout">
-                <div class="card-block">
-                  <p class="card-text"> 
-                  {data.productDesc}
-                 </p>
-                </div>
-                <img className="card-img-top" src={logos.saree}  alt="Card image cap"/>
-                <div class="effect-text">
-                    <div class="effect-btn">
-                      <h2>EXPLORE MORE</h2>
-                      <a class="btn" href={"/Artisanself/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
-                    </div>
+             {this.state.products ? this.state.products.slice(0,this.state.visible).map((data) => {
+              return this.state.categoryData ? this.state.categoryData.map((categoryData) => {
+                 if(data.id === parseInt(categoryData.acf.category_id)) {
+              return <Col xs={12} sm={6} md={4}>
+                  <div className="card Cardlayout">
+                  <div class="card-block">
+                    <p class="card-text"> 
+                    {categoryData.title.rendered}
+                   </p>
                   </div>
-              </div>
-              </Col>
-              ) ) 
-            )): null
+                  <img className="card-img-top" src={categoryData.acf.image}  alt="Card image cap"/>
+                  <div class="effect-text">
+                      <div class="effect-btn">
+                        <h2>EXPLORE MORE</h2>
+                        <a class="btn" href={"/Artisanself/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                </div>
+                </Col>
+                 }
+             }) : <h2 className="text-center">Loading.....</h2>  
+             }): null
             }
                 
               </Row>

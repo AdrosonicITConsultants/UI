@@ -241,7 +241,7 @@ generateEnquiry(item){
      {this.state.ProductData.madeWithAnthran==0?
      <Row noGutters="true">
      <Col sm={2}>  <img className="BPDAntaranlogo" src={logos.artisianSelfLogo}  alt="Card image cap"/></Col>
-     <Col sm={10} className="BPDBrandname">Artisian Co-Design Collection</Col>
+     <Col sm={10} className="BPDBrandname">Artisian Self Collection</Col>
      <hr className="hrlineBPD "></hr>
    </Row>
      :

@@ -13,9 +13,12 @@ import { connect } from "react-redux";
 import * as Actions from "../../redux/action/action"
 import {Link} from "react-router-dom"
 import { memoryHistory, browserHistory } from "../../helpers/history";
+import CMSApi from '../../services/API/CMSApi';
 // import Artreg2 from "../register/artist/artreg2";
 // import Buyreg1 from "../register/buyer/buyreg1";
 // import Artistlogin from "../artist/artistlogin"
+
+var homeSectionStyle = {};
 
  class HomePage extends Component {
                  constructor(props) {
@@ -23,7 +26,9 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 
                      this.state = {
                        username : "",
-                       userpage : 0
+                       userpage : 0,
+                       homePageData : "",
+                       showHomeBg : false,
                      };
                    this.handler = this.handler.bind(this);
                    this.checkpasswordBuyer = this.checkpasswordBuyer.bind(this);
@@ -216,11 +221,35 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                    });                    
                  }
 
+                 componentDidMount () {
+                  CMSApi.getPages(20).then((response)=>{
+                    if(response)
+                    {
+                        console.log(response.data.acf);
+                        this.setState({
+                          homePageData : response.data.acf
+                        })
+                        this.setHomeBgImage();
+                    }
+                  })
+                 }
+
+                 setHomeBgImage = () => {
+                  homeSectionStyle = {
+                    backgroundImage: "url(" + this.state.homePageData.background_image + ")"
+                  };
+                  this.setState({
+                    showHomeBg : true
+                  })
+                 }
+
                  render() {
                    
                    return (
+                     
                      <React.Fragment>
-                       <div className="homeimg">
+                       {this.state.showHomeBg ?
+                       <div className="homeimg" style={homeSectionStyle}>
                          <Container>
                            <Row   className="mt-5">
                              <Col
@@ -248,7 +277,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                            </Row>
                            
                          </Container>
-                       </div>
+                       </div> : null }
                      </React.Fragment>
                    );
                  }

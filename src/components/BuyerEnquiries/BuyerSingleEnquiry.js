@@ -17,6 +17,7 @@ import Moment from 'react-moment';
 import Footer from "../footer/footer";
 import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 import "./BuyerSingleEnquiry.css";
+import { BuyerPIPrintTable } from './BuyerPIPrintTable';
 
 
 export class BuyerSingleEnquiry extends Component {
@@ -790,7 +791,7 @@ MoqSimpleProductSelected(moqId){
                                     {
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
                                         <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
@@ -800,7 +801,7 @@ MoqSimpleProductSelected(moqId){
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
+                                    <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
@@ -957,7 +958,7 @@ MoqSimpleProductSelected(moqId){
                                     {
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
-                                        <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                        <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
                                         <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
@@ -967,7 +968,7 @@ MoqSimpleProductSelected(moqId){
 
                                     </div>
                                     
-                                    <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                    <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
                                     {/* <span ></span> */}
                                     
                                 </div>
@@ -2123,7 +2124,7 @@ MoqSimpleProductSelected(moqId){
                                                             <>
                                                             {/* <Col sm={1}></Col> */}
                                                             <Col sm={10}>
-                                                                <BuyerPreviewInvoice 
+                                                                <BuyerPIPrintTable 
                                                                 enquiryCode={this.state.enquiryCode} 
                                                                 enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
                                                             </Col>

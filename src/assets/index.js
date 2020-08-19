@@ -166,7 +166,15 @@ import cancel from "./cancel.svg"
 import uploaddelreceipt from "./upload del receipt.svg"
 import notifybuyer from "./notify buyer .svg"
 import viewReceipt from "./view Receipt.svg"
+import happyunhappy from "./happy unhappy .svg"
+import bellpopup from "./bell popup.svg"
+import Iconfeatherbell from "./Icon feather-bell.svg"
+import filter from "./filter.svg"
 export default {
+  filter,
+  Iconfeatherbell,
+  bellpopup,
+  happyunhappy,
   viewReceipt,
   notifybuyer,
   uploaddelreceipt,

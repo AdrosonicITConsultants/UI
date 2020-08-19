@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
-import { Row, Col , Container, Button} from 'reactstrap';
+import {Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon, Input} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
@@ -11,6 +11,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
+import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
 
 
 
@@ -22,9 +23,9 @@ export class BuyerRecentList extends Component {
             getTransactionStatus:[],
             getTransactionActions:[],
             getOngoingTransaction:[],
+            getAdvancedPaymentReceipt:[],
             dataload : false,
-            images:[logos.pfi2 , logos.finpay ,logos.redenquiry,logos.pfi1]
-           
+            filter: null,
 
         }
         this.gotoEnquiry = this.gotoEnquiry.bind(this);
@@ -34,11 +35,58 @@ export class BuyerRecentList extends Component {
 
        
     }      
-          
+    updateSearch = (inputValue) => {
+        let filter = this.state.filter;
+  
+        this.setState({
+            filter: inputValue
+        });
+      }
+  
+      handleSearchChange = (event) => {
+          this.updateSearch(event.target.value);
+      }
+  
+      filter = (item) => {
+        if (!this.state.filter) {
+          return item;
+        }
+          return item.filter((item) => 
+          (item.orderCode !== "" && item.orderCode !== null && item.orderCode.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0) ||
+          (item.enquiryCode !== "" && item.enquiryCode !== null && item.enquiryCode.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0)                   
+       
+      )
+    
+      }    
     backoperation(){
         browserHistory.push("/home"); 
     }
 
+    openReceipt(enquiryId){
+        console.log("click");
+        setTimeout(function() { //Start the timer
+            this.setState({render: true}) //After 1 second, set render to true
+        }.bind(this), 1000)
+        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+
+            if(response.data.valid)
+        {
+            // this.componentDidMount();
+            this.setState({getAdvancedPaymentReceipt : response.data.data,
+                receiptId:response.data.data.paymentId,
+                receiptlabel:response.data.data.label
+              
+            },()=>{
+                console.log(this.state.getAdvancedPaymentReceipt);
+               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
+               console.log(this.state.getAdvancedPaymentReceipt.label)
+                
+            window.open(TTCEapi.ReceiptUrl +this.state.getAdvancedPaymentReceipt.paymentId+"/"+this.state.getAdvancedPaymentReceipt.label, "_blank")   
+        });
+        }
+        });
+
+    }
     gotoEnquiry(enquiryId){
         browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
     }
@@ -93,17 +141,6 @@ export class BuyerRecentList extends Component {
         }
      });
 
-     
-    //  TTCEapi.getTransactionActions().then((response)=>{
-    //     this.setState({
-           
-    //          getTransactionActions : response.data.data},()=>{
-         
-    //         console.log(this.state.getTransactionActions);
-         
-    //     });
-    // });
-
     
   
      }
@@ -114,16 +151,24 @@ export class BuyerRecentList extends Component {
             <React.Fragment>
                     {this.state.dataload ?
                         this.state.getOngoingTransaction.length==0?
-                        <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center">
-                        No Recent Transactions.
-                    </Col>
-                </Row>
+                        <EmptyBuyerRecentList />
                 :
                 <Container>
-                
+                 <Row className="mt-5">
+                       <Col md="1"></Col>
+                 <Col md="3" >
+                 <InputGroup size="lg"className="searchenq">
+                  {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
+                  {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
+                   type="text" className="searchenq" placeholder="Search your transaction here"
+                   style={{height:"30px"}}/> */}
+                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction here"/>
+
+                </InputGroup>
+                 </Col>
+                 </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-                {this.state.getOngoingTransaction.map((item)=> 
+                {this.filter(this.state.getOngoingTransaction).map((item)=> 
                     <>
                     {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
 
@@ -139,21 +184,8 @@ export class BuyerRecentList extends Component {
 {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
-{/* <img src={logos.finpay} className="iconsize"/> */}
-{this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 1
-?
-<img src={this.state.images[0]}className="imgicon" />
-:
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 13 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 14 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 15 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 18 
+<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
 
-?
-<img src={this.state.images[1]} className="imgicon"/>
-:
-""
-}
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
 {/* Advance Payment Receipt uploaded */}
@@ -162,7 +194,7 @@ this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2">
-50% payment received against Invoice for enquiry Id: <b className="colorinv">
+{item.transactionOngoing.percentage}{item.transactionOngoing.percentage !=null? "%":""}  payment received against Invoice for enquiry Id: <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 {/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
@@ -175,9 +207,15 @@ this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
     {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
-    <span><img src={logos.viewReceipt} className="receipticon"onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/> <p style={{marginTop:"5px"}}>View Invoice</p></span>
+    <span>
+        <img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/>
+         <p style={{marginTop:"5px"}}>View Invoice</p>
+         </span>
 :
-<span><img src={logos.viewrec} className="receipticon"/> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon"
+ onClick={() => this.openReceipt(item.transactionOngoing.enquiryId)}/>
+  <p style={{marginTop:"5px"}} >View Receipt</p></span>
+
 }
 </Col>
 <Col className="col-xs-3 uplodagaintext" sm="1">
@@ -227,7 +265,12 @@ this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id
               
             
 
-               
+              <div>
+              <img
+                className="notifyFooterBanner internaldiv"
+                src={logos.notifyFooterBanner}
+              ></img>
+            </div>
                 </Container>
               :
               <Container>
@@ -236,6 +279,7 @@ this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id
                        Loading data ..
                     </Col>
                 </Row>
+             
                   </Container>}
             </React.Fragment>
         )

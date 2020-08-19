@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
-import { Row, Col , Container, Button} from 'reactstrap';
+import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon, Input} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 // import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
+import queryString from 'query-string';
+import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 
 
 
@@ -19,20 +24,178 @@ export class ArtisanHistoryList extends Component {
             getTransactionStatus:[],
             getTransactionActions:[],
             getCompletedTransaction:[],
+            getAdvancedPaymentReceipt:[],
             dataload : false,
-            images:[logos.pfi2 , logos.finpay ,logos.redenquiry,logos.pfi1]
-           
+            acceptButtonClick:false,
+            rejectButtonClick:false,
+            validateAdvancePaymentFromArtisan:[],
+            filter: null,
 
         }
+     
+    }   
+    updateSearch = (inputValue) => {
+        let filter = this.state.filter;
+  
+        this.setState({
+            filter: inputValue
+        });
+      }
+  
+      handleSearchChange = (event) => {
+          this.updateSearch(event.target.value);
+      }
+  
+      filter = (item) => {
+        if (!this.state.filter) {
+          return item;
+        }
+          return item.filter((item) => 
+          (item.orderCode !== "" && item.orderCode !== null && item.orderCode.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0) ||
+          (item.enquiryCode !== "" && item.enquiryCode !== null && item.enquiryCode.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0)                   
        
-    }      
-          
+      )
+    
+      }
+    
+
+
+     
+
+    notifyModalShow(){
+    
+        document.getElementById('notifyModal').style.display='block';
+        
+    }
+
+    notifyModalclose = () => {
+        document.getElementById('notifyModal').style.display='none';
+        
+    }
+
+    uploddeliveryreceiptModalShow(){
+    
+        document.getElementById('deliveryReceipt').style.display='block';
+        
+    }
+
+    uploddeliveryreceiptModalclose = () => {
+        document.getElementById('deliveryReceipt').style.display='none';
+        
+    }
+
+    acceptMOQModalShow(enquiryId){
+        console.log("abcfdrf");
+        document.getElementById('acceptMOQModal').style.display='block';
+        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response.data.valid)
+        {
+            // this.componentDidMount();
+            this.setState({getAdvancedPaymentReceipt : response.data.data,
+                receiptId:response.data.data.paymentId,
+                receiptlabel:response.data.data.label
+              
+            },()=>{
+                console.log(this.state.getAdvancedPaymentReceipt);
+               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
+               console.log(this.state.getAdvancedPaymentReceipt.label)
+
+            });
+        }
+        });
+    }
+        
+    
+    acceptMOQModalReject (enquiryId){
+        document.getElementById('acceptMOQModal').style.display='block';
+        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response.data.valid)
+        {
+            // this.componentDidMount();
+            this.setState({getAdvancedPaymentReceipt : response.data.data,
+                receiptId:response.data.data.paymentId,
+                receiptlabel:response.data.data.label
+              
+            },()=>{
+                console.log(this.state.getAdvancedPaymentReceipt);
+               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
+               console.log(this.state.getAdvancedPaymentReceipt.label)
+
+            });
+        }
+        });
+    }
+
+    openReceipt(enquiryId){
+        console.log("click");
+        setTimeout(function() { //Start the timer
+            this.setState({render: true}) //After 1 second, set render to true
+        }.bind(this), 1000)
+        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+
+            if(response.data.valid)
+        {
+            // this.componentDidMount();
+            this.setState({getAdvancedPaymentReceipt : response.data.data,
+                receiptId:response.data.data.paymentId,
+                receiptlabel:response.data.data.label
+              
+            },()=>{
+                console.log(this.state.getAdvancedPaymentReceipt);
+               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
+               console.log(this.state.getAdvancedPaymentReceipt.label)
+                
+            window.open(TTCEapi.ReceiptUrl +this.state.getAdvancedPaymentReceipt.paymentId+"/"+this.state.getAdvancedPaymentReceipt.label, "_blank")   
+        });
+        }
+        });
+
+    }
+
+
+    acceptMOQModalClose = () => {
+        document.getElementById('acceptMOQModal').style.display='none';
+        
+    }
+
     backoperation(){
         browserHistory.push("/home"); 
     }
+
+    gotoEnquiry(enquiryId){
+        browserHistory.push("/enquiryDetails?code="+enquiryId)
+    }
+   
+    
+    acceptorReject(enquiryId,status){
+        this.setState({ acceptButtonClick:true,
+            rejectButtonClick:true})
+        TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
+            if(response.data.valid)
+            {
+                this.componentDidMount();
+                document.getElementById('acceptMOQModal').style.display='none';
+
+            this.setState({
+                 dataload : true,
+                 validateAdvancePaymentFromArtisan : response.data.data},()=>{
+                console.log(this.state.validateAdvancePaymentFromArtisan);
+            
+            });
+        }
+        else{
+            this.setState({ acceptButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
     
     componentDidMount(){
-   
+       
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
@@ -65,29 +228,23 @@ export class ArtisanHistoryList extends Component {
                             this.setState({
                                  dataload : true,
                                  getCompletedTransaction : response.data.data},()=>{
+                                // console.log(this.state.getCompletedTransaction);
                                 console.log(this.state.getCompletedTransaction);
-                            
                             });
                         }
                         });
                     });
                 }
                 });
+
+             
           
          });
         }
      });
 
      
-    //  TTCEapi.getTransactionActions().then((response)=>{
-    //     this.setState({
-           
-    //          getTransactionActions : response.data.data},()=>{
-         
-    //         console.log(this.state.getTransactionActions);
-         
-    //     });
-    // });
+
 
     
   
@@ -97,148 +254,306 @@ export class ArtisanHistoryList extends Component {
     render() {
         return (
             <React.Fragment>
-            {this.state.dataload ?
-                this.state.getCompletedTransaction.length==0?
-                <Row noGutters={true}>
-            <Col className="col-xs-12  text-center">
-                No History
-            </Col>
-        </Row>
-        :
-        <Container>
-        
-        <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-        {this.state.getCompletedTransaction.map((item)=> 
-            <>
-            {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
+                    {this.state.dataload ?
+                        this.state.getCompletedTransaction.length==0?
+                        <ArtisianTransactionEmpty />
+                :
+                <Container>
+                   <Row className="mt-5">
+                       <Col md="1"></Col>
+                 <Col md="3" >
+                 <InputGroup size="lg"className="searchenq">
+                  {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
+                  {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
+                   type="text" className="searchenq" placeholder="Search your transaction here"
+                   style={{height:"30px"}}/> */}
+                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction here"/>
+
+                </InputGroup>
+                 </Col>
+                 </Row>
+                <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
+                {this.filter(this.state.getCompletedTransaction).map((item)=> 
+                    <>
+                    {console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
-{item.transactionOngoing.transactionOn}
+{item.transactionCompleted.transactionOn}
 </Moment>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
-</Moment>
+<p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
+ </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
+{console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
-{/* <img src={logos.finpay} className="iconsize"/> */}
-{this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 1
-?
-<img src={this.state.images[0]}className="imgicon" />
-:
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 13 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 14 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 15 ||
-this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id== 18 
+<img 
+src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Artisan/"+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"
 
-?
-<img src={this.state.images[1]} className="imgicon"/>
-:
-""
-}
+
+/>
+
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
-{/* Advance Payment Receipt uploaded */}
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].artisanText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].artisanText} } />
 
 
 </Col>
-<Col className="col-xs-3 proformacol" sm="2">
-50% payment received against Invoice for enquiry Id: <b className="colorinv">
-{item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
+<Col className="col-xs-3 proformacol" sm="2" >
+                {item.transactionCompleted.percentage} {item.transactionCompleted.percentage !=null? "%":""} payment received against Invoice for enquiry Id: <b className="colorinv">
+    {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
-{/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-{this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
-<span><img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/> <p style={{marginTop:"5px"}}>View Invoice</p></span>
+    {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
+    <span><img src={logos.viewReceipt} className="receipticon"
+    onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}/>
+     <p style={{marginTop:"5px"}}>View Invoice</p></span>
 :
-<span><img src={logos.viewrec} className="receipticon"  /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionCompleted.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
 <Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
-{/* <p>Accept or Reject</p>
-<span><img src={logos.accept} className="acceptrejecticon"/> <img src={logos.cancel}className="acceptrejecticon mlbtn"/></span> */}
+
 {this.state.getTransactionActions.map((data)=> 
 <>
 {
-item.transactionOngoing.isActionCompleted == 0 ?
-this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
-data.id == 3?
-<>
-<p>Accept or Reject</p>
+    item.transactionCompleted.isActionCompleted == 0 ?
+    this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanAction == data.id ? 
+    data.id == 3?
+        <>
+    <p>Accept or Reject</p>
 <span><img src={logos.accept} className="acceptrejecticon" 
- disabled={this.state.acceptButtonClick}
-    onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}/> 
-<img src={logos.cancel}className="acceptrejecticon mlbtn"
-  disabled={this.state.rejectButtonClick}
- onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,2)} /></span>
+       
+            onClick={()=> this.acceptMOQModalShow(item.transactionCompleted.enquiryId)}
+            /> 
+        <img src={logos.cancel}className="acceptrejecticon mlbtn"
+         onClick={()=> this.acceptMOQModalReject(item.transactionCompleted.enquiryId)}
+        //   disabled={this.state.rejectButtonClick}
+        //  onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)} 
+         /></span>
 
-</>
-:
-data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
+      </>
+    :
+    data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
 
-<>
-<p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon"/> 
+   <>
+    <p>Notify buyer again</p>
+<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow()}/> 
 
-</>
-:
-data.id==4 ?
-<>
-<p>upload delivery challan</p>
-<img src={logos.accept} className="acceptrejecticon"/> 
-</>
-:
-data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
-<p style={{marginTop:"5px"}}>Mark Received</p></span>:
-data.id == 1 || data.id == 2? 
-<>     
-<p>upload again</p>
+      </>
+      :
+      data.id==4 ?
+      <>
+      <p>upload delivery challan</p>
+<img src={logos.uploaddelreceipt} className="acceptrejecticon" onClick={()=>this.uploddeliveryreceiptModalShow()}/> 
+        </>
+        :
+        data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
+        <p style={{marginTop:"5px"}}>Mark Received</p></span>:
+        data.id == 1 || data.id == 2? 
+       <>     
+     <p>upload again</p>
 <img src={logos.uploadagain} className="acceptrejecticon" />
 </>
-:""
-: 
-""
-
-:
-""
+     :""
+     : 
+    ""
+    
+     :
+    ""
 }
 </>
 )}
 
 </Col>
-<Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}>
+<Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
+ onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}
+// onClick={()=> this.acceptMOQModalShow}
+ >
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col>
 </Row>
-<hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-</>
-        )}
-      
-    
+ {/* _________________________________________Modal accept Reject_________________________________________________ */}
+                                          
+                                                <div id="acceptMOQModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader">Are you sure ?</div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                        <img src={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} style={{marginRight:"11px",height:"30px"}}/>          
+                                                                       
+                                                                       
+                                                                            <span className="seereceipt">See receipt here:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{fontSize:"11px"}}>  
+                                                                            <a href={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} target="_blank">
+                                                                                    {this.state.getAdvancedPaymentReceipt.label}
+                                                                                      
+                                                                                </a></span>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" >
+                                                                            <img src={logos.happyunhappy} className=" happyunhappyimg" />
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv">
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                        </div>
+                                                                        
+                                                                       
+                                                                        <div className="approvenote">
+                                                                            Once you approved it,the
+                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
+                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
+                                                                           the amount.Best practise is to check with your bank,or in <br/>
+                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
+                                                                           
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.acceptButtonClick}
+                                                                        
+                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)}
+                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
 
-       
-        </Container>
-      :
-      <Container>
-          <Row noGutters={true}>
-            <Col className="col-xs-12  text-center">
-               Loading data ..
-            </Col>
-        </Row>
-          </Container>}
-    </React.Fragment>
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                     
+                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button></span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
+{/* _________________________________________Notification_________________________________________________ */}
+                                          
+<div id="notifyModal" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader playfair">Do you want to notify <br/>the buyer again ?</div>
+                                                                      
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" >
+                                                                            <img src={logos.bellpopup} className=" happyunhappyimg" />
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                        </div>
+                                                                        
+                                                                        <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
+
+                                                                        {/* <div className="approvenote">
+                                                                            Once you approved it,the
+                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
+                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
+                                                                           the amount.Best practise is to check with your bank,or in <br/>
+                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
+                                                                           
+                                                                        </div> */}
+                                                                    </Col>
+                                                                </Row>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span onClick={this.notifyModalclose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                 
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                     
+                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
+                                                                    className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
+ {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
+                                          
+<div id="deliveryReceipt" class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>delivery receipt</div>
+                                                                      
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" >
+                                                                            <img src={logos.uploadagain} className=" happyunhappyimg" />
+                                                                            <p className="uploadrec">Upload Receipt</p>
+                                                                        </div>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                        </div>
+                                                                        
+
+                                                                        <div className="approvenote">
+                                                                            Make sure you send the correct enquiry receipt. <br/>
+                                                                          Also make sure the attached document is <b>clear</b> and <b>readable</b>  <br/> 
+                                                                          with the <b>LR</b> number and  <b>amount.</b> 
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span onClick={this.uploddeliveryreceiptModalclose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                 
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                     
+                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
+                                                                    className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
+                                                                   Send</button></span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
+ 
+  <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
+
+ 
+  </>
+                )}
+              
+            
+
+               
+                </Container>
+              :
+              <Container>
+                  <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       Loading data ..
+                    </Col>
+                </Row>
+                  </Container>}
+            </React.Fragment>
         )
     }
 }

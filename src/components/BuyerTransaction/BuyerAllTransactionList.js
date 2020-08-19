@@ -117,12 +117,12 @@ export class BuyerAllTransactionList extends Component {
                    <BuyerHistoryList />
                     </>
                 }
-                <div>
+                {/* <div>
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
               ></img>
-            </div>
+            </div> */}
                 </Container>
                 <Footer></Footer>
             </React.Fragment>

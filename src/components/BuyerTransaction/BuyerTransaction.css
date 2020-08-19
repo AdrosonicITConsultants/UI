@@ -116,6 +116,139 @@
     text-align: center;
   
 }
+.forgottoplaceorder{
+    
+    text-align: center;
+    color: rgb(204, 110, 0);
+    font-size: 31px;
+    padding: 85px;
+
+}
+
+.hrempty{
+    margin-top: 2px;
+    border-top: 1.5px solid darkgray;
+}
+
+.emtytextp{
+    font-size: 12px;
+    color:darkgray
+}
+
+.browseproductbtn{
+    font-size: 10px !important;
+    padding: 7px !important;
+}
+/* red enq */
+.redthreadbg{
+    margin-bottom: 15px;
+    background-image: url("../../assets/red\ enq.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  
+  }
+
+  .artempthreadbg{
+    margin-bottom: -15px;
+    background-image: url("../../assets/bg\ art.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  
+  }
+
+  .seereceipt{
+    font-size: 10px;
+    font-weight: 600;
+    color: black;
+
+  }
+
+  .happyunhappyimg{
+    height: 100px;
+    width: auto;
+    max-width: 230px;
+  }
+
+  .buyerMOQAcceptModalrejectButton {
+    border: 2px solid red;
+    background-color: transparent;
+    color: red;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.buyerMOQAcceptModalrejectButton:disabled{
+    background-color: gray;
+    opacity: 0.5;
+    border: 2px solid grey;
+}
+
+.approvenote{
+    color: #ACACAC;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bellicon{
+    height: 18px;
+    color: white;
+}
+
+.buyerNotifyButton{
+    border: 2px solid rgb(245, 184, 69);
+    background-color: rgb(245, 184, 69);;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.uploadrec{
+    font-size: 10px;
+    margin-top: 10px;
+    color: rgb(153, 117, 253);
+}
+.senddelButton {
+    border: 2px solid cornflowerblue;
+    background-color: cornflowerblue;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+.filtericon{
+    height: 14px;
+    margin-right: 10px;
+}
+.searchenq{
+   
+    font-size: 10px;
+    width: 122%;
+    height: 30px;
+    margin-bottom: 24px;
+    box-shadow: 1px 1px 1px 1px lightgrey;
+    border: 1px solid transparent;
+
+}
+
+input.empty {
+    font-family: FontAwesome;
+    /* font-style: normal;
+    font-weight: normal; */
+    text-decoration: inherit;
+    
+}
+
 @media only screen and ( max-width: 992px ) {
     .navoncontr {
       font-size: 11px;
@@ -161,6 +294,7 @@
     .payack {
         font-size: 7px;
     }
+   
 }
 
 

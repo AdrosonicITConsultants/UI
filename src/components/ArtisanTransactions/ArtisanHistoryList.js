@@ -24,12 +24,15 @@ export class ArtisanHistoryList extends Component {
             getTransactionStatus:[],
             getTransactionActions:[],
             getCompletedTransaction:[],
+            getTransactions:[],
             getAdvancedPaymentReceipt:[],
             dataload : false,
             acceptButtonClick:false,
             rejectButtonClick:false,
             validateAdvancePaymentFromArtisan:[],
             filter: null,
+            TransactionenquiryCode:"",
+            TransactionenquiryId:""
 
         }
      
@@ -62,43 +65,69 @@ export class ArtisanHistoryList extends Component {
 
      
 
-    notifyModalShow(){
+    notifyModalShow(id,enquiryId){
     
-        document.getElementById('notifyModal').style.display='block';
+        document.getElementById('notifyModal'+id).style.display='block';
+        TTCEapi.getTransactions(enquiryId).then((response)=>
+        {
+            if(response.data.valid)
+            {
+                this.setState({getTransactions:response.data.data,
+                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
+             },()=>{
+                 console.log(this.state.TransactionenquiryCode);
+             })
+            }
+        })
         
     }
 
-    notifyModalclose = () => {
-        document.getElementById('notifyModal').style.display='none';
+    notifyModalclose = (id) => {
+        document.getElementById('notifyModal'+id).style.display='none';
         
     }
 
-    uploddeliveryreceiptModalShow(){
+    uploddeliveryreceiptModalShow(id,enquiryId){
     
-        document.getElementById('deliveryReceipt').style.display='block';
+        document.getElementById('deliveryReceipt'+id).style.display='block';
+        TTCEapi.getTransactions(enquiryId).then((response)=>
+        {
+            if(response.data.valid)
+            {
+                this.setState({getTransactions:response.data.data,
+                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
+             },()=>{
+                 console.log(this.state.TransactionenquiryCode);
+             })
+            }
+        })
         
     }
 
-    uploddeliveryreceiptModalclose = () => {
-        document.getElementById('deliveryReceipt').style.display='none';
+    uploddeliveryreceiptModalclose = (id) => {
+        document.getElementById('deliveryReceipt'+id).style.display='none';
         
     }
-
-    acceptMOQModalShow(enquiryId){
+    
+    acceptModalShow(id,enquiryId){
+        
         console.log("abcfdrf");
-        document.getElementById('acceptMOQModal').style.display='block';
+        // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
+
             // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
+             document.getElementById('acceptMOQModal'+ id).style.display='block';
                 console.log(this.state.getAdvancedPaymentReceipt);
                console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
+               console.log(this.state.getAdvancedPaymentReceipt.label);
+     
 
             });
         }
@@ -106,8 +135,8 @@ export class ArtisanHistoryList extends Component {
     }
         
     
-    acceptMOQModalReject (enquiryId){
-        document.getElementById('acceptMOQModal').style.display='block';
+    RejectModalShow (id,enquiryId){
+       
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
@@ -117,10 +146,12 @@ export class ArtisanHistoryList extends Component {
                 receiptlabel:response.data.data.label
               
             },()=>{
+                document.getElementById('acceptMOQModal' + id).style.display='block';
                 console.log(this.state.getAdvancedPaymentReceipt);
                console.log(this.state.getAdvancedPaymentReceipt.paymentId);
                console.log(this.state.getAdvancedPaymentReceipt.label)
-
+          
+          
             });
         }
         });
@@ -153,8 +184,8 @@ export class ArtisanHistoryList extends Component {
     }
 
 
-    acceptMOQModalClose = () => {
-        document.getElementById('acceptMOQModal').style.display='none';
+    acceptMOQModalClose = (enquiryId) => {
+        document.getElementById('acceptMOQModal'+ enquiryId).style.display='none';
         
     }
 
@@ -167,21 +198,27 @@ export class ArtisanHistoryList extends Component {
     }
    
     
-    acceptorReject(enquiryId,status){
+    acceptorReject(id,enquiryId,status){
+        console.log(enquiryId);
+        console.log(status);
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
             if(response.data.valid)
             {
+                customToast.success("Transaction Status Updated!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
                 this.componentDidMount();
-                document.getElementById('acceptMOQModal').style.display='none';
-
+               
             this.setState({
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
                 console.log(this.state.validateAdvancePaymentFromArtisan);
             
             });
+            document.getElementById('acceptMOQModal'+id).style.display='none';
         }
         else{
             this.setState({ acceptButtonClick:false,
@@ -203,7 +240,7 @@ export class ArtisanHistoryList extends Component {
                 getTransactionStatus : response.data.data,
                },()=>{
                 console.log(this.state.getTransactionStatus);
-                TTCEapi.getCompletedTransaction().then((response)=>{
+                TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
@@ -222,7 +259,7 @@ export class ArtisanHistoryList extends Component {
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getCompletedTransaction().then((response)=>{
+                         TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -265,9 +302,9 @@ export class ArtisanHistoryList extends Component {
                  <InputGroup size="lg"className="searchenq">
                   {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
                   {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
-                   type="text" className="searchenq" placeholder="Search your transaction here"
+                   type="text" className="searchenq" placeholder="Search your transaction by enquiry Id"
                    style={{height:"30px"}}/> */}
-                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction here"/>
+                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
 
                 </InputGroup>
                  </Col>
@@ -333,10 +370,10 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
     <p>Accept or Reject</p>
 <span><img src={logos.accept} className="acceptrejecticon" 
        
-            onClick={()=> this.acceptMOQModalShow(item.transactionCompleted.enquiryId)}
+            onClick={()=> this.acceptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
-         onClick={()=> this.acceptMOQModalReject(item.transactionCompleted.enquiryId)}
+         onClick={()=> this.RejectModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
         //   disabled={this.state.rejectButtonClick}
         //  onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)} 
          /></span>
@@ -347,14 +384,15 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
    <>
     <p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow()}/> 
+<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}/> 
 
       </>
       :
       data.id==4 ?
       <>
       <p>upload delivery challan</p>
-<img src={logos.uploaddelreceipt} className="acceptrejecticon" onClick={()=>this.uploddeliveryreceiptModalShow()}/> 
+<img src={logos.uploaddelreceipt} className="acceptrejecticon"
+ onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}/> 
         </>
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
@@ -384,8 +422,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 </Col>
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
-                                          
-                                                <div id="acceptMOQModal" class="w3-modal">
+
+                                                <div id={"acceptMOQModal"+item.transactionCompleted.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -407,13 +445,19 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv">
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
-                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                            
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
+                                                                            {item.enquiryCode}
+                                                                            {}
+                                                                            
+                                                                            </span>
+                                                                          
                                                                         </div>
                                                                         
                                                                        
                                                                         <div className="approvenote">
                                                                             Once you approved it,the
-                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
+                                                                           <span className="buyerMOQAcceptModalDescSpan"> product stage cannot be reverted.</span> 
                                                                            <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
                                                                            the amount.Best practise is to check with your bank,or in <br/>
                                                                            <b>bank statement</b> from the <b>authorised bank sources.</b>
@@ -423,30 +467,36 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={this.acceptMOQModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={()=>this.acceptMOQModalClose(item.transactionCompleted.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
-                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)}
+                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.id,item.transactionCompleted.enquiryId,2)}
                                                                     className="buyerMOQAcceptModalrejectButton">Reject</button></span>
 
+                                                                    
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
-                                                                     
-                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
-                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button></span>
+                                                                       
+                                                                        onClick={() => this.acceptorReject(
+                                                                            item.transactionCompleted.id,
+                                                                            item.transactionCompleted.enquiryId,1)}
+                                                                            
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
+                                                                    </span>
+                                                                 
                                                                 </div>
                                                                 </div>
                                                             </div>
                                                             </div>
-
+                                                          
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
                                           
-<div id="notifyModal" class="w3-modal">
+                                                        <div id={"notifyModal"+item.transactionCompleted.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -458,7 +508,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
-                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
+                                                                            {item.enquiryCode}</span>
                                                                         </div>
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
@@ -475,7 +526,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={this.notifyModalclose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={()=>this.notifyModalclose(item.transactionCompleted.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                  
                                                                     <span >
                                                                         <button
@@ -492,7 +543,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
-<div id="deliveryReceipt" class="w3-modal">
+                                        <div id={"deliveryReceipt"+item.transactionCompleted.id}class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -500,7 +551,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>delivery receipt</div>
                                                                       
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" >
-                                                                            <img src={logos.uploadagain} className=" happyunhappyimg" />
+                                                                            <img src={logos.Iconfeatherupload} className=" happyunhappyimg" />
                                                                             <p className="uploadrec">Upload Receipt</p>
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
@@ -518,7 +569,9 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={this.uploddeliveryreceiptModalclose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span  
+                                                                     onClick={()=>this.uploddeliveryreceiptModalclose(item.transactionCompleted.id)}
+                                                                    className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                  
                                                                     <span >
                                                                         <button

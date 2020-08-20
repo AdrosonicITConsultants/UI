@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
-import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon, Input} from 'reactstrap';
+import {Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon, Input} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
@@ -8,22 +8,23 @@ import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 // import OngoingList from './BuyerOngoingList';
 // import CompletedList from './BuyerCompletedList';
-import "./BuyerTransaction.css";
+// import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
-import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
+// import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
 
 
 
-export class BuyerHistoryList extends Component {
+export class BuyerTransaction extends Component {
     constructor(props) {
         super(props);
  
         this.state = {
             getTransactionStatus:[],
             getTransactionActions:[],
-            getCompletedTransaction:[],
+            getOngoingTransaction:[],
             getAdvancedPaymentReceipt:[],
+            getTransactions:[],
             dataload : false,
             filter: null,
 
@@ -103,14 +104,14 @@ export class BuyerHistoryList extends Component {
                 getTransactionStatus : response.data.data,
                },()=>{
                 console.log(this.state.getTransactionStatus);
-                TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                TTCEapi.getTransactions(1415).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
-                         getCompletedTransaction : response.data.data},()=>{
-                        console.log(this.state.getCompletedTransaction);
-                    
+                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                         console.log(this.state.getTransactions);
+                         
                     });
                 }
                 });
@@ -122,17 +123,29 @@ export class BuyerHistoryList extends Component {
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                         TTCEapi.getTransactions(1415).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
-                                 getCompletedTransaction : response.data.data},()=>{
-                                console.log(this.state.getCompletedTransaction);
-                            
+                                 getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                                 console.log(this.state.getTransactions);
+                                 
                             });
                         }
                         });
+                    });
+                }
+                });
+
+                TTCEapi.getTransactions(1415).then((response)=>{
+                    if(response.data.valid)
+                    {
+                    this.setState({
+                         dataload : true,
+                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                         console.log(this.state.getTransactions);
+                         
                     });
                 }
                 });
@@ -150,70 +163,81 @@ export class BuyerHistoryList extends Component {
         return (
             <React.Fragment>
                     {this.state.dataload ?
-                        this.state.getCompletedTransaction.length==0?
-                        <EmptyBuyerRecentList />
-                :
+                        this.state.getTransactions.length == 0?
+                       
+                        <Row>
+                        <br></br>
+                        <br></br>
+                        <br></br>   
+                        <Col className="col-xs-12 text-center font14">
+                        No Transactions
+                        </Col>
+                    </Row>
+                        :
                 <Container>
-                 <Row className="mt-5">
+                 {/* <Row className="mt-5">
                        <Col md="1"></Col>
                  <Col md="3" >
                  <InputGroup size="lg"className="searchenq">
-                  {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
-                  {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
-                   type="text" className="searchenq" placeholder="Search your transaction by enquiry Id"
-                   style={{height:"30px"}}/> */}
+                 
                     <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
 
                 </InputGroup>
                  </Col>
+                 </Row> */}
+                 <Row noGutters={true}>
+                     <Col md="1"></Col>
+                     <Col md="3">
+<img src={logos.recent} style={{marginRight:"5px" , height:"17px"}}/> Recent Transactions
+                     </Col>
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-                {this.filter(this.state.getCompletedTransaction).map((item)=> 
+                {this.state.getTransactions.map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1])}
+                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
-{item.transactionCompleted.transactionOn}
+{item.transactionOngoing.transactionOn}
 </Moment>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
+<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id)}
+{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
-<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"/>
+<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
 
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
 {/* Advance Payment Receipt uploaded */}
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].buyerText} } />
 
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2">
-{item.transactionCompleted.percentage}{item.transactionCompleted.percentage !=null? "%":""}  payment received against Invoice for enquiry Id: <b className="colorinv">
+{item.transactionOngoing.percentage}{item.transactionOngoing.percentage !=null? "%":""}  payment received against Invoice for enquiry Id: <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 {/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-    {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
+    {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
     <span>
-        <img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}/>
+        <img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/>
          <p style={{marginTop:"5px"}}>View Invoice</p>
          </span>
 :
 <span><img src={logos.viewrec} className="receipticon"
- onClick={() => this.openReceipt(item.transactionCompleted.enquiryId)}/>
+ onClick={() => this.openReceipt(item.transactionOngoing.enquiryId)}/>
   <p style={{marginTop:"5px"}} >View Receipt</p></span>
 
 }
@@ -223,25 +247,15 @@ export class BuyerHistoryList extends Component {
 {this.state.getTransactionActions.map((data)=> 
 <>
 
-{/* {console.log(this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerAction)} */}
+
 {
-    item.transactionCompleted.isActionCompleted == 0 ?
-    this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerAction == data.id ? 
+    item.transactionOngoing.isActionCompleted == 0 ?
+    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
     data.id == 1 || data.id == 2 ?
-    <span onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}>
+    <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
         <img src={logos.uploadagain} className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload again</p></span>
-    // <>
-    // <span>
-    //   <input type="file" id="file" accept=".png, .jpg, .jpeg" style={{background:"transparent"}}/>
-    //   <label for="file" className="uplodagainicon" style={{background:"transparent",float:"right",marginTop:"-10px"}}>
-    //   <img src={logos.uploadagain} className="uplodagainicon"/>
-      
-    //   </label>
-    //   <p  style={{textAlign:"justify",marginTop:"30px"}} >upload again</p>
-     
-    //   </span>
-    //   </>
+ 
     :
     data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
    
@@ -254,7 +268,7 @@ export class BuyerHistoryList extends Component {
 </>
 )}
 </Col>
-<Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}>
+<Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}>
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col>
@@ -292,5 +306,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerHistoryList);
+const connectedLoginPage = connect(mapStateToProps)(BuyerTransaction);
 export default connectedLoginPage;

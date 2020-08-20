@@ -26,6 +26,9 @@ export class BuyerRecentList extends Component {
             getAdvancedPaymentReceipt:[],
             dataload : false,
             filter: null,
+            paymentType:4,
+            searchString:""
+
 
         }
         this.gotoEnquiry = this.gotoEnquiry.bind(this);
@@ -103,7 +106,7 @@ export class BuyerRecentList extends Component {
                 getTransactionStatus : response.data.data,
                },()=>{
                 console.log(this.state.getTransactionStatus);
-                TTCEapi.getOngoingTransaction().then((response)=>{
+                TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
@@ -122,7 +125,7 @@ export class BuyerRecentList extends Component {
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getOngoingTransaction().then((response)=>{
+                         TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -145,7 +148,12 @@ export class BuyerRecentList extends Component {
   
      }
   
-
+     paymentTypeset(){
+        this.setState({
+            paymentType:1
+        })
+    }
+    
     render() {
         return (
             <React.Fragment>
@@ -160,9 +168,9 @@ export class BuyerRecentList extends Component {
                  <InputGroup size="lg"className="searchenq">
                   {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
                   {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
-                   type="text" className="searchenq" placeholder="Search your transaction here"
+                   type="text" className="searchenq" placeholder="Search your transaction by enquiry Id"
                    style={{height:"30px"}}/> */}
-                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction here"/>
+                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
 
                 </InputGroup>
                  </Col>
@@ -223,7 +231,7 @@ export class BuyerRecentList extends Component {
 {this.state.getTransactionActions.map((data)=> 
 <>
 
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction)} */}
+
 {
     item.transactionOngoing.isActionCompleted == 0 ?
     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
@@ -231,17 +239,7 @@ export class BuyerRecentList extends Component {
     <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
         <img src={logos.uploadagain} className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload again</p></span>
-    // <>
-    // <span>
-    //   <input type="file" id="file" accept=".png, .jpg, .jpeg" style={{background:"transparent"}}/>
-    //   <label for="file" className="uplodagainicon" style={{background:"transparent",float:"right",marginTop:"-10px"}}>
-    //   <img src={logos.uploadagain} className="uplodagainicon"/>
-      
-    //   </label>
-    //   <p  style={{textAlign:"justify",marginTop:"30px"}} >upload again</p>
-     
-    //   </span>
-    //   </>
+ 
     :
     data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
    

@@ -727,8 +727,8 @@ class TTCEapi {
   }
 
   // /transaction/getOngoingTransaction
-  static getOngoingTransaction() {
-    let url = ApiUrl + "/transaction/getOngoingTransaction";
+  static getOngoingTransaction(searchString,paymentType) {
+    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+paymentType;
     console.log(url);
     return axios
       .get(url)
@@ -740,9 +740,24 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /transaction/getTransactions/{enquiryId}?enquiryId=1415
+  static getTransactions(enquiryId) {
+    let url = ApiUrl + "/transaction/getTransactions/{enquiryId}?enquiryId="+enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   // /transaction/getCompletedTransaction
-  static getCompletedTransaction() {
-    let url = ApiUrl + "/transaction/getCompletedTransaction";
+  static getCompletedTransaction(searchString,paymentType) {
+    let url = ApiUrl + "/transaction/getCompletedTransaction/{searchString}/{paymentType}?paymentType="+paymentType;
     console.log(url);
     return axios
       .get(url)

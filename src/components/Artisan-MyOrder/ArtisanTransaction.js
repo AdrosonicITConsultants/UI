@@ -12,11 +12,11 @@ import { toast } from "react-toastify";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
-import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
+// import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 
 
 
-export class ArtisanRecentList extends Component {
+export class ArtisanTransaction extends Component {
     constructor(props) {
         super(props);
  
@@ -78,7 +78,7 @@ paymentTypeset(){
         {
             if(response.data.valid)
             {
-                this.setState({getTransactions:response.data.data,
+                this.setState({getTransactions : response.data.data.ongoingTransactionResponses,
                  TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
              },()=>{
                  console.log(this.state.TransactionenquiryCode);
@@ -100,7 +100,7 @@ paymentTypeset(){
         {
             if(response.data.valid)
             {
-                this.setState({getTransactions:response.data.data,
+                this.setState({ getTransactions : response.data.data.ongoingTransactionResponses,
                  TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
              },()=>{
                  console.log(this.state.TransactionenquiryCode);
@@ -250,14 +250,14 @@ paymentTypeset(){
                 getTransactionStatus : response.data.data,
                },()=>{
                 console.log(this.state.getTransactionStatus);
-                TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                TTCEapi.getTransactions(1415).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
-                         getOngoingTransaction : response.data.data},()=>{
-                        console.log(this.state.getOngoingTransaction);
-                    
+                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                         console.log(this.state.getTransactions);
+                         
                     });
                 }
                 });
@@ -269,14 +269,14 @@ paymentTypeset(){
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                         TTCEapi.getTransactions(1415).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
-                                 getOngoingTransaction : response.data.data},()=>{
-                                // console.log(this.state.getOngoingTransaction);
-                                console.log(this.state.getOngoingTransaction);
+                                 getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                                 console.log(this.state.getTransactions);
+                                 
                             });
                         }
                         });
@@ -302,11 +302,19 @@ paymentTypeset(){
         return (
             <React.Fragment>
                     {this.state.dataload ?
-                        this.state.getOngoingTransaction.length==0?
-                        <ArtisianTransactionEmpty />
-                :
+                  this.state.getTransactions.length == 0?
+                       
+                  <Row>
+                  <br></br>
+                  <br></br>
+                  <br></br>   
+                  <Col className="col-xs-12 text-center font14">
+                  No Transactions
+                  </Col>
+              </Row>
+                  :
                 <Container>
-                   <Row className="mt-5">
+                   {/* <Row className="mt-5">
                        <Col md="1"></Col>
                  <Col md="3" >
                      <span>
@@ -317,7 +325,7 @@ paymentTypeset(){
                 </span>
                  </Col>
                  <Col md="1"></Col>
-                 {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
+                
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -327,9 +335,15 @@ paymentTypeset(){
     </div>
   </div></Col>
                 
+                 </Row> */}
+                 <Row noGutters={true}>
+                     <Col md="1"></Col>
+                     <Col md="3">
+<img src={logos.recent} style={{marginRight:"5px" , height:"17px"}}/> Recent Transactions
+                     </Col>
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-                {this.filter(this.state.getOngoingTransaction).map((item)=> 
+                {this.state.getTransactions.map((item)=> 
                     <>
                     {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
 
@@ -636,5 +650,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisanRecentList);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanTransaction);
 export default connectedLoginPage;

@@ -68,6 +68,8 @@ import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecen
 import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
 import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
 import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
+import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
+import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
 function App() {
   
   return (
@@ -104,6 +106,9 @@ function App() {
           <PrivateRoute exact path="/TransactionList" component={ArtisanAllTransactionList} />
           <PrivateRoute exact path="/RecentList" component={ArtisanRecentList} />
           <PrivateRoute exact path="/historyList" component={ArtisanHistoryList} />
+          <PrivateRoute exact path="/buyerorder" component={Buyerorder} />
+          <PrivateRoute exact path="/artisanorder" component={Artisanorder} />
+
 
 
 

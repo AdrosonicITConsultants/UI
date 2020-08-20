@@ -149,7 +149,7 @@ import cancelenq from "./Cancel Enquiry icon - red.svg"
 
 import greentick from "./done-success.svg"
 import backupload from "./back upload.svg"
-import Iconfeatherupload from "./Icon feather-upload.svg"
+
 import whitetransaction from "./white transaction.svg"
 import rotatingshapes from "./rotating shapes.svg"
 
@@ -170,7 +170,9 @@ import happyunhappy from "./happy unhappy .svg"
 import bellpopup from "./bell popup.svg"
 import Iconfeatherbell from "./Icon feather-bell.svg"
 import filter from "./filter.svg"
+import Iconfeatherupload from "./Icon feather-upload.svg"
 export default {
+  Iconfeatherupload,
   filter,
   Iconfeatherbell,
   bellpopup,

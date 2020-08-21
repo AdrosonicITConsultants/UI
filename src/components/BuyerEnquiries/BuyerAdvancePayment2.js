@@ -365,7 +365,10 @@ export default class BuyerAdvancePayment2 extends Component {
         <input type="file" id="file"  accept=".png, .jpg, .jpeg"
        onChange={this.onFileChange}
         />
-        <label for="file" className="uploadtractionbtnfloat" ><img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+        <label for="file" className="uploadtractionbtnfloat" >
+            {/* <img src={logos.uploadagain} style={{marginRight:"5px",height:"10px"}}/>  */}
+            <i class="fa fa-upload" aria-hidden="true"style={{marginRight:"5px",height:"10px"}}></i>
+
              Upload transaction receipt </label>
              </Col>
              <Col className="col-xs-12 aligncenter" sm={3}>
@@ -385,7 +388,9 @@ export default class BuyerAdvancePayment2 extends Component {
                     </button>  */}
                     <input type="file" id="file" accept=".png, .jpg, .jpeg" onChange={this.onFileChange} />
                     <label for="file" className="uploadroundbtn" >
-                    <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/> 
+                    {/* <img src={logos.uploadagain} style={{marginRight:"5px",height:"10px"}}/>  */}
+                    <i class="fa fa-upload" aria-hidden="true"style={{marginRight:"5px",height:"10px"}}></i>
+
                      </label>
                       <b className="uploadreceiptname">{this.state.selectedFileName}</b>
                     <br/>

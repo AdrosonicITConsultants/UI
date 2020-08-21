@@ -33,11 +33,11 @@ export class ArtisanRecentList extends Component {
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-            paymentType:4,
+            paymentType:0,
             searchString:""
 
         }
-     
+        this.paymentTypeset = this.paymentTypeset.bind(this);
     }   
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
@@ -63,11 +63,7 @@ export class ArtisanRecentList extends Component {
     
       }
     
-paymentTypeset(){
-    this.setState({
-        paymentType:1
-    })
-}
+
 
      
 
@@ -219,6 +215,8 @@ paymentTypeset(){
                 this.componentDidMount();
                
             this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
                 console.log(this.state.validateAdvancePaymentFromArtisan);
@@ -242,32 +240,20 @@ paymentTypeset(){
 
 
     componentDidMount(){
-       
+        // this.setState({
+        //     paymentType: this.state.paymentType
+        //   })
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
-                console.log(this.state.getTransactionStatus);
-                TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
-                    if(response.data.valid)
-                    {
-                    this.setState({
-                         dataload : true,
-                         getOngoingTransaction : response.data.data},()=>{
-                        console.log(this.state.getOngoingTransaction);
-                    
-                    });
-                }
-                });
-
                 TTCEapi.getTransactionActions().then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
-                         dataload : true,
-                         getTransactionActions : response.data.data},()=>{
+                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
                          TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
@@ -283,27 +269,71 @@ paymentTypeset(){
                     });
                 }
                 });
-
-             
-          
+    
          });
         }
      });
-
-     
-
-
-    
   
      }
-  
+     paymentTypeset(e){
+        console.log("abc")
+        this.setState({
+            paymentType:e
+          },()=>{
+              this.componentDidMount();
+          }
+        )
+              
+    }
 
     render() {
         return (
             <React.Fragment>
                     {this.state.dataload ?
-                        this.state.getOngoingTransaction.length==0?
+                        this.state.getOngoingTransaction.length==0 ?
+                        this.state.paymentType==0 ?
                         <ArtisianTransactionEmpty />
+                :
+              <>  <Row className="mt-5">
+                <Col md="1"></Col>
+          <Col md="3" >
+              <span>
+          <InputGroup size="lg"className="searchenq">
+           <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
+         </InputGroup>
+         
+         </span>
+          </Col>
+          <Col md="1"></Col>
+          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
+         <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
+<button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+<div class="w3-dropdown-content w3-bar-block w3-border">
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
+</div>
+</div></Col>
+         
+          </Row>
+          <Container>
+          <Row>
+         <br></br>
+         <br></br>
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <Col className="col-xs-12 text-center font14">
+         No Data Found
+         </Col>
+    </Row>
+          </Container>
+          </>
                 :
                 <Container>
                    <Row className="mt-5">
@@ -321,9 +351,12 @@ paymentTypeset(){
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset()}>Link 1</a>
-      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
     </div>
   </div></Col>
                 

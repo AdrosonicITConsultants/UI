@@ -33,8 +33,7 @@ export class ArtisanTransaction extends Component {
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-            paymentType:4,
-            searchString:""
+          
 
         }
      
@@ -204,6 +203,21 @@ paymentTypeset(){
     }
    
     
+
+    acceptMOQModalClose = (enquiryId) => {
+        document.getElementById('acceptMOQModal'+ enquiryId).style.display='none';
+        
+    }
+
+    backoperation(){
+        browserHistory.push("/home"); 
+    }
+
+    gotoEnquiry(enquiryId){
+        browserHistory.push("/enquiryDetails?code="+enquiryId)
+    }
+   
+    
     acceptorReject(id,enquiryId,status){
         console.log(enquiryId);
         console.log(status);
@@ -219,6 +233,8 @@ paymentTypeset(){
                 this.componentDidMount();
                
             this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
                 console.log(this.state.validateAdvancePaymentFromArtisan);

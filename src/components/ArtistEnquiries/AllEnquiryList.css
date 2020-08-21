@@ -60,7 +60,7 @@
 
 }
 .leEnqtype{
-    font-size: 18px;
+    font-size: 14px;
 }
 .leEnqprodcode{
     font-size: 16px;
@@ -479,6 +479,14 @@ color: rgb(133, 196, 36) !important;
 }
 .multi-steps > li.stop {
     color :red!important;
+}
+
+.multi-steps > li.wait:before {
+    background-color: blue;
+    border-color: blue;
+}
+.multi-steps > li.wait {
+    color :blue!important;
 }
 .multi-steps > li.closedenq:before {
     background-color: red!important;

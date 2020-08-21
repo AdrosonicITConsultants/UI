@@ -64,6 +64,8 @@ export class SingleEnquiry extends Component {
             saveButtonClick:true,
             enquiryId: 0,
             piSend:0,
+            innerEnquiryStages:[],
+            enquiryStagesMTO:[],
            
             
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
@@ -80,8 +82,17 @@ export class SingleEnquiry extends Component {
        stateupdate = () => {
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
-
-        TTCEapi.progressUpdate(parseInt(this.state.Progressidnext) , parseInt(params.code)).then((response)=>{
+        var innerID = 0 ;
+        console.log(this.state.Progressidnext);
+        if(this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryStageId == 4)
+        {
+            innerID = 1;
+        }
+        else if(this.state.Progressidnext == 5) {
+            innerID = this.state.getEnquiryMoq[0].openEnquiriesResponse.innerEnquiryStageId + 1;
+        }
+        else innerID = 0;
+        TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
             if(response.data.valid)
             {   customToast.success("Product Status Updated", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -131,7 +142,7 @@ export class SingleEnquiry extends Component {
         });
     }
 
-        proformaDetailsbtn(){
+    proformaDetailsbtn(){
         this.setState((prevState) => {
             this.componentDidMount()
             return{
@@ -199,24 +210,24 @@ export class SingleEnquiry extends Component {
         // });
       }
 
-      handleMoqEdit(){
-        
-            this.setState({
-                saveButtonClick: !this.state.saveButtonClick,
-                isMoqdetail:!this.state.isMoqdetail,
-               
-                   
-                      
-                
-                
-            },()=>{
-                // this.checkSave();
-            });
+    handleMoqEdit(){
+    
+        this.setState({
+            saveButtonClick: !this.state.saveButtonClick,
+            isMoqdetail:!this.state.isMoqdetail,
             
+                
+                    
+            
+            
+        },()=>{
+            // this.checkSave();
+        });
         
-      }
+    
+    }
 
-      handlePiEdit(){
+    handlePiEdit(){
         
         this.setState({
             isPidetail:!this.state.isPidetail
@@ -226,9 +237,9 @@ export class SingleEnquiry extends Component {
         });
         
     
-  }
+    }
 
-      handleChange(e) {
+    handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
         this.setState({ [name]: value,showValidationMoq: false }, () => {
@@ -277,7 +288,16 @@ export class SingleEnquiry extends Component {
       });
       
       }
+    }
+    
+    ToggleDelete22 = (id) => {
+        document.getElementById('id09'+ id).style.display='block';
+    }
+
+    ToggleDeleteClose22 = (id) => {
+    document.getElementById('id09'+ id).style.display='none';
     } 
+
     savePIDetails(){
         var regex = /[1-9]|\./
         if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
@@ -469,27 +489,60 @@ export class SingleEnquiry extends Component {
     });
        TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
-            {
+            {    TTCEapi.getEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({enquiryStagesMTO:response.data.data})
+                }
+            })
+            TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({enquiryStagesAvailable:response.data.data})
+                }
+            })
+            TTCEapi.getInnerEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({innerEnquiryStages:response.data.data})
+                }
+            })
                 console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
                         TTCEapi.getEnquiryMoq(params.code).then((response)=>{
                             var nextProgressid = 0;
+                            var progressid = 0;
+                            
                             if(response.data.data[0].openEnquiriesResponse.historyProductId == null )
                             {
                                 if(response.data.data[0].openEnquiriesResponse.productStatusId == 2)
                                 {
                                         if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
                                         {
-                                            nextProgressid = 11;
+                                            nextProgressid = 7;
                                         }
                                         else{
                                             nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
                                         }
+                                        progressid=response.data.data[0].openEnquiriesResponse.enquiryStageId
                                 }
                                 else{
-                                    nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                    if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 5 && response.data.data[0].openEnquiriesResponse.innerEnquiryStageId < 5)
+                                    {
+                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId;
+                                        // nextinnerid =  response.data.data[0].openEnquiriesResponse.innerEnquiryStageId + 1
+                                        progressid= 4
+
+                                    }
+                                    else{
+                                        nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                        progressid= response.data.data[0].openEnquiriesResponse.enquiryStageId
+                                    }
                                 }
                             }
                             else{
@@ -506,10 +559,11 @@ export class SingleEnquiry extends Component {
                                 else{
                                     nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
                                 }
+                                progressid= response.data.data[0].openEnquiriesResponse.enquiryStageId
                             }
                             
                             this.setState({getEnquiryMoq : response.data.data,
-                                progressid: response.data.data[0].openEnquiriesResponse.enquiryStageId,
+                                progressid: progressid,
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
@@ -520,20 +574,7 @@ export class SingleEnquiry extends Component {
                     });
             }
         })
-        TTCEapi.getEnquirStages().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesMTO:response.data.data})
-            }
-        })
-        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesAvailable:response.data.data})
-            }
-        })
+       
      }
 
      
@@ -661,7 +702,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -669,7 +710,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -680,7 +721,7 @@ export class SingleEnquiry extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -717,22 +758,99 @@ export class SingleEnquiry extends Component {
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.orderStages.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                    
                             </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
                             </div>
+                                                                                
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {console.log(item.openEnquiriesResponse.productStatusId)    }
+                                {item.openEnquiriesResponse.productStatusId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
                            
                            </Col>
                        </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 14? 
+                    {this.state.progressid < 3 || this.state.progressid == 14 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                    ? 
                      <></>
                    :
                    <button
@@ -762,14 +880,13 @@ export class SingleEnquiry extends Component {
                                 ?
                                 <>
                                  {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.id > 3 
+                                    item1.orderStages.id > 3 
                                     ?
                                     <Col className="col-xs-12 mb7">
-                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {item1.desc}
+                                        {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item1.orderStages.desc}
                                     </Col>
                                     :
                                     <>
@@ -781,15 +898,55 @@ export class SingleEnquiry extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                                     item1.id > 3
                                     ?
-                                    <Col className="col-xs-12 mb7">
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                              <>
+                                        {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
+                                        ?
+                                        <>
+                                        {this.state.innerEnquiryStages.map((item2) => 
+                                         <Col className="col-xs-12 mb7">
+                                        {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item2.stage}
+                                        </Col>
+                                        )}
+                                        </>
+                                    :
+                                    <>
+                                    {item1.id == 5
+                                    ?
+                                    <>
+                                    {
+                                    this.state.innerEnquiryStages.map((item2) => 
+                                        <Col className="col-xs-12 mb7">
+                                       {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
+                                       {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
+                                       {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
+                                       {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
+                                       {item2.stage}
+                                       </Col>
+                                       )
+                                    }
+                                    </>
+                                        :
+                                        <Col className="col-xs-12 mb7">
 
-                                    {/* <div className="greenButtonstatus">
-                                    </div> */}
-                                    {item1.desc}
-                                    </Col>
+                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                            {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                            {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {/* <div className="greenButtonstatus">
+                                        </div> */}
+                                        {item1.desc}
+                                        </Col>
+
+
+                                    }
+                                   
+                                    </>
+                                    }
+                                    </>
+                                
+                                         
                                     :
                                     <>
                                     </>
@@ -910,7 +1067,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -918,7 +1075,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -929,7 +1086,7 @@ export class SingleEnquiry extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -966,22 +1123,99 @@ export class SingleEnquiry extends Component {
                             {item.openEnquiriesResponse.productStatusHistoryId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.orderStages.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                    
                             </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
                             </div>
+                                                                                
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
                            
                            </Col>
                        </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 14? 
+                {this.state.progressid < 3 || this.state.progressid == 14 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                    ? 
                      <></>
                    :
                    <button
@@ -1014,11 +1248,10 @@ export class SingleEnquiry extends Component {
                                     item1.id > 3 
                                     ?
                                     <Col className="col-xs-12 mb7">
-                                         {item1.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {item1.desc}
+                                        {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item1.orderStages.desc}
                                     </Col>
                                     :
                                     <>
@@ -1030,16 +1263,54 @@ export class SingleEnquiry extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                                     item1.id > 3
                                     ?
-                                    <Col className="col-xs-12 mb7">
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-
-                                    {/* <div className="greenButtonstatus">
-                                    </div> */}
-                                    {item1.desc}
-                                    </Col>
-                                    :
+                                    <>
+                                              {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
+                                              ?
+                                              <>
+                                              {this.state.innerEnquiryStages.map((item2) => 
+                                               <Col className="col-xs-12 mb7">
+                                              {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
+                                              {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                              {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                              {item2.stage}
+                                              </Col>
+                                              )}
+                                              </>
+                                          :
+                                          <>
+                                          {item1.id == 5
+                                          ?
+                                          <>
+                                          {
+                                          this.state.innerEnquiryStages.map((item2) => 
+                                              <Col className="col-xs-12 mb7">
+                                             {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
+                                             {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
+                                             {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
+                                             {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
+                                             {item2.stage}
+                                             </Col>
+                                             )
+                                          }
+                                          </>
+                                              :
+                                              <Col className="col-xs-12 mb7">
+      
+                                              {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                                  {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                  {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                              {/* <div className="greenButtonstatus">
+                                              </div> */}
+                                              {item1.desc}
+                                              </Col>
+      
+      
+                                          }
+                                         
+                                          </>
+                                          }
+                                          </>
+                                       :
                                     <>
                                     </>
                                  )} 
@@ -1061,6 +1332,7 @@ export class SingleEnquiry extends Component {
                         </div>
                         </div>
                     </div>
+
 
                 </Row>
                

@@ -1753,6 +1753,21 @@ static sendPI(
       });
   }
 
+  static getInnerEnquirStages() {
+    let url = ApiUrl + "/enquiry/getAllInnerEnquiryStages";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getAllNotifications() {
     let url = ApiUrl + "/notification/getAllNotifications";
     return axios
@@ -1779,6 +1794,21 @@ static sendPI(
 
   static getOpenEnquiries() {
     let url = ApiUrl + "/enquiry/getOpenEnquiries";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getOpenOrders() {
+    let url = ApiUrl + "/order/getOpenOrders";
 
     return axios
       .get(url)
@@ -1840,8 +1870,15 @@ static sendPI(
       });
   }
 
-  static progressUpdate(stageid, id) {
-    let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;
+  static progressUpdate(stageid, id,innerid) {
+    let url = "";
+    if(innerid == 0){
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id  ;
+
+    }else{
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id +  "&innerStageId=" + innerid  ;
+
+    }
     var data = {
       
     };

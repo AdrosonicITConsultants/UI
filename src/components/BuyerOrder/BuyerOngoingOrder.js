@@ -31,7 +31,7 @@ export class BuyerOngoingOrder extends Component {
                 console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getOpenEnquiries().then((response1)=>{
+                        TTCEapi.getOpenOrders().then((response1)=>{
                             console.log("")
                             if(response1.data.valid)
                             {   console.log("heree");
@@ -39,8 +39,21 @@ export class BuyerOngoingOrder extends Component {
                                 this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
                                     console.log(this.state);
                                 });
+                                var someDate = new Date(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn);
+                                console.log(someDate);
+                                var numberOfDaysToAdd = 10;
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime = Math.abs(todayDate - someDate);
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                this.setState({daysleft:diffDays}) 
+    
 
                             }
+                        },()=>{
+                           
                         })
                     });
             }
@@ -91,14 +104,17 @@ export class BuyerOngoingOrder extends Component {
                     ?
                     <>
                         {/* for no change in product data */}
-                        <hr></hr>
+                        
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
                         {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
-                                Converted to order on : 12-07-2019
+                                Converted to order on :
+                                <Moment format="DD-MM-YYYY">
+                                {item.openEnquiriesResponse.orderCreatedOn}
+                                </Moment>
                                 
                             </Col>
                         </Row>
@@ -122,22 +138,22 @@ export class BuyerOngoingOrder extends Component {
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                             {/* <span ></span> */}
 
-                                    </div>
-                                    <div>
-                                    <div noGutters={true} >
-                                        <Col className="leEnqid bold">
-                                        Order Id : {item.openEnquiriesResponse.enquiryCode}
-                                        </Col>
-                                    </div>
-                                    <div noGutters={true} >
-                                        <Col className="lesmallEnqid bold">
-                                        Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                        </Col>
-                                    </div>
-                                    {/* <div noGutters={true} >
-                                        <Col >
-                                        <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                        <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                        </div>
+                                        <div>
+                                        <div noGutters={true} >
+                                            <Col className="leEnqid bold">
+                                            Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                            </Col>
+                                        </div>
+                                        <div noGutters={true} >
+                                            <Col className="lesmallEnqid bold">
+                                            Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
+                                            </Col>
+                                        </div>
+                                        <div noGutters={true} >
+                                            <Col >
+                                            <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                            <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
                                             {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                             ?
                                             <>
@@ -147,7 +163,7 @@ export class BuyerOngoingOrder extends Component {
                                                 <></>
                                             }</span> 
                                         </Col>
-                                    </div> */}
+                                    </div>
                                     {/* <div noGutters={true} className="" >
                                         <Col className="leEnqprodcode ">
                                             {item.openEnquiriesResponse.productType === "Product"
@@ -166,7 +182,7 @@ export class BuyerOngoingOrder extends Component {
                                         <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
@@ -204,7 +220,7 @@ export class BuyerOngoingOrder extends Component {
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
                                             
@@ -215,7 +231,7 @@ export class BuyerOngoingOrder extends Component {
                                         Est. Date of delivery : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.excpectedDate}
                                             </Moment>
                                         :
@@ -228,10 +244,33 @@ export class BuyerOngoingOrder extends Component {
                                     
                                 </Col>
                             </Row>
+                        </Col>                        
+                    </Row>
+
+                    <Row noGutters={true}>
+                    <hr></hr>
+                        <Col className="col-xs-1"></Col>
+                        <Col className="col-xs-8 ">
+                           <span className="">change request:</span> 
+                           <span>Accepted</span> 
+                           <span>you have days to send cr</span>
+                        </Col>
+                        
+                        <Col className="col-xs-2">
+                            <input type="button"  value ="change request"></input>
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    <hr></hr>
+                    </Row>
+                    <Row noGutters={true}>
+                        <Col className="col-xs-8"></Col>
+                        <Col className="col-xs-4">
+                        <div className="buyerMOQConfirmModalEnquiryChatButton">Go to this enquiry chat</div>
+
                         </Col>
 
-                        
-                    </Row>
+                        </Row>
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -241,10 +280,9 @@ export class BuyerOngoingOrder extends Component {
                             </Col>
                         </Row>
                         </Col>
-                    </Row>
-                    <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    </Row>    <Row noGutters={true} className="mt7">
+                    {/* <Col className="col-xs-1"></Col> */}
+                        <Col className="col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 ">
                             <div className="progressbarfont">
@@ -252,22 +290,77 @@ export class BuyerOngoingOrder extends Component {
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                    {console.log(item.openEnquiriesResponse.enquiryStageId , )}
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.orderStages.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}{console.log(item1.orderStages.id)}</li> )     }
                                 <li >Completed</li>
                                 </ul>
                                 :
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
                                 <li >Completed</li>
                                 </ul>
                                     }
 
-                                </div>
+                            </div>
+                                              
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {item.openEnquiriesResponse.productStatusId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
+
                             </Col>
                         </Row>
                         </Col>
                     </Row>
-                  
+                
                     </>
                     :
                     <>
@@ -308,20 +401,20 @@ export class BuyerOngoingOrder extends Component {
                                         Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
-                                    {/* <div noGutters={true} >
-                                        <Col >
-                                        <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                        <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
-                                            {item.openEnquiriesResponse.extraWeftYarnId > 0 
-                                            ?
-                                            <>
-                                            X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
-                                            </>
-                                            :
-                                                <></>
-                                            }</span> 
-                                        </Col>
-                                    </div> */}
+                                    <div noGutters={true} >
+                                      <Col >
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
+                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                        {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                        ?
+                                        <>
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnHistoryId - 1 ].yarnDesc}
+                                        </>
+                                        :
+                                            <></>
+                                        }</span> 
+                                      </Col>
+                                  </div>
                                     {/* <div noGutters={true} className="" >
                                         <Col className="leEnqprodcode ">
                                             {item.openEnquiriesResponse.productType === "Product"
@@ -340,18 +433,17 @@ export class BuyerOngoingOrder extends Component {
                                         <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
                                     </div>
                                     <div noGutters={true} className="" >
                                         <Col className="leEnqprodtype ">
-                                            {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
-                                            {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
-                                            {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
-
-                                                                    
+                                        {item.openEnquiriesResponse.productStatusHistoryId==2? "Available in stock"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==1? "Made to order"   : ""   }
+                                          {item.openEnquiriesResponse.productStatusHistoryId==null? "Requested Custom Design"   : ""   }
+                                                                                                                   
                                         </Col>
 
                                     </div>
@@ -377,7 +469,7 @@ export class BuyerOngoingOrder extends Component {
                                     <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
@@ -385,7 +477,7 @@ export class BuyerOngoingOrder extends Component {
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
                                             
@@ -396,7 +488,7 @@ export class BuyerOngoingOrder extends Component {
                                         Est. Date of delivery : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
-                                        <Moment format="YYYY-MM-DD">
+                                        <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.excpectedDate}
                                             </Moment>
                                         :
@@ -433,17 +525,71 @@ export class BuyerOngoingOrder extends Component {
                                 {item.openEnquiriesResponse.productStatusHistoryId === 2
                                 ?
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                                 <li >Completed</li>
                                 </ul>
                                 :
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
                                 <li >Completed</li>
                                 </ul>
                                     }
 
                                 </div>
+                                                            
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
+
+
                             </Col>
                         </Row>
                         </Col>

@@ -8,13 +8,14 @@ import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 // import OngoingList from './BuyerOngoingList';
 // import CompletedList from './BuyerCompletedList';
-import "./BuyerTransaction.css";
+// import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
-import { BuyerRecentList } from './BuyerRecentList';
-import { BuyerHistoryList } from './BuyerHistoryList';
+import { ArtisanRecentList } from './ArtisanRecentList';
+import { ArtisanHistoryList } from './ArtisanHistoryList';
 
 
-export class BuyerAllTransactionList extends Component {
+
+export class ArtisanAllTransactionList extends Component {
     constructor(props) {
         super(props);
     
@@ -110,19 +111,19 @@ export class BuyerAllTransactionList extends Component {
                     this.state.Recent
                     ?
                     <>
-                   <BuyerRecentList/>
+                   <ArtisanRecentList/>
                     </>
                     :
                     <>
-                   <BuyerHistoryList />
+                   <ArtisanHistoryList />
                     </>
                 }
-                {/* <div>
+                <div>
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
               ></img>
-            </div> */}
+            </div>
                 </Container>
                 <Footer></Footer>
             </React.Fragment>
@@ -136,5 +137,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerAllTransactionList);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanAllTransactionList);
 export default connectedLoginPage;

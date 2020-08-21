@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="48.409" viewBox="0 0 30 48.409">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6fe0a7"/>
+      <stop offset="1" stop-color="#afa"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_1790" data-name="Group 1790" transform="translate(-216 -1091.091)">
+    <g id="Group_1712" data-name="Group 1712" transform="translate(443.699 1587) rotate(180)">
+      <line id="Line_1748" data-name="Line 1748" x1="26.699" transform="translate(200.5 453.5)" fill="none" stroke="#32a069" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2104" data-name="Path 2104" d="M-22333.5-13252.5l6.219-4.277" transform="translate(22534 13706)" fill="none" stroke="#32a069" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2105" data-name="Path 2105" d="M-22333.5-13256.777l6.219,4.277" transform="translate(22534 13710.277)" fill="none" stroke="#32a069" stroke-linecap="round" stroke-width="1"/>
+    </g>
+    <path id="Icon_awesome-file-invoice" data-name="Icon awesome-file-invoice" d="M20.25,18H6.75v4.5h13.5ZM26.508,7.383,19.624.492A1.686,1.686,0,0,0,18.429,0H18V9h9V8.571A1.682,1.682,0,0,0,26.508,7.383ZM15.75,9.563V0H1.688A1.683,1.683,0,0,0,0,1.688V34.313A1.683,1.683,0,0,0,1.688,36H25.313A1.683,1.683,0,0,0,27,34.313V11.25H17.438A1.692,1.692,0,0,1,15.75,9.563ZM4.5,5.063A.562.562,0,0,1,5.063,4.5h5.625a.562.562,0,0,1,.563.563V6.188a.562.562,0,0,1-.562.563H5.063A.562.562,0,0,1,4.5,6.188Zm0,4.5A.562.562,0,0,1,5.063,9h5.625a.562.562,0,0,1,.563.563v1.125a.562.562,0,0,1-.562.563H5.063a.562.562,0,0,1-.562-.562Zm18,21.375a.562.562,0,0,1-.562.563H16.313a.562.562,0,0,1-.562-.562V29.813a.562.562,0,0,1,.563-.562h5.625a.562.562,0,0,1,.563.563Zm0-14.062v6.75a1.125,1.125,0,0,1-1.125,1.125H5.625A1.125,1.125,0,0,1,4.5,23.625v-6.75A1.125,1.125,0,0,1,5.625,15.75h15.75A1.125,1.125,0,0,1,22.5,16.875Z" transform="translate(216.199 1091.091)" fill="url(#linear-gradient)"/>
+    <line id="Line_1752" data-name="Line 1752" y2="48" transform="translate(245.5 1091.5)" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="2"/>
+  </g>
+</svg>

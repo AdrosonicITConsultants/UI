@@ -211,7 +211,7 @@ export class ArtisanHistoryList extends Component {
     }
 
     gotoEnquiry(enquiryId){
-        browserHistory.push("/enquiryDetails?code="+enquiryId)
+        browserHistory.push("/closedEnquiryDetails?code="+enquiryId)
     }
    
     

@@ -123,7 +123,7 @@ export class BuyerTransaction extends Component {
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getTransactions(1415).then((response)=>{
+                         TTCEapi.getTransactions(1416).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -138,7 +138,7 @@ export class BuyerTransaction extends Component {
                 }
                 });
 
-                TTCEapi.getTransactions(1415).then((response)=>{
+                TTCEapi.getTransactions(1416).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({

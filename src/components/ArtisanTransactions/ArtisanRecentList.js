@@ -29,6 +29,7 @@ export class ArtisanRecentList extends Component {
             getAdvancedPaymentReceipt:[],
             dataload : false,
             acceptButtonClick:false,
+            notifyButtonClick:false,
             rejectButtonClick:false,
             validateAdvancePaymentFromArtisan:[],
             filter: null,
@@ -69,21 +70,17 @@ export class ArtisanRecentList extends Component {
 
      
 
-    notifyModalShow(id,enquiryId,notifyId){
+    notifyModalShow(id,notifyId){
     
         document.getElementById('notifyModal'+id).style.display='block';
-        TTCEapi.getTransactions(enquiryId).then((response)=>
-        {
-            if(response.data.valid)
-            {
-                this.setState({getTransactions:response.data.data,
-                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode,
+      
+                this.setState({
                  notifyId:notifyId
              },()=>{
                  console.log(this.state.notifyId);
              })
-            }
-        })
+            
+     
         
     }
 
@@ -203,6 +200,8 @@ export class ArtisanRecentList extends Component {
     }
    
     NotifyAgain(actionId,respectiveActionId,id){
+        this.setState({ notifyButtonClick:true,
+            rejectButtonClick:true})
         console.log(actionId);
         console.log(respectiveActionId);
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
@@ -217,14 +216,15 @@ export class ArtisanRecentList extends Component {
             this.setState({
              
                  dataload : true,
-                 notifyAgain : response.data.data},()=>{
+                 notifyAgain : response.data.data,
+                 notifyButtonClick:false,},()=>{
                 console.log(this.state.notifyAgain);
             
             });
             document.getElementById('notifyModal'+id).style.display='none';
         }
         else{
-            this.setState({ acceptButtonClick:false,
+            this.setState({ notifyButtonClick:false,
                 rejectButtonClick:false})
             customToast.error(response.data.errorMessage, {
                 position: toast.POSITION.TOP_RIGHT,
@@ -475,7 +475,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
    <>
   
     <p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
+<img src={logos.notifybuyer} className="acceptrejecticon" 
+onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
       </>
       :
       data.id==4 ?
@@ -585,7 +586,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{this.state.getTransactionActions.map((data)=> 
+{/* {this.state.getTransactionActions.map((data)=> 
 <>
 {
     item.transactionOngoing.isActionCompleted == 0 ?
@@ -598,7 +599,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
    
 }
     </>
-)}
+)} */}
 
                                           
                                                         <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
@@ -635,7 +636,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                  
                                                                     <span >
                                                                         <button
-                                                                        disabled={this.state.rejectButtonClick}
+                                                                       disabled={this.state.notifyButtonClick}
                                                                      
                                                                         onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
                                                                             item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:

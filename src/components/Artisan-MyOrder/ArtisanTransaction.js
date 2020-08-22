@@ -33,7 +33,7 @@ export class ArtisanTransaction extends Component {
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-          
+            notifyId:""
 
         }
      
@@ -68,24 +68,55 @@ paymentTypeset(){
     })
 }
 
-     
-
-    notifyModalShow(id,enquiryId){
-    
-        document.getElementById('notifyModal'+id).style.display='block';
-        TTCEapi.getTransactions(enquiryId).then((response)=>
+NotifyAgain(actionId,respectiveActionId,id){
+    this.setState({ notifyButtonClick:true,
+        rejectButtonClick:true})
+    console.log(actionId);
+    console.log(respectiveActionId);
+    TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
+        if(response.data.valid)
         {
-            if(response.data.valid)
-            {
-                this.setState({getTransactions : response.data.data.ongoingTransactionResponses,
-                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
-             },()=>{
-                 console.log(this.state.TransactionenquiryCode);
-             })
-            }
-        })
+            customToast.success("Notification Sent", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+            this.componentDidMount();
+           
+        this.setState({
+         
+             dataload : true,
+             notifyAgain : response.data.data,
+             notifyButtonClick:false,},()=>{
+            console.log(this.state.notifyAgain);
         
+        });
+        document.getElementById('notifyModal'+id).style.display='none';
     }
+    else{
+        this.setState({ notifyButtonClick:false,
+            rejectButtonClick:false})
+        customToast.error(response.data.errorMessage, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
+    }
+    });
+}
+
+
+notifyModalShow(id,notifyId){
+    
+    document.getElementById('notifyModal'+id).style.display='block';
+  
+            this.setState({
+             notifyId:notifyId
+         },()=>{
+             console.log(this.state.notifyId);
+         })
+        
+ 
+    
+}
 
     notifyModalclose = (id) => {
         document.getElementById('notifyModal'+id).style.display='none';
@@ -265,27 +296,14 @@ paymentTypeset(){
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
-                console.log(this.state.getTransactionStatus);
-                TTCEapi.getTransactions(1415).then((response)=>{
-                    if(response.data.valid)
-                    {
-                    this.setState({
-                         dataload : true,
-                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
-                         console.log(this.state.getTransactions);
-                         
-                    });
-                }
-                });
-
                 TTCEapi.getTransactionActions().then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
-                         dataload : true,
+                        //  dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getTransactions(1415).then((response)=>{
+                         TTCEapi.getTransactions(1416).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -299,8 +317,7 @@ paymentTypeset(){
                     });
                 }
                 });
-
-             
+ 
           
          });
         }
@@ -433,7 +450,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
    <>
     <p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}/> 
+<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
 
       </>
       :
@@ -544,6 +561,21 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
+{this.state.getTransactionActions.map((data)=> 
+<>
+{
+    item.transactionOngoing.isActionCompleted == 0 ?
+    
+    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
+    " "
+    :""
+    :
+    ""
+   
+}
+    </>
+)}
+
                                           
                                                         <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
@@ -579,14 +611,20 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                  
                                                                     <span >
                                                                         <button
-                                                                        disabled={this.state.rejectButtonClick}
+                                                                       disabled={this.state.notifyButtonClick}
                                                                      
-                                                                        // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
+                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
+                                                                            item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:
+                                                                            item.transactionOngoing.taxInvoiceId !=null?item.transactionOngoing.taxInvoiceId:
+                                                                            item.transactionOngoing.challanId!=null?item.transactionOngoing.challanId:"",
+                                                                            item.transactionOngoing.id)}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>
                                                             </div>
                                                             </div>
+
+
 
 
 {/* ___________________________________________________________________________________________________ */}

@@ -188,6 +188,12 @@
     border: 2px solid grey;
 }
 
+.buyerNotifyButton:disabled{
+    background-color: gray;
+    opacity: 0.5;
+    border: 2px solid grey;
+}
+
 .approvenote{
     color: #ACACAC;
     font-size: 12px;

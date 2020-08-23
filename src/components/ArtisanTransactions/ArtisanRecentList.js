@@ -13,6 +13,7 @@ import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
 import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
+// import { EditorInsertComment } from 'material-ui/svg-icons';
 
 
 
@@ -28,16 +29,18 @@ export class ArtisanRecentList extends Component {
             getAdvancedPaymentReceipt:[],
             dataload : false,
             acceptButtonClick:false,
+            notifyButtonClick:false,
             rejectButtonClick:false,
             validateAdvancePaymentFromArtisan:[],
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-            paymentType:4,
-            searchString:""
+            paymentType:0,
+            searchString:"",
+            notifyId:""
 
         }
-     
+        this.paymentTypeset = this.paymentTypeset.bind(this);
     }   
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
@@ -63,28 +66,21 @@ export class ArtisanRecentList extends Component {
     
       }
     
-paymentTypeset(){
-    this.setState({
-        paymentType:1
-    })
-}
+
 
      
 
-    notifyModalShow(id,enquiryId){
+    notifyModalShow(id,notifyId){
     
         document.getElementById('notifyModal'+id).style.display='block';
-        TTCEapi.getTransactions(enquiryId).then((response)=>
-        {
-            if(response.data.valid)
-            {
-                this.setState({getTransactions:response.data.data,
-                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
+      
+                this.setState({
+                 notifyId:notifyId
              },()=>{
-                 console.log(this.state.TransactionenquiryCode);
+                 console.log(this.state.notifyId);
              })
-            }
-        })
+            
+     
         
     }
 
@@ -203,6 +199,40 @@ paymentTypeset(){
         browserHistory.push("/enquiryDetails?code="+enquiryId)
     }
    
+    NotifyAgain(actionId,respectiveActionId,id){
+        this.setState({ notifyButtonClick:true,
+            rejectButtonClick:true})
+        console.log(actionId);
+        console.log(respectiveActionId);
+        TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Notification Sent", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+             
+                 dataload : true,
+                 notifyAgain : response.data.data,
+                 notifyButtonClick:false,},()=>{
+                console.log(this.state.notifyAgain);
+            
+            });
+            document.getElementById('notifyModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ notifyButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
     
     acceptorReject(id,enquiryId,status){
         console.log(enquiryId);
@@ -219,6 +249,8 @@ paymentTypeset(){
                 this.componentDidMount();
                
             this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
                 console.log(this.state.validateAdvancePaymentFromArtisan);
@@ -242,32 +274,20 @@ paymentTypeset(){
 
 
     componentDidMount(){
-       
+        // this.setState({
+        //     paymentType: this.state.paymentType
+        //   })
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
-                console.log(this.state.getTransactionStatus);
-                TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
-                    if(response.data.valid)
-                    {
-                    this.setState({
-                         dataload : true,
-                         getOngoingTransaction : response.data.data},()=>{
-                        console.log(this.state.getOngoingTransaction);
-                    
-                    });
-                }
-                });
-
                 TTCEapi.getTransactionActions().then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
-                         dataload : true,
-                         getTransactionActions : response.data.data},()=>{
+                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
                          TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
@@ -276,34 +296,78 @@ paymentTypeset(){
                                  dataload : true,
                                  getOngoingTransaction : response.data.data},()=>{
                                 // console.log(this.state.getOngoingTransaction);
-                                console.log(this.state.getOngoingTransaction);
+                                console.log(this.state.getTransactionStatus);
                             });
                         }
                         });
                     });
                 }
                 });
-
-             
-          
+    
          });
         }
      });
-
-     
-
-
-    
   
      }
-  
+     paymentTypeset(e){
+        console.log("abc")
+        this.setState({
+            paymentType:e
+          },()=>{
+              this.componentDidMount();
+          }
+        )
+              
+    }
 
     render() {
         return (
             <React.Fragment>
                     {this.state.dataload ?
-                        this.state.getOngoingTransaction.length==0?
+                        this.state.getOngoingTransaction.length==0 ?
+                        this.state.paymentType==0 ?
                         <ArtisianTransactionEmpty />
+                :
+              <>  <Row className="mt-5">
+                <Col md="1"></Col>
+          <Col md="3" >
+              <span>
+          <InputGroup size="lg"className="searchenq">
+           <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
+         </InputGroup>
+         
+         </span>
+          </Col>
+          <Col md="1"></Col>
+          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
+         <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
+<button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+<div class="w3-dropdown-content w3-bar-block w3-border">
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
+</div>
+</div></Col>
+         
+          </Row>
+          <Container>
+          <Row>
+         <br></br>
+         <br></br>
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <br></br>   
+         <Col className="col-xs-12 text-center font14">
+         No Data Found
+         </Col>
+    </Row>
+          </Container>
+          </>
                 :
                 <Container>
                    <Row className="mt-5">
@@ -321,9 +385,12 @@ paymentTypeset(){
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset()}>Link 1</a>
-      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
     </div>
   </div></Col>
                 
@@ -342,7 +409,9 @@ paymentTypeset(){
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
+{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
+{console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])}
+
 </Col>
 <Col className="col-xs-3" sm="1">
 <img 
@@ -383,9 +452,11 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 <>
 {
     item.transactionOngoing.isActionCompleted == 0 ?
+    
     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
     data.id == 3?
         <>
+     
     <p>Accept or Reject</p>
 <span><img src={logos.accept} className="acceptrejecticon" 
        
@@ -402,9 +473,10 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
     data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
 
    <>
+  
     <p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}/> 
-
+<img src={logos.notifybuyer} className="acceptrejecticon" 
+onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
       </>
       :
       data.id==4 ?
@@ -514,6 +586,21 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
+{/* {this.state.getTransactionActions.map((data)=> 
+<>
+{
+    item.transactionOngoing.isActionCompleted == 0 ?
+    
+    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
+    " "
+    :""
+    :
+    ""
+   
+}
+    </>
+)} */}
+
                                           
                                                         <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
@@ -549,9 +636,13 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                  
                                                                     <span >
                                                                         <button
-                                                                        disabled={this.state.rejectButtonClick}
+                                                                       disabled={this.state.notifyButtonClick}
                                                                      
-                                                                        // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
+                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
+                                                                            item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:
+                                                                            item.transactionOngoing.taxInvoiceId !=null?item.transactionOngoing.taxInvoiceId:
+                                                                            item.transactionOngoing.challanId!=null?item.transactionOngoing.challanId:"",
+                                                                            item.transactionOngoing.id)}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>

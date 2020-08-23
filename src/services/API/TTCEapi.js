@@ -754,7 +754,20 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId=6&respectiveActionId=339
+  static notifyAgain(actionId,respectiveActionId) {
+    let url = ApiUrl + "/transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId="+actionId+"&respectiveActionId="+respectiveActionId;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   // /transaction/getCompletedTransaction
   static getCompletedTransaction(searchString,paymentType) {
     let url = ApiUrl + "/transaction/getCompletedTransaction/{searchString}/{paymentType}?paymentType="+paymentType;

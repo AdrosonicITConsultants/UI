@@ -26,7 +26,7 @@ export class BuyerRecentList extends Component {
             getAdvancedPaymentReceipt:[],
             dataload : false,
             filter: null,
-            paymentType:4,
+            paymentType:0,
             searchString:""
 
 
@@ -148,32 +148,90 @@ export class BuyerRecentList extends Component {
   
      }
   
-     paymentTypeset(){
+     paymentTypeset(e){
+        console.log("abc")
         this.setState({
-            paymentType:1
-        })
+            paymentType:e
+          },()=>{
+              this.componentDidMount();
+          }
+        )
+              
     }
     
     render() {
         return (
             <React.Fragment>
-                    {this.state.dataload ?
-                        this.state.getOngoingTransaction.length==0?
+     {this.state.dataload ?
+                        this.state.getOngoingTransaction.length==0 ?
+                        this.state.paymentType==0 ?
                         <EmptyBuyerRecentList />
+                :
+              <>  <Row className="mt-5">
+                <Col md="1"></Col>
+          <Col md="3" >
+              <span>
+          <InputGroup size="lg"className="searchenq">
+           <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
+         </InputGroup>
+         
+         </span>
+          </Col>
+          <Col md="1"></Col>
+          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
+         <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
+<button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+<div class="w3-dropdown-content w3-bar-block w3-border">
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+<a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+<a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
+</div>
+</div></Col>
+         
+          </Row>
+          <Container>
+          <Row>
+            <br></br>
+            <br></br>
+            <br></br>   
+            <br></br>   
+            <br></br>   
+            <br></br>   
+            <br></br>   
+             <Col className="col-xs-12 text-center font14">
+             No Data Found
+            </Col>
+         </Row>
+          </Container>
+          </>
                 :
                 <Container>
                  <Row className="mt-5">
                        <Col md="1"></Col>
-                 <Col md="3" >
+                       <Col md="3" >
+                     <span>
                  <InputGroup size="lg"className="searchenq">
-                  {/* <InputGroupAddon addonType="prepend">Search</InputGroupAddon> */}
-                  {/* <Input value={this.state.filter} onChange={this.handleSearchChange}
-                   type="text" className="searchenq" placeholder="Search your transaction by enquiry Id"
-                   style={{height:"30px"}}/> */}
-                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
-
+                  <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
                 </InputGroup>
+                
+                </span>
                  </Col>
+                 <Col md="1"></Col>
+                 {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
+                <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
+    <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border">
+    <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
+      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(2)}>Payment ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(3)}>Tax Invoice ID</a>
+      <a  href="#"  class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(4)}>Challan ID</a>
+
+    </div>
+  </div></Col>
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.filter(this.state.getOngoingTransaction).map((item)=> 

@@ -27,7 +27,14 @@ export class BuyerOngoingOrder extends Component {
 
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
-            {
+            {   
+                TTCEapi.getInnerEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({innerEnquiryStages:response.data.data})
+                }
+            })
                 console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
@@ -280,7 +287,8 @@ export class BuyerOngoingOrder extends Component {
                             </Col>
                         </Row>
                         </Col>
-                    </Row>    <Row noGutters={true} className="mt7">
+                    </Row>
+                    <Row noGutters={true} className="mt7">
                     {/* <Col className="col-xs-1"></Col> */}
                         <Col className="col-xs-12">
                         <Row noGutters={true}>
@@ -290,14 +298,17 @@ export class BuyerOngoingOrder extends Component {
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <ul className="list-unstyled multi-steps">
-                                    {console.log(item.openEnquiriesResponse.enquiryStageId , )}
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.orderStages.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}{console.log(item1.orderStages.id)}</li> )     }
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                                 <li >Completed</li>
                                 </ul>
                                 :
-                                <ul className="list-unstyled multi-steps">
+                                <>
+                                { item.isBlue== 1
+                                    ?
+                                    <>
+                                     <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                 {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
@@ -306,6 +317,23 @@ export class BuyerOngoingOrder extends Component {
                                  )     }
                                 <li >Completed</li>
                                 </ul>
+                                    </>
+                                    :
+                                    <ul className="list-unstyled multi-steps">
+                                    {this.state.enquiryStagesMTO.map((item1) => 
+                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                    <br></br>
+                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                    </> : item1.desc}</li>
+                                     )     }
+                                    <li >Completed</li>
+                                    </ul>
+                                
+                                }
+                               
+                                </>
                                     }
 
                             </div>
@@ -360,7 +388,7 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                         </Col>
                     </Row>
-                
+                  
                     </>
                     :
                     <>
@@ -529,9 +557,13 @@ export class BuyerOngoingOrder extends Component {
                                 <li >Completed</li>
                                 </ul>
                                 :
-                                <ul className="list-unstyled multi-steps">
+                                <>
+                                { item.isBlue== 1
+                                    ?
+                                    <>
+                                     <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                 {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
@@ -540,6 +572,23 @@ export class BuyerOngoingOrder extends Component {
                                  )     }
                                 <li >Completed</li>
                                 </ul>
+                                    </>
+                                    :
+                                    <ul className="list-unstyled multi-steps">
+                                    {this.state.enquiryStagesMTO.map((item1) => 
+                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                    <br></br>
+                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                    </> : item1.desc}</li>
+                                     )     }
+                                    <li >Completed</li>
+                                    </ul>
+                                
+                                }
+                               
+                                </> 
                                     }
 
                                 </div>

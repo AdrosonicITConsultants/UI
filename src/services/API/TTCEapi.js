@@ -728,7 +728,7 @@ class TTCEapi {
 
   // /transaction/getOngoingTransaction
   static getOngoingTransaction(searchString,paymentType) {
-    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+paymentType;
+    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+"0";
     console.log(url);
     return axios
       .get(url)

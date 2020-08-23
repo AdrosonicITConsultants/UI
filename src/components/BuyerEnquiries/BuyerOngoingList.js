@@ -531,7 +531,7 @@ export class BuyerOngoingList extends Component {
                                 
                                 }
                                
-                                </>
+                                </> 
                                     }
 
                                 </div>

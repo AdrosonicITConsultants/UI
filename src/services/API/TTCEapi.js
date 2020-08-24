@@ -506,6 +506,20 @@ class TTCEapi {
       });
   } 
   
+
+  static getSingleOrder(enquiryId) {
+    let url = ApiUrl + "/order/getOrder/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
   static getCompletedEnquiry(enquiryId) {
     let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
 

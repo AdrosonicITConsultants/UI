@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, isValidElement } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
@@ -7,6 +7,7 @@ import logos from "../../assets";
 import "./Order.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
+import Diffdays from './Diffdays';
 
 export class BuyerOngoingOrder extends Component {
     
@@ -27,7 +28,23 @@ export class BuyerOngoingOrder extends Component {
 
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
-            {   
+            {    TTCEapi.getEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    var rr = response.data.data;
+                    rr[0].desc = "Quotation Accepted";
+                    rr[1].desc = "Order Details";
+                    this.setState({enquiryStagesMTO:rr})
+                }
+            })
+            TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({enquiryStagesAvailable:response.data.data})
+                }
+            })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
@@ -46,18 +63,7 @@ export class BuyerOngoingOrder extends Component {
                                 this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
                                     console.log(this.state);
                                 });
-                                var someDate = new Date(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn);
-                                console.log(someDate);
-                                var numberOfDaysToAdd = 10;
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime = Math.abs(todayDate - someDate);
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                this.setState({daysleft:diffDays}) 
-    
-
+                                
                             }
                         },()=>{
                            
@@ -65,29 +71,28 @@ export class BuyerOngoingOrder extends Component {
                     });
             }
         })
-        TTCEapi.getEnquirStages().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesMTO:response.data.data})
-            }
-        })
-        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesAvailable:response.data.data})
-            }
-        })
+       
         
         
     }
 
     individualpage(id){
         // localStorage.setItem("seeMoreId", id);
-        browserHistory.push("/buyerEnquiryDetails?code=" + id);
+        browserHistory.push("/buyerorder?code=" + id);
     }
-    
+    daysleft(name)
+    {
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd = 10;
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     render() {
         return (
             <React.Fragment>
@@ -121,8 +126,7 @@ export class BuyerOngoingOrder extends Component {
                                 Converted to order on :
                                 <Moment format="DD-MM-YYYY">
                                 {item.openEnquiriesResponse.orderCreatedOn}
-                                </Moment>
-                                
+                                </Moment>     
                             </Col>
                         </Row>
                             <Row noGutters={true}>
@@ -139,53 +143,35 @@ export class BuyerOngoingOrder extends Component {
                                             </a>
 
                                         }
-
                                         </div>
-                                            
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
-                                            {/* <span ></span> */}
-
                                         </div>
                                         <div>
-                                        <div noGutters={true} >
-                                            <Col className="leEnqid bold">
-                                            Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                            <div noGutters={true} >
+                                                <Col className="leEnqid bold">
+                                                Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                                </Col>
+                                            </div>
+                                            <div noGutters={true} >
+                                                <Col className="lesmallEnqid bold">
+                                                Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
+                                                </Col>
+                                            </div>
+                                            <div noGutters={true} >
+                                                <Col >
+                                                <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                                <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                                {item.openEnquiriesResponse.extraWeftYarnId > 0 
+                                                ?
+                                                <>
+                                                X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                                </>
+                                                :
+                                                    <></>
+                                                }</span> 
                                             </Col>
-                                        </div>
-                                        <div noGutters={true} >
-                                            <Col className="lesmallEnqid bold">
-                                            Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
-                                            </Col>
-                                        </div>
-                                        <div noGutters={true} >
-                                            <Col >
-                                            <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                            <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
-                                            {item.openEnquiriesResponse.extraWeftYarnId > 0 
-                                            ?
-                                            <>
-                                            X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
-                                            </>
-                                            :
-                                                <></>
-                                            }</span> 
-                                        </Col>
-                                    </div>
-                                    {/* <div noGutters={true} className="" >
-                                        <Col className="leEnqprodcode ">
-                                            {item.openEnquiriesResponse.productType === "Product"
-                                            ?
-                                            <>
-                                            Product Code : {item.openEnquiriesResponse.productCode}   
-                                            </>
-                                            :
-                                            <>
-                                            Product Code : NA  
-                                            </>
-                                            }
-                                                                                
-                                        </Col>
-                                    </div> */}
+                                            </div>
+                            
                                         <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
@@ -193,23 +179,23 @@ export class BuyerOngoingOrder extends Component {
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
-                                    </div>
-                                    <div noGutters={true} className="" >
-                                        <Col className="leEnqprodtype ">
-                                            {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
-                                            {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
-                                            {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
+                                        </div>
+                                        <div noGutters={true} className="" >
+                                            <Col className="leEnqprodtype ">
+                                                {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
+                                                {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
+                                                {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
 
-                                                                    
-                                        </Col>
+                                                                        
+                                            </Col>
 
-                                    </div>
-                                    <div noGutters={true} className="" >
-                                        <Col className="leEnqprodcode ">
-                                            <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                            <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
-                                        </Col>
-                                    </div>
+                                        </div>
+                                        <div noGutters={true} className="" >
+                                            <Col className="leEnqprodcode ">
+                                                <span className="leEnqprodbn ">Artisan Brand Name : </span>
+                                                <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
+                                            </Col>
+                                        </div>
                                     </div>
                                 </Col>
                                 <Col sm="3" className="text-right">
@@ -222,8 +208,7 @@ export class BuyerOngoingOrder extends Component {
                                         <Col className="leEnqAmount bold">
                                             {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
-                                    </div>
-                                    
+                                    </div>                                    
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
@@ -253,27 +238,43 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-
+                    {item.openEnquiriesResponse.productStatusId == 2
+                    ?
+                    <>
+                    </>
+                    :
+                             
                     <Row noGutters={true}>
                     <hr></hr>
                         <Col className="col-xs-1"></Col>
+                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
+                        ?
                         <Col className="col-xs-8 ">
-                           <span className="">change request:</span> 
-                           <span>Accepted</span> 
-                           <span>you have days to send cr</span>
+                           <span className="CR bold">Change Request: </span> 
+                           
+                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
+                               </Diffdays>
+                           <span> days Remaining. You can take only single CR untill approved.</span> 
                         </Col>
+                        :
+                        <Col className="col-xs-8 ">
+                        
+                        </Col>
+                        }
+                        
                         
                         <Col className="col-xs-2">
-                            <input type="button"  value ="change request"></input>
+                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
-                    <hr></hr>
                     </Row>
+                    
+                    }<hr></hr>
                     <Row noGutters={true}>
-                        <Col className="col-xs-8"></Col>
-                        <Col className="col-xs-4">
-                        <div className="buyerMOQConfirmModalEnquiryChatButton">Go to this enquiry chat</div>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
 
                         </Col>
 
@@ -283,7 +284,7 @@ export class BuyerOngoingOrder extends Component {
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            Order Status
                             </Col>
                         </Row>
                         </Col>
@@ -398,6 +399,14 @@ export class BuyerOngoingOrder extends Component {
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
                             <Row noGutters={true}>
+                                <Col className="col-xs-12 convertedDate">
+                                    Converted to order on :
+                                    <Moment format="DD-MM-YYYY">
+                                    {item.openEnquiriesResponse.orderCreatedOn}
+                                    </Moment>     
+                                </Col>
+                            </Row>
+                            <Row noGutters={true}>
                                 <Col sm="9">
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
@@ -413,10 +422,7 @@ export class BuyerOngoingOrder extends Component {
                                     }
 
                                     </div>
-                                    
-                                    <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
-                                    {/* <span ></span> */}
-                                       
+                                        <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>                                       
                                     </div>
                                     <div>
                                     <div noGutters={true} >
@@ -443,22 +449,7 @@ export class BuyerOngoingOrder extends Component {
                                         }</span> 
                                       </Col>
                                   </div>
-                                    {/* <div noGutters={true} className="" >
-                                        <Col className="leEnqprodcode ">
-                                            {item.openEnquiriesResponse.productType === "Product"
-                                            ?
-                                            <>
-                                            Product Code : {item.openEnquiriesResponse.productCode}   
-                                            </>
-                                            :
-                                            <>
-                                            Product Code : NA  
-                                            </>
-                                            }
-                                                                                
-                                        </Col>
-                                    </div> */}
-                                        <div noGutters={true} >
+                                  <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
                                         <Moment format="DD-MM-YYYY">
@@ -530,9 +521,49 @@ export class BuyerOngoingOrder extends Component {
                                 </Col>
                             </Row>
                         </Col>
-
-                        
                     </Row>
+                    {item.openEnquiriesResponse.productStatusHistoryId == 2
+                    ?
+                    <>
+                    </>
+                    :
+                             
+                    <Row noGutters={true}>
+                    <hr></hr>
+                        <Col className="col-xs-1"></Col>
+                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
+                        ?
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           
+                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
+                               </Diffdays>
+                           <span> days Remaining. You can take only single CR untill approved.</span> 
+                        </Col>
+                        :
+                        <Col className="col-xs-8 ">
+                        
+                        </Col>
+                        }
+                        
+                        
+                        <Col className="col-xs-2">
+                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                    }<hr></hr>
+                    <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                        </Col>
+
+                        </Row>
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">

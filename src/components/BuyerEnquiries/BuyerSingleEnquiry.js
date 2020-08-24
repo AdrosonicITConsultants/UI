@@ -235,7 +235,9 @@ export class BuyerSingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/buyerEnquiriesList"); 
+        // browserHistory.push("/buyerEnquiriesList"); 
+        browserHistory.goBack();
+        // this.props.history.goBack;
     } 
 
     handleCluster(e) {

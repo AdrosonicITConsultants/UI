@@ -46,47 +46,63 @@ export class PIchange extends Component {
     }
 
 
-
-    saveMoqDetails(){
+    savePIDetails(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
-            this.setState({
-                saveButtonClick:true
-              })
-            let params = queryString.parse(this.props.location.search);
-            console.log(params);
-            TTCEapi.saveMoq(
-                params.code,
-                this.state.additionalInfo,
-                this.state.deliveryDesc ,
-                this.state.moq,
-                this.state.ppu,
-              
-               ).then((response)=>{
-                   if(response.data.valid){
-                this.setState({saveMoq : response.data,
-                    isMoqdetail:!this.state.isMoqdetail,
-                    showValidationMoq: false,
-                },()=>{
-                console.log(this.state.saveMoq);
-               
-                });
-                customToast.success("MOQ Details saved successfully", {
+        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
+            if(document.getElementById('agree').checked){
+                let params = queryString.parse(this.props.location.search);
+                console.log(params);
+                TTCEapi.savePi(
+                    params.code,
+                    this.state.cgst,
+                    this.state.dod ,
+                    this.state.hsncode,
+                    this.state.rpu,
+                    this.state.quantity,
+                    this.state.sgst,
+
+                 
+                   ).then((response)=>
+                   {
+                       if(response.data.valid){
+                        this.state.preview = true;   
+                        this.setState({  
+                        // preview: true,
+                        savePi : response.data,
+                        isPidetail:!this.state.isPidetail,
+                        showValidationPi: false,
+                      
+                    },()=>{
+                    console.log(this.preview);
+                   
+                    });
+                    customToast.success("PI Details saved successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    //   browserHistory.push("/Preview");
+              }  });
+        
+            }
+            else{
+                customToast.error("Please agree to T&C", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-         } });
-        }
-       
+            }
+           
+            }
+         
+
       else{
         this.setState({
-            showValidationMoq: true,
-            saveButtonClick:false
+            showValidationPi: true,
+           
         //   message : "Invalid PAN Number"
       });
       
       }
-    }
+    } 
     
     ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
@@ -214,7 +230,7 @@ export class PIchange extends Component {
     className="PIinput"
         type="number"
         disabled={this.state.isPidetail}
-        // value={this.state.quantity }
+        value={this.state.quantity }
         name="quantity"
         onChange={this.handleChange}
         />
@@ -244,7 +260,7 @@ export class PIchange extends Component {
     {/* </span> */}
     <input type="number"  className="PIinput rsinputboxwidth"
     disabled={this.state.isPidetail}
-    // value={this.state.rpu }
+    value={this.state.rpu }
     name="rpu"
     onChange={this.handleChange} />
     </Col>
@@ -255,7 +271,7 @@ export class PIchange extends Component {
     <br/>
     <input className="PIinput" type="date"
     disabled={this.state.isPidetail}
-    // value={this.state.dod }
+    value={this.state.dod }
     name="dod"
     onChange={this.handleChange}/>
     
@@ -265,7 +281,7 @@ export class PIchange extends Component {
     <br/>
     <input className="PIinput" type="number"
     disabled={this.state.isPidetail}
-    // value={this.state.hsncode }
+    value={this.state.hsncode }
     name="hsncode"
     onChange={this.handleChange}/>
     </Col>

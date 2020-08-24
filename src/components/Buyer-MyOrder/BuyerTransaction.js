@@ -27,6 +27,7 @@ export class BuyerTransaction extends Component {
             getTransactions:[],
             dataload : false,
             filter: null,
+            enquiryCode:this.props.enquiryCode,
 
         }
         this.gotoEnquiry = this.gotoEnquiry.bind(this);
@@ -104,7 +105,7 @@ export class BuyerTransaction extends Component {
                 getTransactionStatus : response.data.data,
                },()=>{
                 console.log(this.state.getTransactionStatus);
-                TTCEapi.getTransactions(1415).then((response)=>{
+                TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
@@ -123,7 +124,7 @@ export class BuyerTransaction extends Component {
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getTransactions(1416).then((response)=>{
+                         TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -138,7 +139,7 @@ export class BuyerTransaction extends Component {
                 }
                 });
 
-                TTCEapi.getTransactions(1416).then((response)=>{
+                TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({

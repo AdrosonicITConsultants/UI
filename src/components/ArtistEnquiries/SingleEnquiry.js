@@ -92,23 +92,47 @@ export class SingleEnquiry extends Component {
             innerID = this.state.getEnquiryMoq[0].openEnquiriesResponse.innerEnquiryStageId + 1;
         }
         else innerID = 0;
-        TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
-            if(response.data.valid)
-            {   customToast.success("Product Status Updated", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-                this.componentDidMount();
-                console.log("updated");
-            }
-            else{
-                customToast.error(response.data.errorMessage, {
+        if(this.state.Progressidnext == 4)
+        {
+            TTCEapi.validateAdvancePaymentFromArtisan(parseInt(params.code),1).then((response)=>{
+                if(response.data.valid)
+                {
+                    customToast.success("Product Status Updated", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.componentDidMount();
+
+                }
+                else{
+                    customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                }
+            })
+        }
+        else{
+            TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
+                if(response.data.valid)
+                {   customToast.success("Product Status Updated", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-            }
-        });
-        this.componentDidMount();
+                    this.componentDidMount();
+                    console.log("updated");
+                }
+                else{
+                    customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                }
+            });
+            
+
+        }
+        
         
        }
     buyersDetailsbtn(){

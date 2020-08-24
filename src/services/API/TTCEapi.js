@@ -652,6 +652,21 @@ class TTCEapi {
       });
   }
 
+  // /enquiry/getCurrencySigns
+  static getCurrencySigns() {
+    let url = ApiUrl + "/enquiry/getCurrencySigns";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   // /enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId=1080&moqId=39
   static MoqSimpleProductSelected(enquiryId,moqId) {
     let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId="+enquiryId+"&moqId="+moqId;

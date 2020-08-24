@@ -62,9 +62,14 @@ import { BuyerAdvancePayment3 } from './components/BuyerEnquiries/BuyerAdvancePa
 import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePayment2' 
 import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';
 import { BuyerRecentList } from './components/BuyerTransaction/BuyerRecentList';
-import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView";
+import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView"
+import { ArtisanAllTransactionList } from './components/ArtisanTransactions/ArtisanAllTransactionList';
+import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecentList';
+import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
 import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
 import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
+import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
+import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
 function App() {
   
   return (
@@ -98,6 +103,15 @@ function App() {
           <PrivateRoute exact path="/enquiriesList" component={AllEnquiryList} />
           <PrivateRoute exact path="/buyerEnquiriesList" component={BuyerAllEnquiryList} />
           <PrivateRoute exact path="/buyerTransactionList" component={BuyerAllTransactionList} />
+          <PrivateRoute exact path="/TransactionList" component={ArtisanAllTransactionList} />
+          <PrivateRoute exact path="/RecentList" component={ArtisanRecentList} />
+          <PrivateRoute exact path="/historyList" component={ArtisanHistoryList} />
+          <PrivateRoute exact path="/buyerorder" component={Buyerorder} />
+          <PrivateRoute exact path="/artisanorder" component={Artisanorder} />
+
+
+
+
           <PrivateRoute exact path="/buyerRecentTransactionList" component={BuyerRecentList} />
 
 

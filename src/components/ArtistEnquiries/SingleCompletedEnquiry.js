@@ -611,7 +611,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -619,7 +619,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -630,7 +630,7 @@ export class SingleEnquiry extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -669,10 +669,10 @@ export class SingleEnquiry extends Component {
                             <ul className="list-unstyled multi-steps">
                                 {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 :
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
                                 {item.openEnquiriesResponse.enquiryStageId == 14
@@ -684,24 +684,46 @@ export class SingleEnquiry extends Component {
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                              {item.openEnquiriesResponse.enquiryStageId == 14
-                              ?
-                              <li >Completed</li>
+                                   {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                ?
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
                             :
-                            <li className="closedenq">Closed</li>
-                            }
-                              
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
+                            
+                             
                             </ul>
                             
                                 }
 
                             </div>
+                          
+                           
                            </Col>
                        </Row>
                     </Col>
                 </Row>
-            
+             
                 </>
                 :
                 <>
@@ -797,7 +819,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -805,7 +827,7 @@ export class SingleEnquiry extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -816,7 +838,7 @@ export class SingleEnquiry extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -855,10 +877,10 @@ export class SingleEnquiry extends Component {
                             <ul className="list-unstyled multi-steps">
                                 {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 :
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
                                 {item.openEnquiriesResponse.enquiryStageId == 14
@@ -870,24 +892,46 @@ export class SingleEnquiry extends Component {
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                              {item.openEnquiriesResponse.enquiryStageId == 14
-                              ?
-                              <li >Completed</li>
+                                 {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                ?
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
                             :
-                            <li className="closedenq">Closed</li>
-                            }
-                              
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
+                            
+                             
                             </ul>
                             
                                 }
 
                             </div>
+                          
+                           
                            </Col>
                        </Row>
                     </Col>
                 </Row>
-            
+             
                 </>
     }
             

@@ -1,0 +1,68 @@
+.changereqcolor{
+    
+    font-weight: bold;
+    color: goldenrod;
+    font-size: 20px;
+
+}
+.Crh{
+    font-size: 17px;
+}
+
+.crbox{
+    border: 1px solid;
+    margin-top: 10px;
+}
+
+.crmnote{
+    
+    font-size: 13px;
+    font-weight: 100;
+    color: darkgrey;
+
+}
+
+.CRare {
+    font-size: 20px;
+    color: black;
+}
+.areyousurecrh1 {
+    font-size: 43px;
+    margin-bottom: -12px;
+    color: black;
+}
+
+.CRAcceptedh3{
+    color: green;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.crp{
+    text-align: center;
+    font-weight: 600;
+}
+
+.craccbox{
+    border: 1px solid transparent;
+    padding: 10px 52px 10px 50px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+
+}
+
+.acceptrejimh{
+    
+    height: 39px;
+    text-align: center;
+    margin-left: 10px;
+
+}
+.innerboxcr{
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.marginminus{
+    margin-top: -10px;
+}

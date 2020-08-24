@@ -64,7 +64,6 @@ export class BuyerSingleEnquiry extends Component {
             gpayupi : "NA",
             paytmupi : "NA",
             phonepeupi  : "NA",
-            //  readmore:[],
              getMoqs:[],
              acceptingmoq:false,
              acceptingmoqtext:true,
@@ -78,6 +77,8 @@ export class BuyerSingleEnquiry extends Component {
              selectedArtisanId: 0,
              selectedMOQId: 0,
              modalOksend:false,
+             innerEnquiryStages:[],
+
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
@@ -105,7 +106,13 @@ export class BuyerSingleEnquiry extends Component {
           });
         }
     }
+    ToggleDelete22 = (id) => {
+        document.getElementById('id09'+ id).style.display='block';
+       }
 
+       ToggleDeleteClose22 = (id) => {
+        document.getElementById('id09'+ id).style.display='none';
+       }
     getcollapseIdNew = activecollapse => {
         if (activecollapse !== this.state.collapseIdNew) {
           this.setState({
@@ -228,7 +235,9 @@ export class BuyerSingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/buyerEnquiriesList"); 
+        // browserHistory.push("/buyerEnquiriesList"); 
+        browserHistory.goBack();
+        // this.props.history.goBack;
     } 
 
     handleCluster(e) {
@@ -661,6 +670,13 @@ export class BuyerSingleEnquiry extends Component {
 
             }
         })
+        TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({innerEnquiryStages:response.data.data})
+            }
+        })
 
        
 
@@ -781,12 +797,14 @@ MoqSimpleProductSelected(moqId){
                 {item.openEnquiriesResponse.historyProductId == null
                 ?
                 <>
-                <Row noGutters={true}>
+                    {/* for no change in product data */}
+                    <hr></hr>
+                <Row noGutters={true} >
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col sm="9">
-                                <div className="imageinlist"> 
+                                <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
                                         item.openEnquiriesResponse.productType === "Product"
@@ -800,20 +818,21 @@ MoqSimpleProductSelected(moqId){
                                     }
 
                                     </div>
-                                    
-                                    <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
-                                    {/* <span ></span> */}
+                                        
+                                        <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
+                                        {/* <span ></span> */}
+
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
-                                  <div noGutters={true} >
-                                      <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                <div noGutters={true} >
+                                    <Col className="leEnqid bold">
+                                    Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                    </Col>
+                                </div>
+                                <div noGutters={true} >
+                                    <Col >
+                                    <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                    <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -822,82 +841,83 @@ MoqSimpleProductSelected(moqId){
                                         :
                                             <></>
                                         }</span> 
-                                      </Col>
-                                  </div>
-                                  <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          {item.openEnquiriesResponse.productType === "Product"
-                                          ?
-                                          <>
-                                          Product Code : {item.openEnquiriesResponse.productCode}   
-                                          </>
-                                          :
-                                          <>
-                                          Product Code : NA  
-                                          </>
-                                          }
+                                    </Col>
+                                </div>
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodcode ">
+                                        {item.openEnquiriesResponse.productType === "Product"
+                                        ?
+                                        <>
+                                        Product Code : {item.openEnquiriesResponse.productCode}   
+                                        </>
+                                        :
+                                        <>
+                                        Product Code : NA  
+                                        </>
+                                        }
                                                                             
-                                      </Col>
-                                  </div>
-                               
-                                  <div noGutters={true} className="" >
-                                      <Col className="leEnqprodtype ">
-                                      {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
-                                          {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
-                                          {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
-                                                                  
-                                      </Col>
+                                    </Col>
+                                </div>
+                            
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodtype ">
+                                        {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
+                                        {item.openEnquiriesResponse.productStatusId==1? "Made to order"   : ""   }
+                                        {item.openEnquiriesResponse.productStatusId==null? "Requested Custom Design"   : ""   }
 
-                                  </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                                                
+                                    </Col>
+
+                                </div>
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodcode ">
+                                        <span className="leEnqprodbn ">Artisan Brand Name : </span>
+                                        <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
+                                    </Col>
+                                </div>
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
-                                      <Col className="leEnqOrderAmount ">
-                                      Order Amount
-                                      </Col>
+                                    <Col className="leEnqOrderAmount ">
+                                    Order Amount
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqAmount bold">
+                                    <Col className="leEnqAmount bold">
                                         {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidDateStarted">
-                                      Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                    <Col className="leEnqidDateStarted">
+                                    Date Started : 
+                                    <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
-                                     {item.openEnquiriesResponse.lastUpdated}
+                                    <Col className="leEnqidLastUpdated">
+                                    Last Updated : 
+                                    <Moment format="DD-MM-YYYY">
+                                    {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
-                                      {item.openEnquiriesResponse.excpectedDate != null 
-                                      ?
-                                      <Moment format="YYYY-MM-DD">
+                                    <Col className="leEnqidEstDelivery">
+                                    Est. Date of delivery : 
+                                    {item.openEnquiriesResponse.excpectedDate != null 
+                                    ?
+                                    <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
-                                      :
-                                      "NA"
-                                      }
-                                      
-                                      </Col>
+                                    :
+                                    "NA"
+                                    }
+                                    
+                                    </Col>
                                 </div>
 
                                 
@@ -910,78 +930,153 @@ MoqSimpleProductSelected(moqId){
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
-                       <Row noGutters={true}>
-                           <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
-                           </Col>
-                       </Row>
+                    <Row noGutters={true}>
+                        <Col className="col-xs-12 leEnqstatus bold">
+                        Enquiry Status
+                        </Col>
+                    </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
-                       <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
-                           <div className="progressbarfont">
+                {/* <Col className="col-xs-1"></Col> */}
+                    <Col className="col-xs-12">
+                    <Row noGutters={true}>
+                        <Col className="col-xs-12 ">
+                        <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                             <li >Completed</li>
                             </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
-                              <li >Completed</li>
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
-                            </div>
+                        </div>
+                                          
+                <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                    <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                        <div>
+                        <Row noGutters={true}>
+                            <Col className="col-xs-12 CSheading">
+                               
+                            </Col>
+                        </Row>
+                        </div>
+                    <div class="w3-container">
+                        <span 
+                        onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                        class="w3-button w3-display-topright cWhite">x</span>
+                        <br></br>
+                        <Row noGutters={true}>
+                            {console.log(item.openEnquiriesResponse.productStatusId)}
+                            {item.openEnquiriesResponse.productStatusId === 2
+                            ?
+                            <>  
+                            {item.openEnquiriesResponse.enquiryCode}
+                            </>
+                            :
+                            <>
+                             {this.state.innerEnquiryStages.map((item1) => 
+                               
+                                <Col className="col-xs-12 mb7">
+                                     {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                    {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                        
+                                {item1.stage }
+                                </Col>
+                                
+                                )} 
+                            </>
+                            }
+                            
                            
-                           </Col>
-                       </Row>
+                            </Row>
+                          
+                            <br></br>
+                            
+                        </div>
+                        </div>
+                    </div>
+
+
+                        </Col>
+                    </Row>
                     </Col>
                 </Row>
-               
+              
                 </>
                 :
                 <>
-               
+                
+                  <hr></hr>
                 <Row noGutters={true}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col sm="9">
-                                <div className="imageinlist"> 
+                                <div className="imageinlist" > 
                                 <div className="imageinlist1"> 
-                                    {
-                                        item.openEnquiriesResponse.productType === "Product"
-                                        ?
-                                        <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
-                                        </a>
-                                        :
-                                        <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
-                                        </a>
+                                {
+                                    item.openEnquiriesResponse.productType === "Product"
+                                    ?
+                                    <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                    </a>
+                                    :
+                                    <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                    </a>
 
-                                    }
+                                }
 
-                                    </div>
-                                    
-                                    <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
-                                    {/* <span ></span> */}
-                                    
+                                </div>
+                                
+                                <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
+                                {/* <span ></span> */}
+                                   
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
-                                  <div noGutters={true} >
-                                  <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                <div noGutters={true} >
+                                    <Col className="leEnqid bold">
+                                    Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                    </Col>
+                                </div>
+                                <div noGutters={true} >
+                                    <Col >
+                                    <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
+                                    <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -990,83 +1085,81 @@ MoqSimpleProductSelected(moqId){
                                         :
                                             <></>
                                         }</span> 
-                                      </Col>
-                                  </div>
-                                  <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          {item.openEnquiriesResponse.productType === "Product"
-                                          ?
-                                          <>
-                                          Product Code : {item.openEnquiriesResponse.productHistoryCode}   
-                                          </>
-                                          :
-                                          <>
-                                          Product Code : NA  
-                                          </>
-                                          }
+                                    </Col>
+                                </div>
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodcode ">
+                                        {item.openEnquiriesResponse.productType === "Product"
+                                        ?
+                                        <>
+                                        Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                        </>
+                                        :
+                                        <>
+                                        Product Code : NA  
+                                        </>
+                                        }
                                                                             
-                                      </Col>
-                                  </div>
-                               
-                                  <div noGutters={true} className="" >
-                                      <Col className="leEnqprodtype ">
-                                      {item.openEnquiriesResponse.productStatusId==2? "Available in stock"   : ""   }
-                                          {item.openEnquiriesResponse.productStatusHistoryId==2? "Available in stock"   : ""   }
-                                          {item.openEnquiriesResponse.productStatusHistoryId==1? "Made to order"   : ""   }
-                                          {item.openEnquiriesResponse.productStatusHistoryId==null? "Requested Custom Design"   : ""   }
-                                                                   
-                                      </Col>
+                                    </Col>
+                                </div>
+                            
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodtype ">
+                                      {item.openEnquiriesResponse.productStatusHistoryId==2? "Available in stock"   : ""   }
+                                      {item.openEnquiriesResponse.productStatusHistoryId==1? "Made to order"   : ""   }
+                                      {item.openEnquiriesResponse.productStatusHistoryId==null? "Requested Custom Design"   : ""   }                                 
+                                    </Col>
 
-                                  </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                </div>
+                                <div noGutters={true} className="" >
+                                    <Col className="leEnqprodcode ">
+                                        <span className="leEnqprodbn ">Artisan Brand Name : </span>
+                                        <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
+                                    </Col>
+                                </div>
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
-                                      <Col className="leEnqOrderAmount ">
-                                      Order Amount
-                                      </Col>
+                                    <Col className="leEnqOrderAmount ">
+                                    Order Amount
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqAmount bold">
+                                    <Col className="leEnqAmount bold">
                                         {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidDateStarted">
-                                      Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                    <Col className="leEnqidDateStarted">
+                                    Date Started : 
+                                    <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
-                                     {item.openEnquiriesResponse.lastUpdated}
+                                    <Col className="leEnqidLastUpdated">
+                                    Last Updated : 
+                                    <Moment format="DD-MM-YYYY">
+                                    {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
-                                      </Col>
+                                    </Col>
                                 </div>
                                 <div noGutters={true} >
-                                      <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
-                                      {item.openEnquiriesResponse.excpectedDate != null 
-                                      ?
-                                      <Moment format="YYYY-MM-DD">
+                                    <Col className="leEnqidEstDelivery">
+                                    Est. Date of delivery : 
+                                    {item.openEnquiriesResponse.excpectedDate != null 
+                                    ?
+                                    <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
-                                      :
-                                      "NA"
-                                      }
-                                      
-                                      </Col>
+                                    :
+                                    "NA"
+                                    }
+                                    
+                                    </Col>
                                 </div>
 
                                 
@@ -1079,42 +1172,116 @@ MoqSimpleProductSelected(moqId){
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
-                       <Row noGutters={true}>
-                           <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
-                           </Col>
-                       </Row>
+                    <Row noGutters={true}>
+                        <Col className="col-xs-12 leEnqstatus bold">
+                        Enquiry Status
+                        </Col>
+                    </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
+                <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
-                       <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
-                           <div className="progressbarfont">
+                    <Row noGutters={true}>
+                        <Col className="col-xs-12 ">
+                        <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusHistoryId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                             <li >Completed</li>
                             </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={this.state.progressid  == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
-                              <li >Completed</li>
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
                             </div>
+                                                        
+                <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                    <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                        <div>
+                        <Row noGutters={true}>
+                            <Col className="col-xs-12 CSheading">
+                               
+                            </Col>
+                        </Row>
+                        </div>
+                    <div class="w3-container">
+                        <span 
+                        onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                        class="w3-button w3-display-topright cWhite">x</span>
+                        <br></br>
+                        <Row noGutters={true}>
+                            {item.openEnquiriesResponse.productStatusHistoryId === 2
+                            ?
+                            <>  
+                            {item.openEnquiriesResponse.enquiryCode}
+                            </>
+                            :
+                            <>
+                             {this.state.innerEnquiryStages.map((item1) => 
+                               
+                                <Col className="col-xs-12 mb7">
+                                     {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                    {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                        
+                                {item1.stage }
+                                </Col>
+                                
+                                )} 
+                            </>
+                            }
+                            
                            
-                           </Col>
-                       </Row>
+                            </Row>
+                          
+                            <br></br>
+                            
+                        </div>
+                        </div>
+                    </div>
+
+
+
+                        </Col>
+                    </Row>
                     </Col>
                 </Row>
-               
+           
                 </>
-    }
+                }
 
                  <br></br>
                 <Row>
@@ -1172,7 +1339,7 @@ MoqSimpleProductSelected(moqId){
                                                          : "Allenqlistbtn ml60")
                                                      }
                                             onClick={this.buyersDetailsbtn}>
-                                            Buyer's Detail
+                                            Artisan's Detail
                                             </Col>
                                             <Col sm={3} 
                                             className={

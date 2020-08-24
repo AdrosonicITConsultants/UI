@@ -234,6 +234,27 @@
   font-size: 12px;
 }
 
+.acceptreject{
+  font-size: 7px;
+  color: darkgray;
+}
+.acceptrejecticon{
+  height: 20px;
+  width: auto;
+cursor: pointer;
+  max-width: 21px;
+}
+
+.mlbtn{
+  margin-left: 10px;
+}
+.imgicon{
+  height: 40px;
+  width: auto;
+  max-width: 25px;
+
+}
+
 .loading-bar {
 	height: 1rem;
 	width: auto;

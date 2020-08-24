@@ -61,9 +61,23 @@ export class BuyerCompletedList extends Component {
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
+        TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({innerEnquiryStages:response.data.data})
+            }
+        })
         
         
     } 
+    ToggleDelete22 = (id) => {
+        document.getElementById('id09'+ id).style.display='block';
+       }
+
+       ToggleDeleteClose22 = (id) => {
+        document.getElementById('id09'+ id).style.display='none';
+       }
     individualpage(id){
         browserHistory.push("/closedBuyerEnquiryDetails?code=" + id)
     }
@@ -165,7 +179,7 @@ export class BuyerCompletedList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.brandName == "" ? "NA" : item.brandName }</span>                                   
+                                          <span className="leEnqbrandname ">{item.brandName == ""||item.brandName == null ? "NA" : item.brandName }</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -184,7 +198,7 @@ export class BuyerCompletedList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -192,7 +206,7 @@ export class BuyerCompletedList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -203,7 +217,7 @@ export class BuyerCompletedList extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -242,10 +256,10 @@ export class BuyerCompletedList extends Component {
                             <ul className="list-unstyled multi-steps">
                                 {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 :
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
                                 {item.openEnquiriesResponse.enquiryStageId == 14
@@ -257,13 +271,33 @@ export class BuyerCompletedList extends Component {
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                              {item.openEnquiriesResponse.enquiryStageId == 14
-                              ?
-                              <li >Completed</li>
+                                   {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                ?
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
                             :
-                            <li className="closedenq">Closed</li>
-                            }
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
+                            
                               
                             </ul>
                             
@@ -352,7 +386,7 @@ export class BuyerCompletedList extends Component {
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
                                           <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.brandName == "" ? "NA" : item.brandName }</span>                                   
+                                          <span className="leEnqbrandname ">{item.brandName == "" ||item.brandName == null ? "NA" : item.brandName }</span>                                   
                                       </Col>
                                   </div>
                                 </div>
@@ -371,7 +405,7 @@ export class BuyerCompletedList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -379,7 +413,7 @@ export class BuyerCompletedList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -390,7 +424,7 @@ export class BuyerCompletedList extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -429,9 +463,9 @@ export class BuyerCompletedList extends Component {
                             <ul className="list-unstyled multi-steps">
                                 {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={11 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                                :
+                              :
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
 
                                 }
@@ -444,14 +478,33 @@ export class BuyerCompletedList extends Component {
                             </ul>
                             :
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                              {item.openEnquiriesResponse.enquiryStageId == 14
-                              ?
-                              <li >Completed</li>
+                                     {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                ?
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
                             :
-                            <li className="closedenq">Closed</li>
-                            }
-                              
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
+                            
                             </ul>
                             
                                 }

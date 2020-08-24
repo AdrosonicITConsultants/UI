@@ -149,7 +149,7 @@ import cancelenq from "./Cancel Enquiry icon - red.svg"
 
 import greentick from "./done-success.svg"
 import backupload from "./back upload.svg"
-import Iconfeatherupload from "./Icon feather-upload.svg"
+
 import whitetransaction from "./white transaction.svg"
 import rotatingshapes from "./rotating shapes.svg"
 
@@ -157,7 +157,41 @@ import recent from "./recent.svg"
 import finpay from "./fin pay.svg"
 import redenquiry from "./red enquiry.svg"
 import viewrec from "./view rec.svg"
+import pfi2 from "./pfi 2.svg"
+import pfi1 from "./pfi 1.svg"
+import uploadagain from "./upload again.svg"
+import received from "./received.svg"
+import accept from "./accept.svg"
+import cancel from "./cancel.svg"
+import uploaddelreceipt from "./upload del receipt.svg"
+import notifybuyer from "./notify buyer .svg"
+import viewReceipt from "./view Receipt.svg"
+import happyunhappy from "./happy unhappy .svg"
+import bellpopup from "./bell popup.svg"
+import Iconfeatherbell from "./Icon feather-bell.svg"
+import filter from "./filter.svg"
+import Iconfeatherupload from "./Icon feather-upload.svg"
+import sadred from "./sad red.svg"
+import acceptgreen from "./accept green.svg"
+import postchangerequesticon from "./post change request icon.svg"
 export default {
+  postchangerequesticon,
+  acceptgreen,
+  sadred,
+  Iconfeatherupload,
+  filter,
+  Iconfeatherbell,
+  bellpopup,
+  happyunhappy,
+  viewReceipt,
+  notifybuyer,
+  uploaddelreceipt,
+  accept,
+  cancel,
+  received,
+  uploadagain,
+  pfi1,
+  pfi2,
   viewrec,
   redenquiry,
   finpay,

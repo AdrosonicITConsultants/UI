@@ -202,7 +202,7 @@ class AddCustomprod extends Component {
                         
                          <Col sm={12} className="Wishlistpcode">
                      <span>Date created :</span> <span><b>
-                     <Moment format="YYYY-MM-DD">
+                     <Moment format="DD-MM-YYYY">
                             {data.createdOn}
                              </Moment>
                           </b></span>

@@ -25,7 +25,15 @@ export class OngoingList extends Component {
         }
         
 
-    }      
+    } 
+    
+    ToggleDelete22 = (id) => {
+        document.getElementById('id09'+ id).style.display='block';
+       }
+
+       ToggleDeleteClose22 = (id) => {
+        document.getElementById('id09'+ id).style.display='none';
+       }     
     componentDidMount(){
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
@@ -56,6 +64,13 @@ export class OngoingList extends Component {
             {
                 console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
+            }
+        })
+        TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({innerEnquiryStages:response.data.data})
             }
         })
         
@@ -179,7 +194,7 @@ export class OngoingList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -187,7 +202,7 @@ export class OngoingList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -198,7 +213,7 @@ export class OngoingList extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -236,15 +251,92 @@ export class OngoingList extends Component {
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
-                            </ul>
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                            
+                                </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
                             </div>
+                                                              
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {item.openEnquiriesResponse.productStatusId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
+
                            </Col>
                        </Row>
                     </Col>
@@ -347,7 +439,7 @@ export class OngoingList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
                                       Date Started : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
                                       </Col>
@@ -355,7 +447,7 @@ export class OngoingList extends Component {
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
                                       Last Updated : 
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
                                         
@@ -366,7 +458,7 @@ export class OngoingList extends Component {
                                       Est. Date of delivery : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
-                                      <Moment format="YYYY-MM-DD">
+                                      <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.excpectedDate}
                                         </Moment>
                                       :
@@ -404,15 +496,91 @@ export class OngoingList extends Component {
                             {item.openEnquiriesResponse.productStatusHistoryId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
-                            </ul>
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                                </ul>
                             :
-                            <ul className="list-unstyled multi-steps">
-                              {this.state.enquiryStagesMTO.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{item1.desc}</li> )     }
+                            <>
+                            { item.isBlue== 1
+                                ?
+                                <>
+                                 <ul className="list-unstyled multi-steps">
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                            {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                            <br></br>
+                            <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                            </> : item1.desc}</li>
+                             )     }
+                            <li >Completed</li>
                             </ul>
+                                </>
+                                :
+                                <ul className="list-unstyled multi-steps">
+                                {this.state.enquiryStagesMTO.map((item1) => 
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                <br></br>
+                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
+                                </> : item1.desc}</li>
+                                 )     }
+                                <li >Completed</li>
+                                </ul>
+                            
+                            }
+                           
+                            </>
                                 }
 
                             </div>
+                                                         
+                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                   
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {item.openEnquiriesResponse.productStatusId === 2
+                                ?
+                                <>  
+                                {item.openEnquiriesResponse.enquiryCode}
+                                </>
+                                :
+                                <>
+                                 {this.state.innerEnquiryStages.map((item1) => 
+                                   
+                                    <Col className="col-xs-12 mb7">
+                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
+                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                            
+                                    {item1.stage }
+                                    </Col>
+                                    
+                                    )} 
+                                </>
+                                }
+                                
+                               
+                                </Row>
+                              
+                                <br></br>
+                                
+                            </div>
+                            </div>
+                        </div>
+ 
+
                            </Col>
                        </Row>
                     </Col>

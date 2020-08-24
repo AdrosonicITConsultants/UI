@@ -506,6 +506,20 @@ class TTCEapi {
       });
   } 
   
+
+  static getSingleOrder(enquiryId) {
+    let url = ApiUrl + "/order/getOrder/{enquiryId}?enquiryId="+ enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
   static getCompletedEnquiry(enquiryId) {
     let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
 
@@ -652,6 +666,21 @@ class TTCEapi {
       });
   }
 
+  // /enquiry/getCurrencySigns
+  static getCurrencySigns() {
+    let url = ApiUrl + "/enquiry/getCurrencySigns";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   // /enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId=1080&moqId=39
   static MoqSimpleProductSelected(enquiryId,moqId) {
     let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId="+enquiryId+"&moqId="+moqId;
@@ -687,6 +716,108 @@ class TTCEapi {
     console.log(url);
     return axios
       .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /transaction/getTransactionStatus
+  static getTransactionStatus() {
+    let url = ApiUrl + "/transaction/getTransactionStatus";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /transaction/getTransactionActions
+  static getTransactionActions() {
+    let url = ApiUrl + "/transaction/getTransactionActions";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /transaction/getOngoingTransaction
+  static getOngoingTransaction(searchString,paymentType) {
+    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+"0";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /transaction/getTransactions/{enquiryId}?enquiryId=1415
+  static getTransactions(enquiryId) {
+    let url = ApiUrl + "/transaction/getTransactions/{enquiryId}?enquiryId="+enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId=6&respectiveActionId=339
+  static notifyAgain(actionId,respectiveActionId) {
+    let url = ApiUrl + "/transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId="+actionId+"&respectiveActionId="+respectiveActionId;
+    console.log(url);
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /transaction/getCompletedTransaction
+  static getCompletedTransaction(searchString,paymentType) {
+    let url = ApiUrl + "/transaction/getCompletedTransaction/{searchString}/{paymentType}?paymentType="+paymentType;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1391&status=2
+
+  static validateAdvancePaymentFromArtisan(enquiryId,status) {
+    let url = ApiUrl + "/enquiry/validateAdvancePaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
+    console.log(url);
+    return axios
+      .put(url)
       .then((response) => {
         console.log(response);
         return response;
@@ -1304,7 +1435,8 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/savePi/{enquiryId}?enquiryId=1435
+  
 
   static saveMoq(
     enquiryId,
@@ -1338,6 +1470,45 @@ class TTCEapi {
         return error.response;
       });
   } 
+
+  // http://101.53.153.96:8090/enquiry/revisedPI?enquiryId=%201435
+
+  static revisedPI(
+    enquiryId,
+     cgst,
+     dod,
+     hsncode,
+     rpu,
+     quantity,
+     sgst,
+     
+      ) {
+      let url = ApiUrl + "/enquiry/revisedPI?enquiryId=%20"+ enquiryId;
+     var data =
+      {
+        cgst: 0,
+        expectedDateOfDelivery: dod,
+        hsn: hsncode,
+        ppu: rpu,
+        quantity:quantity,
+        sgst:0
+      }
+     console.log(data)
+     var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+      return axios
+        .post(url,data,config)
+        .then((response) => {
+          console.log(response);
+          return response;
+        })
+        .catch((error) => {
+          return error.response;
+        });
+    }
 
 
   static savePi(
@@ -1482,6 +1653,22 @@ static sendPI(
           JSON.stringify(response.data.data)
         );
 
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // /enquiry/getOldPIData?enquiryId=1435
+
+  static getOldPIData(enquiryId) {
+    let url = ApiUrl + "/enquiry/getOldPIData?enquiryId="+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1664,6 +1851,21 @@ static sendPI(
       });
   }
 
+  static getInnerEnquirStages() {
+    let url = ApiUrl + "/enquiry/getAllInnerEnquiryStages";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getAllNotifications() {
     let url = ApiUrl + "/notification/getAllNotifications";
     return axios
@@ -1690,6 +1892,36 @@ static sendPI(
 
   static getOpenEnquiries() {
     let url = ApiUrl + "/enquiry/getOpenEnquiries";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getOpenOrders() {
+    let url = ApiUrl + "/order/getOpenOrders";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static getClosedOrders() {
+    let url = ApiUrl + "/order/getClosedOrders";
 
     return axios
       .get(url)
@@ -1751,8 +1983,15 @@ static sendPI(
       });
   }
 
-  static progressUpdate(stageid, id) {
-    let url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}?stageId=" + stageid + "&enquiryId=" + id ;
+  static progressUpdate(stageid, id,innerid) {
+    let url = "";
+    if(innerid == 0){
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id  ;
+
+    }else{
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id +  "&innerStageId=" + innerid  ;
+
+    }
     var data = {
       
     };

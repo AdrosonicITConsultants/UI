@@ -11,6 +11,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import { BuyerRecentList } from './BuyerRecentList';
+import { BuyerHistoryList } from './BuyerHistoryList';
 
 
 export class BuyerAllTransactionList extends Component {
@@ -58,7 +59,7 @@ export class BuyerAllTransactionList extends Component {
                           
                           </Col>
                           <Col sm="10" className="col-xs-9">
-                               <Row noGutters={true} className ="cp1heading cp1headingtr bold fontplay ">
+                               <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                    <Col md="12" className="col-xs-12">
                                         My Transactions
                                        </Col>
@@ -113,15 +114,15 @@ export class BuyerAllTransactionList extends Component {
                     </>
                     :
                     <>
-                   
+                   <BuyerHistoryList />
                     </>
                 }
-                <div>
+                {/* <div>
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
               ></img>
-            </div>
+            </div> */}
                 </Container>
                 <Footer></Footer>
             </React.Fragment>

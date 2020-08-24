@@ -2,4 +2,29 @@
     color: lightgreen;
     font-size: 13px;
     margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+.enqchatbtn{
+    border-radius: 40px;
+
+}
+.changereqbtn{
+    border-radius: 20px;
+    background-color : palevioletred;
+    border-color: palevioletred;
+    padding: 5px 12px;
+    color: black;
+    font-size: 13px;
+}
+.enqreqbtn{
+    border-radius: 20px;
+    border: 1px solid #B9005C;
+    background-color: #B9005C;
+    padding: 5px 12px;
+    color: white;
+    font-size: 13px;
+}
+.CR{
+    font-size:16px;
 }

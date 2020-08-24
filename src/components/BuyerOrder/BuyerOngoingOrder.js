@@ -695,7 +695,7 @@ export class BuyerOngoingOrder extends Component {
             :
             <> 
                 <Row noGutters={true}>
-                <Col className="col-xs-12 text-center">
+                <Col className="col-xs-12 font20 text-center">
                 Loading Please Wait....
                 </Col>
                 </Row>

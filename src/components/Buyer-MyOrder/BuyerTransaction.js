@@ -175,7 +175,7 @@ export class BuyerTransaction extends Component {
                         </Col>
                     </Row>
                         :
-                <Container>
+                <>
                  {/* <Row className="mt-5">
                        <Col md="1"></Col>
                  <Col md="3" >
@@ -282,22 +282,16 @@ export class BuyerTransaction extends Component {
               
             
 
-              <div>
-              <img
-                className="notifyFooterBanner internaldiv"
-                src={logos.notifyFooterBanner}
-              ></img>
-            </div>
-                </Container>
+                </>
               :
-              <Container>
+              <>
                   <Row noGutters={true}>
                     <Col className="col-xs-12  text-center">
                        Loading data ..
                     </Col>
                 </Row>
              
-                  </Container>}
+                  </>}
             </React.Fragment>
         )
     }

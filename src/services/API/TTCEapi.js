@@ -1904,6 +1904,21 @@ static sendPI(
       });
   }
 
+  static getClosedOrders() {
+    let url = ApiUrl + "/order/getClosedOrders";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
 
   static getClosedEnquiries() {
     let url = ApiUrl + "/enquiry/getClosedEnquiries";

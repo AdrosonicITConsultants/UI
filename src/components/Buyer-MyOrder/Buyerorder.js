@@ -36,6 +36,11 @@ export class Buyerorder extends Component {
             qualityCheck:false, 
             dataload:false,
             enquiryCode:"",
+            enquiryStagesMTO :[],
+            openEnquiries: [],
+            productCategories: [],
+            yarns : [],
+            enquiryStagesAvailable:[],
         
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
@@ -124,13 +129,14 @@ export class Buyerorder extends Component {
                 transaction: false,
                 taxInvoice:true,
                 qualityCheck:false,
+                
               
             };
         });
     }
           
     backoperation(){
-        browserHistory.push("/buyerEnquiriesList"); 
+        browserHistory.goBack(); 
     } 
 
     handleCluster(e) {
@@ -141,6 +147,7 @@ export class Buyerorder extends Component {
      
       }
       componentDidMount(){
+        window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         this.state.enquiryCode = params.code;
@@ -207,6 +214,24 @@ export class Buyerorder extends Component {
                    <>
                 
                 <Container>
+                <Row noGutters={true} className="">
+                           <Col sm = "1" className="col-xs-2">
+                           <img
+                                       src={logos.backarrowicon}
+                                       className="margin-cparrow cparrowsize glyphicon"
+                                        onClick={() => this.backoperation()}
+                            ></img>
+                          
+                          </Col>
+                          <Col sm="10" className="col-xs-9">
+                               <Row noGutters={true} className ="cp1heading bold  ">
+                                   <Col md="12" className="col-xs-12">
+                                        Order Id : 
+                                        {this.state.openEnquiries[0].openEnquiriesResponse.orderCode}
+                                       </Col>
+                               </Row>
+                          </Col>                            
+                </Row>
                 {this.state.openEnquiries.map((item)=> 
                     <>
                     {item.openEnquiriesResponse.historyProductId == null
@@ -244,11 +269,11 @@ export class Buyerorder extends Component {
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                         </div>
                                         <div>
-                                            <div noGutters={true} >
+                                            {/* <div noGutters={true} >
                                                 <Col className="leEnqid bold">
                                                 Order Id : {item.openEnquiriesResponse.enquiryCode}
                                                 </Col>
-                                            </div>
+                                            </div> */}
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
                                                 Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
@@ -774,37 +799,12 @@ export class Buyerorder extends Component {
                
                     </>
                     }
-                    <Row>
-                        <Col className="col-xs-12 text-center leEnqshowmore">
-                            <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
-                        </Col>
-                    </Row>
-
-                    <div className="colorbardiv">      
-                            <img src={logos.colorbar} className="colorbarimg"></img>
-                    </div>
+                  
                     </>
                     )}
 
                 
-                <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                            ></img>
-                          
-                          </Col>
-                          <Col sm="10" className="col-xs-9">
-                               <Row noGutters={true} className ="cp1heading bold  ">
-                                   <Col md="12" className="col-xs-12">
-                                        {/* Enquiry Id :  */}
-                                        {/* {this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode} */}
-                                       </Col>
-                               </Row>
-                          </Col>                            
-                </Row>
+                
                
 
                              

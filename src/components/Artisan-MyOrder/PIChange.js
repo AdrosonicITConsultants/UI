@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
+import { PreviewChangedPI } from './PreviewChangedPI';
 
 export class PIchange extends Component {
     constructor() {
@@ -41,7 +42,8 @@ export class PIchange extends Component {
             piSend:0,
             currency:4,
             enquiryCode:"",
-            expectedDateOfDelivery:"",     
+            expectedDateOfDelivery:"",   
+            preview: false,  
         }
     }
 
@@ -270,10 +272,10 @@ export class PIchange extends Component {
     
     </Row>
     
-    {/* <PreviewChangedPI 
+    <PreviewChangedPI 
     //  bp={this.backPI}
      enquiryId={this.state.enquiryId}
-     enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+    //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}
      rpu={this.state.rpu}
@@ -281,7 +283,7 @@ export class PIchange extends Component {
      sgst={this.state.sgst}
      cgst={this.state.cgst}
      piSend={this.state.piSend}
-     /> */}
+     />
    
                 </React.Fragment>
                 )

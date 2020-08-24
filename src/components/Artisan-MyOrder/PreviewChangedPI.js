@@ -19,7 +19,8 @@ export class PreviewChangedPI extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          enquiryId: this.props.enquiryId,
+          // enquiryId: this.props.enquiryId,
+          enquiryId:1435,
           dataload : false,
           enquiryCode:this.props.enquiryCode,
           expectedDateOfDelivery:this.props.expectedDateOfDelivery,
@@ -348,7 +349,7 @@ export class PreviewChangedPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">{this.state.enquiryCode}</p>
+       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 

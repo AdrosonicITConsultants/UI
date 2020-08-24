@@ -18,7 +18,7 @@ import Footer from "../footer/footer";
 import { ArtisanTransaction } from './ArtisanTransaction';
 import { PIchange } from './PIChange';
 import { PreviewOldchanges } from './PreviewOldchanges';
-import { ChangeRequest } from './ChangeRequest';
+import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
 
 
@@ -263,7 +263,7 @@ export class Artisanorder extends Component {
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                            <ChangeRequest />
+                                                            {/* <ChangeRequest /> */}
                                                             </Col>
                                                             </>
                                                             :null}

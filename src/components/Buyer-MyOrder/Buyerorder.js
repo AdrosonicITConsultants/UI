@@ -18,6 +18,9 @@ import Footer from "../footer/footer";
 import { BuyerTransaction } from './BuyerTransaction';
 import { BuyerRecentList } from '../BuyerTransaction/BuyerRecentList';
 import Diffdays from '../BuyerOrder/Diffdays';
+import { ChangeRequest } from './ChangeRequest';
+import { CRaccepted } from './CRaccepted';
+import { BuyerPreviewNewPI } from './BuyerPreviewNewPI';
 
 
 
@@ -890,11 +893,11 @@ export class Buyerorder extends Component {
 
                                                                 {this.state.proformainvoice? 
                                                                 <>
-                                                                <Col sm={1}></Col>
-                                                                <Col sm={8}>
-                                                                 <div>
-                                                                <h6>PI...</h6>
-                                                                </div>
+                                                                {/* <Col sm={1}></Col> */}
+                                                                <Col sm={10}>
+                                                               <BuyerPreviewNewPI
+                                                               enquiryCode={this.state.enquiryCode}
+                                                                />
                                                                 </Col>
                                                                 </>
                                                                 :
@@ -908,9 +911,8 @@ export class Buyerorder extends Component {
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                             <div>
-                                                            <h6>CR</h6>
-                                                            </div>
+                                                            {/* <ChangeRequest /> */}
+                                                            <CRaccepted />
                                                             </Col>
                                                             </>
                                                             :null}

@@ -6,7 +6,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewChangedPI.css";
+// import "./BuyerOldPi.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -20,7 +20,7 @@ const options = {
     unit: 'in',
     format: [1500,1000]
 };
-export class PreviewChangedPI extends Component {
+export class BuyerOldPi extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
@@ -87,7 +87,7 @@ export class PreviewChangedPI extends Component {
             console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
-                  TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
+                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -182,7 +182,7 @@ export class PreviewChangedPI extends Component {
             this.setState({sendPI : response.data,
               },()=>{
             console.log(this.state.sendPI);
-           this.componentDidMount();
+           
             });
             customToast.success("PI Details send successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -234,7 +234,7 @@ export class PreviewChangedPI extends Component {
 </Col>
 
    </Row> */}
-   <Row noGutters={true}>
+   <Row noGutters={true} style={{marginBottom:"15px"}}>
         <Col className="col-xs-6 bold" >
        
         {/* {this.state.piSend === 1?
@@ -253,13 +253,13 @@ export class PreviewChangedPI extends Component {
       
          </Col> */}
          <Col className="col-xs-2">
-         {this.state.piSend === 1?
+         {/* {this.state.piSend === 1?
     ""        :
         <button  disabled={this.state.sendPI} 
         onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
         style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
         Send updated PI</button>
-    }
+    } */}
          </Col>
     </Row>
    <Row noGutters={true}>
@@ -821,18 +821,18 @@ export class PreviewChangedPI extends Component {
 
 
 
-  {this.state.piSend=== 1  ?
+  {this.state.piSend=== 1 || this.props.old ?
 ""
 :
 <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
 }
 
-{this.state.piSend === 1?
+{/* {this.state.piSend === 1?
 ""
 :
 <button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/>  Send updated PI</button>
 
-}
+} */}
 </span>
  {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
@@ -854,5 +854,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(PreviewChangedPI);
+const connectedLoginPage = connect(mapStateToProps)(BuyerOldPi);
 export default connectedLoginPage;

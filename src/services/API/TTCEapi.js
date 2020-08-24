@@ -1660,6 +1660,22 @@ static sendPI(
       });
   }
 
+  // /enquiry/getOldPIData?enquiryId=1435
+
+  static getOldPIData(enquiryId) {
+    let url = ApiUrl + "/enquiry/getOldPIData?enquiryId="+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static getClusters() {
     let url = ApiUrl + "/cluster/getAllClusters";
 

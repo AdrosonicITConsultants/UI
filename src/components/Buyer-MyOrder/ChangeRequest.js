@@ -6,7 +6,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewInvoice.css";
+import "./Buyermyorder.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -36,53 +36,37 @@ export class ChangeRequest extends Component {
      
       ChangeColor1(){
         this.setState({
-            // weftYarn:!this.state.weftYarn
             weftYarn:false,
-            color:true,
-            quantity:true,
-            size:true,
-            placement:true
         })
     }
     ChangeColor2(){
         this.setState({
-            // weftYarn:!this.state.weftYarn
-            weftYarn:true,
             color:false,
-            quantity:true,
-            size:true,
-            placement:true
         })
     }
     ChangeColor3(){
         this.setState({
-            // weftYarn:!this.state.weftYarn
-            weftYarn:true,
-            color:true,
             quantity:false,
-            size:true,
-            placement:true
         })
     }
     ChangeColor4(){
         this.setState({
-            // weftYarn:!this.state.weftYarn
-            weftYarn:true,
-            color:true,
-            quantity:true,
             size:false,
-            placement:true
         })
     }
     ChangeColor5(){
         this.setState({
-            // weftYarn:!this.state.weftYarn
-            weftYarn:true,
-            color:true,
-            quantity:true,
-            size:true,
-            placement:false
+           placement:false
         })
+    }
+
+    ReqChangesModalClose = () => {
+        document.getElementById('ReqChangesModal').style.display='none';
+
+    }
+    ReqChangesModalSHow = () => {
+        document.getElementById('ReqChangesModal').style.display='block';
+
     }
     areyousureCRModalShow = () => {
         document.getElementById('areyousureCRModal').style.display='block';
@@ -191,33 +175,68 @@ export class ChangeRequest extends Component {
                 </span>
                 </Row>
                 <br/>
-                <button onClick={this.areyousureCRModalShow}>abcd</button>
+                <Row noGutters={true}>
+                    <Col className="col-xs-12"style={{textAlign:"center"}}>
+                <button className="proccedwithadvpaybtn" onClick={this.ReqChangesModalSHow}
+                    >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+                </button>
+                </Col>
+                </Row>
+               
+                {/* <button >abcd</button> */}
             
-    {/* _________________________________________Modal_________________________________________________ */}
+    {/* _________________________________________Modal_1________________________________________________ */}
                                           
-    <div id="areyousureCRModal" class="w3-modal">
+    <div id="ReqChangesModal" class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
                                                                     <Col className="col-xs-12 ">
-                                                                       <h1 className="areyousureh1 fontplay">Are you sure ?</h1> 
+                                                                       <h1 className="areyousurecrh1 fontplay">Are you sure ?</h1> 
                                                                         <br/>
-                                                                       <b className="areyousurenote ">You are about to accept the change!</b> 
+                                                                       <b className="CRare ">You are requesting changes for</b> 
                                                                        
                                                                     </Col>
                                                                 </Row>
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+                                                                    <Col className="col-xs-12 ">
+                                                                    <div className="crbox">
+                                                                            <p className="Crh">Weft Yarn</p>
+                                                                            <p className="changereqcolor">Blue</p>
+                                                                        </div>
+                                                                        <div className="crbox">
+                                                                            <p className="Crh">color</p>
+                                                                            <p className="changereqcolor">Blue</p>
+                                                                        </div>
+                                                                        <div className="crbox">
+                                                                            <p className="Crh">Quantity</p>
+                                                                            <p className="changereqcolor">
+                                                                            <span><b style={{color:"darkgrey"}}>20 --------------</b><b>26</b></span>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div className="crbox">
+                                                                            <p className="Crh">Motif Size</p>
+                                                                            <p className="changereqcolor">Blue</p>
+                                                                        </div>
+                                                                        <div className="crbox">
+                                                                            <p className="Crh">Motif placement</p>
+                                                                            <p className="changereqcolor">Blue</p>
+                                                                        </div>
+                                                                        
+                                                                        </Col>
+                                                                        </Row>
                                                                 
                                                                 <Row noGutters={true}>
                                                                 <Col className="col-xs-12" style={{textAlign:"center"}}>
-                                                                    <p className="wanttodis">Want to discuss more ?</p>
-                                                                    <button className="gobacktoeditdet Chathere">
-                                                                        <img src={logos.chatwhite} style={{height:"15px",marginRight:"5px"}}/>
-                                                                        Go to this enquiry chat</button>
+                                                                    <p className="crmnote">This change request may or may not be accepted.
+                                                                    <br/>You can raise change request if rejected by first discussing 
+                                                                    <br/>with artisan in advance to avoid any rejection.</p>
+                                                                    
                                                                         <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={this.areyousureCRModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={this.ReqChangesModalClose} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                     <span >
                                                                         <button
-                                                                         onClick={this.areyousureCRModalClose}
+                                                                         onClick={this.ReqChangesModalClose}
                                                                        className="buyerMOQAcceptModalOkayButton">Ok</button></span>
                                                                 </div>
                                                                   
@@ -230,7 +249,8 @@ export class ChangeRequest extends Component {
                                                 </div>
 
 
-{/* ___________________________________________________________________________________________________ */}
+
+    
 <br/>
 </React.Fragment>
         )

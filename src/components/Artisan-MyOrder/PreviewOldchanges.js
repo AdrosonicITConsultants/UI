@@ -6,7 +6,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewInvoice.css";
+// import "./PreviewOldchanges.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -14,34 +14,227 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
-
+const ref = React.createRef();
+const options = {
+    orientation: 'landscape',
+    unit: 'in',
+    format: [1500,1000]
+};
 export class PreviewOldchanges extends Component {
     constructor(props) {
         super(props);
+        var today = new Date(),
+        date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
+
         this.state = {
-   
-            piSend:0,
-            artisanUser:true
+          // enquiryId: this.props.enquiryId,
+          enquiryId:1435,
+          time: '',
+           currentDate: date,
+          dataload : false,
+          enquiryCode:this.props.enquiryCode,
+          expectedDateOfDelivery:this.props.expectedDateOfDelivery,
+          cgst:this.props.cgst,
+          hsn:this.props.hsn,
+          rpu:this.props.rpu,
+          quantity:this.props.quantity,
+          sgst:this.props.sgst,
+          piSend:this.props.piSend,
+          previewPI:[],
+          previewPiOrder:[],
+          buyerCustomProduct:[],
+          paymentDetails:[],
+          artisanUser:[],
+          addressses:[],
+          generatedBy:[],
+          productCategory:[],
+          companyDetails:[],
+          sendPI: false,
+          weftDye:[],
+          warpDye:[],
+          extraWeftDye:[],
+          weftYarn:[],
+          warpYarn:[],
+            extraWeftYarn:[],
+            customweftDye:[],
+            customwarpDye:[],
+            customextraWeftDye:[],
+            customweftYarn:[],
+            customwarpYarn:[],
+            customextraWeftYarn:[],
+            gobackButtonClick:false,
+            history:false,
+            customhistory:false,
+            productCategories:[],
+            yarns:[],
+            reedCounts:[],
+            dyes:[]
+
 
         };
       }
     
- 
+    
+
     BacktoPreview(){
     this.props.bp();
     }
 
-
+    componentDidMount() {
+      TTCEapi.getProductUploadData().then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(response.data);
+            this.setState({productCategories: response.data.data.productCategories,
+                yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
+                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log("ffffind")
+                        console.log(response.data.data);
+                        if(response.data.data.productHistory != null)
+                        { 
+                          this.setState({history:true});
+                         
+                          
+                        }
+                        if(response.data.data.buyerCustomProductHistory != null)
+                        { 
+                          this.setState({customhistory:true});
+                         
+                          
+                        }
+                        if(response.data.data.productCustom === false){
+                          this.setState({
+                            
+                            previewPI:response.data.data,
+                            buyerDetails: response.data.data.generatedBy,
+                            previewPiOrder:response.data.data.piOrder,
+                            buyerCustomProduct:response.data.data.buyerCustomProduct,
+                            paymentDetails:response.data.data.paymentDetails,
+                            artisanUser:response.data.data.artisanUser,
+                            generatedBy:response.data.data.generatedBy,
+                            weftDye:response.data.data.product.weftDye,
+                            warpDye:response.data.data.product.warpDye,
+                            extraWeftDye:response.data.data.product.extraWeftDye,
+                            weftYarn:response.data.data.product.weftYarn,
+                            warpYarn:response.data.data.product.warpYarn,
+                            extraWeftYarn:response.data.data.product.extraWeftYarn,
+                            dataload : true,
+            
+                        })
+                        }
+                        else{
+                          this.setState({
+                            
+                            previewPI:response.data.data,
+                            buyerDetails: response.data.data.generatedBy,
+                            previewPiOrder:response.data.data.piOrder,
+                            buyerCustomProduct:response.data.data.buyerCustomProduct,
+                            paymentDetails:response.data.data.paymentDetails,
+                            artisanUser:response.data.data.artisanUser,
+                            generatedBy:response.data.data.generatedBy,
+                            customweftDye:response.data.data.buyerCustomProduct.weftDye,
+                            customwarpDye:response.data.data.buyerCustomProduct.warpDye,
+                            customextraWeftDye:response.data.data.buyerCustomProduct.extraWeftDye,
+                            customweftYarn:response.data.data.buyerCustomProduct.weftYarn,
+                            customwarpYarn:response.data.data.buyerCustomProduct.warpYarn,
+                            customextraWeftYarn:response.data.data.buyerCustomProduct.extraWeftYarn,
+                            dataload : true,
+            
+                        })
+                        }
+                           
+                    
+                             
+                    }
+                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
+                })
+                   
+                });
+        }
+      });
+      var date = moment()
+      .utcOffset('+05:30')
+      .format(' hh:mm A');
+    this.setState({ time: date });  
+      }
+    
+      sendPI(){
+         this.setState({
+           sendPI: true,
+            gobackButtonClick:true,
+         })
+       
+        TTCEapi.sendPI(
+            this.state.enquiryId,
+            this.state.cgst,
+            this.state.expectedDateOfDelivery ,
+            this.state.hsn,
+            this.state.rpu,
+            this.state.quantity,
+            this.state.sgst
+           
+          
+           ).then((response)=>{
+               console.log(response);
+               if(response.data.valid){
+            this.setState({sendPI : response.data,
+              },()=>{
+            console.log(this.state.sendPI);
+           
+            });
+            customToast.success("PI Details send successfully", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+          } 
+        else{
+          this.setState({
+            sendPI: true,
+            gobackButtonClick:true
+          })
+          customToast.error(response.data.errorMessage , {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
+        }
+        });
+      
+    } 
+    
+    
     render(){
         return(
             
 <React.Fragment>
-
-    <>
+    {this.state.dataload?<>
    
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 <div >
-    <Row noGutters={true}>
+    {/* <Row noGutters={true}>
+        <Col className="col-xs-12" >
+       
+        {this.state.piSend === 1?
+    ""        :
+        <button  disabled={this.state.sendPI} 
+        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
+        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+        Raise PI</button>
+    }
+        </Col>
+
+
+
+
+    </Row>
+   <Row noGutters={true}>
+       <Col className="col-xs-12">
+       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
+</Col>
+
+   </Row> */}
+   <Row noGutters={true} style={{marginBottom:"15px"}}>
         <Col className="col-xs-6 bold" >
        
         {/* {this.state.piSend === 1?
@@ -51,26 +244,32 @@ export class PreviewOldchanges extends Component {
         style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
         Raise PI</button>
     } */}
-    Showing updated PI after CR
+   <img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post change request process
         </Col>
         <Col className="col-xs-4" >
          </Col>
-        <Col className="col-xs-2 viewoldpi" >
+        {/* <Col className="col-xs-2 viewoldpi" >
   <a href=""><img src={logos.recent} style={{height:"15px"}}/> View old PI</a>    
       
+         </Col> */}
+         <Col className="col-xs-2">
+         {/* {this.state.piSend === 1?
+    ""        :
+        <button  disabled={this.state.sendPI} 
+        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
+        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+        Send updated PI</button>
+    } */}
          </Col>
-
-
-
     </Row>
    <Row noGutters={true}>
-       <Col className="col-xs-4">
+       <Col className="col-xs-8">
        {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
-       Received at:
+       Received at :  {this.state.time} on  { this.state.currentDate }
 </Col>
-<Col className="col-xs-4 CRdate">
+{/* <Col className="col-xs-4 CRdate">
        Change Request date:
-</Col>
+</Col> */}
 <Col className="col-xs-4">
    <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice:
 </Col>
@@ -96,61 +295,47 @@ export class PreviewOldchanges extends Component {
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
-       {/* {this.state.artisanUser.companyDetails?
+       {this.state.artisanUser.companyDetails?
        this.state.artisanUser.companyDetails.logo ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
          <img src={logos.Smile} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
-           } */}
-           abcd
+           }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-    <b className="Ttbrand"> 
-    {/* {this.state.artisanUser.companyDetails?this.state.artisanUser.companyDetails.companyName:""} */}
-    quantity
-    </b> 
-           <p className="subttbrand">
-                {/* {this.state.artisanUser.cluster?
+    <b className="Ttbrand"> {this.state.artisanUser.companyDetails?this.state.artisanUser.companyDetails.companyName:""}</b> 
+           <p className="subttbrand"> {this.state.artisanUser.cluster?
            this.state.artisanUser.cluster.desc:
            "NA"
-           } */}
-           mno
-           </p>
+           }</p>
           <p className="subttbrand">
          
-          {/* {this.state.artisanUser.addressses[0].line1}
+          {this.state.artisanUser.addressses[0].line1}
     {this.state.artisanUser.addressses[0].line2} 
     {this.state.artisanUser.addressses[0].street}
     {this.state.artisanUser.addressses[0].pincode} 
-    {this.state.artisanUser.addressses[0].state}  {this.state.artisanUser.addressses[0].country.name} */}
-          hhhhh
+    {this.state.artisanUser.addressses[0].state}  {this.state.artisanUser.addressses[0].country.name}
+          
           </p>
-          <p className="subttbrand fontplay"> 
-          {/* {this.state.artisanUser.firstName?
+          <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
            this.state.artisanUser.firstName:
            "NA"
            }  {this.state.artisanUser.lastName?
             this.state.artisanUser.lastName:
             "NA"
-            } */}
-
-            xyz
-            </p>
+            }</p>
           
        </Col>
    </Row>
    <Row noGutters={true}>
    <Col sm={12} >
-           <b className="Mobnumpi">Mobile Number : 
-           {/* {this.state.artisanUser.mobile?
+           <b className="Mobnumpi">Mobile Number : {this.state.artisanUser.mobile?
             this.state.artisanUser.mobile:
             this.state.artisanUser.alternateMobile?
             this.state.artisanUser.alternateMobile : "NA"
-            } */}
-            abc
-            </b>
+            }</b>
        </Col>
    </Row>
     </Col>
@@ -161,48 +346,38 @@ export class PreviewOldchanges extends Component {
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
 
-     123
+     
         
-       {/* {this.state.buyerDetails.companyDetails.logo ? 
+       {this.state.buyerDetails.companyDetails.logo ? 
            <img src={TTCEapi.ImageUrl+'User/'+this.state.buyerDetails.id+'/CompanyDetails/Logo/'+this.state.buyerDetails.companyDetails.logo} className="Pilogoimg"></img>
-           :  <img className="Pilogoimg" src={logos.Smile} /> } */}
+           :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
-        <b className="Ttbrand">
-            {/* {this.state.generatedBy.companyDetails.companyName} */}
-            companyDetails
-            </b> 
+        <b className="Ttbrand">{this.state.generatedBy.companyDetails.companyName}</b> 
           <br/>
           <b className="RAcss subttbrand">Registered Address:</b>
           <p className="subttbrand"> 
-          buyerDetails
-          {/* {this.state.buyerDetails.addressses[0].line1}
+          {this.state.buyerDetails.addressses[0].line1}
     {this.state.buyerDetails.addressses[0].line2} 
     {this.state.buyerDetails.addressses[0].street}
     {this.state.buyerDetails.addressses[0].pincode}
-    {this.state.buyerDetails.addressses[0].state}  {this.state.buyerDetails.addressses[0].country.name} */}
+    {this.state.buyerDetails.addressses[0].state}  {this.state.buyerDetails.addressses[0].country.name}
           </p>
          
-          <p className="subttbrand fontplay"> 
-          {/* {this.state.generatedBy.firstName?
+          <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
            this.state.generatedBy.firstName:
            "NA"
            }  {this.state.generatedBy.lastName?
             this.state.generatedBy.lastName:
             "NA"
-            } */}
-            generatedBy
-            </p>
+            }</p>
             
           
        </Col>
    </Row>
    <Row noGutters={true}>
        <Col sm={12} >
-        <b className="Mobnumpi">Mobile Number : 
-        {/* {this.state.generatedBy.mobile?this.state.generatedBy.mobile:this.state.generatedBy.alternateMobile?this.state.generatedBy.alternateMobile:""} */}
-                mobile
-        </b>
+        <b className="Mobnumpi">Mobile Number : {this.state.generatedBy.mobile?this.state.generatedBy.mobile:this.state.generatedBy.alternateMobile?this.state.generatedBy.alternateMobile:""}</b>
        </Col>
    </Row>
     </Col>
@@ -232,17 +407,11 @@ export class PreviewOldchanges extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">
-           {/* {this.state.enquiryCode} */}
-           </p>
+       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
     </td>
     <td className="enqidanddatecolwidth">
-    <p className="PaymentTerm">Date: 
-    {/* {this.state.previewPiOrder.date} */}
-    </p> 
-       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No.
-        {/* {this.state.previewPiOrder.orderId} */}
-        </p>
+    <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId}</p>
     </td>
   </tr>
 </table>
@@ -282,7 +451,7 @@ export class PreviewOldchanges extends Component {
  
 {/* receipt */}
 
-{/* {this.state.previewPI.productCustom === false && this.state.dataload?
+{this.state.previewPI.productCustom === false && this.state.dataload?
 <>
 {console.log("Product  Simple")}
 <>
@@ -336,7 +505,12 @@ export class PreviewOldchanges extends Component {
      <div className="sbred wraptext">
      {this.state.previewPI.productHistory.productCategoryDesc} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
         
-      
+        {/* {this.state.previewPI.productHistory.relProduct.length > 0?
+        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
+          :
+
+          ""} */}
+       
      </div>
      <br/>
      <p>-Dimension :</p>
@@ -477,35 +651,27 @@ export class PreviewOldchanges extends Component {
      
     </>
     }
-    
+     {/* {this.state.customweftYarnCount} */}
     
         </td>
         </>
-} */}
+}
 
 
 
 
 
         <td >
-     <p className="snopi wraptext">hsn
-         {/* {this.state.previewPiOrder.hsn} */}
-         </p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
-     <p className="snopi wraptext">quantity
-         {/* {this.state.previewPiOrder.quantity} */}
-         </p>
+     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">ppu
-         {/* {this.state.previewPiOrder.ppu} */}
-         </p>
+     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">totalamt
-         {/* {(this.state.previewPiOrder.totalAmount).toFixed(2)} */}
-         </p>
+     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -515,12 +681,8 @@ export class PreviewOldchanges extends Component {
         </td>
         <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b >
-          {/* @ {this.state.previewPiOrder.sgst} */}
-          </b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> 
-         {/* @ {this.state.previewPiOrder.cgst} */}
-         </b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
         </td>
      <td >
      <h3 className="snopi wraptext"></h3>
@@ -534,12 +696,8 @@ export class PreviewOldchanges extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-<h3 className="snopi wraptext">
-    {/* {(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)} */}
-    </h3>
-     <h3 className="snopi wraptext">
-         {/* {(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)} */}
-     </h3>
+<h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -560,10 +718,8 @@ export class PreviewOldchanges extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  
-     {/* {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
-     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) } */}
-     </h3>
+     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
@@ -577,19 +733,17 @@ export class PreviewOldchanges extends Component {
          <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-        <h3 className="freightch snopi"><b>
-            {/* {this.state.paymentDetails[0].bankName} */}
-            </b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
-       {/* {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"} */}
+       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
           
           </span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
-      {/* {this.state.paymentDetails[0]?
+      {this.state.paymentDetails[0]?
           <> {this.state.paymentDetails[0].ifsc}</>
         :
-        "NA"} */}
+        "NA"}
           </span></h3>
       {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
 
@@ -629,9 +783,7 @@ export class PreviewOldchanges extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">
-         {/* {this.state.previewPiOrder.expectedDateOfDelivery} */}
-         </span></h3>
+     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
         </td>
         <td >
      <p className="snopi wraptext"></p>
@@ -675,12 +827,12 @@ export class PreviewOldchanges extends Component {
 <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
 }
 
-{this.state.piSend === 1?
+{/* {this.state.piSend === 1?
 ""
 :
-<button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
+<button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/>  Send updated PI</button>
 
-}
+} */}
 </span>
  {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
@@ -690,7 +842,7 @@ export class PreviewOldchanges extends Component {
 {/* </Container> */}
 {/* <Footer/> */}
 </>
-    
+    :<></>}
 </React.Fragment>
         )
     }

@@ -171,7 +171,13 @@ import bellpopup from "./bell popup.svg"
 import Iconfeatherbell from "./Icon feather-bell.svg"
 import filter from "./filter.svg"
 import Iconfeatherupload from "./Icon feather-upload.svg"
+import sadred from "./sad red.svg"
+import acceptgreen from "./accept green.svg"
+import postchangerequesticon from "./post change request icon.svg"
 export default {
+  postchangerequesticon,
+  acceptgreen,
+  sadred,
   Iconfeatherupload,
   filter,
   Iconfeatherbell,

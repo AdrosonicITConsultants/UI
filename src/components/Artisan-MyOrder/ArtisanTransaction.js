@@ -381,6 +381,7 @@ notifyModalShow(id,notifyId){
                     {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
 
 <Row noGutters={true}>
+<Col className="col-xs-3" sm="1"></Col>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
 {item.transactionOngoing.transactionOn}
@@ -479,13 +480,13 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 )}
 
 </Col>
-<Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
+{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}
 // onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
-</Col>
+</Col> */}
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
 

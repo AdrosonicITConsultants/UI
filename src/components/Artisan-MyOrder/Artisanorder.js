@@ -16,6 +16,10 @@ import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { ArtisanTransaction } from './ArtisanTransaction';
+import { PIchange } from './PIChange';
+import { PreviewOldchanges } from './PreviewOldchanges';
+import { ChangeRequest } from './ChangeRequest';
+import { PreviewChangedPI } from './PreviewChangedPI';
 
 
 
@@ -243,9 +247,9 @@ export class Artisanorder extends Component {
                                                                 <>
                                                                 <Col sm={1}></Col>
                                                                 <Col sm={8}>
-                                                                 <div>
-                                                                <h6>PI...</h6>
-                                                                </div>
+                                                                  <PIchange />
+                                                                  {/* <PreviewOldchanges /> */}
+                                                                 
                                                                 </Col>
                                                                 </>
                                                                 :
@@ -259,9 +263,7 @@ export class Artisanorder extends Component {
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                             <div>
-                                                            <h6>CR</h6>
-                                                            </div>
+                                                            <ChangeRequest />
                                                             </Col>
                                                             </>
                                                             :null}

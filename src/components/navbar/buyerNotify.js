@@ -100,7 +100,7 @@ class BuyerNotifications extends Component {
         {/* {this.state.getProductsInWishlist.length==0? */}
 
         <>
-          <body onload="window.location.reload()"></body>
+          {/* <body onload="window.location.reload()"></body> */}
           <Container className="wishlistbg">
             <Row noGutters={true}>
               <Col md="1">

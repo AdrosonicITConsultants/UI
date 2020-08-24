@@ -46,13 +46,13 @@ export class PIchange extends Component {
     }
 
 
-    savePIDetails(){
+    revisedPI(){
         var regex = /[1-9]|\./
         if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 console.log(params);
-                TTCEapi.savePi(
+                TTCEapi.revisedPI(
                     params.code,
                     this.state.cgst,
                     this.state.dod ,
@@ -73,7 +73,7 @@ export class PIchange extends Component {
                         showValidationPi: false,
                       
                     },()=>{
-                    console.log(this.preview);
+                    // console.log(this.preview);
                    
                     });
                     customToast.success("PI Details saved successfully", {
@@ -112,62 +112,7 @@ export class PIchange extends Component {
     document.getElementById('id09'+ id).style.display='none';
     } 
 
-    savePIDetails(){
-        var regex = /[1-9]|\./
-        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
-            if(document.getElementById('agree').checked){
-                let params = queryString.parse(this.props.location.search);
-                console.log(params);
-                TTCEapi.savePi(
-                    params.code,
-                    this.state.cgst,
-                    this.state.dod ,
-                    this.state.hsncode,
-                    this.state.rpu,
-                    this.state.quantity,
-                    this.state.sgst,
-                  
-                   ).then((response)=>
-                   {
-                       if(response.data.valid){
-                        this.state.preview = true;   
-                        this.setState({  
-                        preview: true,
-                        savePi : response.data,
-                        isPidetail:!this.state.isPidetail,
-                        showValidationPi: false,
-                      
-                    },()=>{
-                    console.log(this.preview);
-                   
-                    });
-                    customToast.success("PI Details saved successfully", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: true,
-                      });
-                    //   browserHistory.push("/Preview");
-              }  });
-        
-            }
-            else{
-                customToast.error("Please agree to T&C", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-            }
-           
-            }
-         
-
-      else{
-        this.setState({
-            showValidationPi: true,
-           
-        //   message : "Invalid PAN Number"
-      });
-      
-      }
-    }
+    
     handlePiEdit(){
         
         this.setState({
@@ -319,7 +264,7 @@ export class PIchange extends Component {
     <Row noGutters={true}>
     <Col sm={12} className="text-center">
     
-    <button className="previewandpi" onClick={() => this.savePIDetails()}>
+    <button className="previewandpi" onClick={() => this.revisedPI()}>
     <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
     </Col>
     

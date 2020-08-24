@@ -1435,7 +1435,8 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/savePi/{enquiryId}?enquiryId=1435
+  
 
   static saveMoq(
     enquiryId,
@@ -1469,6 +1470,45 @@ class TTCEapi {
         return error.response;
       });
   } 
+
+  // http://101.53.153.96:8090/enquiry/revisedPI?enquiryId=%201435
+
+  static revisedPI(
+    enquiryId,
+     cgst,
+     dod,
+     hsncode,
+     rpu,
+     quantity,
+     sgst,
+     
+      ) {
+      let url = ApiUrl + "/enquiry/revisedPI?enquiryId=%20"+ enquiryId;
+     var data =
+      {
+        cgst: 0,
+        expectedDateOfDelivery: dod,
+        hsn: hsncode,
+        ppu: rpu,
+        quantity:quantity,
+        sgst:0
+      }
+     console.log(data)
+     var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+      return axios
+        .post(url,data,config)
+        .then((response) => {
+          console.log(response);
+          return response;
+        })
+        .catch((error) => {
+          return error.response;
+        });
+    }
 
 
   static savePi(

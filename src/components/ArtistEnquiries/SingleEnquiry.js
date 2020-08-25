@@ -78,7 +78,6 @@ export class SingleEnquiry extends Component {
        ToggleDeleteClose = () => {
         document.getElementById('id01').style.display='none';
        }
-
        stateupdate = () => {
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
@@ -93,7 +92,7 @@ export class SingleEnquiry extends Component {
         }
         else innerID = 0;
         if(this.state.Progressidnext == 4)
-        {
+        {   
             TTCEapi.validateAdvancePaymentFromArtisan(parseInt(params.code),1).then((response)=>{
                 if(response.data.valid)
                 {
@@ -113,28 +112,61 @@ export class SingleEnquiry extends Component {
             })
         }
         else{
-            TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
-                if(response.data.valid)
-                {   customToast.success("Product Status Updated", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                    this.componentDidMount();
-                    console.log("updated");
-                }
-                else{
+            if(this.state.Progressidnext == 5 && innerID == 5 ){
+                TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
+                    if(response.data.valid){
+
+                    
+                TTCEapi.progressUpdate(6,parseInt(params.code),0).then((response)=>{
+                    if(response.data.valid)
+                    {   customToast.success("Product Status Updated", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                        this.componentDidMount();
+                        console.log("updated");
+                    }
+                    else{
+                        customToast.error(response.data.errorMessage, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                    }
+                });
+                }else{
                     customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
                 }
             });
-            
-
+            }
+            else{
+                TTCEapi.progressUpdate(parseInt(this.state.Progressidnext),parseInt(params.code),innerID ).then((response)=>{
+                    if(response.data.valid)
+                    {   customToast.success("Product Status Updated", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                        this.componentDidMount();
+                        console.log("updated");
+                    }
+                    else{
+                        customToast.error(response.data.errorMessage, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                    }
+                });
+                
+    
+            }
         }
+           
         
         
        }
+      
     buyersDetailsbtn(){
       
         this.setState((prevState) => {
@@ -872,8 +904,8 @@ export class SingleEnquiry extends Component {
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 14 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                    <Row noGutters={true} className="text-center">
+                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -906,12 +938,17 @@ export class SingleEnquiry extends Component {
                                  {this.state.enquiryStagesAvailable.map((item1) => 
                                     item1.orderStages.id > 3 
                                     ?
-                                    <Col className="col-xs-12 mb7">
+                                    <>
+                                    <Col className="col-xs-7 mb7 text-left">
                                         {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
                                         {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
                                         {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-                                        {item1.orderStages.desc}
+                                 {" "}{item1.orderStages.desc}
                                     </Col>
+                                     <Col className="col-xs-5 mb7">
+                                      {item1.orderStages.id == (this.state.Progressidnext) ?  <button className="markCompletedButton" onClick={this.stateupdate}> Mark Completed</button> :<></> }
+                                    </Col>
+                                 </>
                                     :
                                     <>
                                     </>
@@ -922,49 +959,68 @@ export class SingleEnquiry extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                                     item1.id > 3
                                     ?
-                              <>
+                                        <>
                                         {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
                                         ?
+                                            <>
+                                                {this.state.innerEnquiryStages.map((item2) => 
+                                                    <>
+                                                    <Col className="col-xs-7 mb7 text-left">
+                                                    {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
+                                                    {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item2.stage}
+                                                    </Col>
+                                                    <Col className="col-xs-5 mb7 h20">
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
+
+                                                    </Col>
+                                                    </>
+                                                )}
+                                            </>
+                                        :
                                         <>
-                                        {this.state.innerEnquiryStages.map((item2) => 
-                                         <Col className="col-xs-12 mb7">
-                                        {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item1.id == 5
+                                        ?
+                                        <>
+                                    {
+                                        this.state.innerEnquiryStages.map((item2) => 
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
                                         {item2.stage}
                                         </Col>
-                                        )}
+                                        <Col className="col-xs-5 mb7 h20">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 5 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+
+                                        </Col>
                                         </>
-                                    :
-                                    <>
-                                    {item1.id == 5
-                                    ?
-                                    <>
-                                    {
-                                    this.state.innerEnquiryStages.map((item2) => 
-                                        <Col className="col-xs-12 mb7">
-                                       {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
-                                       {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
-                                       {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
-                                       {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
-                                       {item2.stage}
-                                       </Col>
-                                       )
-                                    }
+                                        )
+                                        }
                                     </>
                                         :
-                                        <Col className="col-xs-12 mb7">
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
 
-                                        {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                            {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                            {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                        {/* <div className="greenButtonstatus">
-                                        </div> */}
-                                        {item1.desc}
-                                        </Col>
+                                                {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                                {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item1.desc}
+                                            </Col>
+                                            <Col className="col-xs-5 mb7 h20">
+                                                {}
+                                                {item1.id == 6 && item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId == 4 ? <button className="markCompletedButton" onClick={this.stateupdate}>Complete</button>:<></>}
+                                                {item1.id == (this.state.progressid+1) ?<button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
 
+                                            </Col>
+                                        </>
 
-                                    }
+                                         }
                                    
                                     </>
                                     }
@@ -981,21 +1037,15 @@ export class SingleEnquiry extends Component {
                                
                             </Row>
                             <br></br>
-                            <Row noGutters={true}>
-                            <button className="markCompletedButton"
-                            onClick={this.stateupdate}                           
-                                >
-                                Mark Completed
-                                </button>
-                            </Row>
-                            <br></br>
+                         
                             
                         </div>
                         </div>
                     </div>
 
                 </Row>
-               
+             
+                    
                 </>
                 :
                 <>

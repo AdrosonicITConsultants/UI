@@ -33,7 +33,8 @@ export class ArtisanTransaction extends Component {
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-            notifyId:""
+            notifyId:"",
+            enquiryCode : this.props.enquiryCode,
 
         }
      
@@ -303,7 +304,7 @@ notifyModalShow(id,notifyId){
                         //  dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          console.log(this.state.getTransactionActions);
-                         TTCEapi.getTransactions(1416).then((response)=>{
+                         TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
@@ -346,7 +347,7 @@ notifyModalShow(id,notifyId){
                   </Col>
               </Row>
                   :
-                <Container>
+                <>
                    {/* <Row className="mt-5">
                        <Col md="1"></Col>
                  <Col md="3" >
@@ -688,15 +689,15 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             
 
                
-                </Container>
+                </>
               :
-              <Container>
+              <>
                   <Row noGutters={true}>
                     <Col className="col-xs-12  text-center">
                        Loading data ..
                     </Col>
                 </Row>
-                  </Container>}
+                  </>}
             </React.Fragment>
         )
     }

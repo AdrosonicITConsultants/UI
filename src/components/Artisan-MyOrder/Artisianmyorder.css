@@ -14,7 +14,9 @@
     font-family: none;
     font-weight: bold;
 }
-
+.h20{
+    height: 20px;
+}
 .viewoldpi{
     font-size: 14px;
     font-weight: 600;

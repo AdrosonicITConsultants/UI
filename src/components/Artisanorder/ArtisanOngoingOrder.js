@@ -26,7 +26,13 @@ export class ArtisanOngoingOrder extends Component {
         
 
     } 
-    
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+
+       ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       }
     ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
        }
@@ -37,11 +43,36 @@ export class ArtisanOngoingOrder extends Component {
     componentDidMount(){
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
-            {
+            {   
+                TTCEapi.getEnquirStages().then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log(response.data.data);
+                        var rr = response.data.data;
+                        rr[0].desc = "Quotation Accepted";
+                        rr[1].desc = "Order Details";
+                        this.setState({enquiryStagesMTO:rr})
+                    }
+                })
+                TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log(response.data.data);
+                        this.setState({enquiryStagesAvailable:response.data.data})
+                    }
+                })
+                TTCEapi.getInnerEnquirStages().then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log(response.data.data);
+                        this.setState({innerEnquiryStages:response.data.data})
+                    }
+                })
+               
                 console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getOpenEnquiries().then((response1)=>{
+                        TTCEapi.getOpenOrders().then((response1)=>{
                             console.log("")
                             if(response1.data.valid)
                             {   console.log("heree");
@@ -52,32 +83,24 @@ export class ArtisanOngoingOrder extends Component {
                     });
             }
         })
-        TTCEapi.getEnquirStages().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesMTO:response.data.data})
-            }
-        })
-        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({enquiryStagesAvailable:response.data.data})
-            }
-        })
-        TTCEapi.getInnerEnquirStages().then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({innerEnquiryStages:response.data.data})
-            }
-        })
         
         
     } 
     individualpage(id){
-        browserHistory.push("/enquiryDetails?code=" + id)
+        browserHistory.push("/artisanorder?code=" + id)
+    }
+    daysleft(name)
+    {
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd = 10;
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
     }
     render() {
         return (
@@ -90,8 +113,8 @@ export class ArtisanOngoingOrder extends Component {
                 <>
                 <Row noGutters={true}>
                     <Col className="col-xs-12 text-center">
-                        No Open Enquiries.
-                    </Col>
+                    No Ongoing Order.
+                   </Col>
                 </Row>
                 </>
                 :
@@ -102,10 +125,17 @@ export class ArtisanOngoingOrder extends Component {
                 ?
                 <>
                 {/* for no change in product data */}
-                 <hr></hr>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
+                    <Row noGutters={true}>
+                            <Col className="col-xs-12 convertedDate">
+                                Converted to order on :
+                                <Moment format="DD-MM-YYYY">
+                                {item.openEnquiriesResponse.orderCreatedOn}
+                                </Moment>     
+                            </Col>
+                        </Row>
                         <Row noGutters={true}>
                             <Col sm="9">
                                 <div className="imageinlist" > 
@@ -128,11 +158,16 @@ export class ArtisanOngoingOrder extends Component {
                                     
                                 </div>
                                 <div>
-                                  <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div>
+                                <div noGutters={true} >
+                                                <Col className="leEnqid bold">
+                                                Order Id : {item.openEnquiriesResponse.orderCode}
+                                                </Col>
+                                            </div>
+                                            <div noGutters={true} >
+                                                <Col className="lesmallEnqid bold">
+                                                Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
+                                                </Col>
+                                            </div>
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
@@ -231,19 +266,25 @@ export class ArtisanOngoingOrder extends Component {
                     
                 </Row>
                 
+                <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        </Col>
+                </Row>
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           Order Status
                            </Col>
                        </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                {/* <Col className="col-xs-1"></Col> */}
+                    <Col className="col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 ">
                            <div className="progressbarfont">
@@ -252,7 +293,7 @@ export class ArtisanOngoingOrder extends Component {
                             ?
                             <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
-                            
+                                <li >Completed</li>
                                 </ul>
                             :
                             <>
@@ -351,6 +392,14 @@ export class ArtisanOngoingOrder extends Component {
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
+                    <Row noGutters={true}>
+                                <Col className="col-xs-12 convertedDate">
+                                    Converted to order on :
+                                    <Moment format="DD-MM-YYYY">
+                                    {item.openEnquiriesResponse.orderCreatedOn}
+                                    </Moment>     
+                                </Col>
+                            </Row>
                         <Row noGutters={true}>
                             <Col sm="9">
                                 <div className="imageinlist" > 
@@ -373,11 +422,16 @@ export class ArtisanOngoingOrder extends Component {
                                     
                                 </div>
                                 <div>
-                                  <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div>
+                                <div noGutters={true} >
+                                        <Col className="leEnqid bold">
+                                        Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                        </Col>
+                                    </div>
+                                    <div noGutters={true} >
+                                        <Col className="lesmallEnqid bold">
+                                        Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                        </Col>
+                                    </div>
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
@@ -476,9 +530,16 @@ export class ArtisanOngoingOrder extends Component {
                     
                 </Row>
                 
+                <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        </Col>
+                </Row>
+                
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                {/* <Col className="col-xs-1"></Col> */}
+                    <Col className="col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
                            Enquiry Status
@@ -497,6 +558,7 @@ export class ArtisanOngoingOrder extends Component {
                             ?
                             <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                                <li >Completed</li>
                                 </ul>
                             :
                             <>

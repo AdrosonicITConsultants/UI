@@ -911,8 +911,8 @@ export class Buyerorder extends Component {
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                            {/* <ChangeRequest /> */}
-                                                            <CRaccepted />
+                                                            <ChangeRequest />
+                                                            {/* <CRaccepted /> */}
                                                             </Col>
                                                             </>
                                                             :null}

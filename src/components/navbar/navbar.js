@@ -129,6 +129,25 @@ browserHistory.push("/MyProfile");
   closesearch(){
     this.setState({isSearchClicked : !this.state.isSearchClicked})
   }
+
+  genparam = () => {
+    var userData = [];
+    userData = JSON.parse(localStorage.getItem('user'));
+    var jwtToken = localStorage.getItem('jwtToken');
+    console.log(jwtToken);
+    var params = {
+      "ds0.email": userData.email,
+      "ds0.Token": jwtToken,
+    };
+    var paramsAsString = JSON.stringify(params);
+    var encodedParams = encodeURIComponent(paramsAsString);
+    
+    return (
+      "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=" +
+      encodedParams
+    );
+  }
+  
   render() {
     const { results, value } = this.state;
    // debugger
@@ -517,7 +536,12 @@ browserHistory.push("/MyProfile");
                     ></img>
                   </span>
 
+                  {userTypeId === 2 ?
+                  <a href={this.genparam()}>Dashboard</a> : 
                   <a href="/">Dashboard</a>
+                  }
+
+                  
                 </li>
                 <li className="menu-item">
                   <span className="col-md-2  col-xs-2  col-sm-2">

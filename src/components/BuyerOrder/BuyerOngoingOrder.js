@@ -23,7 +23,13 @@ export class BuyerOngoingOrder extends Component {
             dataload:false,
         }
     }
-    
+    ToggleDelete = () => {
+        document.getElementById('id01').style.display='block';
+       }
+
+       ToggleDeleteClose = () => {
+        document.getElementById('id01').style.display='none';
+       } 
     componentDidMount(){
 
         TTCEapi.getProductUploadData().then((response)=>{
@@ -149,7 +155,7 @@ export class BuyerOngoingOrder extends Component {
                                         <div>
                                             <div noGutters={true} >
                                                 <Col className="leEnqid bold">
-                                                Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                                Order Id : {item.openEnquiriesResponse.orderCode}
                                                 </Col>
                                             </div>
                                             <div noGutters={true} >
@@ -270,7 +276,8 @@ export class BuyerOngoingOrder extends Component {
 
                     </Row>
                     
-                    }<hr></hr>
+                    }
+                    <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -554,7 +561,8 @@ export class BuyerOngoingOrder extends Component {
 
                     </Row>
                     
-                    }<hr></hr>
+                    }
+                    <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">

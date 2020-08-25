@@ -6,29 +6,32 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewChangedPI.css";
+// import "./BuyerPreviewNewPI.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
+import Moment from 'react-moment';
+
 import Footer from '../footer/footer';
+import { BuyerOldPi } from './BuyerOldPi';
 const ref = React.createRef();
 const options = {
     orientation: 'landscape',
     unit: 'in',
     format: [1500,1000]
 };
-export class PreviewChangedPI extends Component {
+export class BuyerPreviewNewPI extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
         this.state = {
-          // enquiryId: this.props.enquiryId,
-          enquiryId:1435,
+          enquiryId: this.props.enquiryCode,
+          // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
@@ -68,13 +71,31 @@ export class PreviewChangedPI extends Component {
             productCategories:[],
             yarns:[],
             reedCounts:[],
-            dyes:[]
+            dyes:[],
+            viewOldPi:false,
+            old:true
 
 
         };
+        this.BacktoPreview = this.BacktoPreview.bind(this);
+        this.oldbackPI = this.oldbackPI.bind(this);
+         this.viewOldPI = this.viewOldPI.bind(this);
       }
     
-    
+      viewOldPI(){
+        this.setState({
+            viewOldPi:true,
+           
+        })
+    }
+
+    oldbackPI(){
+        this.setState({
+            viewOldPi: false,
+            
+           
+        })
+    }
 
     BacktoPreview(){
     this.props.bp();
@@ -87,7 +108,7 @@ export class PreviewChangedPI extends Component {
             console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
-                  TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
+                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -148,7 +169,7 @@ export class PreviewChangedPI extends Component {
                     
                              
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
+                    console.log(this.state.previewPI);
                 })
                    
                 });
@@ -182,7 +203,7 @@ export class PreviewChangedPI extends Component {
             this.setState({sendPI : response.data,
               },()=>{
             console.log(this.state.sendPI);
-           this.componentDidMount();
+           
             });
             customToast.success("PI Details send successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -208,70 +229,58 @@ export class PreviewChangedPI extends Component {
         return(
             
 <React.Fragment>
-    {this.state.dataload?<>
-   
+    {this.state.dataload?
+
+    <>
+            {this.state.viewOldPi ?
+            <BuyerOldPi
+            bp={this.oldbackPI}
+            enquiryId={this.state.enquiryId}
+            enquiryCode={this.state.enquiryCode}
+     expectedDateOfDelivery={this.state.dod}
+     hsn={this.state.hsncode}
+     rpu={this.state.rpu}
+     quantity={this.state.quantity}
+     sgst={this.state.sgst}
+     cgst={this.state.cgst}
+     piSend={this.state.piSend}/>
+
+            :
+            <>
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 <div >
-    {/* <Row noGutters={true}>
-        <Col className="col-xs-12" >
-       
-        {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Raise PI</button>
-    }
-        </Col>
-
-
-
-
-    </Row>
-   <Row noGutters={true}>
-       <Col className="col-xs-12">
-       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
-</Col>
-
-   </Row> */}
-   <Row noGutters={true}>
+  
+   <Row noGutters={true} style={{marginBottom:"20px"}}>
         <Col className="col-xs-6 bold" >
        
-        {/* {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Raise PI</button>
-    } */}
-   <img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post change request process
+       <span><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Showing updated PI after CR</span> 
         </Col>
         <Col className="col-xs-4" >
          </Col>
-        {/* <Col className="col-xs-2 viewoldpi" >
-  <a href=""><img src={logos.recent} style={{height:"15px"}}/> View old PI</a>    
+        <Col className="col-xs-2 viewoldpi" >
+        <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
+
+    onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
       
-         </Col> */}
-         <Col className="col-xs-2">
-         {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Send updated PI</button>
-    }
          </Col>
+        
     </Row>
    <Row noGutters={true}>
-       <Col className="col-xs-8">
+       <Col className="col-xs-4">
        {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
-       Received at :  {this.state.time} on  { this.state.currentDate }
+       Received at :  
+       <Moment format="DD-MM-YYYY">
+{this.state.previewPiOrder.modifiedOn}
+</Moment>
+<Moment format=" h:mm A">
+<p style={{color:"darkgray"}}>{this.state.previewPiOrder.modifiedOn}</p>
+ </Moment>
 </Col>
-{/* <Col className="col-xs-4 CRdate">
-       Change Request date:
-</Col> */}
-<Col className="col-xs-4">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice:
+<Col className="col-xs-5 CRdate">
+       Change Request date:{this.state.time} on  { this.state.currentDate }
+</Col>
+<Col className="col-xs-3">
+   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
 </Col>
 
    </Row>
@@ -407,7 +416,7 @@ export class PreviewChangedPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
+       <p className="againstpi">{this.state.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
@@ -813,36 +822,24 @@ export class PreviewChangedPI extends Component {
      </Col>
  </Row>
  </div>
- {/* ------------------------------buttons------------------------------- */}
- 
- <Row noGutters={true} className="margintoppdisc">
-     <Col className="col-xs-12 btncol">
-<span>
-
-
-
-  {this.state.piSend=== 1  ?
-""
-:
-<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
-}
-
-{this.state.piSend === 1?
-""
-:
-<button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/>  Send updated PI</button>
-
-}
-</span>
- {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
-     </Col>
- </Row>
-{/* -------------------------------------------------------------------------- */}
-
-{/* </Container> */}
-{/* <Footer/> */}
+ </> }
 </>
-    :<></>}
+   
+   :<>
+    <BuyerOldPi
+            bp={this.oldbackPI}
+            enquiryId={this.state.enquiryId}
+            enquiryCode={this.state.enquiryCode}
+    
+     expectedDateOfDelivery={this.state.dod}
+     hsn={this.state.hsncode}
+     rpu={this.state.rpu}
+     quantity={this.state.quantity}
+     sgst={this.state.sgst}
+     cgst={this.state.cgst}
+     piSend={this.state.piSend}
+     old={this.state.old}/>
+   </>}
 </React.Fragment>
         )
     }
@@ -854,5 +851,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(PreviewChangedPI);
+const connectedLoginPage = connect(mapStateToProps)(BuyerPreviewNewPI);
 export default connectedLoginPage;

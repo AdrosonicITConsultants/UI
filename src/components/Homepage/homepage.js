@@ -162,7 +162,7 @@ var homeSectionStyle = {};
                           browserHistory.push("/demo-video");                     
   
                         } else {
-                          this.refs.childa.showValidationpass();
+                          this.refs.childa.showValidationpass(response.data.errorMessage);
                         }
                       }
                     );
@@ -208,7 +208,7 @@ var homeSectionStyle = {};
                              );
                              browserHistory.push("/demo-video"); 
                            } else {
-                             this.refs.childb.showValidationpass();
+                             this.refs.childb.showValidationpass(response.data.errorMessage);
                            }
                          }
                        );

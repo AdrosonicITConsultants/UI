@@ -15,12 +15,14 @@ import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { PreviewChangedPI } from './PreviewChangedPI';
+import { PreviewOldchanges } from './PreviewOldchanges';
 
 export class PIchange extends Component {
     constructor() {
         super();
-        // this.backPI = this.backPI.bind(this);
-        //  this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
+        this.backPI = this.backPI.bind(this);
+        this.oldbackPI = this.oldbackPI.bind(this);
+         this.viewOldPI = this.viewOldPI.bind(this);
          this.handleChange = this.handleChange.bind(this);
         this.handlePiEdit= this.handlePiEdit.bind(this);
         this.state = {
@@ -42,20 +44,43 @@ export class PIchange extends Component {
             piSend:0,
             currency:4,
             enquiryCode:"",
-            expectedDateOfDelivery:"",   
-            preview: false,  
+            expectedDateOfDelivery:"",  
+            viewOldPi:false, 
+         
         }
     }
 
+    backPI(){
+        this.setState({
+            preview: false,
+            isPidetail:true
+           
+        })
+    }
 
+    oldbackPI(){
+        this.setState({
+            viewOldPi: false,
+            isPidetail:true
+           
+        })
+    }
+
+    viewOldPI(){
+        this.setState({
+            viewOldPi:true,
+           
+        })
+    }
     revisedPI(){
         var regex = /[1-9]|\./
         if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
             if(document.getElementById('agree').checked){
-                let params = queryString.parse(this.props.location.search);
-                console.log(params);
+                // let params = queryString.parse(this.props.location.search);
+                // console.log(params);
                 TTCEapi.revisedPI(
-                    params.code,
+                    // params.code,
+                    1435,
                     this.state.cgst,
                     this.state.dod ,
                     this.state.hsncode,
@@ -69,7 +94,7 @@ export class PIchange extends Component {
                        if(response.data.valid){
                         this.state.preview = true;   
                         this.setState({  
-                        // preview: true,
+                        preview: true,
                         savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
@@ -136,7 +161,37 @@ export class PIchange extends Component {
     }
 
     componentDidMount(){
-         
+        TTCEapi.getPi(1435).then((response)=>{
+            // console.log(response)
+            if(response.data.data==null){
+                this.setState({
+                    getPi : 0,
+                    quantity:0,
+                    rpu:0,
+                    dod:"",
+                    hsncode:0,
+                    cgst:0,
+                    sgst:0,
+                })
+            }
+            else {
+            this.setState({
+                getPi : response.data.data,
+                quantity:response.data.data.quantity,
+                rpu:response.data.data.ppu,
+                dod:response.data.data.date,
+                hsncode:response.data.data.hsn,
+                cgst:response.data.data.cgst,
+                sgst:response.data.data.sgst,
+                piSend:response.data.data.isSend,
+          },()=>{
+             
+             console.log(this.state.getPi);
+           
+            });
+        }
+           
+        });
         TTCEapi.getCurrencySigns().then((response)=>{
             this.setState({getCurrencySigns : response.data.data},()=>{
                 console.log(this.state.getCurrencySigns);
@@ -148,6 +203,42 @@ export class PIchange extends Component {
         return (
             <React.Fragment>
 
+{this.state.viewOldPi?
+    <PreviewOldchanges
+    bp={this.oldbackPI}
+    enquiryId={this.state.enquiryId}
+   //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+    expectedDateOfDelivery={this.state.dod}
+    hsn={this.state.hsncode}
+    rpu={this.state.rpu}
+    quantity={this.state.quantity}
+    sgst={this.state.sgst}
+    cgst={this.state.cgst}
+    piSend={this.state.piSend} />
+    :
+    <>
+
+
+
+{this.state.piSend ==1 ?
+<>
+<PreviewChangedPI 
+     bp={this.backPI}
+     enquiryId={this.state.enquiryId}
+    //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+     expectedDateOfDelivery={this.state.dod}
+     hsn={this.state.hsncode}
+     rpu={this.state.rpu}
+     quantity={this.state.quantity}
+     sgst={this.state.sgst}
+     cgst={this.state.cgst}
+     piSend={this.state.piSend}
+     />
+</>
+:
+<>
+{this.state.preview == false ?
+<>
     {this.state.piSend==1?    
     null
         :
@@ -162,13 +253,15 @@ export class PIchange extends Component {
     }
     <Row noGutters={true}>
         <Col style={{textAlign:"center"}} className="playfair">
-            <h3 className="postchangereq">Post Change Request Process</h3>
+            <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post Change Request Process</h3>
         <h1>Update the pro forma invoice</h1>
         <p className="crpigreennote">
             You have <strong>2</strong> days remaining to update your invoice after change request.</p>
         </Col>
         </Row>
-        
+      <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
+
+      onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
     <Row noGutters={true} className="PIcolmt BdImgCol">
     <Col sm={6} >
         <label>Quantity</label>
@@ -267,13 +360,15 @@ export class PIchange extends Component {
     <Col sm={12} className="text-center">
     
     <button className="previewandpi" onClick={() => this.revisedPI()}>
-    <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & send PI</button>
+    <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & Raise PI</button>
     </Col>
     
     </Row>
-    
+    </>
+:
+
     <PreviewChangedPI 
-    //  bp={this.backPI}
+     bp={this.backPI}
      enquiryId={this.state.enquiryId}
     //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
@@ -284,6 +379,13 @@ export class PIchange extends Component {
      cgst={this.state.cgst}
      piSend={this.state.piSend}
      />
+    }
+</>}
+
+
+
+</>
+   }
    
                 </React.Fragment>
                 )

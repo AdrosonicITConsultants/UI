@@ -134,7 +134,6 @@ browserHistory.push("/MyProfile");
     var userData = [];
     userData = JSON.parse(localStorage.getItem('user'));
     var jwtToken = localStorage.getItem('jwtToken');
-    console.log(jwtToken);
     var params = {
       "ds0.email": userData.email,
       "ds0.Token": jwtToken,

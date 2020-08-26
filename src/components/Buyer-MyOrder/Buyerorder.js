@@ -923,8 +923,18 @@ export class Buyerorder extends Component {
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
-                                                            <ChangeRequest />
+                                                            {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                             ?
+                                                            <Row noGutters={true}>
+                                                                <Col className="col-xs-12 bold font20">
+                                                                    Change request disabled by artisan
+                                                                </Col>
+                                                            </Row>
+                                                            
+                                                            : <><ChangeRequest /> 
                                                             {/* <CRaccepted /> */}
+                                                            </>
+                                                             }
                                                             </Col>
                                                             </>
                                                             :null}

@@ -1311,65 +1311,65 @@ export class Artisanorder extends Component {
                   
                     </>
                     )}
-            <br></br>         
+                   <br></br>
                 <Row noGutters={true}>
-                    <Row noGutters={true}>
-                    <Col sm={1}>
+                            <Row noGutters={true}>
+                            <Col sm={1}>
 
-                            </Col>
-                            <Col sm={2}  
-                            className={
-                                (this.state.selected == "BuyerDetails"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.transactionsbtn}>
-                            Transaction
-                            </Col>
-                            <Col sm={2} 
-                            className={
-                                (this.state.selected == "moqDetails"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.moqDetailsbtn}>
-                            Proforma Invoice 
-                            </Col>
+                                    </Col>
+                                    <Col sm={2}  
+                                    className={
+                                        (this.state.selected == "BuyerDetails"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.transactionsbtn}>
+                                    Transaction
+                                    </Col>
+                                    <Col sm={2} 
+                                    className={
+                                        (this.state.selected == "moqDetails"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.moqDetailsbtn}>
+                                    Proforma Invoice 
+                                    </Col>
 
-                            <Col sm={2} 
-                                className={
-                                (this.state.selected == "changeReq"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                                onClick={this.proformaDetailsbtn}>
-                            Change Request
-                            </Col>
-                            <Col sm={2} 
-                                className={
-                                (this.state.selected == "qualityCheck"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                                onClick={this.changeRequestbtn}>
-                                Quality Check 
-                            </Col>
-                            <Col sm={2}  
-                            className={
-                                (this.state.selected == "taxInvoice"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.qualityCheckbtn}>
-                            Tax Invoice
-                            </Col> 
-                                <Col sm={1}>
-                            
-                            </Col>
-                    </Row>
-                    <br></br>
+                                    <Col sm={2} 
+                                        className={
+                                        (this.state.selected == "changeReq"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                        onClick={this.proformaDetailsbtn}>
+                                    Change Request
+                                    </Col>
+                                    <Col sm={2} 
+                                        className={
+                                        (this.state.selected == "qualityCheck"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                        onClick={this.changeRequestbtn}>
+                                        Quality Check 
+                                    </Col>
+                                    <Col sm={2}  
+                                    className={
+                                        (this.state.selected == "taxInvoice"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.qualityCheckbtn}>
+                                    Tax Invoice
+                                    </Col> 
+                                        <Col sm={1}>
+                                    
+                                    </Col>
+                            </Row>
+                            <br></br>
 
-                                <Row noGutters={true}>
+                            <Row noGutters={true}>
                                     <Col sm={1}></Col>
                                     
 
@@ -1394,10 +1394,16 @@ export class Artisanorder extends Component {
 
                                         {this.state.proformainvoice? 
                                         <>
-                                        <Col sm={1}></Col>
-                                        <Col sm={8}>
-                                            <PIchange />
-                                            {/* <PreviewOldchanges /> */}
+                                        {/* <Col sm={1}></Col> */}
+                                        <Col sm={10}>
+                                            <PIchange 
+                                            enquiryId={this.state.enquiryCode}
+                                            enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
+                                            {/* <PreviewOldchanges 
+                                             enquiryId={this.state.enquiryCode}/> */}
+                                             {/* <PreviewChangedPI 
+                                              enquiryId={this.state.enquiryCode}
+                                             /> */}
                                             
                                         </Col>
                                         </>
@@ -1412,7 +1418,83 @@ export class Artisanorder extends Component {
                                     <>
                                     <Col sm={1}></Col>
                                     <Col sm={8}>
-                                    {/* <ChangeRequest /> */}
+                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
+                                                                    ?
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <>
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    </>
+
+                                                                    :
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusHistoryId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <>
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    
+
+                                                                    </>
+
+
+                                                                }
+                                                          
                                     </Col>
                                     </>
                                     :null}
@@ -1443,15 +1525,16 @@ export class Artisanorder extends Component {
                                 </Row>
 
   
-                               </Row>
-                               <Row>
-            <div> 
+                </Row>
+                <Row>
+                <div> 
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
               ></img>
             </div>
           </Row> 
+           
                 </Container>
                
                 </> 

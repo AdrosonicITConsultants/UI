@@ -35,6 +35,8 @@ export class ChangeRequest extends Component {
             inputPlacement: "",
             showCREmptyMessage: false,
             showCRAllEmptyMessage: false,
+            raiseCRArray: "",
+            raiseCRFinalArray: [],
         };
       }
 
@@ -44,56 +46,57 @@ export class ChangeRequest extends Component {
     }
 
     ReqChangesModalSHow = () => {
-        if((this.state.weftYarn === false && this.state.inputWeft !== "") && 
-        (this.state.color === true && this.state.inputColor === "")) {
-            this.setState({
-                showCREmptyMessage: false,
-                showCRAllEmptyMessage: false,
-            });
-            document.getElementById('ReqChangesModal').style.display='block';
-        }
-        // else if(this.state.color === false && this.state.inputColor !== "") {
+        // if((this.state.weftYarn === false && this.state.inputWeft !== "") && 
+        // (this.state.color === true && this.state.inputColor === "")) {
         //     this.setState({
         //         showCREmptyMessage: false,
         //         showCRAllEmptyMessage: false,
         //     });
         //     document.getElementById('ReqChangesModal').style.display='block';
         // }
-        // else if(this.state.quantity === false && this.state.inputQuantity !== "") {
+        // // else if(this.state.color === false && this.state.inputColor !== "") {
+        // //     this.setState({
+        // //         showCREmptyMessage: false,
+        // //         showCRAllEmptyMessage: false,
+        // //     });
+        // //     document.getElementById('ReqChangesModal').style.display='block';
+        // // }
+        // // else if(this.state.quantity === false && this.state.inputQuantity !== "") {
+        // //     this.setState({
+        // //         showCREmptyMessage: false,
+        // //         showCRAllEmptyMessage: false,
+        // //     });
+        // //     document.getElementById('ReqChangesModal').style.display='block';
+        // // }
+        // // else if(this.state.size === false && this.state.inputSize !== "") {
+        // //     this.setState({
+        // //         showCREmptyMessage: false,
+        // //         showCRAllEmptyMessage: false,
+        // //     });
+        // //     document.getElementById('ReqChangesModal').style.display='block';
+        // // }
+        // // else if(this.state.placement === false && this.state.inputPlacement !== "") {
+        // //     this.setState({
+        // //         showCREmptyMessage: false,
+        // //         showCRAllEmptyMessage: false,
+        // //     });
+        // //     document.getElementById('ReqChangesModal').style.display='block';
+        // // }
+        // else if(this.state.inputColor === "" && this.state.inputPlacement === "" && this.state.inputQuantity === "" &&
+        // this.state.inputSize === "" && this.state.inputWeft === "" && this.state.weftYarn === true && 
+        // this.state.color === true && this.state.quantity === true && this.state.size === true && this.state.placement === true) {
         //     this.setState({
+        //         showCRAllEmptyMessage: true,
         //         showCREmptyMessage: false,
+        //     });
+        // }
+        // else {
+        //     this.setState({
+        //         showCREmptyMessage: true,
         //         showCRAllEmptyMessage: false,
         //     });
-        //     document.getElementById('ReqChangesModal').style.display='block';
         // }
-        // else if(this.state.size === false && this.state.inputSize !== "") {
-        //     this.setState({
-        //         showCREmptyMessage: false,
-        //         showCRAllEmptyMessage: false,
-        //     });
-        //     document.getElementById('ReqChangesModal').style.display='block';
-        // }
-        // else if(this.state.placement === false && this.state.inputPlacement !== "") {
-        //     this.setState({
-        //         showCREmptyMessage: false,
-        //         showCRAllEmptyMessage: false,
-        //     });
-        //     document.getElementById('ReqChangesModal').style.display='block';
-        // }
-        else if(this.state.inputColor === "" && this.state.inputPlacement === "" && this.state.inputQuantity === "" &&
-        this.state.inputSize === "" && this.state.inputWeft === "" && this.state.weftYarn === true && 
-        this.state.color === true && this.state.quantity === true && this.state.size === true && this.state.placement === true) {
-            this.setState({
-                showCRAllEmptyMessage: true,
-                showCREmptyMessage: false,
-            });
-        }
-        else {
-            this.setState({
-                showCREmptyMessage: true,
-                showCRAllEmptyMessage: false,
-            });
-        }
+        document.getElementById('ReqChangesModal').style.display='block';
     }
 
     areyousureCRModalShow = () => {
@@ -166,8 +169,13 @@ export class ChangeRequest extends Component {
 
     handleInputChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
-        })
+            raiseCRArray: {
+                requestItemsId: e.target.id,
+                requestText: e.target.value,
+            }
+        });
+        this.state.raiseCRFinalArray.push(this.state.raiseCRArray);
+        console.log(this.state.raiseCRFinalArray);
     }
     
     render(){
@@ -191,7 +199,7 @@ export class ChangeRequest extends Component {
               <b>change in weft yarn</b>  
             </Col>
             <Col className="col-xs-9">
-              <input type="text" className="CRinput" disabled={this.state.weftYarn} name="inputWeft" onChange={this.handleInputChange}/>
+              <input type="text" className="CRinput" disabled={this.state.weftYarn} onChange={this.handleInputChange} id="1"/>
             </Col>
         </span>  
     </Row>
@@ -203,7 +211,7 @@ export class ChangeRequest extends Component {
              <b>change in color</b>  
             </Col>
             <Col className="col-xs-9">
-            <input type="text" className="CRinput" disabled={this.state.color} name="inputColor" onChange={this.handleInputChange}/>
+            <input type="text" className="CRinput" disabled={this.state.color} onChange={this.handleInputChange} id="2"/>
             </Col>
 
                 </span>
@@ -216,7 +224,7 @@ export class ChangeRequest extends Component {
                <b>change in quantity</b>  
             </Col>
             <Col className="col-xs-9">
-            <input type="text" className="CRinput" disabled={this.state.quantity} name="inputQuantity" onChange={this.handleInputChange}/>
+            <input type="text" className="CRinput" disabled={this.state.quantity} onChange={this.handleInputChange} id="3"/>
             </Col>
 
      </span>
@@ -228,7 +236,7 @@ export class ChangeRequest extends Component {
                <b>change in motif size</b>  
             </Col>
             <Col className="col-xs-9">
-            <input type="text" className="CRinput" disabled={this.state.size} name="inputSize" onChange={this.handleInputChange}/>
+            <input type="text" className="CRinput" disabled={this.state.size} onChange={this.handleInputChange} id="4"/>
             </Col>
 
      </span>
@@ -241,7 +249,7 @@ export class ChangeRequest extends Component {
                 <b style={{marginLeft:"30px"}}>  placement</b>  
             </Col>
             <Col className="col-xs-9">
-            <input type="text" className="CRinput" disabled={this.state.placement} name="inputPlacement" onChange={this.handleInputChange}/>
+            <input type="text" className="CRinput" disabled={this.state.placement} onChange={this.handleInputChange} id="5"/>
             </Col>
 
                 </span>

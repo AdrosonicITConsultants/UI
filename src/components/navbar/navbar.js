@@ -253,6 +253,7 @@ browserHistory.push("/MyProfile");
 
             {userTypeId === 1 ? (
               <li className="menu-item">
+                <a href="/artisanOrders">
                 {this.state.isfavHovered ? (
                   <>
                     <img
@@ -281,6 +282,7 @@ browserHistory.push("/MyProfile");
                     </span>
                   </>
                 )}
+                </a>
               </li>
             ) : null}
 

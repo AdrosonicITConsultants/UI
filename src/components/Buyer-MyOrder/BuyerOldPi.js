@@ -28,11 +28,11 @@ export class BuyerOldPi extends Component {
 
         this.state = {
           // enquiryId: this.props.enquiryId,
-          enquiryId:1435,
+          // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
-          enquiryCode:this.props.enquiryCode,
+          // enquiryCode:this.props.enquiryCode,
           expectedDateOfDelivery:this.props.expectedDateOfDelivery,
           cgst:this.props.cgst,
           hsn:this.props.hsn,
@@ -87,7 +87,7 @@ export class BuyerOldPi extends Component {
             console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
-                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
+                  TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -167,7 +167,7 @@ export class BuyerOldPi extends Component {
          })
        
         TTCEapi.sendPI(
-            this.state.enquiryId,
+            this.props.enquiryId,
             this.state.cgst,
             this.state.expectedDateOfDelivery ,
             this.state.hsn,
@@ -208,7 +208,8 @@ export class BuyerOldPi extends Component {
         return(
             
 <React.Fragment>
-    {this.state.dataload?<>
+    {this.state.dataload?
+    <>
    
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 <div >
@@ -263,15 +264,15 @@ export class BuyerOldPi extends Component {
          </Col>
     </Row>
    <Row noGutters={true}>
-       <Col className="col-xs-8">
+       <Col className="col-xs-9">
        {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
        Received at :  {this.state.time} on  { this.state.currentDate }
 </Col>
 {/* <Col className="col-xs-4 CRdate">
        Change Request date:
 </Col> */}
-<Col className="col-xs-4">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice:
+<Col className="col-xs-3">
+   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
 </Col>
 
    </Row>
@@ -407,7 +408,7 @@ export class BuyerOldPi extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
+       <p className="againstpi">{this.props.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
@@ -609,7 +610,12 @@ export class BuyerOldPi extends Component {
      </div></p>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc}: {this.state.previewPI.buyerCustomProductHistory.length} 
+     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1]
+     ?
+     this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc
+     :
+     ""
+    }: {this.state.previewPI.buyerCustomProductHistory.length} 
      {this.state.previewPI.buyerCustomProductHistory.width}
       <br/>
          {this.state.previewPI.buyerCustomProductHistory.relProduct.length > 0?
@@ -842,7 +848,16 @@ export class BuyerOldPi extends Component {
 {/* </Container> */}
 {/* <Footer/> */}
 </>
-    :<></>}
+    :<>
+    <Row>
+                                                                    <br></br>
+                                                                    <br></br>
+                                                                    <br></br>   
+                                                                    <Col className="col-xs-12 text-center font14">
+                                                                    Old PI is Not-Available
+                                                                    </Col>
+                                                                </Row>
+    </>}
 </React.Fragment>
         )
     }

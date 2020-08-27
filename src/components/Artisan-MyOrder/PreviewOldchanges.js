@@ -27,8 +27,8 @@ export class PreviewOldchanges extends Component {
         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
         this.state = {
-          // enquiryId: this.props.enquiryId,
-          enquiryId:1435,
+         
+          enquiryId:this.props.enquiryId,
           time: '',
            currentDate: date,
           dataload : false,
@@ -81,13 +81,14 @@ export class PreviewOldchanges extends Component {
     }
 
     componentDidMount() {
+      console.log(this.props.enquiryId)
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
             console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
-                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
+                  TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -167,7 +168,7 @@ export class PreviewOldchanges extends Component {
          })
        
         TTCEapi.sendPI(
-            this.state.enquiryId,
+            this.props.enquiryId,
             this.state.cgst,
             this.state.expectedDateOfDelivery ,
             this.state.hsn,
@@ -271,7 +272,7 @@ export class PreviewOldchanges extends Component {
        Change Request date:
 </Col> */}
 <Col className="col-xs-4">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice:
+   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
 </Col>
 
    </Row>
@@ -407,7 +408,7 @@ export class PreviewOldchanges extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
+       <p className="againstpi">{this.props.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 

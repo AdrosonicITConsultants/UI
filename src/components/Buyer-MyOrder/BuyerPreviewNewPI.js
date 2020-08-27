@@ -30,12 +30,12 @@ export class BuyerPreviewNewPI extends Component {
         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
         this.state = {
-          enquiryId: this.props.enquiryCode,
+          // enquiryId: this.props.enquiryId
           // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
-          enquiryCode:this.props.enquiryCode,
+          // enquiryCode:this.props.enquiryCode,
           expectedDateOfDelivery:this.props.expectedDateOfDelivery,
           cgst:this.props.cgst,
           hsn:this.props.hsn,
@@ -108,7 +108,7 @@ export class BuyerPreviewNewPI extends Component {
             console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
-                  TTCEapi.getOldPIData(this.state.enquiryId).then((response)=>{
+                  TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -188,7 +188,7 @@ export class BuyerPreviewNewPI extends Component {
          })
        
         TTCEapi.sendPI(
-            this.state.enquiryId,
+            this.props.enquiryId,
             this.state.cgst,
             this.state.expectedDateOfDelivery ,
             this.state.hsn,
@@ -235,8 +235,8 @@ export class BuyerPreviewNewPI extends Component {
             {this.state.viewOldPi ?
             <BuyerOldPi
             bp={this.oldbackPI}
-            enquiryId={this.state.enquiryId}
-            enquiryCode={this.state.enquiryCode}
+            enquiryId={this.props.enquiryId}
+            enquiryCode={this.props.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}
      rpu={this.state.rpu}
@@ -416,7 +416,7 @@ export class BuyerPreviewNewPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       <p className="againstpi">{this.state.enquiryCode}</p>
+       <p className="againstpi">{this.props.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
@@ -618,7 +618,11 @@ export class BuyerPreviewNewPI extends Component {
      </div></p>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc}: {this.state.previewPI.buyerCustomProductHistory.length} 
+     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1]
+     ?
+     this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc
+    :
+    ""}: {this.state.previewPI.buyerCustomProductHistory.length} 
      {this.state.previewPI.buyerCustomProductHistory.width}
       <br/>
          {this.state.previewPI.buyerCustomProductHistory.relProduct.length > 0?
@@ -828,8 +832,8 @@ export class BuyerPreviewNewPI extends Component {
    :<>
     <BuyerOldPi
             bp={this.oldbackPI}
-            enquiryId={this.state.enquiryId}
-            enquiryCode={this.state.enquiryCode}
+            enquiryId={this.props.enquiryId}
+            enquiryCode={this.props.enquiryCode}
     
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}

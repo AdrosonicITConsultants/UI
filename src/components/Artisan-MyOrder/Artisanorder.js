@@ -548,7 +548,20 @@ export class Artisanorder extends Component {
                             <Col className="col-xs-8 leEnqstatus bold">
                             Order Status
                             </Col>
+                            {item.openEnquiriesResponse.productStatusId === 2
+                            ?
                             <Col className="col-xs-4">
+                                {console.log("item.openEnquiriesResponse.productStatusId")}
+
+                                 {console.log(item.openEnquiriesResponse.productStatusId)}
+                            </Col>
+                            
+                            :
+                        
+                            <Col className="col-xs-4">
+                                 {console.log("item.openEnquiriesResponse.productStatusId")}
+
+                                {console.log(item.openEnquiriesResponse.productStatusId)}
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
                              onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
@@ -607,7 +620,8 @@ export class Artisanorder extends Component {
                         </div>
 
                             </Col>
-                        </Row>
+                     
+                            }     </Row>
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
@@ -1000,6 +1014,11 @@ export class Artisanorder extends Component {
                             <Col className="col-xs-8 leEnqstatus bold">
                             Order Status
                             </Col>
+                            {item.openEnquiriesResponse.productStatusHistoryId == 2
+                            ?
+                            <Col className="col-xs-4"></Col>
+                            :
+                            
                             <Col className="col-xs-4">
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
@@ -1059,7 +1078,8 @@ export class Artisanorder extends Component {
                         </div>
 
                             </Col>
-                        </Row>
+                        
+                            } </Row>
                        
                         </Col>
                     </Row>

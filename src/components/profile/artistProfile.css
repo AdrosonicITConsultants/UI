@@ -140,7 +140,7 @@ margin-right: 10px;
 
 .profile-pic:hover {
   background-color: rgba(0,0,0,.5);
-  z-index: 10000;
+  z-index: 100;
   color: #fff;
   transition: all .3s ease;
   text-decoration: none;

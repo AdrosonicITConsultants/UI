@@ -99,6 +99,7 @@ export class SingleEnquiry extends Component {
         })
     }
     stateupdate = () => {
+        
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         var innerID = 0 ;

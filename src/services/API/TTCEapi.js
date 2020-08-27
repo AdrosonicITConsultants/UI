@@ -827,7 +827,34 @@ class TTCEapi {
       });
   }
 
-
+  // /enquiry/getChangeRequestForArtisan?enquiryId=1510
+  static getChangeRequestForArtisan(enquiryId) {
+    let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /enquiry/getChangeRequestItemTable
+  static getChangeRequestItemTable() {
+    let url = ApiUrl + "/enquiry/getChangeRequestItemTable";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
     console.log(url);

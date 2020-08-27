@@ -20,6 +20,7 @@ import { PIchange } from './PIChange';
 import { PreviewOldchanges } from './PreviewOldchanges';
 import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
+import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 
 
 
@@ -1131,7 +1132,8 @@ export class Artisanorder extends Component {
                                     <>
                                     <Col sm={1}></Col>
                                     <Col sm={8}>
-                                    {/* <ChangeRequest /> */}
+                                    <ArtisanChangeRequest 
+                                     enquiryId={this.state.enquiryCode}/>
                                     </Col>
                                     </>
                                     :null}
@@ -1140,9 +1142,7 @@ export class Artisanorder extends Component {
                                     <>
                                     <Col sm={1}></Col>
                                     <Col sm={8}>
-                                        <div>
-                                    <h6>QC...</h6>
-                                    </div>
+                                      
                                     </Col>
                                     </>:null}
 

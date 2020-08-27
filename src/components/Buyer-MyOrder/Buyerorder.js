@@ -890,7 +890,8 @@ export class Buyerorder extends Component {
                                                                            
                                                                              <Col sm={12}>
                                                                               <div>
-                                                                           <BuyerTransaction enquiryCode={this.state.enquiryCode}/>
+                                                                           <BuyerTransaction
+                                                                            enquiryCode={this.state.enquiryCode}/>
                                                                              </div>
                                                                              </Col>
                                                                              </>

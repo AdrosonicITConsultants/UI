@@ -74,3 +74,18 @@
     font-size: 15px;
     font-weight: 600;
 }
+
+.buttoncssnone{
+    background: none;
+    border: none;
+}
+
+.submitCRart{
+    color: white;
+    background: cornflowerblue;
+    width: 120px;
+    height: 30px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+}

@@ -13,12 +13,14 @@ export default class buyerpass extends Component {
                      password: "",
                      showValidation: false,
                      showUserName: true,
+                     messageData: "",
                    };
                  }
 
-                 showValidationpass(){
+                 showValidationpass(message){
                   this.setState({
                     showValidation: !this.state.showValidation,
+                    messageData: message,
                   });
                  }
 
@@ -26,7 +28,10 @@ export default class buyerpass extends Component {
                   event.preventDefault();
                    console.log(this.state);
                    if (this.state.password == "") {
-                   this.showValidationpass();
+                    this.setState({
+                      showValidation: !this.state.showValidation,
+                      messageData: "Please enter password",
+                    });
                    } else {                  
                       if(this.props.userpage == 2){
                         this.props.cpb(this.state.password);
@@ -144,9 +149,11 @@ export default class buyerpass extends Component {
                            <Row  >
                              <div className="col-xs-11 text-right">
                                {this.state.showValidation ? (
-                                 <span className="bg-danger" style={{float:"left", marginLeft:"35px"}}>
-                                   please enter valid password
-                                 </span>
+                                 <div className="bg-danger" style={{float:"left", marginLeft:"35px"}}>
+                                   {this.state.messageData === "Your account has been disabled. Please contact admin for more information" ?
+                                   <>Your account has been disabled.</>
+                                  : this.state.messageData}
+                                 </div>
                                ) : null}
                                {this.props.userpage == 2 ? (
                                  <a href="./forgot-passwordB">

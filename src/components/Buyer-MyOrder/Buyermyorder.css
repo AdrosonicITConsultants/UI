@@ -66,3 +66,11 @@
 .marginminus{
     margin-top: -10px;
 }
+
+.showCREmptyMessage {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: orangered;
+    font-size: 15px;
+    font-weight: 600;
+}

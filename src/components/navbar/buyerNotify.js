@@ -6,7 +6,6 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from "../../services/API/TTCEapi";
 import NavbarComponent from "../navbar/navbar";
 import "./navbar.css";
-// import Wishlist from './navbar/Wishlist';
 import Footer from "../footer/footer";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
@@ -100,7 +99,7 @@ class BuyerNotifications extends Component {
         {/* {this.state.getProductsInWishlist.length==0? */}
 
         <>
-          <body onload="window.location.reload()"></body>
+          {/* <body onload="window.location.reload()"></body> */}
           <Container className="wishlistbg">
             <Row noGutters={true}>
               <Col md="1">
@@ -283,11 +282,19 @@ class BuyerNotifications extends Component {
                        
                             return  <Row noGutters={true} className="notifyRowOuter">
                             <Col md={1} className="notifyRemoveColRight">
-                            {data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
+                            {
+                            data.notificationTypeId === 1 || data.notificationTypeId === 5 ? 
                             <img  className="notifyImage3" src={logos.notifyImage6}/> :
-                            data.notificationTypeId === 4 ? 
+                            data.notificationTypeId === 4 || data.notificationTypeId === 14 ? 
                             <img  className="notifyImage1" src={logos.notifyImage3}/> :
-                            <img  className="notifyImage1" src={logos.notifyImage4}/> }
+                            data.notificationTypeId === 2 ||  data.notificationTypeId === 3 ? 
+                            <img  className="notifyImage1" src={logos.notifyImage4}/> : 
+                            data.notificationTypeId === 6 ||  data.notificationTypeId === 7 || data.notificationTypeId === 8 ?
+                            <img  className="notifyImage3" src={logos.notifyImage5}/> :
+                            data.notificationTypeId === 9 ||  data.notificationTypeId === 10 || data.notificationTypeId === 11 ?
+                            <img  className="notifyImage1" src={logos.notifyImage4}/> :
+                            <img  className="notifyImage1" src={logos.notifyImage3}/> 
+                            }
                             </Col>
                             <Col md={9} className="notifyRemoveColPadding">
                               <div>

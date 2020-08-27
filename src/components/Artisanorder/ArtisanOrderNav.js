@@ -96,6 +96,9 @@ export class ArtisanOrderNav extends Component {
                     :
                     <>
                     {/* <CompletedList></CompletedList> */}
+                    <div className="text-center font20">
+                        No Completed Order
+                    </div>
                     </>
                 }
                 <div>

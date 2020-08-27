@@ -44,6 +44,7 @@ export class Buyerorder extends Component {
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
+            innerEnquiryStages : [],
         
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
@@ -52,22 +53,22 @@ export class Buyerorder extends Component {
         this.changeRequestbtn = this.changeRequestbtn.bind(this);
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
     }
-     ToggleDelete22 = (id) => {
+        ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
-       }
+        }
 
-       ToggleDeleteClose22 = (id) => {
+        ToggleDeleteClose22 = (id) => {
         document.getElementById('id09'+ id).style.display='none';
-       }
-       ToggleDelete = () => {
+        }
+        ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
-       }
+        }
 
-       ToggleDeleteClose = () => {
+        ToggleDeleteClose = () => {
         document.getElementById('id01').style.display='none';
-       }
-    transactionsbtn(){
-      
+        }
+        transactionsbtn(){
+
         this.setState((prevState) => {
             return{
                 selected: "BuyerDetails",
@@ -76,158 +77,144 @@ export class Buyerorder extends Component {
                 changeReq: false,
                 taxInvoice:false,
                 qualityCheck:false,
-               
+                
             };
-          
+            
         });
-    }
-
-    moqDetailsbtn(){
+        }
+        moqDetailsbtn(){
         this.setState((prevState) => {
-            return{
-             selected: "moqDetails",
-            proformainvoice: true,
-            transaction: false,
-            changeReq: false,
-            taxInvoice:false,
-            qualityCheck:false,
-         
-            };
-        });
-    }
+        return{
+        selected: "moqDetails",
+        proformainvoice: true,
+        transaction: false,
+        changeReq: false,
+        taxInvoice:false,
+        qualityCheck:false,
 
+        };
+        });
+        }
         proformaDetailsbtn(){
         this.setState((prevState) => {
-            return{
-                selected:"changeReq",
-                changeReq: true,
-                proformainvoice: false,
-                transaction: false,
-                taxInvoice:false,
-                qualityCheck:false,
-                
-            };
-        });
-    }
-    changeRequestbtn(){
-        this.setState((prevState) => {
-            return{
-                selected:"qualityCheck",
-                changeReq: false,
-                proformainvoice: false,
-                transaction: false,
-                taxInvoice:false,
-                qualityCheck:true,
-             
-            };
-        });
-    }
-    daysleft(name)
-    {
-        var someDate = new Date(name);
-                                console.log(someDate);
-                                var numberOfDaysToAdd = 10;
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime =  someDate - todayDate ;
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                return(diffDays);
-    }
-    qualityCheckbtn(){
-        this.setState((prevState) => {
-            return{
-                selected:"taxInvoice",
-                changeReq: false,
-                proformainvoice: false,
-                transaction: false,
-                taxInvoice:true,
-                qualityCheck:false,
-                
-              
-            };
-        });
-    }
-          
-    backoperation(){
-        browserHistory.goBack(); 
-    } 
+        return{
+        selected:"changeReq",
+        changeReq: true,
+        proformainvoice: false,
+        transaction: false,
+        taxInvoice:false,
+        qualityCheck:false,
 
-    handleCluster(e) {
- 
+        };
+        });
+        }
+        changeRequestbtn(){
+        this.setState((prevState) => {
+        return{
+        selected:"qualityCheck",
+        changeReq: false,
+        proformainvoice: false,
+        transaction: false,
+        taxInvoice:false,
+        qualityCheck:true,
+
+        };
+        });
+        }
+        daysleft(name)
+        {
+        var someDate = new Date(name);
+                        var numberOfDaysToAdd = 10;
+                        someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                        var todayDate= new Date();
+                        const diffTime =  someDate - todayDate ;
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                        return(diffDays);
+        }
+        qualityCheckbtn(){
+        this.setState((prevState) => {
+        return{
+        selected:"taxInvoice",
+        changeReq: false,
+        proformainvoice: false,
+        transaction: false,
+        taxInvoice:true,
+        qualityCheck:false,
+
+
+        };
+        });
+        }
+        backoperation(){
+        browserHistory.goBack(); 
+        } 
+        handleCluster(e) {
+
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('moqId');
-     
-      }
-      componentDidMount(){
+
+        }
+        componentDidMount(){
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
-            {    TTCEapi.getEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    var rr = response.data.data;
-                    rr[0].desc = "Quotation Accepted";
-                    rr[1].desc = "Order Details";
-                    this.setState({enquiryStagesMTO:rr})
-                }
-            })
-            TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({enquiryStagesAvailable:response.data.data})
-                }
-            })
-                TTCEapi.getInnerEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({innerEnquiryStages:response.data.data})
-                }
-            })
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getSingleOrder(params.code).then((response1)=>{
-                            console.log("")
-                            if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
-                                this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                    // console.log(this.state);
-                                });
-                                
-                            }
-                        },()=>{
-                           
-                        })
-                    });
-            }
+        if(response.data.valid)
+        {    TTCEapi.getEnquirStages().then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(response.data.data);
+            var rr = response.data.data;
+            rr[0].desc = "Quotation Accepted";
+            rr[1].desc = "Order Details";
+            this.setState({enquiryStagesMTO:rr})
+        }
+        })
+        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(response.data.data);
+            this.setState({enquiryStagesAvailable:response.data.data})
+        }
+        })
+        TTCEapi.getInnerEnquirStages().then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(response.data.data);
+            this.setState({innerEnquiryStages:response.data.data})
+        }
         })
        
-        
-        
-      }
+        this.setState({productCategories: response.data.data.productCategories,
+            yarns: response.data.data.yarns },()=>{
+                TTCEapi.getSingleOrder(params.code).then((response1)=>{
+                    console.log("")
+                    if(response1.data.valid)
+                    {   
+                        console.log(response1.data.data);
+                        this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
+                            // console.log(this.state);
+                        });
+                        
+                    }
+                },()=>{
+                    
+                })
+            });
+        }
+        })
 
-  
-      
 
+
+        }
     render() {
         return (
             <React.Fragment>
                 <NavbarComponent/>
-                 {this.state.dataload == true 
-                   
+                 {(this.state.openEnquiries.length > 0 && this.state.enquiryStagesAvailable.length > 0 &&  this.state.enquiryStagesMTO.length > 0 && this.state.innerEnquiryStages.length>0 )                 
                    ? 
                    <>
-                
                 <Container>
                 <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
@@ -236,7 +223,6 @@ export class Buyerorder extends Component {
                                        className="margin-cparrow cparrowsize glyphicon"
                                         onClick={() => this.backoperation()}
                             ></img>
-                          
                           </Col>
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold  ">
@@ -327,12 +313,12 @@ export class Buyerorder extends Component {
                                             </Col>
 
                                         </div>
-                                        <div noGutters={true} className="" >
+                                        {/* <div noGutters={true} className="" >
                                             <Col className="leEnqprodcode ">
                                                 <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                                 <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                             </Col>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </Col>
                                 <Col sm="3" className="text-right">
@@ -375,14 +361,37 @@ export class Buyerorder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId == 2
+                    {item.openEnquiriesResponse.productStatusId === 2
                     ?
                     <>
                     </>
                     :
-                             
+                    <>
+                    {item.openEnquiriesResponse.changeRequestOn === 0 
+                        ?
+                           
                     <Row noGutters={true}>
                     <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span className='disabledtext'> Disabled by Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                        :
+                           
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
@@ -395,18 +404,19 @@ export class Buyerorder extends Component {
                         </Col>
                         :
                         <Col className="col-xs-8 ">
-                        
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        
-                        
                         <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
                     </Row>
-                    
+                     
+                        }
+                     </>   
                     }<hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -491,7 +501,7 @@ export class Buyerorder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {/* {console.log(item.openEnquiriesResponse.productStatusId)} */}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -603,12 +613,12 @@ export class Buyerorder extends Component {
                                         </Col>
 
                                     </div>
-                                    <div noGutters={true} className="" >
+                                    {/* <div noGutters={true} className="" >
                                         <Col className="leEnqprodcode ">
                                             <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                             <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                         </Col>
-                                    </div>
+                                    </div> */}
                                     </div>
                                  </Col>
                                 <Col sm="3" className="text-right">
@@ -664,9 +674,32 @@ export class Buyerorder extends Component {
                     <>
                     </>
                     :
-                             
+                    <>
+                    {item.openEnquiriesResponse.changeRequestOn === 0 
+                        ?
+                           
                     <Row noGutters={true}>
                     <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span className='disabledtext'> Disabled by Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                        :
+                           
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
@@ -679,18 +712,19 @@ export class Buyerorder extends Component {
                         </Col>
                         :
                         <Col className="col-xs-8 ">
-                        
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        
-                        
                         <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
                     </Row>
-                    
+                     
+                        }
+                        </>
                     }<hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -818,145 +852,137 @@ export class Buyerorder extends Component {
                     </>
                     )}
 
+        {/* .................................Navigation Section................................  */}
+        {/* .................................Navigation Section................................  */}
+        {/* .................................Navigation Section................................  */}
+        {/* .................................Navigation Section................................  */}
+
+    <Row noGutters={true}>
+        <Row noGutters={true}>
+        <Col sm={1}>
+
+                </Col>
+                <Col sm={2}  
+                className={
+                    (this.state.selected == "BuyerDetails"
+                            ? "Allenqlistbtn2 "
+                                : "Allenqlistbtn ")
+                            }
+                onClick={this.transactionsbtn}>
+                Transaction
+                </Col>
+                <Col sm={2} 
+                className={
+                    (this.state.selected == "moqDetails"
+                            ? "Allenqlistbtn2"
+                                : "Allenqlistbtn")
+                            }
+                onClick={this.moqDetailsbtn}>
+                Proforma Invoice 
+                </Col>
+
+                <Col sm={2} 
+                    className={
+                    (this.state.selected == "changeReq"
+                            ? "Allenqlistbtn2"
+                                : "Allenqlistbtn")
+                            }
+                    onClick={this.proformaDetailsbtn}>
+                Change Request
+                </Col>
+                <Col sm={2} 
+                    className={
+                    (this.state.selected == "qualityCheck"
+                            ? "Allenqlistbtn2"
+                                : "Allenqlistbtn")
+                            }
+                    onClick={this.changeRequestbtn}>
+                    Quality Check 
+                </Col>
+                <Col sm={2}  
+                className={
+                    (this.state.selected == "taxInvoice"
+                            ? "Allenqlistbtn2"
+                                : "Allenqlistbtn")
+                            }
+                onClick={this.qualityCheckbtn}>
+                Tax Invoice
+                </Col> 
+                    <Col sm={1}>
                 
-                
-               
+                </Col>
+        </Row>
+        <br></br>
 
-                             
-                               <Row noGutters={true}>
-                                    <Row noGutters={true}>
-                                    <Col sm={1}>
-     
-                                            </Col>
-                                            <Col sm={2}  
-                                            className={
-                                                (this.state.selected == "BuyerDetails"
-                                                     ? "Allenqlistbtn2 "
-                                                         : "Allenqlistbtn ")
-                                                     }
-                                            onClick={this.transactionsbtn}>
-                                            Transaction
-                                            </Col>
-                                            <Col sm={2} 
-                                            className={
-                                                (this.state.selected == "moqDetails"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                            onClick={this.moqDetailsbtn}>
-                                            Proforma Invoice 
-                                            </Col>
+                <Row noGutters={true}>
+                    <Col sm={1}></Col>
+                        {this.state.transaction ? 
+                                        
+                            <>
+                        
+                            <Col sm={12}>
+                            <div>
+                                <BuyerTransaction enquiryCode={this.state.enquiryCode}/>
+                            </div>
+                            </Col>
+                            </>
+                            :
+                                null}
 
-                                            <Col sm={2} 
-                                              className={
-                                                (this.state.selected == "changeReq"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                             onClick={this.proformaDetailsbtn}>
-                                           Change Request
-                                            </Col>
-                                            <Col sm={2} 
-                                              className={
-                                                (this.state.selected == "qualityCheck"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                             onClick={this.changeRequestbtn}>
-                                             Quality Check 
-                                            </Col>
-                                            <Col sm={2}  
-                                            className={
-                                                (this.state.selected == "taxInvoice"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                            onClick={this.qualityCheckbtn}>
-                                           Tax Invoice
-                                            </Col> 
-                                             <Col sm={1}>
-                                            
-                                            </Col>
-                                    </Row>
-                                    <br></br>
-
-                                                       <Row noGutters={true}>
-                                                           <Col sm={1}></Col>
-                                                          
-          
-                                                                {this.state.transaction ? 
-                                                                             
-                                                                             <>
-                                                                           
-                                                                             <Col sm={12}>
-                                                                              <div>
-                                                                           <BuyerTransaction enquiryCode={this.state.enquiryCode}/>
-                                                                             </div>
-                                                                             </Col>
-                                                                             </>
-                                                                              :
-                                                                                 null}
-                                                            
-  
+                        {this.state.proformainvoice? 
+                        <>
+                        {/* <Col sm={1}></Col> */}
+                        <Col sm={10}>
+                        <BuyerPreviewNewPI
+                        enquiryCode={this.state.enquiryCode}
+                        />
+                        </Col>
+                        </>
+                        :
+                        <>
+                        </>}
 
 
 
 
+                    {this.state.changeReq ? 
+                    <>
+                    <Col sm={1}></Col>
+                    <Col sm={8}>
+                    {/* <ChangeRequest /> */}
+                    <CRaccepted />
+                    </Col>
+                    </>
+                    :null}
 
-                                                                {this.state.proformainvoice? 
-                                                                <>
-                                                                {/* <Col sm={1}></Col> */}
-                                                                <Col sm={10}>
-                                                               <BuyerPreviewNewPI
-                                                               enquiryCode={this.state.enquiryCode}
-                                                                />
-                                                                </Col>
-                                                                </>
-                                                                :
-                                                                <>
-                                                                </>}
+                    {this.state.qualityCheck ?  
+                    <>
+                    <Col sm={1}></Col>
+                    <Col sm={8}>
+                        <div>
+                    <h6>QC...</h6>
+                    </div>
+                    </Col>
+                    </>:null}
 
-     
-                   
+                    {this.state.taxInvoice ? 
+                    <>
+                    <Col sm={1}></Col>
+                    <Col sm={8}>
+                        <div>
+                    <h6>tax...</h6>
+                    </div>
+                    </Col>
+                    </>
+                    :null}
+                    
+                    
+                    
+                </Row>
 
-                                                            {this.state.changeReq ? 
-                                                            <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                            {/* <ChangeRequest /> */}
-                                                            <CRaccepted />
-                                                            </Col>
-                                                            </>
-                                                            :null}
-                                       
-                                                            {this.state.qualityCheck ?  
-                                                            <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                             <div>
-                                                            <h6>QC...</h6>
-                                                            </div>
-                                                            </Col>
-                                                            </>:null}
 
-                                                            {this.state.taxInvoice ? 
-                                                            <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                             <div>
-                                                            <h6>tax...</h6>
-                                                            </div>
-                                                            </Col>
-                                                            </>
-                                                            :null}
-                                                            
-                                                            
-                                                            
-                                                     </Row>
-  
-  
-                               </Row>
-                               <Row>
+                    </Row>
+                    <Row>
             <div> 
               <img
                 className="notifyFooterBanner internaldiv"

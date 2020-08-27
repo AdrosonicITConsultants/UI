@@ -174,7 +174,9 @@ import Iconfeatherupload from "./Icon feather-upload.svg"
 import sadred from "./sad red.svg"
 import acceptgreen from "./accept green.svg"
 import postchangerequesticon from "./post change request icon.svg"
+import freezeReq from "./freeze change req.svg"
 export default {
+  freezeReq,
   postchangerequesticon,
   acceptgreen,
   sadred,

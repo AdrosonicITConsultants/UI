@@ -1653,7 +1653,7 @@ MoqSimpleProductSelected(moqId){
                                        
                                         Collapse <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i>  
                                         </div> : 
-                                        <div onClick={() => this.toggleArrow(data.artisanId)}>  
+                                        <div onClick={() => this.toggleArrow(data.artisanId)} >  
                                        
                                        Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
                                         </div> }

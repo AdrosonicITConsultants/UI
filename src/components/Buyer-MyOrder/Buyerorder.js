@@ -21,6 +21,7 @@ import Diffdays from '../BuyerOrder/Diffdays';
 import { ChangeRequest } from './ChangeRequest';
 import { CRaccepted } from './CRaccepted';
 import { BuyerPreviewNewPI } from './BuyerPreviewNewPI';
+import { BuyerOldPi } from './BuyerOldPi';
 
 
 
@@ -815,8 +816,7 @@ export class Buyerorder extends Component {
                     </>
                     }
                   
-                    </>
-                    )}
+                   
 
                 
                 
@@ -908,8 +908,15 @@ export class Buyerorder extends Component {
                                                                 {/* <Col sm={1}></Col> */}
                                                                 <Col sm={10}>
                                                                <BuyerPreviewNewPI
-                                                               enquiryCode={this.state.enquiryCode}
-                                                                />
+                                                               enquiryId={this.state.enquiryCode}
+                                                               enquiryCode={item.openEnquiriesResponse.enquiryCode}
+                                                               
+                                                                /> 
+                                                                {/* <BuyerOldPi 
+                                                                 enquiryId={this.state.enquiryCode}
+                                                                 enquiryCode={item.openEnquiriesResponse.enquiryCode}
+                                                                /> */}
+                                                               
                                                                 </Col>
                                                                 </>
                                                                 :
@@ -974,6 +981,8 @@ export class Buyerorder extends Component {
               ></img>
             </div>
           </Row> 
+          </>
+                    )}
                 </Container>
                
                 </> :

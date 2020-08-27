@@ -1023,8 +1023,7 @@ export class Artisanorder extends Component {
                     </>
                     }
                   
-                    </>
-                    )}
+                   
                                         
                 <Row noGutters={true}>
                     <Row noGutters={true}>
@@ -1108,10 +1107,16 @@ export class Artisanorder extends Component {
 
                                         {this.state.proformainvoice? 
                                         <>
-                                        <Col sm={1}></Col>
-                                        <Col sm={8}>
-                                            <PIchange />
-                                            {/* <PreviewOldchanges /> */}
+                                        {/* <Col sm={1}></Col> */}
+                                        <Col sm={10}>
+                                            <PIchange 
+                                            enquiryId={this.state.enquiryCode}
+                                            enquiryCode={item.openEnquiriesResponse.enquiryCode}/>
+                                            {/* <PreviewOldchanges 
+                                             enquiryId={this.state.enquiryCode}/> */}
+                                             {/* <PreviewChangedPI 
+                                              enquiryId={this.state.enquiryCode}
+                                             /> */}
                                             
                                         </Col>
                                         </>
@@ -1165,7 +1170,8 @@ export class Artisanorder extends Component {
                 src={logos.notifyFooterBanner}
               ></img>
             </div>
-          </Row> 
+          </Row>  </>
+                    )}
                 </Container>
                
                 </> 

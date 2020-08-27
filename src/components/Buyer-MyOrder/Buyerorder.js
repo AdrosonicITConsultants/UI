@@ -856,6 +856,7 @@ export class Buyerorder extends Component {
         {/* .................................Navigation Section................................  */}
         {/* .................................Navigation Section................................  */}
         {/* .................................Navigation Section................................  */}
+<br></br>
 
     <Row noGutters={true}>
         <Row noGutters={true}>
@@ -941,48 +942,121 @@ export class Buyerorder extends Component {
                         :
                         <>
                         </>}
+                        {this.state.changeReq ? 
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                                {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
+                                                                    ?
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <><ChangeRequest /> 
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    </>
+
+                                                                    :
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusHistoryId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <><ChangeRequest /> 
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    
+
+                                                                    </>
 
 
+                                                                }
+                                                          
+                                                            </Col>
+                                                            </>
+                                                            :null}
+                                       
+                                                            {this.state.qualityCheck ?  
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                             <div>
+                                                            <h6>QC...</h6>
+                                                            </div>
+                                                            </Col>
+                                                            </>:null}
 
-
-                    {this.state.changeReq ? 
-                    <>
-                    <Col sm={1}></Col>
-                    <Col sm={8}>
-                    {/* <ChangeRequest /> */}
-                    <CRaccepted />
-                    </Col>
-                    </>
-                    :null}
-
-                    {this.state.qualityCheck ?  
-                    <>
-                    <Col sm={1}></Col>
-                    <Col sm={8}>
-                        <div>
-                    <h6>QC...</h6>
-                    </div>
-                    </Col>
-                    </>:null}
-
-                    {this.state.taxInvoice ? 
-                    <>
-                    <Col sm={1}></Col>
-                    <Col sm={8}>
-                        <div>
-                    <h6>tax...</h6>
-                    </div>
-                    </Col>
-                    </>
-                    :null}
+                                                            {this.state.taxInvoice ? 
+                                                            <>
+                                                            <Col sm={1}></Col>
+                                                            <Col sm={8}>
+                                                             <div>
+                                                            <h6>tax...</h6>
+                                                            </div>
+                                                            </Col>
+                                                            </>
+                                                            :null}
+                                                            
+                                                            
                     
                     
                     
                 </Row>
 
 
-                    </Row>
-                    <Row>
+                  
+                    
             <div> 
               <img
                 className="notifyFooterBanner internaldiv"

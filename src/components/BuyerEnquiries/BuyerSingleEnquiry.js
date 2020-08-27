@@ -869,12 +869,12 @@ MoqSimpleProductSelected(moqId){
                                     </Col>
 
                                 </div>
-                                <div noGutters={true} className="" >
+                                {/* <div noGutters={true} className="" >
                                     <Col className="leEnqprodcode ">
                                         <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                         <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                     </Col>
-                                </div>
+                                </div> */}
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -1111,12 +1111,12 @@ MoqSimpleProductSelected(moqId){
                                     </Col>
 
                                 </div>
-                                <div noGutters={true} className="" >
+                                {/* <div noGutters={true} className="" >
                                     <Col className="leEnqprodcode ">
                                         <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                         <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                     </Col>
-                                </div>
+                                </div> */}
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">

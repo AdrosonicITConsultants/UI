@@ -1311,7 +1311,7 @@ export class Artisanorder extends Component {
                   
                     </>
                     )}
-                                        
+            <br></br>         
                 <Row noGutters={true}>
                     <Row noGutters={true}>
                     <Col sm={1}>

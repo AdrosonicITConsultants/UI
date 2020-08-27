@@ -2038,6 +2038,25 @@ static sendPI(
       });
   }
 
+  static toggleChangeRequest(id){
+    let url = ApiUrl + "/enquiry/toggleChangeRequestFromArtisan?enquiryId=" + id + "&status=0";
+    console.log(url);
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static updateNotificationSeen(id){
    let url = ApiUrl + "/notification/markAsRead/{notificationId}?notificationId=" + id;
    console.log(url);

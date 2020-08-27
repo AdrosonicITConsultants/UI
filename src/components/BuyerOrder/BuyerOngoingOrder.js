@@ -24,64 +24,68 @@ export class BuyerOngoingOrder extends Component {
         }
     }
     ToggleDelete = () => {
-        document.getElementById('id01').style.display='block';
-       }
-
-       ToggleDeleteClose = () => {
-        document.getElementById('id01').style.display='none';
-       } 
+    document.getElementById('id01').style.display='block';
+    }
+    ToggleDelete22 = (id) => {
+    document.getElementById('id09'+ id).style.display='block';
+    }
+    ToggleDeleteClose22 = (id) => {
+    document.getElementById('id09'+ id).style.display='none';
+    }
+    ToggleDeleteClose = () => {
+    document.getElementById('id01').style.display='none';
+    } 
     componentDidMount(){
 
-        TTCEapi.getProductUploadData().then((response)=>{
+    TTCEapi.getProductUploadData().then((response)=>{
+        if(response.data.valid)
+        {    TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
-            {    TTCEapi.getEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    var rr = response.data.data;
-                    rr[0].desc = "Quotation Accepted";
-                    rr[1].desc = "Order Details";
-                    this.setState({enquiryStagesMTO:rr})
-                }
-            })
-            TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({enquiryStagesAvailable:response.data.data})
-                }
-            })
-                TTCEapi.getInnerEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({innerEnquiryStages:response.data.data})
-                }
-            })
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getOpenOrders().then((response1)=>{
-                            console.log("")
-                            if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
-                                this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                    console.log(this.state);
-                                });
-                                
-                            }
-                        },()=>{
-                           
-                        })
-                    });
+            {
+                console.log(response.data.data);
+                var rr = response.data.data;
+                rr[0].desc = "Quotation Accepted";
+                rr[1].desc = "Order Details";
+                this.setState({enquiryStagesMTO:rr})
             }
         })
-       
-        
-        
-    }
+        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesAvailable:response.data.data})
+            }
+        })
+            TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({innerEnquiryStages:response.data.data})
+            }
+        })
+            console.log(response);
+            this.setState({productCategories: response.data.data.productCategories,
+                yarns: response.data.data.yarns },()=>{
+                    TTCEapi.getOpenOrders().then((response1)=>{
+                        console.log("")
+                        if(response1.data.valid)
+                        {   console.log("heree");
+                            console.log(response1.data.data);
+                            this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
+                                console.log(this.state);
+                            });
+                            
+                        }
+                    },()=>{
+                        
+                    })
+                });
+        }
+    })
 
+
+
+    }
     individualpage(id){
         // localStorage.setItem("seeMoreId", id);
         browserHistory.push("/buyerorder?code=" + id);
@@ -105,7 +109,7 @@ export class BuyerOngoingOrder extends Component {
                 {this.state.dataload
                 ?
                 <>
-                {this.state.openEnquiries.length == 0 
+                {this.state.openEnquiries.length === 0 
                 ?
                 <>
                 <Row noGutters={true}>
@@ -118,7 +122,7 @@ export class BuyerOngoingOrder extends Component {
                 <>
                 {this.state.openEnquiries.map((item)=> 
                     <>
-                    {item.openEnquiriesResponse.historyProductId == null
+                    {item.openEnquiriesResponse.historyProductId === null
                     ?
                     <>
                         {/* for no change in product data */}
@@ -244,14 +248,37 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId == 2
+                    {item.openEnquiriesResponse.productStatusId === 2
                     ?
                     <>
                     </>
                     :
-                             
+                    <>
+                    {item.openEnquiriesResponse.changeRequestOn === 0 
+                        ?
+                           
                     <Row noGutters={true}>
                     <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span className="disabledtext"> Disabled by Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                        :
+                           
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
@@ -264,18 +291,19 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                         :
                         <Col className="col-xs-8 ">
-                        
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        
-                        
                         <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
                     </Row>
-                    
+                     
+                        }
+                     </> 
                     }
                     <hr></hr>
                     <Row noGutters={true}>
@@ -306,7 +334,7 @@ export class BuyerOngoingOrder extends Component {
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId === item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                                 <li >Completed</li>
                                 </ul>
                                 :
@@ -316,7 +344,7 @@ export class BuyerOngoingOrder extends Component {
                                     <>
                                      <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 === item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId === 5 && item1.id === 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                 {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
@@ -329,7 +357,7 @@ export class BuyerOngoingOrder extends Component {
                                     :
                                     <ul className="list-unstyled multi-steps">
                                     {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId === item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId === 5 && item1.id === 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                     {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                     {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                     <br></br>
@@ -529,14 +557,37 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId == 2
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2
                     ?
                     <>
                     </>
                     :
-                             
+                    <>
+                    {item.openEnquiriesResponse.changeRequestOn === 0 
+                        ?
+                           
                     <Row noGutters={true}>
                     <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span className='disabledtext'> Disabled by Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                        :
+                           
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
@@ -549,18 +600,19 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                         :
                         <Col className="col-xs-8 ">
-                        
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        
-                        
                         <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
                     </Row>
-                    
+                     
+                        }
+                     </>  
                     }
                     <hr></hr>
                     <Row noGutters={true}>
@@ -573,18 +625,18 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                    
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
+                        <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            Order Status
                             </Col>
                         </Row>
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    {/* <Col className="col-xs-1"></Col> */}
+                        <Col className="col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 ">
                             <div className="progressbarfont">
@@ -592,7 +644,7 @@ export class BuyerOngoingOrder extends Component {
                                 {item.openEnquiriesResponse.productStatusHistoryId === 2
                                 ?
                                 <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
+                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId === item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
                                 <li >Completed</li>
                                 </ul>
                                 :
@@ -602,7 +654,7 @@ export class BuyerOngoingOrder extends Component {
                                     <>
                                      <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 === item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId === 5 && item1.id === 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                 {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
@@ -615,7 +667,7 @@ export class BuyerOngoingOrder extends Component {
                                     :
                                     <ul className="list-unstyled multi-steps">
                                     {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
+                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId === item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId === 5 && item1.id === 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                     {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                     {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                     <br></br>

@@ -492,14 +492,14 @@ export default class artisanProductCatelog extends Component {
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
                    console.log(option);
-if(optionElement.innerHTML == "Fabric"){
-  this.setState({ showGSM: true});
-}
-else{
-  this.setState({ showGSM: false });
+        if(optionElement.innerHTML == "Fabric"){
+          this.setState({ showGSM: true});
+        }
+        else{
+          this.setState({ showGSM: false });
 
-}
-if (option == -1){
+        }
+        if (option == -1){
 
   this.setState(
     {
@@ -733,13 +733,13 @@ else {
       });
      return ;
   }
-                       if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-    customToast.error("Image name contains special characters.", {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: true,
-    });
-    return;
-  }
+  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
+  //   customToast.error("Image name contains special characters.", {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //     autoClose: true,
+  //   });
+  //   return;
+  // }
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -1266,23 +1266,32 @@ else {
                  ToggleSaveClose = () => {
                   document.getElementById('id02').style.display='none';
                  }
-                          
+                 backoperation = () => {
+                   browserHistory.goBack();
+                 }        
                 render() {
                    return (
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
                        <Container>
-                         <Row noGutters={true}>
+                         <Row  >
                            <div className="artistLanding">
                              {/* //#region Add Image */}
-                             <Row noGutters={true}>
-                               <Row noGutters={true}>
+                             <Row  >
+                               
+                               <Row  >
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
                                    className="col-1 "
-                                 ></Col>{" "}
+                                 >
+                                   <img
+                                    src={logos.backarrowicon}
+                                    className="col-xs-2 margin-arrow arrowsize2 glyphicon"
+                                    onClick={() => this.backoperation()}
+                                  ></img>
+                                   </Col>{" "}
                                  <Col
                                    sm={{ size: "9" }}
                                    xs={{ size: "9" }}
@@ -1310,7 +1319,7 @@ else {
                                    </Col>
                                  {/* )} */}
                                </Row>
-                               <Row noGutters={true}>
+                               <Row  >
                                  <Col
                                    className="tet-center"
                                    sm={{ size: "1" }}
@@ -1343,7 +1352,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row   className="mt30">
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1356,7 +1365,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row  >
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
@@ -1487,7 +1496,7 @@ else {
                                    className="col-2 "
                                  ></Col>
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1502,8 +1511,8 @@ else {
                              {/* //#endregion Add Image */}
 
                              {/* //#region Product details */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1544,7 +1553,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row noGutters={true}>
+                               <Row  >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1557,7 +1566,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1578,7 +1587,7 @@ else {
                                        className="col-6 text-left"
                                      ></Col>{" "}
                                    </Row>
-                                   <Row noGutters={true}>
+                                   <Row  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1623,7 +1632,7 @@ else {
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row noGutters={true}>
+                               <Row  >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
@@ -1636,7 +1645,7 @@ else {
                                    md={{ size: "8" }}
                                    className="col-8"
                                  >
-                                   <Row noGutters={true}>
+                                   <Row  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
@@ -1719,7 +1728,7 @@ else {
                                    className="col-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1734,8 +1743,8 @@ else {
                              {/* //#endregion Product details */}
 
                              {/* //#region Product specificcaions */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -1759,7 +1768,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row   className="mt15">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1781,7 +1790,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row   className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1796,7 +1805,7 @@ else {
                                    </label>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="">
+                               <Row   className="">
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
@@ -1842,7 +1851,7 @@ else {
                                    </Row>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row   className="mt30">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -1864,7 +1873,7 @@ else {
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt15">
+                               <Row   className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -1877,7 +1886,7 @@ else {
                                  </Col>{" "}
                                </Row>
 
-                               <Row noGutters={true} className="mt30">
+                               <Row   className="mt30">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2276,7 +2285,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row noGutters={true} className="mt100">
+                               <Row   className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2312,7 +2321,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row   className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2360,7 +2369,7 @@ else {
                                  ></Col>
                                </Row>
 
-                               <Row noGutters={true} className="mt100">
+                               <Row   className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
@@ -2396,7 +2405,7 @@ else {
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row noGutters={true} className="mt30">
+                               <Row   className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
@@ -2699,7 +2708,7 @@ else {
                                  </>
                                ) : null}
 
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -2714,8 +2723,8 @@ else {
                              {/* //#endregion Product specificcaions */}
 
                              {/* //#region Product wash and care */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -2753,7 +2762,7 @@ else {
                                  </Col>
                                </Row>
 
-                               <Row noGutters={true} className="washAndCareDiv">
+                               <Row   className="washAndCareDiv">
                                  <Row className="washAndCareDiv">
                                    <Col
                                      sm={{ size: "2" }}
@@ -3075,7 +3084,7 @@ else {
                                    ></Col>
                                  </Row>
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -3091,8 +3100,8 @@ else {
 
                              {/* //#region availability */}
 
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -3228,7 +3237,7 @@ else {
                                    className="col-2"
                                  ></Col>
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -3245,8 +3254,8 @@ else {
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
-                                 <Row noGutters={true} className="mt60">
-                                   <Row noGutters={true}>
+                                 <Row   className="mt60">
+                                   <Row  >
                                      <Col
                                        className="text-center"
                                        sm={{ size: "1" }}
@@ -3314,7 +3323,7 @@ else {
                                      </Col>
                                    </Row>
                                    <Row
-                                     noGutters={true}
+                                      
                                      className="text-center"
                                    >
                                      <Col
@@ -3333,8 +3342,8 @@ else {
                              ) : null}
 
                              {/* //#region Enter Weight */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -3424,7 +3433,7 @@ else {
                                    className="col-4 text-center"
                                  ></Col>
                                </Row>
-                               <Row noGutters={true} className="text-center">
+                               <Row   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
@@ -3439,8 +3448,8 @@ else {
                              {/* //#endregion Enter Weight*/}
 
                              {/* //#region Describe the product */}
-                             <Row noGutters={true} className="mt60">
-                               <Row noGutters={true}>
+                             <Row   className="mt60">
+                               <Row  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
@@ -3511,7 +3520,7 @@ else {
                              {/* //#endregion Describe the product*/}
                              /
                              <div className="hrlineforAddProduct"></div>
-                             <Row noGutters={true} className="text-center">
+                             <Row   className="text-center">
                                <Col
                                  sm={{ size: "12" }}
                                  xs={{ size: "12" }}

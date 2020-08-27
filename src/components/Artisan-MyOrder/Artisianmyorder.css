@@ -79,3 +79,80 @@
     font-weight: bold;
     color: darkgrey;
 }
+
+.btn-switch--on {
+    position: relative;
+    display: block;
+    width: 44px;
+    height: 21px;
+    cursor: pointer;
+    background-color: #60C674;
+    border: 2px solid #60C674;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 228px;
+}
+ 
+.btn-switch--on .btn-switch-circle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    height: 16px;
+    width: 16px;
+    background-color: #4F4F4F;
+    border-radius: 40px;
+}
+ 
+.mu-btn-switch {
+    background-color: #C66060;
+    border: 2px solid #C66060;
+}
+ 
+.mu-btn-switch .btn-switch-circle--off {
+    left: 0;
+    right: auto !important;
+}
+.changeRequesttext{
+    width: 220px;
+    float: left;
+    font-size: 19px;
+    color: green;
+}
+.changeRequesttextdis{
+    width: 220px;
+    float: left;
+    font-size: 19px;
+    color: #C66060;
+}
+.sure{
+    font-size: 50px;
+}
+.dcr{
+    margin-top:10px;
+    font-size: 22px;
+}
+.frezeReq{
+    font-size: 22px;
+    margin-top: 10px;
+    color: darkgrey;
+}
+.freezeimg{
+    width: 225px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.greenokbtn{
+    background: green;
+    color: white;
+    border-radius: 2em;
+    width: 8em;
+    height: 2.5em;
+    border: white;
+
+}
+.canceltext{
+    width: 63px;
+    margin: 0 auto;
+    font-size: 20px;
+}

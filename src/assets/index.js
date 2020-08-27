@@ -176,9 +176,11 @@ import acceptgreen from "./accept green.svg"
 import postchangerequesticon from "./post change request icon.svg"
 import happygrey from "./happy grey.svg"
 import sadgrey from "./sad grey.svg"
+import freezeReq from "./freeze change req.svg"
 export default {
   sadgrey,
   happygrey,
+  freezeReq,
   postchangerequesticon,
   acceptgreen,
   sadred,

@@ -538,8 +538,8 @@ export class ArtisanOngoingOrder extends Component {
                 </Row>
                 
                 <Row noGutters={true} className="mt7">
-                {/* <Col className="col-xs-1"></Col> */}
-                    <Col className="col-xs-12">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
                            Enquiry Status
@@ -548,8 +548,8 @@ export class ArtisanOngoingOrder extends Component {
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                {/* <Col className="col-xs-1"></Col> */}
+                    <Col className="col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 ">
                            <div className="progressbarfont">

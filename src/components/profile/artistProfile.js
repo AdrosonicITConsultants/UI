@@ -481,13 +481,13 @@ class ArtistProfile extends Component {
                   });
                 return ;
               }
-              if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-                customToast.error("Image name contains special characters.", {
-                  position: toast.POSITION.TOP_RIGHT,
-                  autoClose: true,
-                });
-                return;
-              }
+              // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+              //   customToast.error("Image name contains special characters.", {
+              //     position: toast.POSITION.TOP_RIGHT,
+              //     autoClose: true,
+              //   });
+              //   return;
+              // }
           this.setState({
             selectedFile: event.target.files[0],
             removedprofile :2 ,
@@ -525,13 +525,13 @@ class ArtistProfile extends Component {
               });
             return ;
           }
-          if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-            customToast.error("Image name contains special characters.", {
-              position: toast.POSITION.TOP_RIGHT,
-              autoClose: true,
-            });
-            return;
-          }
+          // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
+          //   customToast.error("Image name contains special characters.", {
+          //     position: toast.POSITION.TOP_RIGHT,
+          //     autoClose: true,
+          //   });
+          //   return;
+          // }
         this.setState({
           selectedBrandFile: event.target.files[0],
           removedlogo: 2

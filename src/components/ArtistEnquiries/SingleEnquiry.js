@@ -78,19 +78,41 @@ export class SingleEnquiry extends Component {
        ToggleDeleteClose = () => {
         document.getElementById('id01').style.display='none';
        }
-       stateupdate = () => {
+       inprogresss = () => {
+        console.log("inprogress");
+        this.ToggleDeleteClose();
+        let params = queryString.parse(this.props.location.search);
+        TTCEapi.progressUpdate(parseInt(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId),parseInt(params.code),parseInt(this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId)).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Product Status Updated", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+        })
+    }
+    stateupdate = () => {
+        
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         var innerID = 0 ;
         console.log(this.state.Progressidnext);
-        if(this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryStageId == 4)
+        if(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId == 4)
         {
             innerID = 1;
         }
         else if(this.state.Progressidnext == 5) {
-            innerID = this.state.getEnquiryMoq[0].openEnquiriesResponse.innerEnquiryStageId + 1;
+            innerID = this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId + 1;
         }
         else innerID = 0;
+
         if(this.state.Progressidnext == 4)
         {   
             TTCEapi.validateAdvancePaymentFromArtisan(parseInt(params.code),1).then((response)=>{
@@ -618,7 +640,7 @@ export class SingleEnquiry extends Component {
                                 progressid= response.data.data[0].openEnquiriesResponse.enquiryStageId
                             }
                             
-                            this.setState({getEnquiryMoq : response.data.data,
+                            this.setState({openEnquiries : response.data.data,
                                 progressid: progressid,
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
@@ -656,14 +678,14 @@ export class SingleEnquiry extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold  ">
                                    <Col md="12" className="col-xs-12">
-                                        Enquiry Id : {this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                        Enquiry Id : {this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
                                        </Col>
                                </Row>
                           </Col>                            
                 </Row>
                 <br></br>
                     <>
-                    {this.state.getEnquiryMoq.map((item)=> 
+                    {this.state.openEnquiries.map((item)=> 
                 <>
                 {item.openEnquiriesResponse.historyProductId == null
                 ?
@@ -736,12 +758,7 @@ export class SingleEnquiry extends Component {
                                       </Col>
 
                                   </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                  
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -918,7 +935,7 @@ export class SingleEnquiry extends Component {
                      }   
                    
                     <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
                             <div>
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 CSheading">
@@ -1287,8 +1304,8 @@ export class SingleEnquiry extends Component {
                        </Row>
                     </Col>
                 </Row>
-                <Row noGutters={true} className="text-center">
-                {this.state.progressid < 3 || this.state.progressid == 14 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                    <Row noGutters={true} className="text-center">
+                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1301,7 +1318,7 @@ export class SingleEnquiry extends Component {
                      }   
                    
                     <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
                             <div>
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 CSheading">
@@ -1319,14 +1336,19 @@ export class SingleEnquiry extends Component {
                                 ?
                                 <>
                                  {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.id > 3 
+                                    item1.orderStages.id > 3 
                                     ?
-                                    <Col className="col-xs-12 mb7">
+                                    <>
+                                    <Col className="col-xs-7 mb7 text-left">
                                         {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
                                         {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
                                         {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-                                        {item1.orderStages.desc}
+                                 {" "}{item1.orderStages.desc}
                                     </Col>
+                                     <Col className="col-xs-5 mb7">
+                                      {item1.orderStages.id == (this.state.Progressidnext) ?  <button className="markCompletedButton" onClick={this.stateupdate}> Mark Completed</button> :<></> }
+                                    </Col>
+                                 </>
                                     :
                                     <>
                                     </>
@@ -1337,54 +1359,75 @@ export class SingleEnquiry extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                                     item1.id > 3
                                     ?
-                                    <>
-                                              {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
-                                              ?
-                                              <>
-                                              {this.state.innerEnquiryStages.map((item2) => 
-                                               <Col className="col-xs-12 mb7">
-                                              {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
-                                              {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                              {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                              {item2.stage}
-                                              </Col>
-                                              )}
-                                              </>
-                                          :
-                                          <>
-                                          {item1.id == 5
-                                          ?
-                                          <>
-                                          {
-                                          this.state.innerEnquiryStages.map((item2) => 
-                                              <Col className="col-xs-12 mb7">
-                                             {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
-                                             {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
-                                             {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
-                                             {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
-                                             {item2.stage}
-                                             </Col>
-                                             )
-                                          }
-                                          </>
-                                              :
-                                              <Col className="col-xs-12 mb7">
-      
-                                              {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                                  {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                                  {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                              {/* <div className="greenButtonstatus">
-                                              </div> */}
-                                              {item1.desc}
-                                              </Col>
-      
-      
-                                          }
+                                        <>
+                                        {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
+                                        ?
+                                            <>
+                                                {this.state.innerEnquiryStages.map((item2) => 
+                                                    <>
+                                                    <Col className="col-xs-7 mb7 text-left">
+                                                    {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
+                                                    {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item2.stage}
+                                                    </Col>
+                                                    <Col className="col-xs-5 mb7 h20">
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
+
+                                                    </Col>
+                                                    </>
+                                                )}
+                                            </>
+                                        :
+                                        <>
+                                        {item1.id == 5
+                                        ?
+                                        <>
+                                    {
+                                        this.state.innerEnquiryStages.map((item2) => 
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item2.stage}
+                                        </Col>
+                                        <Col className="col-xs-5 mb7 h20">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 5 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+
+                                        </Col>
+                                        </>
+                                        )
+                                        }
+                                    </>
+                                        :
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
+
+                                                {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                                {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item1.desc}
+                                            </Col>
+                                            <Col className="col-xs-5 mb7 h20">
+                                                {}
+                                                {item1.id == 6 && item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId == 4 ? <button className="markCompletedButton" onClick={this.stateupdate}>Complete</button>:<></>}
+                                                {item1.id == (this.state.progressid+1) ?<button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+
+                                            </Col>
+                                        </>
+
+                                         }
+                                   
+                                    </>
+                                    }
+                                    </>
+                                
                                          
-                                          </>
-                                          }
-                                          </>
-                                       :
+                                    :
                                     <>
                                     </>
                                  )} 
@@ -1394,22 +1437,15 @@ export class SingleEnquiry extends Component {
                                
                             </Row>
                             <br></br>
-                            <Row noGutters={true}>
-                            <button className="markCompletedButton"
-                            onClick={this.stateupdate}                           
-                                >
-                                Mark Completed
-                                </button>
-                            </Row>
-                            <br></br>
+                         
                             
                         </div>
                         </div>
                     </div>
 
-
                 </Row>
-               
+             
+                 
                 </>
                  }
                
@@ -1483,7 +1519,7 @@ export class SingleEnquiry extends Component {
                                                                 {this.state.buyersDetail ? 
                                                                 <>
                                                                 
-                                                                  {this.state.getEnquiryMoq ? ( ( this.state.getEnquiryMoq.map((data) => (
+                                                                  {this.state.openEnquiries ? ( ( this.state.openEnquiries.map((data) => (
                                                                 
                                                                  <>
                                                                <Row noGutters={true}>
@@ -1720,7 +1756,7 @@ export class SingleEnquiry extends Component {
                                         <PreviewInvoice 
                                         bp={this.backPI}
                                         enquiryId={this.state.enquiryId}
-                                        enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                        enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
                                         expectedDateOfDelivery={this.state.dod}
                                         hsn={this.state.hsncode}
                                         rpu={this.state.rpu}
@@ -1864,7 +1900,7 @@ export class SingleEnquiry extends Component {
                                                 <PreviewInvoice 
                                                 bp={this.backPI}
                                                 enquiryId={this.state.enquiryId}
-                                                enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                                enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
                                                 expectedDateOfDelivery={this.state.dod}
                                                 hsn={this.state.hsncode}
                                                 rpu={this.state.rpu}

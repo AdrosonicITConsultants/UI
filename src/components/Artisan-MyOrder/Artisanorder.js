@@ -44,6 +44,7 @@ export class Artisanorder extends Component {
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
+            innerEnquiryStages : [],
            
         
         }
@@ -161,36 +162,68 @@ export class Artisanorder extends Component {
            
         
         
-       }
+    }
     ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
-       }
+    }
+    ToggleDeleteClose22 = (id) => {
+    document.getElementById('id09'+ id).style.display='none';
+    }
+    opendisablemodal = (id)=>{
+        if(id === 0 || this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId > 5)
+        {
 
-       ToggleDeleteClose22 = (id) => {
-        document.getElementById('id09'+ id).style.display='none';
-       }
+        }
+        else{
+        console.log("open");
+        document.getElementById('dismod').style.display='block';
+        }
+        
+    }
+    closedisablemodal = () => {
+    document.getElementById('dismod').style.display='none';
+    }
+    confirmFreeze = () => {
+        document.getElementById('dismod').style.display='none';
+    
+        TTCEapi.toggleChangeRequest(this.state.enquiryCode).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Change Request Disabled", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                    });
+                    this.componentDidMount();
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                    });
+            }
+                
+        })
+    }
     ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
-       }
-
-       ToggleDeleteClose = () => {
-        document.getElementById('id01').style.display='none';
-       }
-    moqDetailsbtn(){
-        this.setState((prevState) => {
-            return{
-             selected: "moqDetails",
-            proformainvoice: true,
-            transaction: false,
-            changeReq: false,
-            taxInvoice:false,
-            qualityCheck:false,
-         
-            };
-        });
     }
-
-        proformaDetailsbtn(){
+    ToggleDeleteClose = () => {
+    document.getElementById('id01').style.display='none';
+    }
+    moqDetailsbtn(){
+    this.setState((prevState) => {
+        return{
+            selected: "moqDetails",
+        proformainvoice: true,
+        transaction: false,
+        changeReq: false,
+        taxInvoice:false,
+        qualityCheck:false,
+        
+        };
+    });
+    }
+    proformaDetailsbtn(){
         this.setState((prevState) => {
             return{
                 selected:"changeReq",
@@ -204,159 +237,152 @@ export class Artisanorder extends Component {
         });
     }
     changeRequestbtn(){
-        this.setState((prevState) => {
-            return{
-                selected:"qualityCheck",
-                changeReq: false,
-                proformainvoice: false,
-                transaction: false,
-                taxInvoice:false,
-                qualityCheck:true,
-             
-            };
-        });
+    this.setState((prevState) => {
+        return{
+            selected:"qualityCheck",
+            changeReq: false,
+            proformainvoice: false,
+            transaction: false,
+            taxInvoice:false,
+            qualityCheck:true,
+            
+        };
+    });
     }
     qualityCheckbtn(){
-        this.setState((prevState) => {
-            return{
-                selected:"taxInvoice",
-                changeReq: false,
-                proformainvoice: false,
-                transaction: false,
-                taxInvoice:true,
-                qualityCheck:false,
-              
-            };
-        });
-    }
-          
-    backoperation(){
-        browserHistory.goBack(); 
+    this.setState((prevState) => {
+        return{
+            selected:"taxInvoice",
+            changeReq: false,
+            proformainvoice: false,
+            transaction: false,
+            taxInvoice:true,
+            qualityCheck:false,
+            
+        };
+    });
     } 
-
+    backoperation(){
+    browserHistory.goBack(); 
+    } 
     handleCluster(e) {
- 
-        var index = e.target.selectedIndex;
-        var optionElement = e.target.childNodes[index];
-        var option =  optionElement.getAttribute('moqId');
-     
-      }
-      componentDidMount(){
-        window.scrollTo(0, 0);
-        let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        this.state.enquiryCode = params.code;
-        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
-            {    TTCEapi.getEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    var rr = response.data.data;
-                    rr[0].desc = "Quotation Accepted";
-                    rr[1].desc = "Order Details";
-                    this.setState({enquiryStagesMTO:rr})
-                }
-            })
-            TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({enquiryStagesAvailable:response.data.data})
-                }
-            })
-                TTCEapi.getInnerEnquirStages().then((response)=>{
-                if(response.data.valid)
-                {
-                    console.log(response.data.data);
-                    this.setState({innerEnquiryStages:response.data.data})
-                }
-            })
-                console.log(response);
-                this.setState({productCategories: response.data.data.productCategories,
-                    yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getSingleOrder(params.code).then((response1)=>{
-                            console.log("")
-                            var nextProgressid = 0;
-                            var progressid = 0;
-                            
-                            if(response1.data.data[0].openEnquiriesResponse.historyProductId == null )
-                            {
-                                if(response1.data.data[0].openEnquiriesResponse.productStatusId == 2)
-                                {
-                                        if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                        {
-                                            nextProgressid = 7;
-                                        }
-                                        else{
-                                            nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                        }
-                                        progressid=response1.data.data[0].openEnquiriesResponse.enquiryStageId
-                                }
-                                else{
-                                    if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 5 && response1.data.data[0].openEnquiriesResponse.innerEnquiryStageId < 5)
-                                    {
-                                        nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId;
-                                        // nextinnerid =  response.data.data[0].openEnquiriesResponse.innerEnquiryStageId + 1
-                                        progressid= 4
 
+    var index = e.target.selectedIndex;
+    var optionElement = e.target.childNodes[index];
+    var option =  optionElement.getAttribute('moqId');
+
+    }
+    componentDidMount(){
+    window.scrollTo(0, 0);
+    let params = queryString.parse(this.props.location.search);
+    console.log(params);
+    this.state.enquiryCode = params.code;
+    TTCEapi.getProductUploadData().then((response)=>{
+        if(response.data.valid)
+        {   TTCEapi.getEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                var rr = response.data.data;
+                rr[0].desc = "Quotation Accepted";
+                rr[1].desc = "Order Details";
+                this.setState({enquiryStagesMTO:rr})
+            }
+                })
+        TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({enquiryStagesAvailable:response.data.data})
+            }
+        })
+            TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(response.data.data);
+                this.setState({innerEnquiryStages:response.data.data})
+            }
+        })
+            console.log(response);
+            this.setState({productCategories: response.data.data.productCategories,
+                yarns: response.data.data.yarns },()=>{
+                    TTCEapi.getSingleOrder(params.code).then((response1)=>{
+                        console.log("")
+                        var nextProgressid = 0;
+                        var progressid = 0;
+                        
+                        if(response1.data.data[0].openEnquiriesResponse.historyProductId == null )
+                        {
+                            if(response1.data.data[0].openEnquiriesResponse.productStatusId == 2)
+                            {
+                                    if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                    {
+                                        nextProgressid = 7;
                                     }
                                     else{
                                         nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                        progressid= response1.data.data[0].openEnquiriesResponse.enquiryStageId
                                     }
-                                }
+                                    progressid=response1.data.data[0].openEnquiriesResponse.enquiryStageId
                             }
                             else{
-                                if(response1.data.data[0].openEnquiriesResponse.productStatusHistoryId == 2)
+                                if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 5 && response1.data.data[0].openEnquiriesResponse.innerEnquiryStageId < 5)
                                 {
-                                        if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
-                                        {
-                                            nextProgressid = 11;
-                                        }
-                                        else{
-                                            nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
-                                        }
+                                    nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId;
+                                    // nextinnerid =  response.data.data[0].openEnquiriesResponse.innerEnquiryStageId + 1
+                                    progressid= 4
+
                                 }
                                 else{
                                     nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                    progressid= response1.data.data[0].openEnquiriesResponse.enquiryStageId
                                 }
-                                progressid= response1.data.data[0].openEnquiriesResponse.enquiryStageId
                             }
+                        }
+                        else{
+                            if(response1.data.data[0].openEnquiriesResponse.productStatusHistoryId == 2)
+                            {
+                                    if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 3)
+                                    {
+                                        nextProgressid = 11;
+                                    }
+                                    else{
+                                        nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                                    }
+                            }
+                            else{
+                                nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId + 1;
+                            }
+                            progressid= response1.data.data[0].openEnquiriesResponse.enquiryStageId
+                        }
+                        
+                        if(response1.data.valid)
+                        {   console.log("heree");
+                            console.log(response1.data.data);
+                            this.setState({openEnquiries:response1.data.data,
+                                progressid: progressid,
+                                Progressidnext : nextProgressid,
+                                    dataload:true
+                            },()=>{
+                                // console.log(this.state);
+                            });
                             
-                            if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
-                                this.setState({openEnquiries:response1.data.data,
-                                    progressid: progressid,
-                                    Progressidnext : nextProgressid,
-                                     dataload:true
-                                },()=>{
-                                    // console.log(this.state);
-                                });
-                                
-                            }
-                        },()=>{
-                           
-                        })
-                    });
-            }
-        })
-       
-        
-        
-      }
+                        }
+                    },()=>{
+                        
+                    })
+                });
+        }
+    })
 
-  
-      
 
+
+    }
     render() {
         return (
             <React.Fragment>
                 <NavbarComponent/>
 
-                 {this.state.dataload == true 
-                   
+                 {(this.state.openEnquiries.length > 0 && this.state.enquiryStagesAvailable.length > 0 &&  this.state.enquiryStagesMTO.length > 0 && this.state.innerEnquiryStages.length>0 )                   
                    ? 
                    <>
                 <Container>
@@ -459,12 +485,12 @@ export class Artisanorder extends Component {
                                             </Col>
 
                                         </div>
-                                        <div noGutters={true} className="" >
+                                        {/* <div noGutters={true} className="" >
                                             <Col className="leEnqprodcode ">
-                                                <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                                <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
+                                                <span className="leEnqprodbn ">Brand Name : </span>
+                                                <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName ? item.openEnquiriesResponse.companyName : "NA" }</span>                                   
                                             </Col>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </Col>
                                 <Col sm="3" className="text-right">
@@ -517,11 +543,70 @@ export class Artisanorder extends Component {
 
                         </Row>
                     <Row noGutters={true} className="mt7">
-                    {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
+                    <Col className="col-xs-1"></Col>
+                        <Col className="col-xs-10">
                         <Row noGutters={true}>
-                            <Col className="col-xs-12 leEnqstatus bold">
+                            <Col className="col-xs-8 leEnqstatus bold">
                             Order Status
+                            </Col>
+                            <Col className="col-xs-4">
+                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
+                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
+                             onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
+                             >
+                              <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch-circle btn-switch-circle--off":"btn-switch-circle"  }></div>
+                            </div>
+                                 
+                    <div id="dismod" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
+                            <div>
+                            <Row noGutters={true}>
+                                {/* <Col className="col-xs-12 CSheading">
+                                    hh
+                                </Col> */}
+                            </Row>
+                            </div>
+                            <div class="w3-container">
+                            <span 
+                                onClick={this.closedisablemodal} 
+                                class="w3-button w3-display-topright cWhite">x</span>
+                            
+                            <Row noGutters={true}>  
+                            <br></br>
+                            
+                                <Col className="col-xs-12 text-center fontplay sure bold ">
+                                    Are you Sure?
+                                </Col>
+                                <Col className="col-xs-12 text-center dcr">
+                                    You are disabling change request for buyer.
+                                </Col>
+                                <Col className="col-xs-12 text-center frezeReq">
+                                    This will freeze on the requirement.
+                                </Col>
+                                <Col className="col-xs-12 text-center ">
+                                    <img  className="freezeimg" src={logos.freezeReq}></img>
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                        <div className="canceltext" onClick={this.closedisablemodal}  >Cancel</div>
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                <button className="greenokbtn" onClick={this.confirmFreeze} > OK </button>
+                                </Col>
+                                
+                            </Row>
+                            <Row>
+                            <br></br>
+                                <br></br>
+                            </Row>
+                            
+                         
+                            
+                            </div>
+                            </div>
+                        </div>
+
                             </Col>
                         </Row>
                         </Col>
@@ -594,9 +679,7 @@ export class Artisanorder extends Component {
                                 {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
-                                <>  
-                                {item.openEnquiriesResponse.enquiryCode}
-                                </>
+                                item.openEnquiriesResponse.enquiryCode       
                                 :
                                 <>
                                  {this.state.innerEnquiryStages.map((item1) => 
@@ -640,7 +723,7 @@ export class Artisanorder extends Component {
                      }   
                    
                     <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
                             <div>
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 CSheading">
@@ -844,12 +927,12 @@ export class Artisanorder extends Component {
                                         </Col>
 
                                     </div>
-                                    <div noGutters={true} className="" >
-                                        <Col className="leEnqprodcode ">
-                                            <span className="leEnqprodbn ">Artisan Brand Name : </span>
-                                            <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
-                                        </Col>
-                                    </div>
+                                    {/* <div noGutters={true} className="" >
+                                            <Col className="leEnqprodcode ">
+                                                <span className="leEnqprodbn ">Brand Name : </span>
+                                                <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName ? item.openEnquiriesResponse.companyName : "NA" }</span>                                   
+                                            </Col>
+                                        </div> */}
                                     </div>
                                  </Col>
                                 <Col sm="3" className="text-right">
@@ -911,18 +994,79 @@ export class Artisanorder extends Component {
                         </Row>
                    
                     <Row noGutters={true} className="mt7">
-                    {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
+                    <Col className="col-xs-1"></Col>
+                        <Col className="col-xs-10">
+                        
                         <Row noGutters={true}>
-                            <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            <Col className="col-xs-8 leEnqstatus bold">
+                            Order Status
+                            </Col>
+                            <Col className="col-xs-4">
+                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
+                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
+                             onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
+                             >
+                              <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch-circle btn-switch-circle--off":"btn-switch-circle"  }></div>
+                            </div>
+                                 
+                    <div id="dismod" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
+                            <div>
+                            <Row noGutters={true}>
+                                {/* <Col className="col-xs-12 CSheading">
+                                    hh
+                                </Col> */}
+                            </Row>
+                            </div>
+                            <div class="w3-container">
+                            <span 
+                                onClick={this.closedisablemodal} 
+                                class="w3-button w3-display-topright cWhite">x</span>
+                            
+                            <Row noGutters={true}>  
+                            <br></br>
+                            
+                                <Col className="col-xs-12 text-center fontplay sure bold ">
+                                    Are you Sure?
+                                </Col>
+                                <Col className="col-xs-12 text-center dcr">
+                                    You are disabling change request for buyer.
+                                </Col>
+                                <Col className="col-xs-12 text-center frezeReq">
+                                    This will freeze on the requirement.
+                                </Col>
+                                <Col className="col-xs-12 text-center ">
+                                    <img  className="freezeimg" src={logos.freezeReq}></img>
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                        <div className="canceltext" onClick={this.closedisablemodal}  >Cancel</div>
+                                </Col>
+                                <Col className="col-xs-4 text-center ">
+                                <button className="greenokbtn" onClick={this.confirmFreeze} > OK </button>
+                                </Col>
+                                
+                            </Row>
+                            <Row>
+                            <br></br>
+                                <br></br>
+                            </Row>
+                            
+                         
+                            
+                            </div>
+                            </div>
+                        </div>
+
                             </Col>
                         </Row>
+                       
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    {/* <Col className="col-xs-1"></Col> */}
+                        <Col className="col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 ">
                             <div className="progressbarfont">
@@ -1020,70 +1164,213 @@ export class Artisanorder extends Component {
                         </Row>
                         </Col>
                     </Row>
+                    
+                    <Row noGutters={true} className="text-center">
+                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                    ? 
+                     <></>
+                   :
+                   <button
+                     className="blackButton"
+                     onClick={this.ToggleDelete}
+                    >
+                     Change Status
+                   </button>
+                     }   
+                   
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
+                            <div>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 CSheading">
+                                    Change Status
+                                </Col>
+                            </Row>
+                            </div>
+                        <div class="w3-container">
+                            <span 
+                            onClick={this.ToggleDeleteClose} 
+                            class="w3-button w3-display-topright cWhite">x</span>
+                            <br></br>
+                            <Row noGutters={true}>
+                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                                ?
+                                <>
+                                 {this.state.enquiryStagesAvailable.map((item1) => 
+                                    item1.orderStages.id > 3 
+                                    ?
+                                    <>
+                                    <Col className="col-xs-7 mb7 text-left">
+                                        {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
+                                 {" "}{item1.orderStages.desc}
+                                    </Col>
+                                     <Col className="col-xs-5 mb7">
+                                      {item1.orderStages.id == (this.state.Progressidnext) ?  <button className="markCompletedButton" onClick={this.stateupdate}> Mark Completed</button> :<></> }
+                                    </Col>
+                                 </>
+                                    :
+                                    <>
+                                    </>
+                                 )}   
+                                </>
+                                :
+                                <>
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                                    item1.id > 3
+                                    ?
+                                        <>
+                                        {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
+                                        ?
+                                            <>
+                                                {this.state.innerEnquiryStages.map((item2) => 
+                                                    <>
+                                                    <Col className="col-xs-7 mb7 text-left">
+                                                    {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
+                                                    {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item2.stage}
+                                                    </Col>
+                                                    <Col className="col-xs-5 mb7 h20">
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
+
+                                                    </Col>
+                                                    </>
+                                                )}
+                                            </>
+                                        :
+                                        <>
+                                        {item1.id == 5
+                                        ?
+                                        <>
+                                    {
+                                        this.state.innerEnquiryStages.map((item2) => 
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
+                                        {item2.stage}
+                                        </Col>
+                                        <Col className="col-xs-5 mb7 h20">
+                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+                                        {item.openEnquiriesResponse.enquiryStageId == 5 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+
+                                        </Col>
+                                        </>
+                                        )
+                                        }
+                                    </>
+                                        :
+                                        <>
+                                            <Col className="col-xs-7 mb7 text-left">
+
+                                                {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
+                                                {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
+                                                {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
+                                                    {item1.desc}
+                                            </Col>
+                                            <Col className="col-xs-5 mb7 h20">
+                                                {}
+                                                {item1.id == 6 && item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId == 4 ? <button className="markCompletedButton" onClick={this.stateupdate}>Complete</button>:<></>}
+                                                {item1.id == (this.state.progressid+1) ?<button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
+
+                                            </Col>
+                                        </>
+
+                                         }
+                                   
+                                    </>
+                                    }
+                                    </>
+                                
+                                         
+                                    :
+                                    <>
+                                    </>
+                                 )} 
+                                </>
+                                }
+                                
+                               
+                            </Row>
+                            <br></br>
+                         
+                            
+                        </div>
+                        </div>
+                    </div>
+
+                </Row>
+             
                
                     </>
                     }
                   
-                   
-                                        
+                    </>
+                    )}
+                   <br></br>
                 <Row noGutters={true}>
-                    <Row noGutters={true}>
-                    <Col sm={1}>
+                            <Row noGutters={true}>
+                            <Col sm={1}>
 
-                            </Col>
-                            <Col sm={2}  
-                            className={
-                                (this.state.selected == "BuyerDetails"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.transactionsbtn}>
-                            Transaction
-                            </Col>
-                            <Col sm={2} 
-                            className={
-                                (this.state.selected == "moqDetails"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.moqDetailsbtn}>
-                            Proforma Invoice 
-                            </Col>
+                                    </Col>
+                                    <Col sm={2}  
+                                    className={
+                                        (this.state.selected == "BuyerDetails"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.transactionsbtn}>
+                                    Transaction
+                                    </Col>
+                                    <Col sm={2} 
+                                    className={
+                                        (this.state.selected == "moqDetails"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.moqDetailsbtn}>
+                                    Proforma Invoice 
+                                    </Col>
 
-                            <Col sm={2} 
-                                className={
-                                (this.state.selected == "changeReq"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                                onClick={this.proformaDetailsbtn}>
-                            Change Request
-                            </Col>
-                            <Col sm={2} 
-                                className={
-                                (this.state.selected == "qualityCheck"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                                onClick={this.changeRequestbtn}>
-                                Quality Check 
-                            </Col>
-                            <Col sm={2}  
-                            className={
-                                (this.state.selected == "taxInvoice"
-                                        ? "Allenqlistbtn2"
-                                            : "Allenqlistbtn")
-                                        }
-                            onClick={this.qualityCheckbtn}>
-                            Tax Invoice
-                            </Col> 
-                                <Col sm={1}>
-                            
-                            </Col>
-                    </Row>
-                    <br></br>
+                                    <Col sm={2} 
+                                        className={
+                                        (this.state.selected == "changeReq"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                        onClick={this.proformaDetailsbtn}>
+                                    Change Request
+                                    </Col>
+                                    <Col sm={2} 
+                                        className={
+                                        (this.state.selected == "qualityCheck"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                        onClick={this.changeRequestbtn}>
+                                        Quality Check 
+                                    </Col>
+                                    <Col sm={2}  
+                                    className={
+                                        (this.state.selected == "taxInvoice"
+                                                ? "Allenqlistbtn2"
+                                                    : "Allenqlistbtn")
+                                                }
+                                    onClick={this.qualityCheckbtn}>
+                                    Tax Invoice
+                                    </Col> 
+                                        <Col sm={1}>
+                                    
+                                    </Col>
+                            </Row>
+                            <br></br>
 
-                                <Row noGutters={true}>
+                            <Row noGutters={true}>
                                     <Col sm={1}></Col>
                                     
 
@@ -1112,7 +1399,7 @@ export class Artisanorder extends Component {
                                         <Col sm={10}>
                                             <PIchange 
                                             enquiryId={this.state.enquiryCode}
-                                            enquiryCode={item.openEnquiriesResponse.enquiryCode}/>
+                                            enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
                                             {/* <PreviewOldchanges 
                                              enquiryId={this.state.enquiryCode}/> */}
                                              {/* <PreviewChangedPI 
@@ -1132,8 +1419,83 @@ export class Artisanorder extends Component {
                                     <>
                                     <Col sm={1}></Col>
                                     <Col sm={8}>
-                                    <ArtisanChangeRequest 
-                                     enquiryId={this.state.enquiryCode}/>
+                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
+                                                                    ?
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <>
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    </>
+
+                                                                    :
+                                                                    <>
+                                                                    {
+                                                                    this.state.openEnquiries[0].openEnquiriesResponse.productStatusHistoryId == 2
+                                                                    ?
+                                                                    <>
+                                                                     <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Change request is not applicable for in stock Products.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                      {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
+                                                                        ?
+                                                                        <Row noGutters={true}>
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request disabled by artisan
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+                                                                        : <>
+                                                                        {/* <CRaccepted /> */}
+                                                                        </>
+                                                                        }
+
+                                                                    </>
+                                                                    }
+                                                                    
+
+                                                                    </>
+
+
+                                                                }
+                                                          
                                     </Col>
                                     </>
                                     :null}
@@ -1162,16 +1524,16 @@ export class Artisanorder extends Component {
                                 </Row>
 
   
-                               </Row>
-                               <Row>
-            <div> 
+                </Row>
+                <Row>
+                <div> 
               <img
                 className="notifyFooterBanner internaldiv"
                 src={logos.notifyFooterBanner}
               ></img>
             </div>
-          </Row>  </>
-                    )}
+          </Row> 
+           
                 </Container>
                
                 </> 
@@ -1179,7 +1541,12 @@ export class Artisanorder extends Component {
                 :
                 <> 
                 <Container>
-                    
+                    <Row noGutters={true}>
+                        <Col className='col-xs-12 text-center font20'>
+                                        Loading Please wait..
+                        </Col>
+                    </Row>
+                   
                 </Container>
                 </>}
                 <Footer/>

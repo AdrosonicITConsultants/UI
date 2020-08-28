@@ -931,7 +931,7 @@ export class Buyerorder extends Component {
                                                                 </Col>
                                                             </Row>
                                                             
-                                                            : <><ChangeRequest /> 
+                                                            : <><ChangeRequest enquiryCode={this.state.enquiryCode}/> 
                                                             {/* <CRaccepted /> */}
                                                             </>
                                                              }

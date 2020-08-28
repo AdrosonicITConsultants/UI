@@ -630,13 +630,13 @@ else {
       });
      return ;
   }
-                       if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-    customToast.error("Image name contains special characters.", {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: true,
-    });
-    return;
-  }
+  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
+  //   customToast.error("Image name contains special characters.", {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //     autoClose: true,
+  //   });
+  //   return;
+  // }
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });

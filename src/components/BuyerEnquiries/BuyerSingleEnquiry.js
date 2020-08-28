@@ -78,6 +78,7 @@ export class BuyerSingleEnquiry extends Component {
              selectedMOQId: 0,
              modalOksend:false,
              innerEnquiryStages:[],
+             clickedAccept:false
 
             // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
@@ -689,6 +690,7 @@ AcceptMoq(moqId,artisanId){
         console.log(params);
 
     this.setState({ 
+        clickedAccept:true,
         collapseNew: !this.state.collapseNew,
         disableCheckId: artisanId,
         selectedArtisanId: artisanId,
@@ -869,12 +871,12 @@ MoqSimpleProductSelected(moqId){
                                     </Col>
 
                                 </div>
-                                <div noGutters={true} className="" >
+                                {/* <div noGutters={true} className="" >
                                     <Col className="leEnqprodcode ">
                                         <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                         <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                     </Col>
-                                </div>
+                                </div> */}
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -1111,12 +1113,12 @@ MoqSimpleProductSelected(moqId){
                                     </Col>
 
                                 </div>
-                                <div noGutters={true} className="" >
+                                {/* <div noGutters={true} className="" >
                                     <Col className="leEnqprodcode ">
                                         <span className="leEnqprodbn ">Artisan Brand Name : </span>
                                         <span className="leEnqbrandname ">{item.brandName ? item.brandName : "NA" }</span>                                   
                                     </Col>
-                                </div>
+                                </div> */}
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -1648,12 +1650,19 @@ MoqSimpleProductSelected(moqId){
                                           {data.moq.createdOn}
                                             </Moment>
                                           </p>
-                                        {this.state.collapseId == data.artisanId ?
+                                        {this.state.collapseId == data.artisanId  ?
                                         <div onClick={() => this.toggleArrow(data.artisanId)}>  
                                        
                                         Collapse <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i>  
                                         </div> : 
-                                        <div onClick={() => this.toggleArrow(data.artisanId)}>  
+                                        this.state.clickedAccept?
+                                        <div >  
+                                       
+                                        Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
+                                         </div> 
+                                        :
+
+                                        <div onClick={() => this.toggleArrow(data.artisanId)} >  
                                        
                                        Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
                                         </div> }

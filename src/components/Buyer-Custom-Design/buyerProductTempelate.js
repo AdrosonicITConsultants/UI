@@ -690,13 +690,13 @@ else {
       });
      return ;
   }
-                       if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-    customToast.error("Image name contains special characters.", {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: true,
-    });
-    return;
-  }
+  //    if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
+  //   customToast.error("Image name contains special characters.", {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //     autoClose: true,
+  //   });
+  //   return;
+  // }
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -1190,7 +1190,9 @@ else {
                  ToggleSaveClose = () => {
                   document.getElementById('id02').style.display='none';
                  }
-                
+                 backoperation = () => {
+                  browserHistory.goBack();
+                }    
                           
                 render() {
                    return (
@@ -1207,7 +1209,13 @@ else {
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
                                    className="col-1 "
-                                 ></Col>{" "}
+                                 >
+                                    <img
+                                    src={logos.backarrowicon}
+                                    className="col-xs-2 margin-arrow arrowsize2 glyphicon"
+                                    onClick={() => this.backoperation()}
+                                  ></img>
+                                  </Col>{" "}
                                  <Col
                                    sm={{ size: "9" }}
                                    xs={{ size: "9" }}

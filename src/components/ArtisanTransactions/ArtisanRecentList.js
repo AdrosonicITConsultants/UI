@@ -310,7 +310,7 @@ export class ArtisanRecentList extends Component {
   
      }
      paymentTypeset(e){
-        console.log("abc")
+        console.log(e)
         this.setState({
             paymentType:e
           },()=>{
@@ -427,7 +427,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2" >
-                {item.transactionOngoing.percentage} {item.transactionOngoing.percentage !=null? "%":""} payment received against Invoice for enquiry Id: <b className="colorinv">
+                {item.transactionOngoing.percentage} {item.transactionOngoing.percentage !=null? "%":""}
+                 payment received against Invoice  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 </Col>

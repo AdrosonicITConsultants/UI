@@ -9,20 +9,25 @@ export default class buyeruser extends Component {
     super();
     this.state = {
       userName: "",   
-      showValidation: false     
+      showValidation: false     ,
+      message:"",
     };
   }
 
 
-              showValidation(){
+  showValidation(message){
   this.setState({
     showValidation: !this.state.showValidation,
+    message: message,
   });
 }
 operation = (event) => {
   event.preventDefault();
     if (this.state.userName == "") {
-     this.showValidation();
+      this.setState({
+        showValidation: !this.state.showValidation,
+        message: "enter Username",
+      });
     } else {
       if(this.props.userpage == 1){
         this.props.cub(this.state.userName);
@@ -129,7 +134,7 @@ operation = (event) => {
                     onChange={(e) => this.handleChange(e)}
                   />
                   {this.state.showValidation ? (
-                    <div className="bg-danger text-center loginUserErrorTop">Please enter valid userID</div>
+                    <div className="bg-danger text-center loginUserErrorTop">{this.state.message}</div>
                   ) : (
                     <br />
                   )}

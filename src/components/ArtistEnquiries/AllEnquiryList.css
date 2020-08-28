@@ -423,9 +423,13 @@ color: rgb(133, 196, 36) !important;
 }
 
 
-.modalBoxSizeCS{
+.modalBoxSizeCSCR{
     width: 500px;
 }
+.modalBoxSizeCS{
+    width: 300px;
+}
+
 .CSheading{
     background: black;
     height: 39px;

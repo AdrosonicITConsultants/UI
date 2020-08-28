@@ -260,7 +260,7 @@ export class BuyerHistoryList extends Component {
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2">
-{item.transactionCompleted.percentage}{item.transactionCompleted.percentage !=null? "%":""}  payment received against Invoice for enquiry Id: <b className="colorinv">
+{item.transactionCompleted.percentage}{item.transactionCompleted.percentage !=null? "%":""}  payment received against Invoice for  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 {/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}

@@ -757,7 +757,7 @@ class TTCEapi {
 
   // /transaction/getOngoingTransaction
   static getOngoingTransaction(searchString,paymentType) {
-    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+"0";
+    let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+ paymentType;
     console.log(url);
     return axios
       .get(url)
@@ -827,7 +827,34 @@ class TTCEapi {
       });
   }
 
-
+  // /enquiry/getChangeRequestForArtisan?enquiryId=1510
+  static getChangeRequestForArtisan(enquiryId) {
+    let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /enquiry/getChangeRequestItemTable
+  static getChangeRequestItemTable() {
+    let url = ApiUrl + "/enquiry/getChangeRequestItemTable";
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
     console.log(url);
@@ -2002,6 +2029,25 @@ static sendPI(
     };
     return axios
       .post(url, data, config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static toggleChangeRequest(id){
+    let url = ApiUrl + "/enquiry/toggleChangeRequestFromArtisan?enquiryId=" + id + "&status=0";
+    console.log(url);
+    var config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    return axios
+      .post(url)
       .then((response) => {
         console.log(response);
         return response;

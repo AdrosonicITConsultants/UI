@@ -14,7 +14,18 @@
     border: 1px solid black;
     background: white;
 }
-
+.arrowsize2{
+    width:65px!important;
+    margin-top:50px!important;
+    cursor: pointer;
+    margin-left: 12px;
+}
+.arrowsize3{
+    width:65px!important;
+    margin-top:00px!important;
+    cursor: pointer;
+    margin-left: 12px;
+}
 
 /* modal css */
 .w3-modal {

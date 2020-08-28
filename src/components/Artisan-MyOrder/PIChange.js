@@ -43,7 +43,7 @@ export class PIchange extends Component {
             enquiryId: 0,
             piSend:0,
             currency:4,
-            enquiryCode:"",
+            // enquiryCode:this.props.enquiryCode,
             expectedDateOfDelivery:"",  
             viewOldPi:false, 
          
@@ -80,7 +80,7 @@ export class PIchange extends Component {
                 // console.log(params);
                 TTCEapi.revisedPI(
                     // params.code,
-                    1435,
+                   this.props.enquiryId,
                     this.state.cgst,
                     this.state.dod ,
                     this.state.hsncode,
@@ -161,7 +161,7 @@ export class PIchange extends Component {
     }
 
     componentDidMount(){
-        TTCEapi.getPi(1435).then((response)=>{
+        TTCEapi.getPi(this.props.enquiryId).then((response)=>{
             // console.log(response)
             if(response.data.data==null){
                 this.setState({
@@ -206,8 +206,8 @@ export class PIchange extends Component {
 {this.state.viewOldPi?
     <PreviewOldchanges
     bp={this.oldbackPI}
-    enquiryId={this.state.enquiryId}
-   //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+    enquiryId={this.props.enquiryId}
+    enquiryCode={this.props.enquiryCode}
     expectedDateOfDelivery={this.state.dod}
     hsn={this.state.hsncode}
     rpu={this.state.rpu}
@@ -224,8 +224,8 @@ export class PIchange extends Component {
 <>
 <PreviewChangedPI 
      bp={this.backPI}
-     enquiryId={this.state.enquiryId}
-    //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+     enquiryId={this.props.enquiryId}
+     enquiryCode={this.props.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}
      rpu={this.state.rpu}
@@ -369,8 +369,8 @@ export class PIchange extends Component {
 
     <PreviewChangedPI 
      bp={this.backPI}
-     enquiryId={this.state.enquiryId}
-    //  enquiryCode={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+     enquiryId={this.props.enquiryId}
+     enquiryCode={this.props.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}
      rpu={this.state.rpu}

@@ -1,7 +1,7 @@
 
 .artistbg1{
    background-image: url("../../assets/artistbg1.svg");
-    z-index: 1000;
+    z-index: 100;
     height: 600px;
     /* opacity: 1.7; */
     width: 100%;
@@ -17,7 +17,7 @@
 }
 .artistbg12{
    background-image: url("../../assets/artistbg12.png");
-    z-index: 1000;
+    z-index: 100;
     height: 100px;
     /* opacity: 1.7; */
     width: 100%;
@@ -50,7 +50,7 @@
 }
 .artistbg2{
    background-image: url(../../assets/artistbg2.svg);
-    z-index: 1000;
+    z-index: 100;
     height: 400px;
     /* opacity: 1.7; */
     width: 100%;
@@ -71,7 +71,7 @@
     /* left: 10%;
     top: 15%; */
    
-    z-index: 1000;
+    z-index: 100;
     height: 100px;
  margin-bottom: 20px;
     margin-top: -80px;

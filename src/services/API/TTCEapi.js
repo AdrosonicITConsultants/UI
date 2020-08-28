@@ -2132,6 +2132,49 @@ static getBuyerPreviewPI(code){
       return error.response;
     });
 }
+
+static getChangeRequestItemTable(){
+  let url = ApiUrl + "/enquiry/getChangeRequestItemTable";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .get(url)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static buyerRaiseChangeRequest(enquiryCode, arrayData){
+  let url = ApiUrl + "/enquiry/changeRequest";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  var data = {
+    "enquiryId": enquiryCode,
+    "itemList": arrayData
+  }
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+
   //#endregion
 }
 export default TTCEapi;

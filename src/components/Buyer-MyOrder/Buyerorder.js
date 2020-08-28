@@ -949,7 +949,7 @@ export class Buyerorder extends Component {
                                                                 :
                                                                 <>
                                                                 </>}
-                        {this.state.changeReq ? 
+                                                         {this.state.changeReq ? 
                                                             <>
                                                             <Col sm={1}></Col>
                                                             <Col sm={8}>
@@ -981,7 +981,7 @@ export class Buyerorder extends Component {
                                                                             </Col>
                                                                         </Row>
                                                                         
-                                                                        : <><ChangeRequest /> 
+                                                                        : <><ChangeRequest enquiryCode={this.state.enquiryCode}/> 
                                                                         {/* <CRaccepted /> */}
                                                                         </>
                                                                         }
@@ -1016,7 +1016,7 @@ export class Buyerorder extends Component {
                                                                             </Col>
                                                                         </Row>
                                                                         
-                                                                        : <><ChangeRequest /> 
+                                                                        : <><ChangeRequest enquiryCode={this.state.enquiryCode}/> 
                                                                         {/* <CRaccepted /> */}
                                                                         </>
                                                                         }

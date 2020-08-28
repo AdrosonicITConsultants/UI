@@ -21,13 +21,14 @@ export class ArtisanChangeRequest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accepted:false,
+            accepted:[false,false,false,false,false],
             rejected:false,
             getChangeRequestForArtisan:[],
             getChangeRequestItemTable:[],
             getPi:[],
             dataload:false,
-            selectedId:-1
+            selectedId:-1,
+            
         };
         this.AcceptChange = this.AcceptChange.bind(this);
         this.RejectChange = this.RejectChange.bind(this);
@@ -39,7 +40,7 @@ export class ArtisanChangeRequest extends Component {
           })
           if(e==0){
             this.setState({
-                accepted:true,
+                // accepted(id):true,
                 rejected:false
                 
             })
@@ -61,16 +62,18 @@ export class ArtisanChangeRequest extends Component {
 
 
 componentDidMount(){
+    console.log(this.props.enquiryId)
     TTCEapi.getChangeRequestItemTable().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
+            // console.log(response.data.data);
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
-                        this.setState({getChangeRequestForArtisan:response.data.data})
+                        // console.log(response.data.data);
+                        this.setState({getChangeRequestForArtisan:response.data.data,
+                            dataload:true})
                     }
                 })
 
@@ -84,7 +87,7 @@ componentDidMount(){
     TTCEapi.getPi(this.props.enquiryId).then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
+            // console.log(response.data.data);
             this.setState({getPi:response.data.data,
                 dataload:true
             })
@@ -97,7 +100,7 @@ componentDidMount(){
     return(
             
 <React.Fragment>
-{this.state.dataload ?
+{this.state.getChangeRequestForArtisan.length > 0 ?
 <>
 
     <Row noGutters={true}>
@@ -117,20 +120,20 @@ componentDidMount(){
     </Row>
     <div className="craccbox">
   <h3 className="CRAcceptedh3 " style={{color:"goldenrod"}}>Change Request Details</h3>
- 
   {this.state.getChangeRequestForArtisan.map((item)=> 
 
-  <>
+<>
 <Row noGutters={true} className="innerboxcr">
 <Col className="col-xs-1"></Col>
     <Col className="col-xs-6">
     <p className="Crh">
         {/* Motif Size */}
-        {this.state.getChangeRequestItemTable[item.id-1].item}
+       
+        {this.state.getChangeRequestItemTable[item.requestItemsId-1]?this.state.getChangeRequestItemTable[item.requestItemsId-1].item:""}
         </p>
-        {item.id==this.state.getChangeRequestItemTable[item.id-1].id
+        {item.requestItemsId==this.state.getChangeRequestItemTable[item.requestItemsId-1].id
                     ?
-                    item.id == 3 ? 
+                    item.requestItemsId == 3 ? 
                     <p className="changereqcolor">
      <span><b style={{color:"darkgrey"}}>{this.state.getPi.quantity}--------------</b><b>{item.requestText}</b></span>
      </p>
@@ -149,14 +152,14 @@ componentDidMount(){
     <b style={{color:"green"}}>Accepted</b> 
        <p><button  className="buttoncssnone">
            {this.state.accepted?
-                    this.state.selectedId==item.id
+                    this.state.selectedId==item.requestItemsId
                     ?
                     
                        <img src={logos.acceptgreen} className="acceptrejimh" />
                        :
-                       <img src={logos.happygrey} className="acceptrejimh" onClick={()=>{this.AcceptChange(0,item.id)}} />
+                       <img src={logos.happygrey} className="acceptrejimh" onClick={()=>{this.AcceptChange(0,item.requestItemsId)}} />
                         :
-                        <img src={logos.happygrey} className="acceptrejimh" onClick={()=>{this.AcceptChange(0,item.id)}} />
+                        <img src={logos.happygrey} className="acceptrejimh" onClick={()=>{this.AcceptChange(0,item.requestItemsId)}} />
 
            }
            </button>
@@ -170,7 +173,7 @@ componentDidMount(){
              <img src={logos.sadred} className="acceptrejimh"/>
            :
            <img src={logos.sadgrey} className="acceptrejimh" 
-           onClick={()=>{this.AcceptChange(1,item.id)}}
+           onClick={()=>{this.AcceptChange(1,item.requestItemsId)}}
            />
 
     }
@@ -181,6 +184,7 @@ componentDidMount(){
   </>  
 
 )}
+
 
 <p style={{textAlign:"center"}}>Artisan has accepted <b style={{color:"green"}}>2</b> out of <b style={{color:"green"}}>3</b> requests</p>
 <Row noGutters={true}>

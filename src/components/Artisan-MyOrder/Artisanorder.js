@@ -1503,7 +1503,9 @@ export class Artisanorder extends Component {
                                                                         </Row>
                                                                         
                                                                         : <>
-                                                                        {/* <CRaccepted /> */}
+                                                                        <ArtisanChangeRequest
+                                                                          enquiryId={this.state.enquiryCode}
+                                                                         />
                                                                         </>
                                                                         }
 

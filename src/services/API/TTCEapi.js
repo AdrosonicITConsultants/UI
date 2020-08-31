@@ -2174,6 +2174,20 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
     });
 }
 
+static getChangeRequestForArtisan(enquiryId) {
+  let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId="+ enquiryId;
+
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
+
 
   //#endregion
 }

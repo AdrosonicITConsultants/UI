@@ -389,7 +389,65 @@ export class Buyerorder extends Component {
                     </Row>
                     
                         :
+
+                    item.openEnquiriesResponse.changeRequestStatus === 0 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Awaiting response from Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    : 
+                    item.openEnquiriesResponse.changeRequestStatus === 1 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
                            
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    :
+                    item.openEnquiriesResponse.changeRequestStatus === 2 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
+                        </Col>
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                      :     
                     <Row noGutters={true}>
                     <hr></hr>
                    
@@ -981,8 +1039,13 @@ export class Buyerorder extends Component {
                                                                             </Col>
                                                                         </Row>
                                                                         
-                                                                        : <><ChangeRequest enquiryCode={this.state.enquiryCode}/> 
-                                                                        {/* <CRaccepted /> */}
+                                                                        : <>
+                                                                        {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
+                                                                        (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        :
+                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
+                                                                        }
                                                                         </>
                                                                         }
 
@@ -1016,8 +1079,13 @@ export class Buyerorder extends Component {
                                                                             </Col>
                                                                         </Row>
                                                                         
-                                                                        : <><ChangeRequest enquiryCode={this.state.enquiryCode}/> 
-                                                                        {/* <CRaccepted /> */}
+                                                                        : <>
+                                                                        {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
+                                                                        (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        :
+                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        }
                                                                         </>
                                                                         }
 

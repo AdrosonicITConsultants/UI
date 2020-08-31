@@ -51,6 +51,7 @@ export class ChangeRequest extends Component {
                 }
             ],
             CROkbutton: false,
+            getChangeRequestForArtisan: [],
         };
         this.changeRequstCheckBox = this.changeRequstCheckBox.bind(this);
       }
@@ -62,6 +63,10 @@ export class ChangeRequest extends Component {
 
     ReqChangesModalSHow = () => {
         console.log(this.state.optionDisable);
+        this.setState({
+            raiseCRFinalArray: []
+        });
+
         var array = this.state.optionDisable;
         for(var i = 0; i < array.length; i ++) {
             if(array[i].option === false) {
@@ -76,7 +81,40 @@ export class ChangeRequest extends Component {
             }
         } 
         console.log(this.state.raiseCRFinalArray);
-        document.getElementById('ReqChangesModal').style.display='block';
+
+        if(this.state.raiseCRFinalArray.length === 0) {
+            this.setState({
+                showCRAllEmptyMessage: true
+            });
+        }
+        else {
+            var finalArray = this.state.raiseCRFinalArray;
+            var count = 0;
+            for(var j = 0; j < finalArray.length; j ++) {
+                if(finalArray[j].requestText !== "") {
+                    this.setState({
+                        showCREmptyMessage: false,
+                        showCRAllEmptyMessage: false
+                    });
+                    count = count + 1;
+                }
+            }
+    
+            if(count === finalArray.length) {
+                this.setState({
+                    showCREmptyMessage: false,
+                    showCRAllEmptyMessage: false,
+                    raiseCRFinalArray: finalArray
+                });
+                document.getElementById('ReqChangesModal').style.display='block';
+            }
+            else {
+                this.setState({
+                    showCREmptyMessage: true,
+                    showCRAllEmptyMessage: false
+                })
+            }
+        }      
     }
 
     areyousureCRModalShow = () => {
@@ -135,9 +173,22 @@ export class ChangeRequest extends Component {
 
         TTCEapi.buyerRaiseChangeRequest(parseInt(this.props.enquiryCode), this.state.raiseCRFinalArray).then((response)=>{
             if(response.data.valid)
-            {
+            {  
                 console.log(response.data.data);
                 document.getElementById('ReqChangesModal').style.display='none';
+                this.componentDidMount();
+                customToast.success("Change request send successfully", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            else{
+                document.getElementById('ReqChangesModal').style.display='none';
+                this.componentDidMount();
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
             }
         });
     }
@@ -151,7 +202,19 @@ export class ChangeRequest extends Component {
                     getChangeRequestItemTable: response.data.data
                 })
             }
-        })
+        });
+
+        if(this.props.changeRequestStatus === 0) {
+            TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({
+                        getChangeRequestForArtisan: response.data.data.changeRequestItemList
+                    })
+                }
+            })
+        }
     }
     
     render(){
@@ -168,7 +231,40 @@ export class ChangeRequest extends Component {
             </Col>
     </Row>
 
-    {this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
+    {this.props.changeRequestStatus === 0 ?
+
+    this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
+        return this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((item) => {
+        return data.id === item.requestItemsId ? 
+            <Row noGutters={true}>
+            <span>
+                <Col className="col-xs-3">
+                <input type="checkbox" className="colorchange2" disabled={true} checked={true}/> 
+                <b>{data.item}</b>  
+                </Col>
+                <Col className="col-xs-9">
+                <input type="text" className="CRinput" disabled={true} value={item.requestText}/>
+                </Col>
+            </span>  
+            </Row>
+            : 
+            <Row noGutters={true}>
+            <span>
+                <Col className="col-xs-3">
+                <input type="checkbox" className="colorchange2" disabled={true}/> 
+                <b>{data.item}</b>  
+                </Col>
+                <Col className="col-xs-9">
+                <input type="text" className="CRinput" disabled={true}/>
+                </Col>
+            </span>  
+            </Row>
+
+        }) : null
+
+    }) : null
+    : 
+    this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
         return <Row noGutters={true}>
         <span>
             <Col className="col-xs-3">
@@ -180,8 +276,8 @@ export class ChangeRequest extends Component {
             </Col>
         </span>  
         </Row>
-    })
-    : null }
+    }) : null 
+    }
 
     <br/>
     
@@ -201,10 +297,16 @@ export class ChangeRequest extends Component {
     : null }
 
     <Row noGutters={true}>
-        <Col className="col-xs-12"style={{textAlign:"center"}}>
+    <Col className="col-xs-12"style={{textAlign:"center"}}>
+    {this.props.changeRequestStatus === 0 ? 
+    <button className="proccedwithadvpaybtn" disabled={true} style={{backgroundColor: "#777777"}}
+    >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+    </button>
+    :
     <button className="proccedwithadvpaybtn" onClick={this.ReqChangesModalSHow}
         >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
     </button>
+    }
     </Col>
     </Row>
                
@@ -213,7 +315,7 @@ export class ChangeRequest extends Component {
     {/* _________________________________________Modal_1________________________________________________ */}
                                           
     <div id="ReqChangesModal" class="w3-modal">
-    <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
         <div class="w3-container buyerMOQAcceptModalContainer">
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">

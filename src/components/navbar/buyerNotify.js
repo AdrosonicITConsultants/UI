@@ -292,7 +292,7 @@ class BuyerNotifications extends Component {
                             data.notificationTypeId === 6 ||  data.notificationTypeId === 7 || data.notificationTypeId === 8 ?
                             <img  className="notifyImage3" src={logos.notifyImage5}/> :
                             data.notificationTypeId === 9 ||  data.notificationTypeId === 10 || data.notificationTypeId === 11 ?
-                            <img  className="notifyImage1" src={logos.notifyImage4}/> :
+                            <img  className="notifyImage1" src={logos.crNotify}/> :
                             <img  className="notifyImage1" src={logos.notifyImage3}/> 
                             }
                             </Col>

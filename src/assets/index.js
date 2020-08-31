@@ -178,8 +178,12 @@ import happygrey from "./happy grey.svg"
 import sadgrey from "./sad grey.svg"
 import freezeReq from "./freeze change req.svg"
 import crgreeninpopup from "./cr green in popup.svg"
-import Sadpopup from "./Sad popup.svg"
+import Sadpopup from "./Sad popup.svg";
+import cricon from "./cr.svg";
+import crNotify from "./CR_notify.svg";
+
 export default {
+  crNotify,
   Sadpopup,
   crgreeninpopup,
   sadgrey,
@@ -354,4 +358,5 @@ export default {
   notifyImage6,
   notifyImage7,
   notifyFooterBanner,
+  cricon,
 };

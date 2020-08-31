@@ -52,6 +52,7 @@ export class ChangeRequest extends Component {
             ],
             CROkbutton: false,
             getChangeRequestForArtisan: [],
+            showUpdatedContent: -1,
         };
         this.changeRequstCheckBox = this.changeRequstCheckBox.bind(this);
       }
@@ -175,6 +176,9 @@ export class ChangeRequest extends Component {
             if(response.data.valid)
             {  
                 console.log(response.data.data);
+                this.setState({
+                    showUpdatedContent: 0,
+                })
                 document.getElementById('ReqChangesModal').style.display='none';
                 this.componentDidMount();
                 customToast.success("Change request send successfully", {
@@ -204,7 +208,7 @@ export class ChangeRequest extends Component {
             }
         });
 
-        if(this.props.changeRequestStatus === 0) {
+        if((this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0)) {
             TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
                 if(response.data.valid)
                 {
@@ -213,7 +217,16 @@ export class ChangeRequest extends Component {
                         getChangeRequestForArtisan: response.data.data.changeRequestItemList
                     })
                 }
-            })
+            });
+
+            // var array1 = this.state.getChangeRequestItemTable;
+            // var array2 = this.state.getChangeRequestForArtisan;
+
+            // for(var i = 0; i < array2.length; i++) {
+            //     for(var j = 0; j < array1.length; j++) {
+            //         if(array2[i].requestItemsId === ) 
+            //     }
+            // }
         }
     }
     
@@ -231,11 +244,11 @@ export class ChangeRequest extends Component {
             </Col>
     </Row>
 
-    {this.props.changeRequestStatus === 0 ?
-
-    this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
-        return this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((item) => {
-        return data.id === item.requestItemsId ? 
+    {(this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0) ?
+this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((item) =>
+     {
+        return this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
+        return (data.id === item.requestItemsId) ? 
             <Row noGutters={true}>
             <span>
                 <Col className="col-xs-3">
@@ -248,17 +261,18 @@ export class ChangeRequest extends Component {
             </span>  
             </Row>
             : 
-            <Row noGutters={true}>
-            <span>
-                <Col className="col-xs-3">
-                <input type="checkbox" className="colorchange2" disabled={true}/> 
-                <b>{data.item}</b>  
-                </Col>
-                <Col className="col-xs-9">
-                <input type="text" className="CRinput" disabled={true}/>
-                </Col>
-            </span>  
-            </Row>
+            null
+            // <Row noGutters={true}>
+            // <span>
+            //     <Col className="col-xs-3">
+            //     <input type="checkbox" className="colorchange2" disabled={true}/> 
+            //     <b>{data.item}</b>  
+            //     </Col>
+            //     <Col className="col-xs-9">
+            //     <input type="text" className="CRinput" disabled={true}/>
+            //     </Col>
+            // </span>  
+            // </Row>
 
         }) : null
 
@@ -298,7 +312,7 @@ export class ChangeRequest extends Component {
 
     <Row noGutters={true}>
     <Col className="col-xs-12"style={{textAlign:"center"}}>
-    {this.props.changeRequestStatus === 0 ? 
+    {(this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0) ? 
     <button className="proccedwithadvpaybtn" disabled={true} style={{backgroundColor: "#777777"}}
     >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
     </button>

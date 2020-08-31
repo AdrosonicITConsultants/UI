@@ -1110,6 +1110,45 @@ class TTCEapi {
 
 
 
+
+  static submitDeliveryChallan(
+    enquiryId,
+    formData,
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId;
+
+    // console.log(JSON.stringify(file));
+    console.log(formData);
+    // console.log(selectedFile);
+    debugger;
+    // bodyFormData.append("file",JSON.stringify(file));
+    bodyFormData.append("file", formData);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
+        debugger;
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
+
+
+
+
   static registerBuyer(
     companyname,
     gstno,
@@ -2177,19 +2216,21 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
 // POST /enquiry/changeRequestStatusUpdate
 static changeRequestStatusUpdate(enquiryCode,arrayData,status){
   let url = ApiUrl + "/enquiry/changeRequestStatusUpdate?status="+status;
+  console.log(enquiryCode,arrayData);
   var config = {
     headers: {
       "Content-type": "application/json",
     },
   };
-  var data = {
+  var parameters = {
     "enquiryId": enquiryCode,
     "itemList": arrayData
   }
   return axios
-    .post(url, data, config)
+    .post(url, parameters, config)
     .then((response) => {
       console.log(response);
+      
       return response;
     })
     .catch((error) => {

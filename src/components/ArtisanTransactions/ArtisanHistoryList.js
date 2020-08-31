@@ -514,7 +514,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}
                                                                             {}
                                                                             
                                                                             </span>
@@ -576,7 +576,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}</span>
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
@@ -623,7 +623,9 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
-                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}
+                                                                            </span>
                                                                         </div>
                                                                         
 

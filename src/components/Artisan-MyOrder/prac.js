@@ -168,23 +168,23 @@ export class ArtisanChangeRequest extends Component {
             this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
             this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
             this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
-        //        TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
-        //        this.state.raiseCRFinalArray,
-        //        this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-        //        this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-        //        this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
-        //     if(response.data.valid)
-        //     {
-        //         console.log(this.props.enquiryId);
-        //         console.log(this.state.raiseCRFinalArray);
-        //         console.log(this.state.raiseCRFinalArray,
-        //             this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-        //             this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:3);
-        //         document.getElementById('Modal1').style.display='none';
-        //         document.getElementById('Modal2').style.display='none';
-        //         document.getElementById('Modal3').style.display='block';
-        //     }
-        // });
+               TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
+               this.state.raiseCRFinalArray,
+               this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+               this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
+               this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
+            if(response.data.valid)
+            {
+                console.log(this.props.enquiryId);
+                console.log(this.state.raiseCRFinalArray);
+                console.log(this.state.raiseCRFinalArray,
+                    this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+                    this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:3);
+                document.getElementById('Modal1').style.display='none';
+                document.getElementById('Modal2').style.display='none';
+                document.getElementById('Modal3').style.display='block';
+            }
+        });
     }
 
 Show(){

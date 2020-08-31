@@ -351,22 +351,14 @@ export default class BuyerAdvancePayment2 extends Component {
          
          </Col>
              <Col className="col-xs-12 aligncenter" sm={6}>
-             {/* <button className="proccedwithadvpaybtn uploadtractionbtnfloat" 
-                onClick={this.acceptMOQModalShow}
-                onClick={() => this.uploadReceiptandSend()}
-                 >
-       
-                <img src={logos.Iconfeatherupload} style={{marginRight:"5px",height:"10px"}}/>
-                Upload transaction receipt 
-                    </button> */}
-                
+      
         
 
         <input type="file" id="file"  accept=".png, .jpg, .jpeg"
        onChange={this.onFileChange}
         />
         <label for="file" className="uploadtractionbtnfloat" >
-            {/* <img src={logos.uploadagain} style={{marginRight:"5px",height:"10px"}}/>  */}
+      
             <i class="fa fa-upload" aria-hidden="true"style={{marginRight:"5px",height:"10px"}}></i>
 
              Upload transaction receipt </label>
@@ -382,13 +374,10 @@ export default class BuyerAdvancePayment2 extends Component {
             <>
             <Row noGutters={true} className="margintoprow aligncenter">
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
-                    {/* <button className="uploadroundbtn" >
-                    <input type="file"  className=" " onChange={this.onFileChange} />
-                    <i class="fa fa-upload" aria-hidden="true" style={{marginRight:"5px"}}></i> 
-                    </button>  */}
+                   
                     <input type="file" id="file" accept=".png, .jpg, .jpeg" onChange={this.onFileChange} />
                     <label for="file" className="uploadroundbtn" >
-                    {/* <img src={logos.uploadagain} style={{marginRight:"5px",height:"10px"}}/>  */}
+                   
                     <i class="fa fa-upload" aria-hidden="true"style={{marginRight:"5px",height:"10px"}}></i>
 
                      </label>
@@ -406,22 +395,10 @@ export default class BuyerAdvancePayment2 extends Component {
                 </Col>
                 
             </Row>
-            {/* <Row noGutters={true} className="margintoprow aligncenter">
-            <Col className="col-xs-12 " style={{textAlign:"center"}}>
-            </Col>
-            <div>
-                    <button className="uploadconfirmbtn" 
-                    
-                    onClick={() => this.uploadReceiptandSend()}>
-                        <i class="fa fa-paper-plane" aria-hidden="true" style={{marginRight:"5px"}}></i>  
-                    Upload and send for confirmation 
-                        </button>
-                        </div>
-                </Row> */}
+   
           </>
             }
-            
-{/* <button  onClick={this.acceptMOQModalShow}>abcd</button> */}
+
         <Row noGutters={true} style={{marginTop:"10px"}}>
             <Col className="col-xs-12" style={{textAlign:"center"}}>
             <p>   <span className="selectpercenttext" style={{color:"#333"}}>You can come back later to upload receipt. <br/>  

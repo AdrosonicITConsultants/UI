@@ -20,10 +20,7 @@ import { PreviewOldchanges } from './PreviewOldchanges';
 import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
-
-
-
-
+import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 export class Artisanorder extends Component {
     constructor() {
         super();
@@ -44,7 +41,8 @@ export class Artisanorder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
-            getChangeRequestForArtisan:[]
+            getChangeRequestForArtisan:[],
+            getOrder:[]
            
         
         }
@@ -378,12 +376,21 @@ export class Artisanorder extends Component {
         if(response.data.valid)
         {
             // console.log(response.data.data);
-            this.setState({getChangeRequestForArtisan:response.data.data,
+            this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                 dataload:true})
         }
         console.log(this.state.getChangeRequestForArtisan)
     })
-
+    TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
+        if(response.data.valid)
+        {
+            this.setState({getOrder:response.data.data,
+                dataload:true
+               
+                           })
+        }
+        console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+    })
 
     }
     render() {
@@ -1442,18 +1449,17 @@ export class Artisanorder extends Component {
 
                                         {this.state.proformainvoice? 
                                         <>
-                                        {/* <Col sm={1}></Col> */}
+                                        
                                         <Col sm={10}>
-                                            <PIchange 
-                                            enquiryId={this.state.enquiryCode}
-                                            enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
-                                            {/* <PreviewOldchanges 
-                                             enquiryId={this.state.enquiryCode}/> */}
-                                             {/* <PreviewChangedPI 
-                                              enquiryId={this.state.enquiryCode}
-                                             /> */}
-                                            
-                                        </Col>
+                                        <PIchange 
+                                        enquiryId={this.state.enquiryCode}
+                                        enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
+                                      
+                                        
+                                    </Col>
+                                  
+                                        {/* <Col sm={1}></Col> */}
+                                       
                                         </>
                                         :
                                         <>
@@ -1470,11 +1476,13 @@ export class Artisanorder extends Component {
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
                                                                     ?
                                                                     <>
+                                                                     {console.log("mine3")}
                                                                     {
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
+                                                                     {console.log("mine4")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1487,6 +1495,7 @@ export class Artisanorder extends Component {
                                                                       {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
                                                                         ?
                                                                         <Row noGutters={true}>
+                                                                             {console.log("mine5")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1496,6 +1505,10 @@ export class Artisanorder extends Component {
                                                                         
                                                                         : <>
                                                                         {/* <CRaccepted /> */}
+                                                                        {console.log("mine7")}
+                                                                        <ArtisanChangeRequest
+                                                                         enquiryId={this.state.enquiryCode}
+                                                                        />
                                                                         </>
                                                                         }
 
@@ -1510,6 +1523,7 @@ export class Artisanorder extends Component {
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
+                                                                     {console.log("mine2")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1521,7 +1535,9 @@ export class Artisanorder extends Component {
                                                                     <>
                                                                       {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
                                                                         ?
+                                                                        
                                                                         <Row noGutters={true}>
+                                                                             {console.log("mine1")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1530,7 +1546,12 @@ export class Artisanorder extends Component {
                                                                         </Row>
                                                                         
                                                                         : <>
-                                                                        {this.state.getChangeRequestForArtisan.length>0?
+                                                                        
+                                                                        {console.log("mine")}
+                                                                         <ArtisanChangeRequest
+                                                                         enquiryId={this.state.enquiryCode}
+                                                                        />
+                                                                        {/* {this.state.getChangeRequestForArtisan.length>0?
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                         />
@@ -1542,7 +1563,7 @@ export class Artisanorder extends Component {
                                                                         <br></br>
                                                                     </Col>
                                                                 </Row>
-                                                                    }
+                                                                    } */}
                                                                        
                                                                         </>
                                                                         }
@@ -1570,11 +1591,9 @@ export class Artisanorder extends Component {
 
                                     {this.state.taxInvoice ? 
                                     <>
-                                    <Col sm={1}></Col>
-                                    <Col sm={8}>
-                                        <div>
-                                    <h6>tax...</h6>
-                                    </div>
+                                    {/* <Col sm={1}></Col> */}
+                                    <Col sm={10}>
+                                    <ArtisanTaxInvoice />
                                     </Col>
                                     </>
                                     :null}

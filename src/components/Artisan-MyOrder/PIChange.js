@@ -203,6 +203,7 @@ export class PIchange extends Component {
             if(response.data.valid)
             {
                 this.setState({getOrder:response.data.data,
+                    dataload:true
                    
                                })
             }
@@ -212,8 +213,26 @@ export class PIchange extends Component {
     render() {
         return (
             <React.Fragment>
-
-{this.state.viewOldPi?
+                <>
+                {this.state.dataload?
+                <>
+ {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==1 && this.state.preview==false||
+ this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==3 && this.state.preview==false?
+                   <>
+                    {/* {this.state.piSend==1?    
+                        null
+        :
+        <>  {this.state.isPidetail ? <img
+            src={logos.apedit}
+            className="aoctick"
+            style={{"cursor":"pointer" ,
+                "position" : "absolute"}}
+            onClick={this.handlePiEdit}
+    ></img> : 
+    null} </>
+    } */}
+   
+    {this.state.viewOldPi ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
     <PreviewOldchanges
     bp={this.oldbackPI}
     enquiryId={this.props.enquiryId}
@@ -224,45 +243,7 @@ export class PIchange extends Component {
     quantity={this.state.quantity}
     sgst={this.state.sgst}
     cgst={this.state.cgst}
-    piSend={this.state.piSend} />
-    :
-    <>
-
-
-
-{this.state.piSend ==1 ?
-<>
-<PreviewChangedPI 
-     bp={this.backPI}
-     enquiryId={this.props.enquiryId}
-     enquiryCode={this.props.enquiryCode}
-     expectedDateOfDelivery={this.state.dod}
-     hsn={this.state.hsncode}
-     rpu={this.state.rpu}
-     quantity={this.state.quantity}
-     sgst={this.state.sgst}
-     cgst={this.state.cgst}
-     piSend={this.state.piSend}
-     />
-</>
-:
-<>
-{/* {this.state.getOrder?<></>:""} */}
-
-{this.state.preview == false   ?
-<>
-    {this.state.piSend==1?    
-    null
-        :
-        <>  {this.state.isPidetail ? <img
-            src={logos.apedit}
-            className="aoctick"
-            style={{"cursor":"pointer" ,
-                "position" : "absolute"}}
-            onClick={this.handlePiEdit}
-    ></img> : 
-    null} </>
-    }
+    piSend={this.state.piSend} />:""}
     <Row noGutters={true}>
         <Col style={{textAlign:"center"}} className="playfair">
             <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post Change Request Process</h3>
@@ -271,9 +252,11 @@ export class PIchange extends Component {
             You have <strong>2</strong> days remaining to update your invoice after change request.</p>
         </Col>
         </Row>
+        {this.state.viewOldPi?
       <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
-
       onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
+      :""
+        }
     <Row noGutters={true} className="PIcolmt BdImgCol">
     <Col sm={6} >
         <label>Quantity</label>
@@ -281,7 +264,7 @@ export class PIchange extends Component {
     <input 
     className="PIinput"
         type="number"
-        disabled={this.state.isPidetail}
+       
         value={this.state.quantity }
         name="quantity"
         onChange={this.handleChange}
@@ -293,7 +276,7 @@ export class PIchange extends Component {
         <select name="cars" id="cars" 
         className={this.state.isPidetail ? 
             "rssymboldis":"rssymbol"}
-        disabled={this.state.isPidetail}
+       
         value={this.state.currency}
         onChange={this.handleChange}>
          
@@ -311,7 +294,7 @@ export class PIchange extends Component {
         </select>
     {/* </span> */}
     <input type="number"  className="PIinput rsinputboxwidth"
-    disabled={this.state.isPidetail}
+   
     value={this.state.rpu }
     name="rpu"
     onChange={this.handleChange} />
@@ -322,7 +305,7 @@ export class PIchange extends Component {
     <label>Expected date of delivery</label>
     <br/>
     <input className="PIinput" type="date"
-    disabled={this.state.isPidetail}
+   
     value={this.state.dod }
     name="dod"
     onChange={this.handleChange}/>
@@ -332,7 +315,7 @@ export class PIchange extends Component {
     <label>HSN Code</label>
     <br/>
     <input className="PIinput" type="number"
-    disabled={this.state.isPidetail}
+   
     value={this.state.hsncode }
     name="hsncode"
     onChange={this.handleChange}/>
@@ -377,30 +360,25 @@ export class PIchange extends Component {
     
     </Row>
     </>
-:
-
-    <PreviewChangedPI 
-     bp={this.backPI}
-     enquiryId={this.props.enquiryId}
-     enquiryCode={this.props.enquiryCode}
-     expectedDateOfDelivery={this.state.dod}
-     hsn={this.state.hsncode}
-     rpu={this.state.rpu}
-     quantity={this.state.quantity}
-     sgst={this.state.sgst}
-     cgst={this.state.cgst}
-     piSend={this.state.piSend}
-     />
-    }
-  
-</>
-}
-
-
-
-</>
-   }
-   
+       
+    
+                        :
+         <PreviewChangedPI 
+       bp={this.backPI}
+       enquiryId={this.props.enquiryId}
+       enquiryCode={this.props.enquiryCode}
+       expectedDateOfDelivery={this.state.dod}
+       hsn={this.state.hsncode}
+       rpu={this.state.rpu}
+       quantity={this.state.quantity}
+       sgst={this.state.sgst}
+       cgst={this.state.cgst}
+       piSend={this.state.piSend}
+       />}
+                </>
+                :
+                ""}
+                </>   
                 </React.Fragment>
                 )
                 }

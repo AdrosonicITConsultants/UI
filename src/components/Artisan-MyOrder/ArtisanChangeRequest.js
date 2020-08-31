@@ -34,6 +34,9 @@ export class ArtisanChangeRequest extends Component {
             selectedId:-1,
             count:0,
             status:0,
+            counter: 0,
+            submitdisabled:false,
+            sendCRdisabled:false,
             accepted:[
                 {   
                     id: 1,
@@ -108,24 +111,10 @@ export class ArtisanChangeRequest extends Component {
    
     Modal1Show = () => {
         this.setState({
-            raiseCRFinalArray:[]
+            raiseCRFinalArray:[],
+            submitdisabled:true
         })
-        console.log(this.state.trueCount);
-        console.log(this.state.getChangeRequestForArtisan.length);
-
-        if(this.state.trueCount===this.state.getChangeRequestForArtisan.length)
-        {
-            this.setState({
-                status: 1
-            }) 
-        }
-        else if (this.state.falseCount==this.state.getChangeRequestForArtisan.length){
-            this.setState({
-                status: 2
-            }) 
-        }
-        
-        console.log(this.state.status)
+     
         var array = this.state.accepted;
         var array1 = this.state.getChangeRequestForArtisan;
         for(var j = 0; j < array1.length; j++){
@@ -149,11 +138,16 @@ export class ArtisanChangeRequest extends Component {
                             requestText: data,
                             requestStatus:status,
                         }
-                        console.log(object);
-                        this.state.raiseCRFinalArray.push(object);
-                        console.log(this.state.raiseCRFinalArray);
                         
-                    }
+                        this.state.raiseCRFinalArray.push(object);
+                      
+                        console.log(this.state.raiseCRFinalArray);
+                        var Finalarray= this.state.raiseCRFinalArray
+                        this.setState({
+                            raiseCRFinalArray:Finalarray,
+                            submitdisabled:true
+                        })
+                                           }
                 }
              
             }
@@ -161,32 +155,7 @@ export class ArtisanChangeRequest extends Component {
               
         document.getElementById('Modal1').style.display='block';
     }
-    
-    sendCR = () => {
-        console.log(this.props.enquiryId);
-        console.log(this.state.raiseCRFinalArray);
-        console.log(this.state.raiseCRFinalArray,
-            this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-            this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-            this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
-               TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
-               this.state.raiseCRFinalArray,
-               this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-               this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-               this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(this.props.enquiryId);
-                console.log(this.state.raiseCRFinalArray);
-                console.log(this.state.raiseCRFinalArray,
-                    this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-                    this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:3);
-                document.getElementById('Modal1').style.display='none';
-                document.getElementById('Modal2').style.display='none';
-                document.getElementById('Modal3').style.display='block';
-            }
-        });
-    }
+   
 
 Show(){
     console.log(this.state.accepted)
@@ -218,14 +187,25 @@ componentDidMount(){
                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                       
-                        this.setState({getChangeRequestForArtisan:response.data.data,
+                        // console.log(response.data.data);
+                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                             dataload:true})
+                            var array = this.state.getChangeRequestForArtisan;
+        var count = 0;
+        for(var i = 0; i < array.length; i ++) {
+          if(array[i].requestStatus === 1) {
+            count = count + 1;
+          }
+        }
+
+        this.setState({
+          counter: count,
+        })
                     }
+                    console.log(this.state.getChangeRequestForArtisan)
                 })
 
-                console.log(this.state.getChangeRequestForArtisan);
-            }
+                       }
                 
                 
                 )
@@ -234,7 +214,28 @@ componentDidMount(){
    
   
 }
-
+ 
+sendCR = () => {
+    this.setState({
+        sendCRdisabled:true
+    })
+    console.log(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+        this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
+        this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
+                  TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
+                  this.state.raiseCRFinalArray,
+                  this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+           this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
+           this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
+        if(response.data.valid)
+        {
+        
+            document.getElementById('Modal1').style.display='none';
+            document.getElementById('Modal2').style.display='none';
+            document.getElementById('Modal3').style.display='block';
+        }
+    });
+}
 
 // Modal1Show = () => {
 //     document.getElementById('Modal1').style.display='block';
@@ -245,23 +246,9 @@ Modal1Close = () => {
 }
 
 Modal2Show = () => {
-    if(this.state.trueCount==this.state.getChangeRequestForArtisan.length)
-    {
-        this.setState({
-            status: 1
-        }) 
-    }
-    else if (this.state.falseCount==this.state.getChangeRequestForArtisan.length){
-        this.setState({
-            status: 2
-        }) 
-    }
-    else{
-        this.setState({
-            status: 3
-        }) 
-    }
-    console.log(this.state.status)
+ this.setState({
+    submitdisabled:true
+ })
     var array = this.state.accepted;
     var array1 = this.state.getChangeRequestForArtisan;
     for(var j = 0; j < array1.length; j++){
@@ -288,7 +275,11 @@ Modal2Show = () => {
                     console.log(object);
                     this.state.raiseCRFinalArray.push(object);
                     console.log(object.requestStatus==1?"true":false);
-                    
+                    var Finalarray= this.state.raiseCRFinalArray
+                    this.setState({
+                        raiseCRFinalArray:Finalarray,
+                        submitdisabled:true
+                    })
                 }
             }
          
@@ -308,6 +299,7 @@ Modal3Show = () => {
 
 Modal3Close = () => {
     document.getElementById('Modal3').style.display='none';
+    this.componentDidMount();
 }
     render(){
     return(
@@ -406,11 +398,11 @@ Modal3Close = () => {
 
             <Row noGutters={true}>
                   <Col className="col-xs-12" style={{textAlign:"center"}}>
-                      {this.state.count?  
+                      {this.state.count ?  
                             this.state.trueCount ==0?
-                        <button className="submitCRart" onClick={()=>{this.Modal2Show()}}>Submit</button>
+                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
                         :
-                        <button className="submitCRart" onClick={()=>{this.Modal1Show()}}>Submit</button>
+                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
                          :
                      <button className="submitCRart">Submit</button>
 
@@ -465,6 +457,7 @@ Modal3Close = () => {
                         <span onClick={this.Modal1Close} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                         <span >
                             <button
+                            disabled={this.state.sendCRdisabled}
                             onClick={()=>{this.sendCR()}}
                             className="buyerMOQAcceptModalOkayButton">Ok</button></span>
                     </div>
@@ -558,8 +551,44 @@ Modal3Close = () => {
             
             :
             this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==1 || this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==3?
-            <>
-             <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <><div className="craccbox">
+            <h3 className="CRAcceptedh3">Change Request Details</h3>
+          
+            {this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((data) => {
+              return this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((item) => {
+              return data.requestItemsId === item.id ?
+                <Row noGutters={true} className="innerboxcr">
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-5">
+                    <p className="Crh">{item.item}</p>
+                    <p className="changereqcolor marginminus">{data.requestText}</p>
+                    </Col>
+                    <Col className="col-xs-3"></Col>
+                    {data.requestStatus === 1 ?
+                    <Col className="col-xs-3">
+                      <b style={{color:"green"}}>Accepted</b> 
+                      <p> <img src={logos.acceptgreen} className="acceptrejimh"/></p>
+                    </Col>
+                    :
+                    <>
+                    <Col className="col-xs-3">
+                      <b style={{color:"red"}}>Rejected</b> 
+                      <p> <img src={logos.sadred} className="acceptrejimh"/></p>
+                    </Col>
+                    </>
+                    }
+                </Row>
+                : null
+                  }) : null
+                }) : null
+              }
+              
+          
+          <p style={{textAlign:"center"}}>You have accepted <b style={{color:"green"}}>
+            {this.state.counter}</b> out of <b style={{color:"green"}}>
+            {this.state.getChangeRequestForArtisan.length}</b> requests</p>
+            </div>
+             {/* <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 " style={{border:"2px solid green"}}>
                 <br/>
                 <b className="CRare playfair " >You have accepted the changes on:</b> <br/>
@@ -600,7 +629,7 @@ Modal3Close = () => {
                     <br/>
                 <img src={logos.crgreeninpopup} />
             </Col>
-        </Row>
+        </Row> */}
             </>
             :
             this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?

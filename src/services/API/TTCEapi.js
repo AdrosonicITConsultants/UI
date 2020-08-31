@@ -826,21 +826,6 @@ class TTCEapi {
         return error.response;
       });
   }
-
-  // /enquiry/getChangeRequestForArtisan?enquiryId=1510
-  static getChangeRequestForArtisan(enquiryId) {
-    let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
-    console.log(url);
-    return axios
-      .get(url)
-      .then((response) => {
-        console.log(response);
-        return response;
-      })
-      .catch((error) => {
-        return error.response;
-      });
-  }
   
     static getOrder(enquiryId) {
       let url = ApiUrl + "/order/getOrder/{enquiryId}?enquiryId="+enquiryId;
@@ -2231,7 +2216,6 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
 // POST /enquiry/changeRequestStatusUpdate
 static changeRequestStatusUpdate(enquiryCode,arrayData,status){
   let url = ApiUrl + "/enquiry/changeRequestStatusUpdate?status="+status;
-
   var config = {
     headers: {
       "Content-type": "application/json",
@@ -2250,7 +2234,23 @@ static changeRequestStatusUpdate(enquiryCode,arrayData,status){
     .catch((error) => {
       return error.response;
     });
+} 
+
+static getChangeRequestForArtisan(enquiryId) {
+  let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
 }
+
+
 
   //#endregion
 }

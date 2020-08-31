@@ -46,6 +46,7 @@ export class PIchange extends Component {
             // enquiryCode:this.props.enquiryCode,
             expectedDateOfDelivery:"",  
             viewOldPi:false, 
+            getOrder:[]
          
         }
     }
@@ -198,6 +199,15 @@ export class PIchange extends Component {
            
             });
         });
+        TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getOrder:response.data.data,
+                   
+                               })
+            }
+            console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+        })
     }
     render() {
         return (
@@ -237,7 +247,9 @@ export class PIchange extends Component {
 </>
 :
 <>
-{this.state.preview == false ?
+{/* {this.state.getOrder?<></>:""} */}
+
+{this.state.preview == false   ?
 <>
     {this.state.piSend==1?    
     null
@@ -380,7 +392,9 @@ export class PIchange extends Component {
      piSend={this.state.piSend}
      />
     }
-</>}
+  
+</>
+}
 
 
 

@@ -79,7 +79,38 @@
     font-weight: bold;
     color: darkgrey;
 }
+.crnote4{
+    font-size: 17px;
+    font-weight: 500;
+    color: darkgrey;
+}
+.updateinvday{
+    font-size: 11px;
+    color: green;
+    font-weight: bolder;
 
+}
+
+.makechangenowbtn{
+    background-color: green;
+    color: white;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    height: 32px;
+    border-radius: 27px;
+    padding: 5px;
+    width: 179px;
+}
+.popuprejimg{
+    height: 179px;
+    margin-top: 12px;
+}
+.crnote4p {
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+}
 .btn-switch--on {
     position: relative;
     display: block;

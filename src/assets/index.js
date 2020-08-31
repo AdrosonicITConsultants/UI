@@ -177,7 +177,11 @@ import postchangerequesticon from "./post change request icon.svg"
 import happygrey from "./happy grey.svg"
 import sadgrey from "./sad grey.svg"
 import freezeReq from "./freeze change req.svg"
+import crgreeninpopup from "./cr green in popup.svg"
+import Sadpopup from "./Sad popup.svg"
 export default {
+  Sadpopup,
+  crgreeninpopup,
   sadgrey,
   happygrey,
   freezeReq,

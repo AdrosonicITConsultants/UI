@@ -446,7 +446,9 @@ export class PreviewOldchanges extends Component {
     {/* ------------------------------------- */}
    <tr> 
      <td>
-     <h3 className="snopi srwidth ">01</h3>
+     <h3 className="snopi srwidth ">01
+     <br/>
+     CR</h3>
         </td>
         
  

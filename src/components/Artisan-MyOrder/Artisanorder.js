@@ -1,5 +1,4 @@
 
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
@@ -45,6 +44,7 @@ export class Artisanorder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
+            getChangeRequestForArtisan:[]
            
         
         }
@@ -374,6 +374,15 @@ export class Artisanorder extends Component {
         }
     })
 
+    TTCEapi.getChangeRequestForArtisan(this.state.enquiryCode).then((response)=>{
+        if(response.data.valid)
+        {
+            // console.log(response.data.data);
+            this.setState({getChangeRequestForArtisan:response.data.data,
+                dataload:true})
+        }
+        console.log(this.state.getChangeRequestForArtisan)
+    })
 
 
     }
@@ -1503,9 +1512,20 @@ export class Artisanorder extends Component {
                                                                         </Row>
                                                                         
                                                                         : <>
-                                                                        <ArtisanChangeRequest
-                                                                          enquiryId={this.state.enquiryCode}
-                                                                         />
+                                                                        {this.state.getChangeRequestForArtisan.length>0?
+                                                                         <ArtisanChangeRequest
+                                                                         enquiryId={this.state.enquiryCode}
+                                                                        />
+                                                                    :
+                                                                    <Row noGutters={true}>
+                                                                    <Col className="col-xs-12 bold font20 text-center">
+                                                                        <br></br>
+                                                                        Change request Not available
+                                                                        <br></br>
+                                                                    </Col>
+                                                                </Row>
+                                                                    }
+                                                                       
                                                                         </>
                                                                         }
 

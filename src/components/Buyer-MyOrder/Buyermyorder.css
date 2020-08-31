@@ -89,3 +89,12 @@
     border: none;
     cursor: pointer;
 }
+.submitCRart:disabled{
+    color: white;
+    background: grey;
+    width: 120px;
+    height: 30px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+}

@@ -2216,19 +2216,21 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
 // POST /enquiry/changeRequestStatusUpdate
 static changeRequestStatusUpdate(enquiryCode,arrayData,status){
   let url = ApiUrl + "/enquiry/changeRequestStatusUpdate?status="+status;
+  console.log(enquiryCode,arrayData);
   var config = {
     headers: {
       "Content-type": "application/json",
     },
   };
-  var data = {
+  var parameters = {
     "enquiryId": enquiryCode,
     "itemList": arrayData
   }
   return axios
-    .post(url, data, config)
+    .post(url, parameters, config)
     .then((response) => {
       console.log(response);
+      
       return response;
     })
     .catch((error) => {

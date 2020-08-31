@@ -1449,11 +1449,13 @@ export class Artisanorder extends Component {
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
                                                                     ?
                                                                     <>
+                                                                     {console.log("mine3")}
                                                                     {
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
+                                                                     {console.log("mine4")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1466,6 +1468,7 @@ export class Artisanorder extends Component {
                                                                       {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
                                                                         ?
                                                                         <Row noGutters={true}>
+                                                                             {console.log("mine5")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1475,6 +1478,10 @@ export class Artisanorder extends Component {
                                                                         
                                                                         : <>
                                                                         {/* <CRaccepted /> */}
+                                                                        {console.log("mine7")}
+                                                                        <ArtisanChangeRequest
+                                                                         enquiryId={this.state.enquiryCode}
+                                                                        />
                                                                         </>
                                                                         }
 
@@ -1489,6 +1496,7 @@ export class Artisanorder extends Component {
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
+                                                                     {console.log("mine2")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1500,7 +1508,9 @@ export class Artisanorder extends Component {
                                                                     <>
                                                                       {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
                                                                         ?
+                                                                        
                                                                         <Row noGutters={true}>
+                                                                             {console.log("mine1")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1509,7 +1519,11 @@ export class Artisanorder extends Component {
                                                                         </Row>
                                                                         
                                                                         : <>
-                                                                        {this.state.getChangeRequestForArtisan.length>0?
+                                                                        {console.log("mine")}
+                                                                         <ArtisanChangeRequest
+                                                                         enquiryId={this.state.enquiryCode}
+                                                                        />
+                                                                        {/* {this.state.getChangeRequestForArtisan.length>0?
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                         />
@@ -1521,7 +1535,7 @@ export class Artisanorder extends Component {
                                                                         <br></br>
                                                                     </Col>
                                                                 </Row>
-                                                                    }
+                                                                    } */}
                                                                        
                                                                         </>
                                                                         }

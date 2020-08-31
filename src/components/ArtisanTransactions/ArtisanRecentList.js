@@ -13,6 +13,7 @@ import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
 import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
+import thunk from 'redux-thunk';
 // import { EditorInsertComment } from 'material-ui/svg-icons';
 
 
@@ -37,11 +38,29 @@ export class ArtisanRecentList extends Component {
             TransactionenquiryId:"",
             paymentType:0,
             searchString:"",
-            notifyId:""
+            selectedFile:null,
+            selectedFileName:"",
+            notifyId:"",
+            upload:true
 
         }
+        this.onFileChange= this.onFileChange.bind(this);
         this.paymentTypeset = this.paymentTypeset.bind(this);
-    }   
+        this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
+    }  
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
+    }
+
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
   
@@ -92,18 +111,55 @@ export class ArtisanRecentList extends Component {
     uploddeliveryreceiptModalShow(id,enquiryId){
     
         document.getElementById('deliveryReceipt'+id).style.display='block';
-        TTCEapi.getTransactions(enquiryId).then((response)=>
-        {
-            if(response.data.valid)
-            {
-                this.setState({getTransactions:response.data.data,
-                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
-             },()=>{
-                 console.log(this.state.TransactionenquiryCode);
-             })
-            }
-        })
         
+    }
+
+    uploadReceiptandSend(enquiryId,id){
+        this.setState({
+            rejectButtonClick:true
+          })
+            const formData = new FormData(); 
+        formData.append( 
+          "myFile", 
+          this.state.selectedFile, 
+        //   this.state.selectedFile.name 
+        );
+       
+        console.log(this.state.selectedFile); 
+        TTCEapi.submitDeliveryChallan(
+                enquiryId,
+            this.state.selectedFile,
+            ).then((response)=>{
+            
+            if(response.data.valid){ 
+                document.getElementById('deliveryReceipt'+id).style.display='none';
+                customToast.success("Delivery Challan uploaded", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.setState({  
+               rejectButtonClick:false
+              
+            },()=>{
+                // console.log(response)
+           
+            });
+          
+      }
+      else{
+        document.getElementById('deliveryReceipt'+id).style.display='none';
+
+        this.setState({
+            uploadButtonClick:false
+      });
+      customToast.error(response.data.errorMessage, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+      
+      }
+        })
+      
     }
 
     uploddeliveryreceiptModalclose = (id) => {
@@ -398,7 +454,7 @@ export class ArtisanRecentList extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.filter(this.state.getOngoingTransaction).map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
+                    {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -410,7 +466,7 @@ export class ArtisanRecentList extends Component {
  </Moment>
 
 {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])}
+{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])} */}
 
 </Col>
 <Col className="col-xs-3" sm="1">
@@ -477,14 +533,17 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
   
     <p>Notify buyer again</p>
 <img src={logos.notifybuyer} className="acceptrejecticon" 
-onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
+onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}
+
+
+/> 
       </>
       :
       data.id==4 ?
       <>
       <p>upload delivery challan</p>
 <img src={logos.uploaddelreceipt} className="acceptrejecticon"
- onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}/> 
+ onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)} /> 
         </>
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
@@ -539,7 +598,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}
                                                                             {}
                                                                             
                                                                             </span>
@@ -616,7 +675,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}</span>
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
@@ -660,14 +719,34 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
                                                                     <Col className="col-xs-12">
                                                                         <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>delivery receipt</div>
-                                                                      
-                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" >
+                                                                        {this.state.upload?
+                                                                        <>
+                                                                        <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+                                                                        onChange={this.onFileChange}
+                                                                        style={{background:"white"}}
+                                                                            />
+                                                                            <label for="file" className="buyerMOQAcceptModalEnquiryDiv"  style={{background:"white"}}>
                                                                             <img src={logos.Iconfeatherupload} className=" happyunhappyimg" />
                                                                             <p className="uploadrec">Upload Receipt</p>
-                                                                        </div>
+                                                                            </label>
+                                                                         </>  
+                                                                          :
+                                                                          <Row noGutters={true} className="margintoprow aligncenter">
+                                                                          <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                                                                          <img src={logos.Iconfeatherupload} className=" happyunhappyimg" /><br/>
+                                                                                 <b className="uploadreceiptname">{this.state.selectedFileName}</b>
+                                                                                  <br/>
+                                                                                  <div>
+                                                                                   </div>
+                                                                                  
+                                                                              </Col>
+                                                                              
+                                                                          </Row>
+                                                                    }
+                                                                       
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
-                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
 
@@ -687,7 +766,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
-                                                                     
+                                                                        onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
                                                                         // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>

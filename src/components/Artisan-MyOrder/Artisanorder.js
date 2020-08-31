@@ -20,10 +20,7 @@ import { PreviewOldchanges } from './PreviewOldchanges';
 import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
-
-
-
-
+import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 export class Artisanorder extends Component {
     constructor() {
         super();
@@ -378,7 +375,7 @@ export class Artisanorder extends Component {
         if(response.data.valid)
         {
             // console.log(response.data.data);
-            this.setState({getChangeRequestForArtisan:response.data.data,
+            this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                 dataload:true})
         }
         console.log(this.state.getChangeRequestForArtisan)
@@ -1552,11 +1549,9 @@ export class Artisanorder extends Component {
 
                                     {this.state.taxInvoice ? 
                                     <>
-                                    <Col sm={1}></Col>
-                                    <Col sm={8}>
-                                        <div>
-                                    <h6>tax...</h6>
-                                    </div>
+                                    {/* <Col sm={1}></Col> */}
+                                    <Col sm={10}>
+                                    <ArtisanTaxInvoice />
                                     </Col>
                                     </>
                                     :null}

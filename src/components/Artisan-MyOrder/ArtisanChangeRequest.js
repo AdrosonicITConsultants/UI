@@ -110,22 +110,7 @@ export class ArtisanChangeRequest extends Component {
         this.setState({
             raiseCRFinalArray:[]
         })
-        console.log(this.state.trueCount);
-        console.log(this.state.getChangeRequestForArtisan.length);
-
-        if(this.state.trueCount===this.state.getChangeRequestForArtisan.length)
-        {
-            this.setState({
-                status: 1
-            }) 
-        }
-        else if (this.state.falseCount==this.state.getChangeRequestForArtisan.length){
-            this.setState({
-                status: 2
-            }) 
-        }
-        
-        console.log(this.state.status)
+     
         var array = this.state.accepted;
         var array1 = this.state.getChangeRequestForArtisan;
         for(var j = 0; j < array1.length; j++){
@@ -149,11 +134,10 @@ export class ArtisanChangeRequest extends Component {
                             requestText: data,
                             requestStatus:status,
                         }
-                        console.log(object);
+                        
                         this.state.raiseCRFinalArray.push(object);
                         console.log(this.state.raiseCRFinalArray);
-                        
-                    }
+                                           }
                 }
              
             }
@@ -161,32 +145,7 @@ export class ArtisanChangeRequest extends Component {
               
         document.getElementById('Modal1').style.display='block';
     }
-    
-    sendCR = () => {
-        console.log(this.props.enquiryId);
-        console.log(this.state.raiseCRFinalArray);
-        console.log(this.state.raiseCRFinalArray,
-            this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-            this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-            this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
-               TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
-               this.state.raiseCRFinalArray,
-               this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-               this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-               this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(this.props.enquiryId);
-                console.log(this.state.raiseCRFinalArray);
-                console.log(this.state.raiseCRFinalArray,
-                    this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-                    this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:3);
-                document.getElementById('Modal1').style.display='none';
-                document.getElementById('Modal2').style.display='none';
-                document.getElementById('Modal3').style.display='block';
-            }
-        });
-    }
+   
 
 Show(){
     console.log(this.state.accepted)
@@ -218,14 +177,14 @@ componentDidMount(){
                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                       
-                        this.setState({getChangeRequestForArtisan:response.data.data,
+                        // console.log(response.data.data);
+                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                             dataload:true})
                     }
+                    console.log(this.state.getChangeRequestForArtisan)
                 })
 
-                console.log(this.state.getChangeRequestForArtisan);
-            }
+                       }
                 
                 
                 )
@@ -234,7 +193,29 @@ componentDidMount(){
    
   
 }
-
+ 
+sendCR = () => {
+    console.log(this.props.enquiryId,this.state.raiseCRFinalArray,this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+        this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
+        this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
+                  TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
+                  this.state.raiseCRFinalArray,
+                  this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+           this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
+           this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
+        if(response.data.valid)
+        {
+            console.log(this.props.enquiryId);
+            console.log(this.state.raiseCRFinalArray);
+            console.log(this.state.raiseCRFinalArray,
+                this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
+                this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:3);
+            document.getElementById('Modal1').style.display='none';
+            document.getElementById('Modal2').style.display='none';
+            document.getElementById('Modal3').style.display='block';
+        }
+    });
+}
 
 // Modal1Show = () => {
 //     document.getElementById('Modal1').style.display='block';
@@ -245,23 +226,7 @@ Modal1Close = () => {
 }
 
 Modal2Show = () => {
-    if(this.state.trueCount==this.state.getChangeRequestForArtisan.length)
-    {
-        this.setState({
-            status: 1
-        }) 
-    }
-    else if (this.state.falseCount==this.state.getChangeRequestForArtisan.length){
-        this.setState({
-            status: 2
-        }) 
-    }
-    else{
-        this.setState({
-            status: 3
-        }) 
-    }
-    console.log(this.state.status)
+ 
     var array = this.state.accepted;
     var array1 = this.state.getChangeRequestForArtisan;
     for(var j = 0; j < array1.length; j++){

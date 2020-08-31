@@ -232,6 +232,17 @@
     cursor: pointer;
     margin-right: 6px;
 }
+
+.senddelButton:disabled {
+    border: 2px solid grey;
+    background-color: grey;
+    color: white;
+    padding: 6px 23px;
+    border-radius: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 6px;
+}
 .filtericon{
     height: 14px;
     margin-right: 10px;

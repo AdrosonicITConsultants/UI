@@ -34,10 +34,15 @@ export class ArtisanTransaction extends Component {
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
             notifyId:"",
-            enquiryCode : this.props.enquiryCode,
+            enquiryCode : this.props.enquiryCode,  
+             selectedFile:null,
+            selectedFileName:"",
+             upload:true
 
         }
-     
+        this.onFileChange= this.onFileChange.bind(this);
+        // this.paymentTypeset = this.paymentTypeset.bind(this);
+        this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
     }   
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
@@ -124,20 +129,56 @@ notifyModalShow(id,notifyId){
         
     }
 
+    uploadReceiptandSend(enquiryId,id){
+        this.setState({
+            rejectButtonClick:true
+          })
+            const formData = new FormData(); 
+        formData.append( 
+          "myFile", 
+          this.state.selectedFile, 
+        //   this.state.selectedFile.name 
+        );
+       
+        console.log(this.state.selectedFile); 
+        TTCEapi.submitDeliveryChallan(
+                enquiryId,
+            this.state.selectedFile,
+            ).then((response)=>{
+            
+            if(response.data.valid){ 
+                document.getElementById('deliveryReceipt'+id).style.display='none';
+                customToast.success("Delivery Challan uploaded", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.setState({  
+               rejectButtonClick:false
+              
+            },()=>{
+                // console.log(response)
+           
+            });
+          
+      }
+      else{
+        document.getElementById('deliveryReceipt'+id).style.display='none';
+
+        this.setState({
+            uploadButtonClick:false
+      });
+      customToast.error(response.data.errorMessage, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+      
+      }
+        })
+      
+    }
     uploddeliveryreceiptModalShow(id,enquiryId){
     
         document.getElementById('deliveryReceipt'+id).style.display='block';
-        TTCEapi.getTransactions(enquiryId).then((response)=>
-        {
-            if(response.data.valid)
-            {
-                this.setState({ getTransactions : response.data.data.ongoingTransactionResponses,
-                 TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
-             },()=>{
-                 console.log(this.state.TransactionenquiryCode);
-             })
-            }
-        })
         
     }
 
@@ -145,7 +186,18 @@ notifyModalShow(id,notifyId){
         document.getElementById('deliveryReceipt'+id).style.display='none';
         
     }
-    
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
+    }
     acceptModalShow(id,enquiryId){
         
         console.log("abcfdrf");
@@ -463,7 +515,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
       <>
       <p>upload delivery challan</p>
 <img src={logos.uploaddelreceipt} className="acceptrejecticon"
- onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}/> 
+ onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
         </>
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
@@ -635,20 +687,40 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
-                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
+ <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
                                                                     <Col className="col-xs-12">
                                                                         <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>delivery receipt</div>
-                                                                      
-                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" >
+                                                                        {this.state.upload?
+                                                                        <>
+                                                                        <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+                                                                        onChange={this.onFileChange}
+                                                                        style={{background:"white"}}
+                                                                            />
+                                                                            <label for="file" className="buyerMOQAcceptModalEnquiryDiv"  style={{background:"white"}}>
                                                                             <img src={logos.Iconfeatherupload} className=" happyunhappyimg" />
                                                                             <p className="uploadrec">Upload Receipt</p>
-                                                                        </div>
+                                                                            </label>
+                                                                         </>  
+                                                                          :
+                                                                          <Row noGutters={true} className="margintoprow aligncenter">
+                                                                          <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                                                                          <img src={logos.Iconfeatherupload} className=" happyunhappyimg" /><br/>
+                                                                                 <b className="uploadreceiptname">{this.state.selectedFileName}</b>
+                                                                                  <br/>
+                                                                                  <div>
+                                                                                   </div>
+                                                                                  
+                                                                              </Col>
+                                                                              
+                                                                          </Row>
+                                                                    }
+                                                                       
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
-                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode}</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
 
@@ -668,7 +740,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
-                                                                     
+                                                                        onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
                                                                         // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
@@ -676,7 +748,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 </div>
                                                             </div>
                                                             </div>
-
 
 {/* ___________________________________________________________________________________________________ */}
  

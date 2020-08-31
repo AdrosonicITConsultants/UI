@@ -826,21 +826,20 @@ class TTCEapi {
         return error.response;
       });
   }
-
-  // /enquiry/getChangeRequestForArtisan?enquiryId=1510
-  static getChangeRequestForArtisan(enquiryId) {
-    let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
-    console.log(url);
-    return axios
-      .get(url)
-      .then((response) => {
-        console.log(response);
-        return response;
-      })
-      .catch((error) => {
-        return error.response;
-      });
-  }
+  
+    static getOrder(enquiryId) {
+      let url = ApiUrl + "/order/getOrder/{enquiryId}?enquiryId="+enquiryId;
+      console.log(url);
+      return axios
+        .get(url)
+        .then((response) => {
+          console.log(response);
+          return response;
+        })
+        .catch((error) => {
+          return error.response;
+        });
+    }
   // /enquiry/getChangeRequestItemTable
   static getChangeRequestItemTable() {
     let url = ApiUrl + "/enquiry/getChangeRequestItemTable";
@@ -970,7 +969,8 @@ class TTCEapi {
 
       });
   }
-  //#endregion
+  // POST /enquiry/changeRequestStatusUpdate
+
 
   //#region registration
   static sendOtp(emailId) {
@@ -2114,6 +2114,7 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
+// /order/getOrder/{enquiryId}?enquiryId=1505
 
 static getBuyerPreviewPI(code){
   let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" + code;
@@ -2173,10 +2174,32 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
       return error.response;
     });
 }
+// POST /enquiry/changeRequestStatusUpdate
+static changeRequestStatusUpdate(enquiryCode,arrayData,status){
+  let url = ApiUrl + "/enquiry/changeRequestStatusUpdate?status="+status;
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  var data = {
+    "enquiryId": enquiryCode,
+    "itemList": arrayData
+  }
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
 
 static getChangeRequestForArtisan(enquiryId) {
-  let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId="+ enquiryId;
-
+  let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
+  console.log(url);
   return axios
     .get(url)
     .then((response) => {
@@ -2186,7 +2209,8 @@ static getChangeRequestForArtisan(enquiryId) {
     .catch((error) => {
       return error.response;
     });
-} 
+}
+
 
 
   //#endregion

@@ -155,3 +155,21 @@ h3{
     padding: 0px !important;
 
 }
+
+.cricon{
+  position: absolute;
+  width: 22px;
+  height: auto;
+  left: 398px;
+  top: 23px;
+}
+@media screen and (max-width:1200px) and (min-width:992px){
+  .cricon{
+      left: 326px;
+  }
+}
+@media screen and (max-width:991px) and (min-width:768px){
+  .cricon{
+      left: 245px;
+  }
+}

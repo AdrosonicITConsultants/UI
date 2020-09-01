@@ -103,6 +103,12 @@ export class BuyerOngoingOrder extends Component {
                                 console.log(diffDays); 
                                 return(diffDays);
     }
+
+    raiseCRTabFunction = (id) => {
+        localStorage.setItem("changeRequest", 1);
+        browserHistory.push("/buyerorder?code=" + id);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -274,7 +280,67 @@ export class BuyerOngoingOrder extends Component {
 
                     </Row>
                     
+                        
                         :
+
+                        item.openEnquiriesResponse.changeRequestStatus === 0 ?
+                        <Row noGutters={true}>
+                        <hr></hr>
+                       
+                            <Col className="col-xs-1"></Col>
+                           
+                            <Col className="col-xs-8 ">
+                               <span className="CR bold">Change Request: </span> 
+                               <span> Awaiting response from Artisan.</span> 
+                            </Col>
+                            
+                            
+                            <Col className="col-xs-2">
+                            </Col>
+                            <Col className="col-xs-1"></Col>
+    
+                        </Row>
+                        : 
+                        (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
+                        <Row noGutters={true}>
+                        <hr></hr>
+                       
+                            <Col className="col-xs-1"></Col>
+                           
+                            <Col className="col-xs-8 ">
+                               <span className="CR bold">Change Request: </span> 
+                               <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
+                                {item.openEnquiriesResponse.changeRequestModifiedOn}
+                            </Moment>.</span> 
+                               
+                            </Col>
+                            
+                            
+                            <Col className="col-xs-2">
+                            </Col>
+                            <Col className="col-xs-1"></Col>
+    
+                        </Row>
+                        :
+                        item.openEnquiriesResponse.changeRequestStatus === 2 ?
+                        <Row noGutters={true}>
+                        <hr></hr>
+                       
+                            <Col className="col-xs-1"></Col>
+                           
+                            <Col className="col-xs-8 ">
+                               <span className="CR bold">Change Request: </span> 
+                               <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
+                                {item.openEnquiriesResponse.changeRequestModifiedOn}
+                            </Moment>.</span> 
+                            </Col>
+                            
+                            <Col className="col-xs-2">
+                            </Col>
+                            <Col className="col-xs-1"></Col>
+    
+                        </Row>
+                          :  
                            
                     <Row noGutters={true}>
                     <hr></hr>
@@ -296,7 +362,7 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                         }
                         <Col className="col-xs-2">
-                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button" onClick={() => this.raiseCRTabFunction(item.openEnquiriesResponse.enquiryId)} className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
@@ -339,6 +405,15 @@ export class BuyerOngoingOrder extends Component {
                                 </ul>
                                 :
                                 <>
+                                {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                                 { item.isBlue== 1
                                     ?
                                     <>
@@ -583,7 +658,66 @@ export class BuyerOngoingOrder extends Component {
 
                     </Row>
                     
-                        :
+                    :
+
+                    item.openEnquiriesResponse.changeRequestStatus === 0 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Awaiting response from Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    : 
+                    (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
+                           
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    :
+                    item.openEnquiriesResponse.changeRequestStatus === 2 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
+                        </Col>
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                      :  
                            
                     <Row noGutters={true}>
                     <hr></hr>
@@ -605,7 +739,7 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                         }
                         <Col className="col-xs-2">
-                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
+                            <input type="button" onClick={() => this.raiseCRTabFunction(item.openEnquiriesResponse.enquiryId)} className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
                         <Col className="col-xs-1"></Col>
 
@@ -649,6 +783,15 @@ export class BuyerOngoingOrder extends Component {
                                 </ul>
                                 :
                                 <>
+                                {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                                 { item.isBlue== 1
                                     ?
                                     <>

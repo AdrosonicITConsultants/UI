@@ -29,7 +29,7 @@ import { BuyerOldPi } from './BuyerOldPi';
 export class Buyerorder extends Component {
     constructor() {
         super();
-
+        this.scrollCR = React.createRef();
        
         this.state = {
             selected:"BuyerDetails",
@@ -109,6 +109,16 @@ export class Buyerorder extends Component {
         };
         });
         }
+
+        raiseCRTabFunction = () => {
+            this.proformaDetailsbtn();
+            this.scrollCR.current.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "center",
+            });
+        }
+
         changeRequestbtn(){
         this.setState((prevState) => {
         return{
@@ -195,7 +205,11 @@ export class Buyerorder extends Component {
                     {   
                         console.log(response1.data.data);
                         this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                            // console.log(this.state);
+                            var data = localStorage.getItem("changeRequest");
+                            if(data) {
+                                localStorage.removeItem("changeRequest");
+                                this.raiseCRTabFunction();
+                            }
                         });
                         
                     }
@@ -204,7 +218,9 @@ export class Buyerorder extends Component {
                 })
             });
         }
-        })
+        });
+
+
 
 
 
@@ -362,6 +378,9 @@ export class Buyerorder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
+
+                  {/* for CR */}
+
                     {item.openEnquiriesResponse.productStatusId === 2
                     ?
                     <>
@@ -408,7 +427,7 @@ export class Buyerorder extends Component {
 
                     </Row>
                     : 
-                    item.openEnquiriesResponse.changeRequestStatus === 1 ?
+                    (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
                     <Row noGutters={true}>
                     <hr></hr>
                    
@@ -468,7 +487,16 @@ export class Buyerorder extends Component {
                         </Col>
                         }
                         <Col className="col-xs-2">
-                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
+                        <div className={
+                                (this.state.selected == "changeReq"
+                                        ? "Allenqlistbtn2 changereqbtn"
+                                            : "Allenqlistbtn changereqbtn")
+                                        }  
+                                style={{height: "33px", fontWeight: "500"}}
+                                onClick={this.raiseCRTabFunction}>
+                        Raise a change Request
+                        </div>
+                        
                         </Col>
                         <Col className="col-xs-1"></Col>
 
@@ -510,6 +538,15 @@ export class Buyerorder extends Component {
                                 </ul>
                                 :
                                 <>
+                                {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                                 { item.isBlue== 1
                                     ?
                                     <>
@@ -728,7 +765,9 @@ export class Buyerorder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId == 2
+                    {/* for CR */}
+
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2
                     ?
                     <>
                     </>
@@ -755,7 +794,65 @@ export class Buyerorder extends Component {
                     </Row>
                     
                         :
+
+                    item.openEnquiriesResponse.changeRequestStatus === 0 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Awaiting response from Artisan.</span> 
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    : 
+                    (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
                            
+                        </Col>
+                        
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    :
+                    item.openEnquiriesResponse.changeRequestStatus === 2 ?
+                    <Row noGutters={true}>
+                    <hr></hr>
+                   
+                        <Col className="col-xs-1"></Col>
+                       
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
+                            {item.openEnquiriesResponse.changeRequestModifiedOn}
+                        </Moment>.</span> 
+                        </Col>
+                        
+                        <Col className="col-xs-2">
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                      :     
                     <Row noGutters={true}>
                     <hr></hr>
                    
@@ -776,14 +873,23 @@ export class Buyerorder extends Component {
                         </Col>
                         }
                         <Col className="col-xs-2">
-                            <input type="button"  className="changereqbtn" value ="Raise a change Request"></input>
+                        <div className={
+                                (this.state.selected == "changeReq"
+                                        ? "Allenqlistbtn2 changereqbtn"
+                                            : "Allenqlistbtn changereqbtn")
+                                        }  
+                                style={{height: "33px", fontWeight: "500"}}
+                                onClick={this.raiseCRTabFunction}>
+                        Raise a change Request
+                        </div>
+                        
                         </Col>
                         <Col className="col-xs-1"></Col>
 
                     </Row>
                      
                         }
-                        </>
+                     </>   
                     }<hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -819,6 +925,15 @@ export class Buyerorder extends Component {
                                 </ul>
                                 :
                                 <>
+                                {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                                 { item.isBlue== 1
                                     ?
                                     <>
@@ -941,13 +1056,15 @@ export class Buyerorder extends Component {
                 </Col>
 
                 <Col sm={2} 
+                
                     className={
                     (this.state.selected == "changeReq"
                             ? "Allenqlistbtn2"
                                 : "Allenqlistbtn")
                             }
                     onClick={this.proformaDetailsbtn}>
-                Change Request
+                        <div ref={this.scrollCR}> Change Request</div>
+               
                 </Col>
                 <Col sm={2} 
                     className={

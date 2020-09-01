@@ -287,19 +287,19 @@ export class BuyerSingleEnquiry extends Component {
         //   console.log(this.state.moq);
         });
     }
-    ToggleDelete = () => {
-        document.getElementById('id01').style.display='block';
-       }
-    ToggleDeleteClose = () => {
-        document.getElementById('id01').style.display='none';
-       }
+    // ToggleDelete = () => {
+    //     document.getElementById('id01').style.display='block';
+    //    }
+    // ToggleDeleteClose = () => {
+    //     document.getElementById('id01').style.display='none';
+    //    }
 
        ToggleDelete1 = () => {
-        document.getElementById('DeleteMoQ').style.display='block';
+        document.getElementById('id02').style.display='block';
        }
 
        ToggleDeleteClose1 = () => {
-        document.getElementById('DeleteMoQ').style.display='none';
+        document.getElementById('id02').style.display='none';
        }
     saveMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
@@ -1690,7 +1690,7 @@ MoqSimpleProductSelected(moqId){
                                                 </Col>
                                             </Row>
 
-                                            <div id="DeleteMoQ" class="w3-modal">
+                                            {/* <div id="" class="w3-modal">
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
                                 <h3 className="deleteModalHeader" >Are you sure you want to delete MOQ ?</h3>
@@ -1702,7 +1702,7 @@ MoqSimpleProductSelected(moqId){
                                 </div>
                             </div>
                             </div>
-                            </div>
+                            </div> */}
 
                                         </td>
                                         }

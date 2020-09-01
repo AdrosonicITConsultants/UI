@@ -112,7 +112,7 @@ export class ArtisanChangeRequest extends Component {
     Modal1Show = () => {
         this.setState({
             raiseCRFinalArray:[],
-            submitdisabled:true
+            // submitdisabled:true
         })
      
         var array = this.state.accepted;
@@ -145,7 +145,7 @@ export class ArtisanChangeRequest extends Component {
                         var Finalarray= this.state.raiseCRFinalArray
                         this.setState({
                             raiseCRFinalArray:Finalarray,
-                            submitdisabled:true
+                            // submitdisabled:true
                         })
                                            }
                 }
@@ -247,7 +247,7 @@ Modal1Close = () => {
 
 Modal2Show = () => {
  this.setState({
-    submitdisabled:true
+    // submitdisabled:true
  })
     var array = this.state.accepted;
     var array1 = this.state.getChangeRequestForArtisan;
@@ -278,7 +278,7 @@ Modal2Show = () => {
                     var Finalarray= this.state.raiseCRFinalArray
                     this.setState({
                         raiseCRFinalArray:Finalarray,
-                        submitdisabled:true
+                        // submitdisabled:true
                     })
                 }
             }
@@ -644,7 +644,16 @@ Modal3Close = () => {
             :"No Data"}
 </>
 :
-<p style={{textAlign:"center"}}>Loading Data..</p>
+<p style={{textAlign:"center"}}>
+<Row noGutters={true}>
+                                                                             {console.log("mine5")}
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request Not available
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+</p>
 }
 
 </React.Fragment>

@@ -130,7 +130,7 @@ browserHistory.push("/MyProfile");
     this.setState({isSearchClicked : !this.state.isSearchClicked})
   }
 
-  genparam = () => {
+  buyerDashboard = () => {
     var userData = [];
     userData = JSON.parse(localStorage.getItem('user'));
     var jwtToken = localStorage.getItem('jwtToken');
@@ -143,6 +143,23 @@ browserHistory.push("/MyProfile");
     
     return (
       "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=" +
+      encodedParams
+    );
+  }
+
+  artisanDashboard = () => {
+    var userData = [];
+    userData = JSON.parse(localStorage.getItem('user'));
+    var jwtToken = localStorage.getItem('jwtToken');
+    var params = {
+      "ds0.Token": jwtToken,
+      "ds2.Token": jwtToken,
+    };
+    var paramsAsString = JSON.stringify(params);
+    var encodedParams = encodeURIComponent(paramsAsString);
+    
+    return (
+      "https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=" +
       encodedParams
     );
   }
@@ -538,8 +555,8 @@ browserHistory.push("/MyProfile");
                   </span>
 
                   {userTypeId === 2 ?
-                  <a href={this.genparam()}>Dashboard</a> : 
-                  <a href="/">Dashboard</a>
+                  <a href={this.buyerDashboard()}>Dashboard</a> : 
+                  <a href={this.artisanDashboard()}>Dashboard</a>
                   }
 
                   

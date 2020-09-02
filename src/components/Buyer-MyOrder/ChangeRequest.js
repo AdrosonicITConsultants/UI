@@ -58,8 +58,10 @@ export class ChangeRequest extends Component {
       }
 
     ReqChangesModalClose = () => {
+        this.setState({
+            raiseCRFinalArray: []
+        });
         document.getElementById('ReqChangesModal').style.display='none';
-
     }
 
     ReqChangesModalSHow = () => {
@@ -181,7 +183,7 @@ export class ChangeRequest extends Component {
                 })
                 document.getElementById('ReqChangesModal').style.display='none';
                 this.componentDidMount();
-                customToast.success("Change request send successfully", {
+                customToast.success("Change request sent successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                 });
@@ -198,6 +200,8 @@ export class ChangeRequest extends Component {
     }
 
     componentDidMount() {
+        this.props.componentFunction();
+
         TTCEapi.getChangeRequestItemTable().then((response)=>{
             if(response.data.valid)
             {

@@ -205,7 +205,6 @@ componentDidMount(){
             count = count + 1;
           }
         }
-
         this.setState({
           counter: count,
         })
@@ -668,7 +667,17 @@ Modal3Close = () => {
             :"No Data"}
 </>
 :
-<p style={{textAlign:"center"}}>Loading Data..</p>
+<p style={{textAlign:"center"}}>
+<Row noGutters={true}>
+                                                                             {console.log("mine1")}
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request Not Available
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+</p>
 }
 
 </React.Fragment>

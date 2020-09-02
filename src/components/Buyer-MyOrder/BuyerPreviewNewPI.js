@@ -73,7 +73,8 @@ export class BuyerPreviewNewPI extends Component {
             reedCounts:[],
             dyes:[],
             viewOldPi:false,
-            old:true
+            old:true,
+            getOldPIData:[]
 
 
         };
@@ -175,6 +176,15 @@ export class BuyerPreviewNewPI extends Component {
                 });
         }
       });
+      TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+        if(response.data.valid)
+        {
+            // console.log(response.data.data);
+            this.setState({getOldPIData:response.data.data,
+                // dataload:true
+            })
+        }
+    })
       var date = moment()
       .utcOffset('+05:30')
       .format(' hh:mm A');
@@ -257,12 +267,17 @@ export class BuyerPreviewNewPI extends Component {
         </Col>
         <Col className="col-xs-4" >
          </Col>
-        <Col className="col-xs-2 viewoldpi" >
-        <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
-
-    onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
-      
-         </Col>
+         {this.state.getOldPIData?
+         <Col className="col-xs-2 viewoldpi" >
+         <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
+ 
+     onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
+       
+          </Col>
+          :
+          ""
+         }
+        
         
     </Row>
    <Row noGutters={true}>

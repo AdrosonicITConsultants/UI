@@ -223,6 +223,7 @@ export class Artisanorder extends Component {
     });
     }
     proformaDetailsbtn(){
+        this.componentDidMount()
         this.setState((prevState) => {
             return{
                 selected:"changeReq",
@@ -1459,8 +1460,9 @@ export class Artisanorder extends Component {
 
                                         {this.state.proformainvoice? 
                                         <>
-                                        {this.state.getPi.isSend==1?
+                                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
                                         <>
+                                          {console.log("status-0/2")}
                                          <Col sm={10}>
                                         <PreviewChangedPI 
                                         enquiryId={this.state.enquiryCode}
@@ -1471,6 +1473,7 @@ export class Artisanorder extends Component {
 
                                               :
                                              <>
+                                             {console.log("status-1/3")}
                                               <Col sm={10}>
                                                 <PIchange 
                                                 enquiryId={this.state.enquiryCode}

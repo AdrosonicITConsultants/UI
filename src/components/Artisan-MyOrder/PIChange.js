@@ -218,7 +218,16 @@ export class PIchange extends Component {
                         if(response.data.valid)
                         {
                             this.setState({previewPI:response.data.data,
-                                dataload:true })
+                                })
+                                TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                    if(response.data.valid)
+                                    {
+                                        this.setState({getOldPIData:response.data.data,
+                                            dataload:true
+                                            })
+                                    }
+                                    console.log(this.state.getOldPIData)
+                                })
                         }
                         console.log(this.state.previewPI)
                     })
@@ -226,14 +235,7 @@ export class PIchange extends Component {
             }
             console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
         })
-        TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-                this.setState({getOldPIData:response.data.data,
-                    })
-            }
-            console.log(this.state.getOldPIData)
-        })
+       
 
     }
     render() {
@@ -245,9 +247,31 @@ export class PIchange extends Component {
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
-                                {this.state.viewOldPi ?
+                          {console.log("PIChange.js status-1/3")}
+                        {this.state.getOldPIData
+                        ?
+                                   <>
+                                   {console.log("PI is raised")}
+                                                <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                                previewAndRaisePI={this.state.previewAndRaisePI}
+                                                />
+                    </>
+                :
+                <>
+                   {this.state.viewOldPi ?
                                     <>
-                                    {this.state.getOldPIData && this.state.previewAndRaisePI==false?
+                                    {this.state.getOldPIData.length>0 && this.state.previewAndRaisePI==false?
                                     <>
                                      { console.log(" old data NA")}
                                                 <PreviewOldchanges
@@ -432,6 +456,9 @@ export class PIchange extends Component {
                             
                             </Row>
                                     </>}
+                </>}
+
+                             
                             
 
                             {/* {this.state.getOldPIData.length==0 && this.state.previewPI?
@@ -455,6 +482,7 @@ export class PIchange extends Component {
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===2 ||
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
+                         {console.log("PIChange.js status-2/0")}
                        <PreviewChangedPI 
                         bp={this.backPI}
                         enquiryId={this.props.enquiryId}

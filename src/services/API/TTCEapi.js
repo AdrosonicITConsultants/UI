@@ -710,6 +710,20 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/fetchEnquiryAndPaymentDetails?enquiryId=1550
+  static fetchEnquiryAndPaymentDetails(enquiryId) {
+    let url = ApiUrl + "/enquiry/fetchEnquiryAndPaymentDetails?enquiryId=" +enquiryId;
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
 
   static getMoqs(enquiryId) {
     let url = ApiUrl + "/enquiry/getMoqs/{enquiryId}?enquiryId=" +enquiryId;

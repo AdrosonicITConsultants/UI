@@ -2,6 +2,12 @@
     font-weight: 600;
     color: darkgrey;
 }
+.CRfondcss{
+    color: red;
+    margin-top: 20px;
+    padding: 15px;
+    font-weight: bolder;
+}
 .crpigreennote{
     color: green;
     font-family: sans-serif;

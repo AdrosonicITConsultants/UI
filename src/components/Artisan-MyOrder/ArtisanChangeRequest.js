@@ -1,3 +1,5 @@
+
+  
 import React, { Component } from 'react'
 import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
@@ -77,8 +79,8 @@ export class ArtisanChangeRequest extends Component {
         const updatedHeaders = [...typeElements.accepted];
         updatedHeaders[parseInt(id)-1] = {
             id: parseInt(id),
-            option: true,
-            reject:false
+            reject: false,
+            option:true
                 };
         var that = this;
         that.setState({
@@ -86,7 +88,11 @@ export class ArtisanChangeRequest extends Component {
             count:true,
             trueCount:this.state.trueCount >=0 ? this.state.trueCount + 1:""
         });
-        console.log(this.state.trueCount)
+        var arr = this.state.accepted
+        
+        console.log(arr);
+
+        // console.log(this.state.trueCount)
       }
 
      RejectChange(id){
@@ -114,47 +120,49 @@ export class ArtisanChangeRequest extends Component {
             raiseCRFinalArray:[],
             // submitdisabled:true
         })
-     
-        var array = this.state.accepted;
-        var array1 = this.state.getChangeRequestForArtisan;
-        for(var j = 0; j < array1.length; j++){
-            for(var i = 0; i < array.length; i ++) {
-                if(array[i].id==array1[j].requestItemsId){
-                    if(array[i].option === true || array[i].reject === true) {
-                        var id = array1[j].requestItemsId;
-                        var data = array1[j].requestText;
-                        var status=0;
-                        if (array[i].option===true){
-                            status=1;
-                            
+      
+                var array = this.state.accepted;
+                var array1 = this.state.getChangeRequestForArtisan;
+                for(var j = 0; j < array1.length; j++){
+                    for(var i = 0; i < array.length; i ++) {
+                        if(array[i].id==array1[j].requestItemsId){
+                            if(array[i].option === true || array[i].reject === true) {
+                                var id = array1[j].requestItemsId;
+                                var data = array1[j].requestText;
+                                var status=0;
+                                if (array[i].option===true){
+                                    status=1;
+                                    
+                                }
+                                else if (array[i].reject===true){
+                                    status=2;
+                                    
+                                }
+                               
+                                var object = {
+                                    requestItemsId: id,
+                                    requestText: data,
+                                    requestStatus:status,
+                                }
+                                
+                                this.state.raiseCRFinalArray.push(object);
+                              
+                                console.log(this.state.raiseCRFinalArray);
+                                var Finalarray= this.state.raiseCRFinalArray
+                                this.setState({
+                                    raiseCRFinalArray:Finalarray,
+                                    // submitdisabled:true
+                                })
+                                                   }
                         }
-                        else if (array[i].reject===true){
-                            status=2;
-                            
-                        }
-                       
-                        var object = {
-                            requestItemsId: id,
-                            requestText: data,
-                            requestStatus:status,
-                        }
-                        
-                        this.state.raiseCRFinalArray.push(object);
-                      
-                        console.log(this.state.raiseCRFinalArray);
-                        var Finalarray= this.state.raiseCRFinalArray
-                        this.setState({
-                            raiseCRFinalArray:Finalarray,
-                            // submitdisabled:true
-                        })
-                                           }
+                     
+                    }
                 }
-             
+                      
+                document.getElementById('Modal1').style.display='block';
             }
-        }
-              
-        document.getElementById('Modal1').style.display='block';
-    }
+       
+    
    
 
 Show(){
@@ -249,46 +257,49 @@ Modal2Show = () => {
  this.setState({
     // submitdisabled:true
  })
-    var array = this.state.accepted;
-    var array1 = this.state.getChangeRequestForArtisan;
-    for(var j = 0; j < array1.length; j++){
-        for(var i = 0; i < array.length; i ++) {
-            if(array[i].id==array1[j].requestItemsId){
-                if(array[i].option === true || array[i].reject === true) {
-                    var id = array1[j].requestItemsId;
-                    var data = array1[j].requestText;
-                    var status=0;
-                    if (array[i].option===true){
-                        status=1;
-                        
-                    }
-                    else if (array[i].reject===true){
-                        status=2;
-                        
-                    }
-                   
-                    var object = {
-                        requestItemsId: id,
-                        requestText: data,
-                        requestStatus:status,
-                    }
-                    console.log(object);
-                    this.state.raiseCRFinalArray.push(object);
-                    console.log(object.requestStatus==1?"true":false);
-                    var Finalarray= this.state.raiseCRFinalArray
-                    this.setState({
-                        raiseCRFinalArray:Finalarray,
-                        // submitdisabled:true
-                    })
-                }
-            }
-         
-        }
-    }
-          
-    document.getElementById('Modal2').style.display='block';
 
-}
+
+        var array = this.state.accepted;
+        var array1 = this.state.getChangeRequestForArtisan;
+        for(var j = 0; j < array1.length; j++){
+            for(var i = 0; i < array.length; i ++) {
+                if(array[i].id==array1[j].requestItemsId){
+                    if(array[i].option === true || array[i].reject === true) {
+                        var id = array1[j].requestItemsId;
+                        var data = array1[j].requestText;
+                        var status=0;
+                        if (array[i].option===true){
+                            status=1;
+                            
+                        }
+                        else if (array[i].reject===true){
+                            status=2;
+                            
+                        }
+                       
+                        var object = {
+                            requestItemsId: id,
+                            requestText: data,
+                            requestStatus:status,
+                        }
+                        console.log(object);
+                        this.state.raiseCRFinalArray.push(object);
+                        console.log(object.requestStatus==1?"true":false);
+                        var Finalarray= this.state.raiseCRFinalArray
+                        this.setState({
+                            raiseCRFinalArray:Finalarray,
+                            // submitdisabled:true
+                        })
+                    }
+                }
+             
+            }
+        }
+              
+        document.getElementById('Modal2').style.display='block';
+    }
+
+
 
 Modal2Close = () => {
     document.getElementById('Modal2').style.display='none';
@@ -393,22 +404,35 @@ Modal3Close = () => {
             You have accepted <b style={{color:"green"}}>{this.state.trueCount} </b>
             out of <b style={{color:"green"}}> {this.state.getChangeRequestForArtisan.length}</b> requests</p>
             
-                      {console.log(this.state.count)}
-                      {console.log(this.state.getChangeRequestForArtisan.length)}
+                      {/* {console.log(this.state.count)}
+                      {console.log(this.state.getChangeRequestForArtisan.length)} */}
+                      
+                      <>
+                     <Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+    
+                          {/* {this.state.count ?  
+                                this.state.trueCount ==0?
+                            <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
+                            :
+                            <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
+                             :
+                         <button className="submitCRart">Submit</button>
+    
+                          } */}
+                          {this.state.trueCount==0?
+                           <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
+                           :
+                           <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
+                            
+                          }
+                      </Col>
+                  </Row>
 
-            <Row noGutters={true}>
-                  <Col className="col-xs-12" style={{textAlign:"center"}}>
-                      {this.state.count ?  
-                            this.state.trueCount ==0?
-                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
-                        :
-                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
-                         :
-                     <button className="submitCRart">Submit</button>
-
-                      }
-                  </Col>
-              </Row>
+                      </> 
+                     
+                    
+      
               </div>
             
                  {/* _________________________________________Modal_1________________________________________________ */}
@@ -644,16 +668,7 @@ Modal3Close = () => {
             :"No Data"}
 </>
 :
-<p style={{textAlign:"center"}}>
-<Row noGutters={true}>
-                                                                             {console.log("mine5")}
-                                                                            <Col className="col-xs-12 bold font20 text-center">
-                                                                                <br></br>
-                                                                                Change request Not available
-                                                                                <br></br>
-                                                                            </Col>
-                                                                        </Row>
-</p>
+<p style={{textAlign:"center"}}>Loading Data..</p>
 }
 
 </React.Fragment>
@@ -669,3 +684,4 @@ function mapStateToProps(state) {
 
 const connectedLoginPage = connect(mapStateToProps)(ArtisanChangeRequest);
 export default connectedLoginPage;
+

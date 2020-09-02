@@ -6,7 +6,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewOldchanges.css";
+// import "./PreviewChangedPI.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -14,21 +14,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
+import { PreviewOldchanges } from './PreviewOldchanges';
 const ref = React.createRef();
 const options = {
     orientation: 'landscape',
     unit: 'in',
     format: [1500,1000]
 };
-export class PreviewOldchanges extends Component {
+export class PreviewTaxInvoice extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
         this.state = {
-         
-          enquiryId:this.props.enquiryId,
+          enquiryId: this.props.enquiryId,
+          // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
@@ -69,22 +70,25 @@ export class PreviewOldchanges extends Component {
             yarns:[],
             reedCounts:[],
             dyes:[],
-            getOldPIData:[]
+            getOldPIData:[],
+            oldDataPI:false
 
 
         };
+        this.newPIpreview = this.newPIpreview.bind(this);
+      }
+      newPIpreview(){
+        this.setState({
+          oldDataPI:false,
+        })
       }
     
-      BacktoNewPiPreview(){
-        this.props.newPIpreview();
-      }
 
     BacktoPreview(){
     this.props.bp();
     }
 
     componentDidMount() {
-      console.log(this.props.enquiryId)
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
@@ -92,6 +96,16 @@ export class PreviewOldchanges extends Component {
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                    if(response.data.valid)
+                    {
+                        this.setState({getOldPIData:response.data.data,
+                         
+                            })
+                    }
+                    console.log(this.state.getOldPIData)
+                })
+
+                  TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
                         console.log("ffffind")
@@ -147,8 +161,9 @@ export class PreviewOldchanges extends Component {
                             dataload : true,
             
                         })
+                      
                         }
-                    console.log(this.state.previewPI)       
+                           
                     
                              
                     }
@@ -162,6 +177,7 @@ export class PreviewOldchanges extends Component {
       .utcOffset('+05:30')
       .format(' hh:mm A');
     this.setState({ time: date });  
+
       }
     
       sendPI(){
@@ -186,7 +202,7 @@ export class PreviewOldchanges extends Component {
             this.setState({sendPI : response.data,
               },()=>{
             console.log(this.state.sendPI);
-           
+           this.componentDidMount();
             });
             customToast.success("PI Details send successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -206,7 +222,12 @@ export class PreviewOldchanges extends Component {
         });
       
     } 
-    
+    viewOldPI(){
+      this.setState({
+        oldDataPI:true,
+         
+      })
+  }
     
     render(){
         return(
@@ -215,28 +236,32 @@ export class PreviewOldchanges extends Component {
     {this.state.dataload?<>
    
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
-<div >
- 
-   <Row noGutters={true} style={{marginBottom:"15px"}}>
+
+    <div >
+
+   <Row noGutters={true}>
         <Col className="col-xs-6 bold" >
        
-      
-   <img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post change request process
+            <p style={{fontWeight:"100"}}>INVOICE ID:<b>{this.props.invoiceId}</b></p>
+
         </Col>
         <Col className="col-xs-4" >
-         </Col>
       
+         </Col>
+       
          <Col className="col-xs-2">
-         
+          
+        
          </Col>
     </Row>
    <Row noGutters={true}>
-       <Col className="col-xs-8">
+       <Col className="col-xs-9">
        Received at :  {this.state.time} on  { this.state.currentDate }
 </Col>
 
-<Col className="col-xs-4">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
+<Col className="col-xs-3">
+   <img src={logos.downloadpdficon}style={{height:"15px"}} />   
+    Download this Invoice
 </Col>
 
    </Row>
@@ -245,7 +270,7 @@ export class PreviewOldchanges extends Component {
 
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
-    <Col className="col-xs-12"> Proforma Invoice 
+    <Col className="col-xs-12"> Tax Invoice 
     {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
@@ -363,7 +388,14 @@ export class PreviewOldchanges extends Component {
          <p className="PaymentTerm">Payment Terms: Advance</p> 
        <p className="againstpi">'Advance Against PI'</p>
        </td>
-    <td><p className="yetdodecide">Yet to be decided</p> 
+    <td><p className="yetdodecide">
+        {this.props.percentage==0 ?
+        "Yet to be decided"
+            :
+            <>
+            {this.props.percentage}%
+            </>}
+       </p> 
        <p className="advpaidamt">Advance paid of Total amount</p>
        </td>
     <td className="tdwidth">
@@ -410,10 +442,12 @@ export class PreviewOldchanges extends Component {
     {/* ------------------------------------- */}
    <tr> 
      <td>
-     <h3 className="snopi srwidth ">01
-     <br/>
-     </h3>
-    
+     <h3 className="snopi srwidth ">01</h3>
+     {this.state.getOldPIData.length==0?""
+     :
+     <p className="CRfondcss">CR</p>
+
+          }
         </td>
         
  
@@ -577,7 +611,12 @@ export class PreviewOldchanges extends Component {
      </div></p>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc}: {this.state.previewPI.buyerCustomProductHistory.length} 
+     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1]
+     ?
+     this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc
+    :
+    ""
+    }: {this.state.previewPI.buyerCustomProductHistory.length} 
      {this.state.previewPI.buyerCustomProductHistory.width}
       <br/>
          {this.state.previewPI.buyerCustomProductHistory.relProduct.length > 0?
@@ -633,10 +672,10 @@ export class PreviewOldchanges extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
-     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
+     <p className="snopi wraptext">{this.props.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">{this.props.rpu}</p>
      </td>
      <td>
      <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
@@ -649,8 +688,9 @@ export class PreviewOldchanges extends Component {
         </td>
         <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
+     {/* <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
      <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
+        </td> */}
         </td>
      <td >
      <h3 className="snopi wraptext"></h3>
@@ -664,17 +704,17 @@ export class PreviewOldchanges extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-<h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
-     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3>
+{/* <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3> */}
      </td>
    </tr>
-   {/* -------------------------------------------total------------------------------------------ */}
-    <tr>
+   {/* ----------------------------------------subtotal----------------------------------- */}
+   <tr>
      <td>
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Total</b></h3>
+     <h3 className="freightch snopi"><b>Sub Total</b></h3>
         </td>
         <td >
      <h3 className="snopi wraptext"></h3>
@@ -686,11 +726,107 @@ export class PreviewOldchanges extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
-     +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
+     <h3 className="snopi wraptext"> {this.props.finalamt} </h3>
      </td>
    </tr>
-   {/* --------------------------------total tr end---------------------------------------------- */}
+
+   {/* --------------------------------------sgst/cgst-------------------------------------------- */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.props.sgst}</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.props.cgst}</b></p>
+      </h3>
+        </td>
+        <td >
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td className="">
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext"> {(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
+     </td>
+   </tr>
+   {/* -------------------------------------------total------------------------------------------ */}
+    <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><b>Total</b></h3>
+     <h3 className="freightch snopi"><b>Advance amount paid</b></h3>
+        </td>
+        <td >
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td className="">
+    <h3 className="snopi wraptext">{this.props.quantity}</h3>
+    <h3 className="snopi wraptext"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext">  {(this.props.finalamt +(this.props.finalamt * this.props.sgst / 100) 
+     +(this.props.finalamt * this.props.cgst / 100)).toFixed(2) }</h3>
+     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     </td>
+   </tr>
+   {/* --------------------------------Net amount paid---------------------------------------------- */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td>
+     <h3 className="freightch snopi"><b>Net payment amount</b></h3>
+     
+        </td>
+        <td >
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td className="">
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+    
+     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     </td>
+   </tr>
+   {/* ----------------------------------------Buyer GST number----------------------------------- */}
+   <tr>
+     <td>
+     <h3 className="snopi srwidth "></h3>
+        </td>
+     <td style={{borderRight:"1px solid transparent"}}>
+     <h3 className="freightch snopi"><b>Buyers GST No.</b></h3>
+     <h3 className="freightch snopi"><b>Company's GST No.</b></h3>
+     
+        </td>
+        <td style={{borderRight:"1px solid transparent"}} >
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td style={{borderRight:"1px solid transparent"}}>
+     <h3 className="snopi wraptext"></h3>
+     </td>
+     <td style={{borderRight:"1px solid transparent"}}>
+     <h3 className="snopi wraptext rpu"></h3>
+     </td>
+     <td>
+    
+     <h3 className="snopi wraptext allamtIndtax"> (E.&O.E)</h3>
+     </td>
+   </tr>
+   {/* ----------------------------end--------------------------- */}
    <tr>
      <td>
      <h3 className="snopi srwidth "></h3>
@@ -698,7 +834,7 @@ export class PreviewOldchanges extends Component {
 
         {this.state.paymentDetails?
         <>
-         <td>
+         <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
         <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
@@ -707,7 +843,7 @@ export class PreviewOldchanges extends Component {
        {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
           
           </span></h3>
-      <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
+      <h3 className="freightch snopi "><b>IFSC code:</b> <span className="ACcnodet">
       {this.state.paymentDetails[0]?
           <> {this.state.paymentDetails[0].ifsc}</>
         :
@@ -719,7 +855,7 @@ export class PreviewOldchanges extends Component {
         </td>
         
         </>:<>
-        <td>
+        <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      
      <h3 className="freightch snopi"><b>Bank:NA</b></h3>
@@ -732,13 +868,13 @@ export class PreviewOldchanges extends Component {
         </td>
         </>}
      
-        <td >
+        <td style={{borderRight:"1px solid transparent"}} >
      <p className="snopi wraptext"></p>
      </td>
-     <td className="">
+     <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="snopi wraptext"><b></b></h3>
      </td>
-     <td>
+     <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
@@ -750,20 +886,20 @@ export class PreviewOldchanges extends Component {
      <td>
      <h3 className="snopi srwidth "></h3>
         </td>
-     <td>
+     <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
         </td>
-        <td >
+        <td style={{borderRight:"1px solid transparent"}} >
      <p className="snopi wraptext"></p>
      </td>
-     <td className="">
+     <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="snopi wraptext"><b></b></h3>
      </td>
-     <td>
+     <td style={{borderRight:"1px solid transparent"}}>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
-     <td>
-     <h3 className="snopi wraptext"></h3>
+     <td style={{borderRight:"1px solid transparent"}} className="allamtIndtax">
+     All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
      </td>
    </tr>
  </table>
@@ -771,55 +907,28 @@ export class PreviewOldchanges extends Component {
  </Row>
  </Row>
 
- <Row noGutters={true} className="margintoppdisc">
+ <Row noGutters={true} className="">
      <Col className="col-xs-9 ">
-     <span className="ACcnodet"><b className="Discheading">Disclaimer : </b>The price is excluding tax and delivery charges. These will be included in final invoice.</span>    
+     <span className="ACcnodet"><b className="Discheading">NOTE : </b>This invoice is computer generated.It does not require any signature</span>    
      </Col>
 
-     <Col className="col-xs-3 allamtInd">
+     {/* <Col className="col-xs-3 allamtInd">
          All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+     </Col> */}
+      <Col className="col-xs-3 allamtInd">
+        Subject to <b>Cuttack</b> Jurisdiction
      </Col>
  </Row>
  </div>
- {/* ------------------------------buttons------------------------------- */}
- 
- <Row noGutters={true} className="margintoppdisc">
-     <Col className="col-xs-12 btncol">
-<span>
-
-
-
-  {this.props.previewnewPi===1 && this.state.previewPI ?
-  <>
-{  console.log('btn1')}
-{  console.log(this.props.previewnewPi)}
-
-
-    <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoNewPiPreview()}>Go Back to edit details</button> 
- </>
-:
-<>
-{  console.log('btn2')}
-<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
- </>
-}
-
-{/* {this.state.piSend === 1?
-""
-:
-<button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/>  Send updated PI</button>
-
-} */}
-</span>
- {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
+ <Row noGutters={true}>
+     <Col className="col-xs-12" style={{textAlign:"center",marginTop:"10px"}}>
+     <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
+ onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
      </Col>
  </Row>
-{/* -------------------------------------------------------------------------- */}
 
-{/* </Container> */}
-{/* <Footer/> */}
+   
+
 </>
     :<></>}
 </React.Fragment>
@@ -833,5 +942,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(PreviewOldchanges);
+const connectedLoginPage = connect(mapStateToProps)(PreviewTaxInvoice);
 export default connectedLoginPage;

@@ -166,6 +166,59 @@ export class Buyerorder extends Component {
         var option =  optionElement.getAttribute('moqId');
 
         }
+
+        propsSendFunction = () => {
+            TTCEapi.getProductUploadData().then((response)=>{
+                if(response.data.valid)
+                {    TTCEapi.getEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    var rr = response.data.data;
+                    rr[0].desc = "Quotation Accepted";
+                    rr[1].desc = "Order Details";
+                    this.setState({enquiryStagesMTO:rr})
+                }
+                })
+                TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({enquiryStagesAvailable:response.data.data})
+                }
+                })
+                TTCEapi.getInnerEnquirStages().then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({innerEnquiryStages:response.data.data})
+                }
+                })
+               
+                this.setState({productCategories: response.data.data.productCategories,
+                    yarns: response.data.data.yarns },()=>{
+                        TTCEapi.getSingleOrder(this.state.enquiryCode).then((response1)=>{
+                            console.log("")
+                            if(response1.data.valid)
+                            {   
+                                console.log(response1.data.data);
+                                this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
+                                    var data = localStorage.getItem("changeRequest");
+                                    if(data) {
+                                        localStorage.removeItem("changeRequest");
+                                        this.raiseCRTabFunction();
+                                    }
+                                });
+                                
+                            }
+                        },()=>{
+                            
+                        })
+                    });
+                }
+                });
+
+        }
         componentDidMount(){
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
@@ -219,11 +272,6 @@ export class Buyerorder extends Component {
             });
         }
         });
-
-
-
-
-
         }
     render() {
         return (
@@ -1159,7 +1207,8 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
+                                                                        componentFunction={this.propsSendFunction}/> 
                                                                         :
                                                                         <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                                                         }
@@ -1199,7 +1248,8 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
+                                                                        componentFunction={this.propsSendFunction}/> 
                                                                         :
                                                                         <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
                                                                         }

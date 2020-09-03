@@ -169,6 +169,11 @@ margin-left: 25px;
     font-style: italic;
     float: right;
 }
+.allamtIndtax{
+    font-size: 12px;
+    font-style: italic;
+    /* float: right; */
+}
 .Discheading{
     color: black;
     font-style: normal !important;
@@ -346,7 +351,10 @@ table, th, td {
     }
     .allamtInd {
         font-size: 10px;
-    }    
+    }  
+    .allamtIndtax {
+        font-size: 10px;
+    }
     .ACcnodet{
         font-size: 10px;
     }

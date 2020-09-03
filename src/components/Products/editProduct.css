@@ -41,7 +41,15 @@
     text-align: left;
     margin-left: 10px;
 }
-
+.deleteModalHeadermoq {
+    font-weight: 600;
+    text-align: left;
+    /* margin-left: 10px; */
+    text-align: center;
+    /* padding: 9px; */
+    font-size: xx-large;
+    color: indianred;
+}
 .deleteModalPara {
     font-size: 16px;
     text-align: left;

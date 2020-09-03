@@ -31,6 +31,8 @@ export class PIchange extends Component {
             isPidetail:true,
             getPi:[],
             getCurrencySigns:[],
+            previewPI:[],
+            getOldPIData:[],
             dataload : false,
             ImageUrl:TTCEapi.ImageUrl+'Product/',
             cgst:0,
@@ -43,16 +45,18 @@ export class PIchange extends Component {
             enquiryId: 0,
             piSend:0,
             currency:4,
-            // enquiryCode:this.props.enquiryCode,
             expectedDateOfDelivery:"",  
             viewOldPi:false, 
+            getOrder:[],
+            onlyView:false,
+            previewAndRaisePI:false
          
         }
     }
 
     backPI(){
         this.setState({
-            preview: false,
+            viewOldPi: false,
             isPidetail:true
            
         })
@@ -65,10 +69,12 @@ export class PIchange extends Component {
            
         })
     }
-
+  
     viewOldPI(){
         this.setState({
             viewOldPi:true,
+            previewAndRaisePI:false,
+            onlyView:true,
            
         })
     }
@@ -92,9 +98,13 @@ export class PIchange extends Component {
                    ).then((response)=>
                    {
                        if(response.data.valid){
-                        this.state.preview = true;   
+                        this.state.viewOldPi = true;  
+                        // this.state.onlyView=false, 
+                        // this.state.previewAndRaisePI=true
                         this.setState({  
-                        preview: true,
+                         viewOldPi:true,
+                         onlyView:false,
+                         previewAndRaisePI:true,
                         savePi : response.data,
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
@@ -198,195 +208,299 @@ export class PIchange extends Component {
            
             });
         });
+        
+        TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getOrder:response.data.data,
+                   })
+                    TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                        if(response.data.valid)
+                        {
+                            this.setState({previewPI:response.data.data,
+                                })
+                                TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                    if(response.data.valid)
+                                    {
+                                        this.setState({getOldPIData:response.data.data,
+                                            dataload:true
+                                            })
+                                    }
+                                    console.log(this.state.getOldPIData)
+                                })
+                        }
+                        console.log(this.state.previewPI)
+                    })
+
+            }
+            console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+        })
+       
+
     }
     render() {
         return (
             <React.Fragment>
+                <>
+                    {this.state.dataload?
+                    <>
+                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
+                        <>
+                          {console.log("PIChange.js status-1/3")}
+                        {this.state.getOldPIData
+                        ?
+                                   <>
+                                   {console.log("PI is raised")}
+                                                <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                                previewAndRaisePI={this.state.previewAndRaisePI}
+                                                />
+                    </>
+                :
+                <>
+                   {this.state.viewOldPi ?
+                                    <>
+                                    {this.state.getOldPIData.length>0 && this.state.previewAndRaisePI==false?
+                                    <>
+                                     { console.log(" old data NA")}
+                                                <PreviewOldchanges
+                                                bp={this.oldbackPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                // expectedDateOfDelivery={this.state.dod}
+                                                // hsn={this.state.hsncode}
+                                                // rpu={this.state.rpu}
+                                                // quantity={this.state.quantity}
+                                                // sgst={this.state.sgst}
+                                                // cgst={this.state.cgst}
+                                                // piSend={this.state.piSend} 
+                                                />
+                                    </>
+                                    :
+                                    <>
+                                    {this.state.getPi.isSend===1?
+                                    <>
+                                     { console.log("pi send ")}
+                                                <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                                previewAndRaisePI={this.state.previewAndRaisePI}
+                                                />
+                                   </>
+                                    :
+                                    
+                                             <>
+                                             { console.log("pi not send & old data NA")}
+                                                <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                               
+                                                />
+                                                </>}
+                                    </>
+                                    }
+                                        
+                                       
+                                    </>
+                                    :
+                                    <>
 
-{this.state.viewOldPi?
-    <PreviewOldchanges
-    bp={this.oldbackPI}
-    enquiryId={this.props.enquiryId}
-    enquiryCode={this.props.enquiryCode}
-    expectedDateOfDelivery={this.state.dod}
-    hsn={this.state.hsncode}
-    rpu={this.state.rpu}
-    quantity={this.state.quantity}
-    sgst={this.state.sgst}
-    cgst={this.state.cgst}
-    piSend={this.state.piSend} />
-    :
-    <>
+                            <Row noGutters={true}>
+                                <Col style={{textAlign:"center"}} className="playfair">
+                                    <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 
+                                    Post Change Request Process</h3>
+                                <h1>Update the pro forma invoice</h1>
+                                <p className="crpigreennote">
+                                    You have <strong>2</strong>
+                                     days remaining to update your invoice after change request.</p>
+                                </Col>
+                                </Row>
+                            
+                              <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
+                              onClick={() => this.viewOldPI()}>
+                             <img src={logos.recent} style={{height:"15px"}}/> View old PI</p> 
+                              
+                                 
+                                  
+                            {/* :""
+                                } */}
+                            <Row noGutters={true} className="PIcolmt BdImgCol">
+                            <Col sm={6} >
+                                <label>Quantity</label>
+                                <br/>
+                            <input 
+                            className="PIinput"
+                                type="number"
+                            
+                                value={this.state.quantity }
+                                name="quantity"
+                                onChange={this.handleChange}
+                                />
+                            </Col>
+                            <Col sm={6}>
+                            <label >Rate per unit(or metre)</label>
+                            <br/>
+                                <select name="cars" id="cars" 
+                                className={this.state.isPidetail ? 
+                                    "rssymboldis":"rssymbol"}
+                            
+                                value={this.state.currency}
+                                onChange={this.handleChange}>
+                                
+                                    {this.state.getCurrencySigns.map(
+                                    (data) => (
+                                    <option
+                                    key={data.id}
+                                    currency={data.sign}
+                                    value= {data.id}
+                                        >
+                                    {data.sign}
+                                    </option>
+                                )
+                                )}
+                                </select>
+                            {/* </span> */}
+                            <input type="number"  className="PIinput rsinputboxwidth"
+                        
+                            value={this.state.rpu }
+                            name="rpu"
+                            onChange={this.handleChange} />
+                            </Col>
+                            </Row>
+                            <Row noGutters={true} className="PIcol2mt BdImgCol">
+                            <Col sm={6}>
+                            <label>Expected date of delivery</label>
+                            <br/>
+                            <input className="PIinput" type="date"
+                        
+                            value={this.state.dod }
+                            name="dod"
+                            onChange={this.handleChange}/>
+                            
+                            </Col>
+                            <Col sm={6}>
+                            <label>HSN Code</label>
+                            <br/>
+                            <input className="PIinput" type="number"
+                        
+                            value={this.state.hsncode }
+                            name="hsncode"
+                            onChange={this.handleChange}/>
+                            </Col>
+                            </Row>
+                        
+                            <Row noGutters={true} className="PIcol2mt BdImgCol">
+                                <Col sm={12}>
+                                <input type="checkbox" name="checkbox" value="check" id="agree"
+                                
+                                style={{marginRight:"5px"}} 
+                                /> 
+                                    Agree to <a
+                                        style={{ cursor: "pointer", fontSize: "15px" }}
+                                        onClick={() => {
+                                        alert("clicked");
+                                        }}
+                                    >
+                                        terms & condition
+                                    </a>
+                            
+                                </Col>
+                                </Row>
+                                <p className="text-center">
+                            {this.state.showValidationPi ? (
+                            <span className="bg-danger">All fields are Mandatory</span>
+                            ) : (
+                            <br />
+                            )}
+                            </p>
+                            <Row noGutters={true}>
+                            <Col sm={12} className="text-center crpinote">
+                                The pro forma will be updated according to the changes in fields, <br/>
+                                the same shall be intimated to the buyer. 
+                                </Col></Row>
+                            <Row noGutters={true}>
+                            <Col sm={12} className="text-center">
+                            
+                            <button className="previewandpi" onClick={() => this.revisedPI()}>
+                            <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & Raise PI</button>
+                            </Col>
+                            
+                            </Row>
+                                    </>}
+                </>}
 
+                             
+                            
 
-
-{this.state.piSend ==1 ?
-<>
-<PreviewChangedPI 
-     bp={this.backPI}
-     enquiryId={this.props.enquiryId}
-     enquiryCode={this.props.enquiryCode}
-     expectedDateOfDelivery={this.state.dod}
-     hsn={this.state.hsncode}
-     rpu={this.state.rpu}
-     quantity={this.state.quantity}
-     sgst={this.state.sgst}
-     cgst={this.state.cgst}
-     piSend={this.state.piSend}
-     />
-</>
-:
-<>
-{this.state.preview == false ?
-<>
-    {this.state.piSend==1?    
-    null
-        :
-        <>  {this.state.isPidetail ? <img
-            src={logos.apedit}
-            className="aoctick"
-            style={{"cursor":"pointer" ,
-                "position" : "absolute"}}
-            onClick={this.handlePiEdit}
-    ></img> : 
-    null} </>
-    }
-    <Row noGutters={true}>
-        <Col style={{textAlign:"center"}} className="playfair">
-            <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post Change Request Process</h3>
-        <h1>Update the pro forma invoice</h1>
-        <p className="crpigreennote">
-            You have <strong>2</strong> days remaining to update your invoice after change request.</p>
-        </Col>
-        </Row>
-      <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
-
-      onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
-    <Row noGutters={true} className="PIcolmt BdImgCol">
-    <Col sm={6} >
-        <label>Quantity</label>
-        <br/>
-    <input 
-    className="PIinput"
-        type="number"
-        disabled={this.state.isPidetail}
-        value={this.state.quantity }
-        name="quantity"
-        onChange={this.handleChange}
-        />
-    </Col>
-    <Col sm={6}>
-    <label >Rate per unit(or metre)</label>
-    <br/>
-        <select name="cars" id="cars" 
-        className={this.state.isPidetail ? 
-            "rssymboldis":"rssymbol"}
-        disabled={this.state.isPidetail}
-        value={this.state.currency}
-        onChange={this.handleChange}>
-         
-             {this.state.getCurrencySigns.map(
-            (data) => (
-             <option
-             key={data.id}
-             currency={data.sign}
-             value= {data.id}
-                 >
-             {data.sign}
-             </option>
-        )
-        )}
-        </select>
-    {/* </span> */}
-    <input type="number"  className="PIinput rsinputboxwidth"
-    disabled={this.state.isPidetail}
-    value={this.state.rpu }
-    name="rpu"
-    onChange={this.handleChange} />
-    </Col>
-    </Row>
-    <Row noGutters={true} className="PIcol2mt BdImgCol">
-    <Col sm={6}>
-    <label>Expected date of delivery</label>
-    <br/>
-    <input className="PIinput" type="date"
-    disabled={this.state.isPidetail}
-    value={this.state.dod }
-    name="dod"
-    onChange={this.handleChange}/>
-    
-    </Col>
-    <Col sm={6}>
-    <label>HSN Code</label>
-    <br/>
-    <input className="PIinput" type="number"
-    disabled={this.state.isPidetail}
-    value={this.state.hsncode }
-    name="hsncode"
-    onChange={this.handleChange}/>
-    </Col>
-    </Row>
- 
-    <Row noGutters={true} className="PIcol2mt BdImgCol">
-        <Col sm={12}>
-        <input type="checkbox" name="checkbox" value="check" id="agree"
-        
-        style={{marginRight:"5px"}} 
-        /> 
-            Agree to <a
-                style={{ cursor: "pointer", fontSize: "15px" }}
-                onClick={() => {
-                alert("clicked");
-                }}
-            >
-                terms & condition
-            </a>
-    
-        </Col>
-        </Row>
-        <p className="text-center">
-    {this.state.showValidationPi ? (
-    <span className="bg-danger">All fields are Mandatory</span>
-    ) : (
-    <br />
-    )}
-    </p>
-    <Row noGutters={true}>
-    <Col sm={12} className="text-center crpinote">
-        The pro forma will be updated according to the changes in fields, <br/>
-        the same shall be intimated to the buyer. 
-        </Col></Row>
-    <Row noGutters={true}>
-    <Col sm={12} className="text-center">
-    
-    <button className="previewandpi" onClick={() => this.revisedPI()}>
-    <img src={logos.PIbtnicon} className="PIbuttonicon"></img>Preview & Raise PI</button>
-    </Col>
-    
-    </Row>
-    </>
-:
-
-    <PreviewChangedPI 
-     bp={this.backPI}
-     enquiryId={this.props.enquiryId}
-     enquiryCode={this.props.enquiryCode}
-     expectedDateOfDelivery={this.state.dod}
-     hsn={this.state.hsncode}
-     rpu={this.state.rpu}
-     quantity={this.state.quantity}
-     sgst={this.state.sgst}
-     cgst={this.state.cgst}
-     piSend={this.state.piSend}
-     />
-    }
-</>}
-
-
-
-</>
-   }
-   
+                            {/* {this.state.getOldPIData.length==0 && this.state.previewPI?
+                                 <>
+                                 
+                                 
+                                 </>
+                             :
+                                <>
+                                {this.state.getOldPIData.length>0 && this.state.previewPI?
+                                     <></>
+                                      :
+                                     <></>}
+                                </>
+                                } */}
+                        
+                            
+                        </>
+                        :
+                        <>
+                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===2 ||
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
+                        <>
+                         {console.log("PIChange.js status-2/0")}
+                       <PreviewChangedPI 
+                        bp={this.backPI}
+                        enquiryId={this.props.enquiryId}
+                        enquiryCode={this.props.enquiryCode}
+                        expectedDateOfDelivery={this.state.dod}
+                        hsn={this.state.hsncode}
+                        rpu={this.state.rpu}
+                        quantity={this.state.quantity}
+                        sgst={this.state.sgst}
+                        cgst={this.state.cgst}
+                        piSend={this.state.piSend}
+                        />
+                        </>:"Reject"}
+                        </>}
+                    </>
+                    :
+                    "No data"}
+                </>   
                 </React.Fragment>
                 )
                 }

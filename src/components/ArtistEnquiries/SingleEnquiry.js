@@ -836,6 +836,15 @@ export class SingleEnquiry extends Component {
                             </ul>
                             :
                             <>
+                            {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                             { item.isBlue== 1
                                 ?
                                 <>
@@ -1219,6 +1228,15 @@ export class SingleEnquiry extends Component {
                             </ul>
                             :
                             <>
+                            {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                             { item.isBlue== 1
                                 ?
                                 <>

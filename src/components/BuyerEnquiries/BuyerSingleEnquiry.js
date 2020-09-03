@@ -287,12 +287,12 @@ export class BuyerSingleEnquiry extends Component {
         //   console.log(this.state.moq);
         });
     }
-    ToggleDelete = () => {
-        document.getElementById('id01').style.display='block';
-       }
-    ToggleDeleteClose = () => {
-        document.getElementById('id01').style.display='none';
-       }
+    // ToggleDelete = () => {
+    //     document.getElementById('id01').style.display='block';
+    //    }
+    // ToggleDeleteClose = () => {
+    //     document.getElementById('id01').style.display='none';
+    //    }
 
        ToggleDelete1 = () => {
         document.getElementById('id02').style.display='block';
@@ -338,6 +338,7 @@ export class BuyerSingleEnquiry extends Component {
     handleDeleteItem(id){
         // if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteMoq(id).then((response)=>{
+            console.log(id);
             if (response.data.valid) {
                 customToast.success("MOQ removed!", {
                   position: toast.POSITION.TOP_RIGHT,
@@ -345,7 +346,7 @@ export class BuyerSingleEnquiry extends Component {
                 });
                 this.setState({deleteMoq : response.data},()=>{
                     console.log(this.state.deleteMoq);
-                    document.getElementById('id02').style.display='none';
+                    document.getElementById('DeleteMoQ').style.display='none';
                     this.componentDidMount();
                     // this.componentDidMount();
                 
@@ -690,7 +691,9 @@ AcceptMoq(moqId,artisanId){
         console.log(params);
 
     this.setState({ 
+        collapse: !this.state.collapse,
         clickedAccept:true,
+        // collapse:false,
         collapseNew: !this.state.collapseNew,
         disableCheckId: artisanId,
         selectedArtisanId: artisanId,
@@ -954,6 +957,15 @@ MoqSimpleProductSelected(moqId){
                             </ul>
                             :
                             <>
+                            {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                             { item.isBlue== 1
                                 ?
                                 <>
@@ -1196,6 +1208,15 @@ MoqSimpleProductSelected(moqId){
                             </ul>
                             :
                             <>
+                            {
+                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                    ?
+                                    <img src={logos.cricon} className="cricon"></img>
+ 
+                                    :
+                                    null
+ 
+                                }
                             { item.isBlue== 1
                                 ?
                                 <>
@@ -1298,7 +1319,7 @@ MoqSimpleProductSelected(moqId){
                                     <div id="id02" class="w3-modal">
                                       <div class="w3-modal-content w3-animate-top modalBoxSize">
                                         <div class="w3-container">
-                                          <h3 className="deleteModalHeader">Are you sure you want to close this enquiry ?</h3>
+                                          <h3 className="deleteModalHeadermoq">Are you sure you want to close this enquiry ?</h3>
                                           <p className="deleteModalPara"></p>
                                           <div className="deleteModalButtonOuterDiv">
                                             <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
@@ -1651,14 +1672,18 @@ MoqSimpleProductSelected(moqId){
                                             </Moment>
                                           </p>
                                         {this.state.collapseId == data.artisanId  ?
-                                        <div onClick={() => this.toggleArrow(data.artisanId)}>  
-                                       
+                                            this.state.clickedAccept?
+                                            <div >  
+                                            Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
+                                            </div> 
+                                            :
+                                        <div onClick={() => this.toggleArrow(data.artisanId)}>
                                         Collapse <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i>  
-                                        </div> : 
+                                        </div> 
+                                        : 
                                         this.state.clickedAccept?
                                         <div >  
-                                       
-                                        Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
+                                         Read More <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>  
                                          </div> 
                                         :
 
@@ -1683,10 +1708,10 @@ MoqSimpleProductSelected(moqId){
                                                 </Col>
                                             </Row>
 
-                                            <div id="id02" class="w3-modal">
+                                            {/* <div id="" class="w3-modal">
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
-                                <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
+                                <h3 className="deleteModalHeader" >Are you sure you want to delete MOQ ?</h3>
                                 <div className="deleteModalButtonOuterDiv">
                                 <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
                                 <span 
@@ -1695,7 +1720,7 @@ MoqSimpleProductSelected(moqId){
                                 </div>
                             </div>
                             </div>
-                            </div>
+                            </div> */}
 
                                         </td>
                                         }
@@ -1731,10 +1756,17 @@ MoqSimpleProductSelected(moqId){
 
                                     {this.state.collapseId == data.artisanId ?
                                            <>
-                                              <div className="readmorediv">
+                                           {this.state.clickedAccept?"":
+                                           <>
+                                           <div className="readmorediv">
                                               <p><b>Note from Artisan</b></p>
                                               {data.moq.additionalInfo?data.moq.additionalInfo:""}
                                               </div>
+                                           </>}
+                                              {/* <div className="readmorediv">
+                                              <p><b>Note from Artisan</b></p>
+                                              {data.moq.additionalInfo?data.moq.additionalInfo:""}
+                                              </div> */}
                                               </>
                                              :null}
                                          {/* ----------------Accepting Readmore------------------    */}

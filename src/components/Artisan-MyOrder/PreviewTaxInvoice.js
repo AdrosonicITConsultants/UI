@@ -251,7 +251,11 @@ export class PreviewTaxInvoice extends Component {
        
          <Col className="col-xs-2">
           
-        
+         <button  disabled={this.state.sendPI} 
+        // onClick={() => this.sendPI()} 
+        className="Raiseinvbtn raisePI" 
+        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+        Raise Tax Invoice</button>
          </Col>
     </Row>
    <Row noGutters={true}>
@@ -922,8 +926,15 @@ export class PreviewTaxInvoice extends Component {
  </div>
  <Row noGutters={true}>
      <Col className="col-xs-12" style={{textAlign:"center",marginTop:"10px"}}>
+ <span>
      <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+      onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+       <button disabled={this.state.sendPI} className="Raiseinvbtn"
+      //  onClick={() => this.sendPI()}
+       >
+         <img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise Tax Invoice</button>
+
+</span>
      </Col>
  </Row>
 

@@ -936,7 +936,12 @@ export class PreviewChangedPI extends Component {
     }
 
 </>
-    :<></>}
+    :<>
+    <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       Loading data ..
+                    </Col>
+                </Row></>}
 </React.Fragment>
         )
     }

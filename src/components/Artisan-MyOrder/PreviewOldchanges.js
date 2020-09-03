@@ -821,7 +821,11 @@ export class PreviewOldchanges extends Component {
 {/* </Container> */}
 {/* <Footer/> */}
 </>
-    :<></>}
+    :<><Row noGutters={true}>
+    <Col className="col-xs-12  text-center">
+       Loading data ..
+    </Col>
+</Row></>}
 </React.Fragment>
         )
     }

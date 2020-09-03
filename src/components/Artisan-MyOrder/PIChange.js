@@ -499,7 +499,11 @@ export class PIchange extends Component {
                         </>}
                     </>
                     :
-                    "No data"}
+                    <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       No Data
+                    </Col>
+                </Row>}
                 </>   
                 </React.Fragment>
                 )

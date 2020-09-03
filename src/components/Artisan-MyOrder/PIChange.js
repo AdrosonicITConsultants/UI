@@ -49,7 +49,8 @@ export class PIchange extends Component {
             viewOldPi:false, 
             getOrder:[],
             onlyView:false,
-            previewAndRaisePI:false
+            previewAndRaisePI:false,
+            getOrderStatus:-1
          
         }
     }
@@ -82,43 +83,25 @@ export class PIchange extends Component {
         var regex = /[1-9]|\./
         if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
             if(document.getElementById('agree').checked){
-                // let params = queryString.parse(this.props.location.search);
-                // console.log(params);
-                TTCEapi.revisedPI(
-                    // params.code,
-                   this.props.enquiryId,
-                    this.state.cgst,
-                    this.state.dod ,
-                    this.state.hsncode,
-                    this.state.rpu,
-                    this.state.quantity,
-                    this.state.sgst,
+              
 
-                 
-                   ).then((response)=>
-                   {
-                       if(response.data.valid){
-                        this.state.viewOldPi = true;  
-                        // this.state.onlyView=false, 
-                        // this.state.previewAndRaisePI=true
-                        this.setState({  
-                         viewOldPi:true,
-                         onlyView:false,
-                         previewAndRaisePI:true,
-                        savePi : response.data,
-                        isPidetail:!this.state.isPidetail,
-                        showValidationPi: false,
-                      
-                    },()=>{
-                    // console.log(this.preview);
-                   
-                    });
-                    customToast.success("PI Details saved successfully", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: true,
-                      });
-                    //   browserHistory.push("/Preview");
-              }  });
+                this.state.viewOldPi = true;  
+                       
+                             this.setState({  
+                              viewOldPi:true,
+                              onlyView:false,
+                              previewAndRaisePI:true,
+                            //  savePi : response.data,
+                             isPidetail:!this.state.isPidetail,
+                             showValidationPi: false,
+                          
+                         },()=>{
+                       
+                       
+                        });
+
+
+            
         
             }
             else{
@@ -135,7 +118,7 @@ export class PIchange extends Component {
         this.setState({
             showValidationPi: true,
            
-        //   message : "Invalid PAN Number"
+    
       });
       
       }
@@ -213,11 +196,12 @@ export class PIchange extends Component {
             if(response.data.valid)
             {
                 this.setState({getOrder:response.data.data,
+
                    })
                     TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                         if(response.data.valid)
                         {
-                            this.setState({previewPI:response.data.data,
+                            this.setState({previewPI:response.data.data,dataload:true
                                 })
                                 TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
                                     if(response.data.valid)
@@ -233,7 +217,7 @@ export class PIchange extends Component {
                     })
 
             }
-            console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+          
         })
        
 
@@ -248,28 +232,10 @@ export class PIchange extends Component {
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
                           {console.log("PIChange.js status-1/3")}
-                        {this.state.getOldPIData
+                        {this.state.getOldPIData.length==0
                         ?
                                    <>
-                                   {console.log("PI is raised")}
-                                                <PreviewChangedPI 
-                                                bp={this.backPI}
-                                                enquiryId={this.props.enquiryId}
-                                                enquiryCode={this.props.enquiryCode}
-                                                expectedDateOfDelivery={this.state.dod}
-                                                hsn={this.state.hsncode}
-                                                rpu={this.state.rpu}
-                                                quantity={this.state.quantity}
-                                                sgst={this.state.sgst}
-                                                cgst={this.state.cgst}
-                                                piSend={this.state.piSend}
-                                                onlyView={this.state.onlyView}
-                                                previewAndRaisePI={this.state.previewAndRaisePI}
-                                                />
-                    </>
-                :
-                <>
-                   {this.state.viewOldPi ?
+                                    {this.state.viewOldPi ?
                                     <>
                                     {this.state.getOldPIData.length>0 && this.state.previewAndRaisePI==false?
                                     <>
@@ -333,7 +299,7 @@ export class PIchange extends Component {
                                     </>
                                     :
                                     <>
-
+{console.log("Form display")}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 
@@ -456,6 +422,24 @@ export class PIchange extends Component {
                             
                             </Row>
                                     </>}
+                    </>
+                :
+                <>
+                 {console.log("PI is raised")}
+                                                <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                                previewAndRaisePI={this.state.previewAndRaisePI}
+                                                />
                 </>}
 
                              
@@ -483,6 +467,7 @@ export class PIchange extends Component {
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
                          {console.log("PIChange.js status-2/0")}
+                        
                        <PreviewChangedPI 
                         bp={this.backPI}
                         enquiryId={this.props.enquiryId}
@@ -494,8 +479,21 @@ export class PIchange extends Component {
                         sgst={this.state.sgst}
                         cgst={this.state.cgst}
                         piSend={this.state.piSend}
+                    
                         />
-                        </>:"Reject"}
+                        </>:
+                        <PreviewChangedPI 
+                        bp={this.backPI}
+                        enquiryId={this.props.enquiryId}
+                        enquiryCode={this.props.enquiryCode}
+                        expectedDateOfDelivery={this.state.dod}
+                        hsn={this.state.hsncode}
+                        rpu={this.state.rpu}
+                        quantity={this.state.quantity}
+                        sgst={this.state.sgst}
+                        cgst={this.state.cgst}
+                        piSend={this.state.piSend}
+                        />}
                         </>}
                     </>
                     :

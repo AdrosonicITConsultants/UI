@@ -789,7 +789,7 @@ export class PreviewOldchanges extends Component {
 
 
 
-  {this.props.previewnewPi===1 && this.state.previewPI ?
+  { this.state.previewPI ?
   <>
 {  console.log('btn1')}
 {  console.log(this.props.previewnewPi)}

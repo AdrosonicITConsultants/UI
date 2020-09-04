@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
 import { PreviewOldchanges } from './PreviewOldchanges';
+import { style } from 'glamor';
 const ref = React.createRef();
 const options = {
     orientation: 'landscape',
@@ -71,7 +72,8 @@ export class PreviewChangedPI extends Component {
             reedCounts:[],
             dyes:[],
             getOldPIData:[],
-            oldDataPI:false
+            oldDataPI:false,
+            savePi:[]
 
 
         };
@@ -180,48 +182,112 @@ export class PreviewChangedPI extends Component {
 
       }
     
-      sendPI(){
-         this.setState({
-           sendPI: true,
-            gobackButtonClick:true,
-         })
+    //   sendPI(){
+    //      this.setState({
+    //        sendPI: true,
+    //         gobackButtonClick:true,
+    //      })
        
-        TTCEapi.sendPI(
-            this.props.enquiryId,
-            this.state.cgst,
-            this.state.expectedDateOfDelivery ,
-            this.state.hsn,
-            this.state.rpu,
-            this.state.quantity,
-            this.state.sgst
+    //     TTCEapi.sendPI(
+    //         this.props.enquiryId,
+    //         this.props.cgst,
+    //         this.props.expectedDateOfDelivery,
+    //         this.props.hsn,
+    //         this.props.rpu,
+    //         this.props.quantity,
+    //         this.props.sgst
            
           
-           ).then((response)=>{
-               console.log(response);
-               if(response.data.valid){
-            this.setState({sendPI : response.data,
-              },()=>{
-            console.log(this.state.sendPI);
-           this.componentDidMount();
-            });
-            customToast.success("PI Details send successfully", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-          } 
-        else{
-          this.setState({
-            sendPI: true,
-            gobackButtonClick:true
-          })
-          customToast.error(response.data.errorMessage , {
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: true,
-          });
-        }
-        });
+    //        ).then((response)=>{
+    //            console.log(response);
+    //            if(response.data.valid){
+    //         this.setState({sendPI : response.data,
+    //           },()=>{
+    //         console.log(this.state.sendPI);
+    //        this.componentDidMount();
+    //         });
+    //         customToast.success("PI Details send successfully", {
+    //             position: toast.POSITION.TOP_RIGHT,
+    //             autoClose: true,
+    //           });
+    //       } 
+    //     else{
+    //       this.setState({
+    //         sendPI: true,
+    //         gobackButtonClick:true
+    //       })
+    //       customToast.error(response.data.errorMessage , {
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         autoClose: true,
+    //       });
+    //     }
+    //     });
       
-    } 
+    // } 
+    sendPI(){
+      this.setState({
+        sendPI: true,
+         gobackButtonClick:true,
+      })
+    TTCEapi.revisedPI(
+                   
+      this.props.enquiryId,
+      this.props.cgst,
+      this.props.expectedDateOfDelivery,
+      this.props.hsn,
+      this.props.rpu,
+      this.props.quantity,
+      this.props.sgst
+     
+
+    
+      ).then((response)=>
+      {
+          if(response.data.valid){
+            this.setState({  
+            savePi : response.data,
+          
+       },()=>{
+        TTCEapi.sendPI(
+          this.props.enquiryId,
+          this.props.cgst,
+          this.props.expectedDateOfDelivery,
+          this.props.hsn,
+          this.props.rpu,
+          this.props.quantity,
+          this.props.sgst
+         
+        
+         ).then((response)=>{
+             console.log(response);
+             if(response.data.valid){
+          this.setState({sendPI : response.data,
+            },()=>{
+          console.log(this.state.sendPI);
+         this.componentDidMount();
+          });
+          customToast.success("PI Details send successfully", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: true,
+            });
+        } 
+      else{
+        this.setState({
+          sendPI: true,
+          gobackButtonClick:true
+        })
+        customToast.error(response.data.errorMessage , {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        });
+      }
+      });
+      
+       });
+             
+ }  });
+}
+
     viewOldPI(){
       this.setState({
         oldDataPI:true,
@@ -260,15 +326,16 @@ export class PreviewChangedPI extends Component {
   ""
   :
   <>
-  {this.state.previewPiOrder.isSend==1?
-  <Row noGutters={true}>
+  {this.state.getOldPIData.length==0?
+  ""
+:
+<Row noGutters={true}>
   <Col className="col-xs-12 bold">
   <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
                                 onClick={() => this.viewOldPI()}>
                                <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>
   </Col>
 </Row>
-:""
 }
   </>
   
@@ -281,7 +348,7 @@ export class PreviewChangedPI extends Component {
    {this.state.getOldPIData.length==0?
   "   Post change request process "
   :
-  "   Showing updated PI after CR" 
+  "   Showing updated PI after CR " 
   }
 
         </Col>
@@ -294,24 +361,25 @@ export class PreviewChangedPI extends Component {
             <>
             {this.props.previewAndRaisePI?
             <>
-                {this.state.previewPI.piOrder.isSend === 1 ?
-              ""        :
-            <button  disabled={this.state.sendPI} 
-            onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-            style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-            Send updated PI</button>
+                {this.state.getOldPIData.length === 0 ?
+               <button  disabled={this.state.sendPI} 
+               onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
+               style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+               Send updated PI</button>      
+                :
+               ""
                }
             </>
           :
           ""}
             </>:
            <>
-            {this.state.previewPI.piOrder.isSend === 1 ?
-           ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Send updated PI</button>
+            {this.state.getOldPIData.length === 0 && this.props.previewAndRaisePI?
+           <button  disabled={this.state.sendPI} 
+           onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
+           style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+           Send updated PI</button>        :""
+        
     }
            </>
            }
@@ -463,7 +531,12 @@ export class PreviewChangedPI extends Component {
        <p className="againstpi">{this.props.enquiryCode}</p>
     </td>
     <td className="enqidanddatecolwidth">
-    <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+      {this.props.previewAndRaisePI?
+          <p className="PaymentTerm">Date: {this.props.expectedDateOfDelivery}</p> 
+          :
+          <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
+
+      }
        <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId}</p>
     </td>
   </tr>
@@ -722,9 +795,24 @@ export class PreviewChangedPI extends Component {
 
 
 
-
-
-        <td >
+{this.props.previewAndRaisePI?
+<>
+  <td >
+     <p className="snopi wraptext">{this.props.hsn}</p>
+     </td>
+     <td >
+     <p className="snopi wraptext">{this.props.quantity}</p>
+     </td>
+     <td>
+     <p className="snopi rpu wraptext">{this.props.rpu}</p>
+     </td>
+     <td>
+     <p className="snopi wraptext">{(this.props.quantity * this.props.rpu).toFixed(2)}</p>
+     </td>
+     </>
+     :
+     <>
+     <td >
      <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
      </td>
      <td >
@@ -736,6 +824,11 @@ export class PreviewChangedPI extends Component {
      <td>
      <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
+     </>
+}
+
+       
+    
    </tr>
    {/* --------------------------------------------- */}
    <tr> 
@@ -780,10 +873,17 @@ export class PreviewChangedPI extends Component {
      <td>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
+     {this.props.previewAndRaisePI?
+     <td>
+     <h3 className="snopi wraptext">  {(this.props.rpu * this.props.quantity).toFixed(2) }</h3>
+     </td>
+     :
      <td>
      <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
+     }
+     
    </tr>
    {/* --------------------------------total tr end---------------------------------------------- */}
    <tr>
@@ -846,7 +946,11 @@ export class PreviewChangedPI extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
+       {this.props.previewAndRaisePI?
+            <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.props.expectedDateOfDelivery}</span></h3>
+              :
+              <h3 className="freightch snopi"><b>Expected Date of delivery:</b> <span className="edddate">{this.state.previewPiOrder.expectedDateOfDelivery}</span></h3>
+            }
         </td>
         <td >
      <p className="snopi wraptext"></p>
@@ -888,13 +992,22 @@ export class PreviewChangedPI extends Component {
  onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
 :
 <>
-{this.state.previewPI.piOrder.isSend=== 1  ?
-""
+{console.log(this.props.getOrderStatus)}
+{this.props.getOrderStatus==0?
+<>
+</>
 :
-<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
+<>
+{this.state.getOldPIData.length=== 0  ?
+  <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
+ onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+:
+"" 
 }
 </>}
+</>
+}
+
  
 
 
@@ -902,12 +1015,13 @@ export class PreviewChangedPI extends Component {
               <>
               {this.props.previewAndRaisePI?
               <>
-                  {this.state.previewPI.piOrder.isSend === 1 ?
-                ""        :
-              <button  disabled={this.state.sendPI} 
-              onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-              style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-              Send updated PI</button>
+                  {this.state.getOldPIData.length === 0 ?
+                              <button  disabled={this.state.sendPI} 
+                              onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
+                              style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+                              Send updated PI</button>   
+                                  :
+                                  ""
                  }
               </>
             :
@@ -915,12 +1029,14 @@ export class PreviewChangedPI extends Component {
               </>
            :
            <>
-            {this.state.previewPI.piOrder.isSend === 1 ?
-           ""        :
-           <button disabled={this.state.sendPI}
-           className="Raiseinvbtn"onClick={() => this.sendPI()}>
-             <img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-              Send updated PI</button>
+            {this.state.getOldPIData.length === 0 && this.props.previewAndRaisePI?
+            <button disabled={this.state.sendPI}
+            className="Raiseinvbtn"onClick={() => this.sendPI()}>
+              <img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+               Send updated PI</button>       
+                :
+               ""
+          
     }
            </>
            }
@@ -936,7 +1052,12 @@ export class PreviewChangedPI extends Component {
     }
 
 </>
-    :<></>}
+    :<>
+    <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       Loading data ..
+                    </Col>
+                </Row></>}
 </React.Fragment>
         )
     }

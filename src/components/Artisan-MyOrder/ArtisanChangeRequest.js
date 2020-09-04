@@ -178,42 +178,42 @@ componentDidMount(){
             })
         }
     })
-    TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
-        if(response.data.valid)
-        {
-            this.setState({getOrder:response.data.data,
-               
-                           })
-        }
-        console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
-    })
+  
     TTCEapi.getChangeRequestItemTable().then((response)=>{
         if(response.data.valid)
         {
            
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
-                TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        // console.log(response.data.data);
-                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
-                            dataload:true})
-                            var array = this.state.getChangeRequestForArtisan;
-        var count = 0;
-        for(var i = 0; i < array.length; i ++) {
-          if(array[i].requestStatus === 1) {
-            count = count + 1;
-          }
-        }
-        this.setState({
-          counter: count,
-        })
-                    }
-                    console.log(this.state.getChangeRequestForArtisan)
-                })
+                        this.setState({getOrder:response.data.data},()=>{
+                            TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                                if(response.data.valid)
+                                {
+                                    // console.log(response.data.data);
+                                    this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
+                                        dataload:true})
+                                        var array = this.state.getChangeRequestForArtisan;
+                                        var count = 0;
+                                        for(var i = 0; i < array.length; i ++) {
+                                        if(array[i].requestStatus === 1) {
+                                            count = count + 1;
+                                        }
+                                        }
+                                        this.setState({
+                                        counter: count,
+                                        })
+                                                    }
+                                                    console.log(this.state.getChangeRequestForArtisan)
+                                                })
+                                            })
+                                        }
+                                        // console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+                                    })
 
-                       }
-                
+                                        }
+                                    
                 
                 )
         }
@@ -664,7 +664,12 @@ Modal3Close = () => {
             </Col>
         </Row>
             </>
-            :"No Data"}
+            :
+            <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       Loading data ..
+                    </Col>
+                </Row>}
 </>
 :
 <p style={{textAlign:"center"}}>

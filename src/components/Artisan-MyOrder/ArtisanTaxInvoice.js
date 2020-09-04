@@ -33,18 +33,54 @@ export default class ArtisanTaxInvoice extends Component {
             finalamt:0,
             amttobepaid:0,
             invoiceId:0,
-            percentage:0
+            percentage:0,
+            selectedFile:null,
+            selectedFileName:"",
+            upload:true,
+            showValidationPi:false
           
         }
         this.handleChange = this.handleChange.bind(this);
         this.bp = this.bp.bind(this);
-
-
+        this.onFileChange= this.onFileChange.bind(this);
     }
-    saveTaxInvDetails(){
+    onFileChange(e){
         this.setState({
-            previewTaxInvoice:true
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
         })
+    }
+
+    saveTaxInvDetails(){
+        var regex = /[1-9]|\./
+        if(regex.test(this.state.quantity) && regex.test( this.state.rpu) && regex.test(this.state.pta) && regex.test(this.state.apr)&&regex.test(this.state.apr)
+        &&regex.test(this.state.deliverycharge)&&regex.test(this.state.sgst)&&regex.test(this.state.cgst)&&regex.test(this.state.finalamt)&&regex.test(this.state.amttobepaid)
+        &&regex.test(this.state.deliverycharge)){
+            if(document.getElementById('agree').checked){
+                this.setState({
+                    previewTaxInvoice:true
+                })
+            }
+            else{
+                customToast.error("Please agree to T&C", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }}
+            else{
+                this.setState({
+                    showValidationPi: true,
+                   
+                //   message : "Invalid PAN Number"
+              });
+              
+              }
     }
     handleChange(e) {
         const { name, value } = e.target;
@@ -58,6 +94,9 @@ export default class ArtisanTaxInvoice extends Component {
             previewTaxInvoice:false
         })
     }
+
+  
+   
 componentDidMount(){
     TTCEapi.fetchEnquiryAndPaymentDetails(this.props.enquiryId).then((response)=>{
         if(response.data.data==null){
@@ -120,6 +159,8 @@ componentDidMount(){
                     amttobepaid={this.state.amttobepaid}
                     invoiceId={this.state.invoiceId}
                     percentage={this.state.percentage}
+                    selectedFile={this.state.selectedFile}
+                    selectedFileName={this.state.selectedFileName}
                     />
                     </>
                     :
@@ -189,11 +230,20 @@ componentDidMount(){
                                                     <Col sm={6}>
                                                     <label>Upload delivery Receipt (non-mandatory)</label>
                                                     <br/>
-                                                        <input className="PIinput" type="number"
-                                                       
-                                                        value={this.state.hsncode }
-                                                        name="hsncode"
-                                                        onChange={this.handleChange}/>
+                                                    
+                                                    <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+                                                     onChange={this.onFileChange}                                              
+                                                     />
+                                                     <label for="file" style={{background:"whitesmoke",borderRadius:"0px",color:"cornflowerblue"}} className="PIinput">
+                                                     
+                                                     {this.state.upload?
+                                                     <b className="notetouploadrec">Please use general file formats</b>
+                                                            :
+                                                            this.state.selectedFileName
+                                                     }
+                                                     <img src={logos.uploadagain} className=" happyunhappyimg" style={{height:"15px",float:"right"}}/>
+                                                    
+                                                     </label>
                                                     </Col>
                                                     </Row>
                                                     <Row noGutters={true} className="PIcol2mt BdImgCol">
@@ -257,7 +307,7 @@ componentDidMount(){
                                                             </Row>
                                                             <p className="text-center">
                                                     {this.state.showValidationPi ? (
-                                                <span className="bg-danger">All fields are Mandatory</span>
+                                                <span className="bg-danger">Please fill mandatory fields</span>
                                                 ) : (
                                                 <br />
                                                 )}

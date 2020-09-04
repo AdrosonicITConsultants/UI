@@ -1744,7 +1744,7 @@ export class SingleEnquiry extends Component {
                                                              </Row>
                                                              <p className="text-center">
                                                              {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">please fill mandatory fields</span>
+                                            <span className="bg-danger">Please fill mandatory fields</span>
                                         ) : (
                                             <br />
                                         )}

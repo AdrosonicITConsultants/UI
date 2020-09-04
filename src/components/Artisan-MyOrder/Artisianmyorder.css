@@ -45,6 +45,15 @@
 
     
 }
+.notetouploadrec{
+    background: whitesmoke;
+    border-radius: 0px;
+    color: grey;
+    text-align: start;
+    font-size: 12px;
+    font-weight: 100;
+
+}
 .colorchange2{
     height: 17px;
     width: 17px;

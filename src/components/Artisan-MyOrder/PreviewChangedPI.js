@@ -532,7 +532,7 @@ export class PreviewChangedPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
       {this.props.previewAndRaisePI?
-          <p className="PaymentTerm">Date: {this.props.expectedDateOfDelivery}</p> 
+          <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
           :
           <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
 

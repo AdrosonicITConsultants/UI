@@ -1122,17 +1122,20 @@ class TTCEapi {
       });
   }
 
+  // /enquiry/submitDeliveryChallan?enquiryId=1661&orderDispatchDate=%2000%3A00%3A00&ETA=2020-09-11 400
+  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01&ETA=2012-12-12
 
-
-
+  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01
   static submitDeliveryChallan(
     enquiryId,
     formData,
+    orderDispatchDate,
+    ETA,
   ) {
     debugger;
     var bodyFormData = new FormData();
 
-    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId+"&orderDispatchDate="+orderDispatchDate+"%2000%3A00%3A00&ETA="+ETA;
 
     // console.log(JSON.stringify(file));
     console.log(formData);
@@ -1667,8 +1670,47 @@ static sendPI(
       return error.response;
     });
 } 
-
-
+// /enquiry/generateTaxInvoice
+static sendTaxInvoice(
+  apr,
+  cgst,
+  deliverycharge,
+  enquiryId,
+  finalamt,
+  rpu,
+  quantity,
+  sgst,
+ 
+  ) {
+  let url = ApiUrl + "/enquiry/generateTaxInvoice";
+ var data =
+  {
+  advancePaidAmt:apr,
+  cgst:cgst,
+  deliveryCharges:deliverycharge,
+  enquiryId:enquiryId,
+  finalTotalAmt:finalamt,
+  ppu:rpu,
+  quantity:quantity,
+  sgst:sgst
+ 
+  }
+ console.log(data)
+ var config = {
+  headers: {
+    "Content-type": "application/json",
+  },
+};
+  return axios
+    .post(url,data,config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
 
   static sendMoq(
     enquiryId,

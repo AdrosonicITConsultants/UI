@@ -22,6 +22,8 @@ import { ChangeRequest } from './ChangeRequest';
 import { CRaccepted } from './CRaccepted';
 import { BuyerPreviewNewPI } from './BuyerPreviewNewPI';
 import { BuyerOldPi } from './BuyerOldPi';
+import { PreviewTaxInvoice } from '../Artisan-MyOrder/PreviewTaxInvoice';
+import ArtisanTaxInvoice from '../Artisan-MyOrder/ArtisanTaxInvoice';
 
 
 
@@ -46,6 +48,7 @@ export class Buyerorder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
+            BuyerPreviewInvoice:true
         
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
@@ -396,7 +399,8 @@ export class Buyerorder extends Component {
                                         <Col className="leEnqAmount bold">
                                             {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
-                                    </div>                                    
+                                    </div>     
+                                                                   
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
@@ -429,7 +433,7 @@ export class Buyerorder extends Component {
 
                   {/* for CR */}
 
-                    {item.openEnquiriesResponse.productStatusId === 2
+                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
                     ?
                     <>
                     </>
@@ -552,7 +556,9 @@ export class Buyerorder extends Component {
                      
                         }
                      </>   
-                    }<hr></hr>
+                    }
+                    {/* order dispatch change here */}
+                    <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -815,7 +821,7 @@ export class Buyerorder extends Component {
                     </Row>
                     {/* for CR */}
 
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
                     ?
                     <>
                     </>
@@ -938,7 +944,10 @@ export class Buyerorder extends Component {
                      
                         }
                      </>   
-                    }<hr></hr>
+                    }
+                    {/* change here order dispatch */}
+                   
+                    <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -1281,12 +1290,13 @@ export class Buyerorder extends Component {
 
                                                             {this.state.taxInvoice ? 
                                                             <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                             <div>
-                                                            <h6>tax...</h6>
-                                                            </div>
+                                                            <Col sm={10}>
+                                                                <ArtisanTaxInvoice
+                                                                 enquiryId={this.state.enquiryCode}
+                                                                 enquiryCode={item.openEnquiriesResponse.enquiryCode}
+                                                                 BuyerPreviewInvoice={this.state.BuyerPreviewInvoice}/>
                                                             </Col>
+                                                            
                                                             </>
                                                             :null}
                                                             

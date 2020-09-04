@@ -249,14 +249,18 @@ sendCR = () => {
 // }
 
 Modal1Close = () => {
+    this.setState({
+        raiseCRFinalArray:[],
+        // submitdisabled:true
+    })
     document.getElementById('Modal1').style.display='none';
 }
 
 Modal2Show = () => {
- this.setState({
-    // submitdisabled:true
- })
-
+    this.setState({
+        raiseCRFinalArray:[],
+        // submitdisabled:true
+    })
 
         var array = this.state.accepted;
         var array1 = this.state.getChangeRequestForArtisan;
@@ -301,6 +305,10 @@ Modal2Show = () => {
 
 
 Modal2Close = () => {
+    this.setState({
+        raiseCRFinalArray:[],
+        // submitdisabled:true
+    })
     document.getElementById('Modal2').style.display='none';
 }
 Modal3Show = () => {

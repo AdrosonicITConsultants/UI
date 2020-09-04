@@ -51,7 +51,9 @@
     color: grey;
     text-align: start;
     font-size: 12px;
-    font-weight: 100;
+    /* font-weight: 100; */
+    /* margin-top: 10px; */
+    padding: 10px;
 
 }
 .colorchange2{

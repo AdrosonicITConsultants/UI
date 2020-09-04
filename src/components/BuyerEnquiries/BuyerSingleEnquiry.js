@@ -1334,7 +1334,7 @@ MoqSimpleProductSelected(moqId){
                     <Col className="col-xs-6">
                     <button className="completedenqButton"
                                        onClick={()=>{this.markcompleted()}}
-                                       disabled = {this.state.progressid != 14}
+                                       disabled = {this.state.progressid != 10}
 
                                        >
                                        <img src={logos.completedenq} className="completeenqimg" 

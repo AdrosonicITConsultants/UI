@@ -254,7 +254,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId === 2
+                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
                     ?
                     <>
                     </>
@@ -371,6 +371,7 @@ export class BuyerOngoingOrder extends Component {
                         }
                      </> 
                     }
+                    {/* change here (order dispatch) */}
                     <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -632,7 +633,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
                     ?
                     <>
                     </>
@@ -748,6 +749,7 @@ export class BuyerOngoingOrder extends Component {
                         }
                      </>  
                     }
+                    {/* order dispatch change here */}
                     <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>

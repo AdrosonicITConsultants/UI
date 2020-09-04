@@ -43,7 +43,8 @@ export class Artisanorder extends Component {
             innerEnquiryStages : [],
             getChangeRequestForArtisan:[],
             getOrder:[],
-            getPi:[]
+            getPi:[],
+            BuyerPreviewInvoice:false
            
         
         }
@@ -1620,10 +1621,13 @@ export class Artisanorder extends Component {
                                     {this.state.taxInvoice ? 
                                     <>
                                     {/* <Col sm={1}></Col> */}
+                                    {console.log("artitax")}
                                     <Col sm={10}>
+                                        
                                     <ArtisanTaxInvoice
                                     enquiryId={this.state.enquiryCode}
-                                    enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode} />
+                                    enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
+                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice} />
                                     </Col>
                                     </>
                                     :null}

@@ -71,7 +71,9 @@ export class PreviewTaxInvoice extends Component {
             reedCounts:[],
             dyes:[],
             getOldPIData:[],
-            oldDataPI:false
+            oldDataPI:false,
+            gobackButtonClick:false,
+            sendTax:[]
 
 
         };
@@ -182,36 +184,37 @@ export class PreviewTaxInvoice extends Component {
     
       sendPI(){
          this.setState({
-           sendPI: true,
+          //  sendPI: true,
             gobackButtonClick:true,
          })
        
-        TTCEapi.sendPI(
+        TTCEapi.sendTaxInvoice(
+            this.props.apr,
+            this.props.cgst,
+            this.props.deliverycharge ,
             this.props.enquiryId,
-            this.state.cgst,
-            this.state.expectedDateOfDelivery ,
-            this.state.hsn,
-            this.state.rpu,
-            this.state.quantity,
-            this.state.sgst
-           
-          
+            this.props.finalamt,
+            this.props.rpu,
+            this.props.quantity,
+            this.props.sgst,
+         
+                    
            ).then((response)=>{
                console.log(response);
                if(response.data.valid){
-            this.setState({sendPI : response.data,
+            this.setState({sendTax : response.data,
               },()=>{
-            console.log(this.state.sendPI);
+            console.log(this.state.sendTax);
            this.componentDidMount();
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("Tax Details send successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
           } 
         else{
           this.setState({
-            sendPI: true,
+            // sendPI: true,
             gobackButtonClick:true
           })
           customToast.error(response.data.errorMessage , {
@@ -250,12 +253,15 @@ export class PreviewTaxInvoice extends Component {
          </Col>
        
          <Col className="col-xs-2">
-          
-         <button  disabled={this.state.sendPI} 
-        // onClick={() => this.sendPI()} 
+          {this.props.taxInvoiceGenerated==true?
+          "":
+          <button  disabled={this.state.gobackButtonClick} 
+        onClick={() => this.sendPI()} 
         className="Raiseinvbtn raisePI" 
         style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
         Raise Tax Invoice</button>
+          }
+         
          </Col>
     </Row>
    <Row noGutters={true}>
@@ -449,7 +455,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth ">01</h3>
      {this.state.getOldPIData.length==0?""
      :
-     <p className="CRfondcss">CR</p>
+     <p className="CRfondcss"></p>
 
           }
         </td>
@@ -464,17 +470,18 @@ export class PreviewTaxInvoice extends Component {
 
 <td className="tdmarginleft">
   
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 18px 153px 16px"}}>
+   <span>  <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 18px 153px 16px"}}>
        {this.state.history ? 
        <>
-       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}
+       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">CR</b>
        </>
        :
        <>
-       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}
+       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">CR</b>
        </>
          }  
-       </h3>
+       </h3>    </span>
+
           
      
         </td>
@@ -506,7 +513,7 @@ export class PreviewTaxInvoice extends Component {
      <p className="snopi rpu wraptext">{this.props.rpu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">{parseFloat(this.props.finalamt).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -528,10 +535,13 @@ export class PreviewTaxInvoice extends Component {
      <p className="snopi wraptext"></p>
      </td>
      <td>
-     <h3 className="snopi wraptextrpu"></h3>
+      <h3 className="snopi wraptextrpu"></h3>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
+     <h3 className="snopi wraptextrpu"> {parseFloat(this.props.deliverycharge).toFixed(2)}</h3>
+
+    
 {/* <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
      <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3> */}
      </td>
@@ -554,7 +564,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {this.props.finalamt} </h3>
+     <h3 className="snopi wraptext"> {( parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)).toFixed(2)} </h3>
      </td>
    </tr>
 
@@ -578,8 +588,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
-     <h3 className="snopi wraptext">{(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext"> {parseFloat(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{parseFloat(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -602,9 +612,9 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {(this.props.finalamt +(this.props.finalamt * this.props.sgst / 100) 
-     +(this.props.finalamt * this.props.cgst / 100)).toFixed(2) }</h3>
-     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
+     <h3 className="snopi wraptext"> {parseFloat(this.props.apr).toFixed(2)}</h3>
      </td>
    </tr>
    {/* --------------------------------Net amount paid---------------------------------------------- */}
@@ -627,7 +637,7 @@ export class PreviewTaxInvoice extends Component {
      </td>
      <td>
     
-     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     <h3 className="snopi wraptext"> {parseFloat(this.props.apr).toFixed(2)}</h3>
      </td>
    </tr>
    {/* ----------------------------------------Buyer GST number----------------------------------- */}
@@ -636,9 +646,11 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td style={{borderRight:"1px solid transparent"}}>
-     <h3 className="freightch snopi"><b>Buyers GST No.</b></h3>
-     <h3 className="freightch snopi"><b>Company's GST No.</b></h3>
-     
+     <h3 className="freightch snopi"><b>Buyers GST No. {this.state.generatedBy.companyDetails?this.state.generatedBy.companyDetails.gstNo:"NA"}</b></h3>
+     <h3 className="freightch snopi"><b>Company's GST No. 
+       {this.state.artisanUser.companyDetails?
+     this.state.artisanUser.companyDetails.gstNo!=null? this.state.artisanUser.companyDetails.gstNo:"NA":"NA"} </b></h3>
+     {/* {console.log(this.state.artisanUser.companyDetails.gstNo)} */}
         </td>
         <td style={{borderRight:"1px solid transparent"}} >
      <h3 className="snopi wraptext"></h3>
@@ -748,19 +760,24 @@ export class PreviewTaxInvoice extends Component {
      </Col>
  </Row>
  </div>
- <Row noGutters={true}>
+ {this.props.taxInvoiceGenerated==true?
+ ""
+:
+<Row noGutters={true}>
      <Col className="col-xs-12" style={{textAlign:"center",marginTop:"10px"}}>
  <span>
      <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
       onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
-       <button disabled={this.state.sendPI} className="Raiseinvbtn"
-      //  onClick={() => this.sendPI()}
+       <button disabled={this.state.gobackButtonClick} className="Raiseinvbtn"
+       onClick={() => this.sendPI()}
        >
          <img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise Tax Invoice</button>
 
 </span>
      </Col>
  </Row>
+}
+ 
 
    
 

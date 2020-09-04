@@ -62,6 +62,7 @@ export class CompletedList extends Component {
         
     } 
     individualpage(id){
+        localStorage.setItem("completed", 1);
         browserHistory.push("/closedEnquiryDetails?code=" + id)
     }
     render() {

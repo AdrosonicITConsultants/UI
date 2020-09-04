@@ -137,6 +137,7 @@ browserHistory.push("/MyProfile");
     var params = {
       "ds0.email": userData.email,
       "ds0.Token": jwtToken,
+      "ds44.Token": jwtToken,
     };
     var paramsAsString = JSON.stringify(params);
     var encodedParams = encodeURIComponent(paramsAsString);
@@ -154,6 +155,7 @@ browserHistory.push("/MyProfile");
     var params = {
       "ds0.Token": jwtToken,
       "ds2.Token": jwtToken,
+      "ds12.Token": jwtToken,
     };
     var paramsAsString = JSON.stringify(params);
     var encodedParams = encodeURIComponent(paramsAsString);

@@ -17,7 +17,7 @@ export class AllEnquiryList extends Component {
         super(props);
     
         this.state = {
-            ongoingEnquiry:true,
+            ongoingEnquiry: parseInt(localStorage.getItem("completed")) === 1 ? false : true,
             enquiryStagesMTO :[],
             stage: 3,
             openEnquiries: [],
@@ -98,6 +98,7 @@ export class AllEnquiryList extends Component {
                     </>
                     :
                     <>
+                    {localStorage.removeItem("completed")}
                     <CompletedList></CompletedList>
                     </>
                 }

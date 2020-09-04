@@ -90,6 +90,7 @@ export class BuyerTransaction extends Component {
 
     }
     gotoEnquiry(enquiryId){
+        localStorage.setItem("piShow", 1);
         browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
     }
     

@@ -124,9 +124,9 @@ function App() {
           <PrivateRoute exact path="/Preview" component={PreviewInvoice} />
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
-          <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
+          <PrivateRoute exact path="/payadvance" component={BuyerAdvancePayment} />
           {/* <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} /> */}
-          <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
+          <PrivateRoute exact path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 
           
           <PrivateRoute path="/showArtisanProduct" component={artisanProductCatelog} />
@@ -142,15 +142,15 @@ function App() {
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-          <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
-          <PrivateRoute path="/EditProduct" component={EditProduct} />
-          <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
-          <Route  exact path="/Product-Details" component={BuyersProductDetails} />
-          <Route  exact path="/showBArtisanProduct" component={BuyerProductview} />
+          <PrivateRoute exact path="/Artisanself" component={ArtistSelfDesign} />
+          <PrivateRoute exact path="/EditProduct" component={EditProduct} />
+          <PrivateRoute exact path="/Antaran" component={AntaranCoDesign} />
+          <PrivateRoute  exact path="/Product-Details" component={BuyersProductDetails} />
+          <PrivateRoute  exact path="/showBArtisanProduct" component={BuyerProductview} />
 
-          <Route  exact path="/wishlist" component={AddWishlist} />
-          <Route  exact path="/Customprod" component={AddCustomprod} />
-          <Route  exact path="/Modal" component={SuccessPopup} />
+          <PrivateRoute  exact path="/wishlist" component={AddWishlist} />
+          <PrivateRoute  exact path="/Customprod" component={AddCustomprod} />
+          <PrivateRoute  exact path="/Modal" component={SuccessPopup} />
 
          
         </Switch>

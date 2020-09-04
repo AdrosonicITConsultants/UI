@@ -41,7 +41,7 @@ export default class ArtisanTaxInvoice extends Component {
             selectedFileName:"",
             upload:true,
             showValidationPi:false,
-            showDeliveryValidation:false,
+             showDeliveryValidation:false,
             deliveryChallanUploaded:false,
             taxInvoiceGenerated:false,
           

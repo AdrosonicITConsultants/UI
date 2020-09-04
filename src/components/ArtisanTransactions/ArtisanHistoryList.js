@@ -211,6 +211,7 @@ export class ArtisanHistoryList extends Component {
     }
 
     gotoEnquiry(enquiryId){
+        localStorage.setItem("piShow", 1);
         browserHistory.push("/closedEnquiryDetails?code="+enquiryId)
     }
    

@@ -283,7 +283,10 @@ notifyModalShow(id,notifyId){
     }
 
     gotoEnquiry(enquiryId){
-        browserHistory.push("/enquiryDetails?code="+enquiryId)
+        
+        localStorage.setItem("piShow", 1);
+
+        browserHistory.push("/enquiryDetails?code="+enquiryId);
     }
    
     

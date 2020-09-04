@@ -21,6 +21,7 @@ import { PreviewInvoice } from './PreviewInvoice';
 export class SingleEnquiry extends Component {
     constructor() {
         super();
+        this.scrollPI = React.createRef();
         this.backPI = this.backPI.bind(this);
         this.buyersDetailsbtn = this.buyersDetailsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -486,8 +487,18 @@ export class SingleEnquiry extends Component {
       
       }
     }
+
+    viewPI = () => {
+        this.proformaDetailsbtn();
+        this.scrollPI.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
+    }
  
     componentDidMount(){
+        
         let params = queryString.parse(this.props.location.search);
         console.log(params);
 
@@ -646,6 +657,10 @@ export class SingleEnquiry extends Component {
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
                                 console.log(this.state);
+                                if(localStorage.getItem("piShow") === "1") {
+                                    this.viewPI();
+                                    localStorage.removeItem("piShow");
+                                }
                            
                             });
                         });
@@ -1504,7 +1519,7 @@ export class SingleEnquiry extends Component {
                                                          : "Allenqlistbtn")
                                                      }
                                              onClick={this.proformaDetailsbtn}>
-                                           Proforma Invoice
+                                           <div ref={this.scrollPI}>Proforma Invoice</div>
                                             </Col>
                                             {/* <Col sm={3} 
                                               className={

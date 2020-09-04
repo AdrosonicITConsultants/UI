@@ -79,6 +79,8 @@ export class BuyerCompletedList extends Component {
         document.getElementById('id09'+ id).style.display='none';
        }
     individualpage(id){
+        localStorage.setItem("completed", 1);
+        
         browserHistory.push("/closedBuyerEnquiryDetails?code=" + id)
     }
     render() {

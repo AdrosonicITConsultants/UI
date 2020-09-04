@@ -23,7 +23,7 @@ import { BuyerPIPrintTable } from './BuyerPIPrintTable';
 export class BuyerSingleEnquiry extends Component {
     constructor() {
         super();
-
+        this.scrollPI = React.createRef();
         this.buyersDetailsbtn = this.buyersDetailsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
         this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
@@ -461,6 +461,15 @@ export class BuyerSingleEnquiry extends Component {
       
       }
     }
+
+    viewPI = () => {
+        this.proformaDetailsbtn();
+        this.scrollPI.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
+    }
  
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
@@ -651,7 +660,10 @@ export class BuyerSingleEnquiry extends Component {
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
                                 console.log(this.state.getEnquiryMoq);
-                           
+                                if(localStorage.getItem("piShow") === "1") {
+                                    this.viewPI();
+                                    localStorage.removeItem("piShow");
+                                }
                             });
                         });
                     });
@@ -1381,7 +1393,7 @@ MoqSimpleProductSelected(moqId){
                                                          : "Allenqlistbtn")
                                                      }
                                              onClick={this.proformaDetailsbtn}>
-                                           Proforma Invoice
+                                           <div ref={this.scrollPI}>Proforma Invoice</div>
                                             </Col>
                                             {/* <Col sm={3} 
                                               className={

@@ -181,8 +181,12 @@ import crgreeninpopup from "./cr green in popup.svg"
 import Sadpopup from "./Sad popup.svg";
 import cricon from "./cr.svg";
 import crNotify from "./CR_notify.svg";
+import ConfirmDelivered from "./Confirm Delivered.svg"
+import ratereview from "./rate review.svg"
 
 export default {
+  ratereview,
+  ConfirmDelivered,
   crNotify,
   Sadpopup,
   crgreeninpopup,

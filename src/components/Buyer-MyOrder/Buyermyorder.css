@@ -98,3 +98,36 @@
     border: none;
     cursor: pointer;
 }
+input[type="date"]::before {
+	color: #999999;
+	content: attr(placeholder);
+}
+input[type="date"] {
+	color: transparent;
+}
+input[type="date"]:focus,
+input[type="date"]:valid {
+	color: #666666;
+}
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+	content: "" !important;
+}
+
+.raterevbtn{
+    font-size: 15px;
+    background-color: rebeccapurple;
+    border: none;
+    font-weight: 100;
+}
+.raterevbtnimg{
+    height: 19px;
+    margin-right: 10px;
+}
+.raterevbtnskip{
+    border: none;
+    background: transparent;
+    margin-top: 12px;
+    font-size: 16px;
+    color: darkgrey;
+}

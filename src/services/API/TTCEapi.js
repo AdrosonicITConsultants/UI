@@ -983,8 +983,21 @@ class TTCEapi {
 
       });
   }
-  // POST /enquiry/changeRequestStatusUpdate
+  ///enquiry/markOrderAsRecieved?orderId=1589&orderRecieveDate=05-09-2020
+  static markOrderAsRecieved(enquiryId,date) {
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved?orderId="+enquiryId+"&orderRecieveDate="+date;
 
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
   //#region registration
   static sendOtp(emailId) {

@@ -48,7 +48,10 @@ export class Buyerorder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
-            BuyerPreviewInvoice:true
+            markOrderAsRecieved:[],
+            BuyerPreviewInvoice:true,
+            completebtndis:true,
+            deliveredDate:""
         
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
@@ -56,6 +59,15 @@ export class Buyerorder extends Component {
         this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
         this.changeRequestbtn = this.changeRequestbtn.bind(this);
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+    handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+       
+        });
     }
         ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
@@ -71,6 +83,49 @@ export class Buyerorder extends Component {
         ToggleDeleteClose = () => {
         document.getElementById('id01').style.display='none';
         }
+        CompleteOrderShow = (id) => {
+            
+            console.log(id)
+         document.getElementById('CompleteOrder').style.display='block';
+        }
+        CompleteOrderClose = () => {
+         document.getElementById('CompleteOrder').style.display='none';
+        }
+        CompleteOrder2Show = (enquiryId) => {
+            if(this.state.deliveredDate){
+                console.log(this.state.deliveredDate)
+                console.log(enquiryId)
+                this.setState({
+                    completebtndis:true
+                })
+                TTCEapi.markOrderAsRecieved(enquiryId,this.state.deliveredDate).then((response)=>{
+                    if(response.data.valid)
+                    {
+                        document.getElementById('CompleteOrder').style.display='none';
+    
+                        document.getElementById('CompleteOrder2').style.display='block';
+                        console.log(response.data.data);
+                        this.setState({
+                            markOrderAsRecieved: response.data.data
+                        })
+                    }
+                    else{
+                        customToast.error(response.data.errorMessage, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                    }
+                  });
+            }
+       else
+       this.setState({
+        completebtndis:false
+    })
+       
+           }
+        CompleteOrder2Close = () => {
+            document.getElementById('CompleteOrder2').style.display='none';
+           }
         transactionsbtn(){
 
         this.setState((prevState) => {
@@ -687,6 +742,146 @@ export class Buyerorder extends Component {
                         </Col>
                     </Row>
                   
+{item.openEnquiriesResponse.enquiryStageId>9 ?
+<>
+<Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+                          {item.openEnquiriesResponse.enquiryStageId>10?
+                          <button className="completedenqButton"
+                          onClick={this.CompleteOrder2Show}
+                       //    disabled = {this.state.progressid != 10}
+                           style={{border:"1px solid green"}}
+                          >
+                          <img src={logos.completedenq} className="completeenqimg" 
+                          ></img>
+                   Mark this order as delivered
+                   </button>
+                   :
+                   <button className="completedenqButton"
+                                       onClick={this.CompleteOrderShow}
+                                    //    onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
+
+                                    //    disabled = {this.state.progressid != 10}
+                                        style={{border:"1px solid green"}}
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Mark this order as delivered
+                                </button>
+                          }
+                      
+                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
+
+                                </Col>
+                  </Row>
+</>
+:
+""}
+                  
+                  
+                   {/* _________________________________________Modal_1________________________________________________ */}
+                                          
+    <div id="CompleteOrder" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay">Congrats!
+                {this.state.openEnquiries[0].openEnquiriesResponse.enquiryId}</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>You are about to mark this order completed!</b> 
+                
+            </Col>
+        </Row>
+        <Row noGutters={true} className=" ">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
+            <br/>
+            <input className="PIinput" type="date"
+            style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
+              // value={this.state.orderDispatchDate }
+              placeholder="Enter date of receiving"
+             name="deliveredDate"
+              onChange={this.handleChange}
+              required/>
+        </Col>
+        </Row>
+        
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+            <p className="crmnote">Just in case if you find your order to be faulty,
+            <br/>You can always raise a concern within  
+            <br/>10 days from date received.</p>
+            
+                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
+            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
+            <span >
+                <button
+                style={{fontSize:"15px"}}
+               disabled={this.state.completebtndis}
+                onClick={()=>{this.CompleteOrder2Show(this.state.enquiryCode)}}
+                className="buyerMOQAcceptModalOkayButton">Complete and Review 
+                 <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
+                 </button></span>
+        </div>
+            
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+
+   {/* _________________________________________Modal_2________________________________________________ */}
+                                          
+   <div id="CompleteOrder2" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>
+                    You can find this order under completed tab.</b> 
+                
+            </Col>
+        </Row>
+        <Row noGutters={true} className=" ">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
+           
+        </Col>
+        </Row>
+        
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+            <p className="crmnote">Just in case if you find your order to be faulty,
+            <br/>You can always raise a concern within  
+            <br/>10 days from date received.</p>
+            
+                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
+            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
+            <span >
+                <button
+                style={{fontSize:"15px"}}
+                // onClick={this.sendCRDataFunction}
+                className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
+                 </button></span>
+                 <br/>
+                 <button className="raterevbtnskip"
+                 onClick={this.CompleteOrder2Close}>
+                     Skip <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+        </div>
+            
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+      {/* -------------------------------------------Modal ends  ----------------------------           */}
                     </>
                     :
                     <>

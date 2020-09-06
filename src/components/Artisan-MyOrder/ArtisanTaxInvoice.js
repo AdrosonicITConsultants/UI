@@ -231,7 +231,6 @@ componentDidMount(){
     render() {
         return (
             <React.Fragment>
-
                 {this.props.BuyerPreviewInvoice?
                 <>
                     {this.state.taxInvoiceGenerated?

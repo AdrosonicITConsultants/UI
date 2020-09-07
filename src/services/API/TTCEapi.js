@@ -698,7 +698,7 @@ class TTCEapi {
   // /enquiry/previewPI/{enquiryId}?enquiryId=1106
 
   static previewPI(enquiryId) {
-    let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" +enquiryId;
+    let url = ApiUrl + "/enquiry/previewPI/" +enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -2224,10 +2224,10 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
-// /order/getOrder/{enquiryId}?enquiryId=1505
+// /enquiry/previewPI/
 
 static getBuyerPreviewPI(code){
-  let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" + code;
+  let url = ApiUrl + "/enquiry/previewPI/" + code;
 
   var config = {
     headers: {

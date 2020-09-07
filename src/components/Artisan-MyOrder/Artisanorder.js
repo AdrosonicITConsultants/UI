@@ -213,7 +213,7 @@ export class Artisanorder extends Component {
     moqDetailsbtn(){
     this.setState((prevState) => {
         return{
-            selected: "moqDetails",
+        selected: "moqDetails",
         proformainvoice: true,
         transaction: false,
         changeReq: false,
@@ -1580,6 +1580,7 @@ export class Artisanorder extends Component {
                                                                         {console.log("mine")}
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
+                                                                         openPI={this.moqDetailsbtn}
                                                                         />
                                                                         {/* {this.state.getChangeRequestForArtisan.length>0?
                                                                          <ArtisanChangeRequest

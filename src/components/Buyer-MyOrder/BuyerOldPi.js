@@ -830,7 +830,7 @@ export class BuyerOldPi extends Component {
   {this.state.piSend=== 1 || this.props.old ?
 ""
 :
-<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
+<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back </button> 
 }
 
 {/* {this.state.piSend === 1?

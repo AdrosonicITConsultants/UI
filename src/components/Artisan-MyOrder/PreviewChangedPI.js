@@ -532,7 +532,7 @@ export class PreviewChangedPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
       {this.props.previewAndRaisePI?
-          <p className="PaymentTerm">Date: {this.props.expectedDateOfDelivery}</p> 
+          <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
           :
           <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
 
@@ -989,7 +989,7 @@ export class PreviewChangedPI extends Component {
 
 {this.props.onlyView?
   <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+ onClick={() => this.BacktoPreview()}>Go Back </button>
 :
 <>
 {console.log(this.props.getOrderStatus)}
@@ -998,7 +998,7 @@ export class PreviewChangedPI extends Component {
 </>
 :
 <>
-{this.state.getOldPIData.length=== 0  ?
+{this.state.getOldPIData.length=== 0 && this.props.previewAndRaisePI  ?
   <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
  onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
 :

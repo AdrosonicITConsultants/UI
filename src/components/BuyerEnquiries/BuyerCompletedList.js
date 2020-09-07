@@ -264,7 +264,7 @@ export class BuyerCompletedList extends Component {
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                               ?
                               <li >Completed</li>
                             :
@@ -279,7 +279,7 @@ export class BuyerCompletedList extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                                 :
@@ -291,7 +291,7 @@ export class BuyerCompletedList extends Component {
                             {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                               :
@@ -471,7 +471,7 @@ export class BuyerCompletedList extends Component {
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
 
                                 }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                               ?
                               <li >Completed</li>
                             :
@@ -486,7 +486,7 @@ export class BuyerCompletedList extends Component {
                                  {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                                 :
@@ -498,7 +498,7 @@ export class BuyerCompletedList extends Component {
                             {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                               :

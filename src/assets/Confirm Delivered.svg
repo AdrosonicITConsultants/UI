@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="226" height="226" viewBox="0 0 226 226">
+  <g id="Group_2031" data-name="Group 2031" transform="translate(-850 -658)">
+    <path id="Icon_awesome-hand-holding-heart" data-name="Icon awesome-hand-holding-heart" d="M58.626,53.348a3.71,3.71,0,0,0,5.43,0L87.247,29.029a17.652,17.652,0,0,0-1.193-25.3C79.5-1.956,69.721-.934,63.716,5.37L61.331,7.861l-2.364-2.47C52.962-.934,43.187-1.956,36.628,3.73a17.671,17.671,0,0,0-1.193,25.3Zm61.757,16.525a7.049,7.049,0,0,0-9.072,0L91.634,85.611a13.558,13.558,0,0,1-8.518,2.981H57.924a3.407,3.407,0,0,1,0-6.815H74.6a7.09,7.09,0,0,0,7.091-5.665,6.822,6.822,0,0,0-6.729-7.964H40.887a25.064,25.064,0,0,0-15.78,5.6l-9.9,8.028H3.407A3.417,3.417,0,0,0,0,85.185v20.444a3.417,3.417,0,0,0,3.407,3.407H79.389a13.646,13.646,0,0,0,8.518-2.981l32.2-25.767A6.811,6.811,0,0,0,120.383,69.873Z" transform="translate(902 715.43)" fill="#159a2f"/>
+    <g id="Ellipse_755" data-name="Ellipse 755" transform="translate(850 658)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="113" cy="113" r="113" stroke="none"/>
+      <circle cx="113" cy="113" r="112.8" fill="none"/>
+    </g>
+    <g id="Ellipse_756" data-name="Ellipse 756" transform="translate(853 661)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="110" cy="110" r="110" stroke="none"/>
+      <circle cx="110" cy="110" r="109.8" fill="none"/>
+    </g>
+    <g id="Ellipse_757" data-name="Ellipse 757" transform="translate(856 664)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="107" cy="107" r="107" stroke="none"/>
+      <circle cx="107" cy="107" r="106.8" fill="none"/>
+    </g>
+    <g id="Ellipse_758" data-name="Ellipse 758" transform="translate(859 667)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="104" cy="104" r="104" stroke="none"/>
+      <circle cx="104" cy="104" r="103.8" fill="none"/>
+    </g>
+    <g id="Ellipse_759" data-name="Ellipse 759" transform="translate(862 670)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="101" cy="101" r="101" stroke="none"/>
+      <circle cx="101" cy="101" r="100.8" fill="none"/>
+    </g>
+    <g id="Ellipse_760" data-name="Ellipse 760" transform="translate(866 674)" fill="none" stroke="#38e0b3" stroke-width="0.4">
+      <circle cx="97.5" cy="97.5" r="97.5" stroke="none"/>
+      <circle cx="97.5" cy="97.5" r="97.3" fill="none"/>
+    </g>
+  </g>
+</svg>

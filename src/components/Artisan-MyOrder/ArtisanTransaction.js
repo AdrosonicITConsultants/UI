@@ -37,6 +37,9 @@ export class ArtisanTransaction extends Component {
             enquiryCode : this.props.enquiryCode,  
              selectedFile:null,
             selectedFileName:"",
+            orderDispatchDate:"",
+            showDeliveryValidation:false,
+            eta:"",
              upload:true
 
         }
@@ -130,51 +133,62 @@ notifyModalShow(id,notifyId){
     }
 
     uploadReceiptandSend(enquiryId,id){
-        this.setState({
-            rejectButtonClick:true
-          })
-            const formData = new FormData(); 
-        formData.append( 
-          "myFile", 
-          this.state.selectedFile, 
-        //   this.state.selectedFile.name 
-        );
-       
-        console.log(this.state.selectedFile); 
-        TTCEapi.submitDeliveryChallan(
-                enquiryId,
-            this.state.selectedFile,
-            ).then((response)=>{
-            
-            if(response.data.valid){ 
-                document.getElementById('deliveryReceipt'+id).style.display='none';
-                customToast.success("Delivery Challan uploaded", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                this.setState({  
-               rejectButtonClick:false
-              
-            },()=>{
-                // console.log(response)
+        if(this.state.orderDispatchDate && this.state.selectedFile)
+        {
+            this.setState({
+                rejectButtonClick:true
+              })
+                const formData = new FormData(); 
+            formData.append( 
+              "myFile", 
+              this.state.selectedFile, 
+            //   this.state.selectedFile.name 
+            );
            
-            });
+            console.log(this.state.selectedFile); 
+            TTCEapi.submitDeliveryChallan(
+                enquiryId,
+                this.state.selectedFile,
+                this.state.orderDispatchDate,
+                this.state.eta
+                ).then((response)=>{
+                
+                if(response.data.valid){ 
+                    document.getElementById('deliveryReceipt'+id).style.display='none';
+                    customToast.success("Delivery Challan uploaded", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.setState({  
+                   rejectButtonClick:false
+                  
+                },()=>{
+                    // console.log(response)
+               
+                });
+              
+          }
+          else{
+            document.getElementById('deliveryReceipt'+id).style.display='none';
+    
+            this.setState({
+                uploadButtonClick:false
+          });
+          customToast.error(response.data.errorMessage, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           
-      }
-      else{
-        document.getElementById('deliveryReceipt'+id).style.display='none';
-
-        this.setState({
-            uploadButtonClick:false
-      });
-      customToast.error(response.data.errorMessage, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
-      
-      }
-        })
-      
+          }
+            })
+        }
+        
+        else{
+            this.setState({
+                // rejectButtonClick:true,
+                showDeliveryValidation: true,
+              })
+           }
     }
     uploddeliveryreceiptModalShow(id,enquiryId){
     
@@ -378,7 +392,17 @@ notifyModalShow(id,notifyId){
          });
         }
      });
-
+    //  TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
+    //     if(response.data.valid)
+    //     {
+    //     this.setState({
+    //         deliveryChallanUploaded:response.data.data.deliveryChallanUploaded     
+    //     },()=>{
+    //          console.log(this.state.fetchEnquiryAndPaymentDetails);
+             
+    //     });
+    // }
+    // });
      
 
 
@@ -635,9 +659,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 }
     </>
 )}
-
-                                          
-                                                        <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
+ <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -720,7 +742,26 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                               
                                                                           </Row>
                                                                     }
-                                                                       
+                                                                       <Row noGutters={true}>
+                                                       <Col className="col-xs-6">
+                                                       <label>Date of dispatch</label>
+                                                        <br/>
+                                                            <input className="PIinput" type="date"
+                                                        
+                                                            // value={this.state.orderDispatchDate }
+                                                            name="orderDispatchDate"
+                                                            onChange={this.handleChange}/>
+                                                                        </Col>
+                                                   <Col className="col-xs-6">
+                                                   <label>Revised ETA (if required)</label>
+                                                        <br/>
+                                                            <input className="PIinput" type="date"
+                                                        
+                                                            // value={this.state.eta }
+                                                            name="eta"
+                                                            onChange={this.handleChange}/>
+                                                   </Col>
+                                                   </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
@@ -731,6 +772,11 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                             Make sure you send the correct enquiry receipt. <br/>
                                                                           Also make sure the attached document is <b>clear</b> and <b>readable</b>  <br/> 
                                                                           with the <b>LR</b> number and  <b>amount.</b> 
+                                                                          <p style={{textAlign:"center"}}> {this.state.showDeliveryValidation ? (
+                            <span className="bg-danger">Please fill mandatory fields</span>
+                            ) : (
+                            <br />
+                            )}</p>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>

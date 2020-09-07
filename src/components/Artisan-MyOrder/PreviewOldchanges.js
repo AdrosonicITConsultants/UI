@@ -796,13 +796,13 @@ export class PreviewOldchanges extends Component {
 
 
     <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoNewPiPreview()}>Go Back to edit details</button> 
+ onClick={() => this.BacktoNewPiPreview()}>Go Back </button> 
  </>
 :
 <>
 {  console.log('btn2')}
 <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
+ onClick={() => this.BacktoPreview()}>Go Back </button> 
  </>
 }
 

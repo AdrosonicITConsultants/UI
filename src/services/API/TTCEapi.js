@@ -465,7 +465,7 @@ class TTCEapi {
  
 
   static getMoq(enquiryId) {
-    let url = ApiUrl + "/enquiry/getMoq/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/getMoq/"+enquiryId;
 
     return axios
       .get(url)
@@ -479,7 +479,7 @@ class TTCEapi {
   } 
  
   static getPi(enquiryId) {
-    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/getPi/"+enquiryId;
     return axios
       .get(url)
       .then((response) => {
@@ -491,9 +491,9 @@ class TTCEapi {
       });
   } 
  
-
+  // /enquiry/getEnquiry/1696
   static getEnquiryMoq(enquiryId) {
-    let url = ApiUrl + "/enquiry/getEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getEnquiry/"+ enquiryId;
 
     return axios
       .get(url)
@@ -619,11 +619,11 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/deleteMoq/{moqId}?moqId=13
+  // /enquiry/deleteMoq/39
 
 
   static deleteMoq(moqId){
-    let url = ApiUrl + "/enquiry/deleteMoq/{moqId}?moqId="+moqId;
+    let url = ApiUrl + "/enquiry/deleteMoq/"+moqId;
 
   return axios
     .delete(url)
@@ -650,10 +650,10 @@ class TTCEapi {
         return error.response;
       });
   }
-    // /enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId=1057&moqId=39&artisanId=130
+    // /enquiry/MoqSelected/1550/39/10
 
   static MoqSelected(enquiryId,moqId,artisanId) {
-    let url = ApiUrl + "/enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId="+enquiryId+"&moqId="+moqId +"&artisanId="+artisanId;
+    let url = ApiUrl + "/enquiry/MoqSelected/"+enquiryId+"/"+moqId +"/"+artisanId;
     console.log(url);
     return axios
       .post(url)
@@ -681,9 +681,9 @@ class TTCEapi {
       });
   }
 
-  // /enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId=1080&moqId=39
+  // /enquiry/MoqSimpleProductSelected/1550/39
   static MoqSimpleProductSelected(enquiryId,moqId) {
-    let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId="+enquiryId+"&moqId="+moqId;
+    let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/"+enquiryId+"/"+moqId;
     console.log(url);
     return axios
       .post(url)
@@ -726,7 +726,7 @@ class TTCEapi {
   }
 
   static getMoqs(enquiryId) {
-    let url = ApiUrl + "/enquiry/getMoqs/{enquiryId}?enquiryId=" +enquiryId;
+    let url = ApiUrl + "/enquiry/getMoqs/" +enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -785,7 +785,7 @@ class TTCEapi {
   }
   // /transaction/getTransactions/{enquiryId}?enquiryId=1415
   static getTransactions(enquiryId) {
-    let url = ApiUrl + "/transaction/getTransactions/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/transaction/getTransactions/"+enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -868,6 +868,7 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/generateEnquiry/41/true/Website
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
     console.log(url);
@@ -881,9 +882,9 @@ class TTCEapi {
         return error.response;
       });
   }
-  // enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=41&isCustom=true
+  // /enquiry/ifEnquiryExists/3/true
   static ifEnquiryExists(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=" +productId +"&isCustom="+isCustom;
+    let url = ApiUrl + "/enquiry/ifEnquiryExists/" +productId +"/"+isCustom;
     console.log(url);
     return axios
       .get(url)
@@ -983,8 +984,21 @@ class TTCEapi {
 
       });
   }
-  // POST /enquiry/changeRequestStatusUpdate
+  ///enquiry/markOrderAsRecieved?orderId=1589&orderRecieveDate=05-09-2020
+  static markOrderAsRecieved(enquiryId,date) {
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved?orderId="+enquiryId+"&orderRecieveDate="+date;
 
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
   //#region registration
   static sendOtp(emailId) {
@@ -1122,17 +1136,20 @@ class TTCEapi {
       });
   }
 
+  // /enquiry/submitDeliveryChallan?enquiryId=1661&orderDispatchDate=%2000%3A00%3A00&ETA=2020-09-11 400
+  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01&ETA=2012-12-12
 
-
-
+  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01
   static submitDeliveryChallan(
     enquiryId,
     formData,
+    orderDispatchDate,
+    ETA,
   ) {
     debugger;
     var bodyFormData = new FormData();
 
-    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId+"&orderDispatchDate="+orderDispatchDate+"%2000%3A00%3A00&ETA="+ETA;
 
     // console.log(JSON.stringify(file));
     console.log(formData);
@@ -1515,7 +1532,7 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/savePi/{enquiryId}?enquiryId=1435
+  // /enquiry/saveMoq/1550
   
 
   static saveMoq(
@@ -1526,7 +1543,7 @@ class TTCEapi {
     ppu,
    
     ) {
-    let url = ApiUrl + "/enquiry/saveMoq/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/saveMoq/"+ enquiryId;
    var data =
     {
       additionalInfo: additionalInfo,
@@ -1601,7 +1618,7 @@ class TTCEapi {
    sgst,
    
     ) {
-    let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/savePi/"+ enquiryId;
    var data =
     {
       cgst: 0,
@@ -1640,7 +1657,7 @@ static sendPI(
   sgst
  
   ) {
-  let url = ApiUrl + "/enquiry/sendPi/{enquiryId}?enquiryId="+ enquiryId;
+  let url = ApiUrl + "/enquiry/sendPi/"+ enquiryId;
  var data =
   {
  cgst:0,
@@ -1667,8 +1684,47 @@ static sendPI(
       return error.response;
     });
 } 
-
-
+// /enquiry/generateTaxInvoice
+static sendTaxInvoice(
+  apr,
+  cgst,
+  deliverycharge,
+  enquiryId,
+  finalamt,
+  rpu,
+  quantity,
+  sgst,
+ 
+  ) {
+  let url = ApiUrl + "/enquiry/generateTaxInvoice";
+ var data =
+  {
+  advancePaidAmt:apr,
+  cgst:cgst,
+  deliveryCharges:deliverycharge,
+  enquiryId:enquiryId,
+  finalTotalAmt:finalamt,
+  ppu:rpu,
+  quantity:quantity,
+  sgst:sgst
+ 
+  }
+ console.log(data)
+ var config = {
+  headers: {
+    "Content-type": "application/json",
+  },
+};
+  return axios
+    .post(url,data,config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
 
   static sendMoq(
     enquiryId,
@@ -1678,7 +1734,7 @@ static sendPI(
     ppu,
    
     ) {
-    let url = ApiUrl + "/enquiry/sendMoq/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/sendMoq/"+ enquiryId;
    var data =
     {
       additionalInfo: additionalInfo,
@@ -2015,7 +2071,7 @@ static sendPI(
       });
   }
 
-
+ 
   static getClosedEnquiries() {
     let url = ApiUrl + "/enquiry/getClosedEnquiries";
 
@@ -2062,14 +2118,15 @@ static sendPI(
         return error.response;
       });
   }
-
+  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}
+  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}?innerStageId=2
   static progressUpdate(stageid, id,innerid) {
     let url = "";
     if(innerid == 0){
-      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id  ;
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/" + stageid + "/" + id +"/{innerStageId}"  ;
 
     }else{
-      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id +  "&innerStageId=" + innerid  ;
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/" + stageid + "/" + id +  "/{innerStageId}?innerStageId=" + innerid  ;
 
     }
     var data = {
@@ -2149,7 +2206,7 @@ static sendPI(
 
 
 static markEnquiryClosed(id){
-  let url = ApiUrl + "/enquiry/markEnquiryCompleted/{enquiryId}?enquiryId=" + id;
+  let url = ApiUrl + "/enquiry/markEnquiryCompleted/" + id;
 
   var config = {
     headers: {

@@ -21,6 +21,7 @@ import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
+import ArtisanQC from './ArtisanQC';
 export class Artisanorder extends Component {
     constructor() {
         super();
@@ -1614,10 +1615,9 @@ export class Artisanorder extends Component {
                 
                                     {this.state.qualityCheck ?  
                                     <>
-                                    <Col sm={1}></Col>
-                                    <Col sm={8}>
-                                      
-                                    </Col>
+                                    <Col sm={10}>
+                                   <ArtisanQC enquiryId={this.state.enquiryCode}/>
+                                   </Col>
                                     </>:null}
 
                                     {this.state.taxInvoice ? 

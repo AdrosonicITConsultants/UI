@@ -156,6 +156,8 @@ browserHistory.push("/MyProfile");
       "ds0.Token": jwtToken,
       "ds2.Token": jwtToken,
       "ds12.Token": jwtToken,
+      "ds16.Token": jwtToken,
+      "ds18.Token": jwtToken,
     };
     var paramsAsString = JSON.stringify(params);
     var encodedParams = encodeURIComponent(paramsAsString);

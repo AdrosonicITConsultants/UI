@@ -2168,7 +2168,7 @@ static sendTaxInvoice(
   }
 
   static updateNotificationSeen(id){
-   let url = ApiUrl + "/notification/markAsRead/{notificationId}?notificationId=" + id;
+   let url = ApiUrl + "/notification/markAsRead/" + id;
    console.log(url);
    var config = {
      headers: {
@@ -2323,7 +2323,66 @@ static getChangeRequestForArtisan(enquiryId) {
     });
 }
 
+static getArtisanQcResponse(enquiryId) {
+  let url = ApiUrl + "/qc/getArtisanQcResponse?enquiryId=" + enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 
+static getQCStages() {
+  let url = ApiUrl + "/qc/getStages";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getAllQCQuestions() {
+  let url = ApiUrl + "/qc/getAllQuestions";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static sendOrSaveQcForm(data){
+  let url = ApiUrl + "/qc/sendOrSaveQcForm";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 
   //#endregion
 }

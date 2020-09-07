@@ -1537,6 +1537,7 @@ export class Artisanorder extends Component {
                                                                         {console.log("mine7")}
                                                                         <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
+                                                                         openPI={this.moqDetailsbtn}
                                                                         />
                                                                         </>
                                                                         }

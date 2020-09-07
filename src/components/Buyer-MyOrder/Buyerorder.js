@@ -617,7 +617,7 @@ export class Buyerorder extends Component {
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat "></input>
 
                         </Col>
 
@@ -1016,7 +1016,7 @@ export class Buyerorder extends Component {
                     </Row>
                     {/* for CR */}
 
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -1146,8 +1146,10 @@ export class Buyerorder extends Component {
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                            
 
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                    
                         </Col>
 
                         </Row>

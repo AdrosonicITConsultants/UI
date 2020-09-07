@@ -238,47 +238,7 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId == 2
-                    ?
-                    <>
-                    </>
-                    :
-                             
-                    <Row noGutters={true}>
-                    <hr></hr>
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                        
-                        </Col>
-                        }
-                        
-                        
-                        <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    
-                    }<hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                        </Col>
-
-                        </Row>
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -494,14 +454,14 @@ export class BuyerCompletedOrder extends Component {
                                             {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>
-                                    <div noGutters={true} >
+                                    {/* <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
-                                    </div>
+                                    </div> */}
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
@@ -531,48 +491,7 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId == 2
-                    ?
-                    <>
-                    </>
-                    :
-                             
-                    <Row noGutters={true}>
-                    <hr></hr>
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                        
-                        </Col>
-                        }
-                        
-                        
-                        <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    
-                    }<hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                        </Col>
-
-                        </Row>
-                   
+                                    
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">

@@ -566,7 +566,7 @@ Modal3Close = () => {
                     </Row>
                     <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
-                    <button className="makechangenowbtn mbcr"  >Make changes now</button>
+                    <button className="makechangenowbtn mbcr"  onClick={this.props.openPI()}>Make changes now</button>
             
                     </Col>
                 </Row>

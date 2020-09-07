@@ -387,6 +387,24 @@ export class BuyerOngoingOrder extends Component {
                      </> 
                     }
                     {/* change here (order dispatch) */}
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     <hr></hr>
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                         <Col className="col-xs-4">
+                         <img src={logos.truck} className="truckimg"/>  Check <a href="#">delivery receipt</a>
+                         </Col>
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>

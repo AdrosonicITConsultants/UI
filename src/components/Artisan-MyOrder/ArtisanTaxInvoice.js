@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
 import { PreviewTaxInvoice } from './PreviewTaxInvoice';
+import { PrintTaxInvoice } from './PrintTaxInvoice';
 
 
 export default class ArtisanTaxInvoice extends Component {
@@ -235,7 +236,26 @@ componentDidMount(){
                 {this.props.BuyerPreviewInvoice?
                 <>
                     {this.state.taxInvoiceGenerated?
-                    <PreviewTaxInvoice
+                    // <PreviewTaxInvoice
+                    // bp={this.bp}
+                    // enquiryId ={this.props.enquiryId}
+                    // enquiryCode={this.props.enquiryCode}
+                    // quantity={this.state.quantity}
+                    // rpu={this.state.rpu}
+                    // pta={this.state.pta}
+                    // apr={this.state.apr}
+                    // deliverycharge={this.state.deliverycharge}
+                    // sgst={this.state.sgst}
+                    // cgst={this.state.cgst}
+                    // finalamt={this.state.finalamt}
+                    // amttobepaid={this.state.amttobepaid}
+                    // invoiceId={this.state.invoiceId}
+                    // percentage={this.state.percentage}
+                    // selectedFile={this.state.selectedFile}
+                    // selectedFileName={this.state.selectedFileName}
+                    // taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                    // />
+                    <PrintTaxInvoice
                     bp={this.bp}
                     enquiryId ={this.props.enquiryId}
                     enquiryCode={this.props.enquiryCode}
@@ -253,7 +273,7 @@ componentDidMount(){
                     selectedFile={this.state.selectedFile}
                     selectedFileName={this.state.selectedFileName}
                     taxInvoiceGenerated={this.state.taxInvoiceGenerated}
-                    />
+                   />
                 :
                 <Row noGutters={true}>
                 <Col className="col-xs-12 bold font20 text-center">
@@ -273,7 +293,26 @@ componentDidMount(){
                 <>
                 {this.state.taxInvoiceGenerated?
                 <>
-                <PreviewTaxInvoice
+                <PrintTaxInvoice
+                 bp={this.bp}
+                 enquiryId ={this.props.enquiryId}
+                 enquiryCode={this.props.enquiryCode}
+                 quantity={this.state.quantity}
+                 rpu={this.state.rpu}
+                 pta={this.state.pta}
+                 apr={this.state.apr}
+                 deliverycharge={this.state.deliverycharge}
+                 sgst={this.state.sgst}
+                 cgst={this.state.cgst}
+                 finalamt={this.state.finalamt}
+                 amttobepaid={this.state.amttobepaid}
+                 invoiceId={this.state.invoiceId}
+                 percentage={this.state.percentage}
+                 selectedFile={this.state.selectedFile}
+                 selectedFileName={this.state.selectedFileName}
+                 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                />
+                {/* <PreviewTaxInvoice
                 bp={this.bp}
                 enquiryId ={this.props.enquiryId}
                 enquiryCode={this.props.enquiryCode}
@@ -291,7 +330,7 @@ componentDidMount(){
                 selectedFile={this.state.selectedFile}
                 selectedFileName={this.state.selectedFileName}
                 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
-                />
+                /> */}
                 </>
             :
            
@@ -299,7 +338,25 @@ componentDidMount(){
 
 {this.state.previewTaxInvoice?
 <>
-
+{/* <PrintTaxInvoice
+bp={this.bp}
+enquiryId ={this.props.enquiryId}
+enquiryCode={this.props.enquiryCode}
+quantity={this.state.quantity}
+rpu={this.state.rpu}
+pta={this.state.pta}
+apr={this.state.apr}
+deliverycharge={this.state.deliverycharge}
+sgst={this.state.sgst}
+cgst={this.state.cgst}
+finalamt={this.state.finalamt}
+amttobepaid={this.state.amttobepaid}
+invoiceId={this.state.invoiceId}
+percentage={this.state.percentage}
+selectedFile={this.state.selectedFile}
+selectedFileName={this.state.selectedFileName}
+taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+/> */}
 <PreviewTaxInvoice
 bp={this.bp}
 enquiryId ={this.props.enquiryId}

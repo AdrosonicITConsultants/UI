@@ -188,8 +188,8 @@ componentDidMount(){
                 rpu:response.data.data.pi.ppu,
                 pta:response.data.data.pi.totalAmount,
                 apr:response.data.data.payment?response.data.data.payment.paidAmount:0,
-                sgst:response.data.data.pi.sgst,
-                cgst:response.data.data.pi.cgst,
+                sgst:response.data.data.invoice?response.data.data.invoice.sgst:0,
+                cgst:response.data.data.invoice?response.data.data.invoice.cgst:0,
                 finalamt:response.data.data.pi.totalAmount,
                 amttobepaid:response.data.data.pi.totalAmount-(response.data.data.payment?response.data.data.payment.paidAmount:0),
                 invoiceId:response.data.data.payment?response.data.data.payment.invoiceId:0,
@@ -198,6 +198,7 @@ componentDidMount(){
                 taxInvoiceGenerated:response.data.data.taxInvoiceGenerated,
                 orderDispatchDate:"",
                 eta:"",
+                deliverycharge:response.data.data.invoice?response.data.data.invoice.deliveryCharges:0,
                 dataload:true
             })
         }
@@ -266,18 +267,6 @@ componentDidMount(){
                 :
                 <>
                 
-                {this.state.getOldPIData.length==0?
-                <>
-                {console.log("Please raise the Final PI")}
-                <Row noGutters={true}>
-                <Col className="col-xs-12 bold font20 text-center">
-                <br></br>
-                 Final PI is not raised yet.
-                  <br></br>
-                  </Col>
-                   </Row>
-                </>
-                :
                 <>
                 {console.log("old data present")}
                 {this.state.dataload?
@@ -604,7 +593,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                 </>
                 }
                 </>
-                }
+               
                 </>
                 }
 

@@ -294,12 +294,19 @@ export class BuyerRecentList extends Component {
 {
     item.transactionOngoing.isActionCompleted == 0 ?
     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
-    data.id == 1 || data.id == 2 ?
+     data.id == 2 ?
     <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
         <img src={logos.uploadagain} className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload again</p></span>
  
     :
+    data.id == 1 ?
+    <span 
+    // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+    >
+        <img src={logos.uploadagain} className="uplodagainicon"/>
+     <p style={{marginTop:"5px"}}>upload receipt</p></span>
+     :
     data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
    
      : 

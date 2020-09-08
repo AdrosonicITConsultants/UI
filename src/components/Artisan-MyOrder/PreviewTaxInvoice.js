@@ -469,18 +469,19 @@ export class PreviewTaxInvoice extends Component {
 <>
 
 <td className="tdmarginleft">
-  
-   <span>  <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 18px 153px 16px"}}>
+
+
+    <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>
        {this.state.history ? 
        <>
-       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">CR</b>
+     <span>   {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">CR</b> </span>
        </>
        :
        <>
-       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">CR</b>
+    <span>  {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">CR</b></span> 
        </>
          }  
-       </h3>    </span>
+       </h3>   
 
           
      
@@ -493,7 +494,7 @@ export class PreviewTaxInvoice extends Component {
         <>
         {console.log("Product  custom")}
         <td className="tdmarginleft">
-        <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 18px 153px 16px"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
+        <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
        
         </td>
         </>
@@ -609,12 +610,16 @@ export class PreviewTaxInvoice extends Component {
     <h3 className="snopi wraptext"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext rpu"></h3>
+     <h3 className="snopi wraptext rpu"> ___</h3>
      </td>
      <td>
      <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
      +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
-     <h3 className="snopi wraptext"> {parseFloat(this.props.apr).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">
+     {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }
+        {/* {parseFloat(this.props.apr).toFixed(2)} */}
+        </h3>
      </td>
    </tr>
    {/* --------------------------------Net amount paid---------------------------------------------- */}
@@ -637,7 +642,8 @@ export class PreviewTaxInvoice extends Component {
      </td>
      <td>
     
-     <h3 className="snopi wraptext"> {parseFloat(this.props.apr).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">  {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }</h3>
      </td>
    </tr>
    {/* ----------------------------------------Buyer GST number----------------------------------- */}

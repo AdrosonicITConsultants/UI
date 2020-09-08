@@ -38,6 +38,13 @@
     font-size: 11px;
     text-align: end;
 }
+.needhelpbth{
+    background-color: black;
+    border: none;
+    padding: 6px;
+    margin-right: 6px;
+
+}
 .mbcr{
     margin-bottom: 10px;
 }

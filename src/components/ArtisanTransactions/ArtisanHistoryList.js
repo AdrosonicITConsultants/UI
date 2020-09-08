@@ -465,12 +465,18 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
         <p style={{marginTop:"5px"}}>Mark Received</p></span>:
-        data.id == 1 || data.id == 2? 
+         data.id == 2? 
        <>     
      <p>upload again</p>
 <img src={logos.uploadagain} className="acceptrejecticon" />
 </>
-     :""
+     :
+     data.id == 1 ?
+     <span 
+     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+     >
+         <img src={logos.uploadagain} className="uplodagainicon"/>
+      <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
      : 
     ""
     

@@ -969,6 +969,21 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/getOrderProgress/1705
+  static getOrderProgress(enquiryId) {
+    let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
   static buyergetAllProducts() {
     let url = ApiUrl + "/buyerCustomProduct/getAllProducts";
@@ -984,9 +999,9 @@ class TTCEapi {
 
       });
   }
-  ///enquiry/markOrderAsRecieved?orderId=1589&orderRecieveDate=05-09-2020
+  ///enquiry/markOrderAsRecieved/1705/05-09-2020
   static markOrderAsRecieved(enquiryId,date) {
-    let url = ApiUrl + "/enquiry/markOrderAsRecieved?orderId="+enquiryId+"&orderRecieveDate="+date;
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date;
 
     return axios
       .post(url)

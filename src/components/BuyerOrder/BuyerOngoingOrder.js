@@ -8,6 +8,9 @@ import "./Order.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 import Diffdays from './Diffdays';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export class BuyerOngoingOrder extends Component {
     
@@ -17,11 +20,24 @@ export class BuyerOngoingOrder extends Component {
             enquiryStagesMTO :[],
             stage: 3,
             openEnquiries: [],
+            getOrderProgress:[],
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
             dataload:false,
+            completebtndis:true,
+            deliveredDate:"",
+            markOrderAsRecieved:[]
         }
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+    handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+       
+        });
     }
     ToggleDelete = () => {
     document.getElementById('id01').style.display='block';
@@ -38,17 +54,59 @@ export class BuyerOngoingOrder extends Component {
     CompleteOrderShow = (id) => {
         console.log(id)
         document.getElementById('CompleteOrder'+ id).style.display='block';
+       
        }
        CompleteOrderClose = (id) => {
         document.getElementById('CompleteOrder'+ id).style.display='none';
        }
        CompleteOrder2Show = (id) => {
-           document.getElementById('CompleteOrder'+ id).style.display='none';
+        if(this.state.deliveredDate){
+            console.log(this.state.deliveredDate)
+            console.log(id)
+            this.setState({
+                completebtndis:true
+            })
+            TTCEapi.markOrderAsRecieved(id,this.state.deliveredDate).then((response)=>{
+                if(response.data.valid)
+                {
+                    document.getElementById('CompleteOrder'+ id).style.display='none';
 
            document.getElementById('CompleteOrder2'+ id).style.display='block';
+           TTCEapi.markEnquiryClosed(id).then((response)=>{
+            if(response.data.valid  )
+            {
+                customToast.success("Order closed!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                //   browserHistory.push("/buyerOrders"); 
+
+            }
+        });        
+           // console.log(response.data.data);
+                    this.setState({
+                        markOrderAsRecieved: response.data.data
+                    })
+                }
+                else{
+                    customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                }
+              });
+        }
+   else
+   this.setState({
+    completebtndis:false
+})
+        //    document.getElementById('CompleteOrder'+ id).style.display='none';
+
+        //    document.getElementById('CompleteOrder2'+ id).style.display='block';
           }
        CompleteOrder2Close = (id) => {
            document.getElementById('CompleteOrder2'+ id).style.display='none';
+           this.componentDidMount()
           }
     componentDidMount(){
 
@@ -98,7 +156,7 @@ export class BuyerOngoingOrder extends Component {
         }
     })
 
-
+  
 
     }
     individualpage(id){
@@ -108,14 +166,14 @@ export class BuyerOngoingOrder extends Component {
     daysleft(name)
     {
         var someDate = new Date(name);
-                                console.log(someDate);
+                                // console.log(someDate);
                                 var numberOfDaysToAdd = 10;
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
+                                // console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
+                                // console.log(diffDays); 
                                 return(diffDays);
     }
 
@@ -269,7 +327,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
+                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -406,14 +464,40 @@ export class BuyerOngoingOrder extends Component {
                     </>
     }
                     <hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                    { item.openEnquiriesResponse.enquiryStageId >= 10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
 
                         </Col>
 
                         </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -498,7 +582,7 @@ export class BuyerOngoingOrder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {/* {console.log(item.openEnquiriesResponse.productStatusId)} */}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -666,7 +750,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -783,6 +867,24 @@ export class BuyerOngoingOrder extends Component {
                      </>  
                     }
                     {/* order dispatch change here */}
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     <hr></hr>
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                         <Col className="col-xs-4">
+                         <img src={logos.truck} className="truckimg"/>  Check <a href="#">delivery receipt</a>
+                         </Col>
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -959,7 +1061,7 @@ export class BuyerOngoingOrder extends Component {
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
               // value={this.state.orderDispatchDate }
               placeholder="Enter date of receiving"
-             name="orderDispatchDate"
+              name="deliveredDate"
               onChange={this.handleChange}
               required/>
         </Col>
@@ -976,7 +1078,7 @@ export class BuyerOngoingOrder extends Component {
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                // onClick={this.CompleteOrder2Show}
+                disabled={this.state.completebtndis}
                 onClick={()=>{this.CompleteOrder2Show(item.openEnquiriesResponse.enquiryId)}}
                 className="buyerMOQAcceptModalOkayButton">Complete and Review 
                  <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>

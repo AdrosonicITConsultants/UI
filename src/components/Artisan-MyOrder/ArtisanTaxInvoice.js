@@ -51,6 +51,8 @@ export default class ArtisanTaxInvoice extends Component {
         this.bp = this.bp.bind(this);
         this.onFileChange= this.onFileChange.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
+        this.loadDataDilivery=this.loadDataDilivery.bind(this)
+
 
     }
     onFileChange(e){
@@ -136,7 +138,7 @@ export default class ArtisanTaxInvoice extends Component {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                      this.componentDidMount();
+                      this.loadDataDilivery();
                      
                         }
           else{
@@ -171,6 +173,31 @@ export default class ArtisanTaxInvoice extends Component {
         document.getElementById('deliveryReceipt').style.display='block';
         
     }
+    loadDataDilivery(){
+        TTCEapi.fetchEnquiryAndPaymentDetails(this.props.enquiryId).then((response)=>{
+            if(response.data.valid){
+                this.setState({
+                   
+                    
+                    deliveryChallanUploaded:response.data.data.deliveryChallanUploaded,
+                   
+                })
+            }
+            else {
+                this.setState({
+                   
+                    deliveryChallanUploaded:false,
+                  
+              },()=>{
+                 
+                 console.log(this.state.fetchEnquiryAndPaymentDetails);
+               
+                });
+            }
+          
+        })
+    }
+
 componentDidMount(){
     TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
         if(response.data.valid)

@@ -146,7 +146,8 @@ export class BuyerTransaction extends Component {
         }
         else{
           this.setState({
-              showValidationFinal:true
+              showValidationFinal:true,
+              rejectButtonClick:false
           })
       
         }
@@ -185,13 +186,7 @@ export class BuyerTransaction extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     }
-    uplodFinalreceiptModalClose(id){
-        this.setState({
-            selectedFileName:""
-        })
-        document.getElementById('FinalPayment'+id).style.display='none';
-
-    }
+  
     openReceipt(enquiryId){
         console.log("click");
         setTimeout(function() { //Start the timer

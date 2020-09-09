@@ -154,7 +154,8 @@ export class BuyerRecentList extends Component {
           }
           else{
             this.setState({
-                showValidationFinal:true
+                showValidationFinal:true,
+                rejectButtonClick:false
             })
         
           }

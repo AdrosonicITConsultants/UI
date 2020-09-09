@@ -186,8 +186,10 @@ import ratereview from "./rate review.svg"
 import truck from "./Icon awesome-truck-moving.svg";
 import greenTick from "./green tick sanchita.svg";
 import dropDownQC from "./drop down svg.svg";
+import notifyQC from "./sanchita Qc.svg";
 
 export default {
+  notifyQC,
   dropDownQC,
   greenTick,
   truck,

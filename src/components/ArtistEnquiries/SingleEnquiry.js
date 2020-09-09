@@ -330,7 +330,23 @@ export class SingleEnquiry extends Component {
 
     saveMoqDetails(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
+        // var moqlen = /[1-9]{1,2}\./
+        var moqlen= /^\d{1,2}$/
+        var ppulen=/^\d{1,6}$/
+        if(!moqlen.test(this.state.moq)  ){
+            this.setState({
+                showValidationMoq: true,
+              message : "MOQ should not be empty & more than 2 digits  "
+          });
+        }
+        else if(!ppulen.test(this.state.ppu)){
+            this.setState({
+                showValidationMoq: true,
+              message : "PPU should not be empty & more than 6 digits "
+          });
+        }
+     
+       else if(regex.test(this.state.moq) && regex.test(this.state.deliveryDesc) && regex.test(this.state.ppu)){
             this.setState({
                 saveButtonClick:true
               })
@@ -362,8 +378,8 @@ export class SingleEnquiry extends Component {
       else{
         this.setState({
             showValidationMoq: true,
-            saveButtonClick:false
-        //   message : "Invalid PAN Number"
+            saveButtonClick:false,
+          message : "Please fill mandatory fields"
       });
       
       }
@@ -436,7 +452,21 @@ export class SingleEnquiry extends Component {
     sendMoqDetails(){
       
         var regex = /[1-9]|\./
-        if(regex.test(this.state.moq) && this.state.deliveryDesc && regex.test(this.state.ppu)){
+        var moqlen= /^\d{1,2}$/
+        var ppulen=/^\d{1,6}$/
+        if(!moqlen.test(this.state.moq)){
+            this.setState({
+                showValidationMoq: true,
+              message : "MOQ should not be empty & more than 2 digits "
+          });
+        }
+        else if(!ppulen.test(this.state.ppu)){
+            this.setState({
+                showValidationMoq: true,
+              message : "PPU should not be empty & more than 6 digits "
+          });
+        }
+        else if(regex.test(this.state.moq) && regex.test(this.state.deliveryDesc) && regex.test(this.state.ppu)){
             this.setState({
                 sendButtonClick: true,
                 saveButtonClick:true
@@ -482,7 +512,7 @@ export class SingleEnquiry extends Component {
     else{
         this.setState({
             showValidationMoq: true,
-        //   message : "Invalid PAN Number"
+            message : "Please fill mandatory fields"
       });
       
       }
@@ -1666,11 +1696,12 @@ export class SingleEnquiry extends Component {
                                                                        <input 
                                                                        id="moq"
                                                                         className="width200 alignbox" 
-                                                                       type="number"
+                                                                         type="number"
                                                                        disabled={this.state.isMoqdetail} 
                                                                         value={this.state.moq }
                                                                         name="moq"
-                                                                        onChange={this.handleChange}/> 
+                                                                        onChange={this.handleChange}
+                                                                        /> 
                                                                     </Col>
                                                                 </Row>
 
@@ -1744,7 +1775,8 @@ export class SingleEnquiry extends Component {
                                                              </Row>
                                                              <p className="text-center">
                                                              {this.state.showValidationMoq ? (
-                                            <span className="bg-danger">Please fill mandatory fields</span>
+                                            <span className="bg-danger">{this.state.message}</span>
+                                            
                                         ) : (
                                             <br />
                                         )}
@@ -1914,7 +1946,7 @@ export class SingleEnquiry extends Component {
                                                             </Row>
                                                             <p className="text-center">
                                                     {this.state.showValidationPi ? (
-                                                <span className="bg-danger">All fields are Mandatory</span>
+                                                <span className="bg-danger">{this.state.message}</span>
                                                 ) : (
                                                 <br />
                                                 )}

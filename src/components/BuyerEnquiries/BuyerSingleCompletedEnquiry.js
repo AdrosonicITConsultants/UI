@@ -377,7 +377,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
             // console.log(this.state);
             this.componentDidMount();
             });
-            customToast.success("MOQ Details send successfully", {
+            customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });

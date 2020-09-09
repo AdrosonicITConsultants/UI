@@ -28,6 +28,7 @@ export class ArtisanRecentList extends Component {
             getOngoingTransaction:[],
             getTransactions:[],
             getAdvancedPaymentReceipt:[],
+            validateFinalPaymentFromArtisan:[],
             dataload : false,
             acceptButtonClick:false,
             notifyButtonClick:false,
@@ -41,13 +42,23 @@ export class ArtisanRecentList extends Component {
             selectedFile:null,
             selectedFileName:"",
             notifyId:"",
-            upload:true
+            upload:true,
+            showDeliveryValidation:false
 
         }
         this.onFileChange= this.onFileChange.bind(this);
         this.paymentTypeset = this.paymentTypeset.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
+        this.handleChange=this.handleChange.bind(this)
+
     }  
+    handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
+       
+        });
+    }
     onFileChange(e){
         this.setState({
             selectedFile:e.target.files[0]
@@ -115,6 +126,7 @@ export class ArtisanRecentList extends Component {
     }
 
     uploadReceiptandSend(enquiryId,id){
+      
         if(this.state.orderDispatchDate && this.state.selectedFile)
         {
             this.setState({
@@ -336,7 +348,40 @@ export class ArtisanRecentList extends Component {
         }
         });
     }
-    
+    acceptorRejectFinal(id,enquiryId,status){
+        console.log(enquiryId);
+        console.log(status);
+        this.setState({ acceptButtonClick:true,
+            rejectButtonClick:true})
+        TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Transaction Status Updated!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
+                 dataload : true,
+                 validateFinalPaymentFromArtisan : response.data.data},()=>{
+                console.log(this.state.validateFinalPaymentFromArtisan);
+            
+            });
+            document.getElementById('acceptMOQModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ acceptButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
 
 
 
@@ -527,6 +572,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
         <>
      
     <p>Accept or Reject</p>
+    
 <span><img src={logos.accept} className="acceptrejecticon" 
        
             onClick={()=> this.acceptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
@@ -560,12 +606,18 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
         <p style={{marginTop:"5px"}}>Mark Received</p></span>:
-        data.id == 1 || data.id == 2? 
+         data.id == 2? 
        <>     
      <p>upload again</p>
 <img src={logos.uploadagain} className="acceptrejecticon" />
 </>
-     :""
+     :
+     data.id == 1 ?
+     <span 
+     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+     >
+         <img src={logos.uploadagain} className="uplodagainicon"/>
+      <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
      : 
     ""
     
@@ -631,7 +683,33 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                        {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
+                                                                        <>
+                                                                        {/* "Final apyment accept" */}
+                                                                         <span >
+                                                                        <button
+                                                                        disabled={this.state.acceptButtonClick}
+                                                                        
+                                                                        onClick={() => this.acceptorRejectFinal(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
+
+                                                                    
                                                                     <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                       
+                                                                        onClick={() => this.acceptorRejectFinal(
+                                                                            item.transactionOngoing.id,
+                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
+                                                                    </span>
+                                                                        
+                                                                        </>
+                                                                        
+                                                                        :
+                                                                        <>
+                                                                         <span >
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
@@ -649,6 +727,9 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             
                                                                     className="buyerMOQAcceptModalOkayButton">Accept</button>
                                                                     </span>
+                                                                        </>
+                                                                        }
+                                                                   
                                                                  
                                                                 </div>
                                                                 </div>

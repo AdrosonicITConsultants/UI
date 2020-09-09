@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logos from "../../assets";
 import ReactToPrint from "react-to-print";
-import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 
-export class BuyerPIPrintTable extends Component {
+import { BuyerPreviewNewPI } from './BuyerPreviewNewPI';
+
+export class DownloadBuyerPreviewPI extends Component {
     render() {
         return(
         <React.Fragment>
@@ -16,8 +17,12 @@ export class BuyerPIPrintTable extends Component {
                 }
                 content = {() => this.componentRef}
             />
-            <BuyerPreviewInvoice  enquiryCode={this.props.enquiryCode} 
-            enquiryId={this.props.enquiryId} ref={el => (this.componentRef = el)}/>
+            <br/>
+            <BuyerPreviewNewPI 
+         enquiryId={this.props.enquiryId}
+         enquiryCode={this.props.enquiryCode}
+            
+            ref={el => (this.componentRef = el)}/>
         </React.Fragment>
         )
     }

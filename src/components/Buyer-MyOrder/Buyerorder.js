@@ -25,9 +25,15 @@ import { BuyerOldPi } from './BuyerOldPi';
 import { PreviewTaxInvoice } from '../Artisan-MyOrder/PreviewTaxInvoice';
 import ArtisanTaxInvoice from '../Artisan-MyOrder/ArtisanTaxInvoice';
 import BuyerQC from './BuyerQC';
+import { DownloadBuyerPreviewPI } from './DownloadBuyerPreviewPI';
+// import DatePicker from 'react-datetime';
+// import moment from 'moment';
+// import 'react-datetime/css/react-datetime.css';
 
-
-
+// const today = moment();
+//   const disableFutureDt = current => {
+//     return current.isBefore(today)
+//   }
 
 export class Buyerorder extends Component {
     constructor() {
@@ -46,6 +52,7 @@ export class Buyerorder extends Component {
             enquiryStagesMTO :[],
             openEnquiries: [],
             productCategories: [],
+            getOrderProgress:[],
             yarns : [],
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
@@ -61,6 +68,8 @@ export class Buyerorder extends Component {
         this.changeRequestbtn = this.changeRequestbtn.bind(this);
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChange1 = this.handleChange1.bind(this);
+
 
     }
     handleChange(e) {
@@ -70,6 +79,15 @@ export class Buyerorder extends Component {
        
         });
     }
+    handleChange1(e) {
+        const { name, value } = e.target;
+        
+        console.log(value);
+        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+       
+        });
+    }
+
         ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
         }
@@ -87,7 +105,10 @@ export class Buyerorder extends Component {
         CompleteOrderShow = (id) => {
             
             console.log(id)
-         document.getElementById('CompleteOrder').style.display='block';
+          
+            document.getElementById('CompleteOrder').style.display='block';
+
+        //  document.getElementById('CompleteOrder').style.display='block';
         }
         CompleteOrderClose = () => {
          document.getElementById('CompleteOrder').style.display='none';
@@ -101,16 +122,29 @@ export class Buyerorder extends Component {
                 })
                 TTCEapi.markOrderAsRecieved(enquiryId,this.state.deliveredDate).then((response)=>{
                     if(response.data.valid)
-                    {
+                    {   
                         document.getElementById('CompleteOrder').style.display='none';
     
                         document.getElementById('CompleteOrder2').style.display='block';
-                        console.log(response.data.data);
+                        TTCEapi.markEnquiryClosed(enquiryId).then((response)=>{
+                            if(response.data.valid  )
+                            {
+                                customToast.success("Order closed!", {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                  });
+                                  
+                
+                            }
+                        });
+                         console.log(response.data.data);
                         this.setState({
                             markOrderAsRecieved: response.data.data
                         })
                     }
                     else{
+                        document.getElementById('CompleteOrder').style.display='none';
+
                         customToast.error(response.data.errorMessage, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
@@ -126,6 +160,7 @@ export class Buyerorder extends Component {
            }
         CompleteOrder2Close = () => {
             document.getElementById('CompleteOrder2').style.display='none';
+            browserHistory.push("/buyerOrders"); 
            }
         transactionsbtn(){
 
@@ -489,7 +524,7 @@ export class Buyerorder extends Component {
 
                   {/* for CR */}
 
-                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId > 6
+                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -614,15 +649,62 @@ export class Buyerorder extends Component {
                      </>   
                     }
                     {/* order dispatch change here */}
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     <hr></hr>
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                         <Col className="col-xs-4">
+                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank"> */}
+                         <img src={logos.truck} className="truckimg"/>  Check
+                          {/* <a href={TTCEapi.ReceiptUrl + this.state.receiptId + "/" + prop.receiptlabel} target="_blank">
+                             delivery receipt</a> */}
+
+                         </Col>
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat "></input>
+                    { item.openEnquiriesResponse.enquiryStageId >= 10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
 
                         </Col>
 
                         </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -745,22 +827,12 @@ export class Buyerorder extends Component {
                   
 {item.openEnquiriesResponse.enquiryStageId>9 ?
 <>
-<Row noGutters={true}>
+                        <Row noGutters={true}>
                       <Col className="col-xs-12" style={{textAlign:"center"}}>
-                          {item.openEnquiriesResponse.enquiryStageId>10?
-                          <button className="completedenqButton"
-                          onClick={this.CompleteOrder2Show}
-                       //    disabled = {this.state.progressid != 10}
-                           style={{border:"1px solid green"}}
-                          >
-                          <img src={logos.completedenq} className="completeenqimg" 
-                          ></img>
-                   Mark this order as delivered
-                   </button>
-                   :
+                       
                    <button className="completedenqButton"
-                                       onClick={this.CompleteOrderShow}
-                                    //    onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
+                                    //    onClick={this.CompleteOrderShow}
+                                       onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
 
                                     //    disabled = {this.state.progressid != 10}
                                         style={{border:"1px solid green"}}
@@ -769,7 +841,7 @@ export class Buyerorder extends Component {
                                        ></img>
                                 Mark this order as delivered
                                 </button>
-                          }
+                          
                       
                                 <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
 
@@ -803,8 +875,17 @@ export class Buyerorder extends Component {
               // value={this.state.orderDispatchDate }
               placeholder="Enter date of receiving"
              name="deliveredDate"
-              onChange={this.handleChange}
+              onChange={this.handleChange1}
               required/>
+              {/* <DatePicker
+              className="PIinput"
+              style={{width:"50%",borderRadius:"50px",padding:"15px"}}
+              placeholder="Enter date of receiving"
+              name="deliveredDate"
+               onChange={this.handleChange1}
+             timeFormat={false}
+             isValidDate={disableFutureDt}
+             /> */}
         </Col>
         </Row>
         
@@ -1360,11 +1441,11 @@ export class Buyerorder extends Component {
                             :
                                 null}
 
-{this.state.proformainvoice? 
+                                            {this.state.proformainvoice? 
                                                                 <>
                                                                 {/* <Col sm={1}></Col> */}
                                                                 <Col sm={10}>
-                                                               <BuyerPreviewNewPI
+                                                               <DownloadBuyerPreviewPI
                                                                enquiryId={this.state.enquiryCode}
                                                                enquiryCode={item.openEnquiriesResponse.enquiryCode}
                                                                

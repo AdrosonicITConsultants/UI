@@ -24,6 +24,15 @@ export class BuyerCompletedOrder extends Component {
         }
     }
     
+
+    CompleteOrder2Show = (id) => {
+        document.getElementById('CompleteOrder2'+ id).style.display='block';
+
+    }
+    CompleteOrder2Close = (id) => {
+        document.getElementById('CompleteOrder2'+ id).style.display='none';
+       }
+
     componentDidMount(){
 
         TTCEapi.getProductUploadData().then((response)=>{
@@ -238,7 +247,74 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
+                    {item.openEnquiriesResponse.productStatusId == 2
+                    ?
+                    <>
+                    </>
+                    :
+                             
+                    <Row noGutters={true}>
+                    <hr></hr>
+                        <Col className="col-xs-1"></Col>
+                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
+                        ?
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           
+                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
+                               </Diffdays>
+                           <span> days Remaining. You can take only single CR untill approved.</span> 
+                        </Col>
+                        :
+                        <Col className="col-xs-8 ">
+                        
+                        </Col>
+                        }
+                        
+                        
+                        <Col className="col-xs-2">
+                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                    }<hr></hr>
+                    { item.openEnquiriesResponse.enquiryStageId >=10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value =" Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
                    
+                       
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -454,14 +530,14 @@ export class BuyerCompletedOrder extends Component {
                                             {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>
-                                    {/* <div noGutters={true} >
+                                    <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
                                         Date Started : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
                                         </Col>
-                                    </div> */}
+                                    </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
                                         Last Updated : 
@@ -491,7 +567,81 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                                    
+                    {item.openEnquiriesResponse.productStatusHistoryId == 2
+                    ?
+                    <>
+                    </>
+                    :
+                             
+                    <Row noGutters={true}>
+                    <hr></hr>
+                        <Col className="col-xs-1"></Col>
+                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
+                        ?
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           
+                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
+                               </Diffdays>
+                           <span> days Remaining. You can take only single CR untill approved.</span> 
+                        </Col>
+                        :
+                        <Col className="col-xs-8 ">
+                        
+                        </Col>
+                        }
+                        
+                        
+                        <Col className="col-xs-2">
+                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
+                        </Col>
+                        <Col className="col-xs-1"></Col>
+
+                    </Row>
+                    
+                    }<hr></hr>
+                    {/* <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                        </Col>
+
+                        </Row> */}
+                        { item.openEnquiriesResponse.enquiryStageId >=10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value =" Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -614,6 +764,82 @@ export class BuyerCompletedOrder extends Component {
                
                     </>
                     }
+                    {item.openEnquiriesResponse.enquiryStageId >9
+                   ?
+                <>
+                 <Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+                      <button className="completedenqButton"
+                                    // onClick={this.CompleteOrderShow}
+                                    onClick={()=>{this.CompleteOrder2Show(item.openEnquiriesResponse.enquiryId)}}
+                                    //    disabled = {this.state.progressid != 10}
+                                        style={{border:"1px solid green"}}
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Mark this order as delivered
+                                </button>
+                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
+                                </Col>
+                  </Row>
+                   {/* _________________________________________Modal_1________________________________________________ */}
+                                          
+   <div id={"CompleteOrder2"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>
+                    You can find this order under completed tab.</b> 
+                
+            </Col>
+        </Row>
+        <Row noGutters={true} className=" ">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
+           
+        </Col>
+        </Row>
+        
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+            <p className="crmnote">Just in case if you find your order to be faulty,
+            <br/>You can always raise a concern within  
+            <br/>10 days from date received.</p>
+            
+                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
+            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
+            <span >
+                <button
+                style={{fontSize:"15px"}}
+                // onClick={this.sendCRDataFunction}
+                className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
+                 </button></span>
+                 <br/>
+                 <button className="raterevbtnskip"
+                   onClick={()=>{this.CompleteOrder2Close(item.openEnquiriesResponse.enquiryId)}}
+
+                //  onClick={this.CompleteOrder2Close}
+                 >
+                     Skip <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+        </div>
+            
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+      {/* -------------------------------------------Modal ends             */}
+ 
+                </>
+                :
+                <>
+                </>}
+
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>

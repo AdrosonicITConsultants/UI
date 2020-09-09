@@ -72,7 +72,10 @@ export class ArtisanChangeRequest extends Component {
         this.RejectChange = this.RejectChange.bind(this);
         this.sendCR = this.sendCR.bind(this);
       }
-
+      PI(){
+          this.props.openPI()
+        // console.log("pI cliced")
+      }
       AcceptChange(id){
          
         const typeElements = this.state;
@@ -236,7 +239,12 @@ sendCR = () => {
         
             document.getElementById('Modal1').style.display='none';
             document.getElementById('Modal2').style.display='none';
+            if(this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length){
+                document.getElementById('Modal3').style.display='none';
+
+            }
             document.getElementById('Modal3').style.display='block';
+
         }
     });
    
@@ -566,7 +574,9 @@ Modal3Close = () => {
                     </Row>
                     <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
-                    <button className="makechangenowbtn mbcr"  onClick={this.props.openPI()}>Make changes now</button>
+                    <button className="makechangenowbtn mbcr" 
+                     onClick={()=>{this.PI()}}
+                     >Make changes now</button>
             
                     </Col>
                 </Row>

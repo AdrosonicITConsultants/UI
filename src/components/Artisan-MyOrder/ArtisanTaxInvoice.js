@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
 import { PreviewTaxInvoice } from './PreviewTaxInvoice';
+import { PrintTaxInvoice } from './PrintTaxInvoice';
 
 
 export default class ArtisanTaxInvoice extends Component {
@@ -188,8 +189,8 @@ componentDidMount(){
                 rpu:response.data.data.pi.ppu,
                 pta:response.data.data.pi.totalAmount,
                 apr:response.data.data.payment?response.data.data.payment.paidAmount:0,
-                sgst:response.data.data.pi.sgst,
-                cgst:response.data.data.pi.cgst,
+                sgst:response.data.data.invoice?response.data.data.invoice.sgst:0,
+                cgst:response.data.data.invoice?response.data.data.invoice.cgst:0,
                 finalamt:response.data.data.pi.totalAmount,
                 amttobepaid:response.data.data.pi.totalAmount-(response.data.data.payment?response.data.data.payment.paidAmount:0),
                 invoiceId:response.data.data.payment?response.data.data.payment.invoiceId:0,
@@ -198,6 +199,7 @@ componentDidMount(){
                 taxInvoiceGenerated:response.data.data.taxInvoiceGenerated,
                 orderDispatchDate:"",
                 eta:"",
+                deliverycharge:response.data.data.invoice?response.data.data.invoice.deliveryCharges:0,
                 dataload:true
             })
         }
@@ -234,7 +236,26 @@ componentDidMount(){
                 {this.props.BuyerPreviewInvoice?
                 <>
                     {this.state.taxInvoiceGenerated?
-                    <PreviewTaxInvoice
+                    // <PreviewTaxInvoice
+                    // bp={this.bp}
+                    // enquiryId ={this.props.enquiryId}
+                    // enquiryCode={this.props.enquiryCode}
+                    // quantity={this.state.quantity}
+                    // rpu={this.state.rpu}
+                    // pta={this.state.pta}
+                    // apr={this.state.apr}
+                    // deliverycharge={this.state.deliverycharge}
+                    // sgst={this.state.sgst}
+                    // cgst={this.state.cgst}
+                    // finalamt={this.state.finalamt}
+                    // amttobepaid={this.state.amttobepaid}
+                    // invoiceId={this.state.invoiceId}
+                    // percentage={this.state.percentage}
+                    // selectedFile={this.state.selectedFile}
+                    // selectedFileName={this.state.selectedFileName}
+                    // taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                    // />
+                    <PrintTaxInvoice
                     bp={this.bp}
                     enquiryId ={this.props.enquiryId}
                     enquiryCode={this.props.enquiryCode}
@@ -252,7 +273,7 @@ componentDidMount(){
                     selectedFile={this.state.selectedFile}
                     selectedFileName={this.state.selectedFileName}
                     taxInvoiceGenerated={this.state.taxInvoiceGenerated}
-                    />
+                   />
                 :
                 <Row noGutters={true}>
                 <Col className="col-xs-12 bold font20 text-center">
@@ -266,25 +287,32 @@ componentDidMount(){
                 :
                 <>
                 
-                {this.state.getOldPIData.length==0?
-                <>
-                {console.log("Please raise the Final PI")}
-                <Row noGutters={true}>
-                <Col className="col-xs-12 bold font20 text-center">
-                <br></br>
-                 Final PI is not raised yet.
-                  <br></br>
-                  </Col>
-                   </Row>
-                </>
-                :
                 <>
                 {console.log("old data present")}
                 {this.state.dataload?
                 <>
                 {this.state.taxInvoiceGenerated?
                 <>
-                <PreviewTaxInvoice
+                <PrintTaxInvoice
+                 bp={this.bp}
+                 enquiryId ={this.props.enquiryId}
+                 enquiryCode={this.props.enquiryCode}
+                 quantity={this.state.quantity}
+                 rpu={this.state.rpu}
+                 pta={this.state.pta}
+                 apr={this.state.apr}
+                 deliverycharge={this.state.deliverycharge}
+                 sgst={this.state.sgst}
+                 cgst={this.state.cgst}
+                 finalamt={this.state.finalamt}
+                 amttobepaid={this.state.amttobepaid}
+                 invoiceId={this.state.invoiceId}
+                 percentage={this.state.percentage}
+                 selectedFile={this.state.selectedFile}
+                 selectedFileName={this.state.selectedFileName}
+                 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                />
+                {/* <PreviewTaxInvoice
                 bp={this.bp}
                 enquiryId ={this.props.enquiryId}
                 enquiryCode={this.props.enquiryCode}
@@ -302,7 +330,7 @@ componentDidMount(){
                 selectedFile={this.state.selectedFile}
                 selectedFileName={this.state.selectedFileName}
                 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
-                />
+                /> */}
                 </>
             :
            
@@ -310,7 +338,25 @@ componentDidMount(){
 
 {this.state.previewTaxInvoice?
 <>
-
+{/* <PrintTaxInvoice
+bp={this.bp}
+enquiryId ={this.props.enquiryId}
+enquiryCode={this.props.enquiryCode}
+quantity={this.state.quantity}
+rpu={this.state.rpu}
+pta={this.state.pta}
+apr={this.state.apr}
+deliverycharge={this.state.deliverycharge}
+sgst={this.state.sgst}
+cgst={this.state.cgst}
+finalamt={this.state.finalamt}
+amttobepaid={this.state.amttobepaid}
+invoiceId={this.state.invoiceId}
+percentage={this.state.percentage}
+selectedFile={this.state.selectedFile}
+selectedFileName={this.state.selectedFileName}
+taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+/> */}
 <PreviewTaxInvoice
 bp={this.bp}
 enquiryId ={this.props.enquiryId}
@@ -604,7 +650,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                 </>
                 }
                 </>
-                }
+               
                 </>
                 }
 

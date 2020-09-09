@@ -169,7 +169,7 @@ export class PreviewInvoice extends Component {
             console.log(this.state.sendPI);
            
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });

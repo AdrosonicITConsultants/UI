@@ -13,7 +13,9 @@ import Footer from "../footer/footer";
 import Moment from 'react-moment';
 // import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
 
-
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export class BuyerTransaction extends Component {
     constructor(props) {
@@ -24,19 +26,139 @@ export class BuyerTransaction extends Component {
             getTransactionActions:[],
             getOngoingTransaction:[],
             getAdvancedPaymentReceipt:[],
+            getPaymentDetailsForFinalPayment:[],
             getTransactions:[],
             dataload : false,
             filter: null,
             enquiryCode:this.props.enquiryCode,
+            pid:0,
+            invoiceid:0,
+            totalAmount:0,
+            paidAmount:0,
+            showValidationFinal:false,
+            selectedFile:null,
+            selectedFileName:"",
+            upload:true,
 
         }
         this.gotoEnquiry = this.gotoEnquiry.bind(this);
         this.uploadagain = this.uploadagain.bind(this);
         this.backoperation = this.backoperation.bind(this);
-
+        this.onFileChange= this.onFileChange.bind(this);
+        this.uploadReceiptandSend= this.uploadReceiptandSend.bind(this);
 
        
-    }      
+    }    
+    uplodFinalreceiptModalShow(enquiryId){
+        this.setState({
+            selectedFileName:""
+        })
+            TTCEapi.getPaymentDetailsForFinalPayment(enquiryId).then((response)=>{
+                if(response.data.valid)
+                {
+                this.setState({
+                    showValidationFinal:false,
+                     getPaymentDetailsForFinalPayment : response.data.data,
+                     pid:response.data.data.pid,
+                      invoiceid:response.data.data.invoiceId,
+                      totalAmount:response.data.data.totalAmount,
+                      paidAmount:response.data.data.payableAmount,
+                      dataload : true,
+                    },()=>{
+                    // console.log(this.state.getPaymentDetailsForFinalPayment);
+                
+                });
+            }
+            });
+    
+            document.getElementById('FinalPayment').style.display='block';
+             
+      
+        
+    }  
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+                      
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
+       
+    } 
+    //   {     "enquiryId": 698, "pid":18,    "invoiceId": 2,   "type":2,  "paidAmount": 500,    "totalAmount": 1000    }
+    uploadReceiptandSend(enquiryId){
+      
+        if(this.state.selectedFileName){
+          this.setState({
+              rejectButtonClick:true
+            })
+      // document.getElementById('acceptMOQModal').style.display='block';
+                  
+          const formData = new FormData(); 
+          formData.append( 
+            "myFile", 
+            this.state.selectedFile, 
+            this.state.selectedFile.name 
+          );
+         
+          console.log(this.state.selectedFile); 
+          TTCEapi.FinalPayment(
+              this.state.selectedFile,
+              enquiryId,
+              this.state.pid,
+              this.state.invoiceid,
+              // this.props.percent,
+              this.state.paidAmount,
+              this.state.totalAmount
+              ).then((response)=>{
+              
+              if(response.data.valid){ 
+                  document.getElementById('FinalPayment').style.display='none';
+  
+                  this.setState({  
+                 success:true
+                
+              },()=>{
+                  console.log(response)
+             
+              });
+            
+        }
+        else{
+          document.getElementById('FinalPayment').style.display='none';
+  
+          this.setState({
+              rejectButtonClick:false
+        });
+        customToast.error(response.data.errorMessage, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true,
+        });
+        
+        }
+          })
+        
+        }
+        else{
+          this.setState({
+              showValidationFinal:true
+          })
+      
+        }
+      
+  }
+  uplodFinalreceiptModalClose(){
+    this.setState({
+        selectedFileName:""
+    })
+    document.getElementById('FinalPayment').style.display='none';
+
+}
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
   
@@ -63,7 +185,13 @@ export class BuyerTransaction extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     }
+    uplodFinalreceiptModalClose(id){
+        this.setState({
+            selectedFileName:""
+        })
+        document.getElementById('FinalPayment'+id).style.display='none';
 
+    }
     openReceipt(enquiryId){
         console.log("click");
         setTimeout(function() { //Start the timer
@@ -244,6 +372,7 @@ export class BuyerTransaction extends Component {
  onClick={() => this.openReceipt(item.transactionOngoing.enquiryId)}/>
   <p style={{marginTop:"5px"}} >View Receipt</p></span>
 
+
 }
 </Col>
 <Col className="col-xs-3 uplodagaintext" sm="1">
@@ -255,13 +384,35 @@ export class BuyerTransaction extends Component {
 {
     item.transactionOngoing.isActionCompleted == 0 ?
     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
-    data.id == 1 || data.id == 2 ?
-    <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
-        <img src={logos.uploadagain} className="uplodagainicon"/>
-     <p style={{marginTop:"5px"}}>upload again</p></span>
+     data.id == 2 ?
+     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==17?
+     <>
+       {/* final payment reject acknowledgement */}
+      <span onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)} >   
+           <img src={logos.uploadagain} className="uplodagainicon"/>
+    <p style={{marginTop:"5px"}}>upload again</p></span>
+     </>
+  :
+  <>
+  <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
+  <img src={logos.uploadagain} className="uplodagainicon"/>
+<p style={{marginTop:"5px"}}>upload again</p></span>
+  </> 
  
     :
-    data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
+    data.id == 1 ?
+    
+    <span 
+    onClick={() => this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)}
+    >
+        <img src={logos.uploadagain} className="uplodagainicon"/>
+     <p style={{marginTop:"5px"}}>upload receipt</p></span>
+     :
+    data.id == 5 ?
+     <span style={{color:"green"}}>
+        <img src={logos.received} className="uplodagainicon"/>
+         <p style={{marginTop:"5px"}}>Mark Received</p></span>
+         :""
    
      : 
     ""
@@ -277,6 +428,92 @@ export class BuyerTransaction extends Component {
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col> */}
 </Row>
+{/* _________________________________________Upload Final Payment Receipt_________________________________________________ */}
+                                          
+<div id={"FinalPayment"}class="w3-modal">
+                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                                                <div class="w3-container buyerMOQAcceptModalContainer">
+                                                                <Row noGutters={true} className="buyerMOQAcceptModalOuter">
+                                                                    <Col className="col-xs-12">
+                                                                        <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>Final Payment receipt</div>
+                                                                        {this.state.upload?
+                                                                        <>
+                                                                        <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+                                                                        onChange={this.onFileChange}
+                                                                        style={{background:"white"}}
+                                                                            />
+                                                                            <label for="file" className="buyerMOQAcceptModalEnquiryDiv"  style={{background:"white"}}>
+                                                                            <img src={logos.Iconfeatherupload} className=" happyunhappyimg" />
+                                                                            <p className="uploadrec">Upload Receipt</p>
+                                                                            </label>
+                                                                         </>  
+                                                                          :
+                                                                          <Row noGutters={true} className="margintoprow aligncenter">
+                                                                          <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                                                                          <input type="file" id="file"  accept=".png, .jpg, .jpeg"
+                                                                        onChange={this.onFileChange}
+                                                                        style={{background:"white"}}
+                                                                            />
+                                                                            <label for="file" className="buyerMOQAcceptModalEnquiryDiv"  style={{background:"white"}}>
+                                                                            <img src={logos.Iconfeatherupload} className=" happyunhappyimg" /></label>
+                                                                          <br/>
+                                                                                 <b className="uploadreceiptname" style={{color:"black"}}>{this.state.selectedFileName}</b>
+                                                                                  <br/>
+                                                                                  <div>
+                                                                                   </div>
+                                                                                 
+                                                                              </Col>
+                                                                              {/* { console.log(this.state.selectedFile) } */}
+                                                                          </Row>
+                                                                          
+                                                                    }
+                                                                        <Row noGutters={true}>
+                                                                        <Col className="col-xs-12"style={{fontSize:"20px"}}>
+                                                                        Net payment amount: <b>{this.state.getPaymentDetailsForFinalPayment.payableAmount?this.state.getPaymentDetailsForFinalPayment.payableAmount:"0"}</b> 
+                                                                         </Col>
+                                                                          </Row>
+                                                                        <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">{item.enquiryCode?"Enquiry Id:":"Order Id:"}</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}>
+                                                                                 {item.enquiryCode?item.enquiryCode:item.orderCode}
+                                                                                 </span>
+                                                                        </div>
+                                                                        
+
+                                                                        <div className="approvenote">
+                                                                            Make sure you send the correct enquiry receipt. <br/>
+                                                                          Also make sure the attached document is <b>clear</b> and <b>readable</b>  <br/> 
+                                                                          with the <b>LR</b> number and  <b>amount.</b> 
+                                                                          <p style={{textAlign:"center"}}>
+                                                                               {this.state.showValidationFinal ? (
+                                                                                <span className="bg-danger">Select Receipt to upload</span>
+                                                                                ) : (
+                                                                                <br />
+                                                                                )}</p>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                <hr className="buyerMOQAcceptModalHr"/>
+                                                                <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    <span  
+                                                                     onClick={()=>this.uplodFinalreceiptModalClose()}
+                                                                    className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                 
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                        onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId)}
+                                                                        // onClick={() => this.uploadReceiptandSend()}
+                                                                    className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
+                                                                   Send</button></span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+
+{/* ___________________________________________________________________________________________________ */}
+ 
   <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
   </>
                 )}

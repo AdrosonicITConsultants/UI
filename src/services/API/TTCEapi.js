@@ -698,7 +698,7 @@ class TTCEapi {
   // /enquiry/previewPI/{enquiryId}?enquiryId=1106
 
   static previewPI(enquiryId) {
-    let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" +enquiryId;
+    let url = ApiUrl + "/enquiry/previewPI/" +enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -826,9 +826,24 @@ class TTCEapi {
       });
   }
   // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1391&status=2
-
+  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1550&status=1
+  // /enquiry/validateFinalPaymentFromArtisan?enquiryId=1550&status=1
   static validateAdvancePaymentFromArtisan(enquiryId,status) {
     let url = ApiUrl + "/enquiry/validateAdvancePaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
+    console.log(url);
+    return axios
+      .put(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static validateFinalPaymentFromArtisan(enquiryId,status) {
+    let url = ApiUrl + "/enquiry/validateFinalPaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
     console.log(url);
     return axios
       .put(url)
@@ -969,6 +984,21 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/getOrderProgress/1705
+  static getOrderProgress(enquiryId) {
+    let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
   static buyergetAllProducts() {
     let url = ApiUrl + "/buyerCustomProduct/getAllProducts";
@@ -984,9 +1014,9 @@ class TTCEapi {
 
       });
   }
-  ///enquiry/markOrderAsRecieved?orderId=1589&orderRecieveDate=05-09-2020
+  ///enquiry/markOrderAsRecieved/1705/05-09-2020
   static markOrderAsRecieved(enquiryId,date) {
-    let url = ApiUrl + "/enquiry/markOrderAsRecieved?orderId="+enquiryId+"&orderRecieveDate="+date;
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date;
 
     return axios
       .post(url)
@@ -1083,11 +1113,10 @@ class TTCEapi {
   }
 
 
-
+  // {     "enquiryId": 698,  "type":1,    "paidAmount": 500,     "percentage": 50,     "pid": 18,     "totalAmount": 1000    }
   static advancedPayment(
     formData,
     enquiryId,
-    invoiceId,
     paidAmount,
     percentage,
     pid,
@@ -1097,12 +1126,12 @@ class TTCEapi {
     debugger;
     var bodyFormData = new FormData();
 
-    let url = ApiUrl + "/enquiry/advancedPayment";
+    let url = ApiUrl + "/enquiry/Payment";
 
     var payment = {
       // formData,
       enquiryId:enquiryId,
-      invoiceId:invoiceId,
+      type:parseInt(1),
       paidAmount:paidAmount,
       percentage:parseInt(percentage),
       pid:pid,
@@ -1136,10 +1165,57 @@ class TTCEapi {
       });
   }
 
-  // /enquiry/submitDeliveryChallan?enquiryId=1661&orderDispatchDate=%2000%3A00%3A00&ETA=2020-09-11 400
-  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01&ETA=2012-12-12
+  static FinalPayment(
+    formData,
+    enquiryId,
+    pid,
+    invoiceid,
+    paidAmount,
+    totalAmount
 
-  // /enquiry/submitDeliveryChallan?enquiryId=1669&orderDispatchDate=2012-12-12%2017%3A02%3A01
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/enquiry/Payment";
+
+    var payment = {
+      // formData,
+      enquiryId:enquiryId,
+      type:parseInt(2),
+      pid:parseInt(pid),
+      invoiceId:parseInt(invoiceid),
+      paidAmount:parseInt(paidAmount),
+      totalAmount:parseInt(totalAmount),
+    };
+    // var paymentFile=formData
+    
+    console.log(JSON.stringify(payment));
+    console.log(formData);
+    // console.log(selectedFile);
+    debugger;
+    bodyFormData.append("payment",JSON.stringify(payment));
+    bodyFormData.append("file", formData);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
+        debugger;
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
+
   static submitDeliveryChallan(
     enquiryId,
     formData,
@@ -1871,6 +1947,7 @@ static sendTaxInvoice(
       });
   }
 
+ 
   static async getBuyerSuggestions(value) {
     let config = {
       headers: {
@@ -2224,10 +2301,10 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
-// /order/getOrder/{enquiryId}?enquiryId=1505
+// /enquiry/previewPI/
 
 static getBuyerPreviewPI(code){
-  let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" + code;
+  let url = ApiUrl + "/enquiry/previewPI/" + code;
 
   var config = {
     headers: {
@@ -2364,7 +2441,21 @@ static getAllQCQuestions() {
       return error.response;
     });
 }
+ // /enquiry/getAdvancedPaymentStatus?enquiryId=1715
 
+static  getPaymentDetailsForFinalPayment(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getPaymentDetailsForFinalPayment?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 static sendOrSaveQcForm(data){
   let url = ApiUrl + "/qc/sendOrSaveQcForm";
 

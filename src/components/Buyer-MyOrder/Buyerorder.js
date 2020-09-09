@@ -24,6 +24,7 @@ import { BuyerPreviewNewPI } from './BuyerPreviewNewPI';
 import { BuyerOldPi } from './BuyerOldPi';
 import { PreviewTaxInvoice } from '../Artisan-MyOrder/PreviewTaxInvoice';
 import ArtisanTaxInvoice from '../Artisan-MyOrder/ArtisanTaxInvoice';
+import BuyerQC from './BuyerQC';
 
 
 
@@ -1477,11 +1478,8 @@ export class Buyerorder extends Component {
                                        
                                                             {this.state.qualityCheck ?  
                                                             <>
-                                                            <Col sm={1}></Col>
-                                                            <Col sm={8}>
-                                                             <div>
-                                                            <h6>QC...</h6>
-                                                            </div>
+                                                            <Col sm={10}>
+                                                            <BuyerQC enquiryId={this.state.enquiryCode}/>
                                                             </Col>
                                                             </>:null}
 

@@ -30,6 +30,7 @@ export class ArtisanTransaction extends Component {
             acceptButtonClick:false,
             rejectButtonClick:false,
             validateAdvancePaymentFromArtisan:[],
+            validateFinalPaymentFromArtisan:[],
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
@@ -46,6 +47,41 @@ export class ArtisanTransaction extends Component {
         this.onFileChange= this.onFileChange.bind(this);
         // this.paymentTypeset = this.paymentTypeset.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
+    }
+    acceptorRejectFinal(id,enquiryId,status){
+        console.log("final payment accept/reject")
+        console.log(enquiryId);
+        console.log(status);
+        this.setState({ acceptButtonClick:true,
+            rejectButtonClick:true})
+        TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Transaction Status Updated!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
+                 dataload : true,
+                 validateFinalPaymentFromArtisan : response.data.data},()=>{
+                console.log(this.state.validateFinalPaymentFromArtisan);
+            
+            });
+            document.getElementById('acceptMOQModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ acceptButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
     }   
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
@@ -624,7 +660,51 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    {/* <span >
+                                                                        <button
+                                                                        disabled={this.state.acceptButtonClick}
+                                                                        
+                                                                        onClick={() => this.acceptorReject(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
+
+                                                                    
                                                                     <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                       
+                                                                        onClick={() => this.acceptorReject(
+                                                                            item.transactionOngoing.id,
+                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
+                                                                    </span> */}
+                                                                                                                                          {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
+                                                                        <>
+                                                                        {/* "Final apyment accept" */}
+                                                                         <span >
+                                                                        <button
+                                                                        disabled={this.state.acceptButtonClick}
+                                                                        
+                                                                        onClick={() => this.acceptorRejectFinal(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
+
+                                                                    
+                                                                    <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                       
+                                                                        onClick={() => this.acceptorRejectFinal(
+                                                                            item.transactionOngoing.id,
+                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
+                                                                    </span>
+                                                                        
+                                                                        </>
+                                                                        
+                                                                        :
+                                                                        <>
+                                                                         <span >
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
@@ -642,6 +722,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                             
                                                                     className="buyerMOQAcceptModalOkayButton">Accept</button>
                                                                     </span>
+                                                                        </>
+                                                                        }
                                                                  
                                                                 </div>
                                                                 </div>

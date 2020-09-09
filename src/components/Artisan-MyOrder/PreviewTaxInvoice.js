@@ -207,7 +207,7 @@ export class PreviewTaxInvoice extends Component {
             console.log(this.state.sendTax);
            this.componentDidMount();
             });
-            customToast.success("Tax Details send successfully", {
+            customToast.success("Tax Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });

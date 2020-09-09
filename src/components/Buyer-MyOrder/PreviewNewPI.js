@@ -179,7 +179,7 @@ export class PreviewNewPI extends Component {
             console.log(this.state.sendPI);
            
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -254,7 +254,7 @@ export class PreviewNewPI extends Component {
        Change Request date:
 </Col>
 <Col className="col-xs-4">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
+   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>

@@ -62,7 +62,7 @@ export default class BuyerAdvancePayment2 extends Component {
         TTCEapi.advancedPayment(
             this.state.selectedFile,
             this.props.enquiryId,
-            this.state.random,
+            // this.state.random,
             this.props.calulatedAmount,
             this.props.percent,
             this.props.pid,

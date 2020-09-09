@@ -13,6 +13,8 @@ import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
 // import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
+import thunk from 'redux-thunk';
+// import { EditorInsertComment } from 'material-ui/svg-icons';
 
 
 
@@ -21,68 +23,58 @@ export class ArtisanTransaction extends Component {
         super(props);
  
         this.state = {
+            enquiryCode : this.props.enquiryCode,  
             getTransactionStatus:[],
             getTransactionActions:[],
             getOngoingTransaction:[],
             getTransactions:[],
             getAdvancedPaymentReceipt:[],
+            validateFinalPaymentFromArtisan:[],
             dataload : false,
             acceptButtonClick:false,
+            notifyButtonClick:false,
             rejectButtonClick:false,
             validateAdvancePaymentFromArtisan:[],
-            validateFinalPaymentFromArtisan:[],
             filter: null,
             TransactionenquiryCode:"",
             TransactionenquiryId:"",
-            notifyId:"",
-            enquiryCode : this.props.enquiryCode,  
-             selectedFile:null,
+            paymentType:0,
+            searchString:"",
+            selectedFile:null,
             selectedFileName:"",
-            orderDispatchDate:"",
-            showDeliveryValidation:false,
+            notifyId:"",
+            upload:true,
             eta:"",
-             upload:true
+            showDeliveryValidation:false,
+            deliveryChallanUploaded:false
 
         }
         this.onFileChange= this.onFileChange.bind(this);
-        // this.paymentTypeset = this.paymentTypeset.bind(this);
+        this.paymentTypeset = this.paymentTypeset.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
-    }
-    acceptorRejectFinal(id,enquiryId,status){
-        console.log("final payment accept/reject")
-        console.log(enquiryId);
-        console.log(status);
-        this.setState({ acceptButtonClick:true,
-            rejectButtonClick:true})
-        TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
-            if(response.data.valid)
-            {
-                customToast.success("Transaction Status Updated!", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                this.componentDidMount();
-               
-            this.setState({
-                acceptButtonClick:false,
-                rejectButtonClick:false,
-                 dataload : true,
-                 validateFinalPaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateFinalPaymentFromArtisan);
-            
-            });
-            document.getElementById('acceptMOQModal'+id).style.display='none';
-        }
-        else{
-            this.setState({ acceptButtonClick:false,
-                rejectButtonClick:false})
-            customToast.error(response.data.errorMessage, {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-        }
+        this.handleChange=this.handleChange.bind(this)
+
+    }  
+    handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
+       
         });
-    }   
+    }
+    onFileChange(e){
+        this.setState({
+            selectedFile:e.target.files[0]
+            
+        },()=>{
+             this.setState({
+        selectedFileName: this.state.selectedFile.name,
+        upload:false
+      })
+           
+        })
+    }
+
     updateSearch = (inputValue) => {
         let filter = this.state.filter;
   
@@ -107,68 +99,37 @@ export class ArtisanTransaction extends Component {
     
       }
     
-paymentTypeset(){
-    this.setState({
-        paymentType:1
-    })
-}
-
-NotifyAgain(actionId,respectiveActionId,id){
-    this.setState({ notifyButtonClick:true,
-        rejectButtonClick:true})
-    console.log(actionId);
-    console.log(respectiveActionId);
-    TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
-        if(response.data.valid)
-        {
-            customToast.success("Notification Sent", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: true,
-              });
-            this.componentDidMount();
-           
-        this.setState({
-         
-             dataload : true,
-             notifyAgain : response.data.data,
-             notifyButtonClick:false,},()=>{
-            console.log(this.state.notifyAgain);
-        
-        });
-        document.getElementById('notifyModal'+id).style.display='none';
-    }
-    else{
-        this.setState({ notifyButtonClick:false,
-            rejectButtonClick:false})
-        customToast.error(response.data.errorMessage, {
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: true,
-          });
-    }
-    });
-}
 
 
-notifyModalShow(id,notifyId){
+     
+
+    notifyModalShow(id,notifyId){
     
-    document.getElementById('notifyModal'+id).style.display='block';
-  
-            this.setState({
-             notifyId:notifyId
-         },()=>{
-             console.log(this.state.notifyId);
-         })
+        document.getElementById('notifyModal'+id).style.display='block';
+      
+                this.setState({
+                 notifyId:notifyId
+             },()=>{
+                 console.log(this.state.notifyId);
+             })
+            
+     
         
- 
-    
-}
+    }
 
     notifyModalclose = (id) => {
         document.getElementById('notifyModal'+id).style.display='none';
         
     }
 
+    uploddeliveryreceiptModalShow(id){
+    
+        document.getElementById('deliveryReceipt'+id).style.display='block';
+        
+    }
+
     uploadReceiptandSend(enquiryId,id){
+      
         if(this.state.orderDispatchDate && this.state.selectedFile)
         {
             this.setState({
@@ -226,28 +187,12 @@ notifyModalShow(id,notifyId){
               })
            }
     }
-    uploddeliveryreceiptModalShow(id,enquiryId){
-    
-        document.getElementById('deliveryReceipt'+id).style.display='block';
-        
-    }
 
     uploddeliveryreceiptModalclose = (id) => {
         document.getElementById('deliveryReceipt'+id).style.display='none';
         
     }
-    onFileChange(e){
-        this.setState({
-            selectedFile:e.target.files[0]
-            
-        },()=>{
-             this.setState({
-        selectedFileName: this.state.selectedFile.name,
-        upload:false
-      })
-           
-        })
-    }
+    
     acceptModalShow(id,enquiryId){
         
         console.log("abcfdrf");
@@ -333,27 +278,44 @@ notifyModalShow(id,notifyId){
     }
 
     gotoEnquiry(enquiryId){
-        
         localStorage.setItem("piShow", 1);
-
-        browserHistory.push("/enquiryDetails?code="+enquiryId);
-    }
-   
-    
-
-    acceptMOQModalClose = (enquiryId) => {
-        document.getElementById('acceptMOQModal'+ enquiryId).style.display='none';
-        
-    }
-
-    backoperation(){
-        browserHistory.push("/home"); 
-    }
-
-    gotoEnquiry(enquiryId){
         browserHistory.push("/enquiryDetails?code="+enquiryId)
     }
    
+    NotifyAgain(actionId,respectiveActionId,id){
+        this.setState({ notifyButtonClick:true,
+            rejectButtonClick:true})
+        console.log(actionId);
+        console.log(respectiveActionId);
+        TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Notification Sent", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+             
+                 dataload : true,
+                 notifyAgain : response.data.data,
+                 notifyButtonClick:false,},()=>{
+                console.log(this.state.notifyAgain);
+            
+            });
+            document.getElementById('notifyModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ notifyButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
     
     acceptorReject(id,enquiryId,status){
         console.log(enquiryId);
@@ -389,13 +351,45 @@ notifyModalShow(id,notifyId){
         }
         });
     }
-    
+    acceptorRejectFinal(id,enquiryId,status){
+        console.log(enquiryId);
+        console.log(status);
+        this.setState({ acceptButtonClick:true,
+            rejectButtonClick:true})
+        TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Transaction Status Updated!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
+                 dataload : true,
+                 validateFinalPaymentFromArtisan : response.data.data},()=>{
+                console.log(this.state.validateFinalPaymentFromArtisan);
+            
+            });
+            document.getElementById('acceptMOQModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ acceptButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
 
 
 
 
     componentDidMount(){
-       
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
@@ -428,76 +422,65 @@ notifyModalShow(id,notifyId){
          });
         }
      });
-    //  TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
-    //     if(response.data.valid)
-    //     {
-    //     this.setState({
-    //         deliveryChallanUploaded:response.data.data.deliveryChallanUploaded     
-    //     },()=>{
-    //          console.log(this.state.fetchEnquiryAndPaymentDetails);
+     TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
+        if(response.data.valid){
+            this.setState({
+               
+                
+                deliveryChallanUploaded:response.data.data.deliveryChallanUploaded,
+               
+            })
+        }
+        else {
+            this.setState({
+               
+                deliveryChallanUploaded:false,
+              
+          },()=>{
              
-    //     });
-    // }
-    // });
-     
-
-
-    
-  
+             console.log(this.state.fetchEnquiryAndPaymentDetails);
+           
+            });
+        }
+      
+    })
      }
-  
+     paymentTypeset(e){
+        console.log(e)
+        this.setState({
+            paymentType:e
+          },()=>{
+              this.componentDidMount();
+          }
+        )
+              
+    }
 
     render() {
         return (
             <React.Fragment>
                     {this.state.dataload ?
-                  this.state.getTransactions.length == 0?
-                       
-                  <Row>
-                  <br></br>
-                  <br></br>
-                  <br></br>   
-                  <Col className="col-xs-12 text-center font14">
-                  No Transactions
-                  </Col>
-              </Row>
-                  :
-                <>
-                   {/* <Row className="mt-5">
-                       <Col md="1"></Col>
-                 <Col md="3" >
-                     <span>
-                 <InputGroup size="lg"className="searchenq">
-                  <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
-                </InputGroup>
+                          this.state.getTransactions.length == 0?
+                      
+                          <Row>
+                          <br></br>
+                          <br></br>
+                          <br></br>   
+                          <Col className="col-xs-12 text-center font14">
+                          No Transactions
+                          </Col>
+                      </Row>
                 
-                </span>
-                 </Col>
-                 <Col md="1"></Col>
-                
-                <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
-    <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
-    <div class="w3-dropdown-content w3-bar-block w3-border">
-      <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset()}>Link 1</a>
-      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button">Link 3</a>
-    </div>
-  </div></Col>
-                
-                 </Row> */}
-                 <Row noGutters={true}>
-                     <Col md="1"></Col>
-                     <Col md="3">
-<img src={logos.recent} style={{marginRight:"5px" , height:"17px"}}/> Recent Transactions
-                     </Col>
-                 </Row>
+            
+                :
+                <Container>
+                   
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.state.getTransactions.map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
+                    {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
 
 <Row noGutters={true}>
-<Col className="col-xs-3" sm="1"></Col>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
 {item.transactionOngoing.transactionOn}
@@ -506,7 +489,9 @@ notifyModalShow(id,notifyId){
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
+{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
+{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])} */}
+
 </Col>
 <Col className="col-xs-3" sm="1">
 <img 
@@ -522,10 +507,8 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2" >
-                {item.transactionOngoing.percentage} {item.transactionOngoing.percentage !=null? "%":""} 
-                payment received against Invoice for 
-                {item.orderCode!=null? "order Id:":" enquiry Id:"}
-                 <b className="colorinv">
+                {item.transactionOngoing.percentage} {item.transactionOngoing.percentage !=null? "%":""}
+                 payment received against Invoice  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 </Col>
@@ -550,10 +533,13 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 <>
 {
     item.transactionOngoing.isActionCompleted == 0 ?
+    
     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
     data.id == 3?
         <>
+     
     <p>Accept or Reject</p>
+    
 <span><img src={logos.accept} className="acceptrejecticon" 
        
             onClick={()=> this.acceptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
@@ -569,21 +555,25 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
     data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
 
    <>
+  
     <p>Notify buyer again</p>
-<img src={logos.notifybuyer} className="acceptrejecticon" onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
+<img src={logos.notifybuyer} className="acceptrejecticon" 
+onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}
 
+
+/> 
       </>
       :
       data.id==4 ?
       <>
       <p>upload delivery challan</p>
 <img src={logos.uploaddelreceipt} className="acceptrejecticon"
- onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}/> 
+ onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)} /> 
         </>
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
         <p style={{marginTop:"5px"}}>Mark Received</p></span>:
-        data.id == 2? 
+         data.id == 2? 
        <>     
      <p>upload again</p>
 <img src={logos.uploadagain} className="acceptrejecticon" />
@@ -639,7 +629,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}
                                                                             {}
                                                                             
                                                                             </span>
@@ -660,25 +650,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
-                                                                    {/* <span >
-                                                                        <button
-                                                                        disabled={this.state.acceptButtonClick}
-                                                                        
-                                                                        onClick={() => this.acceptorReject(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
-                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
-
-                                                                    
-                                                                    <span >
-                                                                        <button
-                                                                        disabled={this.state.rejectButtonClick}
-                                                                       
-                                                                        onClick={() => this.acceptorReject(
-                                                                            item.transactionOngoing.id,
-                                                                            item.transactionOngoing.enquiryId,1)}
-                                                                            
-                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
-                                                                    </span> */}
-                                                                                                                                          {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
+                                                                        {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
                                                                         <>
                                                                         {/* "Final apyment accept" */}
                                                                          <span >
@@ -724,6 +696,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                     </span>
                                                                         </>
                                                                         }
+                                                                   
                                                                  
                                                                 </div>
                                                                 </div>
@@ -733,7 +706,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{this.state.getTransactionActions.map((data)=> 
+{/* {this.state.getTransactionActions.map((data)=> 
 <>
 {
     item.transactionOngoing.isActionCompleted == 0 ?
@@ -746,8 +719,10 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
    
 }
     </>
-)}
- <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
+)} */}
+
+                                          
+                                                        <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -760,7 +735,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                                            {item.enquiryCode}</span>
+                                                                            {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
@@ -795,13 +770,17 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                             </div>
 
 
-
-
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
- <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
-                                                            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
+                                           {/* {this.state.deliveryChallanUploaded?
+                                           <>
+                                           "hhhh"
+                                           </>
+                                            : */}
+                                            <>
+                                    <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
                                                                     <Col className="col-xs-12">
@@ -830,7 +809,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                               
                                                                           </Row>
                                                                     }
-                                                                       <Row noGutters={true}>
+                                                                        <Row noGutters={true}>
                                                        <Col className="col-xs-6">
                                                        <label>Date of dispatch</label>
                                                         <br/>
@@ -884,7 +863,11 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                 </div>
                                                                 </div>
                                                             </div>
+                                            </>
+                                            {/* } */}
+                                                           
                                                             </div>
+
 
 {/* ___________________________________________________________________________________________________ */}
  
@@ -897,15 +880,15 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             
 
                
-                </>
+                </Container>
               :
-              <>
+              <Container>
                   <Row noGutters={true}>
                     <Col className="col-xs-12  text-center">
                        Loading data ..
                     </Col>
                 </Row>
-                  </>}
+                  </Container>}
             </React.Fragment>
         )
     }

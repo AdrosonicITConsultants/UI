@@ -58,7 +58,8 @@ export default class ArtisanQC extends Component {
         this.state.arrayObject.push(object);
     }
 
-    saveORsendQCFunction = (id, stageId) => {
+    saveORsendQCFunction = (id, stageId, stageName) => {
+
         this.setState({
             QCsaveButton: true,
             QCsendButton: true,
@@ -127,13 +128,13 @@ export default class ArtisanQC extends Component {
             { 
                 this.componentDidMount();
                 if(id === 0) {
-                    customToast.success("QC saved successfully", {
+                    customToast.success("QC saved successfully for " + stageName, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                     });
                 }
                 else {
-                    customToast.success("QC sent successfully", {
+                    customToast.success("QC sent successfully for " + stageName, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                     });
@@ -143,10 +144,12 @@ export default class ArtisanQC extends Component {
         });
     }
 
-    onlySendQCFunction = (id, stageId) => {
+    onlySendQCFunction = (id, stageId, stageName) => {
+
         this.setState({
             QCsendButton1: true,
-        })
+        });
+        
         var responseArray = this.state.artisanQcResponses[stageId - 1];
         var newArray = [];    
         for(var i  in responseArray) {
@@ -170,7 +173,7 @@ export default class ArtisanQC extends Component {
             if(response.data.valid)
             { 
                 this.componentDidMount();
-                customToast.success("QC sent successfully", {
+                customToast.success("QC sent successfully for " + stageName, {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                 });
@@ -195,8 +198,8 @@ export default class ArtisanQC extends Component {
         console.log(this.state.arrayObject);
     }
 
-    handledropdown = (e, questionId) => {
-        var value = document.getElementById("dropdown" + questionId).value;
+    handledropdown = (e, id, questionId) => {
+        var value = document.getElementById("dropdown" + id).value;
         var object = {
             "answer": value,
             "questionId": questionId,
@@ -373,7 +376,7 @@ export default class ArtisanQC extends Component {
                                     :
                                     data.answerType === "3" ?
                                     <div>
-                                        <select className="QCquestionsInputBox" onChange={(e) => this.handledropdown(e, data.id)}
+                                        <select className="QCquestionsInputBox" onChange={(e) => this.handledropdown(e, data.id, data.questionNo)}
                                         id={"dropdown"+ data.id} >
                                             <option value="">Select option</option>
                                             {this.state.dropDownArray ? this.state.dropDownArray.map((dropdown, key) => [
@@ -390,7 +393,7 @@ export default class ArtisanQC extends Component {
                             }) : null}
 
                             {stage.id === 7 ?
-                            <div>
+                            <div className="QCdeclarationTop">
                                 Declaration by AE- I, hereby certify from my end that all the processes have been Monitored & Supervised 
                                 under my guidence and any issue in Quality Certified by me in person or my staff in charge is liable to be 
                                 discussed with me directly on mail. Once the goods received at your doorsteps, we will not be liable for 
@@ -403,9 +406,13 @@ export default class ArtisanQC extends Component {
                                     {this.state.QCsaveButton ?
                                     <button className="QCsaveDisableButton">Save</button>
                                     :
-                                    <button className="QCsaveButton" onClick={() => this.saveORsendQCFunction(0, stage.id)}>Save</button>
+                                    <button className="QCsaveButton" onClick={() => this.saveORsendQCFunction(0, stage.id, stage.stage)}>Save</button>
                                     }
-                                    <button className="QCsendButton" onClick={() => this.saveORsendQCFunction(1, stage.id)} disabled={this.state.QCsendButton}>Send</button>
+                                    {this.state.QCsendButton ?
+                                    <button className="QCsendDisableButton">Send</button>
+                                    :
+                                    <button className="QCsendButton" onClick={() => this.saveORsendQCFunction(1, stage.id, stage.stage)}>Send</button>
+                                    }
                                 </Col>
                             </Row>
                             </div>
@@ -495,7 +502,7 @@ export default class ArtisanQC extends Component {
                                     {this.state.QCsendButton1 ?
                                     <button className="QCsendDisableButton">Send</button>
                                     :
-                                    <button className="QCsendButton" onClick={() => this.onlySendQCFunction(1, stage.id)}>Send</button>
+                                    <button className="QCsendButton" onClick={() => this.onlySendQCFunction(1, stage.id, stage.stage)}>Send</button>
                                     }
                                 </Col>
                             </Row>
@@ -507,7 +514,7 @@ export default class ArtisanQC extends Component {
                     {/* toggle sent stages */}
 
                     {this.state.stagesData ? this.state.stagesData.map((stage) => {
-                        if(stage.id <= this.state.currentStageId && this.state.currentSeenStatus === 1) {
+                        if((stage.id <= this.state.currentStageId && this.state.currentSeenStatus === 1) || (stage.id < this.state.currentStageId)) {
                             return <div className="artisanQCCardStyleFilled">
                             <div className="artisanQCCardHeaderFilled" onClick={() => this.toggleArrow(stage.id)}>
                                 <Row noGutters={true}>

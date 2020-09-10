@@ -142,7 +142,13 @@ export default class BuyerQC extends Component {
                     
                 </div>
                 : 
-                <div className="artisanQCHeader">Quality Check</div>
+                <Row noGutters={true}>
+                <Col className="col-xs-12 bold font20 text-center">
+                <br></br>
+                 Quality Check Not Available.
+                  <br></br>
+                  </Col>
+                   </Row>
                 }
 
             </React.Fragment>

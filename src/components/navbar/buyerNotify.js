@@ -293,6 +293,8 @@ class BuyerNotifications extends Component {
                             <img  className="notifyImage3" src={logos.notifyImage5}/> :
                             data.notificationTypeId === 9 ||  data.notificationTypeId === 10 || data.notificationTypeId === 11 ?
                             <img  className="notifyImage1" src={logos.crNotify}/> :
+                            data.notificationTypeId === 25 ?
+                            <img  className="notifyImage1" src={logos.notifyQC}/> :
                             <img  className="notifyImage1" src={logos.notifyImage3}/> 
                             }
                             </Col>
@@ -313,7 +315,12 @@ class BuyerNotifications extends Component {
                                 <span className="notifyProductName1">Product : <span className="notifyBrandName1">{data.productDesc}</span></span>
                               </div>
                               <div>
-                                <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : {data.type}</span>                        
+                                <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : 
+                                {data.notificationTypeId === 25 ? 
+                                data.details === "Off loom Process" ?
+                                <span>Qc sent for Off loom Process & Quality Check before delivery completed</span> :
+                                <span>{data.type} for {data.details}</span> :
+                                data.type}</span>                        
                               </div>
                             
                             </Col>

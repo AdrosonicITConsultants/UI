@@ -306,7 +306,7 @@ export class PIchange extends Component {
                                     Post Change Request Process</h3>
                                 <h1>Update the pro forma invoice</h1>
                                 <p className="crpigreennote">
-                                    You have <strong>2</strong>
+                                    You have <strong>2 </strong>
                                      days remaining to update your invoice after change request.</p>
                                 </Col>
                                 </Row>

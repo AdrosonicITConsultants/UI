@@ -51,6 +51,9 @@ export class BuyerOngoingOrder extends Component {
     ToggleDeleteClose = () => {
     document.getElementById('id01').style.display='none';
     } 
+    FaultyOrder(id){
+        browserHistory.push("/faulty?orderid="+id)
+    }
     CompleteOrderShow = (id) => {
         console.log(id)
         document.getElementById('CompleteOrder'+ id).style.display='block';
@@ -1036,8 +1039,12 @@ export class BuyerOngoingOrder extends Component {
                                        ></img>
                                 Mark this order as delivered
                                 </button>
-                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
-                                </Col>
+                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                                 onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                                 >
+                                    raise a concern
+                                    </button> after making it as delivered. </p>                                </Col>
                   </Row>
                 </>
                 :

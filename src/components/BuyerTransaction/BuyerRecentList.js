@@ -448,14 +448,29 @@ export class BuyerRecentList extends Component {
     :
     data.id == 1 ?
     <>
-    
-    <span 
+        { this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==2?
+        <>
+        <span 
+    // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+    >
+        <img src={logos.uploadagain} 
+        //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)} 
+        onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+        className="uplodagainicon"/>
+     <p style={{marginTop:"5px"}}>upload receipt</p></span>
+        </>
+        :
+        <>
+        <span 
     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
     >
         <img src={logos.uploadagain} 
          onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)} 
         className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload receipt</p></span>
+        </>
+}
+    
         </>
      :
     data.id == 5 ? <span style={{color:"green"}}>

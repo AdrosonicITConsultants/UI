@@ -70,6 +70,8 @@ import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
 import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
 import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
 import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
+import { BuyerFaultyOrder } from './components/FaultyOrder/BuyerFaultyOrder';
+import { BuyerCompletedfaultyOrder } from './components/FaultyOrder/BuyerCompletedfaultyOrder';
 function App() {
   
   return (
@@ -134,6 +136,11 @@ function App() {
           {/* ORDER ROUTES */}
           <PrivateRoute exact path="/buyerOrders" component={BuyerOrderNav} />
           <PrivateRoute exact path="/artisanOrders" component={ArtisanOrderNav} />
+          <PrivateRoute exact path="/faulty" component={BuyerFaultyOrder} />
+          <PrivateRoute exact path="/completedorderfaulty" component={BuyerCompletedfaultyOrder} />
+
+          
+
 
           {/* <PrivateRoute exact path="/buyerOrders" component={buyerProductTempelate} /> */}
 

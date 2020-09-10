@@ -88,6 +88,9 @@ export class Buyerorder extends Component {
         });
     }
 
+    FaultyOrder(id){
+        browserHistory.push("/faulty?orderid="+id)
+    }
         ToggleDelete22 = (id) => {
         document.getElementById('id09'+ id).style.display='block';
         }
@@ -843,7 +846,12 @@ export class Buyerorder extends Component {
                                 </button>
                           
                       
-                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
+                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                                 onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
+                                                 >
+                                    raise a concern
+                                    </button> after making it as delivered. </p>
 
                                 </Col>
                   </Row>

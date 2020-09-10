@@ -114,6 +114,13 @@ input[type="date"]:valid::before {
 	content: "" !important;
 }
 
+.raiseaconcernbtn{
+    color: red;
+    background: transparent;
+    border: none;
+    font-weight: bolder;
+
+}
 .raterevbtn{
     font-size: 15px;
     background-color: rebeccapurple;

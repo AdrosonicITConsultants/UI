@@ -50,6 +50,7 @@ export class BuyerTransaction extends Component {
        
     }    
     uplodFinalreceiptModalShow(enquiryId){
+        console.log(enquiryId)
         this.setState({
             selectedFileName:""
         })
@@ -119,9 +120,13 @@ export class BuyerTransaction extends Component {
               
               if(response.data.valid){ 
                   document.getElementById('FinalPayment').style.display='none';
-  
+                  customToast.success("Delivery Challan uploaded", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
                   this.setState({  
-                 success:true
+                 success:true,
+                 rejectButtonClick:false
                 
               },()=>{
                   console.log(response)
@@ -397,11 +402,36 @@ export class BuyerTransaction extends Component {
     :
     data.id == 1 ?
     
+    // <span 
+    // onClick={() => this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)}
+    // >
+    //     <img src={logos.uploadagain} className="uplodagainicon"/>
+    //  <p style={{marginTop:"5px"}}>upload receipt</p></span>
+    <>
+    { this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==2?
+    <>
     <span 
-    onClick={() => this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)}
-    >
-        <img src={logos.uploadagain} className="uplodagainicon"/>
-     <p style={{marginTop:"5px"}}>upload receipt</p></span>
+// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+>
+    <img src={logos.uploadagain} 
+    //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)} 
+    onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+    className="uplodagainicon"/>
+ <p style={{marginTop:"5px"}}>upload receipt</p></span>
+    </>
+    :
+    <>
+    <span 
+// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+>
+    <img src={logos.uploadagain} 
+     onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)} 
+    className="uplodagainicon"/>
+ <p style={{marginTop:"5px"}}>upload receipt</p></span>
+    </>
+}
+
+    </>
      :
     data.id == 5 ?
      <span style={{color:"green"}}>

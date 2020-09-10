@@ -520,6 +520,21 @@ class TTCEapi {
         return error.response;
       });
   } 
+  // /enquiry/getAllRefBuyerReview
+  static getAllRefBuyerReview() {
+    let url = ApiUrl + "/enquiry/getAllRefBuyerReview";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
   static getCompletedEnquiry(enquiryId) {
     let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
 
@@ -548,7 +563,24 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
+  static sendFaultyOrder(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderBuyer/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductsInWishlist() {
     let url = ApiUrl + "/product/getProductsInWishlist";
 
@@ -2445,6 +2477,20 @@ static getAllQCQuestions() {
 
 static  getPaymentDetailsForFinalPayment(enquiryId)  {
   let url = ApiUrl + "/enquiry/getPaymentDetailsForFinalPayment?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /order/getClosedOrder/{enquiryId}?enquiryId=1707
+static  getClosedOrder(enquiryId)  {
+  let url = ApiUrl + "/order/getClosedOrder/{enquiryId}?enquiryId="+enquiryId;
   console.log(url);
   return axios
     .get(url)

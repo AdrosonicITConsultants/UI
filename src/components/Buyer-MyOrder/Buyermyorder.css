@@ -30,6 +30,7 @@
     font-size: 43px;
     margin-bottom: -12px;
     color: black;
+    margin-top: -20px;
 }
 
 .CRAcceptedh3{
@@ -126,6 +127,13 @@ input[type="date"]:valid::before {
     background-color: rebeccapurple;
     border: none;
     font-weight: 100;
+}
+.Foundunusualbtn{
+    font-size: 15px;
+    background-color: rgb(204, 0, 0);;
+    border: none;
+    font-weight: 100;
+    margin-right: 10px;
 }
 .raterevbtnimg{
     height: 19px;

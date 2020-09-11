@@ -148,7 +148,7 @@ export class BuyerOngoingOrder extends Component {
                         {   console.log("heree");
                             console.log(response1.data.data);
                             this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                console.log(this.state);
+                               
                             });
                             
                         }
@@ -184,7 +184,20 @@ export class BuyerOngoingOrder extends Component {
         localStorage.setItem("changeRequest", 1);
         browserHistory.push("/buyerorder?code=" + id);
     }
-
+    daysleftFaultyOrder(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     render() {
         return (
             <React.Fragment>
@@ -455,7 +468,7 @@ export class BuyerOngoingOrder extends Component {
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                          <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check 
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt
                          {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
                              delivery receipt</a> */}
                          </Col>
@@ -879,7 +892,7 @@ export class BuyerOngoingOrder extends Component {
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                          <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check 
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt 
                          {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
                              delivery receipt</a> */}
                          </Col>
@@ -1039,12 +1052,38 @@ export class BuyerOngoingOrder extends Component {
                                        ></img>
                                 Mark this order as delivered
                                 </button>
-                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                                {/* <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                                  <button style={{color:"red"}}className="raiseaconcernbtn" 
                                                  onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
                                                  >
                                     raise a concern
-                                    </button> after making it as delivered. </p>                                </Col>
+                                    </button> after making it as delivered. </p>                               */}
+
+
+
+{item.openEnquiriesResponse.orderReceiveDate!=null?
+                          <>
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0
+                             ?
+                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                                :
+                                ""
+                             }
+                          </>
+                          :
+                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                          }
+                                      </Col>
                   </Row>
                 </>
                 :
@@ -1056,6 +1095,12 @@ export class BuyerOngoingOrder extends Component {
     <div id={"CompleteOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
         <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.CompleteOrderClose(item.openEnquiriesResponse.enquiryId)}>X</h1>
+            </Col>
+  
+        </Row>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay">Congrats!</h1> 

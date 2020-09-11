@@ -23,6 +23,7 @@ export class BuyerCompletedfaultyOrder extends Component {
             getClosedOrder:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
+            getOrderProgress:[],
             dataload:false,
             description:"",
             showValidationfaulty:false,
@@ -52,6 +53,8 @@ export class BuyerCompletedfaultyOrder extends Component {
         }
       
         this.FaultyOrderSelect = this.FaultyOrderSelect.bind(this);
+        this.FaultyUnOrderSelect = this.FaultyUnOrderSelect.bind(this);
+
         this.handleChange = this.handleChange.bind(this);
 
     }  
@@ -72,6 +75,22 @@ export class BuyerCompletedfaultyOrder extends Component {
         var arr = this.state.accepted 
         console.log(arr);
       }   
+      FaultyUnOrderSelect(id){
+        console.log("Unselect")
+        const typeElements = this.state;
+        const updatedHeaders = [...typeElements.accepted];
+        updatedHeaders[parseInt(id)-1] = {
+            id: parseInt(id),
+            comment: false,
+                };
+        var that = this;
+        that.setState({
+            accepted: updatedHeaders,
+        });
+        
+        var arr = this.state.accepted 
+        console.log(arr);
+      }
            
     backoperation(){
         browserHistory.push("/buyerOrders"); 
@@ -160,8 +179,8 @@ export class BuyerCompletedfaultyOrder extends Component {
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
-                 dataload : true,},()=>{
-                console.log(this.state.getClosedOrder.comment);
+                },()=>{
+                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -175,47 +194,193 @@ export class BuyerCompletedfaultyOrder extends Component {
             });
         }
         });
+        TTCEapi.getOrderProgress(params.orderid).then((response)=>{
+            if(response.data.valid)
+            {
+            this.setState({
+                getOrderProgress : response.data,
+                 dataload : true,},()=>{
+                console.log(this.state.getOrderProgress);
+            });
+            if(response.data.data !=null&&response.data.data.buyerReviewId){
+                var buyerReviewId=response.data.data.buyerReviewId;
+                var SplitbuyerId=buyerReviewId.split(",");
+                console.log(SplitbuyerId);
+                for(var i=0;i<SplitbuyerId.length;i++){
+                    var id=SplitbuyerId[i]
+                 const typeElements = this.state;
+                 const updatedHeaders = [...typeElements.accepted];
+                 updatedHeaders[parseInt(id)-1] = {
+                     id: parseInt(id),
+                     comment: true,
+                         };
+                 var that = this;
+                 that.setState({
+                     accepted: updatedHeaders,
+                 });
+                 
+                 var arr = this.state.accepted 
+                 console.log(arr);
+                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
+                }
+            }
+     
+      
+        }
+        });
     }
     
     render() {
         return (
             <React.Fragment>
-                <NavbarComponent/>
-                <Container>
+                                <NavbarComponent/>
+                                <Container>
                     {this.state.dataload?
                     <>
                     {this.state.getClosedOrder.comment !=null?
                     <>
-                     <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                            ></img>
-                          
-                          </Col>
-                         <Col className="col-xs-10">
-                              <Row noGutters={true} className ="cp1heading cp1headingtr  ">
-                                  <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                     <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
-                                                                         
-                                  </Col>
-                                  </Row> 
-                            
-                                <Row noGutters={true} >
-                                <Col className="col-xs-12 nulldatafaulty">
-                                        <h3 className="fontplay faultyheading">Your report is sent to Artisan</h3>
-                                    </Col>
-                                </Row>
-                                <div className="brokenthreadbg">
-                            </div>
-                                                         
-                               
- 
-                          </Col>                            
-                </Row>
-                    </>
+                    <Row noGutters={true} className="">
+                                             <Col sm = "1" className="col-xs-2">
+                                             <img
+                                                         src={logos.backarrowicon}
+                                                         className="margin-cparrow cparrowsize glyphicon"
+                                                          onClick={() => this.backoperation()}
+                                              ></img>
+                                            
+                                            </Col>
+                                           <Col className="col-xs-10">
+                                                <Row noGutters={true} className ="cp1heading cp1headingtr  ">
+                                                    <Col className="col-xs-9" style={{fontSize:"27px"}}>
+                                                       <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
+                                                        <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
+                                                       {this.state.getClosedOrder.orderReceiveDate==null ?
+                                                       ""
+                                                      :
+                                                      <p className="faultyp2">
+                                                      <DaysRemaining startday = {this.state.getClosedOrder.orderReceiveDate}>
+                                                        </DaysRemaining>
+                                                        <span> days left to report a problem.</span> </p>
+                                                      }
+                                                       
+                                                    </Col>
+                                                    </Row> 
+                                              
+                                                  <Row noGutters={true} >
+                                                  <Col className="col-xs-12">
+                                                          <h3 className="fontplay faultyheading">Uh Oh!!!!</h3>
+                                                          <p className="faultyp2" style={{textAlign:"center"}}>Please let us know what went wrong so that we can take it up.</p>
+                                                      </Col>
+                                                  </Row>
+                                                  <div className="brokenthreadbg">
+                                              </div>
+                                                  <Row noGutters={true}>
+                                                  <Col className="col-xs-12">
+                                                          <h3 className=" faultyheading" style={{fontSize:"15px"}}><b>Select if any of the options are relevant.</b></h3>
+                                                          <p className="faultyp2" style={{textAlign:"center"}}>
+                                                              Make sure to choose the right option or else choose others & simply describe your problem in comments below.
+                                                              </p>
+                                                      </Col>
+                                                  </Row>
+                  {/* ----------------------------------------------------------------------------------------------------------------------------- */}
+                  
+                  <Row noGutters={true}style={{textAlign:"center"}}>
+                  
+                  {this.state.getAllRefBuyerReview.map((data,key)=> 
+                  
+                  <>
+                  {data.id<4?
+                  <>
+                  {this.state.accepted[data.id-1].comment?
+                      <Col className="col-xs-4 " style={{textAlign:"center"}} >
+                                                       <div className="faultyreason2" style={{padding:"10px"}}>
+                                                         <b> {data.comment}</b>
+                                                         <p>{data.subComment}</p>
+                                                       </div>
+                                                      </Col>
+                                                      :
+                                                      <Col className="col-xs-12 " sm="4" style={{textAlign:"center"}} 
+                                                     >
+                                                       <div className="faultyreason" style={{padding:"10px"}}
+                                                        >
+                                                         <b> {data.comment}</b>
+                                                         <p>{data.subComment}</p>
+                                                       </div>
+                                                      </Col>
+                  }
+                                      </>
+                                          :
+                                      <>
+                                      {this.state.accepted[data.id-1].comment?
+                                      <>
+                                          <Col className="col-xs-1"></Col>
+                                              <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}
+                                               >
+                                                       <div className="faultyreason2" style={{padding:"10px"}}>
+                                                       <b> {data.comment}</b>
+                                                       <p>{data.subComment}</p>
+                                                       </div>
+                                                      </Col>
+                                       </>
+                                                      :
+                                       <>
+                                                      <Col className="col-xs-1"></Col>
+                                                      <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}
+                                                          >
+                                                               <div className="faultyreason" style={{padding:"10px"}}>
+                                                               <b> {data.comment}</b>
+                                                               <p>{data.subComment}</p>
+                                                               </div>
+                                                              </Col>
+                                         </>
+                                       }
+                  
+                                          </>
+                                          }
+                                                              
+                                                                          
+                                          </>)}
+                                          </Row>
+                                                 
+                                                 
+                  {/* ----------------------------------------------------------------------------------------------------------------------------- */}
+                                                  <Row noGutters={true}>
+                                                      <Col className="col-xs-5"> </Col>
+                                                      <Col className="col-xs-2"><hr className="hrlinefault"></hr> </Col>
+                                                      <Col className="col-xs-5"> </Col>
+                                                  </Row>
+                                                  <Row noGutters={true} style={{marginTop:"0px"}}>
+                                                  <Col className="col-xs-12" style={{textAlign:"center"}}>
+                                                          <h3 className=" faultyheading" style={{fontSize:"15px"}}><b>Description of the problem (Mandatory).</b></h3>
+                                                         <textarea className="descfaultybox" placeholder="type your problem here" 
+                                                         maxLength="500"
+                                                         name="description"
+                                                         id="description"
+                                                          value={this.state.getOrderProgress.data.buyerReviewComment?this.state.getOrderProgress.data.buyerReviewComment:"" }
+                                                         disabled></textarea>
+                                                      </Col>
+                                                      
+                                                  </Row>
+                                                  <Row noGutters={true}>
+                                                      <Col className="col-xs-5"> </Col>
+                                                      <Col className="col-xs-2"><hr className="hrlinefault"></hr> </Col>
+                                                      <Col className="col-xs-5"> </Col>
+                                                  </Row>
+                  
+                                                  <Row noGutters={true}>
+                                                  <Col className="col-xs-12">
+                                                          <p className="faultyp2" style={{textAlign:"center"}}>
+                                                              Please Note:Hand made products are prone to few minor defects,which makes it unique to the style & tradition of the culture
+                                                              <br/>
+                                                              Also it is mark of authenticity.We humbly request you to respect & trust the artisans' on the same before raising any concern.
+                                                              </p>
+                                                      </Col>
+                                                  </Row>
+                                                                                  
+                                            </Col>                            
+                                  </Row>
+                              
+                                       </>
+                                    
                     :
                     <>
  <Row noGutters={true} className="">
@@ -269,7 +434,7 @@ export class BuyerCompletedfaultyOrder extends Component {
 {data.id<4?
 <>
 {this.state.accepted[data.id-1].comment?
-    <Col className="col-xs-4 " style={{textAlign:"center"}}>
+    <Col className="col-xs-4 " style={{textAlign:"center"}}  onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
                                      <div className="faultyreason2" style={{padding:"10px"}}>
                                        <b> {data.comment}</b>
                                        <p>{data.subComment}</p>
@@ -291,7 +456,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                     {this.state.accepted[data.id-1].comment?
                     <>
                         <Col className="col-xs-1"></Col>
-                            <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}>
+                            <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}  onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
                                      <div className="faultyreason2" style={{padding:"10px"}}>
                                      <b> {data.comment}</b>
                                      <p>{data.subComment}</p>
@@ -329,6 +494,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                 <Col className="col-xs-12" style={{textAlign:"center"}}>
                                         <h3 className=" faultyheading" style={{fontSize:"15px"}}><b>Description of the problem (Mandatory).</b></h3>
                                        <textarea className="descfaultybox" placeholder="type your problem here" 
+                                       maxLength="500"
                                        name="description"
                                        id="description"
                                         // value={this.state.description }
@@ -437,7 +603,8 @@ export class BuyerCompletedfaultyOrder extends Component {
               
              
                 </Container>
-                <Footer></Footer>
+               
+               <Footer></Footer>
             </React.Fragment>
         )
     }

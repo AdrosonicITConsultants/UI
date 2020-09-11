@@ -536,7 +536,7 @@ class TTCEapi {
   } 
 
   static getCompletedEnquiry(enquiryId) {
-    let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getClosedEnquiry/"+ enquiryId;
 
     return axios
       .get(url)
@@ -1016,21 +1016,7 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/getOrderProgress/1705
-  static getOrderProgress(enquiryId) {
-    let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
 
-    return axios
-      .get(url)
-      .then((response) => {
-        console.log(response);
-        return response;
-      })
-      .catch((error) => {
-        return error.response;
-
-      });
-  }
 
   static buyergetAllProducts() {
     let url = ApiUrl + "/buyerCustomProduct/getAllProducts";
@@ -2491,6 +2477,20 @@ static  getPaymentDetailsForFinalPayment(enquiryId)  {
 // /order/getClosedOrder/{enquiryId}?enquiryId=1707
 static  getClosedOrder(enquiryId)  {
   let url = ApiUrl + "/order/getClosedOrder/{enquiryId}?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getOrderProgress/1707
+ static  getOrderProgress(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
   console.log(url);
   return axios
     .get(url)

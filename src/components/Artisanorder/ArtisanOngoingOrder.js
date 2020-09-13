@@ -20,6 +20,7 @@ export class ArtisanOngoingOrder extends Component {
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
+            getOrderProgress:[],
             dataload:false
 
         }
@@ -39,7 +40,10 @@ export class ArtisanOngoingOrder extends Component {
 
        ToggleDeleteClose22 = (id) => {
         document.getElementById('id09'+ id).style.display='none';
-       }     
+       }    
+       FaultReport(id){
+           browserHistory.push("/artisanfaultreport?orderid="+id)
+       } 
     componentDidMount(){
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
@@ -272,6 +276,22 @@ export class ArtisanOngoingOrder extends Component {
                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
                         </Col>
                 </Row>
+                {item.openEnquiriesResponse.comment?
+                 <Row noGutters={true}>
+                 <Col className="col-xs-12" style={{textAlign:"center"}}>
+                 <input type="button" className="enqreqbtn" value ="Found Faulty" 
+                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+                 </Col>
+         </Row>
+         :
+         <Row noGutters={true}>
+         <Col className="col-xs-12" style={{textAlign:"center"}}>
+         <input type="button" className="enqreqbtn" value ="Found Faulty" 
+         onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+         </Col>
+ </Row>
+                }
+               
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">

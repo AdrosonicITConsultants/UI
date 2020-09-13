@@ -594,7 +594,37 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/faultyOrderArisan/1758/abcdefgh/1
+  static sendFaultyOrderArtisan(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderArisan/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static getProductsInWishlist() {
+    let url = ApiUrl + "/product/getProductsInWishlist";
 
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductIdsInWishlist() {
     let url = ApiUrl + "/product/getProductIdsInWishlist";
 
@@ -2491,6 +2521,20 @@ static  getClosedOrder(enquiryId)  {
 // /enquiry/getOrderProgress/1707
  static  getOrderProgress(enquiryId)  {
   let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getAllRefArtisanReview
+static  getAllRefArtisanReview()  {
+  let url = ApiUrl + "/enquiry/getAllRefArtisanReview/";
   console.log(url);
   return axios
     .get(url)

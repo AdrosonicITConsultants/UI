@@ -41,6 +41,13 @@ class AntaranProductRegions extends Component {
         };
       
     }
+//     <select  className="SelectCategory"  
+//     id="cluster"
+//     name="cluster" 
+//     onChange={(e) => this.handleCluster(e)}>
+//        <option key = '0' clusterid = '-1'  value='Select Cluster'>View All Products</option>
+//        {this.state.productCategoriesdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.productDesc}>{item.productDesc}</option>)}
+//    </select>
     handleCluster(e) {
         // console.log(e.target.id);
         var index = e.target.selectedIndex;

@@ -118,8 +118,78 @@
 .modalfaultwidth{
     width: 700px;
 }
+.a48hrs{
+    font-size: 18px;
+    font-weight: bolder;
+}
+.orderdettxt{
+     font-weight: 400;
+    color: darkgrey;
+    font-size: 16px;
+    text-align: center;
 
+}
+.faulttxt{
+    color: rgb(104, 206, 117);
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+}
 
+.eqidfault{
+    font-size: 11px;
+    padding: 10px;
+    font-weight: 700;
+    color: black;
+    text-align: left;
+
+}
+.madeorderpurp{
+    font-size: 11px;
+    padding: 10px;
+    color: purple;
+    font-weight: bold;
+    text-align:left;
+
+}
+.dispatcheddate{
+    font-size: 11px;
+    padding: 10px;
+    font-weight: bold;
+    text-align:left;
+
+}
+.descfaulth3{
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(196, 18, 28);
+
+}
+
+.faultrecheading{
+    font-size: 20px;
+    color: red;
+    opacity: 0.5;
+}
+.ptagfaultheading{
+    font-size: 14px;
+    color: darkgrey;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.borderdashstyle{
+    border-right: 3px solid darkgrey;
+    /* border-style: dashed; */
+    border-right-style: dotted;
+}
+
+.remarkbyartfa{
+    font-size: 21px;
+    font-weight: bold;
+    color: rgb(35, 146, 112);
+    padding: 10px;
+}
 @media screen and (max-width:1024px) {
     .faultyreason{
         font-size: 11px;

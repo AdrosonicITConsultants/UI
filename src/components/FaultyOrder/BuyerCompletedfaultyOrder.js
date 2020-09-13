@@ -28,6 +28,7 @@ export class BuyerCompletedfaultyOrder extends Component {
             description:"",
             showValidationfaulty:false,
             rejectButtonClick:false,
+            buyerReviewComment:"",
             accepted:[
                 {   
                     id: 1,
@@ -131,7 +132,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                     console.log(this.state.sendFaultyOrder);
                 });
                 document.getElementById('SureModal').style.display='none';
-                customToast.success("Your concern is sent to Artisan", {
+                customToast.success("Your report is sent to Artisan", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
@@ -199,11 +200,12 @@ export class BuyerCompletedfaultyOrder extends Component {
             {
             this.setState({
                 getOrderProgress : response.data,
-                 dataload : true,},()=>{
+                 dataload : true,
+                 buyerReviewComment:response.data.data.orderProgress.buyerReviewComment?response.data.data.orderProgress.buyerReviewComment:""},()=>{
                 console.log(this.state.getOrderProgress);
             });
-            if(response.data.data !=null&&response.data.data.buyerReviewId){
-                var buyerReviewId=response.data.data.buyerReviewId;
+            if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
+                var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
                 console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
@@ -229,7 +231,20 @@ export class BuyerCompletedfaultyOrder extends Component {
         }
         });
     }
-    
+    daysleftFaultyOrder(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     render() {
         return (
             <React.Fragment>
@@ -355,7 +370,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                                          maxLength="500"
                                                          name="description"
                                                          id="description"
-                                                          value={this.state.getOrderProgress.data.buyerReviewComment?this.state.getOrderProgress.data.buyerReviewComment:"" }
+                                                          value={this.state.buyerReviewComment}
                                                          disabled></textarea>
                                                       </Col>
                                                       

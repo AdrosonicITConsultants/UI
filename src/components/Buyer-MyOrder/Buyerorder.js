@@ -27,20 +27,13 @@ import ArtisanTaxInvoice from '../Artisan-MyOrder/ArtisanTaxInvoice';
 import BuyerQC from './BuyerQC';
 import { DownloadBuyerPreviewPI } from './DownloadBuyerPreviewPI';
 import DaysRemaining from '../FaultyOrder/DaysRemaining';
-// import DatePicker from 'react-datetime';
-// import moment from 'moment';
-// import 'react-datetime/css/react-datetime.css';
-
-// const today = moment();
-//   const disableFutureDt = current => {
-//     return current.isBefore(today)
-//   }
+import moment from 'moment';
 
 export class Buyerorder extends Component {
     constructor() {
         super();
         this.scrollCR = React.createRef();
-       
+        var date= moment().format("YYYY-MM-DD")
         this.state = {
             selected:"BuyerDetails",
             transaction: true,
@@ -61,7 +54,8 @@ export class Buyerorder extends Component {
             BuyerPreviewInvoice:true,
             completebtndis:true,
             deliveredDate:"",
-            getSingleOrder:[]
+            getSingleOrder:[],
+            showDeldatevalidation:false
         
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
@@ -85,7 +79,7 @@ export class Buyerorder extends Component {
         const { name, value } = e.target;
         
         console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false}, () => {
        
         });
     }
@@ -136,7 +130,7 @@ export class Buyerorder extends Component {
          document.getElementById('CompleteOrder').style.display='none';
         }
         CompleteOrder2Show = (enquiryId) => {
-            if(this.state.deliveredDate){
+            if( this.state.deliveredDate <= this.state.currentDate){
                 console.log(this.state.deliveredDate)
                 console.log(enquiryId)
                 this.setState({
@@ -176,7 +170,8 @@ export class Buyerorder extends Component {
             }
        else
        this.setState({
-        completebtndis:false
+        completebtndis:false,
+        showDeldatevalidation:true
     })
        
            }
@@ -950,7 +945,13 @@ export class Buyerorder extends Component {
             <p className="crmnote">Just in case if you find your order to be faulty,
             <br/>You can always raise a concern within  
             <br/>10 days from date received.</p>
-            
+            <p className="text-center">
+                                                             {this.state.showDeldatevalidation ? (
+                                            <span className="bg-danger">Date must be less than or equal to current date.</span>
+                                        ) : (
+                                            <br />
+                                        )}
+                                                             </p>
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
             {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
             <span >

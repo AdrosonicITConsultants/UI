@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 import DaysRemaining from './DaysRemaining';
+import { BuyerFaultyOrderMarkResolve } from './BuyerFaultyOrderMarkResolve';
 export class BuyerFaultyOrder extends Component {
     constructor(props) {
         super(props);
@@ -125,10 +126,10 @@ export class BuyerFaultyOrder extends Component {
             })
             TTCEapi.sendFaultyOrder(params.orderid,this.state.description,dummy).then((response)=>{
                 console.log(params.orderid,this.state.description,dummy);
-                if(response.data.valid)
+                if(response.valid)
                 {
                 this.setState({
-                    sendFaultyOrder : response.data.data,
+                    sendFaultyOrder :response,
                      dataload : true,},()=>{
                     console.log(this.state.sendFaultyOrder);
                 });
@@ -185,7 +186,7 @@ export class BuyerFaultyOrder extends Component {
             {
             this.setState({
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
-                 dataload : true,},()=>{
+                 },()=>{
                 console.log(this.state.getSingleOrder);
             });
         }
@@ -195,7 +196,7 @@ export class BuyerFaultyOrder extends Component {
             {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
-                 dataload : true,},()=>{
+                },()=>{
                 console.log(this.state.getAllRefBuyerReview);
             });
         }
@@ -208,8 +209,8 @@ export class BuyerFaultyOrder extends Component {
                  dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
-            if(response.data.data !=null&&response.data.data.buyerReviewId){
-                var buyerReviewId=response.data.data.buyerReviewId;
+            if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
+                var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
                 console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
@@ -244,9 +245,12 @@ export class BuyerFaultyOrder extends Component {
                 <Container>
                     {this.state.dataload?
                     <>
-                    {this.state.getSingleOrder.comment !=null?
+                    
+                    {this.state.getOrderProgress||this.state.getOrderProgress.data.orderProgress.artisanReviewId == null?
                     <>
-  <Row noGutters={true} className="">
+                     {this.state.getSingleOrder.comment !=null?
+                    <>
+                    <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
                            <img
                                        src={logos.backarrowicon}
@@ -362,7 +366,7 @@ export class BuyerFaultyOrder extends Component {
                                        maxLength="500"
                                        name="description"
                                        id="description"
-                                        value={this.state.getOrderProgress.data.buyerReviewComment?this.state.getOrderProgress.data.buyerReviewComment:"" }
+                                        value={this.state.getOrderProgress.data.orderProgress.buyerReviewComment }
                                        disabled></textarea>
                                     </Col>
                                     
@@ -598,6 +602,15 @@ export class BuyerFaultyOrder extends Component {
 {/* ___________________________________________________________________________________________________ */}
                     </>
                     }
+                    </>
+                    :
+                    <>
+                    <BuyerFaultyOrderMarkResolve
+                    enquiryCode={this.state.enquiryCode}
+                    />
+                    </>
+                    }
+                   
                    
                     </>
                     :

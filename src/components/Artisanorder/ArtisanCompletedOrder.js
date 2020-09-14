@@ -68,6 +68,12 @@ export class ArtisanCompletedOrder extends Component {
     FaultReport(id){
         browserHistory.push("/artisanfaultreportCompleted?orderid="+id)
     } 
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/artisanRating?code=" + id);
+    }
     render() {
         return (
             <React.Fragment>
@@ -119,8 +125,11 @@ export class ArtisanCompletedOrder extends Component {
                             <div>
                               <div noGutters={true} >
                                   <Col className="leEnqid bold">
+                                  <div>
                                   <div dangerouslySetInnerHTML={{ __html: item.openEnquiriesResponse.enquiryCode }} />
-
+                                  <i className="fa fa-star starColorActiveCompleteEnquiryId" />
+                                  </div>
+                                   
                                   {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
                                   </Col>
                               </div>
@@ -214,17 +223,36 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
-            {item.openEnquiriesResponse.comment?
-                 <Row noGutters={true}>
-                     <Col className="col-xs-1"></Col>
-                 <Col className="col-xs-10" style={{textAlign:"left"}}>
+            <hr/>
+            <Row>
+                <Col sm={4} className="col-xs-12 text-center"></Col>
+                <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
+                <i className="fa fa-star starColorActiveCompleteOrder" /> 
+                Buyer provided <a style={{cursor: "pointer"}}>rating for your order</a>
+                </Col>
+                <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
                  <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
                  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
-                 </Col>
-         </Row>
-         :
-        ""
+                :
+                null
                 }
+                </Col>
+            </Row>
+            <hr/>
+
+            <Row noGutters={true}>
+                <Col className="col-xs-12" style={{textAlign:"center"}}>
+                    <button
+                        style={{fontSize:"15px"}}
+                        onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                        className="buyerMOQAcceptModalOkayButton raterevbtn">
+                            <img src={logos.ratereview} className="raterevbtnimg"/>
+                        Rate & Review Buyer
+                    </button>
+                </Col>
+            </Row>
+
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">

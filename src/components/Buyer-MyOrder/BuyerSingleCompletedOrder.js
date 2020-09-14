@@ -341,6 +341,13 @@ export class BuyerSingleCompletedOrder extends Component {
                 });
 
         }
+
+        reviewPageButton = (id, code) => {
+            localStorage.removeItem("ratingEnquiryCode");
+            localStorage.setItem("ratingEnquiryCode", code);
+            browserHistory.push("/buyerRating?code=" + id);
+        }
+
         componentDidMount(){
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
@@ -693,7 +700,7 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
                                 <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -712,7 +719,7 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

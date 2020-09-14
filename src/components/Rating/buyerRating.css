@@ -199,4 +199,37 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.rateLoadingTopBottom {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.starColorActiveCompleteOrder {
+    color: #F2BF17 !important;
+}
+
+.starColorActiveCompleteOrder svg{
+    width: 100% !important;
+    height: 25px !important;
+    position: absolute !important;
+    left: -150px !important;
+}
+
+.starColorActiveCompleteEnquiryId {
+    color: #F2BF17 !important;
+}
+
+.starColorActiveCompleteEnquiryId svg{
+    width: 100% !important;
+    height: 25px !important;
+    position: absolute !important;
+    top: 0px;
+}
+
+@media only screen and (min-width: 1200px) {
+    .starColorActiveCompleteEnquiryId svg{
+        display: block !important;
+    }
+}
     

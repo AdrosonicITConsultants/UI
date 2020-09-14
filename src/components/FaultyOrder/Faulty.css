@@ -200,6 +200,19 @@
     margin-left: 20px;
     color: darkgrey;
 }
+.greenbigsmile{
+    text-align: center;
+    height: 205px;
+    padding: 10px;
+}
+.gretajob{
+    text-align: center;
+    color: green;
+    font-size: 18px;
+    margin-bottom: -31px;
+    margin-top: 15px;
+}
+
 @media screen and (max-width:1024px) {
     .faultyreason{
         font-size: 11px;

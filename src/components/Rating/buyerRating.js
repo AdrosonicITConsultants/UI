@@ -22,6 +22,7 @@ export default class BuyerRating extends Component {
             enquiryCode: "",
             buyerQuestionsComments : [],
             buyerQuestionsRatings: [],
+            getClosedOrder:[],
             ratingArray: [],
             newRatingId: 0,
             userData: [],
@@ -31,6 +32,11 @@ export default class BuyerRating extends Component {
             isBuyerRatingDone: 0
         };   
     
+    }
+
+    foundUnsual(id){
+        console.log('clicked')
+        browserHistory.push("/completedorderfaulty?orderid="+id)
     }
 
     backoperation(){
@@ -43,6 +49,20 @@ export default class BuyerRating extends Component {
         console.log(id);
     }
 
+    daysleftrating(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     ratingFunction = (newValue) => {
         console.log(newValue * 2);
         var rating = newValue * 2;
@@ -150,6 +170,16 @@ export default class BuyerRating extends Component {
                 });
             }
         });
+        TTCEapi.getClosedOrder(this.state.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+            this.setState({
+                 getClosedOrder : response.data.data[0].openEnquiriesResponse,
+                },()=>{
+                console.log(this.state.getClosedOrder);
+            });
+        }
+        });
 
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
             if(response.data.valid)
@@ -161,6 +191,7 @@ export default class BuyerRating extends Component {
                 });
             }
         });
+       
     }
 
     render() {
@@ -208,13 +239,20 @@ export default class BuyerRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton">
+                        <button className="rateUnusualButton" onClick={()=>this.foundUnsual(this.state.enquiryId)}>
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Found something unusual ?
                         </button>
+                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
+                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
+                          ?
+                          
                         <div className="ratingSubheader">
-                            2 days left to report a problem
+                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)} days left to report a problem
                         </div>
+                        :
+                        ""
+                         }
                     </Col>                          
                 </Row>
                 <div className="envelopeBgImg">
@@ -262,13 +300,22 @@ export default class BuyerRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton">
-                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Found something unusual ?
-                        </button>
+                       
+                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
+                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
+                          ?
+                          <>
+                          <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>
+                          <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                          Found something unusual ?
+                      </button>
                         <div className="ratingSubheader">
-                            2 days left to report a problem
+                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)} days left to report a problem
                         </div>
+                        </>
+                        :
+                        ""
+                         }
                     </Col>                          
                 </Row>
 

@@ -193,8 +193,9 @@ import ratingEditIcon from "./Icon material-rate-review.svg";
 import ratingFooterImg from "./thread of times.jpg";
 import envelopeHeart from "./Icon awesome-heart.svg";
 import sadwhite from "./sad - white.svg"
-
+import greenbigsmile from "./greenbigsmile.svg"
 export default {
+  greenbigsmile,
   envelopeHeart,
   ratingFooterImg,
   ratingEditIcon,

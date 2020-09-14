@@ -39,7 +39,7 @@ export class BuyerOrderNav extends Component {
         var data = localStorage.getItem("ratingBack");
 
         if(data) {
-            this.setState({ongoingEnquiry:false})
+            this.setState({ongoingEnquiry:false});
         }
 
         localStorage.removeItem("ratingBack");

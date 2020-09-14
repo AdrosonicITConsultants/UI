@@ -81,6 +81,8 @@ import { FaultResolved } from './components/FaultyOrder/FaultResolved';
 import { BuyerCompletedfaultyOrder } from './components/FaultyOrder-Completed/BuyerCompletedfaultyOrder';
 import { CompletedFaultResolved } from './components/FaultyOrder-Completed/CompletedFaultResolved';
 import { ArtisanFaultCompletedOrder1 } from './components/FaultyOrder-Completed/ArtisanFaultCompletedOrder1';
+import ArtisanRating from './components/Rating/artisanRating';
+import ArtisanSelfRating from './components/Rating/artisanSelfRating';
 function App() {
   
   return (
@@ -183,6 +185,8 @@ function App() {
           <Route  exact path="/Modal" component={SuccessPopup} />
 
           <PrivateRoute exact path="/buyerRating" component={BuyerRating} />
+          <PrivateRoute exact path="/artisanRating" component={ArtisanRating} />
+          <PrivateRoute exact path="/artisanSelfRating" component={ArtisanSelfRating} />
 
          
         </Switch>

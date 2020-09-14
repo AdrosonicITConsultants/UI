@@ -34,6 +34,16 @@ export class ArtisanOrderNav extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     }
+
+    componentDidMount() {
+        var data1 = localStorage.getItem("ratingBack1");
+
+        if(data1) {
+            this.setState({ongoingEnquiry:false});
+        }
+
+        localStorage.removeItem("ratingBack1");
+    }
     
     render() {
         return (

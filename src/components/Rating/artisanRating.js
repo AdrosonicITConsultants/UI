@@ -12,7 +12,7 @@ import ReactStars from "react-rating-stars-component";
 import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 
-export default class BuyerRating extends Component {
+export default class ArtisanRating extends Component {
 
     constructor(props) {
         super(props);
@@ -28,14 +28,14 @@ export default class BuyerRating extends Component {
             submitReviewButton: false,
             averageRate: 0,
             loading: false,
-            isBuyerRatingDone: 0
+            isArtisanRatingDone: 0
         };   
     
     }
 
     backoperation(){
-        localStorage.setItem("ratingBack", 1);
-        browserHistory.push("/buyerOrders"); 
+        localStorage.setItem("ratingBack1", 1);
+        browserHistory.push("/artisanOrders"); 
     }
 
     getRatingId = (id) => {
@@ -144,8 +144,8 @@ export default class BuyerRating extends Component {
             {
                 console.log(response.data.data);
                 this.setState({
-                    buyerQuestionsComments: response.data.data.buyerQuestions.commentQuestions,
-                    buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
+                    buyerQuestionsComments: response.data.data.artisanQuestions.commentQuestions,
+                    buyerQuestionsRatings: response.data.data.artisanQuestions.ratingQuestions,
                     loading: false,
                 });
             }
@@ -156,7 +156,7 @@ export default class BuyerRating extends Component {
             {
                 console.log(response.data.data);
                 this.setState({
-                    isBuyerRatingDone: response.data.data.isBuyerRatingDone,
+                    isArtisanRatingDone: response.data.data.isArtisanRatingDone,
                     loading: false,
                 });
             }
@@ -189,7 +189,7 @@ export default class BuyerRating extends Component {
                 </Col>
                 </Row>
                 :
-                this.state.isBuyerRatingDone === 1 ?
+                this.state.isArtisanRatingDone === 1 ?
                 <Container>
                 <Row noGutters={true} className="ratingRowTop">
                     <Col sm={1} className="col-xs-2">
@@ -258,7 +258,7 @@ export default class BuyerRating extends Component {
                             Review your Order Id : {this.state.enquiryCode}
                         </div>
                         <div className="ratingSubheader">
-                            We'll just take 2 minutes to review this order to let the artisan help you serve better in future
+                            We'll just take 2 minutes to review this order
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
@@ -279,7 +279,7 @@ export default class BuyerRating extends Component {
                             Rate stars below from 1st being poor to 5th as best.                                
                         </div> 
                         <div className="rateSubSubHeader">
-                            Thankyou for helping an artisan bring some confidence & smile !
+                            Thankyou for helping an buyer bring some confidence & smile !
                         </div>
                     </Col>
                 </Row>

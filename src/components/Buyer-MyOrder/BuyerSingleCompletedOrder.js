@@ -710,7 +710,7 @@ export class BuyerSingleCompletedOrder extends Component {
                  </Row> 
 </>
 :
-<Row noGutters={true}>
+                    <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
                              {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 

@@ -239,17 +239,18 @@ export default class BuyerRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton" onClick={()=>this.foundUnsual(this.state.enquiryId)}>
-                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Found something unusual ?
-                        </button>
-                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
+                    {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
                           this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
                           ?
-                          
+                          <>
+                          <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>
+                          <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                          Found something unusual ?
+                      </button>
                         <div className="ratingSubheader">
                         {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)} days left to report a problem
                         </div>
+                        </>
                         :
                         ""
                          }

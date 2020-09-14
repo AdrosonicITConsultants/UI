@@ -298,7 +298,21 @@ export class BuyerCompletedOrder extends Component {
                      </Col>
                  </Row> 
 </>
-:  null } 
+:  
+item.openEnquiriesResponse.enquiryStageId>9 ?
+<Row noGutters={true}>
+<Col className="col-xs-12" style={{textAlign:"center"}}>
+    <span>
+           <button
+           style={{fontSize:"15px"}}
+           onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+           className="buyerMOQAcceptModalOkayButton raterevbtn">
+               <img src={logos.ratereview} className="raterevbtnimg"/>
+           Rate & Review this order
+       </button>
+   </span>
+</Col>
+</Row> : null } 
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -527,6 +541,7 @@ export class BuyerCompletedOrder extends Component {
                  </Row>
                    </>
                    :
+                   item.openEnquiriesResponse.enquiryStageId>9 ?
                    <Row noGutters={true}>
                    <Col className="col-xs-12" style={{textAlign:"center"}}>
                        <span>
@@ -544,7 +559,7 @@ export class BuyerCompletedOrder extends Component {
                       </span>
                    </Col>
                </Row>
-                   }
+                  : null }
                    
                    
                     <Row noGutters={true} className="mt7">

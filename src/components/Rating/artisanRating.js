@@ -210,11 +210,11 @@ export default class ArtisanRating extends Component {
                     <Col sm={3} className="col-xs-12 text-right">
                         <button className="rateUnusualButton">
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Found something unusual ?
+                            Check faulty order
                         </button>
-                        <div className="ratingSubheader">
+                        {/* <div className="ratingSubheader">
                             2 days left to report a problem
-                        </div>
+                        </div> */}
                     </Col>                          
                 </Row>
                 <div className="envelopeBgImg">
@@ -264,11 +264,11 @@ export default class ArtisanRating extends Component {
                     <Col sm={3} className="col-xs-12 text-right">
                         <button className="rateUnusualButton">
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Found something unusual ?
+                            Check faulty order
                         </button>
-                        <div className="ratingSubheader">
+                        {/* <div className="ratingSubheader">
                             2 days left to report a problem
-                        </div>
+                        </div> */}
                     </Col>                          
                 </Row>
 

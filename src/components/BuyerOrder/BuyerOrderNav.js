@@ -34,6 +34,16 @@ export class BuyerOrderNav extends Component {
     backoperation(){
         browserHistory.push("/home"); 
     }
+
+    componentDidMount() {
+        var data = localStorage.getItem("ratingBack");
+
+        if(data) {
+            this.setState({ongoingEnquiry:false})
+        }
+
+        localStorage.removeItem("ratingBack");
+    }
     
     render() {
         return (

@@ -187,8 +187,18 @@ import truck from "./Icon awesome-truck-moving.svg";
 import greenTick from "./green tick sanchita.svg";
 import dropDownQC from "./drop down svg.svg";
 import notifyQC from "./sanchita Qc.svg";
+import rateSadFace from "./sad - white.svg";
+import rateWeatherStar from "./Icon weather-stars.svg";
+import ratingEditIcon from "./Icon material-rate-review.svg";
+import ratingFooterImg from "./thread of times.jpg";
+import envelopeHeart from "./Icon awesome-heart.svg";
 
 export default {
+  envelopeHeart,
+  ratingFooterImg,
+  ratingEditIcon,
+  rateWeatherStar,
+  rateSadFace,
   notifyQC,
   dropDownQC,
   greenTick,

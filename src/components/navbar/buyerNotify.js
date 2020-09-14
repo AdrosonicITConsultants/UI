@@ -318,7 +318,7 @@ class BuyerNotifications extends Component {
                                 <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : 
                                 {data.notificationTypeId === 25 ? 
                                 data.details === "Off loom Process" ?
-                                <span>Qc sent for Off loom Process & Quality Check before delivery completed</span> :
+                                <span>{data.type} for Off loom Process & Quality Check before delivery completed</span> :
                                 <span>{data.type} for {data.details}</span> :
                                 data.type}</span>                        
                               </div>

@@ -89,6 +89,13 @@ export class BuyerCompletedOrder extends Component {
         // localStorage.setItem("seeMoreId", id);
         browserHistory.push("/buyerorder?code=" + id);
     }
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+
     daysleft(name)
     {
         var someDate = new Date(name);
@@ -280,7 +287,7 @@ export class BuyerCompletedOrder extends Component {
                     </Row>
                     
                     }<hr></hr>
-                    { item.openEnquiriesResponse.enquiryStageId >=10
+                    {/* { item.openEnquiriesResponse.enquiryStageId >=10
                     ?
                     <>
                      <Row noGutters={true}>
@@ -312,7 +319,21 @@ export class BuyerCompletedOrder extends Component {
 
                         </Row>
                     </>
-                     }
+                     } */}
+
+                        <Row noGutters={true}>
+                        <Col className="col-xs-12 text-center">
+                        <span>
+                            
+                            <button style={{fontSize:"15px"}} className="buyerMOQAcceptModalOkayButton raterevbtn"
+                            onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}>
+                                <img src={logos.ratereview} className="raterevbtnimg"/> 
+                                Rate & review this order
+                            </button>
+                            
+                        </span>
+                        </Col>
+                        </Row>
                    
                        
                     <Row noGutters={true} className="mt7">

@@ -8,7 +8,7 @@ import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 // import OngoingList from './BuyerOngoingList';
 // import CompletedList from './BuyerCompletedList';
-// import "./BuyerTransaction.css";
+// import "./BuyerCompletedTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
 // import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
@@ -17,7 +17,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-export class BuyerTransaction extends Component {
+export class BuyerCompletedTransaction extends Component {
     constructor(props) {
         super(props);
  
@@ -239,7 +239,7 @@ export class BuyerTransaction extends Component {
                     {
                     this.setState({
                          dataload : true,
-                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                         getTransactions : response.data.data.completedTransactionResponses},()=>{
                          console.log(this.state.getTransactions);
                          
                     });
@@ -258,7 +258,7 @@ export class BuyerTransaction extends Component {
                             {
                             this.setState({
                                  dataload : true,
-                                 getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                                 getTransactions : response.data.data.completedTransactionResponses},()=>{
                                  console.log(this.state.getTransactions);
                                  
                             });
@@ -273,7 +273,7 @@ export class BuyerTransaction extends Component {
                     {
                     this.setState({
                          dataload : true,
-                         getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                         getTransactions : response.data.data.completedTransactionResponses},()=>{
                          console.log(this.state.getTransactions);
                          
                     });
@@ -324,52 +324,52 @@ export class BuyerTransaction extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.state.getTransactions.map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
+                    {console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3" sm="1"></Col>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
-{item.transactionOngoing.transactionOn}
+{item.transactionCompleted.transactionOn}
 </Moment>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
+<p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
+{console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
-<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
+<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"/>
 
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
 {/* Advance Payment Receipt uploaded */}
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].buyerText} } />
 
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2">
-{item.transactionOngoing.percentage}{item.transactionOngoing.percentage !=null? "%":""} 
+{item.transactionCompleted.percentage}{item.transactionCompleted.percentage !=null? "%":""} 
  payment received against Invoice for  {item.orderCode !=null?" order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 {/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-    {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
+    {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
     <span>
-        <img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/>
+        <img src={logos.viewReceipt} className="receipticon" onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}/>
          <p style={{marginTop:"5px"}}>View Invoice</p>
          </span>
 :
 <span><img src={logos.viewrec} className="receipticon"
- onClick={() => this.openReceipt(item.transactionOngoing.enquiryId)}/>
+ onClick={() => this.openReceipt(item.transactionCompleted.enquiryId)}/>
   <p style={{marginTop:"5px"}} >View Receipt</p></span>
 
 
@@ -382,19 +382,19 @@ export class BuyerTransaction extends Component {
 
 
 {
-    item.transactionOngoing.isActionCompleted == 0 ?
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerAction == data.id ? 
+    item.transactionCompleted.isActionCompleted == 0 ?
+    this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerAction == data.id ? 
      data.id == 2 ?
-     this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==17?
+     this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].transactionId==17?
      <>
        {/* final payment reject acknowledgement */}
-      <span onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)} >   
+      <span onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)} >   
            <img src={logos.uploadagain} className="uplodagainicon"/>
     <p style={{marginTop:"5px"}}>upload again</p></span>
      </>
   :
   <>
-  <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
+  <span onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}>
   <img src={logos.uploadagain} className="uplodagainicon"/>
 <p style={{marginTop:"5px"}}>upload again</p></span>
   </> 
@@ -403,29 +403,29 @@ export class BuyerTransaction extends Component {
     data.id == 1 ?
     
     // <span 
-    // onClick={() => this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)}
+    // onClick={() => this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)}
     // >
     //     <img src={logos.uploadagain} className="uplodagainicon"/>
     //  <p style={{marginTop:"5px"}}>upload receipt</p></span>
     <>
-    { this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==2?
+    { this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].transactionId==2?
     <>
     <span 
-// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+// onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
 >
     <img src={logos.uploadagain} 
-    //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)} 
-    onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+    //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)} 
+    onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
     className="uplodagainicon"/>
  <p style={{marginTop:"5px"}}>upload receipt</p></span>
     </>
     :
     <>
     <span 
-// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+// onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
 >
     <img src={logos.uploadagain} 
-     onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)} 
+     onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)} 
     className="uplodagainicon"/>
  <p style={{marginTop:"5px"}}>upload receipt</p></span>
     </>
@@ -448,7 +448,7 @@ export class BuyerTransaction extends Component {
 </>
 )}
 </Col>
-{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}>
+{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}>
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col> */}
@@ -527,7 +527,7 @@ export class BuyerTransaction extends Component {
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
-                                                                        onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId)}
+                                                                        onClick={() => this.uploadReceiptandSend(item.transactionCompleted.enquiryId)}
                                                                         // onClick={() => this.uploadReceiptandSend()}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
@@ -566,5 +566,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerTransaction);
+const connectedLoginPage = connect(mapStateToProps)(BuyerCompletedTransaction);
 export default connectedLoginPage;

@@ -676,23 +676,7 @@ MoqSimpleProductSelected(moqId){
         this.componentDidMount()
     }
 
-     
-//   handleReadmore(id){
-  
-//     let items = [...this.state.readmore];
-  
-//     let item = {...items[id]};
-  
-//     item = !item;
-    
-//     items[id] = item;
-   
-//     this.setState({readmore}),()=>{
-//         console.log(this.state.readmore[id]);
-//     };
-    
 
-//   }
     render() {
         return (
             <React.Fragment>

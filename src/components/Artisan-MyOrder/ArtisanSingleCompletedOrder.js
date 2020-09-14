@@ -22,7 +22,7 @@ import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 import ArtisanQC from './ArtisanQC';
-export class Artisanorder extends Component {
+export class ArtisanSingleCompletedOrder extends Component {
     constructor() {
         super();
 
@@ -43,7 +43,7 @@ export class Artisanorder extends Component {
             enquiryStagesAvailable:[],
             innerEnquiryStages : [],
             getChangeRequestForArtisan:[],
-            getOrder:[],
+            getClosedOrder:[],
             getPi:[],
             BuyerPreviewInvoice:false
            
@@ -309,7 +309,7 @@ export class Artisanorder extends Component {
             console.log(response);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
-                    TTCEapi.getSingleOrder(params.code).then((response1)=>{
+                    TTCEapi.getClosedOrder(params.code).then((response1)=>{
                         console.log("")
                         var nextProgressid = 0;
                         var progressid = 0;
@@ -386,15 +386,15 @@ export class Artisanorder extends Component {
         }
         console.log(this.state.getChangeRequestForArtisan)
     })
-    TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
+    TTCEapi.getClosedOrder(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
         {
-            this.setState({getOrder:response.data.data,
+            this.setState({getClosedOrder:response.data.data,
                 dataload:true
                
                            })
         }
-        console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
+        // console.log(this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus)
     })
     TTCEapi.getPi(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
@@ -1448,7 +1448,7 @@ export class Artisanorder extends Component {
                                                     
                                                         <Col sm={12}>
                                                         <div>
-                                                    <ArtisanTransaction enquiryCode={this.state.enquiryCode} />
+                                                    {/* <ArtisanTransaction enquiryCode={this.state.enquiryCode} /> */}
                                                         </div>
                                                         </Col>
                                                         </>
@@ -1463,14 +1463,14 @@ export class Artisanorder extends Component {
 
                                         {this.state.proformainvoice? 
                                         <>
-                                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
+                                        {this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus==2?
                                         <>
                                           {console.log("status-0/2")}
                                          <Col sm={10}>
                                         <PreviewChangedPI 
                                         enquiryId={this.state.enquiryCode}
-                                        enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
-                                        getOrderStatus={this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus}
+                                        enquiryCode={this.state.getClosedOrder[0].openEnquiriesResponse.enquiryCode}
+                                        getClosedOrderStatus={this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus}
                                         />
                                         
                                       </Col>
@@ -1482,7 +1482,7 @@ export class Artisanorder extends Component {
                                               <Col sm={10}>
                                                 <PIchange 
                                                 enquiryId={this.state.enquiryCode}
-                                                enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
+                                                enquiryCode={this.state.getClosedOrder[0].openEnquiriesResponse.enquiryCode}/>
                                             
                                             </Col>
                                             </>}

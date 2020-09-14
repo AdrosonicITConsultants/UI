@@ -21,9 +21,12 @@ export class BuyerCompletedOrder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             dataload:false,
+            getSingleOrder:[]
         }
     }
-    
+    FaultyOrder(id){
+        browserHistory.push("/completedorderfaulty?orderid="+id)
+    }
 
     CompleteOrder2Show = (id) => {
         document.getElementById('CompleteOrder2'+ id).style.display='block';
@@ -87,7 +90,12 @@ export class BuyerCompletedOrder extends Component {
 
     individualpage(id){
         // localStorage.setItem("seeMoreId", id);
-        browserHistory.push("/buyerorder?code=" + id);
+        browserHistory.push("/buyercompletedorder?code=" + id);
+    }
+
+    FoundSomethingfaulty(id){
+        browserHistory.push("/completedorderfaulty?orderid="+id);
+
     }
 
     reviewPageButton = (id, code) => {
@@ -109,6 +117,20 @@ export class BuyerCompletedOrder extends Component {
                                 console.log(diffDays); 
                                 return(diffDays);
     }
+    daysleftFaultyOrder(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     render() {
         return (
             <React.Fragment>
@@ -120,7 +142,7 @@ export class BuyerCompletedOrder extends Component {
                 <>
                 <Row noGutters={true}>
                     <Col className="col-xs-12  text-center">
-                    No Ongoing Order.
+                    No Completed Order.
                     </Col>
                 </Row>  
                 </>
@@ -236,11 +258,11 @@ export class BuyerCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
-                                        {item.openEnquiriesResponse.excpectedDate != null 
+                                        Date of delivery : 
+                                        {item.openEnquiriesResponse.orderReceiveDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
-                                            {item.openEnquiriesResponse.excpectedDate}
+                                            {item.openEnquiriesResponse.orderReceiveDate}
                                             </Moment>
                                         :
                                         "NA"
@@ -254,88 +276,46 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId == 2
-                    ?
-                    <>
-                    </>
-                    :
-                             
-                    <Row noGutters={true}>
-                    <hr></hr>
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                        
-                        </Col>
-                        }
-                        
-                        
-                        <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    
-                    }<hr></hr>
-                    {/* { item.openEnquiriesResponse.enquiryStageId >=10
-                    ?
-                    <>
-                     <Row noGutters={true}>
-                        <Col className="col-xs-7"></Col>
-                        <Col className="col-xs-4">
-                       <span>
-                      <button className="enqreqbtn needhelpbth">
-                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
-                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                       </span>
-
-                        </Col>
-
-                        </Row>
-                    </>
-                    :
-                    <>
-                      <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                       <span>
-                    
-                         <input type="button" className="enqreqbtn" value =" Go to this Enquiry chat"></input>
-
-                       </span>
-
-                        </Col>
-
-                        </Row>
-                    </>
-                     } */}
-
-                        <Row noGutters={true}>
-                        <Col className="col-xs-12 text-center">
-                        <span>
-                            
-                            <button style={{fontSize:"15px"}} className="buyerMOQAcceptModalOkayButton raterevbtn"
-                            onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}>
-                                <img src={logos.ratereview} className="raterevbtnimg"/> 
-                                Rate & review this order
+                  <hr></hr>
+                                      
+                  {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
+<>
+<Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                // onClick={this.sendCRDataFunction}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
                             </button>
-                            
                         </span>
-                        </Col>
-                        </Row>
-                   
-                       
+                     </Col>
+                 </Row> 
+</>
+:
+<Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                                <button
+                                style={{fontSize:"15px"}}
+                                // onClick={this.sendCRDataFunction}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> } 
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -347,115 +327,69 @@ export class BuyerCompletedOrder extends Component {
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
-                        <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
-                            <div className="progressbarfont">
-                                <br /><br />
-                                {item.openEnquiriesResponse.productStatusId === 2
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.openEnquiriesResponse.productStatusId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                                {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
-                                <li >Completed</li>
-                                </ul>
-                                :
-                                <>
-                                {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
-                                    ?
-                                    <img src={logos.cricon} className="cricon"></img>
- 
-                                    :
-                                    null
- 
-                                }
-                                { item.isBlue== 1
-                                    ?
-                                    <>
-                                     <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                <br></br>
-                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                </> : item1.desc}</li>
-                                 )     }
-                                <li >Completed</li>
-                                </ul>
-                                    </>
-                                    :
-                                    <ul className="list-unstyled multi-steps">
-                                    {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                    <br></br>
-                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                    </> : item1.desc}</li>
-                                     )     }
-                                    <li >Completed</li>
-                                    </ul>
-                                
-                                }
-                               
-                                </>
-                                    }
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                            </div>
-                                              
-                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                   
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <>  
-                                {item.openEnquiriesResponse.enquiryCode}
-                                </>
                                 :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
+
+                                }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                              ?
+                              <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                                   {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                ?
                                 <>
-                                 {this.state.innerEnquiryStages.map((item1) => 
-                                   
-                                    <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
-                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
+                            :
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
                             
-                                    {item1.stage }
-                                    </Col>
-                                    
-                                    )} 
-                                </>
-                                }
-                                
-                               
-                                </Row>
                               
-                                <br></br>
-                                
-                            </div>
-                            </div>
-                        </div>
- 
+                            </ul>
+                            
+                                }
 
-                            </Col>
-                        </Row>
-                        </Col>
-                    </Row>
-                  
+                            </div>
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
                     </>
                     :
                     <>
@@ -570,11 +504,11 @@ export class BuyerCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
-                                        {item.openEnquiriesResponse.excpectedDate != null 
+                                         Date of delivery : 
+                                        {item.openEnquiriesResponse.orderReceiveDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
-                                            {item.openEnquiriesResponse.excpectedDate}
+                                            {item.openEnquiriesResponse.orderReceiveDate}
                                             </Moment>
                                         :
                                         "NA"
@@ -588,279 +522,126 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId == 2
-                    ?
-                    <>
-                    </>
-                    :
-                             
-                    <Row noGutters={true}>
-                    <hr></hr>
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                        
-                        </Col>
-                        }
-                        
-                        
-                        <Col className="col-xs-2">
-                            <input type="button" className="changereqbtn" value ="Raise a change Request"></input>
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    
-                    }<hr></hr>
-                    {/* <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                        </Col>
-
-                        </Row> */}
-                        { item.openEnquiriesResponse.enquiryStageId >=10
-                    ?
-                    <>
+                   <hr></hr>
+                   {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
+                   <>
                      <Row noGutters={true}>
-                        <Col className="col-xs-7"></Col>
-                        <Col className="col-xs-4">
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}}
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                // onClick={this.sendCRDataFunction}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row>
+                   </>
+                   :
+                   <Row noGutters={true}>
+                   <Col className="col-xs-12" style={{textAlign:"center"}}>
                        <span>
-                      <button className="enqreqbtn needhelpbth">
-                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
-                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                       </span>
-
-                        </Col>
-
-                        </Row>
-                    </>
-                    :
-                    <>
-                      <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                       <span>
-                    
-                         <input type="button" className="enqreqbtn" value =" Go to this Enquiry chat"></input>
-
-                       </span>
-
-                        </Col>
-
-                        </Row>
-                    </>
-                     }
+                           {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}}
+                            onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                            className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                           <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                              <button
+                              style={{fontSize:"15px"}}
+                              // onClick={this.sendCRDataFunction}
+                              className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                  <img src={logos.ratereview} className="raterevbtnimg"/>
+                              Rate & Review this order
+                          </button>
+                      </span>
+                   </Col>
+               </Row>
+                   }
+                   
                    
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            Order Status
                             </Col>
                         </Row>
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
-                        <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
-                            <div className="progressbarfont">
-                                <br /><br />
-                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                <Col className="col-xs-1"></Col>
+                    <Col className="col-xs-10">
+                       <Row noGutters={true}>
+                           <Col className="col-xs-12 ">
+                           <div className="progressbarfont">
+                            <br /><br />
+                            {item.openEnquiriesResponse.productStatusHistoryId === 2
+                            ?
+                            <ul className="list-unstyled multi-steps">
+                                {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
-                                <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
-                                <li >Completed</li>
-                                </ul>
-                                :
-                                <>
-                                {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
-                                    ?
-                                    <img src={logos.cricon} className="cricon"></img>
- 
-                                    :
-                                    null
- 
-                                }
-                                { item.isBlue== 1
-                                    ?
-                                    <>
-                                     <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                <br></br>
-                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                </> : item1.desc}</li>
-                                 )     }
-                                <li >Completed</li>
-                                </ul>
-                                    </>
-                                    :
-                                    <ul className="list-unstyled multi-steps">
-                                    {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                    <br></br>
-                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                    </> : item1.desc}</li>
-                                     )     }
-                                    <li >Completed</li>
-                                    </ul>
-                                
-                                }
-                               
-                                </> 
-                                    }
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                                </div>
-                                                            
-                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                   
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusHistoryId === 2
+                              :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                                }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                              ?
+                              <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                            </ul>
+                            :
+                            <ul className="list-unstyled multi-steps">
+                                     {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
                                 ?
-                                <>  
-                                {item.openEnquiriesResponse.enquiryCode}
-                                </>
-                                :
                                 <>
-                                 {this.state.innerEnquiryStages.map((item1) => 
-                                   
-                                    <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
-                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
+                                 {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                                ?
+                                <li >Completed</li>
+                                :
+                                <li className="closedenq">Closed</li>
+                                }
+                                </>
+                            :
+                            <>
+                            {this.state.enquiryStagesMTO.map((item1) => 
+                           
+                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                                {item.openEnquiriesResponse.enquiryStageId == 10
+                                ?
+                                <li >Completed</li>
+                              :
+                              <li className="closedenq">Closed</li>
+                              }
+                              </>
+                        }
                             
-                                    {item1.stage }
-                                    </Col>
-                                    
-                                    )} 
-                                </>
+                            </ul>
+                            
                                 }
-                                
-                               
-                                </Row>
-                              
-                                <br></br>
-                                
-                            </div>
-                            </div>
-                        </div>
- 
 
-
-                            </Col>
-                        </Row>
-                        </Col>
-                    </Row>
+                            </div>
+                           </Col>
+                       </Row>
+                    </Col>
+                </Row>
                
                     </>
                     }
-                    {item.openEnquiriesResponse.enquiryStageId >9
-                   ?
-                <>
-                 <Row noGutters={true}>
-                      <Col className="col-xs-12" style={{textAlign:"center"}}>
-                      <button className="completedenqButton"
-                                    // onClick={this.CompleteOrderShow}
-                                    onClick={()=>{this.CompleteOrder2Show(item.openEnquiriesResponse.enquiryId)}}
-                                    //    disabled = {this.state.progressid != 10}
-                                        style={{border:"1px solid green"}}
-                                       >
-                                       <img src={logos.completedenq} className="completeenqimg" 
-                                       ></img>
-                                Mark this order as delivered
-                                </button>
-                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
-                                </Col>
-                  </Row>
-                   {/* _________________________________________Modal_1________________________________________________ */}
-                                          
-   <div id={"CompleteOrder2"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
-    <div class="w3-modal-content w3-animate-top modalBoxSize">
-        <div class="w3-container buyerMOQAcceptModalContainer">
-        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
-            <Col className="col-xs-12 ">
-                <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 
-                <br/>
-                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>
-                    You can find this order under completed tab.</b> 
                 
-            </Col>
-        </Row>
-        <Row noGutters={true} className=" ">
-            <Col className="col-xs-12 " style={{textAlign:"center"}}>
-          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
-           
-        </Col>
-        </Row>
-        
-        <Row noGutters={true}>
-        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-            <p className="crmnote">Just in case if you find your order to be faulty,
-            <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
-            
-                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
-            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
-            <span >
-                <button
-                style={{fontSize:"15px"}}
-                // onClick={this.sendCRDataFunction}
-                className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
-                 </button></span>
-                 <br/>
-                 <button className="raterevbtnskip"
-                   onClick={()=>{this.CompleteOrder2Close(item.openEnquiriesResponse.enquiryId)}}
-
-                //  onClick={this.CompleteOrder2Close}
-                 >
-                     Skip <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-        </div>
-            
-        </Col>
-        </Row>
-                                                                            
-        
-    </div>
-    </div>
-</div>
-      {/* -------------------------------------------Modal ends             */}
- 
-                </>
-                :
-                <>
-                </>}
-
+                 
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>

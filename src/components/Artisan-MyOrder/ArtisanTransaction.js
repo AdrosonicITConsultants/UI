@@ -864,7 +864,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 </div>
                                                             </div>
                                             </>
-                                            {/* } */}
+                                            
                                                            
                                                             </div>
 

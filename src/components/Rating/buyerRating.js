@@ -354,3 +354,17 @@ export default class BuyerRating extends Component {
     )
     }
 }
+
+{/* <Row noGutters={true}>
+                        <Col className="col-xs-12 text-center">
+                        <span>
+                            
+                            <button style={{fontSize:"15px"}} className="buyerMOQAcceptModalOkayButton raterevbtn"
+                            onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}>
+                                <img src={logos.ratereview} className="raterevbtnimg"/> 
+                                Rate & review this order
+                            </button>
+                            
+                        </span>
+                        </Col>
+                        </Row> */}

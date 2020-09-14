@@ -11,12 +11,19 @@ import Diffdays from './Diffdays';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import moment from 'moment';
+
 
 export class BuyerOngoingOrder extends Component {
     
     constructor(props) {
         super(props);
+        // var today = new Date(),
+        // date=today.getFullYear()+'-'+ (today.getMonth() + 1) + '-' + today.getDate();
+        var date= moment().format("YYYY-MM-DD")
+
         this.state = {
+            currentDate: date,
             enquiryStagesMTO :[],
             stage: 3,
             openEnquiries: [],
@@ -27,17 +34,21 @@ export class BuyerOngoingOrder extends Component {
             dataload:false,
             completebtndis:true,
             deliveredDate:"",
-            markOrderAsRecieved:[]
+            markOrderAsRecieved:[],
+            showDeldatevalidation:false
         }
         this.handleChange = this.handleChange.bind(this);
 
     }
     handleChange(e) {
         const { name, value } = e.target;
+    
         console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+        this.setState({ [name]: value,showDeldatevalidation: false ,completebtndis:false}, () => {
        
         });
+                 
+    
     }
     ToggleDelete = () => {
     document.getElementById('id01').style.display='block';
@@ -51,7 +62,12 @@ export class BuyerOngoingOrder extends Component {
     ToggleDeleteClose = () => {
     document.getElementById('id01').style.display='none';
     } 
+    FaultyOrder(id){
+        browserHistory.push("/faulty?orderid="+id)
+    }
     CompleteOrderShow = (id) => {
+        console.log(this.state.currentDate);
+
         console.log(id)
         document.getElementById('CompleteOrder'+ id).style.display='block';
        
@@ -60,11 +76,12 @@ export class BuyerOngoingOrder extends Component {
         document.getElementById('CompleteOrder'+ id).style.display='none';
        }
        CompleteOrder2Show = (id) => {
-        if(this.state.deliveredDate){
-            console.log(this.state.deliveredDate)
+        // console.log(this.state.deliveredDate >= this.state.currentDate)
+        if( this.state.deliveredDate <= this.state.currentDate){
+            console.log(this.state.deliveredDate <= this.state.currentDate)
             console.log(id)
             this.setState({
-                completebtndis:true
+                completebtndis:false
             })
             TTCEapi.markOrderAsRecieved(id,this.state.deliveredDate).then((response)=>{
                 if(response.data.valid)
@@ -79,11 +96,11 @@ export class BuyerOngoingOrder extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-                //   browserHistory.push("/buyerOrders"); 
+                
 
             }
         });        
-           // console.log(response.data.data);
+           
                     this.setState({
                         markOrderAsRecieved: response.data.data
                     })
@@ -98,7 +115,9 @@ export class BuyerOngoingOrder extends Component {
         }
    else
    this.setState({
-    completebtndis:false
+    completebtndis:false,
+    showDeldatevalidation:true
+
 })
         //    document.getElementById('CompleteOrder'+ id).style.display='none';
 
@@ -145,7 +164,7 @@ export class BuyerOngoingOrder extends Component {
                         {   console.log("heree");
                             console.log(response1.data.data);
                             this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                console.log(this.state);
+                               
                             });
                             
                         }
@@ -181,7 +200,20 @@ export class BuyerOngoingOrder extends Component {
         localStorage.setItem("changeRequest", 1);
         browserHistory.push("/buyerorder?code=" + id);
     }
-
+    daysleftFaultyOrder(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays); 
+                                return(diffDays);
+    }
     render() {
         return (
             <React.Fragment>
@@ -452,7 +484,7 @@ export class BuyerOngoingOrder extends Component {
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                          <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check 
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt
                          {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
                              delivery receipt</a> */}
                          </Col>
@@ -876,7 +908,7 @@ export class BuyerOngoingOrder extends Component {
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                          <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check 
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt 
                          {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
                              delivery receipt</a> */}
                          </Col>
@@ -1036,8 +1068,39 @@ export class BuyerOngoingOrder extends Component {
                                        ></img>
                                 Mark this order as delivered
                                 </button>
-                                <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to <b style={{color:"red"}}>raise a concern</b> after making it as delivered. </p>
-                                </Col>
+                                {/* <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                                 onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                                 >
+                                    raise a concern
+                                    </button> after making it as delivered. </p>                               */}
+
+
+
+{item.openEnquiriesResponse.orderReceiveDate!=null?
+                          <>
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
+                             ?
+                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                                :
+                                ""
+                             }
+                          </>
+                          :
+                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                          }
+                                      </Col>
                   </Row>
                 </>
                 :
@@ -1049,6 +1112,12 @@ export class BuyerOngoingOrder extends Component {
     <div id={"CompleteOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
         <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.CompleteOrderClose(item.openEnquiriesResponse.enquiryId)}>X</h1>
+            </Col>
+  
+        </Row>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay">Congrats!</h1> 
@@ -1075,8 +1144,14 @@ export class BuyerOngoingOrder extends Component {
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
             <p className="crmnote">Just in case if you find your order to be faulty,
             <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
-            
+            <br/>3 days from date received.</p>
+            <p className="text-center">
+                                                             {this.state.showDeldatevalidation ? (
+                                            <span className="bg-danger">Date must be less than or equal to current date.</span>
+                                        ) : (
+                                            <br />
+                                        )}
+                                                             </p>
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
             {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
             <span >
@@ -1097,7 +1172,7 @@ export class BuyerOngoingOrder extends Component {
     </div>
 </div>
 
-   {/* _________________________________________Modal_1________________________________________________ */}
+   {/* _________________________________________Modal_2________________________________________________ */}
                                           
    <div id={"CompleteOrder2"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
@@ -1148,7 +1223,7 @@ export class BuyerOngoingOrder extends Component {
     </div>
     </div>
 </div>
-      {/* -------------------------------------------Modal ends             */}
+      {/* -------------------------------------------Modal ends   ----------------          */}
  
                   <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">

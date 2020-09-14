@@ -71,6 +71,16 @@ import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
 import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
 import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
 import BuyerRating from './components/Rating/buyerRating';
+import { BuyerFaultyOrder } from './components/FaultyOrder/BuyerFaultyOrder';
+// import { BuyerCompletedfaultyOrder } from './components/FaultyOrder/BuyerCompletedfaultyOrder';
+import { BuyerSingleCompletedOrder } from './components/Buyer-MyOrder/BuyerSingleCompletedOrder';
+import ArtisanCompletedOrder from './components/Artisanorder/ArtisanCompletedOrder';
+import { ArtisanSingleCompletedOrder } from './components/Artisan-MyOrder/ArtisanSingleCompletedOrder';
+import { ArtisanFaultyOrder1 } from './components/FaultyOrder/ArtisanFaultyOrder1';
+import { FaultResolved } from './components/FaultyOrder/FaultResolved';
+import { BuyerCompletedfaultyOrder } from './components/FaultyOrder-Completed/BuyerCompletedfaultyOrder';
+import { CompletedFaultResolved } from './components/FaultyOrder-Completed/CompletedFaultResolved';
+import { ArtisanFaultCompletedOrder1 } from './components/FaultyOrder-Completed/ArtisanFaultCompletedOrder1';
 function App() {
   
   return (
@@ -135,6 +145,25 @@ function App() {
           {/* ORDER ROUTES */}
           <PrivateRoute exact path="/buyerOrders" component={BuyerOrderNav} />
           <PrivateRoute exact path="/artisanOrders" component={ArtisanOrderNav} />
+          <PrivateRoute exact path="/faulty" component={BuyerFaultyOrder} />
+          <PrivateRoute exact path="/completedorderfaulty" component={BuyerCompletedfaultyOrder} />
+          <PrivateRoute exact path="/buyercompletedorder" component={BuyerSingleCompletedOrder} />
+          <PrivateRoute exact path="/artisancompletedorder" component={ArtisanSingleCompletedOrder} />
+          <PrivateRoute exact path="/artisanfaultreport" component={ArtisanFaultyOrder1} />
+          <PrivateRoute exact path="/concernsolved" component={FaultResolved} />
+          <PrivateRoute exact path="/completedconcernsolved" component={CompletedFaultResolved} />
+          <PrivateRoute exact path="/artisanfaultreportCompleted" component={ArtisanFaultCompletedOrder1} />
+
+
+
+
+
+
+          
+
+
+          
+
 
           {/* <PrivateRoute exact path="/buyerOrders" component={buyerProductTempelate} /> */}
 

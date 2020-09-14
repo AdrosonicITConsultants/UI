@@ -219,6 +219,33 @@ export class PIchange extends Component {
             }
           
         })
+        TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getClosedOrder:response.data.data,
+
+                   })
+                    TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                        if(response.data.valid)
+                        {
+                            this.setState({previewPI:response.data.data,dataload:true
+                                })
+                                TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                    if(response.data.valid)
+                                    {
+                                        this.setState({getOldPIData:response.data.data,
+                                            dataload:true
+                                            })
+                                    }
+                                    // console.log(this.state.getOldPIData)
+                                })
+                        }
+                        console.log(this.state.previewPI)
+                    })
+
+            }
+          
+        })
        
 
     }
@@ -306,7 +333,7 @@ export class PIchange extends Component {
                                     Post Change Request Process</h3>
                                 <h1>Update the pro forma invoice</h1>
                                 <p className="crpigreennote">
-                                    You have <strong>2</strong>
+                                    You have <strong>2 </strong>
                                      days remaining to update your invoice after change request.</p>
                                 </Col>
                                 </Row>
@@ -464,6 +491,7 @@ export class PIchange extends Component {
                         :
                         <>
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===2 ||
+                       
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
                          {console.log("PIChange.js status-2/0")}

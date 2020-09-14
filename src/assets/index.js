@@ -192,6 +192,7 @@ import rateWeatherStar from "./Icon weather-stars.svg";
 import ratingEditIcon from "./Icon material-rate-review.svg";
 import ratingFooterImg from "./thread of times.jpg";
 import envelopeHeart from "./Icon awesome-heart.svg";
+import sadwhite from "./sad - white.svg"
 
 export default {
   envelopeHeart,
@@ -199,6 +200,7 @@ export default {
   ratingEditIcon,
   rateWeatherStar,
   rateSadFace,
+  sadwhite,
   notifyQC,
   dropDownQC,
   greenTick,

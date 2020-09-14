@@ -520,8 +520,23 @@ class TTCEapi {
         return error.response;
       });
   } 
+  // /enquiry/getAllRefBuyerReview
+  static getAllRefBuyerReview() {
+    let url = ApiUrl + "/enquiry/getAllRefBuyerReview";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
   static getCompletedEnquiry(enquiryId) {
-    let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getClosedEnquiry/"+ enquiryId;
 
     return axios
       .get(url)
@@ -548,7 +563,42 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
+  static sendFaultyOrder(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderBuyer/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  // /enquiry/isResolved/1706
+  static isResolved(id) {
+    let url = ApiUrl + "/enquiry/isResolved/"+id;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductsInWishlist() {
     let url = ApiUrl + "/product/getProductsInWishlist";
 
@@ -562,7 +612,37 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/faultyOrderArisan/1758/abcdefgh/1
+  static sendFaultyOrderArtisan(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderArisan/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static getProductsInWishlist() {
+    let url = ApiUrl + "/product/getProductsInWishlist";
 
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductIdsInWishlist() {
     let url = ApiUrl + "/product/getProductIdsInWishlist";
 
@@ -984,21 +1064,7 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/getOrderProgress/1705
-  static getOrderProgress(enquiryId) {
-    let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
 
-    return axios
-      .get(url)
-      .then((response) => {
-        console.log(response);
-        return response;
-      })
-      .catch((error) => {
-        return error.response;
-
-      });
-  }
 
   static buyergetAllProducts() {
     let url = ApiUrl + "/buyerCustomProduct/getAllProducts";
@@ -2445,6 +2511,48 @@ static getAllQCQuestions() {
 
 static  getPaymentDetailsForFinalPayment(enquiryId)  {
   let url = ApiUrl + "/enquiry/getPaymentDetailsForFinalPayment?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /order/getClosedOrder/{enquiryId}?enquiryId=1707
+static  getClosedOrder(enquiryId)  {
+  let url = ApiUrl + "/order/getClosedOrder/{enquiryId}?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getOrderProgress/1707
+ static  getOrderProgress(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getAllRefArtisanReview
+static  getAllRefArtisanReview()  {
+  let url = ApiUrl + "/enquiry/getAllRefArtisanReview/";
   console.log(url);
   return axios
     .get(url)

@@ -80,6 +80,7 @@ import { FaultResolved } from './components/FaultyOrder/FaultResolved';
 import { BuyerCompletedfaultyOrder } from './components/FaultyOrder-Completed/BuyerCompletedfaultyOrder';
 import { CompletedFaultResolved } from './components/FaultyOrder-Completed/CompletedFaultResolved';
 import { ArtisanFaultCompletedOrder1 } from './components/FaultyOrder-Completed/ArtisanFaultCompletedOrder1';
+import { ArtisanFaultResolved } from './components/FaultyOrder/ArtisianFaultResolved';
 function App() {
   
   return (
@@ -150,6 +151,8 @@ function App() {
           <PrivateRoute exact path="/artisancompletedorder" component={ArtisanSingleCompletedOrder} />
           <PrivateRoute exact path="/artisanfaultreport" component={ArtisanFaultyOrder1} />
           <PrivateRoute exact path="/concernsolved" component={FaultResolved} />
+          <PrivateRoute exact path="/concernsolvedartisan" component={ArtisanFaultResolved} />
+
           <PrivateRoute exact path="/completedconcernsolved" component={CompletedFaultResolved} />
           <PrivateRoute exact path="/artisanfaultreportCompleted" component={ArtisanFaultCompletedOrder1} />
 

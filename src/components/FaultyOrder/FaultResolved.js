@@ -89,9 +89,11 @@ export class FaultResolved extends Component {
           })
       }
     backoperation(){
-        browserHistory.push("/buyerOrders"); 
-    }
-
+     browserHistory.push("/buyerOrders")
+            }
+     backoperation2(){
+    browserHistory.push("/artisanOrders")
+                }
     handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
@@ -105,13 +107,13 @@ export class FaultResolved extends Component {
             this.setState({
                 rejectButtonClick:true
             })
-                let params = queryString.parse(this.props.location.search);
-                console.log(params.orderid);
-                this.setState({
-                    enquiryCode:params.orderid
-                })
-                TTCEapi.sendFaultyOrderArtisan(params.orderid,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(params.orderid,this.state.description,this.state.actioncategoryid);
+                // let params = queryString.parse(this.props.location.search);
+                // console.log(this.props.enquiryCode);
+                // this.setState({
+                //     enquiryCode:this.props.enquiryCode
+                // })
+                TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
+                    console.log(this.props.enquiryCode,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
@@ -169,12 +171,12 @@ export class FaultResolved extends Component {
   
     componentDidMount(){
       
-        let params = queryString.parse(this.props.location.search);
-        console.log(params.orderid);
-        this.setState({
-            enquiryCode:params.orderid
-        })
-        TTCEapi.getSingleOrder(params.orderid).then((response)=>{
+        // let params = queryString.parse(this.props.location.search);
+        // console.log(this.props.enquiryCode);
+        // this.setState({
+        //     enquiryCode:this.props.enquiryCode
+        // })
+        TTCEapi.getSingleOrder(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
@@ -204,7 +206,7 @@ export class FaultResolved extends Component {
             });
         }
         });
-        TTCEapi.getOrderProgress(params.orderid).then((response)=>{
+        TTCEapi.getOrderProgress(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
@@ -257,21 +259,35 @@ export class FaultResolved extends Component {
         return (
             <React.Fragment>
               
-            <NavbarComponent/>
-            <Container>
+            {/* <NavbarComponent/> */}
+            {/* <Container> */}
                     {this.state.dataload?
                     <>
                   
                    <>
                      <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                            ></img>
-                          
-                          </Col>
+                        {this.props.buyer?
+                        <Col sm = "1" className="col-xs-2">
+                        <img
+                                    src={logos.backarrowicon}
+                                    className="margin-cparrow cparrowsize glyphicon"
+                                     onClick={() => this.backoperation()}
+                         ></img>
+                       
+                       </Col>
+                       :
+                       <Col sm = "1" className="col-xs-2">
+                         <img
+                                     src={logos.backarrowicon}
+                                     className="margin-cparrow cparrowsize glyphicon"
+                                      onClick={() => this.backoperation2()}
+                          ></img>
+                        
+                        </Col>
+                        }
+                         
+                        
+                           
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
@@ -379,6 +395,15 @@ export class FaultResolved extends Component {
                             </button>
                                  </Col>
                              </Row>
+                             <Row noGutters={true}>                          
+
+                                 <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                                 <p className="gretajob " style={{textAlign:"center"}}>
+                                     Great Job!
+                                     </p>
+                                   <img src={logos.greenbigsmile} className="greenbigsmile" />
+                                 </Col>
+                             </Row>
                              </>
                              }
                                        
@@ -400,8 +425,8 @@ export class FaultResolved extends Component {
               
               
              
-              </Container>
-              <Footer></Footer>
+              {/* </Container> */}
+            {/* //   <Footer></Footer> */}
             </React.Fragment>
         )
     }

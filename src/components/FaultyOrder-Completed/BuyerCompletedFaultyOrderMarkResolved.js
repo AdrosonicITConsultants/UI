@@ -12,6 +12,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
+import { CompletedFaultResolved } from './CompletedFaultResolved';
 // import DaysRemaining from './DaysRemaining';
 export class BuyerCompletedFaultyOrderMarkResolved extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
+            OrderDetails:[],
             getAllRefArtisanReview:[],
             Allorderdata:[],
             isResolved:[],
@@ -37,6 +39,8 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             buyerReviewComment:"",
             actioncategoryid : 0,
             artisanReviewComment:-1,
+            concernSolved:false,
+            artisan:false,
             accepted:[
                 {   
                     id: 1,
@@ -83,11 +87,15 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
       }
 
       MarkResolved(id){
+        console.log(this.props.enquiryCode);
+
         TTCEapi.isResolved(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
                 isResolved : response.data.data,
+                concernSolved:true
+                
                  },()=>{
                 console.log(this.state.isResolved);
                
@@ -95,7 +103,7 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-                   browserHistory.push("/completedconcernsolved?orderid="+id)
+                //    browserHistory.push("/completedconcernsolved?orderid="+id)
             });
         }
         });
@@ -223,11 +231,13 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             this.setState({
                 getOrderProgress :response.data.data.orderProgress,                
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
-                 dataload : true,},()=>{
+                OrderDetails:response.data.data,              
+                dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
+                    OrderDetails:response.data.data,              
                     getOrderProgress :response.data.data.orderProgress,
                     buyerReviewComment:response.data.data.orderProgress.buyerReviewComment,
                     artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
@@ -271,7 +281,14 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             
                     {this.state.dataload?
                     <>
-                  
+                  {this.state.concernSolved?
+                  <>
+                  <CompletedFaultResolved
+                  enquiryCode={this.props.enquiryCode}
+                  artisan={this.state.artisan}/>
+                  </>
+                :
+                <></>}
                    <>
                      <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
@@ -309,19 +326,21 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                                             Enquiry Id:{this.state.getClosedOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
-                                            Made to order
+                                            {this.state.OrderDetails.productType}
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={2}>
-                                            Brand:<span style={{color:"blue"}}>{ this.state.currentDate }</span>
+                                            Brand:<span style={{color:"blue"}}>{ this.state.OrderDetails.brand }</span>
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={1}>
-                                            123456
+                                            {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.currentDate }
+                                            Dispatched on:{ this.state.getOrderProgress.orderDispatchDate !=null?
+                                            this.state.getOrderProgress.orderDispatchDate:"NA" }
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
-                                            Arrived on:{ this.state.currentDate }
+                                            Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?
+                                            this.state.getOrderProgress.orderReceiveDate:"NA" }
                                         </Col>
                                     </Row>
 

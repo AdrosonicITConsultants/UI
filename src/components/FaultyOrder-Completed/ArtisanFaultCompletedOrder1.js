@@ -12,6 +12,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
+import { CompletedFaultResolved } from './CompletedFaultResolved';
 // import DaysRemaining from './DaysRemaining';
 export class ArtisanFaultCompletedOrder1 extends Component {
     constructor(props) {
@@ -38,6 +39,8 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             artisanReviewComment:-1,
             OrderDetails:[],
             artisanId:-1,
+            isResolved:"",
+            artisan:true,
             accepted:[
                 {   
                     id: 1,
@@ -176,7 +179,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
-                 dataload : true,},()=>{
+                },()=>{
                 console.log(this.state.getClosedOrder);
             });
         }
@@ -186,7 +189,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
-                 dataload : true,},()=>{
+                },()=>{
                 console.log(this.state.getAllRefBuyerReview);
             });
         }
@@ -196,7 +199,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
-                 dataload : true,},()=>{
+                },()=>{
                 console.log(this.state.getAllRefArtisanReview);
             });
         }
@@ -206,6 +209,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             {
             this.setState({
                 getOrderProgress : response.data.data.orderProgress,
+                isResolved:response.data.data.orderProgress.isResolved,
                 OrderDetails:response.data.data,
                 artisanId:response.data.data.orderProgress.artisanReviewId?response.data.data.orderProgress.artisanReviewId:"",
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
@@ -215,6 +219,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
                     getOrderProgress : response.data.data.orderProgress,
+                    isResolved:response.data.data.orderProgress.isResolved,
                     OrderDetails:response.data.data,
                     buyerReviewComment:response.data.data.orderProgress.buyerReviewComment,
                     artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
@@ -258,7 +263,16 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                 <Container>
                     {this.state.dataload?
                     <>
-                   {this.state.artisanReviewId == 1?
+                    {this.state.isResolved?
+                    <>
+                    <CompletedFaultResolved
+                      enquiryCode={this.state.enquiryCode}
+                      artisan={this.state.artisan}
+                      />        
+                    </>
+                :
+                <>
+                {this.state.artisanReviewId == 1?
                    <>
                      <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
@@ -340,7 +354,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                                             disabled 
                                             onChange={(e) => this.handleAction(e)}>
                                                 <option key = '0' actionid = '0'  value='Select Cluster'>
-                                                {this.state.getAllRefArtisanReview[this.state.artisanId].comment}
+                                                {this.state.getAllRefArtisanReview[parseInt(this.state.artisanId)-1].comment}
 
                                                 </option>
                                                 
@@ -413,19 +427,21 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                                             Enquiry Id:{this.state.getClosedOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
-                                            Made to order
+                                            {this.state.OrderDetails.productType}
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={2}>
-                                            Brand:<span style={{color:"blue"}}>{ this.state.currentDate }</span>
+                                            Brand:<span style={{color:"blue"}}>{ this.state.OrderDetails.brand }</span>
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={1}>
-                                            123456
+                                            {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.currentDate }
+                                            Dispatched on:{ this.state.getOrderProgress.orderDispatchDate !=null?
+                                            this.state.getOrderProgress.orderDispatchDate:"NA" }
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
-                                            Arrived on:{ this.state.currentDate }
+                                            Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?
+                                            this.state.getOrderProgress.orderReceiveDate:"NA" }
                                         </Col>
                                     </Row>
 
@@ -501,7 +517,11 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                           </Col>                            
                 </Row>             
                   
-                </>} 
+                </>
+                } 
+                </>
+                }
+                   
                 
                     </>
                     :

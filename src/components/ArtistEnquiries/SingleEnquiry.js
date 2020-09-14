@@ -99,6 +99,7 @@ export class SingleEnquiry extends Component {
             }
         })
     }
+
     stateupdate = () => {
         
         this.ToggleDeleteClose();
@@ -1043,7 +1044,7 @@ export class SingleEnquiry extends Component {
                                                     {item2.stage}
                                                     </Col>
                                                     <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
                                                     {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
 
                                                     </Col>
@@ -1435,7 +1436,7 @@ export class SingleEnquiry extends Component {
                                                     {item2.stage}
                                                     </Col>
                                                     <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
                                                     {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
 
                                                     </Col>

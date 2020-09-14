@@ -188,7 +188,9 @@ import greenTick from "./green tick sanchita.svg";
 import dropDownQC from "./drop down svg.svg";
 import notifyQC from "./sanchita Qc.svg";
 import sadwhite from "./sad - white.svg"
+import greenbigsmile from "./greenbigsmile.svg"
 export default {
+  greenbigsmile,
   sadwhite,
   notifyQC,
   dropDownQC,

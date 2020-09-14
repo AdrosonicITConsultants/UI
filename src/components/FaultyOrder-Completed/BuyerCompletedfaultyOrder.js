@@ -34,6 +34,7 @@ export class BuyerCompletedfaultyOrder extends Component {
             buyerReviewComment:"",
             artisanReviewId:"",
             isResolved:"",
+            artisan:false,
             accepted:[
                 {   
                     id: 1,
@@ -261,7 +262,11 @@ export class BuyerCompletedfaultyOrder extends Component {
                     <>
                     {this.state.isResolved?
                     <>
-                    {browserHistory.push("/completedconcernsolved?orderid="+this.state.enquiryCode)}
+                     <CompletedFaultResolved
+                      enquiryCode={this.state.enquiryCode}
+                      artisan={this.state.artisan}
+                      />   
+                    {/* {browserHistory.push("/completedconcernsolved?orderid="+this.state.enquiryCode)} */}
                     </>
                 :
                 <>

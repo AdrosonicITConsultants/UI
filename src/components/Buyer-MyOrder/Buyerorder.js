@@ -865,7 +865,8 @@ export class Buyerorder extends Component {
                                 </button>
                           {this.state.getSingleOrder.orderReceiveDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,3)>0
+                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,3)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 

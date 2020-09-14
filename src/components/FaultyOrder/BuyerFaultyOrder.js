@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 import DaysRemaining from './DaysRemaining';
 import { BuyerFaultyOrderMarkResolve } from './BuyerFaultyOrderMarkResolve';
+import { FaultResolved } from './FaultResolved';
 export class BuyerFaultyOrder extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +30,9 @@ export class BuyerFaultyOrder extends Component {
             description:"",
             showValidationfaulty:false,
             rejectButtonClick:false,
+            artisanReviewId:"",
+            isResolved:"",
+            buyer:true,
             accepted:[
                 {   
                     id: 1,
@@ -126,7 +130,7 @@ export class BuyerFaultyOrder extends Component {
             })
             TTCEapi.sendFaultyOrder(params.orderid,this.state.description,dummy).then((response)=>{
                 console.log(params.orderid,this.state.description,dummy);
-                if(response.valid)
+                if(response.data.valid)
                 {
                 this.setState({
                     sendFaultyOrder :response,
@@ -206,6 +210,8 @@ export class BuyerFaultyOrder extends Component {
             {
             this.setState({
                 getOrderProgress : response.data,
+                artisanReviewId:response.data.data.orderProgress.artisanReviewId,
+                isResolved:response.data.data.orderProgress.isResolved,
                  dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
@@ -245,8 +251,15 @@ export class BuyerFaultyOrder extends Component {
                 <Container>
                     {this.state.dataload?
                     <>
-                    
-                    {this.state.getOrderProgress.data.orderProgress.artisanReviewId == null?
+                    {this.state.isResolved?
+                    <>
+                    <FaultResolved
+                    enquiryCode={this.state.enquiryCode}
+                    buyer={this.state.buyer}/>
+                    </>
+                    :
+                    <>
+ {this.state.artisanReviewId == null?
                     <>
                      {this.state.getSingleOrder.comment !=null?
                     <>
@@ -610,6 +623,10 @@ export class BuyerFaultyOrder extends Component {
                     />
                     </>
                     }
+                    </>
+                    }
+                    
+                   
                    
                    
                     </>

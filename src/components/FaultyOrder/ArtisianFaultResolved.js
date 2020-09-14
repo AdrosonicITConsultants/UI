@@ -13,8 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 import DaysRemaining from './DaysRemaining';
-import { FaultResolved } from './FaultResolved';
-export class BuyerFaultyOrderMarkResolve extends Component {
+export class ArtisanFaultResolved extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
@@ -25,13 +24,12 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             ongoingEnquiry:true,
             enquiryCode:"",
             getSingleOrder:[],
-            isResolved:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
+            OrderDetails:[],
             getAllRefArtisanReview:[],
             Allorderdata:[],
-            OrderDetails:[],     
             dataload:false,
             description:"",
             showValidationfaulty:false,
@@ -39,8 +37,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             buyerReviewComment:"",
             actioncategoryid : 0,
             artisanReviewComment:-1,
-            concernsolved:false,
-            buyer:true,
+            collapse:false,
             accepted:[
                 {   
                     id: 1,
@@ -68,6 +65,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleAction = this.handleAction.bind(this);
+        this.collpase = this.collpase.bind(this);
 
 
     }  
@@ -85,31 +83,15 @@ export class BuyerFaultyOrderMarkResolve extends Component {
         });
         
       }
-
-      MarkResolved(id){
-          console.log(this.props.enquiryCode);
-        TTCEapi.isResolved(this.props.enquiryCode).then((response)=>{
-            if(response.data.valid)
-            {
-            this.setState({
-                isResolved : response.data.data,
-                concernsolved:true,
-                 },()=>{
-                console.log(this.state.isResolved);
-                customToast.success("Mark Resolved!!", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                //   browserHistory.push("/concernsolved?orderid="+id)
-
-            });
-        }
-        });
+      collpase(){
+          this.setState({
+              collapse:!this.state.collapse
+          })
       }
-           
-    backoperation(){
-        browserHistory.push("/buyerOrders"); 
-    }
+  
+            backoperation(){
+                browserHistory.goBack(); 
+                    }
 
     handleChange(e) {
         const { name, value } = e.target;
@@ -124,13 +106,13 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             this.setState({
                 rejectButtonClick:true
             })
-                // let params = queryString.parse(this.props.location.search);
-                // console.log(params.orderid);
-                // this.setState({
-                //     enquiryCode:params.orderid
-                // })
-                TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(this.props.enquiryCode,this.state.description,this.state.actioncategoryid);
+                let params = queryString.parse(this.props.location.search);
+                console.log(params.orderid);
+                this.setState({
+                    enquiryCode:params.orderid
+                })
+                TTCEapi.sendFaultyOrderArtisan(params.orderid,this.state.description,this.state.actioncategoryid).then((response)=>{
+                    console.log(params.orderid,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
@@ -188,12 +170,12 @@ export class BuyerFaultyOrderMarkResolve extends Component {
   
     componentDidMount(){
       
-        // let params = queryString.parse(this.props.location.search);
-        // console.log(params.orderid);
-        // this.setState({
-        //     enquiryCode:params.orderid
-        // })
-        TTCEapi.getSingleOrder(this.props.enquiryCode).then((response)=>{
+        let params = queryString.parse(this.props.location.search);
+        console.log(params.orderid);
+        this.setState({
+            enquiryCode:params.orderid
+        })
+        TTCEapi.getSingleOrder(params.orderid).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
@@ -223,22 +205,22 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             });
         }
         });
-        TTCEapi.getOrderProgress(this.props.enquiryCode).then((response)=>{
+        TTCEapi.getOrderProgress(params.orderid).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
-                getOrderProgress :response.data.data.orderProgress,                
+                getOrderProgress :response.data.data.orderProgress,  
+                OrderDetails:response.data.data,              
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
-                OrderDetails:response.data.data,               
-                dataload : true,},()=>{
+                 dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
-                    OrderDetails:response.data.data,              
                     getOrderProgress :response.data.data.orderProgress,
                     buyerReviewComment:response.data.data.orderProgress.buyerReviewComment,
                     artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
+                    OrderDetails:response.data.data,              
 
 
                 })
@@ -276,32 +258,31 @@ export class BuyerFaultyOrderMarkResolve extends Component {
         return (
             <React.Fragment>
               
-            
+            <NavbarComponent/>
+            <Container>
                     {this.state.dataload?
                     <>
-                  {this.state.concernsolved?
-                  <>
-                  <FaultResolved
-                  enquiryCode={this.props.enquiryCode}
-                  buyer={this.state.buyer}/>
-                  </>
-                :
-                <>
-                    <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                            ></img>
-                          
-                          </Col>
+                  
+                   <>
+                     <Row noGutters={true} className="">
+                  
+                         <Col sm = "1" className="col-xs-2">
+                         <img
+                                     src={logos.backarrowicon}
+                                     className="margin-cparrow cparrowsize glyphicon"
+                                      onClick={() => this.backoperation()}
+                          ></img>
+                        
+                        </Col>
+                        
+                           
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
+                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
                                         <p className="faultyp1">We are trying to resolve any issues you faced.</p>
-                                        <p className="a48hrs" style={{fontSize:"16px"}}>Please bear, It may take upto 48 hrs for Artisan to address & respond to your raised concern.</p>
+                                        <p className="a48hrs" style={{fontSize:"16px"}}>
+                                            We're glad that your concern is resolved on mutual agreement.</p>
                                     </Col>
                                     <Col className="col-xs-1">
                                          <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
@@ -340,8 +321,22 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                             this.state.getOrderProgress.orderReceiveDate:"NA" }
                                         </Col>
                                     </Row>
-
                                     <Row noGutters={true}>
+                                        <Col className="col-xs-4 viewdefectresp" onClick={()=>this.collpase()}>
+                                            View defets & response 
+                                            {this.state.collapse?
+                                             <i class="fa fa-chevron-up fafaiconcol" aria-hidden="true"></i>
+                                             :
+                                             <i class="fa fa-chevron-down fafaiconcol" aria-hidden="true"></i>
+                                          }
+                                           
+
+
+                                        </Col>
+                                    </Row>
+                            {this.state.collapse?
+                            <>
+                              <Row noGutters={true}>
                                         <Col className="col-xs-12 dispatcheddate borderdashstyle" sm={6}>
                                             <h3 className="descfaulth3">Description of fault</h3>
                                             {this.state.getAllRefBuyerReview.map((data,key)=> 
@@ -373,26 +368,38 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                              </div>
                                         </Col>
                                     </Row>
-                            <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
-                                <span>
-                                          <button
-                                            disabled={this.state.rejectButtonClick}
-                                            style={{backgroundColor:"rgb( 21, 154, 47)",border:"rgb( 21, 154, 47)"}}
-                                            className="senddelButton"
-                                            onClick={()=>this.MarkResolved(this.props.enquiryCode)}>
-                                            Mark Resolved</button>
-                                          </span>
-                                </Col>
-                            </Row>
+                      
+                            </>
+                              :
+                             <>
+                             <Row noGutters={true}>
+                                 <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
+                                 <button
+                                style={{fontSize:"15px"}}
+                                // onClick={this.sendCRDataFunction}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                                 </Col>
+                             </Row>
+                             <Row noGutters={true}>                          
+
+                                 <Col className="col-xs-12 " style={{textAlign:"center"}}>
+                                 <p className="gretajob " style={{textAlign:"center"}}>
+                                     Great Job!
+                                     </p>
+                                   <img src={logos.greenbigsmile} className="greenbigsmile" />
+                                 </Col>
+                             </Row>
+                             </>
+                             }
+                                       
                                                
                           </Col>                            
                 </Row>             
-                
-                </>
-                }
-                   
+                  
+                   </>
                 
                 
                     </>
@@ -406,8 +413,8 @@ export class BuyerFaultyOrderMarkResolve extends Component {
               
               
              
-               
-                
+              </Container>
+              <Footer></Footer>
             </React.Fragment>
         )
     }
@@ -419,5 +426,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(BuyerFaultyOrderMarkResolve);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanFaultResolved);
 export default connectedLoginPage;

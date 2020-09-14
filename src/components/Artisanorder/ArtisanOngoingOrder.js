@@ -280,8 +280,11 @@ export class ArtisanOngoingOrder extends Component {
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                  <Col className="col-xs-10" style={{textAlign:"left"}}>
-                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
-                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+            
+                  <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                            Check Faulty Order
+                        </button>
                  </Col>
          </Row>
          :

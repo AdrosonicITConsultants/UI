@@ -225,15 +225,19 @@ export class ArtisanCompletedOrder extends Component {
             </Row>
             <hr/>
             <Row>
-                <Col sm={4} className="col-xs-12 text-center"></Col>
+                <Col sm={4} className="col-xs-12 text-center">
+                <img src={logos.truck} className="truckimg"/>  Check delivery receipt
+                </Col>
                 <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
                 <i className="fa fa-star starColorActiveCompleteOrder" /> 
                 Buyer provided <a style={{cursor: "pointer"}}>rating for your order</a>
                 </Col>
                 <Col sm={4} className="col-xs-12 text-center">
                 {item.openEnquiriesResponse.comment?
-                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
-                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                            Check Faulty Order
+                        </button>
                 :
                 null
                 }
@@ -252,7 +256,7 @@ export class ArtisanCompletedOrder extends Component {
                     </button>
                 </Col>
             </Row>
-
+          
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">

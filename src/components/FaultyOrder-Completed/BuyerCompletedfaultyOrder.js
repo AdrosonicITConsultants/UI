@@ -7,12 +7,15 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-import Faulty from "./Faulty.css";
+// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
-import DaysRemaining from './DaysRemaining';
+import DaysRemaining from '../FaultyOrder/DaysRemaining';
+import { BuyerFaultyOrderMarkResolve } from '../FaultyOrder/BuyerFaultyOrderMarkResolve';
+import { BuyerCompletedFaultyOrderMarkResolved } from './BuyerCompletedFaultyOrderMarkResolved';
+import { CompletedFaultResolved } from './CompletedFaultResolved';
 export class BuyerCompletedfaultyOrder extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +32,8 @@ export class BuyerCompletedfaultyOrder extends Component {
             showValidationfaulty:false,
             rejectButtonClick:false,
             buyerReviewComment:"",
+            artisanReviewId:"",
+            isResolved:"",
             accepted:[
                 {   
                     id: 1,
@@ -201,6 +206,8 @@ export class BuyerCompletedfaultyOrder extends Component {
             this.setState({
                 getOrderProgress : response.data,
                  dataload : true,
+                 artisanReviewId:response.data.data.orderProgress.artisanReviewId,
+                 isResolved:response.data.data.orderProgress.isResolved,
                  buyerReviewComment:response.data.data.orderProgress.buyerReviewComment?response.data.data.orderProgress.buyerReviewComment:""},()=>{
                 console.log(this.state.getOrderProgress);
             });
@@ -251,6 +258,14 @@ export class BuyerCompletedfaultyOrder extends Component {
                                 <NavbarComponent/>
                                 <Container>
                     {this.state.dataload?
+                    <>
+                    {this.state.isResolved?
+                    <>
+                    {browserHistory.push("/completedconcernsolved?orderid="+this.state.enquiryCode)}
+                    </>
+                :
+                <>
+                {this.state.artisanReviewId == null?
                     <>
                     {this.state.getClosedOrder.comment !=null?
                     <>
@@ -605,7 +620,17 @@ export class BuyerCompletedfaultyOrder extends Component {
 {/* ___________________________________________________________________________________________________ */}
                     </>
                     }
-                     
+                     </>
+                 :
+                <>
+                <BuyerCompletedFaultyOrderMarkResolved
+                  enquiryCode={this.state.enquiryCode}
+                  />
+                
+                </>
+                    }
+                </>}
+                
                     </>
                     :
                     <Row noGutters={true}>

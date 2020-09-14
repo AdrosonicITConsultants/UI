@@ -246,7 +246,7 @@ export class BuyerFaultyOrder extends Component {
                     {this.state.dataload?
                     <>
                     
-                    {this.state.getOrderProgress||this.state.getOrderProgress.data.orderProgress.artisanReviewId == null?
+                    {this.state.getOrderProgress.data.orderProgress.artisanReviewId == null?
                     <>
                      {this.state.getSingleOrder.comment !=null?
                     <>

@@ -24,6 +24,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             ongoingEnquiry:true,
             enquiryCode:"",
             getSingleOrder:[],
+            isResolved:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
@@ -81,7 +82,24 @@ export class BuyerFaultyOrderMarkResolve extends Component {
         
       }
 
- 
+      MarkResolved(id){
+        TTCEapi.isResolved(this.props.enquiryCode).then((response)=>{
+            if(response.data.valid)
+            {
+            this.setState({
+                isResolved : response.data.data,
+                 },()=>{
+                console.log(this.state.isResolved);
+                customToast.success("Mark Resolved!!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                  browserHistory.push("/concernsolved?orderid="+id)
+
+            });
+        }
+        });
+      }
            
     backoperation(){
         browserHistory.push("/buyerOrders"); 
@@ -266,11 +284,14 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                           </Col>
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
-                                    <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
+                                    <Col className="col-xs-11" style={{fontSize:"27px"}}>
+                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
                                         <p className="faultyp1">We are trying to resolve any issues you faced.</p>
                                         <p className="a48hrs" style={{fontSize:"16px"}}>Please bear, It may take upto 48 hrs for Artisan to address & respond to your raised concern.</p>
                                     </Col>
+                                    <Col className="col-xs-1">
+                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                          <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>
                                         <Col className="col-xs-4 orderdettxt" sm={2}>
@@ -336,19 +357,19 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                              </div>
                                         </Col>
                                     </Row>
-                            {/* <Row noGutters={true}>
+                            <Row noGutters={true}>
                             <Col className="col-xs-9"></Col>
                                 <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
-                                          <img src={logos.chatwhite} style={{height:"14px"}}/></button>
+                                <span>
                                           <button
                                             disabled={this.state.rejectButtonClick}
+                                            style={{backgroundColor:"rgb( 21, 154, 47)",border:"rgb( 21, 154, 47)"}}
                                             className="senddelButton"
-                                            onClick={()=>this.submit()}>
-                                            Send</button>
+                                            onClick={()=>this.MarkResolved(this.props.enquiryCode)}>
+                                            Mark Resolved</button>
                                           </span>
                                 </Col>
-                            </Row> */}
+                            </Row>
                                                
                           </Col>                            
                 </Row>             

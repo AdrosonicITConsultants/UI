@@ -7,13 +7,13 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-import Faulty from "./Faulty.css";
+// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
-import DaysRemaining from './DaysRemaining';
-export class ArtisanFaultyOrder1 extends Component {
+import DaysRemaining from '../FaultyOrder/DaysRemaining';
+export class ArtisanCompletedFaultyorder extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
@@ -23,7 +23,7 @@ export class ArtisanFaultyOrder1 extends Component {
             currentDate: date,
             ongoingEnquiry:true,
             enquiryCode:"",
-            getSingleOrder:[],
+            getClosedOrder:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
@@ -171,13 +171,13 @@ export class ArtisanFaultyOrder1 extends Component {
         this.setState({
             enquiryCode:params.orderid
         })
-        TTCEapi.getSingleOrder(params.orderid).then((response)=>{
+        TTCEapi.getClosedOrder(params.orderid).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
-                 getSingleOrder : response.data.data[0].openEnquiriesResponse,
+                 getClosedOrder : response.data.data[0].openEnquiriesResponse,
                  dataload : true,},()=>{
-                console.log(this.state.getSingleOrder);
+                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -272,7 +272,7 @@ export class ArtisanFaultyOrder1 extends Component {
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
+                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                         <p className="faultyp1">Please acknowledge the raised concern to avoid any escalations.</p>
                                         <p className="a48hrs">Please reply before 48 hrs for raised concern.</p>
                                     </Col>
@@ -290,7 +290,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                     </Row>
                                     <Row noGutters={true} style={{marginBottom:"20px"}}>
                                         <Col className="col-xs-4 eqidfault" sm={3}>
-                                            Enquiry Id:{this.state.getSingleOrder.orderCode}
+                                            Enquiry Id:{this.state.getClosedOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
                                             {this.state.OrderDetails.productType}
@@ -392,7 +392,7 @@ export class ArtisanFaultyOrder1 extends Component {
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
+                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                         <p className="faultyp1">Please acknowledge the raised concern to avoid any escalations.</p>
                                         <p className="a48hrs">Please reply before 48 hrs for raised concern.</p>
                                     </Col>
@@ -410,7 +410,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                     </Row>
                                     <Row noGutters={true} style={{marginBottom:"20px"}}>
                                         <Col className="col-xs-4 eqidfault" sm={3}>
-                                            Enquiry Id:{this.state.getSingleOrder.orderCode}
+                                            Enquiry Id:{this.state.getClosedOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
                                             Made to order
@@ -527,5 +527,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisanFaultyOrder1);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanCompletedFaultyorder);
 export default connectedLoginPage;

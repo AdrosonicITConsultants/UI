@@ -7,13 +7,13 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-import Faulty from "./Faulty.css";
+// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
-import DaysRemaining from './DaysRemaining';
-export class ArtisanFaultyOrder1 extends Component {
+// import DaysRemaining from './DaysRemaining';
+export class CompletedFaultResolved extends Component {
     constructor(props) {
         super(props);
         var today = new Date(),
@@ -23,10 +23,11 @@ export class ArtisanFaultyOrder1 extends Component {
             currentDate: date,
             ongoingEnquiry:true,
             enquiryCode:"",
-            getSingleOrder:[],
+            getClosedOrder:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
+            OrderDetails:[],
             getAllRefArtisanReview:[],
             Allorderdata:[],
             dataload:false,
@@ -36,8 +37,7 @@ export class ArtisanFaultyOrder1 extends Component {
             buyerReviewComment:"",
             actioncategoryid : 0,
             artisanReviewComment:-1,
-            OrderDetails:[],
-            artisanId:-1,
+            collapse:false,
             accepted:[
                 {   
                     id: 1,
@@ -65,6 +65,7 @@ export class ArtisanFaultyOrder1 extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleAction = this.handleAction.bind(this);
+        this.collpase = this.collpase.bind(this);
 
 
     }  
@@ -82,11 +83,13 @@ export class ArtisanFaultyOrder1 extends Component {
         });
         
       }
-
- 
-           
+      collpase(){
+          this.setState({
+              collapse:!this.state.collapse
+          })
+      }
     backoperation(){
-        browserHistory.push("/artisanOrders"); 
+        browserHistory.push("/buyerOrders"); 
     }
 
     handleChange(e) {
@@ -171,13 +174,13 @@ export class ArtisanFaultyOrder1 extends Component {
         this.setState({
             enquiryCode:params.orderid
         })
-        TTCEapi.getSingleOrder(params.orderid).then((response)=>{
+        TTCEapi.getClosedOrder(params.orderid).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
-                 getSingleOrder : response.data.data[0].openEnquiriesResponse,
+                 getClosedOrder : response.data.data[0].openEnquiriesResponse,
                  dataload : true,},()=>{
-                console.log(this.state.getSingleOrder);
+                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -205,19 +208,18 @@ export class ArtisanFaultyOrder1 extends Component {
             if(response.data.valid)
             {
             this.setState({
-                getOrderProgress : response.data.data.orderProgress,
-                OrderDetails:response.data.data,
-                artisanId:response.data.data.orderProgress.artisanReviewId?response.data.data.orderProgress.artisanReviewId:"",
+                getOrderProgress :response.data.data.orderProgress,  
+                OrderDetails:response.data.data,              
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
                  dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
-                    getOrderProgress : response.data.data.orderProgress,
-                    OrderDetails:response.data.data,
+                    getOrderProgress :response.data.data.orderProgress,
                     buyerReviewComment:response.data.data.orderProgress.buyerReviewComment,
                     artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
+                    OrderDetails:response.data.data,              
 
 
                 })
@@ -254,11 +256,12 @@ export class ArtisanFaultyOrder1 extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavbarComponent/>
-                <Container>
+              
+            <NavbarComponent/>
+            <Container>
                     {this.state.dataload?
                     <>
-                   {this.state.artisanReviewId == 1?
+                  
                    <>
                      <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
@@ -271,11 +274,15 @@ export class ArtisanFaultyOrder1 extends Component {
                           </Col>
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
-                                    <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
-                                        <p className="faultyp1">Please acknowledge the raised concern to avoid any escalations.</p>
-                                        <p className="a48hrs">Please reply before 48 hrs for raised concern.</p>
+                                    <Col className="col-xs-11" style={{fontSize:"27px"}}>
+                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order id:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>                                    
+                                        <p className="faultyp1">We are trying to resolve any issues you faced.</p>
+                                        <p className="a48hrs" style={{fontSize:"16px"}}>
+                                            We're glad that your concern is resolved on mutual agreement.</p>
                                     </Col>
+                                    <Col className="col-xs-1">
+                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                          <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>
                                         <Col className="col-xs-4 orderdettxt" sm={2}>
@@ -290,7 +297,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                     </Row>
                                     <Row noGutters={true} style={{marginBottom:"20px"}}>
                                         <Col className="col-xs-4 eqidfault" sm={3}>
-                                            Enquiry Id:{this.state.getSingleOrder.orderCode}
+                                            Enquiry Id:{this.state.getClosedOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
                                             {this.state.OrderDetails.productType}
@@ -310,8 +317,22 @@ export class ArtisanFaultyOrder1 extends Component {
                                             this.state.getOrderProgress.orderReceiveDate:"NA" }
                                         </Col>
                                     </Row>
-
                                     <Row noGutters={true}>
+                                        <Col className="col-xs-4 viewdefectresp" onClick={()=>this.collpase()}>
+                                            View defets & response 
+                                            {this.state.collapse?
+                                             <i class="fa fa-chevron-up fafaiconcol" aria-hidden="true"></i>
+                                             :
+                                             <i class="fa fa-chevron-down fafaiconcol" aria-hidden="true"></i>
+                                          }
+                                           
+
+
+                                        </Col>
+                                    </Row>
+                            {this.state.collapse?
+                            <>
+                              <Row noGutters={true}>
                                         <Col className="col-xs-12 dispatcheddate borderdashstyle" sm={6}>
                                             <h3 className="descfaulth3">Description of fault</h3>
                                             {this.state.getAllRefBuyerReview.map((data,key)=> 
@@ -333,175 +354,40 @@ export class ArtisanFaultyOrder1 extends Component {
                                         </Col>
                                         <Col className="col-xs-12 dispatcheddate" sm={6}>
                                             <h3 className="remarkbyartfa">Remark by Artisan Entrepreneur</h3>
-                                            <select  className="SelectCategory" 
-                                            style={{padding:"5px",fontSize:"15px"}} 
-                                            id="cluster"
-                                            name="cluster"
-                                            disabled 
-                                            onChange={(e) => this.handleAction(e)}>
-                                                <option key = '0' actionid = '0'  value='Select Cluster'>
-                                                {this.state.getAllRefArtisanReview[this.state.artisanId].comment}
+                                                                                
 
-                                                </option>
-                                                
-                                            </select>
-                                         
-
-                                            <textarea 
+                                            <div 
                                             className="descfaultybox"
-                                             placeholder="Add your comment" 
-                                             style={{width:"433px"}}
-                                             maxLength="500"
-                                             value={this.state.getOrderProgress.artisanReviewComment?this.state.getOrderProgress.artisanReviewComment:"" }
-                                             name="description"
-                                             id="description"
-                                             disabled>
-
-                                             </textarea>
+                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)"}}
+                                            >
+                                {this.state.getOrderProgress.artisanReviewComment}
+                                             </div>
                                         </Col>
                                     </Row>
-                            {/* <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
-                                          <img src={logos.chatwhite} style={{height:"14px"}}/></button>
-                                          <button
-                                            disabled={this.state.rejectButtonClick}
-                                            className="senddelButton"
-                                            onClick={()=>this.submit()}>
-                                            Send</button>
-                                          </span>
-                                </Col>
-                            </Row> */}
+                      
+                            </>
+                              :
+                             <>
+                             <Row noGutters={true}>
+                                 <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
+                                 <button
+                                style={{fontSize:"15px"}}
+                                // onClick={this.sendCRDataFunction}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                                 </Col>
+                             </Row>
+                             </>
+                             }
+                                       
                                                
                           </Col>                            
                 </Row>             
                   
                    </>
-                :
-                <>
-                  <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
-                           <img
-                                       src={logos.backarrowicon}
-                                       className="margin-cparrow cparrowsize glyphicon"
-                                        onClick={() => this.backoperation()}
-                            ></img>
-                          
-                          </Col>
-                            <Col className="col-xs-10">
-                                    <Row noGutters={true} className ="cp1heading cp1headingtr  ">
-                                    <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
-                                        <p className="faultyp1">Please acknowledge the raised concern to avoid any escalations.</p>
-                                        <p className="a48hrs">Please reply before 48 hrs for raised concern.</p>
-                                    </Col>
-                                    </Row> 
-                                    <Row noGutters={true}>
-                                        <Col className="col-xs-4 orderdettxt" sm={2}>
-                                            Order Details
-                                        </Col>
-                                        <Col className="col-xs-4 faulttxt" sm={2}>
-                                            Fault raised
-                                        </Col>
-                                        <Col className="col-xs-4 orderdettxt" sm={2}>
-                                            Date:{ this.state.currentDate }
-                                        </Col>
-                                    </Row>
-                                    <Row noGutters={true} style={{marginBottom:"20px"}}>
-                                        <Col className="col-xs-4 eqidfault" sm={3}>
-                                            Enquiry Id:{this.state.getSingleOrder.orderCode}
-                                        </Col>
-                                        <Col className="col-xs-4 madeorderpurp" sm={2}>
-                                            Made to order
-                                        </Col>
-                                        <Col className="col-xs-4 eqidfault" sm={2}>
-                                            Brand:<span style={{color:"blue"}}>{ this.state.currentDate }</span>
-                                        </Col>
-                                        <Col className="col-xs-4 eqidfault" sm={1}>
-                                            123456
-                                        </Col>
-                                        <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.currentDate }
-                                        </Col>
-                                        <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
-                                            Arrived on:{ this.state.currentDate }
-                                        </Col>
-                                    </Row>
-
-                                    <Row noGutters={true}>
-                                        <Col className="col-xs-12 dispatcheddate borderdashstyle" sm={6}>
-                                            <h3 className="descfaulth3">Description of fault</h3>
-                                            {this.state.getAllRefBuyerReview.map((data,key)=> 
-                                            <>
-                                            {this.state.accepted[data.id-1].comment?
-                                            <>
-                                            <p className="ptagfaultheading"><b className="faultrecheading">{data.comment}</b> <br/>
-                                            {data.subComment}</p>
-                                     
-                                            </>
-                                            :
-                                            <>
-                                            </>
-                                             } 
-                                             </>
-                                            )}
-                                             <p className="faultrecheading">Note</p>
-                                            <p className="ptagfaultheading" style={{marginTop:"-10px",overflow:"auto"}}>{this.state.buyerReviewComment}</p>
-                                        </Col>
-                                        <Col className="col-xs-12 dispatcheddate" sm={6}>
-                                            <h3 className="remarkbyartfa">Remark by Artisan Entrepreneur</h3>
-                                            <select  className="SelectCategory" 
-                                            style={{padding:"5px",fontSize:"15px"}} 
-                                            id="cluster"
-                                            name="cluster" 
-                                            onChange={(e) => this.handleAction(e)}>
-                                                <option key = '0' actionid = '0'  value='Select Cluster'>View action</option>
-                                                {this.state.getAllRefArtisanReview.map((item) =>
-                                                 <option key =  {item.id}
-                                                  actionid={item.id} 
-                                                  value={item.comment}>
-                                                      {item.comment}
-                                                      </option>)}
-                                            </select>
-
-                                            <textarea 
-                                            className="descfaultybox"
-                                             placeholder="Add your comment" 
-                                             style={{width:"433px"}}
-                                             maxLength="500"
-                                             name="description"
-                                             id="description"
-                                             onChange={this.handleChange}>
-
-                                             </textarea>
-                                        </Col>
-                                    </Row>
-                                    <p className="text-center">
-                                  {this.state.showValidationfaulty ? (
-                                    <span className="bg-danger"><mark>Please Fill Mandatory Fields</mark></span>     
-                                        ) : (
-                                            <br />
-                                        )}
-                                                             </p>
-                            <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
-                                          <img src={logos.chatwhite} style={{height:"14px"}}/></button>
-                                          <button
-                                            disabled={this.state.rejectButtonClick}
-                                            className="senddelButton"
-                                            onClick={()=>this.submit()}>
-                                            Send</button>
-                                          </span>
-                                </Col>
-                            </Row>
-                                               
-                          </Col>                            
-                </Row>             
-                  
-                </>} 
+                
                 
                     </>
                     :
@@ -514,8 +400,8 @@ export class ArtisanFaultyOrder1 extends Component {
               
               
              
-                </Container>
-                <Footer></Footer>
+              </Container>
+              <Footer></Footer>
             </React.Fragment>
         )
     }
@@ -527,5 +413,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisanFaultyOrder1);
+const connectedLoginPage = connect(mapStateToProps)(CompletedFaultResolved);
 export default connectedLoginPage;

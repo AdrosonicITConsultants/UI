@@ -65,6 +65,9 @@ export class ArtisanCompletedOrder extends Component {
         localStorage.setItem("completed", 1);
         browserHistory.push("/artisancompletedorder?code=" + id)
     }
+    FaultReport(id){
+        browserHistory.push("/artisanfaultreportCompleted?orderid="+id)
+    } 
     render() {
         return (
             <React.Fragment>
@@ -211,12 +214,23 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            {item.openEnquiriesResponse.comment?
+                 <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                 <Col className="col-xs-10" style={{textAlign:"left"}}>
+                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
+                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+                 </Col>
+         </Row>
+         :
+        ""
+                }
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">
                    <Row noGutters={true}>
                        <Col className="col-xs-12 leEnqstatus bold">
-                       Enquiry Status
+                       Order Status
                        </Col>
                    </Row>
                 </Col>
@@ -411,12 +425,23 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            {item.openEnquiriesResponse.comment?
+                 <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                 <Col className="col-xs-10" style={{textAlign:"left"}}>
+                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
+                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
+                 </Col>
+         </Row>
+         :
+         ""
+                }
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">
                    <Row noGutters={true}>
                        <Col className="col-xs-12 leEnqstatus bold">
-                       Enquiry Status
+                       Order Status
                        </Col>
                    </Row>
                 </Col>

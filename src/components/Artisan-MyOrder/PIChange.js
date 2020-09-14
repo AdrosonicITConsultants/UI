@@ -255,8 +255,8 @@ export class PIchange extends Component {
                 <>
                     {this.state.dataload?
                     <>
-                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===1||
-                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===3?
+                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
                           {console.log("PIChange.js status-1/3")}
                         {this.state.getOldPIData.length==0
@@ -491,9 +491,8 @@ export class PIchange extends Component {
                         :
                         <>
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===2 ||
-                        this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===2||
-                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0||
-                        this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===0?
+                       
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
                          {console.log("PIChange.js status-2/0")}
                         

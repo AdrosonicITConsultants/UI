@@ -581,6 +581,24 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/isResolved/1706
+  static isResolved(id) {
+    let url = ApiUrl + "/enquiry/isResolved/"+id;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductsInWishlist() {
     let url = ApiUrl + "/product/getProductsInWishlist";
 

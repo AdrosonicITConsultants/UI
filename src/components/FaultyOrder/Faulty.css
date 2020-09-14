@@ -190,6 +190,16 @@
     color: rgb(35, 146, 112);
     padding: 10px;
 }
+.viewdefectresp{
+    font-weight: bolder;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(35, 146, 112);
+}
+.fafaiconcol{
+    margin-left: 20px;
+    color: darkgrey;
+}
 @media screen and (max-width:1024px) {
     .faultyreason{
         font-size: 11px;

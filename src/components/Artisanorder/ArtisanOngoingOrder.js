@@ -278,18 +278,14 @@ export class ArtisanOngoingOrder extends Component {
                 </Row>
                 {item.openEnquiriesResponse.comment?
                  <Row noGutters={true}>
-                 <Col className="col-xs-12" style={{textAlign:"center"}}>
-                 <input type="button" className="enqreqbtn" value ="Found Faulty" 
+                     <Col className="col-xs-1"></Col>
+                 <Col className="col-xs-10" style={{textAlign:"left"}}>
+                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
                  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
                  </Col>
          </Row>
          :
-         <Row noGutters={true}>
-         <Col className="col-xs-12" style={{textAlign:"center"}}>
-         <input type="button" className="enqreqbtn" value ="Found Faulty" 
-         onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
-         </Col>
- </Row>
+        ""
                 }
                
                 <Row noGutters={true} className="mt7">

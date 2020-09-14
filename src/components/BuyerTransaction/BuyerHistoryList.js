@@ -91,6 +91,7 @@ export class BuyerHistoryList extends Component {
 
     }
     gotoEnquiry(enquiryId){
+        localStorage.setItem("piShow", 1);
         browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
     }
     
@@ -293,13 +294,20 @@ export class BuyerHistoryList extends Component {
 {
     item.transactionCompleted.isActionCompleted == 0 ?
     this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerAction == data.id ? 
-    data.id == 1 || data.id == 2 ?
+     data.id == 2 ?
     <span onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}>
         <img src={logos.uploadagain} className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload again</p></span>
- 
-    :
-    data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
+     :
+  data.id == 1 ?
+  <span 
+  // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+  >
+      <img src={logos.uploadagain} className="uplodagainicon"/>
+   <p style={{marginTop:"5px"}}>upload receipt</p></span>
+   :    
+    data.id == 5 ? <span style={{color:"green"}}>
+        <img src={logos.received} className="uplodagainicon"/> <p style={{marginTop:"5px"}}>Mark Received</p></span>:""
    
      : 
     ""

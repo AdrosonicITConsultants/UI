@@ -377,7 +377,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
             // console.log(this.state);
             this.componentDidMount();
             });
-            customToast.success("MOQ Details send successfully", {
+            customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -676,23 +676,7 @@ MoqSimpleProductSelected(moqId){
         this.componentDidMount()
     }
 
-     
-//   handleReadmore(id){
-  
-//     let items = [...this.state.readmore];
-  
-//     let item = {...items[id]};
-  
-//     item = !item;
-    
-//     items[id] = item;
-   
-//     this.setState({readmore}),()=>{
-//         console.log(this.state.readmore[id]);
-//     };
-    
 
-//   }
     render() {
         return (
             <React.Fragment>
@@ -880,7 +864,7 @@ MoqSimpleProductSelected(moqId){
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                               ?
                               <li >Completed</li>
                             :
@@ -895,7 +879,7 @@ MoqSimpleProductSelected(moqId){
                                  {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                                 :
@@ -907,7 +891,7 @@ MoqSimpleProductSelected(moqId){
                             {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                               :
@@ -1082,7 +1066,7 @@ MoqSimpleProductSelected(moqId){
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                               ?
                               <li >Completed</li>
                             :
@@ -1097,7 +1081,7 @@ MoqSimpleProductSelected(moqId){
                                  {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                                 :
@@ -1109,7 +1093,7 @@ MoqSimpleProductSelected(moqId){
                             {this.state.enquiryStagesMTO.map((item1) => 
                            
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
-                                {item.openEnquiriesResponse.enquiryStageId == 14
+                                {item.openEnquiriesResponse.enquiryStageId == 10
                                 ?
                                 <li >Completed</li>
                               :

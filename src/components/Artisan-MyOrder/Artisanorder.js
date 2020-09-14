@@ -21,6 +21,7 @@ import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
+import ArtisanQC from './ArtisanQC';
 export class Artisanorder extends Component {
     constructor() {
         super();
@@ -43,7 +44,8 @@ export class Artisanorder extends Component {
             innerEnquiryStages : [],
             getChangeRequestForArtisan:[],
             getOrder:[],
-            getPi:[]
+            getPi:[],
+            BuyerPreviewInvoice:false
            
         
         }
@@ -212,7 +214,7 @@ export class Artisanorder extends Component {
     moqDetailsbtn(){
     this.setState((prevState) => {
         return{
-            selected: "moqDetails",
+        selected: "moqDetails",
         proformainvoice: true,
         transaction: false,
         changeReq: false,
@@ -223,8 +225,8 @@ export class Artisanorder extends Component {
     });
     }
     proformaDetailsbtn(){
-        this.componentDidMount()
         this.setState((prevState) => {
+            this.componentDidMount();
             return{
                 selected:"changeReq",
                 changeReq: true,
@@ -237,6 +239,7 @@ export class Artisanorder extends Component {
         });
     }
     changeRequestbtn(){
+        this.componentDidMount();
     this.setState((prevState) => {
         return{
             selected:"qualityCheck",
@@ -1466,7 +1469,9 @@ export class Artisanorder extends Component {
                                          <Col sm={10}>
                                         <PreviewChangedPI 
                                         enquiryId={this.state.enquiryCode}
-                                        enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}/>
+                                        enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
+                                        getOrderStatus={this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus}
+                                        />
                                         
                                       </Col>
                                         </>
@@ -1533,6 +1538,7 @@ export class Artisanorder extends Component {
                                                                         {console.log("mine7")}
                                                                         <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
+                                                                         openPI={this.moqDetailsbtn}
                                                                         />
                                                                         </>
                                                                         }
@@ -1575,6 +1581,7 @@ export class Artisanorder extends Component {
                                                                         {console.log("mine")}
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
+                                                                         openPI={this.moqDetailsbtn}
                                                                         />
                                                                         {/* {this.state.getChangeRequestForArtisan.length>0?
                                                                          <ArtisanChangeRequest
@@ -1608,19 +1615,21 @@ export class Artisanorder extends Component {
                 
                                     {this.state.qualityCheck ?  
                                     <>
-                                    <Col sm={1}></Col>
-                                    <Col sm={8}>
-                                      
-                                    </Col>
+                                    <Col sm={10}>
+                                   <ArtisanQC enquiryId={this.state.enquiryCode}/>
+                                   </Col>
                                     </>:null}
 
                                     {this.state.taxInvoice ? 
                                     <>
                                     {/* <Col sm={1}></Col> */}
+                                    {console.log("artitax")}
                                     <Col sm={10}>
+                                        
                                     <ArtisanTaxInvoice
                                     enquiryId={this.state.enquiryCode}
-                                    enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode} />
+                                    enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
+                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice} />
                                     </Col>
                                     </>
                                     :null}

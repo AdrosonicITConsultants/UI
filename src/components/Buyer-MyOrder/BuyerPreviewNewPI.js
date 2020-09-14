@@ -215,7 +215,7 @@ export class BuyerPreviewNewPI extends Component {
             console.log(this.state.sendPI);
            
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -261,21 +261,28 @@ export class BuyerPreviewNewPI extends Component {
 <div >
   
    <Row noGutters={true} style={{marginBottom:"20px"}}>
-        <Col className="col-xs-6 bold" >
+     {this.state.getOldPIData.length==0?
+      <Col className="col-xs-6 bold" >
+      <span> <img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post change request process
+</span> 
+    </Col>
+    :
+    <Col className="col-xs-6 bold" >
+    <span><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Showing updated PI after CR</span> 
+  </Col>
+    }
        
-       <span><img src={logos.postchangerequesticon} style={{height:"20px"}}/> Showing updated PI after CR</span> 
-        </Col>
         <Col className="col-xs-4" >
          </Col>
-         {this.state.getOldPIData?
-         <Col className="col-xs-2 viewoldpi" >
-         <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
- 
-     onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
-       
-          </Col>
+         {this.state.getOldPIData.length==0?
+        ""
           :
-          ""
+          <Col className="col-xs-2 viewoldpi" >
+          <p style={{float:"right",color:"cornflowerblue",cursor:"pointer"}}
+  
+      onClick={() => this.viewOldPI()}> <img src={logos.recent} style={{height:"15px"}}/> View old PI</p>  
+        
+           </Col>
          }
         
         
@@ -295,7 +302,7 @@ export class BuyerPreviewNewPI extends Component {
        Change Request date:{this.state.time} on  { this.state.currentDate }
 </Col>
 <Col className="col-xs-3">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
+   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -470,6 +477,11 @@ export class BuyerPreviewNewPI extends Component {
    <tr> 
      <td>
      <h3 className="snopi srwidth ">01</h3>
+     {this.state.getOldPIData.length==0?""
+     :
+     <p className="CRfondcss">CR</p>
+
+          }
         </td>
         
  

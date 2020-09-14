@@ -213,6 +213,9 @@ generateEnquiry(item){
     }
   
 }
+backoperation = () => {
+  browserHistory.goBack();
+}
     render() {
         return (
 
@@ -224,6 +227,15 @@ generateEnquiry(item){
               <NavbarComponent/>
             
              <Container>
+             <Row>
+                 <Col className='col-xs-12'>
+                 <img
+                                    src={logos.backarrowicon}
+                                    className="col-xs-2 margin-arrow arrowsize3 glyphicon"
+                                    onClick={() => this.backoperation()}
+                                  ></img>
+                 </Col>
+               </Row>
 <Row noGutters="true" id="#Top">
   <Col md={6} lg={6}sm={12} xs={12} style={{marginTop:"27px"}}>
 

@@ -181,8 +181,21 @@ import crgreeninpopup from "./cr green in popup.svg"
 import Sadpopup from "./Sad popup.svg";
 import cricon from "./cr.svg";
 import crNotify from "./CR_notify.svg";
-
+import ConfirmDelivered from "./Confirm Delivered.svg"
+import ratereview from "./rate review.svg"
+import truck from "./Icon awesome-truck-moving.svg";
+import greenTick from "./green tick sanchita.svg";
+import dropDownQC from "./drop down svg.svg";
+import notifyQC from "./sanchita Qc.svg";
+import sadwhite from "./sad - white.svg"
 export default {
+  sadwhite,
+  notifyQC,
+  dropDownQC,
+  greenTick,
+  truck,
+  ratereview,
+  ConfirmDelivered,
   crNotify,
   Sadpopup,
   crgreeninpopup,

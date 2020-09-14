@@ -184,7 +184,7 @@ export class BuyerOldPi extends Component {
             console.log(this.state.sendPI);
            
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -272,7 +272,7 @@ export class BuyerOldPi extends Component {
        Change Request date:
 </Col> */}
 <Col className="col-xs-3">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice
+   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -830,7 +830,7 @@ export class BuyerOldPi extends Component {
   {this.state.piSend=== 1 || this.props.old ?
 ""
 :
-<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back to edit details</button> 
+<button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick}  onClick={() => this.BacktoPreview()}>Go Back </button> 
 }
 
 {/* {this.state.piSend === 1?

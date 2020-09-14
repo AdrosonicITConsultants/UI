@@ -9,6 +9,7 @@ import TTCEapi from '../../services/API/TTCEapi';
 import "../BuyerEnquiries/buyerenquiry.css";
 import Footer from "../footer/footer";
 import ArtisanOngoingOrder from './ArtisanOngoingOrder';
+import ArtisanCompletedOrder from './ArtisanCompletedOrder';
 
 
 export class ArtisanOrderNav extends Component {
@@ -96,9 +97,10 @@ export class ArtisanOrderNav extends Component {
                     :
                     <>
                     {/* <CompletedList></CompletedList> */}
-                    <div className="text-center font20">
+                   <ArtisanCompletedOrder/>
+                    {/* <div className="text-center font20">
                         No Completed Order
-                    </div>
+                    </div> */}
                     </>
                 }
                 <div>

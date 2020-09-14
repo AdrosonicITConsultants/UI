@@ -465,7 +465,7 @@ class TTCEapi {
  
 
   static getMoq(enquiryId) {
-    let url = ApiUrl + "/enquiry/getMoq/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/getMoq/"+enquiryId;
 
     return axios
       .get(url)
@@ -479,7 +479,7 @@ class TTCEapi {
   } 
  
   static getPi(enquiryId) {
-    let url = ApiUrl + "/enquiry/getPi/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/getPi/"+enquiryId;
     return axios
       .get(url)
       .then((response) => {
@@ -491,9 +491,9 @@ class TTCEapi {
       });
   } 
  
-
+  // /enquiry/getEnquiry/1696
   static getEnquiryMoq(enquiryId) {
-    let url = ApiUrl + "/enquiry/getEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getEnquiry/"+ enquiryId;
 
     return axios
       .get(url)
@@ -520,8 +520,23 @@ class TTCEapi {
         return error.response;
       });
   } 
+  // /enquiry/getAllRefBuyerReview
+  static getAllRefBuyerReview() {
+    let url = ApiUrl + "/enquiry/getAllRefBuyerReview";
+
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
   static getCompletedEnquiry(enquiryId) {
-    let url = ApiUrl + "/enquiry/getClosedEnquiry/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/getClosedEnquiry/"+ enquiryId;
 
     return axios
       .get(url)
@@ -548,7 +563,24 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
+  static sendFaultyOrder(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderBuyer/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductsInWishlist() {
     let url = ApiUrl + "/product/getProductsInWishlist";
 
@@ -562,7 +594,37 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/faultyOrderArisan/1758/abcdefgh/1
+  static sendFaultyOrderArtisan(id,desc,select) {
+    let url = ApiUrl + "/enquiry/faultyOrderArisan/"+id+"/"+desc+"/"+select;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
+  static getProductsInWishlist() {
+    let url = ApiUrl + "/product/getProductsInWishlist";
 
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductIdsInWishlist() {
     let url = ApiUrl + "/product/getProductIdsInWishlist";
 
@@ -619,11 +681,11 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/deleteMoq/{moqId}?moqId=13
+  // /enquiry/deleteMoq/39
 
 
   static deleteMoq(moqId){
-    let url = ApiUrl + "/enquiry/deleteMoq/{moqId}?moqId="+moqId;
+    let url = ApiUrl + "/enquiry/deleteMoq/"+moqId;
 
   return axios
     .delete(url)
@@ -650,10 +712,10 @@ class TTCEapi {
         return error.response;
       });
   }
-    // /enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId=1057&moqId=39&artisanId=130
+    // /enquiry/MoqSelected/1550/39/10
 
   static MoqSelected(enquiryId,moqId,artisanId) {
-    let url = ApiUrl + "/enquiry/MoqSelected/{enquiryId}/{moqId}/{artisanId}?enquiryId="+enquiryId+"&moqId="+moqId +"&artisanId="+artisanId;
+    let url = ApiUrl + "/enquiry/MoqSelected/"+enquiryId+"/"+moqId +"/"+artisanId;
     console.log(url);
     return axios
       .post(url)
@@ -681,9 +743,9 @@ class TTCEapi {
       });
   }
 
-  // /enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId=1080&moqId=39
+  // /enquiry/MoqSimpleProductSelected/1550/39
   static MoqSimpleProductSelected(enquiryId,moqId) {
-    let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/{enquiryId}/{moqId}?enquiryId="+enquiryId+"&moqId="+moqId;
+    let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/"+enquiryId+"/"+moqId;
     console.log(url);
     return axios
       .post(url)
@@ -698,7 +760,7 @@ class TTCEapi {
   // /enquiry/previewPI/{enquiryId}?enquiryId=1106
 
   static previewPI(enquiryId) {
-    let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" +enquiryId;
+    let url = ApiUrl + "/enquiry/previewPI/" +enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -726,7 +788,7 @@ class TTCEapi {
   }
 
   static getMoqs(enquiryId) {
-    let url = ApiUrl + "/enquiry/getMoqs/{enquiryId}?enquiryId=" +enquiryId;
+    let url = ApiUrl + "/enquiry/getMoqs/" +enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -785,7 +847,7 @@ class TTCEapi {
   }
   // /transaction/getTransactions/{enquiryId}?enquiryId=1415
   static getTransactions(enquiryId) {
-    let url = ApiUrl + "/transaction/getTransactions/{enquiryId}?enquiryId="+enquiryId;
+    let url = ApiUrl + "/transaction/getTransactions/"+enquiryId;
     console.log(url);
     return axios
       .get(url)
@@ -826,9 +888,24 @@ class TTCEapi {
       });
   }
   // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1391&status=2
-
+  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1550&status=1
+  // /enquiry/validateFinalPaymentFromArtisan?enquiryId=1550&status=1
   static validateAdvancePaymentFromArtisan(enquiryId,status) {
     let url = ApiUrl + "/enquiry/validateAdvancePaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
+    console.log(url);
+    return axios
+      .put(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  static validateFinalPaymentFromArtisan(enquiryId,status) {
+    let url = ApiUrl + "/enquiry/validateFinalPaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
     console.log(url);
     return axios
       .put(url)
@@ -868,6 +945,7 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/generateEnquiry/41/true/Website
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
     console.log(url);
@@ -881,9 +959,9 @@ class TTCEapi {
         return error.response;
       });
   }
-  // enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=41&isCustom=true
+  // /enquiry/ifEnquiryExists/3/true
   static ifEnquiryExists(productId,isCustom) {
-    let url = ApiUrl + "/enquiry/ifEnquiryExists/{productId}/{isCustom}?productId=" +productId +"&isCustom="+isCustom;
+    let url = ApiUrl + "/enquiry/ifEnquiryExists/" +productId +"/"+isCustom;
     console.log(url);
     return axios
       .get(url)
@@ -969,6 +1047,7 @@ class TTCEapi {
       });
   }
 
+
   static buyergetAllProducts() {
     let url = ApiUrl + "/buyerCustomProduct/getAllProducts";
 
@@ -983,8 +1062,21 @@ class TTCEapi {
 
       });
   }
-  // POST /enquiry/changeRequestStatusUpdate
+  ///enquiry/markOrderAsRecieved/1705/05-09-2020
+  static markOrderAsRecieved(enquiryId,date) {
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date;
 
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+
+      });
+  }
 
   //#region registration
   static sendOtp(emailId) {
@@ -1069,11 +1161,10 @@ class TTCEapi {
   }
 
 
-
+  // {     "enquiryId": 698,  "type":1,    "paidAmount": 500,     "percentage": 50,     "pid": 18,     "totalAmount": 1000    }
   static advancedPayment(
     formData,
     enquiryId,
-    invoiceId,
     paidAmount,
     percentage,
     pid,
@@ -1083,12 +1174,12 @@ class TTCEapi {
     debugger;
     var bodyFormData = new FormData();
 
-    let url = ApiUrl + "/enquiry/advancedPayment";
+    let url = ApiUrl + "/enquiry/Payment";
 
     var payment = {
       // formData,
       enquiryId:enquiryId,
-      invoiceId:invoiceId,
+      type:parseInt(1),
       paidAmount:paidAmount,
       percentage:parseInt(percentage),
       pid:pid,
@@ -1122,17 +1213,67 @@ class TTCEapi {
       });
   }
 
-
-
-
-  static submitDeliveryChallan(
-    enquiryId,
+  static FinalPayment(
     formData,
+    enquiryId,
+    pid,
+    invoiceid,
+    paidAmount,
+    totalAmount
+
   ) {
     debugger;
     var bodyFormData = new FormData();
 
-    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId;
+    let url = ApiUrl + "/enquiry/Payment";
+
+    var payment = {
+      // formData,
+      enquiryId:enquiryId,
+      type:parseInt(2),
+      pid:parseInt(pid),
+      invoiceId:parseInt(invoiceid),
+      paidAmount:parseInt(paidAmount),
+      totalAmount:parseInt(totalAmount),
+    };
+    // var paymentFile=formData
+    
+    console.log(JSON.stringify(payment));
+    console.log(formData);
+    // console.log(selectedFile);
+    debugger;
+    bodyFormData.append("payment",JSON.stringify(payment));
+    bodyFormData.append("file", formData);
+
+    // console.log(data);
+    var config = {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    };
+    return axios
+      .post(url, bodyFormData, config)
+      .then((response) => {
+        console.log(response);
+        debugger;
+        return response;
+      })
+      .catch((error) => {
+        debugger;
+        return error.response;
+      });
+  }
+
+  static submitDeliveryChallan(
+    enquiryId,
+    formData,
+    orderDispatchDate,
+    ETA,
+  ) {
+    debugger;
+    var bodyFormData = new FormData();
+
+    let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId+"&orderDispatchDate="+orderDispatchDate+"%2000%3A00%3A00&ETA="+ETA;
 
     // console.log(JSON.stringify(file));
     console.log(formData);
@@ -1515,7 +1656,7 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/savePi/{enquiryId}?enquiryId=1435
+  // /enquiry/saveMoq/1550
   
 
   static saveMoq(
@@ -1526,7 +1667,7 @@ class TTCEapi {
     ppu,
    
     ) {
-    let url = ApiUrl + "/enquiry/saveMoq/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/saveMoq/"+ enquiryId;
    var data =
     {
       additionalInfo: additionalInfo,
@@ -1601,7 +1742,7 @@ class TTCEapi {
    sgst,
    
     ) {
-    let url = ApiUrl + "/enquiry/savePi/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/savePi/"+ enquiryId;
    var data =
     {
       cgst: 0,
@@ -1640,7 +1781,7 @@ static sendPI(
   sgst
  
   ) {
-  let url = ApiUrl + "/enquiry/sendPi/{enquiryId}?enquiryId="+ enquiryId;
+  let url = ApiUrl + "/enquiry/sendPi/"+ enquiryId;
  var data =
   {
  cgst:0,
@@ -1667,8 +1808,47 @@ static sendPI(
       return error.response;
     });
 } 
-
-
+// /enquiry/generateTaxInvoice
+static sendTaxInvoice(
+  apr,
+  cgst,
+  deliverycharge,
+  enquiryId,
+  finalamt,
+  rpu,
+  quantity,
+  sgst,
+ 
+  ) {
+  let url = ApiUrl + "/enquiry/generateTaxInvoice";
+ var data =
+  {
+  advancePaidAmt:apr,
+  cgst:cgst,
+  deliveryCharges:deliverycharge,
+  enquiryId:enquiryId,
+  finalTotalAmt:finalamt,
+  ppu:rpu,
+  quantity:quantity,
+  sgst:sgst
+ 
+  }
+ console.log(data)
+ var config = {
+  headers: {
+    "Content-type": "application/json",
+  },
+};
+  return axios
+    .post(url,data,config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+} 
 
   static sendMoq(
     enquiryId,
@@ -1678,7 +1858,7 @@ static sendPI(
     ppu,
    
     ) {
-    let url = ApiUrl + "/enquiry/sendMoq/{enquiryId}?enquiryId="+ enquiryId;
+    let url = ApiUrl + "/enquiry/sendMoq/"+ enquiryId;
    var data =
     {
       additionalInfo: additionalInfo,
@@ -1815,6 +1995,7 @@ static sendPI(
       });
   }
 
+ 
   static async getBuyerSuggestions(value) {
     let config = {
       headers: {
@@ -2015,7 +2196,7 @@ static sendPI(
       });
   }
 
-
+ 
   static getClosedEnquiries() {
     let url = ApiUrl + "/enquiry/getClosedEnquiries";
 
@@ -2062,14 +2243,15 @@ static sendPI(
         return error.response;
       });
   }
-
+  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}
+  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}?innerStageId=2
   static progressUpdate(stageid, id,innerid) {
     let url = "";
     if(innerid == 0){
-      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id  ;
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/" + stageid + "/" + id +"/{innerStageId}"  ;
 
     }else{
-      url = ApiUrl + "/enquiry/setEnquiryOrderStages/{stageId}/{enquiryId}/{innerStageId}?stageId=" + stageid + "&enquiryId=" + id +  "&innerStageId=" + innerid  ;
+      url = ApiUrl + "/enquiry/setEnquiryOrderStages/" + stageid + "/" + id +  "/{innerStageId}?innerStageId=" + innerid  ;
 
     }
     var data = {
@@ -2111,7 +2293,7 @@ static sendPI(
   }
 
   static updateNotificationSeen(id){
-   let url = ApiUrl + "/notification/markAsRead/{notificationId}?notificationId=" + id;
+   let url = ApiUrl + "/notification/markAsRead/" + id;
    console.log(url);
    var config = {
      headers: {
@@ -2149,7 +2331,7 @@ static sendPI(
 
 
 static markEnquiryClosed(id){
-  let url = ApiUrl + "/enquiry/markEnquiryCompleted/{enquiryId}?enquiryId=" + id;
+  let url = ApiUrl + "/enquiry/markEnquiryCompleted/" + id;
 
   var config = {
     headers: {
@@ -2167,10 +2349,10 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
-// /order/getOrder/{enquiryId}?enquiryId=1505
+// /enquiry/previewPI/
 
 static getBuyerPreviewPI(code){
-  let url = ApiUrl + "/enquiry/previewPI/{enquiryId}?enquiryId=" + code;
+  let url = ApiUrl + "/enquiry/previewPI/" + code;
 
   var config = {
     headers: {
@@ -2266,7 +2448,122 @@ static getChangeRequestForArtisan(enquiryId) {
     });
 }
 
+static getArtisanQcResponse(enquiryId) {
+  let url = ApiUrl + "/qc/getArtisanQcResponse?enquiryId=" + enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 
+static getQCStages() {
+  let url = ApiUrl + "/qc/getStages";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getAllQCQuestions() {
+  let url = ApiUrl + "/qc/getAllQuestions";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+ // /enquiry/getAdvancedPaymentStatus?enquiryId=1715
+
+static  getPaymentDetailsForFinalPayment(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getPaymentDetailsForFinalPayment?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /order/getClosedOrder/{enquiryId}?enquiryId=1707
+static  getClosedOrder(enquiryId)  {
+  let url = ApiUrl + "/order/getClosedOrder/{enquiryId}?enquiryId="+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getOrderProgress/1707
+ static  getOrderProgress(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+// /enquiry/getAllRefArtisanReview
+static  getAllRefArtisanReview()  {
+  let url = ApiUrl + "/enquiry/getAllRefArtisanReview/";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+static sendOrSaveQcForm(data){
+  let url = ApiUrl + "/qc/sendOrSaveQcForm";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
 
   //#endregion
 }

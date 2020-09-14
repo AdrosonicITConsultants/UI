@@ -28,6 +28,7 @@ export class ArtisanRecentList extends Component {
             getOngoingTransaction:[],
             getTransactions:[],
             getAdvancedPaymentReceipt:[],
+            validateFinalPaymentFromArtisan:[],
             dataload : false,
             acceptButtonClick:false,
             notifyButtonClick:false,
@@ -41,13 +42,23 @@ export class ArtisanRecentList extends Component {
             selectedFile:null,
             selectedFileName:"",
             notifyId:"",
-            upload:true
+            upload:true,
+            showDeliveryValidation:false
 
         }
         this.onFileChange= this.onFileChange.bind(this);
         this.paymentTypeset = this.paymentTypeset.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
+        this.handleChange=this.handleChange.bind(this)
+
     }  
+    handleChange(e) {
+        const { name, value } = e.target;
+        console.log(value);
+        this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
+       
+        });
+    }
     onFileChange(e){
         this.setState({
             selectedFile:e.target.files[0]
@@ -108,58 +119,70 @@ export class ArtisanRecentList extends Component {
         
     }
 
-    uploddeliveryreceiptModalShow(id,enquiryId){
+    uploddeliveryreceiptModalShow(id){
     
         document.getElementById('deliveryReceipt'+id).style.display='block';
         
     }
 
     uploadReceiptandSend(enquiryId,id){
-        this.setState({
-            rejectButtonClick:true
-          })
-            const formData = new FormData(); 
-        formData.append( 
-          "myFile", 
-          this.state.selectedFile, 
-        //   this.state.selectedFile.name 
-        );
-       
-        console.log(this.state.selectedFile); 
-        TTCEapi.submitDeliveryChallan(
-                enquiryId,
-            this.state.selectedFile,
-            ).then((response)=>{
-            
-            if(response.data.valid){ 
-                document.getElementById('deliveryReceipt'+id).style.display='none';
-                customToast.success("Delivery Challan uploaded", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                  });
-                this.setState({  
-               rejectButtonClick:false
-              
-            },()=>{
-                // console.log(response)
+      
+        if(this.state.orderDispatchDate && this.state.selectedFile)
+        {
+            this.setState({
+                rejectButtonClick:true
+              })
+                const formData = new FormData(); 
+            formData.append( 
+              "myFile", 
+              this.state.selectedFile, 
+            //   this.state.selectedFile.name 
+            );
            
-            });
+            console.log(this.state.selectedFile); 
+            TTCEapi.submitDeliveryChallan(
+                enquiryId,
+                this.state.selectedFile,
+                this.state.orderDispatchDate,
+                this.state.eta
+                ).then((response)=>{
+                
+                if(response.data.valid){ 
+                    document.getElementById('deliveryReceipt'+id).style.display='none';
+                    customToast.success("Delivery Challan uploaded", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.setState({  
+                   rejectButtonClick:false
+                  
+                },()=>{
+                    // console.log(response)
+               
+                });
+              
+          }
+          else{
+            document.getElementById('deliveryReceipt'+id).style.display='none';
+    
+            this.setState({
+                uploadButtonClick:false
+          });
+          customToast.error(response.data.errorMessage, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true,
+          });
           
-      }
-      else{
-        document.getElementById('deliveryReceipt'+id).style.display='none';
-
-        this.setState({
-            uploadButtonClick:false
-      });
-      customToast.error(response.data.errorMessage, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
-      
-      }
-        })
-      
+          }
+            })
+        }
+        
+        else{
+            this.setState({
+                // rejectButtonClick:true,
+                showDeliveryValidation: true,
+              })
+           }
     }
 
     uploddeliveryreceiptModalclose = (id) => {
@@ -252,6 +275,7 @@ export class ArtisanRecentList extends Component {
     }
 
     gotoEnquiry(enquiryId){
+        localStorage.setItem("piShow", 1);
         browserHistory.push("/enquiryDetails?code="+enquiryId)
     }
    
@@ -324,7 +348,40 @@ export class ArtisanRecentList extends Component {
         }
         });
     }
-    
+    acceptorRejectFinal(id,enquiryId,status){
+        console.log(enquiryId);
+        console.log(status);
+        this.setState({ acceptButtonClick:true,
+            rejectButtonClick:true})
+        TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
+            if(response.data.valid)
+            {
+                customToast.success("Transaction Status Updated!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                this.componentDidMount();
+               
+            this.setState({
+                acceptButtonClick:false,
+                rejectButtonClick:false,
+                 dataload : true,
+                 validateFinalPaymentFromArtisan : response.data.data},()=>{
+                console.log(this.state.validateFinalPaymentFromArtisan);
+            
+            });
+            document.getElementById('acceptMOQModal'+id).style.display='none';
+        }
+        else{
+            this.setState({ acceptButtonClick:false,
+                rejectButtonClick:false})
+            customToast.error(response.data.errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: true,
+              });
+        }
+        });
+    }
 
 
 
@@ -515,6 +572,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
         <>
      
     <p>Accept or Reject</p>
+    
 <span><img src={logos.accept} className="acceptrejecticon" 
        
             onClick={()=> this.acceptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
@@ -548,12 +606,18 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
         <p style={{marginTop:"5px"}}>Mark Received</p></span>:
-        data.id == 1 || data.id == 2? 
+         data.id == 2? 
        <>     
      <p>upload again</p>
 <img src={logos.uploadagain} className="acceptrejecticon" />
 </>
-     :""
+     :
+     data.id == 1 ?
+     <span 
+     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+     >
+         <img src={logos.uploadagain} className="uplodagainicon"/>
+      <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
      : 
     ""
     
@@ -619,7 +683,33 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                        {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
+                                                                        <>
+                                                                        {/* "Final apyment accept" */}
+                                                                         <span >
+                                                                        <button
+                                                                        disabled={this.state.acceptButtonClick}
+                                                                        
+                                                                        onClick={() => this.acceptorRejectFinal(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                    className="buyerMOQAcceptModalrejectButton">Reject</button></span>
+
+                                                                    
                                                                     <span >
+                                                                        <button
+                                                                        disabled={this.state.rejectButtonClick}
+                                                                       
+                                                                        onClick={() => this.acceptorRejectFinal(
+                                                                            item.transactionOngoing.id,
+                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            
+                                                                    className="buyerMOQAcceptModalOkayButton">Accept</button>
+                                                                    </span>
+                                                                        
+                                                                        </>
+                                                                        
+                                                                        :
+                                                                        <>
+                                                                         <span >
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
@@ -637,6 +727,9 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             
                                                                     className="buyerMOQAcceptModalOkayButton">Accept</button>
                                                                     </span>
+                                                                        </>
+                                                                        }
+                                                                   
                                                                  
                                                                 </div>
                                                                 </div>
@@ -743,7 +836,26 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                               
                                                                           </Row>
                                                                     }
-                                                                       
+                                                                        <Row noGutters={true}>
+                                                       <Col className="col-xs-6">
+                                                       <label>Date of dispatch</label>
+                                                        <br/>
+                                                            <input className="PIinput" type="date"
+                                                        
+                                                            // value={this.state.orderDispatchDate }
+                                                            name="orderDispatchDate"
+                                                            onChange={this.handleChange}/>
+                                                                        </Col>
+                                                   <Col className="col-xs-6">
+                                                   <label>Revised ETA (if required)</label>
+                                                        <br/>
+                                                            <input className="PIinput" type="date"
+                                                        
+                                                            // value={this.state.eta }
+                                                            name="eta"
+                                                            onChange={this.handleChange}/>
+                                                   </Col>
+                                                   </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                                             <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
@@ -754,6 +866,11 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             Make sure you send the correct enquiry receipt. <br/>
                                                                           Also make sure the attached document is <b>clear</b> and <b>readable</b>  <br/> 
                                                                           with the <b>LR</b> number and  <b>amount.</b> 
+                                                                          <p style={{textAlign:"center"}}> {this.state.showDeliveryValidation ? (
+                            <span className="bg-danger">Please fill mandatory fields</span>
+                            ) : (
+                            <br />
+                            )}</p>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>

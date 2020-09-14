@@ -10,8 +10,8 @@ export class BuyerPIPrintTable extends Component {
             <ReactToPrint 
                 trigger = {() => 
                 <p className=" belowprevtext" style={{float:"right"}}>
-                    {/* <img src={logos.downloadpdficon} className="InvImg" /> 
-                    Download this invoice in pdf */}
+                    <img src={logos.downloadpdficon} className="InvImg" /> 
+                    Download this invoice in pdf
                 </p>
                 }
                 content = {() => this.componentRef}

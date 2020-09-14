@@ -72,7 +72,10 @@ export class ArtisanChangeRequest extends Component {
         this.RejectChange = this.RejectChange.bind(this);
         this.sendCR = this.sendCR.bind(this);
       }
-
+      PI(){
+          this.props.openPI()
+        // console.log("pI cliced")
+      }
       AcceptChange(id){
          
         const typeElements = this.state;
@@ -178,42 +181,42 @@ componentDidMount(){
             })
         }
     })
-    TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
-        if(response.data.valid)
-        {
-            this.setState({getOrder:response.data.data,
-               
-                           })
-        }
-        console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus)
-    })
+  
     TTCEapi.getChangeRequestItemTable().then((response)=>{
         if(response.data.valid)
         {
            
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
-                TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        // console.log(response.data.data);
-                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
-                            dataload:true})
-                            var array = this.state.getChangeRequestForArtisan;
-        var count = 0;
-        for(var i = 0; i < array.length; i ++) {
-          if(array[i].requestStatus === 1) {
-            count = count + 1;
-          }
-        }
-        this.setState({
-          counter: count,
-        })
-                    }
-                    console.log(this.state.getChangeRequestForArtisan)
-                })
+                        this.setState({getOrder:response.data.data},()=>{
+                            TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                                if(response.data.valid)
+                                {
+                                    // console.log(response.data.data);
+                                    this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
+                                        dataload:true})
+                                        var array = this.state.getChangeRequestForArtisan;
+                                        var count = 0;
+                                        for(var i = 0; i < array.length; i ++) {
+                                        if(array[i].requestStatus === 1) {
+                                            count = count + 1;
+                                        }
+                                        }
+                                        this.setState({
+                                        counter: count,
+                                        })
+                                                    }
+                                                    console.log(this.state.getChangeRequestForArtisan)
+                                                })
+                                            })
+                                        }
+                                        
+                                    })
 
-                       }
-                
+                                        }
+                                    
                 
                 )
         }
@@ -226,22 +229,25 @@ sendCR = () => {
     this.setState({
         sendCRdisabled:true
     })
-    console.log(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-        this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-        this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"");
-                  TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),
-                  this.state.raiseCRFinalArray,
-                  this.state.trueCount===this.state.getChangeRequestForArtisan.length?1:
-           this.state.falseCount===this.state.getChangeRequestForArtisan.length?2:
-           this.state.trueCount!=this.state.getChangeRequestForArtisan?3:"").then((response)=>{
+    console.log(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
+    this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length?2:3)
+   TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
+    this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length?2:3
+    ).then((response)=>{
         if(response.data.valid)
         {
         
             document.getElementById('Modal1').style.display='none';
             document.getElementById('Modal2').style.display='none';
+            if(this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length){
+                document.getElementById('Modal3').style.display='none';
+
+            }
             document.getElementById('Modal3').style.display='block';
+
         }
     });
+   
 }
 
 // Modal1Show = () => {
@@ -249,14 +255,22 @@ sendCR = () => {
 // }
 
 Modal1Close = () => {
+    this.setState({
+        raiseCRFinalArray:[],
+        sendCRdisabled:false
+
+        // submitdisabled:true
+    })
     document.getElementById('Modal1').style.display='none';
 }
 
 Modal2Show = () => {
- this.setState({
-    // submitdisabled:true
- })
+    this.setState({
+        raiseCRFinalArray:[],
+        sendCRdisabled:false
 
+        // submitdisabled:true
+    })
 
         var array = this.state.accepted;
         var array1 = this.state.getChangeRequestForArtisan;
@@ -301,6 +315,10 @@ Modal2Show = () => {
 
 
 Modal2Close = () => {
+    this.setState({
+        raiseCRFinalArray:[],
+        // submitdisabled:true
+    })
     document.getElementById('Modal2').style.display='none';
 }
 Modal3Show = () => {
@@ -400,31 +418,33 @@ Modal3Close = () => {
             
             )}
             <p style={{textAlign:"center"}}>
-            You have accepted <b style={{color:"green"}}>{this.state.trueCount} </b>
+            You have accepted <b style={{color:"green"}}>{ this.state.accepted.filter(function(s) { return s.option; }).length } </b>
             out of <b style={{color:"green"}}> {this.state.getChangeRequestForArtisan.length}</b> requests</p>
             
-                      {/* {console.log(this.state.count)}
-                      {console.log(this.state.getChangeRequestForArtisan.length)} */}
-                      
+                
                       <>
-                     <Row noGutters={true}>
+                      <Row noGutters={true}>
                       <Col className="col-xs-12" style={{textAlign:"center"}}>
-    
-                          {/* {this.state.count ?  
-                                this.state.trueCount ==0?
-                            <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
+                      {
+                     this.state.accepted.filter(function(s) { return s.option; }).length 
+                     +  (this.state.accepted.filter(function(s) { return s.reject; }).length) == 
+                     this.state.getChangeRequestForArtisan.length
+                     ?
+                    <>
+                     {this.state.trueCount==0?
+                            <>
+                             <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
+                            </>
                             :
+                            <>
                             <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
-                             :
-                         <button className="submitCRart">Submit</button>
-    
-                          } */}
-                          {this.state.trueCount==0?
-                           <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
-                           :
-                           <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
-                            
-                          }
+
+                            </>}
+                    </>
+                     :
+                     <button className="submitCRart" disabled={this.state.submitdisabled}>Submit</button>
+                     }
+                     
                       </Col>
                   </Row>
 
@@ -554,7 +574,9 @@ Modal3Close = () => {
                     </Row>
                     <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
-                    <button className="makechangenowbtn mbcr"  >Make changes now</button>
+                    <button className="makechangenowbtn mbcr" 
+                     onClick={()=>{this.PI()}}
+                     >Make changes now</button>
             
                     </Col>
                 </Row>
@@ -573,7 +595,8 @@ Modal3Close = () => {
             </>
             
             :
-            this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==1 || this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==3?
+            this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==1 || this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==3
+            ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
             <><div className="craccbox">
             <h3 className="CRAcceptedh3">Change Request Details</h3>
           
@@ -655,16 +678,11 @@ Modal3Close = () => {
         </Row> */}
             </>
             :
-            this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
-            <>
-            <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
-            <Col className="col-xs-12 " style={{border:"2px solid palevioletred"}}>
-                <b className="CRare ">You have rejected the complete request! </b> 
-                <img src={logos.Sadpopup} className="popuprejimg" />
-            </Col>
-        </Row>
-            </>
-            :"No Data"}
+                    <Row noGutters={true}>
+                    <Col className="col-xs-12  text-center">
+                       Loading data ..
+                    </Col>
+                </Row>}
 </>
 :
 <p style={{textAlign:"center"}}>

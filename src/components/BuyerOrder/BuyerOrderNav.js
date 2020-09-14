@@ -97,10 +97,10 @@ export class BuyerOrderNav extends Component {
                     :
                     <>
                     {/* <CompletedList></CompletedList> */}
-                    {/* <BuyerCompletedOrder></BuyerCompletedOrder> */}
-                    <div className="text-center font20">
+                    <BuyerCompletedOrder></BuyerCompletedOrder>
+                    {/* <div className="text-center font20">
                         No Completed Order
-                    </div>
+                    </div> */}
                     </>
                 }
                 <div>

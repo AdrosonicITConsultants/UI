@@ -71,7 +71,9 @@ export class PreviewTaxInvoice extends Component {
             reedCounts:[],
             dyes:[],
             getOldPIData:[],
-            oldDataPI:false
+            oldDataPI:false,
+            gobackButtonClick:false,
+            sendTax:[]
 
 
         };
@@ -182,36 +184,37 @@ export class PreviewTaxInvoice extends Component {
     
       sendPI(){
          this.setState({
-           sendPI: true,
+          //  sendPI: true,
             gobackButtonClick:true,
          })
        
-        TTCEapi.sendPI(
+        TTCEapi.sendTaxInvoice(
+            this.props.apr,
+            this.props.cgst,
+            this.props.deliverycharge ,
             this.props.enquiryId,
-            this.state.cgst,
-            this.state.expectedDateOfDelivery ,
-            this.state.hsn,
-            this.state.rpu,
-            this.state.quantity,
-            this.state.sgst
-           
-          
+            this.props.finalamt,
+            this.props.rpu,
+            this.props.quantity,
+            this.props.sgst,
+         
+                    
            ).then((response)=>{
                console.log(response);
                if(response.data.valid){
-            this.setState({sendPI : response.data,
+            this.setState({sendTax : response.data,
               },()=>{
-            console.log(this.state.sendPI);
+            console.log(this.state.sendTax);
            this.componentDidMount();
             });
-            customToast.success("PI Details send successfully", {
+            customToast.success("Tax Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
           } 
         else{
           this.setState({
-            sendPI: true,
+            // sendPI: true,
             gobackButtonClick:true
           })
           customToast.error(response.data.errorMessage , {
@@ -250,8 +253,15 @@ export class PreviewTaxInvoice extends Component {
          </Col>
        
          <Col className="col-xs-2">
-          
-        
+          {this.props.taxInvoiceGenerated==true?
+          "":
+          <button  disabled={this.state.gobackButtonClick} 
+        onClick={() => this.sendPI()} 
+        className="Raiseinvbtn raisePI" 
+        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
+        Raise Tax Invoice</button>
+          }
+         
          </Col>
     </Row>
    <Row noGutters={true}>
@@ -260,8 +270,8 @@ export class PreviewTaxInvoice extends Component {
 </Col>
 
 <Col className="col-xs-3">
-   <img src={logos.downloadpdficon}style={{height:"15px"}} />   
-    Download this Invoice
+   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />   
+    Download this Invoice */}
 </Col>
 
    </Row>
@@ -424,7 +434,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth ">S No.</h3>
         </td>
      <td>
-     <h3 className="snopi gdwidth">Goods Description</h3>
+     <h3 className="snopi gdwidth">Particulars</h3>
         </td>
         <td  >
      <h3 className="snopi">HSN Code</h3>
@@ -445,7 +455,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth ">01</h3>
      {this.state.getOldPIData.length==0?""
      :
-     <p className="CRfondcss">CR</p>
+     <p className="CRfondcss"></p>
 
           }
         </td>
@@ -459,110 +469,21 @@ export class PreviewTaxInvoice extends Component {
 <>
 
 <td className="tdmarginleft">
-  
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>
+
+
+    <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>
        {this.state.history ? 
        <>
-       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}
+     <span>   {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">CR</b> </span>
        </>
        :
        <>
-       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}
+    <span>  {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">CR</b></span> 
        </>
          }  
-       </h3>
-       <p>- WARP X WEFT X EXTRA WEFT</p>
-     {this.state.history
-     ?
-     <>
-     <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.yarns[this.state.previewPI.productHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.productHistory.warpYarnCount} X {this.state.previewPI.productHistory.weftYarnCount}{this.state.previewPI.productHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.productHistory.extraWeftYarnCount ? this.state.previewPI.productHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.dyes[this.state.previewPI.productHistory.extraWeftDyeId-1].dyeDesc: ""}
+       </h3>   
 
-      </p>
-    </>
-    :
-    <>
-     <p className="descyarnpi wraptext">
-
-      -Yarn: {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} x {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
-      -Yarn Count: {this.state.previewPI.product.warpYarnCount} {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.warpDye.dyeDesc} 
-      {this.state.weftDye.dyeDesc}
-        {this.state.extraWeftDye?"x":""}
-        {this.state.extraWeftDye?
-          this.state.extraWeftDye.dyeDesc
-        :""} 
-
-      </p>
-    </>
-    }         
-      {this.state.history
-      ?
-      <>
-      <p className="RAcss">- Reed Count : <span className="rcred wraptext">
-        {this.state.reedCounts[this.state.previewPI.productHistory.reedCountId-1].count}</span></p>
-     <p>-Weight :</p>
-     <div className="sbred wraptext">
-     {this.state.previewPI.productHistory.productCategoryDesc} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
-        
-        {/* {this.state.previewPI.productHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
-          :
-
-          ""} */}
-       
-     </div>
-     <br/>
-     <p>-Dimension :</p>
-     <div className="sbred wraptext">
-     {this.state.previewPI.productHistory.productCategoryDesc}: {this.state.previewPI.productHistory.length} 
-     {this.state.previewPI.productHistory.width}
-      <br/>
-         {this.state.previewPI.productHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.relProductName[0]}: {this.state.previewPI.productHistory.relProduct[0].length} x {this.state.previewPI.productHistory.relProduct[0].width}
-         </> :
           
-          ""}
-     </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.productHistory.productCategoryDesc} {this.state.previewPI.productHistory.gsm? this.state.previewPI.productHistory.gsm:""}</span></p>
-        
-      </>
-      :
-      <>
-      <p className="RAcss">- Reed Count : <span className="rcred wraptext">
-       {this.state.previewPI.product.reedCount?this.state.previewPI.product.reedCount.count:"NA"}</span></p>
-     <p>-Weight :</p>
-     <div className="sbred wraptext">
-     {this.state.previewPI.product.productCategoryDesc}: {this.state.previewPI.product.weight?this.state.previewPI.product.weight:"NA"} <br/>
-        
-        {this.state.previewPI.product.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
-          :
-
-          ""}
-       
-     </div>
-     <br/>
-     <p>-Dimension :</p>
-     <div className="sbred wraptext">
-     {this.state.previewPI.product.productCategoryDesc}: {this.state.previewPI.product.length?this.state.previewPI.product.length:""} 
-     {this.state.previewPI.product.width?" x ":""}
-     {this.state.previewPI.product.width?this.state.previewPI.product.width:""}
-      <br/>
-         {this.state.previewPI.product.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].length?this.state.previewPI.product.relProduct[0].length:""} 
-        {this.state.previewPI.product.relProduct[0].length && this.state.previewPI.product.relProduct[0].width?"x":"" } {this.state.previewPI.product.relProduct[0].width?this.state.previewPI.product.relProduct[0].width:""}</>
-          :
-          
-          ""}
-     </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.product.productCategoryDesc} {this.state.previewPI.product.gsm? this.state.previewPI.product.gsm:""}</span></p>
-        
-      </>
-    
-    }     
      
         </td>
 </>
@@ -573,93 +494,8 @@ export class PreviewTaxInvoice extends Component {
         <>
         {console.log("Product  custom")}
         <td className="tdmarginleft">
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
-     <p>- WARP X WEFT X EXTRA WEFT</p>  
-     {this.state.customhistory
-     ?
-    <>
-    
-    <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.yarns[this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.buyerCustomProductHistory.warpYarnCount} X {this.state.previewPI.buyerCustomProductHistory.weftYarnCount}{this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.dyes[this.state.previewPI.buyerCustomProductHistory.extraWeftDyeId-1].dyeDesc: ""}
-
-      </p>
-    </>
-    :
-    <>
-      <p className="descyarnpi wraptext" >
-    -Yarn: {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} x {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
-    -Yarn Count: {this.state.buyerCustomProduct.warpYarnCount} {this.state.buyerCustomProduct.weftYarnCount && this.state.buyerCustomProduct.warpYarnCount ?"x":""} {this.state.buyerCustomProduct.weftYarnCount} {this.state.buyerCustomProduct.extraWeftYarnCount ? "x":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
-    -Dye Used: {this.state.customwarpDye.dyeDesc}   {this.state.customweftDye.dyeDesc} {this.state.customextraWeftDye?"x":""}
-     {this.state.customextraWeftDye?  this.state.customextraWeftDye.dyeDesc
-     :
-     this.state.customextraWeftDye?  this.state.customextraWeftDye:""
-     } 
-
-      </p> 
-    </>
-    }
-    
-    {this.state.customhistory
-    ?
-    <>
-    <p className="RAcss">- Reed Count : <span className="rcred wraptext">
-        {this.state.reedCounts[this.state.previewPI.buyerCustomProductHistory.reedCountId-1].count}</span></p>
-        <p>-Weight : <div className="sbred wraptext">
-       NA
-     </div></p>
-     <p>-Dimension :</p>
-     <div className="sbred wraptext">
-     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1]
-     ?
-     this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc
-    :
-    ""
-    }: {this.state.previewPI.buyerCustomProductHistory.length} 
-     {this.state.previewPI.buyerCustomProductHistory.width}
-      <br/>
-         {this.state.previewPI.buyerCustomProductHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.relProductName[0]}: {this.state.previewPI.buyerCustomProductHistory.relProduct[0].length} x {this.state.previewPI.buyerCustomProductHistory.relProduct[0].width}
-         </> :
-          
-          ""}
-     </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.buyerCustomProductHistory.productCategoryDesc} {this.state.previewPI.buyerCustomProductHistory.gsm? this.state.previewPI.buyerCustomProductHistory.gsm:""}</span></p>
-      
-    </>
-    :
-    <>
-    <p className="RAcss">- Reed Count : <span className="rcred wraptext">{this.state.buyerCustomProduct.reedCount?this.state.buyerCustomProduct.reedCount.count:"NA"}</span></p>
-     <p>-Weight :</p>
-     <div className="sbred wraptext">
-     {this.state.buyerCustomProduct.productCategory.productDesc}: {this.state.buyerCustomProduct.weight?this.state.buyerCustomProduct.weight:"NA"} <br/>
-        
-     {this.state.buyerCustomProduct.relProduct.length > 0?
-        <>  
-        {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].weight !=null?this.state.buyerCustomProduct.relProduct[0].weight:"NA"}</>
-          :
-
-          ""}
-     </div>
-     <p>-Dimension :</p>
-     <div className="sbred wraptext">
-     {this.state.buyerCustomProduct.productCategory.productDesc}: XYZ <br/>
-    
-     {this.state.buyerCustomProduct.relProduct.length > 0?
-        <>  {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].length?this.state.buyerCustomProduct.relProduct[0].length:""} 
-        {this.state.buyerCustomProduct.relProduct[0].length && this.state.buyerCustomProduct.relProduct[0].width?"x":"" } {this.state.buyerCustomProduct.relProduct[0].width?this.state.buyerCustomProduct.relProduct[0].width:""}</>
-          :
-          
-          ""}
-
-     </div>
-     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} XYZ</span></p>
-     
-    </>
-    }
-     {/* {this.state.customweftYarnCount} */}
-    
+        <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
+       
         </td>
         </>
 }
@@ -678,7 +514,7 @@ export class PreviewTaxInvoice extends Component {
      <p className="snopi rpu wraptext">{this.props.rpu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">{parseFloat(this.props.finalamt).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -700,10 +536,13 @@ export class PreviewTaxInvoice extends Component {
      <p className="snopi wraptext"></p>
      </td>
      <td>
-     <h3 className="snopi wraptextrpu"></h3>
+      <h3 className="snopi wraptextrpu"></h3>
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
+     <h3 className="snopi wraptextrpu"> {parseFloat(this.props.deliverycharge).toFixed(2)}</h3>
+
+    
 {/* <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
      <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3> */}
      </td>
@@ -726,7 +565,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {this.props.finalamt} </h3>
+     <h3 className="snopi wraptext"> {( parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)).toFixed(2)} </h3>
      </td>
    </tr>
 
@@ -750,8 +589,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
-     <h3 className="snopi wraptext">{(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext"> {parseFloat(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">{parseFloat(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -771,12 +610,16 @@ export class PreviewTaxInvoice extends Component {
     <h3 className="snopi wraptext"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext rpu"></h3>
+     <h3 className="snopi wraptext rpu"> ___</h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {(this.props.finalamt +(this.props.finalamt * this.props.sgst / 100) 
-     +(this.props.finalamt * this.props.cgst / 100)).toFixed(2) }</h3>
-     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
+     <h3 className="snopi wraptext">
+     {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }
+        {/* {parseFloat(this.props.apr).toFixed(2)} */}
+        </h3>
      </td>
    </tr>
    {/* --------------------------------Net amount paid---------------------------------------------- */}
@@ -799,7 +642,8 @@ export class PreviewTaxInvoice extends Component {
      </td>
      <td>
     
-     <h3 className="snopi wraptext"> {this.props.apr}</h3>
+     <h3 className="snopi wraptext">  {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
+     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }</h3>
      </td>
    </tr>
    {/* ----------------------------------------Buyer GST number----------------------------------- */}
@@ -808,9 +652,11 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td style={{borderRight:"1px solid transparent"}}>
-     <h3 className="freightch snopi"><b>Buyers GST No.</b></h3>
-     <h3 className="freightch snopi"><b>Company's GST No.</b></h3>
-     
+     <h3 className="freightch snopi"><b>Buyers GST No. {this.state.generatedBy.companyDetails?this.state.generatedBy.companyDetails.gstNo:"NA"}</b></h3>
+     <h3 className="freightch snopi"><b>Company's GST No. 
+       {this.state.artisanUser.companyDetails?
+     this.state.artisanUser.companyDetails.gstNo!=null? this.state.artisanUser.companyDetails.gstNo:"NA":"NA"} </b></h3>
+     {/* {console.log(this.state.artisanUser.companyDetails.gstNo)} */}
         </td>
         <td style={{borderRight:"1px solid transparent"}} >
      <h3 className="snopi wraptext"></h3>
@@ -920,12 +766,24 @@ export class PreviewTaxInvoice extends Component {
      </Col>
  </Row>
  </div>
- <Row noGutters={true}>
+ {this.props.taxInvoiceGenerated==true?
+ ""
+:
+<Row noGutters={true}>
      <Col className="col-xs-12" style={{textAlign:"center",marginTop:"10px"}}>
+ <span>
      <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
- onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+      onClick={() => this.BacktoPreview()}>Go Back to edit details</button>
+       <button disabled={this.state.gobackButtonClick} className="Raiseinvbtn"
+       onClick={() => this.sendPI()}
+       >
+         <img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise Tax Invoice</button>
+
+</span>
      </Col>
  </Row>
+}
+ 
 
    
 

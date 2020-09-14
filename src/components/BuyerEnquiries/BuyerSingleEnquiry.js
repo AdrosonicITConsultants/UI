@@ -23,7 +23,7 @@ import { BuyerPIPrintTable } from './BuyerPIPrintTable';
 export class BuyerSingleEnquiry extends Component {
     constructor() {
         super();
-
+        this.scrollPI = React.createRef();
         this.buyersDetailsbtn = this.buyersDetailsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
         this.proformaDetailsbtn = this.proformaDetailsbtn.bind(this);
@@ -446,7 +446,7 @@ export class BuyerSingleEnquiry extends Component {
             // console.log(this.state);
             this.componentDidMount();
             });
-            customToast.success("MOQ Details send successfully", {
+            customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -460,6 +460,15 @@ export class BuyerSingleEnquiry extends Component {
       });
       
       }
+    }
+
+    viewPI = () => {
+        this.proformaDetailsbtn();
+        this.scrollPI.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
     }
  
     componentDidMount(){
@@ -651,7 +660,10 @@ export class BuyerSingleEnquiry extends Component {
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
                                 console.log(this.state.getEnquiryMoq);
-                           
+                                if(localStorage.getItem("piShow") === "1") {
+                                    this.viewPI();
+                                    localStorage.removeItem("piShow");
+                                }
                             });
                         });
                     });
@@ -1334,7 +1346,7 @@ MoqSimpleProductSelected(moqId){
                     <Col className="col-xs-6">
                     <button className="completedenqButton"
                                        onClick={()=>{this.markcompleted()}}
-                                       disabled = {this.state.progressid != 14}
+                                       disabled = {this.state.progressid != 10}
 
                                        >
                                        <img src={logos.completedenq} className="completeenqimg" 
@@ -1381,7 +1393,7 @@ MoqSimpleProductSelected(moqId){
                                                          : "Allenqlistbtn")
                                                      }
                                              onClick={this.proformaDetailsbtn}>
-                                           Proforma Invoice
+                                           <div ref={this.scrollPI}>Proforma Invoice</div>
                                             </Col>
                                             {/* <Col sm={3} 
                                               className={

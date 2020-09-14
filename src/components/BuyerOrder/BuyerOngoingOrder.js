@@ -8,20 +8,47 @@ import "./Order.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 import Diffdays from './Diffdays';
+import customToast from "../../shared/customToast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import moment from 'moment';
+
 
 export class BuyerOngoingOrder extends Component {
     
     constructor(props) {
         super(props);
+        // var today = new Date(),
+        // date=today.getFullYear()+'-'+ (today.getMonth() + 1) + '-' + today.getDate();
+        var date= moment().format("YYYY-MM-DD")
+
         this.state = {
+            currentDate: date,
             enquiryStagesMTO :[],
             stage: 3,
             openEnquiries: [],
+            getOrderProgress:[],
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
             dataload:false,
+            completebtndis:true,
+            deliveredDate:"",
+            markOrderAsRecieved:[],
+            showDeldatevalidation:false
         }
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+    handleChange(e) {
+        const { name, value } = e.target;
+    
+        console.log(value);
+        this.setState({ [name]: value,showDeldatevalidation: false ,completebtndis:false}, () => {
+       
+        });
+                 
+    
     }
     ToggleDelete = () => {
     document.getElementById('id01').style.display='block';
@@ -35,6 +62,71 @@ export class BuyerOngoingOrder extends Component {
     ToggleDeleteClose = () => {
     document.getElementById('id01').style.display='none';
     } 
+    FaultyOrder(id){
+        browserHistory.push("/faulty?orderid="+id)
+    }
+    CompleteOrderShow = (id) => {
+        console.log(this.state.currentDate);
+
+        console.log(id)
+        document.getElementById('CompleteOrder'+ id).style.display='block';
+       
+       }
+       CompleteOrderClose = (id) => {
+        document.getElementById('CompleteOrder'+ id).style.display='none';
+       }
+       CompleteOrder2Show = (id) => {
+        // console.log(this.state.deliveredDate >= this.state.currentDate)
+        if( this.state.deliveredDate <= this.state.currentDate){
+            console.log(this.state.deliveredDate <= this.state.currentDate)
+            console.log(id)
+            this.setState({
+                completebtndis:false
+            })
+            TTCEapi.markOrderAsRecieved(id,this.state.deliveredDate).then((response)=>{
+                if(response.data.valid)
+                {
+                    document.getElementById('CompleteOrder'+ id).style.display='none';
+
+           document.getElementById('CompleteOrder2'+ id).style.display='block';
+           TTCEapi.markEnquiryClosed(id).then((response)=>{
+            if(response.data.valid  )
+            {
+                customToast.success("Order closed!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                
+
+            }
+        });        
+           
+                    this.setState({
+                        markOrderAsRecieved: response.data.data
+                    })
+                }
+                else{
+                    customToast.error(response.data.errorMessage, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                }
+              });
+        }
+   else
+   this.setState({
+    completebtndis:false,
+    showDeldatevalidation:true
+
+})
+        //    document.getElementById('CompleteOrder'+ id).style.display='none';
+
+        //    document.getElementById('CompleteOrder2'+ id).style.display='block';
+          }
+       CompleteOrder2Close = (id) => {
+           document.getElementById('CompleteOrder2'+ id).style.display='none';
+           this.componentDidMount()
+          }
     componentDidMount(){
 
     TTCEapi.getProductUploadData().then((response)=>{
@@ -72,7 +164,7 @@ export class BuyerOngoingOrder extends Component {
                         {   console.log("heree");
                             console.log(response1.data.data);
                             this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                console.log(this.state);
+                               
                             });
                             
                         }
@@ -83,7 +175,7 @@ export class BuyerOngoingOrder extends Component {
         }
     })
 
-
+  
 
     }
     individualpage(id){
@@ -93,8 +185,27 @@ export class BuyerOngoingOrder extends Component {
     daysleft(name)
     {
         var someDate = new Date(name);
-                                console.log(someDate);
+                                // console.log(someDate);
                                 var numberOfDaysToAdd = 10;
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                // console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                // console.log(diffDays); 
+                                return(diffDays);
+    }
+
+    raiseCRTabFunction = (id) => {
+        localStorage.setItem("changeRequest", 1);
+        browserHistory.push("/buyerorder?code=" + id);
+    }
+    daysleftFaultyOrder(name,days)
+    {
+      console.log(name,days);
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
                                 console.log(someDate); 
                                 var todayDate= new Date();
@@ -103,12 +214,6 @@ export class BuyerOngoingOrder extends Component {
                                 console.log(diffDays); 
                                 return(diffDays);
     }
-
-    raiseCRTabFunction = (id) => {
-        localStorage.setItem("changeRequest", 1);
-        browserHistory.push("/buyerorder?code=" + id);
-    }
-
     render() {
         return (
             <React.Fragment>
@@ -254,7 +359,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    {item.openEnquiriesResponse.productStatusId === 2
+                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -371,15 +476,62 @@ export class BuyerOngoingOrder extends Component {
                         }
                      </> 
                     }
+                    {/* change here (order dispatch) */}
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     <hr></hr>
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                         <Col className="col-xs-4">
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt
+                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
+                             delivery receipt</a> */}
+                         </Col>
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                    { item.openEnquiriesResponse.enquiryStageId >= 10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
 
                         </Col>
 
                         </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -464,7 +616,7 @@ export class BuyerOngoingOrder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                {/* {console.log(item.openEnquiriesResponse.productStatusId)} */}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -632,7 +784,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2
+                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
                     </>
@@ -748,6 +900,27 @@ export class BuyerOngoingOrder extends Component {
                         }
                      </>  
                     }
+                    {/* order dispatch change here */}
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     <hr></hr>
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                         <Col className="col-xs-4">
+                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt 
+                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
+                             delivery receipt</a> */}
+                         </Col>
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
@@ -880,12 +1053,183 @@ export class BuyerOngoingOrder extends Component {
                
                     </>
                     }
-                    <Row>
+                   {item.openEnquiriesResponse.enquiryStageId >9
+                   ?
+                <>
+                 <Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+                      <button className="completedenqButton"
+                                    // onClick={this.CompleteOrderShow}
+                                    onClick={()=>{this.CompleteOrderShow(item.openEnquiriesResponse.enquiryId)}}
+                                    //    disabled = {this.state.progressid != 10}
+                                        style={{border:"1px solid green"}}
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Mark this order as delivered
+                                </button>
+                                {/* <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                                 onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                                 >
+                                    raise a concern
+                                    </button> after making it as delivered. </p>                               */}
+
+
+
+{item.openEnquiriesResponse.orderReceiveDate!=null?
+                          <>
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
+                             ?
+                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                                :
+                                ""
+                             }
+                          </>
+                          :
+                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> after making it as delivered. </p>
+                          }
+                                      </Col>
+                  </Row>
+                </>
+                :
+                <>
+                </>}
+                   
+                    {/* _________________________________________Modal_1________________________________________________ */}
+                                          
+    <div id={"CompleteOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.CompleteOrderClose(item.openEnquiriesResponse.enquiryId)}>X</h1>
+            </Col>
+  
+        </Row>
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay">Congrats!</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>You are about to mark this order completed!</b> 
+                
+            </Col>
+        </Row>
+        <Row noGutters={true} className=" ">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
+            <br/>
+            <input className="PIinput" type="date"
+            style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
+              // value={this.state.orderDispatchDate }
+              placeholder="Enter date of receiving"
+              name="deliveredDate"
+              onChange={this.handleChange}
+              required/>
+        </Col>
+        </Row>
+        
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+            <p className="crmnote">Just in case if you find your order to be faulty,
+            <br/>You can always raise a concern within  
+            <br/>3 days from date received.</p>
+            <p className="text-center">
+                                                             {this.state.showDeldatevalidation ? (
+                                            <span className="bg-danger">Date must be less than or equal to current date.</span>
+                                        ) : (
+                                            <br />
+                                        )}
+                                                             </p>
+                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
+            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
+            <span >
+                <button
+                style={{fontSize:"15px"}}
+                disabled={this.state.completebtndis}
+                onClick={()=>{this.CompleteOrder2Show(item.openEnquiriesResponse.enquiryId)}}
+                className="buyerMOQAcceptModalOkayButton">Complete and Review 
+                 <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
+                 </button></span>
+        </div>
+            
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+
+   {/* _________________________________________Modal_2________________________________________________ */}
+                                          
+   <div id={"CompleteOrder2"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
+    <div class="w3-modal-content w3-animate-top modalBoxSize">
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>
+                    You can find this order under completed tab.</b> 
+                
+            </Col>
+        </Row>
+        <Row noGutters={true} className=" ">
+            <Col className="col-xs-12 " style={{textAlign:"center"}}>
+          <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
+           
+        </Col>
+        </Row>
+        
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+            <p className="crmnote">Just in case if you find your order to be faulty,
+            <br/>You can always raise a concern within  
+            <br/>10 days from date received.</p>
+            
+                <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
+            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
+            <span >
+                <button
+                style={{fontSize:"15px"}}
+                // onClick={this.sendCRDataFunction}
+                className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
+                 </button></span>
+                 <br/>
+                 <button className="raterevbtnskip"
+                   onClick={()=>{this.CompleteOrder2Close(item.openEnquiriesResponse.enquiryId)}}
+
+                //  onClick={this.CompleteOrder2Close}
+                 >
+                     Skip <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+        </div>
+            
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+      {/* -------------------------------------------Modal ends   ----------------          */}
+ 
+                  <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
                         </Col>
                     </Row>
-
                     <div className="colorbardiv">      
                             <img src={logos.colorbar} className="colorbarimg"></img>
                     </div>

@@ -70,6 +70,7 @@ import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
 import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
 import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
 import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
+import BuyerRating from './components/Rating/buyerRating';
 import { BuyerFaultyOrder } from './components/FaultyOrder/BuyerFaultyOrder';
 // import { BuyerCompletedfaultyOrder } from './components/FaultyOrder/BuyerCompletedfaultyOrder';
 import { BuyerSingleCompletedOrder } from './components/Buyer-MyOrder/BuyerSingleCompletedOrder';
@@ -183,6 +184,8 @@ function App() {
           <Route  exact path="/wishlist" component={AddWishlist} />
           <Route  exact path="/Customprod" component={AddCustomprod} />
           <Route  exact path="/Modal" component={SuccessPopup} />
+
+          <PrivateRoute exact path="/buyerRating" component={BuyerRating} />
 
          
         </Switch>

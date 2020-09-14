@@ -97,6 +97,13 @@ export class BuyerCompletedOrder extends Component {
         browserHistory.push("/completedorderfaulty?orderid="+id);
 
     }
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+
     daysleft(name)
     {
         var someDate = new Date(name);

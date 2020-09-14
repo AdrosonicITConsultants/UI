@@ -2583,6 +2583,53 @@ static sendOrSaveQcForm(data){
     });
 }
 
+static  getRatingQuestions()  {
+  let url = ApiUrl + "/user/getRatingQuestions";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static submitRatingToUser(data){
+  let url = ApiUrl + "/user/submitRatingToUser";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static  getRatingsForUser(enquiryId, userId)  {
+  let url = ApiUrl + "/user/getRatingsForUser?enquiryId=" + enquiryId + "&userId=" + userId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
   //#endregion
 }
 export default TTCEapi;

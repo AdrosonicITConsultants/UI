@@ -186,7 +186,7 @@ export default class BuyerRating extends Component {
             <NavbarComponent/>
                 {this.state.loading ? 
                 <Row noGutters={true}>
-                <Col className="col-xs-12 text-center">
+                <Col className="col-xs-12 font20 text-center rateLoadingTopBottom">
                 Loading Please Wait....
                 </Col>
                 </Row>
@@ -214,9 +214,9 @@ export default class BuyerRating extends Component {
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Found something unusual ?
                         </button>
-                        {/* <div className="ratingSubheader">
+                        <div className="ratingSubheader">
                             2 days left to report a problem
-                        </div> */}
+                        </div>
                     </Col>                          
                 </Row>
                 <div className="envelopeBgImg">
@@ -268,9 +268,9 @@ export default class BuyerRating extends Component {
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Found something unusual ?
                         </button>
-                        {/* <div className="ratingSubheader">
+                        <div className="ratingSubheader">
                             2 days left to report a problem
-                        </div> */}
+                        </div>
                     </Col>                          
                 </Row>
 
@@ -354,17 +354,3 @@ export default class BuyerRating extends Component {
     )
     }
 }
-
-{/* <Row noGutters={true}>
-                        <Col className="col-xs-12 text-center">
-                        <span>
-                            
-                            <button style={{fontSize:"15px"}} className="buyerMOQAcceptModalOkayButton raterevbtn"
-                            onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}>
-                                <img src={logos.ratereview} className="raterevbtnimg"/> 
-                                Rate & review this order
-                            </button>
-                            
-                        </span>
-                        </Col>
-                        </Row> */}

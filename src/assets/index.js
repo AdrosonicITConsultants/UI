@@ -197,7 +197,6 @@ import greenbigsmile from "./greenbigsmile.svg"
 import Iconioniciosalert1 from "./Icon ionic-ios-alert-1.svg"
 import esc from "./Icon ionic-ios-alert.svg"
 import acceptsmall from "./accept-small.svg"
-
 import progressNotifyIcon from "./tailor code.svg";
 
 export default {

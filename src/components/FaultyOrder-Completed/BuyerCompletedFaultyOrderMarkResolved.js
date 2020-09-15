@@ -283,13 +283,15 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                     <>
                   {this.state.concernSolved?
                   <>
+                                      {console.log("ARtisan 4")}
+
                   <CompletedFaultResolved
                   enquiryCode={this.props.enquiryCode}
                   artisan={this.state.artisan}/>
                   </>
                 :
-                <></>}
-                   <>
+                <>
+                  <>
                      <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
                            <img
@@ -395,6 +397,8 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                   
                    </>
                 
+                </>}
+                 
                 
                     </>
                     :

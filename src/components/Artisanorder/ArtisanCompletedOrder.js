@@ -235,8 +235,8 @@ export class ArtisanCompletedOrder extends Component {
                 <Col sm={4} className="col-xs-12 text-center">
                 {item.openEnquiriesResponse.comment?
                            <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
-                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Check Faulty Order
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
                         </button>
                 :
                 null
@@ -460,10 +460,16 @@ export class ArtisanCompletedOrder extends Component {
             {item.openEnquiriesResponse.comment?
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
-                 <Col className="col-xs-10" style={{textAlign:"left"}}>
-                 <input type="button" className="enqreqbtn" value =" Check Faulty Order" 
-                 onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}></input>
-                 </Col>
+                     <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
+                        </button>
+                :
+                null
+                }
+                </Col>
          </Row>
          :
          ""

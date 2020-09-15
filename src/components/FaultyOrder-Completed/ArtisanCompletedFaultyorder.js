@@ -266,6 +266,8 @@ export class ArtisanCompletedFaultyorder extends Component {
                     {this.state.isResolved?
                     <>
                       {/* {browserHistory.push("/completedconcernsolved?orderid="+this.state.enquiryCode)} */}
+                      {console.log("ARtisan 2")}
+
                       <CompletedFaultResolved
                       enquiryCode={this.state.enquiryCode}
                       artisan={this.state.artisan}

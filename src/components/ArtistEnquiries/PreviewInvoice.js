@@ -750,7 +750,7 @@ export class PreviewInvoice extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </Col>
  </Row>
  </div>

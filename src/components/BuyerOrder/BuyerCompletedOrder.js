@@ -277,10 +277,31 @@ export class BuyerCompletedOrder extends Component {
                         </Col>                        
                     </Row>
                   <hr></hr>
-                                      
-                  {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
-<>
-<Row noGutters={true}>
+                           {this.state.openEnquiries.comment?
+                           <>
+                             <Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row>
+                           </>
+                        :
+                        <>
+                        {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
+                <>
+            <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
                              <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
@@ -297,8 +318,8 @@ export class BuyerCompletedOrder extends Component {
                         </span>
                      </Col>
                  </Row> 
-</>
-:
+            </>
+                :
                  <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
@@ -315,7 +336,11 @@ export class BuyerCompletedOrder extends Component {
                             </button>
                         </span>
                      </Col>
-                 </Row> } 
+                 </Row>
+                  }
+                        </>
+                         }           
+                   
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -523,18 +548,18 @@ export class BuyerCompletedOrder extends Component {
                         </Col>
                     </Row>
                    <hr></hr>
-                   {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
-                   <>
-                     <Row noGutters={true}>
+                   {this.state.openEnquiries.comment?
+                           <>
+                             <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}}
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
                                 <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -542,26 +567,50 @@ export class BuyerCompletedOrder extends Component {
                         </span>
                      </Col>
                  </Row>
-                   </>
-                   :
-                   <Row noGutters={true}>
-                   <Col className="col-xs-12" style={{textAlign:"center"}}>
-                       <span>
-                           {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}}
-                            onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
-                            className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                           <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
-                              <button
-                              style={{fontSize:"15px"}}
-                              // onClick={this.sendCRDataFunction}
-                              className="buyerMOQAcceptModalOkayButton raterevbtn">
-                                  <img src={logos.ratereview} className="raterevbtnimg"/>
-                              Rate & Review this order
-                          </button>
-                      </span>
-                   </Col>
-               </Row>
-                   }
+                           </>
+                        :
+                        <>
+                        {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 ?
+                <>
+            <Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> 
+            </>
+                :
+                 <Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row>
+                  }
+                        </>
+                         } 
                    
                    
                     <Row noGutters={true} className="mt7">

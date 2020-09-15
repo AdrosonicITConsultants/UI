@@ -12,6 +12,7 @@ import ReactStars from "react-rating-stars-component";
 import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 
+
 export default class BuyerRating extends Component {
 
     constructor(props) {
@@ -215,6 +216,7 @@ export default class BuyerRating extends Component {
     return (
         <React.Fragment>
             <NavbarComponent/>
+          
                 {this.state.loading ? 
                 <Row noGutters={true}>
                 <Col className="col-xs-12 font20 text-center rateLoadingTopBottom">

@@ -194,7 +194,13 @@ import ratingFooterImg from "./thread of times.jpg";
 import envelopeHeart from "./Icon awesome-heart.svg";
 import sadwhite from "./sad - white.svg"
 import greenbigsmile from "./greenbigsmile.svg"
+import Iconioniciosalert1 from "./Icon ionic-ios-alert-1.svg"
+import esc from "./Icon ionic-ios-alert.svg"
+import acceptsmall from "./accept-small.svg"
 export default {
+  acceptsmall,
+  esc,
+  Iconioniciosalert1,
   greenbigsmile,
   envelopeHeart,
   ratingFooterImg,

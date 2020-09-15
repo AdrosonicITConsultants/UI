@@ -745,7 +745,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td style={{borderRight:"1px solid transparent"}} className="allamtIndtax">
-     All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+     {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </td>
    </tr>
  </table>

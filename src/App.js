@@ -153,7 +153,6 @@ function App() {
           <PrivateRoute exact path="/artisanfaultreport" component={ArtisanFaultyOrder1} />
           <PrivateRoute exact path="/concernsolved" component={FaultResolved} />
           <PrivateRoute exact path="/concernsolvedartisan" component={ArtisanFaultResolved} />
-
           <PrivateRoute exact path="/completedconcernsolved" component={CompletedFaultResolved} />
           <PrivateRoute exact path="/artisanfaultreportCompleted" component={ArtisanFaultCompletedOrder1} />
 

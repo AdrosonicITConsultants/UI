@@ -265,10 +265,13 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                     <>
                     {this.state.isResolved?
                     <>
-                    <CompletedFaultResolved
+                    {console.log("ARtisan 1")}
+                    {console.log(this.state.enquiryCode)}
+
+                       <CompletedFaultResolved
                       enquiryCode={this.state.enquiryCode}
                       artisan={this.state.artisan}
-                      />        
+                      />   
                     </>
                 :
                 <>

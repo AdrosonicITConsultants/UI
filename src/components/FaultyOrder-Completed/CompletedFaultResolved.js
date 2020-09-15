@@ -177,6 +177,9 @@ export class CompletedFaultResolved extends Component {
         // this.setState({
         //     enquiryCode:this.props.enquiryCode
         // })
+        console.log(this.props)
+
+        console.log(this.props.enquiryCode)
         TTCEapi.getClosedOrder(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
@@ -289,7 +292,7 @@ export class CompletedFaultResolved extends Component {
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order id:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>                                    
+                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order idss:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>                                    
                                         <p className="faultyp1">We are trying to resolve any issues you faced.</p>
                                         <p className="a48hrs" style={{fontSize:"16px"}}>
                                             We're glad that your concern is resolved on mutual agreement.</p>

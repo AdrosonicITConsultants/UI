@@ -262,6 +262,8 @@ export class BuyerCompletedfaultyOrder extends Component {
                     <>
                     {this.state.isResolved?
                     <>
+                                        {console.log("ARtisan 3")}
+
                      <CompletedFaultResolved
                       enquiryCode={this.state.enquiryCode}
                       artisan={this.state.artisan}

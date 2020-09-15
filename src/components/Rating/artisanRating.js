@@ -12,8 +12,7 @@ import ReactStars from "react-rating-stars-component";
 import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 
-
-export default class BuyerRating extends Component {
+export default class ArtisanRating extends Component {
 
     constructor(props) {
         super(props);
@@ -23,26 +22,20 @@ export default class BuyerRating extends Component {
             enquiryCode: "",
             buyerQuestionsComments : [],
             buyerQuestionsRatings: [],
-            getClosedOrder:[],
             ratingArray: [],
             newRatingId: 0,
             userData: [],
             submitReviewButton: false,
             averageRate: 0,
             loading: false,
-            isBuyerRatingDone: 0
+            isArtisanRatingDone: 0
         };   
     
     }
 
-    foundUnsual(id){
-        console.log('clicked')
-        browserHistory.push("/completedorderfaulty?orderid="+id)
-    }
-
     backoperation(){
-        localStorage.setItem("ratingBack", 1);
-        browserHistory.push("/buyerOrders"); 
+        localStorage.setItem("ratingBack1", 1);
+        browserHistory.push("/artisanOrders"); 
     }
 
     getRatingId = (id) => {
@@ -50,20 +43,6 @@ export default class BuyerRating extends Component {
         console.log(id);
     }
 
-    daysleftrating(name,days)
-    {
-      console.log(name,days);
-        var someDate = new Date(name);
-                                console.log(someDate);
-                                var numberOfDaysToAdd =parseInt(days);
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime =  someDate - todayDate ;
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                return(diffDays);
-    }
     ratingFunction = (newValue) => {
         console.log(newValue * 2);
         var rating = newValue * 2;
@@ -165,21 +144,11 @@ export default class BuyerRating extends Component {
             {
                 console.log(response.data.data);
                 this.setState({
-                    buyerQuestionsComments: response.data.data.buyerQuestions.commentQuestions,
-                    buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
+                    buyerQuestionsComments: response.data.data.artisanQuestions.commentQuestions,
+                    buyerQuestionsRatings: response.data.data.artisanQuestions.ratingQuestions,
                     loading: false,
                 });
             }
-        });
-        TTCEapi.getClosedOrder(this.state.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-            this.setState({
-                 getClosedOrder : response.data.data[0].openEnquiriesResponse,
-                },()=>{
-                console.log(this.state.getClosedOrder);
-            });
-        }
         });
 
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
@@ -187,12 +156,11 @@ export default class BuyerRating extends Component {
             {
                 console.log(response.data.data);
                 this.setState({
-                    isBuyerRatingDone: response.data.data.isBuyerRatingDone,
+                    isArtisanRatingDone: response.data.data.isArtisanRatingDone,
                     loading: false,
                 });
             }
         });
-       
     }
 
     render() {
@@ -214,7 +182,6 @@ export default class BuyerRating extends Component {
     return (
         <React.Fragment>
             <NavbarComponent/>
-          
                 {this.state.loading ? 
                 <Row noGutters={true}>
                 <Col className="col-xs-12 font20 text-center rateLoadingTopBottom">
@@ -222,7 +189,7 @@ export default class BuyerRating extends Component {
                 </Col>
                 </Row>
                 :
-                this.state.isBuyerRatingDone === 1 ?
+                this.state.isArtisanRatingDone === 1 ?
                 <Container>
                 <Row noGutters={true} className="ratingRowTop">
                     <Col sm={1} className="col-xs-2">
@@ -241,21 +208,13 @@ export default class BuyerRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                    {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
-                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
-                          ?
-                          <>
-                          <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>
-                          <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                          Found something unusual ?
-                      </button>
-                        <div className="ratingSubheader">
-                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)} days left to report a problem
-                        </div>
-                        </>
-                        :
-                        ""
-                         }
+                        <button className="rateUnusualButton">
+                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                            Check faulty order
+                        </button>
+                        {/* <div className="ratingSubheader">
+                            2 days left to report a problem
+                        </div> */}
                     </Col>                          
                 </Row>
                 <div className="envelopeBgImg">
@@ -299,26 +258,17 @@ export default class BuyerRating extends Component {
                             Review your Order Id : {this.state.enquiryCode}
                         </div>
                         <div className="ratingSubheader">
-                            We'll just take 2 minutes to review this order to let the artisan help you serve better in future
+                            We'll just take 2 minutes to review this order
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                       
-                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
-                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
-                          ?
-                          <>
-                          <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>
-                          <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                          Found something unusual ?
-                      </button>
-                        <div className="ratingSubheader">
-                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)} days left to report a problem
-                        </div>
-                        </>
-                        :
-                        ""
-                         }
+                        <button className="rateUnusualButton">
+                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
+                            Check faulty order
+                        </button>
+                        {/* <div className="ratingSubheader">
+                            2 days left to report a problem
+                        </div> */}
                     </Col>                          
                 </Row>
 
@@ -329,7 +279,7 @@ export default class BuyerRating extends Component {
                             Rate stars below from 1st being poor to 5th as best.                                
                         </div> 
                         <div className="rateSubSubHeader">
-                            Thankyou for helping an artisan bring some confidence & smile !
+                            Thankyou for helping an buyer bring some confidence & smile !
                         </div>
                     </Col>
                 </Row>

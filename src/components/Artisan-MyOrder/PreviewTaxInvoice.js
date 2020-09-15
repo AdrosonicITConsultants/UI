@@ -616,9 +616,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
      +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
      <h3 className="snopi wraptext">
-     {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
-     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }
-        {/* {parseFloat(this.props.apr).toFixed(2)} */}
+     
+        {parseFloat(this.props.apr).toFixed(2)}
         </h3>
      </td>
    </tr>

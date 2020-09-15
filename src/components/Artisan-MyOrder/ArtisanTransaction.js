@@ -706,23 +706,8 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{/* {this.state.getTransactionActions.map((data)=> 
-<>
-{
-    item.transactionOngoing.isActionCompleted == 0 ?
-    
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
-    " "
-    :""
-    :
-    ""
-   
-}
-    </>
-)} */}
 
-                                          
-                                                        <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
+     <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">

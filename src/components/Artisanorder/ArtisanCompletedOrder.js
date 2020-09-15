@@ -74,6 +74,13 @@ export class ArtisanCompletedOrder extends Component {
         localStorage.setItem("ratingEnquiryCode", code);
         browserHistory.push("/artisanRating?code=" + id);
     }
+
+    reviewSelfPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/artisanSelfRating?code=" + id);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -127,7 +134,9 @@ export class ArtisanCompletedOrder extends Component {
                                   <Col className="leEnqid bold">
                                   <div>
                                   <div dangerouslySetInnerHTML={{ __html: item.openEnquiriesResponse.enquiryCode }} />
+                                  {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
                                   <i className="fa fa-star starColorActiveCompleteEnquiryId" />
+                                  : null }
                                   </div>
                                    
                                   {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
@@ -228,10 +237,14 @@ export class ArtisanCompletedOrder extends Component {
                 <Col sm={4} className="col-xs-12 text-center">
                 <img src={logos.truck} className="truckimg"/>  Check delivery receipt
                 </Col>
+                {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
                 <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
                 <i className="fa fa-star starColorActiveCompleteOrder" /> 
-                Buyer provided <a style={{cursor: "pointer"}}>rating for your order</a>
-                </Col>
+                Buyer provided <a style={{cursor: "pointer"}}
+                onClick={() => this.reviewSelfPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                >rating for your order</a>
+                </Col> 
+                : null }
                 <Col sm={4} className="col-xs-12 text-center">
                 {item.openEnquiriesResponse.comment?
                            <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
@@ -245,6 +258,8 @@ export class ArtisanCompletedOrder extends Component {
             </Row>
             <hr/>
 
+            {item.openEnquiriesResponse.enquiryStageId === 10 ?
+
             <Row noGutters={true}>
                 <Col className="col-xs-12" style={{textAlign:"center"}}>
                     <button
@@ -256,6 +271,8 @@ export class ArtisanCompletedOrder extends Component {
                     </button>
                 </Col>
             </Row>
+            : null }
+
           
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>

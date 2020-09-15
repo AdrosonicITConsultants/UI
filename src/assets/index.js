@@ -193,6 +193,7 @@ import ratingEditIcon from "./Icon material-rate-review.svg";
 import ratingFooterImg from "./thread of times.jpg";
 import envelopeHeart from "./Icon awesome-heart.svg";
 import sadwhite from "./sad - white.svg"
+<<<<<<< HEAD
 import greenbigsmile from "./greenbigsmile.svg"
 import Iconioniciosalert1 from "./Icon ionic-ios-alert-1.svg"
 import esc from "./Icon ionic-ios-alert.svg"
@@ -201,6 +202,13 @@ export default {
   acceptsmall,
   esc,
   Iconioniciosalert1,
+=======
+import greenbigsmile from "./greenbigsmile.svg";
+import progressNotifyIcon from "./tailor code.svg";
+
+export default {
+  progressNotifyIcon,
+>>>>>>> 08864d223bc2a6a5b3b9d011beda1352f513ff1f
   greenbigsmile,
   envelopeHeart,
   ratingFooterImg,

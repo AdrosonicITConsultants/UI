@@ -30,11 +30,11 @@ export class BuyerCompletedOrder extends Component {
 
     CompleteOrder2Show = (id) => {
         document.getElementById('CompleteOrder2'+ id).style.display='block';
-
     }
+
     CompleteOrder2Close = (id) => {
         document.getElementById('CompleteOrder2'+ id).style.display='none';
-       }
+    }
 
     componentDidMount(){
 

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 // import DaysRemaining from './DaysRemaining';
+import Moment from 'react-moment';
 export class CompletedFaultResolved extends Component {
     constructor(props) {
         super(props);
@@ -292,7 +293,7 @@ export class CompletedFaultResolved extends Component {
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order idss:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>                                    
+                                        <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order id:  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>                                    
                                         <p className="faultyp1">We are trying to resolve any issues you faced.</p>
                                         <p className="a48hrs" style={{fontSize:"16px"}}>
                                             We're glad that your concern is resolved on mutual agreement.</p>
@@ -326,8 +327,16 @@ export class CompletedFaultResolved extends Component {
                                             {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.getOrderProgress.orderDispatchDate !=null?
-                                            this.state.getOrderProgress.orderDispatchDate:"NA" }
+                                            Dispatched on:
+                                            {this.state.getOrderProgress.orderDispatchDate !=null?
+                                             <Moment format="DD-MM-YYYY">
+                                             {this.state.getOrderProgress.orderDispatchDate }
+                                           </Moment>
+                                           :
+                                           "NA"
+                                            }
+                                                
+                                           
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
                                             Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?

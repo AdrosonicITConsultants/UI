@@ -22,6 +22,7 @@ import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 import ArtisanQC from './ArtisanQC';
+import { ArtisanCompletedTransaction } from './ArtisanCompletedTransactions';
 export class ArtisanSingleCompletedOrder extends Component {
     constructor() {
         super();
@@ -656,254 +657,70 @@ export class ArtisanSingleCompletedOrder extends Component {
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
-                        <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
-                            <div className="progressbarfont">
-                                <br /><br />
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
-                                <li >Completed</li>
-                                </ul>
-                                :
-                                <>
-                                {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
-                                    ?
-                                    <img src={logos.cricon} className="cricon"></img>
- 
-                                    :
-                                    null
- 
-                                }
-                                { item.isBlue== 1
-                                    ?
-                                    <>
-                                     <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                <br></br>
-                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                </> : item1.desc}</li>
-                                 )     }
-                                <li >Completed</li>
-                                </ul>
-                                    </>
-                                    :
-                                    <ul className="list-unstyled multi-steps">
-                                    {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                    <br></br>
-                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                    </> : item1.desc}</li>
-                                     )     }
-                                    <li >Completed</li>
-                                    </ul>
-                                
-                                }
-                               
-                                </>
-                                    }
+            <Col className="col-xs-1"></Col>
+                <Col className="col-xs-10">
+                   <Row noGutters={true}>
+                       <Col className="col-xs-12 ">
+                       <div className="progressbarfont">
+                        <br /><br />
+                        {item.openEnquiriesResponse.productStatusId === 2
+                        ?
+                        <ul className="list-unstyled multi-steps">
+                            {item.openEnquiriesResponse.enquiryStageId == 3
+                            ?
+                            this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                            </div>
-                                              
-                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                   
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                item.openEnquiriesResponse.enquiryCode       
-                                :
-                                <>
-                                 {this.state.innerEnquiryStages.map((item1) => 
-                                   
-                                    <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
-                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
-                            
-                                    {item1.stage }
-                                    </Col>
-                                    
-                                    )} 
-                                </>
-                                }
-                                
-                               
-                                </Row>
-                              
-                                <br></br>
-                                
-                            </div>
-                            </div>
+                            :
+                            this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
+
+                            }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                          ?
+                          <li >Completed</li>
+                        :
+                        <li className="closedenq">Closed</li>
+                        }
+                        </ul>
+                        :
+                        <ul className="list-unstyled multi-steps">
+                               {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                            ?
+                            <>
+                             {this.state.enquiryStagesMTO.map((item1) => 
+                       
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                            ?
+                            <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                            </>
+                        :
+                        <>
+                        {this.state.enquiryStagesMTO.map((item1) => 
+                       
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                            ?
+                            <li >Completed</li>
+                          :
+                          <li className="closedenq">Closed</li>
+                          }
+                          </>
+                    }
+                        
+                          
+                        </ul>
+                        
+                            }
+
                         </div>
- 
-
-                            </Col>
-                        </Row>
-                        </Col>
-                    </Row>
-                    <Row noGutters={true} className="text-center">
-                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
-                    ? 
-                     <></>
-                   :
-                   <button
-                     className="blackButton"
-                     onClick={this.ToggleDelete}
-                    >
-                     Change Status
-                   </button>
-                     }   
-                   
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                    Change Status
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={this.ToggleDeleteClose} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusId === 2
-                                ?
-                                <>
-                                 {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.orderStages.id > 3 
-                                    ?
-                                    <>
-                                    <Col className="col-xs-7 mb7 text-left">
-                                        {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-                                 {" "}{item1.orderStages.desc}
-                                    </Col>
-                                     <Col className="col-xs-5 mb7">
-                                      {item1.orderStages.id == (this.state.Progressidnext) ?  <button className="markCompletedButton" onClick={this.stateupdate}> Mark Completed</button> :<></> }
-                                    </Col>
-                                 </>
-                                    :
-                                    <>
-                                    </>
-                                 )}   
-                                </>
-                                :
-                                <>
-                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                    item1.id > 3
-                                    ?
-                                        <>
-                                        {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
-                                        ?
-                                            <>
-                                                {this.state.innerEnquiryStages.map((item2) => 
-                                                    <>
-                                                    <Col className="col-xs-7 mb7 text-left">
-                                                    {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
-                                                    {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                                    {item2.stage}
-                                                    </Col>
-                                                    <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
-
-                                                    </Col>
-                                                    </>
-                                                )}
-                                            </>
-                                        :
-                                        <>
-                                        {item1.id == 5
-                                        ?
-                                        <>
-                                    {
-                                        this.state.innerEnquiryStages.map((item2) => 
-                                        <>
-                                            <Col className="col-xs-7 mb7 text-left">
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item2.stage}
-                                        </Col>
-                                        <Col className="col-xs-5 mb7 h20">
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId == 5 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-
-                                        </Col>
-                                        </>
-                                        )
-                                        }
-                                    </>
-                                        :
-                                        <>
-                                            <Col className="col-xs-7 mb7 text-left">
-
-                                                {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                                {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                                {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                                    {item1.desc}
-                                            </Col>
-                                            <Col className="col-xs-5 mb7 h20">
-                                                {}
-                                                {item1.id == 6 && item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId == 4 ? <button className="markCompletedButton" onClick={this.stateupdate}>Complete</button>:<></>}
-                                                {item1.id == (this.state.progressid+1) ?<button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-
-                                            </Col>
-                                        </>
-
-                                         }
-                                   
-                                    </>
-                                    }
-                                    </>
-                                
-                                         
-                                    :
-                                    <>
-                                    </>
-                                 )} 
-                                </>
-                                }
-                                
-                               
-                            </Row>
-                            <br></br>
-                         
-                            
-                        </div>
-                        </div>
-                    </div>
-
-                </Row>
-             
-                  
+                       </Col>
+                   </Row>
+                </Col>
+            </Row>
+           
                     </>
                     :
                     <>
@@ -1124,256 +941,69 @@ export class ArtisanSingleCompletedOrder extends Component {
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                    {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
-                        <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
-                            <div className="progressbarfont">
-                                <br /><br />
-                                {item.openEnquiriesResponse.productStatusHistoryId === 2
-                                ?
-                                <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.orderStages.id ? "is-active": " "} >{item1.orderStages.desc}</li> )     }
-                                <li >Completed</li>
-                                </ul>
-                                :
-                                <>
-                                {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
-                                    ?
-                                    <img src={logos.cricon} className="cricon"></img>
- 
-                                    :
-                                    null
- 
-                                }
-                                { item.isBlue== 1
-                                    ?
-                                    <>
-                                     <ul className="list-unstyled multi-steps">
-                                {this.state.enquiryStagesMTO.map((item1) => 
-                                <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                <br></br>
-                                <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                </> : item1.desc}</li>
-                                 )     }
-                                <li >Completed</li>
-                                </ul>
-                                    </>
-                                    :
-                                    <ul className="list-unstyled multi-steps">
-                                    {this.state.enquiryStagesMTO.map((item1) => 
-                                    <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
-                                    <br></br>
-                                    <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
-                                    </> : item1.desc}</li>
-                                     )     }
-                                    <li >Completed</li>
-                                    </ul>
-                                
-                                }
-                               
-                                </> 
-                                    }
+            <Col className="col-xs-1"></Col>
+                <Col className="col-xs-10">
+                   <Row noGutters={true}>
+                       <Col className="col-xs-12 ">
+                       <div className="progressbarfont">
+                        <br /><br />
+                        {item.openEnquiriesResponse.productStatusHistoryId === 2
+                        ?
+                        <ul className="list-unstyled multi-steps">
+                            {item.openEnquiriesResponse.enquiryStageId == 3
+                            ?
+                            this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                                </div>
-                                                            
-                    <div id={"id09"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCS">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                   
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={()=>{this.ToggleDeleteClose22(item.openEnquiriesResponse.enquiryId)}} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusHistoryId === 2
-                                ?
-                                <>  
-                                {item.openEnquiriesResponse.enquiryCode}
-                                </>
-                                :
-                                <>
-                                 {this.state.innerEnquiryStages.map((item1) => 
-                                   
-                                    <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
-                                        {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
-                            
-                                    {item1.stage }
-                                    </Col>
-                                    
-                                    )} 
-                                </>
-                                }
-                                
-                               
-                                </Row>
-                              
-                                <br></br>
-                                
-                            </div>
-                            </div>
+                          :
+                            this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+
+                            }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                          ?
+                          <li >Completed</li>
+                        :
+                        <li className="closedenq">Closed</li>
+                        }
+                        </ul>
+                        :
+                        <ul className="list-unstyled multi-steps">
+                                 {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                            ?
+                            <>
+                             {this.state.enquiryStagesMTO.map((item1) => 
+                       
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                            ?
+                            <li >Completed</li>
+                            :
+                            <li className="closedenq">Closed</li>
+                            }
+                            </>
+                        :
+                        <>
+                        {this.state.enquiryStagesMTO.map((item1) => 
+                       
+                            <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     }
+                            {item.openEnquiriesResponse.enquiryStageId == 10
+                            ?
+                            <li >Completed</li>
+                          :
+                          <li className="closedenq">Closed</li>
+                          }
+                          </>
+                    }
+                        
+                        </ul>
+                        
+                            }
+
                         </div>
- 
-
-
-                            </Col>
-                        </Row>
-                        </Col>
-                    </Row>
-                    
-                    <Row noGutters={true} className="text-center">
-                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
-                    ? 
-                     <></>
-                   :
-                   <button
-                     className="blackButton"
-                     onClick={this.ToggleDelete}
-                    >
-                     Change Status
-                   </button>
-                     }   
-                   
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
-                            <div>
-                            <Row noGutters={true}>
-                                <Col className="col-xs-12 CSheading">
-                                    Change Status
-                                </Col>
-                            </Row>
-                            </div>
-                        <div class="w3-container">
-                            <span 
-                            onClick={this.ToggleDeleteClose} 
-                            class="w3-button w3-display-topright cWhite">x</span>
-                            <br></br>
-                            <Row noGutters={true}>
-                                {item.openEnquiriesResponse.productStatusHistoryId === 2
-                                ?
-                                <>
-                                 {this.state.enquiryStagesAvailable.map((item1) => 
-                                    item1.orderStages.id > 3 
-                                    ?
-                                    <>
-                                    <Col className="col-xs-7 mb7 text-left">
-                                        {item1.orderStages.id < this.state.Progressidnext ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item1.orderStages.id > (this.state.Progressidnext) ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item1.orderStages.id == (this.state.Progressidnext) ?  <div className="blueButtonstatus"></div> :<></> }
-                                 {" "}{item1.orderStages.desc}
-                                    </Col>
-                                     <Col className="col-xs-5 mb7">
-                                      {item1.orderStages.id == (this.state.Progressidnext) ?  <button className="markCompletedButton" onClick={this.stateupdate}> Mark Completed</button> :<></> }
-                                    </Col>
-                                 </>
-                                    :
-                                    <>
-                                    </>
-                                 )}   
-                                </>
-                                :
-                                <>
-                                 {this.state.enquiryStagesMTO.map((item1) => 
-                                    item1.id > 3
-                                    ?
-                                        <>
-                                        {item1.id == 5 && item.openEnquiriesResponse.enquiryStageId == 5
-                                        ?
-                                            <>
-                                                {this.state.innerEnquiryStages.map((item2) => 
-                                                    <>
-                                                    <Col className="col-xs-7 mb7 text-left">
-                                                    {item2.id <=  item.openEnquiriesResponse.innerEnquiryStageId  ?  <div className="greenButtonstatus"></div> :<></> }
-                                                    {item2.id > (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                                    {item2.stage}
-                                                    </Col>
-                                                    <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
-
-                                                    </Col>
-                                                    </>
-                                                )}
-                                            </>
-                                        :
-                                        <>
-                                        {item1.id == 5
-                                        ?
-                                        <>
-                                    {
-                                        this.state.innerEnquiryStages.map((item2) => 
-                                        <>
-                                            <Col className="col-xs-7 mb7 text-left">
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <div className="blueButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id != 1 ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId > 5 ?  <div className="greenButtonstatus"></div> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId < 4 ?  <div className="greyButtonstatus"></div> :<></> }
-                                        {item2.stage}
-                                        </Col>
-                                        <Col className="col-xs-5 mb7 h20">
-                                        {item.openEnquiriesResponse.enquiryStageId == 4 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-                                        {item.openEnquiriesResponse.enquiryStageId == 5 && item2.id == 1 ?  <button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-
-                                        </Col>
-                                        </>
-                                        )
-                                        }
-                                    </>
-                                        :
-                                        <>
-                                            <Col className="col-xs-7 mb7 text-left">
-
-                                                {item1.id <= this.state.progressid ?  <div className="greenButtonstatus"></div> :<></> }
-                                                {item1.id > (this.state.progressid+1) ?  <div className="greyButtonstatus"></div> :<></> }
-                                                {item1.id == (this.state.progressid+1) ?  <div className="blueButtonstatus"></div> :<></> }
-                                                    {item1.desc}
-                                            </Col>
-                                            <Col className="col-xs-5 mb7 h20">
-                                                {}
-                                                {item1.id == 6 && item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId == 4 ? <button className="markCompletedButton" onClick={this.stateupdate}>Complete</button>:<></>}
-                                                {item1.id == (this.state.progressid+1) ?<button className="markCompletedButton" onClick={this.stateupdate}>Mark Completed</button> :<></> }
-
-                                            </Col>
-                                        </>
-
-                                         }
-                                   
-                                    </>
-                                    }
-                                    </>
-                                
-                                         
-                                    :
-                                    <>
-                                    </>
-                                 )} 
-                                </>
-                                }
-                                
-                               
-                            </Row>
-                            <br></br>
-                         
-                            
-                        </div>
-                        </div>
-                    </div>
-
-                </Row>
-             
+                       </Col>
+                   </Row>
+                </Col>
+            </Row>
+           
                
                     </>
                     }
@@ -1448,7 +1078,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                                     
                                                         <Col sm={12}>
                                                         <div>
-                                                    {/* <ArtisanTransaction enquiryCode={this.state.enquiryCode} /> */}
+                                                    <ArtisanCompletedTransaction enquiryCode={this.state.enquiryCode} />
                                                         </div>
                                                         </Col>
                                                         </>
@@ -1482,8 +1112,10 @@ export class ArtisanSingleCompletedOrder extends Component {
                                               <Col sm={10}>
                                                 <PIchange 
                                                 enquiryId={this.state.enquiryCode}
-                                                enquiryCode={this.state.getClosedOrder[0].openEnquiriesResponse.enquiryCode}/>
-                                            
+                                                enquiryCode={this.state.getClosedOrder[0].openEnquiriesResponse.enquiryCode}
+                                                completed={true}
+                                                />
+                                               
                                             </Col>
                                             </>}
                                        
@@ -1539,6 +1171,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                                                         <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                          openPI={this.moqDetailsbtn}
+                                                                         completed={true}
                                                                         />
                                                                         </>
                                                                         }
@@ -1582,6 +1215,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                          openPI={this.moqDetailsbtn}
+                                                                         completed={true}
                                                                         />
                                                                         {/* {this.state.getChangeRequestForArtisan.length>0?
                                                                          <ArtisanChangeRequest

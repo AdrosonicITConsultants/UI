@@ -372,7 +372,23 @@ Modal3Close = () => {
 
 {this.state.dataload?
 <>
-            {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0  ?
+{ this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==null?
+<>
+<p style={{textAlign:"center"}}>
+<Row noGutters={true}>
+                                                                             {console.log("mine1")}
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request Not Available
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+</p>
+</>
+:
+<>
+{this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0  ?
             <>
             <Row noGutters={true}>
                         <Col className="col-xs-12 bold" style={{textAlign:"center"}}>
@@ -678,6 +694,9 @@ Modal3Close = () => {
                        Loading data ..
                     </Col>
                 </Row>}
+</>
+}
+          
 </>
 :
 <p style={{textAlign:"center"}}>

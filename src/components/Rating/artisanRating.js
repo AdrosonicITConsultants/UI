@@ -28,7 +28,9 @@ export default class ArtisanRating extends Component {
             submitReviewButton: false,
             averageRate: 0,
             loading: false,
-            isArtisanRatingDone: 0
+            isArtisanRatingDone: 0,
+            artisanGivenRatingResponse: [],
+            artisanGivenRatingAverageValue: 0,
         };   
     
     }
@@ -157,9 +159,27 @@ export default class ArtisanRating extends Component {
                 console.log(response.data.data);
                 this.setState({
                     isArtisanRatingDone: response.data.data.isArtisanRatingDone,
+                    artisanGivenRatingResponse: response.data.data.artisanRating,
                     loading: false,
                 });
             }
+
+            var array = this.state.artisanGivenRatingResponse;
+            var value = 0;
+            var count = 0;
+            for(var i in array) {
+                if(array[i].response > 0) {
+                    value += array[i].response;
+                    count = count + 1;
+                }
+            }
+            console.log(value);
+            console.log(count);
+            var averageValue = (value/count).toFixed(1);
+
+            this.setState({
+                artisanGivenRatingAverageValue: averageValue,
+            })
         });
     }
 
@@ -222,6 +242,7 @@ export default class ArtisanRating extends Component {
                         <Col className="col-xs-12 text-center">
                             <div className="envelopeHeartTextLine1">With <img src={logos.envelopeHeart} className="envelopeHeart"/></div>
                             <div className="envelopeHeartTextLine2">from Tata Trusts</div>
+                            <div className="envelopeHeartTextLine2">Rating provided = {this.state.artisanGivenRatingAverageValue}</div>
                             <div className="envelopeDear">Dear {this.state.userData.firstName} {this.state.userData.lastName}</div>
                             <div className="envelopeThank">Thank you !</div>
                             <div className="envelopePart">For being a part of this timeless story.</div>

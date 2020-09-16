@@ -102,7 +102,7 @@ export class ArtisanCompletedFaultyorder extends Component {
     }
 
     submit(){
-        if(this.state.description&&this.state.actioncategoryid){
+        if(this.state.description&&this.state.actioncategoryid>0){
             this.setState({
                 rejectButtonClick:true
             })

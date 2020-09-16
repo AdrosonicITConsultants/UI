@@ -18,7 +18,7 @@ import thunk from 'redux-thunk';
 
 
 
-export class ArtisanTransaction extends Component {
+export class ArtisanCompletedTransaction extends Component {
     constructor(props) {
         super(props);
  
@@ -408,7 +408,8 @@ export class ArtisanTransaction extends Component {
                             {
                             this.setState({
                                  dataload : true,
-                                 getTransactions : response.data.data.ongoingTransactionResponses},()=>{
+                                 getTransactions : response.data.data.completedTransactionResponses,
+                                },()=>{
                                  console.log(this.state.getTransactions);
                                  
                             });
@@ -478,53 +479,52 @@ export class ArtisanTransaction extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.state.getTransactions.map((item)=> 
                     <>
-                    {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
+                 
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
-{item.transactionOngoing.transactionOn}
+{item.transactionCompleted.transactionOn}
 </Moment>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
+<p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
  </Moment>
 
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])} */}
+
 
 </Col>
 <Col className="col-xs-3" sm="1">
 <img 
-src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Artisan/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"
+src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Artisan/"+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"
 
 
 />
 
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].artisanText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].artisanText} } />
 
 
 </Col>
 <Col className="col-xs-3 proformacol" sm="2" >
-                {item.transactionOngoing.percentage} {item.transactionOngoing.percentage !=null? "%":""}
+                {item.transactionCompleted.percentage} {item.transactionCompleted.percentage !=null? "%":""}
                  payment received against Invoice  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 </Col>
 <Col className="col-xs-3 payack" sm="2">
-<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
+<div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-    {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
+    {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
     <span><img src={logos.viewReceipt} className="receipticon"
-    onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/>
+    onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}/>
      <p style={{marginTop:"5px"}}>View Invoice</p></span>
 :
-<span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionOngoing.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionCompleted.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
 <Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
@@ -532,9 +532,9 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 {this.state.getTransactionActions.map((data)=> 
 <>
 {
-    item.transactionOngoing.isActionCompleted == 0 ?
+    item.transactionCompleted.isActionCompleted == 0 ?
     
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
+    this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanAction == data.id ? 
     data.id == 3?
         <>
      
@@ -542,12 +542,12 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
     
 <span><img src={logos.accept} className="acceptrejecticon" 
        
-            onClick={()=> this.acceptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
+            onClick={()=> this.acceptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
-         onClick={()=> this.RejectModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
+         onClick={()=> this.RejectModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
         //   disabled={this.state.rejectButtonClick}
-        //  onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,2)} 
+        //  onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)} 
          /></span>
 
       </>
@@ -558,7 +558,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
   
     <p>Notify buyer again</p>
 <img src={logos.notifybuyer} className="acceptrejecticon" 
-onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)}
+onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId,data.id)}
 
 
 /> 
@@ -568,7 +568,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
       <>
       <p>upload delivery challan</p>
 <img src={logos.uploaddelreceipt} className="acceptrejecticon"
- onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId,data.id)} /> 
+ onClick={()=>this.uploddeliveryreceiptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId,data.id)} /> 
         </>
         :
         data.id == 5 ? <span style={{color:"green"}}><img src={logos.received} className="uplodagainicon"/> 
@@ -581,7 +581,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
      :
      data.id == 1 ?
      <span 
-     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
+     // onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
      >
          <img src={logos.uploadagain} className="uplodagainicon"/>
       <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
@@ -596,7 +596,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 
 </Col>
 {/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
- onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}
+ onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}
 // onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
@@ -605,7 +605,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
 
-                                                <div id={"acceptMOQModal"+item.transactionOngoing.id} class="w3-modal">
+                                                <div id={"acceptMOQModal"+item.transactionCompleted.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -649,15 +649,15 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
-                                                                        {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
+                                                                    <span onClick={()=>this.acceptMOQModalClose(item.transactionCompleted.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                        {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].transactionId == 15?
                                                                         <>
                                                                         {/* "Final apyment accept" */}
                                                                          <span >
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
-                                                                        onClick={() => this.acceptorRejectFinal(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                        onClick={() => this.acceptorRejectFinal(item.transactionCompleted.id,item.transactionCompleted.enquiryId,2)}
                                                                     className="buyerMOQAcceptModalrejectButton">Reject</button></span>
 
                                                                     
@@ -666,8 +666,8 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         disabled={this.state.rejectButtonClick}
                                                                        
                                                                         onClick={() => this.acceptorRejectFinal(
-                                                                            item.transactionOngoing.id,
-                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            item.transactionCompleted.id,
+                                                                            item.transactionCompleted.enquiryId,1)}
                                                                             
                                                                     className="buyerMOQAcceptModalOkayButton">Accept</button>
                                                                     </span>
@@ -680,7 +680,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <button
                                                                         disabled={this.state.acceptButtonClick}
                                                                         
-                                                                        onClick={() => this.acceptorReject(item.transactionOngoing.id,item.transactionOngoing.enquiryId,2)}
+                                                                        onClick={() => this.acceptorReject(item.transactionCompleted.id,item.transactionCompleted.enquiryId,2)}
                                                                     className="buyerMOQAcceptModalrejectButton">Reject</button></span>
 
                                                                     
@@ -689,8 +689,8 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         disabled={this.state.rejectButtonClick}
                                                                        
                                                                         onClick={() => this.acceptorReject(
-                                                                            item.transactionOngoing.id,
-                                                                            item.transactionOngoing.enquiryId,1)}
+                                                                            item.transactionCompleted.id,
+                                                                            item.transactionCompleted.enquiryId,1)}
                                                                             
                                                                     className="buyerMOQAcceptModalOkayButton">Accept</button>
                                                                     </span>
@@ -706,23 +706,8 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{/* {this.state.getTransactionActions.map((data)=> 
-<>
-{
-    item.transactionOngoing.isActionCompleted == 0 ?
-    
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
-    " "
-    :""
-    :
-    ""
-   
-}
-    </>
-)} */}
 
-                                          
-                                                        <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
+     <div id={"notifyModal"+item.transactionCompleted.id} class="w3-modal">
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -738,7 +723,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
-                                                                        <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
+                                                                        <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 
                                                                         {/* <div className="approvenote">
                                                                             Once you approved it,the
@@ -752,17 +737,17 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    <span onClick={()=>this.notifyModalclose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
+                                                                    <span onClick={()=>this.notifyModalclose(item.transactionCompleted.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                  
                                                                     <span >
                                                                         <button
                                                                        disabled={this.state.notifyButtonClick}
                                                                      
-                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
-                                                                            item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:
-                                                                            item.transactionOngoing.taxInvoiceId !=null?item.transactionOngoing.taxInvoiceId:
-                                                                            item.transactionOngoing.challanId!=null?item.transactionOngoing.challanId:"",
-                                                                            item.transactionOngoing.id)}
+                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionCompleted.piId !=null?item.transactionCompleted.piId:
+                                                                            item.transactionCompleted.paymentId !=null?item.transactionCompleted.paymentId:
+                                                                            item.transactionCompleted.taxInvoiceId !=null?item.transactionCompleted.taxInvoiceId:
+                                                                            item.transactionCompleted.challanId!=null?item.transactionCompleted.challanId:"",
+                                                                            item.transactionCompleted.id)}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>
@@ -773,7 +758,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
-                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
+                                        <div id={"deliveryReceipt"+item.transactionCompleted.id}class="w3-modal">
                                            {/* {this.state.deliveryChallanUploaded?
                                            <>
                                            "hhhh"
@@ -850,14 +835,14 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
                                                                     <span  
-                                                                     onClick={()=>this.uploddeliveryreceiptModalclose(item.transactionOngoing.id)}
+                                                                     onClick={()=>this.uploddeliveryreceiptModalclose(item.transactionCompleted.id)}
                                                                     className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                  
                                                                     <span >
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
-                                                                        onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
-                                                                        // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
+                                                                        onClick={() => this.uploadReceiptandSend(item.transactionCompleted.enquiryId,item.transactionCompleted.id)}
+                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
                                                                 </div>
@@ -900,5 +885,5 @@ function mapStateToProps(state) {
     return { user };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisanTransaction);
+const connectedLoginPage = connect(mapStateToProps)(ArtisanCompletedTransaction);
 export default connectedLoginPage;

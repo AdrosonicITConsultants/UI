@@ -187,33 +187,69 @@ componentDidMount(){
         {
            
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
-                TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
-                    if(response.data.valid)
-                    {
-                        this.setState({getOrder:response.data.data},()=>{
-                            TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
-                                if(response.data.valid)
-                                {
-                                    // console.log(response.data.data);
-                                    this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
-                                        dataload:true})
-                                        var array = this.state.getChangeRequestForArtisan;
-                                        var count = 0;
-                                        for(var i = 0; i < array.length; i ++) {
-                                        if(array[i].requestStatus === 1) {
-                                            count = count + 1;
-                                        }
-                                        }
-                                        this.setState({
-                                        counter: count,
-                                        })
-                                                    }
-                                                    console.log(this.state.getChangeRequestForArtisan)
-                                                })
+                if(this.props.completed){
+                    console.log("completed if")
+                    TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
+                        if(response.data.valid)
+                        {
+                            this.setState({getOrder:response.data.data},()=>{
+                                TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                                    if(response.data.valid)
+                                    {
+                                        // console.log(response.data.data);
+                                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
+                                            dataload:true})
+                                            var array = this.state.getChangeRequestForArtisan;
+                                            var count = 0;
+                                            for(var i = 0; i < array.length; i ++) {
+                                            if(array[i].requestStatus === 1) {
+                                                count = count + 1;
+                                            }
+                                            }
+                                            this.setState({
+                                            counter: count,
                                             })
-                                        }
-                                        
-                                    })
+                                                        }
+                                                        console.log(this.state.getChangeRequestForArtisan)
+                                                    })
+                                                })
+                                            }
+                                            
+                                        })
+
+                }
+                else{
+                    console.log("completed else")
+                    TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+                        if(response.data.valid)
+                        {
+                            this.setState({getOrder:response.data.data},()=>{
+                                TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                                    if(response.data.valid)
+                                    {
+                                        // console.log(response.data.data);
+                                        this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
+                                            dataload:true})
+                                            var array = this.state.getChangeRequestForArtisan;
+                                            var count = 0;
+                                            for(var i = 0; i < array.length; i ++) {
+                                            if(array[i].requestStatus === 1) {
+                                                count = count + 1;
+                                            }
+                                            }
+                                            this.setState({
+                                            counter: count,
+                                            })
+                                                        }
+                                                        console.log(this.state.getChangeRequestForArtisan)
+                                                    })
+                                                })
+                                            }
+                                            
+                                        })
+
+                }
+                
 
                                         }
                                     
@@ -336,7 +372,23 @@ Modal3Close = () => {
 
 {this.state.dataload?
 <>
-            {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ?
+{ this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==null?
+<>
+<p style={{textAlign:"center"}}>
+<Row noGutters={true}>
+                                                                             {console.log("mine1")}
+                                                                            <Col className="col-xs-12 bold font20 text-center">
+                                                                                <br></br>
+                                                                                Change request Not Available
+                                                                                <br></br>
+                                                                            </Col>
+                                                                        </Row>
+                                                                        
+</p>
+</>
+:
+<>
+{this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0  ?
             <>
             <Row noGutters={true}>
                         <Col className="col-xs-12 bold" style={{textAlign:"center"}}>
@@ -634,48 +686,7 @@ Modal3Close = () => {
             {this.state.counter}</b> out of <b style={{color:"green"}}>
             {this.state.getChangeRequestForArtisan.length}</b> requests</p>
             </div>
-             {/* <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
-            <Col className="col-xs-12 " style={{border:"2px solid green"}}>
-                <br/>
-                <b className="CRare playfair " >You have accepted the changes on:</b> <br/>
-           
-            
-            {this.state.getChangeRequestForArtisan.map((data)=>  
-            
-          
-            this.state.getChangeRequestItemTable[data.requestItemsId-1].id == 1?
-            <p>
-                weft Yarn: {data.requestText}
-            </p>:""
-            ||
-            this.state.getChangeRequestItemTable[data.requestItemsId-1].id == 2?
-            <p>
-                Color: {data.requestItemsId==this.state.getChangeRequestItemTable[data.requestItemsId-1].id ?
-                data.requestText:""
-                }
-            </p>:"" ||
-            this.state.getChangeRequestItemTable[data.requestItemsId-1].id == 3? <p>
-            Quantity: {data.requestItemsId==this.state.getChangeRequestItemTable[data.requestItemsId-1].id ?
-                data.requestText:""
-                }
-        </p>:"" ||
-            this.state.getChangeRequestItemTable[data.requestItemsId-1].id == 4? <p>
-            Motif Size: {data.requestItemsId==this.state.getChangeRequestItemTable[data.requestItemsId-1].id ?
-                data.requestText:""
-                }
-        </p>:""||
-            this.state.getChangeRequestItemTable[data.requestItemsId-1].id == 5? <p>
-            Motif Placement: {data.requestItemsId==this.state.getChangeRequestItemTable[data.requestItemsId-1].id ?
-                data.requestText:""
-                }
-        </p>:""
-           
-            
-                    )} 
-                    <br/>
-                <img src={logos.crgreeninpopup} />
-            </Col>
-        </Row> */}
+    
             </>
             :
                     <Row noGutters={true}>
@@ -683,6 +694,9 @@ Modal3Close = () => {
                        Loading data ..
                     </Col>
                 </Row>}
+</>
+}
+          
 </>
 :
 <p style={{textAlign:"center"}}>

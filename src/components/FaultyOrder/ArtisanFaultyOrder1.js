@@ -12,6 +12,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
+import Moment from 'react-moment';
 import DaysRemaining from './DaysRemaining';
 import { FaultResolved } from './FaultResolved';
 export class ArtisanFaultyOrder1 extends Component {
@@ -316,8 +317,14 @@ export class ArtisanFaultyOrder1 extends Component {
                                             {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.getOrderProgress.orderDispatchDate !=null?
-                                            this.state.getOrderProgress.orderDispatchDate:"NA" }
+                                        Dispatched on:
+                                            {this.state.getOrderProgress.orderDispatchDate !=null?
+                                             <Moment format="DD-MM-YYYY">
+                                             {this.state.getOrderProgress.orderDispatchDate }
+                                           </Moment>
+                                           :
+                                           "NA"
+                                            }
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
                                             Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?
@@ -436,8 +443,14 @@ export class ArtisanFaultyOrder1 extends Component {
                                             {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.getOrderProgress.orderDispatchDate !=null?
-                                            this.state.getOrderProgress.orderDispatchDate:"NA" }
+                                        Dispatched on:
+                                            {this.state.getOrderProgress.orderDispatchDate !=null?
+                                             <Moment format="DD-MM-YYYY">
+                                             {this.state.getOrderProgress.orderDispatchDate }
+                                           </Moment>
+                                           :
+                                           "NA"
+                                            }
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
                                             Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?

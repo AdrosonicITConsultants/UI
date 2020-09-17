@@ -277,6 +277,25 @@ export class BuyerCompletedOrder extends Component {
                         </Col>                        
                     </Row>
                   <hr></hr>
+                 
+                     
+                      
+                  {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <Row>
+                    <Col className="col-xs-1">
+                        </Col>
+                      
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     
+               
+                     }
                            {this.state.openEnquiries.comment?
                            <>
                              <Row noGutters={true}>
@@ -558,6 +577,22 @@ export class BuyerCompletedOrder extends Component {
                         </Col>
                     </Row>
                    <hr></hr>
+                   {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <Row>
+                    <Col className="col-xs-1">
+                        </Col>
+                      
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     
+               
+                     }
                    {this.state.openEnquiries.comment?
                            <>
                              <Row noGutters={true}>

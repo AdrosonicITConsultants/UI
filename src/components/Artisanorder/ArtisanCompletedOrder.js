@@ -233,10 +233,17 @@ export class ArtisanCompletedOrder extends Component {
                 
             </Row>
             <hr/>
-            <Row>
-                <Col sm={4} className="col-xs-12 text-center">
-                <img src={logos.truck} className="truckimg"/>  Check delivery receipt
-                </Col>
+            <Row noGutters={true}>
+            <Col className="col-xs-1"></Col>
+            {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
                 {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
                 <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
                 <i className="fa fa-star starColorActiveCompleteOrder" /> 
@@ -474,6 +481,15 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
             {item.openEnquiriesResponse.comment?
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>

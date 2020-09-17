@@ -46,6 +46,7 @@ export class ArtisanTransaction extends Component {
             upload:true,
             eta:"",
             showDeliveryValidation:false,
+            uploadClick:false,
             deliveryChallanUploaded:false
 
         }
@@ -133,7 +134,7 @@ export class ArtisanTransaction extends Component {
         if(this.state.orderDispatchDate && this.state.selectedFile)
         {
             this.setState({
-                rejectButtonClick:true
+                uploadClick:true
               })
                 const formData = new FormData(); 
             formData.append( 
@@ -157,7 +158,7 @@ export class ArtisanTransaction extends Component {
                         autoClose: true,
                       });
                     this.setState({  
-                   rejectButtonClick:false
+                        uploadClick:false
                   
                 },()=>{
                     // console.log(response)
@@ -216,6 +217,8 @@ export class ArtisanTransaction extends Component {
             });
         }
         });
+        document.getElementById('acceptMOQModal'+ id).style.display='block';
+
     }
         
     
@@ -239,6 +242,8 @@ export class ArtisanTransaction extends Component {
             });
         }
         });
+        document.getElementById('acceptMOQModal' + id).style.display='block';
+
     }
 
     openReceipt(enquiryId){
@@ -283,8 +288,8 @@ export class ArtisanTransaction extends Component {
     }
    
     NotifyAgain(actionId,respectiveActionId,id){
-        this.setState({ notifyButtonClick:true,
-            rejectButtonClick:true})
+        this.setState({ notifyButtonClick:true
+           })
         console.log(actionId);
         console.log(respectiveActionId);
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
@@ -612,15 +617,20 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                     <Col className="col-xs-12">
                                                                         <div className="buyerMOQAcceptModalHeader">Are you sure ?</div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv">
-                                                                        <img src={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} style={{marginRight:"11px",height:"30px"}}/>          
-                                                                       
-                                                                       
-                                                                            <span className="seereceipt">See receipt here:</span>
+                                                                        {this.getAdvancedPaymentReceipt?
+                                                                       <>
+                                                             <img src={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} style={{marginRight:"11px",height:"30px"}}/>          
+                                                                     <span className="seereceipt">See receipt here:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{fontSize:"11px"}}>  
                                                                             <a href={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} target="_blank">
                                                                                     {this.state.getAdvancedPaymentReceipt.label}
                                                                                       
                                                                                 </a></span>
+                                                                       </>
+                                                                        :
+                                                                        <>
+                                                                        </>
+                                                                        }
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" >
                                                                             <img src={logos.happyunhappy} className=" happyunhappyimg" />
@@ -758,11 +768,15 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <button
                                                                        disabled={this.state.notifyButtonClick}
                                                                      
-                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
-                                                                            item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:
-                                                                            item.transactionOngoing.taxInvoiceId !=null?item.transactionOngoing.taxInvoiceId:
-                                                                            item.transactionOngoing.challanId!=null?item.transactionOngoing.challanId:"",
-                                                                            item.transactionOngoing.id)}
+                                                                       onClick={()=>this.NotifyAgain(
+                                                                        item.transactionOngoing.upcomingStatus==13?7:
+                                                                        item.transactionOngoing.upcomingStatus==2?6:
+                                                                        item.transactionOngoing.upcomingStatus==17?8:
+                                                                        item.transactionOngoing.upcomingStatus==21?9:"",
+                                                                        item.transactionOngoing.upcomingStatus==13?item.transactionOngoing.taxInvoiceId:
+                                                                        item.transactionOngoing.upcomingStatus==2?item.transactionOngoing.pId:
+                                                                        item.transactionOngoing.upcomingStatus==17?item.transactionOngoing.paymentId:
+                                                                        item.transactionOngoing.upcomingStatus==21?item.transactionOngoing.challanId:"",item.transactionOngoing.id )}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>
@@ -855,7 +869,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                  
                                                                     <span >
                                                                         <button
-                                                                        disabled={this.state.rejectButtonClick}
+                                                                        disabled={this.state.uploadClick}
                                                                         onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
                                                                         // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>

@@ -563,7 +563,21 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                   
+                    <hr></hr>
+                    {/* {console.log(item.openEnquiriesResponse)} */}
+                    {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <Row>
+                     <Col className="col-xs-1"></Col>
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     }
+                      <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -1036,7 +1050,20 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                   
+                    <hr></hr>
+                    {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Row>
+                     <Col className="col-xs-1"></Col>
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     }
+                      <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">

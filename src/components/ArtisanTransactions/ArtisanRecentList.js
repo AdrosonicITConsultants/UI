@@ -27,6 +27,7 @@ export class ArtisanRecentList extends Component {
             getTransactionActions:[],
             getOngoingTransaction:[],
             getTransactions:[],
+            getSingleOrder:[],
             getAdvancedPaymentReceipt:[],
             validateFinalPaymentFromArtisan:[],
             dataload : false,
@@ -43,6 +44,7 @@ export class ArtisanRecentList extends Component {
             selectedFileName:"",
             notifyId:"",
             upload:true,
+            uploadClick:false,
             showDeliveryValidation:false
 
         }
@@ -119,10 +121,20 @@ export class ArtisanRecentList extends Component {
         
     }
 
-    uploddeliveryreceiptModalShow(id){
-    
+    uploddeliveryreceiptModalShow(id,enquiryId){
+    console.log(id);
+    console.log(enquiryId);
         document.getElementById('deliveryReceipt'+id).style.display='block';
-        
+        TTCEapi.getSingleOrder(enquiryId).then((response)=>{
+            if(response.data.valid)
+            {
+            this.setState({
+                 getSingleOrder : response.data.data[0].openEnquiriesResponse,
+                },()=>{
+                console.log(this.state.getSingleOrder);
+            });
+        }
+        });
     }
 
     uploadReceiptandSend(enquiryId,id){
@@ -130,7 +142,7 @@ export class ArtisanRecentList extends Component {
         if(this.state.orderDispatchDate && this.state.selectedFile)
         {
             this.setState({
-                rejectButtonClick:true
+                uploadClick:true
               })
                 const formData = new FormData(); 
             formData.append( 
@@ -154,10 +166,10 @@ export class ArtisanRecentList extends Component {
                         autoClose: true,
                       });
                     this.setState({  
-                   rejectButtonClick:false
+                        uploadClick:false
                   
                 },()=>{
-                    // console.log(response)
+                    this.componentDidMount();
                
                 });
               
@@ -213,6 +225,7 @@ export class ArtisanRecentList extends Component {
             });
         }
         });
+        document.getElementById('acceptMOQModal'+ id).style.display='block';
     }
         
     
@@ -236,6 +249,8 @@ export class ArtisanRecentList extends Component {
             });
         }
         });
+        document.getElementById('acceptMOQModal' + id).style.display='block';
+
     }
 
     openReceipt(enquiryId){
@@ -280,8 +295,8 @@ export class ArtisanRecentList extends Component {
     }
    
     NotifyAgain(actionId,respectiveActionId,id){
-        this.setState({ notifyButtonClick:true,
-            rejectButtonClick:true})
+        console.log(actionId,respectiveActionId,id)
+        this.setState({ notifyButtonClick:true})
         console.log(actionId);
         console.log(respectiveActionId);
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
@@ -315,6 +330,7 @@ export class ArtisanRecentList extends Component {
     }
     
     acceptorReject(id,enquiryId,status){
+        console.log("advance click")
         console.log(enquiryId);
         console.log(status);
         this.setState({ acceptButtonClick:true,
@@ -349,6 +365,7 @@ export class ArtisanRecentList extends Component {
         });
     }
     acceptorRejectFinal(id,enquiryId,status){
+        console.log("Final click")
         console.log(enquiryId);
         console.log(status);
         this.setState({ acceptButtonClick:true,
@@ -585,7 +602,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
       </>
     :
-    data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9?
+    data.id == 6 ||    data.id == 7 ||  data.id == 8 || data.id == 9 ?
 
    <>
   
@@ -645,15 +662,22 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                     <Col className="col-xs-12">
                                                                         <div className="buyerMOQAcceptModalHeader">Are you sure ?</div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv">
-                                                                        <img src={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} style={{marginRight:"11px",height:"30px"}}/>          
                                                                        
-                                                                       
-                                                                            <span className="seereceipt">See receipt here:</span>
+                                                                       {this.getAdvancedPaymentReceipt?
+                                                                       <>
+                                                             <img src={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} style={{marginRight:"11px",height:"30px"}}/>          
+                                                                     <span className="seereceipt">See receipt here:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{fontSize:"11px"}}>  
                                                                             <a href={TTCEapi.ReceiptUrl + this.state.getAdvancedPaymentReceipt.paymentId + "/" + this.state.getAdvancedPaymentReceipt.label} target="_blank">
                                                                                     {this.state.getAdvancedPaymentReceipt.label}
                                                                                       
                                                                                 </a></span>
+                                                                       </>
+                                                                        :
+                                                                        <>
+                                                                        </>
+                                                                        }
+                                                                            
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" >
                                                                             <img src={logos.happyunhappy} className=" happyunhappyimg" />
@@ -682,6 +706,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
+                                                                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15)}
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                         {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
                                                                         <>
@@ -739,20 +764,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{/* {this.state.getTransactionActions.map((data)=> 
-<>
-{
-    item.transactionOngoing.isActionCompleted == 0 ?
-    
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
-    " "
-    :""
-    :
-    ""
-   
-}
-    </>
-)} */}
+
 
                                           
                                                         <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
@@ -773,14 +785,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
 
-                                                                        {/* <div className="approvenote">
-                                                                            Once you approved it,the
-                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
-                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
-                                                                           the amount.Best practise is to check with your bank,or in <br/>
-                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
-                                                                           
-                                                                        </div> */}
+                                                                        
                                                                     </Col>
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
@@ -791,11 +796,16 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <button
                                                                        disabled={this.state.notifyButtonClick}
                                                                      
-                                                                        onClick={() => this.NotifyAgain(this.state.notifyId,item.transactionOngoing.piId !=null?item.transactionOngoing.piId:
-                                                                            item.transactionOngoing.paymentId !=null?item.transactionOngoing.paymentId:
-                                                                            item.transactionOngoing.taxInvoiceId !=null?item.transactionOngoing.taxInvoiceId:
-                                                                            item.transactionOngoing.challanId!=null?item.transactionOngoing.challanId:"",
-                                                                            item.transactionOngoing.id)}
+                                                                       
+                                                                        onClick={()=>this.NotifyAgain(
+                                                                            item.transactionOngoing.upcomingStatus==13?7:
+                                                                            item.transactionOngoing.upcomingStatus==2?6:
+                                                                            item.transactionOngoing.upcomingStatus==17?8:
+                                                                            item.transactionOngoing.upcomingStatus==21?9:"",
+                                                                            item.transactionOngoing.upcomingStatus==13?item.transactionOngoing.taxInvoiceId:
+                                                                            item.transactionOngoing.upcomingStatus==2?item.transactionOngoing.pId:
+                                                                            item.transactionOngoing.upcomingStatus==17?item.transactionOngoing.paymentId:
+                                                                            item.transactionOngoing.upcomingStatus==21?item.transactionOngoing.challanId:"",item.transactionOngoing.id )}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>
@@ -812,6 +822,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">
                                                                     <Col className="col-xs-12">
                                                                         <div className="buyerMOQAcceptModalHeader playfair">Upload your <br/>delivery receipt</div>
+                                                                        
                                                                         {this.state.upload?
                                                                         <>
                                                                         <input type="file" id="file"  accept=".png, .jpg, .jpeg"
@@ -867,10 +878,10 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                           Also make sure the attached document is <b>clear</b> and <b>readable</b>  <br/> 
                                                                           with the <b>LR</b> number and  <b>amount.</b> 
                                                                           <p style={{textAlign:"center"}}> {this.state.showDeliveryValidation ? (
-                            <span className="bg-danger">Please fill mandatory fields</span>
-                            ) : (
-                            <br />
-                            )}</p>
+                                                                        <span className="bg-danger">Please fill mandatory fields</span>
+                                                                        ) : (
+                                                                        <br />
+                                                                        )}</p>
                                                                         </div>
                                                                     </Col>
                                                                 </Row>
@@ -882,7 +893,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                  
                                                                     <span >
                                                                         <button
-                                                                        disabled={this.state.rejectButtonClick}
+                                                                        disabled={this.state.uploadClick}
                                                                         onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
                                                                         // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>

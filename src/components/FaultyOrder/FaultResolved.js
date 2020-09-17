@@ -102,9 +102,10 @@ export class FaultResolved extends Component {
        
         });
     }
+   
 
     submit(){
-        if(this.state.description&&this.state.actioncategoryid){
+        if(this.state.description&&this.state.actioncategoryid>0){
             this.setState({
                 rejectButtonClick:true
             })
@@ -395,7 +396,7 @@ export class FaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                // onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

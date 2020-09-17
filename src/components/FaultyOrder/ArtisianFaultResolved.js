@@ -103,7 +103,7 @@ export class ArtisanFaultResolved extends Component {
     }
 
     submit(){
-        if(this.state.description&&this.state.actioncategoryid>0){
+        if(this.state.description&&this.state.actioncategoryid){
             this.setState({
                 rejectButtonClick:true
             })

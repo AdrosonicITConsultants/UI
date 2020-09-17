@@ -183,6 +183,9 @@ export default class ArtisanRating extends Component {
         });
     }
 
+    faulty(id){
+        browserHistory.push("artisanfaultreportCompleted?orderid=" +id)
+    }
     render() {
 
     const secondExample = {
@@ -228,7 +231,9 @@ export default class ArtisanRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton">
+                        <button className="rateUnusualButton"
+                        // onClick={()=>this.faulty(this.state.enquiryId)}
+                        >
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Check faulty order
                         </button>
@@ -283,7 +288,10 @@ export default class ArtisanRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton">
+                        <button className="rateUnusualButton"
+                        //   onClick={()=>this.faulty(this.state.enquiryId)}
+                          >
+                                                
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Check faulty order
                         </button>

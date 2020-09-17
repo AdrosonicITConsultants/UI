@@ -671,19 +671,23 @@ export class Buyerorder extends Component {
                      </>   
                     }
                     {/* order dispatch change here */}
+                  
+                    {/* <hr></hr> */}
                     { item.openEnquiriesResponse.enquiryStageId == 10
                     ?
                     <>
                      <hr></hr>
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
-                         <Col className="col-xs-4">
-                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank"> */}
-                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt
-                          {/* <a href={TTCEapi.ReceiptUrl + this.state.receiptId + "/" + prop.receiptlabel} target="_blank">
-                             delivery receipt</a> */}
-
-                         </Col>
+                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
                          <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
                          <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
                          <Col className="col-xs-1"></Col>
@@ -1283,6 +1287,30 @@ export class Buyerorder extends Component {
                     {/* change here order dispatch */}
                    
                     <hr></hr>
+                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    ?
+                    <>
+                     {/* <hr></hr> */}
+                     <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
+                         <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
+                         <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
+                         <Col className="col-xs-1"></Col>
+                     </Row>
+                    </>
+                    :
+                    <>
+                    </>
+    }
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -1299,7 +1327,7 @@ export class Buyerorder extends Component {
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            Order Status
                             </Col>
                         </Row>
                         </Col>

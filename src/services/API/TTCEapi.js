@@ -24,6 +24,8 @@ class TTCEapi {
   static ReceiptUrl = 
             "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
 
+  static DeliveryReceiptUrl = 
+            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/"
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
@@ -877,9 +879,9 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId=6&respectiveActionId=339
+  // /transaction/notifyAgain/1828/47
   static notifyAgain(actionId,respectiveActionId) {
-    let url = ApiUrl + "/transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId="+actionId+"&respectiveActionId="+respectiveActionId;
+    let url = ApiUrl + "/transaction/notifyAgain/"+actionId+"/"+respectiveActionId;
     console.log(url);
     return axios
       .post(url)

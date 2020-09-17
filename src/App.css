@@ -173,3 +173,21 @@ h3{
       left: 245px;
   }
 }
+
+.cricon1{
+  position: absolute;
+  width: 22px;
+  height: auto;
+  left: 328px;
+  top: 23px;
+}
+@media screen and (max-width:1200px) and (min-width:992px){
+  .cricon1{
+      left: 266px;
+  }
+}
+@media screen and (max-width:991px) and (min-width:768px){
+  .cricon1{
+      left: 200px;
+  }
+}

@@ -638,6 +638,7 @@ export class Buyerorder extends Component {
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
+                        <>
                         <Col className="col-xs-8 ">
                            <span className="CR bold">Change Request: </span> 
                            
@@ -645,12 +646,6 @@ export class Buyerorder extends Component {
                                </Diffdays>
                            <span> days Remaining. You can take only single CR untill approved.</span> 
                         </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Last date to raise Change Request passed. </span> 
-                        </Col>
-                        }
                         <Col className="col-xs-2">
                         <div className={
                                 (this.state.selected == "changeReq"
@@ -663,6 +658,14 @@ export class Buyerorder extends Component {
                         </div>
                         
                         </Col>
+                        </>
+                        :
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
+                        </Col>
+                        }
+                        
                         <Col className="col-xs-1"></Col>
 
                     </Row>
@@ -1248,6 +1251,7 @@ export class Buyerorder extends Component {
                         <Col className="col-xs-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
+                        <>
                         <Col className="col-xs-8 ">
                            <span className="CR bold">Change Request: </span> 
                            
@@ -1255,12 +1259,6 @@ export class Buyerorder extends Component {
                                </Diffdays>
                            <span> days Remaining. You can take only single CR untill approved.</span> 
                         </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Last date to raise Change Request passed. </span> 
-                        </Col>
-                        }
                         <Col className="col-xs-2">
                         <div className={
                                 (this.state.selected == "changeReq"
@@ -1273,6 +1271,14 @@ export class Buyerorder extends Component {
                         </div>
                         
                         </Col>
+                        </>
+                        :
+                        <Col className="col-xs-8 ">
+                           <span className="CR bold">Change Request: </span> 
+                           <span> Last date to raise Change Request passed. </span> 
+                        </Col>
+                        }
+                        
                         <Col className="col-xs-1"></Col>
 
                     </Row>
@@ -1299,7 +1305,7 @@ export class Buyerorder extends Component {
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
-                            Enquiry Status
+                            Order Status
                             </Col>
                         </Row>
                         </Col>
@@ -1553,9 +1559,18 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
-                                                                        :
+                                                                        : 
+                                                                        <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Last date to raise Change Request passed.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    :
                                                                         <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                                                         }
                                                                         </>
@@ -1594,10 +1609,19 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
-                                                                        :
-                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        : 
+                                                                        <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Last date to raise Change Request passed.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    :
+                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                                                         }
                                                                         </>
                                                                         }

@@ -350,19 +350,23 @@ browserHistory.push("/MyProfile");
 
             <li className="menu-item">
               {this.state.ischatHovered ? (
+                <a href="/artisanChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
                   onMouseLeave={() => this.toggleHover("ischatHovered")}
                   className="navButtonImg"
                   src={logos.chat_bubble_filled}
                 ></img>
+                </a>
               ) : (
+                <a href="/artisanChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
                   onMouseLeave={() => this.toggleHover("ischatHovered")}
                   className="navButtonImg"
                   src={logos.chaticon}
                 ></img>
+                </a>
               )}
               {userTypeId === 1 ? (
                 <span className="myorder col-md-12 col-sm-12">Chat</span>

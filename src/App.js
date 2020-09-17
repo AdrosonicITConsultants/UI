@@ -84,6 +84,7 @@ import { ArtisanFaultCompletedOrder1 } from './components/FaultyOrder-Completed/
 import ArtisanRating from './components/Rating/artisanRating';
 import ArtisanSelfRating from './components/Rating/artisanSelfRating';
 import { ArtisanFaultResolved } from './components/FaultyOrder/ArtisianFaultResolved';
+import ArtisanChat from './components/Chat/artisanChat';
 function App() {
   
   return (
@@ -190,6 +191,7 @@ function App() {
           <PrivateRoute exact path="/artisanRating" component={ArtisanRating} />
           <PrivateRoute exact path="/artisanSelfRating" component={ArtisanSelfRating} />
 
+          <PrivateRoute exact path="/artisanChat" component={ArtisanChat} />
          
         </Switch>
       </Router>

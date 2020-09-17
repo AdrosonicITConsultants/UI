@@ -376,6 +376,16 @@ export class BuyerCompletedOrder extends Component {
                             }
                             </ul>
                             :
+                            <>
+                            {
+                                (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                ?
+                                <img src={logos.cricon} className="cricon1"></img>
+
+                                :
+                                null
+
+                            }
                             <ul className="list-unstyled multi-steps">
                                    {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
                                 ?
@@ -406,6 +416,7 @@ export class BuyerCompletedOrder extends Component {
                             
                               
                             </ul>
+                            </>
                             
                                 }
 

@@ -175,7 +175,7 @@ generateEnquiry(item){
                           <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
                         <Col className="col-xs-4">
-                          {this.state.proddata.productStatusId == 2 
+                          {this.state.proddata.status == 2 
                           ?
                           <Row    className="stockmargin">
                                 <Col className="Available">

@@ -169,6 +169,13 @@ export class ArtisanFaultResolved extends Component {
         }
       }
   
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+
     componentDidMount(){
       
         let params = queryString.parse(this.props.location.search);
@@ -383,7 +390,7 @@ export class ArtisanFaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), this.state.getSingleOrder.orderCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

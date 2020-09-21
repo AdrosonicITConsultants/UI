@@ -83,6 +83,7 @@ const initialState = {
   modal :false,
   producrid : 0,
   modalDelete : true,
+  modalSaveDisabled: false,
 };
 
 export default class addProduct extends Component {
@@ -862,7 +863,7 @@ else {
                     productData.productWeaves = [];
                       let file2, file3;
 
-
+                 
 
                   if(!this.state.isImageUploadComplete){
                     customToast.error("Please upload product Image.", {
@@ -1099,7 +1100,8 @@ else {
                               }
 
                    this.setState({
-                     SaveDisabled: true
+                     SaveDisabled: true,
+                     modalSaveDisabled: true,
                    }, ()=>{                   
                    })
 
@@ -1141,22 +1143,25 @@ else {
                     debugger;
                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
+                      document.getElementById('id02').style.display='none';
                       customToast.success("Product updated successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                      document.getElementById('id02').style.display='none';
                       this.Cancel();
                       this.setState({
-                        SaveDisabled: false
+                        SaveDisabled: false,
+                        modalSaveDisabled: false,
                       })
                     } else {
+                      document.getElementById('id02').style.display='none';
                       customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
                       this.setState({
-                        SaveDisabled: false
+                        SaveDisabled: false,
+                        modalSaveDisabled: false,
                       })
                     }
 
@@ -3515,7 +3520,7 @@ else {
                                           <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
                                           <div className="deleteModalButtonOuterDiv">
                                             <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton">Save</span>
+                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton" disabled={this.state.modalSaveDisabled}>Save</span>
                                           </div>
                                         </div>
                                       </div>

@@ -198,6 +198,9 @@ import Iconioniciosalert1 from "./Icon ionic-ios-alert-1.svg"
 import esc from "./Icon ionic-ios-alert.svg"
 import acceptsmall from "./accept-small.svg"
 import progressNotifyIcon from "./tailor code.svg";
+import artisanChatSearchIcon from "./Icon ionic-ios-search.svg";
+import artisanChatDropDownIcon from "./new enquiries dropdown.svg";
+import artisanChatChatIcon from "./Group 2076.svg";
 
 export default {
   acceptsmall,
@@ -393,4 +396,7 @@ export default {
   notifyImage7,
   notifyFooterBanner,
   cricon,
+  artisanChatSearchIcon,
+  artisanChatDropDownIcon,
+  artisanChatChatIcon,
 };

@@ -38,7 +38,7 @@ export default class BuyerRating extends Component {
     }
 
     foundUnsual(id){
-        console.log('clicked')
+        console.log('clicked');
         browserHistory.push("/completedorderfaulty?orderid="+id)
     }
 
@@ -181,7 +181,7 @@ export default class BuyerRating extends Component {
                 },()=>{
                 console.log(this.state.getClosedOrder);
             });
-        }
+            }
         });
 
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
@@ -261,8 +261,8 @@ export default class BuyerRating extends Component {
                         </div>
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
-                    {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
-                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
+                    {(this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
+                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4) && (this.state.getClosedOrder.comment === null)
                           ?
                           <>
                           <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>
@@ -275,7 +275,7 @@ export default class BuyerRating extends Component {
                         </>
                         :
                         ""
-                         }
+                    }
                     </Col>                          
                 </Row>
                 <div className="envelopeBgImg">
@@ -325,8 +325,8 @@ export default class BuyerRating extends Component {
                     </Col>  
                     <Col sm={3} className="col-xs-12 text-right">
                        
-                        {this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
-                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4 
+                        {(this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
+                          this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4) && (this.state.getClosedOrder.comment === null)
                           ?
                           <>
                           <button className="rateUnusualButton"  onClick={()=>this.foundUnsual(this.state.enquiryId)}>

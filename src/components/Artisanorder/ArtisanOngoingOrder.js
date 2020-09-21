@@ -81,7 +81,10 @@ export class ArtisanOngoingOrder extends Component {
                             if(response1.data.valid)
                             {   console.log("heree");
                                 console.log(response1.data.data);
-                                this.setState({openEnquiries:response1.data.data, dataload:true});
+                                this.setState({
+                                    openEnquiries:response1.data.data, 
+                                    dataload:true
+                                });
                             }
                         })
                     });
@@ -109,10 +112,11 @@ export class ArtisanOngoingOrder extends Component {
     render() {
         return (
             <React.Fragment>
-                {this.state.dataload
+                {this.state.dataload && this.state.openEnquiries.length >= 0 && this.state.enquiryStagesMTO.length > 0 && 
+                this.state.enquiryStagesAvailable.length > 0 && this.state.innerEnquiryStages.length > 0
                 ?
                 <>
-                {this.state.openEnquiries.length == 0 
+                {this. state.openEnquiries.length == 0
                 ?
                 <>
                 <Row noGutters={true}>

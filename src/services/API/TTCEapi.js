@@ -6,26 +6,35 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-var env = "dev";
-var ApiUrl = "http://101.53.153.96:8090";
+var env = "uat";
+var ApiUrl = "";
+var ImageUrl = "";
+var ReceiptUrl = "";
+var DeliveryReceiptUrl = "";
+
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090";
-} else if (env == "uat") {
-  // ApiUrl = "http://63.34.28.175:8090/TEGAPI/services";
-} else if (env == "live") {
-  // ApiUrl = "https://www.bestforexrate.co.uk/TEGAPI/services";
+  ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
+  ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+  DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+} 
+else if (env == "uat") {
+  ApiUrl = "http://164.52.192.15:8090";
+  ImageUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/";
+  ReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/AdvancedPayment/";
+  DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+} 
+else if (env == "live") {
+  ApiUrl = "";
 }
 
 class TTCEapi {
-  static ImageUrl =
-    " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
-  //#region post methods
+  
+  static ImageUrl = ImageUrl;
 
-  static ReceiptUrl = 
-            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+  static ReceiptUrl = ReceiptUrl;
 
-  static DeliveryReceiptUrl = 
-            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/"
+  static DeliveryReceiptUrl = DeliveryReceiptUrl;
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
@@ -2620,6 +2629,20 @@ static submitRatingToUser(data){
 
 static  getRatingsForUser(enquiryId, userId)  {
   let url = ApiUrl + "/user/getRatingsForUser?enquiryId=" + enquiryId + "&userId=" + userId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEnquiryMessageChatList(searchedString)  {
+  let url = ApiUrl + "/enquiry/getEnquiryMessageChatList?searchedString=" + searchedString;
   console.log(url);
   return axios
     .get(url)

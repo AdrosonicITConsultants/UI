@@ -139,8 +139,8 @@ browserHistory.push("/MyProfile");
       "ds47.Token": jwtToken,
       "ds46.email": userData.email,
       "ds46.Token": jwtToken,
-      "ds45.email": userData.email,
-      "ds45.Token": jwtToken,
+      "ds48.email": userData.email,
+      "ds48.Token": jwtToken,
       "ds44.Token": jwtToken,
     };
     var paramsAsString = JSON.stringify(params);

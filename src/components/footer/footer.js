@@ -16,7 +16,7 @@ export default class Footer extends Component {
             <Container className='footerContainer'>
               <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
-                <div style={{marginBottom: "20px"}}>22-09-20  <span style={{marginLeft: "5px"}}>V-1.1</span></div>
+                {/* <div style={{marginBottom: "20px"}}>22-09-20  <span style={{marginLeft: "5px"}}>V-1.1</span></div> */}
                 </Col>
               </Row>
               <Row noGutters={true}>

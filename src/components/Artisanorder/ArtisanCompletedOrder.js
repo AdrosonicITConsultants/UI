@@ -236,7 +236,7 @@ export class ArtisanCompletedOrder extends Component {
             <Row noGutters={true}>
             <Col className="col-xs-1"></Col>
             {item.openEnquiriesResponse.deliveryChallanLabel?
-                     <Col className="col-xs-4">
+                     <Col className="col-xs-3">
                      <img src={logos.truck} className="truckimg"/>  Check
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>

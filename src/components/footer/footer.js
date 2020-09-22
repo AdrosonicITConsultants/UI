@@ -15,6 +15,11 @@ export default class Footer extends Component {
             <div className="footerblack ">
             <Container className='footerContainer'>
               <Row noGutters={true}>
+                <Col className="col-xs-12 text-center">
+                <div style={{marginBottom: "20px"}}>22-09-20  <span style={{marginLeft: "5px"}}>V-1.1</span></div>
+                </Col>
+              </Row>
+              <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span
                     className="col-md-4 Ffont1"
@@ -50,6 +55,7 @@ export default class Footer extends Component {
                   </span>
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">
+                  
                   For any help
                   <br />
                   <span className="Ffont2">

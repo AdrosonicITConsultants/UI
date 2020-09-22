@@ -214,6 +214,13 @@ export class BuyerOngoingOrder extends Component {
                                 console.log(diffDays); 
                                 return(diffDays);
     }
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+    
     render() {
         return (
             <React.Fragment>
@@ -1234,7 +1241,7 @@ export class BuyerOngoingOrder extends Component {
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                // onClick={this.sendCRDataFunction}
+                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
                 className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
                  </button></span>
                  <br/>

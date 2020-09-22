@@ -332,6 +332,13 @@ export class Buyerorder extends Component {
                 });
 
         }
+
+        reviewPageButton = (id, code) => {
+            localStorage.removeItem("ratingEnquiryCode");
+            localStorage.setItem("ratingEnquiryCode", code);
+            browserHistory.push("/buyerRating?code=" + id);
+        }
+        
         componentDidMount(){
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
@@ -1012,7 +1019,7 @@ export class Buyerorder extends Component {
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                // onClick={this.sendCRDataFunction}
+                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
                 className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
                  </button></span>
                  <br/>

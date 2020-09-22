@@ -170,6 +170,12 @@ export class FaultResolved extends Component {
             })
         }
       }
+
+      reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
   
     componentDidMount(){
       
@@ -396,7 +402,7 @@ export class FaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                // onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getSingleOrder.orderCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

@@ -104,6 +104,12 @@ export class CompletedFaultResolved extends Component {
         });
     }
 
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+
     submit(){
         if(this.state.description&&this.state.actioncategoryid>0){
             this.setState({
@@ -398,7 +404,7 @@ export class CompletedFaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getClosedOrder.orderCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

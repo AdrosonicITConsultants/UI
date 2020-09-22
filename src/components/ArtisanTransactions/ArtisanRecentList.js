@@ -205,6 +205,7 @@ export class ArtisanRecentList extends Component {
     acceptModalShow(id,enquiryId){
         
         console.log("abcfdrf");
+         document.getElementById('acceptMOQModal'+ id).style.display='block';
         // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
@@ -225,11 +226,12 @@ export class ArtisanRecentList extends Component {
             });
         }
         });
-        document.getElementById('acceptMOQModal'+ id).style.display='block';
+        // document.getElementById('acceptMOQModal'+ id).style.display='block';
     }
         
     
     RejectModalShow (id,enquiryId){
+        document.getElementById('acceptMOQModal' + id).style.display='block';
        
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
@@ -249,7 +251,7 @@ export class ArtisanRecentList extends Component {
             });
         }
         });
-        document.getElementById('acceptMOQModal' + id).style.display='block';
+        // document.getElementById('acceptMOQModal' + id).style.display='block';
 
     }
 

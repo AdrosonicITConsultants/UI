@@ -230,17 +230,17 @@ export default class ArtisanRating extends Component {
                             Thank you for the review !
                         </div>
                     </Col>  
-                    <Col sm={3} className="col-xs-12 text-right">
+                    {/* <Col sm={3} className="col-xs-12 text-right">
                         <button className="rateUnusualButton"
-                        // onClick={()=>this.faulty(this.state.enquiryId)}
+                        onClick={()=>this.faulty(this.state.enquiryId)}
                         >
                             <img src={logos.rateSadFace} className="raterevbtnimg"/> 
                             Check faulty order
                         </button>
-                        {/* <div className="ratingSubheader">
+                        <div className="ratingSubheader">
                             2 days left to report a problem
-                        </div> */}
-                    </Col>                          
+                        </div>
+                    </Col>                           */}
                 </Row>
                 <div className="envelopeBgImg">
                     <Row noGutters={true}>
@@ -287,18 +287,6 @@ export default class ArtisanRating extends Component {
                             We'll just take 2 minutes to review this order
                         </div>
                     </Col>  
-                    <Col sm={3} className="col-xs-12 text-right">
-                        <button className="rateUnusualButton"
-                        //   onClick={()=>this.faulty(this.state.enquiryId)}
-                          >
-                                                
-                            <img src={logos.rateSadFace} className="raterevbtnimg"/> 
-                            Check faulty order
-                        </button>
-                        {/* <div className="ratingSubheader">
-                            2 days left to report a problem
-                        </div> */}
-                    </Col>                          
                 </Row>
 
                 <Row noGutters={true}>

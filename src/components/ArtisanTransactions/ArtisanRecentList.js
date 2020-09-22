@@ -803,11 +803,15 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             item.transactionOngoing.upcomingStatus==13?7:
                                                                             item.transactionOngoing.upcomingStatus==2?6:
                                                                             item.transactionOngoing.upcomingStatus==17?8:
-                                                                            item.transactionOngoing.upcomingStatus==21?9:"",
+                                                                            item.transactionOngoing.upcomingStatus==21?9:
+                                                                            item.transactionOngoing.upcomingStatus==11?8:
+                                                                            "",
                                                                             item.transactionOngoing.upcomingStatus==13?item.transactionOngoing.taxInvoiceId:
-                                                                            item.transactionOngoing.upcomingStatus==2?item.transactionOngoing.pId:
+                                                                            item.transactionOngoing.upcomingStatus==2?item.transactionOngoing.piId:
                                                                             item.transactionOngoing.upcomingStatus==17?item.transactionOngoing.paymentId:
-                                                                            item.transactionOngoing.upcomingStatus==21?item.transactionOngoing.challanId:"",item.transactionOngoing.id )}
+                                                                            item.transactionOngoing.upcomingStatus==21?item.transactionOngoing.challanId:
+                                                                            item.transactionOngoing.upcomingStatus==11?item.transactionOngoing.paymentId:
+                                                                            "",item.transactionOngoing.id )}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>

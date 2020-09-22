@@ -115,7 +115,29 @@ export class SingleEnquiry extends Component {
         }
         else innerID = 0;
 
-        if(this.state.Progressidnext == 4)
+        if(this.state.Progressidnext == 9){
+            TTCEapi.validateFinalPaymentFromArtisan(parseInt(params.code),1).then((response)=>{
+                if(response.data.valid)
+                {
+                    customToast.success("Transaction Status Updated!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.componentDidMount();
+                   
+               
+               
+            }
+            else{
+               
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            });
+        }
+       else if(this.state.Progressidnext == 4)
         {   
             TTCEapi.validateAdvancePaymentFromArtisan(parseInt(params.code),1).then((response)=>{
                 if(response.data.valid)
@@ -978,6 +1000,7 @@ export class SingleEnquiry extends Component {
                 </Row>
                     <Row noGutters={true} className="text-center">
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1370,6 +1393,7 @@ export class SingleEnquiry extends Component {
                 </Row>
                     <Row noGutters={true} className="text-center">
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :

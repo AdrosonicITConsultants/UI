@@ -778,6 +778,7 @@ export class Artisanorder extends Component {
                     </Row>
                     <Row noGutters={true} className="text-center">
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1262,7 +1263,8 @@ export class Artisanorder extends Component {
                     
                     <Row noGutters={true} className="text-center">
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
-                    ? 
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
+                                      ? 
                      <></>
                    :
                    <button

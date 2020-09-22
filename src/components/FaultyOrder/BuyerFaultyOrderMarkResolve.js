@@ -374,7 +374,8 @@ export class BuyerFaultyOrderMarkResolve extends Component {
 
                                             <div 
                                             className="descfaultybox"
-                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)"}}
+                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)",overflow:"auto"}}
+
                                             >
                                 {this.state.getOrderProgress.artisanReviewComment}
                                              </div>

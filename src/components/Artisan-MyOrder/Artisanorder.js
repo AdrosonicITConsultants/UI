@@ -101,13 +101,32 @@ export class Artisanorder extends Component {
         {
             innerID = 1;
         }
+
         else if(this.state.Progressidnext == 5) {
             innerID = this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId + 1;
         }
         else innerID = 0;
-        if(this.state.Progressidnext == 4)
-        {   
-            
+        if(this.state.Progressidnext == 9){
+            TTCEapi.validateFinalPaymentFromArtisan(parseInt(params.code),1).then((response)=>{
+                if(response.data.valid)
+                {
+                    customToast.success("Transaction Status Updated!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.componentDidMount();
+                   
+               
+               
+            }
+            else{
+               
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            });
         }
         else{
             if(this.state.Progressidnext == 5 && innerID == 5 ){

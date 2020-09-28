@@ -1097,7 +1097,7 @@ class TTCEapi {
   }
   ///enquiry/markOrderAsRecieved/1705/05-09-2020
   static markOrderAsRecieved(enquiryId,date) {
-    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date;
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date + "/0";
 
     return axios
       .post(url)

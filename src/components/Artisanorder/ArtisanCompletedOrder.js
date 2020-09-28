@@ -481,8 +481,12 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            {/* <Col className="col-xs-1"></Col> */}
+            <hr/>
+            <Row noGutters={true}>
+            <Col className="col-xs-1"></Col>
             {item.openEnquiriesResponse.deliveryChallanLabel?
-                     <Col className="col-xs-4">
+                     <Col className="col-xs-3">
                      <img src={logos.truck} className="truckimg"/>  Check
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
@@ -490,6 +494,26 @@ export class ArtisanCompletedOrder extends Component {
                      :
                      ""
                      }
+                {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
+                <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
+                <i className="fa fa-star starColorActiveCompleteOrder" /> 
+                Buyer provided <a style={{cursor: "pointer"}}
+                onClick={() => this.reviewSelfPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                >rating for your order</a>
+                </Col> 
+                : null }
+                <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
+                        </button>
+                :
+                null
+                }
+                </Col>
+            </Row>
+            <hr/>
             {item.openEnquiriesResponse.comment?
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>

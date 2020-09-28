@@ -11,12 +11,14 @@ var ApiUrl = "";
 var ImageUrl = "";
 var ReceiptUrl = "";
 var DeliveryReceiptUrl = "";
+var ChatMediaUrl = "";
 
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090";
   ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+  ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/" 
 } 
 else if (env == "uat") {
   ApiUrl = "http://164.52.192.15:8090";
@@ -35,6 +37,8 @@ class TTCEapi {
   static ReceiptUrl = ReceiptUrl;
 
   static DeliveryReceiptUrl = DeliveryReceiptUrl;
+
+  static ChatMediaUrl = ChatMediaUrl;
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
@@ -1278,6 +1282,7 @@ class TTCEapi {
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
+
       },
     };
     return axios
@@ -2629,7 +2634,6 @@ static submitRatingToUser(data){
 
 static  getRatingsForUser(enquiryId, userId)  {
   let url = ApiUrl + "/user/getRatingsForUser?enquiryId=" + enquiryId + "&userId=" + userId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
@@ -2643,7 +2647,6 @@ static  getRatingsForUser(enquiryId, userId)  {
 
 static getEnquiryMessageChatList(searchedString)  {
   let url = ApiUrl + "/enquiry/getEnquiryMessageChatList?searchedString=" + searchedString;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
@@ -2655,6 +2658,133 @@ static getEnquiryMessageChatList(searchedString)  {
     });
 }
 
+static getNewEnquiryMessageChatList(searchedString)  {
+  let url = ApiUrl + "/enquiry/getNewEnquiryMessageChatList?searchedString=" + searchedString;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getAndReadChatMessageForEnquiry(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getAndReadChatMessageForEnquiry?enquiryId=" + enquiryId;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static sendChatboxMessage(data){
+  let url = ApiUrl + "/enquiry/sendChatboxMessage";
+
+  var config = {
+    headers: {
+      "Content-type": "multipart/form-data",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEscalations()  {
+  let url = ApiUrl + "/enquiry/getEscalations";
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static raiseEscalaton(data){
+  let url = ApiUrl + "/enquiry/raiseEscalaton";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEscalationSummaryForEnquiry(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getEscalationSummaryForEnquiry?enquiryId=" + enquiryId;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static resolveEscalation(id){
+  let url = ApiUrl + "/enquiry/resolveEscalation?escalationId=" + id;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static goToEnquiryChat(enquiryId){
+  let url = ApiUrl + "/enquiry/goToEnquiryChat?enquiryId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

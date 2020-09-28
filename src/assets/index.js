@@ -201,6 +201,26 @@ import progressNotifyIcon from "./tailor code.svg";
 import artisanChatSearchIcon from "./Icon ionic-ios-search.svg";
 import artisanChatDropDownIcon from "./new enquiries dropdown.svg";
 import artisanChatChatIcon from "./Group 2076.svg";
+import artisanChatAttachIcon from "./Icon material-attach-file.svg";
+import artisanChatNonActiveSend from "./send non active.svg";
+import artisanChatActiveSend from "./send active.svg";
+import artisanChatFile from "./Icon ionic-ios-document.svg";
+import artisanChatAudio from "./Icon metro-keyboard-voice.svg";
+import artisanChatVideo from "./Icon ionic-ios-videocam.svg";
+import artisanChatPhoto from "./Icon ionic-md-image.svg";
+import artisanChatCRIcon from "./change requested .svg";
+import artisanChatChooseAnotherIcon from "./Group 1952.svg"
+import artisanChatUploadFileIcon from "./chatFileUploadIcon.jpg";
+import artisanChatAudioNew from "./Icon metro-keyboard-voice- green.svg";
+import artisanChatVideoNew from "./Icon ionic-ios-videocam- maroon.svg";
+import artisanChatPhotoNew from "./Icon ionic-md-image- blue.svg";
+import escalationConfirmImg from "./qnexclamtion bg - are you sure.svg";
+import artisanEscLogo from "./artisan Escalation.svg";
+import buyerEscLogo from "./buyer escalation.svg";
+import chatEscGreenTick from "./tick green.svg";
+import chatEscGreenAlert from "./green alert.svg";
+import chatIconUploadImg from "./Icon feather-share.svg";
+import chatPinkDocImg from "./Icon ionic-ios-document-pink.svg";
 
 export default {
   acceptsmall,
@@ -399,4 +419,24 @@ export default {
   artisanChatSearchIcon,
   artisanChatDropDownIcon,
   artisanChatChatIcon,
+  artisanChatAttachIcon,
+  artisanChatNonActiveSend,
+  artisanChatActiveSend,
+  artisanChatFile,
+  artisanChatAudio,
+  artisanChatVideo,
+  artisanChatPhoto,
+  artisanChatCRIcon,
+  artisanChatChooseAnotherIcon,
+  artisanChatUploadFileIcon,
+  artisanChatAudioNew,
+  artisanChatVideoNew,
+  artisanChatPhotoNew,
+  escalationConfirmImg,
+  artisanEscLogo,
+  buyerEscLogo,
+  chatEscGreenTick,
+  chatEscGreenAlert,
+  chatIconUploadImg,
+  chatPinkDocImg,
 };

@@ -11,7 +11,7 @@ import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 import "./artisanChat.css";
 
-export default class ArtisanChat extends Component {
+export default class BuyerChat extends Component {
 
     constructor() {
         super();
@@ -711,7 +711,7 @@ export default class ArtisanChat extends Component {
                                 <Col className="chatRemovePadding col-xs-10">
                                     <div className="artisanChatSearchBoxOuter">
                                         <img src={logos.artisanChatSearchIcon}/>
-                                        <input value={this.state.filter} onChange={(e) => this.handleSearchChange(e)} placeholder="Search by enquiry/ order id/ buyer's name"></input>
+                                        <input value={this.state.filter} onChange={(e) => this.handleSearchChange(e)} placeholder="Search by enquiry/ order id/ artisan's name"></input>
                                     </div>
                                 </Col>
                                 <Col className="col-xs-2 text-right" onClick={this.showDropDownClose}>
@@ -781,7 +781,7 @@ export default class ArtisanChat extends Component {
                                 <Col className="chatRemovePadding col-xs-10">
                                     <div className="artisanChatSearchBoxOuter">
                                         <img src={logos.artisanChatSearchIcon}/>
-                                        <input value={this.state.filter1} onChange={(e) => this.handleSearchChange1(e)} placeholder="Search by enquiry/ order id/ buyer's name"></input>
+                                        <input value={this.state.filter1} onChange={(e) => this.handleSearchChange1(e)} placeholder="Search by enquiry/ order id/ artisan's name"></input>
                                     </div>
                                 </Col>
                                 <Col className="col-xs-1 chatRemovePadding" onClick={this.openDropdownChatList}>
@@ -850,7 +850,7 @@ export default class ArtisanChat extends Component {
                     <Col md={8} sm={12} className="col-xs-12 chatRemovePadding">
                         <div className="artisanChatOnLoadBar chatBarBorderLeft"></div>
                         <div className="chatRightHeight">
-                            <div className="artisanChatTalkMoreText">Talk more, sell more !</div>
+                            <div className="artisanChatTalkMoreText">Talk more & buy with confidence !</div>
                             <div className="artisanChatTalkMoreText1">Select the chat to view conversation here !</div>
                             <img  src={logos.artisanChatChatIcon} className="artisanChatChatIcon"/>
                         </div>                        
@@ -926,125 +926,125 @@ export default class ArtisanChat extends Component {
                         {this.state.getEscalationsDataArray ? this.state.getEscalationsDataArray.map((data) => {
                             if(data.escalationFrom === this.state.userData.id) {
                                 if(data.isResolve === 1) {
-                                return <Row noGutters={true} className="chatEscRow1Data">
-                                        <Col className="col-xs-1">
-                                            <div>
-                                                <img src={logos.artisanEscLogo} className="artisanEscLogo"/>
-                                            </div>
-                                            <div>
-                                                <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
-                                            </div>
-                                        </Col>
-                                        <Col className="col-xs-8">
-                                            <div className="chatEscShowCenterColTop">
-                                                <span className="chatEscShowCenterColText1">Raised by You on <Moment format="DD-MM-YY">
-                                                    {data.createdOn}</Moment> at <Moment format="HH:mm">
-                                                    {data.createdOn}</Moment></span>
-                                            </div>
-                                            <div className="chatEscShowCenterColContent">{data.text}</div>
-                                        </Col>
-                                        <Col className="col-xs-3">
-                                            <div className="chatEscShowEndColOuter1"> 
-                                                <div className="text-center">
-                                                    <img src={logos.chatEscGreenCircleTick} className="chatEscGreenCircleTick"/>
-                                                </div>
-                                                <div className="chatEscShowEndColText">Mark as resolved by you</div>
-                                            </div>
-                                        </Col>
-                                    </Row>
+                                return <Row noGutters={true} className="chatEscRow1Data1">
+                                <Col className="col-xs-1">
+                                    <div>
+                                        <img src={logos.buyerEscLogo} className="buyerEscLogo"/>
+                                    </div>
+                                    <div>
+                                        <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
+                                    </div>
+                                </Col>
+                                <Col className="col-xs-8">
+                                    <div className="chatEscShowCenterColTop1">
+                                    <span className="chatEscShowCenterColText1">Raised by you on <Moment format="DD-MM-YY">
+                                            {data.createdOn}</Moment> at <Moment format="HH:mm">
+                                            {data.createdOn}</Moment></span>
+                                    </div>
+                                    <div className="chatEscShowCenterColContent1">{data.text}</div>
+                                </Col>
+                                <Col className="col-xs-3">
+                                    <div className="chatEscShowEndColOuter1">
+                                        <div className="text-center">
+                                            <img src={logos.chatEscGreenCircleTick} className="chatEscGreenCircleTick"/>
+                                        </div>
+                                        <div className="chatEscShowEndColText1">Mark as resolved by you</div>
+                                    </div>
+                                </Col>
+                            </Row>
                                 }
                                 else {
-                                return <Row noGutters={true} className="chatEscRow1Data">
-                                        <Col className="col-xs-1">
-                                            <div>
-                                                <img src={logos.artisanEscLogo} className="artisanEscLogo"/>
-                                            </div>
-                                            <div>
-                                                <img src={logos.Iconioniciosalert1} className="chatEscRedIconSelf"/>
-                                            </div>
-                                        </Col>
-                                        <Col className="col-xs-9">
-                                            <div className="chatEscShowCenterColTop">
-                                            <span className="chatEscShowCenterColText1">Raised by You on <Moment format="DD-MM-YY">
-                                                    {data.createdOn}</Moment> at <Moment format="HH:mm">
-                                                    {data.createdOn}</Moment></span>
-                                                <span className="chatEscShowCenterColText2">Awaiting resolution. {this.daysLeftChatEsc(data.createdOn, 2)} hrs left to auto escalate</span>
-                                            </div>
-                                            <div className="chatEscShowCenterColContent">{data.text}</div>
-                                        </Col>
-                                        <Col className="col-xs-2">
-                                            {this.state.markResolvedButtonDisable === true ? 
-                                            <div className="chatEscShowEndColOuter">
-                                                <div className="chatEscShowEndColText">Mark <br/> Resolved</div>
-                                                <div className="text-center">
-                                                    <img src={logos.chatEscGreenTick} className="chatEscShowEndColImg"/>
-                                                </div>
-                                            </div>
-                                            : 
-                                            <div className="chatEscShowEndColOuter" onClick={() => this.markResolveEscFunction(data.id)}>
-                                                <div className="chatEscShowEndColText">Mark <br/> Resolved</div>
-                                                <div className="text-center">
-                                                    <img src={logos.chatEscGreenTick} className="chatEscShowEndColImg"/>
-                                                </div>
-                                            </div>
-                                            }
-                                        </Col>
-                                    </Row>
+                                return <Row noGutters={true} className="chatEscRow1Data1">
+                                <Col className="col-xs-1">
+                                    <div>
+                                        <img src={logos.buyerEscLogo} className="buyerEscLogo"/>
+                                    </div>
+                                    <div>
+                                        <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
+                                    </div>
+                                </Col>
+                                <Col className="col-xs-9">
+                                    <div className="chatEscShowCenterColTop1">
+                                    <span className="chatEscShowCenterColText1">Raised by you on <Moment format="DD-MM-YY">
+                                            {data.createdOn}</Moment> at <Moment format="HH:mm">
+                                            {data.createdOn}</Moment></span>
+                                            <span className="chatEscShowCenterColText2">Awaiting resolution. {this.daysLeftChatEsc(data.createdOn, 2)} hrs left to auto escalate</span>
+                                    </div>
+                                    <div className="chatEscShowCenterColContent1">{data.text}</div>
+                                </Col>
+                                <Col className="col-xs-2">
+                                    {this.state.markResolvedButtonDisable === true ? 
+                                    <div className="chatEscShowEndColOuter">
+                                        <div className="chatEscShowEndColText">Mark <br/> Resolved</div>
+                                        <div className="text-center">
+                                            <img src={logos.chatEscGreenTick} className="chatEscShowEndColImg"/>
+                                        </div>
+                                    </div>
+                                    : 
+                                    <div className="chatEscShowEndColOuter" onClick={() => this.markResolveEscFunction(data.id)}>
+                                        <div className="chatEscShowEndColText">Mark <br/> Resolved</div>
+                                        <div className="text-center">
+                                            <img src={logos.chatEscGreenTick} className="chatEscShowEndColImg"/>
+                                        </div>
+                                    </div>
+                                    }
+                                </Col>
+                            </Row>
                                 }
                             }
                             else {
                                 if(data.isResolve === 1) {
-                                return <Row noGutters={true} className="chatEscRow1Data1">
-                                        <Col className="col-xs-1">
-                                            <div>
-                                                <img src={logos.buyerEscLogo} className="buyerEscLogo"/>
-                                            </div>
-                                            <div>
-                                                <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
-                                            </div>
-                                        </Col>
-                                        <Col className="col-xs-8">
-                                            <div className="chatEscShowCenterColTop1">
-                                            <span className="chatEscShowCenterColText1">Raised by Buyer on <Moment format="DD-MM-YY">
-                                                    {data.createdOn}</Moment> at <Moment format="HH:mm">
-                                                    {data.createdOn}</Moment></span>
-                                            </div>
-                                            <div className="chatEscShowCenterColContent1">{data.text}</div>
-                                        </Col>
-                                        <Col className="col-xs-3">
-                                            <div className="chatEscShowEndColOuter1">
-                                                <div className="text-center">
-                                                    <img src={logos.chatEscGreenCircleTick} className="chatEscGreenCircleTick"/>
-                                                </div>
-                                                <div className="chatEscShowEndColText1">Mark as resolved by buyer</div>
-                                            </div>
-                                        </Col>
-                                    </Row>
+                                return <Row noGutters={true} className="chatEscRow1Data">
+                                <Col className="col-xs-1">
+                                    <div>
+                                        <img src={logos.artisanEscLogo} className="artisanEscLogo"/>
+                                    </div>
+                                    <div>
+                                        <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
+                                    </div>
+                                </Col>
+                                <Col className="col-xs-8">
+                                    <div className="chatEscShowCenterColTop">
+                                        <span className="chatEscShowCenterColText1">Raised by Artisan on <Moment format="DD-MM-YY">
+                                            {data.createdOn}</Moment> at <Moment format="HH:mm">
+                                            {data.createdOn}</Moment></span>
+                                    </div>
+                                    <div className="chatEscShowCenterColContent">{data.text}</div>
+                                </Col>
+                                <Col className="col-xs-3">
+                                    <div className="chatEscShowEndColOuter1"> 
+                                        <div className="text-center">
+                                            <img src={logos.chatEscGreenCircleTick} className="chatEscGreenCircleTick"/>
+                                        </div>
+                                        <div className="chatEscShowEndColText">Mark as resolved by artisan</div>
+                                    </div>
+                                </Col>
+                            </Row>
                                 }
                                 else {
-                                return <Row noGutters={true} className="chatEscRow1Data1">
-                                        <Col className="col-xs-1">
-                                            <div>
-                                                <img src={logos.buyerEscLogo} className="buyerEscLogo"/>
-                                            </div>
-                                            <div>
-                                                <img src={logos.chatEscGreenAlert} className="chatEscRedIconSelf"/>
-                                            </div>
-                                        </Col>
-                                        <Col className="col-xs-8">
-                                            <div className="chatEscShowCenterColTop1">
-                                            <span className="chatEscShowCenterColText1">Raised by Buyer on <Moment format="DD-MM-YY">
-                                                    {data.createdOn}</Moment> at <Moment format="HH:mm">
-                                                    {data.createdOn}</Moment></span>
-                                            </div>
-                                            <div className="chatEscShowCenterColContent1">{data.text}</div>
-                                        </Col>
-                                        <Col className="col-xs-3">
-                                            <div className="chatEscShowEndColOuter1">
-                                                <div className="chatEscShowEndColText1">Awaiting response from buyer</div>
-                                            </div>
-                                        </Col>
-                                    </Row>
+                                return <Row noGutters={true} className="chatEscRow1Data">
+                                <Col className="col-xs-1">
+                                    <div>
+                                        <img src={logos.artisanEscLogo} className="artisanEscLogo"/>
+                                    </div>
+                                    <div>
+                                        <img src={logos.Iconioniciosalert1} className="chatEscRedIconSelf"/>
+                                    </div>
+                                </Col>
+                                <Col className="col-xs-8">
+                                    <div className="chatEscShowCenterColTop">
+                                    <span className="chatEscShowCenterColText1">Raised by Artisan on <Moment format="DD-MM-YY">
+                                            {data.createdOn}</Moment> at <Moment format="HH:mm">
+                                            {data.createdOn}</Moment></span>
+                                    </div>
+                                    <div className="chatEscShowCenterColContent">{data.text}</div>
+                                </Col>
+                                <Col className="col-xs-3">
+                                    <div className="chatEscShowEndColOuter1">
+                                        <div className="chatEscShowEndColText">Awaiting response from artisan</div>
+                                    </div>
+                                </Col>
+                            </Row>
                                 }
                             }
                         }) : null}
@@ -1176,13 +1176,74 @@ export default class ArtisanChat extends Component {
                                     else {
                                         return <Row noGutters={true}>
                                             <Col className="col-xs-12 text-left">
-                                            <div className="artisanChatBoxWindowLeftText">{item.messageString}
+                                            {item.mediaType === 1 ?
+                                            <div className="artisanChatBoxWindowLeftText">{item.messageString} 
                                             <span className="artisanChatBoxWindowRightTime">
                                                 <Moment format="HH:mm">
                                                     {item.createdOn}
                                                 </Moment>
                                             </span>
                                             </div>
+                                            : 
+                                            item.mediaType === 2 ?
+                                            <div className="artisanChatBoxWindowLeftText">
+                                                <img src={logos.chatPinkDocImg} className="chatmediaNameAudio" />
+                                                {item.mediaName} 
+                                            <span className="artisanChatBoxWindowRightTime">
+                                                <Moment format="HH:mm">
+                                                    {item.createdOn}
+                                                </Moment>
+                                            </span>
+                                            <div className="viewDataFromChat">
+                                            <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                            target="_blank">View document</a>
+                                            </div>
+                                            </div>
+                                            :
+                                            item.mediaType === 3 ?
+                                            <div className="artisanChatBoxWindowLeftText">
+                                                <img src={logos.artisanChatPhotoNew} className="chatmediaNameAudio" />
+                                                {item.mediaName}
+                                            <span className="artisanChatBoxWindowRightTime">
+                                                <Moment format="HH:mm">
+                                                    {item.createdOn}
+                                                </Moment>
+                                            </span>
+                                            <div className="viewDataFromChat">
+                                            <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                            target="_blank">View photo</a>
+                                            </div>
+                                            </div>
+                                            : 
+                                            item.mediaType === 4 ?
+                                            <div className="artisanChatBoxWindowLeftText">
+                                                <img src={logos.artisanChatAudioNew} className="chatmediaNameAudio" />
+                                                {item.mediaName}
+                                            <span className="artisanChatBoxWindowRightTime">
+                                                <Moment format="HH:mm">
+                                                    {item.createdOn}
+                                                </Moment>
+                                            </span>
+                                            <div className="viewDataFromChat">
+                                            <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                            target="_blank">View audio</a>
+                                            </div>
+                                            </div>
+                                            : item.mediaType === 5 ?
+                                            <div className="artisanChatBoxWindowLeftText">
+                                                <img src={logos.artisanChatVideoNew} className="chatmediaNameVideo" />
+                                                {item.mediaName} 
+                                            <span className="artisanChatBoxWindowRightTime">
+                                                <Moment format="HH:mm">
+                                                    {item.createdOn}
+                                                </Moment>
+                                            </span>
+                                            <div className="viewDataFromChat">
+                                            <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                            target="_blank">View video</a>
+                                            </div>
+                                            </div>
+                                            : null }
                                             </Col>
                                         </Row>
                                     }

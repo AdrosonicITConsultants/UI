@@ -85,6 +85,7 @@ import ArtisanRating from './components/Rating/artisanRating';
 import ArtisanSelfRating from './components/Rating/artisanSelfRating';
 import { ArtisanFaultResolved } from './components/FaultyOrder/ArtisianFaultResolved';
 import ArtisanChat from './components/Chat/artisanChat';
+import BuyerChat from './components/Chat/buyerChat';
 function App() {
   
   return (
@@ -192,6 +193,7 @@ function App() {
           <PrivateRoute exact path="/artisanSelfRating" component={ArtisanSelfRating} />
 
           <PrivateRoute exact path="/artisanChat" component={ArtisanChat} />
+          <PrivateRoute exact path="/buyerChat" component={BuyerChat} />
          
         </Switch>
       </Router>

@@ -354,6 +354,7 @@ browserHistory.push("/MyProfile");
 
             <li className="menu-item">
               {this.state.ischatHovered ? (
+                userTypeId === 1 ?
                 <a href="/artisanChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
@@ -362,8 +363,27 @@ browserHistory.push("/MyProfile");
                   src={logos.chat_bubble_filled}
                 ></img>
                 </a>
+                : 
+                <a href="/buyerChat">
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chat_bubble_filled}
+                ></img>
+                </a>
               ) : (
+                userTypeId === 1 ? 
                 <a href="/artisanChat">
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chaticon}
+                ></img>
+                </a>
+                :
+                <a href="/buyerChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
                   onMouseLeave={() => this.toggleHover("ischatHovered")}

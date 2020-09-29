@@ -18,13 +18,14 @@ if (env == "dev") {
   ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
-  ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/" 
+  ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/";
 } 
 else if (env == "uat") {
   ApiUrl = "http://164.52.192.15:8090";
   ImageUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+  ChatMediaUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/ChatBoxMedia/";
 } 
 else if (env == "live") {
   ApiUrl = "";

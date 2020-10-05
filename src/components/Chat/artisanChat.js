@@ -553,6 +553,27 @@ export default class ArtisanChat extends Component {
                         });
                     }
                 });
+                TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log(response.data.data);
+                        this.setState({
+                            dropdownChatList: response.data.data,
+                            loading: false,
+                        });
+                    }
+                });
+                TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
+                    if(response.data.valid)
+                    {
+                        console.log(response.data.data);
+                        this.setState({
+                            selectedChatList: response.data.data,
+                            loading: false,
+                        });
+                        this.scrollToBottom();
+                    }
+                });
             }
         });
     }
@@ -821,8 +842,11 @@ export default class ArtisanChat extends Component {
                                     <div className="chatEnquiryId">E/O Id: {data.enquiryNumber}</div>
                                 </Col>
                                 <Col className="col-xs-2 chatRemovePadding">
-                                    <div className="chatEnquiryBrandName">
+                                    <div className="chatEnquiryBrandName text-right chatLeftDate">
                                         <Moment format="DD-MM-YY">{data.lastChatDate}</Moment>
+                                    </div>
+                                    <div className="chatEnquiryBrandName text-right chatLeftTime">
+                                        <Moment format="HH:mm">{data.lastChatDate}</Moment>
                                     </div>
                                     <Row noGutters={true}>
                                         <Col className="col-xs-6 chatRemovePadding">

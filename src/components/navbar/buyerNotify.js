@@ -299,6 +299,10 @@ class BuyerNotifications extends Component {
                             data.notificationTypeId === 16 ||  data.notificationTypeId === 17 || data.notificationTypeId === 18 || data.notificationTypeId === 19 ||
                             data.notificationTypeId === 20 || data.notificationTypeId === 21 ?
                             <img  className="notifyImage1" src={logos.progressNotifyIcon}/> :
+                            data.notificationTypeId === 23 || data.notificationTypeId === 24 ?
+                            <img  className="notifyEscIcon" src={logos.notifyEscIcon}/> :
+                            data.notificationTypeId === 22 ?
+                            <img  className="notifyChatIcon" src={logos.notifyChatIcon}/> :
                             <img  className="notifyImage1" src={logos.notifyImage3}/> 
                             }
                             </Col>

@@ -38,7 +38,7 @@ export default class DetailSuggestions extends Component {
              if(response.data.valid == true)
              {
                this.setState({
-                products : response.data.data,
+                products : response.data.data.searchResponse,
                 resultsCount : response.data.data.length,
                 searchWord : params.search,
                 both : 1,

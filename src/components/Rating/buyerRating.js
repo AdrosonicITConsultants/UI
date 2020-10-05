@@ -396,7 +396,7 @@ export default class BuyerRating extends Component {
                                    {data.question}
                                 </div>
                                 <textarea placeholder="Type here....." className="ratingTextareaStyle" 
-                                onChange={(e) => this.handleChangeComment(e, data.id)}></textarea>
+                                onChange={(e) => this.handleChangeComment(e, data.id)} maxLength="500"></textarea>
                             </div>
                         }) : null}  
                         {this.state.submitReviewButton === true ?

@@ -198,3 +198,10 @@
 .QCdeclarationTop {
     margin-top: 20px;
 }
+
+.QCTextareaBoxStyle {
+    margin: 0px;
+    width: 100% !important;
+    height: 100px !important;
+    padding: 10px !important;
+}

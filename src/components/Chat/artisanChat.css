@@ -802,6 +802,17 @@
     background-color: #F5F5F5;
 }
 
+.chatLeftDate {
+    font-size: 12px !important;
+    margin-top: 0px !important;
+    margin-bottom: 2px !important;
+}
+
+.chatLeftTime {
+    font-size: 12px !important;
+    margin-top: 0px !important;
+}
+
 /* @media only screen and (max-width: 600px) and (min-width: 400px) */
  
 

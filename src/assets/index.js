@@ -223,6 +223,8 @@ import chatIconUploadImg from "./Icon feather-share.svg";
 import chatPinkDocImg from "./Icon ionic-ios-document-pink.svg";
 import defaultChatProfilePlaceholder from "./BLUE placeholder.svg";
 import chatEscGreenCircleTick from "./green tick circle.svg";
+import notifyChatIcon from "./Icon material-chat.svg";
+import notifyEscIcon from "./Icon ionic-md-alert.svg";
 
 export default {
   acceptsmall,
@@ -443,4 +445,6 @@ export default {
   chatPinkDocImg,
   defaultChatProfilePlaceholder,
   chatEscGreenCircleTick,
+  notifyChatIcon,
+  notifyEscIcon,
 };

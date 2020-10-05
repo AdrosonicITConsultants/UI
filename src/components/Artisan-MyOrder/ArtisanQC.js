@@ -392,12 +392,12 @@ export default class ArtisanQC extends Component {
                                         </select>
                                     </div>
                                     :
-                                    // data.stageId === 7 && data.questionNo === 12 ?
+                                    data.stageId === 7 && data.questionNo === 12 ?
                                     <textarea onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} 
                                     id={data.id} maxLength="100" className="QCTextareaBoxStyle"></textarea>
-                                    // :
-                                    // <input type="text" className="QCquestionsInputBox" stageId={data.stageId} questionId={data.questionNo}
-                                    // onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id} maxLength="25"/>
+                                    :
+                                    <input type="text" className="QCquestionsInputBox" stageId={data.stageId} questionId={data.questionNo}
+                                    onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id} maxLength="25"/>
                                     }
                                     </div>
                             

@@ -1199,16 +1199,77 @@ export default class ArtisanChat extends Component {
                                         }
                                     else {
                                         return <Row noGutters={true}>
-                                            <Col className="col-xs-12 text-left">
-                                            <div className="artisanChatBoxWindowLeftText">{item.messageString}
-                                            <span className="artisanChatBoxWindowRightTime">
-                                                <Moment format="HH:mm">
-                                                    {item.createdOn}
-                                                </Moment>
-                                            </span>
-                                            </div>
-                                            </Col>
-                                        </Row>
+                                        <Col className="col-xs-12 text-left">
+                                        {item.mediaType === 1 ?
+                                        <div className="artisanChatBoxWindowLeftText">{item.messageString} 
+                                        <span className="artisanChatBoxWindowRightTime">
+                                            <Moment format="HH:mm">
+                                                {item.createdOn}
+                                            </Moment>
+                                        </span>
+                                        </div>
+                                        : 
+                                        item.mediaType === 2 ?
+                                        <div className="artisanChatBoxWindowLeftText">
+                                            <img src={logos.chatPinkDocImg} className="chatmediaNameAudio" />
+                                            {item.mediaName} 
+                                        <span className="artisanChatBoxWindowRightTime">
+                                            <Moment format="HH:mm">
+                                                {item.createdOn}
+                                            </Moment>
+                                        </span>
+                                        <div className="viewDataFromChat">
+                                        <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                        target="_blank">View document</a>
+                                        </div>
+                                        </div>
+                                        :
+                                        item.mediaType === 3 ?
+                                        <div className="artisanChatBoxWindowLeftText">
+                                            <img src={logos.artisanChatPhotoNew} className="chatmediaNameAudio" />
+                                            {item.mediaName}
+                                        <span className="artisanChatBoxWindowRightTime">
+                                            <Moment format="HH:mm">
+                                                {item.createdOn}
+                                            </Moment>
+                                        </span>
+                                        <div className="viewDataFromChat">
+                                        <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                        target="_blank">View photo</a>
+                                        </div>
+                                        </div>
+                                        : 
+                                        item.mediaType === 4 ?
+                                        <div className="artisanChatBoxWindowLeftText">
+                                            <img src={logos.artisanChatAudioNew} className="chatmediaNameAudio" />
+                                            {item.mediaName}
+                                        <span className="artisanChatBoxWindowRightTime">
+                                            <Moment format="HH:mm">
+                                                {item.createdOn}
+                                            </Moment>
+                                        </span>
+                                        <div className="viewDataFromChat">
+                                        <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                        target="_blank">View audio</a>
+                                        </div>
+                                        </div>
+                                        : item.mediaType === 5 ?
+                                        <div className="artisanChatBoxWindowLeftText">
+                                            <img src={logos.artisanChatVideoNew} className="chatmediaNameVideo" />
+                                            {item.mediaName} 
+                                        <span className="artisanChatBoxWindowRightTime">
+                                            <Moment format="HH:mm">
+                                                {item.createdOn}
+                                            </Moment>
+                                        </span>
+                                        <div className="viewDataFromChat">
+                                        <a href={TTCEapi.ChatMediaUrl + this.state.selectedEnquiryData.enquiryId + "/" + item.mediaName} 
+                                        target="_blank">View video</a>
+                                        </div>
+                                        </div>
+                                        : null }
+                                        </Col>
+                                    </Row>
                                     }
                                 }) : null}
                                 </div>

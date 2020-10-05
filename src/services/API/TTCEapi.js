@@ -2673,7 +2673,7 @@ static getNewEnquiryMessageChatList(searchedString)  {
 }
 
 static getAndReadChatMessageForEnquiry(enquiryId)  {
-  let url = ApiUrl + "/enquiry/getAndReadChatMessageForEnquiry?enquiryId=" + enquiryId;
+  let url = ApiUrl + "/enquiry/getAndReadChatMessageForEnquiry?enquiryId=" + enquiryId + "&isAdmin=0";
   return axios
     .get(url)
     .then((response) => {

@@ -1,0 +1,823 @@
+.artisanChatOnLoadBar {
+    height: 60px;
+    background-color: #F5F5F5;
+    margin-top: 20px;
+}
+
+.artisanChatTalkMoreText {
+    color: #CD0606;
+    font-size: 45px;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.artisanChatTalkMoreText1 {
+    text-align: center;
+    color: #1E1E1E;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.chatRemovePadding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.artisanChatSearchBoxOuter input, .artisanChatSearchBoxOuter input:focus, .artisanChatSearchBoxOuter input:hover {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #ffffff;
+    width: 90%;
+    margin-left: 10px;
+}
+
+.artisanChatSearchBoxOuter input:focus, .artisanChatSearchBoxOuter input:hover {
+    outline: none;
+}
+
+.artisanChatSearchBoxOuter input::placeholder {
+    color: #B4B4B4;
+}
+
+.artisanChatSearchBoxOuter img {
+    width: 5.5%;
+}
+
+.artisanChatSearchBoxOuter {
+    background-color: #ffffff;
+    padding: 7px 10px !important;
+    border-radius: 50px;
+    margin-top: 12px;
+    margin-left: 10px;
+    margin-bottom: 12px;
+}
+
+.chatBarBorderLeft {
+    border-left: 4px solid #dcdcdc;
+}
+
+.chatEnquiryRow {
+    padding: 15px 15px;
+    border-bottom: 1px solid #efeeee;
+    cursor: pointer;
+}
+
+.chatEnquiryRowGreen {
+    border-left: 4px solid #24B572;
+    background-color: #fdfdfd;
+}
+
+.chatEnquiryRowBlack {
+    border-left: 4px solid #000000;
+    background-color: #fdfdfd;
+}
+
+.chatEnquiryImgCol {
+    padding-right: 0px !important;
+    border-radius: 50px;
+    padding-left: 0px !important;
+}
+
+.chatEnquiryImg {
+    width: 50px;
+    border-radius: 50px;
+    height: 50px;
+    box-shadow: 2px 2px 5px #ececec;
+}
+
+.chatEnquiryBrandName {
+    color: #6d6d6d;
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+
+.chatEnquiryId {
+    font-weight: 600;
+}
+
+.chatEnquiryNotifyNo {
+    border: 1px solid #2258D1;
+    padding: 1px 10px;
+    border-radius: 50px;
+    background-color: #2258D1;
+    color: white;
+    width: fit-content;
+}
+
+.chatRightHeight {
+    height: 580px;
+    border-left: 4px solid #F5F5F5;
+}
+
+.chatLeftHeight {
+    height: 580px;
+    border-left: 1px solid #F5F5F5;
+    overflow: auto;
+}
+
+.chatEnquirySelectedBG {
+    background-color: #dedede;
+}
+
+.artisanChatDropDownIcon {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.artisanChatChatIcon {
+    width: 35rem;
+    margin-top: 50px;
+    margin-left: 20rem;
+}
+
+.chatEscalationIcon {
+    width: 20px;
+}
+
+.chatPadding6Pixel {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.chatEnquiryImg1 {
+    width: 50px;
+    border-radius: 50px;
+    height: 50px;
+    box-shadow: 2px 2px 5px #ececec;
+    margin-top: 5px;
+}
+
+.chatUpperBoxBorderRight {
+    border-right: 1px solid #d2d2d2;
+}
+
+.chatEnquiryBrandNameUpperBox {
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+.chatEnquiryIdUpperBox {
+    margin-left: 15px;
+}
+
+.artisanChatDateStart {
+    color: #a7a7a7;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.artisanChatConvertDate {
+    color: green;
+    font-size: 13px;
+}
+
+.artisanChatProductType {
+    font-size: 13px;
+    color: #bb00ad;
+    margin-bottom: 3px;
+}
+
+.artisanChatLastUpdate {
+    color: green;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.chatUpperBoxOrderStatus {
+    margin-right: 20px;
+}
+
+.chatUpperBoxOrderStatusCircle {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50px;
+    margin-left: -10px;
+    position: absolute;
+    margin-top: 5px;
+}
+
+.chatGradientBg {
+    padding: 5px 8px;
+    background-image: linear-gradient(to right, #FFFFFF, #D55353);
+}
+
+.artisanChatOnLoadBar1 {
+    background-color: #F5F5F5;
+    margin-top: 20px;
+}
+
+.chatRightGoToEsc {
+    font-size: 13px;
+    color: white;
+}
+
+.chatRightGoToEscImg {
+    width: 15px;
+}
+
+.chatRightGoToEscText {
+    margin-left: 8px;
+    margin-right: 20px;
+}
+
+.artisanChatBG {
+    background-image: url("../../assets/bg-chat.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.artisanChatSendBoxOuter {
+    background-color: #cecece8f;
+    padding: 10px 0px;
+    bottom: 0px;
+    position: absolute;
+    width: 99.7%;
+}
+
+.artisanChatSendSearchBoxOuter {
+    background-color: #ffffff;
+    padding: 7px 10px !important;
+    border-radius: 50px;
+    margin-top: 12px;
+    margin: 0px 60px 0px 20px;
+}
+
+.artisanChatSendSearchBoxOuter input, .artisanChatSendSearchBoxOuter input:focus, .artisanChatSendSearchBoxOuter input:hover {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: #ffffff;
+    width: 95%;
+    margin-left: 10px;
+}
+
+.artisanChatSendSearchBoxOuter input:focus, .artisanChatSendSearchBoxOuter input:hover {
+    outline: none;
+}
+
+.artisanChatSendSearchBoxOuter input::placeholder {
+    color: #B4B4B4;
+}
+
+.artisanChatAttachIcon {
+    width: 12px;
+    cursor: pointer;
+}
+
+.artisanChatNonActiveSend {
+    width: 25px;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.artisanChatBoxWindowLeftText {
+    background: #fbfbfb;
+    border-radius: 0px 20px 20px 20px;
+    padding: 10px;
+    color: #484848;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+    position: relative;
+    float: left;
+    clear: both;
+    margin-bottom: 20px;
+    max-width: 70%;
+}
+
+.artisanChatBoxWindowRightText {
+    background: #ADDFFF;
+    border-radius: 20px 20px 0px 20px;
+    padding: 10px;
+    color: #484848;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+    position: relative;
+    float: right;
+    clear: both;
+    margin-bottom: 20px;
+    max-width: 70%;
+}
+
+.artisanChatBoxWindowRightTime {
+    font-size: 10px;
+    color: grey;
+    font-weight: 600;
+    margin-left: 20px;
+    bottom: 10px;
+}
+
+.artisanChatWindowDisplayChatsOuter {
+    padding: 20px;
+    height: 580px;
+    overflow: auto;
+}
+
+.artisanChatBG ::-webkit-scrollbar {
+    width: 8px !important;
+}
+  
+.artisanChatBG ::-webkit-scrollbar-track {
+    border-radius: 10px !important;
+}
+   
+.artisanChatBG ::-webkit-scrollbar-thumb {
+    background:#CFE5EB !important; 
+    border-radius: 10px !important;
+}
+
+.artisanChatActiveSend {
+    width: 50px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    margin-top: -12px;
+}
+
+.chatBoxWindowDateShow {
+    width: max-content;
+    padding: 5px 25px;
+    background-color: white;
+    color: #3da4e6;
+    margin-top: -35px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.chatBoxWindowDateShowHr {
+    border-top: 1px solid #dadada !important;
+}
+
+.chatAttachModalBg {
+    background-image: url("../../assets/share\ bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.chatAttachModalOuter {
+    padding: 20px;
+}
+
+.chatAttachCloseIcon {
+    width: 20px;
+    cursor: pointer;
+}
+
+.artisanChatModalIconsRow {
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.artisanChatFile {
+    width: 23px;
+    cursor: pointer;
+}
+
+.artisanChatAudio {
+    width: 24px;
+    cursor: pointer;
+}
+
+.artisanChatVideo {
+    width: 35px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.artisanChatPhoto {
+    width: 28px;
+    cursor: pointer;
+}
+
+.artisanChatFileText {
+    margin-top: 15px;
+}
+
+.artisanChatAudioText {
+    margin-top: 12px;
+}
+
+.artisanChatVideoText {
+    margin-top: 18.5px;
+}
+
+.artisanChatPhotoText {
+    margin-top: 16px;
+}
+
+.chatInputFileClass [type="file"] + label{
+    background: none !important;
+    border: none;
+    color: #000000 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    font-size: inherit;
+    font-weight: 500;
+    margin-bottom: 0px !important;
+    outline: none;
+    padding: 0px !important;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+.artisanChatCRIcon {
+    width: 13px;
+    margin-left: 30px;
+    margin-top: -3px;
+}
+
+.artisanChatCRIconText {
+    color: #d80000;
+    margin-left: 7px;
+}
+
+.artisanChatModalTitle {
+    font-weight: 600;
+    color: #000000;
+}
+
+.artisanChatModalSubTitle {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.artisanChatSelectedFileData {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.artisanChatFileMargin {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.artisanChatChooseFileText {
+    color: #E25151;
+    margin-left: 10px;
+}
+
+.artisanChatUploadButton {
+    margin-top: 20px;
+    border: 1px solid #0267BE; 
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 7px 20px;
+    border-radius: 30px;
+    background-color: #0267BE;
+    color: white;
+    font-weight: 300;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.chatUploadProgressBar {
+    height: 100%;
+    background-image: linear-gradient(-90deg, #DDF7FD, #1365B7);
+    animation: load 3s ease-out infinite;
+}
+
+.chatLoadingBar {
+    height: 6px;
+    width: auto;
+    max-width: 500px;
+    min-width: 200px;
+    margin: 30px 25px;
+}
+
+.artisanChatVideoNew {
+    width: 32px;
+    cursor: pointer;
+}
+
+.goToChatFunction {
+    cursor: pointer;
+}
+
+.chatGradientBgReverse {
+    padding: 5px 8px;
+    background-image: linear-gradient(to right,  #D55353, #FFFFFF);
+}
+
+.chatRightGoToEscTextNew {
+    font-size: 13px;
+    margin-left: 10px;
+    color: #d82626;
+}
+
+.chatRightGoToEscImgNew {
+    width: 15px;
+    margin-top: -5px;
+}
+
+.escalationButtonImg {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.escalationButtonOuter {
+    border: 1px solid #CC0000;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding: 8px 25px;
+    background-color: #CC0000;
+    color: #ffffff;
+    border-radius: 40px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.chatLeftScrollStyle ::-webkit-scrollbar {
+    width: 6px !important;
+}
+  
+.chatLeftScrollStyle ::-webkit-scrollbar-track {
+    border-radius: 10px !important;
+}
+   
+.chatLeftScrollStyle ::-webkit-scrollbar-thumb {
+    background: #d2d2d2 !important; 
+    border-radius: 10px !important;
+}
+
+.chatEscalationBg {
+    background-image: url("../../assets/escalation\ popup\ bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: auto;
+    background-size: contain;
+}
+
+.chatEscalationModalSubTitle {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.escalationChatModalIcon {
+    margin-right: 13px;
+    width: 23px;
+    margin-top: -5px;
+}
+
+.chatEscalationSelectOption {
+    width: 90%;
+    border: 1px solid #CC0000;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #CC0000;
+}
+
+.chatEscalationSelectOption:focus, .chatEscalationSelectOption:hover {
+    outline: none !important;
+}
+
+.chatEscalationTextarea {
+    margin-top: 25px;
+    width: 90%;
+    height: 150px;
+    border: 1px solid #dadada !important;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.chatEscalationTextarea:focus, .chatEscalationTextarea:hover {
+    outline: none !important;
+}
+
+.chatEscalationModalButtonOuter {
+    border: 1px solid #CC0000;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding: 8px 25px;
+    background-color: #CC0000;
+    color: #ffffff;
+    border-radius: 40px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.chatEscalationConfimrPara {
+    margin-bottom: 0px !important;
+    color: grey;
+}
+
+.escalationConfirmImg {
+    width: 190px;
+}
+
+.chatEscConfirmModalButtonDiv {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.chatEscConfirmModalGoButton {
+    color: grey;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.chatEscConfirmModalOkButton {
+    border: 1px solid #CC0000;
+    padding: 5px 25px;
+    background-color: #CC0000;
+    color: #ffffff;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.artisanChatEscPadding {
+    padding: 20px 60px;
+}
+
+.chatEscRow1Data {
+    background-color: #EAEAEA;
+    margin: 20px !important;
+}
+
+.artisanEscLogo {
+    width: 30px;
+    margin-top: 10px;
+}
+
+.chatEscRedIconSelf {
+    width: 20px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.chatEscShowCenterColTop {
+    margin-top: 10px;
+}
+
+.chatEscShowCenterColText1 {
+    font-size: 12px;
+}
+
+.chatEscShowCenterColText2 {
+    font-size: 13px;
+    margin-left: 10px;
+    color: #d82626;
+}
+
+.chatEscShowCenterColContent {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.chatEscShowEndColOuter {
+    background-color: white;
+    padding: 1px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.chatEscShowEndColOuter1 {
+    padding: 10px;
+}
+
+.chatEscShowEndColText {
+    font-size: 12px;
+    text-align: center;
+    color: green;
+    margin-top: 10px;
+}
+
+.chatEscShowEndColImg {
+    width: 26px;
+    margin-top: 5px;
+}
+
+.buyerEscLogo {
+    width: 22px;
+    margin-top: 10px;
+}
+
+.chatEscRow1Data1 {
+    background-color: #000000;
+    margin: 20px !important;
+}
+
+.chatEscShowCenterColTop1 {
+    margin-top: 10px;
+    color: #d4d4d4;
+}
+
+.chatEscShowCenterColContent1 {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #d4d4d4;
+}
+
+.chatEscShowEndColText1 {
+    font-size: 12px;
+    text-align: center;
+    color: #6fad6f;
+    margin-top: 10px;
+}
+
+.chatEscalationModalDisableButtonOuter {
+    border: 1px solid grey;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding: 8px 25px;
+    background-color: grey;
+    color: #ffffff;
+    border-radius: 40px;
+    margin-top: 30px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.chatEscDataShowOverflow {
+    overflow: auto;
+    height: 450px;
+}
+
+.chatIconUploadImg {
+    width: 18px;
+    margin-right: 10px;
+    margin-top: -3px;
+}
+
+.chatmediaNameVideo {
+    width: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.viewDataFromChat {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.viewDataFromChat a {
+    color: #000098;
+}
+
+.chatmediaNameAudio {
+    width: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.showDropdownListClass {
+    margin-top: 20px;
+    z-index: 9999;
+}
+
+.chatEscGreenCircleTick {
+    width: 33px;
+}
+
+.chatNoResultsClass {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.artisanChatOnLoadBarNewValue {
+    height: 60px;
+    background-color: #F5F5F5;
+}
+
+.chatLeftDate {
+    font-size: 12px !important;
+    margin-top: 0px !important;
+    margin-bottom: 2px !important;
+}
+
+.chatLeftTime {
+    font-size: 12px !important;
+    margin-top: 0px !important;
+}
+
+/* @media only screen and (max-width: 600px) and (min-width: 400px) */
+ 
+
+@media only screen and ( max-width: 991px ) {
+    .searchCol1 {
+        padding-right: 15px !important;
+    }    
+}

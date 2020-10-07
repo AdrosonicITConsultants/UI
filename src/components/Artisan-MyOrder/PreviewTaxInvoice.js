@@ -616,9 +616,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
      +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
      <h3 className="snopi wraptext">
-     {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
-     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }
-        {/* {parseFloat(this.props.apr).toFixed(2)} */}
+     
+        {parseFloat(this.props.apr).toFixed(2)}
         </h3>
      </td>
    </tr>
@@ -745,7 +744,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td style={{borderRight:"1px solid transparent"}} className="allamtIndtax">
-     All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+     {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </td>
    </tr>
  </table>

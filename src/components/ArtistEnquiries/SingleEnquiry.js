@@ -99,6 +99,7 @@ export class SingleEnquiry extends Component {
             }
         })
     }
+
     stateupdate = () => {
         
         this.ToggleDeleteClose();
@@ -114,7 +115,29 @@ export class SingleEnquiry extends Component {
         }
         else innerID = 0;
 
-        if(this.state.Progressidnext == 4)
+        if(this.state.Progressidnext == 9){
+            TTCEapi.validateFinalPaymentFromArtisan(parseInt(params.code),1).then((response)=>{
+                if(response.data.valid)
+                {
+                    customToast.success("Transaction Status Updated!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.componentDidMount();
+                   
+               
+               
+            }
+            else{
+               
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            });
+        }
+       else if(this.state.Progressidnext == 4)
         {   
             TTCEapi.validateAdvancePaymentFromArtisan(parseInt(params.code),1).then((response)=>{
                 if(response.data.valid)
@@ -976,7 +999,8 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                     <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1043,7 +1067,7 @@ export class SingleEnquiry extends Component {
                                                     {item2.stage}
                                                     </Col>
                                                     <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
                                                     {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
 
                                                     </Col>
@@ -1368,7 +1392,8 @@ export class SingleEnquiry extends Component {
                     </Col>
                 </Row>
                     <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1435,7 +1460,7 @@ export class SingleEnquiry extends Component {
                                                     {item2.stage}
                                                     </Col>
                                                     <Col className="col-xs-5 mb7 h20">
-                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.stateupdate}>In Progress</button> :<></> }
+                                                    {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+1) ?  <button className="markCompletedButtonprogress" onClick={this.inprogresss}>In Progress</button> :<></> }
                                                     {item2.id == (item.openEnquiriesResponse.innerEnquiryStageId+2) ?  <button className="markCompletedButton" onClick={this.stateupdate}>Start Stage</button> :<></> }
 
                                                     </Col>

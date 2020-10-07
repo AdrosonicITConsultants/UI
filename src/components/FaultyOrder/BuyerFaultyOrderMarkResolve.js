@@ -13,6 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 import DaysRemaining from './DaysRemaining';
+import { FaultResolved } from './FaultResolved';
+import Moment from 'react-moment';
 export class BuyerFaultyOrderMarkResolve extends Component {
     constructor(props) {
         super(props);
@@ -24,11 +26,13 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             ongoingEnquiry:true,
             enquiryCode:"",
             getSingleOrder:[],
+            isResolved:[],
             getAllRefBuyerReview:[],
             sendFaultyOrder:[],
             getOrderProgress:[],
             getAllRefArtisanReview:[],
             Allorderdata:[],
+            OrderDetails:[],     
             dataload:false,
             description:"",
             showValidationfaulty:false,
@@ -36,6 +40,8 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             buyerReviewComment:"",
             actioncategoryid : 0,
             artisanReviewComment:-1,
+            concernsolved:false,
+            buyer:true,
             accepted:[
                 {   
                     id: 1,
@@ -81,7 +87,26 @@ export class BuyerFaultyOrderMarkResolve extends Component {
         
       }
 
- 
+      MarkResolved(id){
+          console.log(this.props.enquiryCode);
+        TTCEapi.isResolved(this.props.enquiryCode).then((response)=>{
+            if(response.data.valid)
+            {
+            this.setState({
+                isResolved : response.data.data,
+                concernsolved:true,
+                 },()=>{
+                console.log(this.state.isResolved);
+                customToast.success("Mark Resolved!!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+                //   browserHistory.push("/concernsolved?orderid="+id)
+
+            });
+        }
+        });
+      }
            
     backoperation(){
         browserHistory.push("/buyerOrders"); 
@@ -96,7 +121,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
     }
 
     submit(){
-        if(this.state.description&&this.state.actioncategoryid){
+        if(this.state.description&&this.state.actioncategoryid>0){
             this.setState({
                 rejectButtonClick:true
             })
@@ -205,11 +230,13 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             this.setState({
                 getOrderProgress :response.data.data.orderProgress,                
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
-                 dataload : true,},()=>{
+                OrderDetails:response.data.data,               
+                dataload : true,},()=>{
                 console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
+                    OrderDetails:response.data.data,              
                     getOrderProgress :response.data.data.orderProgress,
                     buyerReviewComment:response.data.data.orderProgress.buyerReviewComment,
                     artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
@@ -253,9 +280,15 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             
                     {this.state.dataload?
                     <>
-                  
-                   <>
-                     <Row noGutters={true} className="">
+                  {this.state.concernsolved?
+                  <>
+                  <FaultResolved
+                  enquiryCode={this.props.enquiryCode}
+                  buyer={this.state.buyer}/>
+                  </>
+                :
+                <>
+                    <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
                            <img
                                        src={logos.backarrowicon}
@@ -266,11 +299,14 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                           </Col>
                             <Col className="col-xs-10">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
-                                    <Col className="col-xs-9" style={{fontSize:"27px"}}>
-                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
+                                    <Col className="col-xs-11" style={{fontSize:"27px"}}>
+                                        <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
                                         <p className="faultyp1">We are trying to resolve any issues you faced.</p>
                                         <p className="a48hrs" style={{fontSize:"16px"}}>Please bear, It may take upto 48 hrs for Artisan to address & respond to your raised concern.</p>
                                     </Col>
+                                    <Col className="col-xs-1">
+                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                          <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>
                                         <Col className="col-xs-4 orderdettxt" sm={2}>
@@ -288,19 +324,27 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                             Enquiry Id:{this.state.getSingleOrder.orderCode}
                                         </Col>
                                         <Col className="col-xs-4 madeorderpurp" sm={2}>
-                                            Made to order
+                                            {this.state.OrderDetails.productType}
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={2}>
-                                            Brand:<span style={{color:"blue"}}>{ this.state.currentDate }</span>
+                                            Brand:<span style={{color:"blue"}}>{ this.state.OrderDetails.brand }</span>
                                         </Col>
                                         <Col className="col-xs-4 eqidfault" sm={1}>
-                                            123456
+                                            {this.state.OrderDetails.totalAmount!=null?this.state.OrderDetails.totalAmount:"NA"}
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(190, 31, 105)"}}>
-                                            Dispatched on:{ this.state.currentDate }
+                                        Dispatched on:
+                                            {this.state.getOrderProgress.orderDispatchDate !=null?
+                                             <Moment format="DD-MM-YYYY">
+                                             {this.state.getOrderProgress.orderDispatchDate }
+                                           </Moment>
+                                           :
+                                           "NA"
+                                            }
                                         </Col>
                                         <Col className="col-xs-4 dispatcheddate" sm={2} style={{color:"rgb(222, 143, 102)"}}>
-                                            Arrived on:{ this.state.currentDate }
+                                            Arrived on:{ this.state.getOrderProgress.orderReceiveDate !=null?
+                                            this.state.getOrderProgress.orderReceiveDate:"NA" }
                                         </Col>
                                     </Row>
 
@@ -330,30 +374,33 @@ export class BuyerFaultyOrderMarkResolve extends Component {
 
                                             <div 
                                             className="descfaultybox"
-                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)"}}
+                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)",overflow:"auto"}}
+
                                             >
                                 {this.state.getOrderProgress.artisanReviewComment}
                                              </div>
                                         </Col>
                                     </Row>
-                            {/* <Row noGutters={true}>
+                            <Row noGutters={true}>
                             <Col className="col-xs-9"></Col>
                                 <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
-                                          <img src={logos.chatwhite} style={{height:"14px"}}/></button>
+                                <span>
                                           <button
                                             disabled={this.state.rejectButtonClick}
+                                            style={{backgroundColor:"rgb( 21, 154, 47)",border:"rgb( 21, 154, 47)"}}
                                             className="senddelButton"
-                                            onClick={()=>this.submit()}>
-                                            Send</button>
+                                            onClick={()=>this.MarkResolved(this.props.enquiryCode)}>
+                                            Mark Resolved</button>
                                           </span>
                                 </Col>
-                            </Row> */}
+                            </Row>
                                                
                           </Col>                            
                 </Row>             
-                  
-                   </>
+                
+                </>
+                }
+                   
                 
                 
                     </>

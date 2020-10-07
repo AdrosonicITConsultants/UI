@@ -214,6 +214,13 @@ export class BuyerOngoingOrder extends Component {
                                 console.log(diffDays); 
                                 return(diffDays);
     }
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/buyerRating?code=" + id);
+    }
+    
     render() {
         return (
             <React.Fragment>
@@ -483,11 +490,16 @@ export class BuyerOngoingOrder extends Component {
                      <hr></hr>
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
-                         <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt
-                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
-                             delivery receipt</a> */}
-                         </Col>
+                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
+                         
                          <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
                          <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
                          <Col className="col-xs-1"></Col>
@@ -907,11 +919,16 @@ export class BuyerOngoingOrder extends Component {
                      <hr></hr>
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
-                         <Col className="col-xs-4">
-                         <img src={logos.truck} className="truckimg"/>  Check delivery receipt 
-                         {/* <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
-                             delivery receipt</a> */}
-                         </Col>
+                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
+                         
                          <Col className="col-xs-6 notetruck">This order will be marked as auto complete 10 days after Estimated date of delivery if no input 
                          <br/> is received for delivery confirmation from your end.We'll also consider order to be non faulty in that case. </Col>
                          <Col className="col-xs-1"></Col>
@@ -922,14 +939,39 @@ export class BuyerOngoingOrder extends Component {
                     </>
     }
                     <hr></hr>
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                    { item.openEnquiriesResponse.enquiryStageId >= 10
+                    ?
+                    <>
+                     <Row noGutters={true}>
+                        <Col className="col-xs-7"></Col>
+                        <Col className="col-xs-4">
+                       <span>
+                      <button className="enqreqbtn needhelpbth">
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
 
                         </Col>
 
                         </Row>
+                    </>
+                    :
+                    <>
+                      <Row noGutters={true}>
+                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-2">
+                       <span>
+                    
+                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+
+                       </span>
+
+                        </Col>
+
+                        </Row>
+                    </>
+                     }
                    
                     <Row noGutters={true} className="mt7">
                         <Col className="col-xs-1"></Col>
@@ -1204,7 +1246,7 @@ export class BuyerOngoingOrder extends Component {
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                // onClick={this.sendCRDataFunction}
+                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
                 className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
                  </button></span>
                  <br/>

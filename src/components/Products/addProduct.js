@@ -595,7 +595,7 @@ relatedProductTemp[e.target.name] = option;
                    });
                  };
 
-                 Save = () => {                
+                  Save = () => {                
                    let productData = {};
                     productData.careIds = [];
                     productData.weaveIds = [];

@@ -87,7 +87,7 @@ export class ArtisanProductOfSearch extends Component {
                             <img className="logoincard1 " src={logos.artisianSelfLogo}  alt="Card image cap"/>
                             </div>
                             <div className="col-xs-6">
-                                {this.state.proddata.productStatusId == 2 
+                                {this.state.proddata.status == 2 
                                 ?
                                     <Row   className="stockmargin">
                                         <Col className="Available1">

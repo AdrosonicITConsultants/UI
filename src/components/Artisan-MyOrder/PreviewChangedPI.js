@@ -182,73 +182,14 @@ export class PreviewChangedPI extends Component {
 
       }
     
-    //   sendPI(){
-    //      this.setState({
-    //        sendPI: true,
-    //         gobackButtonClick:true,
-    //      })
-       
-    //     TTCEapi.sendPI(
-    //         this.props.enquiryId,
-    //         this.props.cgst,
-    //         this.props.expectedDateOfDelivery,
-    //         this.props.hsn,
-    //         this.props.rpu,
-    //         this.props.quantity,
-    //         this.props.sgst
-           
-          
-    //        ).then((response)=>{
-    //            console.log(response);
-    //            if(response.data.valid){
-    //         this.setState({sendPI : response.data,
-    //           },()=>{
-    //         console.log(this.state.sendPI);
-    //        this.componentDidMount();
-    //         });
-    //         customToast.success("PI Details send successfully", {
-    //             position: toast.POSITION.TOP_RIGHT,
-    //             autoClose: true,
-    //           });
-    //       } 
-    //     else{
-    //       this.setState({
-    //         sendPI: true,
-    //         gobackButtonClick:true
-    //       })
-    //       customToast.error(response.data.errorMessage , {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: true,
-    //       });
-    //     }
-    //     });
-      
-    // } 
+    
     sendPI(){
       this.setState({
         sendPI: true,
          gobackButtonClick:true,
       })
-    TTCEapi.revisedPI(
-                   
-      this.props.enquiryId,
-      this.props.cgst,
-      this.props.expectedDateOfDelivery,
-      this.props.hsn,
-      this.props.rpu,
-      this.props.quantity,
-      this.props.sgst
-     
-
-    
-      ).then((response)=>
-      {
-          if(response.data.valid){
-            this.setState({  
-            savePi : response.data,
-          
-       },()=>{
-        TTCEapi.sendPI(
+  
+        TTCEapi.revisedPI(
           this.props.enquiryId,
           this.props.cgst,
           this.props.expectedDateOfDelivery,
@@ -283,10 +224,7 @@ export class PreviewChangedPI extends Component {
       }
       });
       
-       });
-             
- }  });
-}
+    }
 
     viewOldPI(){
       this.setState({
@@ -976,7 +914,7 @@ export class PreviewChangedPI extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </Col>
  </Row>
  </div>

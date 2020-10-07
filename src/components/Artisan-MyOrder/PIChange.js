@@ -192,60 +192,71 @@ export class PIchange extends Component {
             });
         });
         
-        TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-                this.setState({getOrder:response.data.data,
 
-                   })
-                    TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
-                        if(response.data.valid)
-                        {
-                            this.setState({previewPI:response.data.data,dataload:true
-                                })
-                                TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
-                                    if(response.data.valid)
-                                    {
-                                        this.setState({getOldPIData:response.data.data,
-                                            dataload:true
-                                            })
-                                    }
-                                    console.log(this.state.getOldPIData)
-                                })
-                        }
-                        console.log(this.state.previewPI)
-                    })
+        if(this.props.completed){
+            console.log("idf if if")
 
-            }
-          
-        })
-        TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-                this.setState({getClosedOrder:response.data.data,
-
-                   })
-                    TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
-                        if(response.data.valid)
-                        {
-                            this.setState({previewPI:response.data.data,dataload:true
-                                })
-                                TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
-                                    if(response.data.valid)
-                                    {
-                                        this.setState({getOldPIData:response.data.data,
-                                            dataload:true
-                                            })
-                                    }
-                                    // console.log(this.state.getOldPIData)
-                                })
-                        }
-                        console.log(this.state.previewPI)
-                    })
-
-            }
-          
-        })
+            TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
+                if(response.data.valid)
+                {
+                    this.setState({getOrder:response.data.data,
+    
+                       })
+                        TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                            if(response.data.valid)
+                            {
+                                this.setState({previewPI:response.data.data,dataload:true
+                                    })
+                                    TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                        if(response.data.valid)
+                                        {
+                                            this.setState({getOldPIData:response.data.data,
+                                                dataload:true
+                                                })
+                                        }
+                                        // console.log(this.state.getOldPIData)
+                                    })
+                            }
+                            console.log(this.state.previewPI)
+                        })
+    
+                }
+              
+            })
+        }
+        else
+        {
+            console.log("else else else")
+            TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+                if(response.data.valid)
+                {
+                    this.setState({getOrder:response.data.data,
+    
+                       })
+                        TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                            if(response.data.valid)
+                            {
+                                this.setState({previewPI:response.data.data,dataload:true
+                                    })
+                                    TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                        if(response.data.valid)
+                                        {
+                                            this.setState({getOldPIData:response.data.data,
+                                                dataload:true
+                                                })
+                                        }
+                                        console.log(this.state.getOldPIData)
+                                    })
+                            }
+                            console.log(this.state.previewPI)
+                        })
+    
+                }
+              
+            })
+        }
+       
+     
        
 
     }
@@ -255,8 +266,8 @@ export class PIchange extends Component {
                 <>
                     {this.state.dataload?
                     <>
-                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===1||
-                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===3?
+                        {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
                           {console.log("PIChange.js status-1/3")}
                         {this.state.getOldPIData.length==0
@@ -491,9 +502,8 @@ export class PIchange extends Component {
                         :
                         <>
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===2 ||
-                        this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===2||
-                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0||
-                        this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus===0?
+                       
+                        this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
                          {console.log("PIChange.js status-2/0")}
                         

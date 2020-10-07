@@ -45,6 +45,7 @@ export default class ArtisanQC extends Component {
             QCsaveButton: false,
             QCsendButton: false,
             QCsendButton1: false,
+            QCenableEditFlag: false,
         };   
     
     }
@@ -227,6 +228,12 @@ export default class ArtisanQC extends Component {
     });
     }
 
+    QCenableEdit = () => {
+        this.setState({
+            QCenableEditFlag: true,
+        })
+    }
+
     componentDidMount() {
         this.setState({
             arrayObject: [], 
@@ -385,8 +392,12 @@ export default class ArtisanQC extends Component {
                                         </select>
                                     </div>
                                     :
+                                    data.stageId === 7 && data.questionNo === 12 ?
+                                    <textarea onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} 
+                                    id={data.id} maxLength="100" className="QCTextareaBoxStyle"></textarea>
+                                    :
                                     <input type="text" className="QCquestionsInputBox" stageId={data.stageId} questionId={data.questionNo}
-                                    onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id}/>
+                                    onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id} maxLength="25"/>
                                     }
                                     </div>
                             
@@ -480,6 +491,9 @@ export default class ArtisanQC extends Component {
                                             </select>
                                         </div>
                                         :
+                                        data.stageId === 7 && data.questionNo === 12 ?
+                                        <textarea disabled value={item.answer} className="QCTextareaBoxStyle"></textarea>
+                                        :
                                         <input type="text" className="QCquestionsInputBox" disabled value={item.answer}/>
                                         }
                                         </div>
@@ -498,7 +512,11 @@ export default class ArtisanQC extends Component {
 
                             <Row noGutters={true}>
                                 <Col sm={12} className="text-center QCsaveSendCol">
-                                    <button className="QCsaveDisableButton">Save</button>
+                                    {this.state.QCenableEditFlag === true ?
+                                    <button className="QCsaveButton">Save</button>
+                                    :
+                                    <button className="QCsaveDisableButton" onClick={this.QCenableEdit}>Edit</button>
+                                    }
                                     {this.state.QCsendButton1 ?
                                     <button className="QCsendDisableButton">Send</button>
                                     :
@@ -597,6 +615,9 @@ export default class ArtisanQC extends Component {
                                                 <option value="" disabled selected>{item.answer}</option>
                                             </select>
                                         </div>
+                                        :
+                                        data.stageId === 7 && data.questionNo === 12 ?
+                                        <textarea disabled value={item.answer} className="QCTextareaBoxStyle"></textarea>
                                         :
                                         <input type="text" className="QCquestionsInputBox" disabled value={item.answer}/>
                                         }

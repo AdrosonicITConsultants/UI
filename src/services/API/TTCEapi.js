@@ -7,23 +7,39 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 var env = "dev";
-var ApiUrl = "http://101.53.153.96:8090";
+var ApiUrl = "";
+var ImageUrl = "";
+var ReceiptUrl = "";
+var DeliveryReceiptUrl = "";
+var ChatMediaUrl = "";
+
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090";
-} else if (env == "uat") {
-  // ApiUrl = "http://63.34.28.175:8090/TEGAPI/services";
-} else if (env == "live") {
-  // ApiUrl = "https://www.bestforexrate.co.uk/TEGAPI/services";
+  ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
+  ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+  DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+  ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/";
+} 
+else if (env == "uat") {
+  ApiUrl = "http://164.52.192.15:8090";
+  ImageUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/";
+  ReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/AdvancedPayment/";
+  DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+  ChatMediaUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/ChatBoxMedia/";
+} 
+else if (env == "live") {
+  ApiUrl = "";
 }
 
 class TTCEapi {
-  static ImageUrl =
-    " https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
-  //#region post methods
+  
+  static ImageUrl = ImageUrl;
 
-  static ReceiptUrl = 
-            "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
+  static ReceiptUrl = ReceiptUrl;
 
+  static DeliveryReceiptUrl = DeliveryReceiptUrl;
+
+  static ChatMediaUrl = ChatMediaUrl;
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
@@ -581,6 +597,24 @@ class TTCEapi {
         return error.response;
       });
   }
+  // /enquiry/isResolved/1706
+  static isResolved(id) {
+    let url = ApiUrl + "/enquiry/isResolved/"+id;
+    var config = {
+      headers: {
+        "Content-type": "application/json",      },
+    };
+    return axios
+      .post(url,config)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      
+      .catch((error) => {
+        return error.response;
+      });
+  }
   static getProductsInWishlist() {
     let url = ApiUrl + "/product/getProductsInWishlist";
 
@@ -859,9 +893,9 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId=6&respectiveActionId=339
+  // /transaction/notifyAgain/1828/47
   static notifyAgain(actionId,respectiveActionId) {
-    let url = ApiUrl + "/transaction/notifyAgain/{actionId}/{respectiveActionId}?actionId="+actionId+"&respectiveActionId="+respectiveActionId;
+    let url = ApiUrl + "/transaction/notifyAgain/"+actionId+"/"+respectiveActionId;
     console.log(url);
     return axios
       .post(url)
@@ -1064,7 +1098,7 @@ class TTCEapi {
   }
   ///enquiry/markOrderAsRecieved/1705/05-09-2020
   static markOrderAsRecieved(enquiryId,date) {
-    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date;
+    let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date + "/0";
 
     return axios
       .post(url)
@@ -1249,6 +1283,7 @@ class TTCEapi {
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
+
       },
     };
     return axios
@@ -2565,6 +2600,192 @@ static sendOrSaveQcForm(data){
     });
 }
 
+static  getRatingQuestions()  {
+  let url = ApiUrl + "/user/getRatingQuestions";
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static submitRatingToUser(data){
+  let url = ApiUrl + "/user/submitRatingToUser";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static  getRatingsForUser(enquiryId, userId)  {
+  let url = ApiUrl + "/user/getRatingsForUser?enquiryId=" + enquiryId + "&userId=" + userId;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEnquiryMessageChatList(searchedString)  {
+  let url = ApiUrl + "/enquiry/getEnquiryMessageChatList?searchedString=" + searchedString;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getNewEnquiryMessageChatList(searchedString)  {
+  let url = ApiUrl + "/enquiry/getNewEnquiryMessageChatList?searchedString=" + searchedString;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getAndReadChatMessageForEnquiry(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getAndReadChatMessageForEnquiry?enquiryId=" + enquiryId + "&isAdmin=0";
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static sendChatboxMessage(data){
+  let url = ApiUrl + "/enquiry/sendChatboxMessage";
+
+  var config = {
+    headers: {
+      "Content-type": "multipart/form-data",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEscalations()  {
+  let url = ApiUrl + "/enquiry/getEscalations";
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static raiseEscalaton(data){
+  let url = ApiUrl + "/enquiry/raiseEscalaton";
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, data, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getEscalationSummaryForEnquiry(enquiryId)  {
+  let url = ApiUrl + "/enquiry/getEscalationSummaryForEnquiry?enquiryId=" + enquiryId;
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static resolveEscalation(id){
+  let url = ApiUrl + "/enquiry/resolveEscalation?escalationId=" + id;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static goToEnquiryChat(enquiryId){
+  let url = ApiUrl + "/enquiry/goToEnquiryChat?enquiryId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

@@ -289,12 +289,20 @@ class BuyerNotifications extends Component {
                             <img  className="notifyImage1" src={logos.notifyImage3}/> :
                             data.notificationTypeId === 2 ||  data.notificationTypeId === 3 ? 
                             <img  className="notifyImage1" src={logos.notifyImage4}/> : 
-                            data.notificationTypeId === 6 ||  data.notificationTypeId === 7 || data.notificationTypeId === 8 ?
+                            data.notificationTypeId === 6 ||  data.notificationTypeId === 7 || data.notificationTypeId === 8 || 
+                            data.notificationTypeId === 26 ||  data.notificationTypeId === 27 || data.notificationTypeId === 28 ?
                             <img  className="notifyImage3" src={logos.notifyImage5}/> :
                             data.notificationTypeId === 9 ||  data.notificationTypeId === 10 || data.notificationTypeId === 11 ?
                             <img  className="notifyImage1" src={logos.crNotify}/> :
                             data.notificationTypeId === 25 ?
                             <img  className="notifyImage1" src={logos.notifyQC}/> :
+                            data.notificationTypeId === 16 ||  data.notificationTypeId === 17 || data.notificationTypeId === 18 || data.notificationTypeId === 19 ||
+                            data.notificationTypeId === 20 || data.notificationTypeId === 21 ?
+                            <img  className="notifyImage1" src={logos.progressNotifyIcon}/> :
+                            data.notificationTypeId === 23 || data.notificationTypeId === 24 ?
+                            <img  className="notifyEscIcon" src={logos.notifyEscIcon}/> :
+                            data.notificationTypeId === 22 ?
+                            <img  className="notifyChatIcon" src={logos.notifyChatIcon}/> :
                             <img  className="notifyImage1" src={logos.notifyImage3}/> 
                             }
                             </Col>
@@ -318,8 +326,11 @@ class BuyerNotifications extends Component {
                                 <span className="notifyStatusCircleWhite"></span><span className="notifyResponse notifyStatusLeft">Status Update : 
                                 {data.notificationTypeId === 25 ? 
                                 data.details === "Off loom Process" ?
-                                <span>Qc sent for Off loom Process & Quality Check before delivery completed</span> :
+                                <span>{data.type} for Off loom Process & Quality Check before delivery completed</span> :
                                 <span>{data.type} for {data.details}</span> :
+                                data.notificationTypeId === 16 ||  data.notificationTypeId === 17 || data.notificationTypeId === 18 || data.notificationTypeId === 19 ||
+                                data.notificationTypeId === 20 || data.notificationTypeId === 21 ? 
+                                <span>{data.type} {data.details}</span> :
                                 data.type}</span>                        
                               </div>
                             

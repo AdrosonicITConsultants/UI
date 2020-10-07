@@ -65,6 +65,22 @@ export class ArtisanCompletedOrder extends Component {
         localStorage.setItem("completed", 1);
         browserHistory.push("/artisancompletedorder?code=" + id)
     }
+    FaultReport(id){
+        browserHistory.push("/artisanfaultreportCompleted?orderid="+id)
+    } 
+
+    reviewPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/artisanRating?code=" + id);
+    }
+
+    reviewSelfPageButton = (id, code) => {
+        localStorage.removeItem("ratingEnquiryCode");
+        localStorage.setItem("ratingEnquiryCode", code);
+        browserHistory.push("/artisanSelfRating?code=" + id);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -116,8 +132,13 @@ export class ArtisanCompletedOrder extends Component {
                             <div>
                               <div noGutters={true} >
                                   <Col className="leEnqid bold">
+                                  <div>
                                   <div dangerouslySetInnerHTML={{ __html: item.openEnquiriesResponse.enquiryCode }} />
-
+                                  {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
+                                  <i className="fa fa-star starColorActiveCompleteEnquiryId" />
+                                  : null }
+                                  </div>
+                                   
                                   {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
                                   </Col>
                               </div>
@@ -211,12 +232,61 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            <hr/>
+            <Row noGutters={true}>
+            <Col className="col-xs-1"></Col>
+            {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-3">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
+                {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
+                <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
+                <i className="fa fa-star starColorActiveCompleteOrder" /> 
+                Buyer provided <a style={{cursor: "pointer"}}
+                onClick={() => this.reviewSelfPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                >rating for your order</a>
+                </Col> 
+                : null }
+                <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
+                        </button>
+                :
+                null
+                }
+                </Col>
+            </Row>
+            <hr/>
+
+            {item.openEnquiriesResponse.enquiryStageId === 10 ?
+
+            <Row noGutters={true}>
+                <Col className="col-xs-12" style={{textAlign:"center"}}>
+                    <button
+                        style={{fontSize:"15px"}}
+                        onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                        className="buyerMOQAcceptModalOkayButton raterevbtn">
+                            <img src={logos.ratereview} className="raterevbtnimg"/>
+                        Rate & Review Buyer
+                    </button>
+                </Col>
+            </Row>
+            : null }
+
+          
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">
                    <Row noGutters={true}>
                        <Col className="col-xs-12 leEnqstatus bold">
-                       Enquiry Status
+                       Order Status
                        </Col>
                    </Row>
                 </Col>
@@ -411,12 +481,62 @@ export class ArtisanCompletedOrder extends Component {
 
                 
             </Row>
+            {/* <Col className="col-xs-1"></Col> */}
+            <hr/>
+            <Row noGutters={true}>
+            <Col className="col-xs-1"></Col>
+            {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Col className="col-xs-3">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     :
+                     ""
+                     }
+                {item.openEnquiriesResponse.buyerRatingDone !== 0 ?
+                <Col sm={4} className="col-xs-12 text-center" style={{fontWeight: "600", fontSize: "15px"}}>
+                <i className="fa fa-star starColorActiveCompleteOrder" /> 
+                Buyer provided <a style={{cursor: "pointer"}}
+                onClick={() => this.reviewSelfPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                >rating for your order</a>
+                </Col> 
+                : null }
+                <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
+                        </button>
+                :
+                null
+                }
+                </Col>
+            </Row>
+            <hr/>
+            {item.openEnquiriesResponse.comment?
+                 <Row noGutters={true}>
+                     <Col className="col-xs-1"></Col>
+                     <Col sm={4} className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.comment?
+                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
+                            <img src={logos.esc} className="raterevbtnimg"/> 
+                            Check concern raised by buyer
+                        </button>
+                :
+                null
+                }
+                </Col>
+         </Row>
+         :
+         ""
+                }
             <Row noGutters={true} className="mt7">
             <Col className="col-xs-1"></Col>
                 <Col className="col-xs-10">
                    <Row noGutters={true}>
                        <Col className="col-xs-12 leEnqstatus bold">
-                       Enquiry Status
+                       Order Status
                        </Col>
                    </Row>
                 </Col>

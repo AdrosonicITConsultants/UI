@@ -230,14 +230,14 @@ export class BuyerSingleCompletedOrder extends Component {
         });
         }
 
-        raiseCRTabFunction = () => {
-            this.proformaDetailsbtn();
-            this.scrollCR.current.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-                inline: "center",
-            });
-        }
+        // raiseCRTabFunction = () => {
+        //     this.proformaDetailsbtn();
+        //     this.scrollCR.current.scrollIntoView({
+        //         behavior: "smooth",
+        //         block: "center",
+        //         inline: "center",
+        //     });
+        // }
 
         changeRequestbtn(){
         this.setState((prevState) => {
@@ -317,18 +317,18 @@ export class BuyerSingleCompletedOrder extends Component {
                
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
-                        TTCEapi.getSingleOrder(this.state.enquiryCode).then((response1)=>{
+                        TTCEapi.getClosedOrder(this.state.enquiryCode).then((response1)=>{
                             console.log("")
                             if(response1.data.valid)
                             {   
                                 console.log(response1.data.data);
                                 this.setState({openEnquiries:response1.data.data,
-                                                 dataload:true},()=>{
-                                       
+                                    getSingleOrder : response1.data.data[0].openEnquiriesResponse,
+                                     dataload:true},()=>{
+                                        console.log(this.state.getSingleOrder);
                                     var data = localStorage.getItem("changeRequest");
                                     if(data) {
                                         localStorage.removeItem("changeRequest");
-                                        this.raiseCRTabFunction();
                                     }
                                 });
                                 
@@ -341,6 +341,13 @@ export class BuyerSingleCompletedOrder extends Component {
                 });
 
         }
+
+        reviewPageButton = (id, code) => {
+            localStorage.removeItem("ratingEnquiryCode");
+            localStorage.setItem("ratingEnquiryCode", code);
+            browserHistory.push("/buyerRating?code=" + id);
+        }
+
         componentDidMount(){
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
@@ -386,7 +393,6 @@ export class BuyerSingleCompletedOrder extends Component {
                             var data = localStorage.getItem("changeRequest");
                             if(data) {
                                 localStorage.removeItem("changeRequest");
-                                this.raiseCRTabFunction();
                             }
                         });
                         
@@ -551,138 +557,32 @@ export class BuyerSingleCompletedOrder extends Component {
                                 </Col>
                             </Row>
                         </Col>                        
-                    </Row>
-
-                  {/* for CR */}
-
-                    {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
-                    ?
+                    </Row>                   
+                   
+                    <hr></hr>
+                    {this.state.getSingleOrder.comment?
                     <>
+                    <Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> 
                     </>
-                    :
-                    <>
-                    {item.openEnquiriesResponse.changeRequestOn === 0 
-                        ?
-                           
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span className='disabledtext'> Disabled by Artisan.</span> 
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    
-                        :
-
-                    item.openEnquiriesResponse.changeRequestStatus === 0 ?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Awaiting response from Artisan.</span> 
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    : 
-                    (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
-                            {item.openEnquiriesResponse.changeRequestModifiedOn}
-                        </Moment>.</span> 
-                           
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    :
-                    item.openEnquiriesResponse.changeRequestStatus === 2 ?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
-                            {item.openEnquiriesResponse.changeRequestModifiedOn}
-                        </Moment>.</span> 
-                        </Col>
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                      :     
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Last date to raise Change Request passed. </span> 
-                        </Col>
-                        }
-                        <Col className="col-xs-2">
-                        <div className={
-                                (this.state.selected == "changeReq"
-                                        ? "Allenqlistbtn2 changereqbtn"
-                                            : "Allenqlistbtn changereqbtn")
-                                        }  
-                                style={{height: "33px", fontWeight: "500"}}
-                                onClick={this.raiseCRTabFunction}>
-                        Raise a change Request
-                        </div>
-                        
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                     
-                        }
-                     </>   
-                    }
-                   
-                   
-                    <hr></hr>
-                    {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4?
+                :
+                <>
+                                  {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4?
 <>
 <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
@@ -693,7 +593,7 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
                                 <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -703,7 +603,8 @@ export class BuyerSingleCompletedOrder extends Component {
                  </Row> 
 </>
 :
-<Row noGutters={true}>
+item.openEnquiriesResponse.enquiryStageId>9 ?
+                    <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
                              {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
@@ -712,15 +613,18 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                // onClick={this.sendCRDataFunction}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
                             </button>
                         </span>
                      </Col>
-                 </Row> 
+                 </Row> : null
 }
+                </>
+                }
+  
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -756,7 +660,18 @@ export class BuyerSingleCompletedOrder extends Component {
                             <li className="closedenq">Closed</li>
                             }
                             </ul>
+
                             :
+                            <>
+                            {
+                                (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                ?
+                                <img src={logos.cricon} className="cricon1"></img>
+
+                                :
+                                null
+
+                            }
                             <ul className="list-unstyled multi-steps">
                                      {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
                                 ?
@@ -786,6 +701,7 @@ export class BuyerSingleCompletedOrder extends Component {
                         }
                             
                             </ul>
+                            </>
                             
                                 }
 
@@ -1048,145 +964,77 @@ export class BuyerSingleCompletedOrder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    {/* for CR */}
-
-                    {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
-                    ?
-                    <>
-                    </>
-                    :
-                    <>
-                    {item.openEnquiriesResponse.changeRequestOn === 0 
-                        ?
-                           
-                    <Row noGutters={true}>
-                    <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span className='disabledtext'> Disabled by Artisan.</span> 
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
 
-                    </Row>
                     
-                        :
-
-                    item.openEnquiriesResponse.changeRequestStatus === 0 ?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Awaiting response from Artisan.</span> 
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    : 
-                    (item.openEnquiriesResponse.changeRequestStatus === 1) || (item.openEnquiriesResponse.changeRequestStatus === 3)?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
-                            {item.openEnquiriesResponse.changeRequestModifiedOn}
-                        </Moment>.</span> 
-                           
-                        </Col>
-                        
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                    :
-                    item.openEnquiriesResponse.changeRequestStatus === 2 ?
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                       
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
-                            {item.openEnquiriesResponse.changeRequestModifiedOn}
-                        </Moment>.</span> 
-                        </Col>
-                        
-                        <Col className="col-xs-2">
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                      :     
-                    <Row noGutters={true}>
-                    <hr></hr>
-                   
-                        <Col className="col-xs-1"></Col>
-                        { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
-                        ?
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           
-                               <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
-                               </Diffdays>
-                           <span> days Remaining. You can take only single CR untill approved.</span> 
-                        </Col>
-                        :
-                        <Col className="col-xs-8 ">
-                           <span className="CR bold">Change Request: </span> 
-                           <span> Last date to raise Change Request passed. </span> 
-                        </Col>
-                        }
-                        <Col className="col-xs-2">
-                        <div className={
-                                (this.state.selected == "changeReq"
-                                        ? "Allenqlistbtn2 changereqbtn"
-                                            : "Allenqlistbtn changereqbtn")
-                                        }  
-                                style={{height: "33px", fontWeight: "500"}}
-                                onClick={this.raiseCRTabFunction}>
-                        Raise a change Request
-                        </div>
-                        
-                        </Col>
-                        <Col className="col-xs-1"></Col>
-
-                    </Row>
-                     
-                        }
-                     </>   
-                    }
                     {/* change here order dispatch */}
                    
                     <hr></hr>
+
+                        {this.state.getSingleOrder.comment?
+                    <>
                     <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                            
-
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-                    
-                        </Col>
-
-                        </Row>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> 
+                    </>
+                :
+                <>
+                                  {item.openEnquiriesResponse.enquiryStageId>9 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 && this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4?
+<>
+<Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> 
+</>
+:
+item.openEnquiriesResponse.enquiryStageId>9 ?
+                    <Row noGutters={true}>
+                     <Col className="col-xs-12" style={{textAlign:"center"}}>
+                         <span>
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
+                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                                <button
+                                style={{fontSize:"15px"}}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                className="buyerMOQAcceptModalOkayButton raterevbtn">
+                                    <img src={logos.ratereview} className="raterevbtnimg"/>
+                                Rate & Review this order
+                            </button>
+                        </span>
+                     </Col>
+                 </Row> : null
+}
+                </>
+                }
                    
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
@@ -1447,9 +1295,18 @@ export class BuyerSingleCompletedOrder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
-                                                                        :
+                                                                        : 
+                                                                        <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Last date to raise Change Request passed.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    :
                                                                         <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                                                         }
                                                                         </>
@@ -1488,10 +1345,19 @@ export class BuyerSingleCompletedOrder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
+                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
-                                                                        :
-                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/> 
+                                                                        : 
+                                                                        <Row noGutters={true}>
+                                                                        <Col className="col-xs-12 bold font20 text-center">
+                                                                            <br></br>
+                                                                            Last date to raise Change Request passed.
+                                                                            <br></br>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    :
+                                                                        <CRaccepted enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                                                         }
                                                                         </>
                                                                         }

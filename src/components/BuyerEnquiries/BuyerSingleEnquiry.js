@@ -1746,7 +1746,9 @@ MoqSimpleProductSelected(moqId){
                                          >
                                         <Row noGutters={true} >
                                                 <Col className="col-xs-12 ">
-                                                <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
+                                               <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
+
                                                     Accept
                                             </Col>
                                         </Row>
@@ -1757,7 +1759,9 @@ MoqSimpleProductSelected(moqId){
                                         >
                                        <Row noGutters={true} >
                                                <Col className="col-xs-12 ">
-                                               <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                               {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
+                                              <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
+
                                                    Accept
                                            </Col>
                                        </Row>
@@ -2068,7 +2072,9 @@ MoqSimpleProductSelected(moqId){
                             <td className={this.state.collapseId == data.artisanId? "acceptmoqbtnlg":"acceptmoqbtn"} onClick={this.acceptMOQModalShow}>
                                                             <Row noGutters={true} >
                                                                 <Col className="col-xs-12 ">
-                                                                <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                                                {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
+                                                               <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
+
                                                                 Accept
                                                                 </Col>
                                                             </Row>

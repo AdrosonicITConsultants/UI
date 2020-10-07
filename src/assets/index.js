@@ -187,8 +187,56 @@ import truck from "./Icon awesome-truck-moving.svg";
 import greenTick from "./green tick sanchita.svg";
 import dropDownQC from "./drop down svg.svg";
 import notifyQC from "./sanchita Qc.svg";
+import rateSadFace from "./sad - white.svg";
+import rateWeatherStar from "./Icon weather-stars.svg";
+import ratingEditIcon from "./Icon material-rate-review.svg";
+import ratingFooterImg from "./thread of times.jpg";
+import envelopeHeart from "./Icon awesome-heart.svg";
 import sadwhite from "./sad - white.svg"
+import greenbigsmile from "./greenbigsmile.svg"
+import Iconioniciosalert1 from "./Icon ionic-ios-alert-1.svg"
+import esc from "./Icon ionic-ios-alert.svg"
+import acceptsmall from "./accept-small.svg"
+import progressNotifyIcon from "./tailor code.svg";
+import artisanChatSearchIcon from "./Icon ionic-ios-search.svg";
+import artisanChatDropDownIcon from "./new enquiries dropdown.svg";
+import artisanChatChatIcon from "./Group 2076.svg";
+import artisanChatAttachIcon from "./Icon material-attach-file.svg";
+import artisanChatNonActiveSend from "./send non active.svg";
+import artisanChatActiveSend from "./send active.svg";
+import artisanChatFile from "./Icon ionic-ios-document.svg";
+import artisanChatAudio from "./Icon metro-keyboard-voice.svg";
+import artisanChatVideo from "./Icon ionic-ios-videocam.svg";
+import artisanChatPhoto from "./Icon ionic-md-image.svg";
+import artisanChatCRIcon from "./change requested .svg";
+import artisanChatChooseAnotherIcon from "./Group 1952.svg"
+import artisanChatUploadFileIcon from "./chatFileUploadIcon.jpg";
+import artisanChatAudioNew from "./Icon metro-keyboard-voice- green.svg";
+import artisanChatVideoNew from "./Icon ionic-ios-videocam- maroon.svg";
+import artisanChatPhotoNew from "./Icon ionic-md-image- blue.svg";
+import escalationConfirmImg from "./qnexclamtion bg - are you sure.svg";
+import artisanEscLogo from "./artisan Escalation.svg";
+import buyerEscLogo from "./buyer escalation.svg";
+import chatEscGreenTick from "./tick green.svg";
+import chatEscGreenAlert from "./green alert.svg";
+import chatIconUploadImg from "./Icon feather-share.svg";
+import chatPinkDocImg from "./Icon ionic-ios-document-pink.svg";
+import defaultChatProfilePlaceholder from "./BLUE placeholder.svg";
+import chatEscGreenCircleTick from "./green tick circle.svg";
+import notifyChatIcon from "./Icon material-chat.svg";
+import notifyEscIcon from "./Icon ionic-md-alert.svg";
+
 export default {
+  acceptsmall,
+  esc,
+  Iconioniciosalert1,
+  progressNotifyIcon,
+  greenbigsmile,
+  envelopeHeart,
+  ratingFooterImg,
+  ratingEditIcon,
+  rateWeatherStar,
+  rateSadFace,
   sadwhite,
   notifyQC,
   dropDownQC,
@@ -372,4 +420,31 @@ export default {
   notifyImage7,
   notifyFooterBanner,
   cricon,
+  artisanChatSearchIcon,
+  artisanChatDropDownIcon,
+  artisanChatChatIcon,
+  artisanChatAttachIcon,
+  artisanChatNonActiveSend,
+  artisanChatActiveSend,
+  artisanChatFile,
+  artisanChatAudio,
+  artisanChatVideo,
+  artisanChatPhoto,
+  artisanChatCRIcon,
+  artisanChatChooseAnotherIcon,
+  artisanChatUploadFileIcon,
+  artisanChatAudioNew,
+  artisanChatVideoNew,
+  artisanChatPhotoNew,
+  escalationConfirmImg,
+  artisanEscLogo,
+  buyerEscLogo,
+  chatEscGreenTick,
+  chatEscGreenAlert,
+  chatIconUploadImg,
+  chatPinkDocImg,
+  defaultChatProfilePlaceholder,
+  chatEscGreenCircleTick,
+  notifyChatIcon,
+  notifyEscIcon,
 };

@@ -135,8 +135,12 @@ browserHistory.push("/MyProfile");
     userData = JSON.parse(localStorage.getItem('user'));
     var jwtToken = localStorage.getItem('jwtToken');
     var params = {
-      "ds0.email": userData.email,
-      "ds0.Token": jwtToken,
+      "ds47.email": userData.email,
+      "ds47.Token": jwtToken,
+      "ds46.email": userData.email,
+      "ds46.Token": jwtToken,
+      "ds48.email": userData.email,
+      "ds48.Token": jwtToken,
       "ds44.Token": jwtToken,
     };
     var paramsAsString = JSON.stringify(params);
@@ -350,19 +354,43 @@ browserHistory.push("/MyProfile");
 
             <li className="menu-item">
               {this.state.ischatHovered ? (
+                userTypeId === 1 ?
+                <a href="/artisanChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
                   onMouseLeave={() => this.toggleHover("ischatHovered")}
                   className="navButtonImg"
                   src={logos.chat_bubble_filled}
                 ></img>
+                </a>
+                : 
+                <a href="/buyerChat">
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chat_bubble_filled}
+                ></img>
+                </a>
               ) : (
+                userTypeId === 1 ? 
+                <a href="/artisanChat">
                 <img
                   onMouseEnter={() => this.toggleHover("ischatHovered")}
                   onMouseLeave={() => this.toggleHover("ischatHovered")}
                   className="navButtonImg"
                   src={logos.chaticon}
                 ></img>
+                </a>
+                :
+                <a href="/buyerChat">
+                <img
+                  onMouseEnter={() => this.toggleHover("ischatHovered")}
+                  onMouseLeave={() => this.toggleHover("ischatHovered")}
+                  className="navButtonImg"
+                  src={logos.chaticon}
+                ></img>
+                </a>
               )}
               {userTypeId === 1 ? (
                 <span className="myorder col-md-12 col-sm-12">Chat</span>

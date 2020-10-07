@@ -54,8 +54,8 @@ debugger;
            selectedBrandFile: [],
            brandPic : "",
            removedlogo : 0 ,
-                                                         
-         
+           rating : 1,                                            
+           ratingclass: "p10",
         };
         
         this.handleEdit = this.handleEdit.bind(this);
@@ -90,6 +90,14 @@ debugger;
                     console.log(brandPic);
 
                 }
+            }
+
+            if(response.data.data.user.rating != null){
+                this.setState({ rating : parseFloat(response.data.data.user.rating) },()=>{
+
+                    var percentage = "p" + this.state.rating*10;
+                    this.setState({ratingclass : percentage});
+                });
             }
 
           });
@@ -483,13 +491,13 @@ debugger;
                                                         <div class="bar"></div>
                                                     </div> */}
                                                      <div class="wrapper">
-  <div class="c100 p40 blue">
-      <span><b>3.7</b></span>
-      <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
-      </div>
-  </div></div>
+                                                <div className={"c100 " + this.state.ratingclass + " blue"}>
+                                                    <span><b>{this.props.user.rating}</b></span>
+                                                    <div class="slice">
+                                                        <div class="bar"></div>
+                                                        <div class="fill"></div>
+                                                    </div>
+                                                </div></div>
                                                     <p className="Ratingtext">Rating by Artisans</p></Col> 
                                         </Row>
                                         <Row  >

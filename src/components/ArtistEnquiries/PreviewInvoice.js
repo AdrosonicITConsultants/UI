@@ -237,7 +237,7 @@ export class PreviewInvoice extends Component {
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
        {this.state.artisanUser.companyDetails?
-       this.state.artisanUser.companyDetails.logo ?
+       this.state.artisanUser.companyDetails.logo !=null ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
          <img src={logos.Smile} className="Pilogoimg"></img>
@@ -426,8 +426,8 @@ export class PreviewInvoice extends Component {
      <p className="descyarnpi wraptext">
 
       -Yarn: {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} x {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
-      -Yarn Count: {this.state.previewPI.product.warpYarnCount} {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.warpDye.dyeDesc} 
+      -Yarn Count: {this.state.previewPI.product.warpYarnCount} x {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.warpDye.dyeDesc} x
       {this.state.weftDye.dyeDesc}
         {this.state.extraWeftDye?"x":""}
         {this.state.extraWeftDye?
@@ -750,7 +750,7 @@ export class PreviewInvoice extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </Col>
  </Row>
  </div>

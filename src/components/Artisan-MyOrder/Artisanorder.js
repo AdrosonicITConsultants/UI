@@ -101,13 +101,32 @@ export class Artisanorder extends Component {
         {
             innerID = 1;
         }
+
         else if(this.state.Progressidnext == 5) {
             innerID = this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId + 1;
         }
         else innerID = 0;
-        if(this.state.Progressidnext == 4)
-        {   
-            
+        if(this.state.Progressidnext == 9){
+            TTCEapi.validateFinalPaymentFromArtisan(parseInt(params.code),1).then((response)=>{
+                if(response.data.valid)
+                {
+                    customToast.success("Transaction Status Updated!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                    this.componentDidMount();
+                   
+               
+               
+            }
+            else{
+               
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                  });
+            }
+            });
         }
         else{
             if(this.state.Progressidnext == 5 && innerID == 5 ){
@@ -563,7 +582,21 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                   
+                    <hr></hr>
+                    {/* {console.log(item.openEnquiriesResponse)} */}
+                    {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <Row>
+                     <Col className="col-xs-1"></Col>
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     }
+                      <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -763,7 +796,8 @@ export class Artisanorder extends Component {
                         </Col>
                     </Row>
                     <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
                      <></>
                    :
@@ -1036,7 +1070,20 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                   
+                    <hr></hr>
+                    {item.openEnquiriesResponse.deliveryChallanLabel?
+                     <Row>
+                     <Col className="col-xs-1"></Col>
+                     <Col className="col-xs-4">
+                     <img src={logos.truck} className="truckimg"/>  Check
+                     <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
+                         delivery receipt</a>
+                     </Col>
+                     </Row>
+                     :
+                     ""
+                     }
+                      <hr></hr>
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
@@ -1234,8 +1281,9 @@ export class Artisanorder extends Component {
                     </Row>
                     
                     <Row noGutters={true} className="text-center">
-                    {this.state.progressid < 3 || this.state.progressid == 10 ||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
-                    ? 
+                   {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
+                   ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
+                                      ? 
                      <></>
                    :
                    <button

@@ -501,9 +501,9 @@ backoperation = () => {
   </Col>
   <Col sm={2} className="BPDmarginright">
   <h3 className="GeneralDetailsh3 text-center">Yarn</h3>
-    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.warpYarnCount?this.state.ProductData.warpYarnCount:null}</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.weftYarnCount?this.state.ProductData.weftYarnCount:null}</p>
-    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.extraWeftYarnCount?this.state.ProductData.extraWeftYarnCount:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.weftYarn.yarnDesc?this.state.ProductData.weftYarn.yarnDesc:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.warpYarn?this.state.ProductData.warpYarn.yarnDesc:null}</p>
+    <p className="GeneralDetailsp text-center bpdmgbt" >{this.state.ProductData.extraWeftYarn?this.state.ProductData.extraWeftYarn.yarnDesc:null}</p>
   </Col>
   <Col sm={2} className="BPDmarginright">
     <h3 className="GeneralDetailsh3 text-center">Yarn Count</h3>
@@ -572,63 +572,151 @@ backoperation = () => {
 {/* -----------------Washcareinst--------------------- */}
 <Row noGutters="true">
 <h2 className="DescheadingBPD" style={{marginLeft:"10px" , fontFamily:"auto"}}>Wash and Care Instructions</h2>
-          <Col sm={1}></Col>
-            <Col sm={2} style={{textAlign:"center"}}>
-            <img
-                                         className="unselectedWareandCare"
-                                         src={logos.washAndCare1}
-                                       ></img>
-                                       <p
-                                         className="BDPWashcare"
-                                       >
-                                         Gentle Hand Wash with soft liquid
-                                         detergent
-                                       </p>
-            </Col>
-            <Col sm={2} style={{textAlign:"center"}}>
-            <img
-                                         className="unselectedWareandCare"
-                                         src={logos.washAndCare2}
-                                       ></img>
-                                       <p
-                                         className="BDPWashcare">
-                                         Machine wash with cold water
-                                       </p>
-            </Col>
-            <Col sm={2} style={{textAlign:"center"}}>
-            <img
-                                         className="unselectedWareandCare"
-                                         src={logos.washAndCare3}
-                                       ></img>
-                                       <p
-                                         className="BDPWashcare"
-                                       >
-                                         Do not bleach
-                                       </p>
-            </Col>
-            <Col sm={2} style={{textAlign:"center"}}>
-            <img
-                                         className="unselectedWareandCare"
-                                         src={logos.washAndCare4}
-                                       ></img>
-                                       <p
-                                         className="BDPWashcare"
-                                       >
-                                         Machine wash with 40 Degree water level
-                                       </p>
-            </Col>
-            <Col sm={2} style={{textAlign:"center"}}>
-            <img
-                                         className="unselectedWareandCare"
-                                         src={logos.washAndCare5}
-                                       ></img>
-                                       <p
-                                         className="BDPWashcare"
-                                       >
-                                         Dry Clean Only
-                                       </p>
-            </Col>
-            <Col sm={1}></Col>
+    {this.state.ProductData.productCares.map((data) => {
+      return(
+        <>
+        {/* <Col sm={1}></Col> */}
+        <Col sm={2} style={{textAlign:"center"}}>
+          {data.productCareId==1?
+          <>
+          <img
+           className="unselectedWareandCare"
+           src={logos.washAndCare1}
+         ></img>
+         <p
+           className="BDPWashcare"
+         >
+           Gentle Hand Wash with soft liquid
+           detergent
+         </p>
+          </>
+        :
+        data.productCareId==2?
+        <>
+        <img
+        className="unselectedWareandCare"
+        src={logos.washAndCare2}
+      ></img>
+      <p
+        className="BDPWashcare">
+        Machine wash with cold water
+      </p>
+      </>
+        :
+        data.productCareId==3?
+        <>
+       <img
+       className="unselectedWareandCare"
+       src={logos.washAndCare3}
+     ></img>
+     <p
+        className="BDPWashcare"
+      >
+        Do not bleach
+     </p>
+      </>
+      :
+      data.productCareId==4?
+        <>
+       <img
+       className="unselectedWareandCare"
+        src={logos.washAndCare4}
+     ></img>
+     <p
+       className="BDPWashcare"
+     >
+       Machine wash with 40 Degree water level
+     </p>
+      </>
+      :
+      data.productCareId==5?
+        <>
+       <img
+       className="unselectedWareandCare"
+        src={logos.washAndCare5}
+     ></img>
+     <p
+       className="BDPWashcare"
+     >
+       Dry Clean Only
+     </p>
+      </>
+      :
+      data.productCareId==6?
+      <>
+     <img
+     className="unselectedWareandCare"
+      src={logos.washAndCare6}
+   ></img>
+   <p
+     className="BDPWashcare"
+   >
+     Wash Separately
+   </p>
+    </>
+    :
+    data.productCareId==7?
+    <>
+   <img
+   className="unselectedWareandCare"
+    src={logos.washAndCare7}
+ ></img>
+ <p
+   className="BDPWashcare"
+ >
+   Put starch for better crease
+ </p>
+  </>
+  :
+  data.productCareId==8?
+  <>
+ <img
+ className="unselectedWareandCare"
+  src={logos.washAndCare8}
+></img>
+<p
+ className="BDPWashcare"
+>
+Normal wash before stitching
+</p>
+</>
+:
+data.productCareId==9?
+<>
+<img
+className="unselectedWareandCare"
+src={logos.washAndCare9}
+></img>
+<p
+className="BDPWashcare"
+>
+No need to wash before stitching
+</p>
+</>
+:
+data.productCareId==10?
+<>
+<img
+className="unselectedWareandCare"
+src={logos.washAndCare10}
+></img>
+<p
+className="BDPWashcare"
+>
+Pre Washed & Pre Shrunk
+</p>
+</>
+:
+""
+        }
+        </Col>
+<Col className="col-xs-1"></Col>
+        </>
+      )
+      
+    })}
+          
+           
             </Row>  
             {/* ------------------like it ------------------ */}
          

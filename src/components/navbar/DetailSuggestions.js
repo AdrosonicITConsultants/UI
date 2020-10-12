@@ -26,23 +26,29 @@ export default class DetailSuggestions extends Component {
             getProductIdsInWishlist :[],
             selfProduct : 0 ,
             antaranProduct: 0 ,
+            currentPage: 1,
+            boolAntaran : -1,
 
     };
   }
 
   componentDidMount(){
+    this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
         console.log(params);
         if(params.search != undefined && params.type != undefined){
-           TTCEapi.showBuyerSearchSuggestion(params.search,params.type).then((response)=>{
+           TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
              if(response.data.valid == true)
              {
                this.setState({
                 products : response.data.data.searchResponse,
-                resultsCount : response.data.data.length,
+                resultsCount : response.data.data.searchResponse.length,
                 searchWord : params.search,
                 both : 1,
                 antaran : 0,
+                currentpage : 1,
+                totalproducts : response.data.data.totalResult,
+                boolAntaran : -1
 
               },()=>{
                 console.log(this.state)
@@ -83,15 +89,169 @@ export default class DetailSuggestions extends Component {
         }
       
   }
+  SelfProduct(){
+    this.setState({dataload:false});
+    let params = queryString.parse(this.props.location.search);
+        // console.log(params);
+        // console.log(page);
+        if(params.search != undefined && params.type != undefined){
+           TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,0).then((response)=>{
+             if(response.data.valid == true)
+             {  var Count = response.data.data.searchResponse.length
+                var moreProducts = response.data.data.searchResponse
+                // var products = this.state.products
+                // products = products.concat(moreProducts);
+               this.setState({
+                products : moreProducts,
+                resultsCount : Count,
+                currentPage : 1,
+                boolAntaran : 0,
+                totalproducts : response.data.data.totalResult,
+
+
+
+              },()=>{
+                console.log(this.state)
+                var self = 0 ;
+                for ( var item in this.state.products )
+                {
+                  if(this.state.products[item].madeWithAnthran == 0)
+                  {
+                    self = self + 1;
+                  }
+                }
+                var antaran = parseInt(this.state.resultsCount - self )
+                this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
+                  // console.log(this.state);
+                });
+              })
+             }
+             else{
+              this.setState({
+                
+                searchWord : params.search,
+                
+
+              })
+             }
+
+        });
+      }
+
+  }
+  Antaran(){
+    this.setState({dataload:false});
+    let params = queryString.parse(this.props.location.search);
+        // console.log(params);
+        // console.log(page);
+        if(params.search != undefined && params.type != undefined){
+           TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,1).then((response)=>{
+             if(response.data.valid == true)
+             {  var Count = response.data.data.searchResponse.length
+                var moreProducts = response.data.data.searchResponse
+                // var products = this.state.products
+                // products = products.concat(moreProducts);
+               this.setState({
+                products : moreProducts,
+                resultsCount : Count,
+                currentPage : 1,
+                boolAntaran : 1,
+                totalproducts : response.data.data.totalResult,
+
+
+
+              },()=>{
+                console.log(this.state)
+                var self = 0 ;
+                for ( var item in this.state.products )
+                {
+                  if(this.state.products[item].madeWithAnthran == 0)
+                  {
+                    self = self + 1;
+                  }
+                }
+                var antaran = parseInt(this.state.resultsCount - self )
+                this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
+                  // console.log(this.state);
+                });
+              })
+             }
+             else{
+              this.setState({
+                
+                searchWord : params.search,
+                
+
+              })
+             }
+
+        });
+      }
+
+  }
+  addMoreProducts(){
+    var page = this.state.currentPage+1;
+    let params = queryString.parse(this.props.location.search);
+        // console.log(params);
+        console.log(page);
+        if(params.search != undefined && params.type != undefined){
+           TTCEapi.showBuyerSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
+             if(response.data.valid == true)
+             {  var Count = this.state.resultsCount + response.data.data.searchResponse.length
+                var moreProducts = response.data.data.searchResponse
+                var products = this.state.products
+                products = products.concat(moreProducts);
+               this.setState({
+                products : products,
+                resultsCount : Count,
+                currentPage : page
+
+              },()=>{
+                console.log(this.state)
+                var self = 0 ;
+                for ( var item in this.state.products )
+                {
+                  if(this.state.products[item].madeWithAnthran == 0)
+                  {
+                    self = self + 1;
+                  }
+                }
+                var antaran = parseInt(this.state.resultsCount - self )
+                this.setState({selfProduct : self , antaranProduct : antaran },()=>{
+                  // console.log(this.state);
+                });
+              })
+             }
+             else{
+              this.setState({
+                
+                searchWord : params.search,
+                
+
+              })
+             }
+
+        });
+      }
+    
+
+    // var ar = [this.state.products[0]]
+    // var dumy = this.state.products;
+    // dumy = dumy.concat(ar);
+    // this.setState({products : dumy})
+    
+     console.log(this.state.products);
+    // this.render( )
+  }
 
   render() {
     
     return (
       <React.Fragment>
+           <NavbarComponent />
            {this.state.dataload == true 
            ?
            <>
-           <NavbarComponent />
            {this.state.resultsCount > 0 
            ?
         <Container>
@@ -118,18 +278,18 @@ export default class DetailSuggestions extends Component {
               Filter according to design collections
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Male" name="gender" checked={this.state.antaran == 1} onClick={()=>{this.setState({both : 0, antaran :1})}}/>
+            <input type="radio" value="Male" name="gender" checked={this.state.antaran == 1} onClick={()=>{this.Antaran(); this.setState({both : 0, antaran :1})}}/>
             <img src={logos.antaranCoDesignLogo} className="logosearch"></img>Show only Antaran Co-Design
 
             </Col>
             <Col className="col-sm-3 padding0">
-            <input type="radio" value="Female" name="gender"  checked={this.state.antaran == 0 && this.state.both == 0 } onClick={()=>{this.setState({both : 0, antaran:0})}}/> 
+            <input type="radio" value="Female" name="gender"  checked={this.state.antaran == 0 && this.state.both == 0 } onClick={()=>{this.SelfProduct(); this.setState({both : 0, antaran:0})}}/> 
             <img src={logos.artisianSelfLogo} className="logosearch"></img>Show only Artisan Self Design
 
 
             </Col>
             <Col className="col-sm-2 padding0">
-            <input type="radio" value="Other" name="gender" onClick={()=>{this.setState({both : 1})}} checked={this.state.both == 1} /> Show both
+            <input type="radio" value="Other" name="gender" onClick={()=>{this.componentDidMount(); this.setState({both : 1})}} checked={this.state.both == 1} /> Show both
 
             </Col>
             </Col>
@@ -165,7 +325,7 @@ export default class DetailSuggestions extends Component {
                                             {this.state.item1 = false}
 
                                           <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>    
-                                            {console.log(item)};
+                                            {/* {console.log(item)}; */}
 
                                         </Col>
                                         :
@@ -197,8 +357,17 @@ export default class DetailSuggestions extends Component {
               </Col>
             </Row>
 
-            <br></br>        <br></br>        <br></br>        <br></br>
-
+            <br></br>       
+                                    <div className="text-center">
+                                      {this.state.totalproducts > this.state.currentPage * 12 
+                                      ?
+                                      <span className="seemore1 " onClick={()=>{this.addMoreProducts()}}>see more</span>
+                                    :
+                                    null
+                                    }
+                                    {/* {this.state.products.length} */}
+                                    </div>
+                                    <br></br>        <br></br>        <br></br>
 
         </Container>
                 :
@@ -230,14 +399,25 @@ export default class DetailSuggestions extends Component {
                                     </Row>
         </Container>
         }
-<Footer></Footer>
       
            </>
            :
            <>
+           <Container>
+           <Row noGutters={true}>
+                                      <br>
+                                      </br>
+                                      <br>
+                                      </br>
+                                      <Col className='col-xs-12 font30 bold text-center'>
+Loading...                                                             
+                                      </Col>
+                </Row>
+           </Container>
+           
            </>
         }
-        
+        <Footer></Footer>
       </React.Fragment>
     );
   }

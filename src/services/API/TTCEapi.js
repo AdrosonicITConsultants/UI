@@ -2050,10 +2050,11 @@ static sendTaxInvoice(
     return response;
   }
 
-  static showBuyerSearchSuggestion(searchQuery,searchTypes){
+  static showBuyerSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
      let url = ApiUrl + "/search/searchProducts";
     var data = {
-      pageNo: 1,
+      madeWithAntaran:boolAntaran ,
+      pageNo: parseInt(pageno),
       searchString: searchQuery,
       searchType : parseInt(searchTypes)
     };
@@ -2093,9 +2094,10 @@ static sendTaxInvoice(
   }
 
 
-  static showArtistSearchSuggestion(searchQuery,searchTypes){
+  static showArtistSearchSuggestion(searchQuery,searchTypes,boolAntaran){
     let url = ApiUrl + "/search/searchArtisanProducts";
    var data = {
+     madeWithAntaran: boolAntaran ,
      pageNo: 1,
      searchString: searchQuery,
      searchType : parseInt(searchTypes)

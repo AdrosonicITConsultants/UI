@@ -295,7 +295,10 @@ export class ArtisanRecentList extends Component {
         localStorage.setItem("piShow", 1);
         browserHistory.push("/enquiryDetails?code="+enquiryId)
     }
-   
+   gotoTaxInvoice(eid){
+    localStorage.setItem("piShow", 1);
+    browserHistory.push("/buyerorder?code="+eid)
+   }
     NotifyAgain(actionId,respectiveActionId,id){
         console.log(actionId,respectiveActionId,id)
         this.setState({ notifyButtonClick:true})
@@ -572,9 +575,18 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
     {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
-    <span><img src={logos.viewReceipt} className="receipticon"
+        <>
+        {item.transactionOngoing.taxInvoiceId!=null?
+        <span><img src={logos.viewReceipt} className="receipticon"
+        onClick={() => this.gotoTaxInvoice(item.transactionOngoing.enquiryId)}/>
+         <p style={{marginTop:"5px"}}>View Invoice</p></span>
+         :
+         <span><img src={logos.viewReceipt} className="receipticon"
     onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}/>
      <p style={{marginTop:"5px"}}>View Invoice</p></span>
+        }
+        </>
+    
 :
 <span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionOngoing.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
@@ -647,13 +659,26 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 )}
 
 </Col>
-<Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
+<>
+        {item.transactionOngoing.taxInvoiceId!=null?
+        <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
+        onClick={() => this.gotoTaxInvoice(item.transactionOngoing.enquiryId)}
+       // onClick={()=> this.acceptMOQModalShow}
+        >
+       <img src={logos.redenquiry} className="gotoiconsize"/>
+       <p className="gotoenqu"> Go to this enquiry</p>
+       </Col>
+         :
+         <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}
 // onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu"> Go to this enquiry</p>
 </Col>
+        }
+        </>
+
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
 

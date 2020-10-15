@@ -162,7 +162,7 @@ export class ArtisanTransaction extends Component {
                   
                 },()=>{
                     // console.log(response)
-               
+                    this.componentDidMount()
                 });
               
           }

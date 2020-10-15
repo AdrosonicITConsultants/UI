@@ -98,10 +98,6 @@ export class ArtisanRecentList extends Component {
     
       }
     
-
-
-     
-
     notifyModalShow(id,notifyId){
     
         document.getElementById('notifyModal'+id).style.display='block';
@@ -110,15 +106,11 @@ export class ArtisanRecentList extends Component {
                  notifyId:notifyId
              },()=>{
                  console.log(this.state.notifyId);
-             })
-            
-     
-        
+             })        
     }
 
     notifyModalclose = (id) => {
-        document.getElementById('notifyModal'+id).style.display='none';
-        
+        document.getElementById('notifyModal'+id).style.display='none';  
     }
 
     uploddeliveryreceiptModalShow(id,enquiryId){
@@ -131,7 +123,9 @@ export class ArtisanRecentList extends Component {
             this.setState({
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
+
                 console.log(this.state.getSingleOrder);
+                this.componentDidMount();
             });
         }
         });
@@ -255,31 +249,21 @@ export class ArtisanRecentList extends Component {
 
     }
 
-    openReceipt(enquiryId){
-        console.log("click");
-        setTimeout(function() { //Start the timer
-            this.setState({render: true}) //After 1 second, set render to true
-        }.bind(this), 1000)
-        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
-
-            if(response.data.valid)
-        {
-            // this.componentDidMount();
-            this.setState({getAdvancedPaymentReceipt : response.data.data,
-                receiptId:response.data.data.paymentId,
-                receiptlabel:response.data.data.label
-              
-            },()=>{
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-                
-            window.open(TTCEapi.ReceiptUrl +this.state.getAdvancedPaymentReceipt.paymentId+"/"+this.state.getAdvancedPaymentReceipt.label, "_blank")   
+    openReceipt(receiptId,challanId){
+        console.log(receiptId,challanId);
+        setTimeout(function() { 
+          this.setState({
+            render: true
+          });
+        }.bind(this), 1000);
+        TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
+          if(response.data.valid) {
+            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
+            window.open(response.data.data)
+          }
+          console.log(response.data.data)
         });
-        }
-        });
-
-    }
+      }
 
 
     acceptMOQModalClose = (enquiryId) => {
@@ -297,7 +281,7 @@ export class ArtisanRecentList extends Component {
     }
    gotoTaxInvoice(eid){
     localStorage.setItem("piShow", 1);
-    browserHistory.push("/buyerorder?code="+eid)
+    browserHistory.push("/artisanorder?code="+eid)
    }
     NotifyAgain(actionId,respectiveActionId,id){
         console.log(actionId,respectiveActionId,id)
@@ -588,7 +572,10 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
         </>
     
 :
-<span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionOngoing.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon" 
+ onClick={()=> this.openReceipt(item.transactionOngoing.receiptId?item.transactionOngoing.receiptId:null,
+    item.transactionOngoing.challanId?item.transactionOngoing.challanId:null)}
+     /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
 <Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>

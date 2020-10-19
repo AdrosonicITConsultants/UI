@@ -37,12 +37,20 @@ export default class DetailSuggestionsArtist extends Component {
   componentDidMount(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        console.log(params);
+        // console.log(params);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
              console.log(response);
              if(response.data.valid == true)
              {
+              TTCEapi.searchArtisanProductCount(params.search,params.type,1,-1).then((response1)=>{
+                if(response1.data.valid)
+                {
+                 this.setState({
+                   totalproducts : response1.data.data,
+                 })
+                }
+              })
                this.setState({
                 products : response.data.data.searchResponse,
                 resultsCount : response.data.data.searchResponse.length,
@@ -50,14 +58,13 @@ export default class DetailSuggestionsArtist extends Component {
                 both : 1,
                 antaran : 0,
                 currentpage : 1,
-                totalproducts : response.data.data.totalResult,
                 boolAntaran : -1
 
 
 
               },()=>{
                 
-                console.log(this.state.searchWord);
+                // console.log(this.state.searchWord);
                 console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
@@ -69,7 +76,7 @@ export default class DetailSuggestionsArtist extends Component {
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran },()=>{
-                  console.log(this.state);
+                  // console.log(this.state);
                 });
 
               })
@@ -107,14 +114,19 @@ export default class DetailSuggestionsArtist extends Component {
                 var moreProducts = response.data.data.searchResponse
                 // var products = this.state.products
                 // products = products.concat(moreProducts);
+                TTCEapi.searchArtisanProductCount(params.search,params.type,1,0).then((response1)=>{
+                  if(response1.data.valid)
+                  {
+                   this.setState({
+                     totalproducts : response1.data.data,
+                   })
+                  }
+                })
                this.setState({
                 products : moreProducts,
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 0,
-                totalproducts : response.data.data.totalResult,
-
-
 
               },()=>{
                 console.log(this.state)
@@ -157,12 +169,19 @@ export default class DetailSuggestionsArtist extends Component {
                 var moreProducts = response.data.data.searchResponse
                 // var products = this.state.products
                 // products = products.concat(moreProducts);
+                TTCEapi.searchArtisanProductCount(params.search,params.type,1,1).then((response1)=>{
+                  if(response1.data.valid)
+                  {
+                   this.setState({
+                     totalproducts : response1.data.data,
+                   })
+                  }
+                })
                this.setState({
                 products : moreProducts,
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 1,
-                totalproducts : response.data.data.totalResult,
 
 
 
@@ -199,7 +218,7 @@ export default class DetailSuggestionsArtist extends Component {
     var page = this.state.currentPage+1;
     let params = queryString.parse(this.props.location.search);
         // console.log(params);
-        console.log(page);
+        // console.log(page);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
              if(response.data.valid == true)
@@ -246,7 +265,7 @@ export default class DetailSuggestionsArtist extends Component {
     // dumy = dumy.concat(ar);
     // this.setState({products : dumy})
     
-     console.log(this.state.products);
+    //  console.log(this.state.products);
     // this.render( )
   }
 
@@ -334,7 +353,7 @@ export default class DetailSuggestionsArtist extends Component {
                                             {this.state.item1 = false}
 
                                           <ArtisanProductOfSearch productData = {item} />    
-                                            {console.log(item)};
+                                            {/* {console.log(item)}; */}
 
                                         </Col>
                                         :
@@ -366,7 +385,18 @@ export default class DetailSuggestionsArtist extends Component {
               </Col>
             </Row>
 
-            <br></br>        <br></br>        <br></br>        <br></br>
+
+            <br></br>       
+                                    <div className="text-center">
+                                      {this.state.totalproducts > this.state.currentPage * 12 
+                                      ?
+                                      <span className="seemore1 " onClick={()=>{this.addMoreProducts()}}>see more</span>
+                                    :
+                                    null
+                                    }
+                                    {/* {this.state.products.length} */}
+                                    </div>
+                                    <br></br>        <br></br>        <br></br>
 
 
         </Container>

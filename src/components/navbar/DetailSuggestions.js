@@ -28,6 +28,7 @@ export default class DetailSuggestions extends Component {
             antaranProduct: 0 ,
             currentPage: 1,
             boolAntaran : -1,
+            totalproducts : 0,
 
     };
   }
@@ -39,7 +40,14 @@ export default class DetailSuggestions extends Component {
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
              if(response.data.valid == true)
-             {
+             { TTCEapi.searchProductCount(params.search,params.type,1,-1).then((response1)=>{
+               if(response1.data.valid)
+               {
+                this.setState({
+                  totalproducts : response1.data.data,
+                })
+               }
+             })
                this.setState({
                 products : response.data.data.searchResponse,
                 resultsCount : response.data.data.searchResponse.length,
@@ -47,7 +55,6 @@ export default class DetailSuggestions extends Component {
                 both : 1,
                 antaran : 0,
                 currentpage : 1,
-                totalproducts : response.data.data.totalResult,
                 boolAntaran : -1
 
               },()=>{
@@ -99,6 +106,14 @@ export default class DetailSuggestions extends Component {
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
+                TTCEapi.searchProductCount(params.search,params.type,1,0).then((response1)=>{
+                  if(response1.data.valid)
+                  {
+                   this.setState({
+                     totalproducts : response1.data.data,
+                   })
+                  }
+                })
                 // var products = this.state.products
                 // products = products.concat(moreProducts);
                this.setState({
@@ -106,9 +121,6 @@ export default class DetailSuggestions extends Component {
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 0,
-                totalproducts : response.data.data.totalResult,
-
-
 
               },()=>{
                 console.log(this.state)
@@ -149,6 +161,14 @@ export default class DetailSuggestions extends Component {
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
+                TTCEapi.searchProductCount(params.search,params.type,1,1).then((response1)=>{
+                  if(response1.data.valid)
+                  {
+                   this.setState({
+                     totalproducts : response1.data.data,
+                   })
+                  }
+                })
                 // var products = this.state.products
                 // products = products.concat(moreProducts);
                this.setState({
@@ -156,9 +176,6 @@ export default class DetailSuggestions extends Component {
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 1,
-                totalproducts : response.data.data.totalResult,
-
-
 
               },()=>{
                 console.log(this.state)

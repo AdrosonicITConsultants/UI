@@ -186,7 +186,7 @@ generateEnquiry(item){
                                 </Col>
                                 <Col className="text-center">
                           
-                                <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                                <img className="logoincard " src={this.state.proddata.madeWithAnthran == 0 ? logos.artisianSelfLogo : logos.antaranCoDesignLogo}  alt="Card image cap"/>
 
                                 
                             
@@ -203,7 +203,7 @@ generateEnquiry(item){
                         Made to order
                         </Col>
                         <Col className="text-center">
-                        <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        <img className="logoincard " src={this.state.proddata.madeWithAnthran == 0 ? logos.artisianSelfLogo : logos.antaranCoDesignLogo}  alt="Card image cap"/>
                         </Col>
                         
                         </Row>

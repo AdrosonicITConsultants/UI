@@ -2074,6 +2074,55 @@ static sendTaxInvoice(
       });
   }
 
+
+  static searchProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+    let url = ApiUrl + "/search/searchProductCount";
+   var data = {
+     madeWithAntaran:boolAntaran ,
+     pageNo: parseInt(pageno),
+     searchString: searchQuery,
+     searchType : parseInt(searchTypes)
+   };
+   var config = {
+     headers: {
+       "Content-type": "application/json",
+     },
+   };
+   return axios
+     .post(url, data, config)
+     .then((response) => {
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+       return error.response;
+     });
+ }
+
+ static searchArtisanProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+  let url = ApiUrl + "/search/searchArtisanProductCount";
+ var data = {
+   madeWithAntaran:boolAntaran ,
+   pageNo: parseInt(pageno),
+   searchString: searchQuery,
+   searchType : parseInt(searchTypes)
+ };
+ var config = {
+   headers: {
+     "Content-type": "application/json",
+   },
+ };
+ return axios
+   .post(url, data, config)
+   .then((response) => {
+     console.log(response);
+     return response;
+   })
+   .catch((error) => {
+     return error.response;
+   });
+}
+
   static async getArtistSuggestions(value) {
     let config = {
       headers: {
@@ -2094,11 +2143,11 @@ static sendTaxInvoice(
   }
 
 
-  static showArtistSearchSuggestion(searchQuery,searchTypes,boolAntaran){
+  static showArtistSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
     let url = ApiUrl + "/search/searchArtisanProducts";
    var data = {
      madeWithAntaran: boolAntaran ,
-     pageNo: 1,
+     pageNo: pageno,
      searchString: searchQuery,
      searchType : parseInt(searchTypes)
    };

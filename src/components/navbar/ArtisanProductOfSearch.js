@@ -66,6 +66,7 @@ export class ArtisanProductOfSearch extends Component {
                                 
                                 }
                     </>
+                    {this.state.proddata.madeWithAnthran == 0 ? 
                      <div class="middle1">
                         <div
                             onClick={() => this.editProduct(this.state.proddata.id)}
@@ -73,7 +74,9 @@ export class ArtisanProductOfSearch extends Component {
                         >
                             Edit product
                         </div>
-                    </div>         
+                    </div>    
+                    : null
+                    }    
                    
             
                     </div>
@@ -84,7 +87,7 @@ export class ArtisanProductOfSearch extends Component {
                         </Col>
                         <Col className="col-xs-12 mt7 mb7">
                             <div className="col-xs-6">
-                            <img className="logoincard1 " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                            <img className="logoincard1 " src={this.state.proddata.madeWithAnthran == 0 ? logos.artisianSelfLogo : logos.antaranCoDesignLogo}  alt="Card image cap"/>
                             </div>
                             <div className="col-xs-6">
                                 {this.state.proddata.status == 2 

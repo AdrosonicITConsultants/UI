@@ -57,7 +57,37 @@ class TTCEapi {
     }
     return true;
   }
-
+  static getReceipt(receiptId,challanId) {
+    if(receiptId!=null){
+      let url = ApiUrl + "/enquiry/getReceipt?receiptId="+receiptId;
+    
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    }
+    else{
+      let url = ApiUrl + "/enquiry/getReceipt?challanId="+challanId;
+    
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    }
+    
+  }
   //#region registration
   static checkWeaverId(weaverId) {
     let url = ApiUrl + "/register/verifyWeaverDetails";

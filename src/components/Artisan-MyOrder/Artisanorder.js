@@ -295,6 +295,7 @@ export class Artisanorder extends Component {
 
     }
     componentDidMount(){
+       
     window.scrollTo(0, 0);
     let params = queryString.parse(this.props.location.search);
     console.log(params);
@@ -386,6 +387,7 @@ export class Artisanorder extends Component {
                                     dataload:true
                             },()=>{
                                 // console.log(this.state);
+                               
                             });
                             
                         }
@@ -425,6 +427,16 @@ export class Artisanorder extends Component {
         }
         console.log(this.state.getPi)
     })
+    }
+
+    
+    viewPI = () => {
+        this.qualityCheckbtn();
+        this.scrollPI.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
     }
     render() {
         return (

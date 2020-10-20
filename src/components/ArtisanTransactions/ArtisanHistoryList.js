@@ -159,31 +159,21 @@ export class ArtisanHistoryList extends Component {
         });
     }
 
-    openReceipt(enquiryId){
-        console.log("click");
-        setTimeout(function() { //Start the timer
-            this.setState({render: true}) //After 1 second, set render to true
-        }.bind(this), 1000)
-        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
-
-            if(response.data.valid)
-        {
-            // this.componentDidMount();
-            this.setState({getAdvancedPaymentReceipt : response.data.data,
-                receiptId:response.data.data.paymentId,
-                receiptlabel:response.data.data.label
-              
-            },()=>{
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-                
-            window.open(TTCEapi.ReceiptUrl +this.state.getAdvancedPaymentReceipt.paymentId+"/"+this.state.getAdvancedPaymentReceipt.label, "_blank")   
+    openReceipt(receiptId,challanId){
+        console.log(receiptId,challanId);
+        setTimeout(function() { 
+          this.setState({
+            render: true
+          });
+        }.bind(this), 1000);
+        TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
+          if(response.data.valid) {
+            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
+            window.open(response.data.data)
+          }
+          console.log(response.data.data)
         });
-        }
-        });
-
-    }
+      }
 
 
     acceptMOQModalClose = (enquiryId) => {
@@ -196,9 +186,13 @@ export class ArtisanHistoryList extends Component {
     }
 
     gotoEnquiry(enquiryId){
-        browserHistory.push("/enquiryDetails?code="+enquiryId)
+        localStorage.setItem("piShow", 1);
+        browserHistory.push("/closedEnquiryDetails?code="+enquiryId)
     }
-   
+    gotoTaxInvoice(eid){
+        localStorage.setItem("piShow", 1);
+        browserHistory.push("/artisancompletedorder?code="+eid)
+       }  
     
   
     acceptMOQModalClose = (enquiryId) => {
@@ -418,12 +412,24 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 ₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
-    {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
-    <span><img src={logos.viewReceipt} className="receipticon"
+{this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
+        <>
+        {item.transactionCompleted.taxInvoiceId!=null?
+        <span><img src={logos.viewReceipt} className="receipticon"
+        onClick={() => this.gotoTaxInvoice(item.transactionCompleted.enquiryId)}/>
+         <p style={{marginTop:"5px"}}>View Invoice</p></span>
+         :
+         <span><img src={logos.viewReceipt} className="receipticon"
     onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}/>
      <p style={{marginTop:"5px"}}>View Invoice</p></span>
+        }
+        </>
+    
 :
-<span><img src={logos.viewrec} className="receipticon" onClick={()=> this.openReceipt(item.transactionCompleted.enquiryId)} /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
+<span><img src={logos.viewrec} className="receipticon" 
+ onClick={()=> this.openReceipt(item.transactionCompleted.receiptId?item.transactionCompleted.receiptId:null,
+    item.transactionCompleted.challanId?item.transactionCompleted.challanId:null)}
+     /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
 <Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>

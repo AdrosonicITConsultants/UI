@@ -55,3 +55,9 @@
     color: white;
     font-size: 13px;
 }
+.seemore1{
+    /* color: rgb(161, 137, 1); */
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}

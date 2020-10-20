@@ -57,7 +57,37 @@ class TTCEapi {
     }
     return true;
   }
-
+  static getReceipt(receiptId,challanId) {
+    if(receiptId!=null){
+      let url = ApiUrl + "/enquiry/getReceipt?receiptId="+receiptId;
+    
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    }
+    else{
+      let url = ApiUrl + "/enquiry/getReceipt?challanId="+challanId;
+    
+    console.log(url);
+    return axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    }
+    
+  }
   //#region registration
   static checkWeaverId(weaverId) {
     let url = ApiUrl + "/register/verifyWeaverDetails";
@@ -2050,10 +2080,11 @@ static sendTaxInvoice(
     return response;
   }
 
-  static showBuyerSearchSuggestion(searchQuery,searchTypes){
+  static showBuyerSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
      let url = ApiUrl + "/search/searchProducts";
     var data = {
-      pageNo: 1,
+      madeWithAntaran:boolAntaran ,
+      pageNo: parseInt(pageno),
       searchString: searchQuery,
       searchType : parseInt(searchTypes)
     };
@@ -2072,6 +2103,55 @@ static sendTaxInvoice(
         return error.response;
       });
   }
+
+
+  static searchProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+    let url = ApiUrl + "/search/searchProductCount";
+   var data = {
+     madeWithAntaran:boolAntaran ,
+     pageNo: parseInt(pageno),
+     searchString: searchQuery,
+     searchType : parseInt(searchTypes)
+   };
+   var config = {
+     headers: {
+       "Content-type": "application/json",
+     },
+   };
+   return axios
+     .post(url, data, config)
+     .then((response) => {
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+       return error.response;
+     });
+ }
+
+ static searchArtisanProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+  let url = ApiUrl + "/search/searchArtisanProductCount";
+ var data = {
+   madeWithAntaran:boolAntaran ,
+   pageNo: parseInt(pageno),
+   searchString: searchQuery,
+   searchType : parseInt(searchTypes)
+ };
+ var config = {
+   headers: {
+     "Content-type": "application/json",
+   },
+ };
+ return axios
+   .post(url, data, config)
+   .then((response) => {
+     console.log(response);
+     return response;
+   })
+   .catch((error) => {
+     return error.response;
+   });
+}
 
   static async getArtistSuggestions(value) {
     let config = {
@@ -2093,10 +2173,11 @@ static sendTaxInvoice(
   }
 
 
-  static showArtistSearchSuggestion(searchQuery,searchTypes){
+  static showArtistSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
     let url = ApiUrl + "/search/searchArtisanProducts";
    var data = {
-     pageNo: 1,
+     madeWithAntaran: boolAntaran ,
+     pageNo: pageno,
      searchString: searchQuery,
      searchType : parseInt(searchTypes)
    };

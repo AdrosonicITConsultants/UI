@@ -55,8 +55,9 @@ export class Buyerorder extends Component {
             completebtndis:true,
             deliveredDate:"",
             getSingleOrder:[],
-            showDeldatevalidation:false
-        
+            showDeldatevalidation:false,
+            orderReceivedCurrentId: 0,
+            orderReceivedModalOkButtonDisable: false,        
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -337,6 +338,50 @@ export class Buyerorder extends Component {
             localStorage.removeItem("ratingEnquiryCode");
             localStorage.setItem("ratingEnquiryCode", code);
             browserHistory.push("/buyerRating?code=" + id);
+        }
+
+        orderReceivedModal = (enquiryId) => {
+            this.setState({
+                orderReceivedCurrentId: enquiryId,
+            });
+            document.getElementById('orderReceivedModal').style.display='block';
+        }
+    
+        orderReceivedModalClose = () => {
+            document.getElementById('orderReceivedModal').style.display='none';
+        }
+    
+        orderReceivedModalOkButton = () => {
+            this.setState({
+                orderReceivedModalOkButtonDisable: true
+            });
+    
+            console.log(this.state.orderReceivedCurrentId);
+    
+            TTCEapi.updateFaultyOrderStatusBuyer(this.state.orderReceivedCurrentId, 1).then((response)=>{
+                if(response.data.valid)
+                {   
+                    document.getElementById('orderReceivedModal').style.display='none';
+                    this.setState({
+                        orderReceivedModalOkButtonDisable: false,
+                    });
+                    this.componentDidMount();
+                    customToast.success(response.data.data, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+                else {
+                    document.getElementById('orderReceivedModal').style.display='none';
+                    this.setState({
+                        orderReceivedModalOkButtonDisable: false,
+                    });
+                    customToast.error("Status not updated", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+            });
         }
         
         componentDidMount(){
@@ -683,7 +728,7 @@ export class Buyerorder extends Component {
                     {/* order dispatch change here */}
                   
                     {/* <hr></hr> */}
-                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    { (item.openEnquiriesResponse.enquiryStageId == 10) && (item.openEnquiriesResponse.isReprocess === null)
                     ?
                     <>
                      <hr></hr>
@@ -708,12 +753,46 @@ export class Buyerorder extends Component {
                     </>
     }
                     <hr></hr>
+
+                    {item.openEnquiriesResponse.isReprocess === 1 ?
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-offset-1 col-xs-11">
+                        <p className="orderRecreationP1TagStyle">Order under Recreation</p>
+                        <p className="orderRecreationP2TagStyle">
+                        Kindly refer chats for regular updates and in-case of any inconvenience, 
+                        feel free to escalate the issue over chat
+                        </p>
+                    </Col>
+                </Row>
+                <hr/>
+                </>
+                : null }
+
                     { item.openEnquiriesResponse.enquiryStageId >= 10
                     ?
                     <>
-                     <Row noGutters={true}>
-                        <Col className="col-xs-7"></Col>
-                        <Col className="col-xs-4">
+                    <Row noGutters={true} style={{marginBottom: "20px"}}>
+                   {item.openEnquiriesResponse.isNewGenerated === 1 ?
+                    item.openEnquiriesResponse.isProductReturned === 1 ?
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Refund received"></input>
+                    </Col>
+                    <Col className="col-xs-4"></Col>
+                    </>
+                    :
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="enqreqbtn" value ="Refund received" 
+                        onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
+                    </Col>
+                    <Col className="col-xs-4"></Col>
+                    </>
+                    :  
+                    <Col className="col-xs-7"></Col>
+                    }
+                     <Col className="col-xs-4">
                        <span>
                       <button className="enqreqbtn needhelpbth">
                         <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
@@ -722,23 +801,34 @@ export class Buyerorder extends Component {
                        </span>
 
                         </Col>
-
-                        </Row>
+                    </Row>
                     </>
                     :
                     <>
-                      <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                       <span>
-                    
-                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-
-                       </span>
-
-                        </Col>
-
-                        </Row>
+                      <Row noGutters={true} style={{marginBottom: "20px"}}>
+                   {item.openEnquiriesResponse.isNewGenerated === 1 ?
+                    item.openEnquiriesResponse.isProductReturned === 1 ?
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Refund received"></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="enqreqbtn" value ="Refund received" 
+                        onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :  
+                    <Col className="col-xs-9"></Col>
+                    }
+                    <Col className="col-xs-2">
+                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                    </Col>
+                    </Row>
                     </>
                      }
                     <Row noGutters={true} className="mt7">
@@ -861,7 +951,7 @@ export class Buyerorder extends Component {
                         </Col>
                     </Row>
                   
-{item.openEnquiriesResponse.enquiryStageId>9 ?
+{(item.openEnquiriesResponse.enquiryStageId >9) && (item.openEnquiriesResponse.isReprocess === null) ?
 <>
                         <Row noGutters={true}>
                       <Col className="col-xs-12" style={{textAlign:"center"}}>
@@ -1299,11 +1389,11 @@ export class Buyerorder extends Component {
                     }
                     {/* change here order dispatch */}
                    
-                    <hr></hr>
-                    { item.openEnquiriesResponse.enquiryStageId == 10
+                    
+                    { (item.openEnquiriesResponse.enquiryStageId == 10) && (item.openEnquiriesResponse.isReprocess === null)
                     ?
                     <>
-                     {/* <hr></hr> */}
+                     <hr></hr>
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                      {item.openEnquiriesResponse.deliveryChallanLabel?
@@ -1324,16 +1414,46 @@ export class Buyerorder extends Component {
                     <>
                     </>
     }
-                    <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
-                        <Col className="col-xs-2">
-                            
+                <hr/>
+                {item.openEnquiriesResponse.isReprocess === 1 ?
+                <>
+                <Row noGutters={true}>
+                    <Col className="col-xs-offset-1 col-xs-11">
+                        <p className="orderRecreationP1TagStyle">Order under Recreation</p>
+                        <p className="orderRecreationP2TagStyle">
+                        Kindly refer chats for regular updates and in-case of any inconvenience, 
+                        feel free to escalate the issue over chat
+                        </p>
+                    </Col>
+                </Row>
+                <hr/>
+                </>
+                : null }
 
+                    <Row noGutters={true} style={{marginBottom: "20px"}}>
+                   {item.openEnquiriesResponse.isNewGenerated === 1 ?
+                    item.openEnquiriesResponse.isProductReturned === 1 ?
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Refund received"></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="enqreqbtn" value ="Refund received" 
+                        onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :  
+                    <Col className="col-xs-9"></Col>
+                    }
+                    <Col className="col-xs-2">
                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
-                    
-                        </Col>
-
-                        </Row>
+                    </Col>
+                    </Row>
                    
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
@@ -1718,6 +1838,29 @@ export class Buyerorder extends Component {
                 <Container>
                     </Container> </>}
                  <Footer/>
+
+        <div id="orderReceivedModal" class="w3-modal">
+            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                <div class="w3-container chatAttachModalOuter">
+                    <div className="text-right">
+                        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.orderReceivedModalClose}/>
+                    </div>
+                    <h3 className="artisanChatModalTitle text-center">
+                        Are you sure ?
+                    </h3>
+                    <Row noGutters={true} className="orderReceivedModalButtonMargin">
+                        <Col className="col-xs-12 text-center">
+                        {this.state.orderReceivedModalOkButtonDisable === true ?
+                        <span className="chatEscalationModalDisableButtonOuter">Ok</span>
+                        : 
+                        <span className="chatEscConfirmModalOkButton" onClick={this.orderReceivedModalOkButton}>Ok</span>
+                        }
+                        </Col>
+                    </Row>
+                    
+                </div>
+            </div>
+        </div>
             </React.Fragment>
         )
     }

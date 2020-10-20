@@ -663,7 +663,7 @@ export default class ArtisanChat extends Component {
         var currentMonth = today.getMonth();
         var currentYear = today.getFullYear();
 
-        var finalDate = currentYear + "-" + ((currentMonth+1) > 9 ? (currentMonth+1) : "0"+(currentMonth+1)) + "-" + currentDate;
+        var finalDate = currentYear + "-" + ((currentMonth+1) > 9 ? (currentMonth+1) : "0"+(currentMonth+1)) + "-" + ((currentDate > 9) ? currentDate : "0"+(currentMonth));
         console.log(finalDate);
 
         let userData = JSON.parse(localStorage.getItem("user"));
@@ -1138,7 +1138,7 @@ export default class ArtisanChat extends Component {
                                             item.mediaType === 2 ?
                                             <div className="artisanChatBoxWindowRightText">
                                                 <img src={logos.chatPinkDocImg} className="chatmediaNameAudio" />
-                                                {item.mediaName} 
+                                                {item.path} 
                                             <span className="artisanChatBoxWindowRightTime">
                                                 <Moment format="HH:mm">
                                                     {item.createdOn}
@@ -1153,7 +1153,7 @@ export default class ArtisanChat extends Component {
                                             item.mediaType === 3 ?
                                             <div className="artisanChatBoxWindowRightText">
                                                 <img src={logos.artisanChatPhotoNew} className="chatmediaNameAudio" />
-                                                {item.mediaName}
+                                                {item.path}
                                             <span className="artisanChatBoxWindowRightTime">
                                                 <Moment format="HH:mm">
                                                     {item.createdOn}
@@ -1168,7 +1168,7 @@ export default class ArtisanChat extends Component {
                                             item.mediaType === 4 ?
                                             <div className="artisanChatBoxWindowRightText">
                                                 <img src={logos.artisanChatAudioNew} className="chatmediaNameAudio" />
-                                                {item.mediaName}
+                                                {item.path}
                                             <span className="artisanChatBoxWindowRightTime">
                                                 <Moment format="HH:mm">
                                                     {item.createdOn}
@@ -1182,7 +1182,7 @@ export default class ArtisanChat extends Component {
                                             : item.mediaType === 5 ?
                                             <div className="artisanChatBoxWindowRightText">
                                                 <img src={logos.artisanChatVideoNew} className="chatmediaNameVideo" />
-                                                {item.mediaName} 
+                                                {item.path} 
                                             <span className="artisanChatBoxWindowRightTime">
                                                 <Moment format="HH:mm">
                                                     {item.createdOn}
@@ -1212,7 +1212,7 @@ export default class ArtisanChat extends Component {
                                         item.mediaType === 2 ?
                                         <div className="artisanChatBoxWindowLeftText">
                                             <img src={logos.chatPinkDocImg} className="chatmediaNameAudio" />
-                                            {item.mediaName} 
+                                            {item.path} 
                                         <span className="artisanChatBoxWindowRightTime">
                                             <Moment format="HH:mm">
                                                 {item.createdOn}
@@ -1227,7 +1227,7 @@ export default class ArtisanChat extends Component {
                                         item.mediaType === 3 ?
                                         <div className="artisanChatBoxWindowLeftText">
                                             <img src={logos.artisanChatPhotoNew} className="chatmediaNameAudio" />
-                                            {item.mediaName}
+                                            {item.path}
                                         <span className="artisanChatBoxWindowRightTime">
                                             <Moment format="HH:mm">
                                                 {item.createdOn}
@@ -1242,7 +1242,7 @@ export default class ArtisanChat extends Component {
                                         item.mediaType === 4 ?
                                         <div className="artisanChatBoxWindowLeftText">
                                             <img src={logos.artisanChatAudioNew} className="chatmediaNameAudio" />
-                                            {item.mediaName}
+                                            {item.path}
                                         <span className="artisanChatBoxWindowRightTime">
                                             <Moment format="HH:mm">
                                                 {item.createdOn}
@@ -1256,7 +1256,7 @@ export default class ArtisanChat extends Component {
                                         : item.mediaType === 5 ?
                                         <div className="artisanChatBoxWindowLeftText">
                                             <img src={logos.artisanChatVideoNew} className="chatmediaNameVideo" />
-                                            {item.mediaName} 
+                                            {item.path} 
                                         <span className="artisanChatBoxWindowRightTime">
                                             <Moment format="HH:mm">
                                                 {item.createdOn}

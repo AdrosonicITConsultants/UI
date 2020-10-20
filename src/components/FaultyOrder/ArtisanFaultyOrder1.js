@@ -63,7 +63,8 @@ export class ArtisanFaultyOrder1 extends Component {
                     id: 5,
                     comment: false,
                 }
-            ]
+            ],
+            orderRecreateModalOkButtonDisable: false,
         }
       
     
@@ -79,15 +80,41 @@ export class ArtisanFaultyOrder1 extends Component {
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('actionid');
         console.log(option);
-        
         this.setState({ [e.target.name]: e.target.value , actioncategoryid : option,showValidationfaulty:false}, ()=> {
           console.log(this.state.actioncategoryid);
-          
-        });
-        
-      }
+        });        
+    }
 
- 
+    orderRecreateModalClose = () => {
+        document.getElementById('orderRecreateModal').style.display='none';
+    }
+
+    orderRecreateModalOkButton = (id) => {
+        this.setState({
+            orderRecreateModalOkButtonDisable: true,
+        });
+        TTCEapi.recreateOrder(id).then((response)=>{
+            console.log(response.data.data);
+            if(response.data.valid)
+            {
+                document.getElementById('orderRecreateModal').style.display='none';
+                this.componentDidMount();
+                customToast.success("Sent Successfully!!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            this.setState({
+                orderRecreateModalOkButtonDisable: false,
+            });      
+        });       
+    }
            
     backoperation(){
         browserHistory.push("/artisanOrders"); 
@@ -126,7 +153,10 @@ export class ArtisanFaultyOrder1 extends Component {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                      this.componentDidMount()
+                      if(this.state.actioncategoryid == 2) {
+                        document.getElementById('orderRecreateModal').style.display='block';
+                      }
+                      this.componentDidMount();
                 }
                 else{
                     customToast.error(response.data.errorMessage, {
@@ -549,6 +579,32 @@ export class ArtisanFaultyOrder1 extends Component {
              
                 </Container>
                 <Footer></Footer>
+
+        <div id="orderRecreateModal" class="w3-modal">
+            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                <div class="w3-container chatAttachModalOuter">
+                    <div className="text-right">
+                        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.orderRecreateModalClose}/>
+                    </div>
+                    <h3 className="artisanChatModalTitle text-center">
+                        Are you sure you want to recreate order ?
+                    </h3>
+                    <Row noGutters={true} className="orderReceivedModalButtonMargin">
+                        <Col className="col-xs-6 text-center">
+                        {this.state.orderRecreateModalOkButtonDisable === true ?
+                        <span className="chatEscalationModalDisableButtonOuter">Confirm</span>
+                        : 
+                        <span className="chatEscConfirmModalOkButton" onClick={() => this.orderRecreateModalOkButton(this.state.getSingleOrder.enquiryId)}>Confirm</span>
+                        }
+                        </Col>
+                        <Col className="col-xs-6 text-center">
+                        <span className="chatEscConfirmModalOkButton" onClick={this.orderRecreateModalClose}>Skip</span>                        
+                        </Col>
+                    </Row>
+                    
+                </div>
+            </div>
+        </div>
             </React.Fragment>
         )
     }

@@ -2786,6 +2786,72 @@ static goToEnquiryChat(enquiryId){
       return error.response;
     });
 }
+
+static updateFaultyOrderStatusArtisan(enquiryId, status) {
+  let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isOrderReturned=" + status;
+  console.log(url);
+  return axios
+    .put(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static updateFaultyOrderStatusBuyer(enquiryId, status) {
+  let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isRefundReceived=" + status;
+  console.log(url);
+  return axios
+    .put(url)
+    .then((response) => {
+      console.log(response); 
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static recreateOrder(enquiryId){
+  let url = ApiUrl + "/order/recreateOrder?orderId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static orderDispatchAfterRecreation(enquiryId){
+  let url = ApiUrl + "/order/orderDispatchAfterRecreation?orderId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

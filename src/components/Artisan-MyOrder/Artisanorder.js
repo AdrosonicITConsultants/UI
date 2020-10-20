@@ -45,9 +45,10 @@ export class Artisanorder extends Component {
             getChangeRequestForArtisan:[],
             getOrder:[],
             getPi:[],
-            BuyerPreviewInvoice:false
-           
-        
+            BuyerPreviewInvoice:false,
+            orderReceivedCurrentId: 0,
+            orderReceivedModalOkButtonDisable: false,   
+            dispatchRCButtonDisable: false,     
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -426,6 +427,79 @@ export class Artisanorder extends Component {
         console.log(this.state.getPi)
     })
     }
+
+    orderReceivedModal = (enquiryId) => {
+        this.setState({
+            orderReceivedCurrentId: enquiryId,
+        });
+        document.getElementById('orderReceivedModal').style.display='block';
+    }
+
+    orderReceivedModalClose = () => {
+        document.getElementById('orderReceivedModal').style.display='none';
+    }
+
+    orderReceivedModalOkButton = () => {
+        this.setState({
+            orderReceivedModalOkButtonDisable: true
+        });
+
+        console.log(this.state.orderReceivedCurrentId);
+
+        TTCEapi.updateFaultyOrderStatusArtisan(this.state.orderReceivedCurrentId, 1).then((response)=>{
+            if(response.data.valid)
+            {   
+                document.getElementById('orderReceivedModal').style.display='none';
+                this.setState({
+                    orderReceivedModalOkButtonDisable: false,
+                });
+                this.componentDidMount();
+                customToast.success(response.data.data, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            else {
+                document.getElementById('orderReceivedModal').style.display='none';
+                this.setState({
+                    orderReceivedModalOkButtonDisable: false,
+                });
+                customToast.error("Status not updated", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+        });
+    }
+
+    dispatchRCFunction = (id) => {
+        this.setState({
+            dispatchRCButtonDisable: true
+        });
+        TTCEapi.orderDispatchAfterRecreation(id).then((response)=>{
+            if(response.data.valid)
+            {   
+                this.componentDidMount();
+                this.setState({
+                    dispatchRCButtonDisable: false,
+                });
+                customToast.success(response.data.data, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            else {
+                this.setState({
+                    dispatchRCButtonDisable: false,
+                });
+                customToast.error("Status not updated", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+        });
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -582,9 +656,11 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>                        
                     </Row>
-                    <hr></hr>
+                    
                     {/* {console.log(item.openEnquiriesResponse)} */}
                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <>
+                    <hr></hr>
                     <Row>
                      <Col className="col-xs-1"></Col>
                      <Col className="col-xs-4">
@@ -593,18 +669,69 @@ export class Artisanorder extends Component {
                          delivery receipt</a>
                      </Col>
                      </Row>
+                     </>
                      :
                      ""
                      }
-                      <hr></hr>
+
+                    <hr></hr>
+
+                    {item.openEnquiriesResponse.isReprocess === 1 ?
+                    <>
                     <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-offset-1 col-xs-11">
+                            <p className="orderRecreationP1TagStyle">Order under Recreation</p>
+                            <p className="orderRecreationP2TagStyle">Kindly keep updating buyer about the status of product over chat</p>
+                        </Col>
+                    </Row>
+                    <hr/>
+                    </>
+                    : null }
+
+                    <Row noGutters={true} style={{marginBottom: "20px"}}>
+                    {item.openEnquiriesResponse.isNewGenerated === 1 ?
+                    item.openEnquiriesResponse.isProductReturned === 1 ?
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Order received back"></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="enqreqbtn" value ="Order received back" 
+                        onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :  
+                    <Col className="col-xs-9"></Col>
+                    }
                         <Col className="col-xs-2">
                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
 
                         </Col>
 
                         </Row>
+
+                {item.openEnquiriesResponse.isReprocess === 1 ?
+                <>
+                <hr/>
+                <Row noGutters={true}>
+                    <Col className="col-xs-offset-1 col-xs-11">
+                        {this.state.dispatchRCButtonDisable === true ?
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                        :
+                        <div className="dispatchRCButton" onClick={() => this.dispatchRCFunction(item.openEnquiriesResponse.enquiryId)}>
+                            Mark order dispatched after recreation
+                        </div>
+                        }
+                    </Col>
+                </Row>
+                </>
+                : null }
+
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -1070,8 +1197,10 @@ export class Artisanorder extends Component {
                             </Row>
                         </Col>
                     </Row>
-                    <hr></hr>
+                    
                     {item.openEnquiriesResponse.deliveryChallanLabel?
+                    <>
+                    <hr></hr>
                      <Row>
                      <Col className="col-xs-1"></Col>
                      <Col className="col-xs-4">
@@ -1080,19 +1209,69 @@ export class Artisanorder extends Component {
                          delivery receipt</a>
                      </Col>
                      </Row>
+                    </>
                      :
                      ""
                      }
-                      <hr></hr>
+                     
+                    <hr></hr>
+
+                    {item.openEnquiriesResponse.isReprocess === 1 ?
+                    <>
                     <Row noGutters={true}>
-                        <Col className="col-xs-9"></Col>
+                        <Col className="col-xs-offset-1 col-xs-11">
+                            <p className="orderRecreationP1TagStyle">Order under Recreation</p>
+                            <p className="orderRecreationP2TagStyle">Kindly keep updating buyer about the status of product over chat</p>
+                        </Col>
+                    </Row>
+                    <hr/>
+                    </>
+                    : null }
+                      
+                    <Row noGutters={true} style={{marginBottom: "20px"}}>
+                    {item.openEnquiriesResponse.isNewGenerated === 1 ?
+                    item.openEnquiriesResponse.isProductReturned === 1 ?
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Order received back"></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :
+                    <>
+                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                        <input type="button" className="enqreqbtn" value ="Order received back" 
+                        onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
+                    </Col>
+                    <Col className="col-xs-6"></Col>
+                    </>
+                    :  
+                    <Col className="col-xs-9"></Col>
+                    }
                         <Col className="col-xs-2">
                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
 
                         </Col>
 
                         </Row>
-                   
+
+                {item.openEnquiriesResponse.isReprocess === 1 ?
+                <>
+                <hr/>
+                <Row noGutters={true}>
+                    <Col className="col-xs-offset-1 col-xs-11">
+                        {this.state.dispatchRCButtonDisable === true ?
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                        :
+                        <div className="dispatchRCButton" onClick={() => this.dispatchRCFunction(item.openEnquiriesResponse.enquiryId)}>
+                            Mark order dispatched after recreation
+                        </div>
+                        }
+                    </Col>
+                </Row>
+                </>
+                : null }
+                
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -1712,6 +1891,29 @@ export class Artisanorder extends Component {
                    
                 </Container>
                 </>}
+
+        <div id="orderReceivedModal" class="w3-modal">
+            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                <div class="w3-container chatAttachModalOuter">
+                    <div className="text-right">
+                        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.orderReceivedModalClose}/>
+                    </div>
+                    <h3 className="artisanChatModalTitle text-center">
+                        Are you sure ?
+                    </h3>
+                    <Row noGutters={true} className="orderReceivedModalButtonMargin">
+                        <Col className="col-xs-12 text-center">
+                        {this.state.orderReceivedModalOkButtonDisable === true ?
+                        <span className="chatEscalationModalDisableButtonOuter">Ok</span>
+                        : 
+                        <span className="chatEscConfirmModalOkButton" onClick={this.orderReceivedModalOkButton}>Ok</span>
+                        }
+                        </Col>
+                    </Row>
+                    
+                </div>
+            </div>
+        </div>
                 <Footer/>
             </React.Fragment>
         )

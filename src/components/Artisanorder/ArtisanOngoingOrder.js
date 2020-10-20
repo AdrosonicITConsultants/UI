@@ -28,6 +28,8 @@ export class ArtisanOngoingOrder extends Component {
             orderReceivedCurrentId: 0,
             orderReceivedModalOkButtonDisable: false,
             dispatchRCButtonDisable: false,
+            orderRecreateModalOkButtonDisable: false,
+            orderRCSelectedId: 0,
         }
         
     } 
@@ -184,6 +186,44 @@ export class ArtisanOngoingOrder extends Component {
                 });
             }
         });
+    }
+
+    orderRCFunction = (id) => {
+        this.setState({
+            orderRCSelectedId: id,
+        })
+        document.getElementById('orderRecreateModal').style.display='block';
+    }
+
+    orderRecreateModalClose = () => {
+        document.getElementById('orderRecreateModal').style.display='none';
+    }
+
+    orderRecreateModalOkButton = () => {
+        this.setState({
+            orderRecreateModalOkButtonDisable: true,
+        });
+        TTCEapi.recreateOrder(this.state.orderRCSelectedId).then((response)=>{
+            console.log(response.data.data);
+            if(response.data.valid)
+            {
+                document.getElementById('orderRecreateModal').style.display='none';
+                this.componentDidMount();
+                customToast.success("Sent Successfully!!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            else{
+                customToast.error(response.data.errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: true,
+                });
+            }
+            this.setState({
+                orderRecreateModalOkButtonDisable: false,
+            });      
+        });       
     }
  
     render() {
@@ -413,9 +453,20 @@ export class ArtisanOngoingOrder extends Component {
                 <>
                 <hr/>
                  <Row noGutters={true}>
-                     <Col className="col-xs-1"></Col>
-                 <Col className="col-xs-10" style={{textAlign:"center"}}>
-            
+                 <Col className="col-xs-1"></Col>
+                 <Col className="col-xs-3">
+                    {
+                        (item.openEnquiriesResponse.isReprocess === null) && (item.openEnquiriesResponse.artisanReviewId === 2) ?
+                           this.state.dispatchRCButtonDisable === true ?
+                            <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                            :
+                            <div className="dispatchRCButton" onClick={() => this.orderRCFunction(item.openEnquiriesResponse.enquiryId)}>
+                                Order recreation
+                            </div>
+                        : null
+                    }
+                 </Col>
+                 <Col className="col-xs-4" style={{textAlign:"center"}}>            
                   <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                   <img src={logos.esc} className="raterevbtnimg"/> 
                             Check concern raised by buyer
@@ -443,6 +494,29 @@ export class ArtisanOngoingOrder extends Component {
                 </Row>
                 </>
                 : null }
+
+        <div id="orderRecreateModal" class="w3-modal">
+            <div class="w3-modal-content w3-animate-top modalBoxSize">
+                <div class="w3-container chatAttachModalOuter">
+                    <div className="text-right">
+                        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.orderRecreateModalClose}/>
+                    </div>
+                    <h3 className="artisanChatModalTitle text-center">
+                        Are you sure you want to recreate order ?
+                    </h3>
+                    <Row noGutters={true} className="orderReceivedModalButtonMargin">
+                        <Col className="col-xs-12 text-center">
+                        {this.state.orderRecreateModalOkButtonDisable === true ?
+                        <span className="chatEscalationModalDisableButtonOuter">Confirm</span>
+                        : 
+                        <span className="chatEscConfirmModalOkButton" onClick={() => this.orderRecreateModalOkButton()}>Confirm</span>
+                        }
+                        </Col>
+                    </Row>
+                    
+                </div>
+            </div>
+        </div>
                
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>

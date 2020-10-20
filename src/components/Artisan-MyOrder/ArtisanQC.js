@@ -324,6 +324,14 @@ export default class ArtisanQC extends Component {
         return (
             <React.Fragment>
                 <div className="artisanQCBg">
+                    {this.props.data.oldQcExists === 1 ?
+                    <div className="text-right">
+                        <a href={"/viewOldQC?enquiryId="+ this.props.enquiryId} target="_blank">
+                        Click to view old QC form
+                        </a>
+                    </div>
+                    : 
+                    null }
                     <div className="artisanQCHeader">Quality Check</div>
                     <div className="artisanQCSubHeader">This form is required to be filled during manufacturing of the product to avoid any defects.</div>
                     <Row noGutters={true} className="artisanQCNameHeaderRow">

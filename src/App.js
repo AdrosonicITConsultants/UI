@@ -86,6 +86,7 @@ import ArtisanSelfRating from './components/Rating/artisanSelfRating';
 import { ArtisanFaultResolved } from './components/FaultyOrder/ArtisianFaultResolved';
 import ArtisanChat from './components/Chat/artisanChat';
 import BuyerChat from './components/Chat/buyerChat';
+import ViewOldQC from './components/Artisan-MyOrder/viewOldQC';
 function App() {
   
   return (
@@ -160,19 +161,7 @@ function App() {
           <PrivateRoute exact path="/completedconcernsolved" component={CompletedFaultResolved} />
           <PrivateRoute exact path="/artisanfaultreportCompleted" component={ArtisanFaultCompletedOrder1} />
 
-
-
-
-
-
-          
-
-
-          
-
-
           {/* <PrivateRoute exact path="/buyerOrders" component={buyerProductTempelate} /> */}
-
 
           {/* /ORDER ROUTES */}
 
@@ -194,6 +183,8 @@ function App() {
 
           <PrivateRoute exact path="/artisanChat" component={ArtisanChat} />
           <PrivateRoute exact path="/buyerChat" component={BuyerChat} />
+
+          <PrivateRoute exact path="/viewOldQC" component={ViewOldQC} />
          
         </Switch>
       </Router>

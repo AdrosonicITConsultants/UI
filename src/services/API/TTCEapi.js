@@ -2933,6 +2933,20 @@ static orderDispatchAfterRecreation(enquiryId){
       return error.response;
     });
 }
+
+static getOldQc(enquiryId) {
+  let url = ApiUrl + "/qc/getOldQc?enquiryId=" + enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

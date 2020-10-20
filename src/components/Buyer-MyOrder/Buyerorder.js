@@ -1797,7 +1797,8 @@ export class Buyerorder extends Component {
                                                             {this.state.qualityCheck ?  
                                                             <>
                                                             <Col sm={10}>
-                                                            <BuyerQC enquiryId={this.state.enquiryCode}/>
+                                                            <BuyerQC enquiryId={this.state.enquiryCode} 
+                                                            data = {this.state.openEnquiries[0].openEnquiriesResponse}/>
                                                             </Col>
                                                             </>:null}
 

@@ -45,7 +45,8 @@ export class Artisanorder extends Component {
             getChangeRequestForArtisan:[],
             getOrder:[],
             getPi:[],
-            BuyerPreviewInvoice:false
+            BuyerPreviewInvoice:false,
+            
            
         
         }
@@ -295,7 +296,13 @@ export class Artisanorder extends Component {
 
     }
     componentDidMount(){
-       
+       var taxinvoice=localStorage.getItem("piShow");
+       console.log(taxinvoice);
+       if (localStorage.getItem('piShow')== 1) {
+       this.qualityCheckbtn();
+    }
+    localStorage.removeItem("piShow");
+
     window.scrollTo(0, 0);
     let params = queryString.parse(this.props.location.search);
     console.log(params);

@@ -204,3 +204,22 @@
     margin: 0 auto;
     font-size: 20px;
 }
+
+.orderRecreationP1TagStyle {
+    margin-left: 15px;
+}
+
+.orderRecreationP2TagStyle {
+    margin-bottom: 0px !important;
+    color: black;
+    margin-left: 15px;
+}
+
+.dispatchRCButton {
+    border: 1px solid black;
+    width: fit-content;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 9px;
+}

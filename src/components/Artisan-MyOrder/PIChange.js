@@ -81,7 +81,14 @@ export class PIchange extends Component {
     }
     revisedPI(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
+        var previewhsn= /^\d{1,8}$/
+        if(!previewhsn.test(this.state.hsncode)){
+            this.setState({
+               showValidationPi:true,
+               message:" HSN code should not be empty & more than 8 digits " 
+            })
+        }
+       else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
               
 
@@ -117,8 +124,8 @@ export class PIchange extends Component {
       else{
         this.setState({
             showValidationPi: true,
-           
-    
+            message : "Please fill mandatory fields"
+   
       });
       
       }
@@ -148,7 +155,7 @@ export class PIchange extends Component {
     handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false }, () => {
+        this.setState({ [name]: value,showValidationMoq: false,showValidationPi:false }, () => {
         //   console.log(this.state.moq);
         });
     }
@@ -415,7 +422,6 @@ export class PIchange extends Component {
                             <label>HSN Code</label>
                             <br/>
                             <input className="PIinput" type="number"
-                        
                             value={this.state.hsncode }
                             name="hsncode"
                             onChange={this.handleChange}/>
@@ -441,7 +447,7 @@ export class PIchange extends Component {
                                 </Row>
                                 <p className="text-center">
                             {this.state.showValidationPi ? (
-                            <span className="bg-danger">All fields are Mandatory</span>
+                            <span className="bg-danger">{this.state.message}</span>
                             ) : (
                             <br />
                             )}

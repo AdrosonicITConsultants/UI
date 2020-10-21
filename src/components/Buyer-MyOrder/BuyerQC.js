@@ -88,6 +88,14 @@ export default class BuyerQC extends Component {
     render() {
         return (
             <React.Fragment>
+                {this.props.data.oldQcExists === 1 ?
+                    <div className="text-right">
+                        <a href={"/viewOldQC?enquiryId="+ this.props.enquiryId} target="_blank">
+                        Click to view old QC form
+                        </a>
+                    </div>
+                    : 
+                null }
                 {this.state.artisanQcResponses.length !== 0 ?
                 <div className="artisanQCBg">
                     <div className="artisanQCHeader">Quality Check</div>

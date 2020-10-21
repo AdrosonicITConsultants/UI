@@ -21,11 +21,11 @@ import SuccessPopup from '../ModalComponent/SuccessModal';
 export class ProductsOfSearch extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+        //console.log(this.props);
         this.state = {
             
             proddata : this.props.productData,
-            imagename :this.props.productData.images.split(",")[0],
+            imagename :this.props.productData.images? this.props.productData.images.split(",")[0] : "abc.jpg",
             isfavHovered :false,
             imageurl : logos.dupatta,
             imageUrl : TTCEapi.ImageUrl +"Product/",
@@ -39,7 +39,7 @@ export class ProductsOfSearch extends Component {
             enqgen:false,
         };
         this.handleAddtoWishlist = this.handleAddtoWishlist.bind(this);
-    //   console.log(this.props);
+    //   //console.log(this.props);
     this.generateEnquiry = this.generateEnquiry.bind(this);
         // this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -55,7 +55,7 @@ export class ProductsOfSearch extends Component {
             autoClose: true,
           });
           this.setState({isAddedtoWishlist : response.data.valid},()=>{
-              console.log(this.state.isAddedtoWishlist);
+              //console.log(this.state.isAddedtoWishlist);
        
           });
         }
@@ -73,7 +73,7 @@ export class ProductsOfSearch extends Component {
 //     TTCEapi.generateEnquiry(item,false).then((response)=>{
 //   this.setState({generateEnquiry : response.data.data},()=>{
 //     this.setState({ modalIsOpen: false });
-//       console.log(this.state.generateEnquiry);
+//       //console.log(this.state.generateEnquiry);
       
 //   });
 // });
@@ -84,11 +84,11 @@ generateEnquiry(item){
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
     // this.setState({ modalIsOpen: false });
-      console.log(this.state.ifEnquiryExists);
+      //console.log(this.state.ifEnquiryExists);
       if(this.state.ifEnquiryExists.ifExists ==false){
         TTCEapi.generateEnquiry(item,false).then((response)=>{
           this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                         console.log(this.state.generateEnquiry);
+                         //console.log(this.state.generateEnquiry);
                         });
         });
       }
@@ -97,13 +97,13 @@ generateEnquiry(item){
 });
 }
     productDescription(id){
-      console.log("Product Descriptiony " + id);
+      //console.log("Product Descriptiony " + id);
       browserHistory.push("/Product-Details?productId=" + id); 
 
     }
     handleRemovefromWishlist(id){
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
-          console.log(response);   
+          //console.log(response);   
           if(response.data.data=="Successfull"){
             this.setState({isAddedtoWishlist:false})
             customToast.success("Product removed from wishlist!", {
@@ -122,7 +122,7 @@ generateEnquiry(item){
         }
     
     componentDidMount(){
-        // console.log(this.state);
+        // //console.log(this.state);
     }
 
 
@@ -186,7 +186,7 @@ generateEnquiry(item){
                                 </Col>
                                 <Col className="text-center">
                           
-                                <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                                <img className="logoincard " src={this.state.proddata.madeWithAnthran == 0 ? logos.artisianSelfLogo : logos.antaranCoDesignLogo}  alt="Card image cap"/>
 
                                 
                             
@@ -203,7 +203,7 @@ generateEnquiry(item){
                         Made to order
                         </Col>
                         <Col className="text-center">
-                        <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        <img className="logoincard " src={this.state.proddata.madeWithAnthran == 0 ? logos.artisianSelfLogo : logos.antaranCoDesignLogo}  alt="Card image cap"/>
                         </Col>
                         
                         </Row>
@@ -253,7 +253,7 @@ generateEnquiry(item){
                 )}
                   </Col>
                  </div>
-                 {/* {console.log(this.state.proddata)} */}
+                 {/* {//console.log(this.state.proddata)} */}
                 
                 </div> 
                 {this.state.modalIsOpen?

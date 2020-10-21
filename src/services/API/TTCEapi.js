@@ -2080,10 +2080,11 @@ static sendTaxInvoice(
     return response;
   }
 
-  static showBuyerSearchSuggestion(searchQuery,searchTypes){
+  static showBuyerSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
      let url = ApiUrl + "/search/searchProducts";
     var data = {
-      pageNo: 1,
+      madeWithAntaran:boolAntaran ,
+      pageNo: parseInt(pageno),
       searchString: searchQuery,
       searchType : parseInt(searchTypes)
     };
@@ -2102,6 +2103,55 @@ static sendTaxInvoice(
         return error.response;
       });
   }
+
+
+  static searchProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+    let url = ApiUrl + "/search/searchProductCount";
+   var data = {
+     madeWithAntaran:boolAntaran ,
+     pageNo: parseInt(pageno),
+     searchString: searchQuery,
+     searchType : parseInt(searchTypes)
+   };
+   var config = {
+     headers: {
+       "Content-type": "application/json",
+     },
+   };
+   return axios
+     .post(url, data, config)
+     .then((response) => {
+       console.log(response);
+       return response;
+     })
+     .catch((error) => {
+       return error.response;
+     });
+ }
+
+ static searchArtisanProductCount(searchQuery,searchTypes,pageno,boolAntaran){
+  let url = ApiUrl + "/search/searchArtisanProductCount";
+ var data = {
+   madeWithAntaran:boolAntaran ,
+   pageNo: parseInt(pageno),
+   searchString: searchQuery,
+   searchType : parseInt(searchTypes)
+ };
+ var config = {
+   headers: {
+     "Content-type": "application/json",
+   },
+ };
+ return axios
+   .post(url, data, config)
+   .then((response) => {
+     console.log(response);
+     return response;
+   })
+   .catch((error) => {
+     return error.response;
+   });
+}
 
   static async getArtistSuggestions(value) {
     let config = {
@@ -2123,10 +2173,11 @@ static sendTaxInvoice(
   }
 
 
-  static showArtistSearchSuggestion(searchQuery,searchTypes){
+  static showArtistSearchSuggestion(searchQuery,searchTypes,pageno,boolAntaran){
     let url = ApiUrl + "/search/searchArtisanProducts";
    var data = {
-     pageNo: 1,
+     madeWithAntaran: boolAntaran ,
+     pageNo: pageno,
      searchString: searchQuery,
      searchType : parseInt(searchTypes)
    };
@@ -2808,6 +2859,86 @@ static goToEnquiryChat(enquiryId){
   };
   return axios
     .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static updateFaultyOrderStatusArtisan(enquiryId, status) {
+  let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isOrderReturned=" + status;
+  console.log(url);
+  return axios
+    .put(url)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static updateFaultyOrderStatusBuyer(enquiryId, status) {
+  let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isRefundReceived=" + status;
+  console.log(url);
+  return axios
+    .put(url)
+    .then((response) => {
+      console.log(response); 
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static recreateOrder(enquiryId){
+  let url = ApiUrl + "/order/recreateOrder?orderId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static orderDispatchAfterRecreation(enquiryId){
+  let url = ApiUrl + "/order/orderDispatchAfterRecreation?orderId=" + enquiryId;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  return axios
+    .post(url, config)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+static getOldQc(enquiryId) {
+  let url = ApiUrl + "/qc/getOldQc?enquiryId=" + enquiryId;
+  console.log(url);
+  return axios
+    .get(url)
     .then((response) => {
       console.log(response);
       return response;

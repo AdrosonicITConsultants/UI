@@ -344,7 +344,7 @@ export class SingleEnquiry extends Component {
     handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false }, () => {
+        this.setState({ [name]: value,showValidationMoq: false ,showValidationPi:false}, () => {
         //   console.log(this.state.moq);
         });
     }
@@ -418,7 +418,14 @@ export class SingleEnquiry extends Component {
 
     savePIDetails(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) && regex.test(this.state.hsncode)){
+        var previewhsn= /^\d{1,8}$/
+        if(!previewhsn.test(this.state.hsncode)){
+            this.setState({
+               showValidationPi:true,
+               message:" HSN code should not be empty & more than 8 digits " 
+            })
+        }
+       else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 console.log(params);
@@ -467,7 +474,7 @@ export class SingleEnquiry extends Component {
         this.setState({
             showValidationPi: true,
            
-        //   message : "Invalid PAN Number"
+          message : "Please fill mandatory fields"
       });
       
       }
@@ -1926,6 +1933,7 @@ export class SingleEnquiry extends Component {
                                                         <input className="PIinput" type="number"
                                                         disabled={this.state.isPidetail}
                                                         value={this.state.hsncode }
+                                                        maxlength="1"
                                                         name="hsncode"
                                                         onChange={this.handleChange}/>
                                                     </Col>
@@ -1976,6 +1984,7 @@ export class SingleEnquiry extends Component {
                                                 <br />
                                                 )}
                                                 </p>
+                                                
                                                 <Row noGutters={true}>
                                                 <Col sm={12} className="text-center">
                                                     

@@ -102,9 +102,9 @@ export class CRaccepted extends Component {
   <div className="craccbox">
   <h3 className="CRAcceptedh3">Change Request Details</h3>
 
-  {this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((data) => {
-    return this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((item) => {
-    return data.requestItemsId === item.id ?
+  {this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((data) => [
+    this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((item) => [
+    data.requestItemsId === item.id ?
       <Row noGutters={true} className="innerboxcr">
       <Col className="col-xs-1"></Col>
           <Col className="col-xs-5">
@@ -127,8 +127,8 @@ export class CRaccepted extends Component {
           }
       </Row>
       : null
-        }) : null
-      }) : null
+    ]) : null
+  ]) : null
     }
     
 

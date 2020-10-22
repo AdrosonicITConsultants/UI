@@ -278,7 +278,10 @@ export class ArtisanTransaction extends Component {
     }
     gotoTaxInvoice(eid){
         localStorage.setItem("piShow", 1);
-        browserHistory.push("/artisanorder?code="+eid)
+        console.log(eid)
+        // browserHistory.push("/artisanorder?code="+eid)
+        var win = window.open("/artisanorder?code="+eid, '_blank');
+        win.focus();
        }
     NotifyAgain(actionId,respectiveActionId,id){
         this.setState({ notifyButtonClick:true

@@ -305,6 +305,7 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
+                                    {item.openEnquiriesResponse.userStatus === 1 ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
@@ -320,17 +321,42 @@ export class BuyerOngoingOrder extends Component {
                                         </div>
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                         </div>
+                                        :
+                                        <div className="imageinlist" > 
+                                        <div className="imageinlist1"> 
+                                        {
+                                            item.openEnquiriesResponse.productType === "Product"
+                                            ?
+                                            <img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
+                                           
+                                            :
+                                            <img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
+                                           
+
+                                        }
+                                        </div>
+                                            {item.openEnquiriesResponse.productName}
+                                        </div>
+                                        }
                                         <div>
                                             <div noGutters={true} >
                                                 <Col className="leEnqid bold">
                                                 Order Id : {item.openEnquiriesResponse.orderCode}
                                                 </Col>
                                             </div>
+                                            {item.openEnquiriesResponse.userStatus === 1 ?
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
                                                 Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
                                                 </Col>
                                             </div>
+                                            :
+                                            <div noGutters={true} >
+                                                <Col className="lesmallEnqid bold">
+                                                Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                                </Col>
+                                            </div>
+                                            }
                                             <div noGutters={true} >
                                                 <Col >
                                                 <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
@@ -406,12 +432,16 @@ export class BuyerOngoingOrder extends Component {
                                         
                                         </Col>
                                     </div>
-
-                                    
                                 </Col>
+                                {item.openEnquiriesResponse.userStatus === 2 ?
+                                <div className="userInactiveText bold">User Inactive</div>
+                                : null }
                             </Row>
                         </Col>                        
                     </Row>
+
+                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    <>
                     {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
@@ -754,6 +784,8 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                         </Col>
                     </Row>
+                    </>
+                    : null}
                   
                     </>
                     :
@@ -773,6 +805,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
+                                    {item.openEnquiriesResponse.userStatus === 1 ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
@@ -789,6 +822,24 @@ export class BuyerOngoingOrder extends Component {
                                     </div>
                                         <a href={"/showBArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>                                       
                                     </div>
+                                    :
+                                    <div className="imageinlist" > 
+                                    <div className="imageinlist1"> 
+                                    {
+                                        item.openEnquiriesResponse.productType === "Product"
+                                        ?
+                                        <img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                      
+                                        :
+                                        <img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
+                                       
+
+                                    }
+
+                                    </div>
+                                        {item.openEnquiriesResponse.productHistoryName}                                      
+                                    </div>
+                                    }
                                     <div>
                                     <div noGutters={true} >
                                         <Col className="leEnqid bold">
@@ -881,12 +932,16 @@ export class BuyerOngoingOrder extends Component {
                                         
                                         </Col>
                                     </div>
-
-                                    
                                 </Col>
+                                {item.openEnquiriesResponse.userStatus === 2 ?
+                                <div className="userInactiveText bold">User Inactive</div>
+                                : null }
                             </Row>
                         </Col>
                     </Row>
+
+                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    <>
                     {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
                     <>
@@ -1228,9 +1283,15 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                         </Col>
                     </Row>
+
+                    </>
+                    : null }
                
                     </>
                     }
+
+                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    <>
                    {(item.openEnquiriesResponse.enquiryStageId >9) && (item.openEnquiriesResponse.isReprocess === null)
                    ?
                 <>
@@ -1284,6 +1345,8 @@ export class BuyerOngoingOrder extends Component {
                 :
                 <>
                 </>}
+                </>
+                : null }
                    
                     {/* _________________________________________Modal_1________________________________________________ */}
                                           
@@ -1403,11 +1466,18 @@ export class BuyerOngoingOrder extends Component {
 </div>
       {/* -------------------------------------------Modal ends   ----------------          */}
  
-                  <Row>
+                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
                         </Col>
                     </Row>
+                    : null }
+
+                    {item.openEnquiriesResponse.userStatus === 2 ? 
+                        <div className="userInactiveDivBottom"></div>
+                    : null } 
+
                     <div className="colorbardiv">      
                             <img src={logos.colorbar} className="colorbarimg"></img>
                     </div>

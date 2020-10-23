@@ -330,10 +330,10 @@ export class BuyerCompletedOrder extends Component {
                              <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
@@ -352,10 +352,10 @@ export class BuyerCompletedOrder extends Component {
             <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
@@ -652,10 +652,10 @@ export class BuyerCompletedOrder extends Component {
                              <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
@@ -674,10 +674,10 @@ export class BuyerCompletedOrder extends Component {
             <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}

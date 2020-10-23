@@ -510,6 +510,19 @@ class TTCEapi {
 
  
 
+  static initializePartialRefund(enquiryId) {
+    let url = ApiUrl + "/order/initializePartialRefund?orderId="+enquiryId;
+    return axios
+      .post(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  } 
+
   static getMoq(enquiryId) {
     let url = ApiUrl + "/enquiry/getMoq/"+enquiryId;
 

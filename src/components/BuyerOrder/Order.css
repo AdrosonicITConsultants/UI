@@ -1,9 +1,37 @@
+
+  input.orderclose { 
+    width: 25px; 
+    height: 17px; 
+} 
+.labelcheckbox{
+    font-size: 16px;
+}
 .convertedDate{
     color: lightgreen;
     font-size: 13px;
     margin-bottom: 10px;
     margin-top: 10px;
 
+}
+.closeorderbtn{
+    font-size: 13px;
+    color: white;
+    width: 100%;
+    border-radius: 26px;
+    padding: 8px;
+    border: 1px solid;
+    /* color: red; */
+    background: #cc0000;
+}
+.closeorderbtn2{
+    color: white;
+    /* width: 100%; */
+    border-radius: 26px;
+    padding: 6px 40px 6px 34px;
+    border: 1px solid;
+    /* color: red; */
+    background: #cc0000;
+    margin-bottom: 30px;
 }
 .enqchatbtn{
     border-radius: 40px;

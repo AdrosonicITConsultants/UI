@@ -130,6 +130,56 @@ export class Buyerorder extends Component {
         CompleteOrderClose = () => {
          document.getElementById('CompleteOrder').style.display='none';
         }
+        PartialPaymentClose=(id)=>{
+            document.getElementById('PartialPayment'+ id).style.display='none';
+            this.componentDidMount();
+        }
+        PartialPaymentShow=(id)=>{
+            document.getElementById('PartialPayment'+ id).style.display='block';
+        }
+        ClosedOrderbutton =(id)=>{
+            document.getElementById('CloseOrder'+ id).style.display='none';
+             }
+           ClosedOrderShow =(id)=>{
+            document.getElementById('CloseOrder'+ id).style.display='block';
+            }
+           ClosedOrderClose =(id)=>{
+            document.getElementById('CloseOrder'+ id).style.display='none';
+            this.componentDidMount();
+           }
+           YesOrderbutton=(id)=>{
+                 TTCEapi.initializePartialRefund(id).then((response)=>{
+                if(response.data.valid  )
+                {
+                 document.getElementById('CloseOrder'+ id).style.display='none';
+                 document.getElementById('PartialPayment'+ id).style.display='block';
+    
+                }
+            }); 
+           this.componentDidMount();
+           }
+           PartialPaymentReceived=(id)=>{
+            if(document.getElementById('agree').checked){
+                
+                TTCEapi.markEnquiryClosed(id).then((response)=>{
+                    if(response.data.valid  )
+                    {
+                        document.getElementById('PartialPayment'+ id).style.display='none';
+                        customToast.success("Order closed!", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                          browserHistory.push("/buyerOrders"); 
+                    }
+                }); 
+                           }
+                    else{
+                        customToast.error("Please agree to partial refund received ", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                    }
+           }
         CompleteOrder2Show = (enquiryId) => {
             if( this.state.deliveredDate <= this.state.currentDate){
                 console.log(this.state.deliveredDate)
@@ -831,6 +881,42 @@ export class Buyerorder extends Component {
                     </Row>
                     </>
                      }
+
+{item.openEnquiriesResponse.enquiryStageId < 9?
+                    <>
+                    {item.openEnquiriesResponse.isPartialRefundReceived==null?
+                    <Row noGutters={true}>
+                    <Col className="col-xs-1">
+                     </Col>
+                     <Col className="col-xs-2">
+                         <button className="closeorderbtn"
+                          onClick={()=>{this.ClosedOrderShow(item.openEnquiriesResponse.enquiryId)}}
+                          >Close Order</button>
+                     </Col>
+                     <Col className="col-xs-9">
+                     </Col>
+                 </Row>
+                 :
+                 <Row noGutters={true}>
+                       <Col className="col-xs-1">
+                        </Col>
+                        <Col className="col-xs-2">
+                            <button className="closeorderbtn"
+                           style={{background:"green",padding:"7px"}}
+                             onClick={()=>{this.PartialPaymentShow(item.openEnquiriesResponse.enquiryId)}}
+                             >Partial Refund Received</button>
+                        </Col>
+                        <Col className="col-xs-9">
+                        </Col>
+                    </Row>
+                    }
+                    
+                    </>
+                    
+                    :
+                    ""
+                    }
+
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -965,7 +1051,7 @@ export class Buyerorder extends Component {
                                        >
                                        <img src={logos.completedenq} className="completeenqimg" 
                                        ></img>
-                                Mark this order as delivered
+                                Found order as per requirement
                                 </button>
                           {this.state.getSingleOrder.orderReceiveDate!=null?
                           <>
@@ -1018,7 +1104,7 @@ export class Buyerorder extends Component {
                 <h1 className="areyousurecrh1 fontplay">Congrats!
                 {this.state.openEnquiries[0].openEnquiriesResponse.enquiryId}</h1> 
                 <br/>
-                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>You are about to mark this order completed!</b> 
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}> Found order as per requirement!</b> 
                 
             </Col>
         </Row>
@@ -1047,9 +1133,9 @@ export class Buyerorder extends Component {
         
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-            <p className="crmnote">Just in case if you find your order to be faulty,
-            <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
+        <p className="crmnote"> Please check the order before marking order received as per requirement.
+            <br/>Once marked the order will be considered as completed  
+            <br/>and no concern can be raised against it.</p>
             <p className="text-center">
                                                              {this.state.showDeldatevalidation ? (
                                             <span className="bg-danger">Date must be less than or equal to current date.</span>
@@ -1065,7 +1151,7 @@ export class Buyerorder extends Component {
                disabled={this.state.completebtndis}
                 onClick={()=>{this.CompleteOrder2Show(this.state.enquiryCode)}}
                 className="buyerMOQAcceptModalOkayButton">Complete and Review 
-                 <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
+                 {/* <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i> */}
                  </button></span>
         </div>
             
@@ -1100,9 +1186,9 @@ export class Buyerorder extends Component {
         
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-            <p className="crmnote">Just in case if you find your order to be faulty,
-            <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
+        <p className="crmnote"> Please check the order before marking order received as per requirement.
+            <br/>Once marked the order will be considered as completed  
+            <br/>and no concern can be raised against it.</p>
             
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
             {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
@@ -1125,7 +1211,101 @@ export class Buyerorder extends Component {
     </div>
     </div>
 </div>
-      {/* -------------------------------------------Modal ends  ----------------------------           */}
+
+       {/* _____________________________________________Modal 3 ________________________________________________ */}
+    <div id={"CloseOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.ClosedOrderClose(item.openEnquiriesResponse.enquiryId)}>X</h1>
+            </Col>
+  
+        </Row>
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay">Are You Sure?</h1> 
+                <br/>
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100",marginBottom:"15px"}}>You are about to close this order!</b> 
+                <br/>
+                           <p className="CRare fontplay">{item.openEnquiriesResponse.orderCode}</p>  
+            </Col>
+        </Row>
+       
+        {/* <div style={{textAlign:"center"}}>
+        <input  type="checkbox" id="agree" className="orderclose"/>
+            <label for="agree" className="labelcheckbox"> Partial Payment Received</label>
+        </div> */}
+       
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+        <button
+                style={{fontSize:"15px"}}
+                 onClick={()=>{this.ClosedOrderClose(item.openEnquiriesResponse.enquiryId)}}
+                className="closeorderbtn2">No
+                 </button>
+               
+                 <button
+                style={{fontSize:"15px",background:"green"}}
+                 onClick={()=>{this.YesOrderbutton(item.openEnquiriesResponse.enquiryId)}}
+                className="closeorderbtn2">Yes
+                 </button>
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+  {/* _____________________________________________Modal 4 ________________________________________________ */}
+  <div id={"PartialPayment"+item.openEnquiriesResponse.enquiryId} class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.PartialPaymentClose(item.openEnquiriesResponse.enquiryId)}>X</h1>
+            </Col>
+  
+        </Row>
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="areyousurecrh1 fontplay">Partial Refund Received?</h1> 
+                {/* <br/> */}
+                {/* <b className="CRare fontplay" style={{color:"grey",fontWeight:"100",marginBottom:"15px"}}>
+                    </b>  */}
+                <br/>
+                 <p className="CRare fontplay">{item.openEnquiriesResponse.orderCode}</p>  
+            </Col>
+        </Row>
+       
+        <div style={{textAlign:"center"}}>
+        <input  type="checkbox" id="agree" className="orderclose"/>
+            <label for="agree" className="labelcheckbox"> Partial Refund Received</label>
+        </div>
+       
+        <Row noGutters={true}>
+        <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
+        {/* <button
+                style={{fontSize:"15px"}}
+                 onClick={()=>{this.PartialPaymentClose(item.openEnquiriesResponse.enquiryId)}}
+                className="closeorderbtn2">No
+                 </button> */}
+               
+                 <button
+                style={{fontSize:"15px",background:"green"}}
+                 onClick={()=>{this.PartialPaymentReceived(item.openEnquiriesResponse.enquiryId)}}
+                className="closeorderbtn2">Yes
+                 </button>
+        </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}
+ 
                     </>
                     :
                     <>
@@ -1452,9 +1632,44 @@ export class Buyerorder extends Component {
                     }
                     <Col className="col-xs-2">
                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        
                     </Col>
                     </Row>
-                   
+                    {item.openEnquiriesResponse.enquiryStageId < 9?
+                    <>
+                    {item.openEnquiriesResponse.isPartialRefundReceived==null?
+                    <Row noGutters={true}>
+                    <Col className="col-xs-1">
+                     </Col>
+                     <Col className="col-xs-2">
+                         <button className="closeorderbtn"
+                          onClick={()=>{this.ClosedOrderShow(item.openEnquiriesResponse.enquiryId)}}
+                          >Close Order</button>
+                     </Col>
+                     <Col className="col-xs-9">
+                     </Col>
+                 </Row>
+                 :
+                 <Row noGutters={true}>
+                       <Col className="col-xs-1">
+                        </Col>
+                        <Col className="col-xs-2">
+                            <button className="closeorderbtn"
+                           style={{background:"green",padding:"7px"}}
+                             onClick={()=>{this.PartialPaymentShow(item.openEnquiriesResponse.enquiryId)}}
+                             >Partial Refund Received</button>
+                        </Col>
+                        <Col className="col-xs-9">
+                        </Col>
+                    </Row>
+                    }
+                    
+                    </>
+                    
+                    :
+                    ""
+                    }
+
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">

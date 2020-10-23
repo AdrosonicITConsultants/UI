@@ -344,7 +344,7 @@ export class PIchange extends Component {
                                     </>
                                     :
                                     <>
-{console.log("Form display")}
+                                {console.log("Form display")}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 

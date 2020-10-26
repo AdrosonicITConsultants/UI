@@ -111,7 +111,7 @@ export class BuyerOngoingList extends Component {
                         <Col className="col-xs-10">
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
@@ -255,7 +255,7 @@ export class BuyerOngoingList extends Component {
                         </Col>
                     </Row>
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
@@ -389,7 +389,7 @@ export class BuyerOngoingList extends Component {
                         <Col className="col-xs-10">
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
@@ -532,7 +532,7 @@ export class BuyerOngoingList extends Component {
                         </Col>
                     </Row>
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
@@ -659,7 +659,7 @@ export class BuyerOngoingList extends Component {
                     </>
                     }
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>

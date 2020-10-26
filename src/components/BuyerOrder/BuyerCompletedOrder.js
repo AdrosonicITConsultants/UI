@@ -169,7 +169,7 @@ export class BuyerCompletedOrder extends Component {
                         </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
@@ -208,7 +208,7 @@ export class BuyerCompletedOrder extends Component {
                                                 Order Id : {item.openEnquiriesResponse.enquiryCode}
                                                 </Col>
                                             </div>
-                                            {item.openEnquiriesResponse.userStatus === 1 ?
+                                            {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
                                                 Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
@@ -304,7 +304,7 @@ export class BuyerCompletedOrder extends Component {
                         </Col>                        
                     </Row>
 
-                  {item.openEnquiriesResponse.userStatus === 1 ?
+                  {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                   <>
 
                   <hr></hr>
@@ -493,7 +493,7 @@ export class BuyerCompletedOrder extends Component {
                             </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
@@ -628,7 +628,7 @@ export class BuyerCompletedOrder extends Component {
                         </Col>
                     </Row>
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                    <hr></hr>
                    {item.openEnquiriesResponse.deliveryChallanLabel?
@@ -790,7 +790,7 @@ export class BuyerCompletedOrder extends Component {
                     </>
                     }
                 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>

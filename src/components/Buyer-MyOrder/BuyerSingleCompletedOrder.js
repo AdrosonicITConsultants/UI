@@ -565,10 +565,10 @@ export class BuyerSingleCompletedOrder extends Component {
                     <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
@@ -587,10 +587,10 @@ export class BuyerSingleCompletedOrder extends Component {
 <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
@@ -730,7 +730,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                 <h1 className="areyousurecrh1 fontplay">Congrats!
                 {this.state.openEnquiries[0].openEnquiriesResponse.enquiryId}</h1> 
                 <br/>
-                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>You are about to mark this order completed!</b> 
+                <b className="CRare fontplay" style={{color:"grey",fontWeight:"100"}}>Found order as per requirement!</b> 
                 
             </Col>
         </Row>
@@ -759,9 +759,9 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
         
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-            <p className="crmnote">Just in case if you find your order to be faulty,
-            <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
+        <p className="crmnote"> Please check the order before marking order received as per requirement.
+            <br/>Once marked the order will be considered as completed  
+            <br/>and no concern can be raised against it.</p>
             
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
             {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
@@ -771,7 +771,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                disabled={this.state.completebtndis}
                 onClick={()=>{this.CompleteOrder2Show(this.state.enquiryCode)}}
                 className="buyerMOQAcceptModalOkayButton">Complete and Review 
-                 <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
+                 {/* <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i> */}
                  </button></span>
         </div>
             
@@ -806,9 +806,9 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
         
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-            <p className="crmnote">Just in case if you find your order to be faulty,
-            <br/>You can always raise a concern within  
-            <br/>10 days from date received.</p>
+        <p className="crmnote"> Please check the order before marking order received as per requirement.
+            <br/>Once marked the order will be considered as completed  
+            <br/>and no concern can be raised against it.</p>
             
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
             {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
@@ -976,10 +976,10 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                     <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
@@ -998,10 +998,10 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
 <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
+                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
                               onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
                               className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button>
+                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}

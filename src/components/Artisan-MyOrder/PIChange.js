@@ -90,9 +90,7 @@ export class PIchange extends Component {
         }
        else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
-              
-
-                this.state.viewOldPi = true;  
+                           this.state.viewOldPi = true;  
                        
                              this.setState({  
                               viewOldPi:true,
@@ -107,9 +105,6 @@ export class PIchange extends Component {
                        
                         });
 
-
-            
-        
             }
             else{
                 customToast.error("Please agree to T&C", {
@@ -344,7 +339,7 @@ export class PIchange extends Component {
                                     </>
                                     :
                                     <>
-{console.log("Form display")}
+                                {console.log("Form display")}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 

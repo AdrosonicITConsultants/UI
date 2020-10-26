@@ -260,7 +260,7 @@ export default class BuyerRating extends Component {
                             Thank you for the review !
                         </div>
                     </Col>  
-                    <Col sm={3} className="col-xs-12 text-right">
+                    {/* <Col sm={3} className="col-xs-12 text-right">
                     {(this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
                           this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4) && (this.state.getClosedOrder.comment === null)
                           ?
@@ -276,7 +276,7 @@ export default class BuyerRating extends Component {
                         :
                         ""
                     }
-                    </Col>                          
+                    </Col>                           */}
                 </Row>
                 <div className="envelopeBgImg">
                     <Row noGutters={true}>
@@ -323,7 +323,7 @@ export default class BuyerRating extends Component {
                             We'll just take 2 minutes to review this order to let the artisan help you serve better in future
                         </div>
                     </Col>  
-                    <Col sm={3} className="col-xs-12 text-right">
+                    {/* <Col sm={3} className="col-xs-12 text-right">
                        
                         {(this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)>0 &&
                           this.daysleftrating(this.state.getClosedOrder.orderReceiveDate,3)<4) && (this.state.getClosedOrder.comment === null)
@@ -340,7 +340,7 @@ export default class BuyerRating extends Component {
                         :
                         ""
                          }
-                    </Col>                          
+                    </Col>                           */}
                 </Row>
 
                 <Row noGutters={true}>

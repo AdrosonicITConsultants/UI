@@ -38,7 +38,7 @@ export class BuyerOngoingOrder extends Component {
             showDeldatevalidation:false,
             orderReceivedCurrentId: 0,
             orderReceivedModalOkButtonDisable: false,
-            verified: false
+            checked: false
         }
         this.handleChange = this.handleChange.bind(this);
 
@@ -53,6 +53,7 @@ export class BuyerOngoingOrder extends Component {
                  
     
     }
+   
     ToggleDelete = () => {
     document.getElementById('id01').style.display='block';
     }
@@ -106,22 +107,33 @@ export class BuyerOngoingOrder extends Component {
 
             }
         }); 
-    //    this.componentDidMount();
-       }
-       verifiedChange = e => {
-        // e.preventDefault(); It's not needed
-        const { verified } = e.target;
-        this.setState({
-          verified: !this.state.verified // It will make the default state value(false) at Part 1 to true 
-        });
-        console.log(this.state.verified)
-      }; 
+         }
+ 
 
+      Verifybox=(e)=>{
+        const { checked, value } = e.target;
+        this.setState({
+            checked:!this.state.checked,
+            
+        })
+        console.log(this.state.checked)
+        let { Allartisanid } = this.state;
+        if (checked){
+            console.log("agreed")
+              }
+                else{
+                    console.log("Not agreed")
+                    this.setState({
+                        checked:!this.state.checked,
+                        
+                    })
+                }            
+             }
+      
        PartialPaymentReceived=(id)=>{
            console.log(id)
-        // if(document.getElementById('agree').checked){
-            if(this.state.verified){
-            console.log("agreed")
+             if(this.state.checked){
+            console.log("agreed yes")
             TTCEapi.markEnquiryClosed(id).then((response)=>{
                 if(response.data.valid)
                 {
@@ -135,7 +147,7 @@ export class BuyerOngoingOrder extends Component {
             }); 
                        }
                 else{
-                    customToast.error("Please agree to partial refund received ", {
+                    customToast.error("Please agree to Partial Refund Received ", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -747,13 +759,13 @@ export class BuyerOngoingOrder extends Component {
                  <Row noGutters={true}>
                        <Col className="col-xs-1">
                         </Col>
-                        <Col className="col-xs-2">
+                        <Col className="col-xs-3">
                             <button className="closeorderbtn"
-                           style={{background:"green",padding:"7px"}}
+                           style={{background:"green",padding:"7px",width:"auto"}}
                              onClick={()=>{this.PartialPaymentShow(item.openEnquiriesResponse.enquiryId)}}
-                             >Partial Refund Received</button>
+                             > Is Partial Refund Received ?</button>
                         </Col>
-                        <Col className="col-xs-9">
+                        <Col className="col-xs-8">
                         </Col>
                     </Row>
                     }
@@ -1283,13 +1295,13 @@ export class BuyerOngoingOrder extends Component {
                  <Row noGutters={true}>
                        <Col className="col-xs-1">
                         </Col>
-                        <Col className="col-xs-2">
+                        <Col className="col-xs-3">
                             <button className="closeorderbtn"
-                           style={{background:"green",padding:"7px"}}
+                           style={{background:"green",padding:"7px",width:"auto"}}
                              onClick={()=>{this.PartialPaymentShow(item.openEnquiriesResponse.enquiryId)}}
-                             >Partial Refund Received</button>
+                             >Is Partial Refund Received ?</button>
                         </Col>
-                        <Col className="col-xs-9">
+                        <Col className="col-xs-8">
                         </Col>
                     </Row>
                     }
@@ -1659,7 +1671,7 @@ export class BuyerOngoingOrder extends Component {
         </Row>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
-                <h1 className="areyousurecrh1 fontplay">Partial Refund Received?</h1> 
+                <h1 className="areyousurecrh1 fontplay">Is Partial Refund Received?</h1> 
                 {/* <br/> */}
                 {/* <b className="CRare fontplay" style={{color:"grey",fontWeight:"100",marginBottom:"15px"}}>
                     </b>  */}
@@ -1669,14 +1681,9 @@ export class BuyerOngoingOrder extends Component {
         </Row>
        
         <div style={{textAlign:"center"}}>
-        {/* <input  type="checkbox" id="agree" className="orderclose"/> */}
-        <input
-          type="checkbox"
-          name="verified"
-          id="verified"
-          onChange={this.verifiedChange} 
-          value={this.state.verified}
-      />
+       
+       <input type="checkbox"className="CheckBrand " style={{marginRight:"10px"}}   
+                                onChange={this.Verifybox} checked={this.state.checked}/> 
             <label for="agree" className="labelcheckbox"> Partial Refund Received</label>
         </div>
        

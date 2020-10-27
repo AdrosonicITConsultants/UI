@@ -318,11 +318,11 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
     <Col className="col-xs-12"style={{textAlign:"center"}}>
     {(this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0) ? 
     <button className="proccedwithadvpaybtn" disabled={true} style={{backgroundColor: "#777777"}}
-    >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+    >Request change  <i class="fas fa-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
     </button>
     :
     <button className="proccedwithadvpaybtn" onClick={this.ReqChangesModalSHow}
-        >Request change  <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+        >Request change  <i class="fas fa-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
     </button>
     }
     </Col>

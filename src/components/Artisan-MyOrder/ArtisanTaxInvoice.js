@@ -539,9 +539,10 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                         /> 
                                             Agree to <a
                                                 style={{ cursor: "pointer", fontSize: "15px" }}
-                                                onClick={() => {
-                                                alert("clicked");
-                                                }}
+                                                // onClick={() => {
+                                                // alert("clicked");
+                                                // }}
+                                                href={logos.tandc}
                                             >
                                                 terms & condition
                                             </a>

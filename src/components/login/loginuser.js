@@ -192,10 +192,15 @@ operation = (event) => {
 <br/>
           <Row   className="mt30 pb10">
             <strong className="col-xs-3 text-center line7 font6">Help?</strong>
-            <span className="col-xs-4"></span>
+            <span
+              style={{ color: "var(--lightFont)",textAlign:"end" }}
+              className="col-xs-5 text-center line7 font6"
+            >
+              Legal Disclaimer
+            </span>
             <span
               style={{ color: "var(--lightFont)" }}
-              className="col-xs-5 text-center line7 font6"
+              className="col-xs-4 text-center line7 font6"
             >
               Privacy policy
             </span>

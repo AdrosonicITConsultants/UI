@@ -263,8 +263,8 @@ class AddWishlist extends Component {
                             <div id="id02" class="w3-modal">
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
-                                <h3 className="deleteModalHeader">Are you sure you want to remove from wishlist ?</h3>
-                                <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
+                                <h3 className="deleteModalHeader text-center removemodalheading">Are you sure you want to remove <br/>this product from wishlist ?</h3>
+                                {/* <p className="deleteModalPara">You can keep the changes or can go back to update.</p> */}
                                 <div className="deleteModalButtonOuterDiv">
                                 <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
                                 <span onClick={() => this.handleDeleteItem(data.product.id)} className="deleteModalOkayButton">Remove</span>

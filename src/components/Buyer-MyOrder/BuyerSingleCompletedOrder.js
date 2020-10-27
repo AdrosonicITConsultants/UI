@@ -771,7 +771,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                disabled={this.state.completebtndis}
                 onClick={()=>{this.CompleteOrder2Show(this.state.enquiryCode)}}
                 className="buyerMOQAcceptModalOkayButton">Complete and Review 
-                 {/* <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i> */}
+                 <i class="fas fa-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
                  </button></span>
         </div>
             

@@ -72,7 +72,7 @@ export default class roleselect extends Component {
               
                 
                                 <Row   className="text-center  mt37">
-                                    Privacy Policy
+                                 <a style={{color:"black"}}>Legal Disclaimer </a> | <a style={{color:"black"}}>Privacy Policy</a> 
                                     
                                 </Row>
                                 <br></br>

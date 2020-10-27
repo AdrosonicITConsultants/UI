@@ -801,7 +801,7 @@ export class BuyerPreviewInvoice extends Component {
 <>
 {this.state.previewPI.product.productStatusId==2 ?  
 "":
- <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+ <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>
 
 }
 </>
@@ -810,7 +810,7 @@ export class BuyerPreviewInvoice extends Component {
 {this.state.buyerCustomProduct.productStatusId==2?
 ""
 :
-<button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fa fa-long-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+<button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>
 
 }
 </>

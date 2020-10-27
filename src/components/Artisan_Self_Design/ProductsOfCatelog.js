@@ -197,14 +197,9 @@ generateEnquiry(item){
                                 In Stock
                                 </Col>
                                 <Col className="text-center">
-                          
                                 <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
-
-                                
-                            
                                 </Col>
-                                
-                                </Row>
+                          </Row>
                         
                         :
                         <Row    className="stockmargin exclusive">
@@ -215,7 +210,11 @@ generateEnquiry(item){
                         Made to order
                         </Col>
                         <Col className="text-center">
+                        {this.state.proddata.madewithAntaran == 0? 
                         <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        :
+                        <img className="logoincard " src={logos.antaranCoDesignLogo}  alt="Card image cap"/>
+                      }
                         </Col>
                         
                         </Row>

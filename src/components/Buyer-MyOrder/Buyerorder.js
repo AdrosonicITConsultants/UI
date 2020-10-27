@@ -57,7 +57,8 @@ export class Buyerorder extends Component {
             getSingleOrder:[],
             showDeldatevalidation:false,
             orderReceivedCurrentId: 0,
-            orderReceivedModalOkButtonDisable: false,        
+            orderReceivedModalOkButtonDisable: false,  
+            verified:false      
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -145,21 +146,29 @@ export class Buyerorder extends Component {
             }
            ClosedOrderClose =(id)=>{
             document.getElementById('CloseOrder'+ id).style.display='none';
-            this.componentDidMount();
+            // this.componentDidMount();
            }
+           verifiedChange = e => {
+            // e.preventDefault(); It's not needed
+            const { verified } = e.target;
+            this.setState({
+              verified: !this.state.verified // It will make the default state value(false) at Part 1 to true 
+            });
+            console.log(this.state.verified)
+          }; 
            YesOrderbutton=(id)=>{
                  TTCEapi.initializePartialRefund(id).then((response)=>{
+                     console.log(response)
                 if(response.data.valid  )
                 {
                  document.getElementById('CloseOrder'+ id).style.display='none';
                  document.getElementById('PartialPayment'+ id).style.display='block';
-    
-                }
+                    }
             }); 
-           this.componentDidMount();
+        //    this.componentDidMount();
            }
            PartialPaymentReceived=(id)=>{
-            if(document.getElementById('agree').checked){
+            if(this.state.verified){
                 
                 TTCEapi.markEnquiryClosed(id).then((response)=>{
                     if(response.data.valid  )
@@ -1151,7 +1160,7 @@ export class Buyerorder extends Component {
                disabled={this.state.completebtndis}
                 onClick={()=>{this.CompleteOrder2Show(this.state.enquiryCode)}}
                 className="buyerMOQAcceptModalOkayButton">Complete and Review 
-                 {/* <i class="fa fa-long-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i> */}
+                 <i class="fas fa-arrow-right" aria-hidden="true" style={{marginLeft:"10px"}}></i>
                  </button></span>
         </div>
             
@@ -1279,7 +1288,14 @@ export class Buyerorder extends Component {
         </Row>
        
         <div style={{textAlign:"center"}}>
-        <input  type="checkbox" id="agree" className="orderclose"/>
+        {/* <input  type="checkbox" id="agree" className="orderclose"/> */}
+        <input
+          type="checkbox"
+          name="verified"
+          id="verified"
+          onChange={this.verifiedChange} 
+          value={this.state.verified}
+      />
             <label for="agree" className="labelcheckbox"> Partial Refund Received</label>
         </div>
        

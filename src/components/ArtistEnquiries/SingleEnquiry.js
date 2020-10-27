@@ -1968,9 +1968,11 @@ export class SingleEnquiry extends Component {
                                                             /> 
                                                                 Agree to <a
                                                                     style={{ cursor: "pointer", fontSize: "15px" }}
-                                                                    onClick={() => {
-                                                                    alert("clicked");
-                                                                    }}
+                                                                    // onClick={() => {
+                                                                    // alert("clicked");
+                                                                    // }}
+                                                                    href=""
+                                                                    target="_blank"
                                                                 >
                                                                     terms & condition
                                                                 </a>

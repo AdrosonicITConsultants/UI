@@ -230,6 +230,7 @@ import notifyRegenerate from "./order recreated.svg";
 import notifyFaulty from "./faulty order.svg";
 
 export default {
+  
   acceptsmall,
   esc,
   Iconioniciosalert1,

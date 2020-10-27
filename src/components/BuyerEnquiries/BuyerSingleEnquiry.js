@@ -1790,7 +1790,8 @@ MoqSimpleProductSelected(moqId){
                                            <>
                                              <div 
                                              className={this.state.acceptingmoqtext?"acceptingloader" : "acceptedloader"}>
-                                             <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i>
+                                             {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
+                                             <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
                                             {this.state.acceptingmoqtext ?  "Accepting..." : "Accepted"} 
                                              </div>
                                               <div className="readmorediv">

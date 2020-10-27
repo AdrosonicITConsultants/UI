@@ -434,7 +434,7 @@ backoperation = () => {
 
 
 <Row noGutters="true" >
-  <Col sm={12} className="BPDCol2">
+  <Col sm={12} className="">
   <h2 className="DescheadingBPD">Description</h2>
   {this.state.ProductData.product_spe ?
 <p>{this.state.ProductData.product_spe}</p>

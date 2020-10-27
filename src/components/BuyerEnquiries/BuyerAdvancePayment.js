@@ -479,7 +479,7 @@ export default class BuyerAdvancePayment extends Component {
     <Col className="col-xs-12">
         <button className="proccedwithadvpaybtn" 
         onClick={() => this.proceedtopay()}>Proceed with {this.state.percent}% 
-       <span></span> advance payment <i class="fa fa-long-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
+       <span></span> advance payment <i class="fas fa-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
 </button>
     </Col>
 </Row>

@@ -73,11 +73,11 @@ export default class roleselect extends Component {
               
                 
                                 <Row   className="text-center  mt37">
-                                    <a 
-                                    href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
-                                    target="_blank">
-                                    Privacy Policy
-                                    </a>
+                                    
+                                 <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+                                    target="_blank">Legal Disclaimer </a> | <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                                    target="_blank">Privacy Policy</a> 
+                                    
                                 </Row>
                                 <br></br>
                                  

@@ -226,11 +226,21 @@ operation = (event) => {
             <strong className="col-xs-3 text-center line7 font6">Help?</strong>
             <span className="col-xs-4"></span>
             <a 
+            href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+            target="_blank">
+            <span
+              style={{ color: "var(--lightFont)",textAlign:"end" }}
+              className="col-xs-5 text-center line7 font6"
+            >
+              Legal Disclaimer
+            </span>
+            </a>
+            <a 
             href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
             target="_blank">
             <span
               style={{ color: "var(--lightFont)" }}
-              className="col-xs-5 text-center line7 font6"
+              className="col-xs-4 text-center line7 font6"
             >
               Privacy policy
             </span>

@@ -293,9 +293,8 @@ export default class artreg5 extends Component {
                                <input type="checkbox" name="checkbox" value="check" id="agree" /> You
                                hearby agree to our <a
                                  style={{ cursor: "pointer", fontSize: "15px" }}
-                                 onClick={() => {
-                                   alert("clicked");
-                                 }}
+                                 href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
+                                 target="_blank"
                                >
                                  Terms and condition
                                </a>

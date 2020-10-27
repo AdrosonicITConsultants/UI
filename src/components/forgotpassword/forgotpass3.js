@@ -7,7 +7,7 @@ import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import buyeruser from '../login/loginuser';
 import { memoryHistory, browserHistory } from "../../helpers/history";
-
+import TTCEapi from '../../services/API/TTCEapi';
 
 
 
@@ -185,12 +185,16 @@ export default class forgotpass3 extends Component {
                            <br />
 
                            <Row noGutters={true}>
+                             <a 
+                             href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                             target="_blank">
                              <span
                                style={{ color: "var(--lightFont)" }}
                                className="col-xs-12 text-center"
                              >
                                Privacy policy
                              </span>
+                             </a>
                            </Row>
                          </div>
                        </Col>

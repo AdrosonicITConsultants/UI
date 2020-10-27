@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col , Container} from 'reactstrap';
 import "./homepage.css"
 import logos from "../../assets";
+import TTCEapi from '../../services/API/TTCEapi';
 
 export default class roleselect extends Component {
     constructor() {
@@ -72,8 +73,11 @@ export default class roleselect extends Component {
               
                 
                                 <Row   className="text-center  mt37">
+                                    <a 
+                                    href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                                    target="_blank">
                                     Privacy Policy
-                                    
+                                    </a>
                                 </Row>
                                 <br></br>
                                  

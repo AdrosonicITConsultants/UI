@@ -3,7 +3,7 @@ import "./footer.css"
 import { Row, Col, Container } from "reactstrap";
 import { logRoles } from '@testing-library/react';
 import logos from "../../assets"
-
+import TTCEapi from '../../services/API/TTCEapi';
 
 
 export default class Footer extends Component {
@@ -91,16 +91,25 @@ export default class Footer extends Component {
                     style={{ marginTop: "10px" }}
                     className="col-md-12 col-sm-12"
                   >
+                    <a 
+                    href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                     target="_blank">
                     <p className="Ffont3 col-md-4 col-sm-4  text-center">
                       Privacy policy
                     </p>
-                    <p className="Ffont3 col-md-4 col-sm-4  text-center">
-                      {" "}
+                    </a>
+                    <a href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
+                       target="_blank">
+                    <p className="Ffont3 col-md-4 col-sm-4  text-center">                      
                       Terms of Usage
                     </p>
+                    </a>
+                    <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+                       target="_blank">
                     <p className="Ffont3 col-md-4 col-sm-4  text-center">
                       Cookie policy
                     </p>
+                    </a>
                   </div>
                 </Col>
               </Row>

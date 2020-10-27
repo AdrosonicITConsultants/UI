@@ -5,6 +5,7 @@ import "./buyer.css";
 import logos from "../../assets";
 // import FacebookLogin from 'react-facebook-login';
 // import GoogleLogin from 'react-google-login';
+import TTCEapi from '../../services/API/TTCEapi';
 
 export default class buyeruser extends Component {
   constructor() {
@@ -57,13 +58,12 @@ operation = (event) => {
   responseFacebook = (response) => {
     console.log("facebook console");
     console.log(response);
-    this.signup(response, 'facebook');
   }
 
   responseGoogle = (response) => {
     console.log("google console");
     console.log(response);
-    this.signup(response, 'google');
+    
   }
 
 
@@ -175,14 +175,14 @@ operation = (event) => {
           {/* <Row noGutters={true}>
             <Col className="col-xs-6 text-right">
               <FacebookLogin
-              appId="1255984978120035"
+              appId="2751983971736639"
               autoLoad={false}
               fields="name,email,picture"
               callback={this.responseFacebook}/>
             </Col>
             <Col className="col-xs-6 text-left googleLoginButton">
               <GoogleLogin
-              clientId="Your Google ID"
+              clientId="22783379582-7duulr04s1kuq8fnlgc93e518ju5nmbu.apps.googleusercontent.com"
               buttonText="Login with Google"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}/>
@@ -225,12 +225,16 @@ operation = (event) => {
           <Row   className="mt10 pb10">
             <strong className="col-xs-3 text-center line7 font6">Help?</strong>
             <span className="col-xs-4"></span>
+            <a 
+            href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+            target="_blank">
             <span
               style={{ color: "var(--lightFont)" }}
               className="col-xs-5 text-center line7 font6"
             >
               Privacy policy
             </span>
+            </a>
           </Row>
         </div>
       </React.Fragment>

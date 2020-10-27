@@ -4,6 +4,7 @@ import "../Homepage/homepage.css"
 import "./buyer.css"
 import logos from "../../assets";
 import { memoryHistory, browserHistory } from "../../helpers/history";
+import TTCEapi from '../../services/API/TTCEapi';
 
 export default class buyerpass extends Component {
                  constructor() {
@@ -218,12 +219,16 @@ export default class buyerpass extends Component {
                              Help?
                            </strong>
                            <span className="col-xs-4"></span>
+                           <a 
+                           href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                           target="_blank">
                            <span
                              style={{ color: "var(--lightFont)" }}
                              className="col-xs-5 text-center line7 font6"
                            >
                              Privacy policy
                            </span>
+                           </a>
                          </Row>
                        </div>
                      </React.Fragment>

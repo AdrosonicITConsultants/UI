@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.627" height="37.836" viewBox="0 0 28.627 37.836">
+  <g id="order_recreated" data-name="order recreated" transform="translate(-1347.5 -3749.708)">
+    <path id="Icon_awesome-file-invoice" data-name="Icon awesome-file-invoice" d="M20.72,18.418H6.907v4.6H20.72ZM27.12,8.77Zm-11,1.015V0H1.727A1.723,1.723,0,0,0,0,1.727V35.109a1.723,1.723,0,0,0,1.727,1.727H25.9a1.723,1.723,0,0,0,1.727-1.727v-23.6H17.842A1.732,1.732,0,0,1,16.116,9.785ZM4.6,5.18a.575.575,0,0,1,.58-.58h5.756a.575.575,0,0,1,.576.576V6.331a.575.575,0,0,1-.576.576H5.18a.575.575,0,0,1-.58-.576Zm0,4.6A.575.575,0,0,1,5.176,9.2h5.756a.575.575,0,0,1,.576.576v1.151a.575.575,0,0,1-.576.576H5.18a.575.575,0,0,1-.576-.576ZM23.022,31.656a.575.575,0,0,1-.576.576H16.691a.575.575,0,0,1-.576-.576V30.5a.575.575,0,0,1,.576-.576h5.756a.575.575,0,0,1,.576.576Zm0-14.389v6.907a1.151,1.151,0,0,1-1.151,1.151H5.756A1.151,1.151,0,0,1,4.6,24.174V17.267a1.151,1.151,0,0,1,1.151-1.151h16.12a1.151,1.151,0,0,1,1.151,1.151Z" transform="translate(1348 3750.208)" fill="none" stroke="#eadbff" stroke-width="1"/>
+    <g id="Group_1934" data-name="Group 1934" transform="translate(-10 5)">
+      <g id="Ellipse_587" data-name="Ellipse 587" transform="translate(1377 3745)" fill="#c9a2fd" stroke="#c9a2fd" stroke-width="1">
+        <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+        <circle cx="4.5" cy="4.5" r="4" fill="none"/>
+      </g>
+      <path id="Icon_material-done" data-name="Icon material-done" d="M6.532,11.169l-1.074-1.1-.358.366L6.532,11.9,9.6,8.766,9.242,8.4Z" transform="translate(1374.329 3739.631)" stroke="#000" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ import logos from "../../../assets"
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import TTCEapi from '../../../services/API/TTCEapi';
 
 export default class buyreg6 extends Component {
     constructor() {
@@ -212,9 +213,8 @@ export default class buyreg6 extends Component {
                     You hearby agree to our
                     <a
                       style={{ cursor: "pointer", fontSize: "15px" }}
-                      onClick={() => {
-                        alert("clicked");
-                      }}
+                      href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
+                      target="_blank"
                     >
                       Terms and condition
                     </a>

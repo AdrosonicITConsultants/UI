@@ -431,9 +431,8 @@ export class PIchange extends Component {
                                 /> 
                                     Agree to <a
                                         style={{ cursor: "pointer", fontSize: "15px" }}
-                                        onClick={() => {
-                                        alert("clicked");
-                                        }}
+                                        href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
+                                        target="_blank"
                                     >
                                         terms & condition
                                     </a>

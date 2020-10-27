@@ -225,6 +225,9 @@ import defaultChatProfilePlaceholder from "./BLUE placeholder.svg";
 import chatEscGreenCircleTick from "./green tick circle.svg";
 import notifyChatIcon from "./Icon material-chat.svg";
 import notifyEscIcon from "./Icon ionic-md-alert.svg";
+import notifyRating from "./rating order.svg";
+import notifyRegenerate from "./order recreated.svg";
+import notifyFaulty from "./faulty order.svg";
 
 export default {
   acceptsmall,
@@ -447,4 +450,7 @@ export default {
   chatEscGreenCircleTick,
   notifyChatIcon,
   notifyEscIcon,
+  notifyRating,
+  notifyRegenerate,
+  notifyFaulty,
 };

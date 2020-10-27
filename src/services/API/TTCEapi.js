@@ -12,6 +12,7 @@ var ImageUrl = "";
 var ReceiptUrl = "";
 var DeliveryReceiptUrl = "";
 var ChatMediaUrl = "";
+var DocumentsURL = "";
 
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090";
@@ -19,6 +20,7 @@ if (env == "dev") {
   ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
   ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/";
+  DocumentsURL = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/documents/";
 } 
 else if (env == "uat") {
   ApiUrl = "http://164.52.192.15:8090";
@@ -26,6 +28,7 @@ else if (env == "uat") {
   ReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";
   ChatMediaUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/ChatBoxMedia/";
+  DocumentsURL = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/documents/";
 } 
 else if (env == "live") {
   ApiUrl = "";
@@ -40,6 +43,8 @@ class TTCEapi {
   static DeliveryReceiptUrl = DeliveryReceiptUrl;
 
   static ChatMediaUrl = ChatMediaUrl;
+
+  static DocumentsURL = DocumentsURL;
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);

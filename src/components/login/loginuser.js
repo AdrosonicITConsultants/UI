@@ -223,14 +223,13 @@ operation = (event) => {
           </Row>
 <br/>
           <Row   className="mt10 pb10">
-            <strong className="col-xs-3 text-center line7 font6">Help?</strong>
-            <span className="col-xs-4"></span>
+            <strong className="col-xs-4 text-center line7 font6">Help?</strong>
             <a 
             href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
             target="_blank">
             <span
-              style={{ color: "var(--lightFont)",textAlign:"end" }}
-              className="col-xs-5 text-center line7 font6"
+              style={{ color: "var(--lightFont)"}}
+              className="col-xs-4 text-center line7 font6"
             >
               Legal Disclaimer
             </span>

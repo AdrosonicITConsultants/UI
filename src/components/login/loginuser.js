@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css";
-import "./buyer.css"
-import logos from "../../assets"
+import "./buyer.css";
+import logos from "../../assets";
+// import FacebookLogin from 'react-facebook-login';
+// import GoogleLogin from 'react-google-login';
 
 export default class buyeruser extends Component {
   constructor() {
@@ -51,6 +53,19 @@ operation = (event) => {
       showValidation: false,
     });
   }
+
+  responseFacebook = (response) => {
+    console.log("facebook console");
+    console.log(response);
+    this.signup(response, 'facebook');
+  }
+
+  responseGoogle = (response) => {
+    console.log("google console");
+    console.log(response);
+    this.signup(response, 'google');
+  }
+
 
   render() {
     return (
@@ -155,8 +170,25 @@ operation = (event) => {
             </div>
           </Row>
           </form>
-          <br />         
-          <br />
+          <br />        
+
+          {/* <Row noGutters={true}>
+            <Col className="col-xs-6 text-right">
+              <FacebookLogin
+              appId="1255984978120035"
+              autoLoad={false}
+              fields="name,email,picture"
+              callback={this.responseFacebook}/>
+            </Col>
+            <Col className="col-xs-6 text-left googleLoginButton">
+              <GoogleLogin
+              clientId="Your Google ID"
+              buttonText="Login with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}/>
+            </Col>
+          </Row>           */}
+
           {/* <Row  >
                 <div className="col-xs-12 text-center">
                   <h2>Or</h2>
@@ -190,7 +222,7 @@ operation = (event) => {
             </div>
           </Row>
 <br/>
-          <Row   className="mt30 pb10">
+          <Row   className="mt10 pb10">
             <strong className="col-xs-3 text-center line7 font6">Help?</strong>
             <span
               style={{ color: "var(--lightFont)",textAlign:"end" }}

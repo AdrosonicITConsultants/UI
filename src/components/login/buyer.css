@@ -57,3 +57,41 @@ button:focus{
     
 }
 
+.kep-login-facebook {
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(.27548vw + 12.71074px);
+    text-decoration: none;
+    background-color: #4c69ba;
+    border: 1px solid #4c69ba !important;
+    font-size: 14px !important;
+    padding: 9px 15px !important;
+    border-radius: 30px !important;
+    font-weight: 500 !important;
+    font-family: var(--LatoFont) !important;
+    text-transform: none !important; 
+}
+
+.googleLoginButton button {
+    background-color: #DB4437 !important;
+    display: inline-block !important;
+    color: #ffffff !important;
+    box-shadow: none !important; 
+    padding: 8px 15px !important;
+    border-radius: 30px !important;
+    border: 1px solid #DB4437 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+    font-family: var(--LatoFont) !important;
+}
+
+.googleLoginButton button div {
+    display: none !important;
+}
+
+.googleLoginButton button span {
+    padding: 0px !important;
+}
+

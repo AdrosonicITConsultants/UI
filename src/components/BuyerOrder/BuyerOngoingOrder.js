@@ -369,7 +369,7 @@ export class BuyerOngoingOrder extends Component {
                         </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
@@ -408,7 +408,7 @@ export class BuyerOngoingOrder extends Component {
                                                 Order Id : {item.openEnquiriesResponse.orderCode}
                                                 </Col>
                                             </div>
-                                            {item.openEnquiriesResponse.userStatus === 1 ?
+                                            {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
                                                 Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
@@ -504,7 +504,7 @@ export class BuyerOngoingOrder extends Component {
                         </Col>                        
                     </Row>
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                     {item.openEnquiriesResponse.productStatusId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
@@ -905,7 +905,7 @@ export class BuyerOngoingOrder extends Component {
                             </Row>
                             <Row noGutters={true}>
                                 <Col sm="9">
-                                    {item.openEnquiriesResponse.userStatus === 1 ?
+                                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
@@ -1040,7 +1040,7 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                     </Row>
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                     {item.openEnquiriesResponse.productStatusHistoryId === 2 || item.openEnquiriesResponse.enquiryStageId >= 6
                     ?
@@ -1426,7 +1426,7 @@ export class BuyerOngoingOrder extends Component {
                     </>
                     }
 
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <>
                    {(item.openEnquiriesResponse.enquiryStageId >9) && (item.openEnquiriesResponse.isReprocess === null)
                    ?
@@ -1703,7 +1703,7 @@ export class BuyerOngoingOrder extends Component {
 
       {/* -------------------------------------------Modal ends   ----------------          */}
  
-                    {item.openEnquiriesResponse.userStatus === 1 ?
+                    {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
                             <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">

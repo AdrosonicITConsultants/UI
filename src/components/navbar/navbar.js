@@ -600,7 +600,8 @@ browserHistory.push("/MyProfile");
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
 
-                  <a href="/">Support</a>
+                  <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+            target="_blank">Support</a>
                 </li>
                 {isAuthenticated ? (
                   <li className="menu-item">

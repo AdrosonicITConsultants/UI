@@ -167,9 +167,8 @@ var homeSectionStyle = {};
                       }
                     );
                   });
-
-
                }
+               
                  checkusernameBuyer(userName){
                    console.log("buyer :" + userName);
                         console.log("artist :" + userName);

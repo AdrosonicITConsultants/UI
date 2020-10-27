@@ -3,8 +3,8 @@ import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css";
 import "./buyer.css";
 import logos from "../../assets";
-// import FacebookLogin from 'react-facebook-login';
-// import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 import TTCEapi from '../../services/API/TTCEapi';
 
 export default class buyeruser extends Component {
@@ -12,8 +12,9 @@ export default class buyeruser extends Component {
     super();
     this.state = {
       userName: "",   
-      showValidation: false     ,
+      showValidation: false,
       message:"",
+      googleFBErrorMsg: false,
     };
   }
 
@@ -58,12 +59,36 @@ operation = (event) => {
   responseFacebook = (response) => {
     console.log("facebook console");
     console.log(response);
+    this.checkGoogleFB();
   }
 
   responseGoogle = (response) => {
     console.log("google console");
     console.log(response);
-    
+    this.checkGoogleFB();
+  }
+
+  checkGoogleFB = () => {
+    var roleId = 0;
+    if(this.props.userpage == 1) {
+      roleId = 2;
+    }
+    else {
+      roleId = 1;
+    }
+
+    var userName = "";
+    var password = "";
+
+    TTCEapi.login(userName, password, roleId).then((response)=>{
+      if(response.data.valid === false)
+      {
+        this.setState({
+          googleFBErrorMsg: true,
+        });
+        console.log(response.data.data);
+      }
+    });
   }
 
 
@@ -89,7 +114,6 @@ operation = (event) => {
             ></img>
           </Row>
 
-          <br />
           <br />
           <br />
           <Row  >
@@ -153,6 +177,10 @@ operation = (event) => {
                   ) : (
                     <br />
                   )}
+
+                  {this.state.googleFBErrorMsg ? (
+                    <div className="bg-danger text-center loginUserErrorTop">Please try again</div>
+                  ) : null}
                 </div>
               </div>
             </Row>
@@ -172,7 +200,7 @@ operation = (event) => {
           </form>
           <br />        
 
-          {/* <Row noGutters={true}>
+          <Row noGutters={true}>
             <Col className="col-xs-6 text-right">
               <FacebookLogin
               appId="2751983971736639"
@@ -187,7 +215,7 @@ operation = (event) => {
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}/>
             </Col>
-          </Row>           */}
+          </Row>          
 
           {/* <Row  >
                 <div className="col-xs-12 text-center">

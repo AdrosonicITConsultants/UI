@@ -154,7 +154,7 @@ export class BuyerCompletedOrder extends Component {
                     ?
                     <>
                         {/* for no change in product data */}
-                        
+                        <br></br>
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
@@ -319,7 +319,9 @@ export class BuyerCompletedOrder extends Component {
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
                      </Col>
+                     <br></br>
                      </Row>
+                    
                      :
                      ""
                      
@@ -641,6 +643,7 @@ export class BuyerCompletedOrder extends Component {
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
                      </Col>
+                     <br></br>
                      </Row>
                      :
                      ""
@@ -728,15 +731,15 @@ export class BuyerCompletedOrder extends Component {
                            <Col className="col-xs-12 ">
                            <div className="progressbarfont">
                             <br /><br />
-                            {item.openEnquiriesResponse.productStatusHistoryId === 2
+                            {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <ul className="list-unstyled multi-steps">
                                 {item.openEnquiriesResponse.enquiryStageId == 3
                                 ?
                                 this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={7 == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
-                              :
-                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.id ? "is-active stop": " "} >{item1.desc}</li> )     
+                                :
+                                this.state.enquiryStagesAvailable.map((item1) => <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1  == item1.orderStages.id ? "is-active stop": " "} >{item1.orderStages.desc}</li> )     
 
                                 }
                                 {item.openEnquiriesResponse.enquiryStageId == 10
@@ -747,8 +750,18 @@ export class BuyerCompletedOrder extends Component {
                             }
                             </ul>
                             :
+                            <>
+                            {
+                                (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                                ?
+                                <img src={logos.cricon} className="cricon1"></img>
+
+                                :
+                                null
+
+                            }
                             <ul className="list-unstyled multi-steps">
-                                     {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
+                                   {item.openEnquiriesResponse.enquiryStageId == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 6
                                 ?
                                 <>
                                  {this.state.enquiryStagesMTO.map((item1) => 
@@ -775,7 +788,9 @@ export class BuyerCompletedOrder extends Component {
                               </>
                         }
                             
+                              
                             </ul>
+                            </>
                             
                                 }
 

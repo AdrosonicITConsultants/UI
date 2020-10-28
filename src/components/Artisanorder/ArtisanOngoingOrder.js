@@ -48,6 +48,8 @@ export class ArtisanOngoingOrder extends Component {
         document.getElementById('id09'+ id).style.display='none';
        }    
        FaultReport(id){
+        localStorage.removeItem("faulty");
+        localStorage.setItem("faulty", "ongoingorder");
            browserHistory.push("/artisanfaultreport?orderid="+id)
        } 
     componentDidMount(){

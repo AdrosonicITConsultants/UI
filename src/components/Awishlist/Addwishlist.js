@@ -42,7 +42,8 @@ class AddWishlist extends Component {
     }
 
     backoperation(){
-        browserHistory.push("/home"); 
+        // browserHistory.push("/home"); 
+        browserHistory.goBack()
     }  
     closeModal() {
         this.setState({ modalIsOpen: false });
@@ -85,7 +86,7 @@ class AddWishlist extends Component {
                 });
                 this.setState({deleteProductsInWishlist : response.data},()=>{
                     console.log(this.state.deleteProductsInWishlist);
-                    document.getElementById('id02').style.display='none';
+                    document.getElementById('id02'+id).style.display='none';
                     window.location.reload();
                     // this.componentDidMount();
                 
@@ -126,12 +127,14 @@ class AddWishlist extends Component {
         document.getElementById('id01').style.display='none';
        }
 
-       ToggleDelete1 = () => {
-        document.getElementById('id02').style.display='block';
+       ToggleDelete1 = (id) => {
+        console.log(id)
+        document.getElementById('id02'+id).style.display='block';
        }
 
-       ToggleDeleteClose1 = () => {
-        document.getElementById('id02').style.display='none';
+       ToggleDeleteClose1 = (id) => {
+           console.log(id)
+        document.getElementById('id02'+id).style.display='none';
        }
 
     componentDidMount(){
@@ -257,16 +260,16 @@ class AddWishlist extends Component {
 {/* Col 3 */}
                        <Col sm={3} className="Colfloatri">
                          <Row noGutters={true}>
-                         <Col sm={12}  className="Removefromwishlist" onClick={this.ToggleDelete1} >
+                         <Col sm={12}  className="Removefromwishlist" onClick={() => this.ToggleDelete1(data.product.id)} >
                             Remove from wish list <img src={logos.removefromwishlist} />
                             </Col>
-                            <div id="id02" class="w3-modal">
+                            <div id={"id02"+data.product.id} class="w3-modal">
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
                                 <h3 className="deleteModalHeader text-center removemodalheading">Are you sure you want to remove <br/>this product from wishlist ?</h3>
                                 {/* <p className="deleteModalPara">You can keep the changes or can go back to update.</p> */}
                                 <div className="deleteModalButtonOuterDiv">
-                                <span onClick={this.ToggleDeleteClose1} className="deleteModalCancelButton">Cancel</span>
+                                <span onClick={() => this.ToggleDeleteClose1(data.product.id)}  className="deleteModalCancelButton">Cancel</span>
                                 <span onClick={() => this.handleDeleteItem(data.product.id)} className="deleteModalOkayButton">Remove</span>
                                 </div>
                             </div>

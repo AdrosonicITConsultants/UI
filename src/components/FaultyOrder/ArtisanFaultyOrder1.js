@@ -117,7 +117,8 @@ export class ArtisanFaultyOrder1 extends Component {
     }
            
     backoperation(){
-        browserHistory.push("/artisanOrders"); 
+        // browserHistory.push("/artisanOrders"); 
+        browserHistory.goBack(); 
     }
 
     handleChange(e) {

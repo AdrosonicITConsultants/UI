@@ -274,14 +274,14 @@ export class ArtisanCompletedOrder extends Component {
                 </Col> 
                 : null }
                 <Col sm={4} className="col-xs-12 text-center">
-                {item.openEnquiriesResponse.comment?
+                {/* {item.openEnquiriesResponse.comment?
                            <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                             <img src={logos.esc} className="raterevbtnimg"/> 
                             Check concern raised by buyer
                         </button>
                 :
                 null
-                }
+                } */}
                 </Col>
             </Row>
             <hr/>
@@ -546,14 +546,14 @@ export class ArtisanCompletedOrder extends Component {
                 </Col> 
                 : null }
                 <Col sm={4} className="col-xs-12 text-center">
-                {item.openEnquiriesResponse.comment?
+                {/* {item.openEnquiriesResponse.comment?
                            <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                             <img src={logos.esc} className="raterevbtnimg"/> 
                             Check concern raised by buyer
                         </button>
                 :
                 null
-                }
+                } */}
                 </Col>
             </Row>
             <hr/>
@@ -561,14 +561,14 @@ export class ArtisanCompletedOrder extends Component {
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                      <Col sm={4} className="col-xs-12 text-center">
-                {item.openEnquiriesResponse.comment?
+                {/* {item.openEnquiriesResponse.comment?
                            <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                             <img src={logos.esc} className="raterevbtnimg"/> 
                             Check concern raised by buyer
                         </button>
                 :
                 null
-                }
+                } */}
                 </Col>
          </Row>
          :

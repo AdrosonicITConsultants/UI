@@ -23,7 +23,8 @@ class Wishlist extends Component {
     }
     
     backoperation(){
-         browserHistory.push("/home"); 
+        //  browserHistory.push("/home"); 
+        browserHistory.goBack()
         
     }  
     
@@ -39,7 +40,7 @@ class Wishlist extends Component {
                         <img
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
-                                    onClick={() =>  browserHistory.push("/home") }
+                                    onClick={() => this.backoperation() }
                                 ></img>
                        
                        </Col>

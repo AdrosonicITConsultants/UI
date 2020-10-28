@@ -274,7 +274,8 @@ export class ArtisanTransaction extends Component {
 
     gotoEnquiry(enquiryId){
         localStorage.setItem("piShow", 1);
-        browserHistory.push("/enquiryDetails?code="+enquiryId)
+        var win = window.open("/enquiryDetails?code="+enquiryId, '_blank');
+        win.focus();
     }
     gotoTaxInvoice(eid){
         localStorage.setItem("piShow", 1);

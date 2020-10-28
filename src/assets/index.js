@@ -229,8 +229,13 @@ import notifyRating from "./rating order.svg";
 import notifyRegenerate from "./order recreated.svg";
 import notifyFaulty from "./faulty order.svg";
 
+import facebook from "./facebook.svg"
+import insta from "./instagram.svg"
+import twitter from "./twitter.svg"
 export default {
-  
+  twitter,
+  insta,
+  facebook,
   acceptsmall,
   esc,
   Iconioniciosalert1,

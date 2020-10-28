@@ -1607,11 +1607,59 @@ export class Buyerorder extends Component {
                         </Row>
                         </Col>
                     </Row>
-               
+                    {(item.openEnquiriesResponse.enquiryStageId >9) && (item.openEnquiriesResponse.isReprocess === null) ?
+<>
+                        <Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+                       
+                   <button className="completedenqButton"
+                                    //    onClick={this.CompleteOrderShow}
+                                       onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
+
+                                    //    disabled = {this.state.progressid != 10}
+                                        style={{border:"1px solid green"}}
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Found order as per requirement
+                                </button>
+                          {this.state.getSingleOrder.orderReceiveDate!=null?
+                          <>
+                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<4 
+                             ?
+                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
+                                             >
+                                raise a concern
+                                </button>here. </p>
+                                :
+                                ""
+                             }
+                          </>
+                          :
+                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
+                                             >
+                                raise a concern
+                                </button> here. </p>
+                          }
+                             
+                                     
+                                      
+                               
+
+                                </Col>
+                  </Row>
+</>
+:
+""}
                     </>
                     }
                   
-                
+                  
                   
                    {/* _________________________________________Modal_1________________________________________________ */}
                                           

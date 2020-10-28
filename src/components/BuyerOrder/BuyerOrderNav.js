@@ -95,7 +95,7 @@ export class BuyerOrderNav extends Component {
                           </Col>                            
                 </Row>
                 <Row>
-                    <hr className="enquiryoptionhr"></hr>
+                    {/* <hr className="enquiryoptionhr"></hr> */}
                 </Row>
                 {
                     this.state.ongoingEnquiry

@@ -284,7 +284,7 @@ export class ArtisanCompletedOrder extends Component {
                 } */}
                 </Col>
             </Row>
-            <hr/>
+           <br></br>
 
             {item.openEnquiriesResponse.enquiryStageId === 10 ?
 
@@ -556,7 +556,7 @@ export class ArtisanCompletedOrder extends Component {
                 } */}
                 </Col>
             </Row>
-            <hr/>
+            <br/>
             {item.openEnquiriesResponse.comment?
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>

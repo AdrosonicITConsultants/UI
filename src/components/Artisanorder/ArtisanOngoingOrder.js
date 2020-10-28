@@ -235,6 +235,8 @@ export class ArtisanOngoingOrder extends Component {
                 this.state.enquiryStagesAvailable.length > 0 && this.state.innerEnquiryStages.length > 0
                 ?
                 <>
+                   <br></br>
+                   <br></br>
                 {this. state.openEnquiries.length == 0
                 ?
                 <>
@@ -252,6 +254,7 @@ export class ArtisanOngoingOrder extends Component {
                 ?
                 <>
                 {/* for no change in product data */}
+             
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">

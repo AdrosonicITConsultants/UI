@@ -90,10 +90,12 @@ export class FaultResolved extends Component {
           })
       }
     backoperation(){
-     browserHistory.push("/buyerOrders")
+    //  browserHistory.push("/buyerOrders")
+    browserHistory.goBack(); 
             }
      backoperation2(){
-    browserHistory.push("/artisanOrders")
+        browserHistory.goBack(); 
+    // browserHistory.push("/artisanOrders")
                 }
     handleChange(e) {
         const { name, value } = e.target;

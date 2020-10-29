@@ -187,6 +187,7 @@ generateEnquiry(item){
                           <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
                         <Col className="col-xs-4">
+                          {/* {console.log(this.state.proddata.madeWithAnthran)} */}
                           {this.state.proddata.productStatusId == 2 
                           ?
                           <Row    className="stockmargin">
@@ -197,8 +198,11 @@ generateEnquiry(item){
                                 In Stock
                                 </Col>
                                 <Col className="text-center">
-                                <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
-                                </Col>
+                                {this.state.proddata.madeWithAnthran == 0? 
+                        <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
+                        :
+                        <img className="logoincard " src={logos.antaranCoDesignLogo}  alt="Card image cap"/>
+                      }                                </Col>
                           </Row>
                         
                         :
@@ -210,7 +214,7 @@ generateEnquiry(item){
                         Made to order
                         </Col>
                         <Col className="text-center">
-                        {this.state.proddata.madewithAntaran == 0? 
+                        {this.state.proddata.madeWithAnthran == 0? 
                         <img className="logoincard " src={logos.artisianSelfLogo}  alt="Card image cap"/>
                         :
                         <img className="logoincard " src={logos.antaranCoDesignLogo}  alt="Card image cap"/>

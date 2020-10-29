@@ -287,7 +287,7 @@ export default class BuyerAdvancePayment extends Component {
       }
     
       backoperation(){
-          browserHistory.push("/buyerEnquiryDetails?code="+this.state.enquiryCode)
+          browserHistory.goBack()
       }
     
     render(){

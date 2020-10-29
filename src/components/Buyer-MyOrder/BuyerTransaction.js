@@ -210,19 +210,22 @@ export class BuyerTransaction extends Component {
       
       gotoTaxInvoice(eid){
         localStorage.setItem("piShow", 1);
-        browserHistory.push("/buyerorder?code="+eid)
+        // browserHistory.push("/buyerorder?code="+eid)
+        var win = window.open("./buyerorder?code="+eid, '_blank');
+        win.focus();
        }
     gotoEnquiry(enquiryId){
         localStorage.setItem("piShow", 1);
-        browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
+        // browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
+        var win = window.open("./buyerEnquiryDetails?code="+enquiryId, '_blank');
+        win.focus();
     }
     
     uploadagain(enquiryId){
         browserHistory.push("/payadvance?code="+enquiryId)
     }
     componentDidMount(){
-   
-        TTCEapi.getTransactionStatus().then((response)=>{
+               TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
          this.setState({

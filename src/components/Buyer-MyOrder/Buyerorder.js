@@ -105,6 +105,8 @@ export class Buyerorder extends Component {
 
 
     FaultyOrder(id){
+        localStorage.removeItem("faulty");
+        localStorage.setItem("faulty", "buyerorder");
         browserHistory.push("/faulty?orderid="+id)
     }
         ToggleDelete22 = (id) => {
@@ -343,7 +345,7 @@ export class Buyerorder extends Component {
         });
         }
         backoperation(){
-        browserHistory.goBack(); 
+            browserHistory.push("/buyerOrders"); 
         } 
         handleCluster(e) {
 
@@ -459,6 +461,13 @@ export class Buyerorder extends Component {
         }
         
         componentDidMount(){
+           
+     var orderDetail = localStorage.getItem('piShow');
+    console.log(orderDetail)
+    if (localStorage.getItem('piShow')== 1) {
+       this.qualityCheckbtn()
+    }
+    localStorage.removeItem("piShow");
         window.scrollTo(0, 0);
         let params = queryString.parse(this.props.location.search);
         this.state.enquiryCode = params.code;
@@ -1082,15 +1091,15 @@ export class Buyerorder extends Component {
                                 </button>
                           {this.state.getSingleOrder.orderReceiveDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,3)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
+                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<4 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
                                              onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
                                              >
                                 raise a concern
-                                </button> after making it as delivered. </p>
+                                </button>here. </p>
                                 :
                                 ""
                              }
@@ -1101,7 +1110,7 @@ export class Buyerorder extends Component {
                                              onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
                                              >
                                 raise a concern
-                                </button> after making it as delivered. </p>
+                                </button> here. </p>
                           }
                              
                                      
@@ -1598,11 +1607,59 @@ export class Buyerorder extends Component {
                         </Row>
                         </Col>
                     </Row>
-               
+                    {(item.openEnquiriesResponse.enquiryStageId >9) && (item.openEnquiriesResponse.isReprocess === null) ?
+<>
+                        <Row noGutters={true}>
+                      <Col className="col-xs-12" style={{textAlign:"center"}}>
+                       
+                   <button className="completedenqButton"
+                                    //    onClick={this.CompleteOrderShow}
+                                       onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
+
+                                    //    disabled = {this.state.progressid != 10}
+                                        style={{border:"1px solid green"}}
+                                       >
+                                       <img src={logos.completedenq} className="completeenqimg" 
+                                       ></img>
+                                Found order as per requirement
+                                </button>
+                          {this.state.getSingleOrder.orderReceiveDate!=null?
+                          <>
+                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<4 
+                             ?
+                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
+                                             >
+                                raise a concern
+                                </button>here. </p>
+                                :
+                                ""
+                             }
+                          </>
+                          :
+                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
+                                             >
+                                raise a concern
+                                </button> here. </p>
+                          }
+                             
+                                     
+                                      
+                               
+
+                                </Col>
+                  </Row>
+</>
+:
+""}
                     </>
                     }
                   
-                
+                  
                   
                    {/* _________________________________________Modal_1________________________________________________ */}
                                           

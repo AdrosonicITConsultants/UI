@@ -159,6 +159,8 @@ class AntaranProductCategories extends Component {
                              {this.state.item1 = true} 
 
                                 {this.state.products.map((item) =>
+                                <>
+                                {item.madeWithAnthran==1?
                                 <div>
                                     {this.state.clusterid == -1 
                                         ? 
@@ -183,7 +185,9 @@ class AntaranProductCategories extends Component {
                                     }
                                        
                                        </div>
-                                )}
+                                :null}
+                                </>
+                               )}
                                 {this.state.item1 != true
                                 ?
                                 <>

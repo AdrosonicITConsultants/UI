@@ -169,6 +169,8 @@ class ProductRegions extends Component {
                              <Row noGutters="true"> 
                              {this.state.item1 = true} 
                                 {this.state.products.map((item) =>
+                                <>
+                                 {item.madeWithAnthran==0?
                                 <div>
                                     {this.state.productCategoryid == -1 
                                         ? 
@@ -200,7 +202,10 @@ class ProductRegions extends Component {
                                     }
                                        
                                        </div>
-                                )}
+                               :
+                               null}
+                               </>
+                               )}
                                 {this.state.item1 != true
                                 ?
                                 <>

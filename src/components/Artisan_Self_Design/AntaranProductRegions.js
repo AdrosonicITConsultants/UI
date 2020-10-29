@@ -170,6 +170,8 @@ class AntaranProductRegions extends Component {
                              <Row noGutters="true"> 
                              {this.state.item1 = true} 
                                 {this.state.products.map((item) =>
+                                <>
+                                {item.madeWithAnthran==1?
                                 <div>
                                     {this.state.productCategoryid == -1 
                                         ? 
@@ -195,6 +197,9 @@ class AntaranProductRegions extends Component {
                                     }
                                        
                                        </div>
+                               :null
+                               }
+                               </>
                                 )}
                                 {this.state.item1 != true
                                 ?

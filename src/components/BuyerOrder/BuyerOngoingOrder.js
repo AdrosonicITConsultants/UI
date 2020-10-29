@@ -67,7 +67,7 @@ export class BuyerOngoingOrder extends Component {
     document.getElementById('id01').style.display='none';
     } 
     FaultyOrder(id){
-        browserHistory.push("/faulty?orderid="+id)
+         browserHistory.push("/faulty?orderid="+id)
     }
     CompleteOrderShow = (id) => {
         console.log(this.state.currentDate);
@@ -1461,7 +1461,7 @@ export class BuyerOngoingOrder extends Component {
                                                  onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
                                                  >
                                     raise a concern
-                                    </button> after making it as delivered. </p>                               */}
+                                    </button> here. </p>                               */}
 
 
 
@@ -1475,7 +1475,7 @@ export class BuyerOngoingOrder extends Component {
                                              onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
                                              >
                                 raise a concern
-                                </button> after making it as delivered. </p>
+                                </button> here. </p>
                                 :
                                 ""
                              }
@@ -1486,7 +1486,7 @@ export class BuyerOngoingOrder extends Component {
                                              onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
                                              >
                                 raise a concern
-                                </button> after making it as delivered. </p>
+                                </button> here. </p>
                           }
                                       </Col>
                   </Row>

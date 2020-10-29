@@ -31,18 +31,9 @@ export default class Footer extends Component {
                   <br />
 
                   <span className="col-md-6">
-                    <i
-                      className="col-md-1 col-sm-1 fa fa-facebook"
-                      style={{ color: "white" }}
-                    ></i>
-                    <i
-                      className="col-md-1 col-sm-1 fa fa-instagram"
-                      style={{ color: "white" }}
-                    ></i>
-                    <i
-                      className="col-md-1 col-sm-1 fa fa-twitter"
-                      style={{ color: "white" }}
-                    ></i>
+                   <img src={logos.facebook} style={{height:"25px",marginRight:"10px"}}/>                    
+                   <img src={logos.insta} style={{height:"25px",marginRight:"10px"}}/>
+                   <img src={logos.twitter} style={{height:"25px",marginRight:"10px"}}/>
                   </span>
                   <br />
                   <br />

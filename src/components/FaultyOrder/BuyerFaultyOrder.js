@@ -100,7 +100,8 @@ export class BuyerFaultyOrder extends Component {
      
            
     backoperation(){
-        browserHistory.push("/buyerOrders"); 
+        // browserHistory.push("/buyerOrders"); 
+        browserHistory.goBack(); 
     }
 
     handleChange(e) {

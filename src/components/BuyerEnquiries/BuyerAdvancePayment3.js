@@ -35,7 +35,8 @@ export class BuyerAdvancePayment3 extends Component {
  
     
     BacktoPreview(){
-    browserHistory.push("/buyerEnquiryDetails?code="+this.props.enquiryId)
+    // browserHistory.push("/buyerEnquiryDetails?code="+this.props.enquiryId)
+    browserHistory.goBack()
     }
     // componentDidMount(){
     //     console.log(this.props.enquiryId);

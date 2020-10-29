@@ -12,7 +12,8 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 const customStyles3 = {
   content: {
     top: "33%",
@@ -72,7 +73,7 @@ const initialState = {
   SaveDisabled:false
 };
 
-export default class addProduct extends Component {
+ class addProduct extends Component {
                  constructor(props) {
                    super(props);
                    this.myRefAddPhoto = React.createRef();  
@@ -946,7 +947,8 @@ relatedProductTemp[e.target.name] = option;
                                    className="col-11"
                                  >
                                    <h1 className="mainheading">
-                                     Add a new product
+                                     {/* Add a new product */}
+                                     {this.props.t("Pages.object.Add a new product")}
                                    </h1>
                                  </Col>
                                </Row>
@@ -3121,3 +3123,4 @@ relatedProductTemp[e.target.name] = option;
                    );
                  }
                }
+               export default withTranslation()(addProduct);

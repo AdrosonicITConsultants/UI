@@ -7,7 +7,8 @@ import TTCEapi from "../../services/API/TTCEapi";
 import BuyerConnectedSuggestions from "./buyerSuggestions.js"
 import NotificationBuyerConnected from "./notificationBuyerCount.js"
 import ANavEnquiries from "../ArtistEnquiries/ANavEnquiry"
-
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
 import {
     Collapse,
@@ -273,7 +274,7 @@ browserHistory.push("/MyProfile");
                     className="navButtonImgA"
                     src={logos.addnewProduct}
                   ></img>
-                  <span className="navButtonImgA">Add a new Product</span>
+                  <span className="navButtonImgA">{this.props.t("Pages.object.Add a new product")}</span>
                 </button>
               )}
             </li>
@@ -633,4 +634,4 @@ browserHistory.push("/MyProfile");
                }
 
  const connectedLoginPage = connect(mapStateToProps)(NavbarComponent);
- export default connectedLoginPage;
+ export default withTranslation()(connectedLoginPage);

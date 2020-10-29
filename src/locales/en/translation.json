@@ -1,8 +1,11 @@
 {
-    "Register": {
+    "object": {
         "artist": "Artisan",
         "register": "Register",
         "haveID": "Do you have an Artisan ID?",
-        "contactus" :"If you don't have Artisan id get in touch with us."
+        "contactus" :"If you don't have Artisan id get in touch with us.",
+        "hello":"Hello",
+       "Add a new product":"Add a new product",
+       "My Orders":"My Orders"
     }
 }

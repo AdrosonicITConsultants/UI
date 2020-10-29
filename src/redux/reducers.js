@@ -13,7 +13,7 @@ const initialState = {
   userTypeId: null,
   data: null,
   searchData: [],
-  selectedLanguage: "en",
+  selectedLanguage: localStorage.getItem("langName"),
   productList :[],
 };
 

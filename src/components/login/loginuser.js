@@ -210,7 +210,7 @@ operation = (event) => {
             </Col>
             <Col className="col-xs-6 text-left googleLoginButton">
               <GoogleLogin
-              clientId="22783379582-7duulr04s1kuq8fnlgc93e518ju5nmbu.apps.googleusercontent.com"
+              clientId="22783379582-k6lub35ijaki3ku3dvi0flo0qkstds4f.apps.googleusercontent.com"
               buttonText="Login with Google"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}/>

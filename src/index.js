@@ -30,8 +30,8 @@ i18n.init({
     wait: true,
   },
   resources: resources,
-  lng: "en",
-  fallbackLng: "en",
+  lng: localStorage.getItem("langName"),
+  fallbackLng: localStorage.getItem("langName"),
   keySeparator: ".",
   debug: true,
   interpolation: {

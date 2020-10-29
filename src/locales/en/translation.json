@@ -1,8 +1,8 @@
 {
-    "Register": {
+    "object": {
         "artist": "Artisan",
         "register": "Register",
-        "haveID": "Do you have an Artisan ID?",
-        "contactus" :"If you don't have Artisan id get in touch with us."
+        "regHaveArtisanID": "Do you have an Artisan ID?",
+        "regArtisanIdGetTouch" :"If you don't have Artisan id get in touch with us."
     }
 }

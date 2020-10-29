@@ -61,7 +61,7 @@ import changeLang from "../../../services/utils/changeLang"
                  }
 
                  changeLang = (data) => {
-                   localStorage.setItem("langName", data);
+                   localStorage.setItem("i18nextLng", data);
                  }
 
                  render() {
@@ -95,11 +95,11 @@ import changeLang from "../../../services/utils/changeLang"
                                ></img>
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
-                                   {this.props.t("Pages.Register.register")}
+                                   {this.props.t("Pages.object.register")}
                                  </h2>
                                  <h4 className="margin-roletext">
                                    {" "}
-                                   {this.props.t("Pages.Register.artist")}
+                                   {this.props.t("Pages.object.artist")}
                                  </h4>
                                </div>
                              </div>
@@ -119,7 +119,7 @@ import changeLang from "../../../services/utils/changeLang"
                            >
                              <span className="col-xs-1"></span>
                              <span className="col-xs-10 fontplay">
-                               {this.props.t("Pages.Register.haveID")}
+                               {this.props.t("Pages.object.regHaveArtisanID")}
                              </span>
                            </Row>
 
@@ -203,7 +203,7 @@ import changeLang from "../../../services/utils/changeLang"
                            >
                              <span className="col-xs-2"></span>
                              <span className="col-xs-8">
-                               {this.props.t("Pages.Register.contactus")}
+                               {this.props.t("Pages.object.regArtisanIdGetTouch")}
                              </span>
                            </Row>
 

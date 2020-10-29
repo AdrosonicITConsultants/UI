@@ -157,6 +157,8 @@ class TTCEapi {
       .post(url, data, config)
       .then((response) => {
         if (response.data.valid) {
+          var language = localStorage.getItem("i18nextLng");
+          console.log(language);
           localStorage.clear();
           sessionStorage.clear();
           // remove user from local storage to log user out
@@ -166,6 +168,7 @@ class TTCEapi {
           const user = response.data.data.user;
           localStorage.setItem("jwtToken", token);
           localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("i18nextLng", language);
           setAuthorizationtoken(token);
 
           //  console.log(jwt.decode(token));

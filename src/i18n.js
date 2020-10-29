@@ -21,7 +21,7 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: localStorage.getItem("langName"),
+    fallbackLng: localStorage.getItem("i18nextLng"),
     debug: true,
     whitelist:Languages,
     interpolation: {

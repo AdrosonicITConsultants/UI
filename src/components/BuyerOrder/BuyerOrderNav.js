@@ -92,7 +92,8 @@ export class BuyerOrderNav extends Component {
                                    
                                </Row>
                                
-                          </Col>                            
+                          </Col>   
+                          <br/><br/>                         
                 </Row>
                 <Row>
                     {/* <hr className="enquiryoptionhr"></hr> */}

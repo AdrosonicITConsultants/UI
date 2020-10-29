@@ -219,7 +219,7 @@ import changeLang from "../../../services/utils/changeLang"
                              </div>
                            </Row>
                            <br />
-                           {/* <ButtonGroup aria-label="Basic example">
+                           <ButtonGroup aria-label="Basic example">
                              <Button
                                onClick={() => changeLang("hi")}
                                className="LangBtn"
@@ -234,7 +234,7 @@ import changeLang from "../../../services/utils/changeLang"
                              >
                                English
                              </Button>
-                           </ButtonGroup> */}
+                           </ButtonGroup>
                            <Row   className="mt7">
                              {/* <span className="col-xs-3 text-center line7 font6">
                     Help?

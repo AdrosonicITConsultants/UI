@@ -81,8 +81,8 @@ import BuyersProductDetails from '../Buyer-ProductDetails/Buyer-ProductDetails';
 <Row noGutters="true">
     {this.state.cluster ?
 this.state.filterArtisian.map((data,index) => {
-  {console.log(data)}
-  if (this.state.clusterid==data.clusterId)
+ 
+   if (this.state.clusterid==data.clusterId )
   return (
     <ArtisanCard
     key={index}
@@ -94,6 +94,7 @@ this.state.filterArtisian.map((data,index) => {
     />
  
   );
+   
  })
 
 :null}

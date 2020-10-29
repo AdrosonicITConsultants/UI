@@ -159,7 +159,11 @@ class ProductCategories extends Component {
                              {this.state.item1 = true} 
 
                                 {this.state.products.map((item) =>
+                               <>
+                                {item.madeWithAnthran==0?
+                                
                                 <div>
+                                    {/* {console.log(item)} */}
                                     {this.state.clusterid == -1 
                                         ? 
                                         <Col xs={12} sm={6} md={4}>
@@ -183,6 +187,10 @@ class ProductCategories extends Component {
                                     }
                                        
                                        </div>
+                                :
+                                null
+                            }
+                            </>
                                 )}
                                 {this.state.item1 != true
                                 ?

@@ -5,7 +5,8 @@ import "./artistLanding.css";
 import logos from "../../assets";
 import Productcatelog from "../Products/productcatelog"
 import TTCEapi from "../../services/API/TTCEapi";
-
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
  class artistLanding extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ import TTCEapi from "../../services/API/TTCEapi";
                   <div className="artistbg1 ">
                     <Row noGutters={true}>
                       <Col className="text-center greetingName">
-                        Hello {this.props.user.firstName}
+                      {this.props.t("Pages.object.hello")}  {this.props.user.firstName}
                       </Col>
                     </Row>
                     <Row noGutters={true}>
@@ -64,9 +65,10 @@ import TTCEapi from "../../services/API/TTCEapi";
                 </Row>
                 <Row className="">
                   <Col sm={{ size: "12" }} className="mt40">
-                    <span className="text1A ">Your Products</span>
+                    <span className="text1A ">{this.props.t("Pages.object.your products")}</span>
                     <span className="text2A col-sm-12 col-md-12">
-                      List of your very own products
+                     
+                      {this.props.t("Pages.object.List of your very own products")}
                     </span>
                   </Col>
                 </Row>
@@ -109,4 +111,5 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(artistLanding);
-export default connectedLoginPage;
+// export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

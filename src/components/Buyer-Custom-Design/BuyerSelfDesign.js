@@ -855,6 +855,7 @@ relatedProductTemp[e.target.name] = option;
                                  >
                                    <h1 className="mainheading">
                                      Add a new product
+                                    
                                    </h1>
                                  </Col>
                                </Row>

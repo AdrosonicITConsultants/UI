@@ -7,11 +7,11 @@ import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";
 import { memoryHistory, browserHistory } from "../../helpers/history";
-
+import { useTranslation, withTranslation } from "react-i18next";
 import TTCEapi from '../../services/API/TTCEapi';
 // import "./ProductCategories.css"
 
-export class ArtisanProductOfSearch extends Component {
+ class ArtisanProductOfSearch extends Component {
     constructor(props) {
         super(props);
 
@@ -72,7 +72,8 @@ export class ArtisanProductOfSearch extends Component {
                             onClick={() => this.editProduct(this.state.proddata.id)}
                             class="text"
                         >
-                            Edit product
+                            {/* Edit product2 */}
+                            {this.props.t("Pages.object.Edit Product")}
                         </div>
                     </div>    
                     : null
@@ -124,4 +125,5 @@ export class ArtisanProductOfSearch extends Component {
     }
 }
 
-export default ArtisanProductOfSearch
+// export default withTranslation()(ArtisanProductOfSearch);
+export default withTranslation()(ArtisanProductOfSearch);

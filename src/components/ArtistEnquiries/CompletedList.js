@@ -7,9 +7,10 @@ import logos from "../../assets";
 import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
+import { useTranslation, withTranslation } from "react-i18next";
 
 
-export class CompletedList extends Component {
+ class CompletedList extends Component {
     constructor(props) {
         super(props);
     
@@ -88,7 +89,7 @@ export class CompletedList extends Component {
                  ?
                  <>
                  
-                <hr></hr>
+                <br></br>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">
@@ -161,11 +162,11 @@ export class CompletedList extends Component {
                                           {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.openEnquiriesResponse.productCode}   
+                                          {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productCode}   
                                           </>
                                           :
                                           <>
-                                          Product Code : NA  
+                                          {this.props.t("Pages.object.Product Code")} : NA  
                                           </>
                                           }
                                                                             
@@ -183,7 +184,7 @@ export class CompletedList extends Component {
                                   </div>
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqprodbn ">{this.props.t("Pages.object.Brand Name")} : </span>
                                           <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                       </Col>
                                   </div>
@@ -192,7 +193,7 @@ export class CompletedList extends Component {
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
-                                      Order Amount
+                                      {this.props.t("Pages.object.Order Amount")}
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
@@ -202,7 +203,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
-                                      Date Started : 
+                                      {this.props.t("Pages.object.Date started")} : 
                                       <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
@@ -210,7 +211,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
+                                      {this.props.t("Pages.object.Last updated")} : 
                                       <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
@@ -219,7 +220,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
+                                      {this.props.t("Pages.object.Est Date of delivery")} : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="DD-MM-YYYY">
@@ -246,7 +247,8 @@ export class CompletedList extends Component {
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           {this.props.t("Pages.object.Enquiry Status")}
+
                            </Col>
                        </Row>
                     </Col>
@@ -373,7 +375,7 @@ export class CompletedList extends Component {
                                 <div>
                                   <div noGutters={true} >
                                       <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                      {this.props.t("Pages.object.Enquiry id")} : {item.openEnquiriesResponse.enquiryCode}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
@@ -395,11 +397,11 @@ export class CompletedList extends Component {
                                           {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                          {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productHistoryCode}   
                                           </>
                                           :
                                           <>
-                                          Product Code : NA  
+                                          {this.props.t("Pages.object.Product Code")} : NA  
                                           </>
                                           }
                                                                             
@@ -417,7 +419,7 @@ export class CompletedList extends Component {
                                   </div>
                                   <div noGutters={true} className="" >
                                       <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
+                                          <span className="leEnqprodbn ">{this.props.t("Pages.object.Brand Name")} : </span>
                                           <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                       </Col>
                                   </div>
@@ -426,7 +428,7 @@ export class CompletedList extends Component {
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
-                                      Order Amount
+                                      {this.props.t("Pages.object.Order Amount")}
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
@@ -436,7 +438,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
-                                      Date Started : 
+                                      {this.props.t("Pages.object.Date started")} : 
                                       <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
@@ -444,7 +446,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
+                                      {this.props.t("Pages.object.Last updated")} : 
                                       <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
@@ -453,7 +455,7 @@ export class CompletedList extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
+                                      {this.props.t("Pages.object.Est Date of delivery")} : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="DD-MM-YYYY">
@@ -480,7 +482,8 @@ export class CompletedList extends Component {
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           {this.props.t("Pages.object.Enquiry Status")}
+
                            </Col>
                        </Row>
                     </Col>
@@ -557,7 +560,7 @@ export class CompletedList extends Component {
                 {item.openEnquiriesResponse.userStatus === 1 ?
                 <Row>
                     <Col className="col-xs-12 text-center leEnqshowmore">
-                        <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details<img src={logos.Nextarrow} className="showmorearrow"></img></a>
+                        <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">{this.props.t("Pages.object.show more details")}<img src={logos.Nextarrow} className="showmorearrow"></img></a>
                     </Col>
                 </Row>
                 : null }
@@ -588,4 +591,6 @@ export class CompletedList extends Component {
     }
 }
 
-export default CompletedList
+// export default CompletedList
+export default withTranslation()(CompletedList);
+

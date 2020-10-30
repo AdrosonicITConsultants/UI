@@ -5,8 +5,8 @@ import logos from "../../assets";
 import "./product.css";
 import TTCEapi from "../../services/API/TTCEapi";
 import { browserHistory } from "../../helpers/history";
-
-
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
 
  class Product extends Component {
@@ -93,7 +93,7 @@ import { browserHistory } from "../../helpers/history";
                      onClick={() => this.editProduct(productList)}
                      class="text"
                    >
-                     Edit product
+                    {this.props.t("Pages.object.Edit Product")}
                    </div>
                  </div>
                </div>
@@ -114,4 +114,5 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(Product);
-export default connectedLoginPage;
+// export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

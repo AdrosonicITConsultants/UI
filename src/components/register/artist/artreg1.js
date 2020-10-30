@@ -6,9 +6,6 @@ import { memoryHistory, browserHistory } from "../../../helpers/history";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang"
 
-
-
- 
  class artreg1 extends Component {
                  constructor(props) {
                    // const { t } = useTranslation();

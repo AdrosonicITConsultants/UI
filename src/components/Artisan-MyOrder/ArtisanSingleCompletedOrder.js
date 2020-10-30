@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
-import { ArtisanTransaction } from './ArtisanTransaction';
+import  ArtisanTransaction  from './ArtisanTransaction';
 import { PIchange } from './PIChange';
 import { PreviewOldchanges } from './PreviewOldchanges';
 import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
@@ -22,8 +22,10 @@ import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 import ArtisanQC from './ArtisanQC';
-import { ArtisanCompletedTransaction } from './ArtisanCompletedTransactions';
-export class ArtisanSingleCompletedOrder extends Component {
+import  ArtisanCompletedTransaction  from './ArtisanCompletedTransactions';
+import { useTranslation, withTranslation } from "react-i18next";
+
+ class ArtisanSingleCompletedOrder extends Component {
     constructor() {
         super();
 
@@ -449,7 +451,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                         {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
-                                Converted to order on :
+                            {this.props.t("Pages.object.Converted to order on")} :
                                 <Moment format="DD-MM-YYYY">
                                 {item.openEnquiriesResponse.orderCreatedOn}
                                 </Moment>     
@@ -480,7 +482,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                             </div> */}
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
-                                                Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
+                                                {this.props.t("Pages.object.Enquiry id")} : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
                                                 </Col>
                                             </div>
                                             <div noGutters={true} >
@@ -500,7 +502,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                             
                                         <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                             <Moment format="DD-MM-YYYY">
                                                 {item.openEnquiriesResponse.startedOn}
                                                 </Moment>
@@ -527,7 +529,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                 <Col sm="3" className="text-right">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
-                                        Order Amount
+                                        {this.props.t("Pages.object.Order Amount")}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -537,7 +539,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>                                    
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
-                                        Last Updated : 
+                                        {this.props.t("Pages.object.Last updated")} : 
                                         <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
@@ -546,7 +548,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
+                                        {this.props.t("Pages.object.Est Date of delivery")} : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
@@ -568,7 +570,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -578,7 +580,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-8 leEnqstatus bold">
-                            Order Status
+                            {this.props.t("Pages.object.Order Status")}
                             </Col>
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
@@ -731,7 +733,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                         <Col className="col-xs-10">
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
-                                    Converted to order on :
+                                {this.props.t("Pages.object.Converted to order on")} :
                                     <Moment format="DD-MM-YYYY">
                                     {item.openEnquiriesResponse.orderCreatedOn}
                                     </Moment>     
@@ -763,7 +765,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="lesmallEnqid bold">
-                                        Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                        {this.props.t("Pages.object.Enquiry id")} : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -782,7 +784,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                   </div>
                                   <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
@@ -808,7 +810,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                 <Col sm="3" className="text-right">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
-                                        Order Amount
+                                        {this.props.t("Pages.object.Order Amount")}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -818,7 +820,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
@@ -826,7 +828,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
-                                        Last Updated : 
+                                        {this.props.t("Pages.object.Last updated")} : 
                                         <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
@@ -835,7 +837,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
+                                        {this.props.t("Pages.object.Est Date of delivery")} : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
@@ -857,7 +859,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -869,7 +871,7 @@ export class ArtisanSingleCompletedOrder extends Component {
                         
                         <Row noGutters={true}>
                             <Col className="col-xs-8 leEnqstatus bold">
-                            Order Status
+                            {this.props.t("Pages.object.Order Status")}
                             </Col>
                             {item.openEnquiriesResponse.productStatusHistoryId == 2
                             ?
@@ -1311,3 +1313,4 @@ function mapStateToProps(state) {
     const { user } = state
     return { user };
 }
+export default withTranslation()(ArtisanSingleCompletedOrder);

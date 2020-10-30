@@ -5,6 +5,7 @@ import logos from "../../assets";
 import "./productcatelog.css";
 import Product from "./Product"
 import TTCEapi from "../../services/API/TTCEapi";
+import { useTranslation, withTranslation } from "react-i18next";
 
 class productcatelog extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class productcatelog extends Component {
                         </Col>
                         {/* <Col className="col-sm-4 col-md-4 hrline1"></Col> */}
                         <Col className="w10 col-sm-2 col-md-2 col-2 text-right">
-                          {items.products.length > 4 ? <span className="seemore"><a href ={"/products/?categoryid="+ items.productCategory.id + "&userid=" + this.props.id}  >See More</a></span> : null}
+                          {items.products.length > 4 ? <span className="seemore"><a href ={"/products/?categoryid="+ items.productCategory.id + "&userid=" + this.props.id}  >{this.props.t("Pages.object.see more")}</a></span> : null}
                          
                         </Col>
                       </Row>
@@ -128,5 +129,5 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(productcatelog);
-export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage) ;
 

@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
-import { ArtisanTransaction } from './ArtisanTransaction';
+import  ArtisanTransaction  from './ArtisanTransaction';
 import { PIchange } from './PIChange';
 import { PreviewOldchanges } from './PreviewOldchanges';
 import { ChangeRequest } from '../Buyer-MyOrder/ChangeRequest';
@@ -22,7 +22,9 @@ import { PreviewChangedPI } from './PreviewChangedPI';
 import { ArtisanChangeRequest } from './ArtisanChangeRequest';
 import ArtisanTaxInvoice from './ArtisanTaxInvoice';
 import ArtisanQC from './ArtisanQC';
-export class Artisanorder extends Component {
+import { useTranslation, withTranslation } from "react-i18next";
+
+ class Artisanorder extends Component {
     constructor() {
         super();
 
@@ -583,7 +585,7 @@ export class Artisanorder extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold  ">
                                    <Col md="12" className="col-xs-12">
-                                        Order Id : 
+                                   {this.props.t("Pages.object.Order Id")} : 
                                         {this.state.openEnquiries[0].openEnquiriesResponse.orderCode}
                                        </Col>
                                </Row>
@@ -603,7 +605,8 @@ export class Artisanorder extends Component {
                         {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
-                                Converted to order on :
+                                 
+                                {this.props.t("Pages.object.Converted to order on")}:
                                 <Moment format="DD-MM-YYYY">
                                 {item.openEnquiriesResponse.orderCreatedOn}
                                 </Moment>     
@@ -634,7 +637,7 @@ export class Artisanorder extends Component {
                                             </div> */}
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
-                                                Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
+                                                {this.props.t("Pages.object.Enquiry id")} : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
                                                 </Col>
                                             </div>
                                             <div noGutters={true} >
@@ -654,7 +657,7 @@ export class Artisanorder extends Component {
                             
                                         <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                             <Moment format="DD-MM-YYYY">
                                                 {item.openEnquiriesResponse.startedOn}
                                                 </Moment>
@@ -681,7 +684,7 @@ export class Artisanorder extends Component {
                                 <Col sm="3" className="text-right">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
-                                        Order Amount
+                                        {this.props.t("Pages.object.Order Amount")}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -691,7 +694,7 @@ export class Artisanorder extends Component {
                                     </div>                                    
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
-                                        Last Updated : 
+                                        {this.props.t("Pages.object.Last updated")} : 
                                         <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
@@ -700,7 +703,7 @@ export class Artisanorder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
+                                        {this.props.t("Pages.object.Est Date of delivery")} : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
@@ -726,9 +729,9 @@ export class Artisanorder extends Component {
                     <Row>
                      <Col className="col-xs-1"></Col>
                      <Col className="col-xs-4">
-                     <img src={logos.truck} className="truckimg"/>  Check
+                     <img src={logos.truck} className="truckimg"/>  {this.props.t("Pages.object.check")}
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
-                         delivery receipt</a>
+                     {this.props.t("Pages.object.delivery receipt")}</a>
                      </Col>
                      </Row>
                      </>
@@ -742,8 +745,8 @@ export class Artisanorder extends Component {
                     <>
                     <Row noGutters={true}>
                         <Col className="col-xs-offset-1 col-xs-11">
-                            <p className="orderRecreationP1TagStyle">Order under Recreation</p>
-                            <p className="orderRecreationP2TagStyle">Kindly keep updating buyer about the status of product over chat</p>
+                            <p className="orderRecreationP1TagStyle">{this.props.t("Pages.object.Order under Recreation")}</p>
+                            <p className="orderRecreationP2TagStyle">{this.props.t("Pages.object.Kindly keep updating buyer about the status of product over chat")}</p>
                         </Col>
                     </Row>
                     <hr/>
@@ -755,14 +758,14 @@ export class Artisanorder extends Component {
                     item.openEnquiriesResponse.isProductReturned === 1 ?
                     <>
                     <Col className="col-xs-2 col-xs-offset-1 text-center">
-                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Order received back"></input>
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Order received back")}></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
                     </>
                     :
                     <>
                     <Col className="col-xs-2 col-xs-offset-1 text-center">
-                        <input type="button" className="enqreqbtn" value ="Order received back" 
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.Order received back")}
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
@@ -771,7 +774,7 @@ export class Artisanorder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -786,10 +789,10 @@ export class Artisanorder extends Component {
                     {
                         (item.openEnquiriesResponse.isReprocess === null) && (item.openEnquiriesResponse.artisanReviewId === 2) ?
                            this.state.dispatchRCButtonDisable === true ?
-                            <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                            <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Mark order dispatched after recreation")}></input>
                             :
                             <div className="dispatchRCButton" onClick={() => this.orderRCFunction(item.openEnquiriesResponse.enquiryId)}>
-                                Order recreation
+                                {this.props.t("Pages.object.Order recreation")}
                             </div>
                         : null
                     }
@@ -797,7 +800,7 @@ export class Artisanorder extends Component {
                  <Col className="col-xs-4" style={{textAlign:"center"}}>            
                   <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                   <img src={logos.esc} className="raterevbtnimg"/> 
-                            Check concern raised by buyer
+                            {this.props.t("Pages.object.Check concern raised by buyer")}
                         </button>
                  </Col>
                 </Row>
@@ -812,10 +815,10 @@ export class Artisanorder extends Component {
                 <Row noGutters={true}>
                     <Col className="col-xs-offset-1 col-xs-11">
                         {this.state.dispatchRCButtonDisable === true ?
-                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Mark order dispatched after recreation")}></input>
                         :
                         <div className="dispatchRCButton" onClick={() => this.dispatchRCFunction(item.openEnquiriesResponse.enquiryId)}>
-                            Mark order dispatched after recreation
+                           {this.props.t("Pages.object.Mark order dispatched after recreation")}
                         </div>
                         }
                     </Col>
@@ -828,7 +831,7 @@ export class Artisanorder extends Component {
                         <Col className="col-xs-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-8 leEnqstatus bold">
-                            Order Status
+                            {this.props.t("Pages.object.Order Status")}
                             </Col>
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
@@ -1023,7 +1026,7 @@ export class Artisanorder extends Component {
                      className="blackButton"
                      onClick={this.ToggleDelete}
                     >
-                     Change Status
+                    {this.props.t("Pages.object.change status")}
                    </button>
                      }   
                    
@@ -1032,7 +1035,8 @@ export class Artisanorder extends Component {
                             <div>
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 CSheading">
-                                    Change Status
+                                {this.props.t("Pages.object.change status")}
+
                                 </Col>
                             </Row>
                             </div>
@@ -1166,7 +1170,7 @@ export class Artisanorder extends Component {
                         <Col className="col-xs-10">
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
-                                    Converted to order on :
+                                {this.props.t("Pages.object.Converted to order on")} :
                                     <Moment format="DD-MM-YYYY">
                                     {item.openEnquiriesResponse.orderCreatedOn}
                                     </Moment>     
@@ -1193,12 +1197,12 @@ export class Artisanorder extends Component {
                                     <div>
                                     <div noGutters={true} >
                                         <Col className="leEnqid bold">
-                                        Order Id : {item.openEnquiriesResponse.enquiryCode}
+                                       {this.props.t("Pages.object.Order Id")} : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="lesmallEnqid bold">
-                                        Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                        {this.props.t("Pages.object.Enquiry id")} : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -1217,7 +1221,7 @@ export class Artisanorder extends Component {
                                   </div>
                                   <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
@@ -1243,7 +1247,7 @@ export class Artisanorder extends Component {
                                 <Col sm="3" className="text-right">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
-                                        Order Amount
+                                        {this.props.t("Pages.object.Order Amount")}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -1253,7 +1257,7 @@ export class Artisanorder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidDateStarted">
-                                        Date Started : 
+                                        {this.props.t("Pages.object.Date started")} : 
                                         <Moment format="DD-MM-YYYY">
                                             {item.openEnquiriesResponse.startedOn}
                                             </Moment>
@@ -1261,7 +1265,7 @@ export class Artisanorder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidLastUpdated">
-                                        Last Updated : 
+                                        {this.props.t("Pages.object.Last updated")} : 
                                         <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.lastUpdated}
                                             </Moment>
@@ -1270,7 +1274,7 @@ export class Artisanorder extends Component {
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqidEstDelivery">
-                                        Est. Date of delivery : 
+                                        {this.props.t("Pages.object.Est Date of delivery")} : 
                                         {item.openEnquiriesResponse.excpectedDate != null 
                                         ?
                                         <Moment format="DD-MM-YYYY">
@@ -1295,9 +1299,9 @@ export class Artisanorder extends Component {
                      <Row>
                      <Col className="col-xs-1"></Col>
                      <Col className="col-xs-4">
-                     <img src={logos.truck} className="truckimg"/>  Check
+                     <img src={logos.truck} className="truckimg"/>  {this.props.t("Pages.object.check")}
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + this.state.enquiryCode + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
-                         delivery receipt</a>
+                     {this.props.t("Pages.object.delivery receipt")}</a>
                      </Col>
                      </Row>
                     </>
@@ -1311,8 +1315,8 @@ export class Artisanorder extends Component {
                     <>
                     <Row noGutters={true}>
                         <Col className="col-xs-offset-1 col-xs-11">
-                            <p className="orderRecreationP1TagStyle">Order under Recreation</p>
-                            <p className="orderRecreationP2TagStyle">Kindly keep updating buyer about the status of product over chat</p>
+                            <p className="orderRecreationP1TagStyle">{this.props.t("Pages.object.Order under Recreation")}</p>
+                            <p className="orderRecreationP2TagStyle"> {this.props.t("Pages.object.Kindly keep updating buyer about the status of product over chat")}</p>
                         </Col>
                     </Row>
                     <hr/>
@@ -1324,14 +1328,14 @@ export class Artisanorder extends Component {
                     item.openEnquiriesResponse.isProductReturned === 1 ?
                     <>
                     <Col className="col-xs-2 col-xs-offset-1 text-center">
-                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Order received back"></input>
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Order received back")}></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
                     </>
                     :
                     <>
                     <Col className="col-xs-2 col-xs-offset-1 text-center">
-                        <input type="button" className="enqreqbtn" value ="Order received back" 
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.Order received back")} 
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
@@ -1340,7 +1344,7 @@ export class Artisanorder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -1355,10 +1359,10 @@ export class Artisanorder extends Component {
                     {
                         (item.openEnquiriesResponse.isReprocess === null) && (item.openEnquiriesResponse.artisanReviewId === 2) ?
                            this.state.dispatchRCButtonDisable === true ?
-                            <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                            <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Mark order dispatched after recreation")}></input>
                             :
                             <div className="dispatchRCButton" onClick={() => this.orderRCFunction(item.openEnquiriesResponse.enquiryId)}>
-                                Order recreation
+                                {this.props.t("Pages.object.Order recreation")}
                             </div>
                         : null
                     }
@@ -1366,7 +1370,7 @@ export class Artisanorder extends Component {
                  <Col className="col-xs-4" style={{textAlign:"center"}}>            
                   <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
                   <img src={logos.esc} className="raterevbtnimg"/> 
-                            Check concern raised by buyer
+                  {this.props.t("Pages.object.Check concern raised by buyer")}
                         </button>
                  </Col>
                 </Row>
@@ -1381,10 +1385,10 @@ export class Artisanorder extends Component {
                 <Row noGutters={true}>
                     <Col className="col-xs-offset-1 col-xs-11">
                         {this.state.dispatchRCButtonDisable === true ?
-                        <input type="button" className="orderReceivedDisableButtonStyle" value ="Mark order dispatched after recreation"></input>
+                        <input type="button" className="orderReceivedDisableButtonStyle" value ={this.props.t("Pages.object.Mark order dispatched after recreation")}></input>
                         :
                         <div className="dispatchRCButton" onClick={() => this.dispatchRCFunction(item.openEnquiriesResponse.enquiryId)}>
-                            Mark order dispatched after recreation
+                           {this.props.t("Pages.object.Mark order dispatched after recreation")}
                         </div>
                         }
                     </Col>
@@ -1398,7 +1402,7 @@ export class Artisanorder extends Component {
                         
                         <Row noGutters={true}>
                             <Col className="col-xs-8 leEnqstatus bold">
-                            Order Status
+                            {this.props.t("Pages.object.Order Status")}
                             </Col>
                             {item.openEnquiriesResponse.productStatusHistoryId == 2
                             ?
@@ -1589,7 +1593,8 @@ export class Artisanorder extends Component {
                      className="blackButton"
                      onClick={this.ToggleDelete}
                     >
-                     Change Status
+                                         {this.props.t("Pages.object.change status")}
+
                    </button>
                      }   
                    
@@ -1598,7 +1603,8 @@ export class Artisanorder extends Component {
                             <div>
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 CSheading">
-                                    Change Status
+                                {this.props.t("Pages.object.change status")}
+
                                 </Col>
                             </Row>
                             </div>
@@ -2071,3 +2077,4 @@ function mapStateToProps(state) {
     const { user } = state
     return { user };
 }
+export default withTranslation()(Artisanorder);

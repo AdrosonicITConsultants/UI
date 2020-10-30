@@ -7,7 +7,8 @@ import TTCEapi from "../../services/API/TTCEapi";
 import BuyerConnectedSuggestions from "./buyerSuggestions.js"
 import NotificationBuyerConnected from "./notificationBuyerCount.js"
 import ANavEnquiries from "../ArtistEnquiries/ANavEnquiry"
-
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
 import {
     Collapse,
@@ -273,7 +274,7 @@ browserHistory.push("/MyProfile");
                     className="navButtonImgA"
                     src={logos.addnewProduct}
                   ></img>
-                  <span className="navButtonImgA">Add a new Product</span>
+                  <span className="navButtonImgA">{this.props.t("Pages.object.Add a new product")}</span>
                 </button>
               )}
             </li>
@@ -305,7 +306,8 @@ browserHistory.push("/MyProfile");
                       src={logos.myOrder}
                     ></img>
                     <span className="myorder1 myorderwidth col-md-12 col-sm-12">
-                      My Orders
+                      {/* My Orders */}
+                      {this.props.t("Pages.object.My Orders")}
                     </span>
                   </>
                 )}
@@ -320,7 +322,7 @@ browserHistory.push("/MyProfile");
                 src={logos.searchlogo}
               ></img>
               {userTypeId === 1 ? (
-                <span className="myorder col-md-12 col-sm-12">Search</span>
+                <span className="myorder col-md-12 col-sm-12"> {this.props.t("Pages.object.Search")}</span>
               ) : null}
             </li>
 
@@ -393,7 +395,7 @@ browserHistory.push("/MyProfile");
                 </a>
               )}
               {userTypeId === 1 ? (
-                <span className="myorder col-md-12 col-sm-12">Chat</span>
+                <span className="myorder col-md-12 col-sm-12">{this.props.t("Pages.object.chat")}</span>
               ) : null}
             </li>
 
@@ -433,7 +435,7 @@ browserHistory.push("/MyProfile");
               )}
               {userTypeId === 1 ? (
                 <span className="myorder col-md-12 col-sm-12">
-                  Notifications
+                  {this.props.t("Pages.object.notification")}
                 </span>
               ) : null}
             </li>
@@ -452,7 +454,7 @@ browserHistory.push("/MyProfile");
                   onClick={this.myenquiries}
                 >
                   <img className="navButtonImg1" src={logos.receipticon}></img>
-                  <span className="navButtonImg">My Enquiries</span>
+                  <span className="navButtonImg">{this.props.t("Pages.object.my enquiry")}</span>
                 </button>
               )}
               {this.state.enquiryopen
@@ -517,10 +519,16 @@ browserHistory.push("/MyProfile");
                       src={logos.accountcircleicon}
                     ></img>
                   </span>
-
+                  {userTypeId == 2 ? (
                   <a className=" text-left " onClick={this.myProfile}>
                     My Profile
                   </a>
+                  ):
+                  (
+                    <a className=" text-left " onClick={this.myProfile}>
+                   {this.props.t("Pages.object.my profile")}
+                  </a> 
+                  )}
                 </li>
                 {userTypeId == 2 ? (
                    <li className="menu-item">
@@ -542,7 +550,7 @@ browserHistory.push("/MyProfile");
                   ></img>
                 </span>
 
-                <a href="/TransactionList">Transactions</a>
+                <a href="/TransactionList"> {this.props.t("Pages.object.transactions")}</a>
               </li>}
                
                 {userTypeId == 2 ? (
@@ -565,7 +573,10 @@ browserHistory.push("/MyProfile");
                       ></img>
                     </span>
 
-                    <a href="/artisanOrders">My orders</a>
+                    <a href="/artisanOrders">
+                      {/* My orders2 */}
+                      {this.props.t("Pages.object.My Orders")}
+                      </a>
                   </li>}
                  {userTypeId == 2 ? (
                   <li className="menu-item">
@@ -590,7 +601,7 @@ browserHistory.push("/MyProfile");
 
                   {userTypeId === 2 ?
                   <a href={this.buyerDashboard()}>Dashboard</a> : 
-                  <a href={this.artisanDashboard()}>Dashboard</a>
+                  <a href={this.artisanDashboard()}>{this.props.t("Pages.object.dashboard")}</a>
                   }
 
                   
@@ -599,9 +610,13 @@ browserHistory.push("/MyProfile");
                   <span className="col-md-2  col-xs-2  col-sm-2">
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
-
+                  {userTypeId === 2 ?
                   <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
-            target="_blank">Support</a>
+            target="_blank">Support </a>
+            :
+            <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+            target="_blank"> {this.props.t("Pages.object.support")}</a>
+            }
                 </li>
                 {isAuthenticated ? (
                   <li className="menu-item">
@@ -612,7 +627,11 @@ browserHistory.push("/MyProfile");
                         src={logos.logouticon}
                       ></img>
                     </span>
+                    {userTypeId === 2 ?
                     <a onClick={this.logout}>Logout</a>
+                    :
+                    <a onClick={this.logout}>{this.props.t("Pages.object.logout")}</a>
+                    }
                   </li>
                 ) : null}
               </ol>
@@ -633,4 +652,4 @@ browserHistory.push("/MyProfile");
                }
 
  const connectedLoginPage = connect(mapStateToProps)(NavbarComponent);
- export default connectedLoginPage;
+ export default withTranslation()(connectedLoginPage);

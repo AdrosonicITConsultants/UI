@@ -3,9 +3,9 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-export default class artreg4 extends Component {
+class artreg4 extends Component {
     constructor() {
         super();
         this.state = {
@@ -170,9 +170,9 @@ export default class artreg4 extends Component {
                     ></img>
                     <div>
                       <h3 className="col-xs-6 margin-registertext text-left">
-                        Register
+                      {this.props.t("Pages.object.register")}
                       </h3>
-                      <h4 className="margin-roletext1">Artisan</h4>
+                      <h4 className="margin-roletext1">{this.props.t("Pages.object.artist")}</h4>
                     </div>
                   </div>
 
@@ -188,7 +188,7 @@ export default class artreg4 extends Component {
                   <span className="col-xs-10">
                     {/* <img src={logos.locklogo}   
                     className="locklogo1 glyphicon mr-5"></img> */}
-                    <span className = "fontplay">ARTISAN ID : </span>{this.props.weaverid}
+                    <span className = "fontplay">{this.props.t("Pages.object.regArtisanID")} : </span>{this.props.weaverid}
                   </span>
                 </Row>
                 <br></br>
@@ -199,7 +199,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        First Name
+                      {this.props.t("Pages.object.regFirstName")}
                       </label>
                       <strong className="requiredStar">*</strong>
 
@@ -226,7 +226,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Last Name
+                      {this.props.t("Pages.object.regLastName")}
                       </label>
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -251,7 +251,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Pin Code
+                      {this.props.t("Pages.object.regPinCode")}
                       </label>
                       <strong className="requiredStar">*</strong>
                       <div className="inner-addon">
@@ -277,7 +277,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Cluster
+                      {this.props.t("Pages.object.regCluster")}
                       </label>
                       <strong className="requiredStar">*</strong>
 
@@ -302,7 +302,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        District
+                      {this.props.t("Pages.object.regDistrict")}
                       </label>
                       <div className="inner-addon">
                         <input
@@ -322,7 +322,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        State
+                      {this.props.t("Pages.object.regState")}
                       </label>
                       <div className="inner-addon">
                         <input
@@ -342,7 +342,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Email ID
+                      {this.props.t("Pages.object.regEmailId")}
                       </label>
                       <strong className="requiredStar">*</strong>
 
@@ -369,7 +369,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Mobile Number
+                      {this.props.t("Pages.object.regMobileNumber")}
                       </label>
                       <strong className="requiredStar">*</strong>
 
@@ -396,7 +396,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        PAN No.
+                      {this.props.t("Pages.object.regPANNo")}
                       </label>
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -421,7 +421,7 @@ export default class artreg4 extends Component {
                       className="form-group1 text-left"
                     >
                       <label className="control-label padform text-left">
-                        Address
+                      {this.props.t("Pages.object.regAddress")}
                       </label>
                       <div className="inner-addon">
                         {/* <i className="glyphicon glyphicon-user"></i> */}
@@ -454,7 +454,7 @@ export default class artreg4 extends Component {
                   >
                     *
                   </strong>
-                  Fields are mandatory
+                  {this.props.t("Pages.object.regMandatoryFields")}
                 </div>
                 <hr className="hrline2"></hr>
 
@@ -464,15 +464,15 @@ export default class artreg4 extends Component {
                       className="blackButton"
                       onClick={() => this.operation()}
                     >
-                      Next
+                      {this.props.t("Pages.object.regNextButton")}
                     </button>
                   </div>
                 </Row>
                 
 
-                <Row   className="text-center line312 font2 mt17">
+                <Row   className="text-center line312 font2">
                   <span className="col-xs-2"></span>
-                  <span className="col-xs-8">Need Help? </span>
+                  <span className="col-xs-8"> {this.props.t("Pages.object.regNeedHelp")}</span>
                 </Row>
 
                 <Row   className="text-center line6 ">
@@ -491,40 +491,5 @@ export default class artreg4 extends Component {
         );
     }
 }
-// {
-//   "address": {
-//     "city": "",
-//     "country": "test",
-//     "district": "test",
-//     "id": 0,
-//     "landmark": "",
-//     "line1": "test",
-//     "line2": "",
-//     "pincode": "test",
-//     "state": "test",
-//     "street": ""
-//   },
-//   "alternateMobile": "",
-//   "buyerCompanyDetails": {
-//     "cin": "",
-//     "companyName": "",
-//     "contact": "",
-//     "gstNo": "",
-//     "id": 0,
-//     "logo": ""
-//   },
-//   "designation": "",
-//   "email": "test@gmail.com",
-//   "firstName": "test",
-//   "lastName": "test",
-//   "mobile": "7888788",
-//   "pancard": "test",
-//   "password": "222",
-//   "productCategoryIds": [
-//     0
-//   ],
-//   "refRoleId": 1,
-//   "socialMediaLink": "string",
-//   "weaverId": 123,
-//   "websiteLink": "string"
-// }
+
+export default withTranslation()(artreg4);

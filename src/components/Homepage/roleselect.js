@@ -14,11 +14,11 @@ export default class roleselect extends Component {
     
       artistopen() {
          this.props.handler(3);
-        
+         localStorage.setItem("selectedUserId", 1);
       } 
       buyeropen() {
         this.props.handler(1);
-       
+        localStorage.setItem("selectedUserId", 2);
      } 
     
      

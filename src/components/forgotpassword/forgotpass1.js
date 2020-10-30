@@ -6,11 +6,9 @@ import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { memoryHistory, browserHistory } from "../../helpers/history";
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-
-
-export default class forgotpass1 extends Component {
+class forgotpass1 extends Component {
                  constructor() {
                    super();
                    this.state = {
@@ -113,9 +111,15 @@ export default class forgotpass1 extends Component {
                                  onClick={() => this.backoperation()}
                                ></img>
                                <div>
+                               {localStorage.getItem("selectedUserId") == 1 ?
+                                 <h2 className="col-xs-6 margin-registertext">
+                                  {this.props.t("Pages.object.regResetWord")}
+                                 </h2>
+                                 :
                                  <h2 className="col-xs-6 margin-registertext">
                                    Reset
                                  </h2>
+                                }
                                  {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
@@ -123,7 +127,11 @@ export default class forgotpass1 extends Component {
                                  ) : (
                                    <h4 className="margin-roletext">Buyer</h4>
                                  )} */}
+                                 {localStorage.getItem("selectedUserId") == 1 ?
+                                 <h4 className="margin-roletext">{this.props.t("Pages.object.regPasswordWord")}</h4>
+                                 :
                                  <h4 className="margin-roletext">Password</h4>
+                                }
                                </div>
                              </div>
 
@@ -139,10 +147,15 @@ export default class forgotpass1 extends Component {
                              className="text-center line32 font3"
                            >
                              <span className="col-xs-1"></span>
-
+                             {localStorage.getItem("selectedUserId") == 1 ? 
+                             <span className="col-xs-10 fontplay">
+                               {this.props.t("Pages.object.regEnterEmailId")}
+                             </span>
+                             :
                              <span className="col-xs-10 fontplay">
                                Enter your email ID
                              </span>
+                            }
                            </Row>
 
                            <Row  >
@@ -155,6 +168,16 @@ export default class forgotpass1 extends Component {
                                    src={logos.emaillogo}
                                    className="maillogo glyphicon"
                                  ></img>
+                                 {localStorage.getItem("selectedUserId") == 1 ? 
+                                 <input
+                                   type="email"
+                                   id="emailid"
+                                   className="form-control BuyerLogin"
+                                   placeholder={this.props.t("Pages.object.regPlaceHolderEmail")}
+                                   name="emailid"
+                                   onChange={(e) => this.handleChange(e)}
+                                 />
+                                 :
                                  <input
                                    type="email"
                                    id="emailid"
@@ -163,6 +186,7 @@ export default class forgotpass1 extends Component {
                                    name="emailid"
                                    onChange={(e) => this.handleChange(e)}
                                  />
+                                 }
                                  {this.state.showValidation ? (
                                    <span className="bg-danger">
                                      please enter valid email ID
@@ -181,7 +205,9 @@ export default class forgotpass1 extends Component {
                                  disabled={this.state.isButtonDisabled}
                                  onClick={() => this.SendOtp()}
                                >
-                                 Send OTP
+                                 {localStorage.getItem("selectedUserId") == 1 ? 
+                                 this.props.t("Pages.object.regSendOTP")
+                                 : "Send OTP" }
                                </button>
                              </div>
                            </Row>
@@ -196,6 +222,16 @@ export default class forgotpass1 extends Component {
                                    src={logos.otplogo}
                                    className="otplogo glyphicon"
                                  ></img>
+                                 {localStorage.getItem("selectedUserId") == 1 ? 
+                                 <input
+                                   type="number"
+                                   id="otppin"
+                                   className="form-control BuyerLogin"
+                                   placeholder={this.props.t("Pages.object.regEnterRecOTP")}
+                                   name="otppin"
+                                   onChange={(e) => this.handleChange(e)}
+                                 />
+                                 :
                                  <input
                                    type="number"
                                    id="otppin"
@@ -204,7 +240,8 @@ export default class forgotpass1 extends Component {
                                    name="otppin"
                                    onChange={(e) => this.handleChange(e)}
                                  />
-                                 {this.state.showValidationpin ? (
+                                 }
+                                  {this.state.showValidationpin ? (
                                    <span className="bg-danger">
                                      please enter OTP
                                    </span>
@@ -224,7 +261,10 @@ export default class forgotpass1 extends Component {
                                  }}
                                  onClick={() => this.operation()}
                                >
-                                 Verify & proceed
+                                  {localStorage.getItem("selectedUserId") == 1 ? 
+                                 this.props.t("Pages.object.regVerifyProceed")
+                                 : "Verify & proceed" }
+                                 
                                </button>
                              </div>
                            </Row>
@@ -235,12 +275,30 @@ export default class forgotpass1 extends Component {
                              className="text-center line311 font3"
                            >
                              <span className="col-xs-2"></span>
+                             {localStorage.getItem("selectedUserId") == 1 ? 
+                             <span className="col-xs-8">
+                               {this.props.t("Pages.object.regCaseAnyHelp")}
+                             </span>
+                             :
                              <span className="col-xs-8">
                                In case of any help{" "}
                              </span>
+                             }
                            </Row>
 
                            <br />
+                           {localStorage.getItem("selectedUserId") == 1 ? 
+                           <Row  >
+                             <div className="col-xs-12 text-center">
+                               <button
+                                 className="whiteButton"
+                                 //   onClick={() => this.operation()}
+                               >
+                                 {this.props.t("Pages.object.regReachOut")}
+                               </button>
+                             </div>
+                           </Row>
+                           :
                            <Row  >
                              <div className="col-xs-12 text-center">
                                <button
@@ -251,14 +309,17 @@ export default class forgotpass1 extends Component {
                                </button>
                              </div>
                            </Row>
-
+                           }
+                           
+                           {localStorage.getItem("selectedUserId") == 1 ? 
                            <Row
                               
-                             className="text-center line6 mt37"
+                             className="text-center line6 mt20"
                            >
                              Change language
                              <img src={logos.language} className="ml-5"></img>
                            </Row>
+                           : null }
 
                            {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>
@@ -271,3 +332,5 @@ export default class forgotpass1 extends Component {
                    );
                  }
                }
+
+               export default withTranslation()(forgotpass1);

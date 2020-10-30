@@ -6,8 +6,9 @@ import logos from "../../assets";
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import TTCEapi from '../../services/API/TTCEapi';
+import { useTranslation, withTranslation } from "react-i18next";
 
-export default class buyeruser extends Component {
+class buyeruser extends Component {
   constructor() {
     super();
     this.state = {
@@ -104,7 +105,8 @@ operation = (event) => {
                 className="col-xs-2 margin-arrow arrowsize glyphicon"
                 onClick={() => this.backoperation()}
               ></img>
-              <h2 className="col-xs-6 margin-login">Login</h2>
+              <h2 className="col-xs-6 margin-login">
+                {this.props.userpage == 1 ? "Login" : this.props.t("Pages.object.regLogin")}</h2>
             </div>
 
             <img
@@ -137,7 +139,7 @@ operation = (event) => {
                     className="cicrleLogo"
                     alt="artist TataTrusts logo"
                   ></img>
-                  <div className="circleText">Artisan</div>
+                  <div className="circleText">{this.props.t("Pages.object.artist")}</div>
                 </i>
               </div>
             )}
@@ -152,7 +154,10 @@ operation = (event) => {
             <Row  >
               <span className="col-xs-1"></span>
               <span className="col-xs-10 text-center font13">
-                Enter your registered mobile number or email id
+              {this.props.userpage == 1 ?
+                "Enter your registered mobile number or email id" :
+                this.props.t("Pages.object.regMobileEmailLogin")
+              }
               </span>
             </Row>
             <Row  >
@@ -168,7 +173,7 @@ operation = (event) => {
                     type="text"
                     id="userName"
                     className="form-control BuyerLogin"
-                    placeholder="Username"
+                    placeholder={this.props.userpage == 1 ? "Username" : this.props.t("Pages.object.regUsername")}
                     name="userName"
                     onChange={(e) => this.handleChange(e)}
                   />
@@ -192,8 +197,10 @@ operation = (event) => {
                 className="blackButton"
                 // onClick={() => this.operation()}
                 // onClick={() => this.operation()}
-              >
-                Next
+              >{this.props.userpage == 1 ?
+                "Next" :
+                this.props.t("Pages.object.regNextButton")
+              }
               </button>
             </div>
           </Row>
@@ -278,3 +285,5 @@ operation = (event) => {
     );
   }
 }
+
+export default withTranslation()(buyeruser);

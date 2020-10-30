@@ -77,7 +77,15 @@ export default class forgotpass2 extends Component {
                       onClick={() => this.backoperation()}
                     ></img>
                     <div>
-                      <h2 className="col-xs-6 margin-registertext">Reset</h2>
+                      {localStorage.getItem("selectedUserId") == 1 ?
+                        <h2 className="col-xs-6 margin-registertext">
+                          {this.props.t("Pages.object.regResetWord")}
+                        </h2>
+                        :
+                        <h2 className="col-xs-6 margin-registertext">
+                          Reset
+                        </h2>
+                      }
                       {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
@@ -85,7 +93,11 @@ export default class forgotpass2 extends Component {
                                  ) : (
                                    <h4 className="margin-roletext">Buyer</h4>
                                  )} */}
-                      <h4 className="margin-roletext">Password</h4>
+                      {localStorage.getItem("selectedUserId") == 1 ?
+                        <h4 className="margin-roletext">{this.props.t("Pages.object.regPasswordWord")}</h4>
+                        :
+                        <h4 className="margin-roletext">Password</h4>
+                      }
                     </div>
                   </div>
 
@@ -103,7 +115,10 @@ export default class forgotpass2 extends Component {
                       src={logos.locklogo}
                       className="locklogo1 glyphicon mr-5"
                     ></img>
-                    Enter your new password
+                    {localStorage.getItem("selectedUserId") == 1 ?
+                    this.props.t("Pages.object.regEnterNewPass")
+                    :
+                    "Enter your new password" }
                   </span>
                 </Row>
 
@@ -176,24 +191,51 @@ export default class forgotpass2 extends Component {
 
                 <Row   className="text-center line311 font3">
                   <span className="col-xs-2"></span>
-                  <span className="col-xs-8">In case of any help </span>
+                  {localStorage.getItem("selectedUserId") == 1 ? 
+                    <span className="col-xs-8">
+                      {this.props.t("Pages.object.regCaseAnyHelp")}
+                    </span>
+                    :
+                    <span className="col-xs-8">
+                      In case of any help{" "}
+                    </span>
+                    }
                 </Row>
                 <br />
-                <Row  >
-                  <div className="col-xs-12 text-center">
-                    <button
-                      className="whiteButton"
-                      //   onClick={() => this.operation()}
-                    >
-                      Reach out to us
-                    </button>
-                  </div>
-                </Row>
 
-                <Row   className="text-center line6 mt37">
+                {localStorage.getItem("selectedUserId") == 1 ? 
+                  <Row  >
+                    <div className="col-xs-12 text-center">
+                      <button
+                        className="whiteButton"
+                        //   onClick={() => this.operation()}
+                      >
+                        {this.props.t("Pages.object.regReachOut")}
+                      </button>
+                    </div>
+                  </Row>
+                  :
+                  <Row  >
+                    <div className="col-xs-12 text-center">
+                      <button
+                        className="whiteButton"
+                        //   onClick={() => this.operation()}
+                      >
+                        Reach out to us
+                      </button>
+                    </div>
+                  </Row>
+                  }
+
+                {localStorage.getItem("selectedUserId") == 1 ? 
+                <Row
+                  
+                  className="text-center line6 mt20"
+                >
                   Change language
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
+                : null }
 
                 {/* <Row  >
             <span className="col-xs-3 text-center">Help</span>

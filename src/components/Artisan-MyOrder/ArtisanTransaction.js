@@ -646,7 +646,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             <img src={logos.happyunhappy} className=" happyunhappyimg" />
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv">
-                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
                                                                             {item.enquiryCode?item.enquiryCode:item.orderCode}
@@ -753,7 +753,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             <img src={logos.bellpopup} className=" happyunhappyimg" />
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
-                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
                                                                             {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
@@ -858,7 +858,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                    </Col>
                                                    </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
-                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         

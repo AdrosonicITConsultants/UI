@@ -18,6 +18,7 @@ import base64Img from "base64-img";
 import "./editProduct.css"
 // import ModalComponent from "../modal/modal";
 // import Modal from 'react-bootstrap/Modal'
+import { useTranslation, withTranslation } from "react-i18next";
 
 const customStyles3 = {
   content: {
@@ -86,7 +87,7 @@ const initialState = {
   modalSaveDisabled: false,
 };
 
-export default class addProduct extends Component {
+ class addProduct extends Component {
                  constructor(props) {
                    super(props);
                    this.myRefAddPhoto = React.createRef();  
@@ -670,7 +671,7 @@ else {
                      if (filename != undefined) {
                       //  filename.name = filename.name.replace(/\s/g, '');
   if (filename.size / 1024 / 1024 > 1) {    
-      customToast.error("Please upload product Image below 1MB.", {
+    customToast.error(this.props.t("Pages.object.Please upload product Image below 1MB"), {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: true,
       });
@@ -866,7 +867,7 @@ else {
                  
 
                   if(!this.state.isImageUploadComplete){
-                    customToast.error("Please upload product Image.", {
+                    customToast.error(this.props.t("Pages.object.please upload product image"), {
                       position: toast.POSITION.TOP_RIGHT,
                       autoClose: true,
                     });
@@ -903,7 +904,7 @@ else {
 
                         let node = this.basicDetailsComplete.current;
                         if(node.getAttribute("class") == "inComplete"){
-                          customToast.error("Please complete basic details.", {
+                          customToast.error(this.props.t("Pages.object.Please complete basic details"), {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
                           });                        
@@ -930,7 +931,7 @@ else {
 
                               if (productData.productWeaves.length == 0) {
                                 customToast.error(
-                                  "Please Add Weaves type of the Product.",
+                                  this.props.t("Pages.object.Please Add Weaves type of the Product"),
                                   {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
@@ -976,7 +977,7 @@ else {
                                 productData.weftYarnCount == ""
                               ) {
                                 customToast.error(
-                                  "Please enter details of Warp & Weft.",
+                                  this.props.t("Pages.object.Please enter details of Warp & Weft"),
                                   {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
@@ -997,7 +998,7 @@ else {
                                 this.state.reedCount == -1
                               ) {
                                 customToast.error(
-                                  "Please enter the reed count",
+                                  this.props.t("Pages.object.Please enter the reed count"),
                                   {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
@@ -1029,7 +1030,7 @@ else {
                                 this.state.length == undefined
                               ) {
                                 customToast.error(
-                                  "Please select dimensions.",
+                                  this.props.t("Pages.object.Please select dimensions"),
                                   {
                                     position: toast.POSITION.TOP_RIGHT,
                                     autoClose: true,
@@ -1046,7 +1047,7 @@ else {
                               
                                 node = this.washAndCare.current;
                                   if (node.getAttribute("class") == "inComplete") {
-                                    customToast.error("Please select Wash & Care Instructions.", {
+                                    customToast.error(this.props.t("Pages.object.Please select Wash & Care Instructions"), {
                                       position: toast.POSITION.TOP_RIGHT,
                                       autoClose: true,
                                     });
@@ -1061,7 +1062,7 @@ else {
                                 node = this.GSMNameComplete.current;
                             ;
                             if (this.state.GSMName == "" && this.state.showGSM) {
-                              customToast.error("Please enter description of the Product.", {
+                              customToast.error(this.props.t("Pages.object.Please enter description of the Product"), {
                                 position: toast.POSITION.TOP_RIGHT,
                                 autoClose: true,
                               });
@@ -1077,7 +1078,7 @@ else {
 
                               node = this.weightComplete.current;
                               if (node.getAttribute("class") == "inComplete") {
-                                customToast.error("Please enter weight of the Product.", {
+                                customToast.error(this.props.t("Pages.object.Please enter weight of the Product"), {
                                   position: toast.POSITION.TOP_RIGHT,
                                   autoClose: true,
                                 });
@@ -1091,7 +1092,7 @@ else {
 
                               node = this.description.current;
                               if (node.getAttribute("class") == "inComplete") {
-                                customToast.error("Please enter description of the Product.", {
+                                customToast.error(this.props.t("Pages.object.Please enter description of the Product"), {
                                   position: toast.POSITION.TOP_RIGHT,
                                   autoClose: true,
                                 });
@@ -1144,7 +1145,7 @@ else {
                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       document.getElementById('id02').style.display='none';
-                      customToast.success("Product updated successfully!", {
+                      customToast.success(this.props.t("Pages.object.Product updated successfully!"), {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -1185,7 +1186,7 @@ else {
                   console.log(this.state.productid);
                   TTCEapi.deleteProduct(this.state.productid).then((response)=>{
                     if(response.data.valid){
-                      customToast.success("Product deleted successfully!", {
+                      customToast.success(this.props.t("Pages.object.Product added successfully"), {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -1253,7 +1254,7 @@ else {
                                       className="EditProductbutton"
                                       disabled = {this.state.isEdit}
                                       onClick={() => {this.editenabled()}}
-                                      >Edit</button>
+                                      >{this.props.t("Pages.object.Edit")}</button>
                                    </Col>
                                  {/* )} */}
                                </Row>
@@ -1284,9 +1285,9 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Add photos</h4>
+                                   <h4 className="subHeading"> {this.props.t("Pages.object.Add photos")}</h4>
                                    <h6 className="subHeading_1">
-                                     Add upto 3 photos for product
+                                   {this.props.t("Pages.object.Add upto 3 photos for product")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -1484,9 +1485,10 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Basic details</h4>
+                                   <h4 className="subHeading">  {this.props.t("Pages.object.Basic details")}</h4>
                                    <h6 className="subHeading_1">
-                                     Add general details for the product
+                                   {this.props.t("Pages.object.Add general details for the product")}
+
                                    </h6>
                                  </Col>
                                </Row>
@@ -1515,7 +1517,7 @@ else {
                                          ref={this.basicDetails}
                                          className="text-right font13"
                                        >
-                                         Name of the product (40 characters)
+                                         {this.props.t("Pages.object.Name of the product (40 characters)")}
                                        </span>
                                      </Col>{" "}
                                      <Col
@@ -1552,7 +1554,7 @@ else {
                                        <input
                                          type="text"
                                          id="productCode"
-                                         placeholder="Product Code (Eg. NAG09_89)"
+                                         placeholder={this.props.t("Pages.object.product code")}
                                          className="ProductTextBox"
                                          name="productCode"
                                          maxLength="20"
@@ -1606,7 +1608,8 @@ else {
                                            id="-1"
                                            value="Select product category"
                                          >
-                                           Select product category
+                                          {this.props.t("Pages.object.product category")}
+
                                          </option>
                                          {this.state.productCategories.map(
                                            (item) => (
@@ -1642,7 +1645,7 @@ else {
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Product type
+                                            {this.props.t("Pages.object.product type")}
                                          </option>
                                          {this.state.productTypes.map(
                                            (item) => (
@@ -1699,10 +1702,11 @@ else {
                                    <div className="inComplete"></div>
 
                                    <h4 className="subHeading">
-                                     Specifications
+                                   {this.props.t("Pages.object.Specifications")}
                                    </h4>
                                    <h6 className="subHeading_1">
-                                     Add detailed specifications for the product
+                                     
+                                     {this.props.t("Pages.object.Add detailed specifications for the product")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -1721,10 +1725,11 @@ else {
                                  >
                                    <div className="SubTopic "></div>{" "}
                                    <h5 className="subHeading2">
-                                     Add weaves type
+                                     
+                                     {this.props.t("Pages.object.Add weaves type")}
                                    </h5>
                                    <h6 className="subHeading_2">
-                                     Select the weave type used for the product
+                                   {this.props.t("Pages.object.Select the weave type used for the product")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -1739,7 +1744,7 @@ else {
                                      ref={this.WeavesComplete}
                                      className="weaveselection"
                                    >
-                                     You can select multiple weave types
+                                     {this.props.t("Pages.object.You can select multiple weave types")}
                                    </label>
                                  </Col>
                                </Row>
@@ -1804,10 +1809,12 @@ else {
                                  >
                                    <div className="SubTopic "></div>{" "}
                                    <h5 className="subHeading2">
-                                     Enter details of Warp, Weft & Yarn
+                                     
+                                     {this.props.t("Pages.object.Enter details of Warp, Weft & Yarn")}
                                    </h5>
                                    <h6 className="subHeading_2">
-                                     Select the yarn for WARP, WEFT & EXTRA WEFT
+                                   {this.props.t("Pages.object.Select the yarn for WARP, WEFT & EXTRA WEFT")}
+                                     
                                    </h6>
                                  </Col>
                                </Row>
@@ -2241,10 +2248,12 @@ else {
                                      className="SubTopic "
                                    ></div>{" "}
                                    <h5 className="subHeading2">
-                                     Enter the reed count
+                                     
+                                     {this.props.t("Pages.object.Enter the reed count")}
                                    </h5>
                                    <h6 className="subHeading_2">
-                                     What is the reed count for the yarn
+                                     
+                                     {this.props.t("Pages.object.What is the reed count for the yarn")}
                                    </h6>
                                  </Col>
                                  <Col
@@ -2286,7 +2295,7 @@ else {
                                        id="-1"
                                        value="Select the reed count"
                                      >
-                                       Select the reed count
+                                       {this.props.t("Pages.object.Select reed count")}
                                      </option>
                                      {this.state.reedCounts.map((item) => (
                                        <option
@@ -2325,10 +2334,12 @@ else {
                                      className="SubTopic "
                                    ></div>{" "}
                                    <h5 className="subHeading2">
-                                     Enter the dimensions
+                                     
+                                     {this.props.t("Pages.object.Enter the dimensions")}
                                    </h5>
                                    <h6 className="subHeading_2">
-                                     Enter the length and width for the product
+                                   {this.props.t("Pages.object.Enter the length and width for the product")}
+
                                    </h6>
                                  </Col>
                                  <Col
@@ -2493,7 +2504,7 @@ else {
                                          id="length"
                                          className="  ProductTextBox"
                                          name="length"
-                                         placeholder="Enter length"
+                                         placeholder={this.props.t("Pages.object.enter length")}
                                          value={this.state.length}
                                          onChange={(e) => this.handleChange(e)}
                                        />
@@ -2511,7 +2522,7 @@ else {
                                          id="width"
                                          className="  ProductTextBox"
                                          name="width"
-                                         placeholder="Enter width"
+                                         placeholder={this.props.t("Pages.object.enter width")}
                                          disabled={!this.state.isEdit}
 
                                          value={this.state.width}
@@ -2691,11 +2702,11 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Wash & care instructions
+                                   {this.props.t("Pages.object.Wash & care instructions")}
                                    </h4>
                                    <h6 className="subHeading_1">
-                                     Select from the wash & care instructions
-                                     for the product
+                                   {this.props.t("Pages.object.Select from the wash & care instructions for the product")}
+
                                    </h6>
                                  </Col>
                                </Row>
@@ -3067,10 +3078,10 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Select availability
+                                     {this.props.t("Pages.object.Select availability")}
                                    </h4>
                                    <h6 className="subHeading_1">
-                                     Check the availability of the product
+                                   {this.props.t("Pages.object.Check the availability of the product")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -3309,9 +3320,9 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Enter weight</h4>
+                                   <h4 className="subHeading">{this.props.t("Pages.object.Enter weight")}</h4>
                                    <h6 className="subHeading_1">
-                                     Weight for the product
+                                   {this.props.t("Pages.object.Weight for the product")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -3329,7 +3340,7 @@ else {
                                    className="col-4 text-center"
                                  >
                                    <span className="ml-160 font13">
-                                     Weight (10 Characters)
+                                   {this.props.t("Pages.object.Weight (10 Characters)")}
                                    </span>
                                  </Col>
                                  <Col
@@ -3416,10 +3427,10 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Describe the product
+                                   {this.props.t("Pages.object.Describe the product")}
                                    </h4>
                                    <h6 className="subHeading_1">
-                                     Describe your product in 500 characters
+                                   {this.props.t("Pages.object.Describe your product in 500 characters")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -3431,7 +3442,7 @@ else {
                                    className="col-12 text-center"
                                  >
                                    <span className="ml-160 font13">
-                                     Description of product
+                                   {this.props.t("Pages.object.Describe the product")}
                                    </span>
                                  </Col>
                                </Row>
@@ -3482,7 +3493,7 @@ else {
                                      <button
                                        onClick={this.Cancel}
                                        className="cancelBtnProduct"
-                                     >Cancel
+                                     >{this.props.t("Pages.object.cancel")}
                                      </button>
                                    </Col>
                                    <Col
@@ -3510,7 +3521,7 @@ else {
                                        className="saveBtnProduct"
                                        disabled={this.state.SaveDisabled}
                                      >
-                                       Save
+                                       {this.props.t("Pages.object.save")}
                                      </button>
 
                                      <div id="id02" class="w3-modal">
@@ -3519,8 +3530,8 @@ else {
                                           <h3 className="deleteModalHeader">Are you sure you want to save ?</h3>
                                           <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
                                           <div className="deleteModalButtonOuterDiv">
-                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton" disabled={this.state.modalSaveDisabled}>Save</span>
+                                            <span onClick={this.ToggleSaveClose} className="deleteModalCancelButton">{this.props.t("Pages.object.cancel")}</span>
+                                            <span onClick={() =>{ this.Save()}} className="saveModalOkayButton" disabled={this.state.modalSaveDisabled}>{this.props.t("Pages.object.save")}</span>
                                           </div>
                                         </div>
                                       </div>
@@ -3564,7 +3575,7 @@ else {
                                      <button
                                       onClick={this.ToggleDelete}
                                        className="cancelBtnProduct"
-                                     >Delete
+                                     > {this.props.t("Pages.object.Delete")}
                                      </button>
                                     
                                      <div id="id01" class="w3-modal">
@@ -3577,7 +3588,7 @@ else {
                                           <p className="deleteModalPara">You can keep the changes or can go back to update.</p>
                                           <div className="deleteModalButtonOuterDiv">
                                             <span onClick={this.ToggleDeleteClose} className="deleteModalCancelButton">Cancel</span>
-                                            <span onClick={this.Delete} className="deleteModalOkayButton">Delete</span>
+                                            <span onClick={this.Delete} className="deleteModalOkayButton">{this.props.t("Pages.object.Delete")}</span>
                                           </div>
                                         </div>
                                       </div>
@@ -3595,7 +3606,7 @@ else {
                                        onClick={this.editenabled}
                                        className="editbutton11"
                                      >
-                                       Edit
+                                       {this.props.t("Pages.object.Edit")}
                                      </button>
                                    </Col>
                                    
@@ -3631,3 +3642,5 @@ else {
                    );
               }
 }
+
+export default withTranslation()(addProduct);

@@ -12,11 +12,12 @@ import Footer from "../footer/footer";
 import { Row, Col , Container, Button} from 'reactstrap';
 import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
-import { ArtisanProductOfSearch } from "./ArtisanProductOfSearch";
+import  ArtisanProductOfSearch  from "./ArtisanProductOfSearch";
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 
-export default class DetailSuggestionsArtist extends Component {
+ class DetailSuggestionsArtist extends Component {
   constructor(props) {
     super(props);
 
@@ -284,18 +285,18 @@ export default class DetailSuggestionsArtist extends Component {
         <Container>
           <Row noGutters={true} >
             <Col  className="headingsearch col-xs-12 bold">
-            Results for "{this.state.searchWord}"
+            {this.props.t("Pages.object.Results for")} "{this.state.searchWord}"
 
             </Col>
             <Col  className="font20 col-xs-12 light">
-            Showing 
+            {this.props.t("Pages.object.Showing")} 
             {" "}
             {this.state.both == 1 ? this.state.resultsCount : null } 
             {this.state.antaran == 1 ? this.state.antaranProduct : null } 
             {(this.state.antaran == 0 && this.state.both == 0)  ? this.state.selfProduct : null } 
 
             {" "}
-             results
+            {this.props.t("Pages.object.Results")}
 
 
             </Col>
@@ -303,21 +304,21 @@ export default class DetailSuggestionsArtist extends Component {
             <Row noGutters={true} className="padding15" >
               <Col className="col-xs-12 filteronsearch">
             <Col className="col-sm-3 padding0">
-              Filter according to design collections
+            {this.props.t("Pages.object.Filter according to design collections")} 
             </Col>
             <Col className="col-sm-3 padding0">
             <input type="radio" value="Male" name="gender" checked={this.state.antaran == 1} onClick={()=>{this.Antaran();  this.setState({both : 0, antaran :1})}}/>
-            <img src={logos.antaranCoDesignLogo} className="logosearch"></img>Show only Antaran Co-Design
+            <img src={logos.antaranCoDesignLogo} className="logosearch"></img>{this.props.t("Pages.object.Show only Antaran Co-Design")} 
 
             </Col>
             <Col className="col-sm-3 padding0">
             <input type="radio" value="Female" name="gender" checked={this.state.antaran == 0 && this.state.both == 0 } onClick={()=>{this.SelfProduct(); this.setState({both : 0, antaran:0})}}/> 
-            <img src={logos.artisianSelfLogo} className="logosearch"></img>Show only Artisan Self Design
+            <img src={logos.artisianSelfLogo} className="logosearch"></img>{this.props.t("Pages.object.Show only Artisan Self Design")} 
 
 
             </Col>
             <Col className="col-sm-2 padding0">
-            <input type="radio" value="Other" name="gender" onClick={()=>{this.componentDidMount(); this.setState({both : 1})}} checked={this.state.both == 1} /> Show both
+            <input type="radio" value="Other" name="gender" onClick={()=>{this.componentDidMount(); this.setState({both : 1})}} checked={this.state.both == 1} /> {this.props.t("Pages.object.Show both")}
 
             </Col>
             </Col>
@@ -326,7 +327,8 @@ export default class DetailSuggestionsArtist extends Component {
             </Row>
             <Row noGutters={true}>
               <Col className="font20 bold col-xs-12">
-                Products that Match Your search
+                
+                {this.props.t("Pages.object.Products that Match Your search")}
               </Col>
             </Row>
             <Row>
@@ -409,23 +411,26 @@ export default class DetailSuggestionsArtist extends Component {
                                       <br>
                                       </br>
                                       <Col className='col-xs-12 font30 bold text-center'>
-                                  Your search "{this.state.searchWord}" returned no results!
+                                  {this.props.t("Pages.object.Your search")} "{this.state.searchWord}" {this.props.t("Pages.object.returned no results")}
                                   
                                   
                                       </Col>
                                      
                                       <Col className='col-xs-12  text-center'>
                                       <br></br>
-                                        0 Results found
+                                        0 {this.props.t("Pages.object.Results found")}
                                         <br></br>
                                         <br></br>
                                       </Col>
                                       
                                       <Col className='col-xs-12  light text-center'>
-                                       Please check your spelling. Or try searching
+                                       
+                                       {this.props.t("Pages.object.Please check your spelling Or try searching")}
                                       </Col>
                                       <Col className='col-xs-12 light text-center'>
-                                       something like "saree", "duppatta" etc.
+                                      
+                                      {this.props.t("Pages.object.something like saree duppatta etc")}
+
                                       </Col>
                                     </Row>
         </Container>
@@ -453,3 +458,5 @@ Loading...
     );
   }
 }
+
+export default withTranslation()(DetailSuggestionsArtist);

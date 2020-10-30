@@ -6,9 +6,6 @@ import { memoryHistory, browserHistory } from "../../../helpers/history";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang"
 
-
-
- 
  class artreg1 extends Component {
                  constructor(props) {
                    // const { t } = useTranslation();
@@ -61,7 +58,7 @@ import changeLang from "../../../services/utils/changeLang"
                  }
 
                  changeLang = (data) => {
-                   localStorage.setItem("langName", data);
+                   localStorage.setItem("i18nextLng", data);
                  }
 
                  render() {
@@ -119,7 +116,7 @@ import changeLang from "../../../services/utils/changeLang"
                            >
                              <span className="col-xs-1"></span>
                              <span className="col-xs-10 fontplay">
-                               {this.props.t("Pages.object.haveID")}
+                               {this.props.t("Pages.object.regHaveArtisanID")}
                              </span>
                            </Row>
 
@@ -203,7 +200,7 @@ import changeLang from "../../../services/utils/changeLang"
                            >
                              <span className="col-xs-2"></span>
                              <span className="col-xs-8">
-                               {this.props.t("Pages.object.contactus")}
+                               {this.props.t("Pages.object.regArtisanIdGetTouch")}
                              </span>
                            </Row>
 

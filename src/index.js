@@ -30,8 +30,8 @@ i18n.init({
     wait: true,
   },
   resources: resources,
-  lng: localStorage.getItem("langName"),
-  fallbackLng: localStorage.getItem("langName"),
+  lng: localStorage.getItem("i18nextLng"),
+  fallbackLng: localStorage.getItem("i18nextLng"),
   keySeparator: ".",
   debug: true,
   interpolation: {

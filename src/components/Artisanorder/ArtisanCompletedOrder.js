@@ -7,9 +7,9 @@ import logos from "../../assets";
 // import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-export class ArtisanCompletedOrder extends Component {
+ class ArtisanCompletedOrder extends Component {
     constructor(props) {
         super(props);
     
@@ -180,11 +180,11 @@ export class ArtisanCompletedOrder extends Component {
                                       {item.openEnquiriesResponse.productType === "Product"
                                       ?
                                       <>
-                                      Product Code : {item.openEnquiriesResponse.productCode}   
+                                       {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productCode}   
                                       </>
                                       :
                                       <>
-                                      Product Code : NA  
+                                       {this.props.t("Pages.object.Product Code")} : NA  
                                       </>
                                       }
                                                                         
@@ -202,7 +202,7 @@ export class ArtisanCompletedOrder extends Component {
                               </div>
                               <div noGutters={true} className="" >
                                   <Col className="leEnqprodcode ">
-                                      <span className="leEnqprodbn ">Brand Name : </span>
+                                      <span className="leEnqprodbn ">{this.props.t("Pages.object.Brand Name")} : </span>
                                       <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                   </Col>
                               </div>
@@ -211,7 +211,7 @@ export class ArtisanCompletedOrder extends Component {
                         <Col sm="3" className="text-right">
                             <div noGutters={true} >
                                   <Col className="leEnqOrderAmount ">
-                                  Order Amount
+                                  {this.props.t("Pages.object.Order Amount")}
                                   </Col>
                             </div>
                             <div noGutters={true} >
@@ -222,7 +222,7 @@ export class ArtisanCompletedOrder extends Component {
                             
                             <div noGutters={true} >
                                   <Col className="leEnqidLastUpdated">
-                                  Last Updated : 
+                                  {this.props.t("Pages.object.Last updated")} : 
                                   <Moment format="DD-MM-YYYY">
                                  {item.openEnquiriesResponse.lastUpdated}
                                     </Moment>
@@ -258,9 +258,9 @@ export class ArtisanCompletedOrder extends Component {
             <Col className="col-xs-1"></Col>
             {item.openEnquiriesResponse.deliveryChallanLabel?
                      <Col className="col-xs-3">
-                     <img src={logos.truck} className="truckimg"/>  Check
+                     <img src={logos.truck} className="truckimg"/>  {this.props.t("Pages.object.check")}
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
-                         delivery receipt</a>
+                     {this.props.t("Pages.object.delivery receipt")}</a>
                      </Col>
                      :
                      ""
@@ -307,7 +307,7 @@ export class ArtisanCompletedOrder extends Component {
                 <Col className="col-xs-10">
                    <Row noGutters={true}>
                        <Col className="col-xs-12 leEnqstatus bold">
-                       Order Status
+                       {this.props.t("Pages.object.Order Status")}
                        </Col>
                    </Row>
                 </Col>
@@ -429,7 +429,7 @@ export class ArtisanCompletedOrder extends Component {
                             <div>
                               <div noGutters={true} >
                                   <Col className="leEnqid bold">
-                                  Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
+                                  {this.props.t("Pages.object.Enquiry id")} : {item.openEnquiriesResponse.enquiryCode}
                                   </Col>
                               </div>
                               <div noGutters={true} >
@@ -451,11 +451,11 @@ export class ArtisanCompletedOrder extends Component {
                                       {item.openEnquiriesResponse.productType === "Product"
                                       ?
                                       <>
-                                      Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                       {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productHistoryCode}   
                                       </>
                                       :
                                       <>
-                                      Product Code : NA  
+                                       {this.props.t("Pages.object.Product Code")} : NA  
                                       </>
                                       }
                                                                         
@@ -473,7 +473,7 @@ export class ArtisanCompletedOrder extends Component {
                               </div>
                               <div noGutters={true} className="" >
                                   <Col className="leEnqprodcode ">
-                                      <span className="leEnqprodbn ">Brand Name : </span>
+                                      <span className="leEnqprodbn ">{this.props.t("Pages.object.Brand Name")} : </span>
                                       <span className="leEnqbrandname ">{item.brandName ?item.brandName :"NA" }</span>                                   
                                   </Col>
                               </div>
@@ -482,7 +482,7 @@ export class ArtisanCompletedOrder extends Component {
                         <Col sm="3" className="text-right">
                             <div noGutters={true} >
                                   <Col className="leEnqOrderAmount ">
-                                  Order Amount
+                                  {this.props.t("Pages.object.Order Amount")}
                                   </Col>
                             </div>
                             <div noGutters={true} >
@@ -493,7 +493,7 @@ export class ArtisanCompletedOrder extends Component {
                             
                             <div noGutters={true} >
                                   <Col className="leEnqidLastUpdated">
-                                  Last Updated : 
+                                  {this.props.t("Pages.object.Last updated")} : 
                                   <Moment format="DD-MM-YYYY">
                                  {item.openEnquiriesResponse.lastUpdated}
                                     </Moment>
@@ -530,9 +530,9 @@ export class ArtisanCompletedOrder extends Component {
             <Col className="col-xs-1"></Col>
             {item.openEnquiriesResponse.deliveryChallanLabel?
                      <Col className="col-xs-3">
-                     <img src={logos.truck} className="truckimg"/>  Check
+                     <img src={logos.truck} className="truckimg"/>  {this.props.t("Pages.object.check")}
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
-                         delivery receipt</a>
+                     {this.props.t("Pages.object.delivery receipt")}</a>
                      </Col>
                      :
                      ""
@@ -656,7 +656,7 @@ export class ArtisanCompletedOrder extends Component {
 
             <Row>
                 <Col className="col-xs-12 text-center leEnqshowmore">
-                    <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details<img src={logos.Nextarrow} className="showmorearrow"></img></a>
+                    <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">{this.props.t("Pages.object.show more details")}<img src={logos.Nextarrow} className="showmorearrow"></img></a>
                 </Col>
             </Row>
 
@@ -689,4 +689,6 @@ export class ArtisanCompletedOrder extends Component {
     }
 }
 
-export default ArtisanCompletedOrder
+
+export default withTranslation()(ArtisanCompletedOrder);
+

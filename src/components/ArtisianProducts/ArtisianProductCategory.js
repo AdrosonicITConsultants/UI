@@ -10,10 +10,11 @@ import TTCEapi from '../../services/API/TTCEapi';
 import ProductOfArtisian from './ProductOfArtisian';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 
-export class ArtisianProductCategory extends Component {
+ class ArtisianProductCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,21 +72,21 @@ export class ArtisianProductCategory extends Component {
                                    <Col  
                                    md={{ size: "8" }}
                                    lg={{ size: "8" }} className="regular font25">
-                                       Find all your {this.state.heading} here.
+                                      {this.props.t("Pages.object.Find all your")} {this.state.heading}  {this.props.t("Pages.object.here")}.
                                    </Col>
                                </Row>
                                <Row noGutters={true} className="mt10"> 
                                    <Col  
                                    md={{ size: "8" }}
                                    lg={{ size: "8" }} className="regular">
-                                       Total : {this.state.products.length} items added.
+                                        {this.props.t("Pages.object.Total")} : {this.state.products.length}  {this.props.t("Pages.object.items added")}.
                                    </Col>
                                </Row>
                                <Row noGutters={true} className="mt10"> 
                                    <Col  
                                    md={{ size: "8" }}
                                    lg={{ size: "8" }} className="regular font15">
-                                      { "Show Antaran co-design also " + " "} 
+                                      { this.props.t("Pages.object.Show Antaran co-design also") + " "} 
                                        <label class="switch">
                                             <input type="checkbox"/>
                                             <span class="slider round"></span>
@@ -171,11 +172,5 @@ export class ArtisianProductCategory extends Component {
         )
     }
 }
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisianProductCategory);
-export default connectedLoginPage;
+export default withTranslation()(ArtisianProductCategory) ;

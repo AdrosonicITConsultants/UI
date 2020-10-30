@@ -9,10 +9,8 @@ import TTCEapi from '../../services/API/TTCEapi';
 import OngoingList from './OngoingList';
 import CompletedList from './CompletedList';
 import Footer from "../footer/footer";
-
-
-
-export class AllEnquiryList extends Component {
+import { useTranslation, withTranslation } from "react-i18next";
+ class AllEnquiryList extends Component {
     constructor(props) {
         super(props);
     
@@ -55,7 +53,7 @@ export class AllEnquiryList extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold fontplay ">
                                    <Col md="12" className="col-xs-12">
-                                        All Enquiries
+                                   {this.props.t("Pages.object.All enquiries")}
                                        </Col>
                                </Row>
                                <Row noGutters={true} className="mt20">
@@ -63,20 +61,20 @@ export class AllEnquiryList extends Component {
                                    ?
                                     <>
                                      <Col className="navoncon oncoselected bold">
-                                       <span onClick={this.ongoing }>Ongoing</span> 
+                                       <span onClick={this.ongoing }>{this.props.t("Pages.object.Ongoing")}</span> 
                                        <hr className="selctedoptionhr"></hr>
                                     </Col>
                                     <Col className="navoncon onconotselected light">
-                                       <span onClick={this.completed }>Completed</span> 
+                                       <span onClick={this.completed }>{this.props.t("Pages.object.Completed")}</span> 
                                     </Col>
                                     </>
                                     :
                                     <>
                                      <Col className="navoncon onconotselected light">
-                                     <span onClick={this.ongoing }>Ongoing</span> 
+                                     <span onClick={this.ongoing }>{this.props.t("Pages.object.Ongoing")}</span> 
                                     </Col>
                                     <Col className="navoncon oncoselected bold">
-                                    <span onClick={this.completed }>Completed</span> 
+                                    <span onClick={this.completed }>{this.props.t("Pages.object.Completed")}</span> 
                                     <hr className="selctedoptionhr2"></hr>
 
                                     </Col>
@@ -124,4 +122,4 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(AllEnquiryList);
-export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

@@ -14,9 +14,9 @@ import { toast } from "react-toastify";
 import Moment from 'react-moment';
 import { PreviewTaxInvoice } from './PreviewTaxInvoice';
 import { PrintTaxInvoice } from './PrintTaxInvoice';
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-export default class ArtisanTaxInvoice extends Component {
+ class ArtisanTaxInvoice extends Component {
     constructor() {
         super();
        
@@ -618,7 +618,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                                    </Col>
                                                    </Row>
                                                     <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
-                                                        <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                        <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
                                                         <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
                                                              {/* {this.props.enquiryId} */}
                                                                 {this.props.enquiryCode}</span>
@@ -692,5 +692,5 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
 
 }
 
-
+export default withTranslation()(ArtisanTaxInvoice);
 

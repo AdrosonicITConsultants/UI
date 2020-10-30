@@ -15,10 +15,11 @@ import Moment from 'react-moment';
 // import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { PreviewInvoice } from './PreviewInvoice';
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 
-export class SingleEnquiry extends Component {
+ class SingleEnquiry extends Component {
     constructor() {
         super();
         this.backPI = this.backPI.bind(this);
@@ -509,7 +510,7 @@ export class SingleEnquiry extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading bold  ">
                                    <Col md="12" className="col-xs-12">
-                                        Enquiry Id : {this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                   {this.props.t("Pages.object.Enquiry id")} : {this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
                                        </Col>
                                </Row>
                           </Col>                            
@@ -569,11 +570,11 @@ export class SingleEnquiry extends Component {
                                           {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.openEnquiriesResponse.productCode}   
+                                          {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productCode}   
                                           </>
                                           :
                                           <>
-                                          Product Code : NA  
+                                          {this.props.t("Pages.object.Product Code")} : NA  
                                           </>
                                           }
                                                                             
@@ -600,7 +601,7 @@ export class SingleEnquiry extends Component {
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
-                                      Order Amount
+                                      {this.props.t("Pages.object.Order Amount")}
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
@@ -610,7 +611,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
-                                      Date Started : 
+                                      {this.props.t("Pages.object.Date started")} : 
                                       <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
@@ -618,7 +619,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
+                                      {this.props.t("Pages.object.Last updated")} : 
                                       <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
@@ -627,7 +628,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
+                                      {this.props.t("Pages.object.Est Date of delivery")} : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="DD-MM-YYYY">
@@ -652,7 +653,8 @@ export class SingleEnquiry extends Component {
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           {this.props.t("Pages.object.Enquiry Status")}
+
                            </Col>
                        </Row>
                     </Col>
@@ -777,11 +779,11 @@ export class SingleEnquiry extends Component {
                                           {item.openEnquiriesResponse.productType === "Product"
                                           ?
                                           <>
-                                          Product Code : {item.openEnquiriesResponse.productHistoryCode}   
+                                          {this.props.t("Pages.object.Product Code")} : {item.openEnquiriesResponse.productHistoryCode}   
                                           </>
                                           :
                                           <>
-                                          Product Code : NA  
+                                          {this.props.t("Pages.object.Product Code")} : NA  
                                           </>
                                           }
                                                                             
@@ -808,7 +810,7 @@ export class SingleEnquiry extends Component {
                             <Col sm="3" className="text-right">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
-                                      Order Amount
+                                      {this.props.t("Pages.object.Order Amount")}
                                       </Col>
                                 </div>
                                 <div noGutters={true} >
@@ -818,7 +820,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidDateStarted">
-                                      Date Started : 
+                                      {this.props.t("Pages.object.Date started")} : 
                                       <Moment format="DD-MM-YYYY">
                                         {item.openEnquiriesResponse.startedOn}
                                         </Moment>
@@ -826,7 +828,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidLastUpdated">
-                                      Last Updated : 
+                                      {this.props.t("Pages.object.Last updated")} : 
                                       <Moment format="DD-MM-YYYY">
                                      {item.openEnquiriesResponse.lastUpdated}
                                         </Moment>
@@ -835,7 +837,7 @@ export class SingleEnquiry extends Component {
                                 </div>
                                 <div noGutters={true} >
                                       <Col className="leEnqidEstDelivery">
-                                      Est. Date of delivery : 
+                                      {this.props.t("Pages.object.Est Date of delivery")} : 
                                       {item.openEnquiriesResponse.excpectedDate != null 
                                       ?
                                       <Moment format="DD-MM-YYYY">
@@ -860,7 +862,8 @@ export class SingleEnquiry extends Component {
                     <Col className="col-xs-10">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           {this.props.t("Pages.object.Enquiry Status")}
+
                            </Col>
                        </Row>
                     </Col>
@@ -1020,7 +1023,7 @@ export class SingleEnquiry extends Component {
                                                                </Row>
                                                                <Row noGutters={true} className="BdImgCol">
                                                                     <Col sm={6} className="BuyerDetailsh1">
-                                                                    Brand Name:
+                                                                    {this.props.t("Pages.object.Brand Name")}:
                                                                     </Col>
                                                                     <Col sm={6} className="">
                                                                     {data.openEnquiriesResponse.companyName ? data.openEnquiriesResponse.companyName : "NA"}   
@@ -1464,5 +1467,6 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(SingleEnquiry);
-export default connectedLoginPage;
+// export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);
 

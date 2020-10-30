@@ -15,10 +15,11 @@ import queryString from 'query-string';
 // import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 import thunk from 'redux-thunk';
 // import { EditorInsertComment } from 'material-ui/svg-icons';
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 
-export class ArtisanTransaction extends Component {
+ class ArtisanTransaction extends Component {
     constructor(props) {
         super(props);
  
@@ -645,7 +646,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             <img src={logos.happyunhappy} className=" happyunhappyimg" />
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv">
-                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
                                                                             
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
                                                                             {item.enquiryCode?item.enquiryCode:item.orderCode}
@@ -752,7 +753,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                             <img src={logos.bellpopup} className=" happyunhappyimg" />
                                                                         </div>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
-                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
                                                                             {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
@@ -857,7 +858,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                    </Col>
                                                    </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
-                                                                            <span className="buyerMOQAcceptModalEnquiry">Enquiry Id:</span>
+                                                                            <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
                                                                             <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> {item.enquiryCode?item.enquiryCode:item.orderCode}</span>
                                                                         </div>
                                                                         
@@ -928,4 +929,5 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(ArtisanTransaction);
-export default connectedLoginPage;
+// export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

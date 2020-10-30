@@ -65,9 +65,10 @@ import changeLang from "../../services/utils/changeLang"
                 </Row>
                 <Row className="">
                   <Col sm={{ size: "12" }} className="mt40">
-                    <span className="text1A ">Your Products</span>
+                    <span className="text1A ">{this.props.t("Pages.object.your products")}</span>
                     <span className="text2A col-sm-12 col-md-12">
-                      List of your very own products
+                     
+                      {this.props.t("Pages.object.List of your very own products")}
                     </span>
                   </Col>
                 </Row>

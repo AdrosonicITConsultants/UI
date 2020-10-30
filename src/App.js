@@ -25,7 +25,8 @@ import AntaranProductCategories from './components/Artisan_Self_Design/AntaranPr
 import AntaranProductRegions from './components/Artisan_Self_Design/AntaranProductRegions';
 import BuyersProductDetails from './components/Buyer-ProductDetails/Buyer-ProductDetails';
 import BPCarousel from './components/Buyer-ProductDetails/Buyers-Productcarousel';
-import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory"
+// import ArtisianProductCategories, { ArtisianProductCategory } from "./components/ArtisianProducts/ArtisianProductCategory";
+import ArtisianProductCategory from "./components/ArtisianProducts/ArtisianProductCategory"
 import Wishlist from './components/Awishlist/Wishlist';
 import AddWishlist from './components/Awishlist/Addwishlist';
 import DetailSuggestions from'./components/navbar/DetailSuggestions';
@@ -67,15 +68,15 @@ import { ArtisanAllTransactionList } from './components/ArtisanTransactions/Arti
 import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecentList';
 import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
 import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
-import { ArtisanOrderNav } from './components/Artisanorder/ArtisanOrderNav';
+import  ArtisanOrderNav  from './components/Artisanorder/ArtisanOrderNav';
 import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
-import { Artisanorder } from './components/Artisan-MyOrder/Artisanorder';
+import  Artisanorder  from './components/Artisan-MyOrder/Artisanorder';
 import BuyerRating from './components/Rating/buyerRating';
 import { BuyerFaultyOrder } from './components/FaultyOrder/BuyerFaultyOrder';
 // import { BuyerCompletedfaultyOrder } from './components/FaultyOrder/BuyerCompletedfaultyOrder';
 import { BuyerSingleCompletedOrder } from './components/Buyer-MyOrder/BuyerSingleCompletedOrder';
 import ArtisanCompletedOrder from './components/Artisanorder/ArtisanCompletedOrder';
-import { ArtisanSingleCompletedOrder } from './components/Artisan-MyOrder/ArtisanSingleCompletedOrder';
+import ArtisanSingleCompletedOrder  from './components/Artisan-MyOrder/ArtisanSingleCompletedOrder';
 import { ArtisanFaultyOrder1 } from './components/FaultyOrder/ArtisanFaultyOrder1';
 import { FaultResolved } from './components/FaultyOrder/FaultResolved';
 import { BuyerCompletedfaultyOrder } from './components/FaultyOrder-Completed/BuyerCompletedfaultyOrder';

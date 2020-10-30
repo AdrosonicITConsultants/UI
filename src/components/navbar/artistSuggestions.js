@@ -9,6 +9,8 @@ import * as Actions from "../../redux/action/action";
 import TTCEapi from "../../services/API/TTCEapi";
 import { Container } from "reactstrap";
 import { placeholder } from "glamor";
+import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
 var languages = [];
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -186,7 +188,7 @@ class ArtistSuggestions extends Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-      placeholder: "Search products, codes, product type, weaves, category",
+      placeholder:this.props.t("Pages.object.Search products, codes, product type, weaves, category"),
       value,
       onChange: this.onChange,
       onKeyPress: (e) => {
@@ -259,4 +261,6 @@ function mapStateToProps(state) {
 }
 
 const ArtistConnectedSuggestions = connect(mapStateToProps)(ArtistSuggestions);
-export default ArtistConnectedSuggestions;
+// export default ArtistConnectedSuggestions;
+export default withTranslation()(ArtistConnectedSuggestions);
+

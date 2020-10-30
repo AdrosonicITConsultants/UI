@@ -6,8 +6,9 @@ import TTCEapi from '../../../services/API/TTCEapi';
 import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { useTranslation, withTranslation } from "react-i18next";
 
-export default class artreg5 extends Component {
+class artreg5 extends Component {
                  constructor() {
                    super();
                
@@ -198,9 +199,9 @@ export default class artreg5 extends Component {
                                ></img>
                                <div>
                                  <h3 className="col-xs-6 margin-registertext text-left">
-                                   Register
+                                 {this.props.t("Pages.object.register")}
                                  </h3>
-                                 <h4 className="margin-roletext1">Artisan</h4>
+                                 <h4 className="margin-roletext1">{this.props.t("Pages.object.artist")}</h4>
                                </div>
                              </div>
 
@@ -234,7 +235,7 @@ export default class artreg5 extends Component {
                              style={{ fontFamily: "var(--PlayfairFont)" }}
                              className="text-center"
                            >
-                             Select category of product you make
+                             {this.props.t("Pages.object.regSelectCategory")}
                            </div>
                            <Row  >
                              <div id="ck-button">
@@ -290,13 +291,12 @@ export default class artreg5 extends Component {
                                }}
                                className="col-xs-12 text-center"
                              >
-                               <input type="checkbox" name="checkbox" value="check" id="agree" /> You
-                               hearby agree to our <a
+                               <input type="checkbox" name="checkbox" value="check" id="agree" /> <a
                                  style={{ cursor: "pointer", fontSize: "15px" }}
                                  href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
                                  target="_blank"
                                >
-                                 Terms and condition
+                               {this.props.t("Pages.object.regAgreeTermsConditions")}
                                </a>
                                </div>
                            </Row>
@@ -307,16 +307,16 @@ export default class artreg5 extends Component {
                                  className="blackButton"
                                  onClick={() => this.operation()}
                                >
-                                 Complete
+                                 {this.props.t("Pages.object.regCompleteButton")}
                                </button>
                              </div>
                            </Row>
                            
 
-                           <Row   className="text-center mt57">
+                           <Row   className="text-center mt30">
                              
                              <div className="col-xs-12 line312 font2">
-                               Need Help?{" "}
+                             {this.props.t("Pages.object.regNeedHelp")}{" "}
                              </div>
                              
                            </Row>
@@ -341,3 +341,5 @@ export default class artreg5 extends Component {
                    );
                  }
                }
+
+               export default withTranslation()(artreg5);

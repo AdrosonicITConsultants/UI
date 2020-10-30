@@ -4,10 +4,28 @@ import { Row, Col, Container } from "reactstrap";
 import { logRoles } from '@testing-library/react';
 import logos from "../../assets"
 import TTCEapi from '../../services/API/TTCEapi';
+import { useTranslation, withTranslation } from "react-i18next";
 
+class Footer extends Component {
+  constructor() {
+    super();
 
-export default class Footer extends Component {
+    this.state = {
+      userId : "",  
+    };
+  
+  }
+
+  componentDidMount () {
+    var data = JSON.parse(localStorage.getItem("user"));
+    this.setState({
+      userId: data.refRoleId
+    });
+    console.log(this.state.userId);
+  }
+
     render() {
+      
         return (
           <>
           
@@ -22,10 +40,13 @@ export default class Footer extends Component {
               <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span
-                    className="col-md-4 Ffont1"
+                    className="col-md-12 Ffont1 text-left"
                     style={{ marginLeft: "9px" }}
                   >
-                    Follow us on
+                    {this.state.userId == "1" ?
+                    this.props.t("Pages.object.followUsOn")
+                    :
+                    "Follow us on"}
                   </span>
                   <br />
                   <br />
@@ -46,16 +67,26 @@ export default class Footer extends Component {
                   </span>
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">
+                  {this.state.userId == "1" ?
+                    this.props.t("Pages.object.forAnyhelp")
+                    :
+                    "For any help"}
                   
-                  For any help
                   <br />
                   <span className="Ffont2">
-                    Write us on help@craftexchange.com
+                  {this.state.userId == "1" ?
+                    this.props.t("Pages.object.writeUsOn")
+                    :
+                    "Write us on help@craftexchange.com"}
+                    
                   </span>
                   <br />
                   <br />
                   <div>
-                    Registered address:
+                  {this.state.userId == "1" ?
+                    this.props.t("Pages.object.registeredAddress")
+                    :
+                    "Registered address"} :
                     <p className="Ffont2">
                       abc gali,abc xyz,
                       <br />
@@ -64,7 +95,12 @@ export default class Footer extends Component {
                   </div>
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">
-                  <span>Download Creaft Xchange App On</span>
+                  <span>                    
+                  {this.state.userId == "1" ?
+                    this.props.t("Pages.object.DownloadAppOn")
+                    :
+                    "Download Craft Xchange App On"}
+                  </span>
                   <br />
                   <div className="col-sm-12 text-center">
                     <br />
@@ -86,19 +122,30 @@ export default class Footer extends Component {
                     href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
                      target="_blank">
                     <p className="Ffont3 col-md-4 col-sm-4  text-center">
-                      Privacy policy
+                    {this.state.userId == "1" ?
+                    this.props.t("Pages.object.privacyPolicy")
+                    :
+                    "Privacy policy"}                      
                     </p>
                     </a>
                     <a href={TTCEapi.DocumentsURL + "TERMS_and_CONDITIONS.pdf"}
                        target="_blank">
-                    <p className="Ffont3 col-md-4 col-sm-4  text-center">                      
-                      Terms of Usage
+                    <p className="Ffont3 col-md-4 col-sm-4  text-center">  
+                    {this.state.userId == "1" ?
+                    this.props.t("Pages.object.termsOfUsage")
+                    :
+                    "Terms of Usage"}                                          
+                      
                     </p>
                     </a>
                     <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
                        target="_blank">
                     <p className="Ffont3 col-md-4 col-sm-4  text-center">
-                      Cookie policy
+                    {this.state.userId == "1" ?
+                    this.props.t("Pages.object.cookiePolicy")
+                    :
+                    "Cookie policy"}                      
+                      
                     </p>
                     </a>
                   </div>
@@ -111,3 +158,5 @@ export default class Footer extends Component {
         );
     }
 }
+
+export default withTranslation()(Footer);

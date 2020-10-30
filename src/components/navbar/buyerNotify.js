@@ -11,6 +11,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import './buyerNotify.css';
+import { useTranslation, withTranslation } from "react-i18next";
 
 class BuyerNotifications extends Component {
   constructor(props) {
@@ -111,7 +112,7 @@ class BuyerNotifications extends Component {
                 ></img>
               </Col>
               <Col md="10" className="addedwishlist">
-                <h1> Your Notifications</h1>
+                <h1>{this.state.userRoleId == "1" ? "Your Notifications" : "Your Notifications" }</h1>
                 <p> {this.state.newCount} New Notifications</p>
                 {this.state.newCount === 0 ? null : 
                 <p style={{ float: "right" }}>
@@ -612,4 +613,7 @@ class BuyerNotifications extends Component {
   }
 }
 
-export default BuyerNotifications;
+
+
+
+export default withTranslation()(BuyerNotifications);

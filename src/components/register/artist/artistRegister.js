@@ -12,10 +12,10 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { memoryHistory, browserHistory } from "../../../helpers/history"
+import { useTranslation, withTranslation } from "react-i18next";
 
 
-
-export default class artistRegister extends Component {
+class artistRegister extends Component {
                  constructor(props) {
                    super(props);
 
@@ -114,7 +114,7 @@ export default class artistRegister extends Component {
                       this.state.address,this.state.selectedprods,this.state.selectedFile).then((response) => {
                          //  debugger;
                        if (response.data.valid) {
-                        customToast.success("Registration is successful ", {
+                        customToast.success(this.props.t("Pages.object.regRegistrationSuccess"), {
                           position: toast.POSITION.TOP_RIGHT,
                           autoClose: true,
                         });
@@ -266,3 +266,5 @@ export default class artistRegister extends Component {
                    );
                  }
                }
+
+               export default withTranslation()(artistRegister);

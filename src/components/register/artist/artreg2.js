@@ -6,11 +6,9 @@ import isEmail from "validator/lib/isEmail";
 import  customToast  from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from 'react-toastify';
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-
-
-export default class artreg2 extends Component {
+class artreg2 extends Component {
                  constructor() {
                    super();
                    this.state = {
@@ -108,9 +106,9 @@ export default class artreg2 extends Component {
                                ></img>
                                <div>
                                  <h2 className="col-xs-6 margin-registertext">
-                                   Register
+                                 {this.props.t("Pages.object.register")}
                                  </h2>
-                                 <h4 className="margin-roletext">Artisan</h4>
+                                 <h4 className="margin-roletext">{this.props.t("Pages.object.artist")}</h4>
                                </div>
                              </div>
 
@@ -132,7 +130,7 @@ export default class artreg2 extends Component {
                                  src={logos.emaillogo}
                                  className="locklogo1 glyphicon mr-5"
                                ></img>
-                               Enter your email ID
+                               {this.props.t("Pages.object.regEnterEmailId")}
                              </span>
                            </Row>
 
@@ -150,7 +148,7 @@ export default class artreg2 extends Component {
                                    type="email"
                                    id="emailid"
                                    className="form-control BuyerLogin"
-                                   placeholder="emailID"
+                                   placeholder={this.props.t("Pages.object.regPlaceHolderEmail")}
                                    name="emailid"
                                    onChange={(e) => this.handleChange(e)}
                                  />
@@ -172,7 +170,7 @@ export default class artreg2 extends Component {
                                  className="blackButton"
                                  onClick={() => this.SendOtp()}
                                >
-                                 Send OTP
+                                 {this.props.t("Pages.object.regSendOTP")}
                                </button>
                              </div>
                            </Row>
@@ -191,7 +189,7 @@ export default class artreg2 extends Component {
                                    type="number"
                                    id="otppin"
                                    className="form-control BuyerLogin"
-                                   placeholder="Enter OTP received in your email id"
+                                   placeholder={this.props.t("Pages.object.regEnterRecOTP")}
                                    name="otppin"
                                    onChange={(e) => this.handleChange(e)}
                                  />
@@ -215,7 +213,7 @@ export default class artreg2 extends Component {
                                  }}
                                  onClick={() => this.operation()}
                                >
-                                 Verify & proceed
+                                 {this.props.t("Pages.object.regVerifyProceed")}
                                </button>
                              </div>
                            </Row>
@@ -227,7 +225,7 @@ export default class artreg2 extends Component {
                            >
                              <span className="col-xs-2"></span>
                              <span className="col-xs-8">
-                               In case of any help{" "}
+                             {this.props.t("Pages.object.regCaseAnyHelp")}{" "}
                              </span>
                            </Row>
 
@@ -241,14 +239,14 @@ export default class artreg2 extends Component {
                                  }}
                                  //   onClick={() => this.operation()}
                                >
-                                 Reach out to us
+                                 {this.props.t("Pages.object.regReachOut")}
                                </button>
                              </div>
                            </Row>
 
                            <Row
                               
-                             className="text-center line6 mt37"
+                             className="text-center line6 mt20"
                            >
                              Change language
                              <img src={logos.language} className="ml-5"></img>
@@ -265,3 +263,6 @@ export default class artreg2 extends Component {
                    );
                  }
                }
+
+
+ export default withTranslation()(artreg2);

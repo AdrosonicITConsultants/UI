@@ -97,9 +97,15 @@ export default class forgotpass3 extends Component {
                            <Row   className="">
                              <div className="col-xs-6">
                                <div>
+                                 {localStorage.getItem("selectedUserId") == 1 ?
+                                 <h2 className="col-xs-6 margin-registertext">
+                                   {this.props.t("Pages.object.regResetWord")}
+                                 </h2>
+                                 :
                                  <h2 className="col-xs-6 margin-registertext">
                                    Reset
                                  </h2>
+                                }
                                  {/* {window.location.pathname.indexOf(
                                    "passwordA"
                                  ) !== -1 ? (
@@ -107,7 +113,11 @@ export default class forgotpass3 extends Component {
                                  ) : (
                                    <h4 className="margin-roletext2">Buyer</h4>
                                  )} */}
-                                 <h4 className="margin-roletext2">Password</h4>
+                                 {localStorage.getItem("selectedUserId") == 1 ?
+                                 <h4 className="margin-roletext">{this.props.t("Pages.object.regPasswordWord")}</h4>
+                                 :
+                                 <h4 className="margin-roletext">Password</h4>
+                                }
                                </div>
                              </div>
 

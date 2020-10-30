@@ -5,8 +5,9 @@ import "./buyer.css"
 import logos from "../../assets";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from '../../services/API/TTCEapi';
+import { useTranslation, withTranslation } from "react-i18next";
 
-export default class buyerpass extends Component {
+class buyerpass extends Component {
                  constructor() {
                    super();
                    this.state = {
@@ -76,7 +77,8 @@ export default class buyerpass extends Component {
                                className="col-xs-2 margin-arrow arrowsize glyphicon"
                                onClick={() => this.backoperation()}
                              ></img>
-                             <h2 className="col-xs-6 margin-login">Login</h2>
+                             <h2 className="col-xs-6 margin-login">
+                             {this.props.userpage == 2 ? "Login" : this.props.t("Pages.object.regLogin")}</h2>
                            </div>
 
                            <img
@@ -109,7 +111,7 @@ export default class buyerpass extends Component {
                                    className="cicrleLogo"
                                    alt="artist TataTrusts logo"
                                  ></img>
-                                 <div className="circleText">Artisan</div>
+                                 <div className="circleText">{this.props.t("Pages.object.artist")}</div>
                                </i>
                              </div>
                            )}
@@ -124,7 +126,7 @@ export default class buyerpass extends Component {
                            <Row  >
                              <span className="col-xs-1"></span>
                              <span className="col-xs-10 text-center font13">
-                               Enter your password
+                             {this.props.userpage == 2 ? "Enter your password" : this.props.t("Pages.object.regEnterPass")}
                              </span>
                            </Row>
                            <Row  >
@@ -140,7 +142,7 @@ export default class buyerpass extends Component {
                                    id="pass"
                                    type="password"
                                    className="form-control BuyerLogin"
-                                   placeholder="password"
+                                   placeholder={this.props.userpage == 2 ? "password" : this.props.t("Pages.object.regPasswordWord")}
                                    name="password"
                                    onChange={(e) => this.handleChange(e)}
                                  />
@@ -162,7 +164,7 @@ export default class buyerpass extends Component {
                                  </a>
                                ) : (
                                  <a href="./forgot-passwordA">
-                                   forgot password?
+                                   {this.props.t("Pages.object.regForgotPassword")}
                                  </a>
                                )}
                              </div>
@@ -174,8 +176,10 @@ export default class buyerpass extends Component {
                              <button
                                className="blackButton"
                               //  onClick={() => this.Login()}
-                             >
-                               Login
+                             >{this.props.userpage == 2 ?
+                               "Login" : 
+                               this.props.t("Pages.object.regLogin")
+                             }
                              </button>
                            </div>
                          </Row>
@@ -244,3 +248,5 @@ export default class buyerpass extends Component {
                    );
                  }
                }
+
+               export default withTranslation()(buyerpass);

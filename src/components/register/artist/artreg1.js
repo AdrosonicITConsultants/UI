@@ -43,7 +43,7 @@ import changeLang from "../../../services/utils/changeLang"
                    else {
                      this.props.cwi(this.state.weaverid);
 
-                     // this.props.handler(1);
+                     //this.props.handler(4);
                    }
                  }
 
@@ -110,7 +110,6 @@ import changeLang from "../../../services/utils/changeLang"
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
-                           <br></br>
                            <br />
                            <br />
                            <Row
@@ -136,7 +135,7 @@ import changeLang from "../../../services/utils/changeLang"
                                    type="text"
                                    id="weaverid"
                                    className="form-control BuyerLogin"
-                                   placeholder="ArtisanID"
+                                   placeholder={this.props.t("Pages.object.regArtisanID")}
                                    name="weaverid"
                                    onChange={(e) => this.handleChange(e)}
                                  />
@@ -189,7 +188,7 @@ import changeLang from "../../../services/utils/changeLang"
                                  className="blackButton"
                                  onClick={() => this.operation()}
                                >
-                                 Next
+                                 {this.props.t("Pages.object.regNextButton")}
                                </button>
                              </div>
                            </Row>
@@ -218,7 +217,7 @@ import changeLang from "../../../services/utils/changeLang"
                                  }}
                                  //   onClick={() => this.operation()}
                                >
-                                 Reach out to us
+                                 {this.props.t("Pages.object.regReachOut")}
                                </button>
                              </div>
                            </Row>

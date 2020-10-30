@@ -5,6 +5,7 @@ import "./buyer.css"
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { connect } from "react-redux";
 import CMSApi from '../../services/API/CMSApi';
+import { useTranslation, withTranslation } from "react-i18next";
 
 class videoPlayer extends Component {
 
@@ -64,7 +65,10 @@ class videoPlayer extends Component {
               className="blackButton SkipButtonVideo"
               onClick={() => this.SkiptoHomepgae()}
             >
-              Skip to Homepage
+              {user.refRoleId == "1" ?
+              this.props.t("Pages.object.skipToHomePage")
+              :
+              "Skip to Homepage" }
             </button>
           </div>
         );
@@ -77,4 +81,5 @@ function mapStateToProps(state) {
 }
 
  const connectedLoginPage = connect(mapStateToProps)(videoPlayer);
- export default connectedLoginPage;
+
+ export default withTranslation()(connectedLoginPage);

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
-import logos from "../../../assets"
-import TTCEapi from "../../../services/API/TTCEapi"
+import logos from "../../../assets";
+import TTCEapi from "../../../services/API/TTCEapi";
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-export default class artreg3 extends Component {
+class artreg3 extends Component {
     constructor() {
         super();
         this.state = {
@@ -84,8 +84,8 @@ export default class artreg3 extends Component {
                       onClick={() => this.backoperation()}
                     ></img>
                     <div>
-                      <h2 className="col-xs-6 margin-registertext">Register</h2>
-                      <h4 className="margin-roletext">Artisan</h4>
+                      <h2 className="col-xs-6 margin-registertext">{this.props.t("Pages.object.register")}</h2>
+                      <h4 className="margin-roletext">{this.props.t("Pages.object.artist")}</h4>
                     </div>
                   </div>
 
@@ -103,7 +103,7 @@ export default class artreg3 extends Component {
                       src={logos.locklogo}
                       className="locklogo1 glyphicon mr-5"
                     ></img>
-                    Enter your new password
+                    {this.props.t("Pages.object.regEnterNewPass")}
                   </span>
                 </Row>
 
@@ -119,7 +119,7 @@ export default class artreg3 extends Component {
                         type="password"
                         id="password"
                         className="form-control BuyerLogin"
-                        placeholder="password"
+                        placeholder={this.props.t("Pages.object.regPasswordWord")}
                         name="password"
                         value={this.state.password}
                         onChange={(e) => this.handleChange(e)}
@@ -145,7 +145,7 @@ export default class artreg3 extends Component {
                         type="password"
                         id="confirmpass"
                         className="form-control BuyerLogin"
-                        placeholder="Re-enter yourpassword"
+                        placeholder={this.props.t("Pages.object.regReEnterPassword")}
                         name="confirmpass"
                         value={this.state.confirmpass}
                         onChange={(e) => this.handleChange(e)}
@@ -168,7 +168,7 @@ export default class artreg3 extends Component {
                       className="blackButton"
                       onClick={() => this.operation()}
                     >
-                      Next
+                      {this.props.t("Pages.object.regNextButton")}
                     </button>
                   </div>
                 </Row>
@@ -178,7 +178,7 @@ export default class artreg3 extends Component {
 
                 <Row   className="text-center line311 font3">
                   <span className="col-xs-2"></span>
-                  <span className="col-xs-8">In case of any help </span>
+                  <span className="col-xs-8">{this.props.t("Pages.object.regCaseAnyHelp")} </span>
                 </Row>
                 <br />
                 <Row  >
@@ -190,12 +190,12 @@ export default class artreg3 extends Component {
                       }}
                       //   onClick={() => this.operation()}
                     >
-                      Reach out to us
+                      {this.props.t("Pages.object.regReachOut")}
                     </button>
                   </div>
                 </Row>
 
-                <Row   className="text-center line6 mt37">
+                <Row   className="text-center line6 mt25">
                   Change language
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
@@ -211,3 +211,5 @@ export default class artreg3 extends Component {
         );
     }
 }
+
+export default withTranslation()(artreg3);

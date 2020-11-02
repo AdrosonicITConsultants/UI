@@ -136,7 +136,10 @@ var homeSectionStyle = {};
                            this.handler(4);
                          }
                        } else {
-                         this.refs.childa.showValidation(response.data.errorMessage);
+                        customToast.error(response.data.errorMessage, {
+                          position: toast.POSITION.TOP_RIGHT,
+                          autoClose: true,
+                      });
                        }
                      });
                    });
@@ -162,7 +165,10 @@ var homeSectionStyle = {};
                           browserHistory.push("/demo-video");                     
   
                         } else {
-                          this.refs.childa.showValidationpass(response.data.errorMessage);
+                          customToast.error(response.data.errorMessage, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                        });
                         }
                       }
                     );
@@ -183,7 +189,10 @@ var homeSectionStyle = {};
                                   this.handler(4);
                                 }
                               } else {
-                                this.refs.childb.showValidation(response.data.errorMessage);
+                                customToast.error(response.data.errorMessage, {
+                                  position: toast.POSITION.TOP_RIGHT,
+                                  autoClose: true,
+                              });
                               }
                             }
                           );
@@ -207,7 +216,10 @@ var homeSectionStyle = {};
                              );
                              browserHistory.push("/demo-video"); 
                            } else {
-                             this.refs.childb.showValidationpass(response.data.errorMessage);
+                            customToast.error(response.data.errorMessage, {
+                              position: toast.POSITION.TOP_RIGHT,
+                              autoClose: true,
+                          });
                            }
                          }
                        );

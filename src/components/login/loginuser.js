@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container,ButtonGroup,Button } from "reactstrap";
 import "../Homepage/homepage.css";
 import "./buyer.css";
 import logos from "../../assets";
@@ -7,6 +7,7 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import TTCEapi from '../../services/API/TTCEapi';
 import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang"
 
 class buyeruser extends Component {
   constructor() {
@@ -19,7 +20,9 @@ class buyeruser extends Component {
     };
   }
 
-
+  changeLang = (data) => {
+    localStorage.setItem("i18nextLng", data);
+  }
   showValidation(message){
   this.setState({
     showValidation: !this.state.showValidation,
@@ -257,6 +260,36 @@ operation = (event) => {
             </div>
           </Row>
 <br/>
+<Row noGutters={true}>
+  <Col className="col-xs-12 text-center">
+<ButtonGroup aria-label="Basic example">
+                             <Button
+                               onClick={() => changeLang("hi")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               हिन्दी
+                             </Button>
+                             <Button
+                               onClick={() => changeLang("en")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               English
+                             </Button>
+                           </ButtonGroup>
+                           </Col>
+                          </Row>
+                           <Row   className="mt7">
+                              <span className="col-xs-12 text-center line6 font6">
+                               Change language
+                               <img src={logos.language} className="ml-5"></img>
+                             </span>
+                             
+                           </Row>  
+
+
+
           <Row   className="mt10 pb10">
             <strong className="col-xs-4 text-center line7 font6">Help?</strong>
             <a 

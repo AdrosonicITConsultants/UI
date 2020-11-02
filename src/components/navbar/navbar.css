@@ -16,9 +16,23 @@
 	color: var(--mainBlue);
 	
 }
-
-
-
+.sublangtext{
+	font-size: 14px;
+}
+/* style={{textAlign:"center",padding:"10px",fontWeight:"600",fontSize:"95px"}} */
+.modalchangelangh1{
+	text-align: center;
+	padding: 10px;
+	font-weight: 600;
+	font-size: 95px;
+}
+.modalchangelangh1Selected{
+	text-align: center;
+	padding: 10px;
+	font-weight: 600;
+	font-size: 95px;
+    color: rgb(39 39 149);
+}
 .logoHeader{
     font-size: 18px;
     margin-top: 10px !important;
@@ -39,7 +53,12 @@
 .navbar-brand{
     padding-top: 0px !important;
 }
-
+.changelangmodalh1 {
+    font-size: 29px;
+    margin-bottom: -42px;
+    color: black;
+    margin-top: -20px;
+}
 .nav-link{
     padding: 0px !important;
     margin-right: 35px !important;

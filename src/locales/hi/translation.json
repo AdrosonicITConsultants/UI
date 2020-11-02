@@ -192,6 +192,7 @@
     "recentTransactions" : "हाल ही में लेन-देन",
     "transactionHistory" : "इतिहास",
     "goToThisEnquiry" : "उसकी पूछताछ के लिए जाओ",
-    "transactionFilter" : "फिल्टर"
+    "transactionFilter" : "फिल्टर",
+    "changelanguage" :"भाषा बदलो"
   }
 }

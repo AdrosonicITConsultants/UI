@@ -60,6 +60,7 @@ import changeLang from "../../../services/utils/changeLang"
                  changeLang = (data) => {
                    localStorage.setItem("i18nextLng", data);
                  }
+                
 
                  render() {
                    return (

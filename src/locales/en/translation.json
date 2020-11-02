@@ -192,6 +192,7 @@
         "recentTransactions" : "Recent Transactions",
         "transactionHistory" : "History",
         "goToThisEnquiry" : "Go to this enquiry",
-        "transactionFilter" : "Filter"
+        "transactionFilter" : "Filter",
+        "changelanguage" :"Change Language"
     } 
 }

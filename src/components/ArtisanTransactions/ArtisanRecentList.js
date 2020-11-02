@@ -833,7 +833,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
-                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
+                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal" style={{paddingTop:"40px"}}>
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">

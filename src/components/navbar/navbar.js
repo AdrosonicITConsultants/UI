@@ -9,6 +9,8 @@ import NotificationBuyerConnected from "./notificationBuyerCount.js"
 import ANavEnquiries from "../ArtistEnquiries/ANavEnquiry"
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../services/utils/changeLang"
+import { Row, Col, Container, Label } from "reactstrap";
+
 
 import {
     Collapse,
@@ -175,6 +177,19 @@ browserHistory.push("/MyProfile");
     );
   }
   
+  ChangeLanguageModalShow=()=>{
+    document.getElementById('Changelanguage').style.display='block';
+}
+ChangeLanguageModalClose=()=>{
+  document.getElementById('Changelanguage').style.display='none';
+}
+changeLang = (data) => {
+  localStorage.setItem("i18nextLng", data);
+}
+componentDidMount(){
+  var Languagetran=localStorage.getItem("i18nextLng");
+  console.log(localStorage.getItem('i18nextLng')== "hi");
+ }
   render() {
     const { results, value } = this.state;
    // debugger
@@ -606,10 +621,25 @@ browserHistory.push("/MyProfile");
 
                   
                 </li>
+                {userTypeId === 2 ?
+                 ""
+                   :
+                   <li className="menu-item" >
+                   <span className="col-md-2  col-xs-2  col-sm-2">
+                     <img style={{ width: "15px" }} src={logos.bwtranslate}></img>
+                   </span>
+                   <p onClick={()=>{this.ChangeLanguageModalShow()}} style={{marginBottom:"0px"}}>
+                   <a>{this.props.t("Pages.object.changelanguage")}</a></p>
+                   
+                 </li>
+                  }
+               
+                
                 <li className="menu-item">
                   <span className="col-md-2  col-xs-2  col-sm-2">
                     <img style={{ width: "15px" }} src={logos.helpicon}></img>
                   </span>
+                  {/* {userTypeId == 2 ?"":<a href="/">Change Language</a>} */}
                   {userTypeId === 2 ?
                   <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
             target="_blank">Support </a>
@@ -638,6 +668,48 @@ browserHistory.push("/MyProfile");
             </li>
           </ol>
         </nav>
+
+         {/* _____________________________________________Modal 4 ________________________________________________ */}
+  <div id="Changelanguage" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.ChangeLanguageModalClose()}>X</h1>
+            </Col>
+  
+        </Row>
+        <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
+            <Col className="col-xs-12 ">
+                <h1 className="changelangmodalh1 fontplay">{this.props.t("Pages.object.changelanguage")}</h1> 
+               
+                <br/>
+            </Col>
+        </Row>
+       
+       
+       
+        <Row noGutters={true}>
+        <Col  
+         onClick={() => changeLang("en")}
+         className={localStorage.getItem('i18nextLng')=="en"?"col-xs-6 modalchangelangh1Selected":"col-xs-6 modalchangelangh1"}>
+            A
+            <p className="sublangtext">English</p>
+        </Col>
+        <Col className= {localStorage.getItem('i18nextLng')=="hi"?"col-xs-6 modalchangelangh1Selected":"col-xs-6 modalchangelangh1"}
+        onClick={() => changeLang("hi")}>
+        ए
+        <p className="sublangtext">हिंदी</p>
+            </Col>
+        </Row>
+                                                                            
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}   
+
       </React.Fragment>
     );
   }

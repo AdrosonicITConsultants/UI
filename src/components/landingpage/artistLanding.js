@@ -16,7 +16,9 @@ import changeLang from "../../services/utils/changeLang"
     };
   }
   componentDidMount(){
-    TTCEapi.getProfile().then((response)=>{
+    var Languagetran=localStorage.getItem("i18nextLng");
+    console.log(localStorage.getItem('i18nextLng')== "hi");
+      TTCEapi.getProfile().then((response)=>{
       if(response.data.data.user.companyDetails != null){
         if(response.data.data.user.companyDetails.logo != null){
             var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
@@ -31,10 +33,6 @@ import changeLang from "../../services/utils/changeLang"
     });
   }
 
-
-
-
-  
     render() {
         return (
           <React.Fragment>
@@ -60,7 +58,7 @@ import changeLang from "../../services/utils/changeLang"
                       </Col>
                       <Col sm={{ size: "4" }}></Col>
                     </Row>
-                    <div className="artistbg12"></div>
+                    <div className={localStorage.getItem('i18nextLng')=="hi"?"artistbg12hindi":"artistbg12"}></div>
                   </div>
                 </Row>
                 <Row className="">
@@ -88,7 +86,7 @@ import changeLang from "../../services/utils/changeLang"
                     sm={{ size: "4" }}
                     md={{ size: "4" }}
                     xs={{ size: "4" }}
-                    className="artistbg3 col-4 text-center"
+                    className={localStorage.getItem('i18nextLng')== "hi"?"artistbg3hindi col-4 text-center":"artistbg3 col-4 text-center"}
                   ></Col>
 
                   <Col

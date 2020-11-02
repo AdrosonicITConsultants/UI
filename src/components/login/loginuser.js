@@ -261,7 +261,7 @@ operation = (event) => {
           </Row>
 <br/>
 {this.props.userpage == 1 ?
-"":
+null :
 <>
 <Row noGutters={true}>
   <Col className="col-xs-12 text-center">
@@ -293,9 +293,10 @@ operation = (event) => {
                                <img src={logos.language} className="ml-5"></img>
                              </span>
                            </Row>  
+                           </>
+  }
 
-</>
-}
+
           <Row   className="mt10 pb10">
             <strong className="col-xs-4 text-center line7 font6">
               {this.props.userpage == 1 ?

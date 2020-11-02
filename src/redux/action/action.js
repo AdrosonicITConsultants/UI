@@ -23,11 +23,13 @@ export const loginSuccess = (token, user, userTypeId) => {
 
 export const logout = (token, user, userTypeId) => {
     //Clear the cache
+  var language = localStorage.getItem("i18nextLng");
   localStorage.clear();
   sessionStorage.clear();
   // remove user from local storage to log user out
   localStorage.removeItem("user");
   localStorage.removeItem("jwtToken");
+  localStorage.setItem("i18nextLng", language);
   setAuthorizationtoken(false);
    browserHistory.push("/"); 
   return {

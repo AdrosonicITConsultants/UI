@@ -258,7 +258,12 @@ operation = (event) => {
           </Row>
 <br/>
           <Row   className="mt10 pb10">
-            <strong className="col-xs-4 text-center line7 font6">Help?</strong>
+            <strong className="col-xs-4 text-center line7 font6">
+              {this.props.userpage == 1 ?
+                "Help ?" :
+                this.props.t("Pages.object.regHelp")
+              }
+            </strong>
             <a 
             href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
             target="_blank">
@@ -266,7 +271,10 @@ operation = (event) => {
               style={{ color: "var(--lightFont)"}}
               className="col-xs-4 text-center line7 font6"
             >
-              Legal Disclaimer
+              {this.props.userpage == 1 ?
+                "Legal Disclaimer" :
+                this.props.t("Pages.object.legalDisclaimer")
+              }              
             </span>
             </a>
             <a 
@@ -276,7 +284,10 @@ operation = (event) => {
               style={{ color: "var(--lightFont)" }}
               className="col-xs-4 text-center line7 font6"
             >
-              Privacy policy
+              {this.props.userpage == 1 ?
+                "Privacy policy" :
+                this.props.t("Pages.object.privacyPolicy")
+              }               
             </span>
             </a>
           </Row>

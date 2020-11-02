@@ -8,10 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import buyeruser from '../login/loginuser';
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import TTCEapi from '../../services/API/TTCEapi';
+import { useTranslation, withTranslation } from "react-i18next";
 
 
-
-export default class forgotpass3 extends Component {
+class forgotpass3 extends Component {
                  constructor() {
                    super();
                    this.state = {
@@ -202,7 +202,11 @@ export default class forgotpass3 extends Component {
                                style={{ color: "var(--lightFont)" }}
                                className="col-xs-12 text-center"
                              >
-                               Privacy policy
+                               {localStorage.getItem("selectedUserId") == 1 ?
+                                 this.props.t("Pages.object.privacyPolicy")
+                                 :
+                                 "Privacy policy"
+                                }
                              </span>
                              </a>
                            </Row>
@@ -212,3 +216,4 @@ export default class forgotpass3 extends Component {
                    );
                  }
                }
+               export default withTranslation()(forgotpass3);

@@ -220,7 +220,10 @@ class buyerpass extends Component {
 
                          <Row   className="mt50">
                            <strong className="col-xs-4 text-center line7 font6">
-                             Help?
+                           {this.props.userpage == 2 ?
+                              "Help ?" :
+                              this.props.t("Pages.object.regHelp")
+                            }
                            </strong>
                            <a 
                             href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
@@ -229,7 +232,10 @@ class buyerpass extends Component {
                               style={{ color: "var(--lightFont)"}}
                               className="col-xs-4 text-center line7 font6"
                             >
-                              Legal Disclaimer
+                              {this.props.userpage == 2 ?
+                                "Legal Disclaimer" :
+                                this.props.t("Pages.object.legalDisclaimer")
+                              } 
                             </span>
                             </a>
                             <a 
@@ -239,7 +245,10 @@ class buyerpass extends Component {
                               style={{ color: "var(--lightFont)" }}
                               className="col-xs-4 text-center line7 font6"
                             >
-                              Privacy policy
+                              {this.props.userpage == 2 ?
+                                "Privacy policy" :
+                                this.props.t("Pages.object.privacyPolicy")
+                              } 
                             </span>
                             </a>
                          </Row>

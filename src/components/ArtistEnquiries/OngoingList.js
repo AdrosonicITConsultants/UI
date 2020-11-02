@@ -113,13 +113,17 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
-                                        item.openEnquiriesResponse.productType === "Product"
+                                        item.openEnquiriesResponse.productImages !=null?
+
+                                        item.openEnquiriesResponse.productType === "Product" 
                                         ?
                                         <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
                                         :
                                         <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
+                                        :
+                                        <img  src={logos.Smile} className="enquiryimage"></img>
 
                                     }
 
@@ -133,6 +137,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
+                                         item.openEnquiriesResponse.productImages !=null?
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
                                         <img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
@@ -140,7 +145,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         :
                                         <img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                         
-
+                                        :
+                                        <img  src={logos.Smile} className="enquiryimage"></img>
                                     }
 
                                     </div>
@@ -388,7 +394,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 {item.openEnquiriesResponse.userStatus === 1 ?
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
-                                    {
+                                    { item.openEnquiriesResponse.productImages !=null?
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
                                         <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
@@ -396,7 +402,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         :
                                         <a href={"/showBuyerProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId }><img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
                                         </a>
-
+                                        :
+                                        <img  src={logos.Smile} className="enquiryimage"></img>
                                     }
 
                                     </div>
@@ -409,13 +416,15 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
+                                         item.openEnquiriesResponse.productImages !=null?
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
                                         <img  src={TTCEapi.ImageUrl +"HistoryProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
                                       
                                         :
                                         <img  src={TTCEapi.ImageUrl +"HistoryCustomProduct/" + item.openEnquiriesResponse.historyProductId + "/" + item.openEnquiriesResponse.productHistoryImages.split(",")[0]} className="enquiryimage"></img>
-                                        
+                                        :
+                                        <img  src={logos.Smile} className="enquiryimage"></img>
                                     }
 
                                     </div>

@@ -115,6 +115,7 @@ export class BuyerOngoingList extends Component {
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
+                                              item.openEnquiriesResponse.productImages !=null?
                                             item.openEnquiriesResponse.productType === "Product"
                                             ?
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
@@ -122,6 +123,8 @@ export class BuyerOngoingList extends Component {
                                             :
                                             <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                             </a>
+                                            :
+                                            <img  src={logos.Smile} className="enquiryimage"></img>
 
                                         }
 
@@ -135,13 +138,15 @@ export class BuyerOngoingList extends Component {
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
+                                              item.openEnquiriesResponse.productImages !=null?
                                             item.openEnquiriesResponse.productType === "Product"
                                             ?
                                             <img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                             
                                             :
                                             <img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
-                                            
+                                            :
+                                            <img  src={logos.Smile} className="enquiryimage"></img>
 
                                         }
 

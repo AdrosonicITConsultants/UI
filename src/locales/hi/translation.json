@@ -195,6 +195,7 @@
     "transactionFilter" : "फिल्टर",
     "changelanguage" :"भाषा बदलो",
     "regHelp" : "मदद ?",
-    "legalDisclaimer" : "कानूनी अस्वीकरण"
+    "legalDisclaimer" : "कानूनी अस्वीकरण",
+    "chooselanguage":"भाषा चुनें"
   }
 }

@@ -260,11 +260,12 @@ operation = (event) => {
             </div>
           </Row>
 <br/>
-{this.props.userpage == 1 ? (
-  <>
+{this.props.userpage == 1 ?
+"":
+<>
 <Row noGutters={true}>
   <Col className="col-xs-12 text-center">
-<ButtonGroup aria-label="Basic example">
+  <ButtonGroup aria-label="Basic example">
                              <Button
                                onClick={() => changeLang("hi")}
                                className="LangBtn"
@@ -280,19 +281,21 @@ operation = (event) => {
                                English
                              </Button>
                            </ButtonGroup>
-                           </Col>
-                          </Row>
+</Col>
+</Row>
                            <Row   className="mt7">
-                              <span className="col-xs-12 text-center line6 font6">
+                             {/* <span className="col-xs-3 text-center line7 font6">
+                    Help?
+                  </span> */}
+                             {/* <span className="col-xs-3"></span> */}
+                             <span className="col-xs-12 text-center line6 font6">
                                Change language
                                <img src={logos.language} className="ml-5"></img>
                              </span>
-                             
                            </Row>  
+
 </>
-):""}
-
-
+}
           <Row   className="mt10 pb10">
             <strong className="col-xs-4 text-center line7 font6">
               {this.props.userpage == 1 ?

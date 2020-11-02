@@ -338,6 +338,7 @@ export default class BuyerAdvancePayment extends Component {
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
+                                         item.openEnquiriesResponse.productImages !=null?
                                         item.openEnquiriesResponse.productType === "Product"
                                         ?
                                         <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
@@ -345,6 +346,8 @@ export default class BuyerAdvancePayment extends Component {
                                         :
                                         <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage advpayimg"></img>
                                         </a>
+                                        :
+                                        <img  src={logos.Smile} className="enquiryimage"></img>
 
                                     }
 
@@ -526,7 +529,7 @@ export default class BuyerAdvancePayment extends Component {
                  productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
                  companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
                  productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
-                 productImages={item.openEnquiriesResponse.productImages}
+                 productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
                  enquiryCode={item.openEnquiriesResponse.enquiryCode}
                 //  FullCode={item.openEnquiriesResponse.enquiryCode}
                  calulatedAmount={this.state.calulatedAmount}
@@ -566,7 +569,7 @@ export default class BuyerAdvancePayment extends Component {
 <BuyerAdvancePayment3
 productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
 productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
-productImages={item.openEnquiriesResponse.productImages}
+productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
 enquiryCode={item.openEnquiriesResponse.enquiryCode}
 productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
 yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
@@ -587,7 +590,7 @@ enquiryId={this.state.previewPiOrder.enquiryId}
 <BuyerAdvancePayment3
 productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
 productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
-productImages={item.openEnquiriesResponse.productImages}
+productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
 enquiryCode={item.openEnquiriesResponse.enquiryCode}
 productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
 yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}

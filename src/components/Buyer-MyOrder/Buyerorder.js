@@ -576,6 +576,7 @@ export class Buyerorder extends Component {
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
+                                             item.openEnquiriesResponse.productImages !=null?
                                             item.openEnquiriesResponse.productType === "Product"
                                             ?
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"Product/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
@@ -583,7 +584,8 @@ export class Buyerorder extends Component {
                                             :
                                             <a href={"/showBuyerProduct?productId="+item.openEnquiriesResponse.productId }><img  src={TTCEapi.ImageUrl +"CustomProduct/" + item.openEnquiriesResponse.productId + "/" + item.openEnquiriesResponse.productImages.split(",")[0]} className="enquiryimage"></img>
                                             </a>
-
+                                            :
+                                            <img  src={logos.Smile} className="enquiryimage"></img>
                                         }
                                         </div>
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>

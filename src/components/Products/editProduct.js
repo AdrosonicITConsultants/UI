@@ -3,6 +3,7 @@ import ImageEditorTTCE from "../../shared/ImageEditorTTCE";
 import ImageUpload from "../../shared/ImageUpload";
 import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
+import ReactModal from "react-modal";
 import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
 import { Row, Col, Container, Label, Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
@@ -771,7 +772,7 @@ else {
                              ></img>
                            </div>
                            <Row className="ImageEditor">
-                             {/* <ReactModal
+                             <ReactModal
                                isOpen={this.state["modal" + num]}
                                contentLabel="Minimal Modal Example"
                                className="Modal"
@@ -792,7 +793,7 @@ else {
                                    })
                                  }
                                ></ImageEditorTTCE>
-                             </ReactModal> */}
+                             </ReactModal>
                            </Row>
                          </div>
                        );

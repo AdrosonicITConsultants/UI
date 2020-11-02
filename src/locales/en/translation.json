@@ -195,6 +195,7 @@
         "transactionFilter" : "Filter",
         "changelanguage" :"Change Language",
         "regHelp" : "Help ?",
-        "legalDisclaimer" : "Legal Disclaimer"
+        "legalDisclaimer" : "Legal Disclaimer",
+        "chooselanguage":"Choose Language"
     } 
 }

@@ -681,7 +681,7 @@ componentDidMount(){
         </Row>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
-                <h1 className="changelangmodalh1 fontplay">{this.props.t("Pages.object.changelanguage")}</h1> 
+                <h1 className="changelangmodalh1 fontplay">{this.props.t("Pages.object.chooselanguage")}</h1> 
                
                 <br/>
             </Col>

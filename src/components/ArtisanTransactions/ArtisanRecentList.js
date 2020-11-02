@@ -15,10 +15,9 @@ import queryString from 'query-string';
 import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 import thunk from 'redux-thunk';
 // import { EditorInsertComment } from 'material-ui/svg-icons';
+import { useTranslation, withTranslation } from "react-i18next";
 
-
-
-export class ArtisanRecentList extends Component {
+class ArtisanRecentList extends Component {
     constructor(props) {
         super(props);
  
@@ -460,7 +459,7 @@ export class ArtisanRecentList extends Component {
           <Col md="1"></Col>
           {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
          <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
-<button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+<button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
 <div class="w3-dropdown-content w3-bar-block w3-border">
 <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
 <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
@@ -502,7 +501,7 @@ export class ArtisanRecentList extends Component {
                  <Col md="1"></Col>
                  {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
-    <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
+    <button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
     <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(0)}>All</a>
       <a href="#" class="w3-bar-item w3-button" onClick={()=> this.paymentTypeset(1)}>P ID</a>
@@ -653,7 +652,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
        // onClick={()=> this.acceptMOQModalShow}
         >
        <img src={logos.redenquiry} className="gotoiconsize"/>
-       <p className="gotoenqu"> Go to this enquiry</p>
+       <p className="gotoenqu">{this.props.t("Pages.object.goToThisEnquiry")}</p>
        </Col>
          :
          <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
@@ -661,7 +660,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 // onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
-<p className="gotoenqu"> Go to this enquiry</p>
+<p className="gotoenqu">{this.props.t("Pages.object.goToThisEnquiry")}</p>
 </Col>
         }
         </>
@@ -947,11 +946,4 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
     }
 }
 
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
-
-const connectedLoginPage = connect(mapStateToProps)(ArtisanRecentList);
-export default connectedLoginPage;
+export default withTranslation()(ArtisanRecentList);

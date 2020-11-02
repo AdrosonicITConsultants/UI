@@ -64,9 +64,9 @@ import BuyerAdvancePayment2 from './components/BuyerEnquiries/BuyerAdvancePaymen
 import { BuyerAllTransactionList } from './components/BuyerTransaction/BuyerAllTransactionList';
 import { BuyerRecentList } from './components/BuyerTransaction/BuyerRecentList';
 import BuyerProductview from "./components/Buyer-ProductDetails/BuyerProductView"
-import { ArtisanAllTransactionList } from './components/ArtisanTransactions/ArtisanAllTransactionList';
-import { ArtisanRecentList } from './components/ArtisanTransactions/ArtisanRecentList';
-import { ArtisanHistoryList } from './components/ArtisanTransactions/ArtisanHistoryList';
+import ArtisanAllTransactionList from './components/ArtisanTransactions/ArtisanAllTransactionList';
+import ArtisanRecentList from './components/ArtisanTransactions/ArtisanRecentList';
+import ArtisanHistoryList from './components/ArtisanTransactions/ArtisanHistoryList';
 import BuyerOrderNav from "./components/BuyerOrder/BuyerOrderNav"
 import  ArtisanOrderNav  from './components/Artisanorder/ArtisanOrderNav';
 import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';

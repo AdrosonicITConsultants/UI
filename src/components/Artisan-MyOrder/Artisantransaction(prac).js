@@ -13,7 +13,7 @@ import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
 // import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
-
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 export class ArtisanTransaction extends Component {
@@ -488,7 +488,7 @@ notifyModalShow(id,notifyId){
                  <Row noGutters={true}>
                      <Col md="1"></Col>
                      <Col md="3">
-<img src={logos.recent} style={{marginRight:"5px" , height:"17px"}}/> Recent Transactions
+<img src={logos.recent} style={{marginRight:"5px" , height:"17px"}}/> {this.props.t("Pages.object.recentTransactions")}
                      </Col>
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
@@ -918,4 +918,4 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(ArtisanTransaction);
-export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

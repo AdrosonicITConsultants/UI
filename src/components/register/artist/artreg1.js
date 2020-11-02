@@ -65,6 +65,7 @@ import changeLang from "../../../services/utils/changeLang"
                  render() {
                    return (
                      <React.Fragment>
+                       {/* artreg */}
                        <Col
                          xs={{ size: "12" }}
                          sm={{ size: "2" }}

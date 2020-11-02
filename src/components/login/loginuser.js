@@ -260,6 +260,8 @@ operation = (event) => {
             </div>
           </Row>
 <br/>
+{this.props.userpage == 1 ? (
+  <>
 <Row noGutters={true}>
   <Col className="col-xs-12 text-center">
 <ButtonGroup aria-label="Basic example">
@@ -287,7 +289,8 @@ operation = (event) => {
                              </span>
                              
                            </Row>  
-
+</>
+):""}
 
 
           <Row   className="mt10 pb10">

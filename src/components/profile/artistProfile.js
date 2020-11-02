@@ -12,6 +12,7 @@ import Footer from "../footer/footer";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { useTranslation, withTranslation } from "react-i18next";
 
 class ArtistProfile extends Component {
     constructor(props) {
@@ -798,29 +799,29 @@ class ArtistProfile extends Component {
                            </div> */}
                         </Row>
                         <Row noGutters={true} className="text-center welcome">
-                           Welcome,{ " " +this.state.firstName + " " + this.state.lastName }
+                           {this.props.t("Pages.object.profileWelcome")},{ " " +this.state.firstName + " " + this.state.lastName }
                         </Row>
                         <Row noGutters={true} className="text-center ">
-                           Manage your info,brand and bank details 
+                        {this.props.t("Pages.object.profileHeaderDesc")}
                         </Row>
                         <Row noGutters={true} className="text-center ">
-                           Artist Rating : {this.state.rating} / 10
+                        {this.props.t("Pages.object.profileArtistRating")} : {this.state.rating} / 10
                         </Row>
                         <Row noGutters={true} className="mt30 ">
                             <Col sm = {{size: "6"}} className="text-right">
                                {this.state.isProfile 
                                ?
-                               <u className="selected fontplay">My Details</u> 
+                               <u className="selected fontplay">{this.props.t("Pages.object.profileMyDetails")}</u> 
                                 :
-                                <span className="notSelected fontplay" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>My Details</span>
+                                <span className="notSelected fontplay" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>{this.props.t("Pages.object.profileMyDetails")}</span>
                                 }
                             </Col>
                             <Col sm = {{size: "6"}} className="text-left">
                             {this.state.isProfile
                                ?
-                               <span className="notSelected fontplay" style={{"cursor":"pointer" }} onClick={this.handleDetail}>Bank Details</span>
+                               <span className="notSelected fontplay" style={{"cursor":"pointer" }} onClick={this.handleDetail}>{this.props.t("Pages.object.profileBankDetails")}</span>
                                 :
-                                <u className="selected fontplay">Bank Details</u> 
+                                <u className="selected fontplay">{this.props.t("Pages.object.profileBankDetails")}</u> 
                                 }
                             </Col>
                         </Row>
@@ -836,7 +837,7 @@ class ArtistProfile extends Component {
                                                                                 src={logos.personalicon}
                                                                                 className="iconcss"
                                                     ></img>
-                                                      Personal Details
+                                                      {this.props.t("Pages.object.profilePersonal")}
                                                 </div>
                                                 {this.state.isPdetail ? <img
                                                                             src={logos.apedit}
@@ -856,25 +857,25 @@ class ArtistProfile extends Component {
                                                 <hr className="hrlineaop3 "></hr>
                                                 <Col sm = {{size: "7"}} className="cardtextfield" >
                                                     <div className="fw700 font14 mt7">
-                                                        Name:
+                                                    {this.props.t("Pages.object.profileName")}:
                                                     </div>
                                                     <div className="font14  mt7">
                                                         {this.props.user.firstName + " " + this.props.user.lastName}                                               
                                                     </div>
                                                 <div className="fw700 font14 mt7">
-                                                   Email Id:
+                                                {this.props.t("Pages.object.regEmailId")}:
                                                 </div>
                                                 <div className="font14  mt7">
                                                    <p>{this.props.user.email}</p> 
                                                 </div>
                                                 <div className="fw700 font14 mt7">
-                                                    Mobile:
+                                                {this.props.t("Pages.object.profileMobile")}:
                                                 </div>
                                                 <div className="font14  mt7">
                                                 {this.props.user.mobile}
                                                 </div>
                                                 <div className="fw700 font14 mt7">
-                                                    Address:
+                                                {this.props.t("Pages.object.regAddress")}:
                                                 </div>
                                                 {this.state.isPdetail
                                                 ? 
@@ -966,7 +967,7 @@ class ArtistProfile extends Component {
                                                 <img
                                                                             src={logos.brandicon}
                                                                             className="iconcss"
-                                                                    ></img>    Brand Details
+                                                                    ></img>    {this.props.t("Pages.object.profileBrandDetails")}
                                                 </div>
                                                 {this.state.isBdetail ? <img
                                                                             src={logos.apedit}
@@ -987,7 +988,7 @@ class ArtistProfile extends Component {
                                                 <hr className="hrlineaop3"></hr>
                                                 <Col sm={{size:7}} className="cardtextfield">
                                                 <div className="fw700 font14 mt7">
-                                                    Name:
+                                                {this.props.t("Pages.object.profileName")}:
                                                 </div>
                                                 <div>
                                                 <input
@@ -1004,14 +1005,14 @@ class ArtistProfile extends Component {
                                                 
                                                 </div>
                                                 <div className="fw700 font14 mt7">
-                                                    Cluster:
+                                                {this.props.t("Pages.object.regCluster")}:
                                                 </div>
                                                 <div className="font14  mt7" >
                                                     {this.props.user.cluster.desc}
                                                     
                                                 </div>
                                                 <div className="fw700 font14 mt7">
-                                                    Product Category:
+                                                {this.props.t("Pages.object.profileProductCategory")}:
                                                 </div>
                                                 <div>
                                                     {this.state.isBdetail
@@ -1064,7 +1065,7 @@ class ArtistProfile extends Component {
                                                                                                        
                                                 </div>
                                                 <div className="fw700 font14 mt7">
-                                                   Description:
+                                                {this.props.t("Pages.object.profileDescription")}:
                                                 </div>
                                                 <div>
                                                 {this.state.isBdetail 
@@ -1117,7 +1118,7 @@ class ArtistProfile extends Component {
                                                         <img src={logos.bankicon} className="bankicon ">
 
                                                         </img>
-                                                            Bank and Digital Payment Options
+                                                        {this.props.t("Pages.object.bankDigitalOptionHeader")}
                                                             {this.state.isDetailsEdit ? <img
                                                                     src={logos.editblack}
                                                                     className="poctick2 "
@@ -1139,12 +1140,12 @@ class ArtistProfile extends Component {
                                                         <Row noGutters={true} className="bankcontent">
                                                             <Col sm = {{size: "6"}}>
                                                             <div className="font20">
-                                                                Bank Details
+                                                            {this.props.t("Pages.object.profileBankDetails")}
                                                             </div>
                                                             <br></br>
                                                                                                         
                                                             <div className="fw700 font14">
-                                                                Account Number
+                                                            {this.props.t("Pages.object.profileAccNo")}
                                                             </div>
                                                 <div>
                                                 <input
@@ -1160,7 +1161,7 @@ class ArtistProfile extends Component {
                                                 
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    Bank Name
+                                                {this.props.t("Pages.object.profileBankName")}
                                                 </div>
                                                 <div>
                                                 <input
@@ -1176,7 +1177,7 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 <div className="fw700 font14">
-                                                Beneficiary Name
+                                                {this.props.t("Pages.object.proflieBeneName")}
                                                 </div>
                                                 <div>
                                                 <input
@@ -1192,7 +1193,7 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    Branch
+                                                {this.props.t("Pages.object.profileBranch")}
                                                 </div>
                                                 <div>
                                                 <input
@@ -1208,7 +1209,7 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 <div className="fw700 font14">
-                                                    IFSC Code
+                                                {this.props.t("Pages.object.profileIFSC")}
                                                 </div>
                                                 <div>
                                                 <input
@@ -1228,7 +1229,7 @@ class ArtistProfile extends Component {
                                                             </Col>
                                                             <Col sm = {{size: "6"}}>
                                                             <div className="font20">
-                                                                Digital Payment Details
+                                                            {this.props.t("Pages.object.profileDigiDetails")}
                                                             </div>
                                                             <br></br>
                                                             <Row>
@@ -1240,7 +1241,7 @@ class ArtistProfile extends Component {
                                                                 </Col>
                                                                 <Col sm = {{size: "9"}} className="digitalbank">
                                                                 <div className="fw700 font14">
-                                                                    Google Pay UPI Id
+                                                                {this.props.t("Pages.object.profileGoogleId")}
                                                                 </div>
                                                                 <div>
                                                                 <input
@@ -1266,7 +1267,7 @@ class ArtistProfile extends Component {
                                                                 </Col>
                                                                 <Col sm = {{size: "9"}} className="digitalbank">
                                                                 <div className="fw700 font14">
-                                                                    Paytm Registered Mobile Number
+                                                                {this.props.t("Pages.object.profilePaytm")}
                                                                 </div>
                                                                 <div>
                                                                 <input
@@ -1292,7 +1293,7 @@ class ArtistProfile extends Component {
                                                                 </Col>
                                                                 <Col sm = {{size: "9"}} className="digitalbank">
                                                                 <div className="fw700 font14">
-                                                                    Registered Number for PhonePe
+                                                                {this.props.t("Pages.object.profilePhonepe")}
                                                                 </div>
                                                                 <div>
                                                                 <input
@@ -1339,7 +1340,7 @@ class ArtistProfile extends Component {
                                            
                                         </Row>
                                                 }
-                       <Row noGutters={true}><Col className="letsbuildtext">Let's build the strong future!</Col></Row>                
+                       <Row noGutters={true}><Col className="letsbuildtext">{this.props.t("Pages.object.profileLetsBuildStrong")}</Col></Row>                
 
 </Container>
 
@@ -1366,4 +1367,4 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(ArtistProfile);
-export default connectedLoginPage;
+export default withTranslation()(connectedLoginPage);

@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
-import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
-// import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
-import { ArtisanRecentList } from './ArtisanRecentList';
-import { ArtisanHistoryList } from './ArtisanHistoryList';
+import ArtisanRecentList from './ArtisanRecentList';
+import ArtisanHistoryList from './ArtisanHistoryList';
+import { useTranslation, withTranslation } from "react-i18next";
 
 
-
-export class ArtisanAllTransactionList extends Component {
+class ArtisanAllTransactionList extends Component {
     constructor(props) {
         super(props);
     
@@ -62,7 +57,7 @@ export class ArtisanAllTransactionList extends Component {
                           <Col sm="10" className="col-xs-9">
                                <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                    <Col md="12" className="col-xs-12">
-                                        My Transactions
+                                        {this.props.t("Pages.object.myTransactions")}
                                        </Col>
                                </Row>
                                <Row noGutters={true} className="mt20">
@@ -78,11 +73,11 @@ export class ArtisanAllTransactionList extends Component {
                                      <Col md="3" className="navoncontr oncoselected fontsizenav bold">
                                        <span onClick={this.ongoing }>
                                       
-                                           Recent Transactions</span> 
+                                       {this.props.t("Pages.object.recentTransactions")}</span> 
                                        <hr className="selctedoptiotransnhr"></hr>
                                     </Col>
                                     <Col md="2" className="navoncontr onconotselected fontsizenav light">
-                                       <span onClick={this.completed }>History</span> 
+                                       <span onClick={this.completed }>{this.props.t("Pages.object.transactionHistory")}</span> 
                                     </Col>
                                     </>
                                     :
@@ -90,10 +85,10 @@ export class ArtisanAllTransactionList extends Component {
                                      <Col md="3" className="navoncontr onconotselected fontsizenav light">
                                      <span onClick={this.ongoing }>
                                     
-                                         Recent Transactions</span> 
+                                     {this.props.t("Pages.object.recentTransactions")}</span> 
                                     </Col>
                                     <Col md="2" className="navoncontr oncoselected fontsizenav bold">
-                                    <span onClick={this.completed }>History</span> 
+                                    <span onClick={this.completed }>{this.props.t("Pages.object.transactionHistory")}</span> 
                                     <hr className="selctedoptiotransnhr2"></hr>
 
                                     </Col>
@@ -131,11 +126,5 @@ export class ArtisanAllTransactionList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
-    return { user };
-}
+export default withTranslation()(ArtisanAllTransactionList);
 
-const connectedLoginPage = connect(mapStateToProps)(ArtisanAllTransactionList);
-export default connectedLoginPage;

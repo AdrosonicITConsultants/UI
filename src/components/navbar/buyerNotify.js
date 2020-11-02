@@ -112,14 +112,14 @@ class BuyerNotifications extends Component {
                 ></img>
               </Col>
               <Col md="10" className="addedwishlist">
-                <h1>{this.state.userRoleId == "1" ? "Your Notifications" : "Your Notifications" }</h1>
-                <p> {this.state.newCount} New Notifications</p>
+                <h1>{this.state.userRoleId == "1" ? this.props.t("Pages.object.yourNotifications") : "Your Notifications" }</h1>
+                <p> {this.state.newCount} {this.state.userRoleId == "1" ? this.props.t("Pages.object.newNotifications") : "New Notifications" }</p>
                 {this.state.newCount === 0 ? null : 
                 <p style={{ float: "right" }}>
                   {/* <button className="clearmywishlist"> */}
                   <span className="notifyCircleRed">O</span>
-                    <span className="spanhome notifyReadRed" onClick={this.markAllReadFunction}>
-                    Mark all as read
+                    <span className="spanhome notifyReadRed" onClick={this.markAllReadFunction}>                    
+                    {this.state.userRoleId == "1" ? this.props.t("Pages.object.markAllRead") : "Mark all as read" }
                     </span>
                   {/* </button> */}
                 </p> }
@@ -344,7 +344,9 @@ class BuyerNotifications extends Component {
                             </Col>
                             <Col md={2} className="notifyRemoveColLeft text-right">
                               <span className="notifyCircle">O</span>
-                              <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>Mark as read</span>
+                              <span className="spanhome notifyRead" onClick={() => this.notificationSeenfunction(data.notificationId)}>                                
+                                {this.state.userRoleId == "1" ? this.props.t("Pages.object.markRead") : "Mark as read" }
+                              </span>
                             </Col>
         
                           </Row> 

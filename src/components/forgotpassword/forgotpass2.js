@@ -3,9 +3,10 @@ import { Row, Col, Container } from "reactstrap";
 import "../Homepage/homepage.css";
 import logos from "../../assets";
 import "react-toastify/dist/ReactToastify.css";
-import TTCEapi from "../../services/API/TTCEapi"
+import TTCEapi from "../../services/API/TTCEapi";
+import { useTranslation, withTranslation } from "react-i18next";
 
-export default class forgotpass2 extends Component {
+class forgotpass2 extends Component {
     constructor() {
         super();
         this.state = {
@@ -134,7 +135,10 @@ export default class forgotpass2 extends Component {
                         type="password"
                         id="password"
                         className="form-control BuyerLogin"
-                        placeholder="password"
+                        placeholder={localStorage.getItem("selectedUserId") == 1 ?
+                        this.props.t("Pages.object.regPasswordWord")
+                        :
+                        "Password" }
                         name="password"
                         onChange={(e) => this.handleChange(e)}
                       />
@@ -159,7 +163,10 @@ export default class forgotpass2 extends Component {
                         type="password"
                         id="confirmpass"
                         className="form-control BuyerLogin"
-                        placeholder="Re-enter yourpassword"
+                        placeholder={localStorage.getItem("selectedUserId") == 1 ?
+                        this.props.t("Pages.object.regReEnterPassword")
+                        :
+                        "Re-enter your password" }
                         name="confirmpass"
                         onChange={(e) => this.handleChange(e)}
                       />
@@ -181,7 +188,10 @@ export default class forgotpass2 extends Component {
                       className="blackButton"
                       onClick={() => this.operation()}
                     >
-                      Next
+                      {localStorage.getItem("selectedUserId") == 1 ?
+                        this.props.t("Pages.object.regNextButton")
+                        :
+                        "Next" }
                     </button>
                   </div>
                 </Row>
@@ -248,3 +258,5 @@ export default class forgotpass2 extends Component {
         );
     }
 }
+
+export default withTranslation()(forgotpass2);

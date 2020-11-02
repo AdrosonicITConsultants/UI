@@ -193,6 +193,8 @@
     "transactionHistory" : "इतिहास",
     "goToThisEnquiry" : "उसकी पूछताछ के लिए जाओ",
     "transactionFilter" : "फिल्टर",
-    "changelanguage" :"भाषा बदलो"
+    "changelanguage" :"भाषा बदलो",
+    "regHelp" : "मदद ?",
+    "legalDisclaimer" : "कानूनी अस्वीकरण"
   }
 }

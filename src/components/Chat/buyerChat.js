@@ -45,6 +45,8 @@ export default class BuyerChat extends Component {
             showNoResultsMsg1: false,
             escalationButtonOkDisable: false,
             markResolvedButtonDisable: false,
+            enableRaiseErrorMsg: "",
+            enableRaiseErrorFlag: false,
         };   
     
     }
@@ -386,6 +388,8 @@ export default class BuyerChat extends Component {
         else {
             this.setState({
                 enableRaiseEscButton: false,
+                enableRaiseErrorMsg: "",
+                enableRaiseErrorFlag: false,
             });
         }
     }
@@ -654,6 +658,30 @@ export default class BuyerChat extends Component {
         if (e.key === 'Enter') {
             console.log('do validate');
             this.artisanSendChatFunction(1);
+        }
+    }
+
+    raiseEscalationError = () => {
+        var data = document.getElementById("chatEscalationSelectId").value;
+        var textData = document.getElementById("chatEscalationTextareaId").value;
+
+        if(data === "" && textData === "") {
+            this.setState({
+                enableRaiseErrorFlag: true,
+                enableRaiseErrorMsg: "Please select escalation type & enter detailed description",
+            });
+        }
+        else if(data === "") {
+            this.setState({
+                enableRaiseErrorFlag: true,
+                enableRaiseErrorMsg: "Please select escalation type",
+            });
+        }
+        else if(textData === "") {
+            this.setState({
+                enableRaiseErrorFlag: true,
+                enableRaiseErrorMsg: "Please enter detailed description",
+            });
         }
     }
 
@@ -1571,12 +1599,17 @@ export default class BuyerChat extends Component {
                                         </select>
                                         <textarea placeholder="Your detailed description here" onChange={this.escalationSelectFunction} 
                                         className="chatEscalationTextarea" id="chatEscalationTextareaId" maxlength="500"></textarea>
+
+                                        {this.state.enableRaiseErrorFlag === true ?
+                                            <div className="enableRaiseErrorMsg">{this.state.enableRaiseErrorMsg}</div>
+                                        : null}
+
                                         {this.state.enableRaiseEscButton === true ?
                                         <div className="chatEscalationModalButtonOuter" onClick={this.raiseEscalationFunction}> 
                                             <span>Raise escalation</span>
                                         </div>
                                         : 
-                                        <div className="chatEscalationModalDisableButtonOuter"> 
+                                        <div className="chatEscalationModalDisableButtonOuter" onClick={this.raiseEscalationError}> 
                                             <span>Raise escalation</span>
                                         </div>
                                         }

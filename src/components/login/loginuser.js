@@ -186,9 +186,9 @@ operation = (event) => {
                     <br />
                   )}
 
-                  {this.state.googleFBErrorMsg ? (
+                  {/* {this.state.googleFBErrorMsg ? (
                     <div className="bg-danger text-center loginUserErrorTop">Please try again</div>
-                  ) : null}
+                  ) : null} */}
                 </div>
               </div>
             </Row>

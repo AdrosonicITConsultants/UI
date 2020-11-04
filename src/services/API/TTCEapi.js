@@ -871,7 +871,7 @@ class TTCEapi {
         return error.response;
       });
   }
-
+  // /enquiry/generateTaxInvoicePreview
   static getMoqs(enquiryId) {
     let url = ApiUrl + "/enquiry/getMoqs/" +enquiryId;
     console.log(url);
@@ -1912,7 +1912,7 @@ static sendTaxInvoice(
   advancePaidAmt:apr,
   cgst:cgst,
   deliveryCharges:deliverycharge,
-  enquiryId:enquiryId,
+  enquiryId:parseInt(enquiryId),
   finalTotalAmt:finalamt,
   ppu:rpu,
   quantity:quantity,

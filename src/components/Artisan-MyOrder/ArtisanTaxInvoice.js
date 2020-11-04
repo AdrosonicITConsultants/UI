@@ -221,21 +221,24 @@ componentDidMount(){
         if(response.data.valid){
             this.setState({
                
-                quantity:response.data.data.pi.quantity,
-                rpu:response.data.data.pi.ppu,
-                pta:response.data.data.pi.totalAmount,
-                apr:response.data.data.payment?response.data.data.payment.paidAmount:0,
-                sgst:response.data.data.invoice?response.data.data.invoice.sgst:0,
-                cgst:response.data.data.invoice?response.data.data.invoice.cgst:0,
-                finalamt:response.data.data.pi.totalAmount,
-                amttobepaid:response.data.data.pi.totalAmount-(response.data.data.payment?response.data.data.payment.paidAmount:0),
+                quantity:response.data.data.invoice!=null?response.data.data.invoice.quantity:response.data.data.pi.quantity,
+                rpu:response.data.data.invoice!=null?response.data.data.invoice.ppu:response.data.data.pi.ppu,
+                pta:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,
+                // advancePaidAmt:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
+                // apr:response.data.payment?response.data.payment.paidAmount:0,
+                apr:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
+                sgst:response.data.data.invoice!=null?response.data.data.invoice.sgst:response.data.data.pi.sgst,
+                cgst:response.data.data.invoice!=null?response.data.data.invoice.cgst:response.data.data.pi.cgst,
+                finalamt:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,
+                amttobepaid:response.data.data.invoice!=null?response.data.data.invoice.totalAmount-(response.data.data.payment?response.data.data.payment.paidAmount:0):
+                response.data.data.pi.totalAmount-(response.data.data.payment?response.data.data.payment.paidAmount:0),
                 invoiceId:response.data.data.payment?response.data.data.payment.invoiceId:0,
                 percentage:response.data.data.payment?response.data.data.payment.percentage:0,
                 deliveryChallanUploaded:response.data.data.deliveryChallanUploaded,
                 taxInvoiceGenerated:response.data.data.taxInvoiceGenerated,
                 orderDispatchDate:"",
                 eta:"",
-                deliverycharge:response.data.data.invoice?response.data.data.invoice.deliveryCharges:0,
+                deliverycharge:response.data.data.invoice!=null?response.data.data.invoice.deliveryCharges:0,
                 dataload:true
             })
         }
@@ -256,6 +259,7 @@ componentDidMount(){
                 taxInvoiceGenerated:false,
                 orderDispatchDate:"",
                 eta:"",
+                advancePaidAmt:0,
                 dataload:true
           },()=>{
              
@@ -302,13 +306,15 @@ componentDidMount(){
                     deliverycharge={this.state.deliverycharge}
                     sgst={this.state.sgst}
                     cgst={this.state.cgst}
-                    finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
-                    amttobepaid={this.state.amttobepaid}
+                    finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                        +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+                        +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}                    amttobepaid={this.state.amttobepaid}
                     invoiceId={this.state.invoiceId}
                     percentage={this.state.percentage}
                     selectedFile={this.state.selectedFile}
                     selectedFileName={this.state.selectedFileName}
                     taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                    advancePaidAmt={this.state.advancePaidAmt}
                    />
                 :
                 <Row noGutters={true}>
@@ -340,13 +346,16 @@ componentDidMount(){
                  deliverycharge={this.state.deliverycharge}
                  sgst={this.state.sgst}
                  cgst={this.state.cgst}
-                 finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
-                 amttobepaid={this.state.amttobepaid}
+                 finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                    +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+                    +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}                 amttobepaid={this.state.amttobepaid}
                  invoiceId={this.state.invoiceId}
                  percentage={this.state.percentage}
                  selectedFile={this.state.selectedFile}
                  selectedFileName={this.state.selectedFileName}
                  taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+                 advancePaidAmt={this.state.advancePaidAmt}
+
                 />
                 {/* <PreviewTaxInvoice
                 bp={this.bp}
@@ -359,8 +368,9 @@ componentDidMount(){
                 deliverycharge={this.state.deliverycharge}
                 sgst={this.state.sgst}
                 cgst={this.state.cgst}
-                finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
-                amttobepaid={this.state.amttobepaid}
+finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+    +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+    +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}                amttobepaid={this.state.amttobepaid}
                 invoiceId={this.state.invoiceId}
                 percentage={this.state.percentage}
                 selectedFile={this.state.selectedFile}
@@ -385,8 +395,9 @@ apr={this.state.apr}
 deliverycharge={this.state.deliverycharge}
 sgst={this.state.sgst}
 cgst={this.state.cgst}
-finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
-amttobepaid={this.state.amttobepaid}
+finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+    +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+    +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}amttobepaid={this.state.amttobepaid}
 invoiceId={this.state.invoiceId}
 percentage={this.state.percentage}
 selectedFile={this.state.selectedFile}
@@ -404,13 +415,17 @@ apr={this.state.apr}
 deliverycharge={this.state.deliverycharge}
 sgst={this.state.sgst}
 cgst={this.state.cgst}
-finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
+finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+    +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+    +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}
 amttobepaid={this.state.amttobepaid}
 invoiceId={this.state.invoiceId}
 percentage={this.state.percentage}
 selectedFile={this.state.selectedFile}
 selectedFileName={this.state.selectedFileName}
 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
+advancePaidAmt={this.state.advancePaidAmt}
+
 />
 </>
 :

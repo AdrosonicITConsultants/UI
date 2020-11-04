@@ -187,18 +187,25 @@ export class PreviewTaxInvoice extends Component {
           //  sendPI: true,
             gobackButtonClick:true,
          })
-       
+       console.log(   
+       this.props.apr,
+       this.props.cgst,                  
+       this.props.deliverycharge ,
+       this.props.enquiryId,
+       this.props.finalamt,
+       this.props.rpu,
+       this.props.quantity,
+       this.props.sgst                    
+      );
         TTCEapi.sendTaxInvoice(
             this.props.apr,
-            this.props.cgst,
+            this.props.cgst,                  
             this.props.deliverycharge ,
             this.props.enquiryId,
             this.props.finalamt,
             this.props.rpu,
             this.props.quantity,
-            this.props.sgst,
-         
-                    
+            this.props.sgst                    
            ).then((response)=>{
                console.log(response);
                if(response.data.valid){
@@ -214,7 +221,6 @@ export class PreviewTaxInvoice extends Component {
           } 
         else{
           this.setState({
-            // sendPI: true,
             gobackButtonClick:true
           })
           customToast.error(response.data.errorMessage , {
@@ -611,9 +617,8 @@ export class PreviewTaxInvoice extends Component {
                                         +parseInt(this.props.deliverycharge))*this.props.cgst/100)
                                         +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)).toFixed(2)}</h3>
      <h3 className="snopi wraptext">
-         ₹ {((parseFloat((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
-                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
-                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)).toFixed(2))-parseInt(this.props.apr)).toFixed(2)}
+     {/* ₹ {this.props.advancePaidAmt!=-1?this.props.advancePaidAmt:this.props.apr} */}
+         ₹ {parseInt(this.props.apr).toFixed(2)}
         </h3>
      </td>
    </tr>
@@ -640,10 +645,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext"> ₹ {parseFloat(((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
                                         +parseInt(this.props.deliverycharge))*this.props.cgst/100)
                                         +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100))-(
-                                          ((((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
-                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
-                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)))-parseInt(this.props.apr))
-                                        )).toFixed(2)}</h3>
+                                          parseInt(this.props.apr).toFixed(2)
+                                           )).toFixed(2)}</h3>
      </td>
    </tr>
    {/* ----------------------------------------Buyer GST number----------------------------------- */}

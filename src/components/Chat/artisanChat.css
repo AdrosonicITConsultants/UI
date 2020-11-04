@@ -813,6 +813,13 @@
     margin-top: 0px !important;
 }
 
+.enableRaiseErrorMsg {
+    margin-top: 20px;
+    color: #CC0000;
+    font-weight: 600;
+    font-size: 15px;
+}
+
 /* @media only screen and (max-width: 600px) and (min-width: 400px) */
  
 

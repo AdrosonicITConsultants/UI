@@ -45,6 +45,7 @@ import { useTranslation, withTranslation } from "react-i18next";
              showDeliveryValidation:false,
             deliveryChallanUploaded:false,
             taxInvoiceGenerated:false,
+            message:""
           
         }
         this.handleChange = this.handleChange.bind(this);
@@ -70,10 +71,17 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     saveTaxInvDetails(){
         var regex = /[1-9]|\./
-        if(regex.test(this.state.quantity) 
+        if(((parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu ))-parseInt(this.state.apr))<0){
+            this.setState({
+                showValidationPi: true,
+                message : "Invalid Amount to be paid "
+
+          });  
+        }
+        else if(regex.test(this.state.quantity) 
         && regex.test( this.state.rpu) && regex.test(this.state.pta) && regex.test(this.state.apr)&&regex.test(this.state.apr)
-        &&regex.test(this.state.deliverycharge)&&regex.test(this.state.sgst)&&regex.test(this.state.cgst)&&regex.test(this.state.finalamt)&&regex.test(this.state.amttobepaid)
-        &&regex.test(this.state.deliverycharge)
+        &&regex.test(this.state.sgst)&&regex.test(this.state.cgst)&&regex.test(this.state.finalamt)&&regex.test(this.state.amttobepaid)
+
         ){
             if(document.getElementById('agree').checked){
                 this.setState({
@@ -89,7 +97,8 @@ import { useTranslation, withTranslation } from "react-i18next";
             else{
                 this.setState({
                     showValidationPi: true,
-                   
+                    message : "Please fill mandatory fields "
+
                 //   message : "Invalid PAN Number"
               });
               
@@ -98,7 +107,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     handleChange(e) {
         const { name, value } = e.target;
         console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false ,showDeliveryValidation:false}, () => {
+        this.setState({ [name]: value,showValidationMoq: false ,showDeliveryValidation:false,showValidationPi:false}, () => {
        
         });
     }
@@ -293,7 +302,7 @@ componentDidMount(){
                     deliverycharge={this.state.deliverycharge}
                     sgst={this.state.sgst}
                     cgst={this.state.cgst}
-                    finalamt={this.state.finalamt}
+                    finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
                     amttobepaid={this.state.amttobepaid}
                     invoiceId={this.state.invoiceId}
                     percentage={this.state.percentage}
@@ -331,7 +340,7 @@ componentDidMount(){
                  deliverycharge={this.state.deliverycharge}
                  sgst={this.state.sgst}
                  cgst={this.state.cgst}
-                 finalamt={this.state.finalamt}
+                 finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
                  amttobepaid={this.state.amttobepaid}
                  invoiceId={this.state.invoiceId}
                  percentage={this.state.percentage}
@@ -350,7 +359,7 @@ componentDidMount(){
                 deliverycharge={this.state.deliverycharge}
                 sgst={this.state.sgst}
                 cgst={this.state.cgst}
-                finalamt={this.state.finalamt}
+                finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
                 amttobepaid={this.state.amttobepaid}
                 invoiceId={this.state.invoiceId}
                 percentage={this.state.percentage}
@@ -376,7 +385,7 @@ apr={this.state.apr}
 deliverycharge={this.state.deliverycharge}
 sgst={this.state.sgst}
 cgst={this.state.cgst}
-finalamt={this.state.finalamt}
+finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
 amttobepaid={this.state.amttobepaid}
 invoiceId={this.state.invoiceId}
 percentage={this.state.percentage}
@@ -395,7 +404,7 @@ apr={this.state.apr}
 deliverycharge={this.state.deliverycharge}
 sgst={this.state.sgst}
 cgst={this.state.cgst}
-finalamt={this.state.finalamt}
+finalamt={parseInt(this.state.sgst)+parseInt(this.state.cgst)+parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )}
 amttobepaid={this.state.amttobepaid}
 invoiceId={this.state.invoiceId}
 percentage={this.state.percentage}
@@ -427,7 +436,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                         className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                             >
                                             <option value="volvo">₹</option>
-                                            <option value="saab">$</option>
+                                            {/* <option value="saab">$</option> */}
                                         </select>
                                 {/* </span> */}
                                     <input type="number"  className="PIinput rsinputboxwidth"
@@ -463,8 +472,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                 <label>Delivery charges(Freight Charges)</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                   
-                                    value={this.state.deliverycharge }
+                                      value={this.state.deliverycharge }
                                     name="deliverycharge"
                                     onChange={this.handleChange}/>
 
@@ -494,7 +502,6 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                 <label>SGST %</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                   
                                     value={this.state.sgst }
                                     name="sgst"
                                     onChange={this.handleChange}/>
@@ -515,20 +522,23 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                 <label>Final Amount</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                   
-                                    value={this.state.finalamt }
+                                    value={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                                        +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+                                        +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}
                                     name="finalamt"
-                                    onChange={this.handleChange}/>
+                                     disabled
+                                    />
 
                                 </Col>
                                 <Col sm={6}>
                                 <label>Amount to be paid (Final Amount - Advanced Payment)</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                   
-                                    value={this.state.amttobepaid }
+                                     value={((parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                                        +parseInt(this.state.deliverycharge))*this.state.cgst/100)
+                                        +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2))-parseInt(this.state.apr)).toFixed(2)}
                                     name="amttobepaid"
-                                    onChange={this.handleChange}/>
+                                  disabled/>
                                 </Col>
                                 </Row>
                                 <Row noGutters={true} className="PIcol2mt BdImgCol">
@@ -549,7 +559,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                                         </Row>
                                         <p className="text-center">
                                 {this.state.showValidationPi ? (
-                            <span className="bg-danger">Please fill mandatory fields</span>
+                            <span className="bg-danger">{this.state.message}</span>
                             ) : (
                             <br />
                             )}
@@ -567,7 +577,7 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
 </>}
 {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                       
-<div id="deliveryReceipt"class="w3-modal" style={{paddingTop:"70px"}}>
+<div id="deliveryReceipt"class="w3-modal" style={{paddingTop:"30px"}}>
                                         <div class="w3-modal-content w3-animate-top modalBoxSize">
                                             <div class="w3-container buyerMOQAcceptModalContainer">
                                             <Row noGutters={true} className="buyerMOQAcceptModalOuter">
@@ -693,4 +703,23 @@ taxInvoiceGenerated={this.state.taxInvoiceGenerated}
 }
 
 export default withTranslation()(ArtisanTaxInvoice);
+// cgst+sgst+finalamount
+// cgst={(q*rpu+deflivery)*cgst/100}
+// sgst={(q*rpu+deflivery)*sgst/100}
+// finalamt={(Q*rpu)+cgst+sgst+delivery}
+// cal
+// finalamt={}
+// value={parseFloat((((parseInt(this.state.sgst)+parseInt(this.state.cgst)+
+//     parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )) * this.state.sgst / 100)+
+//     ((parseInt(this.state.sgst)+parseInt(this.state.cgst)+
+//     parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )) * this.state.sgst / 100))
+//      +parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )).toFixed(2)}   
+    
+// value={parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge)) 
+//         }
 
+// cal={parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))}=5*2+10=20
+// cgst=(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.cgst/100)
+// sgst=(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.sgst/100)
+// finalamt={(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge)))+(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.cgst/100)
+// +(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.sgst/100)}

@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
-import { connect } from "react-redux";
+import { connect, createDispatchHook } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 // import "./Buyermyorder.css";
@@ -131,6 +131,7 @@ export class ArtisanChangeRequest extends Component {
                         if(array[i].id==array1[j].requestItemsId){
                             if(array[i].option === true || array[i].reject === true) {
                                 var id = array1[j].requestItemsId;
+                                var crid=array1[j].changeRequestId;
                                 var data = array1[j].requestText;
                                 var status=0;
                                 if (array[i].option===true){
@@ -143,6 +144,7 @@ export class ArtisanChangeRequest extends Component {
                                 }
                                
                                 var object = {
+                                    changeRequestId:crid,
                                     requestItemsId: id,
                                     requestText: data,
                                     requestStatus:status,
@@ -315,6 +317,7 @@ Modal2Show = () => {
                 if(array[i].id==array1[j].requestItemsId){
                     if(array[i].option === true || array[i].reject === true) {
                         var id = array1[j].requestItemsId;
+                        var crid=array1[j].changeRequestId;
                         var data = array1[j].requestText;
                         var status=0;
                         if (array[i].option===true){
@@ -327,6 +330,7 @@ Modal2Show = () => {
                         }
                        
                         var object = {
+                            changeRequestId:crid,
                             requestItemsId: id,
                             requestText: data,
                             requestStatus:status,
@@ -483,15 +487,16 @@ Modal3Close = () => {
                      this.state.getChangeRequestForArtisan.length
                      ?
                     <>
-                     {this.state.trueCount==0?
-                            <>
-                             <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
-                            </>
+                    {console.log(this.state.accepted.filter(function(s) { return s.reject; }).length,
+                    this.state.getChangeRequestForArtisan.length,
+                    this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length)}
+                    { this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length?
+                       <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
                             :
-                            <>
-                            <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
-
-                            </>}
+                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
+     
+                    }
+                    
                     </>
                      :
                      <button className="submitCRart" disabled={this.state.submitdisabled}>Submit</button>

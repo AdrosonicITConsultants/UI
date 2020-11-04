@@ -358,7 +358,7 @@ export class PreviewChangedPI extends Component {
        this.state.artisanUser.companyDetails.logo ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
-         <img src={logos.Smile} className="Pilogoimg"></img>
+        <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
            }
@@ -711,7 +711,7 @@ export class PreviewChangedPI extends Component {
      </div>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.buyerCustomProduct.productCategory.productDesc}: XYZ <br/>
+     {this.state.buyerCustomProduct.productCategory.productDesc}: NA <br/>
     
      {this.state.buyerCustomProduct.relProduct.length > 0?
         <>  {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].length?this.state.buyerCustomProduct.relProduct[0].length:""} 
@@ -721,7 +721,7 @@ export class PreviewChangedPI extends Component {
           ""}
 
      </div>
-     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} XYZ</span></p>
+     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} </span></p>
      
     </>
     }
@@ -742,10 +742,10 @@ export class PreviewChangedPI extends Component {
      <p className="snopi wraptext">{this.props.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.props.rpu}</p>
+     <p className="snopi rpu wraptext">₹{this.props.rpu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.props.quantity * this.props.rpu).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.props.quantity * this.props.rpu).toFixed(2)}</p>
      </td>
      </>
      :
@@ -757,10 +757,10 @@ export class PreviewChangedPI extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
      </>
 }
@@ -813,11 +813,11 @@ export class PreviewChangedPI extends Component {
      </td>
      {this.props.previewAndRaisePI?
      <td>
-     <h3 className="snopi wraptext">  {(this.props.rpu * this.props.quantity).toFixed(2) }</h3>
+     <h3 className="snopi wraptext"> ₹ {(this.props.rpu * this.props.quantity).toFixed(2) }</h3>
      </td>
      :
      <td>
-     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     <h3 className="snopi wraptext"> ₹ {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
      }
@@ -914,7 +914,7 @@ export class PreviewChangedPI extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
+         All amount in Indian Rupee (₹)
      </Col>
  </Row>
  </div>

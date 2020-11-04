@@ -385,7 +385,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </>
                 :
                 <>
-                <hr></hr>
+                <br/>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">

@@ -299,7 +299,7 @@ export class PreviewTaxInvoice extends Component {
        this.state.artisanUser.companyDetails.logo ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
-         <img src={logos.Smile} className="Pilogoimg"></img>
+        <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
            }
@@ -511,10 +511,10 @@ export class PreviewTaxInvoice extends Component {
      <p className="snopi wraptext">{this.props.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.props.rpu}</p>
+     <p className="snopi rpu wraptext">₹{this.props.rpu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{parseFloat(this.props.finalamt).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{parseFloat(this.props.quantity * this.props.rpu).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -524,9 +524,7 @@ export class PreviewTaxInvoice extends Component {
         </td>
         <td>
      <h3 className="snopi gdwidth freightch" >Freight Charges <span className="Cursivefont">(if any)</span></h3>
-     {/* <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.state.previewPiOrder.sgst}</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.state.previewPiOrder.cgst}</b></p>
-        </td> */}
+    
         </td>
      <td >
      <h3 className="snopi wraptext"></h3>
@@ -540,12 +538,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptextrpu"> {parseFloat(this.props.deliverycharge).toFixed(2)}</h3>
-
-    
-{/* <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
-     <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3> */}
-     </td>
+     <h3 className="snopi wraptextrpu">₹ {parseFloat(this.props.deliverycharge).toFixed(2)}</h3>
+  </td>
    </tr>
    {/* ----------------------------------------subtotal----------------------------------- */}
    <tr>
@@ -565,7 +559,7 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {( parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)).toFixed(2)} </h3>
+     <h3 className="snopi wraptext">₹ {(parseFloat(this.props.deliverycharge)+parseFloat(this.props.quantity * this.props.rpu)).toFixed(2)} </h3>
      </td>
    </tr>
 
@@ -575,8 +569,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi srwidth "></h3>
         </td>
      <td>
-     <h3 className="freightch snopi"><p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.props.sgst}</b></p>
-     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.props.cgst}</b></p>
+     <h3 className="freightch snopi"><p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">SCGT</span><b > @ {this.props.sgst}%</b></p>
+     <p style={{textAlign:"left",marginLeft:"25px"}} className="font10 wraptext"><span className="Cursivefont">CGST</span><b> @ {this.props.cgst}%</b></p>
       </h3>
         </td>
         <td >
@@ -589,8 +583,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext"> {parseFloat(this.props.finalamt * this.props.sgst / 100).toFixed(2)}</h3>
-     <h3 className="snopi wraptext">{parseFloat(this.props.finalamt * this.props.cgst / 100).toFixed(2)}</h3>
+     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)}</h3>
+     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.cgst/100)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -613,11 +607,13 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"> ___</h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
-     +parseFloat(this.props.finalamt * this.props.cgst / 100)).toFixed(2)) }</h3>
+     <h3 className="snopi wraptext">₹ {parseFloat((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
+                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)).toFixed(2)}</h3>
      <h3 className="snopi wraptext">
-     
-        {parseFloat(this.props.apr).toFixed(2)}
+         ₹ {((parseFloat((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
+                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)).toFixed(2))-parseInt(this.props.apr)).toFixed(2)}
         </h3>
      </td>
    </tr>
@@ -641,8 +637,13 @@ export class PreviewTaxInvoice extends Component {
      </td>
      <td>
     
-     <h3 className="snopi wraptext">  {(((parseFloat(this.props.finalamt) + parseFloat(this.props.deliverycharge)+parseFloat(this.props.finalamt * this.props.sgst / 100) 
-     +parseFloat(this.props.finalamt * this.props.cgst / 100))-(parseFloat(this.props.apr))).toFixed(2)) }</h3>
+     <h3 className="snopi wraptext"> ₹ {parseFloat(((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
+                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100))-(
+                                          ((((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
+                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)))-parseInt(this.props.apr))
+                                        )).toFixed(2)}</h3>
      </td>
    </tr>
    {/* ----------------------------------------Buyer GST number----------------------------------- */}
@@ -758,7 +759,7 @@ export class PreviewTaxInvoice extends Component {
      </Col>
 
      {/* <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>)
+         All amount in Indian Rupee (₹)
      </Col> */}
       <Col className="col-xs-3 allamtInd">
         Subject to <b>Cuttack</b> Jurisdiction

@@ -304,12 +304,6 @@ backoperation = () => {
    </Row>
    <hr className="hrlineBPD "></hr>
    
-
-  
- 
-  
-
-
     <Row noGutters="true">
      <Col sm={12} className="BDPdetailscol">
      <p >Region of origin :

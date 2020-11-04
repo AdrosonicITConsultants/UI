@@ -411,6 +411,21 @@ class TTCEapi {
       });
   }
 
+  // /enquiry/deleteMoq/710
+  static deleteMoq(id) {
+    let url = ApiUrl + "/enquiry/deleteMoq/" + id;
+
+    return axios
+      .delete(url)
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   static deleteCustomProduct(id) {
     let url = ApiUrl + "/buyerCustomProduct/deleteProduct/" + id;
 
@@ -766,24 +781,7 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/deleteMoq/39
-
-
-  static deleteMoq(moqId){
-    let url = ApiUrl + "/enquiry/deleteMoq/"+moqId;
-
-  return axios
-    .delete(url)
-    .then((response) => {
-      console.log(response);
-      return response;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-}
-
-
+  
   static addToWishlist(productId) {
     let url = ApiUrl + "/product/addToWishlist/" + productId;
     console.log(url);

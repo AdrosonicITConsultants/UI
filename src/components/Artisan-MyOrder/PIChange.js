@@ -399,9 +399,9 @@ export class PIchange extends Component {
                                             >
                                             <option value="volvo">₹</option>
                                             {/* <option value="saab">$</option> */}
-                                        </select>                            <input type="number"  className="PIinput rsinputboxwidth"
-                        
-                            value={this.state.rpu }
+                                        </select>                           
+                            <input type="number"  className="PIinput rsinputboxwidth"
+                             value={this.state.rpu }
                             name="rpu"
                             onChange={this.handleChange} />
                             </Col>

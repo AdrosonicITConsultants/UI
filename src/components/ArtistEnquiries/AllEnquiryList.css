@@ -421,7 +421,11 @@ color: rgb(133, 196, 36) !important;
     padding-left: 5px!important;
 
 }
-
+.noopenenq{
+    font-size: 25px;
+    font-weight: 600;
+    color: black;
+}
 
 .modalBoxSizeCSCR{
     width: 500px;

@@ -92,7 +92,7 @@ export class BuyerOngoingList extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center">
+                    <Col className="col-xs-12  text-center noopenenq">
                         No Open Enquiries.
                     </Col>
                 </Row>  

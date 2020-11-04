@@ -88,6 +88,13 @@ export class BuyerSingleEnquiry extends Component {
        ToggleSaveClose = () => {
         document.getElementById('id02').style.display='none';
        }
+       CompleteDelivery =()=>{
+        document.getElementById('markdelivered').style.display='block';
+       }
+       CompleteDeliveryClose =()=>{
+        document.getElementById('markdelivered').style.display='none';
+       }
+
     getcollapseId = activecollapse => {
         if (activecollapse !== this.state.collapseId) {
           this.setState({
@@ -268,13 +275,17 @@ export class BuyerSingleEnquiry extends Component {
         });
     }
    
-       ToggleDelete1 = () => {
-        document.getElementById('id02').style.display='block';
+       ToggleDelete1 = (id) => {
+           console.log(id)
+           console.log(document.getElementById('DeleteMoq'+id))
+        document.getElementById('DeleteMoq'+id).style.display='block';
        }
 
-       ToggleDeleteClose1 = () => {
-        document.getElementById('id02').style.display='none';
+       ToggleDeleteClose1 = (id) => {
+        document.getElementById('DeleteMoq'+id).style.display='none';
        }
+
+     
     saveMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
@@ -308,7 +319,8 @@ export class BuyerSingleEnquiry extends Component {
       
       }
     } 
-    handleDeleteItem(id){
+    
+    DeleteMoq(id){
         TTCEapi.deleteMoq(id).then((response)=>{
             console.log(id);
             if (response.data.valid) {
@@ -318,7 +330,7 @@ export class BuyerSingleEnquiry extends Component {
                 });
                 this.setState({deleteMoq : response.data},()=>{
                     console.log(this.state.deleteMoq);
-                    document.getElementById('DeleteMoQ').style.display='none';
+                    document.getElementById('DeleteMoq'+id).style.display='none';
                     this.componentDidMount();        
              
                 });
@@ -1260,7 +1272,7 @@ MoqSimpleProductSelected(moqId){
                                 <img src={logos.cancelenq} className="closeenqimg"></img>
                                 Close Enquiry
                                 </button>
-                                    <div id="id02" class="w3-modal">
+                                    <div id="id02" class="w3-modal" style={{paddingTop:"215px"}}>
                                       <div class="w3-modal-content w3-animate-top modalBoxSize">
                                         <div class="w3-container">
                                           <h3 className="deleteModalHeadermoq">Are you sure you want to close this enquiry ?</h3>
@@ -1274,16 +1286,28 @@ MoqSimpleProductSelected(moqId){
                                      </div>
                                     
                     </Col>
-                    <Col className="col-xs-6">
+                    
+                     <Col className="col-xs-6">
                     <button className="completedenqButton"
-                                       onClick={()=>{this.markcompleted()}}
-                                       disabled = {this.state.progressid != 10}
-
+                     onClick={this.CompleteDelivery}                 
                                        >
-                                       <img src={logos.completedenq} className="completeenqimg" 
+                               <img src={logos.completedenq} className="completeenqimg" 
                                        ></img>
                                 Mark order Delivered
                                 </button>
+                                    <div id="markdelivered" class="w3-modal" style={{paddingTop:"215px"}}>
+                                      <div class="w3-modal-content w3-animate-top modalBoxSize">
+                                        <div class="w3-container" style={{paddingTop:"20px"}}>
+                                          <h3 className="deleteModalHeadermoq">Mark Order Delivered ?</h3>
+                                          <p className="deleteModalPara"></p>
+                                          <div className="deleteModalButtonOuterDiv">
+                                            <span onClick={this.CompleteDeliveryClose} className="deleteModalCancelButton">Cancel</span>
+                                            <span onClick={()=>{this.markcompleted()}} className="saveModalOkayButton">Yes</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     </div>
+                                    
                     </Col>
                 </Row>
            
@@ -1618,14 +1642,44 @@ MoqSimpleProductSelected(moqId){
                                         <Col className="col-xs-12 tdclasscss">
                                        
                                         <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
-                                        onClick={this.ToggleDelete1}></i>
+                                        // onClick={this.ToggleDelete1}
+                                        onClick={()=>this.ToggleDelete1(data.moq.id)}></i>
+   {/* _____________________________________________Modal 4 ________________________________________________ */}
+  <div id={'DeleteMoq'+data.moq.id} class="w3-modal" style={{paddingTop:"215px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.ToggleDeleteClose1(data.moq.id)}>X</h1>
+            </Col>
+  
+        </Row>
+       
+       
+        <div style={{textAlign:"center"}}>
+       <h3 style={{color:"#CC0000"}}> Are you sure you want to delete this moq?</h3>
+        </div>
+        <div className="deleteModalButtonOuterDiv">
+          <span onClick={() => this.ToggleDeleteClose1(data.moq.id)} className="deleteModalCancelButton">Cancel</span>
+          <span 
+          onClick={() => this.DeleteMoq(data.moq.id)}
+           className="deleteModalOkayButton">Delete</span>
+            </div>
+                                                                                  
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}
                                                 </Col>
                                             </Row>
 
                                           
                                         </td>
+                                        
                                         }
-                                       
+
                                        {this.state.disableCheckId == ""? 
                                     
                                         <td className={this.state.collapseId == data.artisanId? "acceptmoqbtnlg":"acceptmoqbtn"} 
@@ -1681,6 +1735,9 @@ MoqSimpleProductSelected(moqId){
                                      {/* ----------------Accepting Readmore ends------------------    */}
                                           
                                      </Row>
+
+                                      
+
                                
                                  </>
         
@@ -1925,11 +1982,38 @@ MoqSimpleProductSelected(moqId){
                                 <Col className="col-xs-12 tdclasscss">
                             
                                 <i class="fa fa-minus-circle" aria-hidden="true" style={{color:"red"}}
-                                        onClick={this.ToggleDelete1}></i>
+                                        onClick={()=>this.ToggleDelete1(data.moq.id)}></i>
+   {/* _____________________________________________Modal 4 ________________________________________________ */}
+  <div id={'DeleteMoq'+data.moq.id} class="w3-modal" style={{paddingTop:"215px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.ToggleDeleteClose1(data.moq.id)}>X</h1>
+            </Col>
+  
+        </Row>
+       
+        <div style={{textAlign:"center"}}>
+       <h3 style={{color:"#CC0000"}}>Are You sure you want to Delete this moq?</h3>
+        </div>
+       
+        <div className="deleteModalButtonOuterDiv">
+                                <span onClick={() => this.ToggleDeleteClose1(data.moq.id)} className="deleteModalCancelButton">Cancel</span>
+                                <span 
+                               onClick={() => this.DeleteMoq(data.moq.id)}
+                                 className="deleteModalOkayButton">Delete</span>
+                                </div>                                                                          
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}
                                                 </Col>
                                             </Row>
 
-                                            <div id="id02" class="w3-modal">
+                                            {/* <div id="id02" class="w3-modal">
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
                                 <h3 className="deleteModalHeader">Are you sure you want to delete MOQ ?</h3>
@@ -1941,7 +2025,7 @@ MoqSimpleProductSelected(moqId){
                                 </div>
                             </div>
                             </div>
-                            </div>
+                            </div> */}
                                 </td>
                                 }
                             

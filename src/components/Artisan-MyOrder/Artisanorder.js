@@ -299,6 +299,12 @@ import { useTranslation, withTranslation } from "react-i18next";
     var option =  optionElement.getAttribute('moqId');
 
     }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+        browserHistory.push("/artisanChat");
+    }
+    
     componentDidMount(){
        var taxinvoice=localStorage.getItem("piShow");
        console.log(taxinvoice);
@@ -774,7 +780,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                     <Col className="col-xs-9"></Col>
                     }
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -1344,7 +1351,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                     <Col className="col-xs-9"></Col>
                     }
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 

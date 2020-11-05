@@ -342,9 +342,11 @@ export class BuyerSingleCompletedOrder extends Component {
 
         }
 
-        reviewPageButton = (id, code) => {
+        reviewPageButton = (id, code, data) => {
             localStorage.removeItem("ratingEnquiryCode");
+            localStorage.removeItem("ratingSelectedEnquirydata");
             localStorage.setItem("ratingEnquiryCode", code);
+            localStorage.setItem("ratingSelectedEnquirydata", JSON.stringify(data));
             browserHistory.push("/buyerRating?code=" + id);
         }
 
@@ -574,7 +576,7 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -596,7 +598,7 @@ export class BuyerSingleCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -616,7 +618,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -818,7 +820,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                // onClick={this.sendCRDataFunction}
+                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode, this.state.openEnquiries[0].openEnquiriesResponse)}
                 className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
                  </button></span>
                  <br/>
@@ -985,7 +987,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -1007,7 +1009,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -1027,7 +1029,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

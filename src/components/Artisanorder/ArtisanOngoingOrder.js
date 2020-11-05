@@ -227,6 +227,11 @@ export class ArtisanOngoingOrder extends Component {
             });      
         });       
     }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+        browserHistory.push("/artisanChat");
+    }
  
     render() {
         return (
@@ -483,7 +488,8 @@ export class ArtisanOngoingOrder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                     <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)} 
+                        value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
                     </Col>
                 </Row>
 
@@ -885,7 +891,8 @@ export class ArtisanOngoingOrder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                     <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
                     </Col>
                 </Row>
                 

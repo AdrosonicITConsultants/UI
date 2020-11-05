@@ -173,11 +173,18 @@ export class FaultResolved extends Component {
         }
       }
 
-      reviewPageButton = (id, code) => {
+      reviewPageButton = (id, code, data) => {
         localStorage.removeItem("ratingEnquiryCode");
+        localStorage.removeItem("ratingSelectedEnquirydata");
         localStorage.setItem("ratingEnquiryCode", code);
+        localStorage.setItem("ratingSelectedEnquirydata", JSON.stringify(data));
         browserHistory.push("/buyerRating?code=" + id);
     }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);    
+        browserHistory.push("/buyerChat");            
+      }
   
     componentDidMount(){
       
@@ -307,7 +314,8 @@ export class FaultResolved extends Component {
                                             We're glad that your concern is resolved on mutual agreement.</p>
                                     </Col>
                                     <Col className="col-xs-1">
-                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                         <button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}
+                                         style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>
@@ -404,7 +412,7 @@ export class FaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getSingleOrder.orderCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getSingleOrder.orderCode, this.state.getSingleOrder)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

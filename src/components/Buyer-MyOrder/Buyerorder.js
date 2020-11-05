@@ -355,6 +355,11 @@ export class Buyerorder extends Component {
 
         }
 
+        goToChatButton = (id) => {
+            localStorage.setItem("goToChatButtonEnquiryId", id);    
+            browserHistory.push("/buyerChat");            
+        }
+
         propsSendFunction = () => {
             TTCEapi.getProductUploadData().then((response)=>{
                 if(response.data.valid)
@@ -410,9 +415,11 @@ export class Buyerorder extends Component {
 
         }
 
-        reviewPageButton = (id, code) => {
+        reviewPageButton = (id, code, data) => {
             localStorage.removeItem("ratingEnquiryCode");
+            localStorage.removeItem("ratingSelectedEnquirydata");
             localStorage.setItem("ratingEnquiryCode", code);
+            localStorage.setItem("ratingSelectedEnquirydata", JSON.stringify(data));
             browserHistory.push("/buyerRating?code=" + id);
         }
 
@@ -884,7 +891,8 @@ export class Buyerorder extends Component {
                        <span>
                       <button className="enqreqbtn needhelpbth">
                         <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
-                         <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                         <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                         value ="Go to this Enquiry chat"></input>
 
                        </span>
 
@@ -914,7 +922,8 @@ export class Buyerorder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                     <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        value ="Go to this Enquiry chat"></input>
                     </Col>
                     </Row>
                     </>
@@ -1451,7 +1460,8 @@ export class Buyerorder extends Component {
                     <Col className="col-xs-9"></Col>
                     }
                     <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ="Go to this Enquiry chat"></input>
+                        <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                         value ="Go to this Enquiry chat"></input>
                         
                     </Col>
                     </Row>
@@ -1770,7 +1780,7 @@ export class Buyerorder extends Component {
             <span >
                 <button
                 style={{fontSize:"15px"}}
-                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode)}
+                onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                 className="buyerMOQAcceptModalOkayButton raterevbtn"><img src={logos.ratereview} className="raterevbtnimg"/> Review and Raiting
                  </button></span>
                  <br/>

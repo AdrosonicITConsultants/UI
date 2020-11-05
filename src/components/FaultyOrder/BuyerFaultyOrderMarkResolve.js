@@ -187,6 +187,11 @@ export class BuyerFaultyOrderMarkResolve extends Component {
             })
         }
       }
+
+      goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);    
+        browserHistory.push("/buyerChat");            
+      }
   
     componentDidMount(){
       
@@ -306,7 +311,8 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                         <p className="a48hrs" style={{fontSize:"16px"}}>Please bear, It may take upto 48 hrs for Artisan to address & respond to your raised concern.</p>
                                     </Col>
                                     <Col className="col-xs-1">
-                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                         <button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}
+                                         style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>

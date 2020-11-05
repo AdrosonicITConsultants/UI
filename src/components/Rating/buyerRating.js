@@ -11,6 +11,7 @@ import "./buyerRating.css";
 import ReactStars from "react-rating-stars-component";
 import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
+import SeeMoreProduct from '../Buyer-ProductDetails/Seemoreproduct';
 
 
 export default class BuyerRating extends Component {
@@ -33,6 +34,11 @@ export default class BuyerRating extends Component {
             isBuyerRatingDone: 0,
             buyerGivenRatingResponse: [],
             buyerGivenRatingAverageValue: 0,
+            ProductData: [],
+            getProductCategoryAndClusterProducts : [],
+            commentBoxId: 0,
+            ratingValidationFlag: false,
+            newArrayLength: 0,
         };   
     
     }
@@ -52,20 +58,20 @@ export default class BuyerRating extends Component {
         console.log(id);
     }
 
-    daysleftrating(name,days)
-    {
-      console.log(name,days);
+    daysleftrating (name,days) {
+        console.log(name,days);
         var someDate = new Date(name);
-                                console.log(someDate);
-                                var numberOfDaysToAdd =parseInt(days);
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime =  someDate - todayDate ;
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                return(diffDays);
+        console.log(someDate);
+        var numberOfDaysToAdd =parseInt(days);
+        someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+        console.log(someDate); 
+        var todayDate= new Date();
+        const diffTime =  someDate - todayDate ;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        console.log(diffDays); 
+        return(diffDays);
     }
+
     ratingFunction = (newValue) => {
         console.log(newValue * 2);
         var rating = newValue * 2;
@@ -92,11 +98,18 @@ export default class BuyerRating extends Component {
         console.log(newArray);
         
         var addRate = 0;
+        var newArrayLength = 0;
         for(var i in newArray) {
-            addRate += newArray[i].response;
+            if(newArray[i].response !== 0) {
+                addRate += newArray[i].response;
+                newArrayLength = newArrayLength + 1;
+            }            
         }
-        console.log(addRate/newArray.length);
-        var averageRate = (addRate/newArray.length).toFixed(1);
+        this.setState({
+            newArrayLength: newArrayLength,
+        });
+        console.log(addRate/newArrayLength);
+        var averageRate = (addRate/newArrayLength).toFixed(1);
         this.setState({
             averageRate: averageRate,
         })
@@ -111,13 +124,14 @@ export default class BuyerRating extends Component {
             response: 0,
             responseComment: data,
         }
+        this.setState({
+            commentBoxId: id
+        });
         this.state.ratingArray.push(object);
     }
 
     submitReviewFunction = () => {
-        this.setState({
-            submitReviewButton: true
-        });
+        
         var currentArray = this.state.ratingArray;
         var newArray = [];      
         var uniqueObject = {}; 
@@ -130,17 +144,37 @@ export default class BuyerRating extends Component {
         }
         console.log(newArray);
 
-        TTCEapi.submitRatingToUser(newArray).then((response)=>{
-            if(response.data.valid)
-            { 
-                this.componentDidMount();
-                customToast.success("Review sent successfully", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                });
-            }
-            console.log(response.data.data);
-        });
+        var ratingValidationFlag = false;        
+        if(this.state.newArrayLength !== this.state.buyerQuestionsRatings.length) {
+            this.setState({
+                ratingValidationFlag: true
+            });
+            ratingValidationFlag = true;            
+        }
+        else {
+            this.setState({
+                ratingValidationFlag: false
+            });
+            ratingValidationFlag = false;
+        }
+
+        if(ratingValidationFlag === false) {
+            this.setState({
+                submitReviewButton: true
+            });
+
+            TTCEapi.submitRatingToUser(newArray).then((response)=>{
+                if(response.data.valid)
+                { 
+                    this.componentDidMount();
+                    customToast.success("Review sent successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+                console.log(response.data.data);
+            });
+        }        
     }
 
     componentDidMount() {
@@ -157,6 +191,7 @@ export default class BuyerRating extends Component {
         this.state.userData = userData;
 
         var enquiryCode = localStorage.getItem("ratingEnquiryCode");
+        var enquiryData = JSON.parse(localStorage.getItem("ratingSelectedEnquirydata"));
         this.state.enquiryCode = enquiryCode;
 
         console.log(this.state.enquiryId);
@@ -169,7 +204,6 @@ export default class BuyerRating extends Component {
                 this.setState({
                     buyerQuestionsComments: response.data.data.buyerQuestions.commentQuestions,
                     buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
-                    loading: false,
                 });
             }
         });
@@ -190,29 +224,43 @@ export default class BuyerRating extends Component {
                 console.log(response.data.data);
                 this.setState({
                     isBuyerRatingDone: response.data.data.isBuyerRatingDone,
-                    buyerGivenRatingResponse: response.data.data.artisanRating,
+                    buyerGivenRatingResponse: response.data.data.buyerRating,
                     loading: false,
                 });
-            }
-
-            var array = this.state.buyerGivenRatingResponse;
-            var value = 0;
-            var count = 0;
-            for(var i in array) {
-                if(array[i].response > 0) {
-                    value += array[i].response;
-                    count = count + 1;
+                var array = response.data.data.buyerRating;
+                var value = 0;
+                var count = 0;
+                for(var i in array) {
+                    if(array[i].response > 0) {
+                        value += array[i].response;
+                        count = count + 1;
+                    }
                 }
-            }
-            console.log(value);
-            console.log(count);
-            var averageValue = (value/count).toFixed(1);
+                console.log(value);
+                console.log(count);
+                var averageValue = (value/count).toFixed(1);
 
-            this.setState({
-                buyerGivenRatingAverageValue: averageValue,
-            });
+                this.setState({
+                    buyerGivenRatingAverageValue: averageValue,
+                });
+            }            
         });
-       
+
+        TTCEapi.getProduct(enquiryData.productId).then((response)=>{
+            this.setState({
+                ProductData :response.data.data
+            },()=>{
+            console.log(this.state.ProductData); 
+            
+            TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{                
+                this.setState({
+                    getProductCategoryAndClusterProducts : response.data.data.products
+                },()=>{
+                    console.log(this.state.getProductCategoryAndClusterProducts);
+                });
+                });
+            });
+        });       
     }
 
     render() {
@@ -276,7 +324,7 @@ export default class BuyerRating extends Component {
                         :
                         ""
                     }
-                    </Col>                           */}
+                    </Col>*/}
                 </Row>
                 <div className="envelopeBgImg">
                     <Row noGutters={true}>
@@ -301,7 +349,28 @@ export default class BuyerRating extends Component {
                         </a>
                     </Col>
                 </Row>
-                
+
+                {this.state.getProductCategoryAndClusterProducts.length > 0 ? 
+                    <Row noGutters={true}>
+                    <Col sm={12}>
+                        <h3 className="MoresareeBPD">Browse unique products from {this.state.ProductData.clusterName}</h3>
+                    </Col>
+                    </Row>
+                : null }
+                <Row noGutter={true} className="suggestedProductsListTopRating">
+                    <div className="col-sm-1 "></div>
+                    {this.state.getProductCategoryAndClusterProducts.length > 0 ?
+                    this.state.getProductCategoryAndClusterProducts.map((data) => {
+                    return(
+                    <>                    
+                        <Col md={2} xs={12} sm={2}>
+                        <SeeMoreProduct product={data} />
+                        </Col>                    
+                    </>)
+                    })
+                    : null }
+                </Row>    
+
                 </Container>
                 :
                 <div>
@@ -340,7 +409,7 @@ export default class BuyerRating extends Component {
                         :
                         ""
                          }
-                    </Col>                           */}
+                    </Col>*/}
                 </Row>
 
                 <Row noGutters={true}>
@@ -399,6 +468,11 @@ export default class BuyerRating extends Component {
                                 onChange={(e) => this.handleChangeComment(e, data.id)} maxLength="500"></textarea>
                             </div>
                         }) : null}  
+
+                        {this.state.ratingValidationFlag === true ?
+                        <div className="ratingValidationFlagError">Please provide your ratings for all questions</div>
+                        : null }
+
                         {this.state.submitReviewButton === true ?
                         <button className="rateSendButtonDisable">
                             Send Review

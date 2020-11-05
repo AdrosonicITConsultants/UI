@@ -178,6 +178,11 @@ export class BuyerFaultyOrder extends Component {
             })
         }
       }
+
+      goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);    
+        browserHistory.push("/buyerChat");            
+      }
   
     componentDidMount(){
       
@@ -560,7 +565,8 @@ export class BuyerFaultyOrder extends Component {
                                 <Row noGutters={true}>
                                 <Col className="col-xs-12">
                                         <p className="faultyp2" style={{textAlign:"center"}}>
-                                      <span>Upload photos (IN CHAT) for reference <button className="buddlechatbtn">
+                                      <span>Upload photos (IN CHAT) for reference <button className="buddlechatbtn"
+                                      onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}>
                                           <img src={logos.chatwhite} style={{height:"15px"}}/></button></span>                
                                           </p>
                                     </Col>

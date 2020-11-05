@@ -365,6 +365,11 @@ Modal3Close = () => {
     document.getElementById('Modal3').style.display='none';
     this.componentDidMount();
 }
+
+goToChatButton = (id) => {
+    localStorage.setItem("goToChatButtonEnquiryId", id);
+    browserHistory.push("/artisanChat");
+}
     render(){
     return(
             
@@ -402,7 +407,8 @@ Modal3Close = () => {
                 <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
                     <button className="enqreqbtn mbcr" 
-                    onClick={()=>{this.Modal3Show()}}><img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
+                    onClick={() => this.goToChatButton(this.state.getOrder[0].openEnquiriesResponse.enquiryId)}>
+                        <img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
             
                     </Col>
                 </Row>
@@ -544,7 +550,8 @@ Modal3Close = () => {
                         <p className="crmnote crnote4">Want to discuss more ?</p>
                         <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
-                    <button className="enqreqbtn mbcr" ><img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
+                    <button className="enqreqbtn mbcr" onClick={() => this.goToChatButton(this.state.getOrder[0].openEnquiriesResponse.enquiryId)}>
+                        <img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
             
                     </Col>
                 </Row>
@@ -588,7 +595,8 @@ Modal3Close = () => {
                     
                         <Row noGutters={true}>
                     <Col className="col-xs-12" style={{textAlign:"center"}}>
-                    <button className="enqreqbtn mbcr" ><img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
+                    <button className="enqreqbtn mbcr" onClick={() => this.goToChatButton(this.state.getOrder[0].openEnquiriesResponse.enquiryId)}>
+                        <img src={logos.chatwhite} style={{marginRight:"10px"}}/>Go to this Enquiry chat</button>
             
                     </Col>
                 </Row>

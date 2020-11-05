@@ -278,6 +278,12 @@ import { useTranslation, withTranslation } from "react-i18next";
     var option =  optionElement.getAttribute('moqId');
 
     }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+        browserHistory.push("/artisanChat");
+    }
+
     componentDidMount(){
     window.scrollTo(0, 0);
     let params = queryString.parse(this.props.location.search);
@@ -570,7 +576,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 
@@ -859,7 +866,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                     <Row noGutters={true}>
                         <Col className="col-xs-9"></Col>
                         <Col className="col-xs-2">
-                        <input type="button" className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
+                        <input type="button" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
+                        className="enqreqbtn" value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
 
                         </Col>
 

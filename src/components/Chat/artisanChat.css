@@ -221,7 +221,7 @@
 
 .chatRightGoToEscText {
     margin-left: 8px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
 .artisanChatBG {
@@ -429,7 +429,7 @@
 
 .artisanChatCRIcon {
     width: 13px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     margin-top: -3px;
 }
 

@@ -198,6 +198,11 @@ export class ArtisanFaultyOrder1 extends Component {
             })
         }
       }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+        browserHistory.push("/artisanChat");
+    }
   
     componentDidMount(){
       
@@ -547,7 +552,8 @@ export class ArtisanFaultyOrder1 extends Component {
                             <Row noGutters={true}>
                             <Col className="col-xs-9"></Col>
                                 <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                <span><button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}
+                                style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px"}}/></button>
                                           <button
                                             disabled={this.state.rejectButtonClick}

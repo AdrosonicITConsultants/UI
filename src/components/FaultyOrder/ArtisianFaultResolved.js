@@ -173,7 +173,12 @@ export class ArtisanFaultResolved extends Component {
     reviewPageButton = (id, code) => {
         localStorage.removeItem("ratingEnquiryCode");
         localStorage.setItem("ratingEnquiryCode", code);
-        browserHistory.push("/buyerRating?code=" + id);
+        browserHistory.push("/artisanRating?code=" + id);
+    }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+        browserHistory.push("/artisanChat");
     }
 
     componentDidMount(){
@@ -293,7 +298,8 @@ export class ArtisanFaultResolved extends Component {
                                             We're glad that your concern is resolved on mutual agreement.</p>
                                     </Col>
                                     <Col className="col-xs-1">
-                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                         <button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}
+                                         style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>

@@ -45,6 +45,10 @@
     margin: 0px 10px;
 }
 
+.ratingStarDisplayMargin:not(.nohover):hover {
+    background-color: #F2BF17;
+}
+
 .ratingRemovePadding {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -196,8 +200,8 @@
     border-radius: 40px;
     cursor: pointer;
     font-size: 15px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .rateLoadingTopBottom {
@@ -221,10 +225,21 @@
 }
 
 .starColorActiveCompleteEnquiryId svg{
-    width: 100% !important;
+    width: 106% !important;
     height: 25px !important;
     position: absolute !important;
     top: 0px;
+}
+
+.suggestedProductsListTopRating {
+    margin-bottom: 30px;
+}
+
+.ratingValidationFlagError {
+    color: #cc0000;
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: 600;
 }
 
 @media only screen and (min-width: 1200px) {

@@ -155,6 +155,11 @@ export class BuyerPreviewInvoice extends Component {
         browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
 
+    goToChatButton = (id) => {
+      localStorage.setItem("goToChatButtonEnquiryId", id);    
+      browserHistory.push("/buyerChat");            
+    }
+
     downloadPdfFunction = () => {
 
       // html2canvas(document.getElementById("contentPDF")).then(function(canvas) {
@@ -796,7 +801,8 @@ export class BuyerPreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span>
-    <button className="gobacktoeditdet"><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
+    <button className="gobacktoeditdet" onClick={() => this.goToChatButton(this.state.enquiryCode)}
+    ><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
 {this.state.previewPI.productCustom == false?
 <>
 {this.state.previewPI.product.productStatusId==2 ?  

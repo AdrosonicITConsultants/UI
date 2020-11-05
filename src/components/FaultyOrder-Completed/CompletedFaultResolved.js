@@ -104,10 +104,21 @@ export class CompletedFaultResolved extends Component {
         });
     }
 
-    reviewPageButton = (id, code) => {
-        localStorage.removeItem("ratingEnquiryCode");
-        localStorage.setItem("ratingEnquiryCode", code);
-        browserHistory.push("/buyerRating?code=" + id);
+    reviewPageButton = (id, code, data) => {
+        var user = JSON.parse(localStorage.getItem("user"));
+
+        if(user.refRoleId == 1) {
+            localStorage.removeItem("ratingEnquiryCode");
+            localStorage.setItem("ratingEnquiryCode", code);
+            browserHistory.push("/artisanRating?code=" + id);
+        }
+        else if(user.refRoleId == 2) {
+            localStorage.removeItem("ratingEnquiryCode");
+            localStorage.removeItem("ratingSelectedEnquirydata");
+            localStorage.setItem("ratingEnquiryCode", code);
+            localStorage.setItem("ratingSelectedEnquirydata", JSON.stringify(data));
+            browserHistory.push("/buyerRating?code=" + id);
+        }        
     }
 
     submit(){
@@ -176,6 +187,20 @@ export class CompletedFaultResolved extends Component {
             })
         }
       }
+
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);
+
+        var user = JSON.parse(localStorage.getItem("user"));
+
+        if(user.refRoleId == 1) {
+            browserHistory.push("/artisanChat");
+        }
+        else if(user.refRoleId == 2) {
+            browserHistory.push("/buyerChat");
+        }
+        
+    }
   
     componentDidMount(){
       
@@ -305,7 +330,8 @@ export class CompletedFaultResolved extends Component {
                                             We're glad that your concern is resolved on mutual agreement.</p>
                                     </Col>
                                     <Col className="col-xs-1">
-                                         <button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
+                                         <button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getClosedOrder.enquiryId)}
+                                         style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px",marginTop:"-40px"}}/></button></Col>
                                     </Row> 
                                     <Row noGutters={true}>
@@ -404,7 +430,7 @@ export class CompletedFaultResolved extends Component {
                                  <Col className="col-xs-12" style={{textAlign:"center",marginTop:"45px"}}>
                                  <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getClosedOrder.orderCode)}
+                                onClick={() => this.reviewPageButton(parseInt(this.props.enquiryCode), this.state.getClosedOrder.orderCode, this.state.getClosedOrder)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order

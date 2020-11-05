@@ -31,6 +31,9 @@ export default class ArtisanRating extends Component {
             isArtisanRatingDone: 0,
             artisanGivenRatingResponse: [],
             artisanGivenRatingAverageValue: 0,
+            commentBoxId: 0,
+            ratingValidationFlag: false,
+            newArrayLength: 0,
         };   
     
     }
@@ -71,11 +74,18 @@ export default class ArtisanRating extends Component {
         console.log(newArray);
         
         var addRate = 0;
+        var newArrayLength = 0;
         for(var i in newArray) {
-            addRate += newArray[i].response;
+            if(newArray[i].response !== 0) {
+                addRate += newArray[i].response;
+                newArrayLength = newArrayLength + 1;
+            }            
         }
-        console.log(addRate/newArray.length);
-        var averageRate = (addRate/newArray.length).toFixed(1);
+        this.setState({
+            newArrayLength: newArrayLength,
+        });
+        console.log(addRate/newArrayLength);
+        var averageRate = (addRate/newArrayLength).toFixed(1);
         this.setState({
             averageRate: averageRate,
         })
@@ -90,13 +100,14 @@ export default class ArtisanRating extends Component {
             response: 0,
             responseComment: data,
         }
+        this.setState({
+            commentBoxId: id
+        });
         this.state.ratingArray.push(object);
     }
 
     submitReviewFunction = () => {
-        this.setState({
-            submitReviewButton: true
-        });
+        
         var currentArray = this.state.ratingArray;
         var newArray = [];      
         var uniqueObject = {}; 
@@ -109,17 +120,37 @@ export default class ArtisanRating extends Component {
         }
         console.log(newArray);
 
-        TTCEapi.submitRatingToUser(newArray).then((response)=>{
-            if(response.data.valid)
-            { 
-                this.componentDidMount();
-                customToast.success("Review sent successfully", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: true,
-                });
-            }
-            console.log(response.data.data);
-        });
+        var ratingValidationFlag = false;        
+        if(this.state.newArrayLength !== this.state.buyerQuestionsRatings.length) {
+            this.setState({
+                ratingValidationFlag: true
+            });
+            ratingValidationFlag = true;            
+        }
+        else {
+            this.setState({
+                ratingValidationFlag: false
+            });
+            ratingValidationFlag = false;
+        }
+
+        if(ratingValidationFlag === false) {
+            this.setState({
+                submitReviewButton: true
+            });
+
+            TTCEapi.submitRatingToUser(newArray).then((response)=>{
+                if(response.data.valid)
+                { 
+                    this.componentDidMount();
+                    customToast.success("Review sent successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+                console.log(response.data.data);
+            });
+        } 
     }
 
     componentDidMount() {
@@ -162,30 +193,30 @@ export default class ArtisanRating extends Component {
                     artisanGivenRatingResponse: response.data.data.artisanRating,
                     loading: false,
                 });
-            }
-
-            var array = this.state.artisanGivenRatingResponse;
-            var value = 0;
-            var count = 0;
-            for(var i in array) {
-                if(array[i].response > 0) {
-                    value += array[i].response;
-                    count = count + 1;
+                var array = response.data.data.artisanRating;
+                var value = 0;
+                var count = 0;
+                for(var i in array) {
+                    if(array[i].response > 0) {
+                        value += array[i].response;
+                        count = count + 1;
+                    }
                 }
-            }
-            console.log(value);
-            console.log(count);
-            var averageValue = (value/count).toFixed(1);
+                console.log(value);
+                console.log(count);
+                var averageValue = (value/count).toFixed(1);
 
-            this.setState({
-                artisanGivenRatingAverageValue: averageValue,
-            })
+                this.setState({
+                    artisanGivenRatingAverageValue: averageValue,
+                })
+            }
         });
     }
 
     faulty(id){
         browserHistory.push("artisanfaultreportCompleted?orderid=" +id)
     }
+
     render() {
 
     const secondExample = {
@@ -196,13 +227,13 @@ export default class ArtisanRating extends Component {
         value: 0,
         a11y: true,
         isHalf: true,
-        emptyIcon: <i className="far fa-star ratingStarDisplayMargin" />,
-        halfIcon: <i className="fa fa-star-half-alt ratingStarDisplayMargin" />,
-        filledIcon: <i className="fa fa-star ratingStarDisplayMargin" />,
+        emptyIcon: <i className="far fa-star ratingStarDisplayMargin nohover" />,
+        halfIcon: <i className="fa fa-star-half-alt ratingStarDisplayMargin nohover" />,
+        filledIcon: <i className="fa fa-star ratingStarDisplayMargin nohover" />,
         onChange: (newValue) => this.ratingFunction(newValue)
     };
 
-    return (
+    return ( 
         <React.Fragment>
             <NavbarComponent/>
                 {this.state.loading ? 
@@ -344,7 +375,12 @@ export default class ArtisanRating extends Component {
                                 <textarea placeholder="Type here....." className="ratingTextareaStyle" 
                                 onChange={(e) => this.handleChangeComment(e, data.id)} maxLength="500"></textarea>
                             </div>
-                        }) : null}  
+                        }) : null} 
+
+                        {this.state.ratingValidationFlag === true ?
+                        <div className="ratingValidationFlagError">Please provide your ratings for all questions</div>
+                        : null }
+
                         {this.state.submitReviewButton === true ?
                         <button className="rateSendButtonDisable">
                             Send Review

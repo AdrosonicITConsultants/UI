@@ -676,6 +676,11 @@ MoqSimpleProductSelected(moqId){
         this.componentDidMount()
     }
 
+    goToChatButton = (id) => {
+        localStorage.setItem("goToChatButtonEnquiryId", id);    
+        browserHistory.push("/buyerChat");            
+    }
+
 
     render() {
         return (
@@ -1875,7 +1880,8 @@ MoqSimpleProductSelected(moqId){
                                                                             </tr>
                                                                         </table>
                                                                         
-                                                                        <div className="buyerMOQConfirmModalEnquiryChatButton">Go to this enquiry chat</div>
+                                                                        <div className="buyerMOQConfirmModalEnquiryChatButton" onClick={() => this.goToChatButton(this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryId)}
+                                                                        >Go to this enquiry chat</div>
                                                                         
                                                                         <div className="buyerMOQConfirmModalDesc">
                                                                             MOQ once accepted cannot be changed further.<br/>

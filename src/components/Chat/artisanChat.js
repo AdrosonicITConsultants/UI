@@ -690,6 +690,8 @@ export default class ArtisanChat extends Component {
         var currentDate = today.getDate();
         var currentMonth = today.getMonth();
         var currentYear = today.getFullYear();
+        var onLoadChatListArray = [];
+        var dropdownChatListArray = [];
 
         var finalDate = currentYear + "-" + ((currentMonth+1) > 9 ? (currentMonth+1) : "0"+(currentMonth+1)) + "-" + ((currentDate > 9) ? currentDate : "0"+(currentMonth));
         console.log(finalDate);
@@ -711,19 +713,40 @@ export default class ArtisanChat extends Component {
                     onLoadChatList: response.data.data,
                     loading: false,
                 });
+                onLoadChatListArray = response.data.data;
             }
-        });
-
-        TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
-            if(response.data.valid)
-            {
-                console.log(response.data.data);
-                this.setState({
-                    dropdownChatList: response.data.data,
-                    loading: false,
-                });
-            }
-        });
+            TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
+                if(response.data.valid)
+                {
+                    console.log(response.data.data);
+                    this.setState({
+                        dropdownChatList: response.data.data,
+                        loading: false,
+                    });
+                    dropdownChatListArray = response.data.data;
+                }
+                if(onLoadChatListArray.length !== 0 || dropdownChatListArray.length !== 0) {
+                    var enquiryId = parseInt(localStorage.getItem("goToChatButtonEnquiryId"));
+                    localStorage.removeItem("goToChatButtonEnquiryId");
+                    var array1 = onLoadChatListArray;
+                    var array2 = dropdownChatListArray;
+                    
+                    if(enquiryId) {
+                        for(var i in array1) {
+                            if(enquiryId === array1[i].enquiryId) {
+                                this.openConversationfunction(0, array1[i].enquiryId, array1[i]);
+                            }
+                        }
+            
+                        for(var i in array2) {
+                            if(enquiryId === array2[i].enquiryId) {
+                                this.initiateNewChatFunction(0, array2[i].enquiryId, array2[i]);
+                            }
+                        }        
+                    }            
+                }
+            });
+        });        
 
         TTCEapi.getEscalations().then((response)=>{
             if(response.data.valid)
@@ -734,7 +757,7 @@ export default class ArtisanChat extends Component {
                     loading: false,
                 });
             }
-        });
+        });        
     }
 
     render() {
@@ -1020,10 +1043,11 @@ export default class ArtisanChat extends Component {
                                             <span className="chatEscShowCenterColText1">Raised by You on <Moment format="DD-MM-YY">
                                                     {data.createdOn}</Moment> at <Moment format="HH:mm">
                                                     {data.createdOn}</Moment></span>
-                                                <span className="chatEscShowCenterColText2">Awaiting resolution. {this.daysLeftChatEsc(data.createdOn, 2)} hrs left to auto escalate</span>
+                                                <span className="chatEscShowCenterColText2">Awaiting resolution. {this.daysLeftChatEsc(data.createdOn, 2) > 0 ? this.daysLeftChatEsc(data.createdOn, 2) : "0"} hrs left to auto escalate</span>
                                             </div>
                                             <div className="chatEscShowCenterColContent">{data.text}</div>
                                         </Col>
+                                        {this.daysLeftChatEsc(data.createdOn, 2) > 0 ?
                                         <Col className="col-xs-2">
                                             {this.state.markResolvedButtonDisable === true ? 
                                             <div className="chatEscShowEndColOuter">
@@ -1041,6 +1065,7 @@ export default class ArtisanChat extends Component {
                                             </div>
                                             }
                                         </Col>
+                                        : null }
                                     </Row>
                                 }
                             }
@@ -1115,16 +1140,19 @@ export default class ArtisanChat extends Component {
                         <>
                         <div className="chatGradientBg">
                             <Row noGutters={true}>
-                                <Col className="col-xs-6 chatRemovePadding chatRightOrderAmount">
+                                <Col className="col-xs-3 chatRemovePadding chatRightOrderAmount">
                                     Order Amount: ₹ {this.state.selectedEnquiryData.orderAmount ? this.state.selectedEnquiryData.orderAmount : "0"}
                                     {this.state.selectedEnquiryData.changeRequestDone === 1 ?
-                                    <>
+                                    <div>
                                         <img src={logos.artisanChatCRIcon} className="artisanChatCRIcon"/>
                                         <span className="artisanChatCRIconText">Change Requested</span>
-                                    </>
+                                    </div>
                                     : null }
                                 </Col>
-                                <Col className="col-xs-6 chatRemovePadding text-right chatRightGoToEsc">
+                                <Col className="col-xs-6 chatRemovePadding">
+                                Chat will be open against an enquiry ID during full process of enquiry execution and even 30 days after enquiry closure
+                                </Col>
+                                <Col className="col-xs-3 chatRemovePadding text-right chatRightGoToEsc">
                                     {this.state.selectedEnquiryData.escalation !== 0 ?
                                     <>
                                         <img src={logos.esc} className="chatRightGoToEscImg"/>
@@ -1135,7 +1163,7 @@ export default class ArtisanChat extends Component {
                                         }
                                     </>
                                     : null }
-                                    <span onClick={this.goToEscalationFunction} className="goToChatFunction">Go to escalations &gt;</span>
+                                    <div onClick={this.goToEscalationFunction} className="goToChatFunction">Go to escalations &gt;</div>
                                 </Col>
                             </Row>
                         </div>

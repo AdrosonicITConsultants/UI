@@ -98,9 +98,11 @@ export class BuyerCompletedOrder extends Component {
 
     }
 
-    reviewPageButton = (id, code) => {
+    reviewPageButton = (id, code, data) => {
         localStorage.removeItem("ratingEnquiryCode");
+        localStorage.removeItem("ratingSelectedEnquirydata");
         localStorage.setItem("ratingEnquiryCode", code);
+        localStorage.setItem("ratingSelectedEnquirydata", JSON.stringify(data));
         browserHistory.push("/buyerRating?code=" + id);
     }
 
@@ -343,7 +345,7 @@ export class BuyerCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -365,7 +367,7 @@ export class BuyerCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -382,7 +384,7 @@ export class BuyerCompletedOrder extends Component {
     <span>
            <button
            style={{fontSize:"15px"}}
-           onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+           onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
            className="buyerMOQAcceptModalOkayButton raterevbtn">
                <img src={logos.ratereview} className="raterevbtnimg"/>
            Rate & Review this order
@@ -666,7 +668,7 @@ export class BuyerCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -688,7 +690,7 @@ export class BuyerCompletedOrder extends Component {
                              <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
                                 <button
                                 style={{fontSize:"15px"}}
-                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+                                onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
                                 className="buyerMOQAcceptModalOkayButton raterevbtn">
                                     <img src={logos.ratereview} className="raterevbtnimg"/>
                                 Rate & Review this order
@@ -705,7 +707,7 @@ export class BuyerCompletedOrder extends Component {
     <span>
            <button
            style={{fontSize:"15px"}}
-           onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode)}
+           onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
            className="buyerMOQAcceptModalOkayButton raterevbtn">
                <img src={logos.ratereview} className="raterevbtnimg"/>
            Rate & Review this order

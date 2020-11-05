@@ -305,10 +305,11 @@ import { useTranslation, withTranslation } from "react-i18next";
        console.log(taxinvoice);
        if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn();
+    //    window.scrollTo(0, 0);
     }
     localStorage.removeItem("piShow");
-
     window.scrollTo(0, 0);
+   
     let params = queryString.parse(this.props.location.search);
     console.log(params);
     this.state.enquiryCode = params.code;
@@ -690,7 +691,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqAmount bold">
-                                            {item.openEnquiriesResponse.totalAmount > 0 ? "â‚¹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                            {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>                                    
                                     <div noGutters={true} >
@@ -1255,7 +1256,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqAmount bold">
-                                            {item.openEnquiriesResponse.totalAmount > 0 ? "â‚¹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                            {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>
                                     <div noGutters={true} >

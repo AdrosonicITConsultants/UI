@@ -236,6 +236,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     document.getElementById('id01').style.display='none';
     }
     moqDetailsbtn(){
+    this.componentDidMount();
     this.setState((prevState) => {
         return{
         selected: "moqDetails",
@@ -1811,12 +1812,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         :
                                                             null}
                                     
-
-
-
-
-
-
                                         {this.state.proformainvoice? 
                                         <>
                                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?

@@ -75,6 +75,7 @@ export class ArtisanChangeRequest extends Component {
       PI(){
           this.props.openPI()
         // console.log("pI cliced")
+        // this.componentDidMount()
       }
       AcceptChange(id){
          
@@ -226,6 +227,7 @@ componentDidMount(){
                         if(response.data.valid)
                         {
                             this.setState({getOrder:response.data.data},()=>{
+
                                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                                     if(response.data.valid)
                                     {
@@ -614,9 +616,9 @@ Modal3Close = () => {
             </div>
             
             {/* ----------------------------------------------------Modal3------------------------------------- */}
-            <div id="Modal3" class="w3-modal">
+            <div id="Modal3" class="w3-modal" style={{height:"220"}}>
                 <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
-                    <div class="w3-container buyerMOQAcceptModalContainer">
+                    <div class="w3-container buyerMOQAcceptModalContainer" style={{padding:"13px 4px 1px 1px"}}>
                     <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
                         <Col className="col-xs-12 ">
                             <h1 className="areyousurecrh1 fontplay" style={{fontSize:"16px"}}>

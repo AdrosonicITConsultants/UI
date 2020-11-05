@@ -27,6 +27,9 @@ class Wishlist extends Component {
         browserHistory.goBack()
         
     }  
+    homepage(){
+        browserHistory.push("/home"); 
+    }
     
 
     render() {
@@ -57,7 +60,7 @@ class Wishlist extends Component {
                    
                 </Row>
                 <Row noGutters={true}>
-                  <div style={{textAlign:"center"}}  onClick={() => this.backoperation()}>
+                  <div style={{textAlign:"center"}}  onClick={() => this.homepage()}>
                         <button className="wishlistblack"><img className="homeiconwishlist" src={logos.Iconfeatherhome}/> <span className="spanhome">Go to home page</span></button>
                         </div>
                 </Row>

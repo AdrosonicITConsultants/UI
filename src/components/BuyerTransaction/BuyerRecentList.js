@@ -120,7 +120,7 @@ export class BuyerRecentList extends Component {
                 ).then((response)=>{
                 
                 if(response.data.valid){ 
-                    customToast.success("Final Payment Receipt Uploaded", {
+                    customToast.success("Final Payment Receipt Uploaded!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });

@@ -304,10 +304,10 @@ export class PreviewNewPI extends Component {
           </p>
           <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
            this.state.artisanUser.firstName:
-           "NA"
+           ""
            }  {this.state.artisanUser.lastName?
             this.state.artisanUser.lastName:
-            "NA"
+            ""
             }</p>
           
        </Col>
@@ -349,10 +349,10 @@ export class PreviewNewPI extends Component {
          
           <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
            this.state.generatedBy.firstName:
-           "NA"
+           ""
            }  {this.state.generatedBy.lastName?
             this.state.generatedBy.lastName:
-            "NA"
+            ""
             }</p>
             
           

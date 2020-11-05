@@ -53,7 +53,6 @@ import { useTranslation, withTranslation } from "react-i18next";
             dispatchRCButtonDisable: false,     
             orderRecreateModalOkButtonDisable: false,
             orderRCSelectedId: 0,
-            changeRequest:[]
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -61,20 +60,7 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.changeRequestbtn = this.changeRequestbtn.bind(this);
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
     }
-    daysleftrating(name,days)
-    {
-      console.log(name,days);
-        var someDate = new Date(name);
-                                console.log(someDate);
-                                var numberOfDaysToAdd =parseInt(days);
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime =  someDate - todayDate ;
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                return(diffDays);
-    }
+
  
     transactionsbtn(){
       
@@ -325,7 +311,6 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
     console.log(params);
     this.state.enquiryCode = params.code;
-    
     TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {   TTCEapi.getEnquirStages().then((response)=>{
@@ -427,11 +412,11 @@ import { useTranslation, withTranslation } from "react-i18next";
     TTCEapi.getChangeRequestForArtisan(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
         {
+            // console.log(response.data.data);
             this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
-                changeRequest:response.data.data.changeRequest,
                 dataload:true})
         }
-        console.log(this.state.changeRequest)
+        console.log(this.state.getChangeRequestForArtisan)
     })
     TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
@@ -704,7 +689,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqAmount bold">
-                                            {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                            {item.openEnquiriesResponse.totalAmount > 0 ? "â‚¹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>                                    
                                     <div noGutters={true} >
@@ -1032,6 +1017,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                         </Col>
                     </Row>
                     <Row noGutters={true} className="text-center">
+                    {console.log(this.state.progressid +" lllllllllllllllllllllllllllllllllllll")}
+
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                    ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
@@ -1267,7 +1254,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     <div noGutters={true} >
                                         <Col className="leEnqAmount bold">
-                                            {item.openEnquiriesResponse.totalAmount > 0 ? "₹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
+                                            {item.openEnquiriesResponse.totalAmount > 0 ? "â‚¹"+ item.openEnquiriesResponse.totalAmount : "NA"} 
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
@@ -1599,6 +1586,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                     </Row>
                     
                     <Row noGutters={true} className="text-center">
+                        {console.log(this.state.progressid +" uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")}
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                    ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                                       ? 
@@ -1822,26 +1810,15 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         </>
                                                         :
                                                             null}
-                                            {this.state.proformainvoice?
-                                            <>
-                                           {this.daysleftrating(this.state.changeRequest.orderReceiveDate,2)>0?
-                                           <>
-                                           
-                                           </>
-                                           :
-                                           <></>
-                                            }
-                                            </>
-                                            :
-                                            <>
-                                            </>
-                                             }
                                     
+
+
+
+
+
+
                                         {this.state.proformainvoice? 
-                                        
                                         <>
-                                        
-                                         <>
                                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?
                                         <>
                                           {console.log("status-0/2")}
@@ -1872,13 +1849,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         </>
                                         :
                                         <>
-                                        </>
-                                        </>
-
-                                        
-                                        :
-                                        ""
-                                        }
+                                        </>}
 
 
 

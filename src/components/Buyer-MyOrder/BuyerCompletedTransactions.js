@@ -120,7 +120,7 @@ export class BuyerCompletedTransaction extends Component {
               
               if(response.data.valid){ 
                   document.getElementById('FinalPayment').style.display='none';
-                  customToast.success("Delivery Challan uploaded", {
+                  customToast.success("Final Payment Receipt uploaded uploaded", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });

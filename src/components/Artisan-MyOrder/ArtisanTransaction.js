@@ -801,7 +801,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 {/* ___________________________________________________________________________________________________ */}
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
-                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal">
+                                        <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal" style={{paddingTop:"27px"}}>
                                            {/* {this.state.deliveryChallanUploaded?
                                            <>
                                            "hhhh"

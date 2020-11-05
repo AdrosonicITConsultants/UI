@@ -299,7 +299,7 @@ export class BuyerPreviewNewPI extends Component {
  </Moment>
 </Col>
 <Col className="col-xs-5 CRdate">
-       Change Request date:{this.state.time} on  { this.state.currentDate }
+       {/* Change Request date:{this.state.time} on  { this.state.currentDate } */}
 </Col>
 <Col className="col-xs-3">
    {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}

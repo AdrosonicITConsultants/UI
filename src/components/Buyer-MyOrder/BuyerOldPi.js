@@ -213,66 +213,26 @@ export class BuyerOldPi extends Component {
    
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 <div >
-    {/* <Row noGutters={true}>
-        <Col className="col-xs-12" >
-       
-        {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Raise PI</button>
-    }
-        </Col>
-
-
-
-
-    </Row>
-   <Row noGutters={true}>
-       <Col className="col-xs-12">
-       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
-</Col>
-
-   </Row> */}
+   
    <Row noGutters={true} style={{marginBottom:"15px"}}>
         <Col className="col-xs-6 bold" >
        
-        {/* {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Raise PI</button>
-    } */}
+        
    <img src={logos.postchangerequesticon} style={{height:"20px"}}/> Post change request process
         </Col>
         <Col className="col-xs-4" >
          </Col>
-        {/* <Col className="col-xs-2 viewoldpi" >
-  <a href=""><img src={logos.recent} style={{height:"15px"}}/> View old PI</a>    
       
-         </Col> */}
          <Col className="col-xs-2">
-         {/* {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Send updated PI</button>
-    } */}
+       
          </Col>
     </Row>
    <Row noGutters={true}>
        <Col className="col-xs-9">
-       {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
        Received at :  {this.state.time} on  { this.state.currentDate }
 </Col>
-{/* <Col className="col-xs-4 CRdate">
-       Change Request date:
-</Col> */}
+
 <Col className="col-xs-3">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -282,7 +242,6 @@ export class BuyerOldPi extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -300,7 +259,7 @@ export class BuyerOldPi extends Component {
        this.state.artisanUser.companyDetails.logo ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
-         <img src={logos.Smile} className="Pilogoimg"></img>
+        <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
            }
@@ -322,10 +281,10 @@ export class BuyerOldPi extends Component {
           </p>
           <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
            this.state.artisanUser.firstName:
-           "NA"
+           ""
            }  {this.state.artisanUser.lastName?
             this.state.artisanUser.lastName:
-            "NA"
+            ""
             }</p>
           
        </Col>
@@ -367,10 +326,10 @@ export class BuyerOldPi extends Component {
          
           <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
            this.state.generatedBy.firstName:
-           "NA"
+           ""
            }  {this.state.generatedBy.lastName?
             this.state.generatedBy.lastName:
-            "NA"
+            ""
             }</p>
             
           
@@ -674,10 +633,10 @@ export class BuyerOldPi extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -724,7 +683,7 @@ export class BuyerOldPi extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     <h3 className="snopi wraptext"> ₹ {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
    </tr>
@@ -815,7 +774,7 @@ export class BuyerOldPi extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
+         All amount in Indian Rupee (₹)
      </Col>
  </Row>
  </div>

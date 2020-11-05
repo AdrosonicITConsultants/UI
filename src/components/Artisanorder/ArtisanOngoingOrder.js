@@ -246,7 +246,7 @@ export class ArtisanOngoingOrder extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12 text-center">
+                    <Col className="col-xs-12 text-center noopenenq">
                     No Ongoing Order.
                    </Col>
                 </Row>

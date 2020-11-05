@@ -50,7 +50,8 @@ export class PIchange extends Component {
             getOrder:[],
             onlyView:false,
             previewAndRaisePI:false,
-            getOrderStatus:-1
+            getOrderStatus:-1,
+            daysleftinint:""
          
         }
     }
@@ -79,6 +80,22 @@ export class PIchange extends Component {
            
         })
     }
+    daysleft(name,days)
+    {
+      console.log(name,days +"Days Left");
+        var someDate = new Date(name);
+                                console.log(someDate);
+                                var numberOfDaysToAdd =parseInt(days);
+                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                console.log(someDate); 
+                                var todayDate= new Date();
+                                const diffTime =  someDate - todayDate ;
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                console.log(diffDays + "+++++++++=diffDays+++++"); 
+                                return(diffDays);
+                               
+    }
+
     revisedPI(){
         var regex = /[1-9]|\./
         var previewhsn= /^\d{1,8}$/
@@ -232,9 +249,23 @@ export class PIchange extends Component {
             TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
                 if(response.data.valid)
                 {
-                    this.setState({getOrder:response.data.data,
-    
-                       })
+                    this.setState({getOrder:response.data.data},()=>{
+                        console.log(response.data.data[0].openEnquiriesResponse.changeRequestModifiedOn,2 +"Days Left");
+                        var someDate = new Date(response.data.data[0].openEnquiriesResponse.changeRequestModifiedOn);
+                                                console.log(someDate);
+                                                var numberOfDaysToAdd =parseInt(2);
+                                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                                                console.log(someDate); 
+                                                var todayDate= new Date();
+                                                const diffTime =  someDate - todayDate ;
+                                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                                console.log(diffDays + "+++++++++=diffDays+++++"); 
+                                                this.setState({
+                                                    daysleftinint:diffDays
+                                                })
+                                                return(diffDays);
+                    })
+                    
                         TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                             if(response.data.valid)
                             {
@@ -252,12 +283,12 @@ export class PIchange extends Component {
                             }
                             console.log(this.state.previewPI)
                         })
-    
+                       
                 }
               
             })
         }
-       
+      
      
        
 
@@ -268,6 +299,7 @@ export class PIchange extends Component {
                 <>
                     {this.state.dataload?
                     <>
+                    {console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus +"abccdddddddddd")}
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
@@ -339,6 +371,27 @@ export class PIchange extends Component {
                                     </>
                                     :
                                     <>
+                                    {this.daysleft(this.state.getOrder[0].openEnquiriesResponse.changeRequestModifiedOn,2)==0?
+                                     <>
+                                     {/* Days left ==0 */}
+                                      <PreviewChangedPI 
+                                                bp={this.backPI}
+                                                enquiryId={this.props.enquiryId}
+                                                enquiryCode={this.props.enquiryCode}
+                                                expectedDateOfDelivery={this.state.dod}
+                                                hsn={this.state.hsncode}
+                                                rpu={this.state.rpu}
+                                                quantity={this.state.quantity}
+                                                sgst={this.state.sgst}
+                                                cgst={this.state.cgst}
+                                                piSend={this.state.piSend}
+                                                onlyView={this.state.onlyView}
+                                               
+                                                />
+                                     </>
+                                     :
+                                                                       <>
+                                     {/* {this.state.getOrder.openEnquiriesResponse.changeRequestModifiedOn} */}
                                 {console.log("Form display")}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
@@ -346,7 +399,7 @@ export class PIchange extends Component {
                                     Post Change Request Process</h3>
                                 <h1>Update the pro forma invoice</h1>
                                 <p className="crpigreennote">
-                                    You have <strong>2 </strong>
+                                    You have <strong>{this.state.daysleftinint} </strong>
                                      days remaining to update your invoice after change request.</p>
                                 </Col>
                                 </Row>
@@ -375,7 +428,7 @@ export class PIchange extends Component {
                             <Col sm={6}>
                             <label >Rate per unit(or metre)</label>
                             <br/>
-                                <select name="cars" id="cars" 
+                                {/* <select name="cars" id="cars" 
                                 className={this.state.isPidetail ? 
                                     "rssymboldis":"rssymbol"}
                             
@@ -393,11 +446,15 @@ export class PIchange extends Component {
                                     </option>
                                 )
                                 )}
-                                </select>
-                            {/* </span> */}
+                                </select> */}
+                                        <select name="cars" id="cars" 
+                                        className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
+                                            >
+                                            <option value="volvo">₹</option>
+                                            {/* <option value="saab">$</option> */}
+                                        </select>                           
                             <input type="number"  className="PIinput rsinputboxwidth"
-                        
-                            value={this.state.rpu }
+                             value={this.state.rpu }
                             name="rpu"
                             onChange={this.handleChange} />
                             </Col>
@@ -459,7 +516,10 @@ export class PIchange extends Component {
                             </Col>
                             
                             </Row>
-                                    </>}
+                                    </>
+                                    }
+                                   </>
+                                    }
                     </>
                 :
                 <>
@@ -478,26 +538,9 @@ export class PIchange extends Component {
                                                 onlyView={this.state.onlyView}
                                                 previewAndRaisePI={this.state.previewAndRaisePI}
                                                 />
-                </>}
-
-                             
-                            
-
-                            {/* {this.state.getOldPIData.length==0 && this.state.previewPI?
-                                 <>
-                                 
-                                 
-                                 </>
-                             :
-                                <>
-                                {this.state.getOldPIData.length>0 && this.state.previewPI?
-                                     <></>
-                                      :
-                                     <></>}
-                                </>
-                                } */}
-                        
-                            
+                </>
+                }
+           
                         </>
                         :
                         <>
@@ -533,7 +576,8 @@ export class PIchange extends Component {
                         cgst={this.state.cgst}
                         piSend={this.state.piSend}
                         />}
-                        </>}
+                        </>
+                        }
                     </>
                     :
                     <Row noGutters={true}>

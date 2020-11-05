@@ -240,7 +240,7 @@ export class PreviewInvoice extends Component {
        this.state.artisanUser.companyDetails.logo !=null ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
-         <img src={logos.Smile} className="Pilogoimg"></img>
+        <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
            }
@@ -262,10 +262,10 @@ export class PreviewInvoice extends Component {
           </p>
           <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
            this.state.artisanUser.firstName:
-           "NA"
+           ""
            }  {this.state.artisanUser.lastName?
             this.state.artisanUser.lastName:
-            "NA"
+            ""
             }</p>
           
        </Col>
@@ -307,10 +307,10 @@ export class PreviewInvoice extends Component {
          
           <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
            this.state.generatedBy.firstName:
-           "NA"
+           ""
            }  {this.state.generatedBy.lastName?
             this.state.generatedBy.lastName:
-            "NA"
+            ""
             }</p>
             
           
@@ -352,7 +352,7 @@ export class PreviewInvoice extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
-       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId}</p>
+       <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId?this.state.previewPiOrder.orderId:0}</p>
     </td>
   </tr>
 </table>
@@ -609,10 +609,10 @@ export class PreviewInvoice extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -637,7 +637,7 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-<h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
+<h3 className="snopi wraptext"> {(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100).toFixed(2)}</h3>
      <h3 className="snopi wraptext">{(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100).toFixed(2)}</h3>
      </td>
    </tr>
@@ -659,7 +659,7 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     <h3 className="snopi wraptext"> ₹ {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
    </tr>
@@ -750,7 +750,7 @@ export class PreviewInvoice extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
+         All amount in Indian Rupee (₹)
      </Col>
  </Row>
  </div>

@@ -406,7 +406,7 @@ export default class BuyerAdvancePayment extends Component {
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay"><span > 
-                   {/* <i class="fa fa-inr" aria-hidden="true" style={{marginRight:'5px'}}></i> */}
+              ₹
                   {this.state.totalAmount}
                     </span>
                     </h3>
@@ -470,7 +470,7 @@ export default class BuyerAdvancePayment extends Component {
     <Col className="col-xs-12" style={{textAlign:"center"}}>
       <span className="selectpercenttext">  Calculated amount you pay as a advanceed : 
       <span className="advtotal">
-     {(this.state.calulatedAmount).toFixed(2)}</span>
+      ₹ {(this.state.calulatedAmount).toFixed(2)}</span>
      
                 </span>
     </Col>

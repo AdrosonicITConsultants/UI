@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
-import { connect } from "react-redux";
+import { connect, createDispatchHook } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 // import "./Buyermyorder.css";
@@ -75,6 +75,7 @@ export class ArtisanChangeRequest extends Component {
       PI(){
           this.props.openPI()
         // console.log("pI cliced")
+        // this.componentDidMount()
       }
       AcceptChange(id){
          
@@ -131,6 +132,7 @@ export class ArtisanChangeRequest extends Component {
                         if(array[i].id==array1[j].requestItemsId){
                             if(array[i].option === true || array[i].reject === true) {
                                 var id = array1[j].requestItemsId;
+                                var crid=array1[j].changeRequestId;
                                 var data = array1[j].requestText;
                                 var status=0;
                                 if (array[i].option===true){
@@ -143,6 +145,7 @@ export class ArtisanChangeRequest extends Component {
                                 }
                                
                                 var object = {
+                                    changeRequestId:crid,
                                     requestItemsId: id,
                                     requestText: data,
                                     requestStatus:status,
@@ -224,6 +227,7 @@ componentDidMount(){
                         if(response.data.valid)
                         {
                             this.setState({getOrder:response.data.data},()=>{
+
                                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                                     if(response.data.valid)
                                     {
@@ -315,6 +319,7 @@ Modal2Show = () => {
                 if(array[i].id==array1[j].requestItemsId){
                     if(array[i].option === true || array[i].reject === true) {
                         var id = array1[j].requestItemsId;
+                        var crid=array1[j].changeRequestId;
                         var data = array1[j].requestText;
                         var status=0;
                         if (array[i].option===true){
@@ -327,6 +332,7 @@ Modal2Show = () => {
                         }
                        
                         var object = {
+                            changeRequestId:crid,
                             requestItemsId: id,
                             requestText: data,
                             requestStatus:status,
@@ -489,15 +495,16 @@ goToChatButton = (id) => {
                      this.state.getChangeRequestForArtisan.length
                      ?
                     <>
-                     {this.state.trueCount==0?
-                            <>
-                             <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
-                            </>
+                    {console.log(this.state.accepted.filter(function(s) { return s.reject; }).length,
+                    this.state.getChangeRequestForArtisan.length,
+                    this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length)}
+                    { this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length?
+                       <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
                             :
-                            <>
-                            <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
-
-                            </>}
+                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal1Show()}}>Submit</button>
+     
+                    }
+                    
                     </>
                      :
                      <button className="submitCRart" disabled={this.state.submitdisabled}>Submit</button>
@@ -617,9 +624,9 @@ goToChatButton = (id) => {
             </div>
             
             {/* ----------------------------------------------------Modal3------------------------------------- */}
-            <div id="Modal3" class="w3-modal">
+            <div id="Modal3" class="w3-modal" style={{height:"220"}}>
                 <div class="w3-modal-content w3-animate-top modalBoxSize modalBoxTop">
-                    <div class="w3-container buyerMOQAcceptModalContainer">
+                    <div class="w3-container buyerMOQAcceptModalContainer" style={{padding:"13px 4px 1px 1px"}}>
                     <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
                         <Col className="col-xs-12 ">
                             <h1 className="areyousurecrh1 fontplay" style={{fontSize:"16px"}}>

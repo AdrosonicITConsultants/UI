@@ -236,6 +236,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     document.getElementById('id01').style.display='none';
     }
     moqDetailsbtn(){
+    this.componentDidMount();
     this.setState((prevState) => {
         return{
         selected: "moqDetails",
@@ -310,10 +311,11 @@ import { useTranslation, withTranslation } from "react-i18next";
        console.log(taxinvoice);
        if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn();
+    //    window.scrollTo(0, 0);
     }
     localStorage.removeItem("piShow");
-
     window.scrollTo(0, 0);
+   
     let params = queryString.parse(this.props.location.search);
     console.log(params);
     this.state.enquiryCode = params.code;
@@ -1024,6 +1026,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                         </Col>
                     </Row>
                     <Row noGutters={true} className="text-center">
+                    {console.log(this.state.progressid +" lllllllllllllllllllllllllllllllllllll")}
+
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                    ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                     ? 
@@ -1592,6 +1596,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                     </Row>
                     
                     <Row noGutters={true} className="text-center">
+                        {console.log(this.state.progressid +" uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")}
                    {this.state.progressid < 3 || this.state.progressid == 10 ||this.state.progressid == 6 ||this.state.progressid == 7||(this.state.progressid == 10 && item.openEnquiriesResponse.productStatusId == 2)
                    ||(this.state.progressid == 3 && item.openEnquiriesResponse.productStatusId == 2)
                                       ? 
@@ -1816,12 +1821,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         :
                                                             null}
                                     
-
-
-
-
-
-
                                         {this.state.proformainvoice? 
                                         <>
                                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus==2?

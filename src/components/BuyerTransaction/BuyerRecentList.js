@@ -120,7 +120,7 @@ export class BuyerRecentList extends Component {
                 ).then((response)=>{
                 
                 if(response.data.valid){ 
-                    customToast.success("Final Payment Receipt Uploaded", {
+                    customToast.success("Final Payment Receipt Uploaded!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -265,7 +265,7 @@ export class BuyerRecentList extends Component {
                             this.setState({
                                  dataload : true,
                                  getOngoingTransaction : response.data.data},()=>{
-                                // console.log(this.state.getOngoingTransaction);
+                                console.log(this.state.getOngoingTransaction);
                             
                             });
                         }
@@ -497,7 +497,7 @@ export class BuyerRecentList extends Component {
 </Row>
 {/* _________________________________________Upload Final Payment Receipt_________________________________________________ */}
                                           
-<div id={"FinalPayment"+item.transactionOngoing.id}class="w3-modal">
+<div id={"FinalPayment"+item.transactionOngoing.id}class="w3-modal" style={{paddingTop:"60px"}}>
                                                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
                                                                 <Row noGutters={true} className="buyerMOQAcceptModalOuter">

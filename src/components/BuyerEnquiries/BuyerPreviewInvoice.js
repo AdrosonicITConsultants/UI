@@ -204,41 +204,16 @@ export class BuyerPreviewInvoice extends Component {
           doc.save('html2pdf.pdf');
         }); 
 
-        // doc.table(
-        //   source 
-        //   , margins.left
-        //   , margins.top
-        //   , {
-        //     'width': margins.width 
-        //     , 'elementHandlers': specialElementHandlers
-        // },
-        // function (dispose) {
-        //   doc.save('html2pdf.pdf');
-        // });
-    }
-
-  //   backPI(){
-  //     this.setState({
-  //         preview: false,
-  //     })
-  // }
+      }
     render(){
         return(
             
 <React.Fragment>
-    {/* <Container> */}
-
-    {/* <Pdf targetRef={ref} filename="code-example.pdf">
-        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
-      </Pdf> */}
+   
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 
 {this.state.dataload === true && this.state.previewPiOrder.isSend === 1 ?
 <>
-
-{/* <p className=" belowprevtext" style={{float:"right"}} onClick={this.downloadPdfFunction}>
-  <img src={logos.downloadpdficon} className="InvImg" /> 
-  Download this invoice in pdf</p> */}
 
 <div style={{width: "100%", height: "100%"}} id="contentPDF">
    <Row noGutters={true} style={{marginTop:"15px"}}>
@@ -246,11 +221,7 @@ export class BuyerPreviewInvoice extends Component {
        <p className="  belowprevtext">  Received at :  {this.state.time} on  { this.state.currentDate }</p>
 </Col>
 <Col className="col-xs-6" >
-{/* <ReactToPdf targetRef={ref} filename="code-example.pdf"  options={options} x={.5} y={.5} scale={0.8}>
-{({ toPdf }) => 
-<p className=" belowprevtext" style={{float:"right"}} onClick={toPdf}><img src={logos.downloadpdficon} className="InvImg" /> Download this invoice in pdf</p>
-}
-      </ReactToPdf> */}
+
 </Col>
    </Row>
 <Row className="MainPIRow " >
@@ -259,7 +230,6 @@ export class BuyerPreviewInvoice extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -271,13 +241,14 @@ export class BuyerPreviewInvoice extends Component {
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
-           {this.state.artisanUser.companyDetails ? 
-           <img src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo} className="Pilogoimg"></img>
-           ?
-           <img src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo} className="Pilogoimg"></img>
-            :
-            <img className="Pilogoimg" src={logos.Smile} />
-           :  <img className="Pilogoimg" src={logos.Smile} /> }
+       {this.state.artisanUser.companyDetails?
+       this.state.artisanUser.companyDetails.logo !=null ?
+        <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
+        :
+         <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
+                    :
+                    <img src={logos.Smile} className="Pilogoimg"></img>
+           }
        </Col>
        <Col sm={8} className=" col-xs-7 ">
     <b className="Ttbrand"> {this.state.artisanUser.companyDetails?this.state.artisanUser.companyDetails.companyName:""}</b> 
@@ -296,10 +267,10 @@ export class BuyerPreviewInvoice extends Component {
           </p>
           <p className="subttbrand fontplay"> {this.state.artisanUser.firstName?
            this.state.artisanUser.firstName:
-           "NA"
+           ""
            }  {this.state.artisanUser.lastName?
             this.state.artisanUser.lastName:
-            "NA"
+            ""
             }</p>
           
        </Col>
@@ -346,10 +317,10 @@ export class BuyerPreviewInvoice extends Component {
          
           <p className="subttbrand fontplay"> {this.state.generatedBy.firstName?
            this.state.generatedBy.firstName:
-           "NA"
+           ""
            }  {this.state.generatedBy.lastName?
             this.state.generatedBy.lastName:
-            "NA"
+            ""
             }</p>
             
           
@@ -388,7 +359,7 @@ export class BuyerPreviewInvoice extends Component {
     </td>
     <td>
            <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
-           <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId}</p>
+           <p className="againstpi" style={{color:"rgb(138 43 226 / 73%);"}}>ORDER No. {this.state.previewPiOrder.orderId?this.state.previewPiOrder.orderId:0}</p>
     </td>
   </tr>
 </table>
@@ -650,10 +621,10 @@ export class BuyerPreviewInvoice extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹ {this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">₹ {(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
    </tr>
    {/* --------------------------------------------- */}
@@ -700,7 +671,7 @@ export class BuyerPreviewInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">  
+     <h3 className="snopi wraptext">  ₹
      {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2)}</h3>
      </td>
@@ -792,7 +763,7 @@ export class BuyerPreviewInvoice extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
+         All amount in Indian Rupee (₹)
      </Col>
  </Row>
  </div>
@@ -836,7 +807,6 @@ export class BuyerPreviewInvoice extends Component {
 {/* <Footer/> */}
 </>
 : 
-
 <Row>
 <br></br>
 <br></br>

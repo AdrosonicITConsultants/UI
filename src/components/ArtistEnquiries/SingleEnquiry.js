@@ -450,7 +450,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                         showValidationPi: false,
                       
                     },()=>{
-                    console.log(this.preview);
+                    console.log(this.savePi);
                    
                     });
                     customToast.success("PI Details saved successfully", {
@@ -1613,8 +1613,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     <br></br>
 
                                                        <Row noGutters={true}>
-                                                           <Col sm={2}></Col>
-                                                                    <Col sm={8}>
+                                                           <Col sm={1}></Col>
+                                                                    <Col sm={10}>
            {/* --------------------------------Buyer Detail----------------------------------------------  */}
                                                                 {this.state.buyersDetail ? 
                                                                 <>
@@ -1854,6 +1854,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                             {this.state.proformaDetails ? 
         
                                                             <>
+                                                           
                                         {this.state.piSend === 1?
                                         <PreviewInvoice 
                                         bp={this.backPI}
@@ -1910,8 +1911,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                             <select name="cars" id="cars" 
                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                                             disabled={this.state.isPidetail}>
-                                                                <option value="volvo">₹</option>
-                                                                <option value="saab">$</option>
+                                                                <option value="volvo" selected disabled>₹</option>
+                                                                {/* <option value="saab">$</option> */}
                                                             </select>
                                                     {/* </span> */}
                                                         <input type="number"  className="PIinput rsinputboxwidth"
@@ -2030,17 +2031,13 @@ import { useTranslation, withTranslation } from "react-i18next";
                                      
                                      </>}
 
-
-
-                                     
-                                     
-                                     
-                                     
                                         </>
                                         }
                                                         
 
-                                                             </>:null}
+                                                             </>
+                                                             :null
+                                                             }
                                          {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                                
@@ -2051,7 +2048,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                             </div>:null}
                                                             
                                                             </Col>
-                                                            <Col sm={2}></Col>
+                                                            {/* <Col sm={2}></Col> */}
                                                      </Row>
   
   

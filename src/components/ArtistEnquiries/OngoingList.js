@@ -90,7 +90,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12 text-center">
+                    <Col className="col-xs-12 text-center noopenenq">
                         No Open Enquiries.
                     </Col>
                 </Row>
@@ -385,7 +385,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </>
                 :
                 <>
-                <hr></hr>
+                <br/>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
                     <Col className="col-xs-10">

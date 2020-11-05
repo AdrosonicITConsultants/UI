@@ -589,8 +589,8 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td>
-     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)}</h3>
-     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.cgst/100)}</h3>
+     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu ))*this.props.sgst/100)}</h3>
+     <h3 className="snopi wraptext">₹ {(parseInt((this.props.quantity * this.props.rpu ))*this.props.cgst/100)}</h3>
      </td>
    </tr>
    {/* -------------------------------------------total------------------------------------------ */}
@@ -614,8 +614,8 @@ export class PreviewTaxInvoice extends Component {
      </td>
      <td>
      <h3 className="snopi wraptext">₹ {parseFloat((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
-                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
-                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100)).toFixed(2)}</h3>
+                                        )*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu ))*this.props.sgst/100)).toFixed(2)}</h3>
      <h3 className="snopi wraptext">
      {/* ₹ {this.props.advancePaidAmt!=-1?this.props.advancePaidAmt:this.props.apr} */}
          ₹ {parseInt(this.props.apr).toFixed(2)}
@@ -643,8 +643,8 @@ export class PreviewTaxInvoice extends Component {
      <td>
     
      <h3 className="snopi wraptext"> ₹ {parseFloat(((((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge)))+(((this.props.quantity * this.props.rpu )
-                                        +parseInt(this.props.deliverycharge))*this.props.cgst/100)
-                                        +(((this.props.quantity * this.props.rpu )+parseInt(this.props.deliverycharge))*this.props.sgst/100))-(
+                                       )*this.props.cgst/100)
+                                        +(((this.props.quantity * this.props.rpu ))*this.props.sgst/100))-(
                                           parseInt(this.props.apr).toFixed(2)
                                            )).toFixed(2)}</h3>
      </td>

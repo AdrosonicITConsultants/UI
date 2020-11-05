@@ -295,14 +295,14 @@ export class BuyerCompletedfaultyOrder extends Component {
                                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                                        <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                                         <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                                       {this.state.getClosedOrder.orderReceiveDate==null ?
+                                                       {/* {this.state.getClosedOrder.orderReceiveDate==null ?
                                                        ""
                                                       :
                                                       <p className="faultyp2">
                                                       <DaysRemaining startday = {this.state.getClosedOrder.orderReceiveDate}>
                                                         </DaysRemaining>
                                                         <span> days left to report a problem.</span> </p>
-                                                      }
+                                                      } */}
                                                        
                                                     </Col>
                                                     </Row> 
@@ -439,14 +439,14 @@ export class BuyerCompletedfaultyOrder extends Component {
                                   <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                      <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                       <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                     {this.state.getClosedOrder.orderReceiveDate==null ?
+                                     {/* {this.state.getClosedOrder.orderReceiveDate==null ?
                                      ""
                                     :
                                     <p className="faultyp2">
                                     <DaysRemaining startday = {this.state.getClosedOrder.orderReceiveDate} >
                                       </DaysRemaining>
                                       <span> days left to report a problem.</span> </p>
-                                    }
+                                    } */}
                                      
                                   </Col>
                                   </Row> 

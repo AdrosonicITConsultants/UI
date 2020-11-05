@@ -1487,8 +1487,8 @@ export class BuyerOngoingOrder extends Component {
 
                       {item.openEnquiriesResponse.orderReceiveDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<11 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 

@@ -207,16 +207,16 @@ export default class BuyerRating extends Component {
                 });
             }
         });
-        TTCEapi.getClosedOrder(this.state.enquiryId).then((response)=>{
-            if(response.data.valid)
-            {
-            this.setState({
-                 getClosedOrder : response.data.data[0].openEnquiriesResponse,
-                },()=>{
-                console.log(this.state.getClosedOrder);
-            });
-            }
-        });
+        // TTCEapi.getClosedOrder(this.state.enquiryId).then((response)=>{
+        //     if(response.data.valid)
+        //     {
+        //     this.setState({
+        //          getClosedOrder : response.data.data[0].openEnquiriesResponse,
+        //         },()=>{
+        //         console.log(this.state.getClosedOrder);
+        //     });
+        //     }
+        // });
 
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
             if(response.data.valid)

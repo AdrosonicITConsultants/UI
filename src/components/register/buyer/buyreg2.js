@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets";
-import TTCEapi from "../../../services/API/TTCEapi"
+import TTCEapi from "../../../services/API/TTCEapi";
 
 export default class buyreg2 extends Component {
   constructor() {

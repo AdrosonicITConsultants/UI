@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { memoryHistory, browserHistory } from "../../../helpers/history";
 
-
+import TTCEapi from '../../../services/API/TTCEapi';
 
 toast.configure()
 export default class buyreg1 extends Component {

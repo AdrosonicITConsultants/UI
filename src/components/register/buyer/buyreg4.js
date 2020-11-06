@@ -6,6 +6,7 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
+import TTCEapi from '../../../services/API/TTCEapi';
 
 
 export default class buyreg4 extends Component {

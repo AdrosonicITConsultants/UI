@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from 'react-toastify';
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang";
+import TTCEapi from '../../../services/API/TTCEapi';
 
 class artreg2 extends Component {
                  constructor() {

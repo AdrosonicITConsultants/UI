@@ -5,6 +5,7 @@ import logos from "../../../assets"
 import { memoryHistory, browserHistory } from "../../../helpers/history";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang";
+import TTCEapi from '../../../services/API/TTCEapi';
 
  class artreg1 extends Component {
                  constructor(props) {

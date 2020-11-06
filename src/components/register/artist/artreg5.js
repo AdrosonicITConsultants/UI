@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, ButtonGroup,Button } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
@@ -7,6 +7,7 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../../services/utils/changeLang";
 
 class artreg5 extends Component {
                  constructor() {
@@ -23,6 +24,10 @@ class artreg5 extends Component {
                      selectedprods :[]
                    };
                  }
+
+                 changeLang = (data) => {
+                  localStorage.setItem("i18nextLng", data);
+                }
 
                  operation() {
                    debugger;
@@ -313,20 +318,37 @@ class artreg5 extends Component {
                            </Row>
                            
 
-                           <Row   className="text-center mt30">
+                           <Row   className="text-center" style={{marginBottom: "10px"}}>
                              
                              <div className="col-xs-12 line312 font2">
                              {this.props.t("Pages.object.regNeedHelp")}{" "}
                              </div>
                              
                            </Row>
+
+                           <ButtonGroup aria-label="Basic example">
+                             <Button
+                               onClick={() => changeLang("hi")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               हिन्दी
+                             </Button>
+                             <Button
+                               onClick={() => changeLang("en")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               English
+                             </Button>
+                           </ButtonGroup>
                            <Row   className="text-center mt7">
                              <div
                                className="col-xs-12 line6"
                               //  style={{ float: "right" }}
                              >
                                {" "}
-                               Change language
+                               {this.props.t("Pages.object.changelanguage")}
                                <img src={logos.language} className="ml-5"></img>
                              </div>
                            </Row>

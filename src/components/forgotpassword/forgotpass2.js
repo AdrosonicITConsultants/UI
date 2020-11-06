@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, ButtonGroup,Button } from "reactstrap";
 import "../Homepage/homepage.css";
 import logos from "../../assets";
 import "react-toastify/dist/ReactToastify.css";
 import TTCEapi from "../../services/API/TTCEapi";
 import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../services/utils/changeLang";
 
 class forgotpass2 extends Component {
     constructor() {
@@ -17,6 +18,10 @@ class forgotpass2 extends Component {
           showUserName: true,
         };
       }  
+
+      changeLang = (data) => {
+        localStorage.setItem("i18nextLng", data);
+      }
     
       operation() {
         debugger;
@@ -49,6 +54,14 @@ class forgotpass2 extends Component {
             showValidationconfirmpass: false
         });
       }
+
+      reachOutToUsModal = () => {
+        document.getElementById('reachOutToUsModal').style.display='block';
+       }
+
+       reachOutToUsModalClose = () => {
+        document.getElementById('reachOutToUsModal').style.display='none';
+       }
     
     render() {
         return (
@@ -196,7 +209,6 @@ class forgotpass2 extends Component {
                   </div>
                 </Row>
 
-                <br />
                 <hr className="hrline"></hr>
 
                 <Row   className="text-center line311 font3">
@@ -218,7 +230,7 @@ class forgotpass2 extends Component {
                     <div className="col-xs-12 text-center">
                       <button
                         className="whiteButton"
-                        //   onClick={() => this.operation()}
+                        onClick={this.reachOutToUsModal}
                       >
                         {this.props.t("Pages.object.regReachOut")}
                       </button>
@@ -229,7 +241,7 @@ class forgotpass2 extends Component {
                     <div className="col-xs-12 text-center">
                       <button
                         className="whiteButton"
-                        //   onClick={() => this.operation()}
+                        onClick={this.reachOutToUsModal}
                       >
                         Reach out to us
                       </button>
@@ -238,13 +250,33 @@ class forgotpass2 extends Component {
                   }
 
                 {localStorage.getItem("selectedUserId") == 1 ? 
+                <>
+                <Row style={{marginTop: "10px"}}> 
+                <ButtonGroup aria-label="Basic example">
+                <Button
+                  onClick={() => changeLang("hi")}
+                  className="LangBtn"
+                  variant="secondary"
+                >
+                  हिन्दी
+                </Button>
+                <Button
+                  onClick={() => changeLang("en")}
+                  className="LangBtn"
+                  variant="secondary"
+                >
+                  English
+                </Button>
+              </ButtonGroup>
+              </Row>
                 <Row
                   
-                  className="text-center line6 mt20"
+                  className="text-center line6 mt10"
                 >
-                  Change language
+                  {this.props.t("Pages.object.changelanguage")}
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
+                </>
                 : null }
 
                 {/* <Row  >
@@ -254,6 +286,18 @@ class forgotpass2 extends Component {
           </Row> */}
               </div>
             </Col>
+
+            <div id="reachOutToUsModal" class="w3-modal">
+<div class="w3-modal-content w3-animate-top modalBoxSize">
+<div class="w3-container chatAttachModalOuter">
+    <div className="text-right">
+        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.reachOutToUsModalClose}/>
+    </div>
+    <h4 className="artisanChatModalTitle text-center">For any query reach us @ <br/><br/><a href = "mailto: antaran@tatatrusts.org">
+    antaran@tatatrusts.org</a></h4>
+</div>
+</div>
+</div>
           </React.Fragment>
         );
     }

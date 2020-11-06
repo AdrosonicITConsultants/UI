@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, ButtonGroup,Button } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
 import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../../services/utils/changeLang";
 
 class artreg4 extends Component {
     constructor() {
@@ -26,6 +27,10 @@ class artreg4 extends Component {
           showUserName: true,
           State: '', region: '' ,
         };
+      }
+
+      changeLang = (data) => {
+        localStorage.setItem("i18nextLng", data);
       }
      
       operation() {
@@ -191,7 +196,6 @@ class artreg4 extends Component {
                     <span className = "fontplay">{this.props.t("Pages.object.regArtisanID")} : </span>{this.props.weaverid}
                   </span>
                 </Row>
-                <br></br>
                 <Row  >
                   <Col xs={{ size: "12" }} md={{ size: "6" }}>
                     <Col
@@ -475,8 +479,25 @@ class artreg4 extends Component {
                   <span className="col-xs-8"> {this.props.t("Pages.object.regNeedHelp")}</span>
                 </Row>
 
+                <ButtonGroup aria-label="Basic example">
+                             <Button
+                               onClick={() => changeLang("hi")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               हिन्दी
+                             </Button>
+                             <Button
+                               onClick={() => changeLang("en")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               English
+                             </Button>
+                           </ButtonGroup>
+
                 <Row   className="text-center line6 ">
-                  Change language
+                {this.props.t("Pages.object.changelanguage")}
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
 

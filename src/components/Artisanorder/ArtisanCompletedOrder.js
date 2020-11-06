@@ -62,7 +62,7 @@ import { useTranslation, withTranslation } from "react-i18next";
         
     } 
     individualpage(id){
-        localStorage.setItem("completed", 1);
+        localStorage.setItem("completedOrder", 1);
         browserHistory.push("/artisancompletedorder?code=" + id)
     }
     FaultReport(id){

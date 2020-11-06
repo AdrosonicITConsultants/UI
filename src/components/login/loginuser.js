@@ -7,7 +7,8 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import TTCEapi from '../../services/API/TTCEapi';
 import { useTranslation, withTranslation } from "react-i18next";
-import changeLang from "../../services/utils/changeLang"
+import changeLang from "../../services/utils/changeLang";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 class buyeruser extends Component {
   constructor() {
@@ -63,28 +64,9 @@ operation = (event) => {
   responseFacebook = (response) => {
     console.log("facebook console");
     console.log(response);
-    this.checkGoogleFB();
-  }
+    console.log(response.accessToken);
 
-  responseGoogle = (response) => {
-    console.log("google console");
-    console.log(response);
-    this.checkGoogleFB();
-  }
-
-  checkGoogleFB = () => {
-    var roleId = 0;
-    if(this.props.userpage == 1) {
-      roleId = 2;
-    }
-    else {
-      roleId = 1;
-    }
-
-    var userName = "";
-    var password = "";
-
-    TTCEapi.login(userName, password, roleId).then((response)=>{
+    TTCEapi.socialLogin("facebook", response.accessToken).then((response)=>{
       if(response.data.valid === false)
       {
         this.setState({
@@ -92,9 +74,41 @@ operation = (event) => {
         });
         console.log(response.data.data);
       }
+      else if(response.data.valid === true) {
+        this.setState({
+          googleFBErrorMsg: false,
+        });
+        if(response.data.data.acctoken) {
+          browserHistory.push("/demo-video");
+        }        
+      }
     });
+
   }
 
+  responseGoogle = (response) => {
+    console.log("google console");
+    console.log(response);
+    console.log(response.wc.access_token);
+
+    TTCEapi.socialLogin("google", response.wc.access_token).then((response)=>{
+      if(response.data.valid === false)
+      {
+        this.setState({
+          googleFBErrorMsg: true,
+        });
+        console.log(response.data.data);
+      }
+      else if(response.data.valid === true) {
+        this.setState({
+          googleFBErrorMsg: false,
+        });
+        if(response.data.data.acctoken) {
+          browserHistory.push("/demo-video");
+        }        
+      }
+    });
+  }
 
   render() {
     return (
@@ -186,9 +200,9 @@ operation = (event) => {
                     <br />
                   )}
 
-                  {/* {this.state.googleFBErrorMsg ? (
-                    <div className="bg-danger text-center loginUserErrorTop">Please try again</div>
-                  ) : null} */}
+                  {this.state.googleFBErrorMsg ? (
+                    <div className="bg-danger text-center loginUserErrorTop">User not found. Please try again.</div>
+                  ) : null}
                 </div>
               </div>
             </Row>
@@ -289,7 +303,7 @@ null :
                   </span> */}
                              {/* <span className="col-xs-3"></span> */}
                              <span className="col-xs-12 text-center line6 font6">
-                               Change language
+                             {this.props.t("Pages.object.changelanguage")}
                                <img src={logos.language} className="ml-5"></img>
                              </span>
                            </Row>  

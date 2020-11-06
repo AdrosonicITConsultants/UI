@@ -277,7 +277,13 @@ export class BuyerSingleCompletedOrder extends Component {
         });
         }
         backoperation(){
-        browserHistory.goBack(); 
+        var data = localStorage.getItem("completedOrder");
+        if(data) {
+            browserHistory.push("/buyerOrders"); 
+        }
+        else {
+            browserHistory.goBack(); 
+        }
         } 
         handleCluster(e) {
 

@@ -438,7 +438,97 @@ export default class ArtisanQC extends Component {
                         }
                         else if(stage.id === this.state.currentStageId && this.state.currentSeenStatus === 0) {
                             // Stage disabled card 
-                        return <div className="artisanQCCardStyle">
+                        return  this.state.QCenableEditFlag === true ?
+                            <div className="artisanQCCardStyle">
+                            <div className="artisanQCCardHeader">{stage.stage}</div>
+
+                            {this.state.questionsData[stage.id - 1] ? this.state.questionsData[stage.id - 1].map((data) => {
+                            return this.state.artisanQcResponses[stage.id - 1] ? this.state.artisanQcResponses[stage.id - 1].map((item) => {
+                                if(data.questionNo === item.questionId) {
+                                return <div>
+                                    <div className="QCquestionsTitle">{data.question}</div>
+                                    {data.answerType === "1" ? 
+                                    <div>
+                                        {this.state.naturalArray ? this.state.naturalArray.map((natural, key) => [
+                                            <label className="QCLabelTitle">
+                                                <input type="checkbox" className="QCLabelInput" id={"natural" + data.id + key} 
+                                                onChange={(e) => this.handleMultiselect(e, data.id, key)}/>
+                                                {natural}
+                                            </label>
+                                        ]) : null}
+                                    </div>
+                                    : 
+                                    data.answerType === "2" ?
+                                    (data.questionNo === 1 || data.questionNo === 2 || data.questionNo === 3 || data.questionNo === 6 || data.questionNo === 8) && (stage.id === 5)?
+                                    <div>
+                                         {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key) => [
+                                            <label className="QCLabelTitle">
+                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key} value={yesNo}
+                                                onChange={(e) => this.handleYesNo(e, data.id, data.questionNo, key)}/>
+                                                {yesNo}
+                                            </label>
+                                         ]) : null }
+                                    </div>
+                                    :
+                                    <div>
+                                         {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key) => [
+                                            <label className="QCLabelTitle">
+                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key} value={yesNo}
+                                                onChange={(e) => this.handleYesNo(e, data.id, data.questionNo, key)}/>
+                                                {yesNo}
+                                            </label>
+                                         ]) : null }
+                                    </div>
+                                    :
+                                    data.answerType === "3" ?
+                                    <div>
+                                        <select className="QCquestionsInputBox" onChange={(e) => this.handledropdown(e, data.id, data.questionNo)}
+                                        id={"dropdown"+ data.id} >
+                                            <option value="">Select option</option>
+                                            {this.state.dropDownArray ? this.state.dropDownArray.map((dropdown, key) => [
+                                                <option id={"dropdown"+ data.id} value={dropdown}>{dropdown}</option>
+                                            ]) : null}
+                                        </select>
+                                    </div>
+                                    :
+                                    data.stageId === 7 && data.questionNo === 12 ?
+                                    <textarea onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} 
+                                    id={data.id} maxLength="100" className="QCTextareaBoxStyle" value={item.answer}></textarea>
+                                    :
+                                    <input type="text" value={item.answer} className="QCquestionsInputBox" stageId={data.stageId} questionId={data.questionNo} 
+                                    onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id} maxLength="25"/>
+                                    }
+                                    </div>                            
+                                    }
+                                }) : null
+                            }) : null}
+
+                            {stage.id === 7 ?
+                            <div className="QCdeclarationTop">
+                                Declaration by AE- I, hereby certify from my end that all the processes have been Monitored & Supervised 
+                                under my guidence and any issue in Quality Certified by me in person or my staff in charge is liable to be 
+                                discussed with me directly on mail. Once the goods received at your doorsteps, we will not be liable for 
+                                quality issue if informed after 72 hrs of receipts. 
+                            </div>
+                            : null }
+
+                            <Row noGutters={true}>
+                                <Col sm={12} className="text-center QCsaveSendCol">
+                                    {this.state.QCsaveButton ?
+                                    <button className="QCsaveDisableButton">Save</button>
+                                    :
+                                    <button className="QCsaveButton" onClick={() => this.saveORsendQCFunction(0, stage.id, stage.stage)}>Save</button>
+                                    }
+                                    {this.state.QCsendButton ?
+                                    <button className="QCsendDisableButton">Send</button>
+                                    :
+                                    <button className="QCsendButton" onClick={() => this.saveORsendQCFunction(1, stage.id, stage.stage)}>Send</button>
+                                    }
+                                </Col>
+                            </Row>
+                            </div>
+                            :
+                            <div className="artisanQCCardStyle">
                             <div className="artisanQCCardHeader">{stage.stage}</div>
 
                             {this.state.questionsData[stage.id - 1] ? this.state.questionsData[stage.id - 1].map((data) => {
@@ -520,11 +610,9 @@ export default class ArtisanQC extends Component {
 
                             <Row noGutters={true}>
                                 <Col sm={12} className="text-center QCsaveSendCol">
-                                    {this.state.QCenableEditFlag === true ?
-                                    <button className="QCsaveButton">Save</button>
-                                    :
+                                    
                                     <button className="QCsaveDisableButton" onClick={this.QCenableEdit}>Edit</button>
-                                    }
+                                    
                                     {this.state.QCsendButton1 ?
                                     <button className="QCsendDisableButton">Send</button>
                                     :

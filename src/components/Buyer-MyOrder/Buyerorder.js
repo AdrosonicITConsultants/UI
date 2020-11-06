@@ -153,7 +153,23 @@ export class Buyerorder extends Component {
             // this.componentDidMount();
            }
          
-           YesOrderbutton=(id)=>{
+           YesOrderbutton=(id,prodid)=>{
+            if(prodid==2){
+                console.log("prod id 2",id)
+                TTCEapi.markEnquiryClosed(id).then((response)=>{
+                    if(response.data.valid  )
+                    {
+                        document.getElementById('PartialPayment').style.display='none';
+                        customToast.success("Order closed!", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: true,
+                          });
+                          browserHistory.push("/buyerOrders"); 
+                    }
+                }); 
+               }
+               else{
+                console.log("prod id 1",id)
                  TTCEapi.initializePartialRefund(id).then((response)=>{
                      console.log(response)
                 if(response.data.valid  )
@@ -162,6 +178,7 @@ export class Buyerorder extends Component {
                  document.getElementById('PartialPayment').style.display='block';
                     }
             }); 
+        }
         //    this.componentDidMount();
            }
            Verifybox=(e)=>{
@@ -1832,7 +1849,7 @@ export class Buyerorder extends Component {
                
                  <button
                 style={{fontSize:"15px",background:"green"}}
-                 onClick={()=>{this.YesOrderbutton(this.state.enquiryCode)}}
+                 onClick={()=>{this.YesOrderbutton(this.state.enquiryCode,item.openEnquiriesResponse.productStatusId)}}
                 className="closeorderbtn2">Yes
                  </button>
         </Col>

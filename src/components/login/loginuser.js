@@ -152,7 +152,7 @@ operation = (event) => {
               <div className="col-xs-4 text-center">
                 <i className="circleDiv">
                   <img
-                    src={logos.buyerlogo}
+                    src={logos.artisanlogo}
                     className="cicrleLogo"
                     alt="artist TataTrusts logo"
                   ></img>

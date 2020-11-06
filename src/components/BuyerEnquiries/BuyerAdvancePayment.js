@@ -287,6 +287,7 @@ export default class BuyerAdvancePayment extends Component {
       }
     
       backoperation(){
+        localStorage.setItem("SelectPI", 1);
           browserHistory.goBack()
       }
     

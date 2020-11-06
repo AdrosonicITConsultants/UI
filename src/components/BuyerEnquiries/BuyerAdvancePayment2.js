@@ -41,7 +41,8 @@ export default class BuyerAdvancePayment2 extends Component {
  
     
     BacktoPreview(){
-    this.props.bp();
+        localStorage.setItem("SelectPI", 1);
+            this.props.bp();
     }
 
    

@@ -559,7 +559,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
  
     componentDidMount(){
-        
+       
         let params = queryString.parse(this.props.location.search);
         console.log(params);
 

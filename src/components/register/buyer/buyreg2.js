@@ -52,6 +52,14 @@ export default class buyreg2 extends Component {
                   });
   }
 
+  reachOutToUsModal = () => {
+    document.getElementById('reachOutToUsModal').style.display='block';
+   }
+
+   reachOutToUsModalClose = () => {
+    document.getElementById('reachOutToUsModal').style.display='none';
+   }
+
 
   render() {
     return (
@@ -184,7 +192,7 @@ export default class buyreg2 extends Component {
                     width: "10em",
                     height: "2.5em",
                   }}
-                  //   onClick={() => this.operation()}
+                  onClick={this.reachOutToUsModal}
                 >
                   Reach out to us
                 </button>
@@ -204,6 +212,18 @@ export default class buyreg2 extends Component {
             <br></br>
           </div>
         </Col>
+
+        <div id="reachOutToUsModal" class="w3-modal">
+<div class="w3-modal-content w3-animate-top modalBoxSize">
+<div class="w3-container chatAttachModalOuter">
+    <div className="text-right">
+        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.reachOutToUsModalClose}/>
+    </div>
+    <h4 className="artisanChatModalTitle text-center">For any query reach us @ <br/><br/><a href = "mailto: antaran@tatatrusts.org">
+    antaran@tatatrusts.org</a></h4>
+</div>
+</div>
+</div>
       </React.Fragment>
     );
   }

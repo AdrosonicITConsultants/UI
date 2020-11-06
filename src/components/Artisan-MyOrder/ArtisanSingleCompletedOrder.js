@@ -268,9 +268,17 @@ import { useTranslation, withTranslation } from "react-i18next";
         };
     });
     } 
+    
     backoperation(){
-    browserHistory.goBack(); 
+        var data = localStorage.getItem("completedOrder");
+        if(data) {
+            browserHistory.push("/artisanOrders"); 
+        }
+        else {
+            browserHistory.goBack(); 
+        }
     } 
+
     handleCluster(e) {
 
     var index = e.target.selectedIndex;
@@ -1260,7 +1268,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     {this.state.qualityCheck ?  
                                     <>
                                     <Col sm={10}>
-                                   <ArtisanQC enquiryId={this.state.enquiryCode}/>
+                                   <ArtisanQC enquiryId={this.state.enquiryCode}
+                                   data = {this.state.openEnquiries[0].openEnquiriesResponse}/>
                                    </Col>
                                     </>:null}
 

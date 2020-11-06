@@ -37,12 +37,18 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     componentDidMount() {
         var data1 = localStorage.getItem("ratingBack1");
+        var data = localStorage.getItem("completedOrder");
 
         if(data1) {
             this.setState({ongoingEnquiry:false});
         }
 
+        if(data) {
+            this.setState({ongoingEnquiry:false});
+        }
+
         localStorage.removeItem("ratingBack1");
+        localStorage.removeItem("completedOrder");
     }
     
     render() {

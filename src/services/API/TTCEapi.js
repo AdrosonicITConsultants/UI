@@ -2966,6 +2966,43 @@ static getOldQc(enquiryId) {
       return error.response;
     });
 }
+
+static socialLogin(type, token) {
+  let url = ApiUrl + "/login/authenticate?socialTokenType=" + type + "&socialToken=" + token;
+
+  var config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+
+  return axios
+    .post(url, config)
+    .then((response) => {
+      if (response.data.valid) {
+        var language = localStorage.getItem("i18nextLng");
+        console.log(language);
+        localStorage.clear();
+        sessionStorage.clear();
+        // remove user from local storage to log user out
+        localStorage.removeItem("user");
+        localStorage.removeItem("jwtToken");
+        const token = response.data.data.acctoken;
+        const user = response.data.data.user;
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("i18nextLng", language);
+        setAuthorizationtoken(token);
+
+        //  console.log(jwt.decode(token));
+      }
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
   //#endregion
 }
 export default TTCEapi;

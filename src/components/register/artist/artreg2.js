@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, ButtonGroup,Button } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import isEmail from "validator/lib/isEmail";
@@ -7,6 +7,7 @@ import  customToast  from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from 'react-toastify';
 import { useTranslation, withTranslation } from "react-i18next";
+import changeLang from "../../../services/utils/changeLang";
 
 class artreg2 extends Component {
                  constructor() {
@@ -19,6 +20,9 @@ class artreg2 extends Component {
                      isButtonDisabled: false,
                    };
                  }
+                 changeLang = (data) => {
+                  localStorage.setItem("i18nextLng", data);
+                }
 
                
 
@@ -77,6 +81,15 @@ class artreg2 extends Component {
                      showValidationpin: false,
                    });
                  }
+
+                 reachOutToUsModal = () => {
+                  document.getElementById('reachOutToUsModal').style.display='block';
+                 }
+
+                 reachOutToUsModalClose = () => {
+                  document.getElementById('reachOutToUsModal').style.display='none';
+                 }
+
 
                  render() {
                    return (
@@ -217,7 +230,6 @@ class artreg2 extends Component {
                                </button>
                              </div>
                            </Row>
-                           <br />
                            <hr className="hrline"></hr>
                            <Row
                               
@@ -237,18 +249,37 @@ class artreg2 extends Component {
                                  style={{
                                    width: "10em",
                                  }}
-                                 //   onClick={() => this.operation()}
+                                 onClick={this.reachOutToUsModal}
                                >
                                  {this.props.t("Pages.object.regReachOut")}
                                </button>
                              </div>
                            </Row>
+                          
+                          <Row style={{marginTop: "8px"}}>
+                           <ButtonGroup aria-label="Basic example"> 
+                             <Button
+                               onClick={() => changeLang("hi")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               हिन्दी
+                             </Button>
+                             <Button
+                               onClick={() => changeLang("en")}
+                               className="LangBtn"
+                               variant="secondary"
+                             >
+                               English
+                             </Button>
+                           </ButtonGroup>
+                           </Row>
 
                            <Row
                               
-                             className="text-center line6 mt20"
+                             className="text-center line6 mt10"
                            >
-                             Change language
+                              {this.props.t("Pages.object.changelanguage")}
                              <img src={logos.language} className="ml-5"></img>
                            </Row>
 
@@ -259,6 +290,18 @@ class artreg2 extends Component {
           </Row> */}
                          </div>
                        </Col>
+
+                       <div id="reachOutToUsModal" class="w3-modal">
+<div class="w3-modal-content w3-animate-top modalBoxSize">
+<div class="w3-container chatAttachModalOuter">
+    <div className="text-right">
+        <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.reachOutToUsModalClose}/>
+    </div>
+    <h4 className="artisanChatModalTitle text-center">For any query reach us @ <br/><br/><a href = "mailto: antaran@tatatrusts.org">
+    antaran@tatatrusts.org</a></h4>
+</div>
+</div>
+</div>
                      </React.Fragment>
                    );
                  }

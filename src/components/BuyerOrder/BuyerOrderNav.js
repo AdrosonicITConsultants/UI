@@ -37,12 +37,18 @@ export class BuyerOrderNav extends Component {
 
     componentDidMount() {
         var data = localStorage.getItem("ratingBack");
+        var data1 = localStorage.getItem("completedOrder");
 
         if(data) {
             this.setState({ongoingEnquiry:false});
         }
 
+        if(data1) {
+            this.setState({ongoingEnquiry:false});
+        }
+
         localStorage.removeItem("ratingBack");
+        localStorage.removeItem("completedOrder");
     }
     
     render() {

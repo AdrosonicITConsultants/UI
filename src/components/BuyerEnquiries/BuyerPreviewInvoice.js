@@ -152,6 +152,7 @@ export class BuyerPreviewInvoice extends Component {
     }
 
     proceedtoadvancepay(){
+      localStorage.setItem("SelectPI", 1);
         browserHistory.push("/payadvance?code="+this.state.enquiryCode)
     }
 

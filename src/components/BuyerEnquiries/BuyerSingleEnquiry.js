@@ -452,6 +452,11 @@ export class BuyerSingleEnquiry extends Component {
         let params = queryString.parse(this.props.location.search);
         console.log(params);
         this.state.enquiryCode = params.code;
+        if (localStorage.getItem('SelectPI')== 1) {
+            this.proformaDetailsbtn();
+         //    window.scrollTo(0, 0);
+         }
+         localStorage.removeItem("SelectPI");
         TTCEapi.getMoq(params.code).then((response)=>{
             console.log(response)
             if(response.data.data==null){

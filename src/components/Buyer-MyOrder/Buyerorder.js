@@ -55,6 +55,7 @@ export class Buyerorder extends Component {
             completebtndis:true,
             deliveredDate:"",
             getSingleOrder:[],
+            geteta:[],
             showDeldatevalidation:false,
             orderReceivedCurrentId: 0,
             orderReceivedModalOkButtonDisable: false,  
@@ -90,17 +91,19 @@ export class Buyerorder extends Component {
 
     daysleftFaultyOrder(name,days)
     {
-      console.log(name,days);
-        var someDate = new Date(name);
-                                console.log(someDate);
-                                var numberOfDaysToAdd =parseInt(days);
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
-                                var todayDate= new Date();
-                                const diffTime =  someDate - todayDate ;
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
-                                return(diffDays);
+        console.log(name);
+        //   const datecon = moment(name).format('DD-MM-YYYY');
+        //     console.log(datecon + " Converted Date");
+            var someDate = new Date(name);
+                                    console.log(someDate);
+                                    // var numberOfDaysToAdd = 10;
+                                    // someDate.setDate(someDate.getDate() );
+                                    // console.log(someDate); 
+                                    var todayDate= new Date();
+                                    const diffTime =  someDate - todayDate ;
+                                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                    console.log(diffTime); 
+                                    return(diffDays);
     }
 
 
@@ -534,8 +537,9 @@ export class Buyerorder extends Component {
                         console.log(response1.data.data);
                         this.setState({openEnquiries:response1.data.data,
                             getSingleOrder : response1.data.data[0].openEnquiriesResponse,
+                            geteta:response1.data.data[0],
                              dataload:true},()=>{
-                                console.log(this.state.getSingleOrder);
+                                console.log(this.state.geteta);
                             var data = localStorage.getItem("changeRequest");
                             if(data) {
                                 localStorage.removeItem("changeRequest");
@@ -1117,10 +1121,9 @@ export class Buyerorder extends Component {
                                        ></img>
                                 Found order as per requirement
                                 </button>
-                          {this.state.getSingleOrder.orderReceiveDate!=null?
+                          {/* {this.state.getSingleOrder.orderReceiveDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,10)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<4 
+                          {this.daysleftFaultyOrder(this.state.getSingleOrder.orderReceiveDate,10)>0 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
@@ -1133,15 +1136,21 @@ export class Buyerorder extends Component {
                              }
                           </>
                           :
-                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                          ""
+                       
+                          } */}
+                             
+                             {this.daysleftFaultyOrder(this.state.geteta.eta)>0?
+                           <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
                                              onClick={()=>{this.FaultyOrder(this.state.enquiryCode)}}
                                              >
                                 raise a concern
-                                </button> here. </p>
-                          }
-                             
-                                     
+                                </button> here. 
+                                </p>
+                                :
+                                ""
+                          }         
                                       
                                
 

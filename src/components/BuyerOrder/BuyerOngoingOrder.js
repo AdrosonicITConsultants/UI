@@ -295,19 +295,22 @@ export class BuyerOngoingOrder extends Component {
         localStorage.setItem("changeRequest", 1);
         browserHistory.push("/buyerorder?code=" + id);
     }
-    daysleftFaultyOrder(name,days)
+    daysleftFaultyOrder(name)
     {
-      console.log(name,days);
+      console.log(name);
+    //   const datecon = moment(name).format('DD-MM-YYYY');
+    //     console.log(datecon + " Converted Date");
         var someDate = new Date(name);
                                 console.log(someDate);
-                                var numberOfDaysToAdd =parseInt(days);
-                                someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
+                                // var numberOfDaysToAdd = 10;
+                                // someDate.setDate(someDate.getDate() );
+                                // console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
+                                console.log(diffTime); 
                                 return(diffDays);
+                                
     }
 
     reviewPageButton = (id, code, data) => {
@@ -1495,36 +1498,22 @@ export class BuyerOngoingOrder extends Component {
                                 </button>
                                
 
-                      {/* {item.openEnquiriesResponse.excpectedDate!=null?
+                    
                           <>
-                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)<11 
-                             ?
-                             <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
-                             <button style={{color:"red"}}className="raiseaconcernbtn" 
-                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
-                                             >
-                                raise a concern
-                                </button> here. </p>
-                                :
-                                ""
-                             }
-                          </>
-                          :
-                          <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
-                             <button style={{color:"red"}}className="raiseaconcernbtn" 
-                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
-                                             >
-                                raise a concern
-                                </button> here. </p>
-                        
-                          } */}
+                             {this.daysleftFaultyOrder(item.eta)>0?
                            <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
                                              onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
                                              >
                                 raise a concern
-                                </button> here. </p>
+                                </button> here. 
+                                </p>
+                                :
+                                ""
+                          }
+                          </>
+                        
+                       
                                       </Col>
                   </Row>
                 </>
@@ -1534,7 +1523,7 @@ export class BuyerOngoingOrder extends Component {
                 </>
                 : null }
                    
-                    {/* _________________________________________Modal_1________________________________________________ */}
+    {/* _________________________________________Modal_1________________________________________________ */}
                                           
     <div id={"CompleteOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
@@ -1649,7 +1638,6 @@ export class BuyerOngoingOrder extends Component {
     </div>
     </div>
 </div>
-    
     
     {/* _____________________________________________Modal 3 ________________________________________________ */}
     <div id={"CloseOrder"+item.openEnquiriesResponse.enquiryId} class="w3-modal" style={{paddingTop:"200px"}}>

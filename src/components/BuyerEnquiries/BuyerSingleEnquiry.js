@@ -454,7 +454,7 @@ export class BuyerSingleEnquiry extends Component {
         this.state.enquiryCode = params.code;
         if (localStorage.getItem('SelectPI')== 1) {
             this.proformaDetailsbtn();
-         //    window.scrollTo(0, 0);
+            // window.scrollTo(0, 0);
          }
          localStorage.removeItem("SelectPI");
         TTCEapi.getMoq(params.code).then((response)=>{

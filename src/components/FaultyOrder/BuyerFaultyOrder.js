@@ -218,11 +218,17 @@ export class BuyerFaultyOrder extends Component {
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                  },()=>{
                 console.log(this.state.getSingleOrder);
+                // var eta = this.state.getSingleOrder.excpectedDate;
+                var today = new Date(this.state.getSingleOrder.excpectedDate);
+                var tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate()+10);
+                tomorrow.toLocaleDateString();
+                 console.log("// add a day" + tomorrow.toLocaleDateString() )
+
                 var today = new Date(),
                 date= moment().format("YYYY-MM-DD")
                 console.log(date) 
-                console.log(this.state.getSingleOrder.excpectedDate)
-                var daysleft=moment(this.state.getSingleOrder.excpectedDate).diff(date, 'days');
+                var daysleft=moment(tomorrow.toLocaleDateString()).diff(date, 'days');
                 console.log(daysleft)  
                 this.setState({
                     daysremaining:daysleft

@@ -314,8 +314,11 @@ null :
           <Row   className="mt10 pb10">
             <strong className="col-xs-4 text-center line7 font6">
               {this.props.userpage == 1 ?
-                "Help ?" :
-                this.props.t("Pages.object.regHelp")
+                <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                target="_blank">Help?</a>
+                   :
+                   <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                         target="_blank">{this.props.t("Pages.object.regHelp")}</a>
               }
             </strong>
             <a 

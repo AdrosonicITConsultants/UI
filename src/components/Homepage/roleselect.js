@@ -67,7 +67,8 @@ export default class roleselect extends Component {
 
                                 </Row>
                                 <Row   className="text-center line5 font3">
-                                    Help?
+                                <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a>
                                 </Row>
                   
               

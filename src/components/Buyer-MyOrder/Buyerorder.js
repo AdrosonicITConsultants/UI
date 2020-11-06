@@ -1859,6 +1859,7 @@ export class Buyerorder extends Component {
     </div>
     </div>
 </div>
+  
   {/* _____________________________________________Modal 4 ________________________________________________ */}
   <div id="PartialPayment" class="w3-modal" style={{paddingTop:"200px"}}>
     <div class="w3-modal-content w3-animate-top modalBoxSize" >

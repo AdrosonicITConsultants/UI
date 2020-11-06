@@ -40,7 +40,7 @@ export default class roleselect extends Component {
                                 <Row   className="selectorrow text-center">
                                     <div className="box1" onClick={() => this.artistopen()}>
                                         <Row  >
-                                <img src={logos.buyerlogo} alt="TataTrusts logo" className="logoselect"></img>
+                                <img src={logos.artisanlogo} alt="TataTrusts logo" className="logoselect"></img>
                                         </Row>
                                         <Row   className="text-center font3">
                                             Artisan

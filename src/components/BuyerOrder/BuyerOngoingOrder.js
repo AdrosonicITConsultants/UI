@@ -1476,19 +1476,12 @@ export class BuyerOngoingOrder extends Component {
                                
                                Found order as per requirement
                                 </button>
-                                {/* <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
-                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
-                                                 onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
-                                                 >
-                                    raise a concern
-                                    </button> here. </p>                               */}
+                               
 
-
-
-                      {item.openEnquiriesResponse.orderReceiveDate!=null?
+                      {/* {item.openEnquiriesResponse.excpectedDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,10)<11 
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)<11 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
@@ -1507,7 +1500,14 @@ export class BuyerOngoingOrder extends Component {
                                              >
                                 raise a concern
                                 </button> here. </p>
-                          }
+                        
+                          } */}
+                           <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> here. </p>
                                       </Col>
                   </Row>
                 </>

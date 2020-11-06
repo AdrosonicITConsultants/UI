@@ -15,11 +15,19 @@ import Diffdays from '../BuyerOrder/Diffdays';
 import DaysRemaining from './DaysRemaining';
 import { BuyerFaultyOrderMarkResolve } from './BuyerFaultyOrderMarkResolve';
 import { FaultResolved } from './FaultResolved';
+import Moment from 'react-moment';
+import moment from 'moment';
+
 export class BuyerFaultyOrder extends Component {
     constructor(props) {
         super(props);
-    
+        var days= moment().format("DD-MM-YYYY")
+        // let days=moment([2020, 11, 7]).diff(moment([2020, 11, 6]),'days')
+        // let days= moment({date}).diff({date}, 'days');
+        // console.log(days)
+        console.log(days);
         this.state = {
+            // currentDate: date,
             ongoingEnquiry:true,
             enquiryCode:"",
             getSingleOrder:[],
@@ -33,6 +41,7 @@ export class BuyerFaultyOrder extends Component {
             artisanReviewId:"",
             isResolved:"",
             buyer:true,
+            daysremaining:"",
             accepted:[
                 {   
                     id: 1,
@@ -183,9 +192,20 @@ export class BuyerFaultyOrder extends Component {
         localStorage.setItem("goToChatButtonEnquiryId", id);    
         browserHistory.push("/buyerChat");            
       }
+    //   daysleft(name)
+    //   {
+    //     var today = new Date(),
+    //     date= moment().format("YYYY-MM-DD")
+    //     console.log(date) 
+    //     console.log(this.state.getSingleOrder.excpectedDate)
+    //     var daysleft=moment(this.state.getSingleOrder.excpectedDate).diff(date, 'days');
+    //     console.log(daysleft)  
+        
+      
+    //   }
   
     componentDidMount(){
-      
+      console.log(this.state.currentDate)
         let params = queryString.parse(this.props.location.search);
         console.log(params.orderid);
         this.setState({
@@ -198,7 +218,18 @@ export class BuyerFaultyOrder extends Component {
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                  },()=>{
                 console.log(this.state.getSingleOrder);
+                var today = new Date(),
+                date= moment().format("YYYY-MM-DD")
+                console.log(date) 
+                console.log(this.state.getSingleOrder.excpectedDate)
+                var daysleft=moment(this.state.getSingleOrder.excpectedDate).diff(date, 'days');
+                console.log(daysleft)  
+                this.setState({
+                    daysremaining:daysleft
+                })
             });
+           
+            console.log(this.state.daysremaining)
         }
         });
         TTCEapi.getAllRefBuyerReview().then((response)=>{
@@ -251,6 +282,7 @@ export class BuyerFaultyOrder extends Component {
     }
     
     render() {
+        
         return (
             <React.Fragment>
                 <NavbarComponent/>
@@ -283,15 +315,17 @@ export class BuyerFaultyOrder extends Component {
                                   <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                      <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
                                       <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                     {/* {this.state.getSingleOrder.orderReceiveDate==null ?
-                                     ""
-                                    :
-                                    <p className="faultyp2">
-                                    <DaysRemaining startday = {this.state.getSingleOrder.orderReceiveDate}>
-                                      </DaysRemaining>
-                                      <span> days left to report a problem.</span> </p>
-                                    } */}
-                                     
+                                      <p className="faultyp2">
+                                      
+                                          {this.state.daysremaining>0?
+                                          <>
+                                           {this.state.daysremaining}
+                                      <span> days left to report a problem.</span> 
+                                          </>
+                                            :
+                                            ""
+                                            }
+                                   </p>
                                   </Col>
                                   </Row> 
                             
@@ -426,14 +460,16 @@ export class BuyerFaultyOrder extends Component {
                                   <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                      <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
                                       <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                     {/* {this.state.getSingleOrder.orderReceiveDate==null ?
-                                     ""
-                                    :
-                                    <p className="faultyp2">
-                                    <DaysRemaining startday = {this.state.getSingleOrder.orderReceiveDate}>
-                                      </DaysRemaining>
-                                      <span> days left to report a problem.</span> </p>
-                                    } */}
+                                      <p className="faultyp2">
+                                          {this.state.daysremaining>0?
+                                          <>
+                                           {this.state.daysremaining}
+                                      <span> days left to report a problem.</span> 
+                                          </>
+                                            :
+                                            ""
+                                            }
+                                   </p>
                                      
                                   </Col>
                                   </Row> 

@@ -17,6 +17,7 @@ export default class ArtisanQC extends Component {
             buyerBrand: "",
             productCategory: "",
             artisanQcResponses: [],
+            dummyResponse: [],
             stagesData: [],
             questionsData: [], 
             arrayObject: [], 
@@ -46,6 +47,8 @@ export default class ArtisanQC extends Component {
             QCsendButton: false,
             QCsendButton1: false,
             QCenableEditFlag: false,
+            dummyResponseNew: [],
+            naturalCheckArrayNew: [],
         };   
     
     }
@@ -57,6 +60,17 @@ export default class ArtisanQC extends Component {
             "questionId": questionId
         }
         this.state.arrayObject.push(object);
+    }
+
+    handleChangeFunction1 = (e, questionId, stageId, key) => {
+        var answer = e.target.value;
+        var array =  this.state.dummyResponseNew;  
+        console.log(array);      
+        array[key].answer = answer;
+        console.log(array);
+        this.setState({
+            dummyResponseNew: array
+        });           
     }
 
     saveORsendQCFunction = (id, stageId, stageName) => {
@@ -82,6 +96,102 @@ export default class ArtisanQC extends Component {
         console.log(this.state.arrayObject);
 
         var currentArray = this.state.arrayObject;
+        var newArray = [];      
+        var uniqueObject = {}; 
+        for (let i in currentArray) { 
+            var objTitle = currentArray[i]['questionId']; 
+            uniqueObject[objTitle] = currentArray[i]; 
+        } 
+        for (var i in uniqueObject) { 
+            newArray.push(uniqueObject[i]); 
+        }
+        console.log(newArray); 
+
+        var questionArray = this.state.questionsData[stageId - 1];
+        var updatedArray = [];
+        for (var i in questionArray) {
+            var object = "";
+            if(stageId === 2 && questionArray[i].answerType === "1") {
+                object = {
+                    "answer": dummy,
+                    "questionId": questionArray[i].questionNo,
+                }
+            }
+            else {
+                object = {
+                    "answer": "",
+                    "questionId": questionArray[i].questionNo,
+                }
+            }
+            updatedArray.push(object);
+        }
+        console.log(updatedArray);
+
+        var res = updatedArray.map(obj => newArray.find(o => o.questionId === obj.questionId) || obj);
+        console.log(res);
+
+        var finalData = {
+            "enquiryId": parseInt(this.props.enquiryId),
+            "questionAnswers": res,
+            "saveOrSend": id,
+            "stageId": stageId
+        }
+        console.log(finalData);
+
+        TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
+            if(response.data.valid)
+            { 
+                this.componentDidMount();
+                if(id === 0) {
+                    customToast.success("QC saved successfully for " + stageName, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+                else {
+                    customToast.success("QC sent successfully for " + stageName, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                    });
+                }
+            }
+            console.log(response.data.data);
+        });
+    }
+
+    saveORsendQCFunction1 = (id, stageId, stageName) => {
+
+        this.setState({
+            QCsaveButton: true,
+            QCsendButton: true,
+        });
+
+        var dummy = "";
+        if(stageId === 2) {
+            var checkedArray = this.state.naturalCheckArrayNew;
+            var dataArray = this.state.naturalArray;
+            for(var i in checkedArray) {
+                if(checkedArray[i].checked === true) {
+                    dummy += dataArray[i] + ",";
+                }
+            }
+            dummy = dummy.substring(0, dummy.length - 1);
+            console.log(dummy);
+        }
+        
+        var dummyArray = this.state.dummyResponseNew;
+        for(var i in dummyArray) {
+            if(stageId === 2 && dummyArray[i].questionId === 1) {
+                dummyArray[i].answer = dummy;
+                this.setState({
+                    dummyResponseNew: dummyArray,
+                })
+            }
+        }
+
+        console.log(this.state.dummyResponseNew);
+
+        var currentArray = this.state.dummyResponseNew;
         var newArray = [];      
         var uniqueObject = {}; 
         for (let i in currentArray) { 
@@ -189,6 +299,36 @@ export default class ArtisanQC extends Component {
         console.log(this.state.naturalCheckArray);
     }
 
+    handleMultiselect1 = (e, id, key) => {
+        var checked = document.getElementById("natural" + id + key).checked;
+        var array = this.state.naturalCheckArrayNew;
+        array[key].checked = checked;
+        this.setState({
+            naturalCheckArrayNew: array,
+        })
+        console.log(this.state.naturalCheckArrayNew);
+    }
+
+    // handleMultiselect1 = (e, id, key) => {
+    //     var checked = document.getElementById("natural" + id + key).checked;
+
+    //     var checkedArray = this.state.naturalCheckArray;
+    //         var dataArray = this.state.naturalArray;
+    //         for(var i in checkedArray) {
+    //             if(checkedArray[i].checked === true) {
+    //                 dummy += dataArray[i] + ",";
+    //         }
+    //     }
+    //         dummy = dummy.substring(0, dummy.length - 1);
+    //     var array =  this.state.dummyResponseNew;  
+    //     console.log(array);      
+    //     array[key].answer = checked;
+    //     console.log(array);
+    //     this.setState({
+    //         dummyResponseNew: array
+    //     });           
+    // }
+
     handleYesNo = (e, key, questionId, id) => {
         var value = document.getElementById("yesNo" + key + id).value;
         var object = {
@@ -199,6 +339,19 @@ export default class ArtisanQC extends Component {
         console.log(this.state.arrayObject);
     }
 
+    handleYesNo1 = (e, id, questionId, key, key1) => {
+        var value = document.getElementById("yesNo" + id + key1).value;
+        console.log(value);
+        console.log(key);
+        var array =  this.state.dummyResponseNew;  
+        console.log(array);
+        array[key].answer = value;
+        console.log(array);
+        this.setState({
+            dummyResponseNew: array
+        });           
+    }
+
     handledropdown = (e, id, questionId) => {
         var value = document.getElementById("dropdown" + id).value;
         var object = {
@@ -207,6 +360,17 @@ export default class ArtisanQC extends Component {
         }
         this.state.arrayObject.push(object);
         console.log(this.state.arrayObject);
+    }
+
+    handledropdown1 = (e, id, questionId, key) => {
+        var value = document.getElementById("dropdown" + id).value;
+        var array =  this.state.dummyResponseNew;  
+        console.log(array);      
+        array[key].answer = value;
+        console.log(array);
+        this.setState({
+            dummyResponseNew: array
+        });           
     }
 
     getcollapseId = activecollapse => {
@@ -240,6 +404,7 @@ export default class ArtisanQC extends Component {
             QCsaveButton: false,
             QCsendButton: false,
             QCsendButton1: false,
+            QCenableEditFlag: false,
         });
         console.log(this.props.enquiryId);
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
@@ -250,9 +415,25 @@ export default class ArtisanQC extends Component {
                     buyerBrand: response.data.data.buyerCompanyName,
                     productCategory: response.data.data.category,
                     artisanQcResponses: response.data.data.artisanQcResponses,
+                    dummyResponse: response.data.data.artisanQcResponses,
                     currentStageId: response.data.data.stageId,
                     currentSeenStatus: response.data.data.isSend,
-                })
+                }, () => {
+                    var data = this.state.artisanQcResponses[this.state.currentStageId - 1];
+                    var array = []; 
+                    for(var i in data) { 
+                        var object = {
+                            "answer": data[i].answer,
+                            "questionId": data[i].questionId
+                        }                       
+                        array.push(object);
+                    }
+                    this.setState({
+                        dummyResponseNew: array,
+                    }, () => {
+                        console.log(this.state.dummyResponseNew);
+                    });                    
+                });
             }
             console.log(response.data.data);
             console.log(this.state.currentStageId);
@@ -293,6 +474,28 @@ export default class ArtisanQC extends Component {
             console.log(result);
             this.setState({
                 naturalArray: result,
+            }, () => {
+                var testArray = [
+                    {
+                        checked: false
+                    },
+                    {
+                        checked: false
+                    },
+                    {
+                        checked: false
+                    },
+                ];
+                for(var i in this.state.naturalArray) {
+                    for(var j in this.state.naturalSelectedArray) {
+                        if(this.state.naturalArray[i] === this.state.naturalSelectedArray[j]) {                            
+                            testArray[i].checked = true;
+                        }
+                    }
+                }
+                this.setState({
+                    naturalCheckArrayNew: testArray
+                });
             });
 
             var yesNo = this.state.questionsData[3][3].optionValue;
@@ -443,38 +646,52 @@ export default class ArtisanQC extends Component {
                             <div className="artisanQCCardHeader">{stage.stage}</div>
 
                             {this.state.questionsData[stage.id - 1] ? this.state.questionsData[stage.id - 1].map((data) => {
-                            return this.state.artisanQcResponses[stage.id - 1] ? this.state.artisanQcResponses[stage.id - 1].map((item) => {
+                            return this.state.artisanQcResponses[stage.id - 1] ? this.state.artisanQcResponses[stage.id - 1].map((item, key) => {
                                 if(data.questionNo === item.questionId) {
                                 return <div>
                                     <div className="QCquestionsTitle">{data.question}</div>
                                     {data.answerType === "1" ? 
                                     <div>
-                                        {this.state.naturalArray ? this.state.naturalArray.map((natural, key) => [
+                                        {this.state.naturalArray ? this.state.naturalArray.map((natural, key2) => [
+                                            this.state.naturalSelectedArray ? this.state.naturalSelectedArray.map((selected, key1) => [
+                                            natural === selected ?
                                             <label className="QCLabelTitle">
-                                                <input type="checkbox" className="QCLabelInput" id={"natural" + data.id + key} 
-                                                onChange={(e) => this.handleMultiselect(e, data.id, key)}/>
+                                                <input type="checkbox" className="QCLabelInput" id={"natural" + data.id + key2} 
+                                                checked={this.state.naturalCheckArrayNew[key2].checked} onChange={(e) => this.handleMultiselect1(e, data.id, key2)}/>
                                                 {natural}
                                             </label>
+                                            : null
+                                            ]) : null
                                         ]) : null}
                                     </div>
                                     : 
                                     data.answerType === "2" ?
                                     (data.questionNo === 1 || data.questionNo === 2 || data.questionNo === 3 || data.questionNo === 6 || data.questionNo === 8) && (stage.id === 5)?
                                     <div>
-                                         {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key) => [
+                                         {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key1) => [
                                             <label className="QCLabelTitle">
-                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key} value={yesNo}
-                                                onChange={(e) => this.handleYesNo(e, data.id, data.questionNo, key)}/>
+                                                {yesNo === this.state.dummyResponseNew[key].answer ?
+                                                <input type="radio" className="QCLabelInput" checked name={"yes_no"+data.id} id={"yesNo" + data.id + key1} value={yesNo}
+                                                onChange={(e) => this.handleYesNo1(e, data.id, data.questionNo, key, key1)}/>
+                                                : 
+                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key1} value={yesNo}
+                                                onChange={(e) => this.handleYesNo1(e, data.id, data.questionNo, key, key1)}/>
+                                                }
                                                 {yesNo}
                                             </label>
                                          ]) : null }
                                     </div>
                                     :
                                     <div>
-                                         {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key) => [
+                                         {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key2) => [
                                             <label className="QCLabelTitle">
-                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key} value={yesNo}
-                                                onChange={(e) => this.handleYesNo(e, data.id, data.questionNo, key)}/>
+                                                {yesNo === this.state.dummyResponseNew[key].answer ?
+                                                <input type="radio" className="QCLabelInput" checked name={"yes_no"+data.id} id={"yesNo" + data.id + key2} value={yesNo}
+                                                onChange={(e) => this.handleYesNo1(e, data.id, data.questionNo, key, key2)}/>
+                                                :
+                                                <input type="radio" className="QCLabelInput" name={"yes_no"+data.id} id={"yesNo" + data.id + key2} value={yesNo}
+                                                onChange={(e) => this.handleYesNo1(e, data.id, data.questionNo, key, key2)}/>
+                                                }
                                                 {yesNo}
                                             </label>
                                          ]) : null }
@@ -482,21 +699,25 @@ export default class ArtisanQC extends Component {
                                     :
                                     data.answerType === "3" ?
                                     <div>
-                                        <select className="QCquestionsInputBox" onChange={(e) => this.handledropdown(e, data.id, data.questionNo)}
+                                        <select className="QCquestionsInputBox" onChange={(e) => this.handledropdown1(e, data.id, data.questionNo, key)}
                                         id={"dropdown"+ data.id} >
                                             <option value="">Select option</option>
-                                            {this.state.dropDownArray ? this.state.dropDownArray.map((dropdown, key) => [
-                                                <option id={"dropdown"+ data.id} value={dropdown}>{dropdown}</option>
+                                            {this.state.dropDownArray ? this.state.dropDownArray.map((dropdown) => [
+                                                this.state.dummyResponseNew[key].answer === dropdown ?
+                                                    <option id={"dropdown"+ data.id} value={dropdown} selected>{dropdown}</option>
+                                                    :
+                                                    <option id={"dropdown"+ data.id} value={dropdown}>{dropdown}</option>
                                             ]) : null}
                                         </select>
                                     </div>
                                     :
                                     data.stageId === 7 && data.questionNo === 12 ?
-                                    <textarea onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} 
-                                    id={data.id} maxLength="100" className="QCTextareaBoxStyle" value={item.answer}></textarea>
+                                    <textarea onChange={(e) => this.handleChangeFunction1(e, data.questionNo, data.stageId, key)} 
+                                    id={data.id} maxLength="100" className="QCTextareaBoxStyle" value={this.state.dummyResponseNew[key].answer}></textarea>
                                     :
-                                    <input type="text" value={item.answer} className="QCquestionsInputBox" stageId={data.stageId} questionId={data.questionNo} 
-                                    onChange={(e) => this.handleChangeFunction(e, data.questionNo, data.stageId)} id={data.id} maxLength="25"/>
+                                    <input type="text" value={this.state.dummyResponseNew[key].answer} className="QCquestionsInputBox" 
+                                    stageId={data.stageId} questionId={data.questionNo} 
+                                    onChange={(e) => this.handleChangeFunction1(e, data.questionNo, data.stageId, key)} id={data.id} maxLength="25"/>
                                     }
                                     </div>                            
                                     }
@@ -517,12 +738,12 @@ export default class ArtisanQC extends Component {
                                     {this.state.QCsaveButton ?
                                     <button className="QCsaveDisableButton">Save</button>
                                     :
-                                    <button className="QCsaveButton" onClick={() => this.saveORsendQCFunction(0, stage.id, stage.stage)}>Save</button>
+                                    <button className="QCsaveButton" onClick={() => this.saveORsendQCFunction1(0, stage.id, stage.stage)}>Save</button>
                                     }
                                     {this.state.QCsendButton ?
                                     <button className="QCsendDisableButton">Send</button>
                                     :
-                                    <button className="QCsendButton" onClick={() => this.saveORsendQCFunction(1, stage.id, stage.stage)}>Send</button>
+                                    <button className="QCsendButton" onClick={() => this.saveORsendQCFunction1(1, stage.id, stage.stage)}>Send</button>
                                     }
                                 </Col>
                             </Row>
@@ -531,7 +752,7 @@ export default class ArtisanQC extends Component {
                             <div className="artisanQCCardStyle">
                             <div className="artisanQCCardHeader">{stage.stage}</div>
 
-                            {this.state.questionsData[stage.id - 1] ? this.state.questionsData[stage.id - 1].map((data) => {
+                            {this.state.questionsData[stage.id - 1] ? this.state.questionsData[stage.id - 1].map((data, key) => {
                                 return this.state.artisanQcResponses[stage.id - 1] ? this.state.artisanQcResponses[stage.id - 1].map((item) => {
                                     if(data.questionNo === item.questionId) {
                                         return <div>
@@ -545,7 +766,7 @@ export default class ArtisanQC extends Component {
                                                     <input type="checkbox" checked disabled className="QCLabelInput" />
                                                     {natural}
                                                 </label> 
-                                                : null 
+                                                : null
                                                 ]) : null
                                             ]) : null}
                                         </div>
@@ -554,7 +775,7 @@ export default class ArtisanQC extends Component {
                                         (data.questionNo === 1 || data.questionNo === 2 || data.questionNo === 3 || data.questionNo === 6 || data.questionNo === 8) && (stage.id === 5) ?
                                         <div>
                                             {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key) => [
-                                                yesNo === item.answer ? 
+                                               yesNo === this.state.dummyResponseNew[key].answer ?
                                                 <label className="QCLabelTitle">
                                                     <input type="radio" className="QCLabelInput" checked disabled/>
                                                     {yesNo}
@@ -565,11 +786,13 @@ export default class ArtisanQC extends Component {
                                                     {yesNo}
                                                 </label>
                                             ]) : null }
+                                            
+                                            {this.state.dummyResponseNew[key].answer}
                                         </div>
                                         :
                                         <div>
                                             {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key) => [
-                                                yesNo === item.answer ? 
+                                               yesNo === this.state.dummyResponseNew[key].answer ?
                                                 <label className="QCLabelTitle">
                                                     <input type="radio" className="QCLabelInput" checked disabled/>
                                                     {yesNo}
@@ -610,8 +833,11 @@ export default class ArtisanQC extends Component {
 
                             <Row noGutters={true}>
                                 <Col sm={12} className="text-center QCsaveSendCol">
-                                    
-                                    <button className="QCsaveDisableButton" onClick={this.QCenableEdit}>Edit</button>
+                                {this.state.QCsendButton1 ?
+                                 <button className="QCsendDisableButton">Edit</button>
+                                 :
+                                    <button className="QCsaveButton" onClick={this.QCenableEdit}>Edit</button> 
+                                }
                                     
                                     {this.state.QCsendButton1 ?
                                     <button className="QCsendDisableButton">Send</button>

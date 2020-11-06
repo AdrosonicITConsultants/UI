@@ -98,7 +98,23 @@ export class BuyerOngoingOrder extends Component {
         document.getElementById('CloseOrder'+ id).style.display='none';
         // this.componentDidMount();
        }
-       YesOrderbutton=(id)=>{
+       YesOrderbutton=(id,prodid)=>{
+           if(prodid==2){
+            console.log("prod id 2",id)
+            TTCEapi.markEnquiryClosed(id).then((response)=>{
+                if(response.data.valid)
+                {
+                    document.getElementById('CloseOrder'+ id).style.display='none';
+                    customToast.success("Order closed!", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: true,
+                      });
+                      this.componentDidMount()
+                }
+            }); 
+           }
+           else{
+            console.log("prod id 1",id)
              TTCEapi.initializePartialRefund(id).then((response)=>{
             if(response.data.valid  )
             {
@@ -107,6 +123,7 @@ export class BuyerOngoingOrder extends Component {
 
             }
         }); 
+        }
          }
  
 
@@ -1476,19 +1493,12 @@ export class BuyerOngoingOrder extends Component {
                                
                                Found order as per requirement
                                 </button>
-                                {/* <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
-                                 <button style={{color:"red"}}className="raiseaconcernbtn" 
-                                                 onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
-                                                 >
-                                    raise a concern
-                                    </button> here. </p>                               */}
+                               
 
-
-
-                      {item.openEnquiriesResponse.orderReceiveDate!=null?
+                      {/* {item.openEnquiriesResponse.excpectedDate!=null?
                           <>
-                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)>0 &&
-                          this.daysleftFaultyOrder(item.openEnquiriesResponse.orderReceiveDate,3)<4 
+                          {this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)>0 &&
+                          this.daysleftFaultyOrder(item.openEnquiriesResponse.excpectedDate,10)<11 
                              ?
                              <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
@@ -1507,7 +1517,14 @@ export class BuyerOngoingOrder extends Component {
                                              >
                                 raise a concern
                                 </button> here. </p>
-                          }
+                        
+                          } */}
+                           <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> here. </p>
                                       </Col>
                   </Row>
                 </>
@@ -1669,7 +1686,7 @@ export class BuyerOngoingOrder extends Component {
                
                  <button
                 style={{fontSize:"15px",background:"green"}}
-                 onClick={()=>{this.YesOrderbutton(item.openEnquiriesResponse.enquiryId)}}
+                 onClick={()=>{this.YesOrderbutton(item.openEnquiriesResponse.enquiryId,item.openEnquiriesResponse.productStatusId)}}
                 className="closeorderbtn2">Yes
                  </button>
         </Col>

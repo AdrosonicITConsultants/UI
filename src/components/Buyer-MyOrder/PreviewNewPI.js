@@ -251,7 +251,7 @@ export class PreviewNewPI extends Component {
        Received at:
 </Col>
 <Col className="col-xs-4 CRdate">
-       Change Request date:
+       {/* Change Request date: */}
 </Col>
 <Col className="col-xs-4">
    {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}

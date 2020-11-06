@@ -90,6 +90,8 @@ export class BuyerCompletedOrder extends Component {
 
     individualpage(id){
         localStorage.setItem("completedOrder", 1);
+        // localStorage.setItem("seeMoreId", id);
+        // localStorage.setItem("completed", 1);
         browserHistory.push("/buyercompletedorder?code=" + id);
     }
 

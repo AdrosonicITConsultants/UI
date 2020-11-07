@@ -413,7 +413,8 @@ export default class buyreg5 extends Component {
 
                 <Row noGutters={true} className="mt30">
                   <strong className="col-xs-12 text-center line7 ">
-                    Help?
+                  <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a>
                   </strong>
                 </Row>
 

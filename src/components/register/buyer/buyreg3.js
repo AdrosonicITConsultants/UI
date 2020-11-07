@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
-import logos from "../../../assets"
+import logos from "../../../assets";
+import TTCEapi from '../../../services/API/TTCEapi';
 
 export default class buyreg3 extends Component {
     constructor() {
@@ -298,7 +299,8 @@ export default class buyreg3 extends Component {
                 </Row>
                 <Row   className="mt30"> 
                   <strong className="col-xs-12 text-center line7 ">
-                    Help?
+                  <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a>
                   </strong>
                   {/* <span className="col-xs-4"></span>
                   <span

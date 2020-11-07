@@ -38,11 +38,26 @@ class ArtistSelfDesign extends Component {
       })
     }
 
+    backoperation(){
+          browserHistory.goBack(); 
+      
+  } 
+
     render() {
         return (
             <React.Fragment>
                 <NavbarComponent/>
                 <Container className="overflownhidden">
+                <Row noGutters={true} style={{marginBottom: "20px"}}>
+                           <Col sm = "1" className="col-xs-2" style={{padding: "0px"}}>
+                           <img
+                                       src={logos.backarrowicon}
+                                       className="margin-cparrow cparrowsize glyphicon"
+                                        onClick={() => this.backoperation()}
+                            ></img>
+                          
+                          </Col>                           
+                </Row>  
                   <Row noGutters="true" className="asdthreadbg">
                     <Col sm={{size:"6"}} className="Col6">
                   <div noGutters="true">

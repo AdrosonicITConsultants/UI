@@ -6,6 +6,7 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
+import TTCEapi from '../../../services/API/TTCEapi';
 
 
 export default class buyreg4 extends Component {
@@ -523,7 +524,8 @@ export default class buyreg4 extends Component {
 
                            <Row   className="mt17">
                              <strong className="col-xs-12 text-center line7 ">
-                               Help?
+                             <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a>
                              </strong>
                              
                            </Row>

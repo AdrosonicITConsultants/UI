@@ -238,7 +238,8 @@ export default class buyreg6 extends Component {
                 <Row   className="mt30">
                   {/* <span className="col-xs-1 col-md-1"></span> */}
                   <strong className="col-xs-12 text-center line7 help">
-                    Help?
+                  <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a>
                   </strong>
                 </Row>
 

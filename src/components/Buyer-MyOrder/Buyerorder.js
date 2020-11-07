@@ -106,6 +106,27 @@ export class Buyerorder extends Component {
                                     return(diffDays);
     }
 
+    daysleftFaultyOrder1(name,days)
+    {
+        console.log(name);
+        //   const datecon = moment(name).format('DD-MM-YYYY');
+        //     console.log(datecon + " Converted Date");
+            var someDate = new Date(name);
+            var numberOfDaysToAdd = 10;
+            someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+            var todayDate= new Date();
+            const diffTime =  someDate - todayDate ;
+                                    // console.log(someDate);
+                                    // // var numberOfDaysToAdd = 10;
+                                    // // someDate.setDate(someDate.getDate() );
+                                    // // console.log(someDate); 
+                                    // var todayDate= new Date();
+                                    // const diffTime =  someDate - todayDate ;
+                                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                                    console.log(diffDays); 
+                                    return(diffDays);
+    }
+
 
     FaultyOrder(id){
         localStorage.removeItem("faulty");
@@ -2049,7 +2070,7 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
+                                                                        this.daysleftFaultyOrder1(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
                                                                         : 
@@ -2099,7 +2120,7 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
+                                                                        this.daysleftFaultyOrder1(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
                                                                         : 

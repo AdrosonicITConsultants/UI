@@ -251,14 +251,15 @@ export default class BuyerRating extends Component {
                 ProductData :response.data.data
             },()=>{
             console.log(this.state.ProductData); 
-            
-            TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{                
-                this.setState({
-                    getProductCategoryAndClusterProducts : response.data.data.products
-                },()=>{
-                    console.log(this.state.getProductCategoryAndClusterProducts);
+            if(response.data.data) {
+                TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{                
+                    this.setState({
+                        getProductCategoryAndClusterProducts : response.data.data.products
+                    },()=>{
+                        console.log(this.state.getProductCategoryAndClusterProducts);
+                    });
                 });
-                });
+            }            
             });
         });       
     }

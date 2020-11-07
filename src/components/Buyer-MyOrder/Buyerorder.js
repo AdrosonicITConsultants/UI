@@ -350,6 +350,20 @@ export class Buyerorder extends Component {
                         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
                         return(diffDays);
         }
+        daysleftCR(name,days){
+        console.log(name,days);
+        var someDate = new Date(name);
+        console.log(someDate);
+        var numberOfDaysToAdd =parseInt(days);
+        someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+        console.log(someDate); 
+        var todayDate= new Date();
+        const diffTime =  someDate - todayDate ;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        console.log(diffDays); 
+        return(diffDays);
+        }
+        
         qualityCheckbtn(){
         this.setState((prevState) => {
         return{
@@ -2049,7 +2063,7 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
+                                                                        this.daysleftCR(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
                                                                         : 
@@ -2099,7 +2113,7 @@ export class Buyerorder extends Component {
                                                                         : <>
                                                                         {(this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === null) || 
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
-                                                                        this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
+                                                                        this.daysleftCR(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
                                                                         componentFunction={this.propsSendFunction}/> 
                                                                         : 

@@ -46,7 +46,7 @@
 }
 
 .ratingStarDisplayMargin:not(.nohover):hover {
-    background-color: #F2BF17;
+    background-color: transparent !important;
 }
 
 .ratingRemovePadding {

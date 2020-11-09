@@ -1259,7 +1259,6 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                                                <DownloadBuyerPreviewPI
                                                                enquiryId={this.state.enquiryCode}
                                                                enquiryCode={item.openEnquiriesResponse.enquiryCode}
-                                                               
                                                                 /> 
                                                                 {/* <BuyerOldPi 
                                                                  enquiryId={this.state.enquiryCode}
@@ -1308,7 +1307,8 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
                                                                         this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
-                                                                        componentFunction={this.propsSendFunction}/> 
+                                                                        componentFunction={this.propsSendFunction}
+                                                                        stageid={item.openEnquiriesResponse.enquiryStageId}/> 
                                                                         : 
                                                                         <Row noGutters={true}>
                                                                         <Col className="col-xs-12 bold font20 text-center">
@@ -1358,7 +1358,8 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                                                         (this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus === 0) ?
                                                                         this.daysleftFaultyOrder(this.state.openEnquiries[0].openEnquiriesResponse.orderCreatedOn, 10) > 0 ? 
                                                                         <ChangeRequest enquiryCode={this.state.enquiryCode} changeRequestStatus={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
-                                                                        componentFunction={this.propsSendFunction}/> 
+                                                                        componentFunction={this.propsSendFunction}
+                                                                        stageid={item.openEnquiriesResponse.enquiryStageId}/> 
                                                                         : 
                                                                         <Row noGutters={true}>
                                                                         <Col className="col-xs-12 bold font20 text-center">

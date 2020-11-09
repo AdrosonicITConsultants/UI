@@ -238,15 +238,20 @@ export class ChangeRequest extends Component {
     return(
             
 <React.Fragment>
+    {this.props.stageid>9?
+    ""
+    :
     <Row noGutters={true}>
-            <Col className="col-xs-12 bold" style={{textAlign:"center"}}>
-                <b>Please Note:</b> <br/>
-                <p>Change request may be accepted or rejected subjective to the feasibility of the change by artisan.If accepted,
-                    <br/>there may be a change in final amount and hence the pro forma invoice.
-                </p>
-                <p style={{color:"orangered"}}>You can only submit this change request once.Be sure about the change requested before submitting.</p>
-            </Col>
-    </Row>
+    <Col className="col-xs-12 bold" style={{textAlign:"center"}}>
+        <b>Please Note:</b> <br/>
+        <p>Change request may be accepted or rejected subjective to the feasibility of the change by artisan.If accepted,
+            <br/>there may be a change in final amount and hence the pro forma invoice.
+        </p>
+        <p style={{color:"orangered"}}>You can only submit this change request once.Be sure about the change requested before submitting.</p>
+    </Col>
+</Row>
+    }
+   
 
     {(this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0) ?
 this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.map((item) =>
@@ -282,7 +287,14 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
 
     }) : null
     : 
-    this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
+    <>
+    {this.props.stageid>9?
+    <>
+    
+    </>
+    :
+    <>
+    {this.state.getChangeRequestItemTable ? this.state.getChangeRequestItemTable.map((data) => {
         return <Row noGutters={true}>
         <span>
             <Col className="col-xs-3">
@@ -294,7 +306,10 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
             </Col>
         </span>  
         </Row>
-    }) : null 
+    }) : null }
+    </>
+    }
+    </>
     }
 
     <br/>
@@ -313,8 +328,19 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
         </Col>
     </Row>
     : null }
-
+    {this.props.stageid>9?
+    <>
     <Row noGutters={true}>
+    <Col className="col-xs-12 bold font20 text-center">
+     <br></br>
+     Change Request cannot be raised once the order is completed.
+     <br></br>
+     </Col>
+    </Row>
+    </>
+    :
+    <>
+     <Row noGutters={true}>
     <Col className="col-xs-12"style={{textAlign:"center"}}>
     {(this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0) ? 
     <button className="proccedwithadvpaybtn" disabled={true} style={{backgroundColor: "#777777"}}
@@ -327,6 +353,9 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
     }
     </Col>
     </Row>
+    </>
+    }
+   
                
    
             

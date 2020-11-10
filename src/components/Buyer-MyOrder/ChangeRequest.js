@@ -238,7 +238,7 @@ export class ChangeRequest extends Component {
     return(
             
 <React.Fragment>
-    {this.props.stageid>9?
+    {this.props.completed==1?
     ""
     :
     <Row noGutters={true}>
@@ -288,7 +288,7 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
     }) : null
     : 
     <>
-    {this.props.stageid>9?
+    {this.props.completed==1?
     <>
     
     </>
@@ -328,12 +328,12 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
         </Col>
     </Row>
     : null }
-    {this.props.stageid>9?
+    {this.props.completed==1?
     <>
     <Row noGutters={true}>
     <Col className="col-xs-12 bold font20 text-center">
      <br></br>
-     Change Request cannot be raised once the order is completed.
+     Change Request Not Available.
      <br></br>
      </Col>
     </Row>

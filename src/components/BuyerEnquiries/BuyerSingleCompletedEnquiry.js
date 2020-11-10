@@ -2057,7 +2057,8 @@ MoqSimpleProductSelected(moqId){
                                                             <Col sm={10}>
                                                                 <BuyerPreviewInvoice 
                                                                 enquiryCode={this.state.enquiryCode} 
-                                                                enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
+                                                                enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}
+                                                                completed={1}/>
                                                             </Col>
                                                          
                                                             </>:null}

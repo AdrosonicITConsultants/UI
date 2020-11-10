@@ -432,6 +432,8 @@ advancePaidAmt={this.state.advancePaidAmt}
 </>
 :
 <>
+{this.props.completedtax!=1?
+<>
  <Row noGutters={true} className=" BdImgCol">
      {/* <button onClick={()=>this.uploddeliveryreceiptModalShow()}>abcd</button> */}
                                     <Col sm={6} >
@@ -591,7 +593,19 @@ advancePaidAmt={this.state.advancePaidAmt}
                             </Col>
                             
      </Row>
-</>}
+</>
+:
+<Row noGutters={true}>
+{console.log("mine1")}
+<Col className="col-xs-12 bold font20 text-center">
+   <br></br>
+  Tax Invoice Not Available.
+   <br></br>
+</Col>
+</Row>
+}
+</>
+}
 {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                       
 <div id="deliveryReceipt"class="w3-modal" style={{paddingTop:"30px"}}>
@@ -720,23 +734,3 @@ advancePaidAmt={this.state.advancePaidAmt}
 }
 
 export default withTranslation()(ArtisanTaxInvoice);
-// cgst+sgst+finalamount
-// cgst={(q*rpu+deflivery)*cgst/100}
-// sgst={(q*rpu+deflivery)*sgst/100}
-// finalamt={(Q*rpu)+cgst+sgst+delivery}
-// cal
-// finalamt={}
-// value={parseFloat((((parseInt(this.state.sgst)+parseInt(this.state.cgst)+
-//     parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )) * this.state.sgst / 100)+
-//     ((parseInt(this.state.sgst)+parseInt(this.state.cgst)+
-//     parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )) * this.state.sgst / 100))
-//      +parseInt(this.state.deliverycharge)+parseInt(this.state.quantity * this.state.rpu )).toFixed(2)}   
-    
-// value={parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge)) 
-//         }
-
-// cal={parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))}=5*2+10=20
-// cgst=(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.cgst/100)
-// sgst=(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.sgst/100)
-// finalamt={(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge)))+(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.cgst/100)
-// +(parseInt((this.state.quantity * this.state.rpu )+(this.state.deliverycharge))*this.state.sgst/100)}

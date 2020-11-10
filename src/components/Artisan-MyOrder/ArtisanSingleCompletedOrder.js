@@ -1269,7 +1269,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     <>
                                     <Col sm={10}>
                                    <ArtisanQC enquiryId={this.state.enquiryCode}
-                                   data = {this.state.openEnquiries[0].openEnquiriesResponse}/>
+                                   data = {this.state.openEnquiries[0].openEnquiriesResponse}
+                                   />
                                    </Col>
                                     </>:null}
 
@@ -1282,7 +1283,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     <ArtisanTaxInvoice
                                     enquiryId={this.state.enquiryCode}
                                     enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
-                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice} />
+                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice}
+                                    completedtax={1} />
                                     </Col>
                                     </>
                                     :null}

@@ -447,13 +447,13 @@ export class PIchange extends Component {
                                 )
                                 )}
                                 </select> */}
-                                        <select name="cars" id="cars" 
+                                        {/* <select name="cars" id="cars" 
                                         className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                             >
                                             <option value="volvo">₹</option>
-                                            {/* <option value="saab">$</option> */}
-                                        </select>                           
-                            <input type="number"  className="PIinput rsinputboxwidth"
+                                           
+                                        </select>                            */}
+                            ₹ <input type="number"  className="PIinput rsinputboxwidth"
                              value={this.state.rpu }
                             name="rpu"
                             onChange={this.handleChange} />

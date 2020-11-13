@@ -451,15 +451,15 @@ advancePaidAmt={this.state.advancePaidAmt}
                                     <label >Rate per unit(or metre)</label>
                                     <br/>
                                    
-                                        <select name="cars" id="cars" 
+                                        {/* <select name="cars" id="cars" 
                                         className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                             >
                                             <option value="volvo">₹</option>
-                                            {/* <option value="saab">$</option> */}
-                                        </select>
+                                            
+                                        </select> */}
                                 {/* </span> */}
-                                    <input type="number"  className="PIinput rsinputboxwidth"
-                                   style={{width:"77%"}}
+                                ₹ <input type="number"  className="PIinput rsinputboxwidth"
+                                   style={{width:"88%"}}
                                     value={this.state.rpu }
                                     name="rpu"
                                     onChange={this.handleChange} />

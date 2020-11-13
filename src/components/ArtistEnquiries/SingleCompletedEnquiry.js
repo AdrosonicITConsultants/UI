@@ -168,7 +168,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
     }
           
     backoperation(){
-        browserHistory.push("/enquiriesList"); 
+        browserHistory.goBack(); 
     } 
 
     backPI(){

@@ -145,10 +145,10 @@ export class BuyerCompletedOrder extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center">
+                    <Col className="col-xs-12 text-center noopenenq">
                     No Completed Order.
-                    </Col>
-                </Row>  
+                   </Col>
+                </Row>
                 </>
                 :                           
                 <>

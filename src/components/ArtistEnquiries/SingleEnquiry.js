@@ -287,7 +287,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
           
     backoperation(){
-        browserHistory.push("/enquiriesList"); 
+        browserHistory.goBack(); 
     } 
 
     backPI(){
@@ -799,7 +799,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                   </div> */}
                                   <div noGutters={true} >
                                       <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?
+                                      this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""} </span> 
                                        <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
@@ -1188,7 +1189,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                   </div> */}
                                   <div noGutters={true} >
                                   <Col >
-                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
+                                      <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1]?
+                                      this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc:""} </span> 
                                        <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
@@ -1908,14 +1910,13 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         {/* <span 
                                                         className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                                         disabled={this.state.isPidetail}> */}
-                                                            <select name="cars" id="cars" 
+                                                            {/* <select name="cars" id="cars" 
                                                             className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
                                                             disabled={this.state.isPidetail}>
                                                                 <option value="volvo" selected disabled>₹</option>
-                                                                {/* <option value="saab">$</option> */}
-                                                            </select>
+                                                                </select> */}
                                                     {/* </span> */}
-                                                        <input type="number"  className="PIinput rsinputboxwidth"
+                                                    ₹ <input type="number"  className="PIinput  rsinputboxwidth"
                                                         disabled={this.state.isPidetail}
                                                         value={this.state.rpu }
                                                         name="rpu"

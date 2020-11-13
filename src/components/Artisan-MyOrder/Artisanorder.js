@@ -195,7 +195,9 @@ import { useTranslation, withTranslation } from "react-i18next";
     document.getElementById('id09'+ id).style.display='none';
     }
     opendisablemodal = (id)=>{
-        if(id === 0 || this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId > 5 ||this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus==0)
+        if(id === 0 || this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId > 5 
+            ||this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus!=null
+            )
         {
 
         }

@@ -88,6 +88,7 @@ import { ArtisanFaultResolved } from './components/FaultyOrder/ArtisianFaultReso
 import ArtisanChat from './components/Chat/artisanChat';
 import BuyerChat from './components/Chat/buyerChat';
 import ViewOldQC from './components/Artisan-MyOrder/viewOldQC';
+import ErrorPage from './components/404errorPage/errorPage';
 function App() {
   
   return (

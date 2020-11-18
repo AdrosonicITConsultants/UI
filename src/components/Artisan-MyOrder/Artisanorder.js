@@ -1979,7 +1979,9 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     <>
                                     <Col sm={10}>
                                    <ArtisanQC enquiryId={this.state.enquiryCode} 
-                                   data = {this.state.openEnquiries[0].openEnquiriesResponse}/>
+                                   data = {this.state.openEnquiries[0].openEnquiriesResponse}
+                                   qcCompleted = "ongoing"
+                                   />
                                    </Col>
                                     </>:null}
 

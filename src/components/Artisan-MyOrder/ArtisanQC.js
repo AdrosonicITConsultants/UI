@@ -401,10 +401,6 @@ export default class ArtisanQC extends Component {
     componentDidMount() {
         this.setState({
             arrayObject: [], 
-            QCsaveButton: false,
-            QCsendButton: false,
-            QCsendButton1: false,
-            QCenableEditFlag: false,
         });
         console.log(this.props.enquiryId);
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
@@ -432,6 +428,12 @@ export default class ArtisanQC extends Component {
                         dummyResponseNew: array,
                     }, () => {
                         console.log(this.state.dummyResponseNew);
+                        this.setState({
+                            QCsaveButton: false,
+                            QCsendButton: false,
+                            QCsendButton1: false,
+                            QCenableEditFlag: false,
+                        });
                     });                    
                 });
             }
@@ -526,15 +528,25 @@ export default class ArtisanQC extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="artisanQCBg">
-                    {this.props.data.oldQcExists ? this.props.data.oldQcExists === 1 ?
+                {this.props.data.oldQcExists ? this.props.data.oldQcExists === 1 ?
                     <div className="text-right">
                         <a href={"/viewOldQC?enquiryId="+ this.props.enquiryId} target="_blank">
                         Click to view old QC form
                         </a>
                     </div>
                     : null 
-                    : null }
+                : null }
+                {this.state.artisanQcResponses.length == 0 && this.props.qcCompleted == "completed" ?
+                    <Row noGutters={true}>
+                        <Col className="col-xs-12 bold font20 text-center">
+                            <br></br>
+                            Quality Check Not Available.
+                            <br></br>
+                        </Col>
+                    </Row>
+                    :
+                <div className="artisanQCBg">                 
+
                     <div className="artisanQCHeader">Quality Check</div>
                     <div className="artisanQCSubHeader">This form is required to be filled during manufacturing of the product to avoid any defects.</div>
                     <Row noGutters={true} className="artisanQCNameHeaderRow">
@@ -549,7 +561,10 @@ export default class ArtisanQC extends Component {
                         </Col> 
                     </Row>
 
-                    {this.state.stagesData ? this.state.stagesData.map((stage) => {
+                    {this.props.qcCompleted == "completed" ? 
+                    null 
+                    :                    
+                    this.state.stagesData ? this.state.stagesData.map((stage) => {
                         if((stage.id === 1 && this.state.currentStageId === null) || (this.state.currentStageId === stage.id - 1 && this.state.currentSeenStatus === 1)) {
                             // Stage active card 
                         return <div className="artisanQCCardStyle">
@@ -653,15 +668,19 @@ export default class ArtisanQC extends Component {
                                     {data.answerType === "1" ? 
                                     <div>
                                         {this.state.naturalArray ? this.state.naturalArray.map((natural, key2) => [
-                                            this.state.naturalSelectedArray ? this.state.naturalSelectedArray.map((selected, key1) => [
-                                            natural === selected ?
+                                            // this.state.naturalSelectedArray ? this.state.naturalSelectedArray.map((selected, key1) => [
+                                            
                                             <label className="QCLabelTitle">
+                                                { natural === this.state.dummyResponseNew[key].answer ?
                                                 <input type="checkbox" className="QCLabelInput" id={"natural" + data.id + key2} 
                                                 checked={this.state.naturalCheckArrayNew[key2].checked} onChange={(e) => this.handleMultiselect1(e, data.id, key2)}/>
+                                                :
+                                                <input type="checkbox" className="QCLabelInput" id={"natural" + data.id + key2} 
+                                                checked={this.state.naturalCheckArrayNew[key2].checked} onChange={(e) => this.handleMultiselect1(e, data.id, key2)}/>
+                                                }
                                                 {natural}
                                             </label>
-                                            : null
-                                            ]) : null
+                                            // ]) : null
                                         ]) : null}
                                     </div>
                                     : 
@@ -759,8 +778,8 @@ export default class ArtisanQC extends Component {
                                         <div className="QCquestionsTitle">{data.question}</div>
                                         {data.answerType === "1" ? 
                                          <div>
-                                         {this.state.naturalArray ? this.state.naturalArray.map((natural, key) => [
-                                            this.state.naturalSelectedArray ? this.state.naturalSelectedArray.map((selected, key1) => [
+                                         {this.state.naturalArray ? this.state.naturalArray.map((natural, key1) => [
+                                            this.state.naturalSelectedArray ? this.state.naturalSelectedArray.map((selected, key2) => [
                                                 natural === selected ?
                                                 <label className="QCLabelTitle">
                                                     <input type="checkbox" checked disabled className="QCLabelInput" />
@@ -774,32 +793,28 @@ export default class ArtisanQC extends Component {
                                         data.answerType === "2" ?
                                         (data.questionNo === 1 || data.questionNo === 2 || data.questionNo === 3 || data.questionNo === 6 || data.questionNo === 8) && (stage.id === 5) ?
                                         <div>
-                                            {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key) => [
-                                               yesNo === this.state.dummyResponseNew[key].answer ?
+                                            {this.state.yesNoArray1 ? this.state.yesNoArray1.map((yesNo, key1) => [                                               
                                                 <label className="QCLabelTitle">
+                                                    {yesNo === (this.state.dummyResponseNew ? this.state.dummyResponseNew[key] ? this.state.dummyResponseNew[key].answer ? this.state.dummyResponseNew[key].answer : null : null : null) ?
                                                     <input type="radio" className="QCLabelInput" checked disabled/>
-                                                    {yesNo}
-                                                </label>
-                                                : 
-                                                <label className="QCLabelTitle">
+                                                    :
                                                     <input type="radio" className="QCLabelInput" disabled/>
+                                                    }
                                                     {yesNo}
                                                 </label>
                                             ]) : null }
                                             
-                                            {this.state.dummyResponseNew[key].answer}
+                                            {/* {this.state.dummyResponseNew[key].answer} */}
                                         </div>
                                         :
                                         <div>
-                                            {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key) => [
-                                               yesNo === this.state.dummyResponseNew[key].answer ?
+                                            {this.state.yesNoArray ? this.state.yesNoArray.map((yesNo, key2) => [
                                                 <label className="QCLabelTitle">
+                                                    {yesNo === (this.state.dummyResponseNew ? this.state.dummyResponseNew[key] ? this.state.dummyResponseNew[key].answer ? this.state.dummyResponseNew[key].answer : null : null : null) ?
                                                     <input type="radio" className="QCLabelInput" checked disabled/>
-                                                    {yesNo}
-                                                </label>
-                                                : 
-                                                <label className="QCLabelTitle">
+                                                    :
                                                     <input type="radio" className="QCLabelInput" disabled/>
+                                                    }
                                                     {yesNo}
                                                 </label>
                                             ]) : null }
@@ -953,9 +968,9 @@ export default class ArtisanQC extends Component {
                         }
                     
                     }) : null}
-
-                    
+                
                 </div>
+    }
 
             </React.Fragment>
 

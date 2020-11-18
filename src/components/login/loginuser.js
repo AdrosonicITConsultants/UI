@@ -79,7 +79,12 @@ operation = (event) => {
           googleFBErrorMsg: false,
         });
         if(response.data.data.acctoken) {
-          browserHistory.push("/demo-video");
+          // if(localStorage.getItem("skipVideo") == "true") {
+          //   browserHistory.push("/home"); 
+          // }
+          // else {
+            browserHistory.push("/demo-video");
+          // }                                              
         }        
       }
     });
@@ -104,7 +109,12 @@ operation = (event) => {
           googleFBErrorMsg: false,
         });
         if(response.data.data.acctoken) {
-          browserHistory.push("/demo-video");
+          // if(localStorage.getItem("skipVideo") == "true") {
+          //   browserHistory.push("/home"); 
+          // }
+          // else {
+            browserHistory.push("/demo-video");
+          // }                                              
         }        
       }
     });

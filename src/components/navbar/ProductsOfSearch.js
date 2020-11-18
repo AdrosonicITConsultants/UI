@@ -25,7 +25,7 @@ export class ProductsOfSearch extends Component {
         this.state = {
             
             proddata : this.props.productData,
-            imagename :this.props.productData.images? this.props.productData.images.split(",")[0] : "abc.jpg",
+            imagename :this.props.productData.images ? this.props.productData.images.split(",")[0] : "abc.jpg",
             isfavHovered :false,
             imageurl : logos.dupatta,
             imageUrl : TTCEapi.ImageUrl +"Product/",

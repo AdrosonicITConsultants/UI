@@ -20,10 +20,7 @@ import TTCEapi from '../../services/API/TTCEapi';
             isfavHovered :false,
             imageurl : logos.dupatta,
             imageUrl : TTCEapi.ImageUrl +"Product/",
-            imagename :this.props.productData.images.split(",")[0],
-
-
-         
+            imagename : this.props.productData.images ? this.props.productData.images.split(",")[0] : null,                   
         };
       
     }
@@ -125,5 +122,4 @@ import TTCEapi from '../../services/API/TTCEapi';
     }
 }
 
-// export default withTranslation()(ArtisanProductOfSearch);
 export default withTranslation()(ArtisanProductOfSearch);

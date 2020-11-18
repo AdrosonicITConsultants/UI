@@ -34,16 +34,19 @@ import changeLang from "../../services/utils/changeLang"
   }
 
     render() {
+
+      let user = JSON.parse(localStorage.getItem("user"));
+
         return (
           <React.Fragment>
-            {console.log(this.props.user)}
+           
             <Row noGutters={true}>
               <div className="artistLanding">
                 <Row noGutters={true}>
                   <div className="artistbg1 ">
                     <Row noGutters={true}>
                       <Col className="text-center greetingName">
-                      {this.props.t("Pages.object.hello")}  {this.props.user.firstName}
+                      {this.props.t("Pages.object.hello")}  {user.firstName}
                       </Col>
                     </Row>
                     <Row noGutters={true}>
@@ -70,7 +73,7 @@ import changeLang from "../../services/utils/changeLang"
                     </span>
                   </Col>
                 </Row>
-                <Row><Productcatelog id={this.props.user.id}></Productcatelog></Row>
+                <Row><Productcatelog id={user.id}></Productcatelog></Row>
 
                 <Row noGutters={true}>
                   <div className="artistbg2"></div>

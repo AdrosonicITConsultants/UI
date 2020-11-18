@@ -22,11 +22,12 @@ class MyProfile extends Component {
       }
       
     render() {
+        let user = JSON.parse(localStorage.getItem("user"));
         return (
 
             <React.Fragment>
                    {/* <NavbarComponent/> */}
-                   {this.props.user.refRoleId == 1 ?
+                   {user.refRoleId == 1 ?
                    <ArtistProfile/>
                     :   
                     <BuyerProfile/>}

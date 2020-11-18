@@ -196,7 +196,7 @@ class artistRegister extends Component {
                            this.handler(1);
                          } else {
                            // alert("Wrong credentials");
-                           customToast.error("Please enter valid Artisan ID.", {
+                           customToast.error(response.data.message ? response.data.message : "Please enter valid Artisan ID.", {
                              position: toast.POSITION.TOP_RIGHT,
                              autoClose: true,
                            });

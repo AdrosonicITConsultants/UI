@@ -29,7 +29,7 @@ switch (to) {
 
     render() {
        let isAuthenticated = this.props.user !== null;
-       let user = this.props.user;
+       let user = JSON.parse(localStorage.getItem("user"));
        let userTypeId = user.refRoleId;
         return (
           <React.Fragment>

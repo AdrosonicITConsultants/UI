@@ -161,8 +161,13 @@ var homeSectionStyle = {};
                       let userTypeId = 2;
                       this.props.dispatch(
                         Actions.loginSuccess(token, user, userTypeId)
-                      );
-                          browserHistory.push("/demo-video");                     
+                      );  
+                          // if(localStorage.getItem("skipVideo") == "true") {
+                          //   browserHistory.push("/home"); 
+                          // }
+                          // else {
+                            browserHistory.push("/demo-video");
+                          // }                                              
   
                         } else {
                           customToast.error(response.data.errorMessage, {
@@ -214,7 +219,12 @@ var homeSectionStyle = {};
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );
-                             browserHistory.push("/demo-video"); 
+                            //  if(localStorage.getItem("skipVideo") == "true") {
+                            //   browserHistory.push("/home"); 
+                            // }
+                            // else {
+                              browserHistory.push("/demo-video");
+                            // }                                              
                            } else {
                             customToast.error(response.data.errorMessage, {
                               position: toast.POSITION.TOP_RIGHT,

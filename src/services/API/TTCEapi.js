@@ -158,6 +158,7 @@ class TTCEapi {
       .then((response) => {
         if (response.data.valid) {
           var language = localStorage.getItem("i18nextLng");
+          var skipVideo = localStorage.getItem("skipVideo");
           console.log(language);
           localStorage.clear();
           sessionStorage.clear();
@@ -169,6 +170,7 @@ class TTCEapi {
           localStorage.setItem("jwtToken", token);
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("i18nextLng", language);
+          localStorage.setItem("skipVideo", skipVideo);
           setAuthorizationtoken(token);
 
           //  console.log(jwt.decode(token));
@@ -2093,7 +2095,7 @@ static sendTaxInvoice(
     };
     console.log(config);
     const response = await axios.get(
-      "http://101.53.153.96:8090/search/getSuggestions",
+      ApiUrl + "/search/getSuggestions",
       config
     );
     return response;
@@ -2185,7 +2187,7 @@ static sendTaxInvoice(
     };
     console.log(config);
     const response = await axios.get(
-      "http://101.53.153.96:8090/search/getArtisanSuggestions",
+      ApiUrl + "/search/getArtisanSuggestions",
       config
     );
     return response;
@@ -2968,7 +2970,7 @@ static getOldQc(enquiryId) {
 }
 
 static socialLogin(type, token) {
-  let url = ApiUrl + "/login/authenticate?socialTokenType=" + type + "&socialToken=" + token;
+  let url = ApiUrl + "/login/authenticate?socialTokenType=" + type + "&socialToken=" + token + "&deviceType=Website";
 
   var config = {
     headers: {

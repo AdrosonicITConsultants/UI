@@ -476,7 +476,11 @@ class artreg4 extends Component {
 
                 <Row   className="text-center line312 font2">
                   <span className="col-xs-2"></span>
-                  <span className="col-xs-8"> {this.props.t("Pages.object.regNeedHelp")}</span>
+                  
+                  <span className="col-xs-8">
+                  <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank"> {this.props.t("Pages.object.regNeedHelp")}
+                                    </a></span>
                 </Row>
 
                 <ButtonGroup aria-label="Basic example">

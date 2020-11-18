@@ -321,7 +321,10 @@ class artreg5 extends Component {
                            <Row   className="text-center" style={{marginBottom: "10px"}}>
                              
                              <div className="col-xs-12 line312 font2">
+                             <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">
                              {this.props.t("Pages.object.regNeedHelp")}{" "}
+                             </a>
                              </div>
                              
                            </Row>

@@ -18,8 +18,9 @@ class videoPlayer extends Component {
   
   }
 
-    SkiptoHomepgae() {      
-              browserHistory.push("/home"); 
+    SkiptoHomepgae() {  
+      localStorage.setItem("skipVideo", true);    
+      browserHistory.push("/home"); 
     }
 
     componentDidMount () {
@@ -37,13 +38,13 @@ class videoPlayer extends Component {
     render() {
 
        let isAuthenticated = this.props.user !== null;
-       let user = this.props.user;
-       let userTypeId = user.refRoleId;
+       let user = JSON.parse(localStorage.getItem("user"));
+       let userTypeId = user ? user.refRoleId ? user.refRoleId : "2" : null;
 
         return (
           <div className="">
             { this.state.videoData ?
-            user.refRoleId == "1" ? (
+            user ? user.refRoleId == "1" ? (
               <ReactPlayer
                 controls
                 width="100vw"
@@ -59,16 +60,17 @@ class videoPlayer extends Component {
                 url={this.state.videoData.buyer_demo_video}
                 onEnded={() => this.SkiptoHomepgae()}
               ></ReactPlayer>
-            ) : null }
+            ) : null : null}
 
             <button
               className="blackButton SkipButtonVideo"
               onClick={() => this.SkiptoHomepgae()}
             >
-              {user.refRoleId == "1" ?
+              {user ? user.refRoleId == "1" ?
               this.props.t("Pages.object.skipToHomePage")
               :
-              "Skip to Homepage" }
+              "Skip to Homepage" 
+            : "Skip to Homepage"}
             </button>
           </div>
         );

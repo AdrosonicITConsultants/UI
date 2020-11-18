@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 
 class BuyerProfile extends Component {
     constructor(props) {
+        let user = JSON.parse(localStorage.getItem("user"));
         super(props);
 debugger;
         this.state = {
@@ -27,25 +28,25 @@ debugger;
           isBdetail: true,
           isPod: true,
           isDaddress : true,
-           designation: this.props.user.designation,
-           alternatemobno: this.props.user.alternateMobile,
-           gstno: this.props.user.companyDetails.gstNo,
-           cinno: this.props.user.companyDetails.cin,
-           panno: this.props.user.pancard,
-           pocname : this.props.user.pointOfContact.firstName,
-           pocemail : this.props.user.pointOfContact.email,
-           pocmobile : this.props.user.pointOfContact.contactNo,
-           line1 : this.props.user.addressses[1].line1,
-           line2 : this.props.user.addressses[1].line2,
-           street :this.props.user.addressses[1].street,
-           city : this.props.user.addressses[1].city,
-           pincode : this.props.user.addressses[1].pincode,
-           state : this.props.user.addressses[1].state, 
+           designation: user.designation,
+           alternatemobno: user.alternateMobile,
+           gstno: user.companyDetails.gstNo,
+           cinno: user.companyDetails.cin,
+           panno: user.pancard,
+           pocname : user.pointOfContact.firstName,
+           pocemail : user.pointOfContact.email,
+           pocmobile : user.pointOfContact.contactNo,
+           line1 : user.addressses[1].line1,
+           line2 : user.addressses[1].line2,
+           street : user.addressses[1].street,
+           city : user.addressses[1].city,
+           pincode : user.addressses[1].pincode,
+           state : user.addressses[1].state, 
           countrydata : [],
-           countryid : this.props.user.addressses[1].country.id,
-           country : this.props.user.addressses[1].country.name,
-           companyname : this.props.user.companyDetails.companyName,
-           landmark : this.props.user.addressses[1].landmark,
+           countryid : user.addressses[1].country.id,
+           country : user.addressses[1].country.name,
+           companyname : user.companyDetails.companyName,
+           landmark : user.addressses[1].landmark,
            showValidationconfirmpass : false,
            showValidationBdetail : false,
            showValidationPOCdetail : false,
@@ -369,6 +370,7 @@ debugger;
         });
       }
     render() {
+        let user = JSON.parse(localStorage.getItem("user"));
         let  $imagePreview2 = (
             <img
                 onClick={() => {
@@ -484,7 +486,7 @@ debugger;
                                     <Col sm = {{size: "10"}}>
                                         <Row  >
                                                     {/* <Col sm = {{size: "1"}}></Col> */}
-                                                    <Col sm = {{size: "8"}} className= "profilename">{this.props.user.firstName}<br></br>{this.props.user.lastName}</Col>
+                                                    <Col sm = {{size: "8"}} className= "profilename">{user.firstName}<br></br>{user.lastName}</Col>
                                                     <Col sm = {{size: "4"}} className="ratingBuyer">
                                                    {/* <div class="circle small" data-notfill="40" data-fill="60" hour style={{"--color":"black ","---color":"white"}}>
                                                         <span><b>3.7</b></span>
@@ -492,7 +494,7 @@ debugger;
                                                     </div> */}
                                                      <div class="wrapper">
                                                 <div className={"c100 " + this.state.ratingclass + " blue"}>
-                                                    <span><b>{this.props.user.rating}</b></span>
+                                                    <span><b>{user.rating}</b></span>
                                                     <div class="slice">
                                                         <div class="bar"></div>
                                                         <div class="fill"></div>
@@ -530,7 +532,7 @@ debugger;
                                                                 onClick={this.handleEdit}
                                                         ></img>}
                                                         
-                                                        {/* {this.props.user.designation}</Col> */}
+                                                        {/* {user.designation}</Col> */}
                                                         </Col>
                                         </Row>
                                         <Row  >
@@ -547,7 +549,7 @@ debugger;
                                                         name="companyname"
                                                         onChange={(e) => this.handleChange(e)}
                                                         />
-                                                        {/* {this.props.user.companyDetails.companyName} */}
+                                                        {/* {user.companyDetails.companyName} */}
 
                                                         </div>
                                                         <hr className="profileline"></hr>
@@ -555,18 +557,18 @@ debugger;
                                                                 Registered Address
                                                         </div>
                                                         <div className="font14 fw600 mt7">
-                                                            {this.props.user.addressses[0].line1}
-                                                            {this.props.user.addressses[0].line2 != "" ? ", " + this.props.user.addressses[0].line2 : " "}
-                                                            {this.props.user.addressses[0].street != "" ? ", " + this.props.user.addressses[0].street : " "}
-                                                            {this.props.user.addressses[0].city != "" ? ", " + this.props.user.addressses[0].city : " "}
-                                                            {this.props.user.addressses[0].pincode != "" ? ", " + this.props.user.addressses[0].pincode : " "}
-                                                            {this.props.user.addressses[0].state != "" ? ", " + this.props.user.addressses[0].state : " "}
+                                                            {user.addressses[0].line1}
+                                                            {user.addressses[0].line2 != "" ? ", " + user.addressses[0].line2 : " "}
+                                                            {user.addressses[0].street != "" ? ", " + user.addressses[0].street : " "}
+                                                            {user.addressses[0].city != "" ? ", " + user.addressses[0].city : " "}
+                                                            {user.addressses[0].pincode != "" ? ", " + user.addressses[0].pincode : " "}
+                                                            {user.addressses[0].state != "" ? ", " + user.addressses[0].state : " "}
                                                           
 
                                                             
                                                         </div>
                                                         <div className="font14 fw600 mt7">
-                                                        {this.props.user.addressses[0].country.name}
+                                                        {user.addressses[0].country.name}
                                                         </div>
                                                     </Col>
                                                     <Col sm = {{size: "6"}} className="pr0">
@@ -576,14 +578,14 @@ debugger;
                                                                 src={logos.maillogo}
                                                                 className ="mr10 iconsw"
                                                                 ></img>
-                                                                {this.props.user.email}
+                                                                {user.email}
 
                                                             </div>
                                                             <div>
                                                             <img
                                                                 src={logos.call}
                                                                 className ="mr15 iconsw" ></img>
-                                                                {this.props.user.mobile}
+                                                                {user.mobile}
                                                                 (primary)
                                                             </div>
                                                         </div>
@@ -960,7 +962,6 @@ debugger;
 }
 
 function mapStateToProps(state) {
-//  debugger;
     const { user } = state
     return { user };
 }

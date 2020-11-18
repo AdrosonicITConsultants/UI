@@ -56,8 +56,10 @@ class NavbarComponent extends Component {
   };
 
   toggleHover(name) {
+
+    let user = JSON.parse(localStorage.getItem("user"));
     console.log(name);
-  if (this.props.user.refRoleId == 2) {
+  if (user.refRoleId == 2) {
     switch (name) {
       case "isfavHovered":
         this.setState({
@@ -87,7 +89,7 @@ class NavbarComponent extends Component {
   }
 
 
-   if (this.props.user.refRoleId == 1) {
+   if (user.refRoleId == 1) {
      switch (name) {
        case "isSearchClicked":
          this.setState({
@@ -148,9 +150,12 @@ browserHistory.push("/MyProfile");
     };
     var paramsAsString = JSON.stringify(params);
     var encodedParams = encodeURIComponent(paramsAsString);
-    
+
+    // older 
+    // https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=
+
     return (
-      "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=" +
+      "https://datastudio.google.com/embed/reporting/1ebd20db-4ec9-4fa3-b7af-cc57a8dbd318/page/iTZoB?params=" +
       encodedParams
     );
   }
@@ -170,9 +175,12 @@ browserHistory.push("/MyProfile");
     };
     var paramsAsString = JSON.stringify(params);
     var encodedParams = encodeURIComponent(paramsAsString);
+
+    // older 
+    // https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=
     
     return (
-      "https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=" +
+      "https://datastudio.google.com/embed/reporting/f0b5c4e2-1e25-43e8-a200-00697598c275/page/imZoB?params=" +
       encodedParams
     );
   }
@@ -194,8 +202,8 @@ componentDidMount(){
     const { results, value } = this.state;
    // debugger
     const ImageUrl = TTCEapi.ImageUrl;
-    let isAuthenticated =this.props.user !== null;
-    let user = this.props.user;
+    let user = JSON.parse(localStorage.getItem("user"));
+    let isAuthenticated = user !== null;    
     let userTypeId = user.refRoleId;
 
     return (
@@ -510,11 +518,11 @@ componentDidMount(){
                   style={{ borderBottom: "2px dashed var(--lightFont)" }}
                 >
                   <span className="col-md-11  col-xs-11 col-sm-11 text-center">
-                    {this.props.user != null ? (
+                    {user != null ? (
                       <p>
                         {" "}
-                        {this.props.user.firstName}
-                        {"  "} {this.props.user.lastName}
+                        {user.firstName}
+                        {"  "} {user.lastName}
                       </p>
                     ) : (
                       "Welcome Guest"
@@ -615,8 +623,8 @@ componentDidMount(){
                   </span>
 
                   {userTypeId === 2 ?
-                  <a href={this.buyerDashboard()}>Dashboard</a> : 
-                  <a href={this.artisanDashboard()}>{this.props.t("Pages.object.dashboard")}</a>
+                  <a href={this.buyerDashboard()} target="_blank">Dashboard</a> : 
+                  <a href={this.artisanDashboard()} target="_blank">{this.props.t("Pages.object.dashboard")}</a>
                   }
 
                   

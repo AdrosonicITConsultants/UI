@@ -19,8 +19,8 @@ class ArtistProfile extends Component {
         super(props);
 
         this.state = {
-          firstName : this.props.user.firstName,
-          lastName : this.props.user.lastName,
+          firstName : JSON.parse(localStorage.getItem("user")).firstName,
+          lastName : JSON.parse(localStorage.getItem("user")).lastName,
           isProfile : true,
           isDetailsEdit : true,
           isPdetail : true,
@@ -43,8 +43,8 @@ class ArtistProfile extends Component {
           brandname : "",
           branddesc : "",
           paymentAccountDetails : [],
-          mobile:this.props.user.mobile,
-          email:this.props.user.email,
+          mobile:JSON.parse(localStorage.getItem("user")).mobile,
+          email:JSON.parse(localStorage.getItem("user")).email,
           ratingclass: "p10",
           prodsel : "",
           selectedFile: [],
@@ -573,6 +573,7 @@ class ArtistProfile extends Component {
         });
       }
     render() {
+      let user = JSON.parse(localStorage.getItem("user"));
         let  $imagePreview = (
                 <img
                   // onClick={() => {
@@ -787,7 +788,7 @@ class ArtistProfile extends Component {
                             <div className={"c100 " + this.state.ratingclass + " blue artistrating"}  >
                                 <span><div className="aprofilelogo">
                                   <img src=
-                                  {this.props.user.profilePic == "" || this.props.user.profilePic == null ?  logos.Smile : TTCEapi.ImageUrl + "User/" + this.props.user.id + "/ProfilePics/" + this.props.user.profilePic }
+                                  {user.profilePic == "" || user.profilePic == null ?  logos.Smile : TTCEapi.ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic }
                                    className="profileImage21"></img>
                            </div></span>
                                 <div className="slice">
@@ -860,19 +861,19 @@ class ArtistProfile extends Component {
                                                     {this.props.t("Pages.object.profileName")}:
                                                     </div>
                                                     <div className="font14  mt7">
-                                                        {this.props.user.firstName + " " + this.props.user.lastName}                                               
+                                                        {user.firstName + " " + user.lastName}                                               
                                                     </div>
                                                 <div className="fw700 font14 mt7">
                                                 {this.props.t("Pages.object.regEmailId")}:
                                                 </div>
                                                 <div className="font14  mt7">
-                                                   <p>{this.props.user.email}</p> 
+                                                   <p>{user.email}</p> 
                                                 </div>
                                                 <div className="fw700 font14 mt7">
                                                 {this.props.t("Pages.object.profileMobile")}:
                                                 </div>
                                                 <div className="font14  mt7">
-                                                {this.props.user.mobile}
+                                                {user.mobile}
                                                 </div>
                                                 <div className="fw700 font14 mt7">
                                                 {this.props.t("Pages.object.regAddress")}:
@@ -1008,7 +1009,7 @@ class ArtistProfile extends Component {
                                                 {this.props.t("Pages.object.regCluster")}:
                                                 </div>
                                                 <div className="font14  mt7" >
-                                                    {this.props.user.cluster.desc}
+                                                    {user.cluster.desc}
                                                     
                                                 </div>
                                                 <div className="fw700 font14 mt7">
@@ -1345,17 +1346,13 @@ class ArtistProfile extends Component {
 </Container>
 
 </div>
-{console.log(this.props.user)}
+
                 </div>
                 <Footer></Footer>
 
 
             </React.Fragment>
-            // <div>
-            //      {console.log("user data")}
-            //      {console.log(this.props.user)}
-            //      {"this is my profile page check console for variable"}
-            // </div>
+           
         )
     }
 }

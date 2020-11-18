@@ -388,15 +388,15 @@ export class BuyerCompletedTransaction extends Component {
      this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].transactionId==17?
      <>
        {/* final payment reject acknowledgement */}
-      <span onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)} >   
+      {/* <span onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)} >   
            <img src={logos.uploadagain} className="uplodagainicon"/>
-    <p style={{marginTop:"5px"}}>upload again</p></span>
+    <p style={{marginTop:"5px"}}>upload again</p></span> */}
      </>
   :
   <>
-  <span onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}>
+  {/* <span onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}>
   <img src={logos.uploadagain} className="uplodagainicon"/>
-<p style={{marginTop:"5px"}}>upload again</p></span>
+<p style={{marginTop:"5px"}}>upload again</p></span> */}
   </> 
  
     :
@@ -410,24 +410,21 @@ export class BuyerCompletedTransaction extends Component {
     <>
     { this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].transactionId==2?
     <>
-    <span 
-// onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
+    {/* <span 
 >
     <img src={logos.uploadagain} 
-    //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)} 
     onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
     className="uplodagainicon"/>
- <p style={{marginTop:"5px"}}>upload receipt</p></span>
+ <p style={{marginTop:"5px"}}>upload receipt</p></span> */}
     </>
     :
     <>
-    <span 
-// onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
+    {/* <span 
 >
     <img src={logos.uploadagain} 
      onClick={()=>this.uplodFinalreceiptModalShow(item.transactionCompleted.enquiryId)} 
     className="uplodagainicon"/>
- <p style={{marginTop:"5px"}}>upload receipt</p></span>
+ <p style={{marginTop:"5px"}}>upload receipt</p></span> */}
     </>
 }
 

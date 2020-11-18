@@ -688,10 +688,10 @@ export class BuyerPreviewInvoice extends Component {
          <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0]?this.state.paymentDetails[0].bankName:""}</b></h3>
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
-       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
+       {this.state.paymentDetails[0]? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
           
           </span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
@@ -773,11 +773,14 @@ export class BuyerPreviewInvoice extends Component {
  <Row noGutters={true} className="margintoppdisc">
      <Col className="col-xs-12 btncol">
 <span>
+  {this.props.artisancompleted==1?
+  "":
     <button className="gobacktoeditdet" onClick={() => this.goToChatButton(this.state.enquiryCode)}
     ><img src={logos.chatwhite} className="InvImg"/>Go to chat</button> 
+  }
 {this.state.previewPI.productCustom == false?
 <>
-{this.state.previewPI.product.productStatusId==2 ?  
+{this.state.previewPI.product.productStatusId==2||this.props.completed==1 ?  
 "":
  <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>
 
@@ -785,7 +788,7 @@ export class BuyerPreviewInvoice extends Component {
 </>
 :
 <>
-{this.state.buyerCustomProduct.productStatusId==2?
+{this.state.buyerCustomProduct.productStatusId==2||this.props.completed==1 ?
 ""
 :
 <button className="Raiseinvbtn"onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>

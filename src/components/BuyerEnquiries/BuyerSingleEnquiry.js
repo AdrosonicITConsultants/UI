@@ -1274,8 +1274,8 @@ MoqSimpleProductSelected(moqId){
 
                  <br></br>
                 <Row>
-                    <Col className="col-xs-6">
-                    <button className=" closedEnquirybtn"
+                    <Col className="col-xs-7 text-center">
+                    <button className=" closedEnquirybtn "
                      onClick={this.ToggleSave}
                     
                                        >
@@ -1297,14 +1297,14 @@ MoqSimpleProductSelected(moqId){
                                     
                     </Col>
                     
-                     <Col className="col-xs-6">
-                    <button className="completedenqButton"
+                     <Col >
+                    {/* <button className="completedenqButton"
                      onClick={this.CompleteDelivery}                 
                                        >
                                <img src={logos.completedenq} className="completeenqimg" 
                                        ></img>
                                 Mark order Delivered
-                                </button>
+                                </button> */}
                                     <div id="markdelivered" class="w3-modal" style={{paddingTop:"215px"}}>
                                       <div class="w3-modal-content w3-animate-top modalBoxSize">
                                         <div class="w3-container" style={{paddingTop:"20px"}}>

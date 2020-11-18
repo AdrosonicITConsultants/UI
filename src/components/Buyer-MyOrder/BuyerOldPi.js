@@ -698,10 +698,10 @@ export class BuyerOldPi extends Component {
          <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0]?this.state.paymentDetails[0].bankName:""}</b></h3>
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
-       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
+       {this.state.paymentDetails[0] ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
           
           </span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">

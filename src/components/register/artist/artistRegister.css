@@ -160,7 +160,7 @@ body {
 
 #ck-button input:checked + span {
     /* background-color:#911; */
-    color: green;
+    color: red;
     font-weight: 700;
 }
 

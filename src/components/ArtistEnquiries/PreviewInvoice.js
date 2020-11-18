@@ -57,7 +57,8 @@ export class PreviewInvoice extends Component {
             productCategories:[],
             yarns:[],
             reedCounts:[],
-            dyes:[]
+            dyes:[],
+            nulled:null
 
 
         };
@@ -69,6 +70,7 @@ export class PreviewInvoice extends Component {
     }
 
     componentDidMount() {
+      console.log(this.state.nulled)
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
@@ -212,7 +214,7 @@ export class PreviewInvoice extends Component {
     </Row>
    <Row noGutters={true}>
        <Col className="col-xs-12">
-       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
+       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer </p>
 </Col>
 
    </Row>
@@ -674,10 +676,10 @@ export class PreviewInvoice extends Component {
          <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      <br/>
-        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0].bankName}</b></h3>
+        <h3 className="freightch snopi"><b>{this.state.paymentDetails[0]?this.state.paymentDetails[0].bankName:""}</b></h3>
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">
-       {this.state.paymentDetails[0].accNo_UPI_Mobile ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
+       {this.state.paymentDetails[0] ? this.state.paymentDetails[0].accNo_UPI_Mobile:"NA"}
           
           </span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">

@@ -1506,7 +1506,20 @@ export class BuyerOngoingOrder extends Component {
 
                     
                           <>
-                             {this.daysleftFaultyOrder(item.eta)>0?
+                          {item.openEnquiriesResponse.comment !=null?
+                                <>
+                            <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
+                             <button style={{color:"red"}}className="raiseaconcernbtn" 
+                                             onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
+                                             >
+                                raise a concern
+                                </button> here. 
+                                </p>
+                                </>
+                            :
+                            <>
+                        {this.daysleftFaultyOrder(item.eta)>0?
+                               
                            <p style={{color:"grey",padding:"10px"}}>If you found any defects,don't worry! You can proceed to
                              <button style={{color:"red"}}className="raiseaconcernbtn" 
                                              onClick={()=>{this.FaultyOrder(item.openEnquiriesResponse.enquiryId)}}
@@ -1517,6 +1530,9 @@ export class BuyerOngoingOrder extends Component {
                                 :
                                 ""
                           }
+                            </>
+                             }
+                            
                           </>
                         
                        

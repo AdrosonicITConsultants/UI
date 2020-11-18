@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
@@ -12,7 +11,6 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { PreviewOldchanges } from './PreviewOldchanges';
@@ -82,16 +80,12 @@ export class PIchange extends Component {
     }
     daysleft(name,days)
     {
-      console.log(name,days +"Days Left");
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd =parseInt(days);
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays + "+++++++++=diffDays+++++"); 
                                 return(diffDays);
                                
     }
@@ -113,7 +107,6 @@ export class PIchange extends Component {
                               viewOldPi:true,
                               onlyView:false,
                               previewAndRaisePI:true,
-                            //  savePi : response.data,
                              isPidetail:!this.state.isPidetail,
                              showValidationPi: false,
                           
@@ -158,7 +151,6 @@ export class PIchange extends Component {
             isPidetail:!this.state.isPidetail
             
         },()=>{
-            // this.checkSave();
         });
         
     
@@ -166,15 +158,12 @@ export class PIchange extends Component {
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false,showValidationPi:false }, () => {
-        //   console.log(this.state.moq);
         });
     }
 
     componentDidMount(){
         TTCEapi.getPi(this.props.enquiryId).then((response)=>{
-            // console.log(response)
             if(response.data.data==null){
                 this.setState({
                     getPi : 0,
@@ -198,7 +187,6 @@ export class PIchange extends Component {
                 piSend:response.data.data.isSend,
           },()=>{
              
-             console.log(this.state.getPi);
            
             });
         }
@@ -206,14 +194,12 @@ export class PIchange extends Component {
         });
         TTCEapi.getCurrencySigns().then((response)=>{
             this.setState({getCurrencySigns : response.data.data},()=>{
-                console.log(this.state.getCurrencySigns);
            
             });
         });
         
 
         if(this.props.completed){
-            console.log("idf if if")
 
             TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
                 if(response.data.valid)
@@ -233,10 +219,8 @@ export class PIchange extends Component {
                                                 dataload:true
                                                 })
                                         }
-                                        // console.log(this.state.getOldPIData)
                                     })
                             }
-                            console.log(this.state.previewPI)
                         })
     
                 }
@@ -245,21 +229,16 @@ export class PIchange extends Component {
         }
         else
         {
-            console.log("else else else")
             TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
                 if(response.data.valid)
                 {
                     this.setState({getOrder:response.data.data},()=>{
-                        console.log(response.data.data[0].openEnquiriesResponse.changeRequestModifiedOn,2 +"Days Left");
                         var someDate = new Date(response.data.data[0].openEnquiriesResponse.changeRequestModifiedOn);
-                                                console.log(someDate);
                                                 var numberOfDaysToAdd =parseInt(2);
                                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                                console.log(someDate); 
                                                 var todayDate= new Date();
                                                 const diffTime =  someDate - todayDate ;
                                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                                console.log(diffDays + "+++++++++=diffDays+++++"); 
                                                 this.setState({
                                                     daysleftinint:diffDays
                                                 })
@@ -278,10 +257,8 @@ export class PIchange extends Component {
                                                 dataload:true
                                                 })
                                         }
-                                        console.log(this.state.getOldPIData)
                                     })
                             }
-                            console.log(this.state.previewPI)
                         })
                        
                 }
@@ -299,11 +276,10 @@ export class PIchange extends Component {
                 <>
                     {this.state.dataload?
                     <>
-                    {console.log(this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus +"abccdddddddddd")}
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
-                          {console.log("PIChange.js status-1/3")}
+                          {/* {console.log("PIChange.js status-1/3")} */}
                         {this.state.getOldPIData.length==0
                         ?
                                    <>
@@ -311,25 +287,19 @@ export class PIchange extends Component {
                                     <>
                                     {this.state.getOldPIData.length>0 && this.state.previewAndRaisePI==false?
                                     <>
-                                     { console.log(" old data NA")}
+                                     {/* { console.log(" old data NA")} */}
                                                 <PreviewOldchanges
                                                 bp={this.oldbackPI}
                                                 enquiryId={this.props.enquiryId}
                                                 enquiryCode={this.props.enquiryCode}
-                                                // expectedDateOfDelivery={this.state.dod}
-                                                // hsn={this.state.hsncode}
-                                                // rpu={this.state.rpu}
-                                                // quantity={this.state.quantity}
-                                                // sgst={this.state.sgst}
-                                                // cgst={this.state.cgst}
-                                                // piSend={this.state.piSend} 
+                                              
                                                 />
                                     </>
                                     :
                                     <>
                                     {this.state.getPi.isSend===1?
                                     <>
-                                     { console.log("pi send ")}
+                                     {/* { console.log("pi send ")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -348,7 +318,7 @@ export class PIchange extends Component {
                                     :
                                     
                                              <>
-                                             { console.log("pi not send & old data NA")}
+                                             {/* { console.log("pi not send & old data NA")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -391,8 +361,7 @@ export class PIchange extends Component {
                                      </>
                                      :
                                                                        <>
-                                     {/* {this.state.getOrder.openEnquiriesResponse.changeRequestModifiedOn} */}
-                                {console.log("Form display")}
+                                {/* {console.log("Form display")} */}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 
@@ -428,31 +397,7 @@ export class PIchange extends Component {
                             <Col sm={6}>
                             <label >Rate per unit(or metre)</label>
                             <br/>
-                                {/* <select name="cars" id="cars" 
-                                className={this.state.isPidetail ? 
-                                    "rssymboldis":"rssymbol"}
-                            
-                                value={this.state.currency}
-                                onChange={this.handleChange}>
-                                
-                                    {this.state.getCurrencySigns.map(
-                                    (data) => (
-                                    <option
-                                    key={data.id}
-                                    currency={data.sign}
-                                    value= {data.id}
-                                        >
-                                    {data.sign}
-                                    </option>
-                                )
-                                )}
-                                </select> */}
-                                        {/* <select name="cars" id="cars" 
-                                        className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                            >
-                                            <option value="volvo">₹</option>
-                                           
-                                        </select>                            */}
+                          
                             ₹ <input type="number"  className="PIinput rsinputboxwidth"
                              value={this.state.rpu }
                             name="rpu"
@@ -523,7 +468,7 @@ export class PIchange extends Component {
                     </>
                 :
                 <>
-                 {console.log("PI is raised")}
+                 {/* {console.log("PI is raised")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -548,7 +493,7 @@ export class PIchange extends Component {
                        
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
-                         {console.log("PIChange.js status-2/0")}
+                         {/* {console.log("PIChange.js status-2/0")} */}
                         
                        <PreviewChangedPI 
                         bp={this.backPI}

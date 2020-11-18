@@ -12,7 +12,6 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { PreviewInvoice } from './PreviewInvoice';
 import { useTranslation, withTranslation } from "react-i18next";
@@ -63,7 +62,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             rpu:"",
             preview:0,
             enquiryCode:""
-            // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
     ToggleDelete = () => {
@@ -85,7 +83,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 autoClose: true,
               });
                 this.componentDidMount();
-                console.log("updated");
             }
             else{
                 customToast.error(response.data.errorMessage, {
@@ -178,18 +175,10 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
     }
 
     handleCluster(e) {
-      
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('moqId');
-        // console.log(option);
-        
-        // this.setState({ [e.target.name]: e.target.value,moqId:option }, ()=> {
-        //   console.log(this.state.moqId);
-         
-          
-        // });
+      
       }
 
       handleMoqEdit(){
@@ -198,7 +187,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 isMoqdetail:!this.state.isMoqdetail
                 
             },()=>{
-                // this.checkSave();
             });
             
         
@@ -210,7 +198,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             isPidetail:!this.state.isPidetail
             
         },()=>{
-            // this.checkSave();
         });
         
     
@@ -218,9 +205,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
       handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value }, () => {
-        //   console.log(this.state.moq);
         });
     }
 
@@ -228,7 +213,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
         
         if(this.state.moq && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
-            console.log(params);
             TTCEapi.saveMoq(
                 params.code,
                 this.state.additionalInfo,
@@ -242,7 +226,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                     isMoqdetail:!this.state.isMoqdetail,
                     showValidationMoq: false,
                 },()=>{
-                console.log(this.state.saveMoq);
                
                 });
                 customToast.success("MOQ Details saved successfully", {
@@ -255,7 +238,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
       else{
         this.setState({
             showValidationMoq: true,
-        //   message : "Invalid PAN Number"
+       
       });
       
       }
@@ -264,7 +247,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
         if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
-                console.log(params);
                 TTCEapi.savePi(
                     params.code,
                     this.state.cgst,
@@ -282,14 +264,13 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                         showValidationPi: false,
                         preview:1,
                     },()=>{
-                    // console.log(this.state);
-                   
+                  
                     });
                     customToast.success("PI Details saved successfully", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                    //   browserHistory.push("/Preview");
+                  
               }  });
         
             }
@@ -306,7 +287,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
       else{
         this.setState({
             showValidationPi: true,
-        //   message : "Invalid PAN Number"
       });
       
       }
@@ -315,7 +295,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
         this.state.enquiryCode = params.code;
-        console.log(params);
         TTCEapi.sendMoq(
             params.code,
             this.state.additionalInfo,
@@ -324,11 +303,9 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             this.state.ppu,
           
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
-            console.log(this.state.sendMoq);
             this.componentDidMount();
             });
             customToast.success("MOQ Details sent successfully", {
@@ -341,7 +318,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
     else{
         this.setState({
             showValidationMoq: true,
-        //   message : "Invalid PAN Number"
       });
       
       }
@@ -349,12 +325,10 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
  
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params.code);
         this.setState({
             enquiryCode:params.code
         })
         TTCEapi.getMoq(params.code).then((response)=>{
-            console.log(response)
             if(response.data.data==null){
                 this.setState({
                 moq:0,
@@ -363,21 +337,17 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 additionalInfo:"",
                 isSend:-1,
                 
-                //  dataload : true,
                 })
             }
             else {
             this.setState({
-                // getxyz:response.data,
                 getMoq : response.data.data,
                 moq:response.data.data.moq.moq,
                 ppu:response.data.data.moq.ppu,
                 deliveryDesc:response.data.data.moq.deliveryTimeId,
                 additionalInfo:response.data.data.moq.additionalInfo,
                 isSend:response.data.data.moq.isSend,
-                //  dataload : true,
           },()=>{
-             console.log(this.state.getMoq);
            
             });
         }
@@ -386,7 +356,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
         
         TTCEapi.getMoqDeliveryTimes().then((response)=>{
          this.setState({getMoqDeliveryTimes : response.data.data},()=>{
-            //  console.log(this.state.getMoqDeliveryTimes);
         
          });
      });
@@ -394,7 +363,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
      
 
     TTCEapi.getPi(params.code).then((response)=>{
-        // console.log(response)
         if(response.data.data==null){
             this.setState({
                 getPi : 0,
@@ -416,7 +384,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             cgst:response.data.data.cgst,
             sgst:response.data.data.sgst,
       },()=>{
-         console.log(this.state.getPi);
        
         });
     }
@@ -425,7 +392,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
        TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
@@ -468,8 +434,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
-                                console.log(this.state);
-                           
+                               
                             });
                         });
                     });
@@ -478,14 +443,12 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
@@ -495,7 +458,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
     render() {
         let params = queryString.parse(this.props.location.search);
-        console.log(params.code);
         return (
             <React.Fragment>
                  {this.state.dataload == true 
@@ -552,11 +514,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                 
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
@@ -596,12 +554,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                       </Col>
 
                                   </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                 
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -761,11 +714,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                     
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                 
                                   <div noGutters={true} >
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
@@ -805,12 +754,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                       </Col>
 
                                   </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                  
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -983,27 +927,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            {/* <Col sm={3} 
-                                              className={
-                                                (this.state.selected == "changeRequest"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                             onClick={this.changeRequestbtn}>
-                                            Change Request 
-                                            </Col>
-                                            <Col sm={2}  
-                                            className={
-                                                (this.state.selected == "qualityCheck"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                            onClick={this.qualityCheckbtn}>
-                                           Quality Check 
-                                            </Col> */}
-                                            {/* <Col sm={1}>
-                                            
-                                            </Col> */}
+                                           
                                     </Row>
                                     <br></br>
 
@@ -1019,7 +943,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                                                  <>
                                                                <Row noGutters={true}>
                                                                    <Col sm={12} className="col-xs-12 BdImgCol">
-                                                                       {/* <img  className="BdImg" src={logos.Dimapur}/> */}
                                                                        {data.openEnquiriesResponse.logo?
                                                                      <img className="Logobpdimg profileImage" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
                                                                          :
@@ -1142,7 +1065,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                                                      Price/unit:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
-                                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
                                                                  <input 
                                                                  id="ppu"
                                                                  className="width200 alignbox"
@@ -1301,7 +1223,6 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

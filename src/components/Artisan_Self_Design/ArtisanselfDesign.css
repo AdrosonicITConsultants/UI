@@ -1,7 +1,5 @@
 .Asdh1{
-    /* background-color: black; */
     width: 100%;
-    /* height: 521px;S */
     color: white;
    margin-top: 93px;
     
@@ -53,7 +51,6 @@
 }
 .Vcheading h1{
     font-size: 30px;
-    /* font-weight: 700; */
     font-family: auto;
     text-align: left;
     color: grey;
@@ -67,7 +64,6 @@
 }
 .Asdbg{
     height: 521px;
-    /* width: 100%; */
     float: right;
 }
 .SelectCategory{
@@ -79,9 +75,7 @@
   font-family: auto;
   border-radius: 4px;
 }
-/* .SelectCategory option{
-  font-size: 25px;
- } */
+
  @media (max-width: 767px) and (min-width:431px) {
   .Cardlayout {
     width: 80% !important;
@@ -229,21 +223,7 @@ font-family: auto;
     text-transform: uppercase;
     border: 1px solid transparent;
   }
-/* @media only screen and ( max-width: 768px ) and ( min-width: 767px ){
-    .Cardlayout{
-        width: 100% !important;
-           }
-           .card-img-top{
-            width: 100%;
-        }
-        .Vcheading h1{
-            font-size: 27px;}
-            .ExploreBtn{
-                width: 43% !important;}
-        .btnexp2{
-            margin-right: 97px !important;
-        }
-} */
+
 @media only screen and ( max-width: 1024px ) and ( min-width: 769px ){
     .Vcheading h1{
         font-size: 29px;
@@ -257,13 +237,11 @@ font-family: auto;
 }
 
 .card-img-top-brand{
-  /* width: 40%;  */
   height: 170px;
   padding: 0px 5px 0px 5px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  /* width: 50%; */
   max-width: 244px;
   margin-top: 12px;
 }
@@ -352,7 +330,6 @@ text-align: center;
     padding: 7px 15px;
     margin: 0 7.5px;
     color: white;
-    /* background: #333333; */
     text-decoration: none;
     border: none;
   }

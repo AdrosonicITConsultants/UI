@@ -46,7 +46,6 @@ export default class BuyerQC extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.enquiryId);
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
             if(response.data.valid)
             {
@@ -59,9 +58,7 @@ export default class BuyerQC extends Component {
                     currentSeenStatus: response.data.data.isSend,
                 })
             }
-            console.log(response.data.data);
-            console.log(this.state.currentStageId);
-            console.log(this.state.currentSeenStatus);
+        
         });
 
         TTCEapi.getQCStages().then((response)=>{
@@ -71,7 +68,6 @@ export default class BuyerQC extends Component {
                     stagesData: response.data.data,
                 })
             }
-            console.log(response.data.data);
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
@@ -81,7 +77,6 @@ export default class BuyerQC extends Component {
                     questionsData: response.data.data,
                 })
             }
-            console.log(this.state.questionsData);            
         });
     }
 

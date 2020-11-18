@@ -59,11 +59,9 @@ export default class BuyerAdvancePayment2 extends Component {
           this.state.selectedFile.name 
         );
        
-        console.log(this.state.selectedFile); 
         TTCEapi.advancedPayment(
             this.state.selectedFile,
             this.props.enquiryId,
-            // this.state.random,
             this.props.calulatedAmount,
             this.props.percent,
             this.props.pid,
@@ -77,8 +75,7 @@ export default class BuyerAdvancePayment2 extends Component {
                success:true
               
             },()=>{
-                console.log(response)
-           
+          
             });
           
       }
@@ -113,9 +110,7 @@ export default class BuyerAdvancePayment2 extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.enquiryId);
-        console.log(this.props.receiptId);
-        console.log(this.props.receiptlabel)
+       
     }
       acceptMOQModalShow = () => {
         document.getElementById('acceptMOQModal').style.display='block';

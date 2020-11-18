@@ -57,7 +57,6 @@ export class ProductsOfCatelog extends Component {
               autoClose: true,
             });
             this.setState({isAddedtoWishlist : response.data.valid},()=>{
-                console.log(this.state.isAddedtoWishlist);
             });
         }
         else{
@@ -78,12 +77,9 @@ generateEnquiry(item){
   this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
-    // this.setState({ modalIsOpen: false });
-      console.log(this.state.ifEnquiryExists);
       if(this.state.ifEnquiryExists.ifExists ==false){
         TTCEapi.generateEnquiry(item,false).then((response)=>{
           this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                         console.log(this.state.generateEnquiry);
                         });
         });
       }
@@ -93,13 +89,11 @@ generateEnquiry(item){
 }
   
     productDescription(id){
-      console.log("Product Descriptiony " + id);
       browserHistory.push("/Product-Details?productId=" + id); 
 
     }
     handleRemovefromWishlist(id){
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
-          console.log(response);   
           if(response.data.data=="Successfull"){
 
             this.setState({isAddedtoWishlist:false})
@@ -235,7 +229,6 @@ generateEnquiry(item){
                      <Col style={{"paddingLeft":"0px"}} className = "col-xs-10">
                             <button className="generateEnquiry"
                              onClick={() => this.generateEnquiry(this.state.proddata.id)}
-                            // onClick={() => this.generateEnquiry(this.state.proddata.id)}
                             >
                             
                             Generate enquiry
@@ -255,7 +248,6 @@ generateEnquiry(item){
                     className="navButtonImg2"
                     src={logos.heariconfilled}
                     onClick={() => this.handleRemovefromWishlist(this.state.proddata.id)}
-                    // onClick={() => this.handleRemovefromWishlist(this.state.proddata.id)}
                   ></img>
                   
                 ) : (
@@ -270,7 +262,6 @@ generateEnquiry(item){
                 )}
                   </Col>
                  </div>
-                 {/* {console.log(this.state.proddata)} */}
 
                 </div> 
                 {this.state.modalIsOpen?

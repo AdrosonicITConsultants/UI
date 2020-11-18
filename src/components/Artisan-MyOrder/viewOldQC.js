@@ -85,7 +85,6 @@ export default class ViewOldQC extends Component {
             QCsendButton: false,
             QCsendButton1: false,
         });
-        console.log(code);
         TTCEapi.getOldQc(code).then((response)=>{
             if(response.data.valid)
             {
@@ -98,14 +97,10 @@ export default class ViewOldQC extends Component {
                     currentSeenStatus: response.data.data.isSend,
                 })
             }
-            console.log(response.data.data);
-            console.log(this.state.currentStageId);
-            console.log(this.state.currentSeenStatus);
+           
             if(this.state.artisanQcResponses[1]) {
                 var data = this.state.artisanQcResponses[1][0].answer;
-                console.log(data);
                 var result = data.split(",");
-                console.log(result);
                 this.setState({
                     naturalSelectedArray: result,
                 });
@@ -119,7 +114,6 @@ export default class ViewOldQC extends Component {
                     stagesData: response.data.data,
                 })
             }
-            console.log(response.data.data);
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
@@ -129,33 +123,27 @@ export default class ViewOldQC extends Component {
                     questionsData: response.data.data,
                 })
             }
-            console.log(this.state.questionsData);
 
             var data = this.state.questionsData[1][0].optionValue;
-            console.log(data);
             var result = data.split(",");
-            console.log(result);
             this.setState({
                 naturalArray: result,
             });
 
             var yesNo = this.state.questionsData[3][3].optionValue;
             var yesNoresult = yesNo.split(";");
-            console.log(yesNoresult);
             this.setState({
                 yesNoArray: yesNoresult,
             });
 
             var dropDown = this.state.questionsData[3][4].optionValue;
             var dropDownresult = dropDown.split(";");
-            console.log(dropDownresult);
             this.setState({
                 dropDownArray: dropDownresult,
             });
 
             var yesNo1 = this.state.questionsData[4][0].optionValue;
             var yesNoresult1 = yesNo1.split(";");
-            console.log(yesNoresult1);
             this.setState({
                 yesNoArray1: yesNoresult1,
             });

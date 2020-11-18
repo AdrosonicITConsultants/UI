@@ -30,7 +30,6 @@ class ArtistSelfDesign extends Component {
       CMSApi.getPages(132).then((response)=>{
         if(response)
         {
-          console.log(response.data.acf);
           this.setState({
             artisanSelfDesignBg : response.data.acf.background_image
           })

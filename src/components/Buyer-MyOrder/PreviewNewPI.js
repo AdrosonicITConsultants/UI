@@ -82,14 +82,12 @@ export class PreviewNewPI extends Component {
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
+                      
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -146,7 +144,6 @@ export class PreviewNewPI extends Component {
                     
                              
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
                 })
                    
                 });
@@ -172,12 +169,10 @@ export class PreviewNewPI extends Component {
            
           
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendPI : response.data,
               },()=>{
-            console.log(this.state.sendPI);
-           
+          
             });
             customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -207,35 +202,9 @@ export class PreviewNewPI extends Component {
    
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 <div >
-    {/* <Row noGutters={true}>
-        <Col className="col-xs-12" >
-       
-        {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> Raise PI</button>
-    }
-        </Col>
 
-
-
-
-    </Row>
    <Row noGutters={true}>
-       <Col className="col-xs-12">
-       <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p>
-</Col>
-
-   </Row> */}
-   <Row noGutters={true}>
-        <Col className="col-xs-6 bold" >
-       
-        {/* {this.state.piSend === 1?
-    ""        :
-        <button  disabled={this.state.sendPI} 
-        onClick={() => this.sendPI()} className="Raiseinvbtn raisePI" 
-        style={{float:"right",width:"215px"}}><img src={logos.Iconpaymentinvoice} className="InvImg"/> 
-        Raise PI</button>
-    } */}
+        <Col className="col-xs-6 bold" >  
     Showing updated PI after CR
         </Col>
         <Col className="col-xs-4" >
@@ -247,14 +216,11 @@ export class PreviewNewPI extends Component {
     </Row>
    <Row noGutters={true}>
        <Col className="col-xs-4">
-       {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
        Received at:
 </Col>
 <Col className="col-xs-4 CRdate">
-       {/* Change Request date: */}
 </Col>
 <Col className="col-xs-4">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -264,7 +230,6 @@ export class PreviewNewPI extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -390,7 +355,6 @@ export class PreviewNewPI extends Component {
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Enquiry Id</p> 
-       {/* <p className="againstpi">{this.state.enquiryCode}</p> */}
     </td>
     <td className="enqidanddatecolwidth">
     <p className="PaymentTerm">Date: {this.state.previewPiOrder.date}</p> 
@@ -436,7 +400,7 @@ export class PreviewNewPI extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -552,7 +516,7 @@ export class PreviewNewPI extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -728,7 +692,6 @@ export class PreviewNewPI extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
 
 
         </td>

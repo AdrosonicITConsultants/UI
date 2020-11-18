@@ -28,7 +28,6 @@ class AntaranCoDesign extends Component {
       CMSApi.getPages(142).then((response)=>{
         if(response)
         {
-          console.log(response.data.acf);
           this.setState({
             antaranCoDesignBg : response.data.acf.background_image
           })

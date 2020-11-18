@@ -65,7 +65,6 @@ export class ChangeRequest extends Component {
     }
 
     ReqChangesModalSHow = () => {
-        console.log(this.state.optionDisable);
         this.setState({
             raiseCRFinalArray: []
         });
@@ -79,11 +78,9 @@ export class ChangeRequest extends Component {
                     requestItemsId: id,
                     requestText: data,
                 }
-                console.log(object);
                 this.state.raiseCRFinalArray.push(object);
             }
         } 
-        console.log(this.state.raiseCRFinalArray);
 
         if(this.state.raiseCRFinalArray.length === 0) {
             this.setState({
@@ -177,7 +174,6 @@ export class ChangeRequest extends Component {
         TTCEapi.buyerRaiseChangeRequest(parseInt(this.props.enquiryCode), this.state.raiseCRFinalArray).then((response)=>{
             if(response.data.valid)
             {  
-                console.log(response.data.data);
                 this.setState({
                     showUpdatedContent: 0,
                 })
@@ -205,7 +201,6 @@ export class ChangeRequest extends Component {
         TTCEapi.getChangeRequestItemTable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     getChangeRequestItemTable: response.data.data
                 })
@@ -216,21 +211,12 @@ export class ChangeRequest extends Component {
             TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({
                         getChangeRequestForArtisan: response.data.data.changeRequestItemList
                     })
                 }
             });
 
-            // var array1 = this.state.getChangeRequestItemTable;
-            // var array2 = this.state.getChangeRequestForArtisan;
-
-            // for(var i = 0; i < array2.length; i++) {
-            //     for(var j = 0; j < array1.length; j++) {
-            //         if(array2[i].requestItemsId === ) 
-            //     }
-            // }
         }
     }
     
@@ -271,17 +257,7 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
             </Row>
             : 
             null
-            // <Row noGutters={true}>
-            // <span>
-            //     <Col className="col-xs-3">
-            //     <input type="checkbox" className="colorchange2" disabled={true}/> 
-            //     <b>{data.item}</b>  
-            //     </Col>
-            //     <Col className="col-xs-9">
-            //     <input type="text" className="CRinput" disabled={true}/>
-            //     </Col>
-            // </span>  
-            // </Row>
+           
 
         }) : null
 

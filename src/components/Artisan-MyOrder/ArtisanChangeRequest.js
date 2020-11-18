@@ -1,5 +1,3 @@
-
-  
 import React, { Component } from 'react'
 import ReactDOM from "react-dom";
 import ReactToPdf from "react-to-pdf";
@@ -8,7 +6,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect, createDispatchHook } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./Buyermyorder.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -16,8 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
 import Footer from '../footer/footer';
-
-
 
 export class ArtisanChangeRequest extends Component {
     constructor(props) {
@@ -74,9 +69,7 @@ export class ArtisanChangeRequest extends Component {
       }
       PI(){
           this.props.openPI()
-        // console.log("pI cliced")
-        // this.componentDidMount()
-      }
+              }
       AcceptChange(id){
          
         const typeElements = this.state;
@@ -93,10 +86,7 @@ export class ArtisanChangeRequest extends Component {
             trueCount:this.state.trueCount >=0 ? this.state.trueCount + 1:""
         });
         var arr = this.state.accepted
-        
-        console.log(arr);
-
-        // console.log(this.state.trueCount)
+      
       }
 
      RejectChange(id){
@@ -114,15 +104,12 @@ export class ArtisanChangeRequest extends Component {
             trueCount:this.state.trueCount > 0? this.state.trueCount - 1:0,
             falseCount:this.state.falseCount >= 0?this.state.falseCount + 1 :""
         });
-        // console.log(this.state.falseCount)
     }
 
 
-   
     Modal1Show = () => {
         this.setState({
             raiseCRFinalArray:[],
-            // submitdisabled:true
         })
       
                 var array = this.state.accepted;
@@ -153,11 +140,9 @@ export class ArtisanChangeRequest extends Component {
                                 
                                 this.state.raiseCRFinalArray.push(object);
                               
-                                console.log(this.state.raiseCRFinalArray);
                                 var Finalarray= this.state.raiseCRFinalArray
                                 this.setState({
                                     raiseCRFinalArray:Finalarray,
-                                    // submitdisabled:true
                                 })
                                                    }
                         }
@@ -171,16 +156,12 @@ export class ArtisanChangeRequest extends Component {
     
    
 
-Show(){
-    console.log(this.state.accepted)
-}
+
 componentDidMount(){
     TTCEapi.getPi(this.props.enquiryId).then((response)=>{
         if(response.data.valid)
         {
-            // console.log(response.data.data);
             this.setState({getPi:response.data.data,
-                // dataload:true
             })
         }
     })
@@ -191,7 +172,6 @@ componentDidMount(){
            
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
                 if(this.props.completed){
-                    console.log("completed if")
                     TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
                         if(response.data.valid)
                         {
@@ -199,7 +179,6 @@ componentDidMount(){
                                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                                     if(response.data.valid)
                                     {
-                                        // console.log(response.data.data);
                                         this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                                             dataload:true})
                                             var array = this.state.getChangeRequestForArtisan;
@@ -213,7 +192,6 @@ componentDidMount(){
                                             counter: count,
                                             })
                                                         }
-                                                        console.log(this.state.getChangeRequestForArtisan)
                                                     })
                                                 })
                                             }
@@ -222,7 +200,6 @@ componentDidMount(){
 
                 }
                 else{
-                    console.log("completed else")
                     TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
                         if(response.data.valid)
                         {
@@ -231,7 +208,6 @@ componentDidMount(){
                                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
                                     if(response.data.valid)
                                     {
-                                        // console.log(response.data.data);
                                         this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                                             dataload:true})
                                             var array = this.state.getChangeRequestForArtisan;
@@ -245,7 +221,6 @@ componentDidMount(){
                                             counter: count,
                                             })
                                                         }
-                                                        console.log(this.state.getChangeRequestForArtisan)
                                                     })
                                                 })
                                             }
@@ -269,9 +244,7 @@ sendCR = () => {
     this.setState({
         sendCRdisabled:true
     })
-    console.log(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
-    this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length?2:3)
-   TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
+     TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
     this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length?2:3
     ).then((response)=>{
         if(response.data.valid)
@@ -290,16 +263,11 @@ sendCR = () => {
    
 }
 
-// Modal1Show = () => {
-//     document.getElementById('Modal1').style.display='block';
-// }
 
 Modal1Close = () => {
     this.setState({
         raiseCRFinalArray:[],
         sendCRdisabled:false
-
-        // submitdisabled:true
     })
     document.getElementById('Modal1').style.display='none';
 }
@@ -308,8 +276,6 @@ Modal2Show = () => {
     this.setState({
         raiseCRFinalArray:[],
         sendCRdisabled:false
-
-        // submitdisabled:true
     })
 
         var array = this.state.accepted;
@@ -337,13 +303,10 @@ Modal2Show = () => {
                             requestText: data,
                             requestStatus:status,
                         }
-                        console.log(object);
                         this.state.raiseCRFinalArray.push(object);
-                        console.log(object.requestStatus==1?"true":false);
                         var Finalarray= this.state.raiseCRFinalArray
                         this.setState({
                             raiseCRFinalArray:Finalarray,
-                            // submitdisabled:true
                         })
                     }
                 }
@@ -359,7 +322,6 @@ Modal2Show = () => {
 Modal2Close = () => {
     this.setState({
         raiseCRFinalArray:[],
-        // submitdisabled:true
     })
     document.getElementById('Modal2').style.display='none';
 }
@@ -387,13 +349,13 @@ goToChatButton = (id) => {
 <>
 <p style={{textAlign:"center"}}>
 <Row noGutters={true}>
-                                                                             {console.log("mine1")}
-                                                                            <Col className="col-xs-12 bold font20 text-center">
-                                                                                <br></br>
-                                                                                Change request Not Available
-                                                                                <br></br>
-                                                                            </Col>
-                                                                        </Row>
+                                                                            
+     <Col className="col-xs-12 bold font20 text-center">
+        <br></br>
+        Change request Not Available
+        <br></br>
+     </Col>
+ </Row>
                                                                         
 </p>
 </>
@@ -495,9 +457,7 @@ goToChatButton = (id) => {
                      this.state.getChangeRequestForArtisan.length
                      ?
                     <>
-                    {console.log(this.state.accepted.filter(function(s) { return s.reject; }).length,
-                    this.state.getChangeRequestForArtisan.length,
-                    this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length)}
+                   
                     { this.state.accepted.filter(function(s) { return s.reject; }).length == this.state.getChangeRequestForArtisan.length?
                        <button className="submitCRart" disabled={this.state.submitdisabled} onClick={()=>{this.Modal2Show()}}>Submit</button>
                             :
@@ -716,13 +676,12 @@ goToChatButton = (id) => {
 :
 <p style={{textAlign:"center"}}>
 <Row noGutters={true}>
-                                                                             {console.log("mine1")}
-                                                                            <Col className="col-xs-12 bold font20 text-center">
-                                                                                <br></br>
-                                                                                Change request Not Available
-                                                                                <br></br>
-                                                                            </Col>
-                                                                        </Row>
+ <Col className="col-xs-12 bold font20 text-center">
+     <br></br>
+     Change request Not Available
+     <br></br>
+ </Col>
+  </Row>
                                                                         
 </p>
 }
@@ -733,7 +692,6 @@ goToChatButton = (id) => {
     
 }
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

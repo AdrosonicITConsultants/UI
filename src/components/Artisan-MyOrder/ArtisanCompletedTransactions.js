@@ -4,7 +4,6 @@ import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddo
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,9 +11,7 @@ import { toast } from "react-toastify";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
-// import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 import thunk from 'redux-thunk';
-// import { EditorInsertComment } from 'material-ui/svg-icons';
 import { useTranslation, withTranslation } from "react-i18next";
 
 export class ArtisanCompletedTransaction extends Component {
@@ -56,7 +53,6 @@ export class ArtisanCompletedTransaction extends Component {
     }  
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
        
         });
@@ -109,7 +105,6 @@ export class ArtisanCompletedTransaction extends Component {
                 this.setState({
                  notifyId:notifyId
              },()=>{
-                 console.log(this.state.notifyId);
              })
             
      
@@ -138,10 +133,8 @@ export class ArtisanCompletedTransaction extends Component {
             formData.append( 
               "myFile", 
               this.state.selectedFile, 
-            //   this.state.selectedFile.name 
             );
            
-            console.log(this.state.selectedFile); 
             TTCEapi.submitDeliveryChallan(
                 enquiryId,
                 this.state.selectedFile,
@@ -159,7 +152,6 @@ export class ArtisanCompletedTransaction extends Component {
                    rejectButtonClick:false
                   
                 },()=>{
-                    // console.log(response)
                
                 });
               
@@ -181,7 +173,6 @@ export class ArtisanCompletedTransaction extends Component {
         
         else{
             this.setState({
-                // rejectButtonClick:true,
                 showDeliveryValidation: true,
               })
            }
@@ -193,25 +184,17 @@ export class ArtisanCompletedTransaction extends Component {
     }
     
     acceptModalShow(id,enquiryId){
-        
-        console.log("abcfdrf");
-        // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
 
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
              document.getElementById('acceptMOQModal'+ id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label);
-     
-
+               
             });
         }
         });
@@ -223,25 +206,19 @@ export class ArtisanCompletedTransaction extends Component {
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
                 document.getElementById('acceptMOQModal' + id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-          
-          
+               
             });
         }
         });
     }
 
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -249,10 +226,8 @@ export class ArtisanCompletedTransaction extends Component {
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
 
@@ -277,8 +252,7 @@ export class ArtisanCompletedTransaction extends Component {
     NotifyAgain(actionId,respectiveActionId,id){
         this.setState({ notifyButtonClick:true,
             rejectButtonClick:true})
-        console.log(actionId);
-        console.log(respectiveActionId);
+       
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
             if(response.data.valid)
             {
@@ -293,7 +267,6 @@ export class ArtisanCompletedTransaction extends Component {
                  dataload : true,
                  notifyAgain : response.data.data,
                  notifyButtonClick:false,},()=>{
-                console.log(this.state.notifyAgain);
             
             });
             document.getElementById('notifyModal'+id).style.display='none';
@@ -310,9 +283,7 @@ export class ArtisanCompletedTransaction extends Component {
     }
     
     acceptorReject(id,enquiryId,status){
-        console.log(enquiryId);
-        console.log(status);
-        this.setState({ acceptButtonClick:true,
+             this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
             if(response.data.valid)
@@ -328,7 +299,6 @@ export class ArtisanCompletedTransaction extends Component {
                 rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateAdvancePaymentFromArtisan);
             
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
@@ -344,8 +314,6 @@ export class ArtisanCompletedTransaction extends Component {
         });
     }
     acceptorRejectFinal(id,enquiryId,status){
-        console.log(enquiryId);
-        console.log(status);
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
@@ -362,8 +330,7 @@ export class ArtisanCompletedTransaction extends Component {
                 rejectButtonClick:false,
                  dataload : true,
                  validateFinalPaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateFinalPaymentFromArtisan);
-            
+           
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
         }
@@ -378,9 +345,6 @@ export class ArtisanCompletedTransaction extends Component {
         });
     }
 
-
-
-
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
@@ -392,9 +356,7 @@ export class ArtisanCompletedTransaction extends Component {
                     if(response.data.valid)
                     {
                     this.setState({
-                        //  dataload : true,
                          getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                             if(response.data.valid)
                             {
@@ -402,7 +364,6 @@ export class ArtisanCompletedTransaction extends Component {
                                  dataload : true,
                                  getTransactions : response.data.data.completedTransactionResponses,
                                 },()=>{
-                                 console.log(this.state.getTransactions);
                                  
                             });
                         }
@@ -418,28 +379,21 @@ export class ArtisanCompletedTransaction extends Component {
      TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
         if(response.data.valid){
             this.setState({
-               
-                
                 deliveryChallanUploaded:response.data.data.deliveryChallanUploaded,
-               
-            })
+                         })
         }
         else {
             this.setState({
-               
-                deliveryChallanUploaded:false,
+                  deliveryChallanUploaded:false,
               
           },()=>{
              
-             console.log(this.state.fetchEnquiryAndPaymentDetails);
-           
             });
         }
       
     })
      }
      paymentTypeset(e){
-        console.log(e)
         this.setState({
             paymentType:e
           },()=>{
@@ -550,8 +504,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
          onClick={()=> this.RejectModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
-        //   disabled={this.state.rejectButtonClick}
-        //  onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)} 
+       
          /></span>
 
       </>
@@ -585,7 +538,6 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
      :
      data.id == 1 ?
      <span 
-     // onClick={() => this.uploadagain(item.transactionCompleted.enquiryId)}
      >
          <img src={logos.uploadagain} className="uplodagainicon"/>
       <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
@@ -599,13 +551,7 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
 )}
 
 </Col>
-{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
- onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}
-// onClick={()=> this.acceptMOQModalShow}
- >
-<img src={logos.redenquiry} className="gotoiconsize"/>
-<p className="gotoenqu"> Go to this enquiry</p>
-</Col> */}
+
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
 
@@ -729,14 +675,6 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 
-                                                                        {/* <div className="approvenote">
-                                                                            Once you approved it,the
-                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
-                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
-                                                                           the amount.Best practise is to check with your bank,or in <br/>
-                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
-                                                                           
-                                                                        </div> */}
                                                                     </Col>
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
@@ -763,11 +701,7 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
                                         <div id={"deliveryReceipt"+item.transactionCompleted.id}class="w3-modal">
-                                           {/* {this.state.deliveryChallanUploaded?
-                                           <>
-                                           "hhhh"
-                                           </>
-                                            : */}
+                                       
                                             <>
                                     <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
@@ -803,18 +737,14 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
                                                        <label>Date of dispatch</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
-                                                            // value={this.state.orderDispatchDate }
-                                                            name="orderDispatchDate"
+                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
                                                    <Col className="col-xs-6">
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
-                                                            // value={this.state.eta }
-                                                            name="eta"
+                                                              name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>
                                                    </Row>
@@ -846,7 +776,6 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
                                                                         onClick={() => this.uploadReceiptandSend(item.transactionCompleted.enquiryId,item.transactionCompleted.id)}
-                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
                                                                 </div>
@@ -884,11 +813,9 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
 }
 
 function mapStateToProps(state) {
-    // debugger;
-    const { user } = state
+      const { user } = state
     return { user };
 }
 
 const connectedLoginPage = connect(mapStateToProps)(ArtisanCompletedTransaction);
-// export default connectedLoginPage;
 export default withTranslation()(connectedLoginPage);

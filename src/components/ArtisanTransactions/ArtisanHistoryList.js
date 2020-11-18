@@ -4,7 +4,6 @@ import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddo
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
@@ -62,11 +61,7 @@ class ArtisanHistoryList extends Component {
       )
     
       }
-    
-
-
-     
-
+   
     notifyModalShow(id,enquiryId){
     
         document.getElementById('notifyModal'+id).style.display='block';
@@ -77,7 +72,6 @@ class ArtisanHistoryList extends Component {
                 this.setState({getTransactions:response.data.data,
                  TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
              },()=>{
-                 console.log(this.state.TransactionenquiryCode);
              })
             }
         })
@@ -99,7 +93,6 @@ class ArtisanHistoryList extends Component {
                 this.setState({getTransactions:response.data.data,
                  TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
              },()=>{
-                 console.log(this.state.TransactionenquiryCode);
              })
             }
         })
@@ -112,25 +105,16 @@ class ArtisanHistoryList extends Component {
     }
     
     acceptModalShow(id,enquiryId){
-        
-        console.log("abcfdrf");
-        // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
-
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
              document.getElementById('acceptMOQModal'+ id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label);
-     
-
+              
             });
         }
         });
@@ -138,21 +122,15 @@ class ArtisanHistoryList extends Component {
         
     
     RejectModalShow (id,enquiryId){
-       
-        TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
-                document.getElementById('acceptMOQModal' + id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-          
+                document.getElementById('acceptMOQModal' + id).style.display='block';   
           
             });
         }
@@ -160,7 +138,6 @@ class ArtisanHistoryList extends Component {
     }
 
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -168,10 +145,8 @@ class ArtisanHistoryList extends Component {
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
 
@@ -211,9 +186,7 @@ class ArtisanHistoryList extends Component {
    
     
     acceptorReject(id,enquiryId,status){
-        console.log(enquiryId);
-        console.log(status);
-        this.setState({ acceptButtonClick:true,
+            this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
             if(response.data.valid)
@@ -229,7 +202,6 @@ class ArtisanHistoryList extends Component {
                 rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateAdvancePaymentFromArtisan);
             
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
@@ -250,9 +222,7 @@ class ArtisanHistoryList extends Component {
 
 
     componentDidMount(){
-        // this.setState({
-        //     paymentType: this.state.paymentType
-        //   })
+      
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
@@ -264,15 +234,13 @@ class ArtisanHistoryList extends Component {
                     {
                     this.setState({
                           getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getCompletedTransaction : response.data.data},()=>{
-                                // console.log(this.state.getCompletedTransaction);
-                                console.log(this.state.getCompletedTransaction);
+                               
                             });
                         }
                         });
@@ -286,7 +254,6 @@ class ArtisanHistoryList extends Component {
   
      }
      paymentTypeset(e){
-        console.log("abc")
         this.setState({
             paymentType:e
           },()=>{
@@ -315,7 +282,6 @@ class ArtisanHistoryList extends Component {
          </span>
           </Col>
           <Col md="1"></Col>
-          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
          <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
 <button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
 <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -357,7 +323,6 @@ class ArtisanHistoryList extends Component {
                 </span>
                  </Col>
                  <Col md="1"></Col>
-                 {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -374,7 +339,6 @@ class ArtisanHistoryList extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.filter(this.state.getCompletedTransaction).map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -385,7 +349,6 @@ class ArtisanHistoryList extends Component {
 <p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
 <img 
@@ -448,8 +411,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
          onClick={()=> this.RejectModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId)}
-        //   disabled={this.state.rejectButtonClick}
-        //  onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,2)} 
+       
          /></span>
 
       </>
@@ -479,7 +441,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
      :
      data.id == 1 ?
      <span 
-     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
      >
          <img src={logos.uploadagain} className="uplodagainicon"/>
       <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
@@ -495,7 +456,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 </Col>
 <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
  onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}
-// onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu">{this.props.t("Pages.object.goToThisEnquiry")}</p>
@@ -594,14 +554,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 
-                                                                        {/* <div className="approvenote">
-                                                                            Once you approved it,the
-                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
-                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
-                                                                           the amount.Best practise is to check with your bank,or in <br/>
-                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
-                                                                           
-                                                                        </div> */}
+                                                                        
                                                                     </Col>
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
@@ -612,7 +565,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
                                                                      
-                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
                                                                     className="buyerNotifyButton"><img src={logos.Iconfeatherbell} className="bellicon"style={{marginRight:"5px"}}/>Notify</button></span>
                                                                 </div>
                                                                 </div>
@@ -659,7 +611,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
                                                                         <button
                                                                         disabled={this.state.rejectButtonClick}
                                                                      
-                                                                        // onClick={() => this.acceptorReject(item.transactionCompleted.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
                                                                 </div>
@@ -676,9 +627,6 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
   </>
                 )}
               
-            
-
-               
                 </Container>
               :
               <Container>

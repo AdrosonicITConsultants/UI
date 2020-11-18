@@ -6,7 +6,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewChangedPI.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -30,7 +29,6 @@ export class PreviewChangedPI extends Component {
 
         this.state = {
           enquiryId: this.props.enquiryId,
-          // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
@@ -94,7 +92,6 @@ export class PreviewChangedPI extends Component {
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
@@ -104,14 +101,12 @@ export class PreviewChangedPI extends Component {
                          
                             })
                     }
-                    console.log(this.state.getOldPIData)
                 })
 
                   TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
+                      
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -165,11 +160,8 @@ export class PreviewChangedPI extends Component {
                         })
                       
                         }
-                           
-                    
-                             
+                            
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
                 })
                    
                 });
@@ -200,11 +192,9 @@ export class PreviewChangedPI extends Component {
          
         
          ).then((response)=>{
-             console.log(response);
              if(response.data.valid){
           this.setState({sendPI : response.data,
             },()=>{
-          console.log(this.state.sendPI);
          this.componentDidMount();
           });
           customToast.success("PI Details sent successfully", {
@@ -242,7 +232,7 @@ export class PreviewChangedPI extends Component {
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 {this.state.oldDataPI?
 <>
-{console.log("oldview")}
+{/* {console.log("oldview")} */}
     <PreviewOldchanges
     newPIpreview={this.newPIpreview}
     enquiryId={this.props.enquiryId}
@@ -330,7 +320,6 @@ export class PreviewChangedPI extends Component {
 </Col>
 
 <Col className="col-xs-3">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -340,7 +329,6 @@ export class PreviewChangedPI extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -522,7 +510,7 @@ export class PreviewChangedPI extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -573,13 +561,7 @@ export class PreviewChangedPI extends Component {
      <p>-Weight :</p>
      <div className="sbred wraptext">
      {this.state.previewPI.productHistory.productCategoryDesc} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
-        
-        {/* {this.state.previewPI.productHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
-          :
-
-          ""} */}
-       
+      
      </div>
      <br/>
      <p>-Dimension :</p>
@@ -638,7 +620,7 @@ export class PreviewChangedPI extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -725,8 +707,7 @@ export class PreviewChangedPI extends Component {
      
     </>
     }
-     {/* {this.state.customweftYarnCount} */}
-    
+   
         </td>
         </>
 }
@@ -846,8 +827,6 @@ export class PreviewChangedPI extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
 
         </td>
         
@@ -859,9 +838,6 @@ export class PreviewChangedPI extends Component {
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">NA</span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">NA</span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">NA</span></h3> */}
-
-
         </td>
         </>}
      
@@ -930,7 +906,6 @@ export class PreviewChangedPI extends Component {
  onClick={() => this.BacktoPreview()}>Go Back </button>
 :
 <>
-{console.log(this.props.getOrderStatus)}
 {this.props.getOrderStatus==0?
 <>
 </>
@@ -979,13 +954,11 @@ export class PreviewChangedPI extends Component {
            </>
            }
 </span>
- {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
  </Row>
 {/* -------------------------------------------------------------------------- */}
 
-{/* </Container> */}
-{/* <Footer/> */}
+
     </>
     }
 
@@ -1002,7 +975,6 @@ export class PreviewChangedPI extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

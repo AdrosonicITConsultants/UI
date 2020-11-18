@@ -65,9 +65,7 @@ export default class ArtisanQC extends Component {
     handleChangeFunction1 = (e, questionId, stageId, key) => {
         var answer = e.target.value;
         var array =  this.state.dummyResponseNew;  
-        console.log(array);      
         array[key].answer = answer;
-        console.log(array);
         this.setState({
             dummyResponseNew: array
         });           
@@ -90,10 +88,8 @@ export default class ArtisanQC extends Component {
                 }
             }
             dummy = dummy.substring(0, dummy.length - 1);
-            console.log(dummy);
         }
 
-        console.log(this.state.arrayObject);
 
         var currentArray = this.state.arrayObject;
         var newArray = [];      
@@ -105,7 +101,6 @@ export default class ArtisanQC extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray); 
 
         var questionArray = this.state.questionsData[stageId - 1];
         var updatedArray = [];
@@ -125,10 +120,8 @@ export default class ArtisanQC extends Component {
             }
             updatedArray.push(object);
         }
-        console.log(updatedArray);
 
         var res = updatedArray.map(obj => newArray.find(o => o.questionId === obj.questionId) || obj);
-        console.log(res);
 
         var finalData = {
             "enquiryId": parseInt(this.props.enquiryId),
@@ -136,7 +129,6 @@ export default class ArtisanQC extends Component {
             "saveOrSend": id,
             "stageId": stageId
         }
-        console.log(finalData);
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
             if(response.data.valid)
@@ -155,7 +147,6 @@ export default class ArtisanQC extends Component {
                     });
                 }
             }
-            console.log(response.data.data);
         });
     }
 
@@ -176,7 +167,6 @@ export default class ArtisanQC extends Component {
                 }
             }
             dummy = dummy.substring(0, dummy.length - 1);
-            console.log(dummy);
         }
         
         var dummyArray = this.state.dummyResponseNew;
@@ -189,7 +179,6 @@ export default class ArtisanQC extends Component {
             }
         }
 
-        console.log(this.state.dummyResponseNew);
 
         var currentArray = this.state.dummyResponseNew;
         var newArray = [];      
@@ -201,7 +190,6 @@ export default class ArtisanQC extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray); 
 
         var questionArray = this.state.questionsData[stageId - 1];
         var updatedArray = [];
@@ -221,10 +209,8 @@ export default class ArtisanQC extends Component {
             }
             updatedArray.push(object);
         }
-        console.log(updatedArray);
 
         var res = updatedArray.map(obj => newArray.find(o => o.questionId === obj.questionId) || obj);
-        console.log(res);
 
         var finalData = {
             "enquiryId": parseInt(this.props.enquiryId),
@@ -232,7 +218,6 @@ export default class ArtisanQC extends Component {
             "saveOrSend": id,
             "stageId": stageId
         }
-        console.log(finalData);
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
             if(response.data.valid)
@@ -251,7 +236,6 @@ export default class ArtisanQC extends Component {
                     });
                 }
             }
-            console.log(response.data.data);
         });
     }
 
@@ -270,7 +254,6 @@ export default class ArtisanQC extends Component {
             }
             newArray.push(object); 
         }
-        console.log(newArray);
 
         var finalData = {
             "enquiryId": parseInt(this.props.enquiryId),
@@ -278,7 +261,6 @@ export default class ArtisanQC extends Component {
             "saveOrSend": id,
             "stageId": stageId
         }
-        console.log(finalData);
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
             if(response.data.valid)
@@ -289,14 +271,12 @@ export default class ArtisanQC extends Component {
                     autoClose: true,
                 });
             }
-            console.log(response.data.data);
         });        
     }
 
     handleMultiselect = (e, id, key) => {
         var checked = document.getElementById("natural" + id + key).checked;
         this.state.naturalCheckArray[key].checked = checked;
-        console.log(this.state.naturalCheckArray);
     }
 
     handleMultiselect1 = (e, id, key) => {
@@ -306,28 +286,9 @@ export default class ArtisanQC extends Component {
         this.setState({
             naturalCheckArrayNew: array,
         })
-        console.log(this.state.naturalCheckArrayNew);
     }
 
-    // handleMultiselect1 = (e, id, key) => {
-    //     var checked = document.getElementById("natural" + id + key).checked;
-
-    //     var checkedArray = this.state.naturalCheckArray;
-    //         var dataArray = this.state.naturalArray;
-    //         for(var i in checkedArray) {
-    //             if(checkedArray[i].checked === true) {
-    //                 dummy += dataArray[i] + ",";
-    //         }
-    //     }
-    //         dummy = dummy.substring(0, dummy.length - 1);
-    //     var array =  this.state.dummyResponseNew;  
-    //     console.log(array);      
-    //     array[key].answer = checked;
-    //     console.log(array);
-    //     this.setState({
-    //         dummyResponseNew: array
-    //     });           
-    // }
+   
 
     handleYesNo = (e, key, questionId, id) => {
         var value = document.getElementById("yesNo" + key + id).value;
@@ -336,17 +297,12 @@ export default class ArtisanQC extends Component {
             "questionId": questionId,
         }
         this.state.arrayObject.push(object);
-        console.log(this.state.arrayObject);
     }
 
     handleYesNo1 = (e, id, questionId, key, key1) => {
         var value = document.getElementById("yesNo" + id + key1).value;
-        console.log(value);
-        console.log(key);
         var array =  this.state.dummyResponseNew;  
-        console.log(array);
         array[key].answer = value;
-        console.log(array);
         this.setState({
             dummyResponseNew: array
         });           
@@ -359,15 +315,12 @@ export default class ArtisanQC extends Component {
             "questionId": questionId,
         }
         this.state.arrayObject.push(object);
-        console.log(this.state.arrayObject);
     }
 
     handledropdown1 = (e, id, questionId, key) => {
         var value = document.getElementById("dropdown" + id).value;
         var array =  this.state.dummyResponseNew;  
-        console.log(array);      
         array[key].answer = value;
-        console.log(array);
         this.setState({
             dummyResponseNew: array
         });           
@@ -406,7 +359,6 @@ export default class ArtisanQC extends Component {
             QCsendButton1: false,
             QCenableEditFlag: false,
         });
-        console.log(this.props.enquiryId);
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
             if(response.data.valid)
             {
@@ -431,18 +383,13 @@ export default class ArtisanQC extends Component {
                     this.setState({
                         dummyResponseNew: array,
                     }, () => {
-                        console.log(this.state.dummyResponseNew);
                     });                    
                 });
             }
-            console.log(response.data.data);
-            console.log(this.state.currentStageId);
-            console.log(this.state.currentSeenStatus);
+         
             if(this.state.artisanQcResponses[1]) {
                 var data = this.state.artisanQcResponses[1][0].answer;
-                console.log(data);
                 var result = data.split(",");
-                console.log(result);
                 this.setState({
                     naturalSelectedArray: result,
                 });
@@ -456,7 +403,6 @@ export default class ArtisanQC extends Component {
                     stagesData: response.data.data,
                 })
             }
-            console.log(response.data.data);
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
@@ -466,12 +412,9 @@ export default class ArtisanQC extends Component {
                     questionsData: response.data.data,
                 })
             }
-            console.log(this.state.questionsData);
 
             var data = this.state.questionsData[1][0].optionValue;
-            console.log(data);
             var result = data.split(",");
-            console.log(result);
             this.setState({
                 naturalArray: result,
             }, () => {
@@ -500,21 +443,18 @@ export default class ArtisanQC extends Component {
 
             var yesNo = this.state.questionsData[3][3].optionValue;
             var yesNoresult = yesNo.split(";");
-            console.log(yesNoresult);
             this.setState({
                 yesNoArray: yesNoresult,
             });
 
             var dropDown = this.state.questionsData[3][4].optionValue;
             var dropDownresult = dropDown.split(";");
-            console.log(dropDownresult);
             this.setState({
                 dropDownArray: dropDownresult,
             });
 
             var yesNo1 = this.state.questionsData[4][0].optionValue;
             var yesNoresult1 = yesNo1.split(";");
-            console.log(yesNoresult1);
             this.setState({
                 yesNoArray1: yesNoresult1,
             });

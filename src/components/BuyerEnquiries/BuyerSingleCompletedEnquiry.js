@@ -4,14 +4,12 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { BuyerPreviewInvoice } from './BuyerPreviewInvoice';
 import "./BuyerSingleEnquiry.css";
@@ -107,7 +105,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
         this.setState({ collapse: !this.state.collapse }, () => {
           this.getcollapseId(id);
           this.setState({ show: !this.state.show });
-          //console.log(this.props.data.id);
         });
     };
 
@@ -130,7 +127,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
                 autoClose: true,
               });
                 this.componentDidMount();
-                console.log("updated");
             }
             else{
                 customToast.error(response.data.errorMessage, {
@@ -218,17 +214,10 @@ export class ClosedBuyerSingleEnquiry extends Component {
 
     handleCluster(e) {
       
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('moqId');
-        // console.log(option);
-        
-        // this.setState({ [e.target.name]: e.target.value,moqId:option }, ()=> {
-        //   console.log(this.state.moqId);
-         
-          
-        // });
+       
       }
 
       handleMoqEdit(){
@@ -237,7 +226,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
                 isMoqdetail:!this.state.isMoqdetail
                 
             },()=>{
-                // this.checkSave();
             });
             
         
@@ -249,7 +237,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
             isPidetail:!this.state.isPidetail
             
         },()=>{
-            // this.checkSave();
         });
         
     
@@ -257,16 +244,13 @@ export class ClosedBuyerSingleEnquiry extends Component {
 
       handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value}, () => {
-        //   console.log(this.state.moq);
         });
     }
 
     saveMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
             let params = queryString.parse(this.props.location.search);
-            console.log(params);
             TTCEapi.saveMoq(
                 params.code,
                 this.state.additionalInfo,
@@ -279,8 +263,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                     isMoqdetail:!this.state.isMoqdetail,
                     showValidationMoq: false,
                 },()=>{
-                // console.log(this.state);
-               
+              
                 });
                 customToast.success("MOQ Details saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
@@ -292,7 +275,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
       else{
         this.setState({
             showValidationMoq: true,
-        //   message : "Invalid PAN Number"
       });
       
       }
@@ -301,7 +283,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
         if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
-                console.log(params);
                 TTCEapi.savePi(
                     params.code,
                     this.state.cgst,
@@ -316,7 +297,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
                         isPidetail:!this.state.isPidetail,
                         showValidationPi: false,
                     },()=>{
-                    // console.log(this.state);
                    
                     });
                     customToast.success("PI Details saved successfully", {
@@ -339,15 +319,12 @@ export class ClosedBuyerSingleEnquiry extends Component {
       else{
         this.setState({
             showValidationPi: true,
-        //   message : "Invalid PAN Number"
       });
       
       }
     } 
     markcompleted(){
-        console.log("clicked");
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         TTCEapi.markEnquiryClosed(params.code).then((response)=>{
             if(response.data.valid)
             {
@@ -363,7 +340,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
     sendMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         TTCEapi.sendMoq(
             params.code,
             this.state.additionalInfo,
@@ -374,7 +350,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
            ).then((response)=>{
             this.setState({sendMoq : response.data,
                 isMoqdetail:true},()=>{
-            // console.log(this.state);
             this.componentDidMount();
             });
             customToast.success("MOQ Details sent successfully", {
@@ -387,7 +362,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
     else{
         this.setState({
             showValidationMoq: true,
-        //   message : "Invalid PAN Number"
       });
       
       }
@@ -395,10 +369,8 @@ export class ClosedBuyerSingleEnquiry extends Component {
  
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         this.state.enquiryCode = params.code;
         TTCEapi.getMoq(params.code).then((response)=>{
-            console.log(response)
             if(response.data.data==null){
                 this.setState({
                 moq:0,
@@ -407,21 +379,17 @@ export class ClosedBuyerSingleEnquiry extends Component {
                 additionalInfo:"",
                 isSend:-1,
                 
-                //  dataload : true,
                 })
             }
             else {
             this.setState({
-                // getxyz:response.data,
                 getMoq : response.data.data,
                 moq:response.data.data.moq,
                 ppu:response.data.data.ppu,
                 deliveryDesc:response.data.data.deliveryTimeId,
                 additionalInfo:response.data.data.additionalInfo,
                 isSend:response.data.data.isSend,
-                //  dataload : true,
           },()=>{
-            //  console.log(this.state.getxyz);
            
             });
         }
@@ -430,13 +398,11 @@ export class ClosedBuyerSingleEnquiry extends Component {
         
         TTCEapi.getMoqDeliveryTimes().then((response)=>{
          this.setState({getMoqDeliveryTimes : response.data.data},()=>{
-             console.log(this.state.getMoqDeliveryTimes);
-             console.log("MOQ delivery Time");
+            
             TTCEapi.getMoqs(params.code).then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log("bhabhkkkk");
-                    console.log(response.data.data.length);
+                   
                     if(response.data.data.length==0)
                     {
                         this.setState({getMoqs:response.data.data,moqavailable:false})
@@ -444,9 +410,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                     }
                   else{
                     this.setState({getMoqs:response.data.data,moqavailable:true})
-                  }
-                    console.log(this.state.getMoqs);
-                    
+                  }               
     
                 }
             })
@@ -457,7 +421,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
      
 
     TTCEapi.getPi(params.code).then((response)=>{
-        // console.log(response)
         if(response.data.data==null){
             this.setState({
                 getPi : 0,
@@ -479,8 +442,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
             cgst:response.data.data.cgst,
             sgst:response.data.data.sgst,
       },()=>{
-         console.log(this.state.getPi);
-       
+      
         });
     }
        
@@ -488,7 +450,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
        TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
@@ -498,10 +459,9 @@ export class ClosedBuyerSingleEnquiry extends Component {
                                 
                                 for (var  items in response.data.data[0].paymentAccountDetails)
                                 {
-                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
                                     switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
                                         case 1:
-                                            console.log("bank");   
+                                            // console.log("bank");   
                                             this.setState({
                                                 accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
                                                 bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
@@ -511,7 +471,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                                             }); 
                                             break;
                                         case 2:
-                                            console.log("gpayy");
+                                            // console.log("gpayy");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
@@ -521,7 +481,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
                                             
                                             break;
                                         case 3:
-                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                             this.setState({
@@ -530,7 +489,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                                         }
                                             break;
                                         case 4:
-                                            console.log("paytm");
+                                            // console.log("paytm");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                                                           
                                                 this.setState({
@@ -581,7 +540,6 @@ export class ClosedBuyerSingleEnquiry extends Component {
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
                            
                             });
                         });
@@ -591,36 +549,27 @@ export class ClosedBuyerSingleEnquiry extends Component {
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                // console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                // console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
 
             }
         })
 
-       
-
-    //    this.state.readmore.map((data) => ( this.setState({data:false})) )
-
      }
 
 AcceptMoq(moqId,artisanId){
     let params = queryString.parse(this.props.location.search);
-        console.log(params);
-
     this.setState({ 
         collapseNew: !this.state.collapseNew,
         disableCheckId: artisanId
     }, () => {
         this.getcollapseIdNew(artisanId);
         this.setState({ showNew: !this.state.showNew });
-        //console.log(this.props.data.id);
     });
        
     this.setState({acceptingmoq:true});
@@ -631,11 +580,8 @@ AcceptMoq(moqId,artisanId){
             this.setState({MoqSelected:response.data.data,acceptingmoqtext:false })
             setTimeout(function() { //Start the timer
                 this.setState({render: true})
-                 //After 3 second, set render to true
                  this.componentDidMount()
             }.bind(this), 3000)
-            console.log(this.state.MoqSelected);
-
         }
     })
 }     
@@ -643,15 +589,12 @@ AcceptMoq(moqId,artisanId){
 
 MoqSimpleProductSelected(moqId){
     let params = queryString.parse(this.props.location.search);
-        console.log(params);
     TTCEapi.MoqSimpleProductSelected(params.code,moqId).then((response)=>{
         if(response.data.valid)
         {
             this.setState({MoqSimpleProductSelected:response.data.data })
             document.getElementById('acceptMOQModal').style.display='none';
               document.getElementById('confirmMOQModal').style.display='block';
-
-            console.log(this.state.MoqSimpleProductSelected);
 
         }
     })
@@ -739,11 +682,7 @@ MoqSimpleProductSelected(moqId){
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                 
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
@@ -783,12 +722,7 @@ MoqSimpleProductSelected(moqId){
                                       </Col>
 
                                   </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                 
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -946,11 +880,7 @@ MoqSimpleProductSelected(moqId){
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                 
                                   <div noGutters={true} >
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
@@ -1164,27 +1094,7 @@ MoqSimpleProductSelected(moqId){
                                              onClick={this.proformaDetailsbtn}>
                                            Proforma Invoice
                                             </Col>
-                                            {/* <Col sm={3} 
-                                              className={
-                                                (this.state.selected == "changeRequest"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                             onClick={this.changeRequestbtn}>
-                                            Change Request 
-                                            </Col>
-                                            <Col sm={2}  
-                                            className={
-                                                (this.state.selected == "qualityCheck"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                            onClick={this.qualityCheckbtn}>
-                                           Quality Check 
-                                            </Col> */}
-                                            {/* <Col sm={1}>
-                                            
-                                            </Col> */}
+                                           
                                     </Row>
                                     <br></br>
 
@@ -1245,12 +1155,7 @@ MoqSimpleProductSelected(moqId){
                                                                    </Col>
                                                                </Row>
                                                                <Row noGutters={true} className="">
-                                                                   {/* <Col sm={6} className="BuyerDetailsh1">
-                                                                   Alternate Phone Number:
-                                                                   </Col>
-                                                                   <Col sm={6} className="">
-                                                                   {data.openEnquiriesResponse.alternateMobile ? data.openEnquiriesResponse.alternateMobile : "NA"}
-                                                                   </Col> */}
+                                                                 
                                                                    <hr className="hrlineasd1 "></hr>
                                                                </Row>
                                                                <Row noGutters={true} className="BdImgCol">
@@ -1258,9 +1163,7 @@ MoqSimpleProductSelected(moqId){
                                                                   <h1 className="BDh1">Delivery address</h1>
                                                                   <p  className="BDp" style={{width:"95%",lineHeight:"25px"}}>
                                                                   {data.openEnquiriesResponse.line1}
-                                                                   {/* {data.openEnquiriesResponse.line2 != "" ? ", " + data.openEnquiriesResponse.line2 : ""} */}
                                                                    {data.openEnquiriesResponse.district != "" ? ", " + data.openEnquiriesResponse.district : ""}
-                                                                   {/* {data.openEnquiriesResponse.city != "" ? ", " + data.openEnquiriesResponse.city : ""} */}
                                                                    {data.openEnquiriesResponse.pincode != "" ? ", " + data.openEnquiriesResponse.pincode : ""}
                                                                    {data.openEnquiriesResponse.state != "" ? ", " + data.openEnquiriesResponse.state : ""}
                                                                    <br>
@@ -1371,8 +1274,7 @@ MoqSimpleProductSelected(moqId){
                                         <>
                                             {this.state.moqavailable?
                                                 <>
-                                                {console.log("Moq available")}
-                                                  {console.log(this.state.moqavailable)}
+                                               
                       <>
                                             <Row noGutters={true}>
                                                 <Col sm={1}></Col>
@@ -1480,25 +1382,21 @@ MoqSimpleProductSelected(moqId){
                                        {this.state.disableCheckId == ""? 
                                     
                                         <td className={this.state.collapseId == data.artisanId? "acceptmoqbtnlg":"acceptmoqbtn"} 
-                                        // onClick={() => this.AcceptMoq(data.moq.id,data.artisanId)}
                                          onClick={() => this.AcceptMoq(data.moq.id,data.artisanId)}
                                        
                                          >
                                         <Row noGutters={true} >
                                                 <Col className="col-xs-12 ">
-                                                {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
                                                <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
                                                     Accept
                                             </Col>
                                         </Row>
                                        </td> :
                                        <td className={this.state.collapseId == data.artisanId? "acceptmoqbtnlg":"acceptmoqbtnDisable"} 
-                                       // onClick={() => this.AcceptMoq(data.moq.id,data.artisanId)}
-                                        // onClick={() => this.AcceptMoq(data.moq.id,data.artisanId)}
+                                       
                                         >
                                        <Row noGutters={true} >
                                                <Col className="col-xs-12 ">
-                                               {/* <i class="fa fa-handshake-o accepticon" aria-hidden="true"></i> */}
                                               <img src={logos.acceptsmall} style={{height:"15px",marginRight:"5px"}}/>
 
                                                    Accept
@@ -1680,10 +1578,10 @@ MoqSimpleProductSelected(moqId){
                             
                             { this.state.getMoqs[0].accepted == false ?
                                       <>
-                                       {console.log("single not accept ")}
+                                       {/* {console.log("single not accept ")} */}
                                              {this.state.moqavailable?
                                                 <>
-                                                {console.log("single not accept available")}
+                                                {/* {console.log("single not accept available")} */}
                                      
                                      <Row noGutters={true}>
                                     <Col sm={1}></Col>
@@ -1924,7 +1822,7 @@ MoqSimpleProductSelected(moqId){
                                                   :
                                                   
                                                   <>     
-                                                   {console.log("single not accept Not available")}                              
+                                                   {/* {console.log("single not accept Not available")}                               */}
                                                      <Row>
                                                         <br></br>
                                                         <br></br>
@@ -1940,7 +1838,7 @@ MoqSimpleProductSelected(moqId){
                                       :
                                       
                                       <>
-                                       {console.log("single accept available")}
+                                       {/* {console.log("single accept available")} */}
                                 {/* if not a custom product else statement */}
                                 <Row noGutters={true} >  
                                                     {/* <Col sm={1}></Col>                                         */}

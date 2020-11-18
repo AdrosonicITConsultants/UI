@@ -23,7 +23,6 @@ export default class BuyerAdvancePayment extends Component {
     constructor() {
         super();
         
-        // this.select20= this.select20.bind(this);
         this.select30= this.select30.bind(this);
         this.select50= this.select50.bind(this);
         this.backPI = this.backPI.bind(this);
@@ -59,7 +58,6 @@ export default class BuyerAdvancePayment extends Component {
     }
 
     proceedtopay(){
-        // browserHistory.push("/uploaddetails?code="+this.state.enquiryCode)
         this.setState({nextPage:true})
     }
 
@@ -99,15 +97,11 @@ export default class BuyerAdvancePayment extends Component {
     }
     componentDidMount() {
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        console.log(this.state.getAdvancedPaymentReceipt);
-        console.log(this.state.getAdvancedPaymentReceipt.id);
-        console.log(this.state.getAdvancedPaymentReceipt.label)
+
         this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
@@ -117,10 +111,9 @@ export default class BuyerAdvancePayment extends Component {
                                 
                                 for (var  items in response.data.data[0].paymentAccountDetails)
                                 {
-                                    console.log(response.data.data[0].paymentAccountDetails[items].accountType.id);
                                     switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
                                         case 1:
-                                            console.log("bank");   
+                                            // console.log("bank");   
                                             this.setState({
                                                 accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
                                                 bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
@@ -130,7 +123,7 @@ export default class BuyerAdvancePayment extends Component {
                                             }); 
                                             break;
                                         case 2:
-                                            console.log("gpayy");
+                                            // console.log("gpayy");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
@@ -140,7 +133,6 @@ export default class BuyerAdvancePayment extends Component {
                                             
                                             break;
                                         case 3:
-                                            // console.log(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile);
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                             this.setState({
@@ -149,7 +141,7 @@ export default class BuyerAdvancePayment extends Component {
                                         }
                                             break;
                                         case 4:
-                                            console.log("paytm");
+                                            // console.log("paytm");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                                                           
                                                 this.setState({
@@ -182,8 +174,7 @@ export default class BuyerAdvancePayment extends Component {
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
-                                console.log(this.state.getEnquiryMoq);
-                           
+                          
                             });
                         });
                     });
@@ -256,14 +247,12 @@ export default class BuyerAdvancePayment extends Component {
                     
                 }
     
-                console.log(response.data.data);
             });
 
             TTCEapi.getAdvancedPaymentStatus(params.code).then((response)=>{
                 if(response.data.valid)
                 {
                 this.setState({getAdvancedPaymentStatus : response.data.data},()=>{
-                    console.log(this.state.getAdvancedPaymentStatus);
 
                 });
             }
@@ -271,16 +260,12 @@ export default class BuyerAdvancePayment extends Component {
             TTCEapi.getAdvancedPaymentReceipt(params.code).then((response)=>{
                 if(response.data.valid)
             {
-                // this.componentDidMount();
                 this.setState({getAdvancedPaymentReceipt : response.data.data,
                     receiptId:response.data.data.paymentId,
                     receiptlabel:response.data.data.label
                   
                 },()=>{
-                    console.log(this.state.getAdvancedPaymentReceipt);
-                   console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-                   console.log(this.state.getAdvancedPaymentReceipt.label)
-
+                   
                 });
             }
             });
@@ -307,11 +292,7 @@ export default class BuyerAdvancePayment extends Component {
 
 {this.state.nextPage==false ?
 <>
-
-
-                        
-
-                          {this.state.getEnquiryMoq.map((item)=> 
+                     {this.state.getEnquiryMoq.map((item)=> 
                 <>
 
                         <Row noGutters={true} className="">

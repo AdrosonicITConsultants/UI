@@ -6,7 +6,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./BuyerPreviewNewPI.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -30,12 +29,10 @@ export class BuyerPreviewNewPI extends Component {
         date = today.getDate()+ '.'+ (today.getMonth() + 1) + '.' + today.getFullYear() ;
 
         this.state = {
-          // enquiryId: this.props.enquiryId
-          // enquiryId:1435,
+       
           time: '',
            currentDate: date,
           dataload : false,
-          // enquiryCode:this.props.enquiryCode,
           expectedDateOfDelivery:this.props.expectedDateOfDelivery,
           cgst:this.props.cgst,
           hsn:this.props.hsn,
@@ -106,14 +103,11 @@ export class BuyerPreviewNewPI extends Component {
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -167,10 +161,7 @@ export class BuyerPreviewNewPI extends Component {
                         })
                         }
                            
-                    
-                             
                     }
-                    console.log(this.state.previewPI);
                 })
                    
                 });
@@ -179,9 +170,7 @@ export class BuyerPreviewNewPI extends Component {
       TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
         if(response.data.valid)
         {
-            // console.log(response.data.data);
             this.setState({getOldPIData:response.data.data,
-                // dataload:true
             })
         }
     })
@@ -208,11 +197,9 @@ export class BuyerPreviewNewPI extends Component {
            
           
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendPI : response.data,
               },()=>{
-            console.log(this.state.sendPI);
            
             });
             customToast.success("PI Details sent successfully", {
@@ -289,7 +276,6 @@ export class BuyerPreviewNewPI extends Component {
     </Row>
    <Row noGutters={true}>
        <Col className="col-xs-4">
-       {/* <p className="  belowprevtext" style={{textAlign:"center"}}>  Below preview of invoice will be available for buyer</p> */}
        Received at :  
        <Moment format="DD-MM-YYYY">
 {this.state.previewPiOrder.modifiedOn}
@@ -299,10 +285,8 @@ export class BuyerPreviewNewPI extends Component {
  </Moment>
 </Col>
 <Col className="col-xs-5 CRdate">
-       {/* Change Request date:{this.state.time} on  { this.state.currentDate } */}
 </Col>
 <Col className="col-xs-3">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -312,7 +296,6 @@ export class BuyerPreviewNewPI extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -489,7 +472,7 @@ export class BuyerPreviewNewPI extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -605,7 +588,7 @@ export class BuyerPreviewNewPI extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -785,9 +768,6 @@ export class BuyerPreviewNewPI extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
-
         </td>
         
         </>:<>

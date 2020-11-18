@@ -101,14 +101,12 @@ import { useTranslation, withTranslation } from "react-i18next";
                     showValidationPi: true,
                     message : "Please fill mandatory fields "
 
-                //   message : "Invalid PAN Number"
               });
               
               }
     }
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showDeliveryValidation:false,showValidationPi:false}, () => {
        
         });
@@ -121,9 +119,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     uploadReceiptandSend(enquiryId){
         if(this.state.orderDispatchDate && this.state.selectedFile){
-            console.log(this.state.orderDispatchDate);
-            console.log(this.state.eta)
-    
+   
             this.setState({
                 rejectButtonClick:true
               })
@@ -131,10 +127,8 @@ import { useTranslation, withTranslation } from "react-i18next";
             formData.append( 
               "myFile", 
               this.state.selectedFile, 
-            //   this.state.selectedFile.name 
             );
            
-            console.log(this.state.selectedFile); 
             TTCEapi.submitDeliveryChallan(
                     enquiryId,
                 this.state.selectedFile,
@@ -201,7 +195,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                   
               },()=>{
                  
-                 console.log(this.state.fetchEnquiryAndPaymentDetails);
                
                 });
             }
@@ -217,7 +210,6 @@ componentDidMount(){
              
                 })
         }
-        console.log(this.state.getOldPIData)
     })
     TTCEapi.fetchEnquiryAndPaymentDetails(this.props.enquiryId).then((response)=>{
         if(response.data.valid){
@@ -226,9 +218,7 @@ componentDidMount(){
                 quantity:response.data.data.invoice!=null?response.data.data.invoice.quantity:response.data.data.pi.quantity,
                 rpu:response.data.data.invoice!=null?response.data.data.invoice.ppu:response.data.data.pi.ppu,
                 pta:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,
-                // advancePaidAmt:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
-                // apr:response.data.payment?response.data.payment.paidAmount:0,
-                apr:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
+                   apr:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
                 sgst:response.data.data.invoice!=null?response.data.data.invoice.sgst:response.data.data.pi.sgst,
                 cgst:response.data.data.invoice!=null?response.data.data.invoice.cgst:response.data.data.pi.cgst,
                 finalamt:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,
@@ -265,7 +255,6 @@ componentDidMount(){
                 dataload:true
           },()=>{
              
-             console.log(this.state.fetchEnquiryAndPaymentDetails);
            
             });
         }
@@ -386,26 +375,7 @@ finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.sta
 
 {this.state.previewTaxInvoice?
 <>
-{/* <PrintTaxInvoice
-bp={this.bp}
-enquiryId ={this.props.enquiryId}
-enquiryCode={this.props.enquiryCode}
-quantity={this.state.quantity}
-rpu={this.state.rpu}
-pta={this.state.pta}
-apr={this.state.apr}
-deliverycharge={this.state.deliverycharge}
-sgst={this.state.sgst}
-cgst={this.state.cgst}
-finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
-    +parseInt(this.state.deliverycharge))*this.state.cgst/100)
-    +(((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge))*this.state.sgst/100)).toFixed(2)}amttobepaid={this.state.amttobepaid}
-invoiceId={this.state.invoiceId}
-percentage={this.state.percentage}
-selectedFile={this.state.selectedFile}
-selectedFileName={this.state.selectedFileName}
-taxInvoiceGenerated={this.state.taxInvoiceGenerated}
-/> */}
+
 <PreviewTaxInvoice
 bp={this.bp}
 enquiryId ={this.props.enquiryId}
@@ -435,7 +405,6 @@ advancePaidAmt={this.state.advancePaidAmt}
 {this.props.completedtax!=1?
 <>
  <Row noGutters={true} className=" BdImgCol">
-     {/* <button onClick={()=>this.uploddeliveryreceiptModalShow()}>abcd</button> */}
                                     <Col sm={6} >
                                         <label>Quantity</label>
                                         <br/>
@@ -451,13 +420,6 @@ advancePaidAmt={this.state.advancePaidAmt}
                                     <label >Rate per unit(or metre)</label>
                                     <br/>
                                    
-                                        {/* <select name="cars" id="cars" 
-                                        className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                            >
-                                            <option value="volvo">₹</option>
-                                            
-                                        </select> */}
-                                {/* </span> */}
                                 ₹ <input type="number"  className="PIinput rsinputboxwidth"
                                    style={{width:"88%"}}
                                     value={this.state.rpu }
@@ -596,7 +558,6 @@ advancePaidAmt={this.state.advancePaidAmt}
 </>
 :
 <Row noGutters={true}>
-{console.log("mine1")}
 <Col className="col-xs-12 bold font20 text-center">
    <br></br>
   Tax Invoice Not Available.
@@ -644,7 +605,6 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.orderDispatchDate }
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -653,7 +613,6 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.eta }
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>
@@ -661,7 +620,6 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                     <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>
                                                         <span className="buyerMOQAcceptModalEnquiry">{this.props.t("Pages.object.Enquiry id")}:</span>
                                                         <span className="buyerMOQAcceptModalEnquiryId" style={{color:"#337ab7"}}> 
-                                                             {/* {this.props.enquiryId} */}
                                                                 {this.props.enquiryCode}</span>
                                                     </div>
                                                     

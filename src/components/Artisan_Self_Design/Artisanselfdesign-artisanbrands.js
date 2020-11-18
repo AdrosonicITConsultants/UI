@@ -32,33 +32,21 @@ import BuyersProductDetails from '../Buyer-ProductDetails/Buyer-ProductDetails';
     }
   
       handleCluster(e) {
-      
-      // console.log(e.target.id);
       var index = e.target.selectedIndex;
       var optionElement = e.target.childNodes[index];
       var option =  optionElement.getAttribute('clusterid');
-      console.log(option);
-      
-      this.setState({ [e.target.name]: e.target.value,clusterid:option }, ()=> {
-        console.log(this.state.clusterid);
-        // console.log(this.state.clusterid);
-        
+       this.setState({ [e.target.name]: e.target.value,clusterid:option }, ()=> {
+           
       });
     }
     componentDidMount(){
    
       TTCEapi.getClusters().then((response)=>{
        this.setState({cluster : response.data.data},()=>{
-           console.log(this.state.cluster);
-      
-           // console.log(this.props.user);
        });
    });
    TTCEapi.getFilteredArtisans().then((response)=>{
     this.setState({filterArtisian : response.data.data},()=>{
-        console.log(this.state.filterArtisian);
-   
-        // console.log(this.props.user);
     });
 });
    }
@@ -117,26 +105,7 @@ this.state.filterArtisian.map((data,index) => {
 
 
 </Row>
-  
     
-    {/* load more */}
-    {/* {this.state.visible < this.state.filterArtisian.length ?
-( 
-  // <p><button onClick={this.loadMore} value="See More">See More</button></p>)
-  
-<Row noGutters="true" >
- <Col sm={{size:"5"}}>
- <hr className="hrlineasd "></hr>
- </Col>
- <Col sm={{size:"2"}} className="asdseemore">
- <input type="button" onClick={this.loadMore} value="See More" style={{"border":"none"}}></input>
- </Col>
- <Col sm={{size:"5"}}>
- <hr className="hrlineasd "></hr> </Col>
-</Row>  )    
-:null    } */}
-
-       
         </React.Fragment>
       );
     }

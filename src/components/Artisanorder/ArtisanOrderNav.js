@@ -101,22 +101,17 @@ import { useTranslation, withTranslation } from "react-i18next";
                           </Col>                            
                 </Row>
                 <Row>
-                    {/* <hr className="enquiryoptionhr"></hr> */}
                 </Row>
                 {
                     this.state.ongoingEnquiry
                     ?
                     <>
-                    {/* <OngoingList></OngoingList> */}
                     <ArtisanOngoingOrder></ArtisanOngoingOrder>
                     </>
                     :
                     <>
-                    {/* <CompletedList></CompletedList> */}
                    <ArtisanCompletedOrder/>
-                    {/* <div className="text-center font20">
-                        No Completed Order
-                    </div> */}
+                   
                     </>
                 }
                 <div>
@@ -133,7 +128,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

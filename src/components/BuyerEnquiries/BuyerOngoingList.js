@@ -4,7 +4,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 
@@ -38,34 +37,27 @@ export class BuyerOngoingList extends Component {
             {           TTCEapi.getEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesMTO:response.data.data})
                 }
             })
             TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesAvailable:response.data.data})
                 }
             })
             TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({innerEnquiryStages:response.data.data})
                 }
             })
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getOpenEnquiries().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {  
                                 this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                    console.log(this.state);
                                 });
 
                             }
@@ -78,7 +70,6 @@ export class BuyerOngoingList extends Component {
     }
 
     individualpage(id){
-        // localStorage.setItem("seeMoreId", id);
         browserHistory.push("/buyerEnquiryDetails?code=" + id);
     }
     
@@ -346,7 +337,6 @@ export class BuyerOngoingList extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -357,7 +347,6 @@ export class BuyerOngoingList extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -633,7 +622,6 @@ export class BuyerOngoingList extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }

@@ -15,9 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
-// import "./editProduct.css"
-// import ModalComponent from "../modal/modal";
-// import Modal from 'react-bootstrap/Modal'
+
 
 const customStyles3 = {
   content: {
@@ -102,7 +100,6 @@ export default class EditBuyerDesign extends Component {
                    });
                  };
                  componentDidMount() {
-                   console.log("did mount");
                    this.myRefAddPhoto.current.scrollIntoView({
                      behavior: "smooth",
                      block: "center",
@@ -127,8 +124,6 @@ export default class EditBuyerDesign extends Component {
                           this.setState({ productid : params.productId },()=>{
      
                           })
-                          console.log('heree');
-                          console.log( response.data);
                           let productData =  response.data.data;
                           this.setProduct(productData);
                       })
@@ -138,7 +133,7 @@ export default class EditBuyerDesign extends Component {
                     
                    }
                    else {
-                     console.log("inelse");
+                    //  console.log("inelse");
                      TTCEapi.getProductUploadData().then((response) => {
                        debugger;
                        this.setState(
@@ -158,8 +153,7 @@ export default class EditBuyerDesign extends Component {
                            this.setState({productid :params.productId },()=>{
       
                            })
-                           console.log('heree');
-                           console.log( response.data);
+                   
                            let productData =  response.data.data;
                            this.setProduct(productData);
                        })
@@ -200,7 +194,6 @@ export default class EditBuyerDesign extends Component {
                     (myBase64) => {
                       let filename = {};
                       filename.name = img.lable;
-                    // console.log(myBase64); // myBase64 is the base64 string
                       this.setState({
                         ["imagePreviewUrl" + (index + 1)]: myBase64,
                         isImageUploadComplete: true,
@@ -218,10 +211,7 @@ export default class EditBuyerDesign extends Component {
                 let productWeavesIds = productData.productWeaves.map(
                   (e) => e.weaveId
                 );
-                console.log(productWeavesIds);
-
                 let { weaves } = this.state;
-                console.log(weaves);
                 productWeavesIds.map((id) => {
                   weaves[id - 1].isChecked = true;
                   this.setState({
@@ -267,8 +257,6 @@ export default class EditBuyerDesign extends Component {
                                 productTypeName: item.productDesc,
                               },
                               () => {
-                                // console.log(this.state);
-
                                 this.state.productTypes.filter((item) => {
                                   if (item.id == this.state.productType) {
                                     if (item.relatedProductType.length != 0) {
@@ -285,9 +273,7 @@ export default class EditBuyerDesign extends Component {
                                           ),
                                         },
                                         () => {
-                                          //  console.log("after related");
-
-                                          //  console.log(this.state);
+                                        
                                           if (productData.relProduct.length > 0) {
                                             this.setState({
                                               length: productData.length,
@@ -327,7 +313,6 @@ export default class EditBuyerDesign extends Component {
                                           savedrelatedProduct: [],
                                         },
                                         () => {
-                                          //  console.log(this.state);
                                         }
                                       );
                                     }
@@ -383,12 +368,10 @@ export default class EditBuyerDesign extends Component {
                   
                   }
                  handleproductCategories(e) {
-                   // console.log(e.target.id);
-                  
+              
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);
 if(optionElement.innerHTML == "Fabric"){
   this.setState({ showGSM: true});
 }
@@ -418,10 +401,7 @@ if (option == -1){
 }
 else {
   this.setState({ [e.target.name]: parseInt(option) }, () => {
-    console.log(this.state);
-  
-
-    this.state.productCategories.filter((item) => {
+       this.state.productCategories.filter((item) => {
       if (item.id == this.state.productCategorie) {
         this.setState(
           {
@@ -448,9 +428,7 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                 //  console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleproductTypes(e) {
@@ -458,7 +436,6 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                  // console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -486,7 +463,6 @@ else {
                                  ),
                                },
                                () => {
-                                // console.log(this.state);
                                }
                              );
                            } else {
@@ -500,7 +476,6 @@ else {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                  // console.log(this.state);
                                }
                              );
                            }
@@ -514,13 +489,10 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                  // console.log(option);       
                    if (option != -1)
                    {
                     
-                      this.setState({ [e.target.name]: option }, () => {
-                      //  console.log(this.state);
-                     
+                      this.setState({ [e.target.name]: option }, () => {                  
                         this.setState(
                           {
                             ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
@@ -548,20 +520,15 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                //   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleDropdownCountOfYarn(e)
                   {
-                   
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                   // console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                  //    console.log(this.state);
                     });
                   }
                  handleChange(e) {
@@ -617,12 +584,7 @@ else {
                  }
                  fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
-
-          
-
-                 
                      if (filename != undefined) {
-                      //  filename.name = filename.name.replace(/\s/g, '');
   if (filename.size / 1024 / 1024 > 1) {    
       customToast.error("Please upload product Image below 1MB.", {
         position: toast.POSITION.TOP_RIGHT,
@@ -630,13 +592,7 @@ else {
       });
      return ;
   }
-  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-  //   customToast.error("Image name contains special characters.", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //     autoClose: true,
-  //   });
-  //   return;
-  // }
+  
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -654,7 +610,6 @@ else {
                              isImageUploadComplete: true,
                            },
                            () => {
-                          //   console.log(this.state);
                            }
                          );
                        };
@@ -729,7 +684,6 @@ else {
                                contentLabel="Minimal Modal Example"
                                className="Modal"
                                style={customStyles3}
-                               // onRequestClose={this.handleCloseWrongPasswordModal}
                              >
                                <ImageEditorTTCE
                                  aI={this.state["imagePreviewUrl" + num]}
@@ -770,25 +724,14 @@ else {
                   var index = e.target.selectedIndex;
                   var optionElement = e.target.childNodes[index];
                   var option = optionElement.getAttribute("id");
-                  //console.log(option);
-
-
                   let relatedProductTemp = this.state.savedrelatedProduct.find(
                     (e) => e.productTypeId == id
                   );
                   relatedProductTemp[e.target.name] = option;
 
                   this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-                    //console.log(this.state);
                   });
 
-
-                  // let relatedProduct = [];
-                  // relatedProduct.Length  .e.target;
-
-                  //  this.setState({ [e.target.name]: parseInt(option) }, () => {
-                  //    console.log(this.state);
-                  //  });
                  } 
                  onselectWareAndCare = (i) => {
                    if(this.state.isEdit == true)
@@ -805,7 +748,7 @@ else {
                    this.setState({
                      wareAndCare: [...wareAndCare],
                      iswashAndCareComplete: ischecked,
-                   },()=>{console.log(this.state)});
+                   },()=>{});
                    }
                  };
                  editenabled = () =>{
@@ -1041,26 +984,12 @@ else {
                       productData.productCategoryId = this.state.productCategorie;
                       productData.productTypeId = this.state.productType;
                       productData.productSpec = this.state.description;
-                      // productData.productStatusId = GSMthis.state.isMTO ? 1 : 2;
                       productData.gsm = this.state.GSMName;
                       productData.length = this.state.length;
                       productData.reedCountId = this.state.reedCount;
                       productData.weight = this.state.weight;
                       productData.width = this.state.width;
                       productData.reedCountId = this.state.reedCount;
-
-                    
-                    //  this.state.weaves.filter((item) => {
-                    //    if (item.isChecked) {
-                    //      productData.productWeaves.push({
-                    //        id: 0,
-                    //        productId: productData.id,
-                    //        weaveId: item.id,
-                    //      });
-                    //    }
-                    //  });  
-
-                    debugger;
                   TTCEapi.editCustomProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       customToast.success("Product updated successfully!", {
@@ -1084,14 +1013,9 @@ else {
 
                       });;
 
-                    
-
-                    console.log(productData);
                  };
                  Cancel = () => {
-                 
-                   browserHistory.push("/Customprod")
-                  //  window.location.replace("./home");
+                    browserHistory.push("/Customprod")
                   
                  };
                  ResetAll = () => {
@@ -1099,7 +1023,6 @@ else {
 
                  };
                  Delete = () => {
-                  console.log(this.state.productid);
                   TTCEapi.deleteCustomProduct(this.state.productid).then((response)=>{
                     if(response.data.valid){
                       customToast.success("Product deleted successfully!", {
@@ -1160,7 +1083,6 @@ else {
 
                                    {/* <div class="loader"></div> */}
                                  </Col>
-                                 {/* {this.state.componentMounted ? null : ( */}
                                    <Col
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
@@ -1430,7 +1352,6 @@ else {
                                        md={{ size: "6" }}
                                        className="col-6 text-right"
                                      >
-                                       {console.log(this.state)}
                                        <select
                                          id="productCategorie"
                                          className="productDropdown"

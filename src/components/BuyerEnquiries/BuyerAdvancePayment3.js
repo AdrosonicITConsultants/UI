@@ -23,7 +23,6 @@ export class BuyerAdvancePayment3 extends Component {
         
 
         this.state = {
-           
             dataload:true,
             enquiryCode:"",
             enquiryId:"",
@@ -35,20 +34,12 @@ export class BuyerAdvancePayment3 extends Component {
  
     
     BacktoPreview(){
-    // browserHistory.push("/buyerEnquiryDetails?code="+this.props.enquiryId)
     localStorage.setItem("SelectPI", 1);
     browserHistory.goBack()
     }
-    // componentDidMount(){
-    //     console.log(this.props.enquiryId);
-    //     console.log(this.props.receiptId);
-    //     console.log(this.props.receiptlabel)
-    // }
-  
-    
+   
     render(){
         let prop=this.props;
-        console.log(prop);
         return(
             
 <React.Fragment>
@@ -154,15 +145,6 @@ export class BuyerAdvancePayment3 extends Component {
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
     
-
-
-         {/* <a href={"/payadvance?code="+this.props.enquiryCode }>
-         <img  src={TTCEapi.ReceiptUrl + this.props.receiptId + "/" + this.props.receiptlabel}
-       >
-
-         </img>
-                                         </a>  */}
-
 <a href={TTCEapi.ReceiptUrl + prop.receiptId + "/" + prop.receiptlabel} target="_blank">
 <button className="proccedwithadvpaybtn viewtractionbtnwidth"  >
             

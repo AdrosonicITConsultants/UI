@@ -82,9 +82,7 @@ export default class BuyerSelfDesign extends Component {
                  };
 
                  componentDidMount() {
-                   console.log("did mount");
-                   console.log(this.state);
-                   if (localStorage.getItem('ProductUploadData') != null) {
+                      if (localStorage.getItem('ProductUploadData') != null) {
                      let response = JSON.parse(localStorage.getItem("ProductUploadData"))
                      this.setState(
                        {
@@ -127,12 +125,10 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleproductCategories(e) {
-                   // console.log(e.target.id);
                    debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);
                     if(optionElement.innerHTML == "Fabric"){
                       this.setState({ showGSM: true});
                     }
@@ -162,7 +158,6 @@ export default class BuyerSelfDesign extends Component {
                     }
                     else {
                       this.setState({ [e.target.name]: parseInt(option) }, () => {
-                        console.log(this.state);
                         debugger;
 
                         this.state.productCategories.filter((item) => {
@@ -193,9 +188,7 @@ export default class BuyerSelfDesign extends Component {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                     console.log(this.state);
                    });
                  }
 
@@ -204,7 +197,6 @@ export default class BuyerSelfDesign extends Component {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -232,7 +224,6 @@ export default class BuyerSelfDesign extends Component {
                                  ),
                                },
                                () => {
-                                 console.log(this.state);
                                }
                              );
                            } else {
@@ -246,7 +237,6 @@ export default class BuyerSelfDesign extends Component {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                   console.log(this.state);
                                }
                              );
                            }
@@ -261,12 +251,10 @@ export default class BuyerSelfDesign extends Component {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);       
                    if (option != -1)
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                        console.log(this.state);
                         debugger;
                         this.setState(
                           {
@@ -296,9 +284,7 @@ export default class BuyerSelfDesign extends Component {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                     console.log(this.state);
                    });
                  }
 
@@ -308,9 +294,7 @@ export default class BuyerSelfDesign extends Component {
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                    console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                      console.log(this.state);
                     });
                   }
 
@@ -373,7 +357,6 @@ export default class BuyerSelfDesign extends Component {
 
                  
                      if (filename != undefined) {
-                      //  filename.name = filename.name.replace(/\s/g, '');
   if (filename.size / 1024 / 1024 > 1) {    
       customToast.error("Please upload product Image below 1MB.", {
         position: toast.POSITION.TOP_RIGHT,
@@ -381,13 +364,7 @@ export default class BuyerSelfDesign extends Component {
       });
      return ;
   }
-  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-  //   customToast.error("Image name contains special characters.", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //     autoClose: true,
-  //   });
-  //   return;
-  // }
+
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -405,7 +382,6 @@ export default class BuyerSelfDesign extends Component {
                              isImageUploadComplete: true,
                            },
                            () => {
-                             console.log(this.state);
                            }
                          );
                        };
@@ -483,7 +459,6 @@ export default class BuyerSelfDesign extends Component {
                                contentLabel="Minimal Modal Example"
                                className="Modal"
                                style={customStyles3}
-                               // onRequestClose={this.handleCloseWrongPasswordModal}
                              >
                                <ImageEditorTTCE
                                  aI={this.state["imagePreviewUrl" + num]}
@@ -525,7 +500,6 @@ export default class BuyerSelfDesign extends Component {
  var index = e.target.selectedIndex;
  var optionElement = e.target.childNodes[index];
  var option = optionElement.getAttribute("id");
- console.log(option);
  debugger;
 
  let relatedProductTemp = this.state.savedrelatedProduct.find(
@@ -534,22 +508,13 @@ export default class BuyerSelfDesign extends Component {
 relatedProductTemp[e.target.name] = option;
 
  this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-   console.log(this.state);
  });
 
-
-// let relatedProduct = [];
-// relatedProduct.Length  .e.target;
- 
-//  this.setState({ [e.target.name]: parseInt(option) }, () => {
-//    console.log(this.state);
-//  });
                  }
 
 
                  Save = () => {                
                    let productData = {};
-                    // productData.careIds = [];
                     productData.weaveIds = [];
                       let file2, file3;
 
@@ -759,17 +724,10 @@ relatedProductTemp[e.target.name] = option;
                   return;
                 }
 
-
-
- 
- 
                    this.setState({
                      SaveDisabled: true
                    }, ()=>{                   
                    })
-
-                    
-
                     productData.productCategoryId = this.state.productCategorie;
                     productData.productTypeId = this.state.productType;
                     productData.productSpec = this.state.description;
@@ -806,10 +764,6 @@ relatedProductTemp[e.target.name] = option;
                     }
 
                       });
-
-                    
-
-                    console.log(productData);
                  };
 
                  ToggleSave = () => {
@@ -1048,80 +1002,6 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               {/* <Row >
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2 "
-                                 ></Col>{" "}
-                                 <Col
-                                   sm={{ size: "8" }}
-                                   xs={{ size: "8" }}
-                                   md={{ size: "8" }}
-                                   className="col-8"
-                                 >
-                                   <Row >
-                                     <Col
-                                       sm={{ size: "6" }}
-                                       xs={{ size: "6" }}
-                                       md={{ size: "6" }}
-                                       className="col-6 text-center mt30 "
-                                     >
-                                       <span
-                                         ref={this.basicDetails}
-                                         className="text-right font13"
-                                       >
-                                         Name of the product (40 characters)
-                                       </span>
-                                     </Col>{" "}
-                                     <Col
-                                       sm={{ size: "6" }}
-                                       xs={{ size: "6" }}
-                                       md={{ size: "6" }}
-                                       className="col-6 text-left"
-                                     ></Col>{" "}
-                                   </Row>
-                                   <Row >
-                                     <Col
-                                       sm={{ size: "6" }}
-                                       xs={{ size: "6" }}
-                                       md={{ size: "6" }}
-                                       className="col-6 text-right "
-                                     >
-                                       <input
-                                         type="text"
-                                         id="productName"
-                                         className=" ProductTextBox"
-                                         name="productName"                                maxLength="40"        
-                                         onChange={(e) => this.handleChange(e)}
-                                       />
-                                     </Col>{" "}
-                                     <Col
-                                       sm={{ size: "6" }}
-                                       xs={{ size: "6" }}
-                                       md={{ size: "6" }}
-                                       className="col-6 text-left"
-                                     >
-                                       <input
-                                         type="text"
-                                         id="productCode"
-                                         placeholder="Product Code (Eg. NAG09_89)"
-                                         className="ProductTextBox"
-                                         name="productCode"
-                                         maxLength="20"
-                                         onChange={(e) => this.handleChange(e)}
-                                       />
-                                     </Col>{" "}
-                                   </Row>
-                                 </Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2 "
-                                 ></Col>{" "}
-                               </Row> */}
                                <Row >
                                  <Col
                                    sm={{ size: "2" }}

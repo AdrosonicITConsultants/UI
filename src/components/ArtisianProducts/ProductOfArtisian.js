@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import logos from "../../assets";
 import { Row, Col , Container, Button} from 'reactstrap';
 import '../navbar/navbar.css';
-// import './ArtisanselfDesign.css';
 import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";
 import { memoryHistory, browserHistory } from "../../helpers/history";
-
 import TTCEapi from '../../services/API/TTCEapi';
-// import "./ProductCategories.css"
 
 export class ProductOfArtisian extends Component {
     constructor(props) {
@@ -27,8 +24,6 @@ export class ProductOfArtisian extends Component {
       
     }
     editProduct = (Product)=>{
-        debugger;
-          console.log(Product);
         browserHistory.push("/EditProduct?ProductId=" + Product)
       }
     toggleHover(name) {      
@@ -110,10 +105,7 @@ export class ProductOfArtisian extends Component {
                         </Col>
                        
                     </Row>
-                 
-
-                    {console.log(this.state)}
-                </div> 
+                    </div> 
                
         )
     }

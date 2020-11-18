@@ -15,18 +15,15 @@ class Wishlist extends Component {
         super(props);
 
         this.state = {
-          
-
          
         };
       
     }
     
     backoperation(){
-        //  browserHistory.push("/home"); 
         browserHistory.goBack()
-        
-    }  
+    } 
+     
     homepage(){
         browserHistory.push("/home"); 
     }

@@ -12,7 +12,6 @@ class TeamToggle extends React.Component {
         this.setState({ collapse: !this.state.collapse }, () => {
           this.props.getcollapseId(this.props.data.id);
           this.setState({ show: !this.state.show });
-          //console.log(this.props.data.id);
         });
       };
     

@@ -70,12 +70,10 @@ export class BuyerPreviewInvoice extends Component {
     } 
  
     componentDidMount() { 
-        console.log(this.state.enquiryCode);
-        console.log(this.state.enquiryId);
+      
         TTCEapi.getProductUploadData().then((response)=>{
           if(response.data.valid)
           {
-              console.log(response.data);
               this.setState({productCategories: response.data.data.productCategories,
                   yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                    
@@ -135,7 +133,6 @@ export class BuyerPreviewInvoice extends Component {
                 
             }
 
-            console.log(response.data.data);
         });
       });
       }
@@ -403,7 +400,7 @@ export class BuyerPreviewInvoice extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -517,7 +514,7 @@ export class BuyerPreviewInvoice extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -547,13 +544,7 @@ export class BuyerPreviewInvoice extends Component {
     }
     
 
-     {/* {this.state.customweftYarnCount} */}
-     {/* <div className="descyarnpi wraptext">
-
--Yarn: {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} x {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
--Yarn Count: {this.state.customweftYarnCount} {this.state.customwarpYarnCount && this.state.customweftYarnCount ?"x":""} {this.state.customwarpYarnCount} {this.state.customextraWeftYarnCount ? "x":""} {this.state.customextraWeftYarnCount ? this.state.customextraWeftYarnCount:""} <br/>
--Dye Used: {this.state.customweftDye} {this.state.customwarpDye && this.state.customweftDye?"x":""}   {this.state.customwarpDye} {this.state.customextraWeftDye?"x":""} {this.state.customextraWeftDye? this.state.customextraWeftDye:""} 
-</div> */}
+     
      {this.state.customhistory
     ?
     <>
@@ -700,8 +691,7 @@ export class BuyerPreviewInvoice extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
+   
 
         </td>
         
@@ -713,9 +703,7 @@ export class BuyerPreviewInvoice extends Component {
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">NA</span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">NA</span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">NA</span></h3> */}
-
-
+     
         </td>
         </>}
      
@@ -807,8 +795,7 @@ export class BuyerPreviewInvoice extends Component {
  </Row>
 {/* -------------------------------------------------------------------------- */}
 
-{/* </Container> */}
-{/* <Footer/> */}
+
 </>
 : 
 <Row>
@@ -826,7 +813,6 @@ export class BuyerPreviewInvoice extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

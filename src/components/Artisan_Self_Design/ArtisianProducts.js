@@ -36,26 +36,17 @@ class ArtisianProducts extends Component {
       
     }
     handleCluster(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('clusterid');
-        console.log(option);
-        
         this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
-          console.log(this.state);
-          
-        });
+             });
         
       }
-    componentWillMount(){
-
-    }
+ 
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         TTCEapi.getArtisianProducts(parseInt(params.artisanId)).then((response)=>{
-            console.log(response.data.data);
             var heading1 = "Artists"
             if(response.data.data.artisanDetails[0].companyName == null)
             {
@@ -72,9 +63,7 @@ class ArtisianProducts extends Component {
                });
         });
         TTCEapi.getProducts().then((response)=>{
-            console.log(response);
             this.setState({productCategoriesdata : response.data.data},()=>{
-                console.log(this.state);
             });
 
         });
@@ -182,11 +171,9 @@ class ArtisianProducts extends Component {
                                 :
                                 <Row noGutters={true} className="text-center">
                                     No Products found
-                                </Row>}
-                               
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
+                                </Row>
+                                }
+                                                              
                             </Row>
                         </Col>
                     </Row>

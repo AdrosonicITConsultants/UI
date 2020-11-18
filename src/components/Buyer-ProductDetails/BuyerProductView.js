@@ -65,7 +65,6 @@ class BuyersProductView extends Component {
             autoClose: true,
           });
           this.setState({isAddedtoWishlist : response.data.valid,clicked: !this.state.clicked},()=>{
-              console.log(this.state.isAddedtoWishlist);
        
           });
         }
@@ -85,27 +84,14 @@ class BuyersProductView extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-//   generateEnquiry(item){
-//     this.setState({ modalIsOpen: true });
-//           TTCEapi.generateEnquiry(item,false).then((response)=>{
-//             this.setState({ modalIsOpen: false });
-//         this.setState({generateEnquiry : response.data.data},()=>{
-          
-//             console.log(this.state.generateEnquiry);
-            
-//         });
-//     });
-// }
+
 generateEnquiry(item){
   this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
-    // this.setState({ modalIsOpen: false });
-      console.log(this.state.ifEnquiryExists);
       if(this.state.ifEnquiryExists.ifExists ==false){
             TTCEapi.generateEnquiry(item,false).then((response)=>{
           this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                         console.log(this.state.generateEnquiry);
                         });
         });
       }
@@ -115,7 +101,6 @@ generateEnquiry(item){
 }
   handleRemovefromWishlist(id){
     TTCEapi.deleteProductsInWishlist(id).then((response)=>{
-        console.log(response);   
         if(response.data.data=="Successfull"){
           this.setState({isAddedtoWishlist:false})
         
@@ -139,28 +124,22 @@ generateEnquiry(item){
      {  
         TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
             this.setState({ProductData :response.data.data,history : false},()=>{
-            console.log(this.state.ProductData);
              TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
                 this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
-                  console.log(this.state)
                 })
                 
               })
               TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.id).then((response)=>{
                
              this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
-                    console.log(this.state.getProductCategoryAndClusterProducts);
                 });
               });
               
               TTCEapi.getProductIdsInWishlist().then((response)=>{
                 var item=this.state.getProductIdsInWishlist
                 this.setState({getProductIdsInWishlist : response.data.data},()=>{
-                    console.log(this.state.getProductIdsInWishlist);
-                    console.log(this.state.ProductData.id);
                     if(this.state.getProductIdsInWishlist){
                       if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
-                      // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
                       {
                         this.setState({
                           isAddedtoWishlist:true,
@@ -169,8 +148,6 @@ generateEnquiry(item){
                       }
                      }
                 
-                    // console.log(this.state.getProductIdsInWishlist.indexOf(12))
-              
                 });
               });
 });
@@ -179,28 +156,23 @@ generateEnquiry(item){
      else{
         TTCEapi.getHistoryProduct(parseInt(params.ProductHistoryId)).then((response)=>{
             this.setState({ProductData :response.data.data,history : true},()=>{
-            console.log(this.state.ProductData);
              TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
                 this.setState({Artisiandata:response.data.data.artisanDetails,dataload : true},()=>{
-                  console.log(this.state)
                 })
                 
               })
               TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.parentProductId).then((response)=>{
                
              this.setState({getProductCategoryAndClusterProducts : response.data.data.products},()=>{
-                    console.log(this.state.getProductCategoryAndClusterProducts);
                 });
               });
               
               TTCEapi.getProductIdsInWishlist().then((response)=>{
                 var item=this.state.getProductIdsInWishlist
                 this.setState({getProductIdsInWishlist : response.data.data},()=>{
-                    console.log(this.state.getProductIdsInWishlist);
-                    console.log(this.state.ProductData.id);
+              
                     if(this.state.getProductIdsInWishlist){
                       if(this.state.getProductIdsInWishlist.indexOf(this.state.ProductData.id)!=-1)
-                      // {console.log(this.state.getProductIdsInWishlist.id!=-1)}
                       {
                         this.setState({
                           isAddedtoWishlist:true,
@@ -209,26 +181,18 @@ generateEnquiry(item){
                       }
                      }
                 
-                    // console.log(this.state.getProductIdsInWishlist.indexOf(12))
-              
                 });
               });
 });
 });
      }
  
-    
-  // console.log(this.state.productIdsInWishlist.indexOf(this.state.getProductIdsInWishlist.id)!=-1);
-  
   TTCEapi.getFilteredArtisans().then((response)=>{
     this.setState({filterArtisian : response.data.data},()=>{
-        console.log(this.state.filterArtisian);
         this.state.filterArtisian.map((data)=>{
           this.setState({logoUrl:TTCEapi.ImageUrl+'User/'+data.artisanId+'/CompanyDetails/Logo/'+data.logo})
-          // logoUrl:TTCEapi.ImageUrl+'User/'+this.state.ProductData.artitionId+'/CompanyDetails/Logo/'+this.state.filterArtisian.logo,
-                    
+          
         })
-        // console.log(this.props.user);
     });
 });
 

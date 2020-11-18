@@ -4,7 +4,6 @@ import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddo
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +13,6 @@ import Moment from 'react-moment';
 import queryString from 'query-string';
 import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 import thunk from 'redux-thunk';
-// import { EditorInsertComment } from 'material-ui/svg-icons';
 import { useTranslation, withTranslation } from "react-i18next";
 
 class ArtisanRecentList extends Component {
@@ -55,7 +53,6 @@ class ArtisanRecentList extends Component {
     }  
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
        
         });
@@ -104,7 +101,6 @@ class ArtisanRecentList extends Component {
                 this.setState({
                  notifyId:notifyId
              },()=>{
-                 console.log(this.state.notifyId);
              })        
     }
 
@@ -113,8 +109,7 @@ class ArtisanRecentList extends Component {
     }
 
     uploddeliveryreceiptModalShow(id,enquiryId){
-    console.log(id);
-    console.log(enquiryId);
+  
         document.getElementById('deliveryReceipt'+id).style.display='block';
         TTCEapi.getSingleOrder(enquiryId).then((response)=>{
             if(response.data.valid)
@@ -123,7 +118,6 @@ class ArtisanRecentList extends Component {
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
 
-                console.log(this.state.getSingleOrder);
                 this.componentDidMount();
             });
         }
@@ -141,10 +135,8 @@ class ArtisanRecentList extends Component {
             formData.append( 
               "myFile", 
               this.state.selectedFile, 
-            //   this.state.selectedFile.name 
             );
            
-            console.log(this.state.selectedFile); 
             TTCEapi.submitDeliveryChallan(
                 enquiryId,
                 this.state.selectedFile,
@@ -184,7 +176,6 @@ class ArtisanRecentList extends Component {
         
         else{
             this.setState({
-                // rejectButtonClick:true,
                 showDeliveryValidation: true,
               })
            }
@@ -196,30 +187,20 @@ class ArtisanRecentList extends Component {
     }
     
     acceptModalShow(id,enquiryId){
-        
-        console.log("abcfdrf");
          document.getElementById('acceptMOQModal'+ id).style.display='block';
-        // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
 
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
              document.getElementById('acceptMOQModal'+ id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label);
-     
-
-            });
+                 });
         }
         });
-        // document.getElementById('acceptMOQModal'+ id).style.display='block';
     }
         
     
@@ -229,27 +210,19 @@ class ArtisanRecentList extends Component {
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
                 document.getElementById('acceptMOQModal' + id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-          
-          
+              
             });
         }
         });
-        // document.getElementById('acceptMOQModal' + id).style.display='block';
-
     }
 
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -257,10 +230,8 @@ class ArtisanRecentList extends Component {
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
 
@@ -283,10 +254,7 @@ class ArtisanRecentList extends Component {
     browserHistory.push("/artisanorder?code="+eid)
    }
     NotifyAgain(actionId,respectiveActionId,id){
-        console.log(actionId,respectiveActionId,id)
         this.setState({ notifyButtonClick:true})
-        console.log(actionId);
-        console.log(respectiveActionId);
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
             if(response.data.valid)
             {
@@ -301,8 +269,7 @@ class ArtisanRecentList extends Component {
                  dataload : true,
                  notifyAgain : response.data.data,
                  notifyButtonClick:false,},()=>{
-                console.log(this.state.notifyAgain);
-            
+         
             });
             document.getElementById('notifyModal'+id).style.display='none';
         }
@@ -318,9 +285,6 @@ class ArtisanRecentList extends Component {
     }
     
     acceptorReject(id,enquiryId,status){
-        console.log("advance click")
-        console.log(enquiryId);
-        console.log(status);
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
@@ -337,9 +301,7 @@ class ArtisanRecentList extends Component {
                 rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateAdvancePaymentFromArtisan);
-            
-            });
+              });
             document.getElementById('acceptMOQModal'+id).style.display='none';
         }
         else{
@@ -353,9 +315,6 @@ class ArtisanRecentList extends Component {
         });
     }
     acceptorRejectFinal(id,enquiryId,status){
-        console.log("Final click")
-        console.log(enquiryId);
-        console.log(status);
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
@@ -372,7 +331,6 @@ class ArtisanRecentList extends Component {
                 rejectButtonClick:false,
                  dataload : true,
                  validateFinalPaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateFinalPaymentFromArtisan);
             
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
@@ -392,9 +350,6 @@ class ArtisanRecentList extends Component {
 
 
     componentDidMount(){
-        // this.setState({
-        //     paymentType: this.state.paymentType
-        //   })
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
             {
@@ -406,15 +361,13 @@ class ArtisanRecentList extends Component {
                     {
                     this.setState({
                           getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getOngoingTransaction : response.data.data},()=>{
-                                // console.log(this.state.getOngoingTransaction);
-                                console.log(this.state.getTransactionStatus);
+                               
                             });
                         }
                         });
@@ -428,7 +381,6 @@ class ArtisanRecentList extends Component {
   
      }
      paymentTypeset(e){
-        console.log(e)
         this.setState({
             paymentType:e
           },()=>{
@@ -457,7 +409,6 @@ class ArtisanRecentList extends Component {
          </span>
           </Col>
           <Col md="1"></Col>
-          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
          <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
 <button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
 <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -499,7 +450,6 @@ class ArtisanRecentList extends Component {
                 </span>
                  </Col>
                  <Col md="1"></Col>
-                 {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/>{this.props.t("Pages.object.transactionFilter")}</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -516,7 +466,6 @@ class ArtisanRecentList extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.filter(this.state.getOngoingTransaction).map((item)=> 
                     <>
-                    {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -526,9 +475,6 @@ class ArtisanRecentList extends Component {
 <Moment format=" h:mm A">
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
-
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])} */}
 
 </Col>
 <Col className="col-xs-3" sm="1">
@@ -596,9 +542,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
          onClick={()=> this.RejectModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
-        //   disabled={this.state.rejectButtonClick}
-        //  onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,2)} 
-         /></span>
+       /></span>
 
       </>
     :
@@ -631,7 +575,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
      :
      data.id == 1 ?
      <span 
-     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
      >
          <img src={logos.uploadagain} className="uplodagainicon"/>
       <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
@@ -649,7 +592,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
         {item.transactionOngoing.taxInvoiceId!=null?
         <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
         onClick={() => this.gotoTaxInvoice(item.transactionOngoing.enquiryId)}
-       // onClick={()=> this.acceptMOQModalShow}
         >
        <img src={logos.redenquiry} className="gotoiconsize"/>
        <p className="gotoenqu">{this.props.t("Pages.object.goToThisEnquiry")}</p>
@@ -657,7 +599,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
          :
          <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}
-// onClick={()=> this.acceptMOQModalShow}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>
 <p className="gotoenqu">{this.props.t("Pages.object.goToThisEnquiry")}</p>
@@ -719,7 +660,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
                                                                 <div className="buyerMOQAcceptModalButtonOuter">
-                                                                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15)}
                                                                     <span onClick={()=>this.acceptMOQModalClose(item.transactionOngoing.id)} className="buyerMOQAcceptModalCancelButton">Cancel</span>
                                                                         {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId == 15?
                                                                         <>
@@ -870,7 +810,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.orderDispatchDate }
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -879,7 +818,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.eta }
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>
@@ -912,7 +850,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <button
                                                                         disabled={this.state.uploadClick}
                                                                         onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
-                                                                        // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
                                                                 </div>

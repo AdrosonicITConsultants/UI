@@ -6,7 +6,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewChangedPI.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -29,7 +28,6 @@ export class PreviewTaxInvoice extends Component {
 
         this.state = {
           enquiryId: this.props.enquiryId,
-          // enquiryId:1435,
           time: '',
            currentDate: date,
           dataload : false,
@@ -94,7 +92,6 @@ export class PreviewTaxInvoice extends Component {
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
@@ -104,14 +101,12 @@ export class PreviewTaxInvoice extends Component {
                          
                             })
                     }
-                    console.log(this.state.getOldPIData)
                 })
 
                   TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
+                     
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -169,7 +164,6 @@ export class PreviewTaxInvoice extends Component {
                     
                              
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
                 })
                    
                 });
@@ -187,16 +181,7 @@ export class PreviewTaxInvoice extends Component {
           //  sendPI: true,
             gobackButtonClick:true,
          })
-       console.log(   
-       this.props.apr,
-       this.props.cgst,                  
-       this.props.deliverycharge ,
-       this.props.enquiryId,
-       this.props.finalamt,
-       this.props.rpu,
-       this.props.quantity,
-       this.props.sgst                    
-      );
+     
         TTCEapi.sendTaxInvoice(
             this.props.apr,
             this.props.cgst,                  
@@ -207,11 +192,9 @@ export class PreviewTaxInvoice extends Component {
             this.props.quantity,
             this.props.sgst                    
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendTax : response.data,
               },()=>{
-            console.log(this.state.sendTax);
            this.componentDidMount();
             });
             customToast.success("Tax Details sent successfully", {
@@ -276,8 +259,7 @@ export class PreviewTaxInvoice extends Component {
 </Col>
 
 <Col className="col-xs-3">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />   
-    Download this Invoice */}
+
 </Col>
 
    </Row>
@@ -287,7 +269,6 @@ export class PreviewTaxInvoice extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Tax Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -471,7 +452,7 @@ export class PreviewTaxInvoice extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -498,7 +479,7 @@ export class PreviewTaxInvoice extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
         <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
        
@@ -617,7 +598,6 @@ export class PreviewTaxInvoice extends Component {
                                         )*this.props.cgst/100)
                                         +(((this.props.quantity * this.props.rpu ))*this.props.sgst/100)).toFixed(2)}</h3>
      <h3 className="snopi wraptext">
-     {/* ₹ {this.props.advancePaidAmt!=-1?this.props.advancePaidAmt:this.props.apr} */}
          ₹ {parseInt(this.props.apr).toFixed(2)}
         </h3>
      </td>
@@ -659,7 +639,6 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="freightch snopi"><b>Company's GST No. 
        {this.state.artisanUser.companyDetails?
      this.state.artisanUser.companyDetails.gstNo!=null? this.state.artisanUser.companyDetails.gstNo:"NA":"NA"} </b></h3>
-     {/* {console.log(this.state.artisanUser.companyDetails.gstNo)} */}
         </td>
         <td style={{borderRight:"1px solid transparent"}} >
      <h3 className="snopi wraptext"></h3>
@@ -698,8 +677,6 @@ export class PreviewTaxInvoice extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
 
         </td>
         
@@ -711,7 +688,6 @@ export class PreviewTaxInvoice extends Component {
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">NA</span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">NA</span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">NA</span></h3> */}
 
 
         </td>
@@ -748,7 +724,6 @@ export class PreviewTaxInvoice extends Component {
      <h3 className="snopi wraptext rpu"></h3>
      </td>
      <td style={{borderRight:"1px solid transparent"}} className="allamtIndtax">
-     {/* All amount in Indian Rupee (<i class="fa fa-inr" aria-hidden="true"></i>) */}
      </td>
    </tr>
  </table>
@@ -761,9 +736,7 @@ export class PreviewTaxInvoice extends Component {
      <span className="ACcnodet"><b className="Discheading">NOTE : </b>This invoice is computer generated.It does not require any signature</span>    
      </Col>
 
-     {/* <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (₹)
-     </Col> */}
+   
       <Col className="col-xs-3 allamtInd">
         Subject to <b>Cuttack</b> Jurisdiction
      </Col>
@@ -786,12 +759,12 @@ export class PreviewTaxInvoice extends Component {
      </Col>
  </Row>
 }
- 
-
-   
 
 </>
-    :<></>}
+    :
+    <>
+    </>
+    }
 </React.Fragment>
         )
     }

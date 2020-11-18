@@ -4,7 +4,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 
@@ -30,16 +29,12 @@ export class BuyerCompletedList extends Component {
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getClosedEnquiries().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {   
                                 this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                    console.log(this.state);
                                 });
 
                             }
@@ -50,21 +45,18 @@ export class BuyerCompletedList extends Component {
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({innerEnquiryStages:response.data.data})
             }
         })

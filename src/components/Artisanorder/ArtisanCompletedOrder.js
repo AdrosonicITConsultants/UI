@@ -4,7 +4,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 import { useTranslation, withTranslation } from "react-i18next";
@@ -30,14 +29,11 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getClosedOrders().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {  
                                 this.setState({openEnquiries:response1.data.data, dataload:true});
                             }
                         })
@@ -47,14 +43,12 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
@@ -127,7 +121,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 </div>
                                 
                                 <a href={"/showArtisanProduct?ProductId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
-                                {/* <span ></span> */}
                                 
                             </div>
                             :
@@ -145,7 +138,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                 </div>
                                 {item.openEnquiriesResponse.productName}
-                                {/* <span ></span> */}
                             </div>
                             }
                             <div>
@@ -158,7 +150,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                   : null }
                                   </div>
                                    
-                                  {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
                                   </Col>
                               </div>
                               <div noGutters={true} >
@@ -274,14 +265,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </Col> 
                 : null }
                 <Col sm={4} className="col-xs-12 text-center">
-                {/* {item.openEnquiriesResponse.comment?
-                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
-                            <img src={logos.esc} className="raterevbtnimg"/> 
-                            Check concern raised by buyer
-                        </button>
-                :
-                null
-                } */}
+               
                 </Col>
             </Row>
            <br></br>
@@ -521,7 +505,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                     </Row>
                 </Col>
             </Row>
-            {/* <Col className="col-xs-1"></Col> */}
 
             {item.openEnquiriesResponse.userStatus === 1 ?
             <>
@@ -546,14 +529,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </Col> 
                 : null }
                 <Col sm={4} className="col-xs-12 text-center">
-                {/* {item.openEnquiriesResponse.comment?
-                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
-                            <img src={logos.esc} className="raterevbtnimg"/> 
-                            Check concern raised by buyer
-                        </button>
-                :
-                null
-                } */}
+                
                 </Col>
             </Row>
             <br/>
@@ -561,14 +537,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                  <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                      <Col sm={4} className="col-xs-12 text-center">
-                {/* {item.openEnquiriesResponse.comment?
-                           <button className="rateUnusualButton"  onClick={()=>this.FaultReport(item.openEnquiriesResponse.enquiryId)}>
-                            <img src={logos.esc} className="raterevbtnimg"/> 
-                            Check concern raised by buyer
-                        </button>
-                :
-                null
-                } */}
+                
                 </Col>
          </Row>
          :

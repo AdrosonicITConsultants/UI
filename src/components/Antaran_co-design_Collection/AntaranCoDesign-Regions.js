@@ -34,7 +34,6 @@ export default class AntaranCoDesignRegion extends Component {
     CMSApi.getRegions().then((response)=>{
       if(response)
       {
-        console.log(response.data);
         this.setState({
           regionData : response.data
         })
@@ -43,7 +42,6 @@ export default class AntaranCoDesignRegion extends Component {
    
      TTCEapi.getClusters().then((response)=>{
       this.setState({cluster : response.data.data},()=>{
-          console.log(this.state.cluster);
       });
   });
   }

@@ -4,14 +4,8 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
-// import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
-
-
 
 export class ArtisianTransactionEmpty extends Component {
     constructor(props) {
@@ -19,12 +13,8 @@ export class ArtisianTransactionEmpty extends Component {
     
         this.state = {
            
-
         }
-       
-
-
-    }      
+          }      
         browseproduct(){
             browserHistory.push("/Artisanself")
         }
@@ -33,8 +23,6 @@ export class ArtisianTransactionEmpty extends Component {
     render() {
         return (
             <React.Fragment>
-               
-               
                
                 <Row noGutters={true} className=" ">
                            
@@ -51,7 +39,6 @@ export class ArtisianTransactionEmpty extends Component {
                              </Row>         
                          </Col>   
                          <div style={{textAlign:"center"}} 
-                        //   onClick={() => this.browseproduct()}
                           >
                         <button className="wishlistblack browseproductbtn">
                         <i class="fa fa-handshake-o" aria-hidden="true" style={{marginRight:"5px"}}></i>
@@ -59,17 +46,12 @@ export class ArtisianTransactionEmpty extends Component {
                         </div>                          
                 </Row>
                 
-             
-              
-              
-              
             </React.Fragment>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

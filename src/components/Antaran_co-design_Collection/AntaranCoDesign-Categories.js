@@ -37,8 +37,7 @@ class AntaranCoDesignCategories extends Component {
     CMSApi.getCategories().then((response)=>{
       if(response)
       {
-        console.log(response.data);
-        this.setState({
+          this.setState({
           categoryData : response.data
         })
       }
@@ -46,10 +45,7 @@ class AntaranCoDesignCategories extends Component {
    
      TTCEapi.getAllProducts().then((response)=>{
       this.setState({products : response.data.data},()=>{
-          console.log(this.state.products);
-     
-          // console.log(this.props.user);
-      });
+            });
   });
   }
     render() {
@@ -99,7 +95,8 @@ class AntaranCoDesignCategories extends Component {
  <input type="button" onClick={this.loadMore} value="See More" style={{"border":"none"}}></input>
  </Col>
  <Col sm={{size:"5"}}>
- <hr className="hrlineasd "></hr> </Col>
+ <hr className="hrlineasd "></hr>
+  </Col>
 </Row>          }
        
 </Container> 

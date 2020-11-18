@@ -84,14 +84,12 @@ export class BuyerOldPi extends Component {
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
+                     
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -144,11 +142,8 @@ export class BuyerOldPi extends Component {
             
                         })
                         }
-                           
-                    
                              
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
                 })
                    
                 });
@@ -177,12 +172,10 @@ export class BuyerOldPi extends Component {
            
           
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendPI : response.data,
               },()=>{
-            console.log(this.state.sendPI);
-           
+          
             });
             customToast.success("PI Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -413,7 +406,7 @@ export class BuyerOldPi extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
+{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -529,7 +522,7 @@ export class BuyerOldPi extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -710,9 +703,6 @@ export class BuyerOldPi extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
-
         </td>
         
         </>:<>

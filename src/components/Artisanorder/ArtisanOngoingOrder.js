@@ -4,7 +4,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import Moment from 'react-moment';
 import customToast from "../../shared/customToast";
@@ -59,7 +58,6 @@ export class ArtisanOngoingOrder extends Component {
                 TTCEapi.getEnquirStages().then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         var rr = response.data.data;
                         rr[0].desc = "Quotation Accepted";
                         rr[1].desc = "Order Details";
@@ -69,26 +67,21 @@ export class ArtisanOngoingOrder extends Component {
                 TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         this.setState({enquiryStagesAvailable:response.data.data})
                     }
                 })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         this.setState({innerEnquiryStages:response.data.data})
                     }
                 })
                
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getOpenOrders().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {   
                                 this.setState({
                                     openEnquiries:response1.data.data, 
                                     dataload:true
@@ -107,14 +100,11 @@ export class ArtisanOngoingOrder extends Component {
     daysleft(name)
     {
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd = 10;
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
                                 return(diffDays);
     }
 
@@ -134,7 +124,6 @@ export class ArtisanOngoingOrder extends Component {
             orderReceivedModalOkButtonDisable: true
         });
 
-        console.log(this.state.orderReceivedCurrentId);
 
         TTCEapi.updateFaultyOrderStatusArtisan(this.state.orderReceivedCurrentId, 1).then((response)=>{
             if(response.data.valid)
@@ -206,7 +195,6 @@ export class ArtisanOngoingOrder extends Component {
             orderRecreateModalOkButtonDisable: true,
         });
         TTCEapi.recreateOrder(this.state.orderRCSelectedId).then((response)=>{
-            console.log(response.data.data);
             if(response.data.valid)
             {
                 document.getElementById('orderRecreateModal').style.display='none';
@@ -646,7 +634,6 @@ export class ArtisanOngoingOrder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -657,7 +644,6 @@ export class ArtisanOngoingOrder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -980,7 +966,6 @@ export class ArtisanOngoingOrder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -991,7 +976,6 @@ export class ArtisanOngoingOrder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }

@@ -1,19 +1,15 @@
-
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { BuyerTransaction } from './BuyerTransaction';
 import { BuyerRecentList } from '../BuyerTransaction/BuyerRecentList';
@@ -74,35 +70,24 @@ export class Buyerorder extends Component {
     }
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
        
         });
     }
     handleChange1(e) {
         const { name, value } = e.target;
-        
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false}, () => {
-       
         });
     }
 
 
     daysleftFaultyOrder(name,days)
     {
-        console.log(name);
-        //   const datecon = moment(name).format('DD-MM-YYYY');
-        //     console.log(datecon + " Converted Date");
+      
             var someDate = new Date(name);
-                                    console.log(someDate);
-                                    // var numberOfDaysToAdd = 10;
-                                    // someDate.setDate(someDate.getDate() );
-                                    // console.log(someDate); 
                                     var todayDate= new Date();
                                     const diffTime =  someDate - todayDate ;
                                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                    console.log(diffTime); 
                                     return(diffDays);
     }
 
@@ -127,12 +112,7 @@ export class Buyerorder extends Component {
         document.getElementById('id01').style.display='none';
         }
         CompleteOrderShow = (id) => {
-            
-            console.log(id)
-          
-            document.getElementById('CompleteOrder').style.display='block';
-
-        //  document.getElementById('CompleteOrder').style.display='block';
+             document.getElementById('CompleteOrder').style.display='block';
         }
         CompleteOrderClose = () => {
          document.getElementById('CompleteOrder').style.display='none';
@@ -148,17 +128,14 @@ export class Buyerorder extends Component {
             document.getElementById('CloseOrder').style.display='none';
              }
            ClosedOrderShow =()=>{
-               console.log(document.getElementById('CloseOrder'))
             document.getElementById('CloseOrder').style.display='block';
             }
            ClosedOrderClose =()=>{
             document.getElementById('CloseOrder').style.display='none';
-            // this.componentDidMount();
            }
          
            YesOrderbutton=(id,prodid)=>{
             if(prodid==2){
-                console.log("prod id 2",id)
                 TTCEapi.markEnquiryClosed(id).then((response)=>{
                     if(response.data.valid  )
                     {
@@ -172,9 +149,7 @@ export class Buyerorder extends Component {
                 }); 
                }
                else{
-                console.log("prod id 1",id)
                  TTCEapi.initializePartialRefund(id).then((response)=>{
-                     console.log(response)
                 if(response.data.valid  )
                 {
                  document.getElementById('CloseOrder').style.display='none';
@@ -182,7 +157,6 @@ export class Buyerorder extends Component {
                     }
             }); 
         }
-        //    this.componentDidMount();
            }
            Verifybox=(e)=>{
             const { checked, value } = e.target;
@@ -190,13 +164,10 @@ export class Buyerorder extends Component {
                 checked:!this.state.checked,
                 
             })
-            console.log(this.state.checked)
             let { Allartisanid } = this.state;
             if (checked){
-                console.log("agreed")
                   }
                     else{
-                        console.log("Not agreed")
                         this.setState({
                             checked:!this.state.checked,
                             
@@ -228,9 +199,7 @@ export class Buyerorder extends Component {
            }
         CompleteOrder2Show = (enquiryId) => {
             if( this.state.deliveredDate <= this.state.currentDate){
-                console.log(this.state.deliveredDate)
-                console.log(enquiryId)
-                this.setState({
+                    this.setState({
                     completebtndis:true
                 })
                 TTCEapi.markOrderAsRecieved(enquiryId,this.state.deliveredDate).then((response)=>{
@@ -250,7 +219,6 @@ export class Buyerorder extends Component {
                 
                             }
                         });
-                         console.log(response.data.data);
                         this.setState({
                             markOrderAsRecieved: response.data.data
                         })
@@ -351,16 +319,12 @@ export class Buyerorder extends Component {
                         return(diffDays);
         }
         daysleftCR(name,days){
-        console.log(name,days);
         var someDate = new Date(name);
-        console.log(someDate);
         var numberOfDaysToAdd =parseInt(days);
         someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-        console.log(someDate); 
         var todayDate= new Date();
         const diffTime =  someDate - todayDate ;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-        console.log(diffDays); 
         return(diffDays);
         }
         
@@ -400,7 +364,6 @@ export class Buyerorder extends Component {
                 {    TTCEapi.getEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     var rr = response.data.data;
                     rr[0].desc = "Quotation Accepted";
                     rr[1].desc = "Order Details";
@@ -410,14 +373,12 @@ export class Buyerorder extends Component {
                 TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesAvailable:response.data.data})
                 }
                 })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({innerEnquiryStages:response.data.data})
                 }
                 })
@@ -425,10 +386,8 @@ export class Buyerorder extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getSingleOrder(this.state.enquiryCode).then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
                             {   
-                                console.log(response1.data.data);
                                 this.setState({openEnquiries:response1.data.data,
                                                  dataload:true},()=>{
                                        
@@ -473,7 +432,6 @@ export class Buyerorder extends Component {
                 orderReceivedModalOkButtonDisable: true
             });
     
-            console.log(this.state.orderReceivedCurrentId);
     
             TTCEapi.updateFaultyOrderStatusBuyer(this.state.orderReceivedCurrentId, 1).then((response)=>{
                 if(response.data.valid)
@@ -504,7 +462,6 @@ export class Buyerorder extends Component {
         componentDidMount(){
            
      var orderDetail = localStorage.getItem('piShow');
-    console.log(orderDetail)
     if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn()
     }
@@ -520,7 +477,6 @@ export class Buyerorder extends Component {
         {    TTCEapi.getEnquirStages().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             var rr = response.data.data;
             rr[0].desc = "Quotation Accepted";
             rr[1].desc = "Order Details";
@@ -530,14 +486,12 @@ export class Buyerorder extends Component {
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             this.setState({enquiryStagesAvailable:response.data.data})
         }
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             this.setState({innerEnquiryStages:response.data.data})
         }
         })
@@ -545,15 +499,12 @@ export class Buyerorder extends Component {
         this.setState({productCategories: response.data.data.productCategories,
             yarns: response.data.data.yarns },()=>{
                 TTCEapi.getSingleOrder(params.code).then((response1)=>{
-                    console.log("")
                     if(response1.data.valid)
                     {   
-                        console.log(response1.data.data);
                         this.setState({openEnquiries:response1.data.data,
                             getSingleOrder : response1.data.data[0].openEnquiriesResponse,
                             geteta:response1.data.data[0],
                              dataload:true},()=>{
-                                console.log(this.state.geteta);
                             var data = localStorage.getItem("changeRequest");
                             if(data) {
                                 localStorage.removeItem("changeRequest");
@@ -1086,7 +1037,6 @@ export class Buyerorder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {/* {console.log(item.openEnquiriesResponse.productStatusId)} */}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -1097,7 +1047,6 @@ export class Buyerorder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1637,7 +1586,6 @@ export class Buyerorder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1668,10 +1616,7 @@ export class Buyerorder extends Component {
                       <Col className="col-xs-12" style={{textAlign:"center"}}>
                        
                    <button className="completedenqButton"
-                                    //    onClick={this.CompleteOrderShow}
                                        onClick={()=>{this.CompleteOrderShow(this.state.enquiryCode)}}
-
-                                    //    disabled = {this.state.progressid != 10}
                                         style={{border:"1px solid green"}}
                                        >
                                        <img src={logos.completedenq} className="completeenqimg" 
@@ -1701,11 +1646,7 @@ export class Buyerorder extends Component {
                                 raise a concern
                                 </button> here. </p>
                           }
-                             
-                                     
-                                      
-                               
-
+                            
                                 </Col>
                   </Row>
 </>
@@ -1742,20 +1683,11 @@ export class Buyerorder extends Component {
             <br/>
             <input className="PIinput" type="date"
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
-              // value={this.state.orderDispatchDate }
               placeholder="Enter date of receiving"
              name="deliveredDate"
               onChange={this.handleChange1}
               required/>
-              {/* <DatePicker
-              className="PIinput"
-              style={{width:"50%",borderRadius:"50px",padding:"15px"}}
-              placeholder="Enter date of receiving"
-              name="deliveredDate"
-               onChange={this.handleChange1}
-             timeFormat={false}
-             isValidDate={disableFutureDt}
-             /> */}
+             
         </Col>
         </Row>
         
@@ -1772,7 +1704,6 @@ export class Buyerorder extends Component {
                                         )}
                                                              </p>
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
-            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
             <span >
                 <button
                 style={{fontSize:"15px"}}
@@ -1819,7 +1750,6 @@ export class Buyerorder extends Component {
             <br/>and no concern can be raised against it.</p>
             
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
-            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
             <span >
                 <button
                 style={{fontSize:"15px"}}
@@ -1860,11 +1790,6 @@ export class Buyerorder extends Component {
             </Col>
         </Row>
        
-        {/* <div style={{textAlign:"center"}}>
-        <input  type="checkbox" id="agree" className="orderclose"/>
-            <label for="agree" className="labelcheckbox"> Partial Payment Received</label>
-        </div> */}
-       
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
         <button
@@ -1899,9 +1824,7 @@ export class Buyerorder extends Component {
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay">Is Partial Refund Received?</h1> 
-                {/* <br/> */}
-                {/* <b className="CRare fontplay" style={{color:"grey",fontWeight:"100",marginBottom:"15px"}}>
-                    </b>  */}
+               
                 <br/>
                  <p className="CRare fontplay">{item.openEnquiriesResponse.orderCode}</p>  
             </Col>
@@ -2021,10 +1944,6 @@ export class Buyerorder extends Component {
                                                                enquiryCode={item.openEnquiriesResponse.enquiryCode}
                                                                
                                                                 /> 
-                                                                {/* <BuyerOldPi 
-                                                                 enquiryId={this.state.enquiryCode}
-                                                                 enquiryCode={item.openEnquiriesResponse.enquiryCode}
-                                                                /> */}
                                                                
                                                                 </Col>
                                                                 </>

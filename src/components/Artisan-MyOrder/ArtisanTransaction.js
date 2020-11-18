@@ -4,7 +4,6 @@ import { Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddo
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,12 +11,8 @@ import { toast } from "react-toastify";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
 import queryString from 'query-string';
-// import { ArtisianTransactionEmpty } from './ArtisianTransactionEmpty';
 import thunk from 'redux-thunk';
-// import { EditorInsertComment } from 'material-ui/svg-icons';
 import { useTranslation, withTranslation } from "react-i18next";
-
-
 
  class ArtisanTransaction extends Component {
     constructor(props) {
@@ -59,7 +54,6 @@ import { useTranslation, withTranslation } from "react-i18next";
     }  
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showDeliveryValidation: false ,completebtndis:false}, () => {
        
         });
@@ -112,12 +106,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                 this.setState({
                  notifyId:notifyId
              },()=>{
-                 console.log(this.state.notifyId);
              })
-            
-     
-        
-    }
+               }
 
     notifyModalclose = (id) => {
         document.getElementById('notifyModal'+id).style.display='none';
@@ -141,10 +131,8 @@ import { useTranslation, withTranslation } from "react-i18next";
             formData.append( 
               "myFile", 
               this.state.selectedFile, 
-            //   this.state.selectedFile.name 
             );
            
-            console.log(this.state.selectedFile); 
             TTCEapi.submitDeliveryChallan(
                 enquiryId,
                 this.state.selectedFile,
@@ -162,7 +150,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                         uploadClick:false
                   
                 },()=>{
-                    // console.log(response)
                     this.componentDidMount()
                 });
               
@@ -184,7 +171,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         
         else{
             this.setState({
-                // rejectButtonClick:true,
                 showDeliveryValidation: true,
               })
            }
@@ -197,24 +183,17 @@ import { useTranslation, withTranslation } from "react-i18next";
     
     acceptModalShow(id,enquiryId){
         
-        console.log("abcfdrf");
-        // document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
 
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
              document.getElementById('acceptMOQModal'+ id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label);
-     
-
+            
             });
         }
         });
@@ -228,17 +207,12 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
             if(response.data.valid)
         {
-            // this.componentDidMount();
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
                 receiptlabel:response.data.data.label
               
             },()=>{
                 document.getElementById('acceptMOQModal' + id).style.display='block';
-                console.log(this.state.getAdvancedPaymentReceipt);
-               console.log(this.state.getAdvancedPaymentReceipt.paymentId);
-               console.log(this.state.getAdvancedPaymentReceipt.label)
-          
           
             });
         }
@@ -248,7 +222,6 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
 
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -256,10 +229,8 @@ import { useTranslation, withTranslation } from "react-i18next";
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
 
@@ -280,16 +251,13 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
     gotoTaxInvoice(eid){
         localStorage.setItem("piShow", 1);
-        console.log(eid)
-        // browserHistory.push("/artisanorder?code="+eid)
         var win = window.open("/artisanorder?code="+eid, '_blank');
         win.focus();
        }
     NotifyAgain(actionId,respectiveActionId,id){
         this.setState({ notifyButtonClick:true
            })
-        console.log(actionId);
-        console.log(respectiveActionId);
+      
         TTCEapi.notifyAgain(actionId,respectiveActionId).then((response)=>{
             if(response.data.valid)
             {
@@ -304,8 +272,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                  dataload : true,
                  notifyAgain : response.data.data,
                  notifyButtonClick:false,},()=>{
-                console.log(this.state.notifyAgain);
-            
+         
             });
             document.getElementById('notifyModal'+id).style.display='none';
         }
@@ -321,8 +288,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
     
     acceptorReject(id,enquiryId,status){
-        console.log(enquiryId);
-        console.log(status);
+       
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateAdvancePaymentFromArtisan(enquiryId,status).then((response)=>{
@@ -339,7 +305,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 rejectButtonClick:false,
                  dataload : true,
                  validateAdvancePaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateAdvancePaymentFromArtisan);
             
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
@@ -355,8 +320,7 @@ import { useTranslation, withTranslation } from "react-i18next";
         });
     }
     acceptorRejectFinal(id,enquiryId,status){
-        console.log(enquiryId);
-        console.log(status);
+      
         this.setState({ acceptButtonClick:true,
             rejectButtonClick:true})
         TTCEapi.validateFinalPaymentFromArtisan(enquiryId,status).then((response)=>{
@@ -373,7 +337,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 rejectButtonClick:false,
                  dataload : true,
                  validateFinalPaymentFromArtisan : response.data.data},()=>{
-                console.log(this.state.validateFinalPaymentFromArtisan);
             
             });
             document.getElementById('acceptMOQModal'+id).style.display='none';
@@ -403,16 +366,13 @@ import { useTranslation, withTranslation } from "react-i18next";
                     if(response.data.valid)
                     {
                     this.setState({
-                        //  dataload : true,
                          getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getTransactions : response.data.data.ongoingTransactionResponses},()=>{
-                                 console.log(this.state.getTransactions);
                                  
                             });
                         }
@@ -441,7 +401,6 @@ import { useTranslation, withTranslation } from "react-i18next";
               
           },()=>{
              
-             console.log(this.state.fetchEnquiryAndPaymentDetails);
            
             });
         }
@@ -449,7 +408,6 @@ import { useTranslation, withTranslation } from "react-i18next";
     })
      }
      paymentTypeset(e){
-        console.log(e)
         this.setState({
             paymentType:e
           },()=>{
@@ -481,7 +439,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.state.getTransactions.map((item)=> 
                     <>
-                    {/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])} */}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -491,9 +448,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 <Moment format=" h:mm A">
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
-
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)} */}
-{/* {console.log(this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1])} */}
 
 </Col>
 <Col className="col-xs-3" sm="1">
@@ -561,8 +515,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
             /> 
         <img src={logos.cancel}className="acceptrejecticon mlbtn"
          onClick={()=> this.RejectModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)}
-        //   disabled={this.state.rejectButtonClick}
-        //  onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,2)} 
+      
          /></span>
 
       </>
@@ -596,7 +549,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
      :
      data.id == 1 ?
      <span 
-     // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
      >
          <img src={logos.uploadagain} className="uplodagainicon"/>
       <p style={{marginTop:"5px"}}>upload receipt</p></span>:""
@@ -610,13 +562,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 )}
 
 </Col>
-{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
- onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}
-// onClick={()=> this.acceptMOQModalShow}
- >
-<img src={logos.redenquiry} className="gotoiconsize"/>
-<p className="gotoenqu"> Go to this enquiry</p>
-</Col> */}
+
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}
 
@@ -726,20 +672,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 
 {/* ___________________________________________________________________________________________________ */}
 {/* _________________________________________Notification_________________________________________________ */}
-{/* {this.state.getTransactionActions.map((data)=> 
-<>
-{
-    item.transactionOngoing.isActionCompleted == 0 ?
-    
-    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanAction == data.id ? 
-    " "
-    :""
-    :
-    ""
-   
-}
-    </>
-)} */}
 
                                           
                                                         <div id={"notifyModal"+item.transactionOngoing.id} class="w3-modal">
@@ -760,14 +692,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         
                                                                         <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
 
-                                                                        {/* <div className="approvenote">
-                                                                            Once you approved it,the
-                                                                           <span className="buyerMOQAcceptModalDescSpan">product stage cannot be reverted.</span> 
-                                                                           <br/>Kindly make sure to <b>check your account balance</b> is reflected with <br/> 
-                                                                           the amount.Best practise is to check with your bank,or in <br/>
-                                                                           <b>bank statement</b> from the <b>authorised bank sources.</b>
-                                                                           
-                                                                        </div> */}
                                                                     </Col>
                                                                 </Row>
                                                                 <hr className="buyerMOQAcceptModalHr"/>
@@ -802,11 +726,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
  {/* _________________________________________Upload Delivery receipt_________________________________________________ */}
                                           
                                         <div id={"deliveryReceipt"+item.transactionOngoing.id}class="w3-modal" style={{paddingTop:"27px"}}>
-                                           {/* {this.state.deliveryChallanUploaded?
-                                           <>
-                                           "hhhh"
-                                           </>
-                                            : */}
+                                      
                                             <>
                                     <div class="w3-modal-content w3-animate-top modalBoxSize">
                                                                 <div class="w3-container buyerMOQAcceptModalContainer">
@@ -843,7 +763,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.orderDispatchDate }
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -852,7 +771,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                         <br/>
                                                             <input className="PIinput" type="date"
                                                         
-                                                            // value={this.state.eta }
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>
@@ -885,7 +803,6 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                                         <button
                                                                         disabled={this.state.uploadClick}
                                                                         onClick={() => this.uploadReceiptandSend(item.transactionOngoing.enquiryId,item.transactionOngoing.id)}
-                                                                        // onClick={() => this.acceptorReject(item.transactionOngoing.enquiryId,1)}
                                                                     className="senddelButton"><i class="fa fa-paper-plane" aria-hidden="true"style={{marginRight:"5px"}}></i>
                                                                    Send</button></span>
                                                                 </div>
@@ -923,11 +840,9 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }
 
 const connectedLoginPage = connect(mapStateToProps)(ArtisanTransaction);
-// export default connectedLoginPage;
 export default withTranslation()(connectedLoginPage);

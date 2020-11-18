@@ -4,15 +4,9 @@ import {Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
-// import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
-// import { EmptyBuyerRecentList } from './EmptyBuyerRecentList';
-
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -50,7 +44,6 @@ export class BuyerTransaction extends Component {
        
     }    
     uplodFinalreceiptModalShow(enquiryId){
-        console.log(enquiryId)
         this.setState({
             selectedFileName:""
         })
@@ -66,8 +59,6 @@ export class BuyerTransaction extends Component {
                       paidAmount:response.data.data.payableAmount,
                       dataload : true,
                     },()=>{
-                    // console.log(this.state.getPaymentDetailsForFinalPayment);
-                
                 });
             }
             });
@@ -91,14 +82,11 @@ export class BuyerTransaction extends Component {
         })
        
     } 
-    //   {     "enquiryId": 698, "pid":18,    "invoiceId": 2,   "type":2,  "paidAmount": 500,    "totalAmount": 1000    }
     uploadReceiptandSend(enquiryId){
-      
-        if(this.state.selectedFileName){
+           if(this.state.selectedFileName){
           this.setState({
               rejectButtonClick:true
             })
-      // document.getElementById('acceptMOQModal').style.display='block';
                   
           const formData = new FormData(); 
           formData.append( 
@@ -107,7 +95,6 @@ export class BuyerTransaction extends Component {
             this.state.selectedFile.name 
           );
          
-          console.log(this.state.selectedFile); 
           TTCEapi.FinalPayment(
               this.state.selectedFile,
               enquiryId,
@@ -131,8 +118,7 @@ export class BuyerTransaction extends Component {
                  rejectButtonClick:false
                 
               },()=>{
-                  console.log(response)
-             
+            
               });
             
         }
@@ -195,7 +181,6 @@ export class BuyerTransaction extends Component {
     }
   
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -203,22 +188,18 @@ export class BuyerTransaction extends Component {
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
       
       gotoTaxInvoice(eid){
         localStorage.setItem("piShow", 1);
-        // browserHistory.push("/buyerorder?code="+eid)
         var win = window.open("./buyerorder?code="+eid, '_blank');
         win.focus();
        }
     gotoEnquiry(enquiryId){
         localStorage.setItem("piShow", 1);
-        // browserHistory.push("/buyerEnquiryDetails?code="+enquiryId)
         var win = window.open("./buyerEnquiryDetails?code="+enquiryId, '_blank');
         win.focus();
     }
@@ -233,14 +214,12 @@ export class BuyerTransaction extends Component {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
-                console.log(this.state.getTransactionStatus);
                 TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.ongoingTransactionResponses},()=>{
-                         console.log(this.state.getTransactions);
                          
                     });
                 }
@@ -252,15 +231,13 @@ export class BuyerTransaction extends Component {
                     this.setState({
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getTransactions : response.data.data.ongoingTransactionResponses},()=>{
-                                 console.log(this.state.getTransactions);
-                                 
+                                
                             });
                         }
                         });
@@ -274,8 +251,6 @@ export class BuyerTransaction extends Component {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.ongoingTransactionResponses},()=>{
-                         console.log(this.state.getTransactions);
-                         
                     });
                 }
                 });
@@ -284,8 +259,6 @@ export class BuyerTransaction extends Component {
         }
      });
 
-    
-  
      }
   
 
@@ -305,16 +278,7 @@ export class BuyerTransaction extends Component {
                     </Row>
                         :
                 <>
-                 {/* <Row className="mt-5">
-                       <Col md="1"></Col>
-                 <Col md="3" >
-                 <InputGroup size="lg"className="searchenq">
-                 
-                    <input style={{height:"30px",border:"none",fontSize:"14px"}} value={this.state.filter} onChange={this.handleSearchChange} type="text" class="form-control empty searchenq" id="iconified" placeholder="&#xF002; Search your transaction by enquiry Id"/>
-
-                </InputGroup>
-                 </Col>
-                 </Row> */}
+                
                  <Row noGutters={true}>
                      <Col md="1"></Col>
                      <Col md="3">
@@ -324,7 +288,6 @@ export class BuyerTransaction extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.state.getTransactions.map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3" sm="1"></Col>
@@ -336,7 +299,6 @@ export class BuyerTransaction extends Component {
 <p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
 <img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
@@ -353,7 +315,6 @@ export class BuyerTransaction extends Component {
  payment received against Invoice for  {item.orderCode !=null?" order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
-{/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerText} } />
@@ -409,19 +370,12 @@ export class BuyerTransaction extends Component {
     :
     data.id == 1 ?
     
-    // <span 
-    // onClick={() => this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)}
-    // >
-    //     <img src={logos.uploadagain} className="uplodagainicon"/>
-    //  <p style={{marginTop:"5px"}}>upload receipt</p></span>
     <>
     { this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==2?
     <>
     <span 
-// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
 >
     <img src={logos.uploadagain} 
-    //  onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.id,item.transactionOngoing.enquiryId)} 
     onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
     className="uplodagainicon"/>
  <p style={{marginTop:"5px"}}>upload receipt</p></span>
@@ -429,7 +383,6 @@ export class BuyerTransaction extends Component {
     :
     <>
     <span 
-// onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
 >
     <img src={logos.uploadagain} 
      onClick={()=>this.uplodFinalreceiptModalShow(item.transactionOngoing.enquiryId)} 
@@ -455,10 +408,7 @@ export class BuyerTransaction extends Component {
 </>
 )}
 </Col>
-{/* <Col className="col-xs-3" sm="1" style={{textAlign:"center"}}  onClick={() => this.gotoEnquiry(item.transactionOngoing.enquiryId)}>
-<img src={logos.redenquiry} className="gotoiconsize"/>
-<p className="gotoenqu"> Go to this enquiry</p>
-</Col> */}
+
 </Row>
 {/* _________________________________________Upload Final Payment Receipt_________________________________________________ */}
                                           
@@ -495,7 +445,6 @@ export class BuyerTransaction extends Component {
                                                                                    </div>
                                                                                  
                                                                               </Col>
-                                                                              {/* { console.log(this.state.selectedFile) } */}
                                                                           </Row>
                                                                           
                                                                     }

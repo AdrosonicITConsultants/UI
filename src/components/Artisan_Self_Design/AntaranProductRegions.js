@@ -41,29 +41,17 @@ class AntaranProductRegions extends Component {
         };
       
     }
-//     <select  className="SelectCategory"  
-//     id="cluster"
-//     name="cluster" 
-//     onChange={(e) => this.handleCluster(e)}>
-//        <option key = '0' clusterid = '-1'  value='Select Cluster'>View All Products</option>
-//        {this.state.productCategoriesdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.productDesc}>{item.productDesc}</option>)}
-//    </select>
+
     handleCluster(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('clusterid');
-        console.log(option);
-        
-        this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
-          console.log(this.state);
+              this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
           
         });
         
       }
-    componentWillMount(){
-
-    }
+  
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
 
@@ -71,7 +59,6 @@ class AntaranProductRegions extends Component {
 
             if(response)
             {
-              console.log(response.data);
               this.setState({
                 regionData : response.data,
                 clusterID : params.clusterid,
@@ -90,7 +77,6 @@ class AntaranProductRegions extends Component {
         });
 
         TTCEapi.getClusterProducts(parseInt(params.clusterid)).then((response)=>{
-            console.log(response.data.data);
             this.setState({
                 dataload : true,
                 heading : response.data.data.cluster.desc,
@@ -98,9 +84,7 @@ class AntaranProductRegions extends Component {
                });
         });
         TTCEapi.getProducts().then((response)=>{
-            console.log(response);
             this.setState({productCategoriesdata : response.data.data},()=>{
-                console.log(this.state);
             });
 
         });
@@ -210,9 +194,6 @@ class AntaranProductRegions extends Component {
                                     No Products found
                                 </Row>}
                                
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
                             </Row>
                         </Col>
                     </Row>

@@ -40,21 +40,15 @@ class AntaranProductCategories extends Component {
       
     }
     handleCluster(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('clusterid');
-        console.log(option);
-        
+              
         this.setState({ [e.target.name]: e.target.value , clusterid : option}, ()=> {
-          console.log(this.state);
-          
         });
         
       }
-    componentWillMount(){
-
-    }
+ 
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
 
@@ -62,7 +56,7 @@ class AntaranProductCategories extends Component {
 
             if(response)
             {
-              console.log(response.data);
+            
               this.setState({
                 categoryData : response.data,
                 clusterID : params.clusterid,
@@ -81,7 +75,6 @@ class AntaranProductCategories extends Component {
         });
 
         TTCEapi.getProductCategoryProducts(parseInt(params.categoryId)).then((response)=>{
-            console.log(response.data.data.products);
             this.setState({
                 dataload : true,
                 heading : response.data.data.productCategory,
@@ -197,9 +190,6 @@ class AntaranProductCategories extends Component {
                                     No Products found
                                 </Row>}
                                
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
                             </Row>
                         </Col>
                     </Row>

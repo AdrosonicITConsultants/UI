@@ -1,18 +1,15 @@
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import  ArtisanTransaction  from './ArtisanTransaction';
 import { PIchange } from './PIChange';
@@ -76,7 +73,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         });
     }
     inprogresss = () => {
-        console.log("inprogress");
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         TTCEapi.progressUpdate(parseInt(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId),parseInt(params.code),parseInt(this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId)).then((response)=>{
@@ -99,7 +95,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         var innerID = 0 ;
-        console.log(this.state.Progressidnext);
         if(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId == 4)
         {
             innerID = 1;
@@ -125,7 +120,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                         autoClose: true,
                       });
                         this.componentDidMount();
-                        console.log("updated");
                     }
                     else{
                         customToast.error(response.data.errorMessage, {
@@ -150,7 +144,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                         autoClose: true,
                       });
                         this.componentDidMount();
-                        console.log("updated");
                     }
                     else{
                         customToast.error(response.data.errorMessage, {
@@ -179,7 +172,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 
         }
         else{
-        console.log("open");
         document.getElementById('dismod').style.display='block';
         }
         
@@ -295,14 +287,12 @@ import { useTranslation, withTranslation } from "react-i18next";
     componentDidMount(){
     window.scrollTo(0, 0);
     let params = queryString.parse(this.props.location.search);
-    console.log(params);
     this.state.enquiryCode = params.code;
     TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {   TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 var rr = response.data.data;
                 rr[0].desc = "Quotation Accepted";
                 rr[1].desc = "Order Details";
@@ -312,22 +302,18 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
             TTCEapi.getInnerEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({innerEnquiryStages:response.data.data})
             }
         })
-            console.log(response);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
                     TTCEapi.getClosedOrder(params.code).then((response1)=>{
-                        console.log("")
                         var nextProgressid = 0;
                         var progressid = 0;
                         
@@ -348,7 +334,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 if(response1.data.data[0].openEnquiriesResponse.enquiryStageId == 5 && response1.data.data[0].openEnquiriesResponse.innerEnquiryStageId < 5)
                                 {
                                     nextProgressid =response1.data.data[0].openEnquiriesResponse.enquiryStageId;
-                                    // nextinnerid =  response.data.data[0].openEnquiriesResponse.innerEnquiryStageId + 1
                                     progressid= 4
 
                                 }
@@ -376,14 +361,12 @@ import { useTranslation, withTranslation } from "react-i18next";
                         }
                         
                         if(response1.data.valid)
-                        {   console.log("heree");
-                            console.log(response1.data.data);
+                        {   
                             this.setState({openEnquiries:response1.data.data,
                                 progressid: progressid,
                                 Progressidnext : nextProgressid,
                                     dataload:true
                             },()=>{
-                                // console.log(this.state);
                             });
                             
                         }
@@ -397,11 +380,9 @@ import { useTranslation, withTranslation } from "react-i18next";
     TTCEapi.getChangeRequestForArtisan(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
         {
-            // console.log(response.data.data);
             this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                 dataload:true})
         }
-        console.log(this.state.getChangeRequestForArtisan)
     })
     TTCEapi.getClosedOrder(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
@@ -411,7 +392,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                
                            })
         }
-        // console.log(this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus)
     })
     TTCEapi.getPi(this.state.enquiryCode).then((response)=>{
         if(response.data.valid)
@@ -421,7 +401,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                
                            })
         }
-        console.log(this.state.getPi)
     })
     }
     render() {
@@ -462,7 +441,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
-                        {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                             {this.props.t("Pages.object.Converted to order on")} :
@@ -489,11 +467,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                             <a href={"/showBArtisanProduct?productId="+item.openEnquiriesResponse.productId } className="leEnqprodName">{item.openEnquiriesResponse.productName}</a>
                                         </div>
                                         <div>
-                                            {/* <div noGutters={true} >
-                                                <Col className="leEnqid bold">
-                                                Order Id : {item.openEnquiriesResponse.enquiryCode}
-                                                </Col>
-                                            </div> */}
+                                          
                                             <div noGutters={true} >
                                                 <Col className="lesmallEnqid bold">
                                                 {this.props.t("Pages.object.Enquiry id")} : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
@@ -532,12 +506,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                             </Col>
 
                                         </div>
-                                        {/* <div noGutters={true} className="" >
-                                            <Col className="leEnqprodcode ">
-                                                <span className="leEnqprodbn ">Brand Name : </span>
-                                                <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName ? item.openEnquiriesResponse.companyName : "NA" }</span>                                   
-                                            </Col>
-                                        </div> */}
+                                       
                                     </div>
                                 </Col>
                                 <Col sm="3" className="text-right">
@@ -600,17 +569,13 @@ import { useTranslation, withTranslation } from "react-i18next";
                             {item.openEnquiriesResponse.productStatusId === 2
                             ?
                             <Col className="col-xs-4">
-                                {console.log("item.openEnquiriesResponse.productStatusId")}
-
-                                 {console.log(item.openEnquiriesResponse.productStatusId)}
+                                
                             </Col>
                             
                             :
                         
                             <Col className="col-xs-4">
-                                 {console.log("item.openEnquiriesResponse.productStatusId")}
-
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
+                                
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
                             <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
                              onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
@@ -622,9 +587,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                         <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
                             <div>
                             <Row noGutters={true}>
-                                {/* <Col className="col-xs-12 CSheading">
-                                    hh
-                                </Col> */}
+                               
                             </Row>
                             </div>
                             <div class="w3-container">
@@ -670,7 +633,8 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                             </Col>
                      
-                            }     </Row>
+                            }   
+                              </Row>
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
@@ -814,12 +778,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         </Col>
 
                                     </div>
-                                    {/* <div noGutters={true} className="" >
-                                            <Col className="leEnqprodcode ">
-                                                <span className="leEnqprodbn ">Brand Name : </span>
-                                                <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName ? item.openEnquiriesResponse.companyName : "NA" }</span>                                   
-                                            </Col>
-                                        </div> */}
+                                   
                                     </div>
                                  </Col>
                                 <Col sm="3" className="text-right">
@@ -906,9 +865,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                         <div class="w3-modal-content w3-animate-top modalBoxSizeCSCR">
                             <div>
                             <Row noGutters={true}>
-                                {/* <Col className="col-xs-12 CSheading">
-                                    hh
-                                </Col> */}
+                               
                             </Row>
                             </div>
                             <div class="w3-container">
@@ -1113,7 +1070,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         <>
                                         {this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus==0 ||this.state.getClosedOrder[0].openEnquiriesResponse.changeRequestStatus==2?
                                         <>
-                                          {console.log("status-0/2")}
                                          <Col sm={10}>
                                         <PreviewChangedPI 
                                         enquiryId={this.state.enquiryCode}
@@ -1126,7 +1082,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                               :
                                              <>
-                                             {console.log("status-1/3")}
                                               <Col sm={10}>
                                                 <PIchange 
                                                 enquiryId={this.state.enquiryCode}
@@ -1136,9 +1091,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                
                                             </Col>
                                             </>}
-                                       
-                                  
-                                        {/* <Col sm={1}></Col> */}
                                        
                                         </>
                                         :
@@ -1156,13 +1108,11 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.historyProductId == null
                                                                     ?
                                                                     <>
-                                                                     {console.log("mine3")}
                                                                     {
                                                                     this.state.openEnquiries[0].openEnquiriesResponse.productStatusId == 2
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
-                                                                     {console.log("mine4")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1175,7 +1125,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                       {this.state.openEnquiries[0].openEnquiriesResponse.changeRequestOn === 0
                                                                         ?
                                                                         <Row noGutters={true}>
-                                                                             {console.log("mine5")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1184,8 +1133,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                         </Row>
                                                                         
                                                                         : <>
-                                                                        {/* <CRaccepted /> */}
-                                                                        {console.log("mine7")}
+                                                                       
                                                                         <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                          openPI={this.moqDetailsbtn}
@@ -1205,7 +1153,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                     ?
                                                                     <>
                                                                      <Row noGutters={true}>
-                                                                     {console.log("mine2")}
                                                                         <Col className="col-xs-12 bold font20 text-center">
                                                                             <br></br>
                                                                             Change request is not applicable for in stock Products.
@@ -1219,7 +1166,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                         ?
                                                                         
                                                                         <Row noGutters={true}>
-                                                                             {console.log("mine1")}
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
                                                                                 Change request disabled by artisan
@@ -1229,25 +1175,12 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                         
                                                                         : <>
                                                                         
-                                                                        {console.log("mine")}
                                                                          <ArtisanChangeRequest
                                                                          enquiryId={this.state.enquiryCode}
                                                                          openPI={this.moqDetailsbtn}
                                                                          completed={true}
                                                                         />
-                                                                        {/* {this.state.getChangeRequestForArtisan.length>0?
-                                                                         <ArtisanChangeRequest
-                                                                         enquiryId={this.state.enquiryCode}
-                                                                        />
-                                                                    :
-                                                                    <Row noGutters={true}>
-                                                                    <Col className="col-xs-12 bold font20 text-center">
-                                                                        <br></br>
-                                                                        Change request Not available
-                                                                        <br></br>
-                                                                    </Col>
-                                                                </Row>
-                                                                    } */}
+                                                                        
                                                                        
                                                                         </>
                                                                         }
@@ -1277,8 +1210,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                     {this.state.taxInvoice ? 
                                     <>
-                                    {/* <Col sm={1}></Col> */}
-                                    {console.log("artitax")}
                                     <Col sm={10}>
                                         
                                     <ArtisanTaxInvoice

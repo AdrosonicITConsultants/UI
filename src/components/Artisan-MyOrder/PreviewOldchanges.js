@@ -6,7 +6,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./PreviewOldchanges.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
@@ -84,18 +83,15 @@ export class PreviewOldchanges extends Component {
     }
 
     componentDidMount() {
-      console.log(this.props.enquiryId)
       TTCEapi.getProductUploadData().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log("ffffind")
-                        console.log(response.data.data);
+                      
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
@@ -148,11 +144,9 @@ export class PreviewOldchanges extends Component {
             
                         })
                         }
-                    console.log(this.state.previewPI)       
-                    
+              
                              
                     }
-                    // console.log(this.state.buyerCustomProduct.weftYarn.yarnDesc);
                 })
                    
                 });
@@ -181,11 +175,9 @@ export class PreviewOldchanges extends Component {
            
           
            ).then((response)=>{
-               console.log(response);
                if(response.data.valid){
             this.setState({sendPI : response.data,
               },()=>{
-            console.log(this.state.sendPI);
            
             });
             customToast.success("PI Details sent successfully", {
@@ -236,7 +228,6 @@ export class PreviewOldchanges extends Component {
 </Col>
 
 <Col className="col-xs-4">
-   {/* <img src={logos.downloadpdficon}style={{height:"15px"}} />    Download this Invoice */}
 </Col>
 
    </Row>
@@ -246,7 +237,6 @@ export class PreviewOldchanges extends Component {
 {/* -----------------------------------------text------------------------------------- */}
 <Row noGutters={true} className="Invoicemb" >
     <Col className="col-xs-12"> Proforma Invoice 
-    {/* {this.state.previewPiOrder.id} */}
 </Col>
 </Row>
 
@@ -421,7 +411,6 @@ export class PreviewOldchanges extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{console.log("Product  Simple")}
 <>
 
 <td className="tdmarginleft">
@@ -472,12 +461,6 @@ export class PreviewOldchanges extends Component {
      <p>-Weight :</p>
      <div className="sbred wraptext">
      {this.state.previewPI.productHistory.productCategoryDesc} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
-        
-        {/* {this.state.previewPI.productHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
-          :
-
-          ""} */}
        
      </div>
      <br/>
@@ -537,7 +520,7 @@ export class PreviewOldchanges extends Component {
         </>
         :
         <>
-        {console.log("Product  custom")}
+        {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
@@ -619,7 +602,6 @@ export class PreviewOldchanges extends Component {
      
     </>
     }
-     {/* {this.state.customweftYarnCount} */}
     
         </td>
         </>
@@ -713,8 +695,6 @@ export class PreviewOldchanges extends Component {
         :
         "NA"}
           </span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">{this.state.previewPiOrder.hsn}</span></h3> */}
-
 
         </td>
         
@@ -726,8 +706,6 @@ export class PreviewOldchanges extends Component {
      
       <h3 className="freightch snopi"><b>Account No.</b> <span className="ACcnodet">NA</span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">NA</span></h3>
-      {/* <h3 className="freightch snopi"><b>HSN code:</b> <span className="hsncnodet">NA</span></h3> */}
-
 
         </td>
         </>}
@@ -791,35 +769,23 @@ export class PreviewOldchanges extends Component {
 
   { this.state.previewPI ?
   <>
-{  console.log('btn1')}
-{  console.log(this.props.previewnewPi)}
-
-
     <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
  onClick={() => this.BacktoNewPiPreview()}>Go Back </button> 
  </>
 :
 <>
-{  console.log('btn2')}
 <button className="gobacktoeditdetart" disabled={this.state.gobackButtonClick} 
  onClick={() => this.BacktoPreview()}>Go Back </button> 
  </>
 }
 
-{/* {this.state.piSend === 1?
-""
-:
-<button disabled={this.state.sendPI} className="Raiseinvbtn"onClick={() => this.sendPI()}><img src={logos.Iconpaymentinvoice} className="InvImg"/>  Send updated PI</button>
 
-} */}
 </span>
- {/* <p className="btncol  belowprevtext">  Please Note: The pro forma invoice will be updated</p> */}
      </Col>
  </Row>
 {/* -------------------------------------------------------------------------- */}
 
-{/* </Container> */}
-{/* <Footer/> */}
+
 </>
     :<><Row noGutters={true}>
     <Col className="col-xs-12  text-center">
@@ -832,7 +798,6 @@ export class PreviewOldchanges extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

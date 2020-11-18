@@ -13,7 +13,6 @@ import Footer from "../footer/footer";
    
    constructor(props){
     super(props);
-    console.log(this.props.Image)
     this.state = {
      Image:this.props.Image,
      ImageUrl:this.props.history == true ? TTCEapi.ImageUrl+'HistoryProduct/' + this.props.Image[0].productHistoryId :  TTCEapi.ImageUrl+'Product/' + this.props.Image[0].productId,
@@ -27,13 +26,10 @@ import Footer from "../footer/footer";
     render () {
       
       return (
-        
-        
+       
         <React.Fragment>
           
             <div class="BPDcontainer" >
-        
-
             <ul class="thumbnails">
               {this.state.Image[0]?
              <li>

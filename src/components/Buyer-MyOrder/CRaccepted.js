@@ -38,7 +38,6 @@ export class CRaccepted extends Component {
     TTCEapi.getChangeRequestItemTable().then((response)=>{
       if(response.data.valid)
       {
-          console.log(response.data.data);
           this.setState({
               getChangeRequestItemTable: response.data.data
           })
@@ -48,7 +47,6 @@ export class CRaccepted extends Component {
     TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
       if(response.data.valid)
       {
-        console.log(response.data.data);
         this.setState({
             getChangeRequestForArtisan: response.data.data.changeRequestItemList,
             getCRDate: response.data.data.changeRequest

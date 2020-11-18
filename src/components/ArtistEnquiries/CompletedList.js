@@ -31,14 +31,11 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getClosedEnquiries().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {   
                                 this.setState({openEnquiries:response1.data.data, dataload:true});
                             }
                         })
@@ -48,14 +45,12 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
@@ -135,7 +130,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     
                                     {item.openEnquiriesResponse.productName}
-                                    {/* <span ></span> */}
                                     
                                 </div>
                                 }
@@ -144,7 +138,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                       <Col className="leEnqid bold">
                                       <div dangerouslySetInnerHTML={{ __html: item.openEnquiriesResponse.enquiryCode }} />
 
-                                      {/* Enquiry Id : {item.openEnquiriesResponse.enquiryCode} */}
                                       </Col>
                                   </div>
                                   <div noGutters={true} >
@@ -354,8 +347,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     </div>
                                     
                                     <a href={"/showArtisanProduct?ProductHistoryId="+item.openEnquiriesResponse.historyProductId } className="leEnqprodName">{item.openEnquiriesResponse.productHistoryName}</a>
-                                    {/* <span ></span> */}
-                                    
+                                   
                                 </div>
                                 :
                                 <div className="imageinlist" > 

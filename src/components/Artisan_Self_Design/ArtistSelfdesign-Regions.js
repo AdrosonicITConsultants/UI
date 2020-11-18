@@ -31,18 +31,12 @@ export default class ArtistSelfdesignRegions extends Component {
         return {visible: prev.visible + 6};
       });
     }
-    // ProductCatalog = (cluster)=>{
-    //   debugger;
-    //     console.log(cluster);
-    //   browserHistory.push("/Artisianself/regions/ProductRegions?clusterid=" + this.props.data.id )
-    // }
-  
+   
   componentDidMount(){
      
     CMSApi.getRegions().then((response)=>{
       if(response)
       {
-        console.log(response.data);
         this.setState({
           regionData : response.data
         })
@@ -51,13 +45,10 @@ export default class ArtistSelfdesignRegions extends Component {
    
      TTCEapi.getClusters().then((response)=>{
       this.setState({cluster : response.data.data},()=>{
-          console.log(this.state.cluster);
       });
   });
   }
     render() {
-      // const { clusterid } = this.props;
-
         return (
          
            <Container>
@@ -104,10 +95,8 @@ export default class ArtistSelfdesignRegions extends Component {
  </Col>
  <Col sm={{size:"5"}}>
  <hr className="hrlineasd "></hr> </Col>
-</Row>          }
-       
-
-
+</Row>        
+  }
  
 </Container> 
 

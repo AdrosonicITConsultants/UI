@@ -12,12 +12,9 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { PreviewInvoice } from './PreviewInvoice';
 import { useTranslation, withTranslation } from "react-i18next";
-
-
 
  class SingleEnquiry extends Component {
     constructor() {
@@ -69,8 +66,6 @@ import { useTranslation, withTranslation } from "react-i18next";
             innerEnquiryStages:[],
             enquiryStagesMTO:[],
            
-            
-            // <img src={this.state.ImageUrl + data.productId + '/' + data.lable } />
         }
     }
     ToggleDelete = () => {
@@ -81,7 +76,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         document.getElementById('id01').style.display='none';
        }
        inprogresss = () => {
-        console.log("inprogress");
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         TTCEapi.progressUpdate(parseInt(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId),parseInt(params.code),parseInt(this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId)).then((response)=>{
@@ -106,7 +100,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.ToggleDeleteClose();
         let params = queryString.parse(this.props.location.search);
         var innerID = 0 ;
-        console.log(this.state.Progressidnext);
         if(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId == 4)
         {
             innerID = 1;
@@ -126,8 +119,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                       });
                     this.componentDidMount();
                    
-               
-               
             }
             else{
                
@@ -171,7 +162,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                         autoClose: true,
                       });
                         this.componentDidMount();
-                        console.log("updated");
                     }
                     else{
                         customToast.error(response.data.errorMessage, {
@@ -196,7 +186,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                         autoClose: true,
                       });
                         this.componentDidMount();
-                        console.log("updated");
                     }
                     else{
                         customToast.error(response.data.errorMessage, {
@@ -300,17 +289,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     handleCluster(e) {
       
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('moqId');
-        // console.log(option);
-        
-        // this.setState({ [e.target.name]: e.target.value,moqId:option }, ()=> {
-        //   console.log(this.state.moqId);
-         
-          
-        // });
+     
       }
 
     handleMoqEdit(){
@@ -318,13 +300,8 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.setState({
             saveButtonClick: !this.state.saveButtonClick,
             isMoqdetail:!this.state.isMoqdetail,
-            
-                
-                    
-            
-            
+          
         },()=>{
-            // this.checkSave();
         });
         
     
@@ -336,7 +313,6 @@ import { useTranslation, withTranslation } from "react-i18next";
             isPidetail:!this.state.isPidetail
             
         },()=>{
-            // this.checkSave();
         });
         
     
@@ -344,9 +320,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationPi:false}, () => {
-        //   console.log(this.state.moq);
         });
     }
 
@@ -354,7 +328,6 @@ import { useTranslation, withTranslation } from "react-i18next";
 
     saveMoqDetails(){
         var regex = /[1-9]|\./
-        // var moqlen = /[1-9]{1,2}\./
         var moqlen= /^\d{1,2}$/
         var ppulen=/^\d{1,6}$/
         if(!moqlen.test(this.state.moq)  ){
@@ -375,7 +348,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 saveButtonClick:true
               })
             let params = queryString.parse(this.props.location.search);
-            console.log(params);
             TTCEapi.saveMoq(
                 params.code,
                 this.state.additionalInfo,
@@ -389,7 +361,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                     isMoqdetail:!this.state.isMoqdetail,
                     showValidationMoq: false,
                 },()=>{
-                console.log(this.state.saveMoq);
                
                 });
                 customToast.success("MOQ Details saved successfully", {
@@ -429,7 +400,6 @@ import { useTranslation, withTranslation } from "react-i18next";
        else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
-                console.log(params);
                 TTCEapi.savePi(
                     params.code,
                     this.state.cgst,
@@ -450,14 +420,12 @@ import { useTranslation, withTranslation } from "react-i18next";
                         showValidationPi: false,
                       
                     },()=>{
-                    console.log(this.savePi);
-                   
+                  
                     });
                     customToast.success("PI Details saved successfully", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
-                    //   browserHistory.push("/Preview");
               }  });
         
             }
@@ -504,7 +472,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                   
             })
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         TTCEapi.sendMoq(
             params.code,
             this.state.additionalInfo,
@@ -513,14 +480,11 @@ import { useTranslation, withTranslation } from "react-i18next";
             this.state.ppu,
           
            ).then((response)=>{
-               console.log(response);
             if(response.data.valid){
             this.setState({sendMoq : response.data,
                 isMoqdetail:true,showValidationMoq: false},()=>{
                     this.componentDidMount();
-            console.log(this.state.sendMoq);
-
-            
+           
             });
             customToast.success("MOQ Details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
@@ -561,13 +525,10 @@ import { useTranslation, withTranslation } from "react-i18next";
     componentDidMount(){
        
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
-
         this.setState({
             enquiryId: params.code
         })
         TTCEapi.getMoq(params.code).then((response)=>{
-            console.log(response)
             if(response.data.data==null){
                 this.setState({
                 moq:0,
@@ -575,13 +536,10 @@ import { useTranslation, withTranslation } from "react-i18next";
                 deliveryDesc:1,
                 additionalInfo:"",
                 isSend:-1,
-                
-                //  dataload : true,
                 })
             }
             else {
             this.setState({
-                // getxyz:response.data,
                 getMoq : response.data.data,
                 moq:response.data.data.moq.moq,
                 ppu:response.data.data.moq.ppu,
@@ -590,7 +548,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 isSend:response.data.data.moq.isSend,
                  
           },()=>{
-             console.log(this.state.getMoq);
            
             });
         }
@@ -599,15 +556,13 @@ import { useTranslation, withTranslation } from "react-i18next";
         
         TTCEapi.getMoqDeliveryTimes().then((response)=>{
          this.setState({getMoqDeliveryTimes : response.data.data},()=>{
-            //  console.log(this.state.getMoqDeliveryTimes);
-        
+       
          });
      });
 
      
 
     TTCEapi.getPi(params.code).then((response)=>{
-        // console.log(response)
         if(response.data.data==null){
             this.setState({
                 getPi : 0,
@@ -631,7 +586,6 @@ import { useTranslation, withTranslation } from "react-i18next";
             piSend:response.data.data.isSend,
       },()=>{
          
-         console.log(this.state.getPi);
        
         });
     }
@@ -642,25 +596,21 @@ import { useTranslation, withTranslation } from "react-i18next";
             {    TTCEapi.getEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesMTO:response.data.data})
                 }
             })
             TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesAvailable:response.data.data})
                 }
             })
             TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({innerEnquiryStages:response.data.data})
                 }
             })
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
@@ -685,7 +635,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     if(response.data.data[0].openEnquiriesResponse.enquiryStageId == 5 && response.data.data[0].openEnquiriesResponse.innerEnquiryStageId < 5)
                                     {
                                         nextProgressid =response.data.data[0].openEnquiriesResponse.enquiryStageId;
-                                        // nextinnerid =  response.data.data[0].openEnquiriesResponse.innerEnquiryStageId + 1
                                         progressid= 4
 
                                     }
@@ -717,7 +666,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 Progressidnext : nextProgressid,
                                 userid : response.data.data[0].userId,
                                 dataload:true},()=>{
-                                console.log(this.state);
                                 if(localStorage.getItem("piShow") === "1") {
                                     this.viewPI();
                                     localStorage.removeItem("piShow");
@@ -792,11 +740,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     {/* <span ></span> */}
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?
@@ -916,8 +860,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                             </ul>
                             :
                             <>
-                            {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                            { (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
                                     ?
                                     <img src={logos.cricon} className="cricon"></img>
  
@@ -931,7 +874,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  <ul className="list-unstyled multi-steps">
                             {this.state.enquiryStagesMTO.map((item1) => 
                             <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                             {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                             <br></br>
                             <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -944,7 +886,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -975,7 +916,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)    }
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -986,7 +926,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1182,11 +1121,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     
                                 </div>
                                 <div>
-                                  {/* <div noGutters={true} >
-                                      <Col className="leEnqid bold">
-                                      Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
-                                      </Col>
-                                  </div> */}
+                                 
                                   <div noGutters={true} >
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1]?
@@ -1227,12 +1162,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                       </Col>
 
                                   </div>
-                                  {/* <div noGutters={true} className="" >
-                                      <Col className="leEnqprodcode ">
-                                          <span className="leEnqprodbn ">Brand Name : </span>
-                                          <span className="leEnqbrandname ">{item.openEnquiriesResponse.companyName}</span>                                   
-                                      </Col>
-                                  </div> */}
+                                 
                                 </div>
                             </Col>
                             <Col sm="3" className="text-right">
@@ -1312,7 +1242,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                             :
                             <>
                             {
-                                    (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
+                               (item.openEnquiriesResponse.changeRequestStatus == 1) || (item.openEnquiriesResponse.changeRequestStatus == 3)
                                     ?
                                     <img src={logos.cricon} className="cricon"></img>
  
@@ -1326,7 +1256,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  <ul className="list-unstyled multi-steps">
                             {this.state.enquiryStagesMTO.map((item1) => 
                             <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                             {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                             <br></br>
                             <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -1339,7 +1268,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -1370,7 +1298,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusHistoryId === 2
                                 ?
                                 <>  
@@ -1381,7 +1308,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1590,27 +1516,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                              onClick={this.proformaDetailsbtn}>
                                            <div ref={this.scrollPI}>Proforma Invoice</div>
                                             </Col>
-                                            {/* <Col sm={3} 
-                                              className={
-                                                (this.state.selected == "changeRequest"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                             onClick={this.changeRequestbtn}>
-                                            Change Request 
-                                            </Col>
-                                            <Col sm={2}  
-                                            className={
-                                                (this.state.selected == "qualityCheck"
-                                                     ? "Allenqlistbtn2"
-                                                         : "Allenqlistbtn")
-                                                     }
-                                            onClick={this.qualityCheckbtn}>
-                                           Quality Check 
-                                            </Col> */}
-                                            {/* <Col sm={1}>
                                             
-                                            </Col> */}
                                     </Row>
                                     <br></br>
 
@@ -1626,7 +1532,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                  <>
                                                                <Row noGutters={true}>
                                                                    <Col sm={12} className="col-xs-12 BdImgCol">
-                                                                       {/* <img  className="BdImg" src={logos.Dimapur}/> */}
                                                                        {data.openEnquiriesResponse.logo?
                                                                      <img className="Logobpdimg profileImage" src={TTCEapi.ImageUrl+'User/'+data.userId+'/CompanyDetails/Logo/'+data.openEnquiriesResponse.logo}/>
                                                                          :
@@ -1749,7 +1654,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                      Price/unit:
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
-                                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
                                                                  <input 
                                                                  id="ppu"
                                                                  className="width200 alignbox"
@@ -1906,16 +1810,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         <Col sm={6}>
                                                         <label >Rate per unit(or metre)</label>
                                                         <br/>
-                                                        {/* <input className="PIinput" type="number"/> */}
-                                                        {/* <span 
-                                                        className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                        disabled={this.state.isPidetail}> */}
-                                                            {/* <select name="cars" id="cars" 
-                                                            className={this.state.isPidetail ? "rssymboldis":"rssymbol"}
-                                                            disabled={this.state.isPidetail}>
-                                                                <option value="volvo" selected disabled>₹</option>
-                                                                </select> */}
-                                                    {/* </span> */}
+                                                       
                                                     ₹ <input type="number"  className="PIinput  rsinputboxwidth"
                                                         disabled={this.state.isPidetail}
                                                         value={this.state.rpu }
@@ -1946,27 +1841,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                     </Col>
                                                     </Row>
 
-                                                    {/* <Row noGutters={true} className="PIcol2mt BdImgCol">
-                                                    <Col sm={6}>
-                                                    <label>CGST %</label>
-                                                    <br/>
-                                                        <input className="PIinput" type="number"
-                                                        disabled={this.state.isPidetail}
-                                                        value={this.state.cgst }
-                                                        name="cgst"
-                                                        onChange={this.handleChange}/>
-
-                                                    </Col>
-                                                    <Col sm={6}>
-                                                    <label>SGST %</label>
-                                                    <br/>
-                                                        <input className="PIinput" type="number"
-                                                        disabled={this.state.isPidetail}
-                                                        value={this.state.sgst }
-                                                        name="sgst"
-                                                        onChange={this.handleChange}/>
-                                                    </Col>
-                                                    </Row> */}
                                                     <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                             <Col sm={12}>
                                                             <input type="checkbox" name="checkbox" value="check" id="agree"
@@ -2039,7 +1913,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                              </>
                                                              :null
                                                              }
-                                         {/* ----------------------------------------------------------------------------------------------                   */}
+ {/* ----------------------------------------------------------------------------------------------                   */}
                                                             {this.state.changeRequest ?  <div>
                                                                
                                                             </div>:null}
@@ -2049,7 +1923,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                             </div>:null}
                                                             
                                                             </Col>
-                                                            {/* <Col sm={2}></Col> */}
                                                      </Row>
   
   
@@ -2074,12 +1947,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }
 
 const connectedLoginPage = connect(mapStateToProps)(SingleEnquiry);
-// export default connectedLoginPage;
 export default withTranslation()(connectedLoginPage);
 

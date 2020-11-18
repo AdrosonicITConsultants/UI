@@ -42,15 +42,11 @@ class ProductRegions extends Component {
       
     }
     handleCluster(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('clusterid');
-        console.log(option);
-        
-        this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
-          console.log(this.state);
-          
+         this.setState({ [e.target.name]: e.target.value , productCategoryid : option}, ()=> {
+       
         });
     }
 
@@ -62,7 +58,6 @@ class ProductRegions extends Component {
 
             if(response)
             {
-              console.log(response.data);
               this.setState({
                 regionData : response.data,
                 clusterID : params.clusterid,
@@ -81,7 +76,6 @@ class ProductRegions extends Component {
         });
     
         TTCEapi.getClusterProducts(parseInt(params.clusterid)).then((response)=>{
-            console.log(response.data.data);
             this.setState({
                 dataload : true,
                 heading : response.data.data.cluster.desc,
@@ -92,16 +86,12 @@ class ProductRegions extends Component {
         TTCEapi.getProductIdsInWishlist().then((response)=>{
             var item=this.state.getProductIdsInWishlist
             this.setState({getProductIdsInWishlist : response.data.data},()=>{
-                console.log(this.state.getProductIdsInWishlist);
-                console.log(this.state.getProductIdsInWishlist.indexOf(12))
-            
+                      
             });
         });
         
         TTCEapi.getProducts().then((response)=>{
-            console.log(response);
             this.setState({productCategoriesdata : response.data.data},()=>{
-                console.log(this.state);
             });
         });
     }
@@ -181,7 +171,6 @@ class ProductRegions extends Component {
                                         <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>  
                                                 
                                         </Col>  
-                                        // {this.state.getProductIdsInWishlist}
                                         :
                                         
                                         <>
@@ -215,9 +204,6 @@ class ProductRegions extends Component {
                                     No Products found
                                 </Row>}
                                
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
                             </Row>
                         </Col>
                     </Row>

@@ -1,19 +1,15 @@
-
-
 import React, { Component } from 'react'
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "./AllEnquiryList.css";
 import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
-// import { Footer } from 'rsuite';
 import Footer from "../footer/footer";
 import { BuyerTransaction } from './BuyerTransaction';
 import { BuyerRecentList } from '../BuyerTransaction/BuyerRecentList';
@@ -28,14 +24,6 @@ import BuyerQC from './BuyerQC';
 import { DownloadBuyerPreviewPI } from './DownloadBuyerPreviewPI';
 import DaysRemaining from '../FaultyOrder/DaysRemaining';
 import { BuyerCompletedTransaction } from './BuyerCompletedTransactions';
-// import DatePicker from 'react-datetime';
-// import moment from 'moment';
-// import 'react-datetime/css/react-datetime.css';
-
-// const today = moment();
-//   const disableFutureDt = current => {
-//     return current.isBefore(today)
-//   }
 
 export class BuyerSingleCompletedOrder extends Component {
     constructor() {
@@ -77,16 +65,13 @@ export class BuyerSingleCompletedOrder extends Component {
     }
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
        
         });
     }
     handleChange1(e) {
         const { name, value } = e.target;
-        
-        console.log(value);
-        this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
+       this.setState({ [name]: value,showValidationMoq: false ,completebtndis:false}, () => {
        
         });
     }
@@ -94,16 +79,12 @@ export class BuyerSingleCompletedOrder extends Component {
 
     daysleftFaultyOrder(name,days)
     {
-      console.log(name,days);
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd =parseInt(days);
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
                                 return(diffDays);
     }
 
@@ -130,19 +111,14 @@ export class BuyerSingleCompletedOrder extends Component {
         }
         CompleteOrderShow = (id) => {
             
-            console.log(id)
-          
             document.getElementById('CompleteOrder').style.display='block';
 
-        //  document.getElementById('CompleteOrder').style.display='block';
         }
         CompleteOrderClose = () => {
          document.getElementById('CompleteOrder').style.display='none';
         }
         CompleteOrder2Show = (enquiryId) => {
             if(this.state.deliveredDate){
-                console.log(this.state.deliveredDate)
-                console.log(enquiryId)
                 this.setState({
                     completebtndis:true
                 })
@@ -163,7 +139,6 @@ export class BuyerSingleCompletedOrder extends Component {
                 
                             }
                         });
-                         console.log(response.data.data);
                         this.setState({
                             markOrderAsRecieved: response.data.data
                         })
@@ -230,14 +205,6 @@ export class BuyerSingleCompletedOrder extends Component {
         });
         }
 
-        // raiseCRTabFunction = () => {
-        //     this.proformaDetailsbtn();
-        //     this.scrollCR.current.scrollIntoView({
-        //         behavior: "smooth",
-        //         block: "center",
-        //         inline: "center",
-        //     });
-        // }
 
         changeRequestbtn(){
         this.setState((prevState) => {
@@ -299,7 +266,6 @@ export class BuyerSingleCompletedOrder extends Component {
                 {    TTCEapi.getEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     var rr = response.data.data;
                     rr[0].desc = "Quotation Accepted";
                     rr[1].desc = "Order Details";
@@ -309,14 +275,12 @@ export class BuyerSingleCompletedOrder extends Component {
                 TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesAvailable:response.data.data})
                 }
                 })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({innerEnquiryStages:response.data.data})
                 }
                 })
@@ -324,14 +288,11 @@ export class BuyerSingleCompletedOrder extends Component {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getClosedOrder(this.state.enquiryCode).then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
                             {   
-                                console.log(response1.data.data);
                                 this.setState({openEnquiries:response1.data.data,
                                     getSingleOrder : response1.data.data[0].openEnquiriesResponse,
                                      dataload:true},()=>{
-                                        console.log(this.state.getSingleOrder);
                                     var data = localStorage.getItem("changeRequest");
                                     if(data) {
                                         localStorage.removeItem("changeRequest");
@@ -365,7 +326,6 @@ export class BuyerSingleCompletedOrder extends Component {
         {    TTCEapi.getEnquirStages().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             var rr = response.data.data;
             rr[0].desc = "Quotation Accepted";
             rr[1].desc = "Order Details";
@@ -375,14 +335,12 @@ export class BuyerSingleCompletedOrder extends Component {
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             this.setState({enquiryStagesAvailable:response.data.data})
         }
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
         if(response.data.valid)
         {
-            console.log(response.data.data);
             this.setState({innerEnquiryStages:response.data.data})
         }
         })
@@ -390,14 +348,11 @@ export class BuyerSingleCompletedOrder extends Component {
         this.setState({productCategories: response.data.data.productCategories,
             yarns: response.data.data.yarns },()=>{
                 TTCEapi.getClosedOrder(params.code).then((response1)=>{
-                    console.log("")
                     if(response1.data.valid)
                     {   
-                        console.log(response1.data.data);
                         this.setState({openEnquiries:response1.data.data,
                             getSingleOrder : response1.data.data[0].openEnquiriesResponse,
                              dataload:true},()=>{
-                                console.log(this.state.getSingleOrder);
                             var data = localStorage.getItem("changeRequest");
                             if(data) {
                                 localStorage.removeItem("changeRequest");
@@ -987,10 +942,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                     <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                            
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -1009,10 +961,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
 <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                          
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -1029,10 +978,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                     <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(this.state.enquiryCode)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                            
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(parseInt(this.state.enquiryCode), item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -1087,7 +1033,6 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                      <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -1100,7 +1045,6 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                     <ul className="list-unstyled multi-steps">
                                     {this.state.enquiryStagesMTO.map((item1) => 
                                     <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                    {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                     {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                     <br></br>
                                     <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -1141,7 +1085,6 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }

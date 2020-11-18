@@ -39,7 +39,6 @@ class ArtistSelfDesignCategories extends Component {
     CMSApi.getCategories().then((response)=>{
       if(response)
       {
-        console.log(response.data);
         this.setState({
           categoryData : response.data
         })
@@ -48,7 +47,6 @@ class ArtistSelfDesignCategories extends Component {
    
     TTCEapi.getAllProducts().then((response)=>{
       this.setState({products : response.data.data},()=>{
-          console.log(this.state.products);
       });
     });
 

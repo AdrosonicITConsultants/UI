@@ -41,10 +41,7 @@ class ArtisanAllTransactionList extends Component {
             <React.Fragment>
                 <NavbarComponent/>
                 <Container>
-                {/* <img
-                                       src={logos.recent}
-                                     className="recenticon"
-                                        ></img> */}
+              
                 <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
                            <img
@@ -100,7 +97,6 @@ class ArtisanAllTransactionList extends Component {
                           </Col>                            
                 </Row>
                 <Row>
-                    {/* <hr className="enquiryoptionhr"></hr> */}
                 </Row>
                 {
                     this.state.Recent

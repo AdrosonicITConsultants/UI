@@ -24,8 +24,6 @@ import { useTranslation, withTranslation } from "react-i18next";
             dataload:false
 
         }
-        
-
     } 
     
     ToggleDelete22 = (id) => {
@@ -39,14 +37,11 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getOpenEnquiries().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {  
                                 this.setState({openEnquiries:response1.data.data, dataload:true});
                             }
                         })
@@ -56,21 +51,18 @@ import { useTranslation, withTranslation } from "react-i18next";
         TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesMTO:response.data.data})
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({innerEnquiryStages:response.data.data})
             }
         })
@@ -299,7 +291,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  <ul className="list-unstyled multi-steps">
                             {this.state.enquiryStagesMTO.map((item1) => 
                             <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                             {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                             <br></br>
                             <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -312,7 +303,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -343,7 +333,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -354,7 +343,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -579,7 +567,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  <ul className="list-unstyled multi-steps">
                             {this.state.enquiryStagesMTO.map((item1) => 
                             <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                            {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                             {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                             <br></br>
                             <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -592,7 +579,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <ul className="list-unstyled multi-steps">
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
-                                {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
                                 {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
@@ -623,7 +609,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {console.log(item.openEnquiriesResponse.productStatusId)}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -634,7 +619,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -700,6 +684,5 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
 }
 
-// export default OngoingList
 export default withTranslation()(OngoingList);
 

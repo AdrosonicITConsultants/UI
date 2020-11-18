@@ -11,35 +11,5 @@ import Footer from "../footer/footer";
 
 
 
-// class AlertRemoveItem extends Component {
-    
-
-
-//     render() {
-//         return (
-   
-//             <React.Fragment>
-             
-//      <>
-//      <h1 className="ModalHeader">Remove this item from wishlist? </h1>
-//      <Row noGutters={true}>
-//          <Col style={{textAlign:"center"}}>
-//          <span><button className="okbtn" > OK</button></span> 
-
-//         <span><button className="cancelbtn"> Cancel</button></span> 
-//      </Col>
-//      </Row>
-    
-//      </>
-                 
-             
-     
-//                 </React.Fragment>
-              
-//         )
-//     }
-// }
-// export default AlertRemoveItem;
-
 
 

@@ -9,10 +9,7 @@ import queryString from 'query-string';
 import TTCEapi from '../../services/API/TTCEapi';
 import ProductOfArtisian from './ProductOfArtisian';
 import { memoryHistory, browserHistory } from "../../helpers/history";
-
 import { useTranslation, withTranslation } from "react-i18next";
-
-
 
  class ArtisianProductCategory extends Component {
     constructor(props) {
@@ -28,24 +25,17 @@ import { useTranslation, withTranslation } from "react-i18next";
     }  
       componentDidMount(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
         TTCEapi.getArtisianProductCategory(parseInt(params.userid), parseInt(params.categoryid)).then((response)=>{
-            console.log(response.data.data);
             this.setState({
                 dataload : true,
                 heading : response.data.data.productCategory,
                 products : response.data.data.products
                });
         });
-        // TTCEapi.getClusters().then((response)=>{
-        //     this.setState({clusterdata : response.data.data});
-
-        // });
-    }
+            }
     render() {
         return (
             <React.Fragment>
-                {console.log(this.state.products.length)}
                {this.state.dataload == true 
                    
                    ? 
@@ -95,23 +85,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                </Row>
                            
                              
-                               {/* <Row noGutters="true">
-                                   <Col sm={{size:"12"}}>
-                                   <br>
-                                   </br>
-                                   <select  className="SelectCategory"  
-                                    id="cluster"
-                                    name="cluster" 
-                                    onChange={(e) => this.handleCluster(e)}>
-                                       <option key = '0' clusterid = '-1'  value='Select Cluster'>View by Cluster</option>
-                                       {this.state.clusterdata.map((item) => <option key =  {item.id} clusterid={item.id} value={item.desc}>{item.desc}</option>)}
-                                   </select>
-                           
-                                   <br>
-                                   </br>
-                                   </Col>
-                                  
-                                </Row> */}
                                 <Row noGutters="true"> 
                                 {this.state.item1 = true} 
    
@@ -150,9 +123,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                        No Products found
                                    </Row>}
                                   
-                                       {/* <Col xs={12} sm={6} md={4}>
-                                       <ProductsOfCatelog productData = {this.state.data}/>              
-                                       </Col>              */}
                                </Row>
                            </Col>
                        </Row>

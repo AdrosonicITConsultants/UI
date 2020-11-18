@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import HoldPopup from '../ModalComponent/ModalHold';
 import Popup from '../ModalComponent/EnguiryModal';
 import SuccessPopup from '../ModalComponent/SuccessModal';
-// import Popup from './EnguiryModal';
 
 class AddWishlist extends Component {
     
@@ -35,14 +34,12 @@ class AddWishlist extends Component {
           isCustom:false,
           enqgen:false,
         };
-    //     this.handleDeleteItem = this.handleDeleteItem.bind(this);   
-    //  this.handleDeleteAllItem = this.handleDeleteAllItem.bind(this);
+
      this.generateEnquiry = this.generateEnquiry.bind(this);
      this.closeModal = this.closeModal.bind(this);
     }
 
     backoperation(){
-        // browserHistory.push("/home"); 
         browserHistory.goBack()
     }  
     closeModal() {
@@ -62,12 +59,9 @@ class AddWishlist extends Component {
         this.setState({ modalIsOpen: true });
           TTCEapi.ifEnquiryExists(item,false).then((response)=>{
         this.setState({ifEnquiryExists : response.data.data},()=>{
-          // this.setState({ modalIsOpen: false });
-            console.log(this.state.ifEnquiryExists);
             if(this.state.ifEnquiryExists.ifExists ==false){
               TTCEapi.generateEnquiry(item,false).then((response)=>{
                 this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                               console.log(this.state.generateEnquiry);
                               });
               });
             }
@@ -77,7 +71,6 @@ class AddWishlist extends Component {
       }
   
     handleDeleteItem(id){
-        // if(window.confirm("Remove this item from wishlist?")){
         TTCEapi.deleteProductsInWishlist(id).then((response)=>{
             if (response.data.valid) {
                 customToast.success("Product removed from wishlist!", {
@@ -85,12 +78,9 @@ class AddWishlist extends Component {
                   autoClose: true,
                 });
                 this.setState({deleteProductsInWishlist : response.data},()=>{
-                    console.log(this.state.deleteProductsInWishlist);
                     document.getElementById('id02'+id).style.display='none';
                     window.location.reload();
-                    // this.componentDidMount();
-                
-             
+                 
                 });
             }
             else{
@@ -107,16 +97,12 @@ class AddWishlist extends Component {
     }
 
     handleDeleteAllItem(){
-        // if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInWishlist().then((response)=>{
                 this.setState({deleteAllProductsInWishlist : response.data},()=>{
-                    console.log(this.state.deleteAllProductsInWishlist);
                     document.getElementById('id01').style.display='none';
                     window.location.reload();
                 });
-            });
-        // }
-      
+            });    
     }
 
     ToggleDelete = () => {
@@ -128,12 +114,10 @@ class AddWishlist extends Component {
        }
 
        ToggleDelete1 = (id) => {
-        console.log(id)
         document.getElementById('id02'+id).style.display='block';
        }
 
        ToggleDeleteClose1 = (id) => {
-           console.log(id)
         document.getElementById('id02'+id).style.display='none';
        }
 
@@ -141,7 +125,6 @@ class AddWishlist extends Component {
    
      TTCEapi.getProductsInWishlist().then((response)=>{
       this.setState({getProductsInWishlist : response.data.data},()=>{
-          console.log(this.state.getProductsInWishlist);
          
       });
   }); 
@@ -159,7 +142,6 @@ class AddWishlist extends Component {
                   {this.state.getProductsInWishlist.length==0?
                   <Wishlist></Wishlist>:
                   <>
-                  {/* <body onload="window.location.reload()"></body> */}
                   
                 <Container className="wishlistbg">
             
@@ -171,7 +153,6 @@ class AddWishlist extends Component {
                                     src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
                                      onClick={() => this.backoperation()}
-                                    //  onClick={() => this.props.history.go(-1)}
                                 ></img>
                        
                        </Col>
@@ -205,7 +186,6 @@ class AddWishlist extends Component {
             
                      {this.state.getProductsInWishlist ? ( ( this.state.getProductsInWishlist.map((data) => ( 
               <>
-        {/* {console.log(data)} */}
                <div>
                     <Card className="wishlistcardbody" >
                         <Row noGutters={true}>
@@ -222,7 +202,6 @@ class AddWishlist extends Component {
                       {data.product.productImages[0]?
                       <img className="Wishlistitemimg"  onClick={()=>{ this.productopen(data.product.id)}} src={this.state.ImageUrl + data.product.productImages[0].productId + '/' + data.product.productImages[0].lable }/>
                         :null}
-                      {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
 
                      </div>
                     </Col>
@@ -267,7 +246,6 @@ class AddWishlist extends Component {
                             <div class="w3-modal-content w3-animate-top modalBoxSize">
                             <div class="w3-container">
                                 <h3 className="deleteModalHeader text-center removemodalheading">Are you sure you want to remove <br/>this product from wishlist ?</h3>
-                                {/* <p className="deleteModalPara">You can keep the changes or can go back to update.</p> */}
                                 <div className="deleteModalButtonOuterDiv">
                                 <span onClick={() => this.ToggleDeleteClose1(data.product.id)}  className="deleteModalCancelButton">Cancel</span>
                                 <span onClick={() => this.handleDeleteItem(data.product.id)} className="deleteModalOkayButton">Remove</span>
@@ -333,9 +311,7 @@ class AddWishlist extends Component {
                 />
                  :
                         (
-                            // this.state.isLoadingEnquiry ?
-                //    <HoldPopup/>
-                   
+                     
                 this.state.enqgen ? 
                  <SuccessPopup
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}
@@ -360,7 +336,6 @@ class AddWishlist extends Component {
             
                 
                   </Container>
-                  {/* <Footer/> */}
                   </>}
                  
                  

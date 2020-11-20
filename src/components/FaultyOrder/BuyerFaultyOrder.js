@@ -22,12 +22,7 @@ export class BuyerFaultyOrder extends Component {
     constructor(props) {
         super(props);
         var days= moment().format("DD-MM-YYYY")
-        // let days=moment([2020, 11, 7]).diff(moment([2020, 11, 6]),'days')
-        // let days= moment({date}).diff({date}, 'days');
-        // console.log(days)
-        console.log(days);
-        this.state = {
-            // currentDate: date,
+              this.state = {
             ongoingEnquiry:true,
             enquiryCode:"",
             getSingleOrder:[],
@@ -72,9 +67,7 @@ export class BuyerFaultyOrder extends Component {
         this.handleChange = this.handleChange.bind(this);
 
     }  
-    // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
     FaultyOrderSelect(id){
-        console.log("select")
         const typeElements = this.state;
         const updatedHeaders = [...typeElements.accepted];
         updatedHeaders[parseInt(id)-1] = {
@@ -87,11 +80,9 @@ export class BuyerFaultyOrder extends Component {
         });
         
         var arr = this.state.accepted 
-        console.log(arr);
       }   
 
       FaultyUnOrderSelect(id){
-        console.log("Unselect")
         const typeElements = this.state;
         const updatedHeaders = [...typeElements.accepted];
         updatedHeaders[parseInt(id)-1] = {
@@ -104,18 +95,15 @@ export class BuyerFaultyOrder extends Component {
         });
         
         var arr = this.state.accepted 
-        console.log(arr);
       }
      
            
     backoperation(){
-        // browserHistory.push("/buyerOrders"); 
         browserHistory.goBack(); 
     }
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
        
         });
@@ -132,20 +120,16 @@ export class BuyerFaultyOrder extends Component {
                 }
             }
             dummy = dummy.substring(0, dummy.length - 3);
-            console.log(dummy);
             let params = queryString.parse(this.props.location.search);
-            console.log(params.orderid);
             this.setState({
                 enquiryCode:params.orderid
             })
             TTCEapi.sendFaultyOrder(params.orderid,this.state.description,dummy).then((response)=>{
-                console.log(params.orderid,this.state.description,dummy);
                 if(response.data.valid)
                 {
                 this.setState({
                     sendFaultyOrder :response,
                      dataload : true,},()=>{
-                    console.log(this.state.sendFaultyOrder);
                 });
                 document.getElementById('SureModal').style.display='none';
                 customToast.success("Your report is sent to Artisan", {
@@ -192,22 +176,9 @@ export class BuyerFaultyOrder extends Component {
         localStorage.setItem("goToChatButtonEnquiryId", id);    
         browserHistory.push("/buyerChat");            
       }
-    //   daysleft(name)
-    //   {
-    //     var today = new Date(),
-    //     date= moment().format("YYYY-MM-DD")
-    //     console.log(date) 
-    //     console.log(this.state.getSingleOrder.excpectedDate)
-    //     var daysleft=moment(this.state.getSingleOrder.excpectedDate).diff(date, 'days');
-    //     console.log(daysleft)  
-        
-      
-    //   }
-  
+    
     componentDidMount(){
-      console.log(this.state.currentDate)
         let params = queryString.parse(this.props.location.search);
-        console.log(params.orderid);
         this.setState({
             enquiryCode:params.orderid
         })
@@ -217,25 +188,18 @@ export class BuyerFaultyOrder extends Component {
             this.setState({
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                  },()=>{
-                console.log(this.state.getSingleOrder);
-                // var eta = this.state.getSingleOrder.excpectedDate;
                 var today = new Date(this.state.getSingleOrder.excpectedDate);
                 var tomorrow = new Date(today);
                 tomorrow.setDate(today.getDate()+10);
                 tomorrow.toLocaleDateString();
-                 console.log("// add a day" + tomorrow.toLocaleDateString() )
-
                 var today = new Date(),
                 date= moment().format("YYYY-MM-DD")
-                console.log(date) 
                 var daysleft=moment(tomorrow.toLocaleDateString()).diff(date, 'days');
-                console.log(daysleft)  
                 this.setState({
                     daysremaining:daysleft
                 })
             });
            
-            console.log(this.state.daysremaining)
         }
         });
         TTCEapi.getAllRefBuyerReview().then((response)=>{
@@ -244,7 +208,6 @@ export class BuyerFaultyOrder extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                 },()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -256,12 +219,10 @@ export class BuyerFaultyOrder extends Component {
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId,
                 isResolved:response.data.data.orderProgress.isResolved,
                  dataload : true,},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -276,15 +237,11 @@ export class BuyerFaultyOrder extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
                 }
             }
      
-      
         }
         });
-        // /enquiry/getOrderProgress/1707
     }
     
     render() {
@@ -570,7 +527,6 @@ export class BuyerFaultyOrder extends Component {
                                        maxLength="500"
                                        name="description"
                                        id="description"
-                                        // value={this.state.description }
                                         onChange={this.handleChange}></textarea>
                                     </Col>
                                     
@@ -674,9 +630,6 @@ export class BuyerFaultyOrder extends Component {
                     }
                     </>
                     }
-                    
-                   
-                   
                    
                     </>
                     :
@@ -697,7 +650,6 @@ export class BuyerFaultyOrder extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

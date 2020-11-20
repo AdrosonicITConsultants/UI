@@ -75,7 +75,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
@@ -88,7 +87,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
@@ -99,7 +97,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEscalationSummaryForEnquiry(enquiryId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
@@ -117,7 +114,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
@@ -144,8 +140,6 @@ export default class ArtisanChat extends Component {
 
     artisanSendChatFunction = (mediaTypeId) => {
         var chatData = document.getElementById("chatTextInput").value;
-        console.log(chatData);
-
         this.setState({
             sendButtonActive: false
         });
@@ -166,7 +160,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.sendChatboxMessage(formData).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 document.getElementById('artisanChatShareFile1').style.display='none';
                 document.getElementById('artisanChatShareAudio1').style.display='none';
                 document.getElementById('artisanChatShareVideo1').style.display='none';
@@ -186,20 +179,15 @@ export default class ArtisanChat extends Component {
     }
 
     artisanChatShareFileFunction (e) {
-        console.log(e);
         this.setState({
             selectedFile: e.target.files[0],
         },()=>{
             if(this.state.selectedFile) {
                 var size = Math.ceil((this.state.selectedFile.size / 1024));  
-                console.log(size);  
                 this.setState({
                     selectedFileName: this.state.selectedFile.name,
                     selectedFileSize: size,
                 });
-                console.log(this.state.selectedFile);
-                console.log(this.state.selectedFileName);
-                console.log(this.state.selectedFileSize);
                 document.getElementById('artisanChatAttachModal').style.display='none';
                 document.getElementById('artisanChatShareFile').style.display='block';
             }
@@ -224,21 +212,16 @@ export default class ArtisanChat extends Component {
     }
 
     artisanChatShareAudioFunction (e) {
-        console.log(e);
         this.setState({
             selectedFile: e.target.files[0],
         },()=>{
             if(this.state.selectedFile) {
                 var size = Math.ceil((this.state.selectedFile.size / 1024));  
-                console.log(size);  
                 this.setState({
                     selectedFileName: this.state.selectedFile.name,
                     selectedFileSize: size,
                 });
-                console.log(this.state.selectedFile);
-                console.log(this.state.selectedFileName);
-                console.log(this.state.selectedFileSize);
-                document.getElementById('artisanChatAttachModal').style.display='none';
+               document.getElementById('artisanChatAttachModal').style.display='none';
                 document.getElementById('artisanChatShareAudio').style.display='block';
             }
         });
@@ -262,20 +245,16 @@ export default class ArtisanChat extends Component {
     }
 
     artisanChatShareVideoFunction (e) {
-        console.log(e);
         this.setState({
             selectedFile: e.target.files[0],
         },()=>{
             if(this.state.selectedFile) {
                 var size = Math.ceil((this.state.selectedFile.size / 1024));  
-                console.log(size);  
                 this.setState({
                     selectedFileName: this.state.selectedFile.name,
                     selectedFileSize: size,
                 });
-                console.log(this.state.selectedFile);
-                console.log(this.state.selectedFileName);
-                console.log(this.state.selectedFileSize);
+              
                 document.getElementById('artisanChatAttachModal').style.display='none';
                 document.getElementById('artisanChatShareVideo').style.display='block';
             }
@@ -300,21 +279,16 @@ export default class ArtisanChat extends Component {
     }
 
     artisanChatSharePhotoFunction (e) {
-        console.log(e);
         this.setState({
             selectedFile: e.target.files[0],
         },()=>{
             if(this.state.selectedFile) {
                 var size = Math.ceil((this.state.selectedFile.size / 1024));  
-                console.log(size);  
                 this.setState({
                     selectedFileName: this.state.selectedFile.name,
                     selectedFileSize: size,
                 });
-                console.log(this.state.selectedFile);
-                console.log(this.state.selectedFileName);
-                console.log(this.state.selectedFileSize);
-                document.getElementById('artisanChatAttachModal').style.display='none';
+                 document.getElementById('artisanChatAttachModal').style.display='none';
                 document.getElementById('artisanChatSharePhoto').style.display='block';
             }
         });
@@ -341,7 +315,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEscalationSummaryForEnquiry(this.state.selectedEnquiryData.enquiryId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
@@ -378,7 +351,6 @@ export default class ArtisanChat extends Component {
         this.setState({
             chatSelectedEscalationValue: data,           
         });
-        console.log(this.state.chatSelectedEscalationValue);
 
         if(data !== "" && textData !== "") {
             this.setState({
@@ -397,8 +369,6 @@ export default class ArtisanChat extends Component {
     raiseEscalationFunction = () => {
 
         var textValue = document.getElementById("chatEscalationTextareaId").value;
-        console.log(textValue);
-
         var data = this.state.chatSelectedEscalationValue;
         var array = this.state.getEscalationsList;
         var categoryId = 0;
@@ -415,13 +385,10 @@ export default class ArtisanChat extends Component {
             escalationTo: this.state.selectedEnquiryData.buyerId,
             text: textValue
         }
-        console.log(object);
-
-        this.setState({
+            this.setState({
             raiseEscalationFinalData: object,
         });
-        console.log(this.state.raiseEscalationFinalData);
-
+      
         document.getElementById('raiseEscalationModal').style.display='none';
         document.getElementById('raiseEscalationConfirmModal').style.display='block';
     }
@@ -435,13 +402,11 @@ export default class ArtisanChat extends Component {
         this.setState({
             escalationButtonOkDisable: true,
         });
-        console.log(this.state.raiseEscalationFinalData);
         var finalData = this.state.raiseEscalationFinalData;
 
         TTCEapi.raiseEscalaton(finalData).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 document.getElementById('raiseEscalationConfirmModal').style.display='none';
                 this.goToEscalationFunction();
                 this.updateEscNoFunction();
@@ -473,7 +438,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
@@ -497,7 +461,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.resolveEscalation(escId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.goToEscalationFunction();
                 this.updateEscNoFunction();
                 this.setState({
@@ -539,7 +502,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.goToEnquiryChat(enquiryId).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     selectedKey: enquiryId,
                     selectedEnquiryData: data,
@@ -550,7 +512,6 @@ export default class ArtisanChat extends Component {
                 TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         this.setState({
                             onLoadChatList: response.data.data,
                             loading: false,
@@ -560,7 +521,6 @@ export default class ArtisanChat extends Component {
                 TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         this.setState({
                             dropdownChatList: response.data.data,
                             loading: false,
@@ -570,7 +530,6 @@ export default class ArtisanChat extends Component {
                 TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
                     if(response.data.valid)
                     {
-                        console.log(response.data.data);
                         this.setState({
                             selectedChatList: response.data.data,
                             loading: false,
@@ -655,7 +614,6 @@ export default class ArtisanChat extends Component {
 
     chathandleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            console.log('do validate');
             this.artisanSendChatFunction(1);
         }
     }
@@ -694,8 +652,6 @@ export default class ArtisanChat extends Component {
         var dropdownChatListArray = [];
 
         var finalDate = currentYear + "-" + ((currentMonth+1) > 9 ? (currentMonth+1) : "0"+(currentMonth+1)) + "-" + ((currentDate > 9) ? currentDate : "0"+(currentMonth));
-        console.log(finalDate);
-
         let userData = JSON.parse(localStorage.getItem("user"));
         
         this.setState({
@@ -708,7 +664,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
@@ -718,7 +673,6 @@ export default class ArtisanChat extends Component {
             TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({
                         dropdownChatList: response.data.data,
                         loading: false,
@@ -751,7 +705,6 @@ export default class ArtisanChat extends Component {
         TTCEapi.getEscalations().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     getEscalationsList: response.data.data,
                     loading: false,
@@ -791,14 +744,7 @@ export default class ArtisanChat extends Component {
                                 </Col>
                             </Row>
                         </div> 
-                        {/* {this.state.showNoResultsMsg === true ?  
-                            <Row noGutters={true}>
-                            <Col sm={12} className="text-center">
-                                <div className="chatNoResultsClass">No results found</div>
-                            </Col>
-                            </Row>
-                        : null } */}
-                            
+                       
                         <div className="chatLeftScrollStyle">
                         <div className="chatLeftHeight chatLeftScrollStyle">
                         {this.state.dropdownChatList ? this.filter(this.state.dropdownChatList).map((data, key) => {
@@ -861,13 +807,7 @@ export default class ArtisanChat extends Component {
                                 </Col>
                             </Row>
                         </div>
-                        {/* {this.state.showNoResultsMsg1 === true ?  
-                        <Row noGutters={true}>
-                        <Col sm={12} className="text-center">
-                            <div className="chatNoResultsClass">No results found</div>
-                        </Col>
-                        </Row>
-                        : null } */}
+                       
                         <div className="chatLeftScrollStyle">
                         <div className="chatLeftHeight chatLeftScrollStyle">
                         {this.state.onLoadChatList ? this.filter1(this.state.onLoadChatList).map((data, key) => {

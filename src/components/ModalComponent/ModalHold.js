@@ -18,15 +18,11 @@ export default class HoldPopup extends React.Component {
    browserHistory.push('/wishlist')
   }
 
-
   render() {
    
     return (
       <React.Fragment>
-    
-      
-      
-         
+        
       <div className='popup'>
           
         <div className='popup_inner_hold'>
@@ -39,9 +35,7 @@ export default class HoldPopup extends React.Component {
           </Col>
 
       </Row>
-     
-          {/* <button onClick={this.props.closePopup} */}
-         
+       
         </div>
         
       </div>

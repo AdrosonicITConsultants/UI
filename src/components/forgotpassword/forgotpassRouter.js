@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Container } from "reactstrap";
 import "../register/artist/artistRegister.css";
-// import Buyerlogin from "../../buyer/buyeruser";
 import Forgotpass1 from "./forgotpass1";
 import Forgotpass2 from "./forgotpass2";
 import Forgotpass3 from "./forgotpass3";
@@ -20,11 +19,9 @@ export default class ForgotpassRouter extends Component {
                      password: "",
                    };
                    this.handler = this.handler.bind(this);
-                   //  this.checkweaverid = this.checkweaverid.bind(this);
                    this.sendotp = this.sendotp.bind(this);
                    this.passwordReset = this.passwordReset.bind(this);
                    this.verifyOtp = this.verifyOtp.bind(this);
-                   //   this.storedetails1 = this.storedetails1.bind(this);
                  }
 
                  sendotp(emailid) {
@@ -80,7 +77,6 @@ export default class ForgotpassRouter extends Component {
                                position: toast.POSITION.TOP_RIGHT,
                                autoClose: true,
                              });
-                             // alert("please enter valid OTP.");
                            }
                          }
                        );
@@ -123,16 +119,13 @@ export default class ForgotpassRouter extends Component {
 
                  storepassword(password) {
                    this.setState({ password: password });
-                   console.log(password);
                  }
 
                  checkotp(otppin) {
-                   console.log(otppin);
                  }
 
                  handler(num) {
                    this.setState({ userpage: num }, () => {
-                     console.log(this.state.userpage);
                    });
                  }
 

@@ -14,14 +14,10 @@ import ArtistLanding from  "./artistLanding"
 
    ExploreMore  = (to) =>{
 switch (to) {
-  case "Self":
-    console.log(to);
-    
+  case "Self":  
     break;
   case "New":
-    console.log(to);
-
-    break;
+     break;
   default:
     break;
 }

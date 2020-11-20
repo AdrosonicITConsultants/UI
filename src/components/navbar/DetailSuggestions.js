@@ -13,8 +13,6 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
 
-
-
 export default class DetailSuggestions extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +34,6 @@ export default class DetailSuggestions extends Component {
   componentDidMount(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        console.log(params);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
              if(response.data.valid == true)
@@ -58,7 +55,6 @@ export default class DetailSuggestions extends Component {
                 boolAntaran : -1
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -69,7 +65,6 @@ export default class DetailSuggestions extends Component {
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran },()=>{
-                  console.log(this.state);
                 });
               })
              }
@@ -86,10 +81,7 @@ export default class DetailSuggestions extends Component {
         TTCEapi.getProductIdsInWishlist().then((response)=>{
           var item=this.state.getProductIdsInWishlist
           this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
-              // console.log(this.state.getProductIdsInWishlist);
-              // console.log(this.state.getProductIdsInWishlist.indexOf(12))
-       
-          });
+            });
       });
 
 
@@ -99,9 +91,7 @@ export default class DetailSuggestions extends Component {
   SelfProduct(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        // console.log(page);
-        if(params.search != undefined && params.type != undefined){
+       if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,0).then((response)=>{
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
@@ -114,8 +104,6 @@ export default class DetailSuggestions extends Component {
                    })
                   }
                 })
-                // var products = this.state.products
-                // products = products.concat(moreProducts);
                this.setState({
                 products : moreProducts,
                 resultsCount : Count,
@@ -123,7 +111,6 @@ export default class DetailSuggestions extends Component {
                 boolAntaran : 0,
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -134,7 +121,6 @@ export default class DetailSuggestions extends Component {
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -154,9 +140,7 @@ export default class DetailSuggestions extends Component {
   Antaran(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        // console.log(page);
-        if(params.search != undefined && params.type != undefined){
+       if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,1).then((response)=>{
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
@@ -169,16 +153,13 @@ export default class DetailSuggestions extends Component {
                    })
                   }
                 })
-                // var products = this.state.products
-                // products = products.concat(moreProducts);
-               this.setState({
+                this.setState({
                 products : moreProducts,
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 1,
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -189,7 +170,6 @@ export default class DetailSuggestions extends Component {
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -209,9 +189,7 @@ export default class DetailSuggestions extends Component {
   addMoreProducts(){
     var page = this.state.currentPage+1;
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        console.log(page);
-        if(params.search != undefined && params.type != undefined){
+      if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
              if(response.data.valid == true)
              {  var Count = this.state.resultsCount + response.data.data.searchResponse.length
@@ -224,7 +202,6 @@ export default class DetailSuggestions extends Component {
                 currentPage : page
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -235,7 +212,6 @@ export default class DetailSuggestions extends Component {
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran },()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -251,14 +227,6 @@ export default class DetailSuggestions extends Component {
         });
       }
     
-
-    // var ar = [this.state.products[0]]
-    // var dumy = this.state.products;
-    // dumy = dumy.concat(ar);
-    // this.setState({products : dumy})
-    
-     console.log(this.state.products);
-    // this.render( )
   }
 
   render() {
@@ -342,7 +310,6 @@ export default class DetailSuggestions extends Component {
                                             {this.state.item1 = false}
 
                                           <ProductsOfSearch productData = {item} productIdsInWishlist={ this.state.getProductIdsInWishlist.indexOf(item.id)!=-1 ? true : false }/>    
-                                            {/* {console.log(item)}; */}
 
                                         </Col>
                                         :
@@ -363,9 +330,6 @@ export default class DetailSuggestions extends Component {
                                     No Products found
                                 </Row>}
                                
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
                             </Row>
                 
               </Col>
@@ -382,7 +346,6 @@ export default class DetailSuggestions extends Component {
                                     :
                                     null
                                     }
-                                    {/* {this.state.products.length} */}
                                     </div>
                                     <br></br>        <br></br>        <br></br>
 

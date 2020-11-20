@@ -39,26 +39,18 @@ class BuyerNotifications extends Component {
           notificationTypeId: response.data.data,
           loading: false
         });
-        console.log(response.data.data);
       }
     });
 
     TTCEapi.getAllNotifications().then((response)=>{
         if(response.data.valid)
         {
-          // var count = 0;
-          // for(var i = 0; i < response.data.data.getAllNotifications.length; i++) {
-          //   if(response.data.data.getAllNotifications[i].seen === 0) {
-          //     count = count + 1;
-          //   }
-          // }
-          // console.log(count);
+          
           this.setState({
             notificationData: response.data.data.getAllNotifications,
             newCount: response.data.data.count,
             loading: false
           });
-          console.log(this.state.notificationData);
         }
     });
 
@@ -72,13 +64,10 @@ class BuyerNotifications extends Component {
   }
 
   notificationSeenfunction = (id) => {
-    console.log(id);
-
     TTCEapi.updateNotificationSeen(id).then((response)=>{
       if(response.data.valid)
       {
         window.location.reload();
-        console.log(response.data.data);
       }
     });
   }
@@ -88,7 +77,6 @@ class BuyerNotifications extends Component {
       if(response.data.valid)
       {
         window.location.reload();
-        console.log(response.data.data);
       }
     });
   }

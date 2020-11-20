@@ -31,7 +31,6 @@ class forgotpass1 extends Component {
                    
                    const emailcheck = isEmail;
 
-                   // validator.isEmail(this.state.emailid);
                    if (
                      this.state.emailid == "" ||
                      !emailcheck(this.state.emailid)

@@ -11,11 +11,8 @@ class Customprod extends Component {
     
     constructor(props) {
         super(props);
-
         this.state = {
-          
-
-         
+        
         };
       
     }
@@ -36,7 +33,7 @@ class Customprod extends Component {
               <Row noGutters={true}>
               <Col md = "1">
                         <img
-                                    src={logos.backarrowicon}
+                            src={logos.backarrowicon}
                                     className="margin-cparrow cparrowsize glyphicon"
                                     onClick={() => this.backoperation()}
                                 ></img>
@@ -58,9 +55,7 @@ class Customprod extends Component {
                         <button className="wishlistblack"><img className="homeiconwishlist" src={logos.whitecustomdesignicon}/> <span className="spanhome">Create my own design</span></button>
                         </div>
                 </Row>
-                {/* <Row noGutters={true}>
-                  
-                </Row> */}
+               
                 </Col>
                   </Row> 
                   </Container>

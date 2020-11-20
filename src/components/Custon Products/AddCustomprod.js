@@ -43,12 +43,9 @@ class AddCustomprod extends Component {
         this.setState({ modalIsOpen: true });
           TTCEapi.ifEnquiryExists(item,true).then((response)=>{
         this.setState({ifEnquiryExists : response.data.data},()=>{
-          // this.setState({ modalIsOpen: false });
-            console.log(this.state.ifEnquiryExists);
             if(this.state.ifEnquiryExists.ifExists ==false){
               TTCEapi.generateEnquiry(item,true).then((response)=>{
                 this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
-                               console.log(this.state.generateEnquiry);
                               });
               });
             }
@@ -64,23 +61,16 @@ class AddCustomprod extends Component {
         // if(window.confirm("Remove this item from wishlist?")){
             TTCEapi.deleteAllProductsInbuyerCustom().then((response)=>{
                 this.setState({deleteAllProductsInbuyerCustom : response.data},()=>{
-                    console.log(this.state.deleteAllProductsInbuyerCustom);
                     document.getElementById('id01').style.display='none';
                     window.location.reload();
                 });
-            });
-            
-        // }
-      
+            });      
     }
+
     componentDidMount(){
    
         TTCEapi.buyergetAllProducts().then((response)=>{
          this.setState({ dataload : true,buyergetAllProducts : response.data.data},()=>{
-          
-             console.log(this.state.buyergetAllProducts);
-          
-             // console.log(this.props.user);
          });
      });
      }
@@ -174,7 +164,6 @@ class AddCustomprod extends Component {
                             <img className="Wishlistitemimg" src={logos.Smile} />
                         }
                       
-                      {/* <img className="Wishlistitemimg" src={logos.Vengtikari}/> */}
 
                      </div>
                     </Col>
@@ -223,7 +212,6 @@ class AddCustomprod extends Component {
                             <Col sm={12} >
                             <div class="buttons">
                         <button class="bpdbutton -bg-yellow" style={{marginTop:"10px",height:"43px",width:"195px"}}  onClick={() => this.generateEnquiry(data.id)}>
-                      {console.log(data.id)}
               
                             <span>Enquiry Now</span>
                                 <div class="arrowPacman">
@@ -244,15 +232,7 @@ class AddCustomprod extends Component {
                             </Row>
                             <Row  >
                                 <Col sm={12} >
-                               
-                               {/* <p className="Wishlistpcode margintopcss"><b>Available in </b>Stock</p> */}
- 
-                            
-{/*                             
-                            <p className="Wishlistpcode margintopcss">     
-                            <b style={{color:"purple"}}>Exclusively </b>made to order
-                            </p> */}
-                            
+                           
                                 </Col>
                             </Row>
                        </Col>
@@ -279,9 +259,7 @@ class AddCustomprod extends Component {
                 />
                  :
                         (
-                            // this.state.isLoadingEnquiry ?
-                //    <HoldPopup/>
-                   
+               
                 this.state.enqgen ? 
                  <SuccessPopup
                  EnquiryCode={this.state.generateEnquiry.enquiry.code}

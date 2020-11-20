@@ -4,10 +4,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
 import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import { BuyerRecentList } from './BuyerRecentList';
@@ -45,11 +42,7 @@ export class BuyerAllTransactionList extends Component {
             <React.Fragment>
                 <NavbarComponent/>
                 <Container>
-                {/* <img
-                                       src={logos.recent}
-                                     className="recenticon"
-                                        ></img> */}
-                <Row noGutters={true} className="">
+               <Row noGutters={true} className="">
                            <Col sm = "1" className="col-xs-2">
                            <img
                                        src={logos.backarrowicon}
@@ -104,7 +97,6 @@ export class BuyerAllTransactionList extends Component {
                           </Col>                            
                 </Row>
                 <Row>
-                    {/* <hr className="enquiryoptionhr"></hr> */}
                 </Row>
                 {
                     this.state.Recent
@@ -117,12 +109,7 @@ export class BuyerAllTransactionList extends Component {
                    <BuyerHistoryList />
                     </>
                 }
-                {/* <div>
-              <img
-                className="notifyFooterBanner internaldiv"
-                src={logos.notifyFooterBanner}
-              ></img>
-            </div> */}
+              
                 </Container>
                 <Footer></Footer>
             </React.Fragment>
@@ -131,7 +118,6 @@ export class BuyerAllTransactionList extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

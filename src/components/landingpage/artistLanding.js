@@ -17,7 +17,6 @@ import changeLang from "../../services/utils/changeLang"
   }
   componentDidMount(){
     var Languagetran=localStorage.getItem("i18nextLng");
-    console.log(localStorage.getItem('i18nextLng')== "hi");
       TTCEapi.getProfile().then((response)=>{
       if(response.data.data.user.companyDetails != null){
         if(response.data.data.user.companyDetails.logo != null){
@@ -25,8 +24,6 @@ import changeLang from "../../services/utils/changeLang"
             this.setState({
                 brandPic : brandPic,
             });
-            console.log(brandPic);
-
         }
     }
 
@@ -39,7 +36,6 @@ import changeLang from "../../services/utils/changeLang"
 
         return (
           <React.Fragment>
-           
             <Row noGutters={true}>
               <div className="artistLanding">
                 <Row noGutters={true}>
@@ -54,7 +50,6 @@ import changeLang from "../../services/utils/changeLang"
                       <Col className="text-center" sm={{ size: "4" }}>
                         <img
                           className="artistbg1img profileImage"
-                          // src={logos.uploadphoto}
                           src = {this.state.brandPic == "" ? logos.Smile :
                           this.state.brandPic}
                         ></img>
@@ -112,5 +107,4 @@ function mapStateToProps(state) {
 }
 
 const connectedLoginPage = connect(mapStateToProps)(artistLanding);
-// export default connectedLoginPage;
 export default withTranslation()(connectedLoginPage);

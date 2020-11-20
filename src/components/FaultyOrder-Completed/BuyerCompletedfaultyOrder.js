@@ -7,7 +7,6 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
@@ -65,7 +64,6 @@ export class BuyerCompletedfaultyOrder extends Component {
         this.handleChange = this.handleChange.bind(this);
 
     }  
-    // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
     FaultyOrderSelect(id){
          
         const typeElements = this.state;
@@ -80,10 +78,8 @@ export class BuyerCompletedfaultyOrder extends Component {
         });
         
         var arr = this.state.accepted 
-        console.log(arr);
       }   
       FaultyUnOrderSelect(id){
-        console.log("Unselect")
         const typeElements = this.state;
         const updatedHeaders = [...typeElements.accepted];
         updatedHeaders[parseInt(id)-1] = {
@@ -96,7 +92,6 @@ export class BuyerCompletedfaultyOrder extends Component {
         });
         
         var arr = this.state.accepted 
-        console.log(arr);
       }
            
     backoperation(){
@@ -105,9 +100,7 @@ export class BuyerCompletedfaultyOrder extends Component {
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
-        //   console.log(this.state.moq);
         });
     }
 
@@ -122,20 +115,16 @@ export class BuyerCompletedfaultyOrder extends Component {
                 }
             }
             dummy = dummy.substring(0, dummy.length - 3);
-            console.log(dummy);
             let params = queryString.parse(this.props.location.search);
-            console.log(params.orderid);
             this.setState({
                 enquiryCode:params.orderid
             })
             TTCEapi.sendFaultyOrder(params.orderid,this.state.description,dummy).then((response)=>{
-                console.log(params.orderid,this.state.description,dummy);
                 if(response.data.valid)
                 {
                 this.setState({
                     sendFaultyOrder : response.data.data,
                      dataload : true,},()=>{
-                    console.log(this.state.sendFaultyOrder);
                 });
                 document.getElementById('SureModal').style.display='none';
                 customToast.success("Your report is sent to Artisan", {
@@ -182,7 +171,6 @@ export class BuyerCompletedfaultyOrder extends Component {
     componentDidMount(){
       
         let params = queryString.parse(this.props.location.search);
-        console.log(params.orderid);
         this.setState({
             enquiryCode:params.orderid
         })
@@ -192,7 +180,6 @@ export class BuyerCompletedfaultyOrder extends Component {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
-                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -202,7 +189,6 @@ export class BuyerCompletedfaultyOrder extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -215,12 +201,10 @@ export class BuyerCompletedfaultyOrder extends Component {
                  artisanReviewId:response.data.data.orderProgress.artisanReviewId,
                  isResolved:response.data.data.orderProgress.isResolved,
                  buyerReviewComment:response.data.data.orderProgress.buyerReviewComment?response.data.data.orderProgress.buyerReviewComment:""},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -235,9 +219,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
-                }
+                  }
             }
      
       
@@ -246,16 +228,12 @@ export class BuyerCompletedfaultyOrder extends Component {
     }
     daysleftFaultyOrder(name,days)
     {
-      console.log(name,days);
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd =parseInt(days);
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
                                 return(diffDays);
     }
     render() {
@@ -267,13 +245,10 @@ export class BuyerCompletedfaultyOrder extends Component {
                     <>
                     {this.state.isResolved?
                     <>
-                                        {console.log("ARtisan 3")}
-
                      <CompletedFaultResolved
                       enquiryCode={this.state.enquiryCode}
                       artisan={this.state.artisan}
                       />   
-                    {/* {browserHistory.push("/completedconcernsolved?orderid="+this.state.enquiryCode)} */}
                     </>
                 :
                 <>
@@ -295,15 +270,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                                        <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                                         <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                                       {/* {this.state.getClosedOrder.orderReceiveDate==null ?
-                                                       ""
-                                                      :
-                                                      <p className="faultyp2">
-                                                      <DaysRemaining startday = {this.state.getClosedOrder.orderReceiveDate}>
-                                                        </DaysRemaining>
-                                                        <span> days left to report a problem.</span> </p>
-                                                      } */}
-                                                       
+                                                      
                                                     </Col>
                                                     </Row> 
                                               
@@ -439,15 +406,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                   <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                      <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
                                       <p className="faultyp1">If you find something is faulty and beyond acceptable,please raise your concern here.</p>
-                                     {/* {this.state.getClosedOrder.orderReceiveDate==null ?
-                                     ""
-                                    :
-                                    <p className="faultyp2">
-                                    <DaysRemaining startday = {this.state.getClosedOrder.orderReceiveDate} >
-                                      </DaysRemaining>
-                                      <span> days left to report a problem.</span> </p>
-                                    } */}
-                                     
+                                   
                                   </Col>
                                   </Row> 
                             
@@ -539,7 +498,6 @@ export class BuyerCompletedfaultyOrder extends Component {
                                        maxLength="500"
                                        name="description"
                                        id="description"
-                                        // value={this.state.description }
                                         onChange={this.handleChange}></textarea>
                                     </Col>
                                     

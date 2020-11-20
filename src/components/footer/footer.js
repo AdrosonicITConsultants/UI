@@ -21,20 +21,16 @@ class Footer extends Component {
     this.setState({
       userId: data.refRoleId
     });
-    console.log(this.state.userId);
   }
 
     render() {
       
         return (
           <>
-          
-
             <div className="footerblack ">
             <Container className='footerContainer'>
               <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
-                {/* <div style={{marginBottom: "20px"}}>08-11-20  <span style={{marginLeft: "5px"}}>V-2</span></div> */}
                 </Col>
               </Row>
               <Row noGutters={true}>

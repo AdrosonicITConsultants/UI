@@ -157,7 +157,7 @@ form input[type="file"] {
         cursor: pointer;
 }
 .aprofilelogo{
-background-image: url("../../assets/logo2.png");
+/* background-image: url("../../assets/logo2.png"); */
 height: 140px;
 width: 140px;
 border-radius: 50%;

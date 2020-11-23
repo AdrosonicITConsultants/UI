@@ -263,7 +263,7 @@ componentDidMount(){
                   browserHistory.push("/buyer-custom-design");
                 }}>
                   <img className="navButtonImg" src={logos.navbarbtn1}></img>
-                  <span className="navButtonImg">New custom design</span>
+                  <span className="navButtonImg">Share your design</span>
                 </button>
               ) : (
                 <button

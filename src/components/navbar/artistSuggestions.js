@@ -64,7 +64,7 @@ class ArtistSuggestions extends Component {
       return (
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "1rem" ,
               paddingTop: "1rem",
             }}
@@ -77,7 +77,7 @@ class ArtistSuggestions extends Component {
         <div>
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "3rem",
               paddingTop: "1rem",
             }}
@@ -215,7 +215,10 @@ class ArtistSuggestions extends Component {
               marginLeft: "18px",
               width: "-webkit-fill-available",
               height: "-webkit-fill-available",
-              fontSize: "25px"
+              fontSize: "20px",
+              padding:" 3px 0px 7px 73px",
+              height: "66px"
+
             }}
             {...inputProps}
           ></input>

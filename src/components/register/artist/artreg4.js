@@ -408,7 +408,7 @@ class artreg4 extends Component {
                           type="text"
                           id="panno"
                           className="form-control form2 BuyerLogin1"
-                          value={this.state.panno}
+                          value={this.state.panno.toUpperCase()}
                           //placeholder="panno"
                           name="panno"
                           onChange={(e) => this.handleChange(e)}

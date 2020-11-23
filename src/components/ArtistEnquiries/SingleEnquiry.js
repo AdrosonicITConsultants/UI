@@ -56,7 +56,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             sgst:0,
             hsncode:0,
             quantity:0,
-            dod:"",
+            dod:"10-10-10",
             rpu:"",
             preview: false,
             sendButtonClick: false,
@@ -1822,12 +1822,16 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                     <Col sm={6}>
                                                     <label>Expected date of delivery</label>
                                                     <br/>
-                                                        <input className="PIinput" type="date"
+                                                        {/* <input className="PIinput" type="date"
                                                         disabled={this.state.isPidetail}
-                                                        value={this.state.dod }
+                                                        value={this.state.dod}
                                                         name="dod"
-                                                        onChange={this.handleChange}/>
-
+                                                        onChange={this.handleChange}/> */}
+                                                        <input type="date" 
+                                                        placeholder="dd/mm/yyyy" 
+                                                        pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" 
+                                                        required></input>
+                                               
                                                     </Col>
                                                     <Col sm={6}>
                                                     <label>HSN Code</label>

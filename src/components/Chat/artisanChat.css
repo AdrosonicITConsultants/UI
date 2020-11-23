@@ -108,7 +108,7 @@
 }
 
 .chatRightHeight {
-    height: 580px;
+    height: 530px;
     border-left: 4px solid #F5F5F5;
 }
 
@@ -312,7 +312,7 @@
 
 .artisanChatWindowDisplayChatsOuter {
     padding: 20px;
-    height: 580px;
+    height: 530px;
     overflow: auto;
 }
 

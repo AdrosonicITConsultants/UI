@@ -2061,7 +2061,7 @@ else {
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option
@@ -2191,7 +2191,7 @@ else {
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for extra weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option

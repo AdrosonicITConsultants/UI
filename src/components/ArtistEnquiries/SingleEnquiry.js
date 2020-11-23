@@ -745,7 +745,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?
                                       this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                    <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnId ? this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnId ? this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -1126,7 +1126,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1]?
                                       this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc:""} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                      <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -1634,7 +1634,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                     <Col sm={6} className="Moqh1">
-                                                                        Min Order Qnty:
+                                                                        Min Order Qnty <strong className="requiredStar">*</strong> :
                                                                     </Col>
                                                                     <Col sm={6} className="Moqh2">
                                                                        <input 
@@ -1651,7 +1651,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                                                  <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                  <Col sm={6} className="Moqh1">
-                                                                     Price/unit:
+                                                                     Price/unit <strong className="requiredStar">*</strong> :
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
                                                                  <input 
@@ -1669,7 +1669,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                                              <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                                  <Col sm={6} className="Moqh1">
-                                                                    Estimated delivery date:
+                                                                    Estimated delivery date <strong className="requiredStar">*</strong> :
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2select">
                                                                                         <select
@@ -1796,7 +1796,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                         }
                                                     <Row noGutters={true} className="PIcolmt BdImgCol">
                                                         <Col sm={6} >
-                                                            <label>Quantity</label>
+                                                            <label>Quantity <strong className="requiredStar">*</strong></label>
                                                             <br/>
                                                         <input 
                                                         className="PIinput"
@@ -1808,7 +1808,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                             />
                                                         </Col>
                                                         <Col sm={6}>
-                                                        <label >Rate per unit(or metre)</label>
+                                                        <label >Rate per unit(or metre) <strong className="requiredStar">*</strong></label>
                                                         <br/>
                                                        
                                                     ₹ <input type="number"  className="PIinput  rsinputboxwidth"
@@ -1820,7 +1820,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                     </Row>
                                                     <Row noGutters={true} className="PIcol2mt BdImgCol">
                                                     <Col sm={6}>
-                                                    <label>Expected date of delivery</label>
+                                                    <label>Expected date of delivery <strong className="requiredStar">*</strong></label>
                                                     <br/>
                                                         <input className="PIinput" type="date"
                                                         disabled={this.state.isPidetail}
@@ -1830,7 +1830,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
                                                     </Col>
                                                     <Col sm={6}>
-                                                    <label>HSN Code</label>
+                                                    <label>HSN Code <strong className="requiredStar">*</strong></label>
                                                     <br/>
                                                         <input className="PIinput" type="number"
                                                         disabled={this.state.isPidetail}

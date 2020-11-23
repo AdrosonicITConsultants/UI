@@ -15,7 +15,7 @@ var ChatMediaUrl = "";
 var DocumentsURL = "";
 
 if (env == "dev") {
-  ApiUrl = "http://101.53.153.96:8090";
+  ApiUrl = "http://101.53.153.96:8090/api";
   ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";

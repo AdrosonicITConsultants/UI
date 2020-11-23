@@ -518,7 +518,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                      <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnId ? this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnId ? this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -718,7 +718,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                   <div noGutters={true} >
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                      <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -1046,7 +1046,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
                                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                     <Col sm={6} className="Moqh1">
-                                                                        Min Order Qnty:
+                                                                        Min Order Qnty <strong className="requiredStar">*</strong> :
                                                                     </Col>
                                                                     <Col sm={6} className="Moqh2">
                                                                        <input 
@@ -1062,7 +1062,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
                                                                  <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                                  <Col sm={6} className="Moqh1">
-                                                                     Price/unit:
+                                                                     Price/unit <strong className="requiredStar">*</strong> :
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2">
                                                                  <input 
@@ -1080,7 +1080,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
 
                                                              <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                                  <Col sm={6} className="Moqh1">
-                                                                    Estimated delivery date:
+                                                                    Estimated delivery date <strong className="requiredStar">*</strong> :
                                                                  </Col>
                                                                  <Col sm={6} className="Moqh2select">
                                                                                         <select

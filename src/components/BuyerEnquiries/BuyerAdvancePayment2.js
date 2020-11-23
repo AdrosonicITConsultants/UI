@@ -187,7 +187,8 @@ export default class BuyerAdvancePayment2 extends Component {
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold fontsize16pa ">{this.props.productDesc} </span> 
-                                       <span className="leEnqspun fontsize16pa"> / {this.props.yarnDesc}  X  {this.props.weftYarnId}  
+
+                                       <span className="leEnqspun fontsize16pa"> / {this.props.yarnDesc ? this.props.yarnDesc : "NA"}  X  {this.props.weftYarnId ? this.props.weftYarnId : "NA"}  
                                         {this.props.extraWeftYarnId > 0 
                                         ?
                                         <>

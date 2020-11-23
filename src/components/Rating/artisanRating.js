@@ -276,8 +276,10 @@ export default class ArtisanRating extends Component {
                 <div className="envelopeBgImg">
                     <Row noGutters={true}>
                         <Col className="col-xs-12 text-center">
-                            <div className="envelopeHeartTextLine1">With <img src={logos.envelopeHeart} className="envelopeHeart"/></div>
-                            <div className="envelopeHeartTextLine2">from Tata Trusts</div>
+                            {/* <div className="envelopeHeartTextLine1">With <img src={logos.envelopeHeart} className="envelopeHeart"/></div>
+                            <div className="envelopeHeartTextLine2">from Tata Trusts</div> */}
+                            <div className="envelopeHeartTextLine1">From Antaran</div>
+                            <div className="envelopeHeartTextLine2">Transforming Crafts</div>
                             <div className="envelopeHeartTextLine2">Rating provided = {this.state.artisanGivenRatingAverageValue}</div>
                             <div className="envelopeDear">Dear {this.state.userData.firstName} {this.state.userData.lastName}</div>
                             <div className="envelopeThank">Thank you !</div>

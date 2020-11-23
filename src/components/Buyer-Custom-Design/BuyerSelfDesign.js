@@ -357,13 +357,13 @@ export default class BuyerSelfDesign extends Component {
 
                  
                      if (filename != undefined) {
-  if (filename.size / 1024 / 1024 > 1) {    
-      customToast.error("Please upload product Image below 1MB.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
-     return ;
-  }
+  // if (filename.size / 1024 / 1024 > 1) {    
+  //     customToast.error("Please upload product Image below 1MB.", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //       autoClose: true,
+  //     });
+  //    return ;
+  // }
 
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
@@ -521,6 +521,7 @@ relatedProductTemp[e.target.name] = option;
 
 
                   if(!this.state.isImageUploadComplete){
+                    document.getElementById('id02').style.display='none';
                     customToast.error("Please upload product Image.", {
                       position: toast.POSITION.TOP_RIGHT,
                       autoClose: true,
@@ -556,6 +557,7 @@ relatedProductTemp[e.target.name] = option;
 
                         let node = this.basicDetailsComplete.current;
                         if(node.getAttribute("class") == "inComplete"){
+                          document.getElementById('id02').style.display='none';
                           customToast.error("Please complete basic details.", {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
@@ -577,22 +579,22 @@ relatedProductTemp[e.target.name] = option;
                                 }
                               });                                
 
-                              if (productData.weaveIds.length == 0){
-                                customToast.error(
-                                  "Please Add Weaves type of the Product.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                 this.WeavesComplete.current.scrollIntoView({
-                                   behavior: "smooth",
-                                   block: "center",
-                                   inline: "center",
-                                 });
-                               ;
-                                return;
-                              }
+                              // if (productData.weaveIds.length == 0){
+                              //   customToast.error(
+                              //     "Please Add Weaves type of the Product.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //    this.WeavesComplete.current.scrollIntoView({
+                              //      behavior: "smooth",
+                              //      block: "center",
+                              //      inline: "center",
+                              //    });
+                              //  ;
+                              //   return;
+                              // }
 
 
                               productData.warpDyeId = this.state.dye1;
@@ -609,57 +611,57 @@ relatedProductTemp[e.target.name] = option;
 
 
 
-                              if (
-                                productData.warpDyeId == undefined ||
-                                productData.warpDyeId == -1 ||
-                                productData.warpYarnId == undefined ||
-                                productData.warpYarnId == -1 ||
-                                productData.weftDyeId == undefined ||
-                                productData.weftDyeId == -1 ||
-                                productData.weftYarnId == undefined ||
-                                productData.weftYarnId == -1 ||
-                                productData.warpYarnCount == undefined ||
-                                productData.warpYarnCount == -1 ||
-                                productData.warpYarnCount == "" ||
-                                productData.weftYarnCount == undefined ||
-                                productData.weftYarnCount == -1 ||
-                                productData.weftYarnCount == ""
-                              ) {
-                                customToast.error(
-                                  "Please enter details of Warp & Weft.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                this.warpweftComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   productData.warpDyeId == undefined ||
+                              //   productData.warpDyeId == -1 ||
+                              //   productData.warpYarnId == undefined ||
+                              //   productData.warpYarnId == -1 ||
+                              //   productData.weftDyeId == undefined ||
+                              //   productData.weftDyeId == -1 ||
+                              //   productData.weftYarnId == undefined ||
+                              //   productData.weftYarnId == -1 ||
+                              //   productData.warpYarnCount == undefined ||
+                              //   productData.warpYarnCount == -1 ||
+                              //   productData.warpYarnCount == "" ||
+                              //   productData.weftYarnCount == undefined ||
+                              //   productData.weftYarnCount == -1 ||
+                              //   productData.weftYarnCount == ""
+                              // ) {
+                              //   customToast.error(
+                              //     "Please enter details of Warp & Weft.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   this.warpweftComplete.current.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
                              
 
-                              if (
-                                this.state.reedCount == undefined ||
-                                this.state.reedCount == -1
-                              ) {
-                                customToast.error(
-                                  "Please enter the reed count",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                this.reedcountComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   this.state.reedCount == undefined ||
+                              //   this.state.reedCount == -1
+                              // ) {
+                              //   customToast.error(
+                              //     "Please enter the reed count",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   this.reedcountComplete.current.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
 
 
@@ -671,46 +673,46 @@ relatedProductTemp[e.target.name] = option;
                                 }
                               });
 
-                              if (
-                                this.state.width == "" ||
-                                this.state.width == undefined ||
-                                   relatedDimension ||
-                                this.state.length == "" ||
-                                this.state.length == undefined
-                              ) {
-                                customToast.error(
-                                  "Please select dimensions.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                node.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   this.state.width == "" ||
+                              //   this.state.width == undefined ||
+                              //      relatedDimension ||
+                              //   this.state.length == "" ||
+                              //   this.state.length == undefined
+                              // ) {
+                              //   customToast.error(
+                              //     "Please select dimensions.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   node.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
                               
 
-                                node = this.GSMNameComplete.current;
-                                ;
-                                if (this.state.GSMName == "" && this.state.showGSM) {
-                                  customToast.error("Please enter description of the Product.", {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  });
-                                  node.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "center",
-                                    inline: "center",
-                                  });
-                                  return;
+                                // node = this.GSMNameComplete.current;
+                                // ;
+                                // if (this.state.GSMName == "" && this.state.showGSM) {
+                                //   customToast.error("Please enter description of the Product.", {
+                                //     position: toast.POSITION.TOP_RIGHT,
+                                //     autoClose: true,
+                                //   });
+                                //   node.scrollIntoView({
+                                //     behavior: "smooth",
+                                //     block: "center",
+                                //     inline: "center",
+                                //   });
+                                //   return;
 
-                                  return;
-                                }
+                                //   return;
+                                // }
 
 
 
@@ -840,7 +842,7 @@ relatedProductTemp[e.target.name] = option;
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Add photos</h4>
+                                   <h4 className="subHeading">Add photos <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add upto 3 photos for product
                                    </h6>
@@ -995,7 +997,7 @@ relatedProductTemp[e.target.name] = option;
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Basic details</h4>
+                                   <h4 className="subHeading">Basic details <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add general details for the product
                                    </h6>
@@ -1418,7 +1420,7 @@ relatedProductTemp[e.target.name] = option;
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option
@@ -1539,7 +1541,7 @@ relatedProductTemp[e.target.name] = option;
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for extra weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option
@@ -2169,7 +2171,7 @@ relatedProductTemp[e.target.name] = option;
                                    )}
 
                                    <h4 className="subHeading">
-                                     Describe the product
+                                     Describe the product <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Describe your product in 500 characters
@@ -2255,7 +2257,7 @@ relatedProductTemp[e.target.name] = option;
                                    >
                                     <div class="w3-container">
                                      <button
-                                       onClick={this.Save}
+                                      //  onClick={this.Save}
                                        onClick={this.ToggleSave}
                                        className="saveBtnProduct"
                                        disabled={this.state.SaveDisabled}

@@ -383,7 +383,7 @@ export class PIchange extends Component {
                                 } */}
                             <Row noGutters={true} className="PIcolmt BdImgCol">
                             <Col sm={6} >
-                                <label>Quantity</label>
+                                <label>Quantity <strong className="requiredStar">*</strong></label>
                                 <br/>
                             <input 
                             className="PIinput"
@@ -395,7 +395,7 @@ export class PIchange extends Component {
                                 />
                             </Col>
                             <Col sm={6}>
-                            <label >Rate per unit(or metre)</label>
+                            <label >Rate per unit(or metre) <strong className="requiredStar">*</strong></label>
                             <br/>
                           
                             ₹ <input type="number"  className="PIinput rsinputboxwidth"
@@ -406,7 +406,7 @@ export class PIchange extends Component {
                             </Row>
                             <Row noGutters={true} className="PIcol2mt BdImgCol">
                             <Col sm={6}>
-                            <label>Expected date of delivery</label>
+                            <label>Expected date of delivery <strong className="requiredStar">*</strong></label>
                             <br/>
                             <input className="PIinput" type="date"
                         
@@ -416,7 +416,7 @@ export class PIchange extends Component {
                             
                             </Col>
                             <Col sm={6}>
-                            <label>HSN Code</label>
+                            <label>HSN Code <strong className="requiredStar">*</strong></label>
                             <br/>
                             <input className="PIinput" type="number"
                             value={this.state.hsncode }

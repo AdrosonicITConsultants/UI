@@ -406,7 +406,7 @@ advancePaidAmt={this.state.advancePaidAmt}
 <>
  <Row noGutters={true} className=" BdImgCol">
                                     <Col sm={6} >
-                                        <label>Quantity</label>
+                                        <label>Quantity <strong className="requiredStar">*</strong></label>
                                         <br/>
                                         <input 
                                         className="PIinput"
@@ -417,7 +417,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                         />
                                     </Col>
                                     <Col sm={6}>
-                                    <label >Rate per unit(or metre)</label>
+                                    <label >Rate per unit(or metre) <strong className="requiredStar">*</strong></label>
                                     <br/>
                                    
                                 ₹ <input type="number"  className="PIinput rsinputboxwidth"
@@ -429,7 +429,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                 </Row>
                                 <Row noGutters={true} className="PIcol2mt BdImgCol">
                                 <Col sm={6}>
-                                <label>Previous Total amount(as per PI)</label>
+                                <label>Previous Total amount(as per PI) <strong className="requiredStar">*</strong></label>
                                 <br/>
                                     <input className="PIinput" type="number"
                                    
@@ -439,7 +439,7 @@ advancePaidAmt={this.state.advancePaidAmt}
 
                                 </Col>
                                 <Col sm={6}>
-                                <label>Advance payment received (Previously as per PI)</label>
+                                <label>Advance payment received (Previously as per PI) <strong className="requiredStar">*</strong></label>
                                 <br/>
                                     <input className="PIinput" type="number"
                                    
@@ -480,7 +480,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                 </Row>
                                 <Row noGutters={true} className="PIcol2mt BdImgCol">
                                 <Col sm={6}>
-                                <label>SGST %</label>
+                                <label>SGST % <strong className="requiredStar">*</strong></label>
                                 <br/>
                                     <input className="PIinput" type="number"
                                     value={this.state.sgst }
@@ -489,7 +489,7 @@ advancePaidAmt={this.state.advancePaidAmt}
 
                                 </Col>
                                 <Col sm={6}>
-                                <label>CGST %</label>
+                                <label>CGST % <strong className="requiredStar">*</strong></label>
                                 <br/>
                                     <input className="PIinput" type="number"
                                    

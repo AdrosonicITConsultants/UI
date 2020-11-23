@@ -99,7 +99,7 @@ export default class BuyerQC extends Component {
                     {/* toggle sent stages */}
 
                     {this.state.stagesData ? this.state.stagesData.map((stage) => {
-                        if(stage.id <= this.state.currentStageId && this.state.currentSeenStatus === 1) {
+                        if((stage.id <= this.state.currentStageId && this.state.currentSeenStatus === 1) || (stage.id < this.state.currentStageId)) {
                             return <div className="artisanQCCardStyleFilled">
                             <div className="artisanQCCardHeaderFilled" onClick={() => this.toggleArrow(stage.id)}>
                                 <Row noGutters={true}>

@@ -239,8 +239,8 @@ export default class EditBuyerDesign extends Component {
                           productData.extraWeftDyeId != null
                             ? productData.extraWeftDyeId
                             : "",
-                        showGSM: productData.gsm ? true : false,
-                        GSMName: productData.gsm ? productData.gsm : false,
+                        showGSM: productData.gsm == "false" || productData.gsm == "" ? false : true,
+                        GSMName: productData.gsm ? productData.gsm : "",
                        
 
                       },
@@ -318,33 +318,33 @@ export default class EditBuyerDesign extends Component {
                                     }
                                   }
                                 });
-
+                                console.log(this.state.yarns)
                                 this.setState(
                                   {
-                                    countOfYarn1: this.state.yarns.find(
+                                    countOfYarn1: this.state.yarns ? this.state.yarn1 ? this.state.yarns.find(
                                       (eID) => eID.id == this.state.yarn1
-                                    ).yarnType.manual
+                                    ).yarnType.manual 
                                       ? []
                                       : this.state.yarns.find(
                                           (eID) => eID.id == this.state.yarn1
-                                        ).yarnType.yarnCounts,
+                                        ).yarnType.yarnCounts : [] : [],
                                     yarnCount1: "",
-                                    countOfYarn2: this.state.yarns.find(
+                                    countOfYarn2: this.state.yarns ? this.state.yarn2 ? this.state.yarns.find(
                                       (eID) => eID.id == this.state.yarn2
                                     ).yarnType.manual
                                       ? []
                                       : this.state.yarns.find(
                                           (eID) => eID.id == this.state.yarn2
-                                        ).yarnType.yarnCounts,
-                                    yarnCount2: "",
+                                        ).yarnType.yarnCounts : [] : [],
+                                    yarnCount2: "" ,
                                     countOfYarn3:
-                                      this.state.yarns.find(
+                                    this.state.yarns ? this.state.yarn3 ? this.state.yarns.find(
                                         (eID) => eID.id == this.state.yarn3
                                       ) == undefined
                                         ? []
                                         : this.state.yarns.find(
                                             (eID) => eID.id == this.state.yarn3
-                                          ).yarnType.yarnCounts,
+                                          ).yarnType.yarnCounts : [] : [],
                                     yarnCount3: "",
                                   },
                                   () => {
@@ -585,13 +585,13 @@ else {
                  fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
                      if (filename != undefined) {
-  if (filename.size / 1024 / 1024 > 1) {    
-      customToast.error("Please upload product Image below 1MB.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: true,
-      });
-     return ;
-  }
+  // if (filename.size / 1024 / 1024 > 1) {    
+  //     customToast.error("Please upload product Image below 1MB.", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //       autoClose: true,
+  //     });
+  //    return ;
+  // }
   
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
@@ -762,6 +762,7 @@ else {
 
 
                   if(!this.state.isImageUploadComplete){
+                    document.getElementById('id02').style.display='none';
                     customToast.error("Please upload product Image.", {
                       position: toast.POSITION.TOP_RIGHT,
                       autoClose: true,
@@ -799,6 +800,7 @@ else {
 
                         let node = this.basicDetailsComplete.current;
                         if(node.getAttribute("class") == "inComplete"){
+                          document.getElementById('id02').style.display='none';
                           customToast.error("Please complete basic details.", {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
@@ -826,21 +828,21 @@ else {
                                 }
                               });                                
 
-                              if (productData.productWeaves.length == 0) {
-                                customToast.error(
-                                  "Please Add Weaves type of the Product.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                this.WeavesComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (productData.productWeaves.length == 0) {
+                              //   customToast.error(
+                              //     "Please Add Weaves type of the Product.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   this.WeavesComplete.current.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
 
                               productData.warpDyeId = this.state.dye1;
@@ -857,57 +859,57 @@ else {
 
 
 
-                              if (
-                                productData.warpDyeId == undefined ||
-                                productData.warpDyeId == -1 ||
-                                productData.warpYarnId == undefined ||
-                                productData.warpYarnId == -1 ||
-                                productData.weftDyeId == undefined ||
-                                productData.weftDyeId == -1 ||
-                                productData.weftYarnId == undefined ||
-                                productData.weftYarnId == -1 ||
-                                productData.warpYarnCount == undefined ||
-                                productData.warpYarnCount == -1 ||
-                                productData.warpYarnCount == "" ||
-                                productData.weftYarnCount == undefined ||
-                                productData.weftYarnCount == -1 ||
-                                productData.weftYarnCount == ""
-                              ) {
-                                customToast.error(
-                                  "Please enter details of Warp & Weft.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                this.warpweftComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   productData.warpDyeId == undefined ||
+                              //   productData.warpDyeId == -1 ||
+                              //   productData.warpYarnId == undefined ||
+                              //   productData.warpYarnId == -1 ||
+                              //   productData.weftDyeId == undefined ||
+                              //   productData.weftDyeId == -1 ||
+                              //   productData.weftYarnId == undefined ||
+                              //   productData.weftYarnId == -1 ||
+                              //   productData.warpYarnCount == undefined ||
+                              //   productData.warpYarnCount == -1 ||
+                              //   productData.warpYarnCount == "" ||
+                              //   productData.weftYarnCount == undefined ||
+                              //   productData.weftYarnCount == -1 ||
+                              //   productData.weftYarnCount == ""
+                              // ) {
+                              //   customToast.error(
+                              //     "Please enter details of Warp & Weft.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   this.warpweftComplete.current.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
                              
 
-                              if (
-                                this.state.reedCount == undefined ||
-                                this.state.reedCount == -1
-                              ) {
-                                customToast.error(
-                                  "Please enter the reed count",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                this.reedcountComplete.current.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   this.state.reedCount == undefined ||
+                              //   this.state.reedCount == -1
+                              // ) {
+                              //   customToast.error(
+                              //     "Please enter the reed count",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   this.reedcountComplete.current.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
 
 
@@ -919,52 +921,53 @@ else {
                                 }
                               });
 
-                              if (
-                                this.state.width == "" ||
-                                this.state.width == undefined ||
-                                   relatedDimension ||
-                                this.state.length == "" ||
-                                this.state.length == undefined
-                              ) {
-                                customToast.error(
-                                  "Please select dimensions.",
-                                  {
-                                    position: toast.POSITION.TOP_RIGHT,
-                                    autoClose: true,
-                                  }
-                                );
-                                node.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
-                              }
+                              // if (
+                              //   this.state.width == "" ||
+                              //   this.state.width == undefined ||
+                              //      relatedDimension ||
+                              //   this.state.length == "" ||
+                              //   this.state.length == undefined
+                              // ) {
+                              //   customToast.error(
+                              //     "Please select dimensions.",
+                              //     {
+                              //       position: toast.POSITION.TOP_RIGHT,
+                              //       autoClose: true,
+                              //     }
+                              //   );
+                              //   node.scrollIntoView({
+                              //     behavior: "smooth",
+                              //     block: "center",
+                              //     inline: "center",
+                              //   });
+                              //   return;
+                              // }
 
                               
                                
 
                                 node = this.GSMNameComplete.current;
                             ;
-                            if (this.state.GSMName == "" && this.state.showGSM) {
-                              customToast.error("Please enter description of the Product.", {
-                                position: toast.POSITION.TOP_RIGHT,
-                                autoClose: true,
-                              });
-                                node.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "center",
-                                  inline: "center",
-                                });
-                                return;
+                            // if (this.state.GSMName == "" && this.state.showGSM) {
+                            //   customToast.error("Please enter description of the Product.", {
+                            //     position: toast.POSITION.TOP_RIGHT,
+                            //     autoClose: true,
+                            //   });
+                            //     node.scrollIntoView({
+                            //       behavior: "smooth",
+                            //       block: "center",
+                            //       inline: "center",
+                            //     });
+                            //     return;
 
-                              return;
-                            }
+                            //   return;
+                            // }
 
                              
 
                               node = this.description.current;
                               if (node.getAttribute("class") == "inComplete") {
+                                document.getElementById('id02').style.display='none';
                                 customToast.error("Please enter description of the Product.", {
                                   position: toast.POSITION.TOP_RIGHT,
                                   autoClose: true,
@@ -1124,7 +1127,7 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Add photos</h4>
+                                   <h4 className="subHeading">Add photos <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add upto 3 photos for product
                                    </h6>
@@ -1323,7 +1326,7 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Basic details</h4>
+                                   <h4 className="subHeading">Basic details <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add general details for the product
                                    </h6>
@@ -1760,7 +1763,7 @@ else {
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option
@@ -1890,7 +1893,7 @@ else {
                                            id="-1"
                                            value="Select Cluster"
                                          >
-                                           Select the yarn for warp
+                                           Select the yarn for extra weft
                                          </option>
                                          {this.state.yarns.map((item) => (
                                            <option
@@ -2544,7 +2547,7 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Describe the product
+                                     Describe the product <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Describe your product in 500 characters

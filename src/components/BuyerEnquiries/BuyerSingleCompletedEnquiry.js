@@ -686,7 +686,7 @@ MoqSimpleProductSelected(moqId){
                                   <div noGutters={true} >
                                       <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc}  
+                                      <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnId ? this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnId ? this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -884,7 +884,7 @@ MoqSimpleProductSelected(moqId){
                                   <div noGutters={true} >
                                   <Col >
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc} </span> 
-                                       <span className="leEnqspun"> / {this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc}  X  {this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc}  
+                                      <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc : "NA"}  
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
@@ -1467,7 +1467,7 @@ MoqSimpleProductSelected(moqId){
                                                 <Col sm={10}>
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                    Min Order Qnty:
+                                                    Min Order Qnty <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                 <Col sm={6} className="Moqh2 ">
                                                 <input 
@@ -1483,7 +1483,7 @@ MoqSimpleProductSelected(moqId){
 
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                Price/unit:
+                                                Price/unit <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                 <Col sm={6} className="Moqh2">
                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
@@ -1502,7 +1502,7 @@ MoqSimpleProductSelected(moqId){
 
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                Estimated delivery date:
+                                                Estimated delivery date <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                  <Col sm={6} className="Moqh2select">
                                                     <select
@@ -1845,7 +1845,7 @@ MoqSimpleProductSelected(moqId){
                                                 <Col sm={10}>
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                    Min Order Qnty:
+                                                    Min Order Qnty <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                 <Col sm={6} className="Moqh2 ">
                                                 <input 
@@ -1861,7 +1861,7 @@ MoqSimpleProductSelected(moqId){
 
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                Price/unit:
+                                                Price/unit <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                 <Col sm={6} className="Moqh2">
                                                 {/* <i class="fa fa-inr" aria-hidden="true"></i>  */}
@@ -1880,7 +1880,7 @@ MoqSimpleProductSelected(moqId){
 
                                                 <Row noGutters={true} className="moqdetailCard Allenqlistbtnmt2">
                                                 <Col sm={6} className="Moqh1 Moqbuyerh1">
-                                                Estimated delivery date:
+                                                Estimated delivery date <strong className="requiredStar">*</strong> :
                                                 </Col>
                                                  <Col sm={6} className="Moqh2select">
                                                     <select

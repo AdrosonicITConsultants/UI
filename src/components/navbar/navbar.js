@@ -58,7 +58,6 @@ class NavbarComponent extends Component {
   toggleHover(name) {
 
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(name);
   if (user.refRoleId == 2) {
     switch (name) {
       case "isfavHovered":
@@ -196,7 +195,6 @@ changeLang = (data) => {
 }
 componentDidMount(){
   var Languagetran=localStorage.getItem("i18nextLng");
-  console.log(localStorage.getItem('i18nextLng')== "hi");
  }
   render() {
     const { results, value } = this.state;
@@ -219,15 +217,7 @@ componentDidMount(){
                 src={logos.searchlogo}
                 className="searchIconinTextbox glyphicon"
               ></img>
-               {/* <input
-                autoFocus
-                // onBlur={() => this.toggleHover("isSearchClicked")}
-                type="text"
-                id="userName"
-                className="form-control searchTextbox "
-                placeholder="Username"
-                name="userName"
-                /> */}
+              
               {
                 userTypeId == 2 ? (
                   <BuyerConnectedSuggestions cs= {this.closesearch}/>
@@ -237,18 +227,7 @@ componentDidMount(){
               
             </div>
             ) : null}
-          {/* {this.state.isSearchClicked ? (
-            <div className="searchbarNav inner-addon right-addon">
-              <button
-                onClick={() => {
-                  browserHistory.push("/home");
-                }}
-                img={logos.searchlogo}
-                // className=" inner-addon right-addon"
-                
-              ></button>
-            </div>
-            ) : null} */}
+         
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             <li className="menu-item">
               {userTypeId === 2 ? (
@@ -284,7 +263,7 @@ componentDidMount(){
                   browserHistory.push("/buyer-custom-design");
                 }}>
                   <img className="navButtonImg" src={logos.navbarbtn1}></img>
-                  <span className="navButtonImg">New custom design</span>
+                  <span className="navButtonImg">Share your design</span>
                 </button>
               ) : (
                 <button
@@ -726,9 +705,7 @@ componentDidMount(){
 
                function mapStateToProps(state) {
                  const {user}  = state
-                 console.log("User : ");
-                 console.log( user);
-                 return { user };
+               return { user };
                }
 
  const connectedLoginPage = connect(mapStateToProps)(NavbarComponent);

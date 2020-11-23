@@ -787,9 +787,10 @@ class ArtistProfile extends Component {
                         <div className="wrapper">
                             <div className={"c100 " + this.state.ratingclass + " blue artistrating"}  >
                                 <span><div className="aprofilelogo">
-                                  <img src=
+                                {this.state.rating?this.state.rating:""}
+                                  {/* <img src=
                                   {user.profilePic == "" || user.profilePic == null ?  logos.Smile : TTCEapi.ImageUrl + "User/" + user.id + "/ProfilePics/" + user.profilePic }
-                                   className="profileImage21"></img>
+                                   className="profileImage21"></img> */}
                            </div></span>
                                 <div className="slice">
                                     <div className="bar"></div>

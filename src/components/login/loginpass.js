@@ -28,7 +28,6 @@ class buyerpass extends Component {
 
                  Login = (event) => {
                   event.preventDefault();
-                   console.log(this.state);
                    if (this.state.password == "") {
                     this.setState({
                       showValidation: !this.state.showValidation,
@@ -186,19 +185,7 @@ class buyerpass extends Component {
                          </form>
 <br/>
                          <br />
-                         {/* <Row  >
-                <div className="col-xs-12 text-center">
-                  <h2>Or</h2>
-                </div>
-              </Row>
-
-              <br />
-
-              <Row  >
-                <div className="col-xs-12 text-center">
-                  <h2>google login</h2>
-                </div>
-              </Row> */}
+                       
                          <hr className="hrline"></hr>
                          <Row  >
                            <div className="col-xs-12 text-center font13">

@@ -27,7 +27,6 @@ class videoPlayer extends Component {
       CMSApi.getDemoVideos().then((response)=>{
         if(response)
         {
-          console.log(response.data[0].acf);
           this.setState({
             videoData : response.data[0].acf
           })

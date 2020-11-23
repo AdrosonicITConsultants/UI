@@ -62,29 +62,20 @@ operation = (event) => {
   }
 
   responseFacebook = (response) => {
-    console.log("facebook console");
-    console.log(response);
-    console.log(response.accessToken);
-
-    TTCEapi.socialLogin("facebook", response.accessToken).then((response)=>{
+      TTCEapi.socialLogin("facebook", response.accessToken).then((response)=>{
       if(response.data.valid === false)
       {
         this.setState({
           googleFBErrorMsg: true,
         });
-        console.log(response.data.data);
       }
       else if(response.data.valid === true) {
         this.setState({
           googleFBErrorMsg: false,
         });
         if(response.data.data.acctoken) {
-          // if(localStorage.getItem("skipVideo") == "true") {
-          //   browserHistory.push("/home"); 
-          // }
-          // else {
+        
             browserHistory.push("/demo-video");
-          // }                                              
         }        
       }
     });
@@ -92,29 +83,20 @@ operation = (event) => {
   }
 
   responseGoogle = (response) => {
-    console.log("google console");
-    console.log(response);
-    console.log(response.wc.access_token);
-
+  
     TTCEapi.socialLogin("google", response.wc.access_token).then((response)=>{
       if(response.data.valid === false)
       {
         this.setState({
           googleFBErrorMsg: true,
         });
-        console.log(response.data.data);
       }
       else if(response.data.valid === true) {
         this.setState({
           googleFBErrorMsg: false,
         });
         if(response.data.data.acctoken) {
-          // if(localStorage.getItem("skipVideo") == "true") {
-          //   browserHistory.push("/home"); 
-          // }
-          // else {
             browserHistory.push("/demo-video");
-          // }                                              
         }        
       }
     });
@@ -222,8 +204,7 @@ operation = (event) => {
             <div className="col-xs-12 text-center">
               <button
                 className="blackButton"
-                // onClick={() => this.operation()}
-                // onClick={() => this.operation()}
+                
               >{this.props.userpage == 1 ?
                 "Next" :
                 this.props.t("Pages.object.regNextButton")
@@ -251,19 +232,6 @@ operation = (event) => {
             </Col>
           </Row>          
 
-          {/* <Row  >
-                <div className="col-xs-12 text-center">
-                  <h2>Or</h2>
-                </div>
-              </Row>
-
-              <br />
-
-              <Row  >
-                <div className="col-xs-12 text-center">
-                  <h2>google login</h2>
-                </div>
-              </Row> */}
           <hr
             className="hrline"
             style={{ bordertop: "2px solid #d8d9da !important" }}
@@ -308,10 +276,7 @@ null :
 </Col>
 </Row>
                            <Row   className="mt7">
-                             {/* <span className="col-xs-3 text-center line7 font6">
-                    Help?
-                  </span> */}
-                             {/* <span className="col-xs-3"></span> */}
+                           
                              <span className="col-xs-12 text-center line6 font6">
                              {this.props.t("Pages.object.changelanguage")}
                                <img src={logos.language} className="ml-5"></img>

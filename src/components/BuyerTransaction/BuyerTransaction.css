@@ -1,19 +1,12 @@
 .selctedoptiotransnhr {
-    /* position: absolute; */
     border: 1.5px solid black;
     width: 176px;
-    /* top: 93px; */
-    /* left: 0px; */
     margin-top: 4px;
 }
     
-
-    .selctedoptiotransnhr2 {
-   /* position: absolute; */
+ .selctedoptiotransnhr2 {
    border: 1.5px solid black;
    width: 64px;
-   /* top: 93px; */
-   /* left: 142px; */
    margin-top: 4px;
 }
 .navoncontr {
@@ -261,8 +254,6 @@
 
 input.empty {
     font-family: FontAwesome;
-    /* font-style: normal;
-    font-weight: normal; */
     text-decoration: inherit;
     
 }
@@ -272,13 +263,11 @@ input.empty {
       font-size: 11px;
            }
     .selctedoptiotransnhr {
-        /* position: absolute; */
         border: 1.5px solid black;
         width: 99px;
     }
 
     .selctedoptiotransnhr2 {
-        /* position: absolute; */
         border: 1.5px solid black;
         width: 38px;
     }

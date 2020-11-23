@@ -4,10 +4,7 @@ import {Row, Col , Container, Button,InputGroup, InputGroupText, InputGroupAddon
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
 import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import Moment from 'react-moment';
@@ -66,7 +63,6 @@ export class BuyerHistoryList extends Component {
     }
 
     openReceipt(receiptId,challanId){
-        console.log(receiptId,challanId);
         setTimeout(function() { 
           this.setState({
             render: true
@@ -74,10 +70,8 @@ export class BuyerHistoryList extends Component {
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
           if(response.data.valid) {
-            // window.open(TTCEapi.ReceiptUrl + response.data.data.paymentId + "/" + response.data.data.label, "_blank");
             window.open(response.data.data)
           }
-          console.log(response.data.data)
         });
       }
     gotoEnquiry(enquiryId){
@@ -101,14 +95,12 @@ export class BuyerHistoryList extends Component {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
-                console.log(this.state.getTransactionStatus);
                 TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                     if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getCompletedTransaction : response.data.data},()=>{
-                        console.log(this.state.getCompletedTransaction);
                     
                     });
                 }
@@ -120,14 +112,12 @@ export class BuyerHistoryList extends Component {
                     this.setState({
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
-                         console.log(this.state.getTransactionActions);
                          TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
                             if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getCompletedTransaction : response.data.data},()=>{
-                                console.log(this.state.getCompletedTransaction);
                             
                             });
                         }
@@ -145,7 +135,6 @@ export class BuyerHistoryList extends Component {
      }
   
      paymentTypeset(e){
-        console.log("abc")
         this.setState({
             paymentType:e
           },()=>{
@@ -174,7 +163,6 @@ export class BuyerHistoryList extends Component {
          </span>
           </Col>
           <Col md="1"></Col>
-          {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
          <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
 <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
 <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -216,7 +204,6 @@ export class BuyerHistoryList extends Component {
                 </span>
                  </Col>
                  <Col md="1"></Col>
-                 {/* <Col md="3"><img src={logos.filter} className="filtericon"/> Filter</Col> */}
                 <Col  md="3">  <div class="w3-dropdown-hover" style={{backgroundColor:"transparent"}}>
     <button class="w3-button"><img src={logos.filter} className="filtericon"/> Filter</button>
     <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -232,7 +219,6 @@ export class BuyerHistoryList extends Component {
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
                 {this.filter(this.state.getCompletedTransaction).map((item)=> 
                     <>
-                    {console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1])}
 
 <Row noGutters={true}>
 <Col className="col-xs-3 DateandTime" sm="1">
@@ -243,7 +229,6 @@ export class BuyerHistoryList extends Component {
 <p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
  </Moment>
 
-{console.log(this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id)}
 </Col>
 <Col className="col-xs-3" sm="1">
 <img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"/>
@@ -259,7 +244,6 @@ export class BuyerHistoryList extends Component {
 {item.transactionCompleted.percentage}{item.transactionCompleted.percentage !=null? "%":""}  payment received against Invoice for  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
-{/* <span><b className="proformainvId"> Invoice Id</b> <b className="colorinv proformainvIdtext "> AS-778</b></span> */}
 </Col>
 <Col className="col-xs-3 payack" sm="2">
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].buyerText} } />
@@ -304,7 +288,6 @@ export class BuyerHistoryList extends Component {
      :
   data.id == 1 ?
   <span 
-  // onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
   >
       <img src={logos.uploadagain} className="uplodagainicon"/>
    <p style={{marginTop:"5px"}}>upload receipt</p></span>

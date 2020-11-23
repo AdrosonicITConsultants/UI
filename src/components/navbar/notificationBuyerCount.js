@@ -43,8 +43,6 @@ class NotificationBuyerCount extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  console.log("User : ");
-  console.log(user);
   return { user };
 }
 

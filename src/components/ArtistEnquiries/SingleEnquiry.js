@@ -56,7 +56,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             sgst:0,
             hsncode:0,
             quantity:0,
-            dod:"",
+            dod:"10-10-10",
             rpu:"",
             preview: false,
             sendButtonClick: false,
@@ -389,6 +389,8 @@ import { useTranslation, withTranslation } from "react-i18next";
     } 
 
     savePIDetails(){
+        var x = document.getElementById("myDate").type;
+        document.getElementById("demo").innerHTML = x;
         var regex = /[1-9]|\./
         var previewhsn= /^\d{1,8}$/
         if(!previewhsn.test(this.state.hsncode)){
@@ -1824,9 +1826,13 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                     <br/>
                                                         <input className="PIinput" type="date"
                                                         disabled={this.state.isPidetail}
-                                                        value={this.state.dod }
+                                                        value={this.state.dod}
                                                         name="dod"
-                                                        onChange={this.handleChange}/>
+                                                        onChange={this.handleChange}
+                                                        placeholder="YYYY-MM-DD"
+                                                        />
+                                                       
+                                               
 
                                                     </Col>
                                                     <Col sm={6}>

@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 import "../landingpage/landingpage.css";
 import { Row, Col, Container, Label, Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import logos from "../../assets";
-// import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import customToast from "../../shared/customToast";
@@ -16,8 +15,6 @@ import { toast } from "react-toastify";
 import queryString from 'query-string';
 import base64Img from "base64-img";
 import "./editProduct.css"
-// import ModalComponent from "../modal/modal";
-// import Modal from 'react-bootstrap/Modal'
 
 const customStyles3 = {
   content: {
@@ -119,7 +116,6 @@ export default class artisanProductCatelog extends Component {
                    });
                  };
                  componentDidMount() {
-                   console.log("did mount");
                    this.myRefAddPhoto.current.scrollIntoView({
                      behavior: "smooth",
                      block: "center",
@@ -140,16 +136,13 @@ export default class artisanProductCatelog extends Component {
                        },
                        () => {
                         let params = queryString.parse(this.props.location.search)
-                        console.log(params.ProductHistoryId == undefined);
                         if(params.ProductHistoryId == undefined)
                         {
                           TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
                             this.setState({productid :params.ProductId,history:false },()=>{
        
                             })
-                            console.log('heree');
-                            console.log( response.data);
-                            let productData =  response.data.data;
+                           let productData =  response.data.data;
                             this.setProduct(productData);
                         })
                         }
@@ -158,9 +151,7 @@ export default class artisanProductCatelog extends Component {
                             this.setState({productid :params.ProductId,history:true },()=>{
        
                             })
-                            console.log('historyproduct');
-                            console.log( response.data);
-                            let productData =  response.data.data;
+                           let productData =  response.data.data;
                             this.setProduct(productData);
                         })
                         }
@@ -171,7 +162,6 @@ export default class artisanProductCatelog extends Component {
                     
                    }
                    else {
-                     console.log("inelse");
                      TTCEapi.getProductUploadData().then((response) => {
                        debugger;
                        this.setState(
@@ -193,8 +183,7 @@ export default class artisanProductCatelog extends Component {
                             this.setState({productid :params.ProductId,history : true },()=>{
        
                             })
-                            console.log('heree');
-                            console.log( response.data);
+                           
                             let productData =  response.data.data;
                             this.setProduct(productData);
                         })
@@ -204,15 +193,12 @@ export default class artisanProductCatelog extends Component {
                             this.setState({productid :params.ProductId ,history : false},()=>{
        
                             })
-                            console.log('heree');
-                            console.log( response.data);
+                           
                             let productData =  response.data.data;
                             this.setProduct(productData);
                         })
                          }
-                         
-                           
-
+                     
                          }
                        );
                      });  
@@ -248,7 +234,6 @@ export default class artisanProductCatelog extends Component {
                         (myBase64) => {
                           let filename = {};
                           filename.name = img.lable;
-                        // console.log(myBase64); // myBase64 is the base64 string
                           this.setState({
                             ["imagePreviewUrl" + (index + 1)]: myBase64,
                             isImageUploadComplete: true,
@@ -273,7 +258,6 @@ export default class artisanProductCatelog extends Component {
                         (myBase64) => {
                           let filename = {};
                           filename.name = img.lable;
-                        // console.log(myBase64); // myBase64 is the base64 string
                           this.setState({
                             ["imagePreviewUrl" + (index + 1)]: myBase64,
                             isImageUploadComplete: true,
@@ -298,10 +282,7 @@ export default class artisanProductCatelog extends Component {
                 let productWeavesIds = productData.productWeaves.map(
                   (e) => e.weaveId
                 );
-                console.log(productWeavesIds);
-
                 let { weaves } = this.state;
-                console.log(weaves);
                 productWeavesIds.map((id) => {
                   weaves[id - 1].isChecked = true;
                   this.setState({
@@ -324,7 +305,6 @@ export default class artisanProductCatelog extends Component {
                 ];
                 for(var  i=0; i < productData.productCares.length; i++ )
                 { wareAndCare1[productData.productCares[i].productCareId].isChecked = true;
-                  console.log(productData.productCares[i].productCareId);
                 }
                     this.setState(
                       {
@@ -356,9 +336,7 @@ export default class artisanProductCatelog extends Component {
 
                       },
                       () => {
-                        // console.log("after all basic setup");
-
-                        // console.log(this.state);
+                      
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
                             debugger;
@@ -370,8 +348,6 @@ export default class artisanProductCatelog extends Component {
                                 productTypeName: item.productDesc,
                               },
                               () => {
-                                // console.log(this.state);
-
                                 this.state.productTypes.filter((item) => {
                                   if (item.id == this.state.productType) {
                                     if (item.relatedProductType.length != 0) {
@@ -388,9 +364,6 @@ export default class artisanProductCatelog extends Component {
                                           ),
                                         },
                                         () => {
-                                          //  console.log("after related");
-
-                                          //  console.log(this.state);
                                           if (productData.relProduct.length > 0) {
                                             this.setState({
                                               length: productData.length,
@@ -430,7 +403,6 @@ export default class artisanProductCatelog extends Component {
                                           savedrelatedProduct: [],
                                         },
                                         () => {
-                                          //  console.log(this.state);
                                         }
                                       );
                                     }
@@ -486,12 +458,10 @@ export default class artisanProductCatelog extends Component {
                   
                   }
                  handleproductCategories(e) {
-                   // console.log(e.target.id);
-                  
+                
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);
         if(optionElement.innerHTML == "Fabric"){
           this.setState({ showGSM: true});
         }
@@ -521,9 +491,7 @@ export default class artisanProductCatelog extends Component {
 }
 else {
   this.setState({ [e.target.name]: parseInt(option) }, () => {
-    console.log(this.state);
   
-
     this.state.productCategories.filter((item) => {
       if (item.id == this.state.productCategorie) {
         this.setState(
@@ -551,9 +519,7 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                 //  console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleproductTypes(e) {
@@ -561,7 +527,6 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                  // console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -589,7 +554,6 @@ else {
                                  ),
                                },
                                () => {
-                                // console.log(this.state);
                                }
                              );
                            } else {
@@ -603,7 +567,6 @@ else {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                  // console.log(this.state);
                                }
                              );
                            }
@@ -617,13 +580,11 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                  // console.log(option);       
                    if (option != -1)
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                      //  console.log(this.state);
-                     
+                   
                         this.setState(
                           {
                             ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
@@ -651,9 +612,7 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                //   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleDropdownCountOfYarn(e)
@@ -662,9 +621,7 @@ else {
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                   // console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                  //    console.log(this.state);
                     });
                   }
                  handleChange(e) {
@@ -733,13 +690,7 @@ else {
       });
      return ;
   }
-  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-  //   customToast.error("Image name contains special characters.", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //     autoClose: true,
-  //   });
-  //   return;
-  // }
+
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -757,7 +708,6 @@ else {
                              isImageUploadComplete: true,
                            },
                            () => {
-                          //   console.log(this.state);
                            }
                          );
                        };
@@ -873,7 +823,6 @@ else {
                   var index = e.target.selectedIndex;
                   var optionElement = e.target.childNodes[index];
                   var option = optionElement.getAttribute("id");
-                  //console.log(option);
 
 
                   let relatedProductTemp = this.state.savedrelatedProduct.find(
@@ -882,16 +831,8 @@ else {
                   relatedProductTemp[e.target.name] = option;
 
                   this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-                    //console.log(this.state);
                   });
 
-
-                  // let relatedProduct = [];
-                  // relatedProduct.Length  .e.target;
-
-                  //  this.setState({ [e.target.name]: parseInt(option) }, () => {
-                  //    console.log(this.state);
-                  //  });
                  } 
                  onselectWareAndCare = (i) => {
                    if(this.state.isEdit == true)
@@ -908,7 +849,7 @@ else {
                    this.setState({
                      wareAndCare: [...wareAndCare],
                      iswashAndCareComplete: ischecked,
-                   },()=>{console.log(this.state)});
+                   },()=>{});
                    }
                  };
                  editenabled = () =>{
@@ -1220,14 +1161,10 @@ else {
 
                       });;
 
-                    
-
-                    console.log(productData);
                  };
                  Cancel = () => {
                  
                    browserHistory.push("./home")
-                  //  window.location.replace("./home");
                   
                  };
                  ResetAll = () => {
@@ -1235,7 +1172,6 @@ else {
 
                  };
                  Delete = () => {
-                  console.log(this.state.productid);
                   TTCEapi.deleteProduct(this.state.productid).then((response)=>{
                     if(response.data.valid){
                       customToast.success("Product deleted successfully!", {

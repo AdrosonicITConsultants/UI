@@ -7,14 +7,12 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
 import Moment from 'react-moment';
 import { CompletedFaultResolved } from './CompletedFaultResolved';
-// import DaysRemaining from './DaysRemaining';
 export class BuyerCompletedFaultyOrderMarkResolved extends Component {
     constructor(props) {
         super(props);
@@ -74,22 +72,17 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
     }  
     
     handleAction(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('actionid');
-        console.log(option);
         
         this.setState({ [e.target.name]: e.target.value , actioncategoryid : option,showValidationfaulty:false}, ()=> {
-          console.log(this.state.actioncategoryid);
-          
+   
         });
         
       }
 
       MarkResolved(id){
-        console.log(this.props.enquiryCode);
-
         TTCEapi.isResolved(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
@@ -98,13 +91,11 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                 concernSolved:true
                 
                  },()=>{
-                console.log(this.state.isResolved);
-               
+              
                 customToast.success("Mark Resolved!!", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-                //    browserHistory.push("/completedconcernsolved?orderid="+id)
             });
         }
         });
@@ -116,7 +107,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
        
         });
@@ -127,21 +117,14 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             this.setState({
                 rejectButtonClick:true
             })
-                // let params = queryString.parse(this.props.location.search);
-                // console.log(params.orderid);
-                // this.setState({
-                //     enquiryCode:params.orderid
-                // })
+               
                 TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(this.props.enquiryCode,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
                         sendFaultyOrder : response.data.data,
                          dataload : true,},()=>{
-                        console.log(this.state.sendFaultyOrder);
                     });
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.success("Sent Successfully!!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -149,7 +132,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                       this.componentDidMount()
                 }
                 else{
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -172,15 +154,13 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
 
     SureModalclose = () => {
         document.getElementById('SureModal').style.display='none';
-        
     }
 
     SureModalShow(){
         if(this.state.description &&  (this.state.accepted.filter(function(s) { return s.comment; }).length)>0)
             {
-        document.getElementById('SureModal').style.display='block';
-                   
-    }
+        document.getElementById('SureModal').style.display='block';              
+            }
     else{        
             this.setState({
                 showValidationfaulty:true
@@ -196,18 +176,12 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
   
     componentDidMount(){
       
-        // let params = queryString.parse(this.props.location.search);
-        // console.log(params.orderid);
-        // this.setState({
-        //     enquiryCode:params.orderid
-        // })
         TTCEapi.getClosedOrder(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
                  dataload : true,},()=>{
-                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -217,7 +191,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -227,7 +200,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefArtisanReview);
             });
         }
         });
@@ -239,7 +211,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
                 OrderDetails:response.data.data,              
                 dataload : true,},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
@@ -252,7 +223,6 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                 })
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -267,30 +237,20 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
-                }
-            }
-           
-                // console.log(response.data.data.artisanReviewId);
-            
-      
+                 }
+            }           
         }
         });
-        // /enquiry/getOrderProgress/1707
     }
     
     render() {
         return (
             <React.Fragment>
               
-            
                     {this.state.dataload?
                     <>
                   {this.state.concernSolved?
                   <>
-                                      {console.log("ARtisan 4")}
-
                   <CompletedFaultResolved
                   enquiryCode={this.props.enquiryCode}
                   artisan={this.state.artisan}/>
@@ -422,17 +382,12 @@ export class BuyerCompletedFaultyOrderMarkResolved extends Component {
                 </Row>
                     }
               
-              
-             
-               
-                
             </React.Fragment>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

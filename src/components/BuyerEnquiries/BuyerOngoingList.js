@@ -160,7 +160,7 @@ export class BuyerOngoingList extends Component {
                                             {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                             ?
                                             <>
-                                            X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                            X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc:""}
                                             </>
                                             :
                                                 <></>

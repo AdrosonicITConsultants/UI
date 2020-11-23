@@ -14,7 +14,6 @@ const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   const response = await TTCEapi.getBuyerSuggestions(value);
-  console.log(response);
   if (response.data.data == null) {
     languages = [];
   } else {
@@ -32,7 +31,6 @@ const getSuggestions = async (value) => {
 };
 
 const getSuggestionValue = (suggestion) => {
-  console.log(suggestion.suggestion);
   if(suggestion.suggestionType == undefined)
   {
 
@@ -62,7 +60,7 @@ class BuyerSuggestions extends Component {
       return (
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "1rem" ,
               paddingTop: "1rem",
             }}
@@ -75,7 +73,7 @@ class BuyerSuggestions extends Component {
         <div>
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "3rem",
               paddingTop: "1rem",
             }}
@@ -161,7 +159,7 @@ class BuyerSuggestions extends Component {
     });
   };
   onSuggestionsFetchRequested = async ({ value }) => {
-    console.log("Calling key pressing function");
+    // console.log("Calling key pressing function");
     this.setState({
       suggestions: await getSuggestions(value),
     });
@@ -183,16 +181,13 @@ class BuyerSuggestions extends Component {
       onChange: this.onChange,
       onKeyPress: (e) => {
         if (e.charCode == 13) {
-          console.log("-------------");
-          console.log(languages);
+      
           if(this.state.value!="")
           {
           window.location.href = `/detailSuggestions?search=${encodeURIComponent(this.state.value)}&type=5`;
-          //this.onSuggestionsFetchRequested({ value: this.state.value });
           }
         }
         else{
-          console.log("no operation");
         }
       },
     };
@@ -216,7 +211,10 @@ class BuyerSuggestions extends Component {
               marginLeft: "18px",
               width: "-webkit-fill-available",
               height: "-webkit-fill-available",
-              fontSize: "36px"
+              fontSize: "20px",
+              padding:" 3px 0px 7px 73px",
+              height: "66px"
+
             }}
             {...inputProps}
           ></input>
@@ -242,8 +240,7 @@ class BuyerSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  console.log("User : ");
-  console.log(user);
+
   return { user };
 }
 

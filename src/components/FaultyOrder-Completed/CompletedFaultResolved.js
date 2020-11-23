@@ -7,12 +7,10 @@ import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
-// import Faulty from "./Faulty.css";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify"
 import Diffdays from '../BuyerOrder/Diffdays';
-// import DaysRemaining from './DaysRemaining';
 import Moment from 'react-moment';
 export class CompletedFaultResolved extends Component {
     constructor(props) {
@@ -72,14 +70,10 @@ export class CompletedFaultResolved extends Component {
     }  
     
     handleAction(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('actionid');
-        console.log(option);
-        
         this.setState({ [e.target.name]: e.target.value , actioncategoryid : option,showValidationfaulty:false}, ()=> {
-          console.log(this.state.actioncategoryid);
           
         });
         
@@ -98,7 +92,6 @@ export class CompletedFaultResolved extends Component {
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
        
         });
@@ -126,21 +119,13 @@ export class CompletedFaultResolved extends Component {
             this.setState({
                 rejectButtonClick:true
             })
-                // let params = queryString.parse(this.props.location.search);
-                // console.log(this.props.enquiryCode);
-                // this.setState({
-                //     enquiryCode:this.props.enquiryCode
-                // })
                 TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(this.props.enquiryCode,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
                         sendFaultyOrder : response.data.data,
                          dataload : true,},()=>{
-                        console.log(this.state.sendFaultyOrder);
                     });
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.success("Sent Successfully!!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -148,7 +133,6 @@ export class CompletedFaultResolved extends Component {
                       this.componentDidMount()
                 }
                 else{
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -203,22 +187,12 @@ export class CompletedFaultResolved extends Component {
     }
   
     componentDidMount(){
-      
-        // let params = queryString.parse(this.props.location.search);
-        // console.log(this.props.enquiryCode);
-        // this.setState({
-        //     enquiryCode:this.props.enquiryCode
-        // })
-        console.log(this.props)
-
-        console.log(this.props.enquiryCode)
-        TTCEapi.getClosedOrder(this.props.enquiryCode).then((response)=>{
+       TTCEapi.getClosedOrder(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
                  dataload : true,},()=>{
-                console.log(this.state.getClosedOrder);
             });
         }
         });
@@ -228,7 +202,6 @@ export class CompletedFaultResolved extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -238,7 +211,6 @@ export class CompletedFaultResolved extends Component {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefArtisanReview);
             });
         }
         });
@@ -250,7 +222,6 @@ export class CompletedFaultResolved extends Component {
                 OrderDetails:response.data.data,              
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
                  dataload : true,},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
@@ -263,7 +234,6 @@ export class CompletedFaultResolved extends Component {
                 })
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -278,17 +248,10 @@ export class CompletedFaultResolved extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
                 }
             }
-           
-                // console.log(response.data.data.artisanReviewId);
-            
-      
         }
         });
-        // /enquiry/getOrderProgress/1707
     }
     
     render() {

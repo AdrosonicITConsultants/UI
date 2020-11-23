@@ -181,7 +181,14 @@ export class PreviewTaxInvoice extends Component {
           //  sendPI: true,
             gobackButtonClick:true,
          })
-     
+     console.log(this.props.apr,
+      this.props.cgst,                  
+      this.props.deliverycharge ,
+      this.props.enquiryId,
+      this.props.finalamt,
+      this.props.rpu,
+      this.props.quantity,
+      this.props.sgst      )
         TTCEapi.sendTaxInvoice(
             this.props.apr,
             this.props.cgst,                  

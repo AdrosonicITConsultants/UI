@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import logos from "../../assets";
 import { Row, Col , Container, Button} from 'reactstrap';
 import '../navbar/navbar.css';
-// import './ArtisanselfDesign.css';
 import Footer from "../footer/footer";
 import { Switch, Route, Router,Link } from "react-router-dom";
 import PrivateRoute from "../../services/utils/PrivateRoute";
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import { useTranslation, withTranslation } from "react-i18next";
 import TTCEapi from '../../services/API/TTCEapi';
-// import "./ProductCategories.css"
 
  class ArtisanProductOfSearch extends Component {
     constructor(props) {
@@ -26,7 +24,6 @@ import TTCEapi from '../../services/API/TTCEapi';
     }
     editProduct = (Product)=>{
         debugger;
-          console.log(Product);
         browserHistory.push("/EditProduct?ProductId=" + Product)
       }
     toggleHover(name) {      
@@ -114,9 +111,7 @@ import TTCEapi from '../../services/API/TTCEapi';
                        
                     </Row>
                  
-
-                    {console.log(this.state)}
-                </div> 
+               </div> 
                
         )
     }

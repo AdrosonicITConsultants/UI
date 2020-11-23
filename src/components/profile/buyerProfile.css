@@ -671,6 +671,7 @@ input[type="number"]:disabled {
     -o-transition-timing-function: ease-out;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
+    font-weight: 700;
   }
   .c100:after {
     position: absolute;

@@ -14,9 +14,6 @@ import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
 import  ArtisanProductOfSearch  from "./ArtisanProductOfSearch";
 import { useTranslation, withTranslation } from "react-i18next";
-
-
-
  class DetailSuggestionsArtist extends Component {
   constructor(props) {
     super(props);
@@ -38,10 +35,8 @@ import { useTranslation, withTranslation } from "react-i18next";
   componentDidMount(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
-             console.log(response);
              if(response.data.valid == true)
              {
               TTCEapi.searchArtisanProductCount(params.search,params.type,1,-1).then((response1)=>{
@@ -64,9 +59,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
 
               },()=>{
-                
-                // console.log(this.state.searchWord);
-                console.log(this.state)
+            
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -77,7 +70,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran },()=>{
-                  // console.log(this.state);
                 });
 
               })
@@ -106,16 +98,12 @@ import { useTranslation, withTranslation } from "react-i18next";
   SelfProduct(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        // console.log(page);
-        if(params.search != undefined && params.type != undefined){
+         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,0).then((response)=>{
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
-                // var products = this.state.products
-                // products = products.concat(moreProducts);
-                TTCEapi.searchArtisanProductCount(params.search,params.type,1,0).then((response1)=>{
+               TTCEapi.searchArtisanProductCount(params.search,params.type,1,0).then((response1)=>{
                   if(response1.data.valid)
                   {
                    this.setState({
@@ -130,7 +118,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 boolAntaran : 0,
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -141,7 +128,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -161,16 +147,12 @@ import { useTranslation, withTranslation } from "react-i18next";
   Antaran(){
     this.setState({dataload:false});
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        // console.log(page);
-        if(params.search != undefined && params.type != undefined){
+       if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,1).then((response)=>{
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
-                // var products = this.state.products
-                // products = products.concat(moreProducts);
-                TTCEapi.searchArtisanProductCount(params.search,params.type,1,1).then((response1)=>{
+               TTCEapi.searchArtisanProductCount(params.search,params.type,1,1).then((response1)=>{
                   if(response1.data.valid)
                   {
                    this.setState({
@@ -183,11 +165,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 resultsCount : Count,
                 currentPage : 1,
                 boolAntaran : 1,
-
-
-
-              },()=>{
-                console.log(this.state)
+               },()=>{
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -198,7 +176,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran ,dataload:true},()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -218,8 +195,7 @@ import { useTranslation, withTranslation } from "react-i18next";
   addMoreProducts(){
     var page = this.state.currentPage+1;
     let params = queryString.parse(this.props.location.search);
-        // console.log(params);
-        // console.log(page);
+
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
              if(response.data.valid == true)
@@ -233,7 +209,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 currentPage : page
 
               },()=>{
-                console.log(this.state)
                 var self = 0 ;
                 for ( var item in this.state.products )
                 {
@@ -244,7 +219,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                 }
                 var antaran = parseInt(this.state.resultsCount - self )
                 this.setState({selfProduct : self , antaranProduct : antaran },()=>{
-                  // console.log(this.state);
                 });
               })
              }
@@ -259,16 +233,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
         });
       }
-    
-
-    // var ar = [this.state.products[0]]
-    // var dumy = this.state.products;
-    // dumy = dumy.concat(ar);
-    // this.setState({products : dumy})
-    
-    //  console.log(this.state.products);
-    // this.render( )
-  }
+     }
 
   render() {
     
@@ -355,7 +320,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                             {this.state.item1 = false}
 
                                           <ArtisanProductOfSearch productData = {item} />    
-                                            {/* {console.log(item)}; */}
 
                                         </Col>
                                         :
@@ -375,11 +339,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                 <Row noGutters={true} className="text-center">
                                     No Products found
                                 </Row>}
-                               
-                                    {/* <Col xs={12} sm={6} md={4}>
-                                    <ProductsOfCatelog productData = {this.state.data}/>              
-                                    </Col>              */}
-                            </Row>
+                               </Row>
                 
               </Col>
               <Col className="col-xs-1">
@@ -396,7 +356,6 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     :
                                     null
                                     }
-                                    {/* {this.state.products.length} */}
                                     </div>
                                     <br></br>        <br></br>        <br></br>
 

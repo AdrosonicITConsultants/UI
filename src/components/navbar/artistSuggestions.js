@@ -13,12 +13,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../services/utils/changeLang"
 
 var languages = [];
-// Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = async (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   const response = await TTCEapi.getArtistSuggestions(value);
-  console.log(response);
   if (response.data.data == null) {
     languages = [];
   } else {
@@ -36,7 +34,6 @@ const getSuggestions = async (value) => {
 };
 
 const getSuggestionValue = (suggestion) => {
-  console.log(suggestion.suggestionType);
   if(suggestion.suggestionType == undefined)
   {
 
@@ -51,10 +48,7 @@ const getSuggestionValue = (suggestion) => {
  
 };
 
-// Use your imagination to render suggestions.
-
 {
-  /* <a href={"./detailSuggestions?params="+suggestion.suggestion+"&id="suggestion.suggestionTypeId}><div className="custom-suggestion-row">{suggestion.suggestion} in {suggestion.suggestionType}</div></a> */
 }
 class ArtistSuggestions extends Component {
   constructor() {
@@ -70,7 +64,7 @@ class ArtistSuggestions extends Component {
       return (
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "1rem" ,
               paddingTop: "1rem",
             }}
@@ -83,7 +77,7 @@ class ArtistSuggestions extends Component {
         <div>
           <div
             style={{
-              fontSize: "xx-large",
+              fontSize: "27px",
               paddingLeft: "3rem",
               paddingTop: "1rem",
             }}
@@ -170,11 +164,9 @@ class ArtistSuggestions extends Component {
     });
   };
   onSuggestionsFetchRequested = async ({ value }) => {
-    console.log("Calling key pressing function");
     this.setState({
       suggestions: await getSuggestions(value),
     });
-    console.log("************************************************", this.state.suggestions)
   };
   onSuggestionsClearRequested = () => {
     this.setState({
@@ -193,16 +185,12 @@ class ArtistSuggestions extends Component {
       onChange: this.onChange,
       onKeyPress: (e) => {
         if (e.charCode == 13) {
-          console.log("-------------");
-          console.log(languages);
-          if(this.state.value!="")
+        if(this.state.value!="")
           {
           window.location.href = `/A-detailSuggestions?search=${encodeURIComponent(this.state.value)}&type=5`;
-          //this.onSuggestionsFetchRequested({ value: this.state.value });
           }
         }
         else{
-          console.log("no operation");
         }
       },
     };
@@ -227,8 +215,10 @@ class ArtistSuggestions extends Component {
               marginLeft: "18px",
               width: "-webkit-fill-available",
               height: "-webkit-fill-available",
-              fontSize: "25px"
-              // letterSpacing: "1px",
+              fontSize: "20px",
+              padding:" 3px 0px 7px 73px",
+              height: "66px"
+
             }}
             {...inputProps}
           ></input>
@@ -255,12 +245,10 @@ class ArtistSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  console.log("User : ");
-  console.log(user);
+ 
   return { user };
 }
 
 const ArtistConnectedSuggestions = connect(mapStateToProps)(ArtistSuggestions);
-// export default ArtistConnectedSuggestions;
 export default withTranslation()(ArtistConnectedSuggestions);
 

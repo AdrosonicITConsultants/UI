@@ -12,7 +12,6 @@ class ArtistDetailSuggestions extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    console.log(this.props.match.params.type);
     this.callapi = this.callapi.bind(this);
   }
 
@@ -21,7 +20,6 @@ class ArtistDetailSuggestions extends Component {
       searchQuery,
       searchTypes
     );
-    console.log(response);
   }
 
   render() {
@@ -33,7 +31,6 @@ class ArtistDetailSuggestions extends Component {
       <Container>
       <div className="searchresults">
         <form>
-          {/* <h1>Type {this.props.match.params.type}</h1> */}
           <h2>Results for "{this.props.match.params.suggestion}"</h2>
           <br></br>
           <p>Showing {this.props.match.params.total} results</p>
@@ -53,8 +50,6 @@ class ArtistDetailSuggestions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  console.log("User : ");
-  console.log(user);
   return { user };
 }
 

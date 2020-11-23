@@ -7,7 +7,6 @@ import TTCEapi from '../../services/API/TTCEapi';
 import "./Modalcomp.css"
 import HoldPopup from './ModalHold';
 import SuccessPopup from './SuccessModal';
-// import SuccessPopup from './SuccessModal';
 export default class Popup extends React.Component {
 
     constructor(props) {
@@ -37,8 +36,7 @@ export default class Popup extends React.Component {
     TTCEapi.generateEnquiry(item,this.state.isCustom).then((response)=>{
   this.setState({generateEnquiry : response.data.data},()=>{
     this.setState({ modalIsOpen: false });
-      console.log(this.state.generateEnquiry);
-      
+     
   });
 });
 }
@@ -46,10 +44,7 @@ export default class Popup extends React.Component {
 
   render() {
    
-    return (
-      
-      
-         
+    return (    
       <div className='popup'>
           
         <div className='popup_inner'>
@@ -89,7 +84,6 @@ export default class Popup extends React.Component {
                            </p>
           </Col>
       </Row>
-          {/* <button onClick={this.props.closePopup} */}
          
         </div>
         {this.state.generateEnquiry ?<></> :null

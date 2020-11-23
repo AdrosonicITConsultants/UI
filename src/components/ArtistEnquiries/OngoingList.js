@@ -159,7 +159,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                         {item.openEnquiriesResponse.extraWeftYarnId > 0 
                                         ?
                                         <>
-                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc}
+                                        X  {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc:""}
                                         </>
                                         :
                                             <></>

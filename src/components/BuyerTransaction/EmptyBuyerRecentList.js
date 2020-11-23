@@ -4,10 +4,7 @@ import { Row, Col , Container, Button} from 'reactstrap';
 import { connect } from "react-redux";
 import NavbarComponent from "../navbar/navbar";
 import logos from "../../assets";
-// import "../ArtistEnquiries/AllEnquiryList.css"
 import TTCEapi from '../../services/API/TTCEapi';
-// import OngoingList from './BuyerOngoingList';
-// import CompletedList from './BuyerCompletedList';
 import "./BuyerTransaction.css";
 import Footer from "../footer/footer";
 import { BuyerRecentList } from './BuyerRecentList';
@@ -19,12 +16,9 @@ export class EmptyBuyerRecentList extends Component {
         super(props);
     
         this.state = {
-           
-
-        }
        
-
-
+        }
+      
     }      
         browseproduct(){
             browserHistory.push("/Artisanself")
@@ -34,9 +28,7 @@ export class EmptyBuyerRecentList extends Component {
     render() {
         return (
             <React.Fragment>
-               
-               
-               
+              
                 <Row noGutters={true} className="redthreadbg playfair">
                            
                           <Col sm="12" className="col-xs-12 forgottoplaceorder" style={{textAlign:"center"}}>
@@ -56,18 +48,13 @@ export class EmptyBuyerRecentList extends Component {
                          </Col>   
                                                  
                 </Row>
-              
              
-              
-              
-              
             </React.Fragment>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

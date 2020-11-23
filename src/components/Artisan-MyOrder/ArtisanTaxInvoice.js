@@ -29,7 +29,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             rpu:0,
             pta:0,
             apr:0,
-            deliverycharge:0,
+            deliverycharge:"0",
             sgst:0,
             cgst:0,
             finalamt:0,
@@ -294,12 +294,13 @@ componentDidMount(){
                     rpu={this.state.rpu}
                     pta={this.state.pta}
                     apr={this.state.apr}
-                    deliverycharge={this.state.deliverycharge}
+                    deliverycharge={this.state.deliverycharge?this.state.deliverycharge:0}
                     sgst={this.state.sgst}
                     cgst={this.state.cgst}
-                    finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                    finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge?this.state.deliverycharge:0)))+(((this.state.quantity * this.state.rpu )
                         )*this.state.cgst/100)
-                        +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2)}                    amttobepaid={this.state.amttobepaid}
+                        +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2)}                  
+                          amttobepaid={this.state.amttobepaid}
                     invoiceId={this.state.invoiceId}
                     percentage={this.state.percentage}
                     selectedFile={this.state.selectedFile}
@@ -334,10 +335,10 @@ componentDidMount(){
                  rpu={this.state.rpu}
                  pta={this.state.pta}
                  apr={this.state.apr}
-                 deliverycharge={this.state.deliverycharge}
+                 deliverycharge={this.state.deliverycharge?this.state.deliverycharge:0}
                  sgst={this.state.sgst}
                  cgst={this.state.cgst}
-                 finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                 finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge?this.state.deliverycharge:0)))+(((this.state.quantity * this.state.rpu )
                     )*this.state.cgst/100)
                     +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2)}                 amttobepaid={this.state.amttobepaid}
                  invoiceId={this.state.invoiceId}
@@ -384,10 +385,10 @@ quantity={this.state.quantity}
 rpu={this.state.rpu}
 pta={this.state.pta}
 apr={this.state.apr}
-deliverycharge={this.state.deliverycharge}
+deliverycharge={this.state.deliverycharge?this.state.deliverycharge:0}
 sgst={this.state.sgst}
 cgst={this.state.cgst}
-finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+finalamt={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge?this.state.deliverycharge:0)))+(((this.state.quantity * this.state.rpu )
     )*this.state.cgst/100)
     +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2)}
 amttobepaid={this.state.amttobepaid}
@@ -503,7 +504,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                 <label>Final Amount</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                    value={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                                    value={parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge?this.state.deliverycharge:0)))+(((this.state.quantity * this.state.rpu )
                                         )*this.state.cgst/100)
                                         +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2)}
                                     name="finalamt"
@@ -515,7 +516,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                 <label>Amount to be paid (Final Amount - Advanced Payment)</label>
                                 <br/>
                                     <input className="PIinput" type="number"
-                                     value={((parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge)))+(((this.state.quantity * this.state.rpu )
+                                     value={((parseFloat((((this.state.quantity * this.state.rpu )+parseInt(this.state.deliverycharge?this.state.deliverycharge:0)))+(((this.state.quantity * this.state.rpu )
                                         )*this.state.cgst/100)
                                         +(((this.state.quantity * this.state.rpu ))*this.state.sgst/100)).toFixed(2))-parseInt(this.state.apr)).toFixed(2)}
                                     name="amttobepaid"
@@ -604,7 +605,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                        <label>Date of dispatch</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -612,7 +613,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>

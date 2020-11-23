@@ -103,8 +103,7 @@ const initialState = {
                  };
 
                  componentDidMount() {
-                   console.log("did mount");
-                   console.log(this.state);
+                
                    if (localStorage.getItem('ProductUploadData') != null) {
                      let response = JSON.parse(localStorage.getItem("ProductUploadData"))
                      this.setState(
@@ -161,12 +160,10 @@ const initialState = {
                  }
 
                  handleproductCategories(e) {
-                   // console.log(e.target.id);
                    debugger;
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);
                     if(optionElement.innerHTML == "Fabric"){
                       this.setState({ showGSM: true});
                     }
@@ -196,7 +193,6 @@ const initialState = {
                     }
                     else {
                       this.setState({ [e.target.name]: parseInt(option) }, () => {
-                        console.log(this.state);
                         debugger;
 
                         this.state.productCategories.filter((item) => {
@@ -227,9 +223,7 @@ const initialState = {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                     console.log(this.state);
                    });
                  }
 
@@ -238,7 +232,6 @@ const initialState = {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -266,7 +259,6 @@ const initialState = {
                                  ),
                                },
                                () => {
-                                 console.log(this.state);
                                }
                              );
                            } else {
@@ -280,7 +272,6 @@ const initialState = {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                   console.log(this.state);
                                }
                              );
                            }
@@ -295,12 +286,10 @@ const initialState = {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);       
                    if (option != -1)
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                        console.log(this.state);
                         debugger;
                         this.setState(
                           {
@@ -330,9 +319,7 @@ const initialState = {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                     console.log(this.state);
                    });
                  }
 
@@ -342,9 +329,7 @@ const initialState = {
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                    console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                      console.log(this.state);
                     });
                   }
 
@@ -415,13 +400,7 @@ const initialState = {
       });
      return ;
   }
-  //                      if (/[^0-9a-zA-Z\-\_\.\(\)\sg]/.test(filename.name)) {
-  //   customToast.error("Image name contains special characters.", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //     autoClose: true,
-  //   });
-  //   return;
-  // }
+ 
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
     });
@@ -439,7 +418,6 @@ const initialState = {
                              isImageUploadComplete: true,
                            },
                            () => {
-                             console.log(this.state);
                            }
                          );
                        };
@@ -559,7 +537,6 @@ const initialState = {
  var index = e.target.selectedIndex;
  var optionElement = e.target.childNodes[index];
  var option = optionElement.getAttribute("id");
- console.log(option);
  debugger;
 
  let relatedProductTemp = this.state.savedrelatedProduct.find(
@@ -568,17 +545,8 @@ const initialState = {
 relatedProductTemp[e.target.name] = option;
 
  this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-   console.log(this.state);
  });
-
-
-// let relatedProduct = [];
-// relatedProduct.Length  .e.target;
- 
-//  this.setState({ [e.target.name]: parseInt(option) }, () => {
-//    console.log(this.state);
-//  });
-                 }
+       }
 
                  onselectWareAndCare = (i) => {
                    let { wareAndCare } = this.state;
@@ -652,9 +620,6 @@ relatedProductTemp[e.target.name] = option;
                           return;
                         }
 
-                          
-
-
                               this.state.weaves.filter((item) => {
                                 if (item.isChecked) {
                                   productData.weaveIds.push(item.id);
@@ -724,8 +689,6 @@ relatedProductTemp[e.target.name] = option;
                                 return;
                               }
 
-                             
-
                               if (
                                 this.state.reedCount == undefined ||
                                 this.state.reedCount == -1
@@ -744,8 +707,6 @@ relatedProductTemp[e.target.name] = option;
                                 });
                                 return;
                               }
-
-
 
                               node =this.dimensionsComplete.current
                               let relatedDimension = false;
@@ -776,7 +737,6 @@ relatedProductTemp[e.target.name] = option;
                                 });
                                 return;
                               }
-
                               
                                 node = this.washAndCare.current;
                                 if (node.getAttribute("class") == "inComplete") {
@@ -873,7 +833,6 @@ relatedProductTemp[e.target.name] = option;
                     productData.relatedProduct = this.state.savedrelatedProduct;
 
                       TTCEapi.uploadProduct(file1, file2, file3, productData).then((response) => {
-                        console.log(response)
                     if (response.data.valid) {
                       customToast.success(this.props.t("Pages.object.Product added successfully"), {
                         position: toast.POSITION.TOP_RIGHT,
@@ -908,9 +867,6 @@ relatedProductTemp[e.target.name] = option;
 
                       });;
 
-                    
-
-                    console.log(productData);
                  };
 
                  Cancel = () => {

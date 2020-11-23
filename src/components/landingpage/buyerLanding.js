@@ -29,12 +29,10 @@ class buyerLanding extends Component {
   ExploreMore = (to) => {
     switch (to) {
       case "Self":
-        console.log(to);
         browserHistory.push("./Artisanself");
 
         break;
       case "New":
-        console.log(to);
          browserHistory.push("./Antaran");
 
         break;
@@ -47,7 +45,6 @@ class buyerLanding extends Component {
     CMSApi.getPages(27).then((response)=>{
       if(response)
       {
-          console.log(response.data.acf);
           this.setState({
             buyerPageData : response.data.acf
           })

@@ -18,8 +18,7 @@ export class BuyerOngoingOrder extends Component {
     
     constructor(props) {
         super(props);
-        // var today = new Date(),
-        // date=today.getFullYear()+'-'+ (today.getMonth() + 1) + '-' + today.getDate();
+       
         var date= moment().format("YYYY-MM-DD")
 
         this.state = {
@@ -45,11 +44,8 @@ export class BuyerOngoingOrder extends Component {
     }
     handleChange(e) {
         const { name, value } = e.target;
-    
-        console.log(value);
         this.setState({ [name]: value,showDeldatevalidation: false ,completebtndis:false}, () => {
-       
-        });
+               });
                  
     
     }
@@ -70,8 +66,6 @@ export class BuyerOngoingOrder extends Component {
          browserHistory.push("/faulty?orderid="+id)
     }
     CompleteOrderShow = (id) => {
-        console.log(this.state.currentDate);
-        console.log(id)
         document.getElementById('CompleteOrder'+ id).style.display='block';
        
        }
@@ -100,7 +94,6 @@ export class BuyerOngoingOrder extends Component {
        }
        YesOrderbutton=(id,prodid)=>{
            if(prodid==2){
-            console.log("prod id 2",id)
             TTCEapi.markEnquiryClosed(id).then((response)=>{
                 if(response.data.valid)
                 {
@@ -114,7 +107,6 @@ export class BuyerOngoingOrder extends Component {
             }); 
            }
            else{
-            console.log("prod id 1",id)
              TTCEapi.initializePartialRefund(id).then((response)=>{
             if(response.data.valid  )
             {
@@ -133,13 +125,10 @@ export class BuyerOngoingOrder extends Component {
             checked:!this.state.checked,
             
         })
-        console.log(this.state.checked)
         let { Allartisanid } = this.state;
         if (checked){
-            console.log("agreed")
               }
                 else{
-                    console.log("Not agreed")
                     this.setState({
                         checked:!this.state.checked,
                         
@@ -148,9 +137,7 @@ export class BuyerOngoingOrder extends Component {
              }
       
        PartialPaymentReceived=(id)=>{
-           console.log(id)
              if(this.state.checked){
-            console.log("agreed yes")
             TTCEapi.markEnquiryClosed(id).then((response)=>{
                 if(response.data.valid)
                 {
@@ -171,10 +158,7 @@ export class BuyerOngoingOrder extends Component {
                 }
        }
        CompleteOrder2Show = (id) => {
-        // console.log(this.state.deliveredDate >= this.state.currentDate)
         if( this.state.deliveredDate <= this.state.currentDate){
-            console.log(this.state.deliveredDate <= this.state.currentDate)
-            console.log(id)
             this.setState({
                 completebtndis:false
             })
@@ -195,7 +179,6 @@ export class BuyerOngoingOrder extends Component {
 
             }
         });        
-           
                     this.setState({
                         markOrderAsRecieved: response.data.data
                     })
@@ -214,10 +197,7 @@ export class BuyerOngoingOrder extends Component {
     showDeldatevalidation:true
 
 })
-        //    document.getElementById('CompleteOrder'+ id).style.display='none';
-
-        //    document.getElementById('CompleteOrder2'+ id).style.display='block';
-          }
+        }
        CompleteOrder2Close = (id) => {
            document.getElementById('CompleteOrder2'+ id).style.display='none';
            this.componentDidMount()
@@ -229,7 +209,6 @@ export class BuyerOngoingOrder extends Component {
         {    TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 var rr = response.data.data;
                 rr[0].desc = "Quotation Accepted";
                 rr[1].desc = "Order Details";
@@ -239,25 +218,20 @@ export class BuyerOngoingOrder extends Component {
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
         })
             TTCEapi.getInnerEnquirStages().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({innerEnquiryStages:response.data.data})
             }
         })
-            console.log(response);
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
                     TTCEapi.getOpenOrders().then((response1)=>{
-                        console.log("")
                         if(response1.data.valid)
-                        {   console.log("heree");
-                            console.log(response1.data.data);
+                        {  
                             this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
                                
                             });
@@ -274,20 +248,16 @@ export class BuyerOngoingOrder extends Component {
 
     }
     individualpage(id){
-        // localStorage.setItem("seeMoreId", id);
         browserHistory.push("/buyerorder?code=" + id);
     }
     daysleft(name)
     {
         var someDate = new Date(name);
-                                // console.log(someDate);
                                 var numberOfDaysToAdd = 10;
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                // console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                // console.log(diffDays); 
                                 return(diffDays);
     }
 
@@ -297,18 +267,12 @@ export class BuyerOngoingOrder extends Component {
     }
     daysleftFaultyOrder(name)
     {
-      console.log(name);
-    //   const datecon = moment(name).format('DD-MM-YYYY');
-    //     console.log(datecon + " Converted Date");
+   
         var someDate = new Date(name);
-                                console.log(someDate);
-                                // var numberOfDaysToAdd = 10;
-                                // someDate.setDate(someDate.getDate() );
-                                // console.log(someDate); 
+                                
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffTime); 
                                 return(diffDays);
                                 
     }
@@ -337,7 +301,6 @@ export class BuyerOngoingOrder extends Component {
             orderReceivedModalOkButtonDisable: true
         });
 
-        console.log(this.state.orderReceivedCurrentId);
 
         TTCEapi.updateFaultyOrderStatusBuyer(this.state.orderReceivedCurrentId, 1).then((response)=>{
             if(response.data.valid)
@@ -397,7 +360,6 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
-                        {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                                 Converted to order on :
@@ -897,7 +859,6 @@ export class BuyerOngoingOrder extends Component {
                             class="w3-button w3-display-topright cWhite">x</span>
                             <br></br>
                             <Row noGutters={true}>
-                                {/* {console.log(item.openEnquiriesResponse.productStatusId)} */}
                                 {item.openEnquiriesResponse.productStatusId === 2
                                 ?
                                 <>  
@@ -908,7 +869,6 @@ export class BuyerOngoingOrder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1452,7 +1412,6 @@ export class BuyerOngoingOrder extends Component {
                                  {this.state.innerEnquiryStages.map((item1) => 
                                    
                                     <Col className="col-xs-12 mb7">
-                                         {/* {console.log(item1.id  , item.openEnquiriesResponse.innerEnquiryStageId)}  */}
                                         {item1.id <= (item.openEnquiriesResponse.innerEnquiryStageId) ?  <div className="greenButtonstatus"></div> :<div className="greyButtonstatus"></div> } 
                             
                                     {item1.stage }
@@ -1568,7 +1527,7 @@ export class BuyerOngoingOrder extends Component {
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
           <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
             <br/>
-            <input className="PIinput" type="date"
+            <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
               // value={this.state.orderDispatchDate }
               placeholder="Enter date of receiving"
@@ -1590,7 +1549,6 @@ export class BuyerOngoingOrder extends Component {
                                         )}
                                                              </p>
                 <div className="buyerMOQAcceptModalButtonOuter" style={{textAlign:"center"}}>
-            {/* <span  onClick={this.CompleteOrderClose} className="buyerMOQAcceptModalCancelButton">Cancel</span> */}
             <span >
                 <button
                 style={{fontSize:"15px"}}
@@ -1719,10 +1677,7 @@ export class BuyerOngoingOrder extends Component {
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay">Is Partial Refund Received?</h1> 
-                {/* <br/> */}
-                {/* <b className="CRare fontplay" style={{color:"grey",fontWeight:"100",marginBottom:"15px"}}>
-                    </b>  */}
-                <br/>
+               <br/>
                  <p className="CRare fontplay">{item.openEnquiriesResponse.orderCode}</p>  
             </Col>
         </Row>
@@ -1736,13 +1691,7 @@ export class BuyerOngoingOrder extends Component {
        
         <Row noGutters={true}>
         <Col className="col-xs-12" style={{textAlign:"center",padding:"10px",fontWeight:"600"}}>
-        {/* <button
-                style={{fontSize:"15px"}}
-                 onClick={()=>{this.PartialPaymentClose(item.openEnquiriesResponse.enquiryId)}}
-                className="closeorderbtn2">No
-                 </button> */}
-               
-                 <button
+        <button
                 style={{fontSize:"15px",background:"green"}}
                  onClick={()=>{this.PartialPaymentReceived(item.openEnquiriesResponse.enquiryId)}}
                 className="closeorderbtn2">Yes

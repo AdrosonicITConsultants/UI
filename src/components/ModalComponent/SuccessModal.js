@@ -59,9 +59,6 @@ export default class SuccessPopup extends React.Component {
         </div>
           </div>
       </>
-      
-         {/* <HoldPopup  wait={3500}/> */}
-
       </React.Fragment>
     );
   }

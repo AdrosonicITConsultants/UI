@@ -100,13 +100,7 @@ class forgotpass2 extends Component {
                           Reset
                         </h2>
                       }
-                      {/* {window.location.pathname.indexOf(
-                                   "passwordA"
-                                 ) !== -1 ? (
-                                   <h4 className="margin-roletext">Artist</h4>
-                                 ) : (
-                                   <h4 className="margin-roletext">Buyer</h4>
-                                 )} */}
+                     
                       {localStorage.getItem("selectedUserId") == 1 ?
                         <h4 className="margin-roletext">{this.props.t("Pages.object.regPasswordWord")}</h4>
                         :

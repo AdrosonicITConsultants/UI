@@ -809,7 +809,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                        <label>Date of dispatch</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -817,7 +817,7 @@ onClick={()=>this.notifyModalShow(item.transactionOngoing.id,item.transactionOng
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>

@@ -43,7 +43,6 @@ export class BuyerCompletedOrder extends Component {
             {    TTCEapi.getEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     var rr = response.data.data;
                     rr[0].desc = "Quotation Accepted";
                     rr[1].desc = "Order Details";
@@ -53,27 +52,21 @@ export class BuyerCompletedOrder extends Component {
             TTCEapi.getEnquirStagesforAvailable().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({enquiryStagesAvailable:response.data.data})
                 }
             })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
                 if(response.data.valid)
                 {
-                    console.log(response.data.data);
                     this.setState({innerEnquiryStages:response.data.data})
                 }
             })
-                console.log(response);
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getClosedOrders().then((response1)=>{
-                            console.log("")
                             if(response1.data.valid)
-                            {   console.log("heree");
-                                console.log(response1.data.data);
+                            {   
                                 this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
-                                    console.log(this.state);
                                 });
                                 
                             }
@@ -90,9 +83,7 @@ export class BuyerCompletedOrder extends Component {
 
     individualpage(id){
         localStorage.setItem("completedOrder", 1);
-        // localStorage.setItem("seeMoreId", id);
-        // localStorage.setItem("completed", 1);
-        browserHistory.push("/buyercompletedorder?code=" + id);
+         browserHistory.push("/buyercompletedorder?code=" + id);
     }
 
     FoundSomethingfaulty(id){
@@ -111,28 +102,21 @@ export class BuyerCompletedOrder extends Component {
     daysleft(name)
     {
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd = 10;
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
                                 return(diffDays);
     }
     daysleftFaultyOrder(name,days)
     {
-      console.log(name,days);
         var someDate = new Date(name);
-                                console.log(someDate);
                                 var numberOfDaysToAdd =parseInt(days);
                                 someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                                console.log(someDate); 
                                 var todayDate= new Date();
                                 const diffTime =  someDate - todayDate ;
                                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                                console.log(diffDays); 
                                 return(diffDays);
     }
     render() {
@@ -162,7 +146,6 @@ export class BuyerCompletedOrder extends Component {
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
                         <Col className="col-xs-10">
-                        {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                                 Converted to order on :
@@ -341,10 +324,7 @@ export class BuyerCompletedOrder extends Component {
                              <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                            
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -363,10 +343,7 @@ export class BuyerCompletedOrder extends Component {
             <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                            
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -664,10 +641,7 @@ export class BuyerCompletedOrder extends Component {
                              <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                            
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}
@@ -686,10 +660,7 @@ export class BuyerCompletedOrder extends Component {
             <Row noGutters={true}>
                      <Col className="col-xs-12" style={{textAlign:"center"}}>
                          <span>
-                             {/* <button  style={{fontSize:"15px",backgroundColor:"rgb(204, 0, 0);"}} 
-                              onClick={()=>this.FoundSomethingfaulty(item.openEnquiriesResponse.enquiryId)} 
-                              className="buyerMOQAcceptModalOkayButton Foundunusualbtn">
-                             <img src={logos.sadwhite} className="raterevbtnimg"/>Found Something unusual?</button> */}
+                           
                                 <button
                                 style={{fontSize:"15px"}}
                                 onClick={() => this.reviewPageButton(item.openEnquiriesResponse.enquiryId, item.openEnquiriesResponse.enquiryCode, item.openEnquiriesResponse)}

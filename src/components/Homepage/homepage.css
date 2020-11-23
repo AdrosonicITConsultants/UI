@@ -193,7 +193,7 @@ font-size: 15px;
 }
 
 /* align glyph */
-.left-addon .glyphicon  { left:  0px;}
+.left-addon .glyphicon  { left:  0px;height: 45px; padding: 4px 10px 12px 10px;}
 .right-addon .glyphicon { right: 0px;}
 
 /* add padding  */

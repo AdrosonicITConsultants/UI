@@ -72,15 +72,12 @@ export class FaultResolved extends Component {
     }  
     
     handleAction(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('actionid');
-        console.log(option);
-        
+      
         this.setState({ [e.target.name]: e.target.value , actioncategoryid : option,showValidationfaulty:false}, ()=> {
-          console.log(this.state.actioncategoryid);
-          
+         
         });
         
       }
@@ -90,16 +87,13 @@ export class FaultResolved extends Component {
           })
       }
     backoperation(){
-    //  browserHistory.push("/buyerOrders")
     browserHistory.goBack(); 
             }
      backoperation2(){
         browserHistory.goBack(); 
-    // browserHistory.push("/artisanOrders")
                 }
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
        
         });
@@ -111,21 +105,14 @@ export class FaultResolved extends Component {
             this.setState({
                 rejectButtonClick:true
             })
-                // let params = queryString.parse(this.props.location.search);
-                // console.log(this.props.enquiryCode);
-                // this.setState({
-                //     enquiryCode:this.props.enquiryCode
-                // })
+               
                 TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(this.props.enquiryCode,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
                         sendFaultyOrder : response.data.data,
                          dataload : true,},()=>{
-                        console.log(this.state.sendFaultyOrder);
                     });
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.success("Sent Successfully!!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -133,7 +120,6 @@ export class FaultResolved extends Component {
                       this.componentDidMount()
                 }
                 else{
-                    // document.getElementById('SureModal').style.display='none';
                     customToast.error(response.data.errorMessage, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -188,18 +174,12 @@ export class FaultResolved extends Component {
   
     componentDidMount(){
       
-        // let params = queryString.parse(this.props.location.search);
-        // console.log(this.props.enquiryCode);
-        // this.setState({
-        //     enquiryCode:this.props.enquiryCode
-        // })
         TTCEapi.getSingleOrder(this.props.enquiryCode).then((response)=>{
             if(response.data.valid)
             {
             this.setState({
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                  dataload : true,},()=>{
-                console.log(this.state.getSingleOrder);
             });
         }
         });
@@ -209,7 +189,6 @@ export class FaultResolved extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -219,7 +198,6 @@ export class FaultResolved extends Component {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
                  dataload : true,},()=>{
-                console.log(this.state.getAllRefArtisanReview);
             });
         }
         });
@@ -231,7 +209,6 @@ export class FaultResolved extends Component {
                 OrderDetails:response.data.data,              
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
                  dataload : true,},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
@@ -244,7 +221,6 @@ export class FaultResolved extends Component {
                 })
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -259,25 +235,18 @@ export class FaultResolved extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
+                
                 }
             }
            
-                // console.log(response.data.data.artisanReviewId);
-            
-      
         }
         });
-        // /enquiry/getOrderProgress/1707
     }
     
     render() {
         return (
             <React.Fragment>
-              
-            {/* <NavbarComponent/> */}
-            {/* <Container> */}
+           
                     {this.state.dataload?
                     <>
                   
@@ -447,17 +416,12 @@ export class FaultResolved extends Component {
                 </Row>
                     }
               
-              
-             
-              {/* </Container> */}
-            {/* //   <Footer></Footer> */}
             </React.Fragment>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // debugger;
     const { user } = state
     return { user };
 }

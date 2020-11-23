@@ -75,13 +75,10 @@ export class ArtisanFaultyOrder1 extends Component {
     }  
     
     handleAction(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('actionid');
-        console.log(option);
         this.setState({ [e.target.name]: e.target.value , actioncategoryid : option,showValidationfaulty:false}, ()=> {
-          console.log(this.state.actioncategoryid);
         });        
     }
 
@@ -94,7 +91,6 @@ export class ArtisanFaultyOrder1 extends Component {
             orderRecreateModalOkButtonDisable: true,
         });
         TTCEapi.recreateOrder(id).then((response)=>{
-            console.log(response.data.data);
             if(response.data.valid)
             {
                 document.getElementById('orderRecreateModal').style.display='none';
@@ -117,13 +113,11 @@ export class ArtisanFaultyOrder1 extends Component {
     }
            
     backoperation(){
-        // browserHistory.push("/artisanOrders"); 
         browserHistory.goBack(); 
     }
 
     handleChange(e) {
         const { name, value } = e.target;
-        console.log(value);
         this.setState({ [name]: value,showValidationMoq: false ,showValidationfaulty:false}, () => {
        
         });
@@ -135,19 +129,16 @@ export class ArtisanFaultyOrder1 extends Component {
                 rejectButtonClick:true
             })
                 let params = queryString.parse(this.props.location.search);
-                console.log(params.orderid);
-                console.log(this.state.actioncategoryid);
+
                 this.setState({
                     enquiryCode:params.orderid
                 })
                 TTCEapi.sendFaultyOrderArtisan(params.orderid,this.state.description,this.state.actioncategoryid).then((response)=>{
-                    console.log(params.orderid,this.state.description,this.state.actioncategoryid);
                     if(response.data.valid)
                     {
                     this.setState({
                         sendFaultyOrder : response.data.data,
                          dataload : true,},()=>{
-                        console.log(this.state.sendFaultyOrder);
                     });
                    
                     customToast.success("Sent Successfully!!", {
@@ -207,7 +198,6 @@ export class ArtisanFaultyOrder1 extends Component {
     componentDidMount(){
       
         let params = queryString.parse(this.props.location.search);
-        console.log(params.orderid);
         this.setState({
             enquiryCode:params.orderid
         })
@@ -217,7 +207,6 @@ export class ArtisanFaultyOrder1 extends Component {
             this.setState({
                  getSingleOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
-                console.log(this.state.getSingleOrder);
             });
         }
         });
@@ -227,7 +216,6 @@ export class ArtisanFaultyOrder1 extends Component {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                 },()=>{
-                console.log(this.state.getAllRefBuyerReview);
             });
         }
         });
@@ -237,7 +225,6 @@ export class ArtisanFaultyOrder1 extends Component {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
                 },()=>{
-                console.log(this.state.getAllRefArtisanReview);
             });
         }
         });
@@ -251,7 +238,6 @@ export class ArtisanFaultyOrder1 extends Component {
                 artisanId:response.data.data.orderProgress.artisanReviewId?response.data.data.orderProgress.artisanReviewId:0,
                 artisanReviewId:response.data.data.orderProgress.artisanReviewId==null?this.state.artisanReviewId=0:1,
                  dataload : true,},()=>{
-                console.log(this.state.getOrderProgress);
             });
             if(response.data.data.orderProgress !=null&&response.data.data.orderProgress.buyerReviewId){
                 this.setState({
@@ -265,7 +251,6 @@ export class ArtisanFaultyOrder1 extends Component {
                 })
                 var buyerReviewId=response.data.data.orderProgress.buyerReviewId;
                 var SplitbuyerId=buyerReviewId.split(",");
-                console.log(SplitbuyerId);
                 for(var i=0;i<SplitbuyerId.length;i++){
                     var id=SplitbuyerId[i]
                  const typeElements = this.state;
@@ -280,17 +265,14 @@ export class ArtisanFaultyOrder1 extends Component {
                  });
                  
                  var arr = this.state.accepted 
-                 console.log(arr);
-                 console.log(this.state.accepted.filter(function(s) { return s.comment; }).length)
+                
                 }
             }
            
-                // console.log(response.data.data.artisanReviewId);
             
       
         }
         });
-        // /enquiry/getOrderProgress/1707
     }
     
     render() {
@@ -302,7 +284,6 @@ export class ArtisanFaultyOrder1 extends Component {
                     <>
                     {this.state.isResolved?
                     <>
-                   {/* { browserHistory.push("/concernsolvedartisan?orderid="+this.state.enquiryCode)} */}
                    <FaultResolved
                    enquiryCode={this.state.enquiryCode}
                    buyer={this.state.buyer}/>
@@ -417,20 +398,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                              </textarea>
                                         </Col>
                                     </Row>
-                            {/* <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
-                                <span><button className="buddlechatbtn" style={{marginRight:"10px",height:"30px"}}>
-                                          <img src={logos.chatwhite} style={{height:"14px"}}/></button>
-                                          <button
-                                            disabled={this.state.rejectButtonClick}
-                                            className="senddelButton"
-                                            onClick={()=>this.submit()}>
-                                            Send</button>
-                                          </span>
-                                </Col>
-                            </Row> */}
-                                               
+                                                                          
                           </Col>                            
                 </Row>             
                   

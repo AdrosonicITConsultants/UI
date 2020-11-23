@@ -14,10 +14,6 @@ import * as Actions from "../../redux/action/action"
 import {Link} from "react-router-dom"
 import { memoryHistory, browserHistory } from "../../helpers/history";
 import CMSApi from '../../services/API/CMSApi';
-// import Artreg2 from "../register/artist/artreg2";
-// import Buyreg1 from "../register/buyer/buyreg1";
-// import Artistlogin from "../artist/artistlogin"
-
 var homeSectionStyle = {};
 
  class HomePage extends Component {
@@ -51,7 +47,6 @@ var homeSectionStyle = {};
                    }
                      switch (num) {
                        case 0:
-                       //  this.props.loginpageState = 0;
                          localStorage.removeItem("homepageredirect");
                        
                          return (
@@ -124,9 +119,7 @@ var homeSectionStyle = {};
                      }
                  }
                 checkusernameArtist(userName){
-                //  console.log("artist :" + userName);  
                    this.setState({ username: userName }, () => {
-                     console.log("artist :" + this.state.username);
                      TTCEapi.validateUsername(userName, 1).then((response) => {
                        debugger;
                        if (response.data.valid) {
@@ -148,7 +141,6 @@ var homeSectionStyle = {};
                 }
                 checkpasswordArtist(password){
                   debugger
-                  console.log("artist :" + this.state.username);
                   this.setState({ username: this.state.username }, () => {
                     TTCEapi.login(this.state.username, password, 1).then(
                       (response) => {
@@ -162,13 +154,9 @@ var homeSectionStyle = {};
                       this.props.dispatch(
                         Actions.loginSuccess(token, user, userTypeId)
                       );  
-                          // if(localStorage.getItem("skipVideo") == "true") {
-                          //   browserHistory.push("/home"); 
-                          // }
-                          // else {
+                        
                             browserHistory.push("/demo-video");
-                          // }                                              
-  
+                       
                         } else {
                           customToast.error(response.data.errorMessage, {
                             position: toast.POSITION.TOP_RIGHT,
@@ -181,9 +169,7 @@ var homeSectionStyle = {};
                }
                
                  checkusernameBuyer(userName){
-                   console.log("buyer :" + userName);
-                        console.log("artist :" + userName);
-                        this.setState({ username: userName }, () => {
+                this.setState({ username: userName }, () => {
                           TTCEapi.validateUsername(userName, 2).then(
                             (response) => {
                               debugger;
@@ -206,7 +192,6 @@ var homeSectionStyle = {};
 
                  }
                  checkpasswordBuyer(password){
-                  console.log("buyer :" + this.state.username);
                      this.setState({ username: this.state.username }, () => {
                        TTCEapi.login(this.state.username, password, 2).then(
                          (response) => {
@@ -219,12 +204,8 @@ var homeSectionStyle = {};
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );
-                            //  if(localStorage.getItem("skipVideo") == "true") {
-                            //   browserHistory.push("/home"); 
-                            // }
-                            // else {
+                            
                               browserHistory.push("/demo-video");
-                            // }                                              
                            } else {
                             customToast.error(response.data.errorMessage, {
                               position: toast.POSITION.TOP_RIGHT,
@@ -238,7 +219,6 @@ var homeSectionStyle = {};
                 }
                  handler(num) {              
                    this.setState({ userpage : num }, () => {
-                     console.log(this.state.userpage);
                    });                    
                  }
 
@@ -246,7 +226,6 @@ var homeSectionStyle = {};
                   CMSApi.getPages(20).then((response)=>{
                     if(response)
                     {
-                        console.log(response.data.acf);
                         this.setState({
                           homePageData : response.data.acf
                         })
@@ -291,9 +270,7 @@ var homeSectionStyle = {};
                              >
 
                                {this.renderSection(this.state.userpage)}
-                               {/* <Buyerpass handler={this.handler} /> */}
-                               {/* <Buyeruser handler={this.handler} /> */}
-                               {/* <Artistlogin handler={this.handler} /> */}
+                             
                              </Col>
                            </Row>
                            

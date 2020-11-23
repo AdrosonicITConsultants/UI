@@ -737,6 +737,7 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
                                                        <label>Date of dispatch</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
+                                                             placeholder="YYYY-MM-DD"
                                                              name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -744,6 +745,7 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
+                                                             placeholder="YYYY-MM-DD"
                                                               name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>

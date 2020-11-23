@@ -1681,7 +1681,7 @@ export class Buyerorder extends Component {
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
           <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
             <br/>
-            <input className="PIinput" type="date"
+            <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
               placeholder="Enter date of receiving"
              name="deliveredDate"

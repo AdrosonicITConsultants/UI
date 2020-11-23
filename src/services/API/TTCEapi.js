@@ -15,7 +15,7 @@ var ChatMediaUrl = "";
 var DocumentsURL = "";
 
 if (env == "dev") {
-  ApiUrl = "http://101.53.153.96:8090";
+  ApiUrl = "http://101.53.153.96:8090/api";
   ImageUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
@@ -23,7 +23,7 @@ if (env == "dev") {
   DocumentsURL = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/documents/";
 } 
 else if (env == "uat") {
-  ApiUrl = "http://164.52.192.15:8090";
+  ApiUrl = "http://164.52.192.15:8090/api";
   ImageUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";

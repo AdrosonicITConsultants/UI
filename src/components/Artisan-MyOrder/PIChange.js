@@ -409,7 +409,7 @@ export class PIchange extends Component {
                             <label>Expected date of delivery</label>
                             <br/>
                             <input className="PIinput" type="date"
-                        
+                         placeholder="YYYY-MM-DD"
                             value={this.state.dod }
                             name="dod"
                             onChange={this.handleChange}/>

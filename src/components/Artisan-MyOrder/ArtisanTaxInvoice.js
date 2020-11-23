@@ -605,7 +605,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                        <label>Date of dispatch</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="orderDispatchDate"
                                                             onChange={this.handleChange}/>
                                                                         </Col>
@@ -613,7 +613,7 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
                                                             <input className="PIinput" type="date"
-                                                        
+                                                         placeholder="YYYY-MM-DD"
                                                             name="eta"
                                                             onChange={this.handleChange}/>
                                                    </Col>

@@ -89,7 +89,6 @@ import ArtisanChat from './components/Chat/artisanChat';
 import BuyerChat from './components/Chat/buyerChat';
 import ViewOldQC from './components/Artisan-MyOrder/viewOldQC';
 import ErrorPage from './components/404errorPage/errorPage';
-import DateViewer from "./components/Practisefolder/Date"
 function App() {
   
   return (
@@ -190,7 +189,6 @@ function App() {
           <PrivateRoute exact path="/buyerChat" component={BuyerChat} />
 
           <PrivateRoute exact path="/viewOldQC" component={ViewOldQC} />
-          <PrivateRoute exact path="/date" component={DateViewer} />
 
           <Route component={ErrorPage} />
          

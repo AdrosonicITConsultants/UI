@@ -248,9 +248,7 @@ export class Buyerorder extends Component {
                   });
 
 
-                document.getElementById('CompleteOrder').style.display='none';
-    
-                        document.getElementById('CompleteOrder2').style.display='block';
+               
             }
        else
        this.setState({

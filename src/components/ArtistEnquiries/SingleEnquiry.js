@@ -32,7 +32,7 @@ import ModernDatepicker from 'react-modern-datepicker';
         this.handlePiEdit= this.handlePiEdit.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.state = {
-            startDate: new Date(),
+            startDate: "",
             selected:"BuyerDetails",
             buyersDetail: true,
             moqDetail: false,

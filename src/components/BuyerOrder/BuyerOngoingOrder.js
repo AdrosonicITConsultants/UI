@@ -12,6 +12,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import moment from 'moment';
+import ModernDatepicker from 'react-modern-datepicker';
 
 
 export class BuyerOngoingOrder extends Component {
@@ -41,7 +42,19 @@ export class BuyerOngoingOrder extends Component {
             innerEnquiryStages : [],
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
 
+    }
+    handleChangeDate(date) {
+        console.log(date)
+        // const { name, value } = date.target;
+        this.setState({
+            // [name]: value,
+            deliveredDate: date,
+            showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false
+        },()=>{
+            console.log( this.state.deliveredDate)
+        });
     }
     handleChange(e) {
         const { name, value } = e.target;
@@ -1528,13 +1541,26 @@ export class BuyerOngoingOrder extends Component {
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
           <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
             <br/>
-            <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
+            {/* <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
-              // value={this.state.orderDispatchDate }
               placeholder="Enter date of receiving"
               name="deliveredDate"
               onChange={this.handleChange}
-              required/>
+              required/> */}
+                <Row noGutters={true} >
+              <Col style={{textAlign:"center"}} className="col-xs-1"></Col>
+                  <Col style={{textAlign:"center"}} className="col-xs-10">
+              <ModernDatepicker
+                                                         className="PIinput extracss"
+                                                         date={this.state.deliveredDate}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        name="deliveredDate"
+                                                        onChange={date => this.handleChangeDate(date)}
+                                                        placeholder={'Enter date of receiving'}
+                                                        required
+                                                    />
+              </Col></Row>
         </Col>
         </Row>
         <Row noGutters={true}>
@@ -1572,7 +1598,7 @@ export class BuyerOngoingOrder extends Component {
                                           
    <div id={"CompleteOrder2"+item.openEnquiriesResponse.enquiryId} class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
-        <div class="w3-container buyerMOQAcceptModalContainer">
+        <div class="w3-container "style={{padding:"25px"}}>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 

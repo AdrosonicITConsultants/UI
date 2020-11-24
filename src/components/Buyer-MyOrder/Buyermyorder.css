@@ -21,7 +21,15 @@
     color: darkgrey;
 
 }
-
+.extracss{
+width: 50% !important;
+border-radius: 50px !important;
+padding:15px !important;
+text-align: center;
+}
+.extraml{
+    margin-left: 73px!important;
+}
 .CRare {
     font-size: 20px;
     color: black;

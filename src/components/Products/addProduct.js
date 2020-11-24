@@ -393,7 +393,7 @@ const initialState = {
                  
                      if (filename != undefined) {
                       //  filename.name = filename.name.replace(/\s/g, '');
-  if (filename.size / 1024 / 1024 > 1) {    
+  if (filename.size / 1024 / 1024 > 15) {    
       customToast.error(this.props.t("Pages.object.Please upload product Image below 1MB"), {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: true,
@@ -935,9 +935,12 @@ relatedProductTemp[e.target.name] = option;
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">  {this.props.t("Pages.object.Add photos")}</h4>
+                                   <h4 className="subHeading">  {this.props.t("Pages.object.Add photos")} <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Add upto 3 photos for product")}
+                                   </h6>
+                                   <h6 className="subHeading_1" style={{color: "red"}}>
+                                   {this.props.t("Pages.object.Please upload product Image below 1MB")}
                                    </h6>
                                  </Col>
                                </Row>
@@ -1091,7 +1094,7 @@ relatedProductTemp[e.target.name] = option;
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">{this.props.t("Pages.object.Basic details")}</h4>
+                                   <h4 className="subHeading">{this.props.t("Pages.object.Basic details")} <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Add general details for the product")}
                                    </h6>
@@ -1299,7 +1302,7 @@ relatedProductTemp[e.target.name] = option;
                                    <div className="inComplete"></div>
 
                                    <h4 className="subHeading">
-                                   {this.props.t("Pages.object.Specifications")}
+                                   {this.props.t("Pages.object.Specifications")} <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Add detailed specifications for the product")}
@@ -2255,7 +2258,7 @@ relatedProductTemp[e.target.name] = option;
                                    )}
 
                                    <h4 className="subHeading">
-                                   {this.props.t("Pages.object.Wash & care instructions")}
+                                   {this.props.t("Pages.object.Wash & care instructions")} <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Select from the wash & care instructions for the product")}
@@ -2628,7 +2631,7 @@ relatedProductTemp[e.target.name] = option;
                                    )}
 
                                    <h4 className="subHeading">
-                                   {this.props.t("Pages.object.Select availability")}
+                                   {this.props.t("Pages.object.Select availability")} <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Check the availability of the product")}
@@ -2775,7 +2778,7 @@ relatedProductTemp[e.target.name] = option;
                                        )}
 
                                        <h4 className="subHeading">
-                                         Enter GSM (Gram per Square Metre)
+                                         Enter GSM (Gram per Square Metre) <strong className="requiredStar">*</strong>
                                        </h4>
                                        <h6 className="subHeading_1">
                                          Fill in the GSM value for the product
@@ -2857,7 +2860,7 @@ relatedProductTemp[e.target.name] = option;
                                      ></div>
                                    )}
 
-<h4 className="subHeading">{this.props.t("Pages.object.Enter weight")}</h4>
+<h4 className="subHeading">{this.props.t("Pages.object.Enter weight")} <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Weight for the product")}
                                    </h6>
@@ -2961,7 +2964,7 @@ relatedProductTemp[e.target.name] = option;
                                    )}
 
                                    <h4 className="subHeading">
-                                   {this.props.t("Pages.object.Describe the product")}
+                                   {this.props.t("Pages.object.Describe the product")} <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                    {this.props.t("Pages.object.Describe your product in 500 characters")}

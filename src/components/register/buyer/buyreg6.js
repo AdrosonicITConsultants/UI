@@ -11,8 +11,8 @@ export default class buyreg6 extends Component {
     constructor() {
         super();
         this.state = {
-          weblink : "",
-          sociallink : "",
+          weblink : localStorage.getItem("regWebLink") ? localStorage.getItem("regWebLink") : "",
+          sociallink : localStorage.getItem("regSocialLink") ? localStorage.getItem("regSocialLink") : "",
           checktc : false,
          
         };
@@ -40,10 +40,21 @@ export default class buyreg6 extends Component {
     
     
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        var name = e.target.name;
+        this.setState({ 
+          [e.target.name]: e.target.value 
+        }, () => {
+          if(name == "weblink") {
+            localStorage.setItem("regWebLink", this.state.weblink);
+          }
+          else if(name == "sociallink") {
+            localStorage.setItem("regSocialLink", this.state.sociallink);
+          }
+        });
         
       }
       componentDidMount(){
+        localStorage.setItem("regCurrentPage", 5);
         if(document.getElementById('agree').checked){
           this.setState({checktc : true});
         }
@@ -163,6 +174,7 @@ export default class buyreg6 extends Component {
                           //placeholder="firstname"
                           name="weblink"
                           onChange={(e) => this.handleChange(e)}
+                          value={this.state.weblink}
                         />
                         <br />
                       </div>
@@ -185,6 +197,7 @@ export default class buyreg6 extends Component {
                           //placeholder="firstname"
                           name="sociallink"
                           onChange={(e) => this.handleChange(e)}
+                          value={this.state.sociallink}
                         />
                         <br />
                       </div>
@@ -235,7 +248,7 @@ export default class buyreg6 extends Component {
                 </Row>
                 <br></br>
 
-                <Row   className="mt30">
+                <Row   className="mt10">
                   {/* <span className="col-xs-1 col-md-1"></span> */}
                   <strong className="col-xs-12 text-center line7 help">
                   <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}

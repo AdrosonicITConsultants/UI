@@ -12,7 +12,7 @@ import TTCEapi from '../../../services/API/TTCEapi';
                    // const { t } = useTranslation();
                    super(props);
                    this.state = {
-                     weaverid: "",
+                     weaverid: localStorage.getItem("regWeaverId") ? localStorage.getItem("regWeaverId") : "",
                      //  weaverpin: "",
                      showValidation: false,
                      showValidationpin: false,
@@ -41,6 +41,8 @@ import TTCEapi from '../../../services/API/TTCEapi';
                    else {
                      this.props.cwi(this.state.weaverid);
 
+                     
+
                      //this.props.handler(4);
                    }
                  }
@@ -51,7 +53,11 @@ import TTCEapi from '../../../services/API/TTCEapi';
                  }
 
                  handleChange(e) {
-                   this.setState({ [e.target.name]: e.target.value });
+                   this.setState({ 
+                     [e.target.name]: e.target.value 
+                    }, () => {
+                      localStorage.setItem("regWeaverId", this.state.weaverid);
+                    });
                    this.setState({
                      showValidation: false,
                      showValidationpin: false,
@@ -68,6 +74,10 @@ import TTCEapi from '../../../services/API/TTCEapi';
 
                  reachOutToUsModalClose = () => {
                   document.getElementById('reachOutToUsModal').style.display='none';
+                 }
+
+                 componentDidMount() {
+                   localStorage.setItem("regCurrentPage", 0);
                  }
 
                 
@@ -147,6 +157,7 @@ import TTCEapi from '../../../services/API/TTCEapi';
                                    placeholder={this.props.t("Pages.object.regArtisanID")}
                                    name="weaverid"
                                    onChange={(e) => this.handleChange(e)}
+                                   value={this.state.weaverid}
                                  />
                                  {this.state.showValidation ? (
                                    <span className="bg-danger">

@@ -37,7 +37,8 @@ export class BuyerOngoingOrder extends Component {
             showDeldatevalidation:false,
             orderReceivedCurrentId: 0,
             orderReceivedModalOkButtonDisable: false,
-            checked: false
+            checked: false,
+            innerEnquiryStages : [],
         }
         this.handleChange = this.handleChange.bind(this);
 

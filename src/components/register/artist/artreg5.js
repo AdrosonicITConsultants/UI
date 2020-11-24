@@ -21,7 +21,7 @@ class artreg5 extends Component {
                      showValidationconfirmpass: false,
                      showUserName: true,
                      selectedFile: [],
-                     selectedprods :[]
+                     selectedprods : [],
                    };
                  }
 
@@ -50,6 +50,7 @@ class artreg5 extends Component {
                  }
                   
                   componentDidMount(){
+                    localStorage.setItem("regCurrentPage", 4);
                       
                     TTCEapi.getProducts().then((response)=>{
                       this.setState({products : response.data.data},() => {
@@ -66,7 +67,7 @@ class artreg5 extends Component {
                   if (filename != undefined) {
                     //  filename.name = filename.name.replace(/\s/g, '');
                       if (filename.size / 1024 / 1024 > 1) {    
-                          customToast.error("Please upload product Image below 1MB.", {
+                          customToast.error("Please upload product image below 1MB.", {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
                           });
@@ -117,6 +118,17 @@ class artreg5 extends Component {
                      showValidationconfirmpass: false,
                    });
                  }
+
+                //  handleProductSelect = () => {
+                //   this.state.products.map((item) => { 
+                //     if(document.getElementById(item.id).checked){ 
+                //       this.state.selectedprods.push(item.id);
+                //       console.log(this.state.selectedprods);
+                //       // localStorage.setItem("regSelectedProducts", this.state.selectedprods);
+                //     }   
+                //  });     
+                  
+                //  }
 
                  render() {
                      let $imagePreview = (

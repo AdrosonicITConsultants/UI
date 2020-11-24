@@ -10,17 +10,17 @@ class artreg4 extends Component {
     constructor() {
         super();
         this.state = {
-          firstname : "",
-          lastname : "",
-          pincode : "",
-          cluster : "",
-          district : "",
-          state : "",
-          mobileno : "",
-          panno : "",
-          address : "",
+          firstname : localStorage.getItem("regFirstName") ? localStorage.getItem("regFirstName") : "",
+          lastname : localStorage.getItem("regLastName") ? localStorage.getItem("regLastName") : "",
+          pincode : localStorage.getItem("regPincode") ? localStorage.getItem("regPincode") : "",
+          cluster : localStorage.getItem("regCluster") ? localStorage.getItem("regCluster") : "",
+          district : localStorage.getItem("regDistrict") ? localStorage.getItem("regDistrict") : "",
+          state : localStorage.getItem("regState") ? localStorage.getItem("regState") : "",
+          mobileno : localStorage.getItem("regMobile") ? localStorage.getItem("regMobile") : "",
+          panno : localStorage.getItem("regPanNo") ? localStorage.getItem("regPanNo") : "",
+          address : localStorage.getItem("regAddress") ? localStorage.getItem("regAddress") : "",
           clusterdata : [],
-          clusterid : -1,
+          clusterid : localStorage.getItem("regClusterId") ? localStorage.getItem("regClusterId") : -1,
           message : "please fill mandatory fields",
           showValidationpass: false,
           showValidationconfirmpass: false,
@@ -86,7 +86,8 @@ class artreg4 extends Component {
           
           this.setState({ [e.target.name]: e.target.value , clusterid : option}, ()=> {
             console.log(this.state);
-            
+            localStorage.setItem("regCluster", this.state.cluster);
+            localStorage.setItem("regClusterId", option);
           });
           this.setState({
               showValidationpass: false,
@@ -96,10 +97,39 @@ class artreg4 extends Component {
         if (e.target.id =="panno"){
           var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
           e.target.value = stripped;
-          this.setState({ [e.target.name]: e.target.value });
+          this.setState({ 
+            [e.target.name]: e.target.value 
+          }, () => {            
+            localStorage.setItem("regPanNo", this.state.panno);            
+          });
         }
         else{
-          this.setState({ [e.target.name]: e.target.value });
+          var name = e.target.name;
+          this.setState({ 
+            [e.target.name]: e.target.value 
+          }, () => {
+            if(name == "firstname") {
+              localStorage.setItem("regFirstName", this.state.firstname);
+            }
+            else if(name == "lastname") {
+              localStorage.setItem("regLastName", this.state.lastname);
+            }
+            else if(name == "pincode") {
+              localStorage.setItem("regPincode", this.state.pincode);
+            }
+            else if(name == "district") {
+              localStorage.setItem("regDistrict", this.state.district);
+            }
+            else if(name == "state") {
+              localStorage.setItem("regState", this.state.state);
+            }
+            else if(name == "mobileno") {
+              localStorage.setItem("regMobile", this.state.mobileno);
+            }
+            else if(name == "address") {
+              localStorage.setItem("regAddress", this.state.address);
+            }
+          });
           this.setState({
               showValidationpass: false,
           });
@@ -108,6 +138,7 @@ class artreg4 extends Component {
       }
       componentDidMount(){
         console.log("here");
+        localStorage.setItem("regCurrentPage", 3);
         this.setState({firstname : this.props.firstname ,
           lastname : this.props.lastname,
           pincode : this.props.pincode,

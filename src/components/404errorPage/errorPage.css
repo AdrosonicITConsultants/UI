@@ -1,0 +1,19 @@
+.errorPageText {
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 80px;
+}
+
+.errorPageButton {
+    font-size: 18px;
+    border: 1px solid #cc0000;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 5px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-color: #cc0000;
+    margin-top: 50px;
+    cursor: pointer;
+}

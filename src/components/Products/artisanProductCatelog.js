@@ -684,7 +684,7 @@ else {
                      if (filename != undefined) {
                       //  filename.name = filename.name.replace(/\s/g, '');
   if (filename.size / 1024 / 1024 > 1) {    
-      customToast.error("Please upload product Image below 1MB.", {
+      customToast.error("Please upload product image below 15MB.", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: true,
       });
@@ -1282,7 +1282,7 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Add photos</h4>
+                                   <h4 className="subHeading">Add photos <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add upto 3 photos for product
                                    </h6>
@@ -1482,7 +1482,7 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Basic details</h4>
+                                   <h4 className="subHeading">Basic details <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add general details for the product
                                    </h6>
@@ -1697,7 +1697,7 @@ else {
                                    <div className="inComplete"></div>
 
                                    <h4 className="subHeading">
-                                     Specifications
+                                     Specifications <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Add detailed specifications for the product
@@ -2689,7 +2689,7 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Wash & care instructions
+                                     Wash & care instructions <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Select from the wash & care instructions
@@ -3065,7 +3065,7 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Select availability
+                                     Select availability <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Check the availability of the product
@@ -3220,7 +3220,7 @@ else {
                                        )}
 
                                        <h4 className="subHeading">
-                                         Enter GSM (Gram per Square Metre)
+                                         Enter GSM (Gram per Square Metre) <strong className="requiredStar">*</strong>
                                        </h4>
                                        <h6 className="subHeading_1">
                                          Fill in the GSM value for the product
@@ -3307,7 +3307,7 @@ else {
                                      ></div>
                                    )}
 
-                                   <h4 className="subHeading">Enter weight</h4>
+                                   <h4 className="subHeading">Enter weight <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Weight for the product
                                    </h6>
@@ -3414,7 +3414,7 @@ else {
                                    )}
 
                                    <h4 className="subHeading">
-                                     Describe the product
+                                     Describe the product <strong className="requiredStar">*</strong>
                                    </h4>
                                    <h6 className="subHeading_1">
                                      Describe your product in 500 characters

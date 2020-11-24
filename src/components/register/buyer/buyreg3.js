@@ -8,11 +8,11 @@ export default class buyreg3 extends Component {
     constructor() {
         super();
         this.state = {
-          firstname : "",
-          lastname :"",
-          mobileno : "",
-          alternatemobno : "",
-          designation : "",
+          firstname : localStorage.getItem("regFirstName") ? localStorage.getItem("regFirstName") : "",
+          lastname : localStorage.getItem("regLastName") ? localStorage.getItem("regLastName") : "",
+          mobileno : localStorage.getItem("regMobile") ? localStorage.getItem("regMobile") : "",
+          alternatemobno : localStorage.getItem("regAlternateMobile") ? localStorage.getItem("regAlternateMobile") : "",
+          designation : localStorage.getItem("regDesignation") ? localStorage.getItem("regDesignation") : "",
           showValidationpass: false,
           message : "",
           
@@ -54,12 +54,32 @@ export default class buyreg3 extends Component {
     
     
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        var name = e.target.name;
+        this.setState({ 
+          [e.target.name]: e.target.value 
+        }, () => {
+          if(name == "firstname") {
+            localStorage.setItem("regFirstName", this.state.firstname);
+          }
+          else if(name == "lastname") {
+            localStorage.setItem("regLastName", this.state.lastname);
+          }
+          else if(name == "mobileno") {
+            localStorage.setItem("regMobile", this.state.mobileno);
+          }
+          else if(name == "alternatemobno") {
+            localStorage.setItem("regAlternateMobile", this.state.alternatemobno);
+          }
+          else if(name == "designation") {
+            localStorage.setItem("regDesignation", this.state.designation);
+          }
+        });
         this.setState({
             showValidationpass: false,
         });
       }
       componentDidMount(){
+        localStorage.setItem("regCurrentPage", 2);
         this.setState({firstname : this.props.firstname ,
           lastname : this.props.lastname,
           mobileno : this.props.mobileno,

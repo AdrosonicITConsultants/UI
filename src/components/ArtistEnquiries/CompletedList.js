@@ -72,7 +72,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                 <>
                 <Row noGutters={true}>
                     <Col className="col-xs-12  text-center noopenenq">
-                        No Open Enquiries.
+                        No Completed Enquiries.
                     </Col>
                 </Row>
                 </>

@@ -29,6 +29,7 @@ export class ArtisanOngoingOrder extends Component {
             dispatchRCButtonDisable: false,
             orderRecreateModalOkButtonDisable: false,
             orderRCSelectedId: 0,
+            innerEnquiryStages: [],
         }
         
     } 

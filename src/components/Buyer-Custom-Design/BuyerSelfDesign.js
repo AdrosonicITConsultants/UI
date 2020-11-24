@@ -357,13 +357,13 @@ export default class BuyerSelfDesign extends Component {
 
                  
                      if (filename != undefined) {
-  // if (filename.size / 1024 / 1024 > 1) {    
-  //     customToast.error("Please upload product Image below 1MB.", {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //       autoClose: true,
-  //     });
-  //    return ;
-  // }
+  if (filename.size / 1024 / 1024 > 15) {    
+      customToast.error("Please upload product image below 15MB.", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+      });
+     return ;
+  }
 
     this.setState({
       ["selectedFile" + num]: event.target.files[0],
@@ -845,6 +845,9 @@ relatedProductTemp[e.target.name] = option;
                                    <h4 className="subHeading">Add photos <strong className="requiredStar">*</strong></h4>
                                    <h6 className="subHeading_1">
                                      Add upto 3 photos for product
+                                   </h6>
+                                   <h6 className="subHeading_1" style={{color: "red"}}>
+                                     Please upload product image below 15MB
                                    </h6>
                                  </Col>
                                </Row>

@@ -14,7 +14,7 @@ class artreg2 extends Component {
                  constructor() {
                    super();
                    this.state = {
-                     emailid: "",
+                     emailid: localStorage.getItem("regEmailId") ? localStorage.getItem("regEmailId") : "",
                      otppin: "",
                      showValidation: false,
                      showValidationpin: false,
@@ -76,7 +76,15 @@ class artreg2 extends Component {
                  }
 
                  handleChange(e) {
-                   this.setState({ [e.target.name]: e.target.value });
+                   var name = e.target.name;
+                   this.setState({ 
+                     [e.target.name]: e.target.value 
+                    }, () => {
+                      if(name == "emailid") {
+                        localStorage.setItem("regEmailId", this.state.emailid);
+                      }
+
+                    });
                    this.setState({
                      showValidation: false,
                      showValidationpin: false,
@@ -90,6 +98,10 @@ class artreg2 extends Component {
                  reachOutToUsModalClose = () => {
                   document.getElementById('reachOutToUsModal').style.display='none';
                  }
+
+                 componentDidMount() {
+                  localStorage.setItem("regCurrentPage", 1);
+                }
 
 
                  render() {
@@ -165,6 +177,7 @@ class artreg2 extends Component {
                                    placeholder={this.props.t("Pages.object.regPlaceHolderEmail")}
                                    name="emailid"
                                    onChange={(e) => this.handleChange(e)}
+                                   value={this.state.emailid}
                                  />
                                  {this.state.showValidation ? (
                                    <span className="bg-danger">

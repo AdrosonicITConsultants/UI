@@ -14,6 +14,7 @@ import Moment from 'react-moment';
 import Footer from "../footer/footer";
 import { PreviewChangedPI } from './PreviewChangedPI';
 import { PreviewOldchanges } from './PreviewOldchanges';
+import ModernDatepicker from 'react-modern-datepicker';
 
 export class PIchange extends Component {
     constructor() {
@@ -23,6 +24,8 @@ export class PIchange extends Component {
          this.viewOldPI = this.viewOldPI.bind(this);
          this.handleChange = this.handleChange.bind(this);
         this.handlePiEdit= this.handlePiEdit.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+
         this.state = {
             
             showValidationPi:false,
@@ -155,7 +158,14 @@ export class PIchange extends Component {
         
     
     }
-
+    handleChangeDate(date) {
+        console.log(date)
+        this.setState({
+            dod: date,
+            showValidationMoq: false ,
+            showValidationPi:false
+        });
+    }
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value,showValidationMoq: false,showValidationPi:false }, () => {
@@ -408,12 +418,21 @@ export class PIchange extends Component {
                             <Col sm={6}>
                             <label>Expected date of delivery <strong className="requiredStar">*</strong></label>
                             <br/>
-                            <input className="PIinput" type="date"
+                            {/* <input className="PIinput" type="date"
                          placeholder="YYYY-MM-DD"
                             value={this.state.dod }
                             name="dod"
-                            onChange={this.handleChange}/>
-                            
+                            onChange={this.handleChange}/> */}
+                                                     <ModernDatepicker
+                                                         className="PIinput"
+                                                        date={this.state.dod}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        value={this.state.dod}
+                                                        name="dod"
+                                                        onChange={date => this.handleChangeDate(date)}
+                                                        placeholder={'Select a date'}
+                                                         />
                             </Col>
                             <Col sm={6}>
                             <label>HSN Code <strong className="requiredStar">*</strong></label>

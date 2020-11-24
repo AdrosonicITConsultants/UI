@@ -24,6 +24,7 @@ import BuyerQC from './BuyerQC';
 import { DownloadBuyerPreviewPI } from './DownloadBuyerPreviewPI';
 import DaysRemaining from '../FaultyOrder/DaysRemaining';
 import moment from 'moment';
+import ModernDatepicker from 'react-modern-datepicker';
 
 export class Buyerorder extends Component {
     constructor() {
@@ -31,6 +32,7 @@ export class Buyerorder extends Component {
         this.scrollCR = React.createRef();
         var date= moment().format("YYYY-MM-DD")
         this.state = {
+            currentDate: date,
             selected:"BuyerDetails",
             transaction: true,
             proformainvoice: false,
@@ -65,8 +67,20 @@ export class Buyerorder extends Component {
         this.qualityCheckbtn = this.qualityCheckbtn.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChange1 = this.handleChange1.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
 
 
+    }
+    handleChangeDate(date) {
+        console.log(date)
+        // const { name, value } = date.target;
+        this.setState({
+            // [name]: value,
+            deliveredDate: date,
+            showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false
+        },()=>{
+            console.log( this.state.deliveredDate)
+        });
     }
     handleChange(e) {
         const { name, value } = e.target;
@@ -232,6 +246,11 @@ export class Buyerorder extends Component {
                           });
                     }
                   });
+
+
+                document.getElementById('CompleteOrder').style.display='none';
+    
+                        document.getElementById('CompleteOrder2').style.display='block';
             }
        else
        this.setState({
@@ -1681,12 +1700,27 @@ export class Buyerorder extends Component {
             <Col className="col-xs-12 " style={{textAlign:"center"}}>
           <img src={logos.ConfirmDelivered} style={{height:"150px"}}/>
             <br/>
-            <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
+            {/* <input className="PIinput" type="date"  placeholder="YYYY-MM-DD"
             style={{width:"50%",borderRadius:"50px",padding:"15px"}}                                       
               placeholder="Enter date of receiving"
              name="deliveredDate"
               onChange={this.handleChange1}
-              required/>
+              required/> */}
+              <Row noGutters={true} >
+              <Col style={{textAlign:"center"}} className="col-xs-1"></Col>
+                  <Col style={{textAlign:"center"}} className="col-xs-10">
+              <ModernDatepicker
+                                                         className="PIinput extracss"
+                                                         date={this.state.deliveredDate}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        name="deliveredDate"
+                                                        onChange={date => this.handleChangeDate(date)}
+                                                        placeholder={'Enter date of receiving'}
+                                                        required
+                                                    />
+              </Col></Row>
+                                                      
              
         </Col>
         </Row>
@@ -1726,7 +1760,7 @@ export class Buyerorder extends Component {
                                           
    <div id="CompleteOrder2" class="w3-modal">
     <div class="w3-modal-content w3-animate-top modalBoxSize">
-        <div class="w3-container buyerMOQAcceptModalContainer">
+        <div class="w3-container" style={{padding:"25px"}}>
         <Row noGutters={true} className="buyerMOQAcceptModalOuter uploadingreceiptheading ">
             <Col className="col-xs-12 ">
                 <h1 className="areyousurecrh1 fontplay" style={{color:"green"}}>Completed!</h1> 

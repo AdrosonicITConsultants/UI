@@ -15,6 +15,7 @@ import Moment from 'react-moment';
 import { PreviewTaxInvoice } from './PreviewTaxInvoice';
 import { PrintTaxInvoice } from './PrintTaxInvoice';
 import { useTranslation, withTranslation } from "react-i18next";
+import ModernDatepicker from 'react-modern-datepicker';
 
  class ArtisanTaxInvoice extends Component {
     constructor() {
@@ -53,6 +54,8 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.onFileChange= this.onFileChange.bind(this);
         this.uploadReceiptandSend=this.uploadReceiptandSend.bind(this)
         this.loadDataDilivery=this.loadDataDilivery.bind(this)
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+        this.handleChangeDate2 = this.handleChangeDate2.bind(this);
 
 
     }
@@ -108,7 +111,30 @@ import { useTranslation, withTranslation } from "react-i18next";
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value,showValidationMoq: false ,showDeliveryValidation:false,showValidationPi:false}, () => {
+            console.log( this.state.orderDispatchDate,
+                this.state.eta)
+        });
        
+    }
+    handleChangeDate(date) {
+        console.log(date)
+        // const { name, value } = date.target;
+        this.setState({
+            // [name]: value,
+            orderDispatchDate: date,
+        },()=>{
+            console.log( this.state.orderDispatchDate)
+        });
+    }
+
+    handleChangeDate2(date) {
+        console.log(date)
+        // const { name, value } = date.target;
+        this.setState({
+            // [name]: value,
+            eta: date,
+        },()=>{
+            console.log( this.state.orderDispatchDate,this.state.eta)
         });
     }
     bp(){
@@ -604,18 +630,37 @@ advancePaidAmt={this.state.advancePaidAmt}
                                                        <Col className="col-xs-6">
                                                        <label>Date of dispatch</label>
                                                         <br/>
-                                                            <input className="PIinput" type="date"
+                                                            {/* <input className="PIinput" type="date"
                                                          placeholder="YYYY-MM-DD"
                                                             name="orderDispatchDate"
-                                                            onChange={this.handleChange}/>
+                                                            onChange={this.handleChange}/> */}
+                                                            <ModernDatepicker
+                                                         className="PIinput"
+                                                         date={this.state.orderDispatchDate}
+                                                       value={this.state.orderDispatchDate}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        name="orderDispatchDate"
+                                                        onChange={date => this.handleChangeDate(date)}
+                                                        placeholder={'Select a date'}
+                                                    />
                                                                         </Col>
                                                    <Col className="col-xs-6">
                                                    <label>Revised ETA (if required)</label>
                                                         <br/>
-                                                            <input className="PIinput" type="date"
+                                                            {/* <input className="PIinput" type="date"
                                                          placeholder="YYYY-MM-DD"
                                                             name="eta"
-                                                            onChange={this.handleChange}/>
+                                                            onChange={this.handleChange}/> */}
+                                                              <ModernDatepicker
+                                                         className="PIinput"
+                                                         date={this.state.eta}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        name="eta"
+                                                        onChange={date => this.handleChangeDate2(date)}
+                                                        placeholder={'Select a date'}
+                                                    />
                                                    </Col>
                                                    </Row>
                                                     <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>

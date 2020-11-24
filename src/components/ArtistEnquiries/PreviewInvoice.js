@@ -143,7 +143,7 @@ export class PreviewInvoice extends Component {
            sendPI: true,
             gobackButtonClick:true,
          })
-       
+          
         TTCEapi.sendPI(
             this.state.enquiryId,
             this.state.cgst,

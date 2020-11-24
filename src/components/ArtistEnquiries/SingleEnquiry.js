@@ -15,6 +15,7 @@ import Moment from 'react-moment';
 import Footer from "../footer/footer";
 import { PreviewInvoice } from './PreviewInvoice';
 import { useTranslation, withTranslation } from "react-i18next";
+import ModernDatepicker from 'react-modern-datepicker';
 
  class SingleEnquiry extends Component {
     constructor() {
@@ -29,7 +30,9 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.handleMoqEdit = this.handleMoqEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handlePiEdit= this.handlePiEdit.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
         this.state = {
+            startDate: new Date(),
             selected:"BuyerDetails",
             buyersDetail: true,
             moqDetail: false,
@@ -56,7 +59,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             sgst:0,
             hsncode:0,
             quantity:0,
-            dod:"10-10-10",
+            dod:"",
             rpu:"",
             preview: false,
             sendButtonClick: false,
@@ -67,6 +70,20 @@ import { useTranslation, withTranslation } from "react-i18next";
             enquiryStagesMTO:[],
            
         }
+    }
+    // const { name, value } = date.target;
+    // this.setState({ [name]: value,showValidationMoq: false ,showValidationPi:false}, () => {
+    // });
+    handleChangeDate(date) {
+        console.log(date)
+        // const { name, value } = date.target;
+        this.setState({
+            // [name]: value,
+            startDate:date,
+            dod: date,
+            showValidationMoq: false ,
+            showValidationPi:false
+        });
     }
     ToggleDelete = () => {
         document.getElementById('id01').style.display='block';
@@ -389,9 +406,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     } 
 
     savePIDetails(){
-        var x = document.getElementById("myDate").type;
-        document.getElementById("demo").innerHTML = x;
-        var regex = /[1-9]|\./
+         var regex = /[1-9]|\./
         var previewhsn= /^\d{1,8}$/
         if(!previewhsn.test(this.state.hsncode)){
             this.setState({
@@ -1824,15 +1839,33 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                     <Col sm={6}>
                                                     <label>Expected date of delivery <strong className="requiredStar">*</strong></label>
                                                     <br/>
-                                                        <input className="PIinput" type="date"
+                                                        {/* <input className="PIinput" type="date"
                                                         disabled={this.state.isPidetail}
                                                         value={this.state.dod}
                                                         name="dod"
                                                         onChange={this.handleChange}
                                                         placeholder="YYYY-MM-DD"
-                                                        />
+                                                        /> */}
+                                                       {this.state.isPidetail?
+                                                       <input className="PIinput" type="date"
+                                                       disabled={this.state.isPidetail}
+                                                       value={this.state.dod}
+                                                       name="dod"
+                                                       placeholder="Select a date"
+                                                       />
+                                                       :
+                                                        <ModernDatepicker
+                                                         className="PIinput"
+                                                        date={this.state.startDate}
+                                                        format={'YYYY-MM-DD'}
+                                                        showBorder
+                                                        value={this.state.dod}
+                                                        name="dod"
+                                                        onChange={date => this.handleChangeDate(date)}
+                                                        placeholder={'Select a date'}
+                                                    />
+                                                       }
                                                        
-                                               
 
                                                     </Col>
                                                     <Col sm={6}>

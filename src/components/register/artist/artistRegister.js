@@ -109,7 +109,7 @@ class artistRegister extends Component {
                  completeRegister(selectedprods,selectedFile){
                    this.setState({selectedprods : selectedprods , selectedFile : selectedFile},() => {
                      debugger;
-                    TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.passwordSend,
+                    TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.passwordSend ? this.state.passwordSend : this.state.password,
                       this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
                       this.state.district,this.state.state,this.state.mobileno,this.state.panno,
                       this.state.address,this.state.selectedprods,this.state.selectedFile).then((response) => {

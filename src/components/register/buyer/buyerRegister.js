@@ -167,7 +167,7 @@ export default class buyerRegister extends Component {
                             this.state.state,this.state.country,this.state.pincode,this.state.landmark,
                             this.state.weblink, this.state.sociallink,this.state.firstname,
                             this.state.lastname,this.state.mobileno,this.state.alternatemobno,
-                            this.state.designation,this.state.passwordSend,this.state.emailid,
+                            this.state.designation,this.state.passwordSend ? this.state.passwordSend : this.state.password,this.state.emailid,
                             this.state.pocmobile,this.state.pocemail,this.state.pocname,
                             this.state.countryid).then(
                               (response) => {

@@ -13,6 +13,8 @@ var ReceiptUrl = "";
 var DeliveryReceiptUrl = "";
 var ChatMediaUrl = "";
 var DocumentsURL = "";
+var BuyerDasboard = "";
+var ArtisanDashboard = "";
 
 if (env == "dev") {
   ApiUrl = "http://101.53.153.96:8090/api";
@@ -21,6 +23,9 @@ if (env == "dev") {
   DeliveryReceiptUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/deliveryChallanReceipt/";
   ChatMediaUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/ChatBoxMedia/";
   DocumentsURL = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/documents/";
+  BuyerDasboard = "https://datastudio.google.com/embed/reporting/1ebd20db-4ec9-4fa3-b7af-cc57a8dbd318/page/iTZoB?params=";
+  ArtisanDashboard = "https://datastudio.google.com/embed/reporting/f0b5c4e2-1e25-43e8-a200-00697598c275/page/imZoB?params=";
+
 } 
 else if (env == "uat") {
   ApiUrl = "http://164.52.192.15:8090/api";
@@ -29,6 +34,8 @@ else if (env == "uat") {
   DeliveryReceiptUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/deliveryChallanReceipt/";
   ChatMediaUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/ChatBoxMedia/";
   DocumentsURL = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/documents/";
+  BuyerDasboard = "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=";
+  ArtisanDashboard = "https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=";
 } 
 else if (env == "live") {
   ApiUrl = "";
@@ -45,6 +52,10 @@ class TTCEapi {
   static ChatMediaUrl = ChatMediaUrl;
 
   static DocumentsURL = DocumentsURL;
+
+  static BuyerDasboard = BuyerDasboard;
+
+  static ArtisanDashboard = ArtisanDashboard;
 
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);

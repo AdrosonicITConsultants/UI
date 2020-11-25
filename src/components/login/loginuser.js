@@ -102,6 +102,15 @@ operation = (event) => {
     });
   }
 
+  newRegisterClick = () => {
+    var language = localStorage.getItem("i18nextLng");
+    var skipVideo = localStorage.getItem("skipVideo");
+    localStorage.clear();
+    sessionStorage.clear();
+    localStorage.setItem("i18nextLng", language);
+    localStorage.setItem("skipVideo", skipVideo);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -240,12 +249,12 @@ operation = (event) => {
             <div className="col-xs-12 text-center font13">
               {this.props.userpage == 1 ? (
                 <div>
-                  New user <a href="/buyer-registration">click here</a> to
+                  New user <a href="/buyer-registration" onClick={this.newRegisterClick}>click here</a> to
                   register.
                 </div>
               ) : (
                 <div>
-                  New user <a href="/artist-registration">click here</a> to
+                  New user <a href="/artist-registration" onClick={this.newRegisterClick}>click here</a> to
                   register.
                 </div>
               )}

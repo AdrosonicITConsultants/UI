@@ -350,7 +350,7 @@ export class ArtisanCompletedFaultyorder extends Component {
 
                                             <textarea 
                                             className="descfaultybox"
-                                             placeholder="Add your comment" 
+                                            placeholder="Add your comment *"
                                              style={{width:"433px"}}
                                              maxLength="500"
                                              value={this.state.getOrderProgress.artisanReviewComment?this.state.getOrderProgress.artisanReviewComment:"" }
@@ -463,7 +463,7 @@ export class ArtisanCompletedFaultyorder extends Component {
 
                                             <textarea 
                                             className="descfaultybox"
-                                             placeholder="Add your comment" 
+                                            placeholder="Add your comment *" 
                                              style={{width:"433px"}}
                                              maxLength="500"
                                              name="description"

@@ -321,7 +321,7 @@ debugger;
         if (filename != undefined) {
           //  filename.name = filename.name.replace(/\s/g, '');
             if (filename.size / 1024 / 1024 > 1) {    
-                customToast.error("Please upload product Image below 1MB.", {
+                customToast.error("Please upload product image below 1MB.", {
                   position: toast.POSITION.TOP_RIGHT,
                   autoClose: true,
                 });

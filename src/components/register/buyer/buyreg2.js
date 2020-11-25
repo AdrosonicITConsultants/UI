@@ -40,7 +40,15 @@ export default class buyreg2 extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    var name = e.target.name;
+    this.setState({ 
+      [e.target.name]: e.target.value 
+    }, () => {
+      if(name == "password") {
+        localStorage.setItem("regPassword", this.state.password);
+      }
+
+    });
     this.setState({
       showValidationpass: false,
       showValidationconfirmpass: false,
@@ -50,6 +58,7 @@ export default class buyreg2 extends Component {
     this.setState({password : this.props.password ,
                    confirmpass : this.props.password 
                   });
+    localStorage.setItem("regCurrentPage", 1);
   }
 
   reachOutToUsModal = () => {
@@ -59,7 +68,6 @@ export default class buyreg2 extends Component {
    reachOutToUsModalClose = () => {
     document.getElementById('reachOutToUsModal').style.display='none';
    }
-
 
   render() {
     return (

@@ -13,14 +13,14 @@ export default class buyreg4 extends Component {
                  constructor() {
                    super();
                    this.state = {
-                    companyname : "",
-                    gstno : "",
+                    companyname : localStorage.getItem("regCompany") ? localStorage.getItem("regCompany") : "",
+                    gstno : localStorage.getItem("regGST") ? localStorage.getItem("regGST") : "",
                     officeno : "",
-                    cinno : "",
-                    panno : "",
-                    pocname : "",
-                    pocemail : "",
-                    pocmobile : "",
+                    cinno : localStorage.getItem("regCIN") ? localStorage.getItem("regCIN") : "",
+                    panno : localStorage.getItem("regPanNo") ? localStorage.getItem("regPanNo") : "",
+                    pocname : localStorage.getItem("regPOCName") ? localStorage.getItem("regPOCName") : "",
+                    pocemail : localStorage.getItem("regPOCEmail") ? localStorage.getItem("regPOCEmail") : "",
+                    pocmobile : localStorage.getItem("regPOCMobile") ? localStorage.getItem("regPOCMobile") : "",
                     showValidationpass: false,
                     brandLogo : [],
                     logoname : "",
@@ -98,10 +98,15 @@ export default class buyreg4 extends Component {
                  }
 
                  handleChange(e) {
+                  var name = e.target.name;
                   if (e.target.id =="gstno"){
                     var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
                     e.target.value = stripped;
-                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({ 
+                      [e.target.name]: e.target.value 
+                    }, () => {
+                      localStorage.setItem("regGST", this.state.gstno);
+                    });
                     this.setState({
                       showValidationpass: false,
                     });
@@ -109,7 +114,11 @@ export default class buyreg4 extends Component {
                   else if (e.target.id =="panno"){
                     var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
                     e.target.value = stripped;
-                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({ 
+                      [e.target.name]: e.target.value 
+                    }, () => {
+                      localStorage.setItem("regPanNo", this.state.panno);
+                    });
                     this.setState({
                       showValidationpass: false,
                     });
@@ -117,13 +126,32 @@ export default class buyreg4 extends Component {
                   else if (e.target.id =="cinno"){
                     var stripped = e.target.value.replace(/[^A-Z0-9\sg]+/i, '')
                     e.target.value = stripped;
-                    this.setState({ [e.target.name]: e.target.value });
+                    this.setState({ 
+                      [e.target.name]: e.target.value 
+                    }, () => {
+                      localStorage.setItem("regCIN", this.state.cinno);
+                    });
                     this.setState({
                       showValidationpass: false,
                     });
                   }
                   else{
-                   this.setState({ [e.target.name]: e.target.value });
+                   this.setState({ 
+                     [e.target.name]: e.target.value 
+                    }, () => {
+                      if(name == "companyname") {
+                        localStorage.setItem("regCompany", this.state.companyname);
+                      }
+                      else if(name == "pocname") {
+                        localStorage.setItem("regPOCName", this.state.pocname);
+                      }
+                      else if(name == "pocemail") {
+                        localStorage.setItem("regPOCEmail", this.state.pocemail);
+                      }
+                      else if(name == "pocmobile") {
+                        localStorage.setItem("regPOCMobile", this.state.pocmobile);
+                      }
+                    });
                    this.setState({
                      showValidationpass: false,
                    });
@@ -134,7 +162,7 @@ export default class buyreg4 extends Component {
                   let filename = event.target.files[0];
                   if (filename != undefined) {
                     if (filename.size / 1024 / 1024 > 1) {    
-                      customToast.error("Please upload product Image below 1MB.", {
+                      customToast.error("Please upload product image below 1MB.", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
                       });
@@ -172,6 +200,8 @@ export default class buyreg4 extends Component {
                    
                  };
                  componentDidMount(){
+
+                  localStorage.setItem("regCurrentPage", 3);
                   this.setState({companyname : this.props.companyname ,
                     gstno : this.props.gstno,
                     officeno : this.props.officeno,

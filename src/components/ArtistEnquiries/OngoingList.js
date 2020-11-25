@@ -21,7 +21,8 @@ import { useTranslation, withTranslation } from "react-i18next";
             productCategories: [],
             yarns : [],
             enquiryStagesAvailable:[],
-            dataload:false
+            dataload:false,
+            innerEnquiryStages: [],
 
         }
     } 

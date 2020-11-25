@@ -8,15 +8,15 @@ export default class buyreg5 extends Component {
     constructor() {
         super();
         this.state = {
-          adl1 : "",
-          adl2 : "",
-          street : "",
-          city : "",
-          state : "",
-          countryid : "",
-          country : "",
-          pincode : "",
-          landmark : "",    
+          adl1 : localStorage.getItem("regAddress1") ? localStorage.getItem("regAddress1") : "",
+          adl2 : localStorage.getItem("regAddress2") ? localStorage.getItem("regAddress2") : "",
+          street : localStorage.getItem("regStreet") ? localStorage.getItem("regStreet") : "",
+          city : localStorage.getItem("regCity") ? localStorage.getItem("regCity") : "",
+          state : localStorage.getItem("regState") ? localStorage.getItem("regState") : "",
+          countryid : localStorage.getItem("regCountryId") ? localStorage.getItem("regCountryId") : "",
+          country : localStorage.getItem("regCountry") ? localStorage.getItem("regCountry") : "",
+          pincode : localStorage.getItem("regPincode") ? localStorage.getItem("regPincode") : "",
+          landmark : localStorage.getItem("regLandmark") ? localStorage.getItem("regLandmark") : "",    
           showValidationpass: false,
           countrydata : [],
           message : "please fill mandatory fields",
@@ -53,7 +53,32 @@ export default class buyreg5 extends Component {
     
     
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        var name = e.target.name;
+        this.setState({ 
+          [e.target.name]: e.target.value 
+        }, () => {
+          if(name == "adl1") {
+            localStorage.setItem("regAddress1", this.state.adl1);
+          }
+          else if(name == "adl2") {
+            localStorage.setItem("regAddress2", this.state.adl2);
+          }
+          else if(name == "street") {
+            localStorage.setItem("regStreet", this.state.street);
+          }
+          else if(name == "city") {
+            localStorage.setItem("regCity", this.state.city);
+          }
+          else if(name == "state") {
+            localStorage.setItem("regState", this.state.state);
+          }
+          else if(name == "pincode") {
+            localStorage.setItem("regPincode", this.state.pincode);
+          }
+          else if(name == "landmark") {
+            localStorage.setItem("regLandmark", this.state.landmark);
+          }
+        });
         this.setState({
             showValidationpass: false,
         });
@@ -67,13 +92,15 @@ export default class buyreg5 extends Component {
         
         this.setState({ [e.target.name]: e.target.value , countryid : option}, ()=> {
           console.log(this.state);
-          
+          localStorage.setItem("regCountry", this.state.country);
+          localStorage.setItem("regCountryId", option);
         });
         this.setState({
             showValidationpass: false,
         });
       }
       componentDidMount(){
+        localStorage.setItem("regCurrentPage", 4);
         this.setState({adl1 : this.props.adl1 ,
           adl2 : this.props.adl2,
           street : this.props.street,
@@ -411,7 +438,7 @@ export default class buyreg5 extends Component {
                   </div>
                 </Row>
 
-                <Row noGutters={true} className="mt30">
+                <Row noGutters={true} className="mt10">
                   <strong className="col-xs-12 text-center line7 ">
                   <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">Help?</a>

@@ -21,7 +21,8 @@ export class BuyerCompletedOrder extends Component {
             yarns : [],
             enquiryStagesAvailable:[],
             dataload:false,
-            getSingleOrder:[]
+            getSingleOrder:[],
+            innerEnquiryStages: [],
         }
     }
     FaultyOrder(id){

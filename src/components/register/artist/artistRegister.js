@@ -20,22 +20,23 @@ class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 0,
-                     weaverid: "",
-                     emailid: "",
+                     userpage: localStorage.getItem("regCurrentPage") ? parseInt(localStorage.getItem("regCurrentPage")) : 0,
+                     weaverid: localStorage.getItem("regWeaverId") ? localStorage.getItem("regWeaverId") : "",
+                     emailid: localStorage.getItem("regEmailId") ? localStorage.getItem("regEmailId") : "",
                      password: "",
-                     firstname: "",
-                     lastname: "",
-                     pincode: "",
-                     cluster: -1,
-                     district: "",
-                     state: "",
-                     mobileno: "",
-                     panno: "",
-                     address: "",
-                     clustername : "",
-                     selectedprods :[],
+                     firstname: localStorage.getItem("regFirstName") ? localStorage.getItem("regFirstName") : "",
+                     lastname: localStorage.getItem("regLastName") ? localStorage.getItem("regLastName") : "",
+                     pincode: localStorage.getItem("regPincode") ? localStorage.getItem("regPincode") : "",
+                     cluster: localStorage.getItem("regClusterId") ? localStorage.getItem("regClusterId") : -1,
+                     district: localStorage.getItem("regDistrict") ? localStorage.getItem("regDistrict") : "",
+                     state: localStorage.getItem("regState") ? localStorage.getItem("regState") : "",
+                     mobileno: localStorage.getItem("regMobile") ? localStorage.getItem("regMobile") : "",
+                     panno: localStorage.getItem("regPanNo") ? localStorage.getItem("regPanNo") : "",
+                     address: localStorage.getItem("regAddress") ? localStorage.getItem("regAddress") : "",
+                     clustername : localStorage.getItem("regCluster") ? localStorage.getItem("regCluster") : "",
+                     selectedprods : [],
                      selectedFile : [],
+                     passwordSend : localStorage.getItem("regPassword") ? localStorage.getItem("regPassword") : "",
 
                     //  weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address
 
@@ -108,7 +109,7 @@ class artistRegister extends Component {
                  completeRegister(selectedprods,selectedFile){
                    this.setState({selectedprods : selectedprods , selectedFile : selectedFile},() => {
                      debugger;
-                    TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.password,
+                    TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.passwordSend,
                       this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
                       this.state.district,this.state.state,this.state.mobileno,this.state.panno,
                       this.state.address,this.state.selectedprods,this.state.selectedFile).then((response) => {

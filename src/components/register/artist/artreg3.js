@@ -50,16 +50,26 @@ class artreg3 extends Component {
     
     
       handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        var name = e.target.name;
+        this.setState({ 
+          [e.target.name]: e.target.value 
+        }, () => {
+          if(name == "password") {
+            localStorage.setItem("regPassword", this.state.password);
+          }
+
+        });
         this.setState({
             showValidationpass: false,
             showValidationconfirmpass: false
         });
       }
       componentDidMount(){
-        this.setState({password : this.props.password ,
-                       confirmpass : this.props.password 
-                      });
+        this.setState({
+          password : this.props.password ,
+          confirmpass : this.props.password 
+        });
+        localStorage.setItem("regCurrentPage", 2);
       }
 
       reachOutToUsModal = () => {

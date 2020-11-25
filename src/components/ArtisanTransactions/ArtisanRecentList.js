@@ -424,7 +424,9 @@ class ArtisanRecentList extends Component {
                         this.state.paymentType==0 ?
                         <ArtisianTransactionEmpty />
                 :
-              <>  <Row className="mt-5">
+              <> 
+             
+               <Row className="mt-5">
                 <Col md="1"></Col>
           <Col md="3" >
               <span>

@@ -41,7 +41,8 @@ export class ArtisianTransactionEmpty extends Component {
                          <div style={{textAlign:"center"}} 
                           >
                         <button className="wishlistblack browseproductbtn">
-                        <i class="fa fa-handshake-o" aria-hidden="true" style={{marginRight:"5px"}}></i>
+                        {/* <i class="fa fa-handshake-o" aria-hidden="true" style={{marginRight:"5px"}}></i> */}
+                        <img src={logos.acceptsmall} style={{height:"12px",marginRight:"5px"}}/>
                          Reach out to Tata Trusts</button>
                         </div>                          
                 </Row>

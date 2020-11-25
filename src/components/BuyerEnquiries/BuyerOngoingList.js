@@ -294,7 +294,7 @@ export class BuyerOngoingList extends Component {
                                 {this.state.enquiryStagesMTO.map((item1) => 
                                 <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId + 1 == item1.id ? "is-active wait": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                 {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1]?this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage:""}
                                 <br></br>
                                 <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
                                 </> : item1.desc}</li>
@@ -307,7 +307,7 @@ export class BuyerOngoingList extends Component {
                                     {this.state.enquiryStagesMTO.map((item1) => 
                                     <li key={item1.id} className={item.openEnquiriesResponse.enquiryStageId == item1.id ? "is-active": " "} >{}{item.openEnquiriesResponse.enquiryStageId == 5 && item1.id == 5 && item.openEnquiriesResponse.innerEnquiryStageId < 5 ? <> Work in Progress<br></br>
                                     {/* {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId -1].stage} */}
-                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage}
+                                    {this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1]?this.state.innerEnquiryStages[item.openEnquiriesResponse.innerEnquiryStageId - 1].stage:""}
                                     <br></br>
                                     <span className="seemore" onClick={()=>{this.ToggleDelete22(item.openEnquiriesResponse.enquiryId)}}>see more</span>
                                     </> : item1.desc}</li>

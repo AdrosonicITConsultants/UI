@@ -29,11 +29,11 @@ class Footer extends Component {
           <>
             <div className="footerblack ">
             <Container className='footerContainer'>
-              <Row noGutters={true}>
+              {/* <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
                 <div style={{marginBottom: "20px"}}>25-11-20  <span style={{marginLeft: "5px"}}>V-3</span></div>
                 </Col>
-              </Row>
+              </Row> */}
               <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span

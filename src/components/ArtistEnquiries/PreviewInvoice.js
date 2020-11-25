@@ -385,11 +385,11 @@ export class PreviewInvoice extends Component {
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>
        {this.state.history ? 
        <>
-       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}
+       {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length?this.state.previewPI.productHistory.length:""}
        </>
        :
        <>
-       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}
+       {this.state.previewPI.product.tag} -{this.state.previewPI.product.length?this.state.previewPI.product.length:""}
        </>
          }  
        </h3>
@@ -398,9 +398,14 @@ export class PreviewInvoice extends Component {
      ?
      <>
      <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.yarns[this.state.previewPI.productHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.productHistory.warpYarnCount} X {this.state.previewPI.productHistory.weftYarnCount}{this.state.previewPI.productHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.productHistory.extraWeftYarnCount ? this.state.previewPI.productHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.dyes[this.state.previewPI.productHistory.extraWeftDyeId-1].dyeDesc: ""}
+     -Yarn: {this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1]?this.state.yarns[this.state.previewPI.productHistory.warpYarnId-1].yarnDesc:""}x
+      {this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1]?this.state.yarns[this.state.previewPI.productHistory.weftYarnId-1].yarnDesc:""}
+       {this.state.previewPI.extraWeftYarnId?"x" : ""}
+        {this.state.extraWeftYarnId? this.state.yarns[this.state.previewPI.productHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
+      -Yarn Count: {this.state.previewPI.productHistory?this.state.previewPI.productHistory.warpYarnCount:""} x {this.state.previewPI.productHistory?this.state.previewPI.productHistory.weftYarnCount:""}{this.state.previewPI.productHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.productHistory.extraWeftYarnCount ? this.state.previewPI.productHistory.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1]?this.state.dyes[this.state.previewPI.productHistory.warpDyeId-1].dyeDesc:""} 
+      {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1]?" x" : ""}
+       {this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1]?this.state.dyes[this.state.previewPI.productHistory.weftDyeId-1].dyeDesc:""} {this.state.previewPI.extraWeftYarnId?"x" : ""} {this.state.extraWeftYarnId? this.state.dyes[this.state.previewPI.productHistory.extraWeftDyeId-1].dyeDesc: ""}
 
       </p>
     </>
@@ -409,9 +414,9 @@ export class PreviewInvoice extends Component {
      <p className="descyarnpi wraptext">
 
       -Yarn: {this.state.warpYarn?this.state.warpYarn.yarnDesc:""} x {this.state.weftYarn?this.state.weftYarn.yarnDesc:""} {this.state.extraWeftYarn?"x" : ""} {this.state.extraWeftYarn? this.state.extraWeftYarn.yarnDesc : ""} <br/>
-      -Yarn Count: {this.state.previewPI.product.warpYarnCount} x {this.state.previewPI.product.weftYarnCount} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.warpDye.dyeDesc} x
-      {this.state.weftDye.dyeDesc}
+      -Yarn Count: {this.state.previewPI.product?this.state.previewPI.product.warpYarnCount:""} x {this.state.previewPI.product?this.state.previewPI.product.weftYarnCount:""} {this.state.previewPI.product.extraWeftYarnCount ? "x":""} {this.state.previewPI.product.extraWeftYarnCount ? this.state.previewPI.product.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.warpDye?this.state.warpDye.dyeDesc:""} x
+      {this.state.weftDye?this.state.weftDye.dyeDesc:""}
         {this.state.extraWeftDye?"x":""}
         {this.state.extraWeftDye?
           this.state.extraWeftDye.dyeDesc
@@ -427,13 +432,13 @@ export class PreviewInvoice extends Component {
         {this.state.reedCounts[this.state.previewPI.productHistory.reedCountId-1].count}</span></p>
      <p>-Weight :</p>
      <div className="sbred wraptext">
-     {this.state.previewPI.productHistory.productCategoryDesc} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
+     {this.state.previewPI.productHistory.productCategoryDesc?this.state.previewPI.productHistory.productCategoryDesc:""} : {this.state.previewPI.productHistory.weight?this.state.previewPI.productHistory.weight:"NA"} <br/>
        
      </div>
      <br/>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.previewPI.productHistory.productCategoryDesc}: {this.state.previewPI.productHistory.length} 
+     {this.state.previewPI.productHistory.productCategoryDesc?this.state.previewPI.productHistory.productCategoryDesc:""}: {this.state.previewPI.productHistory.length} 
      {this.state.previewPI.productHistory.width}
       <br/>
          {this.state.previewPI.productHistory.relProduct.length > 0?
@@ -442,7 +447,7 @@ export class PreviewInvoice extends Component {
           
           ""}
      </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.productHistory.productCategoryDesc} {this.state.previewPI.productHistory.gsm? this.state.previewPI.productHistory.gsm:""}</span></p>
+         <p>-GSM Value : <span className="rcred">{this.state.previewPI.productHistory.productCategoryDesc?this.state.previewPI.productHistory.productCategoryDesc:""} {this.state.previewPI.productHistory.gsm? this.state.previewPI.productHistory.gsm:""}</span></p>
         
       </>
       :
@@ -454,7 +459,7 @@ export class PreviewInvoice extends Component {
      {this.state.previewPI.product.productCategoryDesc}: {this.state.previewPI.product.weight?this.state.previewPI.product.weight:"NA"} <br/>
         
         {this.state.previewPI.product.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
+        <>  {this.state.previewPI.product.relProduct[0].productType?this.state.previewPI.product.relProduct[0].productType.productDesc:""}: {this.state.previewPI.product.relProduct[0].weight !=null?this.state.previewPI.product.relProduct[0].weight:"NA"}</>
           :
 
           ""}
@@ -468,13 +473,13 @@ export class PreviewInvoice extends Component {
      {this.state.previewPI.product.width?this.state.previewPI.product.width:""}
       <br/>
          {this.state.previewPI.product.relProduct.length > 0?
-        <>  {this.state.previewPI.product.relProduct[0].productType.productDesc}: {this.state.previewPI.product.relProduct[0].length?this.state.previewPI.product.relProduct[0].length:""} 
+        <>  {this.state.previewPI.product.relProduct[0].productType?this.state.previewPI.product.relProduct[0].productType.productDesc:""}: {this.state.previewPI.product.relProduct[0].length?this.state.previewPI.product.relProduct[0].length:""} 
         {this.state.previewPI.product.relProduct[0].length && this.state.previewPI.product.relProduct[0].width?"x":"" } {this.state.previewPI.product.relProduct[0].width?this.state.previewPI.product.relProduct[0].width:""}</>
           :
           
           ""}
      </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.product.productCategoryDesc} {this.state.previewPI.product.gsm? this.state.previewPI.product.gsm:""}</span></p>
+         <p>-GSM Value : <span className="rcred">{this.state.previewPI.product.productCategoryDesc?this.state.previewPI.product.productCategoryDesc:""} {this.state.previewPI.product.gsm? this.state.previewPI.product.gsm:""}</span></p>
         
       </>
     
@@ -489,16 +494,22 @@ export class PreviewInvoice extends Component {
         <>
         {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
-     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
+     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length?this.state.buyerCustomProduct.length:""}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  
      {this.state.customhistory
      ?
     <>
     
     <p className="descyarnpi wraptext">
-     -Yarn: {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1].yarnDesc}X {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1].yarnDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.yarns[this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
-      -Yarn Count: {this.state.previewPI.buyerCustomProductHistory.warpYarnCount} X {this.state.previewPI.buyerCustomProductHistory.weftYarnCount}{this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount:""} <br/>
-      -Dye Used: {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1].dyeDesc}X {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1].dyeDesc} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.dyes[this.state.previewPI.buyerCustomProductHistory.extraWeftDyeId-1].dyeDesc: ""}
+     -Yarn: {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1]?this.state.yarns[this.state.previewPI.buyerCustomProductHistory.warpYarnId-1].yarnDesc:""}x
+     {this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1]?this.state.yarns[this.state.previewPI.buyerCustomProductHistory.weftYarnId-1].yarnDesc:""} 
+     {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} 
+     {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.yarns[this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId-1].yarnDesc: ""} <br/>
+      -Yarn Count: {this.state.previewPI.buyerCustomProductHistory.warpYarnCount?this.state.previewPI.buyerCustomProductHistory.warpYarnCount:""} x {this.state.previewPI.buyerCustomProductHistory.weftYarnCount?this.state.previewPI.buyerCustomProductHistory.weftYarnCount:""}{this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? "x":""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount ? this.state.previewPI.buyerCustomProductHistory.extraWeftYarnCount:""} <br/>
+      -Dye Used: {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1]?
+      this.state.dyes[this.state.previewPI.buyerCustomProductHistory.warpDyeId-1].dyeDesc:""}x
+       {this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1]?this.state.dyes[this.state.previewPI.buyerCustomProductHistory.weftDyeId-1].dyeDesc:""}
+        {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId?"x" : ""} {this.state.previewPI.buyerCustomProductHistory.extraWeftYarnId? this.state.dyes[this.state.previewPI.buyerCustomProductHistory.extraWeftDyeId-1].dyeDesc: ""}
 
       </p>
     </>
@@ -506,11 +517,12 @@ export class PreviewInvoice extends Component {
     <>
       <p className="descyarnpi wraptext" >
     -Yarn: {this.state.customwarpYarn?this.state.customwarpYarn.yarnDesc:""} x {this.state.customweftYarn?this.state.customweftYarn.yarnDesc:""} {this.state.customextraWeftYarn?"x" : ""} {this.state.customextraWeftYarn? this.state.customextraWeftYarn.yarnDesc : ""} <br/>
-    -Yarn Count: {this.state.buyerCustomProduct.warpYarnCount} {this.state.buyerCustomProduct.weftYarnCount && this.state.buyerCustomProduct.warpYarnCount ?"x":""} {this.state.buyerCustomProduct.weftYarnCount} {this.state.buyerCustomProduct.extraWeftYarnCount ? "x":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
-    -Dye Used: {this.state.customwarpDye.dyeDesc}   {this.state.customweftDye.dyeDesc} {this.state.customextraWeftDye?"x":""}
+    -Yarn Count: {this.state.buyerCustomProduct?this.state.buyerCustomProduct.warpYarnCount:""} x {this.state.buyerCustomProduct?this.state.buyerCustomProduct.weftYarnCount:""}
+     {this.state.buyerCustomProduct.extraWeftYarnCount ? "x":""} {this.state.buyerCustomProduct.extraWeftYarnCount ? this.state.buyerCustomProduct.extraWeftYarnCount:""} <br/>
+    -Dye Used: {this.state.customwarpDye?this.state.customwarpDye.dyeDesc:""} x  {this.state.customweftDye?this.state.customweftDye.dyeDesc:""} {this.state.customextraWeftDye?"x":""}
      {this.state.customextraWeftDye?  this.state.customextraWeftDye.dyeDesc
      :
-     this.state.customextraWeftDye?  this.state.customextraWeftDye:""
+     this.state.customextraWeftDye?this.state.customextraWeftDye:""
      } 
 
       </p> 
@@ -521,22 +533,29 @@ export class PreviewInvoice extends Component {
     ?
     <>
     <p className="RAcss">- Reed Count : <span className="rcred wraptext">
-        {this.state.reedCounts[this.state.previewPI.buyerCustomProductHistory.reedCountId-1].count}</span></p>
+        {this.state.reedCounts[this.state.previewPI.buyerCustomProductHistory.reedCountId-1]?this.state.reedCounts[this.state.previewPI.buyerCustomProductHistory.reedCountId-1].count:""}</span></p>
         <p>-Weight : <div className="sbred wraptext">
        NA
      </div></p>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc}: {this.state.previewPI.buyerCustomProductHistory.length} 
-     {this.state.previewPI.buyerCustomProductHistory.width}
+     {this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1]?
+     this.state.productCategories[this.state.previewPI.buyerCustomProductHistory.productTypeId-1].productDesc:""}:
+      {this.state.previewPI.buyerCustomProductHistory.length?this.state.previewPI.buyerCustomProductHistory.length:""} 
+     {this.state.previewPI.buyerCustomProductHistory.width?this.state.previewPI.buyerCustomProductHistory.width:""}
       <br/>
          {this.state.previewPI.buyerCustomProductHistory.relProduct.length > 0?
-        <>  {this.state.previewPI.relProductName[0]}: {this.state.previewPI.buyerCustomProductHistory.relProduct[0].length} x {this.state.previewPI.buyerCustomProductHistory.relProduct[0].width}
+        <>  {this.state.previewPI.relProductName[0]?
+          this.state.previewPI.relProductName[0]:""}: 
+          {this.state.previewPI.buyerCustomProductHistory.relProduct[0]?
+          this.state.previewPI.buyerCustomProductHistory.relProduct[0].length:""} x 
+          {this.state.previewPI.buyerCustomProductHistory.relProduct[0]?this.state.previewPI.buyerCustomProductHistory.relProduct[0].width:""}
          </> :
           
           ""}
      </div>
-         <p>-GSM Value : <span className="rcred">{this.state.previewPI.buyerCustomProductHistory.productCategoryDesc} {this.state.previewPI.buyerCustomProductHistory.gsm? this.state.previewPI.buyerCustomProductHistory.gsm:""}</span></p>
+         <p>-GSM Value : <span className="rcred">{this.state.previewPI.buyerCustomProductHistory?this.state.previewPI.buyerCustomProductHistory.productCategoryDesc:""}
+          {this.state.previewPI.buyerCustomProductHistory.gsm? this.state.previewPI.buyerCustomProductHistory.gsm:""}</span></p>
       
     </>
     :
@@ -544,28 +563,30 @@ export class PreviewInvoice extends Component {
     <p className="RAcss">- Reed Count : <span className="rcred wraptext">{this.state.buyerCustomProduct.reedCount?this.state.buyerCustomProduct.reedCount.count:"NA"}</span></p>
      <p>-Weight :</p>
      <div className="sbred wraptext">
-     {this.state.buyerCustomProduct.productCategory.productDesc}: {this.state.buyerCustomProduct.weight?this.state.buyerCustomProduct.weight:"NA"} <br/>
+     {this.state.buyerCustomProduct.productCategory?this.state.buyerCustomProduct.productCategory.productDesc:""}: {this.state.buyerCustomProduct.weight?this.state.buyerCustomProduct.weight:"NA"} <br/>
         
      {this.state.buyerCustomProduct.relProduct.length > 0?
         <>  
-        {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].weight !=null?this.state.buyerCustomProduct.relProduct[0].weight:"NA"}</>
+        {this.state.buyerCustomProduct.relProduct[0].productType?this.state.buyerCustomProduct.relProduct[0].productType.productDesc:""}: {this.state.buyerCustomProduct.relProduct[0].weight !=null?this.state.buyerCustomProduct.relProduct[0].weight:"NA"}</>
           :
 
           ""}
      </div>
      <p>-Dimension :</p>
      <div className="sbred wraptext">
-     {this.state.buyerCustomProduct.productCategory.productDesc}: XYZ <br/>
+     {this.state.buyerCustomProduct.productCategory?this.state.buyerCustomProduct.productCategory.productDesc:""}: XYZ <br/>
     
      {this.state.buyerCustomProduct.relProduct.length > 0?
-        <>  {this.state.buyerCustomProduct.relProduct[0].productType.productDesc}: {this.state.buyerCustomProduct.relProduct[0].length?this.state.buyerCustomProduct.relProduct[0].length:""} 
-        {this.state.buyerCustomProduct.relProduct[0].length && this.state.buyerCustomProduct.relProduct[0].width?"x":"" } {this.state.buyerCustomProduct.relProduct[0].width?this.state.buyerCustomProduct.relProduct[0].width:""}</>
+        <>  {this.state.buyerCustomProduct.relProduct[0].productType?this.state.buyerCustomProduct.relProduct[0].productType.productDesc:""}: 
+        {this.state.buyerCustomProduct.relProduct[0].length?this.state.buyerCustomProduct.relProduct[0].length:""} 
+        {this.state.buyerCustomProduct.relProduct[0].length && this.state.buyerCustomProduct.relProduct[0].width?"x":"" } 
+        {this.state.buyerCustomProduct.relProduct[0].width?this.state.buyerCustomProduct.relProduct[0].width:""}</>
           :
           
           ""}
 
      </div>
-     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc} XYZ</span></p>
+     <p>-GSM Value : <span className="rcred">{this.state.buyerCustomProduct.productCategory.productDesc?this.state.buyerCustomProduct.productCategory.productDesc:""} XYZ</span></p>
      
     </>
     }
@@ -574,13 +595,13 @@ export class PreviewInvoice extends Component {
         </>
 }
      <td >
-     <p className="snopi wraptext">{this.state.previewPiOrder.hsn}</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder?this.state.previewPiOrder.hsn:""}</p>
      </td>
      <td >
-     <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
+     <p className="snopi wraptext">{this.state.previewPiOrder?this.state.previewPiOrder.quantity:""}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder?this.state.previewPiOrder.ppu:""}</p>
      </td>
      <td>
      <p className="snopi wraptext">₹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>

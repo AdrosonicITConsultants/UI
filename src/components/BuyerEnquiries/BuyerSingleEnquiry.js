@@ -334,6 +334,14 @@ export class BuyerSingleEnquiry extends Component {
         });    
     }
     
+    gotoOrders(){
+        browserHistory.push("/buyerorder?code="+this.state.enquiryCode);
+    }
+
+    gotoTransaction(){
+        browserHistory.push("/buyerTransactionList")
+    }
+
     savePIDetails(){
         if(this.state.quantity &&  this.state.dod && this.state.rpu && this.state.hsncode&& this.state.cgst&& this.state.sgst){
             if(document.getElementById('agree').checked){
@@ -1276,7 +1284,46 @@ MoqSimpleProductSelected(moqId){
                                     
                     </Col>
                 </Row>
-           
+                {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
+                <>
+                    <Row >
+                    <Col className="col-xs-11 text-right">
+
+                {item.openEnquiriesResponse.enquiryStageId>=3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                </Col>
+                <Col className="col-xs-1 text-right"></Col>
+                </Row>
+                </>
+                :
+                                <Row >
+
+                                    <Col className="col-xs-11 text-right">
+                                    {
+                                    // item.openEnquiriesResponse.enquiryStageId===4?
+                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5?
+                                    <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
+                                    :
+                                    item.openEnquiriesResponse.enquiryStageId >=4?
+                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}> <img
+                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                    src={logos.receipticon}
+                                  ></img> Go to Order</button>
+                                    :
+                                    ""
+                                    }
+                                    </Col>
+                                    <Col className="col-xs-1 text-right"></Col>
+
+                                </Row>
+    }
                 </>
                 )}
                     </>

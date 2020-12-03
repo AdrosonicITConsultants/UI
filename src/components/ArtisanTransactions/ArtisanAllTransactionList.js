@@ -33,7 +33,7 @@ class ArtisanAllTransactionList extends Component {
         this.setState({Recent:true})
     }        
     backoperation(){
-        browserHistory.push("/home"); 
+        browserHistory.goBack(); 
     }
     
     render() {

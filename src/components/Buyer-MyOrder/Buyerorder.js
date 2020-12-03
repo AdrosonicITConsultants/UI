@@ -360,7 +360,8 @@ export class Buyerorder extends Component {
         });
         }
         backoperation(){
-            browserHistory.push("/buyerOrders"); 
+            // browserHistory.push("/buyerOrders"); 
+            browserHistory.goBack(); 
         } 
         handleCluster(e) {
 

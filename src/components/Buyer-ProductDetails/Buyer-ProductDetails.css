@@ -46,7 +46,9 @@
 }
 
 .likeitbg {
-  background: url('../../assets/Like\ it\ backdrop.svg');
+  /* background: url('../../assets/Like\ it\ backdrop.svg'); */
+  background-color: rgb(35, 82, 124);
+    background-image: linear-gradient(to right, #03202e , rgb(35, 82, 124));
     background-repeat: no-repeat;
     background-size: cover;
     /* background-position: center; */
@@ -62,6 +64,7 @@
   color: white;
   letter-spacing: 1px;
   font-weight: 800;
+  font-family: 'Playfair Display'
 }
 .BPDmarginright{
   border-right: 1px solid;
@@ -158,8 +161,11 @@ scroll-behavior: smooth;
   text-align: center;
   font-weight: 600;
   color: rgba(51, 51, 51, 0.84);
-  font-size: 18px;
-  margin-bottom: 40px;
+  font-size: 20px;
+  margin-bottom: 31px;
+  padding: 20px 0px 0px 0px;
+  color: rgb(40 96 144);
+
 }
 
 .backtotopbdp{

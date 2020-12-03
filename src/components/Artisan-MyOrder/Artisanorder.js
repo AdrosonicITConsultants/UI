@@ -1943,7 +1943,8 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     <ArtisanTaxInvoice
                                     enquiryId={this.state.enquiryCode}
                                     enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
-                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice} />
+                                    BuyerPreviewInvoice={this.state.BuyerPreviewInvoice} 
+                                    CR={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}/>
                                     </Col>
                                     </>
                                     :null

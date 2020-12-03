@@ -46,14 +46,11 @@ export class BuyerOngoingOrder extends Component {
 
     }
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
+
         this.setState({
-            // [name]: value,
             deliveredDate: date,
             showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false
         },()=>{
-            console.log( this.state.deliveredDate)
         });
     }
     handleChange(e) {
@@ -1736,8 +1733,10 @@ export class BuyerOngoingOrder extends Component {
                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
-                            <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">
-                                show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
+                            <button  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore showmorebtncss">
+                                show more details
+                                <i class="fa fa-angle-double-right" style={{fontSize:"15px",padding:"0px 0px 0px 12px"}}></i>
+                                </button>
                         </Col>
                     </Row>
                     : null }

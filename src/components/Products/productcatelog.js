@@ -23,14 +23,9 @@ class productcatelog extends Component {
    
     TTCEapi.getArtitionProducts().then((response) => {
       if (response.data.data != null){
-        console.log(response.data.data);
-        this.setState({ ProductListArtist: response.data.data }, () => { console.log(this.state) })
+        this.setState({ ProductListArtist: response.data.data }, () => {})
       }    
-      //  this.setState({
-      //   ProductList: response.data.data
-      // },() =>{
-      //  console.log(this.state);
-      // })
+     
     }
       );
     

@@ -126,7 +126,6 @@ export default class buyreg2 extends Component {
               <div className="form-group col-xs-10">
                 <label className="control-label"></label>
                 <div className="inner-addon left-addon">
-                  {/* <i className="glyphicon glyphicon-user"></i> */}
                   <input
                     type="password"
                     id="password"
@@ -207,16 +206,7 @@ export default class buyreg2 extends Component {
               </div>
             </Row>
 
-            {/* <Row   className="text-center line6 font3">
-              Change language
-              <img src={logos.language} className="ml-5"></img>
-            </Row> */}
-
-            {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
+           
             <br></br>
           </div>
         </Col>

@@ -69,7 +69,6 @@ class ArtistProfile extends Component {
   
       }
       componentDidMount(){
-        console.log("dsds");
         TTCEapi.getProducts().then((response)=>{
             this.setState({products : response.data.data},() => {
             });
@@ -80,8 +79,7 @@ class ArtistProfile extends Component {
                     if(response.data.data.userProductCategories.length != 0)
                     {   var prodselected = "";
                       for (var  items in response.data.data.userProductCategories)
-                      {     console.log(response.data.data.userProductCategories[items]);
-                        // document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
+                      { 
                         prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
                       }
                       this.setState({
@@ -98,7 +96,6 @@ class ArtistProfile extends Component {
                 this.setState({
                     profilePic : profilePic,
                 });
-                console.log(profilePic);
             }
             if(response.data.data.user.rating != null){
                 this.setState({ rating : parseFloat(response.data.data.user.rating) },()=>{
@@ -113,10 +110,8 @@ class ArtistProfile extends Component {
 
                 for (var  items in response.data.data.user.paymentAccountDetails)
                 {
-                    console.log(response.data.data.user.paymentAccountDetails[items].accountType.id);
                     switch(response.data.data.user.paymentAccountDetails[items].accountType.id){
                         case 1:
-                            console.log("bank");   
                             this.setState({
                                 accountno : parseInt(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile),
                                 bankname : response.data.data.user.paymentAccountDetails[items].bankName ,
@@ -126,7 +121,6 @@ class ArtistProfile extends Component {
                             }); 
                             break;
                         case 2:
-                            console.log("gpayy");
                             if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                             
                                 this.setState({
@@ -136,7 +130,6 @@ class ArtistProfile extends Component {
                             
                             break;
                         case 3:
-                            // console.log(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile);
                             if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                             
                             this.setState({
@@ -145,7 +138,6 @@ class ArtistProfile extends Component {
                         }
                             break;
                         case 4:
-                            console.log("paytm");
                             if(response.data.data.user.paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                                           
                                 this.setState({
@@ -159,15 +151,13 @@ class ArtistProfile extends Component {
                 
 
             }
-            // console.log("hfjdfink");
-            // console.log(response.data.data.user.companyDetails != null)
+          
             if(response.data.data.user.companyDetails != null){
                 if(response.data.data.user.companyDetails.logo != null){
                     var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
                     this.setState({
                         brandPic : brandPic,
                     });
-                    console.log(brandPic);
 
                 }
                 this.setState({
@@ -208,11 +198,8 @@ class ArtistProfile extends Component {
                 state :response.data.data.user.addressses[0].state ,
             })
             }
-            // console.log(response.data.data.user.addressses[0].district);
 
           }, () =>{
-            //   console.log("hdsdj");
-            // console.log(this.state);
             
           })
       }
@@ -358,9 +345,8 @@ class ArtistProfile extends Component {
           },()=>{
             TTCEapi.getProfile().then((response)=>{
               for (var  items in response.data.data.userProductCategories)
-                        {     console.log(response.data.data.userProductCategories[items]);
+                        {    
                           document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
-                          // prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
                         }
 
             })
@@ -373,18 +359,13 @@ class ArtistProfile extends Component {
                   this.state.selectedprods.push(item.id)
                   productSelected = productSelected + item.productDesc + ", "; 
                   }  
-              // console.log(this.state.selectedprods) ;
-              // this.setState({
-              //     prodsel : productSelected
-              // });
-              // document.getElementById("prodselected").innerHTML = productSelected;
+              
           }); 
           
             
               this.setState({
                 prodsel : productSelected
             },()=>{
-                console.log(this.state.selectedprods) ;
                 TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo).then((response)=>{
                   if (response.data.valid) {
                     customToast.success("Brand data updated !", {
@@ -464,8 +445,7 @@ class ArtistProfile extends Component {
         
       }
       handleDetail(){
-        console.log("hdsdj");
-        console.log(this.state);
+     
         this.setState({
             isProfile:!this.state.isProfile
         })
@@ -482,19 +462,12 @@ class ArtistProfile extends Component {
                   });
                 return ;
               }
-              // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-              //   customToast.error("Image name contains special characters.", {
-              //     position: toast.POSITION.TOP_RIGHT,
-              //     autoClose: true,
-              //   });
-              //   return;
-              // }
+              
           this.setState({
             selectedFile: event.target.files[0],
             removedprofile :2 ,
             
           },()=>{
-            console.log(this.state);
           });
 
           let reader = new FileReader();
@@ -505,7 +478,6 @@ class ArtistProfile extends Component {
               //  selectedFile: { ...this.state.selectedFile },
               imagePreviewUrl: imagebytes,
             },()=>{
-                  console.log(this.state);
             });
           };
           if (event.target.files[0]) {
@@ -526,19 +498,12 @@ class ArtistProfile extends Component {
               });
             return ;
           }
-          // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-          //   customToast.error("Image name contains special characters.", {
-          //     position: toast.POSITION.TOP_RIGHT,
-          //     autoClose: true,
-          //   });
-          //   return;
-          // }
+        
         this.setState({
           selectedBrandFile: event.target.files[0],
           removedlogo: 2
         },()=>{
-          console.log("change brand img");
-          console.log(this.state);
+        
         });
 
         let reader = new FileReader();
@@ -549,7 +514,6 @@ class ArtistProfile extends Component {
           //  selectedFile: { ...this.state.selectedFile },
             imagePreviewUrl2: imagebytes,
           },()=>{
-              console.log(this.state);
           });
         };
         if (event.target.files[0]) {

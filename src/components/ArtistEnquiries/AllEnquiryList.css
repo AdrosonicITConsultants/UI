@@ -119,9 +119,17 @@ font-size: 13px;
 
 .leEnqshowmore{
     cursor: pointer;
-    color: black!important;
+    color: #B9005C!important;
     margin-bottom: 6px;
-    font-size: 15px;
+    font-size: 17px;
+    padding: 3px 25px 3px 25px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+.showmorebtncss{
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid;
 }
 .showmorearrow{
     width:13px;

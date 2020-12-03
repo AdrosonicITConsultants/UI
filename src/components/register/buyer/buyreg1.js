@@ -7,7 +7,6 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { memoryHistory, browserHistory } from "../../../helpers/history";
-
 import TTCEapi from '../../../services/API/TTCEapi';
 
 toast.configure()
@@ -25,8 +24,6 @@ export default class buyreg1 extends Component {
                  }
                  SendOtp() {
                    const emailcheck = isEmail;
-
-                   // validator.isEmail(this.state.emailid);
                    if (
                      this.state.emailid == "" ||
                      !emailcheck(this.state.emailid)
@@ -45,7 +42,6 @@ export default class buyreg1 extends Component {
                        () => this.setState({ isButtonDisabled: false }),
                        10000
                      );
-                     // toast.success("OTP sent successfully.",{position:toast.POSITION.TOP_CENTER})
                    }
                  }
                  operation() {
@@ -69,7 +65,6 @@ export default class buyreg1 extends Component {
 
                  backoperation() {
                    browserHistory.push("/");
-                   // this.props.handler(0);
                  }
 
                  handleChange(e) {
@@ -164,7 +159,6 @@ export default class buyreg1 extends Component {
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
                                <div className="inner-addon ">
-                                 {/* <i className="glyphicon glyphicon-user"></i> */}
                                  <input
                                    type="email"
                                    id="emailid"
@@ -202,7 +196,6 @@ export default class buyreg1 extends Component {
                              <div className="form-group col-xs-10 ">
                                <label className="control-label"></label>
                                <div className="inner-addon ">
-                                 {/* <i className="glyphicon glyphicon-user"></i> */}
                                  <input
                                    type="number"
                                    id="otppin"
@@ -262,16 +255,7 @@ export default class buyreg1 extends Component {
                              </div>
                            </Row>
 
-                           {/* <Row   className="text-center line6 mt37">
-              Change language
-              <img src={logos.language} className="ml-5"></img>
-            </Row> */}
-
-                           {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
+                          
                            <br></br>
                          </div>
                        </Col>

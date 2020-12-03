@@ -32,7 +32,7 @@ class artreg5 extends Component {
                  operation() {
                    debugger;
                    if(document.getElementById('agree').checked){
-                    {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)}   console.log(this.state.selectedprods) }  )     }
+                    {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)} }  )     }
                       this.props.cr(this.state.selectedprods,this.state.selectedFile);
                      
                    }
@@ -41,7 +41,6 @@ class artreg5 extends Component {
                          position: toast.POSITION.TOP_RIGHT,
                          autoClose: true,
                        });
-                  //  alert("Please agree to T&C");
                    }
                  }
 
@@ -55,7 +54,6 @@ class artreg5 extends Component {
                     TTCEapi.getProducts().then((response)=>{
                       this.setState({products : response.data.data},() => {
                         
-                        console.log(this.state.products[0].productDesc);
                       });
           
                   });
@@ -65,7 +63,6 @@ class artreg5 extends Component {
                   let filename = event.target.files[0];
 
                   if (filename != undefined) {
-                    //  filename.name = filename.name.replace(/\s/g, '');
                       if (filename.size / 1024 / 1024 > 1) {    
                           customToast.error("Please upload product image below 1MB.", {
                             position: toast.POSITION.TOP_RIGHT,
@@ -73,17 +70,10 @@ class artreg5 extends Component {
                           });
                         return ;
                       }
-                      // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-                      //   customToast.error("Image name contains special characters.", {
-                      //     position: toast.POSITION.TOP_RIGHT,
-                      //     autoClose: true,
-                      //   });
-                      //   return;
-                      // }
+                    
                    this.setState({
                      selectedFile: event.target.files[0],
                    },()=>{
-                     console.log(this.state);
                    });
 
                    let reader = new FileReader();
@@ -91,10 +81,8 @@ class artreg5 extends Component {
                    reader.onloadend = () => {
                    let imagebytes = reader.result;               
                      this.setState({
-                      //  selectedFile: { ...this.state.selectedFile },
                        imagePreviewUrl: imagebytes,
                      },()=>{
-                          console.log(this.state);
                      });
                    };
                    if (event.target.files[0]) {
@@ -119,17 +107,7 @@ class artreg5 extends Component {
                    });
                  }
 
-                //  handleProductSelect = () => {
-                //   this.state.products.map((item) => { 
-                //     if(document.getElementById(item.id).checked){ 
-                //       this.state.selectedprods.push(item.id);
-                //       console.log(this.state.selectedprods);
-                //       // localStorage.setItem("regSelectedProducts", this.state.selectedprods);
-                //     }   
-                //  });     
-                  
-                //  }
-
+               
                  render() {
                      let $imagePreview = (
                        <img
@@ -235,7 +213,6 @@ class artreg5 extends Component {
                            <br></br>
                            <Row>
                              <div className="col-xs-12">
-                               {/* <div className="col-md-4"></div> */}
                                {$imagePreview}
                                <input
                                  accept="image/png, image/jpeg"
@@ -244,7 +221,6 @@ class artreg5 extends Component {
                                  ref="fileUploader"
                                  style={{ display: "none" }}
                                ></input>
-                               {/* <Avtar style={{marginLeft:"50px"}} className="col-md-4"></Avtar> */}
                              </div>
                            </Row>
                            <hr className="hrline2"></hr>

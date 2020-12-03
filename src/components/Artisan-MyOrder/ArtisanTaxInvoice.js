@@ -111,30 +111,22 @@ import ModernDatepicker from 'react-modern-datepicker';
     handleChange(e) {
         const { name, value } = e.target;
         this.setState({ [name]: value,showValidationMoq: false ,showDeliveryValidation:false,showValidationPi:false}, () => {
-            console.log( this.state.orderDispatchDate,
-                this.state.eta)
+           
         });
        
     }
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             orderDispatchDate: date,
         },()=>{
-            console.log( this.state.orderDispatchDate)
         });
     }
 
     handleChangeDate2(date) {
-        console.log(date)
-        // const { name, value } = date.target;
+       
         this.setState({
-            // [name]: value,
             eta: date,
         },()=>{
-            console.log( this.state.orderDispatchDate,this.state.eta)
         });
     }
     bp(){
@@ -333,6 +325,8 @@ componentDidMount(){
                     selectedFileName={this.state.selectedFileName}
                     taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                     advancePaidAmt={this.state.advancePaidAmt}
+                    CR={this.props.CR}
+
                    />
                 :
                 <Row noGutters={true}>
@@ -348,7 +342,7 @@ componentDidMount(){
                 <>
                 
                 <>
-                {console.log("old data present")}
+                {/* {console.log("old data present")} */}
                 {this.state.dataload?
                 <>
                 {this.state.taxInvoiceGenerated?
@@ -373,6 +367,7 @@ componentDidMount(){
                  selectedFileName={this.state.selectedFileName}
                  taxInvoiceGenerated={this.state.taxInvoiceGenerated}
                  advancePaidAmt={this.state.advancePaidAmt}
+                 CR={this.props.CR}
 
                 />
                 {/* <PreviewTaxInvoice
@@ -424,7 +419,7 @@ selectedFile={this.state.selectedFile}
 selectedFileName={this.state.selectedFileName}
 taxInvoiceGenerated={this.state.taxInvoiceGenerated}
 advancePaidAmt={this.state.advancePaidAmt}
-
+CR={this.props.CR}
 />
 </>
 :

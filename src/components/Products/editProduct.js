@@ -122,7 +122,6 @@ const initialState = {
                    });
                  };
                  componentDidMount() {
-                   console.log("did mount");
                    this.myRefAddPhoto.current.scrollIntoView({
                      behavior: "smooth",
                      block: "center",
@@ -147,8 +146,7 @@ const initialState = {
                           this.setState({productid :params.ProductId },()=>{
      
                           })
-                          console.log('heree');
-                          console.log( response.data);
+
                           let productData =  response.data.data;
                           this.setProduct(productData);
                       })
@@ -158,7 +156,6 @@ const initialState = {
                     
                    }
                    else {
-                     console.log("inelse");
                      TTCEapi.getProductUploadData().then((response) => {
                        debugger;
                        this.setState(
@@ -178,8 +175,6 @@ const initialState = {
                            this.setState({productid :params.ProductId },()=>{
       
                            })
-                           console.log('heree');
-                           console.log( response.data);
                            let productData =  response.data.data;
                            this.setProduct(productData);
                        })
@@ -220,7 +215,6 @@ const initialState = {
                     (myBase64) => {
                       let filename = {};
                       filename.name = img.lable;
-                    // console.log(myBase64); // myBase64 is the base64 string
                       this.setState({
                         ["imagePreviewUrl" + (index + 1)]: myBase64,
                         isImageUploadComplete: true,
@@ -243,10 +237,8 @@ const initialState = {
                 let productWeavesIds = productData.productWeaves.map(
                   (e) => e.weaveId
                 );
-                console.log(productWeavesIds);
 
                 let { weaves } = this.state;
-                console.log(weaves);
                 productWeavesIds.map((id) => {
                   weaves[id - 1].isChecked = true;
                   this.setState({
@@ -269,7 +261,6 @@ const initialState = {
                 ];
                 for(var  i=0; i < productData.productCares.length; i++ )
                 { wareAndCare1[productData.productCares[i].productCareId].isChecked = true;
-                  console.log(productData.productCares[i].productCareId);
                 }
                     this.setState(
                       {
@@ -301,9 +292,7 @@ const initialState = {
 
                       },
                       () => {
-                        // console.log("after all basic setup");
-
-                        // console.log(this.state);
+      
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
                             debugger;
@@ -315,8 +304,6 @@ const initialState = {
                                 productTypeName: item.productDesc,
                               },
                               () => {
-                                // console.log(this.state);
-
                                 this.state.productTypes.filter((item) => {
                                   if (item.id == this.state.productType) {
                                     if (item.relatedProductType.length != 0) {
@@ -333,9 +320,7 @@ const initialState = {
                                           ),
                                         },
                                         () => {
-                                          //  console.log("after related");
-
-                                          //  console.log(this.state);
+                                   
                                           if (productData.relProduct.length > 0) {
                                             this.setState({
                                               length: productData.length,
@@ -375,7 +360,6 @@ const initialState = {
                                           savedrelatedProduct: [],
                                         },
                                         () => {
-                                          //  console.log(this.state);
                                         }
                                       );
                                     }
@@ -431,12 +415,10 @@ const initialState = {
                   
                   }
                  handleproductCategories(e) {
-                   // console.log(e.target.id);
-                  
+              
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                   console.log(option);
 if(optionElement.innerHTML == "Fabric"){
   this.setState({ showGSM: true});
 }
@@ -466,8 +448,7 @@ if (option == -1){
 }
 else {
   this.setState({ [e.target.name]: parseInt(option) }, () => {
-    console.log(this.state);
-  
+ 
 
     this.state.productCategories.filter((item) => {
       if (item.id == this.state.productCategorie) {
@@ -496,9 +477,7 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                 //  console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleproductTypes(e) {
@@ -506,7 +485,6 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                  // console.log(option);
                    this.setState(
                      {
                        [e.target.name]: parseInt(option),
@@ -534,7 +512,6 @@ else {
                                  ),
                                },
                                () => {
-                                // console.log(this.state);
                                }
                              );
                            } else {
@@ -548,7 +525,6 @@ else {
                                  savedrelatedProduct: [],
                                },
                                () => {
-                                  // console.log(this.state);
                                }
                              );
                            }
@@ -562,12 +538,10 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
-                  // console.log(option);       
                    if (option != -1)
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                      //  console.log(this.state);
                      
                         this.setState(
                           {
@@ -596,9 +570,7 @@ else {
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
-                //   console.log(option);
                    this.setState({ [e.target.name]: parseInt(option) }, () => {
-                //     console.log(this.state);
                    });
                  }
                  handleDropdownCountOfYarn(e)
@@ -607,9 +579,7 @@ else {
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
-                   // console.log(option);
                     this.setState({ [e.target.name]: option }, () => {
-                  //    console.log(this.state);
                     });
                   }
                  handleChange(e) {
@@ -702,7 +672,6 @@ else {
                              isImageUploadComplete: true,
                            },
                            () => {
-                          //   console.log(this.state);
                            }
                          );
                        };
@@ -818,7 +787,6 @@ else {
                   var index = e.target.selectedIndex;
                   var optionElement = e.target.childNodes[index];
                   var option = optionElement.getAttribute("id");
-                  //console.log(option);
 
 
                   let relatedProductTemp = this.state.savedrelatedProduct.find(
@@ -827,16 +795,9 @@ else {
                   relatedProductTemp[e.target.name] = option;
 
                   this.setState({ savedrelatedProduct: [...this.state.savedrelatedProduct] }, () => {
-                    //console.log(this.state);
                   });
 
 
-                  // let relatedProduct = [];
-                  // relatedProduct.Length  .e.target;
-
-                  //  this.setState({ [e.target.name]: parseInt(option) }, () => {
-                  //    console.log(this.state);
-                  //  });
                  } 
                  onselectWareAndCare = (i) => {
                    if(this.state.isEdit == true)
@@ -853,7 +814,7 @@ else {
                    this.setState({
                      wareAndCare: [...wareAndCare],
                      iswashAndCareComplete: ischecked,
-                   },()=>{console.log(this.state)});
+                   },()=>{});
                    }
                  };
                  editenabled = () =>{
@@ -1169,9 +1130,6 @@ else {
 
                       });;
 
-                    
-
-                    console.log(productData);
                  };
                  Cancel = () => {
                  
@@ -1184,7 +1142,6 @@ else {
 
                  };
                  Delete = () => {
-                  console.log(this.state.productid);
                   TTCEapi.deleteProduct(this.state.productid).then((response)=>{
                     if(response.data.valid){
                       customToast.success(this.props.t("Pages.object.Product added successfully"), {
@@ -1596,7 +1553,6 @@ else {
                                        md={{ size: "6" }}
                                        className="col-6 text-right"
                                      >
-                                       {console.log(this.state)}
                                        <select
                                          id="productCategorie"
                                          className="productDropdown"

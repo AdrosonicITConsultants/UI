@@ -789,7 +789,11 @@ export class BuyerCompletedOrder extends Component {
                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                     <Row>
                         <Col className="col-xs-12 text-center leEnqshowmore">
-                            <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a>
+                            {/* <a  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore">show more details <img src={logos.Nextarrow} className="showmorearrow"></img></a> */}
+                            <button  onClick={()=>this.individualpage(item.openEnquiriesResponse.enquiryId)} className="leEnqshowmore showmorebtncss">
+                                show more details
+                                <i class="fa fa-angle-double-right" style={{fontSize:"15px",padding:"0px 0px 0px 12px"}}></i>
+                                </button>
                         </Col>
                     </Row>
                     : null }

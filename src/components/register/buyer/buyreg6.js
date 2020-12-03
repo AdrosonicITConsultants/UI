@@ -29,9 +29,7 @@ export default class buyreg6 extends Component {
            autoClose: true,
          });
             }
-            // window.open("./", "_self"); // to redirect to login page
-            // this.props.handler(5);
-         
+          
       }
 
       backoperation() {
@@ -65,7 +63,6 @@ export default class buyreg6 extends Component {
           sociallink : this.props.sociallink,
 
          },()=>{
-          console.log(this.state);
          });
         
 
@@ -125,8 +122,7 @@ export default class buyreg6 extends Component {
                     }}
                     className="col-xs-10 ml-6"
                   >
-                    {/* <img src={logos.locklogo}   
-                    className="locklogo1 glyphicon mr-5"></img> */}
+                   
                     Enter your details to complete registration
                   </span>
                 </Row>
@@ -137,8 +133,7 @@ export default class buyreg6 extends Component {
                     style={{ fontWeight: "600" }}
                     className="col-xs-10 line32 text-center fontplay font3"
                   >
-                    {/* <img src={logos.locklogo}   
-                        className="locklogo1 glyphicon mr-5"></img> */}
+                  
                     Provide your link for web presence
                   </span>
                 </Row>
@@ -166,7 +161,6 @@ export default class buyreg6 extends Component {
                         Website Link
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="url"
                           id="weblink"
@@ -189,7 +183,6 @@ export default class buyreg6 extends Component {
                         Social mdeia Link
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="url"
                           id="sociallink"
@@ -239,8 +232,6 @@ export default class buyreg6 extends Component {
                     <button
                       className="blackButton"
                       onClick={() => this.operation()}
-                      // disabled = {this.state.checktc}
-                      // { this.state.checktc == false  ? (disabled) : () }
                     >
                       Complete
                     </button>
@@ -249,18 +240,12 @@ export default class buyreg6 extends Component {
                 <br></br>
 
                 <Row   className="mt10">
-                  {/* <span className="col-xs-1 col-md-1"></span> */}
                   <strong className="col-xs-12 text-center line7 help">
                   <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">Help?</a>
                   </strong>
                 </Row>
 
-                {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
               </div>
             </Col>
           </React.Fragment>

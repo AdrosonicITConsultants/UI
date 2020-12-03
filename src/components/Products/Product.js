@@ -12,7 +12,6 @@ import changeLang from "../../services/utils/changeLang"
  class Product extends Component {
    editProduct = (Product)=>{
      debugger;
-       console.log(Product);
      browserHistory.push("./EditProduct?ProductId=" + Product.id)
    }
    render() {

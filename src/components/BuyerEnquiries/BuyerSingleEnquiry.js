@@ -2273,12 +2273,25 @@ MoqSimpleProductSelected(moqId){
 
                                                             {this.state.proformaDetails ? 
                                                             <>
-                                                            {/* <Col sm={1}></Col> */}
+
+                                                            {this.state.getPi?
                                                             <Col sm={10}>
-                                                                <BuyerPIPrintTable 
-                                                                enquiryCode={this.state.enquiryCode} 
-                                                                enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
-                                                            </Col>
+                                                            <BuyerPIPrintTable 
+                                                            enquiryCode={this.state.enquiryCode} 
+                                                            enquiryId={this.state.getEnquiryMoq[0].openEnquiriesResponse.enquiryCode}/>
+                                                        </Col>
+                                                        :
+                                                        <Row>
+                                                        <br></br>
+                                                        <br></br>
+                                                         <br></br>   
+                                                        <Col className="col-xs-12 text-center font14">
+                                                         PI Details not Received for this product.
+                                                        </Col>
+                                                         </Row>
+                                                            }
+                                                            {/* <Col sm={1}></Col> */}
+                                                            
                                                          
                                                             </>:null}
 {/* ----------------------------------------------------------------------------------------------                   */}

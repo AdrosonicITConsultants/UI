@@ -71,14 +71,9 @@ import ModernDatepicker from 'react-modern-datepicker';
            
         }
     }
-    // const { name, value } = date.target;
-    // this.setState({ [name]: value,showValidationMoq: false ,showValidationPi:false}, () => {
-    // });
+
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             startDate:date,
             dod: date,
             showValidationMoq: false ,
@@ -596,7 +591,7 @@ import ModernDatepicker from 'react-modern-datepicker';
             getPi : response.data.data,
             quantity:response.data.data.quantity,
             rpu:response.data.data.ppu,
-            dod:response.data.data.date,
+            dod:response.data.data.expectedDateOfDelivery,
             hsncode:response.data.data.hsn,
             cgst:response.data.data.cgst,
             sgst:response.data.data.sgst,
@@ -1851,18 +1846,18 @@ import ModernDatepicker from 'react-modern-datepicker';
                                                        disabled={this.state.isPidetail}
                                                        value={this.state.dod}
                                                        name="dod"
-                                                       placeholder="Select a date"
+                                                       placeholder={this.state.dod?this.state.dod:"Select a date"}
                                                        />
                                                        :
                                                         <ModernDatepicker
                                                          className="PIinput"
-                                                        date={this.state.startDate}
+                                                        date={this.state.dod}
                                                         format={'YYYY-MM-DD'}
                                                         showBorder
                                                         value={this.state.dod}
                                                         name="dod"
                                                         onChange={date => this.handleChangeDate(date)}
-                                                        placeholder={'Select a date'}
+                                                        // placeholder={'Select a date'}
                                                     />
                                                        }
                                                        

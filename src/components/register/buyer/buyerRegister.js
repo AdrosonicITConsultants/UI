@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from 'reactstrap';
 import "./buyerRegister.css"
-// import Buyerlogin from "../../buyer/buyeruser";
 import Buyreg1 from "./buyreg1";
 import Buyreg2 from "./buyreg2";
 import Buyreg3 from "./buyreg3";
@@ -160,7 +159,6 @@ export default class buyerRegister extends Component {
                    this.setState(
                      { weblink: weblink, sociallink: sociallink },
                      () => {
-                       console.log(this.state.weblink, this.state.sociallink);
                           TTCEapi.registerBuyer(this.state.companyname,this.state.gstno,this.state.officeno,
                             this.state.brandLogo,this.state.cinno,this.state.panno,this.state.logoname,
                             this.state.adl1,this.state.adl2,this.state.street,this.state.city,
@@ -186,7 +184,6 @@ export default class buyerRegister extends Component {
                                        position: toast.POSITION.TOP_RIGHT,
                                        autoClose: true,
                                      });
-                                   // alert("please enter valid OTP.");
                                  }
                               }
                             );
@@ -217,17 +214,7 @@ export default class buyerRegister extends Component {
                        countryid: countryid,
                      },
                      () => {
-                       console.log(
-                         this.state.adl1,
-                         this.state.adl2,
-                         this.state.street,
-                         this.state.city,
-                         this.state.state,
-                         this.state.country,
-                         this.state.pincode,
-                         this.state.landmark,
-                         this.state.countryid
-                       );
+                      
                      }
                    );
                  }
@@ -254,18 +241,7 @@ export default class buyerRegister extends Component {
                        pocname : pocname
                      },
                      () => {
-                       console.log(
-                         this.state.companyname,
-                         this.state.gstno,
-                         this.state.officeno,
-                         this.state.brandLogo,
-                         this.state.cinno,
-                         this.state.panno,
-                         this.state.logoname,
-                         this.state.pocmobile,
-                         this.state.pocemail,
-                         this.state.pocname
-                       );
+                      
                      }
                    );
                  }
@@ -285,35 +261,24 @@ export default class buyerRegister extends Component {
                        designation: designation,
                      },
                      () => {
-                       console.log(
-                         this.state.firstname,
-                         this.state.lastname,
-                         this.state.mobileno,
-                         this.state.alternatemobno,
-                         this.state.designation
-                       );
+                     
                      }
                    );
                  }
                  storepassword(password) {
                    this.setState({ password: password },() =>{ 
-                      console.log(this.state);
                    });
-                  //  console.log(password);
                  }
                
                  
                  handler(num) {
                    this.setState({ userpage: num }, () => {
-                     console.log(this.state.userpage);
                    });
                  }
                  sendotp(emailid) {                
-                   console.log(emailid);               
-                  //  debugger;
+                 
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
-                      //  debugger;
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -330,10 +295,8 @@ export default class buyerRegister extends Component {
                  }
 
                  verifyOtp(emailid, otppin) {
-                  //  debugger;
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                      //  debugger;
                        if (response.data.valid) {
                          this.handler(1);
                        } else {
@@ -341,7 +304,6 @@ export default class buyerRegister extends Component {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: true,
                           });
-                         // alert("please enter valid OTP.");
                        }
                      });
                    });

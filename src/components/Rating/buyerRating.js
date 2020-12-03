@@ -44,7 +44,6 @@ export default class BuyerRating extends Component {
     }
 
     foundUnsual(id){
-        console.log('clicked');
         browserHistory.push("/completedorderfaulty?orderid="+id)
     }
 
@@ -55,25 +54,19 @@ export default class BuyerRating extends Component {
 
     getRatingId = (id) => {
         this.state.newRatingId = id;
-        console.log(id);
     }
 
     daysleftrating (name,days) {
-        console.log(name,days);
         var someDate = new Date(name);
-        console.log(someDate);
         var numberOfDaysToAdd =parseInt(days);
         someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-        console.log(someDate); 
         var todayDate= new Date();
         const diffTime =  someDate - todayDate ;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-        console.log(diffDays); 
         return(diffDays);
     }
 
     ratingFunction = (newValue) => {
-        console.log(newValue * 2);
         var rating = newValue * 2;
         var object = {
             enquiryId: this.state.enquiryId,
@@ -83,7 +76,6 @@ export default class BuyerRating extends Component {
             responseComment: "",
         }
         this.state.ratingArray.push(object);
-        console.log(this.state.ratingArray);
 
         var currentArray = this.state.ratingArray;
         var newArray = [];      
@@ -95,7 +87,6 @@ export default class BuyerRating extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray);
         
         var addRate = 0;
         var newArrayLength = 0;
@@ -108,7 +99,6 @@ export default class BuyerRating extends Component {
         this.setState({
             newArrayLength: newArrayLength,
         });
-        console.log(addRate/newArrayLength);
         var averageRate = (addRate/newArrayLength).toFixed(1);
         this.setState({
             averageRate: averageRate,
@@ -142,7 +132,6 @@ export default class BuyerRating extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray);
 
         var ratingValidationFlag = false;        
         if(this.state.newArrayLength !== this.state.buyerQuestionsRatings.length) {
@@ -172,7 +161,6 @@ export default class BuyerRating extends Component {
                         autoClose: true,
                     });
                 }
-                console.log(response.data.data);
             });
         }        
     }
@@ -194,34 +182,19 @@ export default class BuyerRating extends Component {
         var enquiryData = JSON.parse(localStorage.getItem("ratingSelectedEnquirydata"));
         this.state.enquiryCode = enquiryCode;
 
-        console.log(this.state.enquiryId);
-        console.log(this.state.enquiryCode);
-
         TTCEapi.getRatingQuestions().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     buyerQuestionsComments: response.data.data.buyerQuestions.commentQuestions,
                     buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
                 });
             }
         });
-        // TTCEapi.getClosedOrder(this.state.enquiryId).then((response)=>{
-        //     if(response.data.valid)
-        //     {
-        //     this.setState({
-        //          getClosedOrder : response.data.data[0].openEnquiriesResponse,
-        //         },()=>{
-        //         console.log(this.state.getClosedOrder);
-        //     });
-        //     }
-        // });
-
+        
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     isBuyerRatingDone: response.data.data.isBuyerRatingDone,
                     buyerGivenRatingResponse: response.data.data.buyerRating,
@@ -236,8 +209,7 @@ export default class BuyerRating extends Component {
                         count = count + 1;
                     }
                 }
-                console.log(value);
-                console.log(count);
+              
                 var averageValue = (value/count).toFixed(1);
 
                 this.setState({
@@ -250,13 +222,11 @@ export default class BuyerRating extends Component {
             this.setState({
                 ProductData :response.data.data
             },()=>{
-            console.log(this.state.ProductData); 
             if(response.data.data) {
                 TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{                
                     this.setState({
                         getProductCategoryAndClusterProducts : response.data.data.products
                     },()=>{
-                        console.log(this.state.getProductCategoryAndClusterProducts);
                     });
                 });
             }            

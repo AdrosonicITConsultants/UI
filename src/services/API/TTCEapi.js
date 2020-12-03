@@ -60,7 +60,6 @@ class TTCEapi {
   static validatePass(pass) {
     const re = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g);
     const isOk = re.test(pass);
-    // console.log(isOk);
     if (!isOk) {
       customToast.error(
         "Please enter valid password with 8 characters.It should contain at least 1 Capital alphabet, number and special character.",
@@ -77,11 +76,9 @@ class TTCEapi {
     if(receiptId!=null){
       let url = ApiUrl + "/enquiry/getReceipt?receiptId="+receiptId;
     
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -91,11 +88,9 @@ class TTCEapi {
     else{
       let url = ApiUrl + "/enquiry/getReceipt?challanId="+challanId;
     
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -119,7 +114,6 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -141,7 +135,6 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -170,7 +163,6 @@ class TTCEapi {
         if (response.data.valid) {
           var language = localStorage.getItem("i18nextLng");
           var skipVideo = localStorage.getItem("skipVideo");
-          console.log(language);
           localStorage.clear();
           sessionStorage.clear();
           // remove user from local storage to log user out
@@ -184,7 +176,6 @@ class TTCEapi {
           localStorage.setItem("skipVideo", skipVideo);
           setAuthorizationtoken(token);
 
-          //  console.log(jwt.decode(token));
         }
         return response;
       })
@@ -207,7 +198,6 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -234,7 +224,6 @@ class TTCEapi {
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -259,19 +248,15 @@ class TTCEapi {
    return axios
      .post(url, data, config)
      .then((response) => {
-      console.log("efjjfi");
-       console.log(response);
        return response;
      })
      .catch((error) => {
-      console.log("efwdwdwdjjfi");
        return error.response;
 
      });
  }
   static editProduct(file1, file2 = null, file3 = null, productData) {
     debugger;
-    console.log(productData);
     let url = ApiUrl + "/product/edit/product";
     var data = new FormData();
     data.append("file1", file1);
@@ -286,7 +271,6 @@ class TTCEapi {
     return axios
       .put(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -308,12 +292,10 @@ class TTCEapi {
         "Content-type": "multipart/form-data",
       },
     };
-    console.log(data);
-    console.log(productData);
+   
     return axios
       .put(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -330,7 +312,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -344,7 +325,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -358,7 +338,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -372,7 +351,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -386,7 +364,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -400,7 +377,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -416,7 +392,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -431,7 +406,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -445,7 +419,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -453,13 +426,11 @@ class TTCEapi {
       });
   }
   static getProductCategoryProducts(id) {
-    console.log(id);
     let url = ApiUrl + "/product/getProductCategoryProducts/" + id;
 
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -468,13 +439,11 @@ class TTCEapi {
   }
 
   static getClusterProducts(id) {
-    console.log(id);
     let url = ApiUrl + "/product/getClusterProducts/" + id;
 
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -483,13 +452,11 @@ class TTCEapi {
   }
 
   static getArtisianProducts(id) {
-    console.log(id);
     let url = ApiUrl + "/product/getProductByArtisan/" + id;
 
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -497,7 +464,6 @@ class TTCEapi {
       });
   }
   static getArtisianProductCategory(userid, categoryid) {
-    console.log(userid, categoryid);
     let url =
       ApiUrl +
       "/product/getProductCategoryAndArtisanProducts/" +
@@ -508,7 +474,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -522,7 +487,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -536,7 +500,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -551,7 +514,6 @@ class TTCEapi {
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -565,7 +527,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -578,7 +539,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -593,7 +553,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -608,21 +567,18 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   } 
-  // /enquiry/getAllRefBuyerReview
   static getAllRefBuyerReview() {
     let url = ApiUrl + "/enquiry/getAllRefBuyerReview";
 
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -636,7 +592,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -651,14 +606,12 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/faultyOrderBuyer/1699/Nothing/1%2C3 
   static sendFaultyOrder(id,desc,select) {
     let url = ApiUrl + "/enquiry/faultyOrderBuyer/"+id+"/"+desc+"/"+select;
     var config = {
@@ -668,7 +621,6 @@ class TTCEapi {
     return axios
       .post(url,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       
@@ -676,7 +628,6 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/isResolved/1706
   static isResolved(id) {
     let url = ApiUrl + "/enquiry/isResolved/"+id;
     var config = {
@@ -686,7 +637,6 @@ class TTCEapi {
     return axios
       .post(url,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       
@@ -700,14 +650,12 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/faultyOrderArisan/1758/abcdefgh/1
   static sendFaultyOrderArtisan(id,desc,select) {
     let url = ApiUrl + "/enquiry/faultyOrderArisan/"+id+"/"+desc+"/"+select;
     var config = {
@@ -717,7 +665,6 @@ class TTCEapi {
     return axios
       .post(url,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       
@@ -731,7 +678,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -744,7 +690,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -758,7 +703,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -772,7 +716,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -787,7 +730,6 @@ class TTCEapi {
     return axios
       .delete(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -797,26 +739,21 @@ class TTCEapi {
   
   static addToWishlist(productId) {
     let url = ApiUrl + "/product/addToWishlist/" + productId;
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-    // /enquiry/MoqSelected/1550/39/10
 
   static MoqSelected(enquiryId,moqId,artisanId) {
     let url = ApiUrl + "/enquiry/MoqSelected/"+enquiryId+"/"+moqId +"/"+artisanId;
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -824,14 +761,11 @@ class TTCEapi {
       });
   }
 
-  // /enquiry/getCurrencySigns
   static getCurrencySigns() {
     let url = ApiUrl + "/enquiry/getCurrencySigns";
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -839,57 +773,45 @@ class TTCEapi {
       });
   }
 
-  // /enquiry/MoqSimpleProductSelected/1550/39
   static MoqSimpleProductSelected(enquiryId,moqId) {
     let url = ApiUrl + "/enquiry/MoqSimpleProductSelected/"+enquiryId+"/"+moqId;
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/previewPI/{enquiryId}?enquiryId=1106
 
   static previewPI(enquiryId) {
     let url = ApiUrl + "/enquiry/previewPI/" +enquiryId;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/fetchEnquiryAndPaymentDetails?enquiryId=1550
   static fetchEnquiryAndPaymentDetails(enquiryId) {
     let url = ApiUrl + "/enquiry/fetchEnquiryAndPaymentDetails?enquiryId=" +enquiryId;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/generateTaxInvoicePreview
   static getMoqs(enquiryId) {
     let url = ApiUrl + "/enquiry/getMoqs/" +enquiryId;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -897,14 +819,11 @@ class TTCEapi {
       });
   }
 
-  // /transaction/getTransactionStatus
   static getTransactionStatus() {
     let url = ApiUrl + "/transaction/getTransactionStatus";
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -912,14 +831,11 @@ class TTCEapi {
       });
   }
 
-  // /transaction/getTransactionActions
   static getTransactionActions() {
     let url = ApiUrl + "/transaction/getTransactionActions";
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -927,72 +843,56 @@ class TTCEapi {
       });
   }
 
-  // /transaction/getOngoingTransaction
   static getOngoingTransaction(searchString,paymentType) {
     let url = ApiUrl + "/transaction/getOngoingTransaction/{searchString}/{paymentType}?paymentType="+ paymentType;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /transaction/getTransactions/{enquiryId}?enquiryId=1415
   static getTransactions(enquiryId) {
     let url = ApiUrl + "/transaction/getTransactions/"+enquiryId;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /transaction/notifyAgain/1828/47
   static notifyAgain(actionId,respectiveActionId) {
     let url = ApiUrl + "/transaction/notifyAgain/"+actionId+"/"+respectiveActionId;
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /transaction/getCompletedTransaction
   static getCompletedTransaction(searchString,paymentType) {
     let url = ApiUrl + "/transaction/getCompletedTransaction/{searchString}/{paymentType}?paymentType="+paymentType;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1391&status=2
-  // /enquiry/validateAdvancePaymentFromArtisan?enquiryId=1550&status=1
-  // /enquiry/validateFinalPaymentFromArtisan?enquiryId=1550&status=1
+ 
   static validateAdvancePaymentFromArtisan(enquiryId,status) {
     let url = ApiUrl + "/enquiry/validateAdvancePaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
-    console.log(url);
     return axios
       .put(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1002,11 +902,9 @@ class TTCEapi {
 
   static validateFinalPaymentFromArtisan(enquiryId,status) {
     let url = ApiUrl + "/enquiry/validateFinalPaymentFromArtisan?enquiryId="+enquiryId+"&status="+status;
-    console.log(url);
     return axios
       .put(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1016,53 +914,42 @@ class TTCEapi {
   
     static getOrder(enquiryId) {
       let url = ApiUrl + "/order/getOrder/{enquiryId}?enquiryId="+enquiryId;
-      console.log(url);
       return axios
         .get(url)
         .then((response) => {
-          console.log(response);
           return response;
         })
         .catch((error) => {
           return error.response;
         });
     }
-  // /enquiry/getChangeRequestItemTable
   static getChangeRequestItemTable() {
     let url = ApiUrl + "/enquiry/getChangeRequestItemTable";
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/generateEnquiry/41/true/Website
   static generateEnquiry(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom + "/Website";
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/ifEnquiryExists/3/true
   static ifEnquiryExists(productId,isCustom) {
     let url = ApiUrl + "/enquiry/ifEnquiryExists/" +productId +"/"+isCustom;
-    console.log(url);
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1072,11 +959,9 @@ class TTCEapi {
 
   static generateEnquiryTrue(productId,isCustom) {
     let url = ApiUrl + "/enquiry/generateEnquiry/" + productId + "/" + isCustom ;
-    console.log(url);
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1091,7 +976,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1116,7 +1000,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1135,7 +1018,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1150,7 +1032,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1158,14 +1039,12 @@ class TTCEapi {
 
       });
   }
-  ///enquiry/markOrderAsRecieved/1705/05-09-2020
   static markOrderAsRecieved(enquiryId,date) {
     let url = ApiUrl + "/enquiry/markOrderAsRecieved/"+enquiryId+"/"+date + "/0";
 
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1181,7 +1060,6 @@ class TTCEapi {
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1231,13 +1109,10 @@ class TTCEapi {
       productCategoryIds: selectedProducts,
       weaverId: weaverid,
     };
-    console.log(data1);
-    console.log(selectedFile);
-    debugger;
+
     bodyFormData.append("registerRequest", JSON.stringify(data1));
     bodyFormData.append("profilePic", selectedFile);
 
-    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1246,18 +1121,14 @@ class TTCEapi {
     return axios
       .post(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
-        debugger;
         return response;
       })
       .catch((error) => {
-        debugger;
         return error.response;
       });
   }
 
 
-  // {     "enquiryId": 698,  "type":1,    "paidAmount": 500,     "percentage": 50,     "pid": 18,     "totalAmount": 1000    }
   static advancedPayment(
     formData,
     enquiryId,
@@ -1273,7 +1144,6 @@ class TTCEapi {
     let url = ApiUrl + "/enquiry/Payment";
 
     var payment = {
-      // formData,
       enquiryId:enquiryId,
       type:parseInt(1),
       paidAmount:paidAmount,
@@ -1281,16 +1151,10 @@ class TTCEapi {
       pid:pid,
       totalAmount:parseInt(totalAmount),
     };
-    // var paymentFile=formData
     
-    console.log(JSON.stringify(payment));
-    console.log(formData);
-    // console.log(selectedFile);
-    debugger;
     bodyFormData.append("payment",JSON.stringify(payment));
     bodyFormData.append("file", formData);
 
-    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1299,12 +1163,10 @@ class TTCEapi {
     return axios
       .post(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
-        debugger;
+  
         return response;
       })
       .catch((error) => {
-        debugger;
         return error.response;
       });
   }
@@ -1332,16 +1194,10 @@ class TTCEapi {
       paidAmount:parseInt(paidAmount),
       totalAmount:parseInt(totalAmount),
     };
-    // var paymentFile=formData
-    
-    console.log(JSON.stringify(payment));
-    console.log(formData);
-    // console.log(selectedFile);
-    debugger;
+ 
     bodyFormData.append("payment",JSON.stringify(payment));
     bodyFormData.append("file", formData);
 
-    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1351,12 +1207,10 @@ class TTCEapi {
     return axios
       .post(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
-        debugger;
+       
         return response;
       })
       .catch((error) => {
-        debugger;
         return error.response;
       });
   }
@@ -1372,14 +1226,8 @@ class TTCEapi {
 
     let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId+"&orderDispatchDate="+orderDispatchDate+"%2000%3A00%3A00&ETA="+ETA;
 
-    // console.log(JSON.stringify(file));
-    console.log(formData);
-    // console.log(selectedFile);
-    debugger;
-    // bodyFormData.append("file",JSON.stringify(file));
     bodyFormData.append("file", formData);
 
-    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1388,12 +1236,9 @@ class TTCEapi {
     return axios
       .post(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
-        debugger;
         return response;
       })
       .catch((error) => {
-        debugger;
         return error.response;
       });
   }
@@ -1471,8 +1316,7 @@ class TTCEapi {
       socialMediaLink: sociallink,
       websiteLink: weblink,
     };
-    console.log(data);
-    console.log(brandLogo);
+   
     bodyFormData.append("registerRequest", JSON.stringify(data));
     bodyFormData.append("brandLogo", brandLogo);
 
@@ -1484,8 +1328,7 @@ class TTCEapi {
     return axios
       .post(url, bodyFormData, config)
       .then((response) => {
-        debugger;
-        console.log(response);
+       
         return response;
       })
       .catch((error) => {
@@ -1546,13 +1389,9 @@ class TTCEapi {
       designation: designation,
       pancard: panno,
     };
-    console.log(data);
-    console.log(selectedBrandFile);
-    console.log(removedlogo);
-
+    
     bodyFormData.append("profileDetails", JSON.stringify(data));
     if (removedlogo == 1) {
-      // bodyFormData.append('', selectedBrandFile);
       var f = new File([""], "");
       bodyFormData.append("logo", f);
       debugger;
@@ -1560,9 +1399,7 @@ class TTCEapi {
     if (removedlogo == 2) {
       bodyFormData.append("logo", selectedBrandFile);
     }
-    // bodyFormData.append('logo', selectedBrandFile);
-
-    // console.log(data);
+   
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1572,7 +1409,6 @@ class TTCEapi {
     return axios
       .put(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
         if (response.data.valid) {
           localStorage.removeItem("user");
           const user = response.data.data;
@@ -1604,20 +1440,16 @@ class TTCEapi {
       pincode: pincode,
       state: state,
     };
-    console.log(data);
-    console.log(selectedFile);
+  
     bodyFormData.append("address", JSON.stringify(data));
-    console.log(removedprofile);
     if (removedprofile == 1) {
       var f = new File([""], "");
       bodyFormData.append("profilePic", f);
-      debugger;
     }
     if (removedprofile == 2) {
       bodyFormData.append("profilePic", selectedFile);
     }
 
-    // console.log(data);
     var config = {
       headers: {
         "Content-type": "multipart/form-data",
@@ -1627,9 +1459,7 @@ class TTCEapi {
     return axios
       .put(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
         if (response.data.valid) {
-          console.log("Personal details updated");
         }
         return response;
       })
@@ -1654,16 +1484,11 @@ class TTCEapi {
       },
       productCategories: selectedprods,
     };
-    console.log(data);
-    console.log(selectedBrandFile);
-    console.log(removedlogo);
-
+  
     bodyFormData.append("editBrandDetails", JSON.stringify(data));
     if (removedlogo == 1) {
-      // bodyFormData.append('', selectedBrandFile);
       var f = new File([""], "");
       bodyFormData.append("logo", f);
-      debugger;
     }
     if (removedlogo == 2) {
       bodyFormData.append("logo", selectedBrandFile);
@@ -1678,14 +1503,11 @@ class TTCEapi {
     return axios
       .put(url, bodyFormData, config)
       .then((response) => {
-        console.log(response);
         if (response.data.valid) {
-          console.log("Brand details updated");
         }
         return response;
       })
       .catch((error) => {
-        console.log(error.response);
         return error.response;
       });
   }
@@ -1731,21 +1553,16 @@ class TTCEapi {
         },
       },
     ];
-    console.log(data);
-    // debugger;
 
     var config = {
       headers: {
         "Content-type": "application/json",
-        // "Authorization" : axios.defaults.headers.common['Authorization']
       },
     };
     return axios
       .put(url, data, config)
       .then((response) => {
-        console.log(response);
         if (response.data.valid) {
-          console.log("details updated");
         }
         return response;
       })
@@ -1753,7 +1570,6 @@ class TTCEapi {
         return error.response;
       });
   }
-  // /enquiry/saveMoq/1550
   
 
   static saveMoq(
@@ -1772,7 +1588,6 @@ class TTCEapi {
       moq: moq,
       ppu: ppu
     }
-   console.log(data)
    var config = {
     headers: {
       "Content-type": "application/json",
@@ -1781,7 +1596,6 @@ class TTCEapi {
     return axios
       .post(url,data,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1789,7 +1603,6 @@ class TTCEapi {
       });
   } 
 
-  // http://101.53.153.96:8090/enquiry/revisedPI?enquiryId=%201435
 
   static revisedPI(
     enquiryId,
@@ -1811,7 +1624,6 @@ class TTCEapi {
         quantity:quantity,
         sgst:0
       }
-     console.log(data)
      var config = {
       headers: {
         "Content-type": "application/json",
@@ -1820,7 +1632,6 @@ class TTCEapi {
       return axios
         .post(url,data,config)
         .then((response) => {
-          console.log(response);
           return response;
         })
         .catch((error) => {
@@ -1849,7 +1660,6 @@ class TTCEapi {
       quantity:quantity,
       sgst:0
     }
-   console.log(data)
    var config = {
     headers: {
       "Content-type": "application/json",
@@ -1858,7 +1668,6 @@ class TTCEapi {
     return axios
       .post(url,data,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1866,7 +1675,6 @@ class TTCEapi {
       });
   }
   
-// http://101.53.153.96:8090/enquiry/sendPi/{enquiryId}?enquiryId=1107
 
 static sendPI(
   enquiryId,
@@ -1889,7 +1697,6 @@ static sendPI(
   sgst:0
  
   }
- console.log(data)
  var config = {
   headers: {
     "Content-type": "application/json",
@@ -1898,14 +1705,12 @@ static sendPI(
   return axios
     .post(url,data,config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 } 
-// /enquiry/generateTaxInvoice
 static sendTaxInvoice(
   apr,
   cgst,
@@ -1930,7 +1735,6 @@ static sendTaxInvoice(
   sgst:sgst
  
   }
- console.log(data)
  var config = {
   headers: {
     "Content-type": "application/json",
@@ -1939,7 +1743,6 @@ static sendTaxInvoice(
   return axios
     .post(url,data,config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -1963,7 +1766,6 @@ static sendTaxInvoice(
       moq: moq,
       ppu: ppu
     }
-   console.log(data)
    var config = {
     headers: {
       "Content-type": "application/json",
@@ -1972,7 +1774,6 @@ static sendTaxInvoice(
     return axios
       .post(url,data,config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -1986,7 +1787,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
 
         return response;
       })
@@ -2003,7 +1803,6 @@ static sendTaxInvoice(
       .get(url)
       .then((response) => {
         debugger;
-        console.log(response);
         localStorage.removeItem("ProductUploadData");
         localStorage.setItem(
           "ProductUploadData",
@@ -2017,7 +1816,6 @@ static sendTaxInvoice(
       });
   }
 
-  // /enquiry/getOldPIData?enquiryId=1435
 
   static getOldPIData(enquiryId) {
     let url = ApiUrl + "/enquiry/getOldPIData?enquiryId="+enquiryId;
@@ -2025,7 +1823,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2039,7 +1836,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2053,7 +1849,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2067,7 +1862,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2079,12 +1873,10 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log("profiledata");
         localStorage.removeItem("user");
         const user = response.data.data.user;
         localStorage.setItem("user", JSON.stringify(user));
 
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2104,7 +1896,6 @@ static sendTaxInvoice(
         str: value,
       },
     };
-    console.log(config);
     const response = await axios.get(
       ApiUrl + "/search/getSuggestions",
       config
@@ -2128,7 +1919,6 @@ static sendTaxInvoice(
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2153,7 +1943,6 @@ static sendTaxInvoice(
    return axios
      .post(url, data, config)
      .then((response) => {
-       console.log(response);
        return response;
      })
      .catch((error) => {
@@ -2177,7 +1966,6 @@ static sendTaxInvoice(
  return axios
    .post(url, data, config)
    .then((response) => {
-     console.log(response);
      return response;
    })
    .catch((error) => {
@@ -2196,7 +1984,6 @@ static sendTaxInvoice(
         str: value,
       },
     };
-    console.log(config);
     const response = await axios.get(
       ApiUrl + "/search/getArtisanSuggestions",
       config
@@ -2221,7 +2008,6 @@ static sendTaxInvoice(
    return axios
      .post(url, data, config)
      .then((response) => {
-       console.log(response);
        return response;
      })
      .catch((error) => {
@@ -2236,8 +2022,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2251,8 +2035,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2266,8 +2048,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2305,8 +2085,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2320,8 +2098,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2335,8 +2111,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2351,8 +2125,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2360,7 +2132,6 @@ static sendTaxInvoice(
       });
   }
 
-  // /enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId=1205
 
   static getAdvancedPaymentReceipt(enquiryId) {
     let url = ApiUrl + "/enquiry/getAdvancedPaymentReceipt/{enquiryId}?enquiryId="+enquiryId;
@@ -2368,8 +2139,6 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
@@ -2383,16 +2152,13 @@ static sendTaxInvoice(
     return axios
       .get(url)
       .then((response) => {
-        console.log(response);
-
         return response;
       })
       .catch((error) => {
         return error.response;
       });
   }
-  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}
-  // /enquiry/setEnquiryOrderStages/4/1701/{innerStageId}?innerStageId=2
+
   static progressUpdate(stageid, id,innerid) {
     let url = "";
     if(innerid == 0){
@@ -2413,7 +2179,6 @@ static sendTaxInvoice(
     return axios
       .post(url, data, config)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2423,7 +2188,6 @@ static sendTaxInvoice(
 
   static toggleChangeRequest(id){
     let url = ApiUrl + "/enquiry/toggleChangeRequestFromArtisan?enquiryId=" + id + "&status=0";
-    console.log(url);
     var config = {
       headers: {
         "Content-type": "application/json",
@@ -2432,7 +2196,6 @@ static sendTaxInvoice(
     return axios
       .post(url)
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -2442,7 +2205,6 @@ static sendTaxInvoice(
 
   static updateNotificationSeen(id){
    let url = ApiUrl + "/notification/markAsRead/" + id;
-   console.log(url);
    var config = {
      headers: {
        "Content-type": "application/json",
@@ -2451,7 +2213,6 @@ static sendTaxInvoice(
    return axios
      .post(url)
      .then((response) => {
-       console.log(response);
        return response;
      })
      .catch((error) => {
@@ -2489,7 +2250,6 @@ static markEnquiryClosed(id){
   return axios
     .post(url)
     .then((response) => {
-      console.log(response);
       return response;
       
     })
@@ -2497,7 +2257,6 @@ static markEnquiryClosed(id){
       return error.response;
     });
 }
-// /enquiry/previewPI/
 
 static getBuyerPreviewPI(code){
   let url = ApiUrl + "/enquiry/previewPI/" + code;
@@ -2550,17 +2309,14 @@ static buyerRaiseChangeRequest(enquiryCode, arrayData){
   return axios
     .post(url, data, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 }
-// POST /enquiry/changeRequestStatusUpdate
 static changeRequestStatusUpdate(enquiryCode,arrayData,status){
   let url = ApiUrl + "/enquiry/changeRequestStatusUpdate?status="+status;
-  console.log(enquiryCode,arrayData);
   var config = {
     headers: {
       "Content-type": "application/json",
@@ -2573,8 +2329,7 @@ static changeRequestStatusUpdate(enquiryCode,arrayData,status){
   return axios
     .post(url, parameters, config)
     .then((response) => {
-      console.log(response);
-      
+     
       return response;
     })
     .catch((error) => {
@@ -2584,11 +2339,9 @@ static changeRequestStatusUpdate(enquiryCode,arrayData,status){
 
 static getChangeRequestForArtisan(enquiryId) {
   let url = ApiUrl + "/enquiry/getChangeRequestForArtisan?enquiryId=" + enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2598,11 +2351,9 @@ static getChangeRequestForArtisan(enquiryId) {
 
 static getArtisanQcResponse(enquiryId) {
   let url = ApiUrl + "/qc/getArtisanQcResponse?enquiryId=" + enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2612,11 +2363,9 @@ static getArtisanQcResponse(enquiryId) {
 
 static getQCStages() {
   let url = ApiUrl + "/qc/getStages";
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2626,68 +2375,54 @@ static getQCStages() {
 
 static getAllQCQuestions() {
   let url = ApiUrl + "/qc/getAllQuestions";
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 }
- // /enquiry/getAdvancedPaymentStatus?enquiryId=1715
 
 static  getPaymentDetailsForFinalPayment(enquiryId)  {
   let url = ApiUrl + "/enquiry/getPaymentDetailsForFinalPayment?enquiryId="+enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 }
-// /order/getClosedOrder/{enquiryId}?enquiryId=1707
 static  getClosedOrder(enquiryId)  {
   let url = ApiUrl + "/order/getClosedOrder/{enquiryId}?enquiryId="+enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 }
-// /enquiry/getOrderProgress/1707
  static  getOrderProgress(enquiryId)  {
   let url = ApiUrl + "/enquiry/getOrderProgress/"+enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
       return error.response;
     });
 }
-// /enquiry/getAllRefArtisanReview
 static  getAllRefArtisanReview()  {
   let url = ApiUrl + "/enquiry/getAllRefArtisanReview/";
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2705,7 +2440,6 @@ static sendOrSaveQcForm(data){
   return axios
     .post(url, data, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2715,11 +2449,9 @@ static sendOrSaveQcForm(data){
 
 static  getRatingQuestions()  {
   let url = ApiUrl + "/user/getRatingQuestions";
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2738,7 +2470,6 @@ static submitRatingToUser(data){
   return axios
     .post(url, data, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2751,7 +2482,6 @@ static  getRatingsForUser(enquiryId, userId)  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2764,8 +2494,7 @@ static getEnquiryMessageChatList(searchedString)  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
-      return response;
+     return response;
     })
     .catch((error) => {
       return error.response;
@@ -2777,7 +2506,6 @@ static getNewEnquiryMessageChatList(searchedString)  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2790,7 +2518,6 @@ static getAndReadChatMessageForEnquiry(enquiryId)  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2809,7 +2536,6 @@ static sendChatboxMessage(data){
   return axios
     .post(url, data, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2822,7 +2548,6 @@ static getEscalations()  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2841,7 +2566,6 @@ static raiseEscalaton(data){
   return axios
     .post(url, data, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2854,7 +2578,6 @@ static getEscalationSummaryForEnquiry(enquiryId)  {
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2873,7 +2596,6 @@ static resolveEscalation(id){
   return axios
     .post(url, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2892,7 +2614,6 @@ static goToEnquiryChat(enquiryId){
   return axios
     .post(url, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2902,11 +2623,9 @@ static goToEnquiryChat(enquiryId){
 
 static updateFaultyOrderStatusArtisan(enquiryId, status) {
   let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isOrderReturned=" + status;
-  console.log(url);
   return axios
     .put(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2916,11 +2635,9 @@ static updateFaultyOrderStatusArtisan(enquiryId, status) {
 
 static updateFaultyOrderStatusBuyer(enquiryId, status) {
   let url = ApiUrl + "/enquiry/updateFaultyOrderStatus?enquiryId=" + enquiryId + "&isRefundReceived=" + status;
-  console.log(url);
   return axios
     .put(url)
     .then((response) => {
-      console.log(response); 
       return response;
     })
     .catch((error) => {
@@ -2939,7 +2656,6 @@ static recreateOrder(enquiryId){
   return axios
     .post(url, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2958,7 +2674,6 @@ static orderDispatchAfterRecreation(enquiryId){
   return axios
     .post(url, config)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2968,11 +2683,9 @@ static orderDispatchAfterRecreation(enquiryId){
 
 static getOldQc(enquiryId) {
   let url = ApiUrl + "/qc/getOldQc?enquiryId=" + enquiryId;
-  console.log(url);
   return axios
     .get(url)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
@@ -2994,7 +2707,6 @@ static socialLogin(type, token) {
     .then((response) => {
       if (response.data.valid) {
         var language = localStorage.getItem("i18nextLng");
-        console.log(language);
         localStorage.clear();
         sessionStorage.clear();
         // remove user from local storage to log user out
@@ -3007,9 +2719,7 @@ static socialLogin(type, token) {
         localStorage.setItem("i18nextLng", language);
         setAuthorizationtoken(token);
 
-        //  console.log(jwt.decode(token));
       }
-      console.log(response);
       return response;
     })
     .catch((error) => {

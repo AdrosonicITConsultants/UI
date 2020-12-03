@@ -43,11 +43,9 @@ export default class ArtisanSelfRating extends Component {
 
     getRatingId = (id) => {
         this.state.newRatingId = id;
-        console.log(id);
     }
 
     ratingFunction = (newValue) => {
-        console.log(newValue * 2);
         var rating = newValue * 2;
         var object = {
             enquiryId: this.state.enquiryId,
@@ -57,7 +55,6 @@ export default class ArtisanSelfRating extends Component {
             responseComment: "",
         }
         this.state.ratingArray.push(object);
-        console.log(this.state.ratingArray);
 
         var currentArray = this.state.ratingArray;
         var newArray = [];      
@@ -69,13 +66,11 @@ export default class ArtisanSelfRating extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray);
         
         var addRate = 0;
         for(var i in newArray) {
             addRate += newArray[i].response;
         }
-        console.log(addRate/newArray.length);
         var averageRate = (addRate/newArray.length).toFixed(1);
         this.setState({
             averageRate: averageRate,
@@ -108,7 +103,6 @@ export default class ArtisanSelfRating extends Component {
         for (var i in uniqueObject) { 
             newArray.push(uniqueObject[i]); 
         }
-        console.log(newArray);
 
         TTCEapi.submitRatingToUser(newArray).then((response)=>{
             if(response.data.valid)
@@ -119,7 +113,6 @@ export default class ArtisanSelfRating extends Component {
                     autoClose: true,
                 });
             }
-            console.log(response.data.data);
         });
     }
 
@@ -139,7 +132,6 @@ export default class ArtisanSelfRating extends Component {
             }
         }
         var averageValue = (value/array1.length).toFixed(1);
-        console.log(averageValue);
 
         this.setState({
             averageRating: averageValue,
@@ -162,13 +154,10 @@ export default class ArtisanSelfRating extends Component {
         var enquiryCode = localStorage.getItem("ratingEnquiryCode");
         this.state.enquiryCode = enquiryCode;
 
-        console.log(this.state.enquiryId);
-        console.log(this.state.enquiryCode);
-
+    
         TTCEapi.getRatingQuestions().then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     buyerQuestionsComments: response.data.data.buyerQuestions.commentQuestions,
                     buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
@@ -181,7 +170,6 @@ export default class ArtisanSelfRating extends Component {
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
             if(response.data.valid)
             {
-                console.log(response.data.data);
                 this.setState({
                     isArtisanRatingDone: response.data.data.isArtisanRatingDone,
                     isBuyerRatingDone: response.data.data.isBuyerRatingDone,

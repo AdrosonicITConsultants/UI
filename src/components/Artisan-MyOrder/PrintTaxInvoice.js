@@ -34,7 +34,7 @@ export class PrintTaxInvoice extends Component {
             selectedFile={this.props.selectedFile}
             selectedFileName={this.props.selectedFileName}
             taxInvoiceGenerated={this.props.taxInvoiceGenerated}
-            
+            CR={this.props.CR}
             ref={el => (this.componentRef = el)}/>
         </React.Fragment>
         )

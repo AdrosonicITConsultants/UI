@@ -169,7 +169,6 @@ import { useTranslation, withTranslation } from "react-i18next";
     opendisablemodal = (id)=>{
         if(id === 0 || this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId > 5)
         {
-
         }
         else{
         document.getElementById('dismod').style.display='block';
@@ -1216,7 +1215,9 @@ import { useTranslation, withTranslation } from "react-i18next";
                                     enquiryId={this.state.enquiryCode}
                                     enquiryCode={this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
                                     BuyerPreviewInvoice={this.state.BuyerPreviewInvoice}
-                                    completedtax={1} />
+                                    completedtax={1}
+                                    CR={this.state.openEnquiries[0].openEnquiriesResponse.changeRequestStatus}
+                                    />
                                     </Col>
                                     </>
                                     :null}

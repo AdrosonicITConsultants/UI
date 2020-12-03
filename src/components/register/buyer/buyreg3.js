@@ -89,7 +89,6 @@ export default class buyreg3 extends Component {
           
 
          },()=>{
-          console.log(this.state);
          });
         
 
@@ -147,8 +146,7 @@ export default class buyreg3 extends Component {
                     }}
                     className="col-xs-10 fontplay"
                   >
-                    {/* <img src={logos.locklogo}   
-                    className="locklogo1 glyphicon mr-5"></img> */}
+                   
                     Enter your details to complete registration
                   </span>
                 </Row>
@@ -158,8 +156,7 @@ export default class buyreg3 extends Component {
                     style={{ fontWeight: "600" }}
                     className="col-xs-10 line32 text-left ml-6 font3 fontplay"
                   >
-                    {/* <img src={logos.locklogo}   
-                        className="locklogo1 glyphicon mr-5"></img> */}
+              
                     Personal Details
                   </span>
                 </Row>
@@ -175,12 +172,10 @@ export default class buyreg3 extends Component {
                         First Name<strong className="requiredStar">*</strong>
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="firstname"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value= {this.state.firstname}
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
@@ -200,12 +195,10 @@ export default class buyreg3 extends Component {
                         Last Name
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="lastname"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="lastname"
                           value= {this.state.lastname}
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
@@ -224,12 +217,10 @@ export default class buyreg3 extends Component {
                         Mobile Number<strong className="requiredStar">*</strong>
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
                           id="mobileno"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="mobileno"
                           value= {this.state.mobileno}
 
                           name="mobileno"
@@ -248,14 +239,11 @@ export default class buyreg3 extends Component {
                         Alternate contact Number
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
                           id="alternatemobno"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="mobileno"
                           value= {this.state.alternatemobno}
-
                           name="alternatemobno"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -273,7 +261,6 @@ export default class buyreg3 extends Component {
                         Designation
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="designation"
@@ -322,20 +309,10 @@ export default class buyreg3 extends Component {
                   <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">Help?</a>
                   </strong>
-                  {/* <span className="col-xs-4"></span>
-                  <span
-                    style={{ color: "var(--lightFont)" }}
-                    className="col-xs-5 text-center line7 font3"
-                  >
-                    Privacy policy
-                  </span> */}
+                 
                 </Row>
 
-                {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
+              
                 
               </div>
             </Col>

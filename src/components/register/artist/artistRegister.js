@@ -164,29 +164,17 @@ class artistRegister extends Component {
                    },() => {
                      
                    });
-                  //  console.log(
-                  //    firstname,
-                  //    lastname,
-                  //    pincode,
-                  //    cluster,
-                  //    district,
-                  //    state,
-                  //    mobileno,
-                  //    panno,
-                  //    address
-                  //  );
+                
                  }
                  storepassword(password){
                   this.setState(
                     { password: password } , () => {
-                      console.log(this.state.password);
 
                     });
 
 
                  }
                  checkweaverid(weaverid) {
-                   // console.log(weaverid , weaverpin);
                    this.setState(
                      { weaverid: weaverid },
                      () => {
@@ -208,7 +196,6 @@ class artistRegister extends Component {
                  }
 
                  sendotp(emailid) {
-                   console.log(emailid);
                  
                   //  debugger;
                    this.setState({ emailid: emailid }, () => {
@@ -249,7 +236,6 @@ class artistRegister extends Component {
 
                  handler(num) {
                    this.setState({ userpage: num }, () => {
-                     console.log(this.state.userpage);
                    });
                  }
 

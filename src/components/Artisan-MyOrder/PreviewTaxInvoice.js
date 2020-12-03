@@ -54,24 +54,24 @@ export class PreviewTaxInvoice extends Component {
           extraWeftDye:[],
           weftYarn:[],
           warpYarn:[],
-            extraWeftYarn:[],
-            customweftDye:[],
-            customwarpDye:[],
-            customextraWeftDye:[],
-            customweftYarn:[],
-            customwarpYarn:[],
-            customextraWeftYarn:[],
-            gobackButtonClick:false,
-            history:false,
-            customhistory:false,
-            productCategories:[],
-            yarns:[],
-            reedCounts:[],
-            dyes:[],
-            getOldPIData:[],
-            oldDataPI:false,
-            gobackButtonClick:false,
-            sendTax:[]
+          extraWeftYarn:[],
+          customweftDye:[],
+          customwarpDye:[],
+          customextraWeftDye:[],
+          customweftYarn:[],
+          customwarpYarn:[],
+          customextraWeftYarn:[],
+          gobackButtonClick:false,
+          history:false,
+          customhistory:false,
+          productCategories:[],
+          yarns:[],
+          reedCounts:[],
+          dyes:[],
+          getOldPIData:[],
+          oldDataPI:false,
+          gobackButtonClick:false,
+          sendTax:[]
 
 
         };
@@ -110,13 +110,11 @@ export class PreviewTaxInvoice extends Component {
                         if(response.data.data.productHistory != null)
                         { 
                           this.setState({history:true});
-                         
                           
                         }
                         if(response.data.data.buyerCustomProductHistory != null)
                         { 
                           this.setState({customhistory:true});
-                         
                           
                         }
                         if(response.data.data.productCustom === false){
@@ -159,10 +157,7 @@ export class PreviewTaxInvoice extends Component {
             
                         })
                       
-                        }
-                           
-                    
-                             
+                        }                           
                     }
                 })
                    
@@ -181,14 +176,7 @@ export class PreviewTaxInvoice extends Component {
           //  sendPI: true,
             gobackButtonClick:true,
          })
-     console.log(this.props.apr,
-      this.props.cgst,                  
-      this.props.deliverycharge ,
-      this.props.enquiryId,
-      this.props.finalamt,
-      this.props.rpu,
-      this.props.quantity,
-      this.props.sgst      )
+
         TTCEapi.sendTaxInvoice(
             this.props.apr,
             this.props.cgst,                  
@@ -459,7 +447,6 @@ export class PreviewTaxInvoice extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{/* {console.log("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -468,11 +455,11 @@ export class PreviewTaxInvoice extends Component {
     <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>
        {this.state.history ? 
        <>
-     <span>   {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">CR</b> </span>
+     <span>   {this.state.previewPI.productHistory.tag}-{this.state.previewPI.productHistory.length}  <b className="CRfondcss">{this.props.CR!=1?"":"CR"}</b> </span>
        </>
        :
        <>
-    <span>  {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">CR</b></span> 
+    <span>  {this.state.previewPI.product.tag} -{this.state.previewPI.product.length}  <b className="CRfondcss">{this.props.CR!=1?"":"CR"}</b></span> 
        </>
          }  
        </h3>   
@@ -488,7 +475,7 @@ export class PreviewTaxInvoice extends Component {
         <>
         {/* {console.log("Product  custom")} */}
         <td className="tdmarginleft">
-        <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
+        <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}  <b className="CRfondcss">{this.props.CR!=1?"":"CR"}</b></h3>
        
         </td>
         </>

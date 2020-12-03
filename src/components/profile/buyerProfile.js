@@ -88,7 +88,6 @@ debugger;
                     this.setState({
                         brandPic : brandPic,
                     });
-                    console.log(brandPic);
 
                 }
             }
@@ -106,22 +105,17 @@ debugger;
       });
       }
       handleCountry(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('countryid');
-        console.log(option);
         
         this.setState({ [e.target.name]: e.target.value , countryid : option}, ()=> {
-          console.log(this.state);  
           
         });
         this.setState({
             ischanged : true
         });
-        // this.setState({
-        //     showValidationpass: false,
-        // });
+        
       }
     handleEdit(){
           this.setState({
@@ -295,9 +289,6 @@ debugger;
         
     }
     SaveDetails(){
-        // alert("saveclicked");
-        console.log(this.state);
-        // debugger;
         TTCEapi.updateBuyerProfile(this.state.companyname, this.state.gstno, 
             this.state.cinno, this.state.panno, this.state.line1,
             this.state.line2, this.state.street, this.state.city, this.state.state, 
@@ -340,8 +331,7 @@ debugger;
 
            isButtonDisabled : false
          },()=>{
-            console.log("change brand img");
-           console.log(this.state);
+          
          });
 
          let reader = new FileReader();
@@ -352,7 +342,6 @@ debugger;
             //  selectedFile: { ...this.state.selectedFile },
              imagePreviewUrl2: imagebytes,
            },()=>{
-                console.log(this.state);
            });
          };
          if (event.target.files[0]) {
@@ -951,12 +940,7 @@ debugger;
                 <Footer></Footer>
 
             </React.Fragment>
-            // <div>
-             
-               
-            //      {"this is my buyerprofile page check console for variable"}
-            
-            // </div>
+           
         )
     }
 }

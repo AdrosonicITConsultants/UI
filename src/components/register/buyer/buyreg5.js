@@ -84,14 +84,10 @@ export default class buyreg5 extends Component {
         });
       }
       handleCountry(e) {
-        // console.log(e.target.id);
         var index = e.target.selectedIndex;
         var optionElement = e.target.childNodes[index];
         var option =  optionElement.getAttribute('countryid');
-        console.log(option);
-        
         this.setState({ [e.target.name]: e.target.value , countryid : option}, ()=> {
-          console.log(this.state);
           localStorage.setItem("regCountry", this.state.country);
           localStorage.setItem("regCountryId", option);
         });
@@ -115,7 +111,6 @@ export default class buyreg5 extends Component {
           
 
          },()=>{
-          console.log(this.state);
          });
         
          TTCEapi.getCountries().then((response)=>{
@@ -189,8 +184,7 @@ export default class buyreg5 extends Component {
                     }}
                     className="col-xs-10 ml-6 fontplay"
                   >
-                    {/* <img src={logos.locklogo}   
-                    className="locklogo1 glyphicon mr-5"></img> */}
+                 
                     Enter your details to complete registration
                   </span>
                 </Row>
@@ -201,8 +195,7 @@ export default class buyreg5 extends Component {
                     style={{ fontWeight: "600" }}
                     className="col-xs-10 line32 text-left ml-6 font3 fontplay"
                   >
-                    {/* <img src={logos.locklogo}   
-                        className="locklogo1 glyphicon mr-5"></img> */}
+                   
                     Registered Address
                   </span>
                 </Row>
@@ -240,12 +233,10 @@ export default class buyreg5 extends Component {
                         Address Line 2
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="adl2"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.adl2}
                           name="adl2"
                           onChange={(e) => this.handleChange(e)}
@@ -262,12 +253,10 @@ export default class buyreg5 extends Component {
                         Street
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="street"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.street}
                           name="street"
                           onChange={(e) => this.handleChange(e)}
@@ -284,12 +273,10 @@ export default class buyreg5 extends Component {
                         City
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="city"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.city}
                           name="city"
                           onChange={(e) => this.handleChange(e)}
@@ -306,12 +293,10 @@ export default class buyreg5 extends Component {
                         State
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="state"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.state}
                           name="state"
                           onChange={(e) => this.handleChange(e)}
@@ -328,7 +313,6 @@ export default class buyreg5 extends Component {
                         Country<strong className="requiredStar">*</strong>
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <select
                           id="country"
                           className="form-control form2 BuyerLogin1"
@@ -361,15 +345,12 @@ export default class buyreg5 extends Component {
                         Pincode<strong className="requiredStar">*</strong>
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.pincode}
                           name="pincode"
-                          // maxlength="6"
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -384,12 +365,10 @@ export default class buyreg5 extends Component {
                         Landmark
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="landmark"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.landmark}
                           name="landmark"
                           onChange={(e) => this.handleChange(e)}
@@ -398,13 +377,7 @@ export default class buyreg5 extends Component {
                     </Col>
                   </Col>
                 </Row>
-                {/* {this.state.showValidationpass ? (
-                  <span className="bg-danger">
-                    please enter all mandatory fields
-                  </span>
-                ) : (
-                  <br />
-                )} */}
+               
                  {this.state.showValidationpass ? (
                           <span className="bg-danger text-center">
                             {this.state.message}
@@ -445,11 +418,7 @@ export default class buyreg5 extends Component {
                   </strong>
                 </Row>
 
-                {/* <Row noGutters={true}>
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
+               
               </div>
             </Col>
           </React.Fragment>

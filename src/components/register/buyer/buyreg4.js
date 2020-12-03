@@ -31,7 +31,6 @@ export default class buyreg4 extends Component {
                  operation() {
                    debugger;
                    const emailcheck = isEmail;
-                   console.log(emailcheck(this.state.pocemail));
                    var flag = true; 
                    var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
                    var alpha=/([A-Z]){1}([0-9]){5}([A-Z]){2}([0-9]){4}([A-Z]){3}([0-9]){6}$/;
@@ -168,13 +167,7 @@ export default class buyreg4 extends Component {
                       });
                     return ;
                   }
-                  // if (/[^0-9a-zA-Z\-\_\.\(\)]/.test(filename.name)) {
-                  //   customToast.error("Image name contains special characters.", {
-                  //     position: toast.POSITION.TOP_RIGHT,
-                  //     autoClose: true,
-                  //   });
-                  //   return;
-                  // }
+                 
                   this.setState({
                     brandLogo: event.target.files[0],
                   });
@@ -183,13 +176,11 @@ export default class buyreg4 extends Component {
                       let imagebytes = reader.result;
 
                     this.setState({
-                     //  brandLogo :{ ...this.state.brandLogo},
                       imagePreviewUrl: imagebytes
                     });
                   };
                
                   if (event.target.files[0]) {
-                  //  reader.readAsDataURL(event.target.files[0]);
                   this.refs.fileUploaderName.value = event.target.files[0].name;
                   this.setState({
                     logoname : event.target.files[0].name
@@ -215,7 +206,6 @@ export default class buyreg4 extends Component {
                     
           
                    },()=>{
-                    console.log(this.state);
                    });
                   
           
@@ -268,7 +258,6 @@ export default class buyreg4 extends Component {
                               
                              className="text-left line32  font3"
                            >
-                             {/* <span className="col-xs-1"></span> */}
                              <span
                                style={{
                                  fontWeight: "bold",
@@ -277,8 +266,7 @@ export default class buyreg4 extends Component {
                                }}
                                className="col-xs-10 ml-6 fontplay"
                              >
-                               {/* <img src={logos.locklogo}   
-                    className="locklogo1 glyphicon mr-5"></img> */}
+                              
                                Enter your details to complete registration
                              </span>
                            </Row>
@@ -288,8 +276,7 @@ export default class buyreg4 extends Component {
                                style={{ fontWeight: "600" }}
                                className="col-xs-10 line32 text-left ml-6 font3 fontplay"
                              >
-                               {/* <img src={logos.locklogo}   
-                        className="locklogo1 glyphicon mr-5"></img> */}
+                              
                                Company Details
                              </span>
                            </Row>
@@ -306,12 +293,10 @@ export default class buyreg4 extends Component {
                                    <strong className="requiredStar">*</strong>
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
                                      id="companyname"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="firstname"
                                      value = {this.state.companyname}
                                      name="companyname"
                                      onChange={(e) => this.handleChange(e)}
@@ -329,14 +314,11 @@ export default class buyreg4 extends Component {
                                    GST No.
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
                                      id="gstno"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="lastname"
                                      value = {this.state.gstno.toUpperCase()}
-
                                      name="gstno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
@@ -355,7 +337,6 @@ export default class buyreg4 extends Component {
                                    Upload your Brand Logo
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
 
                                    <input
                                      type="text"
@@ -363,7 +344,6 @@ export default class buyreg4 extends Component {
                                      style={{ paddingRight: "38px" }}
                                      disabled
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="lastname"
                                      value = {this.state.logoname}
 
                                      ref="fileUploaderName"
@@ -405,12 +385,10 @@ export default class buyreg4 extends Component {
                                    <strong className="requiredStar">*</strong>
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
                                      id="panno"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
                                      value = {this.state.panno.toUpperCase()}
                                      name="panno"
                                      onChange={(e) => this.handleChange(e)}
@@ -428,14 +406,11 @@ export default class buyreg4 extends Component {
                                    CIN Number
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
                                      id="cinno"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
                                      value = {this.state.cinno.toUpperCase()}
-
                                      name="cinno"
                                      onChange={(e) => this.handleChange(e)}
                                    />
@@ -450,15 +425,12 @@ export default class buyreg4 extends Component {
                                >
                                  <label className="control-label padform text-left">
                                    Point of contact (Name)
-                                   {/* <strong className="requiredStar">*</strong> */}
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="text"
                                      id="pocname"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
                                      value = {this.state.pocname}
                                      name="pocname"
                                      onChange={(e) => this.handleChange(e)}
@@ -474,15 +446,12 @@ export default class buyreg4 extends Component {
                                >
                                  <label className="control-label padform text-left">
                                    Email ID for point of contact
-                                   {/* <strong className="requiredStar">*</strong> */}
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="email"
                                      id="pocemail"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
                                      value = {this.state.pocemail}
                                      name="pocemail"
                                      onChange={(e) => this.handleChange(e)}
@@ -498,15 +467,12 @@ export default class buyreg4 extends Component {
                                >
                                  <label className="control-label padform text-left">
                                    Mobile No. for point of contact
-                                   {/* <strong className="requiredStar">*</strong> */}
                                  </label>
                                  <div className="inner-addon">
-                                   {/* <i className="glyphicon glyphicon-user"></i> */}
                                    <input
                                      type="number"
                                      id="pocmobile"
                                      className="form-control form2 BuyerLogin1"
-                                     //placeholder="address"
                                      value = {this.state.pocmobile}
                                      name="pocmobile"
                                      onChange={(e) => this.handleChange(e)}
@@ -560,12 +526,7 @@ export default class buyreg4 extends Component {
                              
                            </Row>
 
-                           {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
-                           
+                            
                          </div>
                        </Col>
                      </React.Fragment>

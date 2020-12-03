@@ -246,10 +246,10 @@ var homeSectionStyle = {};
                  render() {
                    
                    return (
-                     
+                    // id="google_translate_element"
                      <React.Fragment>
                        {this.state.showHomeBg ?
-                       <div className="homeimg" style={homeSectionStyle}>
+                       <div className="homeimg" style={homeSectionStyle} >
                          <Container>
                            <Row   className="mt-5">
                              <Col

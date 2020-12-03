@@ -49,12 +49,10 @@ import Popup from './components/ModalComponent/EnguiryModal';
 import AllEnquiryList from './components/ArtistEnquiries/AllEnquiryList';
 import SingleEnquiry from "./components/ArtistEnquiries/SingleEnquiry";
 import SingleCompletedEnquiry from "./components/ArtistEnquiries/SingleCompletedEnquiry";
-
 import { PreviewInvoice } from './components/ArtistEnquiries/PreviewInvoice';
 import buyerProductTempelate from './components/Buyer-Custom-Design/buyerProductTempelate';
 import artisanProductCatelog from './components/Products/artisanProductCatelog';
 import { BuyerPreviewInvoice } from './components/BuyerEnquiries/BuyerPreviewInvoice';
-// import { BuyerSingleEnquiry } from './components/Abcd/BuyerSingleEnquiry';
 import { BuyerAllEnquiryList } from './components/BuyerEnquiries/BuyerAllEnquiryList';
 import BuyerAdvancePayment from "./components/BuyerEnquiries/BuyerAdvancePayment"
 import BuyerSingle, { BuyerSingleEnquiry } from './components/BuyerEnquiries/BuyerSingleEnquiry'
@@ -73,7 +71,6 @@ import { Buyerorder } from './components/Buyer-MyOrder/Buyerorder';
 import  Artisanorder  from './components/Artisan-MyOrder/Artisanorder';
 import BuyerRating from './components/Rating/buyerRating';
 import { BuyerFaultyOrder } from './components/FaultyOrder/BuyerFaultyOrder';
-// import { BuyerCompletedfaultyOrder } from './components/FaultyOrder/BuyerCompletedfaultyOrder';
 import { BuyerSingleCompletedOrder } from './components/Buyer-MyOrder/BuyerSingleCompletedOrder';
 import ArtisanCompletedOrder from './components/Artisanorder/ArtisanCompletedOrder';
 import ArtisanSingleCompletedOrder  from './components/Artisan-MyOrder/ArtisanSingleCompletedOrder';
@@ -146,7 +143,6 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
-          {/* <PrivateRoute path="/uploaddetails" component={BuyerAdvancePayment2} /> */}
           <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 
           

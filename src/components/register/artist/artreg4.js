@@ -41,7 +41,6 @@ class artreg4 extends Component {
                 showValidationpass: true,
                 message : "please fill mandatory fields"
             });
-            console.log(this.state.panno.length);
           }
           else if(!pin.test(this.state.pincode) || this.state.pincode.length != 6)
           {
@@ -67,7 +66,6 @@ class artreg4 extends Component {
           }
           else {
             this.props.sd1(this.state.firstname,this.state.lastname,this.state.pincode,this.state.clusterid,this.state.district,this.state.state,this.state.mobileno,this.state.panno,this.state.address,this.state.cluster)
-            console.log(this.state);
             this.props.handler(4);
  
           }
@@ -78,14 +76,11 @@ class artreg4 extends Component {
         }
     
         handleCluster(e) {
-          // console.log(e.target.id);
           var index = e.target.selectedIndex;
           var optionElement = e.target.childNodes[index];
           var option =  optionElement.getAttribute('clusterid');
-          console.log(option);
           
           this.setState({ [e.target.name]: e.target.value , clusterid : option}, ()=> {
-            console.log(this.state);
             localStorage.setItem("regCluster", this.state.cluster);
             localStorage.setItem("regClusterId", option);
           });
@@ -137,7 +132,6 @@ class artreg4 extends Component {
       
       }
       componentDidMount(){
-        console.log("here");
         localStorage.setItem("regCurrentPage", 3);
         this.setState({firstname : this.props.firstname ,
           lastname : this.props.lastname,
@@ -152,29 +146,23 @@ class artreg4 extends Component {
           
 
          },()=>{
-          console.log(this.state);
          });
 
         TTCEapi.getClusters().then((response)=>{
             this.setState({clusterdata : response.data.data},() => {
-              // this.setState({cluster : this.state.clusterdata[0].desc})
              
               if(this.state.clusterid > 0)
               {
-                // this.setState({clusterid : -1 });
-                
+               
               }
               else {
                 this.setState({clusterid : -1  , cluster : 'Select Cluster' });
-                
-
+               
               }
-              // console.log("show" + this.state.clusterdata[ind].desc);
               
             });
 
         });
-        // console.log(this.state);
       }
     
     render() {
@@ -222,8 +210,7 @@ class artreg4 extends Component {
                 <Row   className="text-center line32 font3">
                   <span className="col-xs-1"></span>
                   <span className="col-xs-10">
-                    {/* <img src={logos.locklogo}   
-                    className="locklogo1 glyphicon mr-5"></img> */}
+                   
                     <span className = "fontplay">{this.props.t("Pages.object.regArtisanID")} : </span>{this.props.weaverid}
                   </span>
                 </Row>
@@ -239,19 +226,15 @@ class artreg4 extends Component {
                       <strong className="requiredStar">*</strong>
 
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="firstname"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="firstname"
                           value={this.state.firstname}
                           name="firstname"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your first Name</span>
-                        ) : <br/>} */}
+                        
                       </div>
                     </Col>
                   </Col>
@@ -264,19 +247,15 @@ class artreg4 extends Component {
                       {this.props.t("Pages.object.regLastName")}
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="lastname"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="lastname"
                           value={this.state.lastname}
                           name="lastname"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your lastname</span>
-                        ) : <br/>} */}
+                    
                       </div>
                     </Col>
                   </Col>
@@ -290,19 +269,15 @@ class artreg4 extends Component {
                       </label>
                       <strong className="requiredStar">*</strong>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
                           id="pincode"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="pincode"
                           value={this.state.pincode}
                           name="pincode"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your pincode</span>
-                        ) : <br/>} */}
+                       
                       </div>
                     </Col>
                   </Col>
@@ -317,7 +292,6 @@ class artreg4 extends Component {
                       <strong className="requiredStar">*</strong>
 
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <select
                           id="cluster"
                           className="form-control boxDropdown form2 BuyerLogin1"
@@ -382,7 +356,6 @@ class artreg4 extends Component {
                       <strong className="requiredStar">*</strong>
 
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="email"
                           id="emailid"
@@ -392,9 +365,7 @@ class artreg4 extends Component {
                           disabled
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your emailid</span>
-                        ) : <br/>} */}
+                       
                       </div>
                     </Col>
                   </Col>
@@ -409,19 +380,15 @@ class artreg4 extends Component {
                       <strong className="requiredStar">*</strong>
 
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="number"
                           id="mobileno"
                           className="form-control form2 BuyerLogin1"
-                          //placeholder="mobileno"
                           value={this.state.mobileno}
                           name="mobileno"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your mobile no</span>
-                        ) : <br/>} */}
+                       
                       </div>
                     </Col>
                   </Col>
@@ -434,19 +401,15 @@ class artreg4 extends Component {
                       {this.props.t("Pages.object.regPANNo")}
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="panno"
                           className="form-control form2 BuyerLogin1"
                           value={this.state.panno.toUpperCase()}
-                          //placeholder="panno"
                           name="panno"
                           onChange={(e) => this.handleChange(e)}
                         />
-                        {/* {this.state.showValidationpass ? (
-                        <span className="bg-danger">please enter your PAN No.</span>
-                        ) : <br/>} */}
+                       
                       </div>
                     </Col>
                   </Col>
@@ -459,13 +422,11 @@ class artreg4 extends Component {
                       {this.props.t("Pages.object.regAddress")}
                       </label>
                       <div className="inner-addon">
-                        {/* <i className="glyphicon glyphicon-user"></i> */}
                         <input
                           type="text"
                           id="address"
                           className="form-control form2 BuyerLogin1"
                           value={this.state.address}
-                          //placeholder="address"
                           name="address"
                           onChange={(e) => this.handleChange(e)}
                         />
@@ -536,11 +497,6 @@ class artreg4 extends Component {
                   <img src={logos.language} className="ml-5"></img>
                 </Row>
 
-                {/* <Row  >
-            <span className="col-xs-3 text-center">Help</span>
-            <span className="col-xs-5"></span>
-            <span className="col-xs-4 text-center">Privacy policy</span>
-          </Row> */}
               </div>
             </Col>
           </React.Fragment>

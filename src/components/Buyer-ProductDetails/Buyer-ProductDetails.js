@@ -436,10 +436,10 @@ backoperation = () => {
   <h3 className="GeneralDetailsh3">Artisan Brand</h3>
     <p className="GeneralDetailsp" style={{color:"#23527c"}}>
       {/* {this.state.ProductData.brand?this.state.ProductData.brand:null} */}
-      {this.state.ProductData.brand ? <span className="brandcolor">
+      {this.state.ProductData.brand ? <span style={{color:"rgb(35, 82, 124)"}}>
           {this.state.ProductData.brand}</span>: this.state.ProductData.artistName
-          ? <span className="brandcolor">{this.state.ProductData.artistName} </span>: 
-          <span className="brandcolor">  </span>
+          ? <span style={{color:"rgb(35, 82, 124)"}}>{this.state.ProductData.artistName} </span>: 
+          <span>  </span>
           }
       </p>
    

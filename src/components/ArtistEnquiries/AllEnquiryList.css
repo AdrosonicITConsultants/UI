@@ -52,7 +52,7 @@
 }
 .leEnqspun{
     font-size: 14px;
-    color: #8e8e8e;
+    color: #545454;
 
 }
 .leEnqprodName{
@@ -64,7 +64,7 @@
 }
 .leEnqprodcode{
     font-size: 16px;
-    color: #8e8e8e;
+    color: #545454;
 }
 .leEnqprodtype{
 color: magenta;
@@ -81,7 +81,7 @@ font-size: 13px;
 }
 .leEnqOrderAmount{
     font-size: 12px;
-    color: #8e8e8e;
+    color: #545454;
 }
 .leEnqAmount{
     font-size: 35px;
@@ -89,17 +89,17 @@ font-size: 13px;
 }
 .leEnqidDateStarted{
     font-size: 13px;
-    color: #8e8e8e;
+    color: #545454;
 
 }
 .leEnqidLastUpdated{
     font-size: 13px;
-    color: rgb(73, 233, 81);
+    color: rgb(0 179 9);
 
 }
 .leEnqidEstDelivery{
     font-size: 13px;
-    color: cyan;
+    color: #00b9b9;
 
 }
 .leEnqstatus{
@@ -193,7 +193,7 @@ font-size: 13px;
     border-color: green;
   }
   .multi-steps > li.is-active ~ li {
-    color: #808080;
+    color:#00abe4;
   }
   .multi-steps > li.is-active ~ li:before {
     background-color: #ededed;
@@ -206,13 +206,14 @@ font-size: 13px;
 .Allenqlistbtn{
     width: 100%;
     text-align: center;
-    color: goldenrod;
+    color: brown;
     font-size: 15px;
     background: white;
     border: 1px solid lightgrey;
     cursor: pointer;
     height: 50px;
     padding: 12px;
+    font-weight: bold;
 }
 .ml60{
     margin-left:49px;

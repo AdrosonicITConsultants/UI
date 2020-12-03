@@ -49,9 +49,9 @@ class Footer extends Component {
                   <br />
 
                   <span className="col-md-6">
-                  <a href="https://www.facebook.com/antarantransformingcrafts"><img src={logos.facebook} style={{height:"25px",marginRight:"10px"}}/></a>                     
-                  <a href="https://www.instagram.com/antaran_transformingcrafts/"><img src={logos.insta} style={{height:"25px",marginRight:"10px"}}/></a>
-                  <a href=""> <img src={logos.twitter} style={{height:"25px",marginRight:"10px"}}/></a>
+                  <a href="https://www.facebook.com/antarantransformingcrafts" target="_blank"><img src={logos.facebook} style={{height:"25px",marginRight:"10px"}}/></a>                     
+                  <a href="https://www.instagram.com/antaran_transformingcrafts/" target="_blank"><img src={logos.insta} style={{height:"25px",marginRight:"10px"}}/></a>
+                  <a href="" target="_blank"> <img src={logos.twitter} style={{height:"25px",marginRight:"10px"}}/></a>
                   </span>
                   <br />
                   <br />

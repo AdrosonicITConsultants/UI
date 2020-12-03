@@ -177,7 +177,7 @@ export class BuyerTransaction extends Component {
     
       }    
     backoperation(){
-        browserHistory.push("/home"); 
+      browserHistory.goBack(); 
     }
   
     openReceipt(receiptId,challanId){

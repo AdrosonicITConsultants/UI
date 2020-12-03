@@ -1238,7 +1238,7 @@ MoqSimpleProductSelected(moqId){
 
                  <br></br>
                 <Row>
-                    <Col className="col-xs-7 text-center">
+                    <Col className="col-xs-6 text-center">
                     <button className=" closedEnquirybtn "
                      onClick={this.ToggleSave}
                     
@@ -1260,15 +1260,43 @@ MoqSimpleProductSelected(moqId){
                                      </div>
                                     
                     </Col>
-                    
+                    {/* ******************Go to order/transaction btn **************** */}
+                    {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
+                <>
+                   
+
+                {item.openEnquiriesResponse.enquiryStageId>=3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                </>
+                :
+                                
+<>
+                                    {
+                                    // item.openEnquiriesResponse.enquiryStageId===4?
+                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5?
+                                    <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
+                                    :
+                                    item.openEnquiriesResponse.enquiryStageId >=4?
+                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}> <img
+                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                    src={logos.receipticon}
+                                  ></img> Go to Order</button>
+                                    :
+                                    ""
+                                    }
+</>
+    }
+                        {/* ******************Go to order/transaction btn **************** */}
+
                      <Col >
-                    {/* <button className="completedenqButton"
-                     onClick={this.CompleteDelivery}                 
-                                       >
-                               <img src={logos.completedenq} className="completeenqimg" 
-                                       ></img>
-                                Mark order Delivered
-                                </button> */}
+                   
                                     <div id="markdelivered" class="w3-modal" style={{paddingTop:"215px"}}>
                                       <div class="w3-modal-content w3-animate-top modalBoxSize">
                                         <div class="w3-container" style={{paddingTop:"20px"}}>
@@ -1284,7 +1312,7 @@ MoqSimpleProductSelected(moqId){
                                     
                     </Col>
                 </Row>
-                {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
+                {/* {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
                 <>
                     <Row >
                     <Col className="col-xs-11 text-right">
@@ -1323,7 +1351,7 @@ MoqSimpleProductSelected(moqId){
                                     <Col className="col-xs-1 text-right"></Col>
 
                                 </Row>
-    }
+    } */}
                 </>
                 )}
                     </>

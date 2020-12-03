@@ -1496,7 +1496,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                  {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
                 <>
                     <Row >
-                    <Col className="col-xs-11 text-right">
+                    <Col className="col-xs-12 text-center">
                 {item.openEnquiriesResponse.enquiryStageId>=3?
                                                     <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
                                                          <img
@@ -1507,13 +1507,12 @@ import ModernDatepicker from 'react-modern-datepicker';
                                                     ""
                 }
                 </Col>
-                <Col className="col-xs-1 text-right"></Col>
                 </Row>
                 </>
                 :
                                 <Row >
 
-                                    <Col className="col-xs-11 text-right">
+                                    <Col className="col-xs-12 text-center">
                                     {
                                     // item.openEnquiriesResponse.enquiryStageId===4?
                                     item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5 ?
@@ -1528,7 +1527,6 @@ import ModernDatepicker from 'react-modern-datepicker';
                                     ""
                                     }
                                     </Col>
-                                    <Col className="col-xs-1 text-right"></Col>
 
                                 </Row>
     }

@@ -25,7 +25,7 @@ class ArtistProfile extends Component {
           isDetailsEdit : true,
           isPdetail : true,
           isBdetail: true,
-          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
+          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
           selectedprods :[],          
           accountno : "",
           bankname : "" ,
@@ -1023,6 +1023,12 @@ class ArtistProfile extends Component {
                                                     <label>
                                                         <input type="checkbox" value="3" id={this.state.products[5].id}/>
                                                         <span>{this.state.products[5].productDesc}</span>
+                                                    </label>
+                                                    </div>
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="1" id={this.state.products[6].id}/>
+                                                        <span>{this.state.products[6].productDesc}</span>
                                                     </label>
                                                     </div>
 

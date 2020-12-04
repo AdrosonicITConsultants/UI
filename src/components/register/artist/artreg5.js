@@ -14,7 +14,7 @@ class artreg5 extends Component {
                    super();
                
                    this.state = {
-                     products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
+                     products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
                      password: "",
                      confirmpass: "",
                      showValidationpass: false,
@@ -270,7 +270,16 @@ class artreg5 extends Component {
                                </label>
                              </div>
                            </Row>
-                           <br></br>
+                           <Row  noGutters={true}>
+                             <Col className="col-xs-12 text-center">
+                             <div id="ck-button">
+                               <label>
+                                 <input type="checkbox" value="2" id={this.state.products[6].id}/>
+                                 <span>{this.state.products[6].productDesc}</span>
+                               </label>
+                             </div>
+                             </Col>                             
+                           </Row>
                            <Row
                               
                              className="text-center line312 font1"

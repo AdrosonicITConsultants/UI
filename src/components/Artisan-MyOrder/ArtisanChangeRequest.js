@@ -352,7 +352,7 @@ goToChatButton = (id) => {
                                                                             
      <Col className="col-xs-12 bold font20 text-center">
         <br></br>
-        Change request Not Available
+        Change request is not available yet
         <br></br>
      </Col>
  </Row>
@@ -678,7 +678,7 @@ goToChatButton = (id) => {
 <Row noGutters={true}>
  <Col className="col-xs-12 bold font20 text-center">
      <br></br>
-     Change request Not Available
+     Change request is not available yet
      <br></br>
  </Col>
   </Row>

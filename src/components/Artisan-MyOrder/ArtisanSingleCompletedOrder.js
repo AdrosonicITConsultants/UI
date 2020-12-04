@@ -1122,7 +1122,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                         <Row noGutters={true}>
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
-                                                                                Change request disabled by artisan
+                                                                                Change Request is disabled by an artisan
                                                                                 <br></br>
                                                                             </Col>
                                                                         </Row>
@@ -1163,7 +1163,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                                                                         <Row noGutters={true}>
                                                                             <Col className="col-xs-12 bold font20 text-center">
                                                                                 <br></br>
-                                                                                Change request disabled by artisan
+                                                                                Change Request is disabled by an artisan
                                                                                 <br></br>
                                                                             </Col>
                                                                         </Row>

@@ -1774,7 +1774,7 @@ MoqSimpleProductSelected(moqId){
                                                                         <div className="buyerMOQAcceptModalDesc">
                                                                             MOQ once accepted cannot be changed further.<br/>
                                                                             You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
-                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            <span className="buyerMOQAcceptModalDescSpan"> Enquires</span><br/>
                                                                             tab to track your enquiry.
                                                                         </div>
                                                                     </Col>
@@ -1827,7 +1827,7 @@ MoqSimpleProductSelected(moqId){
                                                                         <div className="buyerMOQConfirmModalDesc">
                                                                             MOQ once accepted cannot be changed further.<br/>
                                                                             You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
-                                                                            <span className="buyerMOQAcceptModalDescSpan">Enquires</span><br/>
+                                                                            <span className="buyerMOQAcceptModalDescSpan"> Enquires</span><br/>
                                                                             tab to track your enquiry.
                                                                         </div>
                                                                         <div className="buyerMOQConfirmModalButtonOuter">

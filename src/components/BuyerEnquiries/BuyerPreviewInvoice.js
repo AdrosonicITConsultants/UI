@@ -814,7 +814,7 @@ export class BuyerPreviewInvoice extends Component {
 <br></br>
  <br></br>   
 <Col className="col-xs-12 text-center font14">
- PI Details not Received for this product.
+PI details are not received for this product
 </Col>
  </Row>
 }

@@ -734,10 +734,10 @@ export class PreviewChangedPI extends Component {
      <p className="snopi wraptext">{this.props.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">â‚¹{this.props.rpu}</p>
+     <p className="snopi rpu wraptext">₹{this.props.rpu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">â‚¹{(this.props.quantity * this.props.rpu).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.props.quantity * this.props.rpu).toFixed(2)}</p>
      </td>
      </>
      :
@@ -749,10 +749,10 @@ export class PreviewChangedPI extends Component {
      <p className="snopi wraptext">{this.state.previewPiOrder.quantity}</p>
      </td>
      <td>
-     <p className="snopi rpu wraptext">â‚¹{this.state.previewPiOrder.ppu}</p>
+     <p className="snopi rpu wraptext">₹{this.state.previewPiOrder.ppu}</p>
      </td>
      <td>
-     <p className="snopi wraptext">â‚¹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
+     <p className="snopi wraptext">₹{(this.state.previewPiOrder.totalAmount).toFixed(2)}</p>
      </td>
      </>
 }
@@ -805,11 +805,11 @@ export class PreviewChangedPI extends Component {
      </td>
      {this.props.previewAndRaisePI?
      <td>
-     <h3 className="snopi wraptext"> â‚¹ {(this.props.rpu * this.props.quantity).toFixed(2) }</h3>
+     <h3 className="snopi wraptext"> ₹ {(this.props.rpu * this.props.quantity).toFixed(2) }</h3>
      </td>
      :
      <td>
-     <h3 className="snopi wraptext"> â‚¹ {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
+     <h3 className="snopi wraptext"> ₹ {(this.state.previewPiOrder.totalAmount +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.sgst / 100) 
      +(this.state.previewPiOrder.totalAmount * this.state.previewPiOrder.cgst / 100)).toFixed(2) }</h3>
      </td>
      }
@@ -901,7 +901,7 @@ export class PreviewChangedPI extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (â‚¹)
+         All amount in Indian Rupee (₹)
      </Col>
  </Row>
  </div>

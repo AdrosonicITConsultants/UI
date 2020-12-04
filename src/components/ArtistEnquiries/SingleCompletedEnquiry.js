@@ -291,6 +291,10 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
       
       }
     } 
+
+    gotoOrders(){
+        browserHistory.push("/artisancompletedorder?code="+this.state.enquiryCode)
+    }
     sendMoqDetails(){
         if(this.state.moq  && this.state.deliveryDesc && this.state.ppu){
         let params = queryString.parse(this.props.location.search);
@@ -887,7 +891,45 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
              
                 </>
     }
-            
+             <Row>
+                <Col className="col-xs-12 text-center">
+               
+
+{item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
+                <>
+                    <Row >
+                    <Col className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.enquiryStageId>=3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                </Col>
+                </Row>
+                </>
+                :
+                                <Row >
+
+                                    <Col className="col-xs-12 text-center">
+                                    {item.openEnquiriesResponse.enquiryStageId>3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                                    </Col>
+
+                                </Row>
+    }
+                </Col>
+            </Row>
                 </>
                 )}
                     </>

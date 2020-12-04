@@ -94,7 +94,7 @@
     font-size: 16px;
     font-weight: 600;
     background: #33ac33;
-    border: none;
+    border: 1px solid green;
     padding: 7px 30px 5px 30px;
     border-radius: 18px;
     color: white;
@@ -104,7 +104,7 @@
     font-size: 16px;
     font-weight: 600;
     background: #33ac33;
-    border: none;
+    border: 1px solid green;
     padding: 7px 30px 5px 30px;
     border-radius: 18px;
     color: white;

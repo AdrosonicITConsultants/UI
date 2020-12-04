@@ -428,6 +428,7 @@ export class ArtisanCompletedTransaction extends Component {
                  
 
 <Row noGutters={true}>
+<Col className="col-xs-1"></Col>
 <Col className="col-xs-3 DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
 {item.transactionCompleted.transactionOn}
@@ -485,7 +486,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
      /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
-<Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
+{/* <Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
 
 {this.state.getTransactionActions.map((data)=> 
 <>
@@ -550,7 +551,7 @@ onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionC
 </>
 )}
 
-</Col>
+</Col> */}
 
 </Row>
  {/* _________________________________________Modal accept Reject_________________________________________________ */}

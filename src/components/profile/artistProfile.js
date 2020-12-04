@@ -344,11 +344,12 @@ class ArtistProfile extends Component {
 
           },()=>{
             TTCEapi.getProfile().then((response)=>{
+              console.log(response.data.data +"checki")
+
               for (var  items in response.data.data.userProductCategories)
                         {    
                           document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
                         }
-
             })
           })
       }
@@ -1025,7 +1026,12 @@ class ArtistProfile extends Component {
                                                         <span>{this.state.products[5].productDesc}</span>
                                                     </label>
                                                     </div>
-
+                                                    <div id="ck-button m00">
+                                                    <label>
+                                                        <input type="checkbox" value="3" id={this.state.products[6].id}/>
+                                                        <span>{this.state.products[6].productDesc}</span>
+                                                    </label>
+                                                    </div>
                                                     </div>
                                                 }
                                                                                                        

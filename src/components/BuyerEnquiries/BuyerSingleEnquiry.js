@@ -1264,7 +1264,7 @@ MoqSimpleProductSelected(moqId){
                     {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
                 <>
                    
-
+                       
                 {item.openEnquiriesResponse.enquiryStageId>=3?
                                                     <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
                                                          <img
@@ -1280,7 +1280,7 @@ MoqSimpleProductSelected(moqId){
 <>
                                     {
                                     // item.openEnquiriesResponse.enquiryStageId===4?
-                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5?
+                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5 || item.openEnquiriesResponse.isPaymentRejected==1?
                                     <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
                                     :
                                     item.openEnquiriesResponse.enquiryStageId >=4?
@@ -1312,46 +1312,7 @@ MoqSimpleProductSelected(moqId){
                                     
                     </Col>
                 </Row>
-                {/* {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
-                <>
-                    <Row >
-                    <Col className="col-xs-11 text-right">
-
-                {item.openEnquiriesResponse.enquiryStageId>=3?
-                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
-                                                         <img
-                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
-                                                    src={logos.receipticon}
-                                                  ></img> Go to order</button>
-                                                    :
-                                                    ""
-                }
-                </Col>
-                <Col className="col-xs-1 text-right"></Col>
-                </Row>
-                </>
-                :
-                                <Row >
-
-                                    <Col className="col-xs-11 text-right">
-                                    {
-                                    // item.openEnquiriesResponse.enquiryStageId===4?
-                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5?
-                                    <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
-                                    :
-                                    item.openEnquiriesResponse.enquiryStageId >=4?
-                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}> <img
-                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
-                                    src={logos.receipticon}
-                                  ></img> Go to Order</button>
-                                    :
-                                    ""
-                                    }
-                                    </Col>
-                                    <Col className="col-xs-1 text-right"></Col>
-
-                                </Row>
-    } */}
+              
                 </>
                 )}
                     </>

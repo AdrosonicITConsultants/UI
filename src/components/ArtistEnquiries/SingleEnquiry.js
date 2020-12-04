@@ -1515,7 +1515,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                     <Col className="col-xs-12 text-center">
                                     {
                                     // item.openEnquiriesResponse.enquiryStageId===4?
-                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5 ?
+                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5 || item.openEnquiriesResponse.isPaymentRejected==1?
                                     <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
                                     :
                                     item.openEnquiriesResponse.enquiryStageId >=4?
@@ -1536,7 +1536,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                 )}
                 </>
                 <br></br>
-
+               
                                <br></br>
                                <Row noGutters={true}>
                                     <Row noGutters={true}>

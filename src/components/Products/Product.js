@@ -21,9 +21,9 @@ import changeLang from "../../services/utils/changeLang"
 
      return (
        <React.Fragment>
-         <div className="ProductCard col-6 mx-auto col-md-6 col-sm-6 col-lg-3 my-3">
+         <div className="ProductCard col-6 mx-auto col-md-6 col-sm-6 col-lg-3 my-3" >
            <Row className="mt10">
-             <Col className="col-6 mx-auto col-md-6 col-sm-6 col-lg-6 my-3 PorductNameborder">
+             <Col className="col-6 mx-auto col-md-6 col-sm-6 col-lg-6 my-3 PorductNameborder" style={{marginBottom:"10px",overflow:"auto"}}>
                {/* <span className="productName">Exquisite Trefoil Motifs</span> */}
                <span className="productName">{productList.tag}</span>
              </Col>

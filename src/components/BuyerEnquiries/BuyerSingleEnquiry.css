@@ -93,17 +93,18 @@
 .gotoordernewbtn{
     font-size: 16px;
     font-weight: 600;
-    background: #B9005C;
-    border: none;
+    background: #33ac33;
+    border: 1px solid green;
     padding: 7px 30px 5px 30px;
     border-radius: 18px;
     color: white;
 }
+
 .gototrannewbtn{
     font-size: 16px;
     font-weight: 600;
-    background: #B9005C;
-    border: none;
+    background: #33ac33;
+    border: 1px solid green;
     padding: 7px 30px 5px 30px;
     border-radius: 18px;
     color: white;

@@ -209,7 +209,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
     }
           
     backoperation(){
-        browserHistory.push("/buyerEnquiriesList"); 
+        browserHistory.goBack(); 
     } 
 
     handleCluster(e) {
@@ -336,6 +336,11 @@ export class ClosedBuyerSingleEnquiry extends Component {
 
             }
         });
+    }
+
+    gotoOrders(){
+        browserHistory.push("/buyercompletedorder?code="+this.state.enquiryCode); 
+  
     }
     sendMoqDetails(){
         if(this.state.moq &&  this.state.additionalInfo && this.state.deliveryDesc && this.state.ppu){
@@ -1054,7 +1059,45 @@ MoqSimpleProductSelected(moqId){
                 }
 
               <br></br>
-            
+            <Row>
+                <Col className="col-xs-12 text-center">
+               
+
+{item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
+                <>
+                    <Row >
+                    <Col className="col-xs-12 text-center">
+                {item.openEnquiriesResponse.enquiryStageId>=3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                </Col>
+                </Row>
+                </>
+                :
+                                <Row >
+
+                                    <Col className="col-xs-12 text-center">
+                                    {item.openEnquiriesResponse.enquiryStageId>3?
+                                                    <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
+                                                         <img
+                                                    style={{marginRight:"4px",height:"20px",marginBottom:"2px"}}
+                                                    src={logos.receipticon}
+                                                  ></img> Go to order</button>
+                                                    :
+                                                    ""
+                }
+                                    </Col>
+
+                                </Row>
+    }
+                </Col>
+            </Row>
                 </>
                 )}
                     </>

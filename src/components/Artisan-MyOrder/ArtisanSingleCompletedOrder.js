@@ -575,11 +575,9 @@ import { useTranslation, withTranslation } from "react-i18next";
                         
                             <Col className="col-xs-4">
                                 
-                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
-                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
-                             onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
-                             >
-                              <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch-circle btn-switch-circle--off":"btn-switch-circle"  }></div>
+                                <div className="GreyoutCR">  Change Request  </div>
+                            <div className="btn-switch--on greytogglebtn">
+                              <div className="btn-switch-circle btn-switch-circle--off"></div>
                             </div>
                                  
                     <div id="dismod" class="w3-modal">
@@ -853,11 +851,9 @@ import { useTranslation, withTranslation } from "react-i18next";
                             :
                             
                             <Col className="col-xs-4">
-                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "changeRequesttextdis": "changeRequesttext"  }>{item.openEnquiriesResponse.changeRequestOn === 0 ? "Change Request Disabled": "Change Request Enabled"   }</div>
-                            <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch--on mu-btn-switch": "btn-switch--on"  }
-                             onClick={()=>this.opendisablemodal(item.openEnquiriesResponse.changeRequestOn)}
-                             >
-                              <div className={item.openEnquiriesResponse.changeRequestOn === 0 ? "btn-switch-circle btn-switch-circle--off":"btn-switch-circle"  }></div>
+  <div className="GreyoutCR">  Change Request  </div>
+                            <div className="btn-switch--on greytogglebtn">
+                              <div className="btn-switch-circle btn-switch-circle--off"></div>
                             </div>
                                  
                     <div id="dismod" class="w3-modal">

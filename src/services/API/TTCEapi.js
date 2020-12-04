@@ -1876,7 +1876,6 @@ static sendTaxInvoice(
         localStorage.removeItem("user");
         const user = response.data.data.user;
         localStorage.setItem("user", JSON.stringify(user));
-        console.log(response)
         return response;
       })
       .catch((error) => {

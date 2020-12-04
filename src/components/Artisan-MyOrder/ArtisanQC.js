@@ -469,6 +469,7 @@ export default class ArtisanQC extends Component {
     render() {
         return (
             <React.Fragment>
+                
                 {this.props.data.oldQcExists ? this.props.data.oldQcExists === 1 ?
                     <div className="text-right">
                         <a href={"/viewOldQC?enquiryId="+ this.props.enquiryId} target="_blank">
@@ -535,7 +536,9 @@ export default class ArtisanQC extends Component {
                                                 onChange={(e) => this.handleYesNo(e, data.id, data.questionNo, key)}/>
                                                 {yesNo}
                                             </label>
+                                            
                                          ]) : null }
+                                        
                                     </div>
                                     :
                                     <div>

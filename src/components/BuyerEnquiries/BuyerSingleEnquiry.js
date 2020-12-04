@@ -1260,11 +1260,12 @@ MoqSimpleProductSelected(moqId){
                                      </div>
                                     
                     </Col>
+                    {console.log(item.openEnquiriesResponse.isPaymentRejected+"dhb")}
                     {/* ******************Go to order/transaction btn **************** */}
                     {item.openEnquiriesResponse.productStatusId==2 || item.openEnquiriesResponse.productStatusHistoryId === 2?
                 <>
                    
-
+                       
                 {item.openEnquiriesResponse.enquiryStageId>=3?
                                                     <button className="gotoordernewbtn" onClick={()=>{this.gotoOrders()}}>
                                                          <img
@@ -1278,9 +1279,10 @@ MoqSimpleProductSelected(moqId){
                 :
                                 
 <>
+{console.log(item.openEnquiriesResponse + "chekcinh")}
                                     {
                                     // item.openEnquiriesResponse.enquiryStageId===4?
-                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5?
+                                    item.isBlue==1 && item.openEnquiriesResponse.enquiryStageId<5 || item.openEnquiriesResponse.isPaymentRejected==1?
                                     <button className="gototrannewbtn" onClick={()=>{this.gotoTransaction()}}>Go to Transactions</button>
                                     :
                                     item.openEnquiriesResponse.enquiryStageId >=4?

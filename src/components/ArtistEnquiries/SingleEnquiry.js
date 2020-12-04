@@ -1977,7 +1977,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                                 <br></br>
                                                 <br></br>   
                                                 <Col className="col-xs-12 text-center font14">
-                                            MOQ Details are Not submitted / accepted yet.
+                                                MOQ details are not submitted/accepted yet
                                                  </Col>
                                                 </Row>
                                      

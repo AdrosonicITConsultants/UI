@@ -332,7 +332,7 @@ componentDidMount(){
                 <Row noGutters={true}>
                 <Col className="col-xs-12 bold font20 text-center">
                 <br></br>
-                 Tax Invoice Not Available.
+                Tax Invoice is not available
                   <br></br>
                   </Col>
                    </Row>
@@ -582,7 +582,7 @@ CR={this.props.CR}
 <Row noGutters={true}>
 <Col className="col-xs-12 bold font20 text-center">
    <br></br>
-  Tax Invoice Not Available.
+   Tax Invoice is not available
    <br></br>
 </Col>
 </Row>

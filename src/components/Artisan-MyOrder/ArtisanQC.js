@@ -481,7 +481,7 @@ export default class ArtisanQC extends Component {
                     <Row noGutters={true}>
                         <Col className="col-xs-12 bold font20 text-center">
                             <br></br>
-                            Quality Check Not Available.
+                            Quality Check is not available
                             <br></br>
                         </Col>
                     </Row>

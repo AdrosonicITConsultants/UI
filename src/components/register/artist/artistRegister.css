@@ -125,7 +125,7 @@ body {
     overflow: auto;
     display: inline-block;
     width: 160px;
-    margin: 20px 5px 20px 5px;
+    margin: 10px 5px 10px 5px;
 }
 
 #ck-button:hover {

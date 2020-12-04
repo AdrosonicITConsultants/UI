@@ -450,7 +450,7 @@ export default class BuyerAdvancePayment extends Component {
 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
-      <span className="selectpercenttext">  Calculated amount you pay as a advanced : 
+      <span className="selectpercenttext">  Calculated amount you pay as an advanced : 
       <span className="advtotal">
       ₹ {(this.state.calulatedAmount).toFixed(2)}</span>
      

@@ -309,7 +309,7 @@ this.state.getChangeRequestForArtisan ? this.state.getChangeRequestForArtisan.ma
     <Row noGutters={true}>
     <Col className="col-xs-12 bold font20 text-center">
      <br></br>
-     Change Request Not Available.
+     Change request is not available yet
      <br></br>
      </Col>
     </Row>

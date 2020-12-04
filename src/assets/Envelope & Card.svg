@@ -21,22 +21,22 @@
       <feComposite operator="in" in2="blur-3"/>
       <feComposite in="SourceGraphic"/>
     </filter>
-    <filter id="Path_764" x="585.468" y="413.406" width="149.419" height="149.42" filterUnits="userSpaceOnUse">
+    <filter id="Path_764" x="595.468" y="413.406" width="149.419" height="149.42" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="3" result="blur-4"/>
       <feFlood flood-opacity="0.161"/>
       <feComposite operator="in" in2="blur-4"/>
       <feComposite in="SourceGraphic"/>
     </filter>
-    <filter id="Polygon_72" x="53.768" y="936.906" width="1188" height="492" filterUnits="userSpaceOnUse">
-      <feOffset dx="-4" dy="8" input="SourceAlpha"/>
+    <filter id="Polygon_72" x="56.768" y="936.906" width="1188" height="492" filterUnits="userSpaceOnUse">
+      <feOffset dx="-1" dy="8" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="6.5" result="blur-5"/>
       <feFlood flood-opacity="0.161"/>
       <feComposite operator="in" in2="blur-5"/>
       <feComposite in="SourceGraphic"/>
     </filter>
   </defs>
-  <g id="Group_2063" data-name="Group 2063" transform="translate(-319.732 -304.594)">
+  <g id="Group_2254" data-name="Group 2254" transform="translate(-319.732 -304.594)">
     <g transform="matrix(1, 0, 0, 1, 319.73, 304.59)" filter="url(#Path_2317)">
       <path id="Path_2317-2" data-name="Path 2317" d="M-1897.455-16994.475l574.7-514.908h0l574,514.908Z" transform="translate(1976.95 17586.88)" fill="#e2d276"/>
     </g>
@@ -57,29 +57,26 @@
         <path d="M 1110.599975585938 1.19256591796875 L 806.941162109375 402.9442749023438 L 806.8204345703125 403.10400390625 L 806.6204223632812 403.1031494140625 L 305.3334350585938 401.0484313964844 L 305.1498413085938 401.0477294921875 L 305.0307006835938 400.9081420898438 L -34.479248046875 3.13409423828125 L -37.9951171875 811.5999755859375 L 39.776611328125 811.5999755859375 L 1110.599975585938 811.5999755859375 L 1110.599975585938 1.19256591796875 M 1111 0 L 1111 812 L 39.776611328125 812 L -38.3968505859375 812 L -34.87451171875 2.0546875 L 305.3350219726562 400.6484375 L 806.6220092773438 402.7031555175781 L 1111 0 Z" stroke="none" fill="#c7c7c7"/>
       </g>
     </g>
-    <g id="Group_2038" data-name="Group 2038" transform="translate(866.201 710)">
-      <g transform="matrix(1, 0, 0, 1, -546.47, -405.41)" filter="url(#Path_764)">
-        <path id="Path_764-2" data-name="Path 764" d="M516.925,182.016a65.71,65.71,0,1,1-65.709,65.709,65.712,65.712,0,0,1,65.709-65.709" transform="translate(143.25 237.39)" fill="#e2d276" fill-rule="evenodd"/>
+    <g id="Group_2038" data-name="Group 2038" transform="translate(876.201 710)">
+      <g transform="matrix(1, 0, 0, 1, -556.47, -405.41)" filter="url(#Path_764)">
+        <path id="Path_764-2" data-name="Path 764" d="M516.925,182.016a65.71,65.71,0,1,1-65.709,65.709,65.712,65.712,0,0,1,65.709-65.709" transform="translate(153.25 237.39)" fill="#e2d276" fill-rule="evenodd"/>
       </g>
       <path id="Path_765" data-name="Path 765" d="M574.274,278.317a25.558,25.558,0,0,1-6.053,5.609,11.284,11.284,0,0,1-10.551,1.157c-4.4-1.708-9.672-6.37-10.505-11.1s2.772-9.523.244-7.379-11.189,11.223-15.367,15.563-3.877,3.94-2.114,2.368,4.985-4.314,7.076-6.329a52.787,52.787,0,0,0,4.024-4.422,8.2,8.2,0,0,0,2.386-3.942,7.882,7.882,0,0,0-1.494-6.685c-1.741-1.981-5.056-3.127-9.024.645s-8.591,12.454-13.848,17.278a21.612,21.612,0,0,1-29.859-1.242c-4.007-4.157-7.615-10.567-7.817-17.633a28.691,28.691,0,0,1,7.068-19.072c4.06-4.294,8.976-5.167,14.613-4.839s12,1.86,17.1,1.461,8.963-2.725,10.588-5.909a8.911,8.911,0,0,0-1.289-9.8c-2.315-2.572-6.35-3.68-10.916-3.784s-9.67.778-16.349,2.126-14.941,3.155-22.414,2.472-15.491-4.552-22.18-7.727" transform="translate(-403.978 -165.753)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="22.926" stroke-width="2"/>
     </g>
-    <text id="Craft_Xchange" data-name="Craft Xchange" transform="translate(913 906)" fill="#aa972d" font-size="24" font-family="Avenir-Roman, Avenir"><tspan x="0" y="0">Craft Xchange</tspan></text>
-    <text id="An_initiative_of_Tata_Trusts" data-name="An initiative of Tata Trusts" transform="translate(876 938)" fill="#4a4a4a" font-size="20" font-family="HelveticaNeue, Helvetica Neue"><tspan x="0" y="0">An initiative of Tata Trusts</tspan></text>
+    <text id="Craft_Xchange" data-name="Craft Xchange" transform="translate(913 906)" fill="#aa972d" font-size="24" font-family="OpenSans, Open Sans"><tspan x="0" y="0">Craft Xchange</tspan></text>
+    <text id="An_initiative_of_Tata_Trusts" data-name="An initiative of Tata Trusts" transform="translate(876 938)" fill="#4a4a4a" font-size="20" font-family="OpenSans, Open Sans"><tspan x="0" y="0">An initiative of Tata Trusts</tspan></text>
     <g transform="matrix(1, 0, 0, 1, 319.73, 304.59)" filter="url(#Polygon_72)">
-      <g id="Polygon_72-2" data-name="Polygon 72" transform="translate(77.27 948.41)" fill="#fff">
-        <path d="M 1148.5673828125 452.8500061035156 L 0.4325567781925201 452.8500061035156 L 574.5 0.1910760849714279 L 1148.5673828125 452.8500061035156 Z" stroke="none"/>
-        <path d="M 574.5 0.38201904296875 L 0.864990234375 452.7000122070312 L 1148.135009765625 452.7000122070312 L 574.5 0.38201904296875 M 574.5 0 L 1149 453 L 0 453 L 574.5 0 Z" stroke="none" fill="#707070"/>
-      </g>
+      <path id="Polygon_72-2" data-name="Polygon 72" d="M574.5,0,1149,453H0Z" transform="translate(77.27 948.41)" fill="#fff"/>
     </g>
-    <g id="Group_2040" data-name="Group 2040" transform="translate(54.975 -260.582) rotate(7)">
-      <path id="Path_2330" data-name="Path 2330" d="M.028,291.275S205.742,721.5,425.229,529.091,882.189,558.6,843.4,668.761s-250.99-90.337-32.927-257.256C996.7,268.958,1036.856,132.118,1018.689,54.6c-1.542-6.578-14.9-6.12-20.051-15.867C993.917,29.8,1002.46,4.808,999.444.1" transform="matrix(1, 0.017, -0.017, 1, 553.115, 1064.829)" fill="none" stroke="#3441dd" stroke-linecap="round" stroke-width="1"/>
-      <path id="Path_2331" data-name="Path 2331" d="M.027,276.66s202.711,431.21,417.194,238.771S863.783,544.921,825.886,655.1,580.6,564.762,793.7,397.812C975.157,255.647,1012.626,116.38,994.521,37.5c-1.021-4.448-10.6-1.462-12.105-5.82-2.685-7.755,3.257-25.352-.643-31.587" transform="matrix(1, 0.017, -0.017, 1, 562.85, 1078.642)" fill="none" stroke="#fd1689" stroke-linecap="round" stroke-width="1"/>
-      <path id="Path_2332" data-name="Path 2332" d="M.026,263.412s197.772,430.9,408.01,238.43,437.74,29.476,400.6,139.668-240.44-90.338-31.564-257.317C950.435,245.6,987.662,112.418,973.866,33.864c-1.46-8.315-9.245-1.425-10.636-6.242-1.064-3.7,3.5-22.249.264-27.527" transform="matrix(1, 0.017, -0.017, 1, 573.464, 1092.4)" fill="none" stroke="#1176cc" stroke-linecap="round" stroke-width="1"/>
-      <path id="Path_2333" data-name="Path 2333" d="M.025,242.31s192.981,431.722,397.282,239.2,425.4,29.456,389.314,139.672-233.669-90.341-30.689-257.366C916.285,231.865,960.272,104.819,952.564,24.942c-1.987-20.6-21.737,2.91-14.375-23.072.008-.03.691-1.446.787-1.773" transform="matrix(1, 0.017, -0.017, 1, 586.168, 1112.931)" fill="none" stroke="#16a227" stroke-linecap="round" stroke-width="1"/>
-      <path id="Path_2334" data-name="Path 2334" d="M.024,229.1S187.928,660.97,387.33,468.41s415.223,29.438,380,139.671-228.08-90.342-29.967-257.4C878.817,231.4,927.491,116.135,930.023,35.943c1-31.609-14.479-21.32-10.29-35.846" transform="matrix(1, 0.017, -0.017, 1, 597.839, 1126.217)" fill="none" stroke="#dedede" stroke-linecap="round" stroke-width="1"/>
-      <path id="Path_2335" data-name="Path 2335" d="M.024,220.044s183.311,423.7,378.11,235.554,405.639,28.761,371.232,136.47-222.816-88.273-29.276-251.5C840.857,238.714,892.4,139.854,905.149,64.295c7.632-45.225-3.719-55.268-1.2-64.2" transform="matrix(1, 0.017, -0.017, 1, 608.683, 1135.325)" fill="none" stroke="#fd9d27" stroke-linecap="round" stroke-width="1"/>
+    <g id="Group_2040" data-name="Group 2040" transform="translate(88.209 -256.502) rotate(7)">
+      <path id="Path_2330" data-name="Path 2330" d="M.164,291.177s199.3,430.333,411.58,238.054S853.937,559,816.47,669.135s-242.922-90.478-32.007-257.272c180.12-142.441,218.9-279.257,201.274-356.784-1.5-6.579-14.421-6.129-19.412-15.878-4.573-8.935,3.68-33.924.758-38.637" transform="matrix(1, 0.017, -0.017, 1, 552.745, 1064.925)" fill="none" stroke="#3441dd" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2331" data-name="Path 2331" d="M.156,276.562s196.4,431.321,403.832,239,432.132,29.742,395.523,139.9-237.4-90.474-31.293-257.3C943.728,256.1,979.906,116.855,962.342,37.969c-.991-4.448-10.253-1.468-11.717-5.827-2.6-7.756,3.137-25.35-.64-31.587" transform="matrix(1, 0.017, -0.017, 1, 562.165, 1078.738)" fill="none" stroke="#fd1689" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2332" data-name="Path 2332" d="M.149,263.314S191.766,694.324,395.094,501.972s423.595,29.722,387.715,139.893S550.1,551.392,752.121,384.532C919.8,246.038,955.748,112.879,942.354,34.318c-1.417-8.316-8.947-1.431-10.3-6.248-1.032-3.7,3.374-22.246.24-27.526" transform="matrix(1, 0.017, -0.017, 1, 572.435, 1092.496)" fill="none" stroke="#1176cc" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2333" data-name="Path 2333" d="M.137,242.211S187.118,674.038,384.7,481.632s411.659,29.7,376.8,139.89-226.161-90.473-29.842-257.381C886.748,232.284,929.241,105.264,921.738,25.383c-1.934-20.6-21.032,2.9-13.923-23.08.008-.03.667-1.446.761-1.772" transform="matrix(1, 0.017, -0.017, 1, 584.726, 1113.028)" fill="none" stroke="#16a227" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2334" data-name="Path 2334" d="M.129,229S182.2,660.974,375.041,468.528,776.848,498.2,742.829,608.413,522.076,517.943,713.685,351C850.494,231.8,897.528,116.561,899.933,36.371c.948-31.609-14.023-21.328-9.978-35.852" transform="matrix(1, 0.017, -0.017, 1, 596.018, 1126.313)" fill="none" stroke="#dedede" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_2335" data-name="Path 2335" d="M.124,219.945s177.62,423.8,366.011,235.765,392.533,28.99,359.3,136.678-215.658-88.4-28.471-251.516c116.8-101.783,166.621-200.612,178.917-276.163,7.359-45.22-3.63-55.27-1.2-64.2" transform="matrix(1, 0.017, -0.017, 1, 606.511, 1135.423)" fill="none" stroke="#fd9d27" stroke-linecap="round" stroke-width="1"/>
     </g>
-    <text id="A_thread_of_times_" data-name="A thread of times!!" transform="translate(955 1604)" fill="#3b2977" font-size="37" font-family="Zapfino"><tspan x="-212.519" y="0">A thread of times!!</tspan></text>
+    <text id="A_thread_of_times_" data-name="A thread of times!!" transform="translate(980 1635)" fill="#3b2977" font-size="27" font-family="OpenSans, Open Sans"><tspan x="-115.403" y="0">A thread of times!!</tspan></text>
     <g id="Group_2044" data-name="Group 2044" transform="translate(-222.013 -1810)">
       <g id="Ellipse_166" data-name="Ellipse 166" transform="translate(634.013 3000)" fill="none" stroke="#5130fb" stroke-width="3" stroke-dasharray="3 36">
         <circle cx="141" cy="141" r="141" stroke="none"/>

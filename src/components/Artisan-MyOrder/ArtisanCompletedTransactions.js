@@ -513,7 +513,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 
    <>
   
-    <p>Notify buyer again</p>
+    <p className="">Notify buyer again</p>
 <img src={logos.notifybuyer} className="acceptrejecticon" 
 onClick={()=>this.notifyModalShow(item.transactionCompleted.id,item.transactionCompleted.enquiryId,data.id)}
 

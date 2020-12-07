@@ -265,7 +265,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                 },()=>{
               
                 });
-                customToast.success("MOQ Details saved successfully", {
+                customToast.success("MOQ details are saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
@@ -357,7 +357,7 @@ export class ClosedBuyerSingleEnquiry extends Component {
                 isMoqdetail:true},()=>{
             this.componentDidMount();
             });
-            customToast.success("MOQ Details sent successfully", {
+            customToast.success("MOQ details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -1494,7 +1494,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <br></br>
                                                                     <br></br>   
                                                                     <Col className="col-xs-12 text-center font14">
-                                                                        MOQ not finalised for this Custom Product yet.
+                                                                        MOQ is not finalised for this Custom Product yet
                                                                     </Col>
                                                                 </Row>
                                                 </>
@@ -1613,7 +1613,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <br></br>
                                                                     <br></br>   
                                                                     <Col className="col-xs-12 text-center font14">
-                                                                    No Moq is Available
+                                                                    MOQ is not available
                                                                     </Col>
                                                                 </Row>
                                 </>
@@ -1871,7 +1871,7 @@ MoqSimpleProductSelected(moqId){
                                                         <br></br>
                                                          <br></br>   
                                                         <Col className="col-xs-12 text-center font14">
-                                                         MOQ Details not Received for this product.
+                                                         MOQ details are not received for this product
                                                         </Col>
                                                          </Row>
                                        

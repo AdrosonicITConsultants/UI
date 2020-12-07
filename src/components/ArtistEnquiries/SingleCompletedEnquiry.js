@@ -228,7 +228,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 },()=>{
                
                 });
-                customToast.success("MOQ Details saved successfully", {
+                customToast.success("MOQ details are saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
@@ -312,7 +312,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 isMoqdetail:true,showValidationMoq: false},()=>{
             this.componentDidMount();
             });
-            customToast.success("MOQ Details sent successfully", {
+            customToast.success("MOQ details are sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -1209,7 +1209,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                 <br></br>
                 <br></br>   
                 <Col className="col-xs-12 text-center font14">
-                    MOQ not Available.
+                    MOQ is not available
                 </Col>
             </Row>
             }

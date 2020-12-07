@@ -295,7 +295,7 @@ export class BuyerSingleEnquiry extends Component {
                 },()=>{
               
                 });
-                customToast.success("MOQ Details saved successfully", {
+                customToast.success("MOQ details are saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
@@ -313,7 +313,7 @@ export class BuyerSingleEnquiry extends Component {
     DeleteMoq(id){
         TTCEapi.deleteMoq(id).then((response)=>{
             if (response.data.valid) {
-                customToast.success("MOQ removed!", {
+                customToast.success("MOQ is removed!", {
                   position: toast.POSITION.TOP_RIGHT,
                   autoClose: true,
                 });
@@ -415,7 +415,7 @@ export class BuyerSingleEnquiry extends Component {
                 isMoqdetail:true},()=>{
             this.componentDidMount();
             });
-            customToast.success("MOQ Details sent successfully", {
+            customToast.success("MOQ details are sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
@@ -1753,7 +1753,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <br></br>
                                                                     <br></br>   
                                                                     <Col className="col-xs-12 text-center font14">
-                                                                        MOQ not finalised for this Custom Product yet.
+                                                                    MOQ is not finalised for this Custom Product yet
                                                                     </Col>
                                                                 </Row>
                                                 </>
@@ -1872,7 +1872,7 @@ MoqSimpleProductSelected(moqId){
                                                                     <br></br>
                                                                     <br></br>   
                                                                     <Col className="col-xs-12 text-center font14">
-                                                                    No Moq is Available
+                                                                    MOQ is not Available
                                                                     </Col>
                                                                 </Row>
                                 </>
@@ -2173,7 +2173,7 @@ MoqSimpleProductSelected(moqId){
                                                         <br></br>
                                                          <br></br>   
                                                         <Col className="col-xs-12 text-center font14">
-                                                         MOQ Details not Received for this product.
+                                                        MOQ details are not received for this product
                                                         </Col>
                                                          </Row>
                                        
@@ -2295,7 +2295,7 @@ MoqSimpleProductSelected(moqId){
                                                         <br></br>
                                                          <br></br>   
                                                         <Col className="col-xs-12 text-center font14">
-                                                         MOQ Details not Received for this product.
+                                                        MOQ details are not received for this product
                                                         </Col>
                                                          </Row>
                             </>}

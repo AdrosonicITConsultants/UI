@@ -25,7 +25,7 @@ class ArtistProfile extends Component {
           isDetailsEdit : true,
           isPdetail : true,
           isBdetail: true,
-          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
+          products : [{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""},{id: 0 , productDesc :""}],
           selectedprods :[],          
           accountno : "",
           bankname : "" ,

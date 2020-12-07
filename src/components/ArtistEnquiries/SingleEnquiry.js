@@ -375,7 +375,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                 },()=>{
                
                 });
-                customToast.success("MOQ Details saved successfully", {
+                customToast.success("MOQ details are saved successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
@@ -504,7 +504,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                     this.componentDidMount();
            
             });
-            customToast.success("MOQ Details sent successfully", {
+            customToast.success("MOQ details sent successfully", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });

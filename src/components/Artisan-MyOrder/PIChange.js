@@ -159,7 +159,6 @@ export class PIchange extends Component {
     
     }
     handleChangeDate(date) {
-        console.log(date)
         this.setState({
             dod: date,
             showValidationMoq: false ,

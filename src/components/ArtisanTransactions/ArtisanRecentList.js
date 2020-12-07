@@ -57,24 +57,16 @@ class ArtisanRecentList extends Component {
 
     }  
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
-        this.setState({
-            // [name]: value,
+       this.setState({
             orderDispatchDate: date,
         },()=>{
-            console.log( this.state.orderDispatchDate)
         });
     }
 
     handleChangeDate2(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             eta: date,
         },()=>{
-            console.log( this.state.orderDispatchDate,this.state.eta)
         });
     }
     handleChange(e) {

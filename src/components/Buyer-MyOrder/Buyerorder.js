@@ -72,14 +72,10 @@ export class Buyerorder extends Component {
 
     }
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             deliveredDate: date,
             showValidationMoq: false ,completebtndis:false,showDeldatevalidation:false
         },()=>{
-            console.log( this.state.deliveredDate)
         });
     }
     handleChange(e) {

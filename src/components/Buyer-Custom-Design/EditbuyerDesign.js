@@ -318,7 +318,6 @@ export default class EditBuyerDesign extends Component {
                                     }
                                   }
                                 });
-                                console.log(this.state.yarns)
                                 this.setState(
                                   {
                                     countOfYarn1: this.state.yarns ? this.state.yarn1 ? this.state.yarns.find(

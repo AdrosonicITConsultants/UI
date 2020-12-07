@@ -57,24 +57,16 @@ import ModernDatepicker from 'react-modern-datepicker';
 
     }  
     handleChangeDate(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             orderDispatchDate: date,
         },()=>{
-            console.log( this.state.orderDispatchDate)
         });
     }
 
     handleChangeDate2(date) {
-        console.log(date)
-        // const { name, value } = date.target;
         this.setState({
-            // [name]: value,
             eta: date,
         },()=>{
-            console.log( this.state.orderDispatchDate,this.state.eta)
         });
     }
     handleChange(e) {

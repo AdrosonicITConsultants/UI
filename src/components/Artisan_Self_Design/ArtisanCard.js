@@ -28,7 +28,6 @@ import Footer from "../footer/footer";
       return (
         
         <React.Fragment>
-        {console.log(this.state)}
           
         {/* Row 1 */}
          

@@ -11,11 +11,11 @@ import changeLang from "../../services/utils/changeLang"
 
  class Product extends Component {
    editProduct = (Product)=>{
-     debugger;
+     
      browserHistory.push("./EditProduct?ProductId=" + Product.id)
    }
    render() {
-     debugger;
+     
      const { productList } = this.props;
      const ImageUrl = TTCEapi.ImageUrl;
 

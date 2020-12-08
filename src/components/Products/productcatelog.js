@@ -32,7 +32,7 @@ class productcatelog extends Component {
   }
 
   render() {
-    debugger;
+    
     const ImageUrl = TTCEapi.ImageUrl;
 
     return (

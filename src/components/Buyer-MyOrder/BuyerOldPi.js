@@ -824,7 +824,7 @@ export class BuyerOldPi extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

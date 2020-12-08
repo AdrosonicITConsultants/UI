@@ -121,7 +121,7 @@ var homeSectionStyle = {};
                 checkusernameArtist(userName){
                    this.setState({ username: userName }, () => {
                      TTCEapi.validateUsername(userName, 1).then((response) => {
-                       debugger;
+                       
                        if (response.data.valid) {
                          if (this.state.userpage == 1) {
                            this.handler(2);
@@ -144,7 +144,7 @@ var homeSectionStyle = {};
                   this.setState({ username: this.state.username }, () => {
                     TTCEapi.login(this.state.username, password, 1).then(
                       (response) => {
-                        debugger;
+                        
                         if (response.data.valid) {
                           debugger
                     
@@ -172,7 +172,7 @@ var homeSectionStyle = {};
                 this.setState({ username: userName }, () => {
                           TTCEapi.validateUsername(userName, 2).then(
                             (response) => {
-                              debugger;
+                              
                               if (response.data.valid) {
                                 if (this.state.userpage == 1) {
                                   this.handler(2);
@@ -195,7 +195,7 @@ var homeSectionStyle = {};
                      this.setState({ username: this.state.username }, () => {
                        TTCEapi.login(this.state.username, password, 2).then(
                          (response) => {
-                           debugger;
+                           
                            if (response.data.valid) {
                            
                              let token = response.data.data.acctoken;

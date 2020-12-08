@@ -45,7 +45,7 @@ export default class buyreg1 extends Component {
                    }
                  }
                  operation() {
-                   debugger;
+                   
                    const emailcheck = isEmail;
                    if (
                      this.state.emailid == "" ||

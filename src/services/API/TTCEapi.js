@@ -208,7 +208,7 @@ class TTCEapi {
   //#endregion
 
   static uploadProduct(file1, file2 = null, file3 = null, productData) {
-    debugger;
+    
     let url = ApiUrl + "/product/uploadProduct";
     var data = new FormData();
     data.append("file1", file1);
@@ -232,7 +232,7 @@ class TTCEapi {
   }
 
   static buyerpUploadDesign(file1, file2 = null, file3 = null , productData) {
-    debugger;
+    
    let url = ApiUrl + "/buyerCustomProduct/uploadProduct";
    var data = new FormData();
    data.append("file1", file1);
@@ -256,7 +256,7 @@ class TTCEapi {
      });
  }
   static editProduct(file1, file2 = null, file3 = null, productData) {
-    debugger;
+    
     let url = ApiUrl + "/product/edit/product";
     var data = new FormData();
     data.append("file1", file1);
@@ -280,7 +280,7 @@ class TTCEapi {
 
 
   static editCustomProduct(file1, file2 = null, file3 = null, productData) {
-    debugger;
+    
     let url = ApiUrl + "/buyerCustomProduct/edit/product";
     var data = new FormData();
     data.append("file1", file1);
@@ -1082,7 +1082,7 @@ class TTCEapi {
     selectedProducts,
     selectedFile
   ) {
-    debugger;
+    
     var bodyFormData = new FormData();
 
     let url = ApiUrl + "/register/user";
@@ -1138,7 +1138,7 @@ class TTCEapi {
     totalAmount
 
   ) {
-    debugger;
+    
     var bodyFormData = new FormData();
 
     let url = ApiUrl + "/enquiry/Payment";
@@ -1180,7 +1180,7 @@ class TTCEapi {
     totalAmount
 
   ) {
-    debugger;
+    
     var bodyFormData = new FormData();
 
     let url = ApiUrl + "/enquiry/Payment";
@@ -1221,7 +1221,7 @@ class TTCEapi {
     orderDispatchDate,
     ETA,
   ) {
-    debugger;
+    
     var bodyFormData = new FormData();
 
     let url = ApiUrl + "/enquiry/submitDeliveryChallan?enquiryId="+enquiryId+"&orderDispatchDate="+orderDispatchDate+"%2000%3A00%3A00&ETA="+ETA;
@@ -1394,7 +1394,7 @@ class TTCEapi {
     if (removedlogo == 1) {
       var f = new File([""], "");
       bodyFormData.append("logo", f);
-      debugger;
+      
     }
     if (removedlogo == 2) {
       bodyFormData.append("logo", selectedBrandFile);
@@ -1796,13 +1796,13 @@ static sendTaxInvoice(
   }
 
   static getProductUploadData() {
-    debugger;
+    
     let url = ApiUrl + "/product/getProductUploadData";
 
     return axios
       .get(url)
       .then((response) => {
-        debugger;
+        
         localStorage.removeItem("ProductUploadData");
         localStorage.setItem(
           "ProductUploadData",

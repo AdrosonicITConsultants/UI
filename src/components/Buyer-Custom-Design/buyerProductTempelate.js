@@ -149,7 +149,7 @@ export default class buyerProductTempelate extends Component {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       debugger;
+                       
                        this.setState(
                          {
                            productCategories:
@@ -305,7 +305,7 @@ export default class buyerProductTempelate extends Component {
                        
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
-                            debugger;
+                            
                         
                             this.setState(
                               {
@@ -1080,7 +1080,7 @@ else {
                     //    }
                     //  });  
 
-                    debugger;
+                    
                   TTCEapi.editCustomProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       customToast.success("Product updated successfully!", {

@@ -2053,7 +2053,7 @@ MoqSimpleProductSelected(moqId){
 
 
 function mapStateToProps(state) {
-    // debugger;
+    
     const { user } = state
     return { user };
 }

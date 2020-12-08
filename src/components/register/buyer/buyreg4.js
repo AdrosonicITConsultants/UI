@@ -29,7 +29,7 @@ export default class buyreg4 extends Component {
                  }
        
                  operation() {
-                   debugger;
+                   
                    const emailcheck = isEmail;
                    var flag = true; 
                    var regex=/([A-Z]){5}([0-9]){4}([A-Z]){1}$/;

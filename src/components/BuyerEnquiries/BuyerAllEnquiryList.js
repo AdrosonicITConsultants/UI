@@ -113,7 +113,7 @@ export class BuyerAllEnquiryList extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

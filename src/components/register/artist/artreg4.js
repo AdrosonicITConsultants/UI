@@ -35,7 +35,7 @@ class artreg4 extends Component {
      
       operation() {
         var pin=/([0-9]){1}([0-9]){5}$/;
-        // debugger;
+        // 
         if (this.state.firstname == ""  || this.state.clusterid == -1 || this.state.pincode == "" || this.state.mobileno == "") {
             this.setState({
                 showValidationpass: true,

@@ -421,7 +421,7 @@ export class ArtisanFaultResolved extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

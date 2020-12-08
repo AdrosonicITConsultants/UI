@@ -30,7 +30,7 @@ class artreg5 extends Component {
                 }
 
                  operation() {
-                   debugger;
+                   
                    if(document.getElementById('agree').checked){
                     {this.state.products.map((item) => { if(document.getElementById(item.id).checked){ this.state.selectedprods.push(item.id)} }  )     }
                       this.props.cr(this.state.selectedprods,this.state.selectedFile);

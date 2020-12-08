@@ -806,7 +806,7 @@ export class PreviewNewPI extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

@@ -117,10 +117,10 @@ function ImageEditorTTCE(props) {
       props.cancelUpdate();
   }
   const saveImageToDisk = () => {
-    debugger;
+    
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
-    debugger;
+    
     if (data) {
                 const mimeType = data.split(";")[0];
                 const extension = data.split(";")[0].split("/")[1];

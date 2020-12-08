@@ -80,7 +80,14 @@ class ArtistProfile extends Component {
                     {   var prodselected = "";
                       for (var  items in response.data.data.userProductCategories)
                       { 
-                        prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc + ", "
+                        if(response.data.data.userProductCategories.length - 1 != parseInt(items)) {
+                          prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc 
+                          + ", ";
+                        }
+                        else {
+                          prodselected = prodselected + this.state.products[response.data.data.userProductCategories[items].productCategoryId - 1].productDesc 
+                        + "";
+                        }                        
                       }
                       this.setState({
                         prodsel : prodselected
@@ -1329,7 +1336,7 @@ class ArtistProfile extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
+    
     const { user } = state
     return { user };
 }

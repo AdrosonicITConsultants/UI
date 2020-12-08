@@ -159,7 +159,6 @@ export class PIchange extends Component {
     
     }
     handleChangeDate(date) {
-        console.log(date)
         this.setState({
             dod: date,
             showValidationMoq: false ,
@@ -289,7 +288,7 @@ export class PIchange extends Component {
                         {this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===1 ||
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===3 ?
                         <>
-                          {/* {console.log("PIChange.js status-1/3")} */}
+                          {/* {("PIChange.js status-1/3")} */}
                         {this.state.getOldPIData.length==0
                         ?
                                    <>
@@ -297,7 +296,7 @@ export class PIchange extends Component {
                                     <>
                                     {this.state.getOldPIData.length>0 && this.state.previewAndRaisePI==false?
                                     <>
-                                     {/* { console.log(" old data NA")} */}
+                                     {/* { (" old data NA")} */}
                                                 <PreviewOldchanges
                                                 bp={this.oldbackPI}
                                                 enquiryId={this.props.enquiryId}
@@ -309,7 +308,7 @@ export class PIchange extends Component {
                                     <>
                                     {this.state.getPi.isSend===1?
                                     <>
-                                     {/* { console.log("pi send ")} */}
+                                     {/* {("pi send ")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -328,7 +327,7 @@ export class PIchange extends Component {
                                     :
                                     
                                              <>
-                                             {/* { console.log("pi not send & old data NA")} */}
+                                             {/* { ("pi not send & old data NA")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -371,7 +370,7 @@ export class PIchange extends Component {
                                      </>
                                      :
                                                                        <>
-                                {/* {console.log("Form display")} */}
+                                {/* {("Form display")} */}
                             <Row noGutters={true}>
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 
@@ -487,7 +486,7 @@ export class PIchange extends Component {
                     </>
                 :
                 <>
-                 {/* {console.log("PI is raised")} */}
+                 {/* {("PI is raised")} */}
                                                 <PreviewChangedPI 
                                                 bp={this.backPI}
                                                 enquiryId={this.props.enquiryId}
@@ -512,7 +511,7 @@ export class PIchange extends Component {
                        
                         this.state.getOrder[0].openEnquiriesResponse.changeRequestStatus===0?
                         <>
-                         {/* {console.log("PIChange.js status-2/0")} */}
+                         {/* {("PIChange.js status-2/0")} */}
                         
                        <PreviewChangedPI 
                         bp={this.backPI}

@@ -180,7 +180,6 @@ class ProductRegions extends Component {
                                             {this.state.item1 = false}
 
                                         <ProductsOfCatelog productData = {item} productIdsInWishlist={this.state.getProductIdsInWishlist}/>    
-                                {console.log(item)};
 
                                         </Col>
                                         :

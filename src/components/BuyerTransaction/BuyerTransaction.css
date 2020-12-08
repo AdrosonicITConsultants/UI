@@ -276,6 +276,7 @@ input.empty {
     }
     .cparrowsizetr {
         width: 21px!important;
+        cursor: pointer;
     }
     .recenticonsm {
         height: 14px;

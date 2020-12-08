@@ -23,7 +23,6 @@ export default class Menu extends Component {
         isChecked: isCheckedfilter
       },
       () => {
-        console.log("hey " + this.state.isChecked);
       }
     );
   };

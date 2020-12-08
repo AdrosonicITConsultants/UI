@@ -204,7 +204,6 @@ class buyerLanding extends Component {
                       {" "}
                       <p>Antaran</p>
                       <p>co-design</p>
-                      {/* <p>collection</p> */}
                     </div>
 
                     <div className="Homebg2div3">
@@ -215,7 +214,7 @@ class buyerLanding extends Component {
                         >
                           Explore more <strong>></strong>
                         </Label>
-                        <p>Antaran</p> <p>co-design </p>
+                        <p>Antaran</p> <p>co-design</p>
                         <hr className="hrlineLeft"></hr>
                         <br />
                         {/* <div className="textline3" style={{marginRight: '30px'}}>

@@ -159,7 +159,7 @@ class BuyerSuggestions extends Component {
     });
   };
   onSuggestionsFetchRequested = async ({ value }) => {
-    // console.log("Calling key pressing function");
+    // ("Calling key pressing function");
     this.setState({
       suggestions: await getSuggestions(value),
     });

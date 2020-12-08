@@ -181,7 +181,6 @@ generateEnquiry(item){
                           <div className="productname">{this.state.proddata.tag}</div> 
                         </Col>
                         <Col className="col-xs-4">
-                          {/* {console.log(this.state.proddata.madeWithAnthran)} */}
                           {this.state.proddata.productStatusId == 2 
                           ?
                           <Row    className="stockmargin">

@@ -32,7 +32,6 @@ export const logout = (token, user, userTypeId) => {
   localStorage.removeItem("jwtToken");
   localStorage.setItem("i18nextLng", language);
   localStorage.setItem("skipVideo", skipVideo);
-  console.log(localStorage.getItem("skipVideo"));
   setAuthorizationtoken(false);
    browserHistory.push("/"); 
   return {

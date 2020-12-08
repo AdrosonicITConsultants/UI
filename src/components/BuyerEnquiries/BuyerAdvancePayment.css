@@ -340,6 +340,7 @@ cursor: pointer;
  }
  .cparrowsize {
   width: 21px!important;
+  cursor: pointer;
 }
 .fontheadingadv{
   font-size:14px

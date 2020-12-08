@@ -379,7 +379,6 @@ export default class ArtisanQC extends Component {
                     this.setState({
                         dummyResponseNew: array,
                     }, () => {
-                        console.log(this.state.dummyResponseNew);
                         this.setState({
                             QCsaveButton: false,
                             QCsendButton: false,

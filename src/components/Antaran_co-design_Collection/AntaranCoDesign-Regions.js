@@ -7,6 +7,7 @@ import * as Actions from "../../redux/action/action";
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
 import CMSApi from '../../services/API/CMSApi';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class AntaranCoDesignRegion extends Component {
   constructor(props) {
@@ -45,6 +46,10 @@ export default class AntaranCoDesignRegion extends Component {
       });
   });
   }
+
+  exploreMore(id){
+    browserHistory.push("/Antaran/regions/ProductRegions?clusterid="+id)
+  }
     render() {
         return (
          
@@ -64,7 +69,7 @@ export default class AntaranCoDesignRegion extends Component {
                  </p>
                 </div>
                 <img className="card-img-top" src={regionData.acf.image}   alt="Card image cap"/>
-                <div class="effect-text">
+                <div class="effect-text"onClick={()=>this.exploreMore(data.id)}>
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
                   <a class="btn" href={"/Antaran/regions/ProductRegions?clusterid=" +data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>

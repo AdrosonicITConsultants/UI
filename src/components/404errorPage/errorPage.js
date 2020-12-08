@@ -16,7 +16,6 @@ import { browserHistory } from "../../helpers/history";
     render() {
         var user = "";
         user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : "";
-        console.log("testError");
         return (            
         <div>
             {user !== ""?

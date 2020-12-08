@@ -473,7 +473,7 @@ export class PreviewTaxInvoice extends Component {
         </>
         :
         <>
-        {/* {console.log("Product  custom")} */}
+        {/* {("Product  custom")} */}
         <td className="tdmarginleft">
         <h3 className="snopi gdwidth wraptext" style={{textAlign:"left",padding:"46px 0px 153px 0px"}}>Custom Product -{this.state.buyerCustomProduct.length}  <b className="CRfondcss">{this.props.CR!=1?"":"CR"}</b></h3>
        

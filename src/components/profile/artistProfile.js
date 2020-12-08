@@ -351,7 +351,6 @@ class ArtistProfile extends Component {
 
           },()=>{
             TTCEapi.getProfile().then((response)=>{
-              console.log(response.data.data +"checki")
 
               for (var  items in response.data.data.userProductCategories)
                         {    

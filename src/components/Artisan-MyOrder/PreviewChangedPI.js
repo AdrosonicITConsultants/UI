@@ -232,7 +232,7 @@ export class PreviewChangedPI extends Component {
 {/* --------------------------------------Invoice---------------------------------------------------------- */}
 {this.state.oldDataPI?
 <>
-{/* {console.log("oldview")} */}
+{/* {("oldview")} */}
     <PreviewOldchanges
     newPIpreview={this.newPIpreview}
     enquiryId={this.props.enquiryId}
@@ -510,7 +510,7 @@ export class PreviewChangedPI extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{/* {console.log("Product  Simple")} */}
+{/* {("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -626,7 +626,7 @@ export class PreviewChangedPI extends Component {
         </>
         :
         <>
-        {/* {console.log("Product  custom")} */}
+        {/* {("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  

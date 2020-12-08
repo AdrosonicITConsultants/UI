@@ -48,6 +48,10 @@ export default class ArtistSelfdesignRegions extends Component {
       });
   });
   }
+
+  exploreMore(id){
+    browserHistory.push("/Artisianself/regions/ProductRegions?clusterid=" + id)
+  }
     render() {
         return (
          
@@ -69,7 +73,7 @@ export default class ArtistSelfdesignRegions extends Component {
                  </p>
                 </div>
                 <img className="card-img-top" src={regionData.acf.image}  alt="Card image cap"/>
-                <div class="effect-text">
+                <div class="effect-text" onClick={()=>this.exploreMore(data.id)}>
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
                       <a class="btn" href={"/Artisianself/regions/ProductRegions?clusterid=" + data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>

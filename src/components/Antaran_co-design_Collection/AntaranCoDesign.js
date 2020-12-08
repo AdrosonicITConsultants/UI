@@ -60,7 +60,7 @@ class AntaranCoDesign extends Component {
                   <div noGutters="true">
                         <Col sm={{size:12}} className="Asdh1">
                           <h1>  Antaran <br/> Co-Design </h1>
-                            <p>Collection</p>
+                            <p></p>
                             <p><img className="BPDAntaranlogo" src={logos.antaranCoDesignLogo}  alt="Card image cap" style={{height:"47px"}}/></p>
                         </Col>
                     </div>

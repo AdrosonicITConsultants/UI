@@ -31,7 +31,9 @@ class AntaranCoDesignCategories extends Component {
         return {visible: prev.visible + 6};
       });
     }
-
+exploreMore(id){
+  browserHistory.push("/Antaran/categories/ProductCategories?categoryId="+id)
+}
   componentDidMount(){
 
     CMSApi.getCategories().then((response)=>{
@@ -60,14 +62,14 @@ class AntaranCoDesignCategories extends Component {
                return this.state.categoryData ? this.state.categoryData.map((categoryData) => {
                 if(data.id === parseInt(categoryData.acf.category_id)) {
               return <Col xs={12} sm={6} md={4}>
-                <div className="card Cardlayout">
+                <div className="card Cardlayout" >
                 <div class="card-block">
                   <p class="card-text"> 
                   {categoryData.title.rendered}
                  </p>
                 </div>
                 <img className="card-img-top" src={categoryData.acf.image}  alt="Card image cap"/>
-                <div class="effect-text">
+                <div class="effect-text" onClick={()=>this.exploreMore(data.id)}>
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
                       <a class="btn" href={"/Antaran/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>

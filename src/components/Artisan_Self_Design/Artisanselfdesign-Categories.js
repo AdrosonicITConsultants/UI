@@ -52,6 +52,9 @@ class ArtistSelfDesignCategories extends Component {
 
   }
 
+  exploreMore(id){
+    browserHistory.push("/Artisanself/categories/ProductCategories?categoryId="+id)
+  }
     render() {
         return (
 
@@ -71,7 +74,7 @@ class ArtistSelfDesignCategories extends Component {
                    </p>
                   </div>
                   <img className="card-img-top" src={categoryData.acf.image}  alt="Card image cap"/>
-                  <div class="effect-text">
+                  <div class="effect-text" onClick={()=>this.exploreMore(data.id)}>
                       <div class="effect-btn">
                         <h2>EXPLORE MORE</h2>
                         <a class="btn" href={"/Artisanself/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>

@@ -8,6 +8,7 @@ import * as Actions from "../../redux/action/action";
 import './ArtisanselfDesign.css';
 import TTCEapi from '../../services/API/TTCEapi';
 import Footer from "../footer/footer";
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
  class ArtisanCard extends Component {
   constructor(props){
@@ -22,7 +23,9 @@ import Footer from "../footer/footer";
    
   }
        
-  
+  exploreMore(id){
+    browserHistory.push("artisanbrands/ArtisanProducts?artisanId="+id)
+  }
     render () {
       
       return (
@@ -44,7 +47,7 @@ import Footer from "../footer/footer";
           <div class="card-block cardaligntext">
          <p class="card-text1">{this.props.companyName ? <p>{this.props.companyName}</p>:<p>{this.props.firstName}</p>}</p>
          </div>
-         <div class="effect-text">
+         <div class="effect-text" onClick={()=>this.exploreMore(this.props.artisanId)}>
              <div class="effect-btn">
                <h2>EXPLORE MORE</h2>
                <a class="btn" href={"artisanbrands/ArtisanProducts?artisanId="+this.props.artisanId}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>

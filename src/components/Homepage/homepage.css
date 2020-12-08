@@ -127,7 +127,7 @@ font-size: 15px;
     font-size: 20px;
 }
 .font4{
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .font5{
@@ -147,9 +147,7 @@ font-size: 15px;
     margin-left: 10%;
     box-shadow: 0px 10px 20px 0px #d8d6d6;
     border-radius: 15px;
-
-    
-   
+    cursor: pointer;  
 }
 .box3{
     float: left;
@@ -159,6 +157,8 @@ font-size: 15px;
     margin-right: 10%;
     box-shadow: 0px 10px 20px 0px #d8d6d6;
     border-radius: 15px;
+    cursor: pointer;  
+
 }
 .selectorrow{
     margin-top:20px;
@@ -304,6 +304,7 @@ background-color: white !important;
 }
 .arrowsize{
     width: 54px!important;
+    cursor: pointer;
   }
   .or{
     margin-top: -10%;
@@ -450,7 +451,7 @@ background-color: white !important;
         font-size: 20px;
     }
     .font4{
-        font-size: 25px;
+        font-size: 22px;
     }
     .font5{
         font-size: 35px;

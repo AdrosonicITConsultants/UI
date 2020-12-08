@@ -133,7 +133,6 @@ export default class EditBuyerDesign extends Component {
                     
                    }
                    else {
-                    //  console.log("inelse");
                      TTCEapi.getProductUploadData().then((response) => {
                        debugger;
                        this.setState(
@@ -147,7 +146,7 @@ export default class EditBuyerDesign extends Component {
                            yarns: response.data.data.yarns,
                            dyes: response.data.data.dyes,
                          },
-                         () => {console.log("stateset");
+                         () => {;
                          let params = queryString.parse(this.props.location.search)
                          TTCEapi.getbuyerSimpleProduct(params.productId).then((response) => {
                            this.setState({productid :params.productId },()=>{

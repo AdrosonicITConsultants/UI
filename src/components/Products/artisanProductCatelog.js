@@ -175,7 +175,7 @@ export default class artisanProductCatelog extends Component {
                            yarns: response.data.data.yarns,
                            dyes: response.data.data.dyes,
                          },
-                         () => {console.log("stateset");
+                         () => {
                          let params = queryString.parse(this.props.location.search)
                          if(params.ProductHistoryId == undefined)
                          {

@@ -113,7 +113,7 @@ export default class BuyerAdvancePayment extends Component {
                                 {
                                     switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
                                         case 1:
-                                            // console.log("bank");   
+                                            //("bank");   
                                             this.setState({
                                                 accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
                                                 bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
@@ -123,7 +123,7 @@ export default class BuyerAdvancePayment extends Component {
                                             }); 
                                             break;
                                         case 2:
-                                            // console.log("gpayy");
+                                            // ("gpayy");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
@@ -141,7 +141,7 @@ export default class BuyerAdvancePayment extends Component {
                                         }
                                             break;
                                         case 4:
-                                            // console.log("paytm");
+                                            //("paytm");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                                                           
                                                 this.setState({

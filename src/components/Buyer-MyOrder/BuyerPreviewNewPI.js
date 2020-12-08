@@ -472,7 +472,7 @@ export class BuyerPreviewNewPI extends Component {
 
 {this.state.previewPI.productCustom === false && this.state.dataload?
 <>
-{/* {console.log("Product  Simple")} */}
+{/* {("Product  Simple")} */}
 <>
 
 <td className="tdmarginleft">
@@ -594,7 +594,7 @@ export class BuyerPreviewNewPI extends Component {
         </>
         :
         <>
-        {/* {console.log("Product  custom")} */}
+        {/* {("Product  custom")} */}
         <td className="tdmarginleft">
      <h3 className="snopi gdwidth wraptext" style={{textAlign:"left"}}>Custom Product -{this.state.buyerCustomProduct.length}</h3>
      <p>- WARP X WEFT X EXTRA WEFT</p>  

@@ -535,7 +535,7 @@ export class BuyerSingleEnquiry extends Component {
                                 {
                                     switch(response.data.data[0].paymentAccountDetails[items].accountType.id){
                                         case 1:
-                                            // console.log("bank");   
+                                            // ("bank");   
                                             this.setState({
                                                 accountno : parseInt(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile),
                                                 bankname : response.data.data[0].paymentAccountDetails[items].bankName ,
@@ -545,7 +545,7 @@ export class BuyerSingleEnquiry extends Component {
                                             }); 
                                             break;
                                         case 2:
-                                            // console.log("gpayy");
+                                            // ("gpayy");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                             
                                                 this.setState({
@@ -563,7 +563,7 @@ export class BuyerSingleEnquiry extends Component {
                                         }
                                             break;
                                         case 4:
-                                            // console.log("paytm");
+                                            // ("paytm");
                                             if(response.data.data[0].paymentAccountDetails[items].accNo_UPI_Mobile != ''){
                                                                           
                                                 this.setState({
@@ -1880,10 +1880,10 @@ MoqSimpleProductSelected(moqId){
                             
                             { this.state.getMoqs[0].accepted == false ?
                                       <>
-                                       {/* {console.log("single not accept ")} */}
+                                       {/* {("single not accept ")} */}
                                              {this.state.moqavailable?
                                                 <>
-                                                {/* {console.log("single not accept available")} */}
+                                                {/* {("single not accept available")} */}
                                      
                                      <Row noGutters={true}>
                                     <Col sm={1}></Col>
@@ -2167,7 +2167,7 @@ MoqSimpleProductSelected(moqId){
                                                   :
                                                   
                                                   <>     
-                                                   {/* {console.log("single not accept Not available")}                               */}
+                                                   {/* {("single not accept Not available")}                               */}
                                                      <Row>
                                                         <br></br>
                                                         <br></br>
@@ -2183,7 +2183,7 @@ MoqSimpleProductSelected(moqId){
                                       :
                                       
                                       <>
-                                       {/* {console.log("single accept available")} */}
+                                       {/* {("single accept available")} */}
                                 {/* if not a custom product else statement */}
                                 <Row noGutters={true} >  
                                                     {/* <Col sm={1}></Col>                                         */}

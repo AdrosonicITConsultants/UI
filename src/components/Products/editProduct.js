@@ -169,7 +169,7 @@ const initialState = {
                            yarns: response.data.data.yarns,
                            dyes: response.data.data.dyes,
                          },
-                         () => {console.log("stateset");
+                         () => {
                          let params = queryString.parse(this.props.location.search)
                          TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
                            this.setState({productid :params.ProductId },()=>{

@@ -342,7 +342,7 @@ componentDidMount(){
                 <>
                 
                 <>
-                {/* {console.log("old data present")} */}
+                {/* {("old data present")} */}
                 {this.state.dataload?
                 <>
                 {this.state.taxInvoiceGenerated?

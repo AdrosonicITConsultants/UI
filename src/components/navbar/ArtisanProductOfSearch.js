@@ -23,7 +23,7 @@ import TTCEapi from '../../services/API/TTCEapi';
       
     }
     editProduct = (Product)=>{
-        debugger;
+        
         browserHistory.push("/EditProduct?ProductId=" + Product)
       }
     toggleHover(name) {      

@@ -134,7 +134,7 @@ export default class EditBuyerDesign extends Component {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       debugger;
+                       
                        this.setState(
                          {
                            productCategories:
@@ -247,7 +247,7 @@ export default class EditBuyerDesign extends Component {
                        
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
-                            debugger;
+                            
                         
                             this.setState(
                               {

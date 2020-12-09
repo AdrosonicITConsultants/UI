@@ -44,7 +44,7 @@ class forgotpass3 extends Component {
                    }
                  }
                  operation() {
-                   debugger;
+                   
                    if (this.state.emailid == "") {
                      this.setState({
                        showValidation: !this.state.showValidation,

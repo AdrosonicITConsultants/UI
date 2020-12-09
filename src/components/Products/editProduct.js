@@ -157,7 +157,7 @@ const initialState = {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       debugger;
+                       
                        this.setState(
                          {
                            productCategories:
@@ -295,7 +295,7 @@ const initialState = {
       
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
-                            debugger;
+                            
                         
                             this.setState(
                               {
@@ -1103,7 +1103,7 @@ else {
                     //  });  
 
                     productData.relProduct = this.state.savedrelatedProduct;
-                    debugger;
+                    
                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
                     if (response.data.valid) {
                       document.getElementById('id02').style.display='none';

@@ -110,7 +110,7 @@ class NavbarComponent extends Component {
   };
 
   myProfile =() =>{
-   debugger;
+   
 browserHistory.push("/MyProfile");
     
   }

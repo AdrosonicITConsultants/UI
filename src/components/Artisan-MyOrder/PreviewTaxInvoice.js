@@ -765,7 +765,7 @@ export class PreviewTaxInvoice extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

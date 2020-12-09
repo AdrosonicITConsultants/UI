@@ -103,7 +103,7 @@ export default class BuyerSelfDesign extends Component {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       debugger;
+                       
                        this.setState(
                          {
                            productCategories:
@@ -125,7 +125,7 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleproductCategories(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
@@ -158,7 +158,7 @@ export default class BuyerSelfDesign extends Component {
                     }
                     else {
                       this.setState({ [e.target.name]: parseInt(option) }, () => {
-                        debugger;
+                        
 
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
@@ -184,7 +184,7 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleReedCounts(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -193,7 +193,7 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleproductTypes(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -247,7 +247,7 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleyarns(e, stateNumber) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
@@ -255,7 +255,7 @@ export default class BuyerSelfDesign extends Component {
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                        debugger;
+                        
                         this.setState(
                           {
                             ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
@@ -280,7 +280,7 @@ export default class BuyerSelfDesign extends Component {
                  }
 
                  handleDropdown(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -290,7 +290,7 @@ export default class BuyerSelfDesign extends Component {
 
                  handleDropdownCountOfYarn(e)
                   {
-                    debugger;
+                    
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
@@ -353,7 +353,7 @@ export default class BuyerSelfDesign extends Component {
                   fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
 
-                   debugger;
+                   
 
                  
                      if (filename != undefined) {
@@ -407,7 +407,7 @@ export default class BuyerSelfDesign extends Component {
     }
 
                  GenerateImage = (num) => {
-                   //  debugger;
+                   //  
                    if (
                      num == 1 ||
                      this.state["imagePreviewUrl" + (num - 1)] != null
@@ -500,7 +500,7 @@ export default class BuyerSelfDesign extends Component {
  var index = e.target.selectedIndex;
  var optionElement = e.target.childNodes[index];
  var option = optionElement.getAttribute("id");
- debugger;
+ 
 
  let relatedProductTemp = this.state.savedrelatedProduct.find(
    (e) => e.productTypeId == id
@@ -777,7 +777,7 @@ relatedProductTemp[e.target.name] = option;
                  }
 
                  Cancel = () => {
-                   debugger;
+                   
                  
                    browserHistory.push("./home")
                  };

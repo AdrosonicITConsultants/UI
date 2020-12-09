@@ -29,7 +29,7 @@ export default class ForgotpassRouter extends Component {
                    (window.location.pathname.indexOf("passwordA") !== -1 ? (roleID = 1) : (roleID = 2));                  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtpForgotpass(emailid, roleID).then((response) => {
-                       debugger;
+                       
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -63,13 +63,13 @@ export default class ForgotpassRouter extends Component {
                  }
 
                  passwordReset(password, username = this.state.emailid) {
-                   debugger;
+                   
                    this.setState(
                      { username: username, password: password },
                      () => {
                        TTCEapi.passwordReset(username, password).then(
                          (response) => {
-                           debugger;
+                           
                            if (response.data.valid) {
                              this.handler(2);
                            } else {

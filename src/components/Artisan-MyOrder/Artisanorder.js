@@ -2035,7 +2035,7 @@ import { useTranslation, withTranslation } from "react-i18next";
 
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

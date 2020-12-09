@@ -20,7 +20,7 @@ export default class buyreg3 extends Component {
       }
     
       operation() {
-        debugger;
+        
         if (this.state.firstname == "" || this.state.mobileno == "") {
             this.setState({
                 showValidationpass: true,

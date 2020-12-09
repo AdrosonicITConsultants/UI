@@ -141,7 +141,7 @@ export class CRaccepted extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

@@ -138,7 +138,7 @@ const initialState = {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       debugger;
+                       
                        this.setState(
                          {
                            productCategories:
@@ -160,7 +160,7 @@ const initialState = {
                  }
 
                  handleproductCategories(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
@@ -193,7 +193,7 @@ const initialState = {
                     }
                     else {
                       this.setState({ [e.target.name]: parseInt(option) }, () => {
-                        debugger;
+                        
 
                         this.state.productCategories.filter((item) => {
                           if (item.id == this.state.productCategorie) {
@@ -219,7 +219,7 @@ const initialState = {
                  }
 
                  handleReedCounts(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -228,7 +228,7 @@ const initialState = {
                  }
 
                  handleproductTypes(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -282,7 +282,7 @@ const initialState = {
                  }
 
                  handleyarns(e, stateNumber) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = parseInt(optionElement.getAttribute("id"));
@@ -290,7 +290,7 @@ const initialState = {
                    {
                     
                       this.setState({ [e.target.name]: option }, () => {
-                        debugger;
+                        
                         this.setState(
                           {
                             ["countOfYarn" + stateNumber]: this.state.yarns.find((eID) => eID.id == this.state["yarn" + stateNumber]).yarnType.manual                        
@@ -315,7 +315,7 @@ const initialState = {
                  }
 
                  handleDropdown(e) {
-                   debugger;
+                   
                    var index = e.target.selectedIndex;
                    var optionElement = e.target.childNodes[index];
                    var option = optionElement.getAttribute("id");
@@ -325,7 +325,7 @@ const initialState = {
 
                  handleDropdownCountOfYarn(e)
                   {
-                    debugger;
+                    
                     var index = e.target.selectedIndex;
                     var optionElement = e.target.childNodes[index];
                     var option = optionElement.getAttribute("id");
@@ -388,7 +388,7 @@ const initialState = {
                   fileChangedHandler = (event, num) => {
                    let filename = event.target.files[0];
 
-                   debugger;
+                   
 
                  
                      if (filename != undefined) {
@@ -443,7 +443,7 @@ const initialState = {
     }
 
                  GenerateImage = (num) => {
-                   //  debugger;
+                   //  
                    if (
                      num == 1 ||
                      this.state["imagePreviewUrl" + (num - 1)] != null
@@ -537,7 +537,7 @@ const initialState = {
  var index = e.target.selectedIndex;
  var optionElement = e.target.childNodes[index];
  var option = optionElement.getAttribute("id");
- debugger;
+ 
 
  let relatedProductTemp = this.state.savedrelatedProduct.find(
    (e) => e.productTypeId == id
@@ -818,7 +818,7 @@ relatedProductTemp[e.target.name] = option;
 
                     productData.width = this.state.width;
                     productData.length = this.state.length;
-                    debugger;
+                    
                     productData.reedCountId = this.state.reedCount;
 
                     this.state.wareAndCare.filter((item) => {
@@ -870,7 +870,7 @@ relatedProductTemp[e.target.name] = option;
                  };
 
                  Cancel = () => {
-                   debugger;
+                   
                  
                    browserHistory.push("./home")
                  };

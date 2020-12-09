@@ -19,7 +19,7 @@ class BuyerProfile extends Component {
     constructor(props) {
         let user = JSON.parse(localStorage.getItem("user"));
         super(props);
-debugger;
+
         this.state = {
           isDesc: true,
           ischanged: false,

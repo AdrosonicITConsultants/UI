@@ -5,6 +5,7 @@ import { logRoles } from '@testing-library/react';
 import logos from "../../assets"
 import TTCEapi from '../../services/API/TTCEapi';
 import { useTranslation, withTranslation } from "react-i18next";
+import Moment from 'react-moment';
 
 class Footer extends Component {
   constructor() {
@@ -48,7 +49,7 @@ class Footer extends Component {
                   <br />
                   <br />
 
-                  <span className="col-md-6">
+                  <span className="col-md-6 text-left" style={{ marginLeft: "9px" }}>
                   <a href="https://www.facebook.com/antarantransformingcrafts" target="_blank"><img src={logos.facebook} style={{height:"25px",marginRight:"10px"}}/></a>                     
                   <a href="https://www.instagram.com/antaran_transformingcrafts/" target="_blank"><img src={logos.insta} style={{height:"25px",marginRight:"10px"}}/></a>
                   {/* <a href="" target="_blank"> <img src={logos.twitter} style={{height:"25px",marginRight:"10px"}}/></a> */}
@@ -60,7 +61,7 @@ class Footer extends Component {
                     style={{ marginLeft: "9px" }}
                     className="col-md-12 Ffont1 text-left"
                   >
-                    © 2020 CRAFT XCHANGE . ALL RIGHTS RESERVED.
+                    © <Moment format="YYYY" date={new Date()} /> CRAFT XCHANGE . ALL RIGHTS RESERVED.
                   </span>
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">

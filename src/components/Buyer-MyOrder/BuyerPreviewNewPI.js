@@ -868,7 +868,7 @@ export class BuyerPreviewNewPI extends Component {
     
 }
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

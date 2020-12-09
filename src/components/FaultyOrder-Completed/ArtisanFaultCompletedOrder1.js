@@ -520,7 +520,7 @@ export class ArtisanFaultCompletedOrder1 extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

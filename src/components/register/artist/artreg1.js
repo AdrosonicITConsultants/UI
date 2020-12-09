@@ -23,11 +23,11 @@ import TTCEapi from '../../../services/API/TTCEapi';
                 
 
                  componentWillReceiveProps(props){
-                   debugger;
+                   
                  }
 
                  operation() {
-                   debugger;
+                   
                    if (this.state.weaverid == "") {
                      this.setState({
                        showValidation: !this.state.showValidation,

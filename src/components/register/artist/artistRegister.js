@@ -108,12 +108,12 @@ class artistRegister extends Component {
                  }
                  completeRegister(selectedprods,selectedFile){
                    this.setState({selectedprods : selectedprods , selectedFile : selectedFile},() => {
-                     debugger;
+                     
                     TTCEapi.registerArtist(this.state.weaverid,this.state.emailid,this.state.passwordSend ? this.state.passwordSend : this.state.password,
                       this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
                       this.state.district,this.state.state,this.state.mobileno,this.state.panno,
                       this.state.address,this.state.selectedprods,this.state.selectedFile).then((response) => {
-                         //  debugger;
+                         //  
                        if (response.data.valid) {
                         customToast.success(this.props.t("Pages.object.regRegistrationSuccess"), {
                           position: toast.POSITION.TOP_RIGHT,
@@ -197,10 +197,10 @@ class artistRegister extends Component {
 
                  sendotp(emailid) {
                  
-                  //  debugger;
+                  //  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
-                       debugger;
+                       
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -217,10 +217,10 @@ class artistRegister extends Component {
                  }
 
                  verifyOtp(emailid, otppin) {
-                  //  debugger;
+                  //  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                      //  debugger;
+                      //  
                        if (response.data.valid) {
                          this.handler(2);
                        } else {

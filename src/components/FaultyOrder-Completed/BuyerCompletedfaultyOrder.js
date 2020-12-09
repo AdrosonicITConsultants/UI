@@ -622,7 +622,7 @@ export class BuyerCompletedfaultyOrder extends Component {
 }
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

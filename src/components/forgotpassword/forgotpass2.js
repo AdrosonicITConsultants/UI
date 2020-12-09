@@ -24,7 +24,7 @@ class forgotpass2 extends Component {
       }
     
       operation() {
-        debugger;
+        
         if (this.state.password == "") {
             this.setState({
                 showValidationpass: !this.state.showValidationpass,

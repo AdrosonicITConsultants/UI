@@ -19,7 +19,7 @@ export default class buyreg6 extends Component {
       }
     
       operation() {
-        debugger;
+        
         if(document.getElementById('agree').checked)
             {this.props.sl(this.state.weblink,this.state.sociallink);
             }

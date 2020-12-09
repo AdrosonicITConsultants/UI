@@ -1384,7 +1384,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
 
 
 function mapStateToProps(state) {
-    // debugger;
+    // 
     const { user } = state
     return { user };
 }

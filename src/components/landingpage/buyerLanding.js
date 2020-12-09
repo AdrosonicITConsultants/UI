@@ -99,10 +99,35 @@ class buyerLanding extends Component {
       {this.state.showBuyerPage ?
       <div>
           <Row noGutters={true}>
-            <div className="homeDivmain" style={buyerLandingBg}>
+            <div className="homeDivmain" >
+              <div style={buyerLandingBg} className="buyerUpdatedBGImage">
+                <Row noGutters={true}>
+                <Col sm={{ size: "1" }} className="center"></Col>
+                <Col sm={{ size: "10" }}>
+                  <div className="carousal">
+                    <div className="carousalbg">
+                      {/* <p className="carousaltext1">
+                      {this.state.buyerPageData.card_header}
+                      </p> */}
+                      {/* <p className="carousaltext2">{this.state.buyerPageData.card_title}</p> */}
+                      <p className="carousaltext3">
+                      {this.state.buyerPageData.card_para}
+                      </p>
+                      <p className="carousaltext3">
+                      {this.state.buyerPageData.card_para1}
+                      </p>
+                      <p className="carousaltext3">
+                      {this.state.buyerPageData.card_para2}
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+                <Col sm={{ size: "1" }} className="center"></Col>
+              </Row>
+              </div>
               <br></br>
 
-              <Row noGutters={true} className="topmarginHome">
+              {/* <Row noGutters={true} className="topmarginHome">
                 <Col sm={{ size: "1" }}></Col>
                 <Col sm={{ size: "6" }}>
                   <div>
@@ -114,8 +139,8 @@ class buyerLanding extends Component {
                     </h6>
                   </div>
                 </Col>
-              </Row>
-              <Row noGutters={true}>
+              </Row> */}
+              {/* <Row noGutters={true}>
                 <Col sm={{ size: "1" }} className="center"></Col>
                 <Col sm={{ size: "10" }}>
                   <div className="carousal">
@@ -132,7 +157,7 @@ class buyerLanding extends Component {
                   </div>
                 </Col>
                 <Col sm={{ size: "1" }} className="center"></Col>
-              </Row>
+              </Row> */}
             </div>
           </Row>
 
@@ -162,9 +187,9 @@ class buyerLanding extends Component {
                         <h3>Artisan</h3> <h3>self design</h3>
                         <hr className="hrline1"></hr>
                         <br />
-                        <div className="textline3" style={{marginLeft: '30px'}}>
+                        {/* <div className="textline3" style={{marginLeft: '30px'}}>
                         {this.state.buyerPageData.artisan_para}
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="textline4" style={{marginLeft: '50px'}}>
@@ -192,9 +217,9 @@ class buyerLanding extends Component {
                         <p>Antaran</p> <p>co-design</p>
                         <hr className="hrlineLeft"></hr>
                         <br />
-                        <div className="textline3" style={{marginRight: '30px'}}>
+                        {/* <div className="textline3" style={{marginRight: '30px'}}>
                         {this.state.buyerPageData.antaran_para}
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="textline4" style={{marginRight: '50px'}}>
@@ -209,7 +234,7 @@ class buyerLanding extends Component {
 
           <Row noGutters={true}>
             <Col className="internaldiv homeDiv3 text-center reviewtext">
-              <div className="text1">And our Artisan say that</div>
+              <div className="text1">About Antaran -</div>
               <img className="quote" src={logos.quoteicon}></img>
               {this.state.buyerPageData.quote_message}
               <img className="quote" src={logos.quoteiconend}></img>

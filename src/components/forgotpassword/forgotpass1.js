@@ -54,7 +54,7 @@ class forgotpass1 extends Component {
                    }
                  }
                  operation() {
-                   debugger;
+                   
                     const emailcheck = isEmail;
                    if (
                      this.state.emailid == "" ||

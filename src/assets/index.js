@@ -38,7 +38,7 @@ import staricon from "./weather-stars.svg"
 import mainLogoNavbar from "./Login logo@2x.png";
 import background1 from "./Backround1Home .png";
 import background2 from "./Backround2Home .png";
-import background3 from "./Backround3Home .png";
+import background3 from "./timeless tale@2x.png";
 import playstorebtn from "./Play-store-button.png"
 import appstorebtn from "./App-store-button.png"
 import heariconfilled from "./heart-filled.svg";

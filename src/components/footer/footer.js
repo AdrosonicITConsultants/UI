@@ -77,7 +77,7 @@ class Footer extends Component {
                   {this.state.userId == "1" ?
                     this.props.t("Pages.object.writeUsOn")
                     :
-                    "Write us on help@craftexchange.com"}
+                    "Write us on craftxchange.tatatrusts@gmail.com"}
                     
                   </span>
                   <br />

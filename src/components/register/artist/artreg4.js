@@ -518,8 +518,8 @@ class artreg4 extends Component {
   
         </Row>
        <p className="helpptag">For any kind of help reach out to us at <br></br>
-       <a href = "mailto: antaran@tatatrusts.org">
-             antaran@tatatrusts.org</a></p>
+       <a href = "mailto: craftxchange.tatatrusts@gmail.com">
+       craftxchange.tatatrusts@gmail.com</a></p>
        
                                                                      
         

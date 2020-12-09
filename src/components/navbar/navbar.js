@@ -620,10 +620,10 @@ componentDidMount(){
                   </span>
                   {/* {userTypeId == 2 ?"":<a href="/">Change Language</a>} */}
                   {userTypeId === 2 ?
-                  <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+                  <a href={TTCEapi.DocumentsURL + "FAQ.pdf"}
             target="_blank">Support </a>
             :
-            <a href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+            <a href={TTCEapi.DocumentsURL + "FAQ.pdf"}
             target="_blank"> {this.props.t("Pages.object.support")}</a>
             }
                 </li>

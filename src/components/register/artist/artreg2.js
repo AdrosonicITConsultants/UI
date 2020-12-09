@@ -311,8 +311,8 @@ class artreg2 extends Component {
     <div className="text-right">
         <img src={logos.closelogo} className="chatAttachCloseIcon" onClick={this.reachOutToUsModalClose}/>
     </div>
-    <h4 className="artisanChatModalTitle text-center">For any query reach us @ <br/><br/><a href = "mailto: antaran@tatatrusts.org">
-    antaran@tatatrusts.org</a></h4>
+    <h4 className="artisanChatModalTitle text-center">For any query reach us @ <br/><br/><a href = "mailto: craftxchange.tatatrusts@gmail.com">
+    craftxchange.tatatrusts@gmail.com</a></h4>
 </div>
 </div>
 </div>

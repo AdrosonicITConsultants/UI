@@ -262,7 +262,8 @@ class buyerpass extends Component {
   
         </Row>
        <p className="helpptag">For any kind of help reach out to us at <br></br>
-       <b>antaran@tatatrusts.org</b></p>
+       <a href = "mailto: craftxchange.tatatrusts@gmail.com">
+         craftxchange.tatatrusts@gmail.com</a></p>
        
                                                                      
         

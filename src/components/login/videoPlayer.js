@@ -46,6 +46,7 @@ class videoPlayer extends Component {
             user ? user.refRoleId == "1" ? (
               <ReactPlayer
                 controls
+                playing={true}
                 width="100vw"
                 height="98vh"
                 url={this.state.videoData.artisan_demo_video}
@@ -54,6 +55,7 @@ class videoPlayer extends Component {
             ) : (
               <ReactPlayer
                 controls
+                playing={true}
                 width="100vw"
                 height="98vh"
                 url={this.state.videoData.buyer_demo_video}

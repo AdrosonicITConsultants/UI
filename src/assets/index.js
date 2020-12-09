@@ -116,7 +116,7 @@ import catelogBackground from "./Cluster back ground .svg"
 import backdrop from "./backdrop-blur.svg"
 import colorbar from "./topcolorbar.svg"
 
-import AntaranCodesignIcon from "./AntaranCodesignIcon.svg"
+import AntaranCodesignIcon from "./Antaran Co design Icon.svg"
 import whitearrow from "./whitearrow.svg"
 import Nextarrow from './Nextarrow.png'
 import Antaranbgthread from "./Antaranbgthread.svg"

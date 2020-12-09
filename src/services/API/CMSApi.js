@@ -42,8 +42,21 @@ export default class CMSApi {
         });
     }
 
-    static getCategories() {
-        let url = CMSUrl + "/categories";
+    static getCategoriesSelfDesign() {
+        let url = CMSUrl + "/categoriesselfdesign";
+    
+        return axios
+        .get(url)
+        .then((response) => {
+        return response;
+        })
+        .catch((error) => {
+        return error.response;
+        });
+    }
+
+    static getCategoriesCoDesign() {
+        let url = CMSUrl + "/categoriescodesign";
     
         return axios
         .get(url)

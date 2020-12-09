@@ -230,12 +230,16 @@ import notifyRating from "./rating order.svg";
 import notifyRegenerate from "./order recreated.svg";
 import notifyFaulty from "./faulty order.svg";
 
-import facebook from "./facebook.svg";
-import insta from "./instagram.svg";
+import facebook from "./facebook logo (1).svg";
+import insta from "./Instagram_logo (1).svg";
 import twitter from "./twitter.svg";
 import bwtranslate from "./bwtranslate.svg"
-import artisanlogo from "./for the light back ground artisan.svg"
+import artisanlogo from "./for the light back ground artisan.svg";
+import youTubeLogo from "./youtubeAsset 1@3x (1).svg";
+import linkedinLogo from "./LinkedIn_Logo.svg";
 export default {
+  youTubeLogo,
+  linkedinLogo,
   artisanlogo,
   buyerlogo,
   bwtranslate,

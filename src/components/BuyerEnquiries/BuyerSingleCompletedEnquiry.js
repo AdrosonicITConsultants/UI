@@ -1772,10 +1772,8 @@ MoqSimpleProductSelected(moqId){
                                                                         <div className="buyerMOQAcceptModalState">{data.clusterName}</div>
                                                                         <hr className="buyerMOQAcceptModalHr"/>
                                                                         <div className="buyerMOQAcceptModalDesc">
-                                                                            MOQ once accepted cannot be changed further.<br/>
-                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
-                                                                            <span className="buyerMOQAcceptModalDescSpan"> Enquires</span><br/>
-                                                                            tab to track your enquiry.
+                                                                         You have accepted the MOQ.<br/>
+                                                                         For further discussion and negotiation use Chat box option in the app.
                                                                         </div>
                                                                     </Col>
                                                                 </Row>
@@ -1825,10 +1823,8 @@ MoqSimpleProductSelected(moqId){
                                                                         >Go to this enquiry chat</div>
                                                                         
                                                                         <div className="buyerMOQConfirmModalDesc">
-                                                                            MOQ once accepted cannot be changed further.<br/>
-                                                                            You can find this MOQ in <span className="buyerMOQAcceptModalDescSpan">Ongoing Enquiry</span> under 
-                                                                            <span className="buyerMOQAcceptModalDescSpan"> Enquires</span><br/>
-                                                                            tab to track your enquiry.
+                                                                        You have accepted the MOQ.<br/>
+                                                                         For further discussion and negotiation use Chat box option in the app.
                                                                         </div>
                                                                         <div className="buyerMOQConfirmModalButtonOuter">
                                                                             <span onClick={this.buyerMOQAcceptClose} className="buyerMOQConfirmModalCancelButton">Close</span>

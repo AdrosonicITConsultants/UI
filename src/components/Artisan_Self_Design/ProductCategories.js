@@ -52,7 +52,7 @@ class ProductCategories extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
 
-        CMSApi.getCategories().then((response)=>{
+        CMSApi.getCategoriesSelfDesign().then((response)=>{
 
             if(response)
             {
@@ -87,7 +87,7 @@ class ProductCategories extends Component {
     }
     
     backoperation(){
-        browserHistory.push("/Artisanself/categories"); 
+       browserHistory.goBack(); ; 
     }  
     
 

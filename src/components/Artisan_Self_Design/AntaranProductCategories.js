@@ -52,7 +52,7 @@ class AntaranProductCategories extends Component {
     componentDidMount(){
         let params = queryString.parse(this.props.location.search);
 
-        CMSApi.getCategories().then((response)=>{
+        CMSApi.getCategoriesCoDesign().then((response)=>{
 
             if(response)
             {
@@ -88,7 +88,7 @@ class AntaranProductCategories extends Component {
     }
     
     backoperation(){
-        browserHistory.push("/Antaran/categories/"); 
+        browserHistory.goBack(); 
     }  
     
 

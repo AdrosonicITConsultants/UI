@@ -36,7 +36,7 @@ exploreMore(id){
 }
   componentDidMount(){
 
-    CMSApi.getCategories().then((response)=>{
+    CMSApi.getCategoriesCoDesign().then((response)=>{
       if(response)
       {
           this.setState({

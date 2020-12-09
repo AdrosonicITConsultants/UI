@@ -91,18 +91,18 @@
 
     .mainDivTransitionleft:hover  .Homebg2div4{
      
-    display: block;
-    animation: fadeinLeft 1s ease-in;  
-    width: 430px;    
-     height: 450px; 
-    left: 26.4%;
+        display: block;
+        animation: fadeinLeft 1s ease-in;
+        width: 450px;
+        height: 400px;
+        left: 23.4%;
     
     }
 
      @keyframes fadeinLeft {
          0% {opacity: 0;  }
-        100% {opacity: 1;  width: 430px;    
-     height: 450px;}
+        100% {opacity: 1;  width: 450px;    
+     height: 400px;}
     }
 
 
@@ -149,7 +149,7 @@
     display: block;
     animation: fadein 1s ease-in;
       width: 430px;
-      height: 450px;  
+      height: 400px;  
 
     }
      .mainDivTransitionright:hover  .Homebg2div2  {
@@ -160,7 +160,7 @@
     }
     @keyframes fadein {
         0% {opacity: 0;   }
-        100% {opacity: 1;     width: 430px;    height: 450px;}
+        100% {opacity: 1;     width: 430px;    height: 400px;}
     }
 
     @keyframes fadeout {
@@ -207,10 +207,15 @@
 
 .reviewtext{
     font-family: var(--PlayfairFont);
-    font-style: italic;
+    /* font-style: italic; */
     font-size: 16px;
     font-weight: 500;
     line-height: 0px;
+}
+
+.aboutTextQuote {
+    margin-top: 40px;
+    font-style: italic;
 }
 
 .carousaltext1{
@@ -240,7 +245,7 @@ font-size: xx-large;
 
 .artistunHover {
     /* background-image: url("../../assets/Artisanself\ combined\ layers.png");   */
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -265,7 +270,7 @@ background-size: 100% 100%;
 
 .counHover {
     /* background-image: url("../../assets/co\ design\ combined.png");   */
-    background-size: contain;
+    background-size: 105% 105%;
     background-repeat: no-repeat;
     /* background-size: 100% 100%; */
 }
@@ -315,28 +320,36 @@ background-size: 100% 100%;
 
 .exploremore {    
    position: absolute;
-    right: -2px;
-    font-size: 10px;
-    background: white;
+    /* right: -2px; */
+    font-size: 15px;
+    background: #ffffff;
     color: black;
     font-family: var(--LatoFont);
-    font-weight: 500;
+    font-weight: bold;
     padding: 5px;
     cursor: pointer;
+    left: 35%;
+    right: 35%;
+    width: fit-content;
+    margin-top: 100px;
 
 
 }
 
 .exploremoreLeft {    
-   position: absolute;
-    left: -2px;
-    font-size: 10px;
-    background: white;
+    position: absolute;
+    /* left: -2px; */
+    font-size: 15px;
+    background: #ffffff;
     color: black;
     font-family: var(--LatoFont);
-    font-weight: 500;
+    font-weight: bold;
     padding: 5px;
     cursor: pointer;
+    left: 35%;
+    right: 35%;
+    width: fit-content;
+    margin-top: 100px;
 
 }
    
@@ -351,7 +364,7 @@ background-color: black;
 
 .text1 {
    margin-bottom: 5px;
-    font-family: var(--LatoFont);
+   font-family: var(--PlayfairFont);
     font-size: 20px;
     font-weight: 600;
 }

@@ -176,20 +176,21 @@ class buyerLanding extends Component {
                       <p>Artisan</p> <p>self design</p>
                     </div>
                     <div className="Homebg2div4">
-                      <div className="artistHover" style={artisanExtendedBg}>
+                      <div className="artistHover" style={artisanExtendedBg} onClick={() => this.ExploreMore("Self")}>
+                        
+                        <h3>Artisan</h3> <h3>self design</h3>
+                        {/* <hr className="hrline1"></hr> */}
+                        <br />
+                        {/* <div className="textline3" style={{marginLeft: '30px'}}>
+                        {this.state.buyerPageData.artisan_para}
+                        </div> */}
                         <Label
-                          style={{ left: "-2px" }}
+                          // style={{ left: "-2px" }}
                           onClick={() => this.ExploreMore("Self")}
                           className="exploremoreLeft"
                         >
                           Explore more <strong>></strong>
                         </Label>
-                        <h3>Artisan</h3> <h3>self design</h3>
-                        <hr className="hrline1"></hr>
-                        <br />
-                        {/* <div className="textline3" style={{marginLeft: '30px'}}>
-                        {this.state.buyerPageData.artisan_para}
-                        </div> */}
                       </div>
 
                       <div className="textline4" style={{marginLeft: '50px'}}>
@@ -207,19 +208,20 @@ class buyerLanding extends Component {
                     </div>
 
                     <div className="Homebg2div3">
-                      <div className="coHover" style={antaranExtendedBg}>
+                      <div className="coHover" style={antaranExtendedBg} onClick={() => this.ExploreMore("New")}>
+                        
+                        <h3>Antaran</h3> <h3>co-design</h3>
+                        {/* <hr className="hrlineLeft"></hr> */}
+                        <br />
+                        {/* <div className="textline3" style={{marginRight: '30px'}}>
+                        {this.state.buyerPageData.antaran_para}
+                        </div> */}
                         <Label
                           onClick={() => this.ExploreMore("New")}
                           className="exploremore"
                         >
                           Explore more <strong>></strong>
                         </Label>
-                        <p>Antaran</p> <p>co-design</p>
-                        <hr className="hrlineLeft"></hr>
-                        <br />
-                        {/* <div className="textline3" style={{marginRight: '30px'}}>
-                        {this.state.buyerPageData.antaran_para}
-                        </div> */}
                       </div>
 
                       <div className="textline4" style={{marginRight: '50px'}}>
@@ -234,10 +236,10 @@ class buyerLanding extends Component {
 
           <Row noGutters={true}>
             <Col className="internaldiv homeDiv3 text-center reviewtext">
-              <div className="text1">About Antaran -</div>
-              <img className="quote" src={logos.quoteicon}></img>
-              {this.state.buyerPageData.quote_message}
-              <img className="quote" src={logos.quoteiconend}></img>
+              <div className="text1">About Antaran</div>
+              {/* <img className="quote" src={logos.quoteicon}></img> */}
+              <p className="aboutTextQuote">{this.state.buyerPageData.quote_message}</p>
+              {/* <img className="quote" src={logos.quoteiconend}></img> */}
             </Col>
           </Row>
           <Row>

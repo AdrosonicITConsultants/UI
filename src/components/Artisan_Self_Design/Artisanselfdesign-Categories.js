@@ -36,7 +36,7 @@ class ArtistSelfDesignCategories extends Component {
 
   componentDidMount(){
 
-    CMSApi.getCategories().then((response)=>{
+    CMSApi.getCategoriesSelfDesign().then((response)=>{
       if(response)
       {
         this.setState({

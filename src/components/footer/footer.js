@@ -49,9 +49,11 @@ class Footer extends Component {
                   <br />
                   <br />
 
-                  <span className="col-md-6 text-left" style={{ marginLeft: "9px" }}>
-                  <a href="https://www.facebook.com/antarantransformingcrafts" target="_blank"><img src={logos.facebook} style={{height:"25px",marginRight:"10px"}}/></a>                     
-                  <a href="https://www.instagram.com/antaran_transformingcrafts/" target="_blank"><img src={logos.insta} style={{height:"25px",marginRight:"10px"}}/></a>
+                  <span className="col-md-8 text-left" style={{ marginLeft: "9px" }}>
+                  <a href="https://www.facebook.com/antarantransformingcrafts" target="_blank"><img src={logos.facebook} style={{height:"25px",marginRight:"20px"}}/></a>                     
+                  <a href="https://www.instagram.com/antaran_transformingcrafts/" target="_blank"><img src={logos.insta} style={{height:"25px",marginRight:"20px"}}/></a>
+                  <a href="https://www.youtube.com/channel/UCacuDD60s97KY1LqYmAj1fQ/" target="_blank"><img src={logos.youTubeLogo} style={{height:"20px",marginRight:"20px"}}/></a>
+                  <a href="https://www.linkedin.com/company/antaran-transforming-crafts/" target="_blank"><img src={logos.linkedinLogo} style={{height:"25px",marginRight:"10px"}}/></a>
                   {/* <a href="" target="_blank"> <img src={logos.twitter} style={{height:"25px",marginRight:"10px"}}/></a> */}
                   </span>
                   <br />
@@ -80,7 +82,7 @@ class Footer extends Component {
                   </span>
                   <br />
                   <br />
-                  <div>
+                  {/* <div>
                   {this.state.userId == "1" ?
                     this.props.t("Pages.object.registeredAddress")
                     :
@@ -90,7 +92,7 @@ class Footer extends Component {
                       <br />
                       Mumbai, MH
                     </p>
-                  </div>
+                  </div> */}
                 </Col>
                 <Col md="4" sm="4" xs="4" className=" Ffont1 text-center">
                   <span>                    

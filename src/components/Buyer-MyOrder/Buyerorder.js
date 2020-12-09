@@ -899,7 +899,7 @@ export class Buyerorder extends Component {
                     {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                     target="_blank"> */}
                       <button className="enqreqbtn needhelpbth" onClick={this.helpshow}>
-                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
+                        <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px",cursor:"pointer"}}></i>Need Help</button>
                         {/* </a> */}
                          <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                          value ="Go to this Enquiry chat"></input>

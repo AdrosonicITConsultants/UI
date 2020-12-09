@@ -219,7 +219,7 @@ class buyerpass extends Component {
                               :
                               // <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                               //       target="_blank">{this.props.t("Pages.object.regHelp")}</a>
-                              <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>{this.props.t("Pages.object.regHelp")}</p> 
+                              <p style={{color:"black",fontWeight:"600",cursor:"pointer"}} onClick={this.helpshow}>{this.props.t("Pages.object.regHelp")}</p> 
 
                             }
                            </strong>

@@ -13,13 +13,13 @@
     /* margin-top:20px; */
     background-color: white;
     border-radius: 10px;
-    height:578px;
+    height:575px;
     width:400px;
     margin: 0 auto;
    
 }
 .logohome{
-    width:30%;
+    width:23%;
     height:auto;
     margin-top:20px;
 }
@@ -124,7 +124,7 @@ font-size: 15px;
     font-size: 13px;
 }
 .font3{
-    font-size: 20px;
+    font-size: 18px;
 }
 .font4{
     font-size: 22px;
@@ -448,7 +448,7 @@ background-color: white !important;
         font-size: 13px;
     }
     .font3{
-        font-size: 20px;
+        font-size: 18px;
     }
     .font4{
         font-size: 22px;
@@ -464,7 +464,7 @@ background-color: white !important;
           /* margin-top:100px; */
           background-color: white;
           border-radius: 10px;
-          height:625px;
+          height:580px;
           width:400px;
       }
       
@@ -492,4 +492,20 @@ background-color: white !important;
 }
 @media only screen and ( min-width: 1200px ) {
 
+}
+
+.helpptag{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 34px;
+    margin-bottom: 69px;
+}
+.newsloganp{
+    text-align: center;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+    color: black;
+    margin-top: 0px;
 }

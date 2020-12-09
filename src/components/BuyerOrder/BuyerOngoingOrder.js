@@ -343,7 +343,12 @@ export class BuyerOngoingOrder extends Component {
         localStorage.setItem("goToChatButtonEnquiryId", id);    
         browserHistory.push("/buyerChat");            
     }
-    
+    helpshow(){
+        document.getElementById('help').style.display='block';
+    } 
+    helpClose(){
+        document.getElementById('help').style.display='none'; 
+    }
     render() {
         return (
             <React.Fragment>
@@ -707,11 +712,11 @@ export class BuyerOngoingOrder extends Component {
                     }
                      <Col className="col-xs-4">
                        <span>
-                       <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                                    target="_blank">
-                      <button className="enqreqbtn needhelpbth">
+                       {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank"> */}
+                      <button className="enqreqbtn needhelpbth"  onClick={this.helpshow}>
                         <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
-                        </a>
+                        {/* </a> */}
                          <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                          value ="Go to this Enquiry chat"></input>
 
@@ -1250,11 +1255,11 @@ export class BuyerOngoingOrder extends Component {
                     }
                      <Col className="col-xs-4">
                        <span>
-                       <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                                    target="_blank">
-                      <button className="enqreqbtn needhelpbth">
+                       {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank"> */}
+                      <button className="enqreqbtn needhelpbth"  onClick={this.helpshow}>
                         <i class="fa fa-question-circle" aria-hidden="true" style={{marginRight:"6px"}}></i>Need Help</button>
-                        </a>
+                        {/* </a> */}
                          <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                          value ="Go to this Enquiry chat"></input>
 
@@ -1727,6 +1732,27 @@ export class BuyerOngoingOrder extends Component {
     </div>
     </div>
 </div>
+{/* _____________________________________________Modal 5________________________________________________ */}
+<div id="help" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.helpClose()}>X</h1>
+            </Col>
+  
+        </Row>
+       <p className="helpptag">For any kind of help reach out to us at <br></br>
+       <a href = "mailto: antaran@tatatrusts.org">
+             antaran@tatatrusts.org</a></p>
+       
+                                                                     
+        
+    </div>
+    </div>
+</div>
+
+
 
       {/* -------------------------------------------Modal ends   ----------------          */}
  

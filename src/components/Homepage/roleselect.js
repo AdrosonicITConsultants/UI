@@ -21,7 +21,12 @@ export default class roleselect extends Component {
         localStorage.setItem("selectedUserId", 2);
      } 
     
-     
+    helpshow(){
+        document.getElementById('help').style.display='block';
+    } 
+    helpClose(){
+        document.getElementById('help').style.display='none'; 
+    }
     
     render() {
 
@@ -67,23 +72,49 @@ export default class roleselect extends Component {
 
                                 </Row>
                                 <Row   className="text-center line5 font3">
-                                <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                                    target="_blank">Help?</a>
+                                {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a> */}
+                                   <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>Help?</p> 
                                 </Row>
                   
               
                 
-                                <Row   className="text-center  mt37">
+                                <Row   className="text-center">
                                     
-                                 <a style={{color:"black",fontStyle:"italic"}} href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
-                                    target="_blank">Legal Disclaimer </a> | <a style={{color:"black",fontStyle:"italic"}} href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                                 <a style={{color:"black",fontStyle:"italic",marginTop:"10px",fontSize:"17px"}} href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+                                    target="_blank">Legal Disclaimer </a> | <a style={{color:"black",fontStyle:"italic",marginTop:"10px",fontSize:"17px"}} href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
                                     target="_blank">Privacy Policy</a> 
                                     
                                 </Row>
                                 <br></br>
-                                 
+                                <Row className="text-center">
+ <p className="newsloganp"> Any commercial activity between the buyer and the artisan is solely <br></br> between the two entities. Antaran (An Initiative of Tata Trusts) <br></br>does not take responsibility for any transactions whatsoever. 
+</p>
+                                </Row>
+ 
 
                             </div>
+   {/* _____________________________________________Modal ________________________________________________ */}
+   <div id="help" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.helpClose()}>X</h1>
+            </Col>
+  
+        </Row>
+       <p className="helpptag">For any kind of help reach out to us at <br></br>
+       <a href = "mailto: antaran@tatatrusts.org">
+             antaran@tatatrusts.org</a></p>
+       
+                                                                     
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}   
 
             </React.Fragment> 
         )

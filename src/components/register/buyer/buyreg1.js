@@ -148,7 +148,8 @@ export default class buyreg1 extends Component {
                              <span className="col-xs-10 fontplay">
                                <img
                                  src={logos.emaillogo}
-                                 className="locklogo1 glyphicon mr-5"
+                                 className="locklogo1 glyphicon "
+                                 style={{marginRight:"10px"}}
                                ></img>
                                Enter your email ID
                              </span>

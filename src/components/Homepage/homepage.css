@@ -19,7 +19,7 @@
    
 }
 .logohome{
-    width:30%;
+    width:23%;
     height:auto;
     margin-top:20px;
 }
@@ -492,4 +492,11 @@ background-color: white !important;
 }
 @media only screen and ( min-width: 1200px ) {
 
+}
+
+.helpptag{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 34px;
+    margin-bottom: 69px;
 }

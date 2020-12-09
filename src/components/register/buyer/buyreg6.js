@@ -67,6 +67,12 @@ export default class buyreg6 extends Component {
         
 
       }
+      helpshow(){
+        document.getElementById('help').style.display='block';
+    } 
+    helpClose(){
+        document.getElementById('help').style.display='none'; 
+    }
     render() {
       const { Country, region } = this.state;
         return (
@@ -241,12 +247,36 @@ export default class buyreg6 extends Component {
 
                 <Row   className="mt10">
                   <strong className="col-xs-12 text-center line7 help">
-                  <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                                    target="_blank">Help?</a>
+                  {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                                    target="_blank">Help?</a> */}
+                     <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>Help?</p> 
+
                   </strong>
                 </Row>
 
               </div>
+                  {/* _____________________________________________Modal ________________________________________________ */}
+   <div id="help" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.helpClose()}>X</h1>
+            </Col>
+  
+        </Row>
+       <p className="helpptag">For any kind of help reach out to us at <br></br>
+       <a href = "mailto: antaran@tatatrusts.org">
+             antaran@tatatrusts.org</a></p>
+       
+                                                                     
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}   
+
             </Col>
           </React.Fragment>
         );

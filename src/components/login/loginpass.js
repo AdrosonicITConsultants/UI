@@ -63,7 +63,12 @@ class buyerpass extends Component {
                      showValidation: false,
                    });
                  }
-
+                 helpshow(){
+                  document.getElementById('help').style.display='block';
+              } 
+              helpClose(){
+                  document.getElementById('help').style.display='none'; 
+              }
                  render() {
                    return (
                      <React.Fragment>
@@ -208,12 +213,14 @@ class buyerpass extends Component {
                          <Row   className="mt50">
                            <strong className="col-xs-4 text-center line7 font6">
                            {this.props.userpage == 2 ?
-                           <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                           target="_blank">Help?</a>
+                          //  
+                          <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>Helps?</p> 
+
                               :
-                              <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
-                                    target="_blank">{this.props.t("Pages.object.regHelp")}</a>
-                              
+                              // <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                              //       target="_blank">{this.props.t("Pages.object.regHelp")}</a>
+                              <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>{this.props.t("Pages.object.regHelp")}</p> 
+
                             }
                            </strong>
                            <a 
@@ -244,6 +251,27 @@ class buyerpass extends Component {
                             </a>
                          </Row>
                        </div>
+                        {/* _____________________________________________Modal ________________________________________________ */}
+   <div id="help" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.helpClose()}>X</h1>
+            </Col>
+  
+        </Row>
+       <p className="helpptag">For any kind of help reach out to us at <br></br>
+       <b>antaran@tatatrusts.org</b></p>
+       
+                                                                     
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}   
+
                      </React.Fragment>
                    );
                  }

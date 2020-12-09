@@ -33,23 +33,17 @@ import TTCEapi from '../../../services/API/TTCEapi';
                        showValidation: !this.state.showValidation,
                      });
                    }
-                   // else if (this.state.weaverpin == ""){
-                   //     this.setState({
-                   //       showValidationpin: !this.state.showValidationpin,
-                   //     });
-                   // }
+                  
                    else {
                      this.props.cwi(this.state.weaverid);
 
                      
 
-                     //this.props.handler(4);
                    }
                  }
 
                  backoperation() {
                    browserHistory.push("/");
-                   // this.props.handler(0);
                  }
 
                  handleChange(e) {
@@ -80,7 +74,12 @@ import TTCEapi from '../../../services/API/TTCEapi';
                    localStorage.setItem("regCurrentPage", 0);
                  }
 
-                
+                 helpshow(){
+                  document.getElementById('help').style.display='block';
+              } 
+              helpClose(){
+                  document.getElementById('help').style.display='none'; 
+              }
 
                  render() {
                    return (

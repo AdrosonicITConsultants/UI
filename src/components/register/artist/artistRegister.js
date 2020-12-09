@@ -13,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { memoryHistory, browserHistory } from "../../../helpers/history"
 import { useTranslation, withTranslation } from "react-i18next";
-
+import CMSApi from '../../../services/API/CMSApi';
+var homeSectionStyle = {};
 
 class artistRegister extends Component {
                  constructor(props) {
@@ -37,7 +38,7 @@ class artistRegister extends Component {
                      selectedprods : [],
                      selectedFile : [],
                      passwordSend : localStorage.getItem("regPassword") ? localStorage.getItem("regPassword") : "",
-
+                     showHomeBg : false,
                     //  weaverid,emailid,password,firstname,lastname,pincode,cluster,district,state,mobileno,panno,address
 
                    };
@@ -239,16 +240,39 @@ class artistRegister extends Component {
                    });
                  }
 
+                 setHomeBgImage = () => {
+                  homeSectionStyle = {
+                    backgroundImage: "url(" + this.state.homePageData.background_image + ")"
+                  };
+                  this.setState({
+                    showHomeBg : true
+                  });
+                 }
+
+                 componentDidMount () {
+                  CMSApi.getPages(20).then((response)=>{
+                    if(response)
+                    {
+                        this.setState({
+                          homePageData : response.data.acf
+                        })
+                        this.setHomeBgImage();
+                    }
+                  })
+                 }
+
                  render() {
                    return (
                      <React.Fragment>
-                       <div className="registerimg">
+                       {this.state.showHomeBg ?
+                       <div className="registerimg" style={homeSectionStyle}>
                          <Container>
                            <Row   className="mt-5">
                              {this.renderSection(this.state.userpage)}
                            </Row>
                          </Container>
                        </div>
+                       : null }
                      </React.Fragment>
                    );
                  }

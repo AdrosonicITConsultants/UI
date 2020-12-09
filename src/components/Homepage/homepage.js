@@ -240,7 +240,7 @@ var homeSectionStyle = {};
                   };
                   this.setState({
                     showHomeBg : true
-                  })
+                  });
                  }
 
                  render() {

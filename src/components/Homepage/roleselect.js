@@ -88,7 +88,7 @@ export default class roleselect extends Component {
                                 </Row>
                                 <br></br>
                                 <Row className="text-center">
- <p className="newsloganp"> Any commercial activity between the buyer and the artisan is solely <br></br> between the two entities. Antaran (An Initiative of Tata Trusts) <br></br>does not take responsibility for any transactions whatsoever. 
+ <p className="newsloganp"> Any commercial activity between the buyer and the artisan is solely between the two entities. Antaran (An Initiative of Tata Trusts) does not take responsibility for any transactions whatsoever. 
 </p>
                                 </Row>
  

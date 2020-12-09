@@ -12,9 +12,8 @@ import customToast from "../../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { memoryHistory, browserHistory } from "../../../helpers/history";
-
-
-
+import CMSApi from '../../../services/API/CMSApi';
+var homeSectionStyle = {};
 
 export default class buyerRegister extends Component {
                  constructor(props) {
@@ -51,7 +50,7 @@ export default class buyerRegister extends Component {
                     pocmobile : localStorage.getItem("regPOCMobile") ? localStorage.getItem("regPOCMobile") : "",
                     countryid : localStorage.getItem("regCountryId") ? localStorage.getItem("regCountryId") : "",
                     passwordSend : localStorage.getItem("regPassword") ? localStorage.getItem("regPassword") : "",
-
+                    showHomeBg : false,
                      
                    };
                    this.handler = this.handler.bind(this);
@@ -309,16 +308,39 @@ export default class buyerRegister extends Component {
                    });
                  }
 
+                 setHomeBgImage = () => {
+                  homeSectionStyle = {
+                    backgroundImage: "url(" + this.state.homePageData.background_image + ")"
+                  };
+                  this.setState({
+                    showHomeBg : true
+                  });
+                 }
+
+                 componentDidMount () {
+                  CMSApi.getPages(20).then((response)=>{
+                    if(response)
+                    {
+                        this.setState({
+                          homePageData : response.data.acf
+                        })
+                        this.setHomeBgImage();
+                    }
+                  })
+                 }
+
                  render() {
                    return (
                      <React.Fragment>
-                       <div className="registerimg">
+                       {this.state.showHomeBg ?
+                       <div className="registerimg" style={homeSectionStyle}>
                          <Container>
                            <Row   className="mt-5">
                              {this.renderSection(this.state.userpage)}
                            </Row>
                          </Container>
                        </div>
+                       : null }
                      </React.Fragment>
                    );
                  }

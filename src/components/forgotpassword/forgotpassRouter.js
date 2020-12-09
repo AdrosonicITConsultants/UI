@@ -8,6 +8,8 @@ import TTCEapi from "../../services/API/TTCEapi";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import CMSApi from '../../services/API/CMSApi';
+var homeSectionStyle = {};
 
 export default class ForgotpassRouter extends Component {
                  constructor(props) {
@@ -17,6 +19,7 @@ export default class ForgotpassRouter extends Component {
                      userpage: 0,
                      emailid: "",
                      password: "",
+                     showHomeBg : false,
                    };
                    this.handler = this.handler.bind(this);
                    this.sendotp = this.sendotp.bind(this);
@@ -129,16 +132,39 @@ export default class ForgotpassRouter extends Component {
                    });
                  }
 
+                 setHomeBgImage = () => {
+                  homeSectionStyle = {
+                    backgroundImage: "url(" + this.state.homePageData.background_image + ")"
+                  };
+                  this.setState({
+                    showHomeBg : true
+                  });
+                 }
+
+                 componentDidMount () {
+                  CMSApi.getPages(20).then((response)=>{
+                    if(response)
+                    {
+                        this.setState({
+                          homePageData : response.data.acf
+                        })
+                        this.setHomeBgImage();
+                    }
+                  })
+                 }
+
                  render() {
                    return (
                      <React.Fragment>
-                       <div className="registerimg">
+                       {this.state.showHomeBg ?
+                       <div className="registerimg" style={homeSectionStyle}>
                          <Container>
                            <Row noGutters={true} className="mt-5">
                              {this.renderSection(this.state.userpage)}
                            </Row>
                          </Container>
                        </div>
+                       : null }
                      </React.Fragment>
                    );
                  }

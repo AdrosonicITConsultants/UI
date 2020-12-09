@@ -479,7 +479,7 @@ class artreg4 extends Component {
                   {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank"> {this.props.t("Pages.object.regNeedHelp")}
                                     </a> */}
-                   <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}> {this.props.t("Pages.object.regNeedHelp")}</p> 
+                   <p style={{color:"black",fontWeight:"600",cursor:"pointer"}} onClick={this.helpshow}> {this.props.t("Pages.object.regNeedHelp")}</p> 
 
                                     </span>
                 </Row>

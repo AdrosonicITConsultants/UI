@@ -249,7 +249,7 @@ export default class buyreg6 extends Component {
                   <strong className="col-xs-12 text-center line7 help">
                   {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">Help?</a> */}
-                     <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>Help?</p> 
+                     <p style={{color:"black",fontWeight:"600",cursor:"pointer"}} onClick={this.helpshow}>Help?</p> 
 
                   </strong>
                 </Row>

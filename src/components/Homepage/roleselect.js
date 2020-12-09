@@ -74,7 +74,7 @@ export default class roleselect extends Component {
                                 <Row   className="text-center line5 font3">
                                 {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">Help?</a> */}
-                                   <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}>Help?</p> 
+                                   <p style={{color:"black",fontWeight:"600",cursor:"pointer"}} onClick={this.helpshow}>Help?</p> 
                                 </Row>
                   
               

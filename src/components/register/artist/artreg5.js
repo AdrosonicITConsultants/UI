@@ -328,7 +328,7 @@ class artreg5 extends Component {
                                     target="_blank">
                              {this.props.t("Pages.object.regNeedHelp")}{" "}
                              </a> */}
-                              <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}> {this.props.t("Pages.object.regNeedHelp")}</p> 
+                              <p style={{color:"black",fontWeight:"600",cursor:"pointer"}} onClick={this.helpshow}> {this.props.t("Pages.object.regNeedHelp")}</p> 
 
                              </div>
                              

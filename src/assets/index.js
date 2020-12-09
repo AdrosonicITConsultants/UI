@@ -1,5 +1,5 @@
 import mainlogo from "./Logowithtextonbottom.svg";
-import mainlogoside from "./logo-side.jpg"
+import mainlogoside from "./Login logo@2x.png"
 import userlogo from "./awesome-id-badge.svg"
 import locklogo from "./material-lock-outline.svg";
 import coderwalllogo from "./simple-coderwall.svg";
@@ -35,7 +35,7 @@ import helpicon from "./material-help.svg";
 import receipticonH from "./material-receipt.svg";
 import cashregistericon from"./awesome-cash-register.svg";
 import staricon from "./weather-stars.svg"
-import mainLogoNavbar from "./transparent logo main nav bar.png";
+import mainLogoNavbar from "./Login logo@2x.png";
 import background1 from "./Backround1Home .png";
 import background2 from "./Backround2Home .png";
 import background3 from "./Backround3Home .png";

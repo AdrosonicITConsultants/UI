@@ -309,7 +309,7 @@ null :
             href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
             target="_blank">
             <span
-              style={{ color: "var(--lightFont)"}}
+              style={{ color: "var(--lightFont)",fontStyle:"italic"}}
               className="col-xs-4 text-center line7 font6"
             >
               {this.props.userpage == 1 ?
@@ -322,7 +322,7 @@ null :
             href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
             target="_blank">
             <span
-              style={{ color: "var(--lightFont)" }}
+              style={{ color: "var(--lightFont)" ,fontStyle:"italic"}}
               className="col-xs-4 text-center line7 font6"
             >
               {this.props.userpage == 1 ?

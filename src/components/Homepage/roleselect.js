@@ -79,15 +79,19 @@ export default class roleselect extends Component {
                   
               
                 
-                                <Row   className="text-center  mt37">
+                                <Row   className="text-center">
                                     
-                                 <a style={{color:"black",fontStyle:"italic"}} href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
-                                    target="_blank">Legal Disclaimer </a> | <a style={{color:"black",fontStyle:"italic"}} href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
+                                 <a style={{color:"black",fontStyle:"italic",marginTop:"10px",fontSize:"17px"}} href={TTCEapi.DocumentsURL + "LEGAL%20DISCLAIMER.pdf"}
+                                    target="_blank">Legal Disclaimer </a> | <a style={{color:"black",fontStyle:"italic",marginTop:"10px",fontSize:"17px"}} href={TTCEapi.DocumentsURL + "PRIVACY%20POLICY.pdf"}
                                     target="_blank">Privacy Policy</a> 
                                     
                                 </Row>
                                 <br></br>
-                                 
+                                <Row className="text-center">
+ <p className="newsloganp"> Any commercial activity between the buyer and the artisan is solely <br></br> between the two entities. Antaran (An Initiative of Tata Trusts) <br></br>does not take responsibility for any transactions whatsoever. 
+</p>
+                                </Row>
+ 
 
                             </div>
    {/* _____________________________________________Modal ________________________________________________ */}

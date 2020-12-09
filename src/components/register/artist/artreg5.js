@@ -106,7 +106,13 @@ class artreg5 extends Component {
                      showValidationconfirmpass: false,
                    });
                  }
-
+                 helpshow(){
+                  document.getElementById('help').style.display='block';
+              } 
+              helpClose(){
+                  document.getElementById('help').style.display='none'; 
+              }
+              
                
                  render() {
                      let $imagePreview = (
@@ -318,10 +324,12 @@ class artreg5 extends Component {
                            <Row   className="text-center" style={{marginBottom: "10px"}}>
                              
                              <div className="col-xs-12 line312 font2">
-                             <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
+                             {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank">
                              {this.props.t("Pages.object.regNeedHelp")}{" "}
-                             </a>
+                             </a> */}
+                              <p style={{color:"black",fontWeight:"600"}} onClick={this.helpshow}> {this.props.t("Pages.object.regNeedHelp")}</p> 
+
                              </div>
                              
                            </Row>
@@ -358,6 +366,28 @@ class artreg5 extends Component {
             <span className="col-xs-4 text-center">Privacy policy</span>
           </Row> */}
                          </div>
+                         {/* _____________________________________________Modal ________________________________________________ */}
+   <div id="help" class="w3-modal" style={{paddingTop:"200px"}}>
+    <div class="w3-modal-content w3-animate-top modalBoxSize" >
+        <div class="w3-container buyerMOQAcceptModalContainer">
+        <Row noGutters={true}>
+            <Col sm={12}  style={{textAlign:"right"}}>
+              <h1 className="closebtn" onClick={() => this.helpClose()}>X</h1>
+            </Col>
+  
+        </Row>
+       <p className="helpptag">For any kind of help reach out to us at <br></br>
+       <a href = "mailto: antaran@tatatrusts.org">
+             antaran@tatatrusts.org</a></p>
+       
+                                                                     
+        
+    </div>
+    </div>
+</div>
+
+      {/* -------------------------------------------Modal ends   ----------------          */}   
+
                        </Col>
                      </React.Fragment>
                    );

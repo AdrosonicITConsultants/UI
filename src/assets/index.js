@@ -38,7 +38,7 @@ import staricon from "./weather-stars.svg"
 import mainLogoNavbar from "./Login logo@2x.png";
 import background1 from "./Backround1Home .png";
 import background2 from "./Backround2Home .png";
-import background3 from "./timeless tale@2x.png";
+import background3 from "./tt black@2x (1).png";
 import playstorebtn from "./Play-store-button.png"
 import appstorebtn from "./App-store-button.png"
 import heariconfilled from "./heart-filled.svg";
@@ -138,7 +138,7 @@ import notifyImage4 from "./notifyImage4.svg";
 import notifyImage5 from "./notifyImage5.svg";
 import notifyImage6 from "./notifyImage6.svg";
 import notifyImage7 from "./notifyImage7.svg";
-import notifyFooterBanner from "./notifyFooterBanner.svg";
+import notifyFooterBanner from "./tt black@2x (1).png";
 
 import PIbtnicon from "./Icon material-view-column.svg"
 import Iconpaymentinvoice from "./Icon payment-invoice.svg"
@@ -191,7 +191,7 @@ import notifyQC from "./sanchita Qc.svg";
 import rateSadFace from "./sad - white.svg";
 import rateWeatherStar from "./Icon weather-stars.svg";
 import ratingEditIcon from "./Icon material-rate-review.svg";
-import ratingFooterImg from "./thread of times.jpg";
+import ratingFooterImg from "./Tt@2x (1).png";
 import envelopeHeart from "./Icon awesome-heart.svg";
 import sadwhite from "./sad - white.svg"
 import greenbigsmile from "./greenbigsmile.svg"

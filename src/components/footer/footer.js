@@ -32,7 +32,7 @@ class Footer extends Component {
             <Container className='footerContainer'>
               <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
-                <div style={{marginBottom: "20px"}}>09-12-20  <span style={{marginLeft: "5px"}}>V-5</span></div>
+                <div style={{marginBottom: "20px"}}>10-12-20  <span style={{marginLeft: "5px"}}>V-5.1</span></div>
                 </Col>
               </Row>
               <Row noGutters={true}>

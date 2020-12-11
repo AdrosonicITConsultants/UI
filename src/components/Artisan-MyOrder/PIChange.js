@@ -96,13 +96,19 @@ export class PIchange extends Component {
     revisedPI(){
         var regex = /[1-9]|\./
         var previewhsn= /^\d{1,8}$/
-        if(!previewhsn.test(this.state.hsncode)){
+        if((parseInt(this.state.quantity) < 10)  ){
+            this.setState({
+                showValidationPi: true,
+              message : "Quantity should be atleast 10"
+          });
+        }
+        else if(!previewhsn.test(this.state.hsncode)){
             this.setState({
                showValidationPi:true,
                message:" HSN code should not be empty & more than 8 digits " 
             })
         }
-       else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
+       else if(this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
                            this.state.viewOldPi = true;  
                        

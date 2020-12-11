@@ -342,10 +342,11 @@ import ModernDatepicker from 'react-modern-datepicker';
         var regex = /[1-9]|\./
         var moqlen= /^\d{1,2}$/
         var ppulen=/^\d{1,6}$/
-        if(!moqlen.test(this.state.moq)  ){
+
+        if((parseInt(this.state.moq) < 10)  ){
             this.setState({
                 showValidationMoq: true,
-              message : "MOQ should not be empty & more than 2 digits  "
+              message : "Min Order Qty should be atleast 10"
           });
         }
         else if(!ppulen.test(this.state.ppu)){
@@ -409,13 +410,19 @@ import ModernDatepicker from 'react-modern-datepicker';
     savePIDetails(){
          var regex = /[1-9]|\./
         var previewhsn= /^\d{1,8}$/
-        if(!previewhsn.test(this.state.hsncode)){
+        if((parseInt(this.state.quantity) < 10)  ){
+            this.setState({
+                showValidationPi: true,
+              message : "Quantity should be atleast 10"
+          });
+        }
+        else if(!previewhsn.test(this.state.hsncode)){
             this.setState({
                showValidationPi:true,
                message:" HSN code should not be empty & more than 8 digits " 
             })
         }
-       else if(regex.test(this.state.quantity) &&  this.state.dod && regex.test(this.state.rpu) ){
+       else if(this.state.dod && regex.test(this.state.rpu) ){
             if(document.getElementById('agree').checked){
                 let params = queryString.parse(this.props.location.search);
                 TTCEapi.savePi(
@@ -471,10 +478,10 @@ import ModernDatepicker from 'react-modern-datepicker';
         var regex = /[1-9]|\./
         var moqlen= /^\d{1,2}$/
         var ppulen=/^\d{1,6}$/
-        if(!moqlen.test(this.state.moq)){
+        if((parseInt(this.state.moq) < 10)  ){
             this.setState({
                 showValidationMoq: true,
-              message : "MOQ should not be empty & more than 2 digits "
+              message : "Min Order Qty should be atleast 10"
           });
         }
         else if(!ppulen.test(this.state.ppu)){

@@ -172,19 +172,28 @@ var homeSectionStyle = {};
                 this.setState({ username: userName }, () => {
                           TTCEapi.validateUsername(userName, 2).then(
                             (response) => {
-                              
-                              if (response.data.valid) {
-                                if (this.state.userpage == 1) {
-                                  this.handler(2);
+                              if(response) {
+                                if (response.data.valid) {
+                                  if (this.state.userpage == 1) {
+                                    this.handler(2);
+                                  } else {
+                                    this.handler(4);
+                                  }
                                 } else {
-                                  this.handler(4);
+                                  customToast.error(response.data.errorMessage, {
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    autoClose: true,
+                                });
                                 }
-                              } else {
-                                customToast.error(response.data.errorMessage, {
+                              }
+                              else {
+                                customToast.error("This contact number/email does not exists!", {
                                   position: toast.POSITION.TOP_RIGHT,
                                   autoClose: true,
                               });
                               }
+                              
+                              
                             }
                           );
                         });

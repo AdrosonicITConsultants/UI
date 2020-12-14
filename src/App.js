@@ -87,6 +87,7 @@ import BuyerChat from './components/Chat/buyerChat';
 import ViewOldQC from './components/Artisan-MyOrder/viewOldQC';
 import ErrorPage from './components/404errorPage/errorPage';
 import AdvancePaymentCR from './components/Buyer-MyOrder/AdvancePaymentCR';
+import AdvancePaymentCR2 from './components/Buyer-MyOrder/AdvancePaymentCR2';
 function App() {
   
   return (
@@ -144,7 +145,7 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
-          <PrivateRoute path="/payadvanceamount" component={AdvancePaymentCR} />
+          <PrivateRoute path="/payadvanceamount" component={AdvancePaymentCR2} />
 
           <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 

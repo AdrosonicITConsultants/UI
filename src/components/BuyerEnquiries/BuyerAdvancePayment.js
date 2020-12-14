@@ -604,6 +604,7 @@ enquiryId={this.state.previewPiOrder.enquiryId}
               ></img>
             </div>
           </Row> 
+         
                 </>
 :
 null
@@ -616,6 +617,7 @@ null
 
 
 </Container>
+<Footer />
 </React.Fragment>
         )
     }

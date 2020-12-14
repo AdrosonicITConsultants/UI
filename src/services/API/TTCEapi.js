@@ -1150,7 +1150,8 @@ class TTCEapi {
     paidAmount,
     percentage,
     pid,
-    totalAmount
+    totalAmount,
+    typeNo,
 
   ) {
     
@@ -1160,7 +1161,7 @@ class TTCEapi {
 
     var payment = {
       enquiryId:enquiryId,
-      type:parseInt(1),
+      type:typeNo,
       paidAmount:paidAmount,
       percentage:parseInt(percentage),
       pid:pid,

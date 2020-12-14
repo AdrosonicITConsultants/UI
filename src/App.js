@@ -145,7 +145,7 @@ function App() {
           <PrivateRoute exact path="/BuyerPreview" component={BuyerPreviewInvoice} />
 
           <PrivateRoute path="/payadvance" component={BuyerAdvancePayment} />
-          <PrivateRoute path="/payadvanceamount" component={AdvancePaymentCR2} />
+          <PrivateRoute path="/payadvanceamount" component={AdvancePaymentCR} />
 
           <PrivateRoute path="/uploadReceiptandSend" component={BuyerAdvancePayment3} />
 

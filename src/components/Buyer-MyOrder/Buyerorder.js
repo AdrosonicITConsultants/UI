@@ -58,7 +58,8 @@ export class Buyerorder extends Component {
             orderReceivedCurrentId: 0,
             orderReceivedModalOkButtonDisable: false,  
             checked:false  ,
-            orderCodeid:""    
+            orderCodeid:""  ,
+            revisedAdvancePaymentId:""  
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -285,6 +286,8 @@ export class Buyerorder extends Component {
         };
         });
         }
+       
+
         proformaDetailsbtn(){
         this.setState((prevState) => {
         return{
@@ -474,7 +477,10 @@ export class Buyerorder extends Component {
         }
         
         componentDidMount(){
-           
+            if (localStorage.getItem('SelectPI')== 1) {
+                this.moqDetailsbtn();
+             }
+             localStorage.removeItem("SelectPI"); 
      var orderDetail = localStorage.getItem('piShow');
     if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn()
@@ -518,6 +524,7 @@ export class Buyerorder extends Component {
                         this.setState({openEnquiries:response1.data.data,
                             getSingleOrder : response1.data.data[0].openEnquiriesResponse,
                             geteta:response1.data.data[0],
+                            revisedAdvancePaymentId:response1.data.data[0].openEnquiriesResponse.revisedAdvancePaymentId,
                              dataload:true},()=>{
                             var data = localStorage.getItem("changeRequest");
                             if(data) {
@@ -1998,7 +2005,7 @@ export class Buyerorder extends Component {
                                                                <DownloadBuyerPreviewPI
                                                                enquiryId={this.state.enquiryCode}
                                                                enquiryCode={item.openEnquiriesResponse.enquiryCode}
-                                                               
+                                                               revisedAdvancePaymentId={this.state.revisedAdvancePaymentId}
                                                                 /> 
                                                                
                                                                 </Col>

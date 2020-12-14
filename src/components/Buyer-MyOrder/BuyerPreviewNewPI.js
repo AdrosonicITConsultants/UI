@@ -221,7 +221,9 @@ export class BuyerPreviewNewPI extends Component {
       
     } 
     
-    
+    proceedtoadvancepay(){
+      browserHistory.push("payadvanceamount?code="+this.props.enquiryId)
+    }
     render(){
         return(
             
@@ -843,6 +845,30 @@ export class BuyerPreviewNewPI extends Component {
          All amount in Indian Rupee (₹)
      </Col>
  </Row>
+ {this.state.getOldPIData.length==0?
+        ""
+          :
+<Row className="postadvpaybtn">
+ {this.state.previewPI.productCustom == false?
+<>
+{this.state.previewPI.product.productStatusId==2||this.props.completed==1 ?  
+"":
+ <button className="Raiseinvbtn" onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+
+}
+</>
+:
+<>
+{this.state.buyerCustomProduct.productStatusId==2||this.props.completed==1 ?
+""
+:
+<button className="Raiseinvbtn" onClick={() => this.proceedtoadvancepay()}> Proceed to advance payment <i class="fas fa-arrow-right MarginLeft10" aria-hidden="true"></i></button>
+
+}
+</>
+}
+</Row>
+    }
  </div>
  </> }
 </>

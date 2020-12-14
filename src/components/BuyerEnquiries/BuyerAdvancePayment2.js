@@ -223,7 +223,7 @@ export default class BuyerAdvancePayment2 extends Component {
             <Col className="col-xs-12">
             <div class="Total-square-container">
                 <div class="Total-square">
-                <p className="orderamthead">Order amount</p>
+                <p className="orderamthead">Advance amount</p>
               <h3 className="totalamtpay totalamtpay2" ><span > 
     ₹ {this.props.calulatedAmount}
      </span>

@@ -101,6 +101,7 @@
     font-size: 20px;
     color: rgb(102, 136, 255);
     width: auto;
+    margin-left: 15px;
  }
  .proccedwithadvpaybtn{
     border: 1px solid;
@@ -320,6 +321,8 @@ cursor: pointer;
     color: rgb(102, 136, 255);
     width: auto;
     display: inline-flex;
+    margin-left: 15px;
+
 }
 .selectpercenttext {
   color: gray;

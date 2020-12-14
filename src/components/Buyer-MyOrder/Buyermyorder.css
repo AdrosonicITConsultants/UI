@@ -154,3 +154,9 @@ input[type="date"]:valid::before {
     font-size: 16px;
     color: darkgrey;
 }
+
+.postadvpaybtn{
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: -66px;
+}

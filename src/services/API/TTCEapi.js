@@ -684,6 +684,7 @@ class TTCEapi {
         return error.response;
       });
   }
+  
   static getProductIdsInWishlist() {
     let url = ApiUrl + "/product/getProductIdsInWishlist";
 
@@ -696,7 +697,20 @@ class TTCEapi {
         return error.response;
       });
   }
+  static getRevisedAdvancedPaymentStatus(enquiryId) {
+    let url = ApiUrl + "/getRevisedAdvancedPaymentStatus/"+enquiryId;
 
+    return axios
+      .get(url)
+      .then((response) => {
+        return response;
+        console.log(response)
+      })
+
+      .catch((error) => {
+        return error.response;
+            });
+  }
   static deleteAllProductsInWishlist() {
     let url = ApiUrl + "/product/deleteAllProductsInWishlist";
 

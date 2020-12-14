@@ -777,14 +777,20 @@ export class BuyerPreviewNewPI extends Component {
           
           </span></h3>
       <h3 className="freightch snopi"><b>IFSC code:</b> <span className="ACcnodet">
-      {this.state.paymentDetails[0]?
-          <> {this.state.paymentDetails[0].ifsc}</>
+      {
+      this.state.paymentDetails[0]?
+          <>
+           {this.state.paymentDetails[0].ifsc}
+          </>
         :
-        "NA"}
+        "NA"
+        }
           </span></h3>
         </td>
         
-        </>:<>
+        </>
+        :
+        <>
         <td>
      <h3 className="freightch snopi"><b>Account Details:</b></h3>
      
@@ -796,9 +802,10 @@ export class BuyerPreviewNewPI extends Component {
 
 
         </td>
-        </>}
+        </>
+        }
      
-        <td >
+     <td >
      <p className="snopi wraptext"></p>
      </td>
      <td className="">
@@ -810,7 +817,7 @@ export class BuyerPreviewNewPI extends Component {
      <td>
      <h3 className="snopi wraptext"></h3>
      </td>
-   </tr>
+     </tr>
    {/* -----------------------------edd--------------------------------------- */}
    <tr>
      <td>
@@ -843,7 +850,7 @@ export class BuyerPreviewNewPI extends Component {
      </Col>
 
      <Col className="col-xs-3 allamtInd">
-         All amount in Indian Rupee (₹)
+      All amount in Indian Rupee (₹)
      </Col>
  </Row>
  {this.props.revisedAdvancePaymentId==0 || this.props.revisedAdvancePaymentId==1 || this.props.revisedAdvancePaymentId==4
@@ -877,10 +884,9 @@ export class BuyerPreviewNewPI extends Component {
    
    :<>
     <BuyerOldPi
-            bp={this.oldbackPI}
-            enquiryId={this.props.enquiryId}
-            enquiryCode={this.props.enquiryCode}
-    
+     bp={this.oldbackPI}
+     enquiryId={this.props.enquiryId}
+     enquiryCode={this.props.enquiryCode}
      expectedDateOfDelivery={this.state.dod}
      hsn={this.state.hsncode}
      rpu={this.state.rpu}

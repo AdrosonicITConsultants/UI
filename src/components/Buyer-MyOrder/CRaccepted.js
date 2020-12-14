@@ -79,7 +79,7 @@ export class CRaccepted extends Component {
   }
     
     <p className="crp">
-       <span>Change request raised <b style={{color:"lightgrey",marginLeft:"10px"}}>
+       <span>Change request raised <b style={{color:"grey",marginLeft:"29px"}}>
        <Moment format="DD-MM-YYYY">
           {this.state.getCRDate.createdOn ? this.state.getCRDate.createdOn : "12/12/2020"}
        </Moment> 

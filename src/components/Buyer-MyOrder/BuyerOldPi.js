@@ -814,7 +814,7 @@ export class BuyerOldPi extends Component {
                                                                     <br></br>
                                                                     <br></br>   
                                                                     <Col className="col-xs-12 text-center font14">
-                                                                    Old PI is Not-Available
+                                                                   
                                                                     </Col>
                                                                 </Row>
     </>}

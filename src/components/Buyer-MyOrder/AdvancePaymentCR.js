@@ -23,16 +23,10 @@ export default class AdvancePaymentCR extends Component {
     constructor() {
         super();
         
-        this.select30= this.select30.bind(this);
-        this.select50= this.select50.bind(this);
         this.backPI = this.backPI.bind(this);
         this.state = {
-            selected:"select30",
-            select30:true,
-            select50:false,
             dataload:false,
             enquiryCode:"",
-            percent:"30",
             totalAmount:"",
             calulatedAmount:0,
             nextPage:false,
@@ -62,44 +56,14 @@ export default class AdvancePaymentCR extends Component {
         this.setState({nextPage:true})
     }
 
-  
-
-    select30(){
-        this.setState((prevState) => {
-            return{
-             selected: "select30",
-             select20:false,
-             select30:true,
-             select50:false,
-             percent:"30",
-             calulatedAmount:((this.state.totalAmount * 30)/100),
-            };
-        });
-    }
-
-    select50(){
-        this.setState((prevState) => {
-            return{
-             selected: "select50",
-             select20:false,
-             select30:false,
-             select50:true,
-             percent:"50",
-             calulatedAmount:(this.state.totalAmount * 50)/100,
-         
-            };
-        });
-    }
     backPI(){
         this.setState({
-            nextPage:false
-           
+         nextPage:false
         })
     }
     componentDidMount() {
         let params = queryString.parse(this.props.location.search);
-
-        this.state.enquiryCode = params.code;
+         this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
             {
@@ -194,7 +158,7 @@ export default class AdvancePaymentCR extends Component {
     
       backoperation(){
         localStorage.setItem("SelectPI", 1);
-          browserHistory.goBack()
+        browserHistory.goBack()
       }
     
     render(){
@@ -206,9 +170,6 @@ export default class AdvancePaymentCR extends Component {
     {this.state.dataload?
     
 <>
-
-
-
 {this.state.getEnquiryMoq.map((item)=> 
                 <>
 
@@ -356,10 +317,6 @@ export default class AdvancePaymentCR extends Component {
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
-
-                
-               
-
 
 <Row>
             <div>

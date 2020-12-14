@@ -21,6 +21,7 @@ export class DownloadBuyerPreviewPI extends Component {
             <BuyerPreviewNewPI 
          enquiryId={this.props.enquiryId}
          enquiryCode={this.props.enquiryCode}
+         revisedAdvancePaymentId={this.props.revisedAdvancePaymentId}
             
             ref={el => (this.componentRef = el)}/>
         </React.Fragment>

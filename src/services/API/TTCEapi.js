@@ -554,6 +554,7 @@ class TTCEapi {
       .get(url)
       .then((response) => {
         return response;
+        console.log(response)
       })
       .catch((error) => {
         return error.response;
@@ -698,10 +699,10 @@ class TTCEapi {
       });
   }
   static getRevisedAdvancedPaymentStatus(enquiryId) {
-    let url = ApiUrl + "/getRevisedAdvancedPaymentStatus/"+enquiryId;
+    let url = ApiUrl + "/enquiry/getRevisedAdvancedPaymentStatus/"+enquiryId;
 
     return axios
-      .get(url)
+      .post(url)
       .then((response) => {
         return response;
         console.log(response)

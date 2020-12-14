@@ -46,6 +46,7 @@ export default class AdvancePaymentCR extends Component {
             lastName:"",
             getAdvancedPaymentStatus:[],
             getAdvancedPaymentReceipt:[],
+            getRevisedAdvancedPaymentStatus:[],
             receiptId:"",
             receiptlabel:""
 
@@ -180,7 +181,15 @@ export default class AdvancePaymentCR extends Component {
                     });
             }
         })
-      
+        TTCEapi.getRevisedAdvancedPaymentStatus(params.code).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getRevisedAdvancedPaymentStatus:response.data.data,
+                 
+                    })
+                    console.log(this.state.getRevisedAdvancedPaymentStatus)
+            }
+        })
       }
     
       backoperation(){
@@ -296,8 +305,7 @@ export default class AdvancePaymentCR extends Component {
                 <div class="Total-square">
                 <p className="orderamthead">Order amount</p>
               <h3 className="totalamtpay"><span > 
-              ₹
-                  {this.state.totalAmount}
+              ₹  {(this.state.getRevisedAdvancedPaymentStatus.totalAmount).toFixed(2)}
                     </span>
                     </h3>
 
@@ -307,20 +315,11 @@ export default class AdvancePaymentCR extends Component {
             </Col>
   </Row>
 
-
-
-
-  {/* <Row  noGutters={true}>
-      <Col className="col-xs-12 selectpercenttext">
-          Select the % of the total amount (as per PI) you wish to pay below
-      </Col>
-  </Row> */}
- 
 <Row noGutters={true} className="margintoprow">
     <Col className="col-xs-12" style={{textAlign:"center"}}>
       <span className="selectpercenttext">  You need to pay pending advance amount : 
       <span className="advtotal">
-       ₹ {(this.state.calulatedAmount).toFixed(2)}</span>
+       ₹ {(this.state.getRevisedAdvancedPaymentStatus.pendingAmount).toFixed(2)}</span>
      
                 </span>
     </Col>
@@ -331,7 +330,7 @@ export default class AdvancePaymentCR extends Component {
 
     <Col className="col-xs-12">
         <button className="proccedwithadvpaybtn" 
-        onClick={() => this.proceedtopay()}>Proceed with {this.state.percent}% 
+        onClick={() => this.proceedtopay()}>Proceed with {this.state.getRevisedAdvancedPaymentStatus.percentage}% 
        <span></span> advance payment <i class="fas fa-arrow-right" style={{marginLeft:"15px"}} aria-hidden="true"></i>
 </button>
     </Col>

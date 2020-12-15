@@ -490,7 +490,7 @@ src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/Transac
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].artisanText} } />
 </Col>
 <Col className="col-xs-3 boldrs" sm="1">
-₹ {item.totalAmount !=null?item.totalAmount:item.paidAmount != null?item.paidAmount:item.eta !=null ? item.eta:"NA"}
+ {item.totalAmount !=null? "₹" +  item.totalAmount:item.paidAmount != null? "₹" + item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
 <Col className="col-xs-3 viewreceipt" sm="1">
 {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?

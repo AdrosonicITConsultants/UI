@@ -415,7 +415,6 @@ export default class AdvancePaymentCR extends Component {
 <>
 {this.state.getEnquiryMoq.map((item)=> 
     <>
-{console.log(item.openEnquiriesResponse.productId)}
 
 <AdvancePaymentCR2
 bp={this.backPI}
@@ -458,7 +457,10 @@ getRevisedAdvancedPaymentStatus={this.state.getRevisedAdvancedPaymentStatus.pend
     </>
     :
     <>
+        {/* {console.log(this.state.getEnquiryMoq.openEnquiriesResponse.revisedAdvancePaymentId)} */}
+
     {this.state.getEnquiryMoq.map((item)=> 
+
 <AdvancePaymentCR3
 productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
 productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
@@ -472,6 +474,7 @@ companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.c
 receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
 receiptlabel={this.state.getAdvancedPaymentReceipt.label}
 enquiryId={this.state.previewPiOrder.enquiryId}
+revisedAdvancePaymentId={item.openEnquiriesResponse.revisedAdvancePaymentId}
 />
  )}
     </>

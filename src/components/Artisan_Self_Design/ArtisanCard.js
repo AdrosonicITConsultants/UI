@@ -24,7 +24,7 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
   }
        
   exploreMore(id){
-    browserHistory.push("artisanbrands/ArtisanProducts?artisanId="+id)
+    browserHistory.push("/Artisanself/artisanbrands/ArtisanProducts?artisanId="+id)
   }
     render () {
       

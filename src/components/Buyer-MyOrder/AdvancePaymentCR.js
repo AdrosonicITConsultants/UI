@@ -14,9 +14,7 @@ import { toast } from "react-toastify";
 import moment from 'moment';
 import Moment from 'react-moment';
 import NavbarComponent from "../navbar/navbar";
-import Footer from '../footer/footer';
-import BuyerAdvancePayment2 from "../BuyerEnquiries/BuyerAdvancePayment2"
-import BuyerAdvancePayment3 from "../BuyerEnquiries/BuyerAdvancePayment3"
+import AdvancePaymentCR2 from './AdvancePaymentCR2';
 
 
 export default class AdvancePaymentCR extends Component {
@@ -170,6 +168,10 @@ export default class AdvancePaymentCR extends Component {
     {this.state.dataload?
     
 <>
+
+{this.state.nextPage==false ? 
+<>
+
 {this.state.getEnquiryMoq.map((item)=> 
                 <>
 
@@ -317,6 +319,56 @@ export default class AdvancePaymentCR extends Component {
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>
                 </div>
+</>
+:
+<>
+{this.state.getEnquiryMoq.map((item)=> 
+    <>
+
+{this.state.calulatedAmount?
+<AdvancePaymentCR2
+bp={this.backPI}
+productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
+yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
+weftYarnId ={this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc:""}
+extraWeftYarnId ={item.openEnquiriesResponse.extraWeftYarnId?item.openEnquiriesResponse.extraWeftYarnId:""}
+extraWeftYarnIds = {this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ] ?this.state.yarns[item.openEnquiriesResponse.extraWeftYarnId - 1 ].yarnDesc:""}
+productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
+companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
+productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
+productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
+enquiryCode={item.openEnquiriesResponse.enquiryCode}
+//  FullCode={item.openEnquiriesResponse.enquiryCode}
+calulatedAmount={this.state.calulatedAmount}
+gpay={this.state.gpay?this.state.gpay:"NA"}
+phonePay={this.state.phonePay?this.state.phonePay:"NA"}
+paytm={this.state.paytm}
+ifscCode={this.state.ifscCode}
+accNo={this.state.accNo}
+bankName={this.state.bankName}
+firstName={this.state.firstName}
+lastName={this.state.lastName}
+enquiryId={this.state.previewPiOrder.enquiryId}
+percent={this.state.percent} 
+totalAmount={this.state.totalAmount}
+pid={this.state.previewPiOrder.id}
+receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
+receiptlabel={this.state.getAdvancedPaymentReceipt.label}
+ />
+ 
+ :
+ ""
+}
+
+
+</>
+)}
+</>
+    }
+  
+                
+               
+
 
 <Row>
             <div>

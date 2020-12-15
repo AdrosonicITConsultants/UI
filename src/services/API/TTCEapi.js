@@ -559,7 +559,6 @@ class TTCEapi {
       .get(url)
       .then((response) => {
         return response;
-        console.log(response)
       })
       .catch((error) => {
         return error.response;
@@ -710,7 +709,6 @@ class TTCEapi {
       .post(url)
       .then((response) => {
         return response;
-        console.log(response)
       })
 
       .catch((error) => {

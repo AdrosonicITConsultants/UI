@@ -467,7 +467,7 @@ goToChatButton = (id) => {
                     
                     </>
                      :
-                     <button className="submitCRart" disabled={this.state.submitdisabled}>Submit</button>
+                     <button className="submitCRart disablesubmitCRart" disabled={this.state.submitdisabled}>Submit</button>
                      }
                      
                       </Col>

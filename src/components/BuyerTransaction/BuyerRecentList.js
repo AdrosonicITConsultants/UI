@@ -357,7 +357,7 @@ export class BuyerRecentList extends Component {
 
 </Col>
 <Col className="col-xs-3" sm="1">
-<img src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
+<img src={TTCEapi.IconsUrl+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
 
 </Col>
 <Col className="col-xs-3 paymentreceiptup" sm="2">

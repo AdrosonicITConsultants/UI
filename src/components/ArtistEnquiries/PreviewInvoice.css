@@ -242,6 +242,7 @@ margin-left: 25px;
     color: grey;
     font-weight: 500;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .Qtyandhsn{
@@ -382,6 +383,7 @@ table, th, td {
     }    
     .belowprevtext {
         font-size: 12px;
+        cursor: pointer;
     }
 }
 

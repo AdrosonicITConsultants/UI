@@ -853,7 +853,7 @@ export class BuyerPreviewNewPI extends Component {
       All amount in Indian Rupee (₹)
      </Col>
  </Row>
- {this.props.revisedAdvancePaymentId==0 || this.props.revisedAdvancePaymentId==1 || this.props.revisedAdvancePaymentId==4
+ {this.props.revisedAdvancePaymentId==0 || this.props.revisedAdvancePaymentId==1 
 ?
         ""
           :

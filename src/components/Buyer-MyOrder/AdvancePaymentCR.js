@@ -229,6 +229,18 @@ export default class AdvancePaymentCR extends Component {
                             })
             }
         })
+        TTCEapi.getRevisedAdvancedPaymentReceipt(params.code).then((response)=>{
+            if(response.data.valid)
+        {
+            this.setState({getAdvancedPaymentReceipt : response.data.data,
+                receiptId:response.data.data.paymentId,
+                receiptlabel:response.data.data.label
+              
+            },()=>{
+               
+            });
+        }
+        });
       }
     
       backoperation(){

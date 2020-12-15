@@ -213,6 +213,9 @@ export class BuyerRecentList extends Component {
     uploadagain(enquiryId){
         browserHistory.push("/payadvance?code="+enquiryId)
     }
+    uploadagainCR(enquiryId){
+      browserHistory.push("/payadvanceamount?code="+enquiryId)
+  }
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
             if(response.data.valid)
@@ -417,7 +420,13 @@ export class BuyerRecentList extends Component {
             <img src={logos.uploadagain} className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload again</p></span>
       </>
-   
+    :
+    this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==29?
+    <>
+     <span onClick={() => this.uploadagainCR(item.transactionOngoing.enquiryId)} >   
+             <img src={logos.uploadagain} className="uplodagainicon"/>
+      <p style={{marginTop:"5px"}}>upload again</p></span>
+    </>
      :
         <>
         <span onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}>
@@ -435,6 +444,16 @@ export class BuyerRecentList extends Component {
         onClick={() => this.uploadagain(item.transactionOngoing.enquiryId)}
         className="uplodagainicon"/>
      <p style={{marginTop:"5px"}}>upload receipt</p></span>
+        </>
+        :
+        this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].transactionId==5?
+        <>
+            <span 
+>
+    <img src={logos.uploadagain} 
+     onClick={()=>this.uploadagainCR(item.transactionOngoing.enquiryId)} 
+    className="uplodagainicon"/>
+ <p style={{marginTop:"5px"}}>upload receipt</p></span>
         </>
         :
         <>
@@ -507,7 +526,7 @@ export class BuyerRecentList extends Component {
                                                                     }
                                                                         <Row noGutters={true}>
                                                                         <Col className="col-xs-12"style={{fontSize:"20px"}}>
-                                                                        Net payment amount: <b>{this.state.payableAmount}</b> 
+                                                                        Net payment amount: <b>₹ {this.state.payableAmount}</b> 
                                                                          </Col>
                                                                           </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>

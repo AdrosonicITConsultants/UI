@@ -132,7 +132,17 @@ export class AdvancePaymentCR3 extends Component {
     <img src={logos.greentick} style={{height:"100px"}}/>
      </Col>
 </Row>
-
+{this.props.revisedAdvancePaymentId==1?
+<>
+<Row noGutters={true} style={{marginTop:"10px"}}>
+    <Col className="col-xs-12" style={{textAlign:"center"}}>
+    <p >   <span className="selectpercenttext" style={{fontSize:"18px"}}>  An Artisan has already received your advance payment. This will get reflected in Final Tax Invoice
+                </span></p>
+    </Col>
+</Row>
+</>
+:
+<>
 <Row noGutters={true} style={{marginTop:"10px"}}>
     <Col className="col-xs-12" style={{textAlign:"center"}}>
     <p>   <span className="selectpercenttext">  Thank you! Your receipt has been uploaded successfully and Artisan is notified. <br/>
@@ -154,6 +164,9 @@ export class AdvancePaymentCR3 extends Component {
 
     </Col>
 </Row>
+</>
+}
+
 <br/>
 <div className="colorbardiv">      
                           <img src={logos.colorbar} className="colorbarimg"></img>

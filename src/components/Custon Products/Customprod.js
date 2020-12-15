@@ -17,7 +17,7 @@ class Customprod extends Component {
       
     }
     backoperation(){
-        browserHistory.push("/home"); 
+        browserHistory.goBack();  
     }  
     
     custompage(){

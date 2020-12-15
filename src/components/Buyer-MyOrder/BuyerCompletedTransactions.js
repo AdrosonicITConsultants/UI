@@ -431,7 +431,7 @@ export class BuyerCompletedTransaction extends Component {
                                                                     }
                                                                         <Row noGutters={true}>
                                                                         <Col className="col-xs-12"style={{fontSize:"20px"}}>
-                                                                        Net payment amount: <b>{this.state.getPaymentDetailsForFinalPayment.payableAmount?this.state.getPaymentDetailsForFinalPayment.payableAmount:"0"}</b> 
+                                                                        Net payment amount: <b>₹ {this.state.getPaymentDetailsForFinalPayment.payableAmount?this.state.getPaymentDetailsForFinalPayment.payableAmount:"0"}</b> 
                                                                          </Col>
                                                                           </Row>
                                                                         <div className="buyerMOQAcceptModalEnquiryDiv" style={{marginBottom:"10px"}}>

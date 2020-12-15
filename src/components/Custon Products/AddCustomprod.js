@@ -55,7 +55,7 @@ class AddCustomprod extends Component {
       }
 
     backoperation(){
-        browserHistory.push("/home"); 
+        browserHistory.goBack(); 
     }  
     handleDeleteAllItem(){
         // if(window.confirm("Remove this item from wishlist?")){

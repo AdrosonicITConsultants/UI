@@ -27,7 +27,7 @@ class BuyerNotifications extends Component {
   }
 
   backoperation() {
-    browserHistory.push("/home");
+    browserHistory.goBack(); 
   }
 
   componentDidMount(){

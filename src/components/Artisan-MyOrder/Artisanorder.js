@@ -51,6 +51,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             dispatchRCButtonDisable: false,     
             orderRecreateModalOkButtonDisable: false,
             orderRCSelectedId: 0,
+            disableStatusButton: false,
         }
         this.transactionsbtn = this.transactionsbtn.bind(this);
         this.moqDetailsbtn = this.moqDetailsbtn.bind(this);
@@ -77,6 +78,9 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
     inprogresss = () => {
         this.ToggleDeleteClose();
+        this.setState({
+            disableStatusButton: true
+        })
         let params = queryString.parse(this.props.location.search);
         TTCEapi.progressUpdate(parseInt(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId),parseInt(params.code),parseInt(this.state.openEnquiries[0].openEnquiriesResponse.innerEnquiryStageId)).then((response)=>{
             if(response.data.valid)
@@ -85,6 +89,9 @@ import { useTranslation, withTranslation } from "react-i18next";
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
+                this.setState({
+                    disableStatusButton: false
+                })
             }
             else{
                 customToast.error(response.data.errorMessage, {
@@ -96,6 +103,9 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
     stateupdate = () => {
         this.ToggleDeleteClose();
+        this.setState({
+            disableStatusButton: true
+        })
         let params = queryString.parse(this.props.location.search);
         var innerID = 0 ;
         if(this.state.openEnquiries[0].openEnquiriesResponse.enquiryStageId == 4)
@@ -298,6 +308,11 @@ import { useTranslation, withTranslation } from "react-i18next";
     }
     
     componentDidMount(){
+
+        this.setState({
+            disableStatusButton: false,
+        });
+        console.log(this.state.disableStatusButton);
        var taxinvoice=localStorage.getItem("piShow");
        if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn();
@@ -997,12 +1012,21 @@ import { useTranslation, withTranslation } from "react-i18next";
                     ? 
                      <></>
                    :
+                   this.state.disableStatusButton === false ?
                    <button
                      className="blackButton"
                      onClick={this.ToggleDelete}
                     >
                     {this.props.t("Pages.object.change status")}
                    </button>
+                   :                  
+                   <button
+                   className="blackButton"
+                   disabled
+                  >
+                  {this.props.t("Pages.object.change status")}
+
+                 </button>
                      }   
                    
                     <div id="id01" class="w3-modal">
@@ -1579,13 +1603,23 @@ import { useTranslation, withTranslation } from "react-i18next";
                                       ? 
                      <></>
                    :
-                   <button
+                  this.state.disableStatusButton === false ?
+                  <button
                      className="blackButton"
                      onClick={this.ToggleDelete}
                     >
                     {this.props.t("Pages.object.change status")}
 
                    </button>
+                   :
+                   
+                   <button
+                   className="blackButton"
+                   disabled
+                  >
+                  {this.props.t("Pages.object.change status")}
+
+                 </button>
                      }   
                    
                     <div id="id01" class="w3-modal">

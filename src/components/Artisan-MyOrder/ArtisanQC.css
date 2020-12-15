@@ -211,7 +211,7 @@
 }
 
 
-[type="radio"]:checked,
+/* [type="radio"]:checked,
 [type="radio"]:not(:checked) {
     position: absolute;
     left: -9999px;
@@ -260,4 +260,4 @@
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
-}
+} */

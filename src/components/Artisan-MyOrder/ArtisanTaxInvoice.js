@@ -236,7 +236,7 @@ componentDidMount(){
                 quantity:response.data.data.invoice!=null?response.data.data.invoice.quantity:response.data.data.pi.quantity,
                 rpu:response.data.data.invoice!=null?response.data.data.invoice.ppu:response.data.data.pi.ppu,
                 pta:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,
-                   apr:response.data.data.invoice!=null?response.data.data.invoice.advancePaidAmt:response.data.payment?response.data.payment.paidAmount:0,
+                apr:response.data.data.payment!=null?response.data.data.revisedPayment!=null?response.data.data.payment.paidAmount + response.data.data.revisedPayment.paidAmount :response.data.data.payment.paidAmount : 0,
                 sgst:response.data.data.invoice!=null?response.data.data.invoice.sgst:response.data.data.pi.sgst,
                 cgst:response.data.data.invoice!=null?response.data.data.invoice.cgst:response.data.data.pi.cgst,
                 finalamt:response.data.data.invoice!=null?response.data.data.invoice.totalAmount:response.data.data.pi.totalAmount,

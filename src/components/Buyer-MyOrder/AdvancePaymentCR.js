@@ -15,7 +15,8 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import NavbarComponent from "../navbar/navbar";
 import AdvancePaymentCR2 from './AdvancePaymentCR2';
-
+import { AdvancePaymentCR3 } from './AdvancePaymentCR3';
+import Footer from '../footer/footer';
 
 export default class AdvancePaymentCR extends Component {
     constructor() {
@@ -40,7 +41,8 @@ export default class AdvancePaymentCR extends Component {
             getAdvancedPaymentReceipt:[],
             getRevisedAdvancedPaymentStatus:[],
             receiptId:"",
-            receiptlabel:""
+            receiptlabel:"",
+            getOrderData: "",
 
                    }
     }
@@ -152,6 +154,81 @@ export default class AdvancePaymentCR extends Component {
                     console.log(this.state.getRevisedAdvancedPaymentStatus)
             }
         })
+
+        TTCEapi.getBuyerPreviewPI(params.code).then((response)=>{
+            if(response.data.valid)
+            {
+          
+
+                if(response.data.data.productCustom === false) {
+                    this.setState({
+                        
+                    previewPI:response.data.data,
+                  buyerDetails: response.data.data.generatedBy,
+                  previewPiOrder:response.data.data.piOrder,
+                  buyerCustomProduct:response.data.data.buyerCustomProduct,
+                  paymentDetails:response.data.data.paymentDetails,
+                  gpay:response.data.data.paymentDetails&&response.data.data.paymentDetails[1]?response.data.data.paymentDetails[1].accNo_UPI_Mobile:"",
+                  phonePay:response.data.data.paymentDetails&&response.data.data.paymentDetails[2]?response.data.data.paymentDetails[2].accNo_UPI_Mobile:"",
+                  paytm:response.data.data.paymentDetails&&response.data.data.paymentDetails[3]?response.data.data.paymentDetails[3].accNo_UPI_Mobile:"",
+                  ifscCode:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].ifsc:"",
+                  accNo:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].accNo_UPI_Mobile:"",
+                  bankName:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].bankName:"",
+                  artisanUser:response.data.data.artisanUser,
+                  firstName:response.data.data.artisanUser.firstName,
+                  lastName:response.data.data.artisanUser.lastName,
+                  generatedBy:response.data.data.generatedBy,
+                  weftDye:response.data.data.product.weftDye,
+                  warpDye:response.data.data.product.warpDye,
+                  extraWeftDye:response.data.data.product.extraWeftDye,
+                  weftYarn:response.data.data.product.weftYarn,
+                  warpYarn:response.data.data.product.warpYarn,
+                  extraWeftYarn:response.data.data.product.extraWeftYarn,
+                //  totalAmount:totalAmount,
+                //  calulatedAmount:totalAmount * 0.3,
+                    })
+                }
+                else {
+                    this.setState({
+                    previewPI:response.data.data,
+                  buyerDetails: response.data.data.generatedBy,
+                  previewPiOrder:response.data.data.piOrder,
+                  buyerCustomProduct:response.data.data.buyerCustomProduct,
+                  paymentDetails:response.data.data.paymentDetails,
+                  gpay:response.data.data.paymentDetails&&response.data.data.paymentDetails[1]?response.data.data.paymentDetails[1].accNo_UPI_Mobile:"",
+                  phonePay:response.data.data.paymentDetails&&response.data.data.paymentDetails[2]?response.data.data.paymentDetails[2].accNo_UPI_Mobile:"",
+                  paytm:response.data.data.paymentDetails&&response.data.data.paymentDetails[3]?response.data.data.paymentDetails[3].accNo_UPI_Mobile:"",
+                  ifscCode:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].ifsc:"",
+                  accNo:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].accNo_UPI_Mobile:"",
+                  bankName:response.data.data.paymentDetails&&response.data.data.paymentDetails[0]?response.data.data.paymentDetails[0].bankName:"",
+                  artisanUser:response.data.data.artisanUser,
+                  firstName:response.data.data.artisanUser.firstName,
+                  lastName:response.data.data.artisanUser.lastName,
+                  generatedBy:response.data.data.generatedBy,
+                  customweftDye:response.data.data.buyerCustomProduct.weftDye,
+                  customwarpDye:response.data.data.buyerCustomProduct.warpDye,
+                  customextraWeftDye:response.data.data.buyerCustomProduct.extraWeftDye,
+                  customweftYarn:response.data.data.buyerCustomProduct.weftYarn,
+                  customwarpYarn:response.data.data.buyerCustomProduct.warpYarn,
+                  customextraWeftYarn:response.data.data.buyerCustomProduct.extraWeftYarn,
+                //   totalAmount:totalAmount,
+                //   calulatedAmount:totalAmount * 0.3,
+                    })
+                }
+                
+            }
+
+        });
+
+        TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
+            if(response.data.valid)
+            {
+                this.setState({getOrderData:response.data.data[0].openEnquiriesResponse,
+                    
+                   
+                            })
+            }
+        })
       }
     
       backoperation(){
@@ -167,6 +244,8 @@ export default class AdvancePaymentCR extends Component {
 <NavbarComponent />
     {this.state.dataload?
     
+<>
+{this.state.getOrderData.revisedAdvancePaymentId == 2 ?
 <>
 
 {this.state.nextPage==false ? 
@@ -324,8 +403,8 @@ export default class AdvancePaymentCR extends Component {
 <>
 {this.state.getEnquiryMoq.map((item)=> 
     <>
+{console.log(item.openEnquiriesResponse.productId)}
 
-{this.state.calulatedAmount?
 <AdvancePaymentCR2
 bp={this.backPI}
 productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
@@ -339,31 +418,51 @@ productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.produ
 productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
 enquiryCode={item.openEnquiriesResponse.enquiryCode}
 //  FullCode={item.openEnquiriesResponse.enquiryCode}
-calulatedAmount={this.state.calulatedAmount}
 gpay={this.state.gpay?this.state.gpay:"NA"}
 phonePay={this.state.phonePay?this.state.phonePay:"NA"}
 paytm={this.state.paytm}
 ifscCode={this.state.ifscCode}
+calulatedAmount={this.state.getRevisedAdvancedPaymentStatus.pendingAmount}
 accNo={this.state.accNo}
 bankName={this.state.bankName}
 firstName={this.state.firstName}
 lastName={this.state.lastName}
 enquiryId={this.state.previewPiOrder.enquiryId}
-percent={this.state.percent} 
-totalAmount={this.state.totalAmount}
+percent={this.state.getRevisedAdvancedPaymentStatus.percentage} 
+totalAmount={this.state.getRevisedAdvancedPaymentStatus.totalAmount}
 pid={this.state.previewPiOrder.id}
 receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
 receiptlabel={this.state.getAdvancedPaymentReceipt.label}
+getRevisedAdvancedPaymentStatus={this.state.getRevisedAdvancedPaymentStatus.pendingAmount}
  />
- 
- :
- ""
-}
+
+
 
 
 </>
 )}
 </>
+    }
+    </>
+    :
+    <>
+    {this.state.getEnquiryMoq.map((item)=> 
+<AdvancePaymentCR3
+productType={item.openEnquiriesResponse.productType?item.openEnquiriesResponse.productType:"NA"}
+productId={item.openEnquiriesResponse.productId?item.openEnquiriesResponse.productId:"NA"}
+productImages={item.openEnquiriesResponse.productImages!=null?item.openEnquiriesResponse.productImages:""}
+enquiryCode={item.openEnquiriesResponse.enquiryCode}
+productDesc ={this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""}
+yarnDesc={this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc:""}
+weftYarnId ={this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ]?this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc:""}
+extraWeftYarnId ={item.openEnquiriesResponse.extraWeftYarnId?item.openEnquiriesResponse.extraWeftYarnId:""}
+companyName={item.openEnquiriesResponse.companyName?item.openEnquiriesResponse.companyName:"NA"}
+receiptId={this.state.getAdvancedPaymentReceipt.paymentId}
+receiptlabel={this.state.getAdvancedPaymentReceipt.label}
+enquiryId={this.state.previewPiOrder.enquiryId}
+/>
+ )}
+    </>
     }
   
                 
@@ -378,6 +477,7 @@ receiptlabel={this.state.getAdvancedPaymentReceipt.label}
               ></img>
             </div>
           </Row> 
+         
                 </>
 :
 null
@@ -390,6 +490,7 @@ null
 
 
 </Container>
+<Footer />
 </React.Fragment>
         )
     }

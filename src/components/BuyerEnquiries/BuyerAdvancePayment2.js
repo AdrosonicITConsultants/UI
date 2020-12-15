@@ -65,7 +65,8 @@ export default class BuyerAdvancePayment2 extends Component {
             this.props.calulatedAmount,
             this.props.percent,
             this.props.pid,
-            this.props.totalAmount
+            this.props.totalAmount,
+            1
             ).then((response)=>{
             
             if(response.data.valid){ 

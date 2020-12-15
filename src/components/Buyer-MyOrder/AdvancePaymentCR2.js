@@ -65,7 +65,8 @@ export default class AdvancePaymentCR2 extends Component {
             this.props.calulatedAmount,
             this.props.percent,
             this.props.pid,
-            this.props.totalAmount
+            this.props.totalAmount,
+            3
             ).then((response)=>{
             
             if(response.data.valid){ 
@@ -109,17 +110,6 @@ export default class AdvancePaymentCR2 extends Component {
         })
     }
 
-    // componentDidMount(){
-    //     TTCEapi.getRevisedAdvancedPaymentStatus(params.code).then((response)=>{
-    //         if(response.data.valid)
-    //         {
-    //         this.setState({getAdvancedPaymentStatus : response.data.data},()=>{
-
-    //         });
-    //     }
-    //     });
-       
-    // }
       acceptMOQModalShow = () => {
         document.getElementById('acceptMOQModal').style.display='block';
     }
@@ -233,7 +223,7 @@ export default class AdvancePaymentCR2 extends Component {
                 <div class="Total-square">
                 <p className="orderamthead">Advance amount</p>
               <h3 className="totalamtpay totalamtpay2" ><span > 
-    ₹ {this.props.calulatedAmount}
+    ₹ {(this.props.getRevisedAdvancedPaymentStatus).toFixed(2)}
      </span>
                     </h3>
     

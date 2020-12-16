@@ -6,6 +6,7 @@ import { Row, Col } from 'reactstrap';
 import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class ArtisanQC extends Component {
 
@@ -131,6 +132,7 @@ export default class ArtisanQC extends Component {
         }
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
+            if (response){
             if(response.data.valid)
             { 
                 this.componentDidMount();
@@ -147,6 +149,10 @@ export default class ArtisanQC extends Component {
                     });
                 }
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         });
     }
 

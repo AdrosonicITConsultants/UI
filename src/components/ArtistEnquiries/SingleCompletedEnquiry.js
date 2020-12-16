@@ -383,7 +383,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             getPi : response.data.data,
             quantity:response.data.data.quantity,
             rpu:response.data.data.ppu,
-            dod:response.data.data.date,
+            dod:response.data.data.expectedDateOfDelivery,
             hsncode:response.data.data.hsn,
             cgst:response.data.data.cgst,
             sgst:response.data.data.sgst,

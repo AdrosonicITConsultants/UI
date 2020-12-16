@@ -222,11 +222,15 @@ import ModernDatepicker from 'react-modern-datepicker';
 
 componentDidMount(){
     TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({getOldPIData:response.data.data,
              
                 })
+        } }
+        else{
+            browserHistory.push("/404error")
         }
     })
     TTCEapi.fetchEnquiryAndPaymentDetails(this.props.enquiryId).then((response)=>{

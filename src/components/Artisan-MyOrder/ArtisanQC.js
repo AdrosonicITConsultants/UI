@@ -226,6 +226,7 @@ export default class ArtisanQC extends Component {
         }
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
+if(response){
             if(response.data.valid)
             { 
                 this.componentDidMount();
@@ -242,6 +243,10 @@ export default class ArtisanQC extends Component {
                     });
                 }
             }
+             }
+        else{
+            browserHistory.push("/404error")
+        }
         });
     }
 
@@ -269,6 +274,7 @@ export default class ArtisanQC extends Component {
         }
 
         TTCEapi.sendOrSaveQcForm(finalData).then((response)=>{
+            if(response){
             if(response.data.valid)
             { 
                 this.componentDidMount();
@@ -277,6 +283,10 @@ export default class ArtisanQC extends Component {
                     autoClose: true,
                 });
             }
+                }
+        else{
+            browserHistory.push("/404error")
+        }
         });        
     }
 
@@ -362,7 +372,8 @@ export default class ArtisanQC extends Component {
             arrayObject: [], 
         });
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                if(response.data.valid)
             {
                 this.setState({
                     artisanBrand: response.data.data.artisanCompanyName,
@@ -394,7 +405,11 @@ export default class ArtisanQC extends Component {
                     });                    
                 });
             }
-         
+          }
+        else{
+            browserHistory.push("/404error")
+        }
+
             if(this.state.artisanQcResponses[1]) {
                 var data = this.state.artisanQcResponses[1][0].answer;
                 var result = data.split(",");
@@ -405,20 +420,30 @@ export default class ArtisanQC extends Component {
         });
 
         TTCEapi.getQCStages().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({
                     stagesData: response.data.data,
                 })
             }
+             }
+              else{
+            browserHistory.push("/404error")
+        }
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({
                     questionsData: response.data.data,
-                })
+                }) 
+            }
+        else{
+            browserHistory.push("/404error")
+        }
             }
 
             var data = this.state.questionsData[1][0].optionValue;

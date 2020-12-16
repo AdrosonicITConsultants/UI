@@ -534,6 +534,7 @@
     border-radius: 40px;
     margin-top: 50px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .chatLeftScrollStyle ::-webkit-scrollbar {

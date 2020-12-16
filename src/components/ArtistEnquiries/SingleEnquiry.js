@@ -554,7 +554,8 @@ import ModernDatepicker from 'react-modern-datepicker';
             enquiryId: params.code
         })
         TTCEapi.getMoq(params.code).then((response)=>{
-            if(response.data.data==null){
+            if(response){
+                 if(response.data.data==null){
                 this.setState({
                 moq:0,
                 ppu:"0",
@@ -576,7 +577,11 @@ import ModernDatepicker from 'react-modern-datepicker';
            
             });
         }
-           
+         }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
         });
         
         TTCEapi.getMoqDeliveryTimes().then((response)=>{
@@ -588,7 +593,8 @@ import ModernDatepicker from 'react-modern-datepicker';
      
 
     TTCEapi.getPi(params.code).then((response)=>{
-        if(response.data.data==null){
+        if(response){
+             if(response.data.data==null){
             this.setState({
                 getPi : 0,
                 quantity:0,
@@ -614,27 +620,45 @@ import ModernDatepicker from 'react-modern-datepicker';
        
         });
     }
-       
+      }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
     });
        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {    TTCEapi.getEnquirStages().then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                     this.setState({enquiryStagesMTO:response.data.data})
-                }
+                }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
             })
             TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                     this.setState({enquiryStagesAvailable:response.data.data})
-                }
+                }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
             })
             TTCEapi.getInnerEnquirStages().then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                     this.setState({innerEnquiryStages:response.data.data})
-                }
+                }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
             })
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
@@ -700,6 +724,11 @@ import ModernDatepicker from 'react-modern-datepicker';
                         });
                     });
             }
+            }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
         })
        
      }

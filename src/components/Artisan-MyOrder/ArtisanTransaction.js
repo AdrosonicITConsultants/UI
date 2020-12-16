@@ -201,6 +201,7 @@ import ModernDatepicker from 'react-modern-datepicker';
     acceptModalShow(id,enquiryId){
         
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response){
             if(response.data.valid)
         {
 
@@ -212,6 +213,9 @@ import ModernDatepicker from 'react-modern-datepicker';
              document.getElementById('acceptMOQModal'+ id).style.display='block';
             
             });
+        } }
+        else{
+            browserHistory.push("/404error")
         }
         });
         document.getElementById('acceptMOQModal'+ id).style.display='block';
@@ -374,17 +378,20 @@ import ModernDatepicker from 'react-modern-datepicker';
 
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
+if(response){
             if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactionActions().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                     this.setState({
                          getTransactionActions : response.data.data},()=>{
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
+                             if(response){
                             if(response.data.valid)
                             {
                             this.setState({
@@ -392,30 +399,36 @@ import ModernDatepicker from 'react-modern-datepicker';
                                  getTransactions : response.data.data.ongoingTransactionResponses},()=>{
                                  
                             });
-                        }
+                        } }
+        else{
+            browserHistory.push("/404error")
+        }
                         });
                     });
                 }
+            }
+        else{
+            browserHistory.push("/404error")
+        }
                 });
  
           
          });
         }
+         }
+        else{
+            browserHistory.push("/404error")
+        }
      });
      TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
         if(response.data.valid){
             this.setState({
-               
-                
-                deliveryChallanUploaded:response.data.data.deliveryChallanUploaded,
-               
+              deliveryChallanUploaded:response.data.data.deliveryChallanUploaded, 
             })
         }
         else {
             this.setState({
-               
                 deliveryChallanUploaded:false,
-              
           },()=>{
              
            

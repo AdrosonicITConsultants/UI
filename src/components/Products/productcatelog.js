@@ -6,6 +6,7 @@ import "./productcatelog.css";
 import Product from "./Product"
 import TTCEapi from "../../services/API/TTCEapi";
 import { useTranslation, withTranslation } from "react-i18next";
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 class productcatelog extends Component {
   constructor(props) {

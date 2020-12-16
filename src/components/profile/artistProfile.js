@@ -13,6 +13,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useTranslation, withTranslation } from "react-i18next";
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 class ArtistProfile extends Component {
     constructor(props) {

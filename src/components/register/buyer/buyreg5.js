@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 export default class buyreg5 extends Component {
     constructor() {

@@ -12,7 +12,7 @@ import Footer from "../footer/footer";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 
 class BuyerProfile extends Component {

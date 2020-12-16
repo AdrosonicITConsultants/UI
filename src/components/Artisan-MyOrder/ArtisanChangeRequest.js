@@ -159,20 +159,27 @@ export class ArtisanChangeRequest extends Component {
 
 componentDidMount(){
     TTCEapi.getPi(this.props.enquiryId).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({getPi:response.data.data,
             })
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
     })
   
     TTCEapi.getChangeRequestItemTable().then((response)=>{
+        if(response){
         if(response.data.valid)
         {
            
             this.setState({getChangeRequestItemTable:response.data.data},()=>{
                 if(this.props.completed){
                     TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
+                        if(response){
                         if(response.data.valid)
                         {
                             this.setState({getOrder:response.data.data},()=>{
@@ -195,17 +202,23 @@ componentDidMount(){
                                                     })
                                                 })
                                             }
+                                        }
+                                        else{
+                                            browserHistory.push("/404error")
+                                        }
                                             
                                         })
 
                 }
                 else{
                     TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+                        if(response){
                         if(response.data.valid)
                         {
                             this.setState({getOrder:response.data.data},()=>{
 
                                 TTCEapi.getChangeRequestForArtisan(this.props.enquiryId).then((response)=>{
+                                    if(response){
                                     if(response.data.valid)
                                     {
                                         this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
@@ -221,9 +234,17 @@ componentDidMount(){
                                             counter: count,
                                             })
                                                         }
+                                                    }
+                                                    else{
+                                                        browserHistory.push("/404error")
+                                                    }
                                                     })
                                                 })
                                             }
+                                        }
+                                        else{
+                                            browserHistory.push("/404error")
+                                        }
                                             
                                         })
 
@@ -235,6 +256,10 @@ componentDidMount(){
                 
                 )
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
     })
    
   
@@ -247,6 +272,7 @@ sendCR = () => {
      TTCEapi.changeRequestStatusUpdate(parseInt(this.props.enquiryId),this.state.raiseCRFinalArray,this.state.accepted.filter(function(s) { return s.option; }).length==this.state.getChangeRequestForArtisan.length?1:
     this.state.accepted.filter(function(s) { return s.reject; }).length==this.state.getChangeRequestForArtisan.length?2:3
     ).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
         
@@ -259,6 +285,10 @@ sendCR = () => {
             document.getElementById('Modal3').style.display='block';
 
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
     });
    
 }

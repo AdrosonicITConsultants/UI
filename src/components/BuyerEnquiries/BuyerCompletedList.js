@@ -27,6 +27,7 @@ export class BuyerCompletedList extends Component {
     }      
     componentDidMount(){
         TTCEapi.getProductUploadData().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({productCategories: response.data.data.productCategories,
@@ -41,24 +42,43 @@ export class BuyerCompletedList extends Component {
                         })
                     });
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
         TTCEapi.getEnquirStages().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesMTO:response.data.data})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({innerEnquiryStages:response.data.data})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
         
         

@@ -54,9 +54,11 @@ export class ArtisanOngoingOrder extends Component {
        } 
     componentDidMount(){
         TTCEapi.getProductUploadData().then((response)=>{
+            if(response){
             if(response.data.valid)
             {   
                 TTCEapi.getEnquirStages().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                         var rr = response.data.data;
@@ -64,23 +66,38 @@ export class ArtisanOngoingOrder extends Component {
                         rr[1].desc = "Order Details";
                         this.setState({enquiryStagesMTO:rr})
                     }
+                }
+                else{
+                    browserHistory.push("/404error")
+                }
                 })
                 TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                         this.setState({enquiryStagesAvailable:response.data.data})
                     }
+                }
+                else{
+                    browserHistory.push("/404error")
+                }
                 })
                 TTCEapi.getInnerEnquirStages().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                         this.setState({innerEnquiryStages:response.data.data})
                     }
+                }
+                else{
+                    browserHistory.push("/404error")
+                }
                 })
                
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
                         TTCEapi.getOpenOrders().then((response1)=>{
+                            if(response){
                             if(response1.data.valid)
                             {   
                                 this.setState({
@@ -88,9 +105,17 @@ export class ArtisanOngoingOrder extends Component {
                                     dataload:true
                                 });
                             }
+                        }
+                        else{
+                            browserHistory.push("/404error")
+                        }
                         })
                     });
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
         
         

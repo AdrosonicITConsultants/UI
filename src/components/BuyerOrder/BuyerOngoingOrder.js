@@ -106,6 +106,7 @@ export class BuyerOngoingOrder extends Component {
        YesOrderbutton=(id,prodid)=>{
            if(prodid==2){
             TTCEapi.markEnquiryClosed(id).then((response)=>{
+                if(response){
                 if(response.data.valid)
                 {
                     document.getElementById('CloseOrder'+ id).style.display='none';
@@ -115,16 +116,25 @@ export class BuyerOngoingOrder extends Component {
                       });
                       this.componentDidMount()
                 }
+            }
+            else{
+                browserHistory.push("/404error")
+            }
             }); 
            }
            else{
              TTCEapi.initializePartialRefund(id).then((response)=>{
+                 if(response){
             if(response.data.valid  )
             {
              document.getElementById('CloseOrder'+ id).style.display='none';
              document.getElementById('PartialPayment'+ id).style.display='block';
 
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         }); 
         }
          }
@@ -150,6 +160,7 @@ export class BuyerOngoingOrder extends Component {
        PartialPaymentReceived=(id)=>{
              if(this.state.checked){
             TTCEapi.markEnquiryClosed(id).then((response)=>{
+                if(response){
                 if(response.data.valid)
                 {
                     document.getElementById('PartialPayment'+ id).style.display='none';
@@ -159,6 +170,10 @@ export class BuyerOngoingOrder extends Component {
                       });
                       this.componentDidMount()
                 }
+            }
+            else{
+                browserHistory.push("/404error")
+            }
             }); 
                        }
                 else{
@@ -216,6 +231,7 @@ export class BuyerOngoingOrder extends Component {
     componentDidMount(){
 
     TTCEapi.getProductUploadData().then((response)=>{
+        if(response){
         if(response.data.valid)
         {    TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
@@ -227,20 +243,31 @@ export class BuyerOngoingOrder extends Component {
             }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
             TTCEapi.getInnerEnquirStages().then((response)=>{
-            if(response.data.valid)
+                    if(response){
+                if(response.data.valid)
             {
                 this.setState({innerEnquiryStages:response.data.data})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         })
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
                     TTCEapi.getOpenOrders().then((response1)=>{
+                        if(response1){
                         if(response1.data.valid)
                         {  
                             this.setState({openEnquiries:response1.data.data, dataload:true},()=>{
@@ -248,11 +275,19 @@ export class BuyerOngoingOrder extends Component {
                             });
                             
                         }
+                    }
+                    else{
+                        browserHistory.push("/404error")
+                    }
                     },()=>{
                         
                     })
                 });
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
     })
 
   

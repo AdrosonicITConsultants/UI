@@ -39,6 +39,9 @@ export default class AntaranCoDesignRegion extends Component {
           regionData : response.data
         })
       }
+      else{
+        browserHistory.push("/404error")
+      }
     });
    
      TTCEapi.getClusters().then((response)=>{

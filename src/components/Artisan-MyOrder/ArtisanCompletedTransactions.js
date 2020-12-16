@@ -168,6 +168,7 @@ export class ArtisanCompletedTransaction extends Component {
           });
           
           }
+          
             })
         }
         
@@ -185,6 +186,7 @@ export class ArtisanCompletedTransaction extends Component {
     
     acceptModalShow(id,enquiryId){
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response){
             if(response.data.valid)
         {
 
@@ -197,6 +199,10 @@ export class ArtisanCompletedTransaction extends Component {
                
             });
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
         });
     }
         
@@ -204,6 +210,7 @@ export class ArtisanCompletedTransaction extends Component {
     RejectModalShow (id,enquiryId){
        
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response){
             if(response.data.valid)
         {
             this.setState({getAdvancedPaymentReceipt : response.data.data,
@@ -215,7 +222,12 @@ export class ArtisanCompletedTransaction extends Component {
                
             });
         }
-        });
+    }
+    else{
+        browserHistory.push("/404error")
+    }
+        }
+        );
     }
 
     openReceipt(receiptId,challanId){
@@ -225,9 +237,14 @@ export class ArtisanCompletedTransaction extends Component {
           });
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
+            if(response){
           if(response.data.valid) {
             window.open(response.data.data)
           }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
         });
       }
 
@@ -347,6 +364,7 @@ export class ArtisanCompletedTransaction extends Component {
 
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
          this.setState({
@@ -375,6 +393,10 @@ export class ArtisanCompletedTransaction extends Component {
           
          });
         }
+    }
+    else{
+        browserHistory.push("/404error")
+    }
      });
      TTCEapi.fetchEnquiryAndPaymentDetails(this.state.enquiryCode).then((response)=>{
         if(response.data.valid){

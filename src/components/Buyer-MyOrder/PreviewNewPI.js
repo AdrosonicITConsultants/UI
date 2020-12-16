@@ -244,12 +244,16 @@ export class PreviewNewPI extends Component {
    <Row noGutters={true}>
        <Col sm={4} className=" col-xs-5">
        {this.state.artisanUser.companyDetails?
-       this.state.artisanUser.companyDetails.logo ?
+       this.state.artisanUser.companyDetails.logo !=null ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
         :
-         <img src={logos.Smile} className="Pilogoimg"></img>
+        this.state.artisanUser.profilePic?
+        <img  src={TTCEapi.ImageUrl+"User/" +this.state.artisanUser.id +"/ProfilePics/" +this.state.artisanUser.profilePic} className="Pilogoimg"></img>
                     :
                     <img src={logos.Smile} className="Pilogoimg"></img>
+                    :
+                    <img src={logos.Smile} className="Pilogoimg"></img>
+
            }
        </Col>
        <Col sm={8} className=" col-xs-7 ">

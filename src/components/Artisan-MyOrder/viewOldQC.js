@@ -7,6 +7,7 @@ import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
 import queryString from 'query-string';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class ViewOldQC extends Component {
 

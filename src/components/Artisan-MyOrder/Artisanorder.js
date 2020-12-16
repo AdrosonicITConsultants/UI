@@ -323,6 +323,7 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
     this.state.enquiryCode = params.code;
     TTCEapi.getProductUploadData().then((response)=>{
+        if(response){
         if(response.data.valid)
         {   TTCEapi.getEnquirStages().then((response)=>{
             if(response.data.valid)
@@ -410,16 +411,27 @@ import { useTranslation, withTranslation } from "react-i18next";
                     })
                 });
         }
+    }
+    else{
+        browserHistory.push("/404error")
+      }
     })
 
     TTCEapi.getChangeRequestForArtisan(this.state.enquiryCode).then((response)=>{
+        if (response){
         if(response.data.valid)
         {
             this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                 dataload:true})
         }
+    }
+        else{
+            browserHistory.push("/404error")
+
+        }
     })
     TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
+        if (response){
         if(response.data.valid)
         {
             this.setState({getOrder:response.data.data,
@@ -427,8 +439,14 @@ import { useTranslation, withTranslation } from "react-i18next";
                
                            })
         }
+    }
+        else{
+            browserHistory.push("/404error")
+
+        }
     })
     TTCEapi.getPi(this.state.enquiryCode).then((response)=>{
+        if (response){
         if(response.data.valid)
         {
             this.setState({getPi:response.data.data,
@@ -436,6 +454,11 @@ import { useTranslation, withTranslation } from "react-i18next";
                
                            })
         }
+    }
+    else{
+        browserHistory.push("/404error")
+
+    }
     })
     }
 

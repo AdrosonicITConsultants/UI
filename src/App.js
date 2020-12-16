@@ -189,6 +189,7 @@ function App() {
           <PrivateRoute exact path="/buyerChat" component={BuyerChat} />
 
           <PrivateRoute exact path="/viewOldQC" component={ViewOldQC} />
+          <PrivateRoute exact path="/404error" component={ErrorPage} />
 
           <Route component={ErrorPage} />
          

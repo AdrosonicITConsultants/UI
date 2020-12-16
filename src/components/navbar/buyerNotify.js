@@ -33,6 +33,7 @@ class BuyerNotifications extends Component {
   componentDidMount(){
 
     TTCEapi.getAllNotificationTypes().then((response)=>{
+      if(response){ 
       if(response.data.valid)
       {
         this.setState({
@@ -40,9 +41,15 @@ class BuyerNotifications extends Component {
           loading: false
         });
       }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
+
     });
 
     TTCEapi.getAllNotifications().then((response)=>{
+      if(response){ 
         if(response.data.valid)
         {
           
@@ -52,6 +59,11 @@ class BuyerNotifications extends Component {
             loading: false
           });
         }
+      }
+      else{
+        browserHistory.push("/404error");
+      }
+
     });
 
     var userData = [];
@@ -65,19 +77,31 @@ class BuyerNotifications extends Component {
 
   notificationSeenfunction = (id) => {
     TTCEapi.updateNotificationSeen(id).then((response)=>{
+      if(response){ 
       if(response.data.valid)
       {
         window.location.reload();
       }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
+
     });
   }
 
   markAllReadFunction = () => {
     TTCEapi.markAllReadNotification().then((response)=>{
+      if(response){ 
       if(response.data.valid)
       {
         window.location.reload();
       }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
+
     });
   }
 

@@ -114,6 +114,7 @@ export default class buyreg5 extends Component {
          });
         
          TTCEapi.getCountries().then((response)=>{
+          if(response){
           this.setState({countrydata : response.data.data},()=>{
             if(this.state.countryid > 0)
             {
@@ -122,13 +123,12 @@ export default class buyreg5 extends Component {
             }
             else {
               this.setState({countryid : -1  , country : 'Select Country' });
-
-
             }
           });
-         
-     
-
+        }
+        else{
+          browserHistory.push("/404error");
+        }        
       });
 
       }

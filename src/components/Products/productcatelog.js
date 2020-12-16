@@ -22,9 +22,14 @@ class productcatelog extends Component {
   
    
     TTCEapi.getArtitionProducts().then((response) => {
+      if(response) {
       if (response.data.data != null){
         this.setState({ ProductListArtist: response.data.data }, () => {})
-      }    
+      }  
+    }
+    else{
+      browserHistory.push("/404error");
+    }  
      
     }
       );

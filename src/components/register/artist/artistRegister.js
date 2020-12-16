@@ -114,7 +114,7 @@ class artistRegister extends Component {
                       this.state.firstname,this.state.lastname,this.state.pincode,this.state.cluster,
                       this.state.district,this.state.state,this.state.mobileno,this.state.panno,
                       this.state.address,this.state.selectedprods,this.state.selectedFile).then((response) => {
-                         //  
+                        if(response){
                        if (response.data.valid) {
                         customToast.success(this.props.t("Pages.object.regRegistrationSuccess"), {
                           position: toast.POSITION.TOP_RIGHT,
@@ -134,6 +134,10 @@ class artistRegister extends Component {
                            });
                          // alert("please enter valid OTP.");
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
 
                     } );
 
@@ -182,6 +186,7 @@ class artistRegister extends Component {
                        TTCEapi.checkWeaverId(
                          this.state.weaverid                    
                        ).then((response) => {
+                        if(response){
                          if (response.data.valid) {
                            this.handler(1);
                          } else {
@@ -191,6 +196,10 @@ class artistRegister extends Component {
                              autoClose: true,
                            });
                          }
+                        }
+                        else{
+                          browserHistory.push("/404error");
+                        }
                        });
                      }
                    );
@@ -201,7 +210,7 @@ class artistRegister extends Component {
                   //  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
-                       
+                      if(response){
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -213,6 +222,10 @@ class artistRegister extends Component {
                            autoClose: true,
                          });
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                      });
                    });
                  }
@@ -221,7 +234,7 @@ class artistRegister extends Component {
                   //  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                      //  
+                      if(response){ 
                        if (response.data.valid) {
                          this.handler(2);
                        } else {
@@ -231,6 +244,10 @@ class artistRegister extends Component {
                          });
                          // alert("please enter valid OTP.");
                        }
+                         }
+                        else{
+                          browserHistory.push("/404error");
+                        }
                      });
                    });
                  }

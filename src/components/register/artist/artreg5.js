@@ -52,9 +52,14 @@ class artreg5 extends Component {
                     localStorage.setItem("regCurrentPage", 4);
                       
                     TTCEapi.getProducts().then((response)=>{
+                      if(response){
                       this.setState({products : response.data.data},() => {
                         
                       });
+                    }
+                    else{
+                      browserHistory.push("/404error");
+                    } 
           
                   });
                   }

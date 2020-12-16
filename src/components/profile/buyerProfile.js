@@ -12,7 +12,7 @@ import Footer from "../footer/footer";
 import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 
 class BuyerProfile extends Component {
@@ -79,9 +79,15 @@ class BuyerProfile extends Component {
       componentDidMount(){
        
          TTCEapi.getCountries().then((response)=>{
+            if(response){ 
           this.setState({countrydata : response.data.data},()=>{
           });
+        }
+        else{
+          browserHistory.push("/404error");
+        }
           TTCEapi.getProfile().then((response) => {
+            if(response){ 
             if(response.data.data.user.companyDetails != null){
                 if(response.data.data.user.companyDetails.logo != null){
                     var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
@@ -99,6 +105,10 @@ class BuyerProfile extends Component {
                     this.setState({ratingclass : percentage});
                 });
             }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
 
           });
 
@@ -295,6 +305,7 @@ class BuyerProfile extends Component {
             this.state.country, this.state.pincode, this.state.landmark, this.state.alternatemobno,
             this.state.designation, this.state.pocmobile, this.state.pocemail, this.state.pocname,
             this.state.countryid,this.state.selectedBrandFile,this.state.removedlogo).then((response) => {
+                if(response){ 
                 this.setState({
                     isButtonDisabled : true,
                 });
@@ -302,7 +313,10 @@ class BuyerProfile extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                   });
-
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
 
             });
     }

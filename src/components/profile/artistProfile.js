@@ -13,6 +13,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useTranslation, withTranslation } from "react-i18next";
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 class ArtistProfile extends Component {
     constructor(props) {
@@ -70,11 +71,18 @@ class ArtistProfile extends Component {
       }
       componentDidMount(){
         TTCEapi.getProducts().then((response)=>{
+          if(response){ 
             this.setState({products : response.data.data},() => {
             });
+          }
+          else{
+            browserHistory.push("/404error");
+          }
         });
         TTCEapi.getProfile().then((response) => {
+          if(response){ 
             TTCEapi.getProducts().then((response1)=>{
+              if(response1){ 
                 this.setState({products : response1.data.data},() => {
                     if(response.data.data.userProductCategories.length != 0)
                     {   var prodselected = "";
@@ -95,8 +103,17 @@ class ArtistProfile extends Component {
                   }
 
                 });
+              }
+              else{
+                browserHistory.push("/404error");
+              }
     
             });
+          }
+          else{
+            browserHistory.push("/404error");
+          }
+          
             
             if(response.data.data.user.profilePic != null && response.data.data.user.profilePic != ""){
                 var profilePic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/ProfilePics/" + response.data.data.user.profilePic ;
@@ -209,6 +226,7 @@ class ArtistProfile extends Component {
           }, () =>{
             
           })
+       
       }
       handlePdetailEdit(){
         this.setState({
@@ -225,6 +243,7 @@ class ArtistProfile extends Component {
       }
       else{
         TTCEapi.updatePersonalDetails(this.state.line1,this.state.district,this.state.pincode,this.state.state,this.state.selectedFile,this.state.removedprofile).then((response)=>{
+          if(response){ 
           if (response.data.valid) {
             customToast.success("Personal data updated !", {
               position: toast.POSITION.TOP_RIGHT,
@@ -237,6 +256,10 @@ class ArtistProfile extends Component {
               autoClose: true,
             });
           }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
         })
        this.setState({
            isPdetail:!this.state.isPdetail
@@ -323,6 +346,7 @@ class ArtistProfile extends Component {
               TTCEapi.updateBankDetails(this.state.accountno,this.state.bankname,
                 this.state.branch,this.state.ifsccode,this.state.benificiaryname,
                 this.state.gpayupi,this.state.paytmupi,this.state.phonepeupi).then((response) => {
+                  if(response){ 
                   if (response.data.valid) {
                     customToast.success("Bank details updated !", {
                       position: toast.POSITION.TOP_RIGHT,
@@ -337,6 +361,10 @@ class ArtistProfile extends Component {
                     });
                     
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
 
     
                 });
@@ -351,11 +379,16 @@ class ArtistProfile extends Component {
 
           },()=>{
             TTCEapi.getProfile().then((response)=>{
+              if(response){ 
 
               for (var  items in response.data.data.userProductCategories)
                         {    
                           document.getElementById(response.data.data.userProductCategories[items].productCategoryId).checked = true;
                         }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
             })
           })
       }
@@ -374,6 +407,7 @@ class ArtistProfile extends Component {
                 prodsel : productSelected
             },()=>{
                 TTCEapi.updateBrandDetails(this.state.brandname,this.state.branddesc,this.state.selectedprods,this.state.selectedBrandFile,this.state.removedlogo).then((response)=>{
+                  if(response){ 
                   if (response.data.valid) {
                     customToast.success("Brand data updated !", {
                       position: toast.POSITION.TOP_RIGHT,
@@ -388,6 +422,10 @@ class ArtistProfile extends Component {
                     });
                     
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 });
     
             });

@@ -168,6 +168,7 @@ export default class buyerRegister extends Component {
                             this.state.pocmobile,this.state.pocemail,this.state.pocname,
                             this.state.countryid).then(
                               (response) => {
+                                if(response){
                                 if (response.data.valid) {
                                   customToast.success("Registration is successful ", {
                                     position: toast.POSITION.TOP_RIGHT,
@@ -184,6 +185,10 @@ export default class buyerRegister extends Component {
                                        autoClose: true,
                                      });
                                  }
+                                }
+                                else{
+                                  browserHistory.push("/404error");
+                                } 
                               }
                             );
                       }
@@ -278,6 +283,7 @@ export default class buyerRegister extends Component {
                  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtp(emailid).then((response) => {
+                      if(response){
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -289,6 +295,10 @@ export default class buyerRegister extends Component {
                            autoClose: true,
                          });
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      } 
                      });
                    });
                  }
@@ -296,6 +306,7 @@ export default class buyerRegister extends Component {
                  verifyOtp(emailid, otppin) {
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
+                      if(response){
                        if (response.data.valid) {
                          this.handler(1);
                        } else {
@@ -304,6 +315,10 @@ export default class buyerRegister extends Component {
                             autoClose: true,
                           });
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      } 
                      });
                    });
                  }

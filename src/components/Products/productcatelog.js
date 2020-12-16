@@ -6,6 +6,7 @@ import "./productcatelog.css";
 import Product from "./Product"
 import TTCEapi from "../../services/API/TTCEapi";
 import { useTranslation, withTranslation } from "react-i18next";
+import { memoryHistory, browserHistory } from "../../helpers/history"
 
 class productcatelog extends Component {
   constructor(props) {
@@ -22,9 +23,14 @@ class productcatelog extends Component {
   
    
     TTCEapi.getArtitionProducts().then((response) => {
+      if(response) {
       if (response.data.data != null){
         this.setState({ ProductListArtist: response.data.data }, () => {})
-      }    
+      }  
+    }
+    else{
+      browserHistory.push("/404error");
+    }  
      
     }
       );

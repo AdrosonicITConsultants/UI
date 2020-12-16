@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang";
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 class artreg5 extends Component {
                  constructor() {
@@ -52,9 +53,14 @@ class artreg5 extends Component {
                     localStorage.setItem("regCurrentPage", 4);
                       
                     TTCEapi.getProducts().then((response)=>{
+                      if(response){
                       this.setState({products : response.data.data},() => {
                         
                       });
+                    }
+                    else{
+                      browserHistory.push("/404error");
+                    } 
           
                   });
                   }

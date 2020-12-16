@@ -5,6 +5,7 @@ import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../../services/utils/changeLang";
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 class artreg4 extends Component {
     constructor() {
@@ -149,6 +150,7 @@ class artreg4 extends Component {
          });
 
         TTCEapi.getClusters().then((response)=>{
+          if(response){
             this.setState({clusterdata : response.data.data},() => {
              
               if(this.state.clusterid > 0)
@@ -161,6 +163,10 @@ class artreg4 extends Component {
               }
               
             });
+          }
+          else{
+            browserHistory.push("/404error");
+          }
 
         });
       }

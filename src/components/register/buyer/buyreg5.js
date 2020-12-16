@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 import "../../Homepage/homepage.css";
 import logos from "../../../assets"
 import TTCEapi from '../../../services/API/TTCEapi';
+import { memoryHistory, browserHistory } from "../../../helpers/history"
 
 export default class buyreg5 extends Component {
     constructor() {
@@ -114,6 +115,7 @@ export default class buyreg5 extends Component {
          });
         
          TTCEapi.getCountries().then((response)=>{
+          if(response){
           this.setState({countrydata : response.data.data},()=>{
             if(this.state.countryid > 0)
             {
@@ -122,13 +124,12 @@ export default class buyreg5 extends Component {
             }
             else {
               this.setState({countryid : -1  , country : 'Select Country' });
-
-
             }
           });
-         
-     
-
+        }
+        else{
+          browserHistory.push("/404error");
+        }        
       });
 
       }

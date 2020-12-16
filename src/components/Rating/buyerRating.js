@@ -153,6 +153,7 @@ export default class BuyerRating extends Component {
             });
 
             TTCEapi.submitRatingToUser(newArray).then((response)=>{
+                if(response){ 
                 if(response.data.valid)
                 { 
                     this.componentDidMount();
@@ -161,6 +162,10 @@ export default class BuyerRating extends Component {
                         autoClose: true,
                     });
                 }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
             });
         }        
     }
@@ -183,6 +188,7 @@ export default class BuyerRating extends Component {
         this.state.enquiryCode = enquiryCode;
 
         TTCEapi.getRatingQuestions().then((response)=>{
+            if(response){ 
             if(response.data.valid)
             {
                 this.setState({
@@ -190,9 +196,14 @@ export default class BuyerRating extends Component {
                     buyerQuestionsRatings: response.data.data.buyerQuestions.ratingQuestions,
                 });
             }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
         });
         
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
+            if(response){ 
             if(response.data.valid)
             {
                 this.setState({
@@ -215,23 +226,38 @@ export default class BuyerRating extends Component {
                 this.setState({
                     buyerGivenRatingAverageValue: averageValue,
                 });
-            }            
+            } 
+        }
+        else{
+          browserHistory.push("/404error");
+        }           
         });
 
         TTCEapi.getProduct(enquiryData.productId).then((response)=>{
+            if(response){ 
             this.setState({
                 ProductData :response.data.data
             },()=>{
             if(response.data.data) {
-                TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{                
+                TTCEapi.getProductCategoryAndClusterProducts(this.state.ProductData.productType.productCategoryId,this.state.ProductData.clusterId,this.state.ProductData.productImages[0].productId).then((response)=>{  
+                    if(response){               
                     this.setState({
                         getProductCategoryAndClusterProducts : response.data.data.products
                     },()=>{
                     });
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 });
             }            
             });
-        });       
+        }
+        else{
+          browserHistory.push("/404error");
+        }
+        }); 
+        
     }
 
     render() {

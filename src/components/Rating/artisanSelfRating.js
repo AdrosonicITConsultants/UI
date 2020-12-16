@@ -105,6 +105,7 @@ export default class ArtisanSelfRating extends Component {
         }
 
         TTCEapi.submitRatingToUser(newArray).then((response)=>{
+            if(response){ 
             if(response.data.valid)
             { 
                 this.componentDidMount();
@@ -113,6 +114,10 @@ export default class ArtisanSelfRating extends Component {
                     autoClose: true,
                 });
             }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
         });
     }
 
@@ -156,6 +161,7 @@ export default class ArtisanSelfRating extends Component {
 
     
         TTCEapi.getRatingQuestions().then((response)=>{
+            if(response){ 
             if(response.data.valid)
             {
                 this.setState({
@@ -165,9 +171,14 @@ export default class ArtisanSelfRating extends Component {
                 });
                 this.calculateAverage();
             }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
         });
 
         TTCEapi.getRatingsForUser(this.state.enquiryId, this.state.userData.id).then((response)=>{
+            if(response){ 
             if(response.data.valid)
             {
                 this.setState({
@@ -178,6 +189,10 @@ export default class ArtisanSelfRating extends Component {
                 });
                 this.calculateAverage();
             }
+        }
+        else{
+          browserHistory.push("/404error");
+        }
         });
     }
 

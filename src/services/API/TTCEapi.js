@@ -6,7 +6,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-var env = "dev";
+var env = "uat";
 var ApiUrl = "";
 var ImageUrl = "";
 var ReceiptUrl = "";
@@ -37,7 +37,7 @@ else if (env == "uat") {
   DocumentsURL = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/documents/";
   BuyerDasboard = "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=";
   ArtisanDashboard = "https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=";
-  IconsUrl = "https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Buyer/";
+  IconsUrl = "https://tatacrftexchangeuat.objectstore.e2enetworks.net/TransactionIcons/Buyer/";
 
 } 
 else if (env == "live") {

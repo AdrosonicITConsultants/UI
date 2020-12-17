@@ -298,8 +298,9 @@ export class BuyerCompletedTransaction extends Component {
 <Moment format="DD-MM-YYYY">
 {item.transactionCompleted.transactionOn}
 </Moment>
+<br/>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionCompleted.transactionOn}</p>
+{item.transactionCompleted.transactionOn}
  </Moment>
 
 </Col>

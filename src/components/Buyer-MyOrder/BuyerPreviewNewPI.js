@@ -283,8 +283,9 @@ export class BuyerPreviewNewPI extends Component {
        <Moment format="DD-MM-YYYY">
 {this.state.previewPiOrder.modifiedOn}
 </Moment>
+<br/>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{this.state.previewPiOrder.modifiedOn}</p>
+{this.state.previewPiOrder.modifiedOn}
  </Moment>
 </Col>
 <Col className="col-xs-5 CRdate">

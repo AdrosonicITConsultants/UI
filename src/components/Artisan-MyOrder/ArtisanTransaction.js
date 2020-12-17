@@ -475,8 +475,9 @@ if(response){
 <Moment format="DD-MM-YYYY">
 {item.transactionOngoing.transactionOn}
 </Moment>
+<br/>
 <Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
+{item.transactionOngoing.transactionOn}
  </Moment>
 
 </Col>

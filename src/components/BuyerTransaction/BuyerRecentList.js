@@ -346,6 +346,8 @@ export class BuyerRecentList extends Component {
   </div></Col>
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
+                {console.log(this.state.getOngoingTransaction)}
+
                 {this.filter(this.state.getOngoingTransaction).map((item)=> 
                     <>
 
@@ -354,8 +356,9 @@ export class BuyerRecentList extends Component {
 <Moment format="DD-MM-YYYY">
 {item.transactionOngoing.transactionOn}
 </Moment>
-<Moment format=" h:mm A">
-<p style={{color:"darkgray"}}>{item.transactionOngoing.transactionOn}</p>
+<br/>
+<Moment format="h:mm A">
+{item.transactionOngoing.transactionOn}
  </Moment>
 
 </Col>

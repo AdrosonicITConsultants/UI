@@ -130,6 +130,7 @@ class ArtisanRecentList extends Component {
   
         document.getElementById('deliveryReceipt'+id).style.display='block';
         TTCEapi.getSingleOrder(enquiryId).then((response)=>{
+            if(response){
             if(response.data.valid)
             {
             this.setState({
@@ -138,7 +139,10 @@ class ArtisanRecentList extends Component {
 
                 this.componentDidMount();
             });
-        }
+        }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
         });
     }
 
@@ -207,6 +211,7 @@ class ArtisanRecentList extends Component {
     acceptModalShow(id,enquiryId){
          document.getElementById('acceptMOQModal'+ id).style.display='block';
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
+            if(response){
             if(response.data.valid)
         {
 
@@ -218,6 +223,10 @@ class ArtisanRecentList extends Component {
              document.getElementById('acceptMOQModal'+ id).style.display='block';
                  });
         }
+        }
+                      else{
+                          browserHistory.push("/404error")
+                      }
         });
     }
         
@@ -369,17 +378,20 @@ class ArtisanRecentList extends Component {
 
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
+           if(response){
             if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactionActions().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                     this.setState({
                           getTransactionActions : response.data.data},()=>{
                          TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                            if(response){
                             if(response.data.valid)
                             {
                             this.setState({
@@ -387,14 +399,23 @@ class ArtisanRecentList extends Component {
                                  getOngoingTransaction : response.data.data},()=>{
                                
                             });
-                        }
+                        }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
                         });
                     });
-                }
+                }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
                 });
     
          });
-        }
+        }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
      });
   
      }

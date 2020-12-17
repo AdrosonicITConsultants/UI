@@ -7,6 +7,7 @@ import customToast from "../../shared/customToast";
 import { toast } from "react-toastify";
 import Moment from 'react-moment';
 import queryString from 'query-string';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class ViewOldQC extends Component {
 
@@ -86,6 +87,7 @@ export default class ViewOldQC extends Component {
             QCsendButton1: false,
         });
         TTCEapi.getOldQc(code).then((response)=>{
+             if(response){
             if(response.data.valid)
             {
                 this.setState({
@@ -97,7 +99,10 @@ export default class ViewOldQC extends Component {
                     currentSeenStatus: response.data.data.isSend,
                 })
             }
-           
+           }
+                      else{
+                          browserHistory.push("/404error")
+                      }
             if(this.state.artisanQcResponses[1]) {
                 var data = this.state.artisanQcResponses[1][0].answer;
                 var result = data.split(",");
@@ -108,21 +113,29 @@ export default class ViewOldQC extends Component {
         });
 
         TTCEapi.getQCStages().then((response)=>{
+             if(response){
             if(response.data.valid)
             {
                 this.setState({
                     stagesData: response.data.data,
                 })
-            }
+            }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
+             if(response){
             if(response.data.valid)
             {
                 this.setState({
                     questionsData: response.data.data,
                 })
-            }
+            }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
 
             var data = this.state.questionsData[1][0].optionValue;
             var result = data.split(",");

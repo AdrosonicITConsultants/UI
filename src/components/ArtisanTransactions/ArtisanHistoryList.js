@@ -66,7 +66,7 @@ class ArtisanHistoryList extends Component {
     
         document.getElementById('notifyModal'+id).style.display='block';
         TTCEapi.getTransactions(enquiryId).then((response)=>
-        {
+        { if(response){
             if(response.data.valid)
             {
                 this.setState({getTransactions:response.data.data,
@@ -74,6 +74,10 @@ class ArtisanHistoryList extends Component {
              },()=>{
              })
             }
+            }
+                      else{
+                          browserHistory.push("/404error")
+                      }
         })
         
     }
@@ -88,13 +92,17 @@ class ArtisanHistoryList extends Component {
         document.getElementById('deliveryReceipt'+id).style.display='block';
         TTCEapi.getTransactions(enquiryId).then((response)=>
         {
+             if(response){
             if(response.data.valid)
             {
                 this.setState({getTransactions:response.data.data,
                  TransactionenquiryCode:response.data.data.ongoingTransactionResponses[0].enquiryCode
              },()=>{
              })
-            }
+            }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
         })
         
     }
@@ -106,7 +114,8 @@ class ArtisanHistoryList extends Component {
     
     acceptModalShow(id,enquiryId){
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
         {
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
@@ -116,7 +125,11 @@ class ArtisanHistoryList extends Component {
              document.getElementById('acceptMOQModal'+ id).style.display='block';
               
             });
-        }
+        }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
         });
     }
         
@@ -224,17 +237,20 @@ class ArtisanHistoryList extends Component {
     componentDidMount(){
       
         TTCEapi.getTransactionStatus().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactionActions().then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                     this.setState({
                           getTransactionActions : response.data.data},()=>{
                          TTCEapi.getCompletedTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
+                             if(response){
                             if(response.data.valid)
                             {
                             this.setState({
@@ -242,14 +258,25 @@ class ArtisanHistoryList extends Component {
                                  getCompletedTransaction : response.data.data},()=>{
                                
                             });
-                        }
+                        }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
                         });
                     });
-                }
+                }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
                 });
     
          });
         }
+        }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
      });
   
      }

@@ -288,27 +288,44 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
     this.state.enquiryCode = params.code;
     TTCEapi.getProductUploadData().then((response)=>{
+        if(response){
+       
         if(response.data.valid)
         {   TTCEapi.getEnquirStages().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 var rr = response.data.data;
                 rr[0].desc = "Quotation Accepted";
                 rr[1].desc = "Order Details";
                 this.setState({enquiryStagesMTO:rr})
-            }
+            } 
+        }
+        else{
+            browserHistory.push("/404error")
+        }
                 })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
+             }
+            else{
+            browserHistory.push("/404error")
+        }
         })
             TTCEapi.getInnerEnquirStages().then((response)=>{
+        if(response){
             if(response.data.valid)
             {
                 this.setState({innerEnquiryStages:response.data.data})
             }
+             }
+        else{
+            browserHistory.push("/404error")
+        }
         })
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
@@ -374,31 +391,48 @@ import { useTranslation, withTranslation } from "react-i18next";
                     })
                 });
         }
+    }
+      
+               else{
+                   browserHistory.push("/404error")
+               }
     })
 
     TTCEapi.getChangeRequestForArtisan(this.state.enquiryCode).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({getChangeRequestForArtisan:response.data.data.changeRequestItemList,
                 dataload:true})
+        } }
+        else{
+            browserHistory.push("/404error")
         }
     })
     TTCEapi.getClosedOrder(this.state.enquiryCode).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({getClosedOrder:response.data.data,
                 dataload:true
                
                            })
+        } }
+        else{
+            browserHistory.push("/404error")
         }
     })
     TTCEapi.getPi(this.state.enquiryCode).then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({getPi:response.data.data,
                 dataload:true
                
                            })
+        } }
+        else{
+            browserHistory.push("/404error")
         }
     })
     }

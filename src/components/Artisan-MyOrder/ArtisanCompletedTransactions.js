@@ -371,11 +371,13 @@ export class ArtisanCompletedTransaction extends Component {
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactionActions().then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                     this.setState({
                          getTransactionActions : response.data.data},()=>{
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
+                             if(response){
                             if(response.data.valid)
                             {
                             this.setState({
@@ -385,9 +387,17 @@ export class ArtisanCompletedTransaction extends Component {
                                  
                             });
                         }
+                    }
+                    else{
+                        browserHistory.push("/404error")
+                    }
                         });
                     });
                 }
+            }
+            else{
+                browserHistory.push("/404error")
+            }
                 });
  
           

@@ -333,7 +333,8 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
             enquiryCode:params.code
         })
         TTCEapi.getMoq(params.code).then((response)=>{
-            if(response.data.data==null){
+         if(response){
+                 if(response.data.data==null){
                 this.setState({
                 moq:0,
                 ppu:"0",
@@ -355,6 +356,11 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
            
             });
         }
+        }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
            
         });
         
@@ -394,7 +400,8 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
        
     });
        TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
@@ -443,18 +450,32 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                         });
                     });
             }
+            }
+                      else{
+                          browserHistory.push("/404error")
+                      }
+
         })
         TTCEapi.getEnquirStages().then((response)=>{
+             if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesMTO:response.data.data})
-            }
+            }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-            if(response.data.valid)
+           
+            if(response){ 
+                if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
-            }
+            }}
+                      else{
+                          browserHistory.push("/404error")
+                      }
         })
      }
 

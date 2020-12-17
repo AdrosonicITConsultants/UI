@@ -14,7 +14,7 @@
 .disablesubmitCRart{
     background-color: #505050 !important;
     color: white !important;
-    opacity: 0.4;
+    opacity: 0.4 !important;
 }
 .artisanQCSubHeader {
     text-align: center;

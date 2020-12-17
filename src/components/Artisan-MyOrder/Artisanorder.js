@@ -312,7 +312,6 @@ import { useTranslation, withTranslation } from "react-i18next";
         this.setState({
             disableStatusButton: false,
         });
-        console.log(this.state.disableStatusButton);
        var taxinvoice=localStorage.getItem("piShow");
        if (localStorage.getItem('piShow')== 1) {
        this.qualityCheckbtn();
@@ -326,6 +325,7 @@ import { useTranslation, withTranslation } from "react-i18next";
         if(response){
         if(response.data.valid)
         {   TTCEapi.getEnquirStages().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 var rr = response.data.data;
@@ -333,18 +333,31 @@ import { useTranslation, withTranslation } from "react-i18next";
                 rr[1].desc = "Order Details";
                 this.setState({enquiryStagesMTO:rr})
             }
+        }
+        else{
+            browserHistory.push("/404error")
+        }
                 })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
             }
-        })
+        }
+        else{
+            browserHistory.push("/404error")
+        } })
             TTCEapi.getInnerEnquirStages().then((response)=>{
+        if(response){
             if(response.data.valid)
             {
                 this.setState({innerEnquiryStages:response.data.data})
             }
+            }
+         else{
+            browserHistory.push("/404error")
+        } 
         })
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns },()=>{
@@ -1037,14 +1050,14 @@ import { useTranslation, withTranslation } from "react-i18next";
                    :
                    this.state.disableStatusButton === false ?
                    <button
-                     className="blackButton"
+                     className="blackButton "
                      onClick={this.ToggleDelete}
                     >
                     {this.props.t("Pages.object.change status")}
                    </button>
                    :                  
                    <button
-                   className="blackButton"
+                   className="blackButton disablesubmitCRart"
                    disabled
                   >
                   {this.props.t("Pages.object.change status")}
@@ -1637,7 +1650,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                    :
                    
                    <button
-                   className="blackButton"
+                   className="blackButton disablesubmitCRart"
                    disabled
                   >
                   {this.props.t("Pages.object.change status")}

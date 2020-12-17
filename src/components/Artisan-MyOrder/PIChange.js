@@ -179,6 +179,7 @@ export class PIchange extends Component {
 
     componentDidMount(){
         TTCEapi.getPi(this.props.enquiryId).then((response)=>{
+if(response){
             if(response.data.data==null){
                 this.setState({
                     getPi : 0,
@@ -205,6 +206,10 @@ export class PIchange extends Component {
            
             });
         }
+         }
+        else{
+            browserHistory.push("/404error")
+        }
         });
         TTCEapi.getCurrencySigns().then((response)=>{
             this.setState({getCurrencySigns : response.data.data},()=>{
@@ -216,6 +221,7 @@ export class PIchange extends Component {
         if(this.props.completed){
 
             TTCEapi.getClosedOrder(this.props.enquiryId).then((response)=>{
+               if(response){
                 if(response.data.valid)
                 {
                     this.setState({getOrder:response.data.data,
@@ -238,12 +244,16 @@ export class PIchange extends Component {
                         })
     
                 }
-              
+               }
+        else{
+            browserHistory.push("/404error")
+        }
             })
         }
         else
         {
             TTCEapi.getOrder(this.props.enquiryId).then((response)=>{
+                if(response){
                 if(response.data.valid)
                 {
                     this.setState({getOrder:response.data.data},()=>{
@@ -260,23 +270,35 @@ export class PIchange extends Component {
                     })
                     
                         TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                            if(response){
                             if(response.data.valid)
                             {
                                 this.setState({previewPI:response.data.data,dataload:true
                                     })
                                     TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                                        if(response){
                                         if(response.data.valid)
                                         {
                                             this.setState({getOldPIData:response.data.data,
                                                 dataload:true
                                                 })
-                                        }
+                                        } }
+        else{
+            browserHistory.push("/404error")
+        }
                                     })
                             }
+ }
+        else{
+            browserHistory.push("/404error")
+        }
                         })
                        
                 }
-              
+               }
+        else{
+            browserHistory.push("/404error")
+        }
             })
         }
       

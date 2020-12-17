@@ -90,17 +90,24 @@ export class PreviewChangedPI extends Component {
 
     componentDidMount() {
       TTCEapi.getProductUploadData().then((response)=>{
+        if(response){
+       
         if(response.data.valid)
         {
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                   if(response){
                     if(response.data.valid)
                     {
                         this.setState({getOldPIData:response.data.data,
                          
                             })
                     }
+                    }
+                      else{
+                          browserHistory.push("/404error")
+                      }
                 })
 
                   TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
@@ -108,16 +115,17 @@ export class PreviewChangedPI extends Component {
                     {
                       
                         if(response.data.data.productHistory != null)
+                        if(response){
                         { 
-                          this.setState({history:true});
-                         
-                          
+                          this.setState({history:true}); 
                         }
+                      }
+                      else{
+                          browserHistory.push("/404error")
+                      }
                         if(response.data.data.buyerCustomProductHistory != null)
                         { 
                           this.setState({customhistory:true});
-                         
-                          
                         }
                         if(response.data.data.productCustom === false){
                           this.setState({
@@ -166,6 +174,10 @@ export class PreviewChangedPI extends Component {
                    
                 });
         }
+      }
+      else{
+          browserHistory.push("/404error")
+      }
       
       });
       var date = moment()

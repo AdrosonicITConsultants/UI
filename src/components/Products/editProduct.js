@@ -143,12 +143,17 @@ const initialState = {
                        () => {
                         let params = queryString.parse(this.props.location.search)
                         TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                           if(response){ 
                           this.setState({productid :params.ProductId },()=>{
      
                           })
 
                           let productData =  response.data.data;
                           this.setProduct(productData);
+                        }
+                        else{
+                          browserHistory.push("/404error");
+                        }
                       })
 
                        }
@@ -157,6 +162,7 @@ const initialState = {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
+                      if(response){ 
                        
                        this.setState(
                          {
@@ -172,16 +178,24 @@ const initialState = {
                          () => {
                          let params = queryString.parse(this.props.location.search)
                          TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                          if(response){ 
                            this.setState({productid :params.ProductId },()=>{
       
                            })
                            let productData =  response.data.data;
                            this.setProduct(productData);
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                        })
                            
 
-                         }
-                       );
+                         });
+                        }
+                        else{
+                          browserHistory.push("/404error");
+                        }
                      });  
                    }
            
@@ -1105,6 +1119,7 @@ else {
                     productData.relProduct = this.state.savedrelatedProduct;
                     
                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
+                    if(response){ 
                     if (response.data.valid) {
                       document.getElementById('id02').style.display='none';
                       customToast.success(this.props.t("Pages.object.Product updated successfully!"), {
@@ -1127,6 +1142,10 @@ else {
                         modalSaveDisabled: false,
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error");
+                  }
 
                       });;
 
@@ -1143,6 +1162,7 @@ else {
                  };
                  Delete = () => {
                   TTCEapi.deleteProduct(this.state.productid).then((response)=>{
+                    if(response){ 
                     if(response.data.valid){
                       customToast.success(this.props.t("Pages.object.Product added successfully"), {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1154,6 +1174,10 @@ else {
                         SaveDisabled: false
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error");
+                  }
                   })
                  }   
                  

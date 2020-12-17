@@ -34,10 +34,15 @@ export default class Popup extends React.Component {
   generateEnquiry(item){
     this.setState({ modalIsOpen: true });
     TTCEapi.generateEnquiry(item,this.state.isCustom).then((response)=>{
+      if(response) {
   this.setState({generateEnquiry : response.data.data},()=>{
     this.setState({ modalIsOpen: false });
      
   });
+}
+else{
+  browserHistory.push("/404error");
+}
 });
 }
 

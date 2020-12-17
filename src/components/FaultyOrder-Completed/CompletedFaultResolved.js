@@ -120,6 +120,7 @@ export class CompletedFaultResolved extends Component {
                 rejectButtonClick:true
             })
                 TTCEapi.sendFaultyOrderArtisan(this.props.enquiryCode,this.state.description,this.state.actioncategoryid).then((response)=>{
+                    if(response) {
                     if(response.data.valid)
                     {
                     this.setState({
@@ -138,6 +139,10 @@ export class CompletedFaultResolved extends Component {
                         autoClose: true,
                       });
                 }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
                 this.setState({
                     rejectButtonClick:false
                 })
@@ -188,6 +193,7 @@ export class CompletedFaultResolved extends Component {
   
     componentDidMount(){
        TTCEapi.getClosedOrder(this.props.enquiryCode).then((response)=>{
+        if(response) {
             if(response.data.valid)
             {
             this.setState({
@@ -195,8 +201,13 @@ export class CompletedFaultResolved extends Component {
                  dataload : true,},()=>{
             });
         }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
         });
         TTCEapi.getAllRefBuyerReview().then((response)=>{
+            if(response) {
             if(response.data.valid)
             {
             this.setState({
@@ -204,8 +215,13 @@ export class CompletedFaultResolved extends Component {
                  dataload : true,},()=>{
             });
         }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
         });
         TTCEapi.getAllRefArtisanReview().then((response)=>{
+            if(response) {
             if(response.data.valid)
             {
             this.setState({
@@ -213,8 +229,13 @@ export class CompletedFaultResolved extends Component {
                  dataload : true,},()=>{
             });
         }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
         });
         TTCEapi.getOrderProgress(this.props.enquiryCode).then((response)=>{
+            if(response) {
             if(response.data.valid)
             {
             this.setState({
@@ -251,6 +272,10 @@ export class CompletedFaultResolved extends Component {
                 }
             }
         }
+    }
+    else{
+      browserHistory.push("/404error");
+    }
         });
     }
     

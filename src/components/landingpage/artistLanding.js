@@ -18,6 +18,7 @@ import changeLang from "../../services/utils/changeLang"
   componentDidMount(){
     var Languagetran=localStorage.getItem("i18nextLng");
       TTCEapi.getProfile().then((response)=>{
+        if(response) {
       if(response.data.data.user.companyDetails != null){
         if(response.data.data.user.companyDetails.logo != null){
             var brandPic = TTCEapi.ImageUrl + 'User/' + response.data.data.user.id + "/CompanyDetails/Logo/" + response.data.data.user.companyDetails.logo ;
@@ -26,6 +27,10 @@ import changeLang from "../../services/utils/changeLang"
             });
         }
     }
+  }
+  else{
+    browserHistory.push("/404error");
+  }
 
     });
   }

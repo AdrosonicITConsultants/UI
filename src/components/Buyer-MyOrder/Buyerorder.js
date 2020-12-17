@@ -148,7 +148,8 @@ export class Buyerorder extends Component {
            YesOrderbutton=(id,prodid)=>{
             if(prodid==2){
                 TTCEapi.markEnquiryClosed(id).then((response)=>{
-                    if(response.data.valid  )
+                   if(response){
+                         if(response.data.valid  )
                     {
                         document.getElementById('PartialPayment').style.display='none';
                         customToast.success("Order closed!", {
@@ -156,16 +157,24 @@ export class Buyerorder extends Component {
                             autoClose: true,
                           });
                           browserHistory.push("/buyerOrders"); 
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 }); 
                }
                else{
                  TTCEapi.initializePartialRefund(id).then((response)=>{
-                if(response.data.valid  )
+                if(response){ 
+                    if(response.data.valid  )
                 {
                  document.getElementById('CloseOrder').style.display='none';
                  document.getElementById('PartialPayment').style.display='block';
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
             }); 
         }
            }
@@ -190,7 +199,8 @@ export class Buyerorder extends Component {
             if(this.state.checked){
                 
                 TTCEapi.markEnquiryClosed(id).then((response)=>{
-                    if(response.data.valid  )
+                    if(response){
+                         if(response.data.valid  )
                     {
                         document.getElementById('PartialPayment').style.display='none';
                         customToast.success("Order closed!", {
@@ -198,7 +208,11 @@ export class Buyerorder extends Component {
                             autoClose: true,
                           });
                           browserHistory.push("/buyerOrders"); 
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                 }); 
                            }
                     else{

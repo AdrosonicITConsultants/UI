@@ -9,6 +9,8 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import CMSApi from '../../services/API/CMSApi';
+import { memoryHistory, browserHistory } from "../../helpers/history";
+
 var homeSectionStyle = {};
 
 export default class ForgotpassRouter extends Component {

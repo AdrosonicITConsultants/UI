@@ -7,6 +7,7 @@ import Productcatelog from "../Products/productcatelog"
 import TTCEapi from "../../services/API/TTCEapi";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../services/utils/changeLang"
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
  class artistLanding extends Component {
   constructor(props) {

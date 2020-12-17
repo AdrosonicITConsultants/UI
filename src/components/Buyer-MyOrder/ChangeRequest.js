@@ -199,22 +199,32 @@ export class ChangeRequest extends Component {
         this.props.componentFunction();
 
         TTCEapi.getChangeRequestItemTable().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getChangeRequestItemTable: response.data.data
                 })
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         if((this.props.changeRequestStatus === 0) || (this.state.showUpdatedContent === 0)) {
             TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                     this.setState({
                         getChangeRequestForArtisan: response.data.data.changeRequestItemList
                     })
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
             });
 
         }

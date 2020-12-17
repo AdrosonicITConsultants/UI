@@ -101,11 +101,13 @@ export class BuyerPreviewNewPI extends Component {
 
     componentDidMount() {
       TTCEapi.getProductUploadData().then((response)=>{
-        if(response.data.valid)
+        if(response){
+           if(response.data.valid)
         {
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.previewPI(this.props.enquiryId).then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                         if(response.data.data.productHistory != null)
@@ -161,18 +163,30 @@ export class BuyerPreviewNewPI extends Component {
                         })
                         }
                            
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
                 })
                    
                 });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
       });
       TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
-        if(response.data.valid)
+        if(response){
+           if(response.data.valid)
         {
             this.setState({getOldPIData:response.data.data,
             })
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
     })
       var date = moment()
       .utcOffset('+05:30')

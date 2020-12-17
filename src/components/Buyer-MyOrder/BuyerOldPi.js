@@ -82,11 +82,13 @@ export class BuyerOldPi extends Component {
 
     componentDidMount() {
       TTCEapi.getProductUploadData().then((response)=>{
+        if(response){
         if(response.data.valid)
         {
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.getOldPIData(this.props.enquiryId).then((response)=>{
+                    if(response){
                     if(response.data.valid)
                     {
                      
@@ -144,10 +146,17 @@ export class BuyerOldPi extends Component {
                         }
                              
                     }
+                     }
+                  else{
+                    browserHistory.push("/404error")
+                  }
                 })
                    
                 });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
       });
       var date = moment()
       .utcOffset('+05:30')

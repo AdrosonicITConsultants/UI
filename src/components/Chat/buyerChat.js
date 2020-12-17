@@ -73,35 +73,50 @@ export default class BuyerChat extends Component {
         }); 
 
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
                 });
                 this.scrollToBottom();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         var searchedString = "";
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         TTCEapi.getEscalationSummaryForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -112,14 +127,19 @@ export default class BuyerChat extends Component {
         }
         
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
                 });
                 this.scrollToBottom();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -158,7 +178,8 @@ export default class BuyerChat extends Component {
         formData.append("file", this.state.selectedFile);
 
         TTCEapi.sendChatboxMessage(formData).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 document.getElementById('artisanChatShareFile1').style.display='none';
                 document.getElementById('artisanChatShareAudio1').style.display='none';
@@ -166,7 +187,11 @@ export default class BuyerChat extends Component {
                 document.getElementById('artisanChatSharePhoto1').style.display='none';
                 this.showUpdatedConversation(this.state.selectedEnquiryData.enquiryId);
                 this.componentDidMount();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });     
     }
 
@@ -314,14 +339,19 @@ export default class BuyerChat extends Component {
 
     goToEscalationFunction = () => {
         TTCEapi.getEscalationSummaryForEnquiry(this.state.selectedEnquiryData.enquiryId).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
                     showEscalationScreen: true,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -407,7 +437,8 @@ export default class BuyerChat extends Component {
         var finalData = this.state.raiseEscalationFinalData;
 
         TTCEapi.raiseEscalaton(finalData).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 document.getElementById('raiseEscalationConfirmModal').style.display='none';
                 this.goToEscalationFunction();
@@ -431,7 +462,11 @@ export default class BuyerChat extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -665,23 +700,33 @@ export default class BuyerChat extends Component {
 
         var searchedString = "";
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
                 });
                 onLoadChatListArray = response.data.data;
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
             TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                     this.setState({
                         dropdownChatList: response.data.data,
                         loading: false,
                     });
                     dropdownChatListArray = response.data.data;
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 if(onLoadChatListArray.length !== 0 || dropdownChatListArray.length !== 0) {
                     var enquiryId = parseInt(localStorage.getItem("goToChatButtonEnquiryId"));
                     localStorage.removeItem("goToChatButtonEnquiryId");
@@ -706,13 +751,18 @@ export default class BuyerChat extends Component {
         });        
 
         TTCEapi.getEscalations().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getEscalationsList: response.data.data,
                     loading: false,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         });
     }
 

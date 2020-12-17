@@ -65,7 +65,8 @@ export default class AdvancePaymentCR extends Component {
         let params = queryString.parse(this.props.location.search);
          this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
@@ -144,23 +145,30 @@ export default class AdvancePaymentCR extends Component {
                         });
                     });
             }
+             }
+                  else{
+                    browserHistory.push("/404error")
+                  }
         })
         TTCEapi.getRevisedAdvancedPaymentStatus(params.code).then((response)=>{
+            if(response){
             if(response.data.valid)
             {
                 this.setState({getRevisedAdvancedPaymentStatus:response.data.data,
                  
                     })
                     console.log(this.state.getRevisedAdvancedPaymentStatus)
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
         })
 
         TTCEapi.getBuyerPreviewPI(params.code).then((response)=>{
-            if(response.data.valid)
+            if(response){ 
+                if(response.data.valid)
             {
-          
-
-                if(response.data.data.productCustom === false) {
+                 if(response.data.data.productCustom === false) {
                     this.setState({
                         
                     previewPI:response.data.data,
@@ -217,20 +225,29 @@ export default class AdvancePaymentCR extends Component {
                 }
                 
             }
+             }
+                  else{
+                    browserHistory.push("/404error")
+                  }
 
         });
 
         TTCEapi.getOrder(this.state.enquiryCode).then((response)=>{
-            if(response.data.valid)
+            if(response){ 
+                if(response.data.valid)
             {
                 this.setState({getOrderData:response.data.data[0].openEnquiriesResponse,
                     
                    
                             })
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
         })
         TTCEapi.getRevisedAdvancedPaymentReceipt(params.code).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
         {
             this.setState({getAdvancedPaymentReceipt : response.data.data,
                 receiptId:response.data.data.paymentId,
@@ -239,7 +256,11 @@ export default class AdvancePaymentCR extends Component {
             },()=>{
                
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         });
       }
     

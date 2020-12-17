@@ -58,6 +58,8 @@
 .boldrs{
     font-size: 15px;
     font-weight: bolder;
+    overflow: auto;
+    margin-top: 10px;
 }
 .iconsize{
           height: 35px;
@@ -298,6 +300,7 @@ input.empty {
     }
     .boldrs{
         font-size: 10px;
+        overflow: auto;
     }
     .payack {
         font-size: 7px;
@@ -316,3 +319,24 @@ input.empty {
         width: 143px;
     }    
 }
+
+
+/* width */
+.boldrs::-webkit-scrollbar {
+    height:0px !important;
+  }
+  
+  /* Track */
+  .boldrs::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .boldrs::-webkit-scrollbar-thumb {
+    background: #C9C9C9; 
+  }
+  
+  /* Handle on hover */
+  .boldrs::-webkit-scrollbar-thumb:hover {
+    background: #C9C9C9; 
+  }

@@ -744,7 +744,8 @@ relatedProductTemp[e.target.name] = option;
                     });  
 
                     TTCEapi.buyerpUploadDesign(file1, file2, file3, productData).then((response) => {
-                    if (response.data.valid) {
+                    if(response){
+                      if (response.data.valid) {
                       customToast.success("Product added successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -764,7 +765,10 @@ relatedProductTemp[e.target.name] = option;
                         SaveDisabled: false
                       })
                     }
-
+ }
+                  else{
+                    browserHistory.push("/404error")
+                  }
                       });
                  };
 

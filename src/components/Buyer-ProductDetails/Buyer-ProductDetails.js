@@ -58,7 +58,8 @@ class BuyersProductDetails extends Component {
   }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
-        if (response.data.valid) {
+        if(response){
+           if (response.data.valid) {
           customToast.success("Product added to wishlist!", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: true,
@@ -72,7 +73,11 @@ class BuyersProductDetails extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: true,
               });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
       });
   }
   togglePopup() {

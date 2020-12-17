@@ -72,14 +72,16 @@ export class BuyerPreviewInvoice extends Component {
     componentDidMount() { 
       
         TTCEapi.getProductUploadData().then((response)=>{
-          if(response.data.valid)
+          if(response){
+             if(response.data.valid)
           {
               this.setState({productCategories: response.data.data.productCategories,
                   yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                    
         TTCEapi.getBuyerPreviewPI(this.state.enquiryCode).then((response)=>{
             if(response.data.valid)
-            {
+            if(response){
+               {
                
               if(response.data.data.productHistory != null)
                         { 
@@ -131,11 +133,19 @@ export class BuyerPreviewInvoice extends Component {
                     })
                 }
                 
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
 
         });
       });
-      }
+      } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
     });
         
         var date = moment()

@@ -322,33 +322,50 @@ export class BuyerSingleCompletedOrder extends Component {
         let params = queryString.parse(this.props.location.search);
         this.state.enquiryCode = params.code;
         TTCEapi.getProductUploadData().then((response)=>{
-        if(response.data.valid)
+         if(response){
+             if(response.data.valid)
         {    TTCEapi.getEnquirStages().then((response)=>{
-        if(response.data.valid)
+        if(response){
+             if(response.data.valid)
         {
             var rr = response.data.data;
             rr[0].desc = "Quotation Accepted";
             rr[1].desc = "Order Details";
             this.setState({enquiryStagesMTO:rr})
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-        if(response.data.valid)
+        if(response){
+             if(response.data.valid)
         {
             this.setState({enquiryStagesAvailable:response.data.data})
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
         TTCEapi.getInnerEnquirStages().then((response)=>{
-        if(response.data.valid)
+        if(response){
+             if(response.data.valid)
         {
             this.setState({innerEnquiryStages:response.data.data})
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
        
         this.setState({productCategories: response.data.data.productCategories,
             yarns: response.data.data.yarns },()=>{
                 TTCEapi.getClosedOrder(params.code).then((response1)=>{
-                    if(response1.data.valid)
+                    if(response1){
+                         if(response1.data.valid)
                     {   
                         this.setState({openEnquiries:response1.data.data,
                             getSingleOrder : response1.data.data[0].openEnquiriesResponse,
@@ -359,12 +376,20 @@ export class BuyerSingleCompletedOrder extends Component {
                             }
                         });
                         
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 },()=>{
                     
                 })
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         }
     render() {

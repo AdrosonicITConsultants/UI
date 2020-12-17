@@ -73,35 +73,50 @@ export default class ArtisanChat extends Component {
         }); 
 
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+             if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
                 });
                 this.scrollToBottom();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         var searchedString = "";
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     onLoadChatList: response.data.data,
                     loading: false,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         TTCEapi.getEscalationSummaryForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -112,14 +127,19 @@ export default class ArtisanChat extends Component {
         }
         
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     selectedChatList: response.data.data,
                     loading: false,
                 });
                 this.scrollToBottom();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -158,7 +178,8 @@ export default class ArtisanChat extends Component {
         formData.append("file", this.state.selectedFile);
 
         TTCEapi.sendChatboxMessage(formData).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 document.getElementById('artisanChatShareFile1').style.display='none';
                 document.getElementById('artisanChatShareAudio1').style.display='none';
@@ -166,7 +187,11 @@ export default class ArtisanChat extends Component {
                 document.getElementById('artisanChatSharePhoto1').style.display='none';
                 this.showUpdatedConversation(this.state.selectedEnquiryData.enquiryId);
                 this.componentDidMount();
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });     
     }
 
@@ -313,14 +338,19 @@ export default class ArtisanChat extends Component {
 
     goToEscalationFunction = () => {
         TTCEapi.getEscalationSummaryForEnquiry(this.state.selectedEnquiryData.enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     getEscalationsDataArray: response.data.data,
                     loading: false,
                     showEscalationScreen: true,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -405,7 +435,8 @@ export default class ArtisanChat extends Component {
         var finalData = this.state.raiseEscalationFinalData;
 
         TTCEapi.raiseEscalaton(finalData).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 document.getElementById('raiseEscalationConfirmModal').style.display='none';
                 this.goToEscalationFunction();
@@ -429,14 +460,19 @@ export default class ArtisanChat extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
     updateEscNoFunction = () => {
         var searchedString = "";
         TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     onLoadChatList: response.data.data,
@@ -450,7 +486,11 @@ export default class ArtisanChat extends Component {
                         });
                     }
                 }
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -459,7 +499,8 @@ export default class ArtisanChat extends Component {
             markResolvedButtonDisable: true,
         });
         TTCEapi.resolveEscalation(escId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.goToEscalationFunction();
                 this.updateEscNoFunction();
@@ -479,7 +520,11 @@ export default class ArtisanChat extends Component {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: true,
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 
@@ -500,7 +545,8 @@ export default class ArtisanChat extends Component {
             showDropDown: false,
         });
         TTCEapi.goToEnquiryChat(enquiryId).then((response)=>{
-            if(response.data.valid)
+             if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     selectedKey: enquiryId,
@@ -510,34 +556,53 @@ export default class ArtisanChat extends Component {
                 });
                 var searchedString = "";
                 TTCEapi.getEnquiryMessageChatList(searchedString).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                         this.setState({
                             onLoadChatList: response.data.data,
                             loading: false,
                         });
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
                 TTCEapi.getNewEnquiryMessageChatList(searchedString).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                         this.setState({
                             dropdownChatList: response.data.data,
                             loading: false,
                         });
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
                 TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                         this.setState({
                             selectedChatList: response.data.data,
                             loading: false,
                         });
                         this.scrollToBottom();
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
     }
 

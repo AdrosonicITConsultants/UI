@@ -4,6 +4,7 @@ import TTCEapi from "../../services/API/TTCEapi";
 import "../Artisan-MyOrder/ArtisanQC.css";
 import { Row, Col } from 'reactstrap';
 import Moment from 'react-moment';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class BuyerQC extends Component {
 
@@ -47,7 +48,8 @@ export default class BuyerQC extends Component {
 
     componentDidMount() {
         TTCEapi.getArtisanQcResponse(this.props.enquiryId).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     artisanBrand: response.data.data.artisanCompanyName,
@@ -58,25 +60,39 @@ export default class BuyerQC extends Component {
                     currentSeenStatus: response.data.data.isSend,
                 })
             }
-        
+         }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         TTCEapi.getQCStages().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     stagesData: response.data.data,
                 })
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
 
         TTCEapi.getAllQCQuestions().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({
                     questionsData: response.data.data,
                 })
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         });
     }
 

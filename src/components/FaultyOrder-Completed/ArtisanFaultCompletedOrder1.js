@@ -166,34 +166,50 @@ export class ArtisanFaultCompletedOrder1 extends Component {
             enquiryCode:params.orderid
         })
         TTCEapi.getClosedOrder(params.orderid).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         TTCEapi.getAllRefBuyerReview().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                 },()=>{
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         TTCEapi.getAllRefArtisanReview().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                 getAllRefArtisanReview : response.data.data,
                 },()=>{
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         TTCEapi.getOrderProgress(params.orderid).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                 getOrderProgress : response.data.data.orderProgress,
@@ -230,7 +246,11 @@ export class ArtisanFaultCompletedOrder1 extends Component {
                  
                  var arr = this.state.accepted 
                 }
-            } }
+            } } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         });
     }
     

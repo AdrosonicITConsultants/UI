@@ -80,12 +80,14 @@ export class PreviewNewPI extends Component {
 
     componentDidMount() {
       TTCEapi.getProductUploadData().then((response)=>{
-        if(response.data.valid)
+        if(response){
+           if(response.data.valid)
         {
             this.setState({productCategories: response.data.data.productCategories,
                 yarns: response.data.data.yarns ,dyes : response.data.data.dyes ,reedCounts : response.data.data.reedCounts},()=>{
                   TTCEapi.previewPI(this.state.enquiryId).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                       if(response.data.valid)
                     {
                       
                         if(response.data.data.productHistory != null)
@@ -143,11 +145,19 @@ export class PreviewNewPI extends Component {
                            
                     
                              
-                    }
+                    } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                 })
                    
                 });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
       });
            
       }

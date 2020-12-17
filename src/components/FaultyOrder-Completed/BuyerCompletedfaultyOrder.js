@@ -175,25 +175,36 @@ export class BuyerCompletedfaultyOrder extends Component {
             enquiryCode:params.orderid
         })
         TTCEapi.getClosedOrder(params.orderid).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                  getClosedOrder : response.data.data[0].openEnquiriesResponse,
                 },()=>{
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         TTCEapi.getAllRefBuyerReview().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                 getAllRefBuyerReview : response.data.data,
                  dataload : true,},()=>{
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         });
         TTCEapi.getOrderProgress(params.orderid).then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
             this.setState({
                 getOrderProgress : response.data,
@@ -223,7 +234,11 @@ export class BuyerCompletedfaultyOrder extends Component {
             }
      
       
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         });
     }
     daysleftFaultyOrder(name,days)

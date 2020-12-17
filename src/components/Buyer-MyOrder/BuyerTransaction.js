@@ -48,7 +48,8 @@ export class BuyerTransaction extends Component {
             selectedFileName:""
         })
             TTCEapi.getPaymentDetailsForFinalPayment(enquiryId).then((response)=>{
-                if(response.data.valid)
+                if(response){
+                   if(response.data.valid)
                 {
                 this.setState({
                     showValidationFinal:false,
@@ -60,7 +61,11 @@ export class BuyerTransaction extends Component {
                       dataload : true,
                     },()=>{
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
             });
     
             document.getElementById('FinalPayment').style.display='block';
@@ -188,9 +193,14 @@ export class BuyerTransaction extends Component {
           });
         }.bind(this), 1000);
         TTCEapi.getReceipt(receiptId,challanId).then((response)=>{
-          if(response.data.valid) {
+          if(response){
+             if(response.data.valid) {
             window.open(response.data.data)
-          }
+          } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
           console.log(response.data.data);
 
         }
@@ -217,54 +227,79 @@ export class BuyerTransaction extends Component {
   }
     componentDidMount(){
                TTCEapi.getTransactionStatus().then((response)=>{
-            if(response.data.valid)
+            if(response){
+               if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                       if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.ongoingTransactionResponses},()=>{
                          
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
 
                 TTCEapi.getTransactionActions().then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                       if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
-                            if(response.data.valid)
+                            if(response){
+                               if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getTransactions : response.data.data.ongoingTransactionResponses},()=>{
                                 
                             });
-                        }
+                        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                         });
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
 
                 TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                       if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.ongoingTransactionResponses},()=>{
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                 });
           
          });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
      });
 
      }

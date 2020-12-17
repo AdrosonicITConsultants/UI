@@ -12,6 +12,7 @@ import Footer from "../footer/footer";
 import { Row, Col , Container, Button} from 'reactstrap';
 import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class DetailSuggestions extends Component {
   constructor(props) {

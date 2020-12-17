@@ -48,7 +48,8 @@ export class BuyerCompletedTransaction extends Component {
             selectedFileName:""
         })
             TTCEapi.getPaymentDetailsForFinalPayment(enquiryId).then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                 this.setState({
                     showValidationFinal:false,
@@ -61,7 +62,11 @@ export class BuyerCompletedTransaction extends Component {
                     },()=>{
                
                 });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
             });
     
             document.getElementById('FinalPayment').style.display='block';
@@ -184,7 +189,7 @@ export class BuyerCompletedTransaction extends Component {
             this.setState({render: true}) //After 1 second, set render to true
         }.bind(this), 1000)
         TTCEapi.getAdvancedPaymentReceipt(enquiryId).then((response)=>{
-
+            if(response){
             if(response.data.valid)
         {
             this.setState({getAdvancedPaymentReceipt : response.data.data,
@@ -195,7 +200,10 @@ export class BuyerCompletedTransaction extends Component {
                 
             window.open(TTCEapi.ReceiptUrl +this.state.getAdvancedPaymentReceipt.paymentId+"/"+this.state.getAdvancedPaymentReceipt.label, "_blank")   
         });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
         });
 
     }
@@ -210,24 +218,31 @@ export class BuyerCompletedTransaction extends Component {
     componentDidMount(){
    
         TTCEapi.getTransactionStatus().then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.completedTransactionResponses},()=>{
                         
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
 
                 TTCEapi.getTransactionActions().then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
@@ -243,22 +258,36 @@ export class BuyerCompletedTransaction extends Component {
                         }
                         });
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
 
                 TTCEapi.getTransactions(this.state.enquiryCode).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                         if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactions : response.data.data.completedTransactionResponses},()=>{
                         
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                 });
           
          });
         }
+         }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
      });
 
     

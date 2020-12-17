@@ -69,7 +69,8 @@ export default class AdvancePaymentCR2 extends Component {
             3
             ).then((response)=>{
             
-            if(response.data.valid){ 
+            if(response){
+                 if(response.data.valid){ 
                 document.getElementById('acceptMOQModal').style.display='none';
 
                 this.setState({  
@@ -91,7 +92,11 @@ export default class AdvancePaymentCR2 extends Component {
         autoClose: true,
       });
       
-      }
+      } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
         })
       
     }

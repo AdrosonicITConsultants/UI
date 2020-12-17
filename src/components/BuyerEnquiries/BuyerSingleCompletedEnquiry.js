@@ -376,7 +376,8 @@ export class ClosedBuyerSingleEnquiry extends Component {
         let params = queryString.parse(this.props.location.search);
         this.state.enquiryCode = params.code;
         TTCEapi.getMoq(params.code).then((response)=>{
-            if(response.data.data==null){
+            if(response){
+                 if(response.data.data==null){
                 this.setState({
                 moq:0,
                 ppu:"0",
@@ -397,7 +398,11 @@ export class ClosedBuyerSingleEnquiry extends Component {
           },()=>{
            
             });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
            
         });
         
@@ -405,7 +410,8 @@ export class ClosedBuyerSingleEnquiry extends Component {
          this.setState({getMoqDeliveryTimes : response.data.data},()=>{
             
             TTCEapi.getMoqs(params.code).then((response)=>{
-                if(response.data.valid)
+                if(response){
+                     if(response.data.valid)
                 {
                    
                     if(response.data.data.length==0)
@@ -417,7 +423,11 @@ export class ClosedBuyerSingleEnquiry extends Component {
                     this.setState({getMoqs:response.data.data,moqavailable:true})
                   }               
     
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
             })
         
          });
@@ -426,7 +436,8 @@ export class ClosedBuyerSingleEnquiry extends Component {
      
 
     TTCEapi.getPi(params.code).then((response)=>{
-        if(response.data.data==null){
+        if(response){
+             if(response.data.data==null){
             this.setState({
                 getPi : 0,
                 quantity:0,
@@ -450,11 +461,16 @@ export class ClosedBuyerSingleEnquiry extends Component {
       
         });
     }
-       
+      }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
     });
        TTCEapi.getProductUploadData().then((response)=>{
             if(response.data.valid)
-            {
+            if(response){
+                 {
                 this.setState({productCategories: response.data.data.productCategories,
                     yarns: response.data.data.yarns },()=>{
             
@@ -549,20 +565,34 @@ export class ClosedBuyerSingleEnquiry extends Component {
                             });
                         });
                     });
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
         TTCEapi.getEnquirStages().then((response)=>{
-            if(response.data.valid)
+           if(response){
+                 if(response.data.valid)
             {
                 this.setState({enquiryStagesMTO:response.data.data})
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
         TTCEapi.getEnquirStagesforAvailable().then((response)=>{
-            if(response.data.valid)
+            if(response){
+                 if(response.data.valid)
             {
                 this.setState({enquiryStagesAvailable:response.data.data})
 
-            }
+            } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
         })
 
      }
@@ -580,14 +610,19 @@ AcceptMoq(moqId,artisanId){
     this.setState({acceptingmoq:true});
     TTCEapi.MoqSelected(params.code,moqId,artisanId).then((response)=>
     {
-        if(response.data.valid)
+        if(response){
+             if(response.data.valid)
         {
             this.setState({MoqSelected:response.data.data,acceptingmoqtext:false })
             setTimeout(function() { //Start the timer
                 this.setState({render: true})
                  this.componentDidMount()
             }.bind(this), 3000)
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
     })
 }     
 
@@ -595,13 +630,18 @@ AcceptMoq(moqId,artisanId){
 MoqSimpleProductSelected(moqId){
     let params = queryString.parse(this.props.location.search);
     TTCEapi.MoqSimpleProductSelected(params.code,moqId).then((response)=>{
-        if(response.data.valid)
+        if(response){
+             if(response.data.valid)
         {
             this.setState({MoqSimpleProductSelected:response.data.data })
             document.getElementById('acceptMOQModal').style.display='none';
               document.getElementById('confirmMOQModal').style.display='block';
 
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
     })
 } 
 

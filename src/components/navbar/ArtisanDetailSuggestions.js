@@ -14,6 +14,8 @@ import ProductsOfCatelog from '../Artisan_Self_Design/ProductsOfCatelog';
 import ProductsOfSearch  from './ProductsOfSearch'
 import  ArtisanProductOfSearch  from "./ArtisanProductOfSearch";
 import { useTranslation, withTranslation } from "react-i18next";
+import { memoryHistory, browserHistory } from "../../helpers/history";
+
  class DetailSuggestionsArtist extends Component {
   constructor(props) {
     super(props);

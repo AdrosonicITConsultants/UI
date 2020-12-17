@@ -483,7 +483,7 @@ if(response){
 </Col>
 <Col className="col-xs-3" sm="1">
 <img 
-src={"https://f3adac-craft-exchange-resource.objectstore.e2enetworks.net/TransactionIcons/Artisan/"+this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"
+src={TTCEapi.IconUrlArtisan +this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"
 
 
 />

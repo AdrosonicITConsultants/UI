@@ -36,16 +36,22 @@ export class CRaccepted extends Component {
   componentDidMount() {
 
     TTCEapi.getChangeRequestItemTable().then((response)=>{
-      if(response.data.valid)
+      if(response){
+         if(response.data.valid)
       {
           this.setState({
               getChangeRequestItemTable: response.data.data
           })
-      }
+      } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
     });
 
     TTCEapi.getChangeRequestForArtisan(parseInt(this.props.enquiryCode)).then((response)=>{
-      if(response.data.valid)
+      if(response){
+         if(response.data.valid)
       {
         this.setState({
             getChangeRequestForArtisan: response.data.data.changeRequestItemList,
@@ -63,7 +69,11 @@ export class CRaccepted extends Component {
         this.setState({
           counter: count,
         })
-      }
+      } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
     })
   }
 

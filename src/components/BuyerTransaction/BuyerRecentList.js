@@ -218,44 +218,64 @@ export class BuyerRecentList extends Component {
   }
     componentDidMount(){
         TTCEapi.getTransactionStatus().then((response)=>{
-            if(response.data.valid)
+            if(response){
+               if(response.data.valid)
             {
          this.setState({
                 getTransactionStatus : response.data.data,
                },()=>{
                 TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
-                    if(response.data.valid)
+                    if(response){
+                       if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getOngoingTransaction : response.data.data},()=>{
                     
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
 
                 TTCEapi.getTransactionActions().then((response)=>{
-                    if(response.data.valid)
+                   if(response){
+                       if(response.data.valid)
                     {
                     this.setState({
                          dataload : true,
                          getTransactionActions : response.data.data},()=>{
                          TTCEapi.getOngoingTransaction(this.state.searchString,this.state.paymentType).then((response)=>{
-                            if(response.data.valid)
+                            if(response){
+                               if(response.data.valid)
                             {
                             this.setState({
                                  dataload : true,
                                  getOngoingTransaction : response.data.data},()=>{
                            
                             });
-                        }
+                        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
                         });
                     });
-                }
+                } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
                 });
           
          });
-        }
+        } }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+
      });
   
     

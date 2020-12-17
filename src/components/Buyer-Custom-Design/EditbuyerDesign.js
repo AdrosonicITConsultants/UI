@@ -992,7 +992,8 @@ else {
                       productData.width = this.state.width;
                       productData.reedCountId = this.state.reedCount;
                   TTCEapi.editCustomProduct(file1, file2, file3, productData).then((response) => {
-                    if (response.data.valid) {
+                    if(response){
+                       if (response.data.valid) {
                       customToast.success("Product updated successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: true,
@@ -1011,6 +1012,11 @@ else {
                         SaveDisabled: false
                       })
                     }
+                     }
+                  else{
+                    browserHistory.push("/404error")
+                  }
+                  
 
                       });;
 
@@ -1025,6 +1031,7 @@ else {
                  };
                  Delete = () => {
                   TTCEapi.deleteCustomProduct(this.state.productid).then((response)=>{
+                    if(response){
                     if(response.data.valid){
                       customToast.success("Product deleted successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1036,6 +1043,10 @@ else {
                         SaveDisabled: false
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error")
+                  }
                   })
                  }
 

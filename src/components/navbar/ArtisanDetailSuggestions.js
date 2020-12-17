@@ -37,15 +37,21 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              {
               TTCEapi.searchArtisanProductCount(params.search,params.type,1,-1).then((response1)=>{
+                if(response1){ 
                 if(response1.data.valid)
                 {
                  this.setState({
                    totalproducts : response1.data.data,
                  })
                 }
+              }
+              else{
+                browserHistory.push("/404error");
+              }
               })
                this.setState({
                 products : response.data.data.searchResponse,
@@ -82,13 +88,22 @@ import { useTranslation, withTranslation } from "react-i18next";
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
         TTCEapi.getProductIdsInWishlist().then((response)=>{
+          if(response){ 
           var item=this.state.getProductIdsInWishlist
           this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
        
           });
+        }
+        else{
+          browserHistory.push("/404error");
+        }
       });
 
 
@@ -100,16 +115,22 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
          if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,0).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                TTCEapi.searchArtisanProductCount(params.search,params.type,1,0).then((response1)=>{
+                if(response1){ 
                   if(response1.data.valid)
                   {
                    this.setState({
                      totalproducts : response1.data.data,
                    })
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 })
                this.setState({
                 products : moreProducts,
@@ -139,6 +160,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }
@@ -149,16 +174,22 @@ import { useTranslation, withTranslation } from "react-i18next";
     let params = queryString.parse(this.props.location.search);
        if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,1,1).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                TTCEapi.searchArtisanProductCount(params.search,params.type,1,1).then((response1)=>{
+                if(response1){ 
                   if(response1.data.valid)
                   {
                    this.setState({
                      totalproducts : response1.data.data,
                    })
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 })
                this.setState({
                 products : moreProducts,
@@ -187,6 +218,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }
@@ -198,7 +233,8 @@ import { useTranslation, withTranslation } from "react-i18next";
 
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showArtistSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
-             if(response.data.valid == true)
+            if(response){  
+            if(response.data.valid == true)
              {  var Count = this.state.resultsCount + response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                 var products = this.state.products
@@ -230,6 +266,10 @@ import { useTranslation, withTranslation } from "react-i18next";
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }

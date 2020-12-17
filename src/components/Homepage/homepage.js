@@ -121,7 +121,7 @@ var homeSectionStyle = {};
                 checkusernameArtist(userName){
                    this.setState({ username: userName }, () => {
                      TTCEapi.validateUsername(userName, 1).then((response) => {
-                       
+                      if(response) {
                        if (response.data.valid) {
                          if (this.state.userpage == 1) {
                            this.handler(2);
@@ -134,6 +134,10 @@ var homeSectionStyle = {};
                           autoClose: true,
                       });
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                      });
                    });
 
@@ -144,7 +148,7 @@ var homeSectionStyle = {};
                   this.setState({ username: this.state.username }, () => {
                     TTCEapi.login(this.state.username, password, 1).then(
                       (response) => {
-                        
+                        if(response) {
                         if (response.data.valid) {
                           debugger
                     
@@ -163,6 +167,10 @@ var homeSectionStyle = {};
                             autoClose: true,
                         });
                         }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                       }
                     );
                   });
@@ -204,7 +212,7 @@ var homeSectionStyle = {};
                      this.setState({ username: this.state.username }, () => {
                        TTCEapi.login(this.state.username, password, 2).then(
                          (response) => {
-                           
+                          if(response) {
                            if (response.data.valid) {
                            
                              let token = response.data.data.acctoken;
@@ -221,6 +229,10 @@ var homeSectionStyle = {};
                               autoClose: true,
                           });
                            }
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                          }
                        );
                      });

@@ -36,14 +36,20 @@ export default class DetailSuggestions extends Component {
     let params = queryString.parse(this.props.location.search);
         if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,-1).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              { TTCEapi.searchProductCount(params.search,params.type,1,-1).then((response1)=>{
+              if(response1){ 
                if(response1.data.valid)
                {
                 this.setState({
                   totalproducts : response1.data.data,
                 })
                }
+              }
+              else{
+                browserHistory.push("/404error");
+              }
              })
                this.setState({
                 products : response.data.data.searchResponse,
@@ -76,12 +82,21 @@ export default class DetailSuggestions extends Component {
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
         TTCEapi.getProductIdsInWishlist().then((response)=>{
+          if(response){ 
           var item=this.state.getProductIdsInWishlist
           this.setState({getProductIdsInWishlist : response.data.data, dataload : true,},()=>{
             });
+          }
+          else{
+            browserHistory.push("/404error");
+          }
       });
 
 
@@ -93,16 +108,22 @@ export default class DetailSuggestions extends Component {
     let params = queryString.parse(this.props.location.search);
        if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,0).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                 TTCEapi.searchProductCount(params.search,params.type,1,0).then((response1)=>{
+                  if(response1){ 
                   if(response1.data.valid)
                   {
                    this.setState({
                      totalproducts : response1.data.data,
                    })
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 })
                this.setState({
                 products : moreProducts,
@@ -132,6 +153,10 @@ export default class DetailSuggestions extends Component {
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }
@@ -142,16 +167,22 @@ export default class DetailSuggestions extends Component {
     let params = queryString.parse(this.props.location.search);
        if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,1,1).then((response)=>{
+            if(response){ 
              if(response.data.valid == true)
              {  var Count = response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                 TTCEapi.searchProductCount(params.search,params.type,1,1).then((response1)=>{
+                  if(response1){ 
                   if(response1.data.valid)
                   {
                    this.setState({
                      totalproducts : response1.data.data,
                    })
                   }
+                }
+                else{
+                  browserHistory.push("/404error");
+                }
                 })
                 this.setState({
                 products : moreProducts,
@@ -181,6 +212,10 @@ export default class DetailSuggestions extends Component {
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }
@@ -191,7 +226,8 @@ export default class DetailSuggestions extends Component {
     let params = queryString.parse(this.props.location.search);
       if(params.search != undefined && params.type != undefined){
            TTCEapi.showBuyerSearchSuggestion(params.search,params.type,page,this.state.boolAntaran).then((response)=>{
-             if(response.data.valid == true)
+            if(response){  
+            if(response.data.valid == true)
              {  var Count = this.state.resultsCount + response.data.data.searchResponse.length
                 var moreProducts = response.data.data.searchResponse
                 var products = this.state.products
@@ -223,6 +259,10 @@ export default class DetailSuggestions extends Component {
 
               })
              }
+            }
+            else{
+              browserHistory.push("/404error");
+            }
 
         });
       }

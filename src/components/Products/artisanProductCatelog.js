@@ -139,20 +139,30 @@ export default class artisanProductCatelog extends Component {
                         if(params.ProductHistoryId == undefined)
                         {
                           TTCEapi.getSimpleProduct(params.ProductId).then((response) => {
+                            if(response){ 
                             this.setState({productid :params.ProductId,history:false },()=>{
        
                             })
                            let productData =  response.data.data;
                             this.setProduct(productData);
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                         })
                         }
                         else{
                           TTCEapi.getSimpleHistoryProduct(params.ProductHistoryId).then((response) => {
+                            if(response){ 
                             this.setState({productid :params.ProductId,history:true },()=>{
        
                             })
                            let productData =  response.data.data;
                             this.setProduct(productData);
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                         })
                         }
                        
@@ -163,6 +173,7 @@ export default class artisanProductCatelog extends Component {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
+                      if(response){ 
                        
                        this.setState(
                          {
@@ -180,27 +191,40 @@ export default class artisanProductCatelog extends Component {
                          if(params.ProductHistoryId == undefined)
                          {
                           TTCEapi.getSimpleHistoryProduct(params.ProductId).then((response) => {
+                            if(response){ 
                             this.setState({productid :params.ProductId,history : true },()=>{
        
                             })
                            
                             let productData =  response.data.data;
                             this.setProduct(productData);
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                         })
                          }
                          else{
                           TTCEapi.getSimpleHistoryProduct(params.ProductId).then((response) => {
+                            if(response){ 
                             this.setState({productid :params.ProductId ,history : false},()=>{
        
                             })
                            
                             let productData =  response.data.data;
                             this.setProduct(productData);
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                         })
                          }
                      
-                         }
-                       );
+                         });
+                        }
+                        else{
+                          browserHistory.push("/404error");
+                        }
                      });  
                    }
            
@@ -1139,6 +1163,7 @@ else {
                     productData.relProduct = this.state.savedrelatedProduct;
                     
                   TTCEapi.editProduct(file1, file2, file3, productData).then((response) => {
+                    if(response){ 
                     if (response.data.valid) {
                       customToast.success("Product updated successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1158,6 +1183,10 @@ else {
                         SaveDisabled: false
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error");
+                  }
 
                       });;
 
@@ -1173,6 +1202,7 @@ else {
                  };
                  Delete = () => {
                   TTCEapi.deleteProduct(this.state.productid).then((response)=>{
+                    if(response){ 
                     if(response.data.valid){
                       customToast.success("Product deleted successfully!", {
                         position: toast.POSITION.TOP_RIGHT,
@@ -1184,6 +1214,10 @@ else {
                         SaveDisabled: false
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error");
+                  }
                   })
                  }   
                  

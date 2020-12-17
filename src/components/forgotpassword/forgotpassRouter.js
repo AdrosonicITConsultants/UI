@@ -32,7 +32,7 @@ export default class ForgotpassRouter extends Component {
                    (window.location.pathname.indexOf("passwordA") !== -1 ? (roleID = 1) : (roleID = 2));                  
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.sendOtpForgotpass(emailid, roleID).then((response) => {
-                       
+                      if(response) {
                        if (response.data.valid) {
                          customToast.success(response.data.data, {
                            position: toast.POSITION.TOP_RIGHT,
@@ -44,6 +44,10 @@ export default class ForgotpassRouter extends Component {
                            autoClose: true,
                          });
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                      });
                    });
                  }
@@ -51,7 +55,7 @@ export default class ForgotpassRouter extends Component {
                  verifyOtp(emailid, otppin) {                   
                    this.setState({ emailid: emailid }, () => {
                      TTCEapi.verifyOtp(emailid, otppin).then((response) => {
-                    
+                      if(response) {
                        if (response.data.valid) {
                          this.handler(1);
                        } else {                 
@@ -61,6 +65,10 @@ export default class ForgotpassRouter extends Component {
                          });
                         
                        }
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                      });
                    });
                  }
@@ -72,7 +80,7 @@ export default class ForgotpassRouter extends Component {
                      () => {
                        TTCEapi.passwordReset(username, password).then(
                          (response) => {
-                           
+                          if(response) {
                            if (response.data.valid) {
                              this.handler(2);
                            } else {
@@ -81,6 +89,10 @@ export default class ForgotpassRouter extends Component {
                                autoClose: true,
                              });
                            }
+                          }
+                          else{
+                            browserHistory.push("/404error");
+                          }
                          }
                        );
                      }

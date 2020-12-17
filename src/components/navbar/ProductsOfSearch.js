@@ -41,6 +41,7 @@ export class ProductsOfSearch extends Component {
     }
     handleAddtoWishlist(id){
       TTCEapi.addToWishlist(id).then((response)=>{
+        if(response){ 
         if (response.data.valid) {
           customToast.success("Product added to wishlist!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -56,22 +57,37 @@ export class ProductsOfSearch extends Component {
                 autoClose: true,
               });
         }
+      }
+      else{
+        browserHistory.push("/404error");
+      }
       });
   }
 
 generateEnquiry(item){
   this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
+      if(response){ 
   this.setState({ifEnquiryExists : response.data.data},()=>{
     if(this.state.ifEnquiryExists.ifExists ==false){
         TTCEapi.generateEnquiry(item,false).then((response)=>{
+          if(response){ 
           this.setState({generateEnquiry : response.data.data,modalIsOpen: false,enqgen:true },()=>{
                         });
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
         });
       }
   });
+}
+else{
+  browserHistory.push("/404error");
+}
   
 });
+
 }
     productDescription(id){
       browserHistory.push("/Product-Details?productId=" + id); 
@@ -79,6 +95,7 @@ generateEnquiry(item){
     }
     handleRemovefromWishlist(id){
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
+        if(response){ 
           if(response.data.data=="Successfull"){
             this.setState({isAddedtoWishlist:false})
             customToast.success("Product removed from wishlist!", {
@@ -92,6 +109,10 @@ generateEnquiry(item){
                     autoClose: true,
                   });
             }
+          }
+          else{
+            browserHistory.push("/404error");
+          }
            
         });
         }

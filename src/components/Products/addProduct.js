@@ -138,7 +138,7 @@ const initialState = {
                    }
                    else {
                      TTCEapi.getProductUploadData().then((response) => {
-                       
+                      if(response){ 
                        this.setState(
                          {
                            productCategories:
@@ -154,6 +154,10 @@ const initialState = {
 
                          }
                        );
+                      }
+                      else{
+                        browserHistory.push("/404error");
+                      }
                      });  
                    }
                                    
@@ -833,6 +837,7 @@ relatedProductTemp[e.target.name] = option;
                     productData.relatedProduct = this.state.savedrelatedProduct;
 
                       TTCEapi.uploadProduct(file1, file2, file3, productData).then((response) => {
+                        if(response){ 
                     if (response.data.valid) {
                       customToast.success(this.props.t("Pages.object.Product added successfully"), {
                         position: toast.POSITION.TOP_RIGHT,
@@ -864,6 +869,10 @@ relatedProductTemp[e.target.name] = option;
                         SaveDisabled: false
                       })
                     }
+                  }
+                  else{
+                    browserHistory.push("/404error");
+                  }
 
                       });;
 

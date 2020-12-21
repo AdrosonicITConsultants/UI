@@ -237,7 +237,9 @@ import bwtranslate from "./bwtranslate.svg"
 import artisanlogo from "./for the light back ground artisan.svg";
 import youTubeLogo from "./youtubeAsset 1@3x (1).svg";
 import linkedinLogo from "./LinkedIn_Logo.svg";
+import usermanual from "./Group 9 user Manual Icon android n web.svg"
 export default {
+  usermanual,
   youTubeLogo,
   linkedinLogo,
   artisanlogo,

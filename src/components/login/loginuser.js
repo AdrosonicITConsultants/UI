@@ -232,14 +232,14 @@ helpClose(){
           <Row noGutters={true}>
             <Col className="col-xs-6 text-right">
               <FacebookLogin
-              appId="2751983971736639"
+              appId={TTCEapi.facebookurl}
               autoLoad={false}
               fields="name,email,picture"
               callback={this.responseFacebook}/>
             </Col>
             <Col className="col-xs-6 text-left googleLoginButton">
               <GoogleLogin
-              clientId="22783379582-k6lub35ijaki3ku3dvi0flo0qkstds4f.apps.googleusercontent.com"
+              clientId={TTCEapi.googleurl}
               buttonText="Login with Google"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}/>

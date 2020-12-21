@@ -196,6 +196,7 @@
         "changelanguage" :"Change Language",
         "regHelp" : "Help ?",
         "legalDisclaimer" : "Legal Disclaimer",
-        "chooselanguage":"Choose Language"
+        "chooselanguage":"Choose Language",
+        "usermanual":"User Manual"
     } 
 }

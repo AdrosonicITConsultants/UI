@@ -612,6 +612,19 @@ componentDidMount(){
                    
                  </li>
                   }
+                    <li className="menu-item">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
+                    <img style={{ width: "15px" }} src={logos.usermanual}></img>
+                  </span>
+                  {/* {userTypeId == 2 ?"":<a href="/">Change Language</a>} */}
+                  {userTypeId === 2 ?
+                  <a href={TTCEapi.UserManual + "Buyer Web.docx"}
+            target="_blank">User Manual </a>
+            :
+            <a href={TTCEapi.DocumentsURL + "FAQ.pdf"}
+            target="_blank"> {this.props.t("Pages.object.usermanual")}</a>
+            }
+                </li>
                
                 
                 <li className="menu-item">

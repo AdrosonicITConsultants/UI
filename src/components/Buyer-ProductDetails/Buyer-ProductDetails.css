@@ -208,6 +208,7 @@ scroll-behavior: smooth;
     overflow: hidden;
     background-color: white;
     height: 234px;
+    cursor: pointer;
 }
 .card-text-BDP {
   font-size: 15px;

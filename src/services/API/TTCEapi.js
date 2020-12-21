@@ -6,7 +6,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-var env = "dev";
+var env = "live";
 var ApiUrl = "";
 var ImageUrl = "";
 var ReceiptUrl = "";
@@ -44,7 +44,17 @@ else if (env == "uat") {
 
 } 
 else if (env == "live") {
-  ApiUrl = "";
+  ApiUrl = "https://162.52.206.168:8090/api";
+  ImageUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/";
+  ReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/AdvancedPayment/";
+  DeliveryReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/deliveryChallanReceipt/";
+  ChatMediaUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/ChatBoxMedia/";
+  DocumentsURL = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/documents/";
+  BuyerDasboard = "https://datastudio.google.com/embed/reporting/1ebd20db-4ec9-4fa3-b7af-cc57a8dbd318/page/iTZoB?params=";
+  ArtisanDashboard = "https://datastudio.google.com/embed/reporting/f0b5c4e2-1e25-43e8-a200-00697598c275/page/imZoB?params=";
+  IconsUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/TransactionIcons/Buyer/";
+  IconUrlArtisan="https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/TransactionIcons/Artisan/"
+
 }
 
 class TTCEapi {

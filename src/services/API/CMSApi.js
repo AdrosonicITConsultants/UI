@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-var env = "dev";
+var env = "live";
 var CMSUrl = "";
 
 if (env == "dev") {
@@ -11,7 +11,7 @@ else if (env == "uat") {
     CMSUrl = "";
 } 
 else if (env == "live") {
-    CMSUrl = "";
+    CMSUrl = "https://craftxchange.antaran.in/index.php/wp-json/wp/v2";
 }
 
 export default class CMSApi {

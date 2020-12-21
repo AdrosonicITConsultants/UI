@@ -42,7 +42,15 @@ class buyerLanding extends Component {
   }
 
   componentDidMount () {
-    CMSApi.getPages(27).then((response)=>{
+    var env="live";
+    var id=0;
+    if(env=="test"){
+     id=27
+    }
+    else if(env=="live"){
+      id=64
+    }
+    CMSApi.getPages(id).then((response)=>{
       if(response)
       {
           this.setState({

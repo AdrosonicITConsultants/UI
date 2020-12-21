@@ -25,7 +25,15 @@ class AntaranCoDesign extends Component {
     }
 
     componentDidMount () {
-      CMSApi.getPages(142).then((response)=>{
+      var env="live";
+      var id=0;
+      if(env=="test"){
+       id=142
+      }
+      else if(env=="live"){
+        id=14
+      }
+      CMSApi.getPages(id).then((response)=>{
         if(response)
         {
           this.setState({

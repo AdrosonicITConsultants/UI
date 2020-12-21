@@ -54,14 +54,14 @@ else if (env == "uat") {
 
 } 
 else if (env == "live") {
-  ApiUrl = "https://162.52.206.168:8090/api";
+  ApiUrl = "http://164.52.206.168:8090/api";
   ImageUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/deliveryChallanReceipt/";
   ChatMediaUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/ChatBoxMedia/";
   DocumentsURL = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/documents/";
-  BuyerDasboard = "https://datastudio.google.com/embed/reporting/1ebd20db-4ec9-4fa3-b7af-cc57a8dbd318/page/iTZoB?params=";
-  ArtisanDashboard = "https://datastudio.google.com/embed/reporting/f0b5c4e2-1e25-43e8-a200-00697598c275/page/imZoB?params=";
+  BuyerDasboard = "https://datastudio.google.com/embed/reporting/0ede1d26-5dbf-4564-a7c4-4f850493a89f/page/i56cB?params=";
+  ArtisanDashboard = "https://datastudio.google.com/embed/reporting/cef7a3b2-e37f-48a2-9f28-0c3f45a07585/page/RJ8dB?params=";
   IconsUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/TransactionIcons/Buyer/";
   IconUrlArtisan="https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/TransactionIcons/Artisan/"
   UserManual="https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/usermanual/";

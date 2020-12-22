@@ -54,7 +54,7 @@ else if (env == "uat") {
 
 } 
 else if (env == "live") {
-  ApiUrl = "http://164.52.206.168:8090/api";
+  ApiUrl = "https://craftxchange.antaran.in/api";
   ImageUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/";
   ReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/AdvancedPayment/";
   DeliveryReceiptUrl = "https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/deliveryChallanReceipt/";

@@ -8,10 +8,10 @@ if (env == "dev") {
     CMSUrl = "http://101.53.158.227/wordpress/index.php/wp-json/wp/v2";
 } 
 else if (env == "uat") {
-    CMSUrl = "";
+    CMSUrl = "http://101.53.158.227/wordpress/index.php/wp-json/wp/v2";
 } 
 else if (env == "live") {
-    CMSUrl = "https://craftxchange.antaran.in/index.php/wp-json/wp/v2";
+    CMSUrl = "https://craftxchangecms.antaran.in/index.php/wp-json/wp/v2";
 }
 
 export default class CMSApi {

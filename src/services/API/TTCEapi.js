@@ -902,7 +902,7 @@ class TTCEapi {
       .get(url)
       .then((response) => {
         return response;
-        console.log(response)
+       
       })
       .catch((error) => {
         return error.response;

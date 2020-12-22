@@ -157,7 +157,7 @@ export default class AdvancePaymentCR extends Component {
                 this.setState({getRevisedAdvancedPaymentStatus:response.data.data,
                  
                     })
-                    console.log(this.state.getRevisedAdvancedPaymentStatus)
+                   
             } }
                   else{
                     browserHistory.push("/404error")
@@ -478,7 +478,7 @@ getRevisedAdvancedPaymentStatus={this.state.getRevisedAdvancedPaymentStatus.pend
     </>
     :
     <>
-        {/* {console.log(this.state.getEnquiryMoq.openEnquiriesResponse.revisedAdvancePaymentId)} */}
+       
 
     {this.state.getEnquiryMoq.map((item)=> 
 

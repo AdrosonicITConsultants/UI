@@ -505,7 +505,7 @@ class ArtisanRecentList extends Component {
                 
                  </Row>
                 <hr className="enquiryoptionhr" style={{width:"100%"}}></hr>
-                {console.log(this.state.getOngoingTransaction)}
+               
 
                 {this.filter(this.state.getOngoingTransaction).map((item)=> 
                     <>

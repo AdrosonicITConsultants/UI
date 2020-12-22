@@ -186,7 +186,7 @@ export class BuyerTransaction extends Component {
     }
   
     openReceipt(receiptId,challanId){
-      console.log(receiptId,challanId + "abcdef")
+     
         setTimeout(function() { 
           this.setState({
             render: true
@@ -201,7 +201,7 @@ export class BuyerTransaction extends Component {
                     browserHistory.push("/404error")
                   }
 
-          console.log(response.data.data);
+          
 
         }
         );

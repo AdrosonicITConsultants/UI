@@ -333,7 +333,15 @@ export default class buyerRegister extends Component {
                  }
 
                  componentDidMount () {
-                  CMSApi.getPages(20).then((response)=>{
+                  var env="live";
+                  var id=0;
+                  if(env=="test"){
+                   id=20
+                  }
+                  else if(env=="live"){
+                    id=58
+                  }
+                  CMSApi.getPages(id).then((response)=>{
                     if(response)
                     {
                         this.setState({

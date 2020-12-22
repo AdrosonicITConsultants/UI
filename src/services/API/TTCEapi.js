@@ -66,7 +66,7 @@ else if (env == "live") {
   IconUrlArtisan="https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/TransactionIcons/Artisan/"
   UserManual="https://tatatrustcraftxchangelive.objectstore.e2enetworks.net/usermanual/";
   facebookurl="2960179490877793";
-  googleurl="951846626811-hbtscl3iiugt6aprpcik60spe281pm10.apps.googleusercontent.com"
+  googleurl="667962321153-fvelcklphu7ee6b4ifg944f5krusv0nq.apps.googleusercontent.com"
 }
 
 class TTCEapi {

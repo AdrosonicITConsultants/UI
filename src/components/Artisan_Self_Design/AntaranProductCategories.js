@@ -62,6 +62,9 @@ class AntaranProductCategories extends Component {
                 clusterID : params.clusterid,
               })
             }
+            else{
+                browserHistory.push("/404error")
+              }
 
             return this.state.categoryData ? this.state.categoryData.map((data) => {
                 if(data.acf.category_id == params.categoryId) {

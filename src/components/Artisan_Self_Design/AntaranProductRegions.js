@@ -64,6 +64,9 @@ class AntaranProductRegions extends Component {
                 clusterID : params.clusterid,
               })
             }
+            else{
+                browserHistory.push("/404error")
+              }
 
             return this.state.regionData ? this.state.regionData.map((data) => {
                 if(data.acf.cluster_id == params.clusterid) {

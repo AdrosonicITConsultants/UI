@@ -41,11 +41,19 @@ export default class ArtistSelfdesignRegions extends Component {
           regionData : response.data
         })
       }
+      else{
+        browserHistory.push("/404error")
+      }
     });
    
      TTCEapi.getClusters().then((response)=>{
+       if(response) {
       this.setState({cluster : response.data.data},()=>{
       });
+    }
+    else{
+      browserHistory.push("/404error")
+    }
   });
   }
 

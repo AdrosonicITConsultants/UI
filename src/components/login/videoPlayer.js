@@ -31,6 +31,9 @@ class videoPlayer extends Component {
             videoData : response.data[0].acf
           })
         }
+        else{
+          browserHistory.push("/404error")
+        }
       })
     }
 

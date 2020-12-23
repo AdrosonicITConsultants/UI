@@ -43,6 +43,9 @@ class ArtistSelfDesignCategories extends Component {
           categoryData : response.data
         })
       }
+      else{
+        browserHistory.push("/404error")
+      }
     });
    
     TTCEapi.getAllProducts().then((response)=>{

@@ -40,6 +40,9 @@ class AntaranCoDesign extends Component {
             antaranCoDesignBg : response.data.acf.background_image
           })
         }
+        else{
+          browserHistory.push("/404error")
+        }
       })
     }
 

@@ -260,6 +260,9 @@ var homeSectionStyle = {};
                         })
                         this.setHomeBgImage();
                     }
+                    else{
+                      browserHistory.push("/404error")
+                    }
                   })
                  }
 

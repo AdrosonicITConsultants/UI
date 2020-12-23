@@ -58,6 +58,9 @@ class buyerLanding extends Component {
           })
           this.setHomeBgImage();
       }
+      else{
+        browserHistory.push("/404error")
+      }
     })
    }
 

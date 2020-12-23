@@ -42,6 +42,9 @@ class ArtistSelfDesign extends Component {
             artisanSelfDesignBg : response.data.acf.background_image
           })
         }
+        else{
+          browserHistory.push("/404error")
+        }
       })
     }
 

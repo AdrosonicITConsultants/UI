@@ -191,7 +191,7 @@ function App() {
           <PrivateRoute exact path="/viewOldQC" component={ViewOldQC} />
           <PrivateRoute exact path="/404error" component={ErrorPage} />
 
-          {/* <Route component={ErrorPage} /> */}
+          <Route component={ErrorPage} /> 
          
         </Switch>
       </Router>

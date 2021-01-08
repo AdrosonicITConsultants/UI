@@ -39,7 +39,7 @@ var homeSectionStyle = {};
                    if (
                      localStorage.getItem('homepageredirect') != null
                    ) {
-                     num = parseInt(localStorage.getItem("homepageredirect"));
+                     num = parseInt(localStorage.getItem("homepageredirect"));                     
                      this.setState({
                        userpage : num,
                      });
@@ -221,8 +221,11 @@ var homeSectionStyle = {};
                              this.props.dispatch(
                                Actions.loginSuccess(token, user, userTypeId)
                              );
-                            
-                              browserHistory.push("/demo-video");
+
+                             browserHistory.push("/demo-video");
+                              // var currentUrl = localStorage.getItem("uaClickedUrl");
+                              // localStorage.removeItem("uaClickedUrl");
+                              // browserHistory.push(currentUrl);                              
                            } else {
                             customToast.error(response.data.errorMessage, {
                               position: toast.POSITION.TOP_RIGHT,
@@ -263,7 +266,20 @@ var homeSectionStyle = {};
                     else{
                       browserHistory.push("/404error")
                     }
-                  })
+                  });
+
+                  if (
+                    localStorage.getItem('uahomepageredirect') != null
+                  ) {
+                    var num = parseInt(localStorage.getItem("uahomepageredirect"));                     
+                    this.setState({
+                      userpage : num,
+                    });
+
+                    
+        
+                    
+                  }
                  }
 
                  setHomeBgImage = () => {
@@ -314,9 +330,9 @@ var homeSectionStyle = {};
                }
 
 
-                function mapStateToProps(state) {
-              
-                }
-
-               const connectedLoginPage = connect(mapStateToProps)(HomePage);
+              function mapStateToProps(state) {
+                
+              }
+              const connectedLoginPage = connect(mapStateToProps)(HomePage);
+                         
                export default  connectedLoginPage ;

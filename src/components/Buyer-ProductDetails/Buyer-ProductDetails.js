@@ -57,6 +57,9 @@ class BuyersProductDetails extends Component {
     this.closeModal = this.closeModal.bind(this);  
   }
     handleAddtoWishlist(id){
+      var user = localStorage.getItem("user");
+
+    if(user) {
       TTCEapi.addToWishlist(id).then((response)=>{
         if(response){
            if (response.data.valid) {
@@ -79,6 +82,12 @@ class BuyersProductDetails extends Component {
                   }
                   
       });
+    }
+    else {
+      localStorage.setItem("uaWishlistAdd", id);
+      localStorage.setItem("uahomepageredirect", 1);
+      browserHistory.push("/login"); 
+    }
   }
   togglePopup() {
     this.setState({
@@ -90,6 +99,9 @@ class BuyersProductDetails extends Component {
   }
 
 generateEnquiry(item){
+  var user = localStorage.getItem("user");
+
+  if(user) {
   this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
@@ -102,6 +114,13 @@ generateEnquiry(item){
   });
   
 });
+}
+else {
+  localStorage.setItem("uaGenerateEnquiryFlag", 1);
+  localStorage.setItem("uaGenerateEnquiryData", item);
+  localStorage.setItem("uahomepageredirect", 1);
+  browserHistory.push("/login"); 
+}
 }
   handleRemovefromWishlist(id){
     TTCEapi.deleteProductsInWishlist(id).then((response)=>{
@@ -126,6 +145,7 @@ generateEnquiry(item){
     let params = queryString.parse(this.props.location.search);
      
     TTCEapi.getProduct(parseInt(params.productId)).then((response)=>{
+      
       this.setState({ProductData :response.data.data},()=>{
 
                   TTCEapi.getArtisianProducts(this.state.ProductData.artitionId).then((response)=>{
@@ -168,6 +188,22 @@ generateEnquiry(item){
         })
     });
 });
+
+if(localStorage.getItem("uaGenerateEnquiryData")) {
+  if(localStorage.getItem("uaGenerateEnquiryData") != "null"){
+  var enquiryData = parseInt(localStorage.getItem("uaGenerateEnquiryData")); 
+  localStorage.removeItem("uaGenerateEnquiryData");
+  localStorage.removeItem("uaGenerateEnquiryFlag");
+  this.generateEnquiry(enquiryData);   
+  }
+}
+else if(localStorage.getItem("uaWishlistAdd")) {
+  if(localStorage.getItem("uaWishlistAdd") != "null") {
+  var enquiryData = parseInt(localStorage.getItem("uaWishlistAdd")); 
+  localStorage.removeItem("uaWishlistAdd");
+  this.handleAddtoWishlist(enquiryData);
+}
+}
 
 
   }

@@ -3,6 +3,7 @@ import { Row, Col , Container} from 'reactstrap';
 import "./homepage.css"
 import logos from "../../assets";
 import TTCEapi from '../../services/API/TTCEapi';
+import { memoryHistory, browserHistory } from "../../helpers/history";
 
 export default class roleselect extends Component {
     constructor() {
@@ -13,11 +14,31 @@ export default class roleselect extends Component {
       }
     
       artistopen() {
+        if(localStorage.getItem("user")) {
+            var user = JSON.parse(localStorage.getItem("user"));
+            var id = parseInt(user.refRoleId);
+    
+            if(id == 2) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("jwtToken");
+            }
+        }
+        
          this.props.handler(3);
          localStorage.setItem("selectedUserId", 1);
       } 
       buyeropen() {
-        this.props.handler(1);
+        // this.props.handler(1);
+        if(localStorage.getItem("user")) {
+        var user = JSON.parse(localStorage.getItem("user"));
+        var id = parseInt(user.refRoleId);
+
+        if(id == 1) {
+            localStorage.removeItem("user");
+            localStorage.removeItem("jwtToken");
+        }
+    }
+        browserHistory.push("/buyerHome");
         localStorage.setItem("selectedUserId", 2);
      } 
     
@@ -26,6 +47,14 @@ export default class roleselect extends Component {
     } 
     helpClose(){
         document.getElementById('help').style.display='none'; 
+    }
+
+    componentDidMount() {
+        localStorage.removeItem("homepageredirect");
+        // localStorage.removeItem("uaClickedUrl");
+        localStorage.removeItem("uahomepageredirect");
+
+        
     }
     
     render() {

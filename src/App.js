@@ -88,6 +88,7 @@ import ViewOldQC from './components/Artisan-MyOrder/viewOldQC';
 import ErrorPage from './components/404errorPage/errorPage';
 import AdvancePaymentCR from './components/Buyer-MyOrder/AdvancePaymentCR';
 import AdvancePaymentCR2 from './components/Buyer-MyOrder/AdvancePaymentCR2';
+import BuyerLanding from "./components/landingpage/buyerLanding";
 function App() {
   
   return (
@@ -97,25 +98,28 @@ function App() {
        
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={HomePage} />
           <Route exact path="/buyer-registration" component={Buyerregister} />
           <Route exact path="/artist-registration" component={Artistregister} />
           <Route exact path="/forgot-passwordA" component={ForgotpassRouter} />
           <Route exact path="/forgot-passwordB" component={ForgotpassRouter} />
+
+          <Route exact path="/buyerHome" component={BuyerLanding} />
           
           <PrivateRoute exact path="/addProduct" component={AddProduct} />
           
-          <PrivateRoute exact path="/detailSuggestions" component={DetailSuggestions}/>
+          <Route exact path="/detailSuggestions" component={DetailSuggestions}/>
           <PrivateRoute exact path="/A-detailSuggestions" component={DetailSuggestionsArtist}/>
           <PrivateRoute exact path="/B-NotificationCount" component={NotificationBuyerConnected}/>
           <PrivateRoute exact path="/B-Notifications" component={BuyerNotifications}/>
-          <PrivateRoute exact path="/demo-video" component={videoPlayer} />
+          <Route exact path="/demo-video" component={videoPlayer} />
           <PrivateRoute exact path="/home" component={LandingPage} />
           <PrivateRoute exact path="/MyProfile" component={MyProfile} />
-          <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
-          <PrivateRoute exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
-          <PrivateRoute exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
-          <PrivateRoute exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
-          <PrivateRoute exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
+          <Route exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} />
+          <Route exact path="/Artisianself/regions/ProductRegions" component={ProductRegions} />
+          <Route exact path="/Artisanself/artisanbrands/ArtisanProducts" component={ArtisianProducts} />
+          <Route exact path="/Antaran/categories/ProductCategories" component={AntaranProductCategories} />
+          <Route exact path="/Antaran/regions/ProductRegions" component={AntaranProductRegions} />
           <PrivateRoute exact path="/products" component={ArtisianProductCategory} />
           <PrivateRoute exact path="/buyer-custom-design" component={BuyerSelfDesign} />
           
@@ -171,10 +175,10 @@ function App() {
 
           {/* <PrivateRoute exact path="/Artisanself/categories/ProductCategories" component={ProductCategories} /> */}
 
-          <PrivateRoute path="/Artisanself" component={ArtistSelfDesign} />
+          <Route path="/Artisanself" component={ArtistSelfDesign} />
           <PrivateRoute path="/EditProduct" component={EditProduct} />
-          <PrivateRoute path="/Antaran" component={AntaranCoDesign} />
-          <PrivateRoute  exact path="/Product-Details" component={BuyersProductDetails} />
+          <Route path="/Antaran" component={AntaranCoDesign} />
+          <Route  exact path="/Product-Details" component={BuyersProductDetails} />
           <PrivateRoute  exact path="/showBArtisanProduct" component={BuyerProductview} />
 
           <PrivateRoute  exact path="/wishlist" component={AddWishlist} />

@@ -58,6 +58,8 @@ class NavbarComponent extends Component {
   toggleHover(name) {
 
     let user = JSON.parse(localStorage.getItem("user"));
+
+    if(user) {
   if (user.refRoleId == 2) {
     switch (name) {
       case "isfavHovered":
@@ -102,6 +104,36 @@ class NavbarComponent extends Component {
      }
    }
   }
+  }
+
+  uatoggleHover = (name) => {
+    switch (name) {
+      case "isfavHovered":
+        this.setState({
+          isfavHovered: !this.state.isfavHovered,
+        });
+        break;
+      case "isnotificationHovered":
+        this.setState({
+          isnotificationHovered: !this.state.isnotificationHovered,
+        });
+        break;
+      case "ischatHovered":
+        this.setState({
+          ischatHovered: !this.state.ischatHovered,
+        });
+        break;
+      case "isSearchClicked":
+        this.setState({
+          isSearchClicked: !this.state.isSearchClicked,
+          // isSearchClicked: true,      
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
 
   toggleMobileMenu = () => {
     this.setState({
@@ -134,46 +166,64 @@ browserHistory.push("/MyProfile");
     this.setState({isSearchClicked : !this.state.isSearchClicked})
   }
 
+  uaShareDesign = () => {
+    localStorage.setItem("uahomepageredirect", 1);
+    // localStorage.setItem("uaClickedUrl", "/buyer-custom-design");
+    browserHistory.push("/login");                                   
+  }
+
+  switchToArtisan =() =>{
+   
+    browserHistory.push("/");
+        
+ }
+
   buyerDashboard = () => {
     var userData = [];
     userData = JSON.parse(localStorage.getItem('user'));
     var jwtToken = localStorage.getItem('jwtToken');
-    var params = {
-      "ds47.email": userData.email,
-      "ds47.Token": jwtToken,
-      "ds46.email": userData.email,
-      "ds46.Token": jwtToken,
-      "ds48.email": userData.email,
-      "ds48.Token": jwtToken,
-      "ds44.Token": jwtToken,
-    };
-    var paramsAsString = JSON.stringify(params);
-    var encodedParams = encodeURIComponent(paramsAsString);
 
-    return (
-      TTCEapi.BuyerDasboard + encodedParams
-    );
+    if(userData) {
+      var params = {
+        "ds47.email": userData.email,
+        "ds47.Token": jwtToken,
+        "ds46.email": userData.email,
+        "ds46.Token": jwtToken,
+        "ds48.email": userData.email,
+        "ds48.Token": jwtToken,
+        "ds44.Token": jwtToken,
+      };
+      var paramsAsString = JSON.stringify(params);
+      var encodedParams = encodeURIComponent(paramsAsString);
+  
+      return (
+        TTCEapi.BuyerDasboard + encodedParams
+      );
+    }    
   }
 
   artisanDashboard = () => {
     var userData = [];
     userData = JSON.parse(localStorage.getItem('user'));
     var jwtToken = localStorage.getItem('jwtToken');
-    var params = {
-      "ds0.Token": jwtToken,
-      "ds2.Token": jwtToken,
-      "ds12.Token": jwtToken,
-      "ds16.Token": jwtToken,
-      "ds18.Token": jwtToken,
-      "ds22.Token": jwtToken,
-      "ds30.Token": jwtToken,
-    };
-    var paramsAsString = JSON.stringify(params);
-    var encodedParams = encodeURIComponent(paramsAsString);
-    
-    return (
-      TTCEapi.ArtisanDashboard + encodedParams
-    );
+
+    if(userData) {
+      var params = {
+        "ds0.Token": jwtToken,
+        "ds2.Token": jwtToken,
+        "ds12.Token": jwtToken,
+        "ds16.Token": jwtToken,
+        "ds18.Token": jwtToken,
+        "ds22.Token": jwtToken,
+        "ds30.Token": jwtToken,
+      };
+      var paramsAsString = JSON.stringify(params);
+      var encodedParams = encodeURIComponent(paramsAsString);
+      
+      return (
+        TTCEapi.ArtisanDashboard + encodedParams
+      );
+    }    
   }
   
   ChangeLanguageModalShow=()=>{
@@ -194,10 +244,11 @@ componentDidMount(){
     const ImageUrl = TTCEapi.ImageUrl;
     let user = JSON.parse(localStorage.getItem("user"));
     let isAuthenticated = user !== null;    
-    let userTypeId = user.refRoleId;
+    let userTypeId = user ? user.refRoleId : null;
 
     return (
       <React.Fragment>
+        {userTypeId ? 
         <nav
           className="menu navbarTransparent navbar-expand-sm"
           onClick={this.toggleMobileMenu}
@@ -224,7 +275,7 @@ componentDidMount(){
             <li className="menu-item">
               {userTypeId === 2 ? (
                 <a
-                  href="/home"
+                  href="/buyerHome"
                   className={
                     this.state.activeTabClassName === "/" ? "active" : ""
                   }
@@ -660,6 +711,304 @@ componentDidMount(){
             </li>
           </ol>
         </nav>
+        :
+        <nav
+        className="menu navbarTransparent navbar-expand-sm"
+        onClick={this.toggleMobileMenu}
+      >
+        {" "}
+        {this.state.isSearchClicked ? (
+          <div className="searchbarNav inner-addon left-addon">
+            <img
+              src={logos.searchlogo}
+              className="searchIconinTextbox glyphicon"
+            ></img>
+            
+            
+                <BuyerConnectedSuggestions cs= {this.closesearch}/>
+             
+            
+          </div>
+          ) : null}
+       
+        <ol className={this.state.openMenu ? "mobile_menu" : ""}>
+          <li className="menu-item">
+            
+              <a
+                href="/buyerHome"
+                className={
+                  this.state.activeTabClassName === "/" ? "active" : ""
+                }
+              >
+                {" "}
+                <img
+                  className="navbarLogo"
+                  src={logos.mainLogoNavbar}
+                ></img>{" "}
+              </a>
+          
+          </li>
+          <li className="menu-item">
+            
+              <button className="navButton navbarTransparent navbtn1"
+              onClick={() => this.uaShareDesign()}>
+                <img className="navButtonImg" src={logos.navbarbtn1}></img>
+                <span className="navButtonImg">Share your design</span>
+              </button>
+            
+          </li>
+
+
+          <li className="menu-item">
+            <img
+              onClick={() => this.uatoggleHover("isSearchClicked")}
+              className="navButtonImg"
+              src={logos.searchlogo}
+            ></img>
+            
+          </li>
+
+          
+            <li className="menu-item">
+              {this.state.isfavHovered ? (
+                 <a
+                 onClick={() => this.uaShareDesign()}
+                 className={
+                   this.state.activeTabClassName === "/" ? "active" : ""
+                 }
+               >
+                <img
+                  onMouseEnter={() => this.toggleHover("isfavHovered")}
+                  onMouseLeave={() => this.toggleHover("isfavHovered")}
+                  className="navButtonImg"
+                  src={logos.heariconfilled}
+                ></img></a>
+              ) : (
+                <a
+                onClick={() => this.uaShareDesign()}>
+                <img
+                  onMouseEnter={() => this.toggleHover("isfavHovered")}
+                  onMouseLeave={() => this.toggleHover("isfavHovered")}
+                  className="navButtonImg"
+                  src={logos.favoriteicon}
+                ></img></a>
+              )}
+            </li>
+         
+
+          <li className="menu-item">
+            {this.state.ischatHovered ? (
+              
+              <a onClick={() => this.uaShareDesign()}>
+              <img
+                onMouseEnter={() => this.toggleHover("ischatHovered")}
+                onMouseLeave={() => this.toggleHover("ischatHovered")}
+                className="navButtonImg"
+                src={logos.chat_bubble_filled}
+              ></img>
+              </a>
+            ) : (
+              
+              <a onClick={() => this.uaShareDesign()}>
+              <img
+                onMouseEnter={() => this.toggleHover("ischatHovered")}
+                onMouseLeave={() => this.toggleHover("ischatHovered")}
+                className="navButtonImg"
+                src={logos.chaticon}
+              ></img>
+              </a>
+            )}
+           
+          </li>
+
+          <li className="menu-item">
+          
+          <NotificationBuyerConnected/>
+        
+            {this.state.isnotificationHovered ? (
+              <a
+              onClick={() => this.uaShareDesign()}
+              className={
+                this.state.activeTabClassName === "/" ? "active" : ""
+              }
+            >
+              <img
+                onMouseEnter={() => this.toggleHover("isnotificationHovered")}
+                onMouseLeave={() => this.toggleHover("isnotificationHovered")}
+                className="navButtonImg"
+                src={logos.belliconfilled}
+              ></img></a>
+            ) : (
+              <a
+              onClick={() => this.uaShareDesign()}
+              className={
+                this.state.activeTabClassName === "/" ? "active" : ""
+              }
+            >
+              <img
+                onMouseEnter={() => this.toggleHover("isnotificationHovered")}
+                onMouseLeave={() => this.toggleHover("isnotificationHovered")}
+                className="navButtonImg"
+                src={logos.notificationsicon}
+              ></img></a>
+            )}
+            
+          </li>
+
+          <li className="menu-item">
+           
+              <button className="navButton navbtn2" style={{ width: "11em" }}
+                  onClick={() => this.uaShareDesign()}>
+                <img className="navButtonImg1" src={logos.receipticon}></img>
+                <span className="navButtonImg">My Enquiries</span>
+              </button>
+           
+            {this.state.enquiryopen
+            ?
+            <div className="artistenquiries">
+               <ANavEnquiries></ANavEnquiries>
+            </div>
+            :
+            <div>
+            </div>}
+          </li>
+
+          <li className="menu-item">
+            <a href="#">
+
+             
+                <img src={logos.usernamelogo}></img>
+             
+            </a>
+            <ol className="sub-menu">
+              <li
+                className="menu-item"
+                style={{ borderBottom: "2px dashed var(--lightFont)" }}
+              >
+                <span className="col-md-11  col-xs-11 col-sm-11 text-center">
+                  {user != null ? (
+                    <p>
+                      {" "}
+                      {user.firstName}
+                      {"  "} {user.lastName}
+                    </p>
+                  ) : (
+                    "Welcome Guest"
+                  )}
+                </span>
+                <span>
+                  <img
+                    style={{ width: "10px", opacity: "0" }}
+                    src={logos.closelogo}
+                  ></img>
+                </span>
+              </li>
+              <li className="menu-item">
+                <span className="col-md-2 col-xs-2 col-sm-2 ">
+                  <img
+                    style={{ width: "15px" }}
+                    src={logos.accountcircleicon}
+                  ></img>
+                </span>
+               
+                <a className=" text-left " onClick={() => this.uaShareDesign()}>
+                  My Profile
+                </a>
+                
+              </li>
+              
+                 <li className="menu-item">
+                 <span className="col-md-2  col-xs-2  col-sm-2">
+                   <img
+                     style={{ width: "15px" }}
+                     src={logos.cashregistericon}
+                   ></img>
+                 </span>
+
+                 <a onClick={() => this.uaShareDesign()}>Transactions</a>
+               </li>
+              
+             
+              
+                <li className="menu-item">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.receipticonH}
+                    ></img>
+                  </span>
+
+                  <a onClick={() => this.uaShareDesign()}>My orders</a>
+                </li>
+              
+               
+                <li className="menu-item">
+                  <span className="col-md-2  col-xs-2  col-sm-2">
+                    <img
+                      style={{ width: "15px" }}
+                      src={logos.CustomDesignIcons}
+                    ></img>
+                  </span>
+
+                  <a onClick={() => this.uaShareDesign()}>Custom Design</a>
+                </li>
+              
+
+              <li className="menu-item">
+                <span className="col-md-2  col-xs-2  col-sm-2">
+                  <img
+                    style={{ width: "15px" }}
+                    src={logos.dashboardicon}
+                  ></img>
+                </span>
+
+                
+                <a onClick={() => this.uaShareDesign()} target="_blank">Dashboard</a> 
+               
+
+                
+              </li>
+              
+                  <li className="menu-item">
+                <span className="col-md-2  col-xs-2  col-sm-2">
+                  <img style={{ width: "15px" }} src={logos.usermanual}></img>
+                </span>
+                
+                
+                <a href={TTCEapi.UserManual + "BuyerWeb.pdf"}
+          target="_blank">User Manual </a>
+          
+              </li>
+             
+              
+              <li className="menu-item">
+                <span className="col-md-2  col-xs-2  col-sm-2">
+                  <img style={{ width: "15px" }} src={logos.helpicon}></img>
+                </span>
+                
+                <a href={TTCEapi.DocumentsURL + "FAQ.pdf"}
+          target="_blank">Support </a>
+          
+              </li>
+
+               <li className="menu-item">
+                <span className="col-md-2 col-xs-2 col-sm-2 ">
+                  <img
+                    style={{ width: "15px" }}
+                    src={logos.accountcircleicon}
+                  ></img>
+                </span>
+               
+                <a className=" text-left " onClick={this.switchToArtisan}>
+                Switch to Artisan
+                </a>
+                
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+  }
 
          {/* _____________________________________________Modal 4 ________________________________________________ */}
   <div id="Changelanguage" class="w3-modal" style={{paddingTop:"200px"}}>

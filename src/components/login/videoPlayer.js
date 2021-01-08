@@ -23,6 +23,24 @@ class videoPlayer extends Component {
       browserHistory.push("/home"); 
     }
 
+    SkiptoHomepgaeBuyer() {  
+      
+        if(localStorage.getItem("uaGenerateEnquiryData") != "null"){
+        var enquiryData = parseInt(localStorage.getItem("uaGenerateEnquiryData"));        
+        browserHistory.push("/Product-Details?productId=" + enquiryData);
+      }
+    
+      else if(localStorage.getItem("uaWishlistAdd") != "null") {
+        var enquiryData = parseInt(localStorage.getItem("uaWishlistAdd"));        
+        browserHistory.push("/Product-Details?productId=" + enquiryData);
+      }
+    
+      else {
+        localStorage.setItem("skipVideo", true);    
+        browserHistory.push("/buyerHome"); 
+      }      
+    }
+
     componentDidMount () {
       CMSApi.getDemoVideos().then((response)=>{
         if(response)
@@ -62,20 +80,46 @@ class videoPlayer extends Component {
                 width="100vw"
                 height="98vh"
                 url={this.state.videoData.buyer_demo_video}
-                onEnded={() => this.SkiptoHomepgae()}
+                onEnded={() => this.SkiptoHomepgaeBuyer()}
               ></ReactPlayer>
-            ) : null : null}
+            ) : 
+            (
+              <ReactPlayer
+                controls
+                playing={true}
+                width="100vw"
+                height="98vh"
+                url={this.state.videoData.buyer_demo_video}
+                onEnded={() => this.SkiptoHomepgaeBuyer()}
+              ></ReactPlayer>
+            ) : null}
+
+           {user ? user.refRoleId == "1" ?
 
             <button
               className="blackButton SkipButtonVideo"
               onClick={() => this.SkiptoHomepgae()}
             >
-              {user ? user.refRoleId == "1" ?
-              this.props.t("Pages.object.skipToHomePage")
-              :
-              "Skip to Homepage" 
-            : "Skip to Homepage"}
+              
+              {this.props.t("Pages.object.skipToHomePage")}
+              
             </button>
+            :
+            <button
+            className="blackButton SkipButtonVideo"
+            onClick={() => this.SkiptoHomepgaeBuyer()}
+          >
+            Skip to Homepage
+          </button>
+          : 
+          <button
+          className="blackButton SkipButtonVideo"
+          onClick={() => this.SkiptoHomepgaeBuyer()}
+        >
+          Skip to Homepage
+        </button>
+          }
+          
           </div>
         );
     }

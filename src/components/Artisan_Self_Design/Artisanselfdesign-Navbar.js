@@ -100,9 +100,9 @@ export default class ArtisanselfdesignNavbar extends Component {
             </Row>
             </Container>
             <Router history={browserHistory}>
-                <PrivateRoute exact path="/Artisanself" component={ArtistSelfdesignRegions} />
-                <PrivateRoute exact path="/Artisanself/categories" component={ArtistSelfDesignCategories} />
-                <PrivateRoute exact path="/Artisanself/artisanbrands"component={ArtistSelfDesignBrands} />
+                <Route exact path="/Artisanself" component={ArtistSelfdesignRegions} />
+                <Route exact path="/Artisanself/categories" component={ArtistSelfDesignCategories} />
+                <Route exact path="/Artisanself/artisanbrands"component={ArtistSelfDesignBrands} />
               
               </Router>
             </React.Fragment>

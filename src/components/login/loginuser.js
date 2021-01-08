@@ -116,12 +116,33 @@ operation = (event) => {
 helpClose(){
     document.getElementById('help').style.display='none'; 
 }
+
+uaLoginGoBack = () => {
+  
+    // localStorage.removeItem("uaClickedUrl");
+    localStorage.removeItem("uahomepageredirect");
+    localStorage.removeItem("uaGenerateEnquiryData");
+    localStorage.removeItem("uaGenerateEnquiryFlag");
+    localStorage.removeItem("uaWishlistAdd");
+    browserHistory.goBack();
+
+}
   render() {
     return (
       <React.Fragment>
         <div className="demo" noGutters={true}>
           <br></br>
           <Row   className="">
+            {localStorage.getItem("uahomepageredirect") ? 
+            <div className="col-xs-6">
+            <img
+              src={logos.backarrowicon}
+              className="col-xs-2 margin-arrow arrowsize glyphicon"
+              onClick={this.uaLoginGoBack}
+            ></img>
+            <h2 className="col-xs-6 margin-login">Login</h2>
+          </div>
+          :
             <div className="col-xs-6">
               <img
                 src={logos.backarrowicon}
@@ -131,6 +152,9 @@ helpClose(){
               <h2 className="col-xs-6 margin-login">
                 {this.props.userpage == 1 ? "Login" : this.props.t("Pages.object.regLogin")}</h2>
             </div>
+            
+            
+           }
 
             <img
               src={logos.mainlogoside}

@@ -5,6 +5,8 @@ import "./landingpage.css";
 import logos from "../../assets";
 import { browserHistory } from "../../helpers/history";
 import CMSApi from '../../services/API/CMSApi';
+import NavbarComponent from "../navbar/navbar";
+import Footer from "../footer/footer";
 
 var buyerLandingBg = {};
 var cardBg1 = {};
@@ -15,7 +17,7 @@ var artisanExtendedBg = {};
 var antaranBg = {};
 var antaranExtendedBg = {};
 
-class buyerLanding extends Component {
+class BuyerLanding extends Component {
 
   constructor(props) {
     super(props);
@@ -107,6 +109,9 @@ class buyerLanding extends Component {
     return (
     
       <React.Fragment>
+       
+            <NavbarComponent></NavbarComponent>
+            <Container>
       {this.state.showBuyerPage ?
       <div>
           <Row noGutters={true}>
@@ -263,16 +268,19 @@ class buyerLanding extends Component {
           </Row>
           </div>
           : null }
+           </Container>
+                          
+        <Footer></Footer>
       </React.Fragment>
     
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { user } = state;
-  return { user };
-}
+// function mapStateToProps(state) {
+//   const { user } = state;
+//   return { user };
+// }
 
-const connectedLoginPage = connect(mapStateToProps)(buyerLanding);
-export default connectedLoginPage;
+// const connectedLoginPage = connect(mapStateToProps)(BuyerLanding);
+export default BuyerLanding;

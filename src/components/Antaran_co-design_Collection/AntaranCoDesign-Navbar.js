@@ -83,8 +83,8 @@ export default class AntaranCoDesignNavbar extends Component {
             </Row>
             </Container>
             <Router history={browserHistory}>
-                <PrivateRoute exact path="/Antaran" component={AntaranCoDesignRegion} />
-                <PrivateRoute exact path="/Antaran/categories" component={AntaranCoDesignCategories} />
+                <Route exact path="/Antaran" component={AntaranCoDesignRegion} />
+                <Route exact path="/Antaran/categories" component={AntaranCoDesignCategories} />
                
               </Router>
             </React.Fragment>

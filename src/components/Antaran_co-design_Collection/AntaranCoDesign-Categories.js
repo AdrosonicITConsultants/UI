@@ -75,7 +75,9 @@ exploreMore(id){
                 <div class="effect-text" onClick={()=>this.exploreMore(data.id)}>
                     <div class="effect-btn">
                       <h2>EXPLORE MORE</h2>
-                      <a class="btn" href={"/Antaran/categories/ProductCategories?categoryId="+data.id}><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
+                      <a class="btn" 
+                      // href={"/Antaran/categories/ProductCategories?categoryId="+data.id}
+                      ><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></a>
                     </div>
                   </div>
               </div>

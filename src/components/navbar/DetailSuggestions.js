@@ -89,6 +89,8 @@ export default class DetailSuggestions extends Component {
             }
 
         });
+        var user = localStorage.getItem("user");
+        if(user) {
         TTCEapi.getProductIdsInWishlist().then((response)=>{
           if(response){ 
           var item=this.state.getProductIdsInWishlist
@@ -99,6 +101,12 @@ export default class DetailSuggestions extends Component {
             browserHistory.push("/404error");
           }
       });
+    }
+    else {
+      this.setState({
+        dataload: true
+      })
+    }
 
 
         }

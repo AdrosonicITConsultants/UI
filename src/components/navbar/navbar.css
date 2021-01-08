@@ -376,6 +376,18 @@ animation-delay: 0.5s;
 animation-duration: 0.8s;
 animation-delay: 0.6s;
 }
+.sub-menu .menu-item:nth-child(8) {
+	animation-duration: 0.9s;
+	animation-delay: 0.7s;
+	}
+	.sub-menu .menu-item:nth-child(9) {
+		animation-duration: 0.10s;
+		animation-delay: 0.8s;
+		}
+		.sub-menu .menu-item:nth-child(10) {
+			animation-duration: 0.11s;
+			animation-delay: 0.9s;
+			}
 .sub-menu .menu-item:hover {
 background: #ccc;	
 background-color: #f1cece !important;

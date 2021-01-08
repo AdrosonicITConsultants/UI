@@ -49,7 +49,9 @@ export class ProductsOfCatelog extends Component {
     }
    
   handleAddtoWishlist(id){
-   
+    var user = localStorage.getItem("user");
+
+    if(user) {
     TTCEapi.addToWishlist(id).then((response)=>{
         if (response.data.valid) {
             customToast.success("Product added to wishlist!", {
@@ -68,13 +70,22 @@ export class ProductsOfCatelog extends Component {
        
     
     });
+  }
+  else {
+    localStorage.setItem("uaWishlistAdd", id);
+    localStorage.setItem("uahomepageredirect", 1);
+    browserHistory.push("/login"); 
+  }
 
 }
 
 
 
 generateEnquiry(item){
-  this.setState({ modalIsOpen: true });
+  var user = localStorage.getItem("user");
+
+  if(user) {
+    this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
   this.setState({ifEnquiryExists : response.data.data},()=>{
       if(this.state.ifEnquiryExists.ifExists ==false){
@@ -86,6 +97,14 @@ generateEnquiry(item){
   });
   
 });
+  }
+  else {
+    localStorage.setItem("uaGenerateEnquiryFlag", 1);
+    localStorage.setItem("uaGenerateEnquiryData", item);
+    localStorage.setItem("uahomepageredirect", 1);
+    browserHistory.push("/login"); 
+  }
+  
 }
   
     productDescription(id){
@@ -93,6 +112,9 @@ generateEnquiry(item){
 
     }
     handleRemovefromWishlist(id){
+      var user = localStorage.getItem("user");
+
+    if(user) {
       TTCEapi.deleteProductsInWishlist(id).then((response)=>{
           if(response.data.data=="Successfull"){
 
@@ -111,6 +133,13 @@ generateEnquiry(item){
         }
        
     });
+  }
+  else {
+    localStorage.setItem("uaWishlistRemove", id);
+    localStorage.setItem("uaWishlistAdd", id);
+    localStorage.setItem("uahomepageredirect", 1);
+    browserHistory.push("/login"); 
+  }
     }
 
   

@@ -6,7 +6,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-var env = "live";
+var env = "dev";
 var ApiUrl = "";
 var ImageUrl = "";
 var ReceiptUrl = "";
@@ -203,6 +203,11 @@ class TTCEapi {
         if (response.data.valid) {
           var language = localStorage.getItem("i18nextLng");
           var skipVideo = localStorage.getItem("skipVideo");
+          // var currentUrl = localStorage.getItem("uaClickedUrl");
+          var enquiryData = localStorage.getItem("uaGenerateEnquiryData");
+          var enquiryFlag = localStorage.getItem("uaGenerateEnquiryFlag");
+          var wishlistAdd = localStorage.getItem("uaWishlistAdd");
+          var wishlistRemove = localStorage.getItem("uaWishlistRemove");
           localStorage.clear();
           sessionStorage.clear();
           // remove user from local storage to log user out
@@ -214,6 +219,11 @@ class TTCEapi {
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("i18nextLng", language);
           localStorage.setItem("skipVideo", skipVideo);
+          // localStorage.setItem("uaClickedUrl", currentUrl);
+          localStorage.setItem("uaGenerateEnquiryData", enquiryData);
+          localStorage.setItem("uaGenerateEnquiryFlag", enquiryFlag);
+          localStorage.setItem("uaWishlistAdd", wishlistAdd);
+          localStorage.setItem("uaWishlistRemove", wishlistRemove);
           setAuthorizationtoken(token);
 
         }
@@ -1942,7 +1952,7 @@ static sendTaxInvoice(
   static async getBuyerSuggestions(value) {
     let config = {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+        // Authorization: "Bearer " + localStorage.getItem("jwtToken"),
         Accept: "application/json",
       },
 

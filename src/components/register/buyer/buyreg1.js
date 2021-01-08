@@ -64,7 +64,8 @@ export default class buyreg1 extends Component {
                  }
 
                  backoperation() {
-                   browserHistory.push("/");
+                  localStorage.setItem("uahomepageredirect", 1);
+                   browserHistory.goBack();
                  }
 
                  handleChange(e) {

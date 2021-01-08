@@ -40,6 +40,9 @@ export class ProductsOfSearch extends Component {
       this.setState({ modalIsOpen: false });
     }
     handleAddtoWishlist(id){
+      var user = localStorage.getItem("user");
+
+      if(user) {
       TTCEapi.addToWishlist(id).then((response)=>{
         if(response){ 
         if (response.data.valid) {
@@ -62,9 +65,18 @@ export class ProductsOfSearch extends Component {
         browserHistory.push("/404error");
       }
       });
+    }
+    else {
+      localStorage.setItem("uaWishlistAdd", id);
+      localStorage.setItem("uahomepageredirect", 1);
+      browserHistory.push("/login"); 
+    }
   }
 
 generateEnquiry(item){
+  var user = localStorage.getItem("user");
+
+  if(user) {
   this.setState({ modalIsOpen: true });
     TTCEapi.ifEnquiryExists(item,false).then((response)=>{
       if(response){ 
@@ -87,6 +99,13 @@ else{
 }
   
 });
+}
+else {
+  localStorage.setItem("uaGenerateEnquiryFlag", 1);
+  localStorage.setItem("uaGenerateEnquiryData", item);
+  localStorage.setItem("uahomepageredirect", 1);
+  browserHistory.push("/login"); 
+}
 
 }
     productDescription(id){
@@ -215,8 +234,8 @@ else{
                              onClick={() => this.generateEnquiry(this.state.proddata.id)}
                             >
                             Generate enquiry
-                         <a href={"/generateEnquiry"}>
-                              <img className="cpwhitearrow" src={logos.whitearrow}></img></a>
+                         
+                              <img className="cpwhitearrow" src={logos.whitearrow}></img>
 
                             </button>
                      </Col>

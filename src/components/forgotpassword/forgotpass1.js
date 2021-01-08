@@ -75,10 +75,10 @@ class forgotpass1 extends Component {
 
                  backoperation() {
                   //  this.props.handler(0);
-   
-              browserHistory.push("/"); 
-
-                 }
+                  
+                  (window.location.pathname.indexOf("passwordA") !== -1 ? localStorage.setItem("uahomepageredirect", 3) : localStorage.setItem("uahomepageredirect", 1));
+                  browserHistory.goBack(); 
+                }
 
                  handleChange(e) {
                    this.setState({ [e.target.name]: e.target.value });

@@ -32,11 +32,11 @@ class Footer extends Component {
          
             <div className="footerblack ">
             <Container className='footerContainer'>
-              {/* <Row noGutters={true}>
+              <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
-                <div style={{marginBottom: "20px"}}>16-12-20  <span style={{marginLeft: "5px"}}>V-6</span></div>
+                <div style={{marginBottom: "20px"}}>08-01-21  <span style={{marginLeft: "5px"}}>V-7</span></div>
                 </Col>
-              </Row> */}
+              </Row>
               <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span
@@ -160,11 +160,11 @@ class Footer extends Component {
             :
 <div className="footerblack ">
             <Container className='footerContainer'>
-              {/* <Row noGutters={true}>
+              <Row noGutters={true}>
                 <Col className="col-xs-12 text-center">
-                <div style={{marginBottom: "20px"}}>16-12-20  <span style={{marginLeft: "5px"}}>V-6</span></div>
+                <div style={{marginBottom: "20px"}}>08-01-21  <span style={{marginLeft: "5px"}}>V-7</span></div>
                 </Col>
-              </Row> */}
+              </Row>
               <Row noGutters={true}>
                 <Col md="4" sm="4" xs="4" className="text-center">
                   <span

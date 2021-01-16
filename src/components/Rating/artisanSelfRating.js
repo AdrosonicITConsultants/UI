@@ -256,10 +256,10 @@ export default class ArtisanSelfRating extends Component {
                                 if(data.id === item.questionId) {
                             return <div>
                                     <Row noGutters={true}>
-                                        <Col sm={8} className="col-xs-6">
+                                        <Col sm={8} className="col-xs-12">
                                             <div className="ratingQs">{data.question}</div>
                                         </Col>
-                                        <Col sm={4} className="col-xs-6 text-right ratingRemovePadding" id={data.id} onFocus={() => this.getRatingId(data.id)}>
+                                        <Col sm={4} className="col-xs-12 text-right ratingRemovePadding" id={data.id} onFocus={() => this.getRatingId(data.id)}>
                                             <ReactStars size={60} 
                                                         count={5}
                                                         color={"#EFEFEF"}

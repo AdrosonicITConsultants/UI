@@ -130,7 +130,6 @@
 .artisanChatChatIcon {
     width: 35rem;
     margin-top: 50px;
-    margin-left: 20rem;
 }
 
 .chatEscalationIcon {
@@ -821,11 +820,61 @@
     font-size: 15px;
 }
 
+.hideMobileArrowClass {
+    display: none;
+}
+
+.showMobileArrowClass {
+    display: none;
+}
+
 /* @media only screen and (max-width: 600px) and (min-width: 400px) */
  
 
 @media only screen and ( max-width: 991px ) {
     .searchCol1 {
         padding-right: 15px !important;
-    }    
+    }
+    
+    .chatLeftHeight {
+        overflow: unset;
+    }
+
+    .chatRightHeight {
+        height: auto;
+    }
+
+    .hideMobileClass {
+        display: none;
+    }
+
+    .hideMobileChatClass {
+        display: none;
+    }
+
+    .showMobileClass {
+        display: block;
+    }
+
+    .showMobileChatClass {
+        display: block;
+    }
+
+    .hideMobileArrowClass {
+        display: none;
+    }
+
+    .showMobileArrowClass {
+        display: block;
+    }
+
+    .chatLeftMarginBottom {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and ( max-width: 767px ) {
+    .artisanChatSendSearchBoxOuter input, .artisanChatSendSearchBoxOuter input:focus, .artisanChatSendSearchBoxOuter input:hover {
+        width: 90%;
+    }
 }

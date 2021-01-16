@@ -69,7 +69,7 @@ class ArtistSelfDesign extends Component {
                           </Col>                           
                 </Row>  
                   <Row noGutters="true" className="asdthreadbg">
-                    <Col sm={{size:"6"}} className="Col6">
+                    <Col sm={{size:"6"}} className="Col6 col-xs-12">
                   <div noGutters="true">
                         <Col sm={{size:12}} className="Asdh1">
                           <h1>  Artisan <br/> Self Design </h1>
@@ -80,7 +80,7 @@ class ArtistSelfDesign extends Component {
              
             
                   </Col>
-                  <Col sm={{size:"6"}} className="headimgposter">
+                  <Col sm={{size:"6"}} className="headimgposter col-xs-12">
                   {this.state.artisanSelfDesignBg ?
                     <img className="Asdbg" src={this.state.artisanSelfDesignBg}  alt="Card image cap"/>
                   : null }

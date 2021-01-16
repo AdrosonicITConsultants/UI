@@ -417,7 +417,7 @@ goToChatButton = (id) => {
             <>
             <Row noGutters={true} className="innerboxcr">
             <Col className="col-xs-1"></Col>
-                <Col className="col-xs-6">
+                <Col className="col-xs-11 col-sm-6">
                 <p className="Crh">
                     {/* Motif Size */}
                    
@@ -440,7 +440,7 @@ goToChatButton = (id) => {
                    
                 </p>
                 </Col>
-                <Col className="col-xs-2">
+                <Col className="col-xs-6 col-sm-2 text-center">
                 <b style={{color:"green"}}>Accepted</b> 
                    <p><button  className="buttoncssnone">
                             {this.state.accepted[item.requestItemsId-1].option?
@@ -455,7 +455,7 @@ goToChatButton = (id) => {
                  </p>
                 </Col>
                
-                <Col className="col-xs-2">
+                <Col className="col-xs-6 col-sm-2 text-center">
                 <b style={{color:"red"}}>Rejected</b> 
                    <p><button className="buttoncssnone">
                        {this.state.accepted[item.requestItemsId-1].reject?

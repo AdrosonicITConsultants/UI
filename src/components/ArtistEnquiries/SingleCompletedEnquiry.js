@@ -1200,7 +1200,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                                             
                                                              <Row noGutters={true} className=" Allenqlistbtnmt2">
                                                                
-                                                                 <Col sm={6} >
+                                                                 <Col sm={6} className="col-xs-12 savemoqbtnColClass">
                                                                  {this.state.isSend== 1?
                                                                  <button className="savemoqbtn"
                                                                   disabled >Save</button>
@@ -1211,7 +1211,7 @@ import { BuyerPreviewInvoice } from '../BuyerEnquiries/BuyerPreviewInvoice';
                                                                     onClick={() => this.saveMoqDetails()} >Save</button>}
                                                                     
                                                                  </Col>
-                                                                 <Col sm={6} className="">
+                                                                 <Col sm={6} className="col-xs-12 savemoqbtnColClass">
                                                                  {this.state.isSend== 1?
                                                                  <button className="sendmoqbtn"                    
                                                                   disabled >Send</button>

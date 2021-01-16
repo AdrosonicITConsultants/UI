@@ -67,11 +67,11 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                 </Row>
                 <Row className="">
                   <Col sm={{ size: "12" }} className="mt40">
-                    <span className="text1A ">{this.props.t("Pages.object.your products")}</span>
-                    <span className="text2A col-sm-12 col-md-12">
+                    <div className="text1A ">{this.props.t("Pages.object.your products")}</div>
+                    <div className="text2A col-sm-12 col-md-12">
                      
                       {this.props.t("Pages.object.List of your very own products")}
-                    </span>
+                    </div>
                   </Col>
                 </Row>
                 <Row><Productcatelog id={user.id}></Productcatelog></Row>
@@ -89,8 +89,8 @@ import { memoryHistory, browserHistory } from "../../helpers/history";
                   <Col
                     sm={{ size: "4" }}
                     md={{ size: "4" }}
-                    xs={{ size: "4" }}
-                    className={localStorage.getItem('i18nextLng')== "hi"?"artistbg3hindi col-4 text-center":"artistbg3 col-4 text-center"}
+                    xs={{ size: "12" }}
+                    className={localStorage.getItem('i18nextLng')== "hi"?"artistbg3hindi col-4 text-center":"artistbg3 col-4 col-xs-12 text-center"}
                   ></Col>
 
                   <Col

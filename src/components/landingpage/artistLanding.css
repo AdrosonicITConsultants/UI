@@ -161,3 +161,11 @@
 .mt160{
     margin-top: 160px;
 }
+
+
+@media only screen and (max-width: 425px) {
+    .artistbg12{
+        height: 60px !important;
+        background-size: 85% 100% !important;    
+    }
+}

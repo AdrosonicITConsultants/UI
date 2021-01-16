@@ -248,7 +248,7 @@ export class BuyerPreviewInvoice extends Component {
     <Col sm={6} className=" col-xs-6 Invoicebr">
    <b className="origintxt">Origin</b>
    <Row noGutters={true}>
-       <Col sm={4} className=" col-xs-5">
+       <Col sm={4} className=" col-xs-12">
        {this.state.artisanUser.companyDetails?
        this.state.artisanUser.companyDetails.logo !=null ?
         <img className="Pilogoimg" src={TTCEapi.ImageUrl+'User/'+this.state.artisanUser.id+'/CompanyDetails/Logo/'+this.state.artisanUser.companyDetails.logo}/>
@@ -262,7 +262,7 @@ export class BuyerPreviewInvoice extends Component {
 
            }
        </Col>
-       <Col sm={8} className=" col-xs-7 ">
+       <Col sm={8} className=" col-xs-12">
     <b className="Ttbrand"> {this.state.artisanUser.companyDetails?this.state.artisanUser.companyDetails.companyName:""}</b> 
            <p className="subttbrand"> {this.state.artisanUser.cluster?
            this.state.artisanUser.cluster.desc:
@@ -303,7 +303,7 @@ export class BuyerPreviewInvoice extends Component {
   <Col sm={6} className=" col-xs-6  ">
    <b className="origintxt">Buyer</b>
    <Row noGutters={true}>
-       <Col sm={4} className=" col-xs-5">
+       <Col sm={4} className=" col-xs-12">
 
      
         
@@ -315,7 +315,7 @@ export class BuyerPreviewInvoice extends Component {
 
            :  <img className="Pilogoimg" src={logos.Smile} /> }
        </Col>
-       <Col sm={8} className=" col-xs-7 ">
+       <Col sm={8} className=" col-xs-12">
         <b className="Ttbrand">{this.state.generatedBy.companyDetails.companyName}</b> 
           <br/>
           <b className="RAcss subttbrand">Registered Address:</b>

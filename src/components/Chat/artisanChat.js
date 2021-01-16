@@ -47,6 +47,8 @@ export default class ArtisanChat extends Component {
             markResolvedButtonDisable: false,
             enableRaiseErrorMsg: "",
             enableRaiseErrorFlag: false,
+            hideMobileFlag: false,
+            hideMobileChatFlag: true,
         };   
     
     }
@@ -70,6 +72,8 @@ export default class ArtisanChat extends Component {
             selectedKey: enquiryId,
             selectedEnquiryData: data,
             defaultChatWindow: false,
+            hideMobileFlag: true,
+            hideMobileChatFlag: false,
         }); 
 
         TTCEapi.getAndReadChatMessageForEnquiry(enquiryId).then((response)=>{
@@ -543,6 +547,8 @@ export default class ArtisanChat extends Component {
     initiateNewChatFunction = (key, enquiryId, data) => {
         this.setState({
             showDropDown: false,
+            hideMobileFlag: true,
+            hideMobileChatFlag: false,
         });
         TTCEapi.goToEnquiryChat(enquiryId).then((response)=>{
              if(response){
@@ -707,6 +713,13 @@ export default class ArtisanChat extends Component {
         }
     }
 
+    backoperation = () => {
+        this.setState({
+            hideMobileFlag: false,
+            hideMobileChatFlag: true,
+        })
+    }
+
     componentDidMount() {
 
         var today = new Date(); 
@@ -791,8 +804,8 @@ export default class ArtisanChat extends Component {
             </Row>
             :
             <Container>
-                <Row noGutters={true}>
-                    <Col md={4} sm={12} className="col-xs-12 chatRemovePadding">
+                <Row noGutters={true} className="chatLeftMarginBottom">
+                    <Col md={4} sm={12} className={this.state.hideMobileFlag ? "col-xs-12 chatRemovePadding hideMobileClass" : "col-xs-12 chatRemovePadding showMobileClass"}>
                          
                         {this.state.showDropDown === true ? 
                         <div className="showDropdownListClass">
@@ -932,15 +945,34 @@ export default class ArtisanChat extends Component {
                         <div className="chatRightHeight">
                             <div className="artisanChatTalkMoreText">Talk more, sell more !</div>
                             <div className="artisanChatTalkMoreText1">Select the chat to view conversation here !</div>
-                            <img  src={logos.artisanChatChatIcon} className="artisanChatChatIcon"/>
+                            <Row noGutters={true}>
+                                <Col className="col-xs-12 text-center">
+                                <img  src={logos.artisanChatChatIcon} className="artisanChatChatIcon"/>
+                                </Col>
+                            </Row>
                         </div>                        
                     </Col>
                     : 
-                    <Col md={8} sm={12} className="col-xs-12 chatRemovePadding">
+                    <Col md={8} sm={12} className={this.state.hideMobileChatFlag ? "col-xs-12 chatRemovePadding hideMobileChatClass" : "col-xs-12 chatRemovePadding showMobileChatClass"}>
+                        
+                        {this.state.hideMobileFlag ?
+                           <Row noGutters={true}>
+                               <Col className={this.state.hideMobileChatFlag ? "col-xs-2 hideMobileArrowClass" : "col-xs-2 showMobileArrowClass"}>
+                                <img
+                                    src={logos.backarrowicon}
+                                    className="margin-cparrow cparrowsize glyphicon"
+                                    onClick={() => this.backoperation() }
+                                ></img>                       
+                                </Col>
+                           </Row> 
+                           :
+                           null
+                        }
+                        
                         <div className="artisanChatOnLoadBar1 chatBarBorderLeft">
                             {this.state.selectedEnquiryData ? 
                             <Row noGutters={true}>
-                                <Col className="col-xs-4 chatPadding6Pixel">
+                                <Col className="col-sm-4 col-xs-12 chatPadding6Pixel">
                                     <Row noGutters={true} className="chatUpperBoxBorderRight">
                                         <Col className="col-xs-2 chatRemovePadding chatEnquiryImgCol">
                                         {this.state.selectedEnquiryData.buyerLogo ? 
@@ -956,7 +988,7 @@ export default class ArtisanChat extends Component {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col className="col-xs-4 chatPadding6Pixel">
+                                <Col className="col-sm-4 col-xs-6 chatPadding6Pixel">
                                     <div className="artisanChatDateStart">Date Started: <Moment format="DD-MM-YY">
                                         {this.state.selectedEnquiryData.enquiryGeneratedOn}
                                     </Moment></div>
@@ -968,7 +1000,7 @@ export default class ArtisanChat extends Component {
                                     </div>
                                     <div className="artisanChatProductType">{this.state.selectedEnquiryData.productTypeId}</div>
                                 </Col>
-                                <Col className="col-xs-4 chatPadding6Pixel text-right">
+                                <Col className="col-sm-4 col-xs-6 chatPadding6Pixel text-right">
                                     <div className="artisanChatLastUpdate">
                                         <span className="chatUpperBoxOrderStatus">{this.state.selectedEnquiryData.orderStatus}</span> 
                                         <span className="chatUpperBoxOrderStatusCircle"></span>
@@ -1145,7 +1177,7 @@ export default class ArtisanChat extends Component {
                         <>
                         <div className="chatGradientBg">
                             <Row noGutters={true}>
-                                <Col className="col-xs-3 chatRemovePadding chatRightOrderAmount">
+                                <Col className="col-sm-3 col-xs-12 chatRemovePadding chatRightOrderAmount">
                                     Order Amount: ₹ {this.state.selectedEnquiryData.orderAmount ? this.state.selectedEnquiryData.orderAmount : "0"}
                                     {this.state.selectedEnquiryData.changeRequestDone === 1 ?
                                     <div>
@@ -1154,10 +1186,10 @@ export default class ArtisanChat extends Component {
                                     </div>
                                     : null }
                                 </Col>
-                                <Col className="col-xs-6 chatRemovePadding">
+                                <Col className="col-sm-6 col-xs-8 chatRemovePadding">
                                 Chat will be open against an enquiry ID during full process of enquiry execution and even 30 days after enquiry closure
                                 </Col>
-                                <Col className="col-xs-3 chatRemovePadding text-right chatRightGoToEsc">
+                                <Col className="col-sm-3 col-xs-4 chatRemovePadding text-right chatRightGoToEsc">
                                     {this.state.selectedEnquiryData.escalation !== 0 ?
                                     <>
                                         <img src={logos.esc} className="chatRightGoToEscImg"/>

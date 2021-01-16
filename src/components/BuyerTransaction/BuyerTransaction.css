@@ -23,7 +23,7 @@
 
 }
 .DateandTime{
-    font-size: 9px;
+    font-size: 11px;
     font-weight: bolder;
     color: #545454;
 }
@@ -286,13 +286,13 @@ input.empty {
         margin-bottom: 10px;
     }
     .DateandTime{
-        font-size: 6px;
+        font-size: 10px;
     }
     .paymentreceiptup{
         font-size: 10px;
     }
     .proformacol{
-        font-size: 7px;
+        font-size: 10px;
         padding: 5px;
     }
     .proformainvIdtext{
@@ -303,9 +303,27 @@ input.empty {
         overflow: auto;
     }
     .payack {
-        font-size: 7px;
+        font-size: 10px;
     }
    
+}
+
+@media only screen and ( max-width: 991px ) {
+    .searchenq{   
+        width: 100% !important;   
+    }
+}
+
+@media only screen and ( max-width: 767px ) {
+    .horiScrollRow {
+        overflow-x: auto !important; 
+        white-space: nowrap !important;
+    }
+
+    .horiScrollCol {
+        display: inline-block !important; 
+        float: none !important;
+    }
 }
 
 

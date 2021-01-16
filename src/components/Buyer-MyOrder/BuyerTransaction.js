@@ -332,9 +332,9 @@ export class BuyerTransaction extends Component {
                 {this.state.getTransactions.map((item)=> 
                     <>
 
-<Row noGutters={true}>
-<Col className="col-xs-3" sm="1"></Col>
-<Col className="col-xs-3 DateandTime" sm="1">
+<Row noGutters={true} className="horiScrollRow">
+<Col className="horiScrollCol" sm="1"></Col>
+<Col className="horiScrollCol DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
 {item.transactionOngoing.transactionOn}
 </Moment>
@@ -344,29 +344,29 @@ export class BuyerTransaction extends Component {
  </Moment>
 
 </Col>
-<Col className="col-xs-3" sm="1">
+<Col className="horiScrollCol" sm="1">
 <img src={TTCEapi.IconsUrl + this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].id+".svg"} className="iconsize"/>
 
 </Col>
-<Col className="col-xs-3 paymentreceiptup" sm="2">
+<Col className="horiScrollCol paymentreceiptup" sm="2">
 {/* Advance Payment Receipt uploaded */}
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.accomplishedStatus-1].buyerText} } />
 
 
 </Col>
-<Col className="col-xs-3 proformacol" sm="2">
+<Col className="horiScrollCol proformacol" sm="2">
 {item.transactionOngoing.percentage}{item.transactionOngoing.percentage !=null? "%":""} 
  payment received against Invoice for  {item.orderCode !=null?" order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 </Col>
-<Col className="col-xs-3 payack" sm="2">
+<Col className="horiScrollCol payack" sm="2">
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].buyerText} } />
 </Col>
-<Col className="col-xs-3 boldrs" sm="1">
+<Col className="horiScrollCol boldrs" sm="1">
 {item.totalAmount !=null? "₹" +  item.totalAmount:item.paidAmount != null? "₹" +  item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
-<Col className="col-xs-3 viewreceipt" sm="1">
+<Col className="horiScrollCol viewreceipt" sm="1">
 {this.state.getTransactionStatus[item.transactionOngoing.upcomingStatus-1].viewType=="invoice"?
         <>
         {item.transactionOngoing.taxInvoiceId!=null?
@@ -387,7 +387,7 @@ export class BuyerTransaction extends Component {
      /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
-<Col className="col-xs-3 uplodagaintext" sm="1">
+<Col className="horiScrollCol uplodagaintext" sm="1">
 
 {this.state.getTransactionActions.map((data)=> 
 <>

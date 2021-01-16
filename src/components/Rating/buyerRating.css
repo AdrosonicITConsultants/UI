@@ -162,6 +162,13 @@
     margin-left: 25px;
 }
 
+.envelopeHeartTextLine3 {
+    color: #645604;
+    font-size: 22px;
+    padding-top: 5px;
+    margin-left: 25px;
+}
+
 .envelopeDear {
     color: #645604;
     font-size: 18px;
@@ -250,3 +257,91 @@
     }
 }
     
+@media only screen and (max-width: 767px) {
+    .ratingCodeStyle {
+        font-size: 23px !important;
+    }
+
+    .envelopeBgImg {
+        height: 450px;
+        position: relative;
+    }
+
+    .envelopeHeart {
+        width: 25px;
+        margin-left: 8px;
+    }
+    
+    .envelopeHeartTextLine1 {
+        font-size: 14px;
+        padding-top: 6rem;
+        margin-left: 18px;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+    
+    .envelopeHeartTextLine2 {
+        font-size: 14px;
+        padding-top: 8rem;
+        margin-left: 18px;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+
+    .envelopeHeartTextLine3 {
+        font-size: 14px;
+        padding-top: 10rem;
+        margin-left: 18px;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+    
+    .envelopeDear {
+        font-size: 14px;
+        margin-top: 21rem;
+        margin-left: 18px;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+    
+    .envelopeThank {
+        font-size: 20px;
+        margin-top: 23rem;
+        margin-left: 18px;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+    
+    .envelopePart {
+        margin-left: 30px;
+        font-size: 14px;
+        margin-top: 26rem;
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+    
+    .envelopeBrandlogo {
+        width: 75px;
+        margin-top: 32rem;
+        margin-left: -30px;
+        position: absolute;
+        height: 75px;
+    }
+    
+}
+
+@media only screen and ( max-width: 991px ) and ( min-width: 768px ) {
+    .envelopeBgImg {
+        height: 850px;
+    }
+
+    .envelopeDear {
+        margin-top: 20rem;
+    }
+}

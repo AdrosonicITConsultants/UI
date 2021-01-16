@@ -367,8 +367,8 @@ class ArtisanHistoryList extends Component {
                 {this.filter(this.state.getCompletedTransaction).map((item)=> 
                     <>
 
-<Row noGutters={true}>
-<Col className="col-xs-3 DateandTime" sm="1">
+<Row noGutters={true} className="horiScrollRow">
+<Col className="horiScrollCol DateandTime" sm="1">
 <Moment format="DD-MM-YYYY">
 {item.transactionCompleted.transactionOn}
 </Moment>
@@ -378,29 +378,29 @@ class ArtisanHistoryList extends Component {
  </Moment>
 
 </Col>
-<Col className="col-xs-3" sm="1">
+<Col className="horiScrollCol" sm="1">
 <img 
 src={TTCEapi.IconUrlArtisan+this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].id+".svg"} className="iconsize"
 />
 
 </Col>
-<Col className="col-xs-3 paymentreceiptup" sm="2">
+<Col className="horiScrollCol paymentreceiptup" sm="2">
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.accomplishedStatus-1].artisanText} } />
 
 
 </Col>
-<Col className="col-xs-3 proformacol" sm="2" >
+<Col className="horiScrollCol proformacol" sm="2" >
                 {item.transactionCompleted.percentage} {item.transactionCompleted.percentage !=null? "%":""} payment received against Invoice for  {item.orderCode!=null? "order Id:":" enquiry Id:"} <b className="colorinv">
     {item.orderCode !=null ?item.orderCode : item.enquiryCode !=null?item.enquiryCode:"NA"}</b>
 <br/>
 </Col>
-<Col className="col-xs-3 payack" sm="2">
+<Col className="horiScrollCol payack" sm="2">
 <div dangerouslySetInnerHTML={{ __html: this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].artisanText} } />
 </Col>
-<Col className="col-xs-3 boldrs" sm="1">
+<Col className="horiScrollCol boldrs" sm="1">
 {item.totalAmount !=null? "₹" +  item.totalAmount:item.paidAmount != null? "₹" +  item.paidAmount:item.eta !=null ? item.eta:"NA"}
 </Col>
-<Col className="col-xs-3 viewreceipt" sm="1">
+<Col className="horiScrollCol viewreceipt" sm="1">
 {this.state.getTransactionStatus[item.transactionCompleted.upcomingStatus-1].viewType=="invoice"?
         <>
         {item.transactionCompleted.taxInvoiceId!=null?
@@ -421,7 +421,7 @@ src={TTCEapi.IconUrlArtisan+this.state.getTransactionStatus[item.transactionComp
      /> <p style={{marginTop:"5px"}} >View Receipt</p></span>
 }
 </Col>
-<Col className="col-xs-3 acceptreject" sm="1" style={{textAlign:"center"}}>
+<Col className="horiScrollCol acceptreject" sm="1" style={{textAlign:"center"}}>
 
 {this.state.getTransactionActions.map((data)=> 
 <>
@@ -480,7 +480,7 @@ src={TTCEapi.IconUrlArtisan+this.state.getTransactionStatus[item.transactionComp
 )}
 
 </Col>
-<Col className="col-xs-3" sm="1" style={{textAlign:"center"}} 
+<Col className="horiScrollCol" sm="1" style={{textAlign:"center"}} 
  onClick={() => this.gotoEnquiry(item.transactionCompleted.enquiryId)}
  >
 <img src={logos.redenquiry} className="gotoiconsize"/>

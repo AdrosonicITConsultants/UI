@@ -294,7 +294,7 @@ export class FaultResolved extends Component {
                          
                         
                            
-                            <Col className="col-xs-10">
+                            <Col className="col-sm-10 col-xs-12">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
                                         <b style={{color:"rgb( 21, 154, 47)"}}>Concern Resolved</b> for Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
@@ -387,7 +387,7 @@ export class FaultResolved extends Component {
 
                                             <div 
                                             className="descfaultybox"
-                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)"}}
+                                             style={{border:"transparent",color:"rgb(35, 146, 112)"}}
                                             >
                                 {this.state.getOrderProgress.artisanReviewComment}
                                              </div>

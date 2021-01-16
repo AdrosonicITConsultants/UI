@@ -21,7 +21,7 @@ import changeLang from "../../services/utils/changeLang"
 
      return (
        <React.Fragment>
-         <div className="ProductCard col-6 mx-auto col-md-6 col-sm-6 col-lg-3 my-3" >
+         <div className="ProductCard col-6 mx-auto col-md-6 col-sm-6 col-lg-3 my-3 col-xs-12" >
            <Row className="mt10">
              <Col className="col-6 mx-auto col-md-6 col-sm-6 col-lg-6 my-3 PorductNameborder" style={{marginBottom:"10px",overflow:"auto"}}>
                {/* <span className="productName">Exquisite Trefoil Motifs</span> */}
@@ -30,7 +30,7 @@ import changeLang from "../../services/utils/changeLang"
              </Col>
              {/* for exclusive */}
            {productList.productStatusId == 1 ? (
-               <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3">
+               <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3 col-xs-12">
                  <div className="mt10">
                    <img style={{ float: "left" }} src={logos.scissor}></img>
                    <div className="hrlineDotted"></div>
@@ -50,7 +50,7 @@ import changeLang from "../../services/utils/changeLang"
                </Col>
              ) : (
                <>
-                 <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3">
+                 <Col className="col-9 mx-auto col-md-6 col-sm-6 col-lg-6 ml-10 my-3 col-xs-12">
                    <div className="text-right mt10 lh15">
                     
                        <>

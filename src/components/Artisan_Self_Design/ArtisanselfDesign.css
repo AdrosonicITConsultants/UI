@@ -115,12 +115,16 @@
   color: black;
   font-size: 25px;
 }
-.Artisianleft{
+/* .Artisianleft{
   margin-left: -10px !important;
+} */
+
+.Vcheading h1 {
+  margin-bottom: 10px;
 }
-.colorWhite h1{
+/* .colorWhite h1{
   color: white !important;
-}
+} */
  }
 
 
@@ -156,15 +160,19 @@
   color: black;
   font-size: 25px;
 }
-.Artisianleft{
+/* .Artisianleft{
   margin-left: -10px !important;
-}
+} */
 .Cardlayout {
   width: 77% !important;
 }
 .card-img-top {
   min-width: 0px !important;
   width: 100% !important;
+}
+
+.Vcheading h1 {
+  margin-bottom: 10px;
 }
 }
 /* --------Artisian Self Design Region Css start------------ */

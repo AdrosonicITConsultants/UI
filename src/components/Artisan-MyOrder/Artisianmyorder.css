@@ -253,3 +253,13 @@
     margin-right: 15px;
     color: rgb(212, 19, 13);
 }
+
+@media only screen and (max-width: 767px) {
+    .notetouploadrec{
+        margin-left: 20px !important;  
+    }
+
+    .CompletedPIH1ForMobile {
+        font-size: 22px !important;
+    }
+}

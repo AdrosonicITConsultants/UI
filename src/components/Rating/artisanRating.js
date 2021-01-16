@@ -283,7 +283,7 @@ export default class ArtisanRating extends Component {
                             <div className="envelopeHeartTextLine2">from Tata Trusts</div> */}
                             <div className="envelopeHeartTextLine1">From Antaran</div>
                             <div className="envelopeHeartTextLine2">Transforming Crafts</div>
-                            <div className="envelopeHeartTextLine2">Rating provided = {this.state.artisanGivenRatingAverageValue}</div>
+                            <div className="envelopeHeartTextLine3">Rating provided = {this.state.artisanGivenRatingAverageValue}</div>
                             <div className="envelopeDear">Dear {this.state.userData.firstName} {this.state.userData.lastName}</div>
                             <div className="envelopeThank">Thank you !</div>
                             <div className="envelopePart">For being a part of this timeless story.</div>
@@ -303,7 +303,7 @@ export default class ArtisanRating extends Component {
                 </Row>
                 
                 </Container>
-                :
+               :
                 <div>
                 <div className="buyerRatingBG">
                 <Container>
@@ -341,10 +341,10 @@ export default class ArtisanRating extends Component {
                         {this.state.buyerQuestionsRatings ? this.state.buyerQuestionsRatings.map((data) => {
                         return <div>
                             <Row noGutters={true}>
-                                <Col sm={7} className="col-xs-6">
+                                <Col sm={7} className="col-xs-12">
                                     <div className="ratingQs">{data.question}</div>
                                 </Col>
-                                <Col sm={5} className="col-xs-6 text-right ratingRemovePadding" id={data.id} onFocus={() => this.getRatingId(data.id)}>
+                                <Col sm={5} className="col-xs-12 text-right ratingRemovePadding" id={data.id} onFocus={() => this.getRatingId(data.id)}>
                                     <ReactStars {...secondExample}/> 
                                 </Col>
                             </Row>

@@ -292,7 +292,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                             ></img>
                           
                           </Col>
-                            <Col className="col-xs-10">
+                            <Col className="col-sm-10 col-xs-12">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-11" style={{fontSize:"27px"}}>
                                         <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>                                    
@@ -370,7 +370,7 @@ export class BuyerFaultyOrderMarkResolve extends Component {
 
                                             <div 
                                             className="descfaultybox"
-                                             style={{width:"433px",border:"transparent",color:"rgb(35, 146, 112)",overflow:"auto"}}
+                                             style={{border:"transparent",color:"rgb(35, 146, 112)",overflow:"auto"}}
 
                                             >
                                 {this.state.getOrderProgress.artisanReviewComment}
@@ -378,8 +378,8 @@ export class BuyerFaultyOrderMarkResolve extends Component {
                                         </Col>
                                     </Row>
                             <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
+                            <Col className="col-sm-9"></Col>
+                                <Col className="col-sm-3 col-xs-12 text-right">
                                 <span>
                                           <button
                                             disabled={this.state.rejectButtonClick}

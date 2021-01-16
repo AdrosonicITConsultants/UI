@@ -64,7 +64,7 @@ class Wishlist extends Component {
                 </Col>
                   </Row> 
                   </Container>
-                  <Footer/>
+                 
                 </React.Fragment>
               
         )

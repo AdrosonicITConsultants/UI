@@ -145,7 +145,7 @@ class AddWishlist extends Component {
                   
                 <Container className="wishlistbg">
             
-              <Row noGutters={true}>
+              <Row noGutters={true} style={{marginBottom: "20px"}}>
           
               
               <Col md = "1">
@@ -338,7 +338,7 @@ class AddWishlist extends Component {
                   </Container>
                   </>}
                  
-                 
+                  <Footer/>
      
                 </React.Fragment>
               

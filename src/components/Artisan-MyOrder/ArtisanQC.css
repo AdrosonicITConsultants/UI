@@ -210,3 +210,37 @@
     padding: 10px !important;
 }
 
+@media only screen and (max-width: 767px) {
+    .artisanQCHeader {
+        font-size: 20px !important;
+    }
+
+    .artisanQCSubHeader {
+        font-size: 15px !important;
+    }
+
+    .artisanQCNameHeaderRow {
+        font-size: 15px !important;
+    }
+
+    .artisanQCCardStyle, .artisanQCCardStyleFilled {
+        padding: 30px 20px !important;
+        margin: 30px 0px !important;
+    }
+
+}
+
+@media only screen and (max-width: 542px) {
+    .QCsaveButton {
+        margin-bottom: 10px !important;
+    }
+}
+
+@media only screen and ( max-width: 991px ) and (min-width:768px) {
+    .artisanQCCardStyle, .artisanQCCardStyleFilled {
+        margin: 30px 0px !important;
+    }
+}
+
+
+

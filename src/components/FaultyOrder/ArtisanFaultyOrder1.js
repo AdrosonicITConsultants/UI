@@ -321,7 +321,7 @@ export class ArtisanFaultyOrder1 extends Component {
                             ></img>
                           
                           </Col>
-                            <Col className="col-xs-10">
+                            <Col className="col-sm-10 col-xs-12">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                         <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
@@ -408,7 +408,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                             <textarea 
                                             className="descfaultybox"
                                              placeholder="Add your comment *"
-                                             style={{width:"433px"}}
+                                             
                                              maxLength="500"
                                              value={this.state.getOrderProgress.artisanReviewComment?this.state.getOrderProgress.artisanReviewComment:"" }
                                              name="description"
@@ -434,7 +434,7 @@ export class ArtisanFaultyOrder1 extends Component {
                             ></img>
                           
                           </Col>
-                            <Col className="col-xs-10">
+                            <Col className="col-sm-10 col-xs-12">
                                     <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                         <b style={{color:"rgb(196, 18, 28)"}}>Fault Raised</b> for your Order id:  <b className="oidt">{this.state.getSingleOrder.orderCode}</b>
@@ -521,7 +521,7 @@ export class ArtisanFaultyOrder1 extends Component {
                                             <textarea 
                                             className="descfaultybox"
                                             placeholder="Add your comment *"
-                                             style={{width:"433px"}}
+                                             
                                              maxLength="500"
                                              name="description"
                                              id="description"
@@ -538,8 +538,8 @@ export class ArtisanFaultyOrder1 extends Component {
                                         )}
                                                              </p>
                             <Row noGutters={true}>
-                            <Col className="col-xs-9"></Col>
-                                <Col className="col-xs-3">
+                            <Col className="col-sm-9"></Col>
+                                <Col className="col-sm-3 col-xs-12 text-right">
                                 <span><button className="buddlechatbtn" onClick={() => this.goToChatButton(this.state.getSingleOrder.enquiryId)}
                                 style={{marginRight:"10px",height:"30px"}}>
                                           <img src={logos.chatwhite} style={{height:"14px"}}/></button>

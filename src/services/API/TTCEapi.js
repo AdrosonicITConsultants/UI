@@ -6,7 +6,7 @@ import customToast from "../../shared/customToast";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-var env = "uat";
+var env = "dev";
 var ApiUrl = "";
 var ImageUrl = "";
 var ReceiptUrl = "";

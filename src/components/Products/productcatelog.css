@@ -235,8 +235,26 @@ margin: 20px;
     
 }
 
-@media only screen and ( max-width: 480px ) {
+@media only screen and (max-width: 767px) {
+    .ProductCard{
+       height: 400px !important;
+    }
+
+    .ProductImageContainer {
+        height: auto !important;
+    }
+
+    .ProductImage {
+        height: 100% !important;
+        width: 100% !important;
+    }
+    
+    .Imagecontainer {
+        width: 100% !important;
+        height: 220px !important;
+    }
 }
+
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
     .artistbg1img {
     width: 12%;
@@ -247,6 +265,18 @@ margin: 20px;
     .ProductListMargin{
 margin-left: 10% !important;
 }
+
+/* .ProductCard{
+    height: 400px !important;
+ }
+
+ .ProductImageContainer {
+     height: auto !important;
+ }
+
+ .ProductImage {
+    height: 250px;
+ } */
 }
 @media only screen and ( max-width: 1199px ) and ( min-width: 992px ){}
 

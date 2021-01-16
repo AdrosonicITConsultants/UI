@@ -280,7 +280,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                               ></img>
                                             
                                             </Col>
-                                           <Col className="col-xs-10">
+                                           <Col className="col-sm-10 col-xs-12">
                                                 <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                                     <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                                        <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
@@ -315,7 +315,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                   {data.id<4?
                   <>
                   {this.state.accepted[data.id-1].comment?
-                      <Col className="col-xs-4 " style={{textAlign:"center"}} >
+                      <Col className="col-sm-4 col-xs-12 text-center" style={{textAlign:"center"}} >
                                                        <div className="faultyreason2" style={{padding:"10px"}}>
                                                          <b> {data.comment}</b>
                                                          <p>{data.subComment}</p>
@@ -337,7 +337,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                       {this.state.accepted[data.id-1].comment?
                                       <>
                                           <Col className="col-xs-1"></Col>
-                                              <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}
+                                              <Col className="col-xs-12 faultMarginTop20" sm="4" 
                                                >
                                                        <div className="faultyreason2" style={{padding:"10px"}}>
                                                        <b> {data.comment}</b>
@@ -348,7 +348,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                                       :
                                        <>
                                                       <Col className="col-xs-1"></Col>
-                                                      <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}
+                                                      <Col className="col-xs-12 faultMarginTop20" sm="4" 
                                                           >
                                                                <div className="faultyreason" style={{padding:"10px"}}>
                                                                <b> {data.comment}</b>
@@ -367,11 +367,11 @@ export class BuyerCompletedfaultyOrder extends Component {
                                                  
                                                  
                   {/* ----------------------------------------------------------------------------------------------------------------------------- */}
-                                                  <Row noGutters={true}>
-                                                      <Col className="col-xs-5"> </Col>
-                                                      <Col className="col-xs-2"><hr className="hrlinefault"></hr> </Col>
-                                                      <Col className="col-xs-5"> </Col>
-                                                  </Row>
+                  <Row noGutters={true}>
+                                    <Col className="col-sm-5"> </Col>
+                                    <Col className="col-sm-2 col-xs-12"><hr className="hrlinefault"></hr> </Col>
+                                    <Col className="col-sm-5"> </Col>
+                                </Row>
                                                   <Row noGutters={true} style={{marginTop:"0px"}}>
                                                   <Col className="col-xs-12" style={{textAlign:"center"}}>
                                                           <h3 className=" faultyheading" style={{fontSize:"15px"}}><b>Description of the problem (Mandatory).</b></h3>
@@ -416,7 +416,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                             ></img>
                           
                           </Col>
-                         <Col className="col-xs-10">
+                         <Col className="col-sm-10 col-xs-12">
                               <Row noGutters={true} className ="cp1heading cp1headingtr  ">
                                   <Col className="col-xs-9" style={{fontSize:"27px"}}>
                                      <b>Report a Fault in your Order id:</b>  <b className="oidt">{this.state.getClosedOrder.orderCode}</b>
@@ -450,7 +450,7 @@ export class BuyerCompletedfaultyOrder extends Component {
 {data.id<4?
 <>
 {this.state.accepted[data.id-1].comment?
-    <Col className="col-xs-4 " style={{textAlign:"center"}}  onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
+    <Col className="col-sm-4 col-xs-12" style={{textAlign:"center"}}  onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
                                      <div className="faultyreason2" style={{padding:"10px"}}>
                                        <b> {data.comment}</b>
                                        <p>{data.subComment}</p>
@@ -472,7 +472,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                     {this.state.accepted[data.id-1].comment?
                     <>
                         <Col className="col-xs-1"></Col>
-                            <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}  onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
+                            <Col className="col-xs-12 faultMarginTop20" sm="4" onClick={()=>{this.FaultyUnOrderSelect(data.id)}}>
                                      <div className="faultyreason2" style={{padding:"10px"}}>
                                      <b> {data.comment}</b>
                                      <p>{data.subComment}</p>
@@ -482,7 +482,7 @@ export class BuyerCompletedfaultyOrder extends Component {
                                     :
                      <>
                                     <Col className="col-xs-1"></Col>
-                                    <Col className="col-xs-12 " sm="4" style={{textAlign:"center",marginTop:"20px"}}
+                                    <Col className="col-xs-12 faultMarginTop20" sm="4" 
                                         onClick={()=>{this.FaultyOrderSelect(data.id)}}>
                                              <div className="faultyreason" style={{padding:"10px"}}>
                                              <b> {data.comment}</b>
@@ -501,10 +501,10 @@ export class BuyerCompletedfaultyOrder extends Component {
                                
                                
 {/* ----------------------------------------------------------------------------------------------------------------------------- */}
-                                <Row noGutters={true}>
-                                    <Col className="col-xs-5"> </Col>
-                                    <Col className="col-xs-2"><hr className="hrlinefault"></hr> </Col>
-                                    <Col className="col-xs-5"> </Col>
+<Row noGutters={true}>
+                                    <Col className="col-sm-5"> </Col>
+                                    <Col className="col-sm-2 col-xs-12"><hr className="hrlinefault"></hr> </Col>
+                                    <Col className="col-sm-5"> </Col>
                                 </Row>
                                 <Row noGutters={true} style={{marginTop:"0px"}}>
                                 <Col className="col-xs-12" style={{textAlign:"center"}}>

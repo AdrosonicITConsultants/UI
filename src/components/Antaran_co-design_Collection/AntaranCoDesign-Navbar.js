@@ -63,14 +63,14 @@ export default class AntaranCoDesignNavbar extends Component {
             <React.Fragment>
                 <Container className="container0">
             <Row noGutters="true">
-            <Col sm={{size:2}} className="Vcheading">
+            <Col sm={{size:2}} className="Vcheading col-xs-6">
                <Link to="/Antaran"> <h1 className={
                        (this.state.selected == "Regions"
             ? "selectedNavbarTab"
             : "")
             } onClick={this.handleSelect}>Regions</h1></Link>
                 </Col>
-                <Col sm={{size:2}} className="Vcheading">
+                <Col sm={{size:2}} className="Vcheading col-xs-6">
                 <Link to="/Antaran/categories"> 
                  <h1 className={
                        (this.state.selected == "Categories"

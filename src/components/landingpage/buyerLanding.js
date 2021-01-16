@@ -126,13 +126,13 @@ class BuyerLanding extends Component {
                       {this.state.buyerPageData.card_header}
                       </p> */}
                       {/* <p className="carousaltext2">{this.state.buyerPageData.card_title}</p> */}
-                      <p className="carousaltext3">
+                      <p className="carousaltext31">
                       {this.state.buyerPageData.card_para}
                       </p>
-                      <p className="carousaltext3">
+                      <p className="carousaltext32">
                       {this.state.buyerPageData.card_para1}
                       </p>
-                      <p className="carousaltext3">
+                      <p className="carousaltext33">
                       {this.state.buyerPageData.card_para2}
                       </p>
                     </div>

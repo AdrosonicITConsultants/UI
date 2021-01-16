@@ -402,7 +402,7 @@ if(response){
                                 <Col style={{textAlign:"center"}} className="playfair">
                                     <h3 className="postchangereq"><img src={logos.postchangerequesticon} style={{height:"20px"}}/> 
                                     Post Change Request Process</h3>
-                                <h1>Update the pro forma invoice</h1>
+                                <h1 className="CompletedPIH1ForMobile">Update the pro forma invoice</h1>
                                 <p className="crpigreennote">
                                     You have <strong>{this.state.daysleftinint} </strong>
                                      days remaining to update your invoice after change request.</p>

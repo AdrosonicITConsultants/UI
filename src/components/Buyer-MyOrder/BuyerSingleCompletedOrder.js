@@ -1227,6 +1227,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                                                <DownloadBuyerPreviewPI
                                                                enquiryId={this.state.enquiryCode}
                                                                enquiryCode={item.openEnquiriesResponse.enquiryCode}
+                                                               completed="1"
                                                                 /> 
                                                                 {/* <BuyerOldPi 
                                                                  enquiryId={this.state.enquiryCode}

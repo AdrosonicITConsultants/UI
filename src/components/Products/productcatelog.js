@@ -51,12 +51,12 @@ class productcatelog extends Component {
                   <>
                     <div className="ProductList col-12 mx-auto col-md-12 col-lg-12 my-10">
                       <Row style={{ margin: "20px", marginTop:"50px" }}  >
-                        <Col className="col-sm-1 col-md-1 col-1">
+                        <Col className="col-sm-1 col-md-1 col-1 col-xs-12">
                           <span className="text1PC">{items.productCategory.productDesc}</span>
                         </Col>
 
                         {/* <Col className="col-sm-4 col-md-4 hrline1"></Col> */}
-                        <Col className="col-sm-9 col-md-9 col-9">
+                        <Col className="col-sm-9 col-md-9 col-9 col-xs-12">
                           <div className="separator text2PC">
                             {items.products.length > 4 ? `Showing 4 of ${items.products.length}` : `Showing ${items.products.length} of ${items.products.length} `}
                             {" "}
@@ -67,7 +67,7 @@ class productcatelog extends Component {
                           </span> */}
                         </Col>
                         {/* <Col className="col-sm-4 col-md-4 hrline1"></Col> */}
-                        <Col className="w10 col-sm-2 col-md-2 col-2 text-right">
+                        <Col className="col-sm-2 col-md-2 col-2 text-center col-xs-12">
                           {items.products.length > 4 ? <span className="seemore"><a href ={"/products/?categoryid="+ items.productCategory.id + "&userid=" + this.props.id}  >{this.props.t("Pages.object.see more")}</a></span> : null}
                          
                         </Col>

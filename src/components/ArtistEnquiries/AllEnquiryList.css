@@ -627,19 +627,28 @@ color: rgb(133, 196, 36) !important;
 } 
 .savemoqbtn{
     /* position: absolute; */
-    margin-right: 100px;
-
+    /* margin-right: 100px; */
+    float: none !important;
+    margin-bottom: 10px !important;
 }
 .sendmoqbtn{
     /* position: absolute; */
-    margin-left: 100px;
+    /* margin-left: 100px; */
 
+}
+
+.savemoqbtnColClass {
+    text-align: center !important;
 }
 .BdImgCol{
     text-align: center;
 }
 .previewandpi{
     width: 60%;}
+
+    .ml60{
+        margin-left: 0px !important;
+    }
 }
 @media screen and (max-width:320px){
     .savemoqbtn{

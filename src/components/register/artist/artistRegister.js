@@ -21,7 +21,7 @@ class artistRegister extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: localStorage.getItem("regCurrentPage") ? parseInt(localStorage.getItem("regCurrentPage")) : 0,
+                     userpage:localStorage.getItem("regCurrentPage") ? parseInt(localStorage.getItem("regCurrentPage")) : 0,
                      weaverid: localStorage.getItem("regWeaverId") ? localStorage.getItem("regWeaverId") : "",
                      emailid: localStorage.getItem("regEmailId") ? localStorage.getItem("regEmailId") : "",
                      password: "",

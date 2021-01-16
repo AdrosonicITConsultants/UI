@@ -745,7 +745,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                 <NavbarComponent/>
                 <Container>
                 <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
+                           <Col sm = "1" className="col-xs-1">
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
@@ -753,8 +753,8 @@ import ModernDatepicker from 'react-modern-datepicker';
                             ></img>
                           
                           </Col>
-                          <Col sm="10" className="col-xs-9">
-                               <Row noGutters={true} className ="cp1heading bold  ">
+                          <Col sm="10" className="col-xs-10">
+                               <Row noGutters={true} className ="cp1heading bold headingenq ">
                                    <Col md="12" className="col-xs-12">
                                    {this.props.t("Pages.object.Enquiry id")} : {this.state.openEnquiries[0].openEnquiriesResponse.enquiryCode}
                                        </Col>
@@ -770,9 +770,9 @@ import ModernDatepicker from 'react-modern-datepicker';
                  <>
                   <Row noGutters={true}>
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
-                            <Col sm="9">
+                            <Col sm="9" className="col-xs-12">
                                 <div className="imageinlist"> 
                                     <div className="imageinlist1"> 
                                     {
@@ -796,7 +796,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                 <div>
                                 
                                   <div noGutters={true} >
-                                      <Col >
+                                      <Col className="mt150">
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1]?
                                       this.state.productCategories[item.openEnquiriesResponse.productCategoryId - 1].productDesc:""} </span> 
                                     <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnId ? this.state.yarns[item.openEnquiriesResponse.warpYarnId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnId ? this.state.yarns[item.openEnquiriesResponse.weftYarnId - 1 ].yarnDesc : "NA"}  
@@ -838,7 +838,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                   
                                 </div>
                             </Col>
-                            <Col sm="3" className="text-right">
+                            <Col sm="3" className="rightsmleft col-xs-12">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
                                       {this.props.t("Pages.object.Order Amount")}
@@ -890,7 +890,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                 </Row>
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-sm-10 col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
                            {this.props.t("Pages.object.Enquiry Status")}
@@ -901,9 +901,9 @@ import ModernDatepicker from 'react-modern-datepicker';
                 </Row>
                 <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusId === 2
@@ -1152,9 +1152,9 @@ import ModernDatepicker from 'react-modern-datepicker';
                
                  <Row noGutters={true}>
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
-                            <Col sm="9">
+                            <Col sm="9" className="col-xs-12">
                                 <div className="imageinlist"> 
                                 <div className="imageinlist1"> 
                                     {
@@ -1177,7 +1177,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                 <div>
                                  
                                   <div noGutters={true} >
-                                  <Col >
+                                  <Col className="mt150">
                                       <span className="leEnqtype bold ">{this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1]?
                                       this.state.productCategories[item.openEnquiriesResponse.productCategoryHistoryId - 1].productDesc:""} </span> 
                                       <span className="leEnqspun"> / {item.openEnquiriesResponse.warpYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.warpYarnHistoryId - 1 ].yarnDesc : "NA"}  X  {item.openEnquiriesResponse.weftYarnHistoryId ? this.state.yarns[item.openEnquiriesResponse.weftYarnHistoryId - 1 ].yarnDesc : "NA"}  
@@ -1219,7 +1219,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                                  
                                 </div>
                             </Col>
-                            <Col sm="3" className="text-right">
+                            <Col sm="3" className="rightsmleft col-xs-12">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
                                       {this.props.t("Pages.object.Order Amount")}
@@ -1271,7 +1271,7 @@ import ModernDatepicker from 'react-modern-datepicker';
                 </Row>
                 <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                            <Col sm="3" className="rightsmleft col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
                            {this.props.t("Pages.object.Enquiry Status")}
@@ -1283,9 +1283,9 @@ import ModernDatepicker from 'react-modern-datepicker';
 
                 <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusHistoryId === 2

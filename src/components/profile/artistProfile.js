@@ -819,7 +819,7 @@ class ArtistProfile extends Component {
                         {this.props.t("Pages.object.profileArtistRating")} : {this.state.rating} / 10
                         </Row>
                         <Row noGutters={true} className="mt30 ">
-                            <Col sm = {{size: "6"}} className="text-right">
+                            <Col sm = {{size: "6"}} className="text-right col-xs-6">
                                {this.state.isProfile 
                                ?
                                <u className="selected fontplay">{this.props.t("Pages.object.profileMyDetails")}</u> 
@@ -827,7 +827,7 @@ class ArtistProfile extends Component {
                                 <span className="notSelected fontplay" style={{"cursor":"pointer" }}  onClick={this.handleDetail}>{this.props.t("Pages.object.profileMyDetails")}</span>
                                 }
                             </Col>
-                            <Col sm = {{size: "6"}} className="text-left">
+                            <Col sm = {{size: "6"}} className="text-left col-xs-6">
                             {this.state.isProfile
                                ?
                                <span className="notSelected fontplay" style={{"cursor":"pointer" }} onClick={this.handleDetail}>{this.props.t("Pages.object.profileBankDetails")}</span>
@@ -842,7 +842,7 @@ class ArtistProfile extends Component {
                         ?
 
                 <Row noGutters={true} className="detailsheight">
-                                            <Col sm = {{size: "6"}} className="aocbg1" >
+                                            <Col sm = {{size: "6"}} className="aocbg1 col-xs-12" >
                                                 <div className="fw600 bdetailsheading">
                                                     <img
                                                                                 src={logos.personalicon}
@@ -866,7 +866,7 @@ class ArtistProfile extends Component {
                                                                     ></img>}
                                                 
                                                 <hr className="hrlineaop3 "></hr>
-                                                <Col sm = {{size: "7"}} className="cardtextfield" >
+                                                <Col sm = {{size: "7"}} className="cardtextfield col-xs-7" >
                                                     <div className="fw700 font14 mt7">
                                                     {this.props.t("Pages.object.profileName")}:
                                                     </div>
@@ -954,7 +954,7 @@ class ArtistProfile extends Component {
                                                  </div>
                                                         }
                                               </Col>
-                                              <Col sm={{size:"5"}}>
+                                              <Col sm={{size:"5"}} className="col-xs-5">
                                               <div class="Profilecontainer">
 
                                             <div class="card Profilecard">
@@ -973,7 +973,7 @@ class ArtistProfile extends Component {
                                             </div>
                                               </Col>
                                             </Col>
-                                            <Col sm = {{size: "6"}} className="aocbg2" >
+                                            <Col sm = {{size: "6"}} className="aocbg2 col-xs-12" >
                                                 <div className="fw600 bdetailsheading">
                                                 <img
                                                                             src={logos.brandicon}
@@ -997,7 +997,7 @@ class ArtistProfile extends Component {
                                                                     ></img>}
                                                 
                                                 <hr className="hrlineaop3"></hr>
-                                                <Col sm={{size:7}} className="cardtextfield">
+                                                <Col sm={{size:7}} className="cardtextfield col-xs-7">
                                                 <div className="fw700 font14 mt7">
                                                 {this.props.t("Pages.object.profileName")}:
                                                 </div>
@@ -1104,7 +1104,7 @@ class ArtistProfile extends Component {
                                                     
                                                 </div>
                                                 </Col>
-                                                <Col sm={{size:5}}>
+                                                <Col sm={{size:5}} className=" col-xs-5">
                                                 <div class="Profilecontainer">
 
                                                         <div class="card Profilecard">
@@ -1154,7 +1154,7 @@ class ArtistProfile extends Component {
                                                         </div>
                                                         <hr className="hrlineaop3 "></hr>
                                                         <Row noGutters={true} className="bankcontent">
-                                                            <Col sm = {{size: "6"}}>
+                                                            <Col sm = {{size: "6"}} className="sm480 col-xs-6">
                                                             <div className="font20">
                                                             {this.props.t("Pages.object.profileBankDetails")}
                                                             </div>
@@ -1243,19 +1243,19 @@ class ArtistProfile extends Component {
                                                 
 
                                                             </Col>
-                                                            <Col sm = {{size: "6"}}>
+                                                            <Col sm = {{size: "6"}} className="sm480 col-xs-6">
                                                             <div className="font20">
                                                             {this.props.t("Pages.object.profileDigiDetails")}
                                                             </div>
                                                             <br></br>
                                                             <Row>
 
-                                                                <Col sm = {{size: "2"}}>
+                                                                <Col sm = {{size: "2"}} className="col-xs-2">
                                                                 
                                                                 <img src={logos.gpay} className="gpayicon"></img>
 
                                                                 </Col>
-                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <Col sm = {{size: "9"}} className=" col-xs-9 digitalbank">
                                                                 <div className="fw700 font14">
                                                                 {this.props.t("Pages.object.profileGoogleId")}
                                                                 </div>
@@ -1276,12 +1276,12 @@ class ArtistProfile extends Component {
                                                                 </Row>
                                                             <Row>
 
-                                                                <Col sm = {{size: "2"}}>
+                                                                <Col sm = {{size: "2"}} className="col-xs-2">
                                                                 
                                                                 <img src={logos.paytm} className="gpayicon"></img>
 
                                                                 </Col>
-                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <Col sm = {{size: "9"}} className="col-xs-9 digitalbank">
                                                                 <div className="fw700 font14">
                                                                 {this.props.t("Pages.object.profilePaytm")}
                                                                 </div>
@@ -1302,12 +1302,12 @@ class ArtistProfile extends Component {
                                                                 </Row>
                                                                 <Row>
 
-                                                                <Col sm = {{size: "2"}}>
+                                                                <Col sm = {{size: "2"}} className="col-xs-2">
                                                                 
                                                                 <img src={logos.phonepe} className="gpayicon"></img>
 
                                                                 </Col>
-                                                                <Col sm = {{size: "9"}} className="digitalbank">
+                                                                <Col sm = {{size: "9"}} className="col-xs-9 digitalbank">
                                                                 <div className="fw700 font14">
                                                                 {this.props.t("Pages.object.profilePhonepe")}
                                                                 </div>

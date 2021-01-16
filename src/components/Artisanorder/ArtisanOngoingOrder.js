@@ -260,7 +260,7 @@ export class ArtisanOngoingOrder extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12 text-center noopenenq">
+                    <Col className="col-xs-12 text-center noopenenq mt150">
                     No Ongoing Order.
                    </Col>
                 </Row>
@@ -276,7 +276,7 @@ export class ArtisanOngoingOrder extends Component {
              
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                     <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                             {this.props.t("Pages.object.Converted to order on")} :
@@ -286,7 +286,7 @@ export class ArtisanOngoingOrder extends Component {
                             </Col>
                         </Row>
                         <Row noGutters={true}>
-                            <Col sm="9">
+                            <Col sm="9"  className="col-xs-12">
                                 {item.openEnquiriesResponse.userStatus === 1 ?
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
@@ -393,7 +393,7 @@ export class ArtisanOngoingOrder extends Component {
                                   </div>
                                 </div>
                             </Col>
-                            <Col sm="3" className="text-right">
+                            <Col sm="3" className="rightsmleft col-xs-12">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
                                       {this.props.t("Pages.object.Order Amount")}
@@ -499,9 +499,9 @@ export class ArtisanOngoingOrder extends Component {
                     <Col className="col-xs-6"></Col>
                     </>
                     :  
-                    <Col className="col-xs-9"></Col>
+                    <Col className="col-sm-9 col-xs-1"></Col>
                     }
-                    <Col className="col-xs-2">
+                    <Col className="col-sm-2 col-xs-10">
                         <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)} 
                         value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
                     </Col>
@@ -588,9 +588,9 @@ export class ArtisanOngoingOrder extends Component {
                 </Row>
                 <Row noGutters={true} className="mt7">
                 {/* <Col className="col-xs-1"></Col> */}
-                    <Col className="col-xs-12">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof ">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusId === 2
@@ -702,7 +702,7 @@ export class ArtisanOngoingOrder extends Component {
                 <hr></hr>
                 <Row noGutters={true} id={item.enquiryId}>
                     <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                     <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
                                 {this.props.t("Pages.object.Converted to order on")} :
@@ -712,7 +712,7 @@ export class ArtisanOngoingOrder extends Component {
                                 </Col>
                             </Row>
                         <Row noGutters={true}>
-                            <Col sm="9">
+                            <Col sm="9" className="col-xs-12">
                                 {item.openEnquiriesResponse.userStatus === 1 ?
                                 <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
@@ -812,7 +812,7 @@ export class ArtisanOngoingOrder extends Component {
                                   </div>
                                 </div>
                             </Col>
-                            <Col sm="3" className="text-right">
+                            <Col sm="3" className="rightsmleft col-xs-12">
                                 <div noGutters={true} >
                                       <Col className="leEnqOrderAmount ">
                                       {this.props.t("Pages.object.Order Amount")}
@@ -900,29 +900,29 @@ export class ArtisanOngoingOrder extends Component {
                     <Col className="col-xs-6"></Col>
                     </>
                     :  
-                    <Col className="col-xs-9"></Col>
+                    <Col className="col-sm-9 col-xs-1"></Col>
                     }
-                    <Col className="col-xs-2">
+                    <Col className="col-sm-2 col-xs-10" >
                         <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                         value ={this.props.t("Pages.object.go to this enquiry chat")}></input>
                     </Col>
                 </Row>
                 
                 <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                <Col className="col-sm-1"></Col>
+                    <Col className="col-sm-10 col-xs-12">
                        <Row noGutters={true}>
                            <Col className="col-xs-12 leEnqstatus bold">
-                           Enquiry Status
+                           {this.props.t("Pages.object.Order Status")}
                            </Col>
                        </Row>
                     </Col>
                 </Row>
                 <Row noGutters={true} className="mt7">
                 {/* <Col className="col-xs-1"></Col> */}
-                    <Col className="col-xs-12">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusHistoryId === 2
@@ -1058,7 +1058,7 @@ export class ArtisanOngoingOrder extends Component {
             :
             <>
                 <Row noGutters={true}>
-                <Col className="col-xs-12 text-center">
+                <Col className="col-xs-12 text-center mt150">
                 Loading Please Wait....
                 </Col>
                 </Row>

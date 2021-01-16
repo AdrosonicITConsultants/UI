@@ -97,7 +97,7 @@ import { useTranslation, withTranslation } from "react-i18next";
             ?
             <>
             <Row noGutters={true}>
-                <Col className="col-xs-12  text-center noopenenq">
+                <Col className="col-xs-12  text-center mt150 noopenenq">
                     No Completed Order.
                 </Col>
             </Row>
@@ -113,9 +113,9 @@ import { useTranslation, withTranslation } from "react-i18next";
             <hr></hr>
             <Row noGutters={true} id={item.enquiryId}>
                 <Col className="col-xs-1"></Col>
-                <Col className="col-xs-10">
+                <Col className="col-xs-12 col-sm-10">
                     <Row noGutters={true}>
-                        <Col sm="9">
+                        <Col sm="9" className="col-xs-12">
                             {item.openEnquiriesResponse.userStatus === 1 ?
                             <div className="imageinlist" > 
                                 <div className="imageinlist1"> 
@@ -211,7 +211,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                               </div>
                             </div>
                         </Col>
-                        <Col sm="3" className="text-right">
+                        <Col sm="3" className="rightsmleft col-xs-12">
                             <div noGutters={true} >
                                   <Col className="leEnqOrderAmount ">
                                   {this.props.t("Pages.object.Order Amount")}
@@ -309,10 +309,10 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </Col>
             </Row>
             <Row noGutters={true} className="mt7">
-            <Col className="col-xs-1"></Col>
-                <Col className="col-xs-10">
+            {/* <Col className="col-xs-1"></Col> */}
+                <Col className="col-xs-12 col-sm-10">
                    <Row noGutters={true}>
-                       <Col className="col-xs-12 ">
+                       <Col className="col-xs-12 progressof">
                        <div className="progressbarfont">
                         <br /><br />
                         {item.openEnquiriesResponse.productStatusId === 2
@@ -381,9 +381,9 @@ import { useTranslation, withTranslation } from "react-i18next";
             <hr></hr>
             <Row noGutters={true} id={item.enquiryId}>
                 <Col className="col-xs-1"></Col>
-                <Col className="col-xs-10">
+                <Col className="col-xs-12 col-sm-10">
                     <Row noGutters={true}>
-                        <Col sm="9">
+                        <Col sm="9" className="col-xs-12">
                             {item.openEnquiriesResponse.userStatus === 1 ?
                             <div className="imageinlist" > 
                             <div className="imageinlist1"> 
@@ -475,7 +475,7 @@ import { useTranslation, withTranslation } from "react-i18next";
                               </div>
                             </div>
                         </Col>
-                        <Col sm="3" className="text-right">
+                        <Col sm="3" className="rightsmleft col-xs-12">
                             <div noGutters={true} >
                                   <Col className="leEnqOrderAmount ">
                                   {this.props.t("Pages.object.Order Amount")}
@@ -566,10 +566,10 @@ import { useTranslation, withTranslation } from "react-i18next";
                 </Col>
             </Row>
             <Row noGutters={true} className="mt7">
-            <Col className="col-xs-1"></Col>
-                <Col className="col-xs-10">
+            {/* <Col className="col-xs-1"></Col> */}
+                <Col className="col-xs-12 col-sm-10">
                    <Row noGutters={true}>
-                       <Col className="col-xs-12 ">
+                       <Col className="col-xs-12 progressof">
                        <div className="progressbarfont">
                         <br /><br />
                         {item.openEnquiriesResponse.productStatusHistoryId === 2
@@ -662,7 +662,7 @@ import { useTranslation, withTranslation } from "react-i18next";
         :
         <>
         <Row noGutters={true}>
-            <Col className="col-xs-12 text-center">
+            <Col className="col-xs-12 mt150 text-center">
             Loading Please Wait....
             </Col>
             </Row></>

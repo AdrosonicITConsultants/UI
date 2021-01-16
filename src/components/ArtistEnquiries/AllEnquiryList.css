@@ -97,6 +97,9 @@ font-size: 13px;
     color: rgb(0 179 9);
 
 }
+.rightsmleft{
+    text-align: right;
+}
 .leEnqidEstDelivery{
     font-size: 13px;
     color: #00b9b9;
@@ -611,6 +614,25 @@ color: rgb(133, 196, 36) !important;
    
 }
 @media screen and (max-width:767px){
+    /* .selctedoptionhr2 {
+        position: absolute;
+        border: 1.5px solid black;
+        width: 116px;
+        top: 80px;
+        left: 142px;
+    } */
+    .headingenq{
+        font-size: 27px!important;
+        margin-top: 5px!important;
+    
+}
+    .progressof{
+        overflow-x: scroll;
+    }
+    .progressbarfont {
+        font-size: 9px;
+        width: 800px;
+    }
 .moqdetailCard{
     text-align: center;
 }
@@ -650,7 +672,55 @@ color: rgb(133, 196, 36) !important;
         margin-left: 0px !important;
     }
 }
-@media screen and (max-width:320px){
+@media screen and (max-width:480px){
+    .leEnqstatus {
+        font-size: 17px;
+    }
+    .progressof{
+        overflow-x: scroll;
+    }
+    .progressbarfont {
+        font-size: 8px;
+        width: 600px;
+    }
+    .leEnqidDateStarted {
+        font-size: 11px;
+        color: #545454;
+    }
+    .leEnqidLastUpdated {
+        font-size: 12px;
+        color: rgb(0 179 9);
+    }
+    .leEnqidEstDelivery {
+        font-size: 12px;
+        color: #00b9b9;
+    }
+    .leEnqAmount {
+        font-size: 20px;
+    }
+    .rightsmleft{
+        text-align: left;
+    }
+    .headingenq{
+            font-size: 14px!important;
+            margin-top: 9px!important;
+        
+    }
+    .mt150{
+        margin-top: 150px;
+    }
+    .leEnqprodcode {
+        font-size: 12px;
+        color: #545454;
+    }
+    .leEnqspun {
+        font-size: 10px;
+        color: #545454;
+    }
+    .leEnqid {
+        font-size: 12px;
+        margin-top: 150px;
+    }
     .savemoqbtn{
         position: none;
         margin-right: 49px !important;
@@ -666,6 +736,57 @@ color: rgb(133, 196, 36) !important;
     }
     .previewandpi{
         width: 70%;}
+    .cp1heading {
+        font-size: 25px;
+    }
+    .margin-cparrow {
+        margin-top: 11px;
+        margin-right: 1px;
+    }
+    .navoncon {
+        width: 92px;
+        float: left;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .selctedoptionhr {
+        position: absolute;
+        border: 1.5px solid black;
+        width: 95px;
+        top: 72px;
+        left: 3px;
+    }
+    .leEnqshowmore {
+        cursor: pointer;
+        /* color: #B9005C!important; */
+        margin-bottom: 6px;
+        font-size: 15px;
+        padding: 3px 25px 3px 25px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+    .selctedoptionhr2 {
+        position: absolute;
+        border: 1.5px solid black;
+        width: 115px;
+        top: 72px;
+        left: 99px;
+    }
+    .gotoordernewbtn {
+        font-size: 12px;
+        font-weight: 600;
+        background: #33ac33;
+        border: 1px solid green;
+        padding: 7px 30px 5px 30px;
+        border-radius: 18px;
+        color: white;
+    }
+    .convertedDate {
+        color: rgb(0 179 9);
+        font-size: 13px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
     
    
 }

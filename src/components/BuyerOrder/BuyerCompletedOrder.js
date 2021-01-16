@@ -155,7 +155,7 @@ export class BuyerCompletedOrder extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12 text-center noopenenq">
+                    <Col className="col-xs-12 text-center noopenenq mt150">
                     No Completed Order.
                    </Col>
                 </Row>
@@ -171,7 +171,7 @@ export class BuyerCompletedOrder extends Component {
                         <br></br>
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                                 Converted to order on :
@@ -181,7 +181,7 @@ export class BuyerCompletedOrder extends Component {
                             </Col>
                         </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9" className="col-xs-12">
                                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
@@ -280,7 +280,7 @@ export class BuyerCompletedOrder extends Component {
                                         </div>
                                     </div>
                                 </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -332,7 +332,7 @@ export class BuyerCompletedOrder extends Component {
                     <Col className="col-xs-1">
                         </Col>
                       
-                     <Col className="col-xs-4">
+                     <Col className="col-sm-4 col-xs-10">
                      <img src={logos.truck} className="truckimg"/>  Check
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
@@ -403,8 +403,8 @@ export class BuyerCompletedOrder extends Component {
                          }           
                    
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -413,10 +413,10 @@ export class BuyerCompletedOrder extends Component {
                         </Col>
                     </Row>
                     <Row noGutters={true} className="mt7">
-                <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                {/* <Col className="col-xs-1"></Col> */}
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusId === 2
@@ -496,7 +496,7 @@ export class BuyerCompletedOrder extends Component {
                       <hr></hr>
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
                                     Converted to order on :
@@ -506,7 +506,7 @@ export class BuyerCompletedOrder extends Component {
                                 </Col>
                             </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9" className="col-xs-12">
                                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
@@ -592,7 +592,7 @@ export class BuyerCompletedOrder extends Component {
                                     </div>
                                     </div>
                                  </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -650,7 +650,7 @@ export class BuyerCompletedOrder extends Component {
                     <Col className="col-xs-1">
                         </Col>
                       
-                     <Col className="col-xs-4">
+                     <Col className="col-sm-4 col-xs-10">
                      <img src={logos.truck} className="truckimg"/>  Check
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
@@ -721,8 +721,8 @@ export class BuyerCompletedOrder extends Component {
                    
                    
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -732,9 +732,9 @@ export class BuyerCompletedOrder extends Component {
                     </Row>
                     <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusId === 2
@@ -839,7 +839,7 @@ export class BuyerCompletedOrder extends Component {
             :
             <> 
                 <Row noGutters={true}>
-                <Col className="col-xs-12 text-center">
+                <Col className="col-xs-12 mt150 text-center">
                 Loading Please Wait....
                 </Col>
                 </Row>

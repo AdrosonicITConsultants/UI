@@ -196,8 +196,8 @@ class artreg4 extends Component {
               className="vcenter1 "
             >
               <div className="demoab text-center"  >
-                <br></br>
-                <Row   className="">
+                {/* <br></br> */}
+                <Row   className="pt2" >
                   <div className="col-xs-7">
                     <img
                       src={logos.backarrowicon}

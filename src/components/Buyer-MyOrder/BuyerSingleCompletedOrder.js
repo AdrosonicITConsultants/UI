@@ -401,15 +401,15 @@ export class BuyerSingleCompletedOrder extends Component {
                    <>
                 <Container>
                 <Row noGutters={true} className="">
-                           <Col sm = "1" className="col-xs-2">
+                           <Col sm = "1" className="col-xs-1">
                            <img
                                        src={logos.backarrowicon}
                                        className="margin-cparrow cparrowsize glyphicon"
                                         onClick={() => this.backoperation()}
                             ></img>
                           </Col>
-                          <Col sm="10" className="col-xs-9">
-                               <Row noGutters={true} className ="cp1heading bold  ">
+                          <Col sm="10" className="col-xs-10">
+                               <Row noGutters={true} className ="headingenq cp1heading bold  ">
                                    <Col md="12" className="col-xs-12">
                                         Order Id : 
                                         {this.state.openEnquiries[0].openEnquiriesResponse.orderCode}
@@ -426,7 +426,7 @@ export class BuyerSingleCompletedOrder extends Component {
                         
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                         {/* <Col className="col-xs-10" ref={this.scrollDiv}> */}
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
@@ -437,7 +437,7 @@ export class BuyerSingleCompletedOrder extends Component {
                             </Col>
                         </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9" className="col-xs-12">
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
                                         {
@@ -463,7 +463,7 @@ export class BuyerSingleCompletedOrder extends Component {
                                                 </Col>
                                             </div> */}
                                             <div noGutters={true} >
-                                                <Col className="lesmallEnqid bold">
+                                                <Col className="mt150 lesmallEnqid bold">
                                                 Enquiry Id : <a href={'/buyerEnquiryDetails?code='+item.openEnquiriesResponse.enquiryId }>{item.openEnquiriesResponse.enquiryCode}</a>
                                                 </Col>
                                             </div>
@@ -508,7 +508,7 @@ export class BuyerSingleCompletedOrder extends Component {
                                         </div> */}
                                     </div>
                                 </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -617,8 +617,8 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                 }
   
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -628,9 +628,9 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                     </Row>
                     <Row noGutters={true} className="mt7">
                 <Col className="col-xs-1"></Col>
-                    <Col className="col-xs-10">
+                    <Col className="col-xs-12 col-sm-10">
                        <Row noGutters={true}>
-                           <Col className="col-xs-12 ">
+                           <Col className="col-xs-12 progressof">
                            <div className="progressbarfont">
                             <br /><br />
                             {item.openEnquiriesResponse.productStatusHistoryId === 2
@@ -830,7 +830,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                       <hr></hr>
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
                                     Converted to order on :
@@ -840,7 +840,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                 </Col>
                             </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9" className="col-xs-12">
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
                                     {
@@ -859,12 +859,12 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                     </div>
                                     <div>
                                     <div noGutters={true} >
-                                        <Col className="leEnqid bold">
+                                        <Col className=" leEnqid bold">
                                         Order Id : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
                                     <div noGutters={true} >
-                                        <Col className="lesmallEnqid bold">
+                                        <Col className="mt150 lesmallEnqid bold">
                                         Enquiry Id : {item.openEnquiriesResponse.enquiryCode}
                                         </Col>
                                     </div>
@@ -907,7 +907,7 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                                     </div> */}
                                     </div>
                                  </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -1019,8 +1019,8 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                 }
                    
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -1030,9 +1030,9 @@ item.openEnquiriesResponse.enquiryStageId>9 ?
                     </Row>
                     <Row noGutters={true} className="mt7">
                     <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
+                            <Col className="col-xs-12 progressof">
                             <div className="progressbarfont">
                                 <br /><br />
                                 {item.openEnquiriesResponse.productStatusHistoryId === 2

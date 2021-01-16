@@ -253,3 +253,14 @@
     margin-right: 15px;
     color: rgb(212, 19, 13);
 }
+@media screen and (max-width:768px){
+
+    .GreyoutCR {
+        width: 220px;
+        float: left;
+        font-size: 19px;
+        color: grey;
+        opacity: 0.6;
+        margin-left: 0px;
+    }
+}

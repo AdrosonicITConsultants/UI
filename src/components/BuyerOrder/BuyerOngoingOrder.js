@@ -394,7 +394,7 @@ export class BuyerOngoingOrder extends Component {
                 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-12  text-center noopenenq">
+                    <Col className="col-xs-12  text-center noopenenq mt150">
                     No Ongoing Order.
                     </Col>
                 </Row>  
@@ -410,7 +410,7 @@ export class BuyerOngoingOrder extends Component {
                         
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 convertedDate">
                                 Converted to order on :
@@ -420,7 +420,7 @@ export class BuyerOngoingOrder extends Component {
                             </Col>
                         </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9"  className="col-xs-12">
                                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                         <div className="imageinlist1"> 
@@ -518,7 +518,7 @@ export class BuyerOngoingOrder extends Component {
                                         </div>
                                     </div>
                                 </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -595,17 +595,17 @@ export class BuyerOngoingOrder extends Component {
                         <Row noGutters={true}>
                         <hr></hr>
                        
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
                            
-                            <Col className="col-xs-8 ">
+                            <Col className="col-sm-8 col-xs-12 ">
                                <span className="CR bold">Change Request: </span> 
                                <span> Awaiting response from Artisan.</span> 
                             </Col>
                             
                             
-                            <Col className="col-xs-2">
+                            <Col className="col-sm-2">
                             </Col>
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
     
                         </Row>
                         : 
@@ -613,9 +613,9 @@ export class BuyerOngoingOrder extends Component {
                         <Row noGutters={true}>
                         <hr></hr>
                        
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
                            
-                            <Col className="col-xs-8 ">
+                            <Col className="col-sm-8 col-xs-12">
                                <span className="CR bold">Change Request: </span> 
                                <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
                                 {item.openEnquiriesResponse.changeRequestModifiedOn}
@@ -624,9 +624,9 @@ export class BuyerOngoingOrder extends Component {
                             </Col>
                             
                             
-                            <Col className="col-xs-2">
+                            <Col className="col-sm-2">
                             </Col>
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
     
                         </Row>
                         :
@@ -634,18 +634,18 @@ export class BuyerOngoingOrder extends Component {
                         <Row noGutters={true}>
                         <hr></hr>
                        
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
                            
-                            <Col className="col-xs-8 ">
+                            <Col className="col-sm-8 col-xs-12">
                                <span className="CR bold">Change Request: </span> 
                                <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
                                 {item.openEnquiriesResponse.changeRequestModifiedOn}
                             </Moment>.</span> 
                             </Col>
                             
-                            <Col className="col-xs-2">
+                            <Col className="col-sm-2">
                             </Col>
-                            <Col className="col-xs-1"></Col>
+                            <Col className="col-sm-1"></Col>
     
                         </Row>
                           :  
@@ -653,10 +653,10 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            
                                <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
@@ -664,15 +664,15 @@ export class BuyerOngoingOrder extends Component {
                            <span> days Remaining. You can take only single CR untill approved.</span> 
                         </Col>
                         :
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12 ">
                            <span className="CR bold">Change Request: </span> 
                            <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        <Col className="col-xs-2">
+                        <Col className="col-sm-2">
                             <input type="button" onClick={() => this.raiseCRTabFunction(item.openEnquiriesResponse.enquiryId)} className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
 
                     </Row>
                      
@@ -687,7 +687,7 @@ export class BuyerOngoingOrder extends Component {
                      <Row noGutters={true}>
                      <Col className="col-xs-1"></Col>
                      {item.openEnquiriesResponse.deliveryChallanLabel?
-                     <Col className="col-xs-4">
+                     <Col className="col-xs-10 col-sm-4">
                      <img src={logos.truck} className="truckimg"/>Check
                      <a style= {{marginLeft:"5px"}} href={TTCEapi.DeliveryReceiptUrl + item.openEnquiriesResponse.enquiryId + "/" + item.openEnquiriesResponse.deliveryChallanLabel} target="_blank">
                          delivery receipt</a>
@@ -729,14 +729,14 @@ export class BuyerOngoingOrder extends Component {
                    {item.openEnquiriesResponse.isNewGenerated === 1 ?
                     item.openEnquiriesResponse.isProductReturned === 1 ?
                     <>
-                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                    <Col className="col-xs-2 col-sm-offset-1 text-center">
                         <input type="button" className="orderReceivedDisableButtonStyle" value ="Refund received"></input>
                     </Col>
                     <Col className="col-xs-4"></Col>
                     </>
                     :
                     <>
-                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                    <Col className="col-xs-2 col-sm-offset-1 text-center">
                         <input type="button" className="enqreqbtn" value ="Refund received" 
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
@@ -766,23 +766,23 @@ export class BuyerOngoingOrder extends Component {
                    {item.openEnquiriesResponse.isNewGenerated === 1 ?
                     item.openEnquiriesResponse.isProductReturned === 1 ?
                     <>
-                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                    <Col className="col-xs-2 col-sm-offset-1 text-center">
                         <input type="button" className="orderReceivedDisableButtonStyle" value ="Refund received"></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
                     </>
                     :
                     <>
-                    <Col className="col-xs-2 col-xs-offset-1 text-center">
+                    <Col className="col-xs-2 col-sm-offset-1 text-center">
                         <input type="button" className="enqreqbtn" value ="Refund received" 
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
                     <Col className="col-xs-6"></Col>
                     </>
                     :  
-                    <Col className="col-xs-9"></Col>
+                    <Col className="col-sm-9 col-xs-1"></Col>
                     }
-                    <Col className="col-xs-2">
+                    <Col className="col-sm-2 col-xs-12">
                         <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                         value ="Go to this Enquiry chat"></input>
                     </Col>
@@ -796,7 +796,7 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <Col className="col-xs-1">
                      </Col>
-                     <Col className="col-xs-2">
+                     <Col className="col-sm-2 col-xs-12">
                          <button className="closeorderbtn"
                           onClick={()=>{this.ClosedOrderShow(item.openEnquiriesResponse.enquiryId)}}
                           >Close Order</button>
@@ -827,8 +827,8 @@ export class BuyerOngoingOrder extends Component {
 
 
                     <Row noGutters={true} className="mt7">
-                    <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                    <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -838,9 +838,9 @@ export class BuyerOngoingOrder extends Component {
                     </Row>
                     <Row noGutters={true} className="mt7">
                     {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
+                        <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
+                            <Col className="col-xs-12 progressof ">
                             <div className="progressbarfont">
                                 <br /><br />
                                 {item.openEnquiriesResponse.productStatusId === 2
@@ -953,7 +953,7 @@ export class BuyerOngoingOrder extends Component {
                       <hr></hr>
                     <Row noGutters={true} id={item.enquiryId}>
                         <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-xs-12 col-sm-10">
                             <Row noGutters={true}>
                                 <Col className="col-xs-12 convertedDate">
                                     Converted to order on :
@@ -963,7 +963,7 @@ export class BuyerOngoingOrder extends Component {
                                 </Col>
                             </Row>
                             <Row noGutters={true}>
-                                <Col sm="9">
+                                <Col sm="9" className="col-xs-12">
                                     {item.openEnquiriesResponse.userStatus === 1 || item.openEnquiriesResponse.userStatus === null ?
                                     <div className="imageinlist" > 
                                     <div className="imageinlist1"> 
@@ -1054,7 +1054,7 @@ export class BuyerOngoingOrder extends Component {
                                     </div>
                                     </div>
                                  </Col>
-                                <Col sm="3" className="text-right">
+                                <Col sm="3" className="rightsmleft col-xs-12">
                                     <div noGutters={true} >
                                         <Col className="leEnqOrderAmount ">
                                         Order Amount
@@ -1138,17 +1138,17 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
                        
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8  col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            <span> Awaiting response from Artisan.</span> 
                         </Col>
                         
                         
-                        <Col className="col-xs-2">
+                        <Col className="col-sm-2">
                         </Col>
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
 
                     </Row>
                     : 
@@ -1156,9 +1156,9 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
                        
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            <span> Accepted by Artisan on <Moment format="DD-MM-YYYY">
                             {item.openEnquiriesResponse.changeRequestModifiedOn}
@@ -1167,9 +1167,9 @@ export class BuyerOngoingOrder extends Component {
                         </Col>
                         
                         
-                        <Col className="col-xs-2">
+                        <Col className="col-sm-2">
                         </Col>
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
 
                     </Row>
                     :
@@ -1177,18 +1177,18 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
                        
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            <span> Rejected by Artisan on <Moment format="DD-MM-YYYY">
                             {item.openEnquiriesResponse.changeRequestModifiedOn}
                         </Moment>.</span> 
                         </Col>
                         
-                        <Col className="col-xs-2">
+                        <Col className="col-sm-2">
                         </Col>
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
 
                     </Row>
                       :  
@@ -1196,10 +1196,10 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <hr></hr>
                    
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
                         { this.daysleft(item.openEnquiriesResponse.orderCreatedOn) > 0
                         ?
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            
                                <Diffdays startday = {item.openEnquiriesResponse.orderCreatedOn} >
@@ -1207,15 +1207,15 @@ export class BuyerOngoingOrder extends Component {
                            <span> days Remaining. You can take only single CR untill approved.</span> 
                         </Col>
                         :
-                        <Col className="col-xs-8 ">
+                        <Col className="col-sm-8 col-xs-12">
                            <span className="CR bold">Change Request: </span> 
                            <span> Last date to raise Change Request passed. </span> 
                         </Col>
                         }
-                        <Col className="col-xs-2">
+                        <Col className="col-sm-2 col-xs-12">
                             <input type="button" onClick={() => this.raiseCRTabFunction(item.openEnquiriesResponse.enquiryId)} className="changereqbtn" value ="Raise a change Request"></input>
                         </Col>
-                        <Col className="col-xs-1"></Col>
+                        <Col className="col-sm-1"></Col>
 
                     </Row>
                      
@@ -1253,7 +1253,7 @@ export class BuyerOngoingOrder extends Component {
                     {item.openEnquiriesResponse.isReprocess === 1 ?
                 <>
                 <Row noGutters={true}>
-                    <Col className="col-xs-offset-1 col-xs-11">
+                    <Col className="col-sm-offset-1 col-xs-11">
                         <p className="orderRecreationP1TagStyle">Order under Recreation</p>
                         <p className="orderRecreationP2TagStyle">
                         Kindly refer chats for regular updates and in-case of any inconvenience, 
@@ -1283,12 +1283,12 @@ export class BuyerOngoingOrder extends Component {
                         <input type="button" className="enqreqbtn" value ="Refund received" 
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
-                    <Col className="col-xs-4"></Col>
+                    <Col className="col-sm-4"></Col>
                     </>
                     :  
-                    <Col className="col-xs-7"></Col>
+                    <Col className="col-sm-7"></Col>
                     }
-                     <Col className="col-xs-4">
+                     <Col className="col-sm-4">
                        <span>
                        {/* <a style={{color:"black"}} href={TTCEapi.DocumentsURL + "Help.pdf"}
                                     target="_blank"> */}
@@ -1320,12 +1320,12 @@ export class BuyerOngoingOrder extends Component {
                         <input type="button" className="enqreqbtn" value ="Refund received" 
                         onClick={() => this.orderReceivedModal(item.openEnquiriesResponse.enquiryId)}></input>
                     </Col>
-                    <Col className="col-xs-6"></Col>
+                    <Col className="col-sm-6"></Col>
                     </>
                     :  
-                    <Col className="col-xs-9"></Col>
+                    <Col className="col-sm-9"></Col>
                     }
-                    <Col className="col-xs-2">
+                    <Col className="col-sm-2 col-xs-12">
                         <input type="button" className="enqreqbtn" onClick={() => this.goToChatButton(item.openEnquiriesResponse.enquiryId)}
                         value ="Go to this Enquiry chat"></input>
                     </Col>
@@ -1340,7 +1340,7 @@ export class BuyerOngoingOrder extends Component {
                     <Row noGutters={true}>
                     <Col className="col-xs-1">
                      </Col>
-                     <Col className="col-xs-2">
+                     <Col className="col-sm-2 col-xs-12">
                          <button className="closeorderbtn"
                           onClick={()=>{this.ClosedOrderShow(item.openEnquiriesResponse.enquiryId)}}
                           >Close Order</button>
@@ -1370,8 +1370,8 @@ export class BuyerOngoingOrder extends Component {
                     }
 
                     <Row noGutters={true} className="mt7">
-                        <Col className="col-xs-1"></Col>
-                        <Col className="col-xs-10">
+                        <Col className="col-sm-1"></Col>
+                        <Col className="col-sm-10 col-xs-12">
                         <Row noGutters={true}>
                             <Col className="col-xs-12 leEnqstatus bold">
                             Order Status
@@ -1381,9 +1381,9 @@ export class BuyerOngoingOrder extends Component {
                     </Row>
                     <Row noGutters={true} className="mt7">
                     {/* <Col className="col-xs-1"></Col> */}
-                        <Col className="col-xs-12">
+                        <Col className="col-xs-12 col-sm-10">
                         <Row noGutters={true}>
-                            <Col className="col-xs-12 ">
+                            <Col className="col-xs-12 progressof">
                             <div className="progressbarfont">
                                 <br /><br />
                                 {item.openEnquiriesResponse.productStatusHistoryId === 2
@@ -1818,7 +1818,7 @@ export class BuyerOngoingOrder extends Component {
             :
             <> 
                 <Row noGutters={true}>
-                <Col className="col-xs-12 font20 text-center">
+                <Col className="col-xs-12 font20 mt150 text-center">
                 Loading Please Wait....
                 </Col>
                 </Row>

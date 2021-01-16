@@ -117,7 +117,7 @@ class forgotpass3 extends Component {
 
                              <img
                                src={logos.mainlogoside}
-                               className="tatatrustLogo col-xs-6"
+                               className="tatatrustLogo col-xs-6 "
                                alt="TataTrusts logo"
                              ></img>
                            </Row>
@@ -136,10 +136,10 @@ class forgotpass3 extends Component {
                            </Row>
                            <br />
                            <Row>
-                             <span className=" resetsuccessfulText col-md-12 col-sm-12 text-center">
+                             <span className=" resetsuccessfulText col-md-12 col-sm-12 col-xs-12 text-center">
                                Your password was
                              </span>
-                             <span className="resetsuccessfulText col-md-12 col-sm-12 text-center">
+                             <span className="resetsuccessfulText col-md-12 col-sm-12 col-xs-12 text-center">
                                successfully reset
                              </span>
                            </Row>
@@ -147,10 +147,10 @@ class forgotpass3 extends Component {
                            <br />
 
                            <Row>
-                             <span className="emailconfirmationText  col-md-12 col-sm-12 text-center">
+                             <span className="emailconfirmationText  col-md-12 col-sm-12 col-xs-12 text-center">
                                An email confirmation has been sent
                              </span>
-                             <span className="emailconfirmationText col-md-12 col-sm-12 text-center">
+                             <span className="emailconfirmationText col-md-12 col-sm-12 col-xs-12 text-center">
                                to your registered email id
                              </span>
                            </Row>

@@ -4,7 +4,7 @@ import ImageUpload from "../../shared/ImageUpload";
 import NavbarComponent from "../navbar/navbar";
 import Footer from "../footer/footer";
 import "../landingpage/landingpage.css";
-import { Row, Col, Container, Label, Button } from "reactstrap";
+import { Row, Col, Container,Table, Label, Button } from "reactstrap";
 import logos from "../../../src/assets";
 import ReactModal from "react-modal";
 import TTCEapi from "../../services/API/TTCEapi";
@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useTranslation, withTranslation } from "react-i18next";
 import changeLang from "../../services/utils/changeLang"
+
 const customStyles3 = {
   content: {
     top: "33%",
@@ -473,7 +474,7 @@ const initialState = {
                              alt="icon"
                              width="200"
                            />{" "}
-                           <div className="imageEdit text-center col-sm-12 col-md-12 col-lg-12 col-12">
+                           <div className="imageEdit text-center col-sm-12 col-md-12 col-lg-12 col-xs-12">
                              <img
                                className="productImageEdit "
                                onClick={() => {
@@ -493,7 +494,7 @@ const initialState = {
                                src={logos.materialdeleteforever}
                              ></img>
                            </div>
-                           <Row className="ImageEditor">
+                           <Row noGutters={true} className="ImageEditor">
                              <ReactModal
                                isOpen={this.state["modal" + num]}
                                contentLabel="Minimal Modal Example"
@@ -893,23 +894,26 @@ relatedProductTemp[e.target.name] = option;
                    return (
                      <React.Fragment>
                        <NavbarComponent></NavbarComponent>
+
                        <Container>
-                         <Row  >
+                         {/* <Table> */}
+
+                         <Row noGutters={true}  >
                            <div className="artistLanding">
                              {/* //#region Add Image */}
-                             <Row  >
-                               <Row  >
+                             <Row noGutters={true}  >
+                               <Row noGutters={true}  >
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    <h1 className="mainheading">
                                      {/* Add a new product */}
@@ -917,19 +921,19 @@ relatedProductTemp[e.target.name] = option;
                                    </h1>
                                  </Col>
                                </Row>
-                               <Row  >
+                               <Row noGutters={true}  >
                                  <Col
                                    className="tet-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.imagePreviewUrl1 ? (
                                      <div
@@ -953,29 +957,28 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true}   className="mt30">
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>
                                  <Col
                                    sm={{ size: "8" }}
                                    xs={{ size: "8" }}
                                    md={{ size: "8" }}
-                                   className="col-8"
+                                   className="col-xs-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}  >
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
                                        md={{ size: "4" }}
-                                       className="col-4 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        {" "}
                                        <div>
-                                         <div className="col-xs-12">
                                            {this.GenerateImage(1)}
                                            <input
                                              accept="image/png, image/jpeg"
@@ -992,14 +995,14 @@ relatedProductTemp[e.target.name] = option;
                                              }
                                              style={{ display: "none" }}
                                            ></input>
-                                         </div>
+                                         
                                        </div>
                                      </Col>
                                      <Col
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
                                        md={{ size: "4" }}
-                                       className="col-4 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        {" "}
                                        <div>
@@ -1023,7 +1026,7 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "4" }}
                                        xs={{ size: "4" }}
                                        md={{ size: "4" }}
-                                       className="col-4 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        {" "}
                                        <div>
@@ -1049,15 +1052,15 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -1067,20 +1070,20 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Add Image */}
 
                              {/* //#region Product details */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.productName == "" ||
                                    this.state.productCode == "" ||
@@ -1110,25 +1113,25 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               <Row  >
+                               <Row noGutters={true}  >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "8" }}
                                    xs={{ size: "8" }}
                                    md={{ size: "8" }}
-                                   className="col-8"
+                                   className="col-xs-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-center mt30 "
+                                       className="col-xs-12 text-center mt30 "
                                      >
                                        <span
                                          ref={this.basicDetails}
@@ -1141,15 +1144,15 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-left"
+                                       className="col-xs-6 "
                                      ></Col>{" "}
                                    </Row>
-                                   <Row  >
+                                   <Row noGutters={true}  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-right "
+                                       className="col-xs-12  "
                                      >
                                        <input
                                          type="text"
@@ -1163,7 +1166,7 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-left"
+                                       className="col-xs-12 "
                                      >
                                        <input
                                          type="text"
@@ -1181,28 +1184,28 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row  >
+                               <Row noGutters={true}  >
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "8" }}
                                    xs={{ size: "8" }}
                                    md={{ size: "8" }}
-                                   className="col-8"
+                                   className="col-xs-8"
                                  >
-                                   <Row  >
+                                   <Row noGutters={true}  >
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-right"
+                                       className="col-xs-12 "
                                      >
                                        <select
                                          id="productCategorie"
@@ -1237,7 +1240,7 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 "
+                                       className="col-xs-12 "
                                      >
                                        <select
                                          id="productType"
@@ -1275,15 +1278,15 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2 "
+                                   className="col-xs-2 "
                                  ></Col>{" "}
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -1293,20 +1296,20 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Product details */}
 
                              {/* //#region Product specificcaions */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    <div className="inComplete"></div>
 
@@ -1319,18 +1322,18 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true}   className="mt15">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 text-right "
+                                   className="col-xs-1 text-right "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "10" }}
                                    xs={{ size: "10" }}
                                    md={{ size: "10" }}
-                                   className="col-10 ml30"
+                                   className="col-xs-10 ml30"
                                  >
                                    <div className="SubTopic "></div>{" "}
                                    <h5 className="subHeading2">
@@ -1342,12 +1345,12 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true}   className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <label
                                      ref={this.WeavesComplete}
@@ -1357,20 +1360,20 @@ relatedProductTemp[e.target.name] = option;
                                    </label>
                                  </Col>
                                </Row>
-                               <Row   className="">
+                               <Row noGutters={true}   className="">
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
                                    md={{ size: "3" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  ></Col>
                                  <Col
                                    sm={{ size: "8" }}
                                    xs={{ size: "8" }}
                                    md={{ size: "8" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
-                                   <Row>
+                                   <Row noGutters={true}>
                                      {this.state.weaves.map((product, i) => {
                                        return (
                                          <Col
@@ -1378,7 +1381,7 @@ relatedProductTemp[e.target.name] = option;
                                            sm={{ size: "6" }}
                                            xs={{ size: "6" }}
                                            md={{ size: "6" }}
-                                           className="col-12"
+                                           className="col-xs-12"
                                          >
                                            <div className="weaveselectionCheckbox">
                                              <label className="checkbox col-sm-2 col-md-2 text-left">
@@ -1402,18 +1405,18 @@ relatedProductTemp[e.target.name] = option;
                                    </Row>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true}   className="mt30">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 text-right "
+                                   className="col-xs-1 text-right "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "10" }}
                                    xs={{ size: "10" }}
                                    md={{ size: "10" }}
-                                   className="col-10 ml30"
+                                   className="col-xs-10 ml30"
                                  >
                                    <div className="SubTopic "></div>{" "}
                                    <h5 className="subHeading2">
@@ -1424,12 +1427,12 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row   className="mt15">
+                               <Row noGutters={true}   className="mt15">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-1 text-center "
+                                   className="col-xs-12 text-center "
                                  >
                                    <span className="warpweftheader">
                                      WARP X WEFT X EXTRA WEFT
@@ -1437,12 +1440,12 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>{" "}
                                </Row>
 
-                               <Row   className="mt30">
+                               <Row noGutters={true}   className="mt30">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-1 text-center "
+                                   className="col-xs-12 text-center "
                                  >
                                    <img
                                      className="warpweftImage"
@@ -1451,23 +1454,23 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>{" "}
                                </Row>
 
-                               <Row className="Plr60 mt30 mlrow">
+                               <Row noGutters={true} className="Plr60 mt30 mlrow">
                                  <Col
                                    sm={{ size: "6" }}
                                    xs={{ size: "6" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center vrlineforAddProduct "
+                                   className="col-xs-12 text-center vrlineforAddProduct "
                                  >
                                    <div
                                      ref={this.warpweftComplete}
                                      className="detailsWdiv"
                                    >
                                      <div className="detailWtextHeader">
-                                       <label className="col-sm-2 col-md-2 col-lg-2 col-4">
+                                       <label className="col-sm-2 col-md-2 col-lg-2 col-xs-4">
                                          Warp{" "}
                                        </label>
                                        <img
-                                         className="detailWtextHeaderImage col-sm-4 col-md-4 col-lg-4 col-12"
+                                         className="detailWtextHeaderImage col-sm-4 col-md-4 col-lg-4 col-xs-12"
                                          src={logos.warpicon}
                                        ></img>
                                      </div>
@@ -1574,17 +1577,17 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                  <Col
                                    sm={{ size: "6" }}
-                                   xs={{ size: "6" }}
+                                  
                                    md={{ size: "4" }}
-                                   className="col-4 text-center vrlineforAddProduct "
+                                   className="col-xs-12 text-center vrlineforAddProduct "
                                  >
                                    <div className="detailsWdiv">
                                      <div className="detailWtextHeader">
-                                       <label className="col-sm-2 col-md-2 col-lg-2 col-4">
+                                       <label className="col-sm-2 col-md-2 col-lg-2 col-xs-4">
                                          Weft{" "}
                                        </label>
                                        <img
-                                         className="detailWtextHeaderImageWeft col-sm-4 col-md-4 col-lg-4 col-12"
+                                         className="detailWtextHeaderImageWeft col-sm-4 col-md-4 col-lg-4 col-xs-12"
                                          src={logos.wefticon}
                                        ></img>
                                      </div>
@@ -1692,20 +1695,20 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                  <Col
                                    sm={{ size: "6" }}
-                                   xs={{ size: "6" }}
+                                 
                                    md={{ size: "4" }}
-                                   className="col-4 text-center "
+                                   className="col-xs-12 text-center "
                                  >
                                    <div className="detailsWdiv">
                                      <div className="detailWtextHeader">
-                                       <label className="col-sm-9 col-md-9 col-lg-9 col-9 text-left">
+                                       <label className="col-sm-9 col-md-9 col-lg-9 col-xs-9 text-left">
                                          Extra Weft{" "}
                                          <strong className="extraweftOptional">
                                            (Optional)
                                          </strong>{" "}
                                        </label>
                                        <img
-                                         className="detailWtextHeaderImage col-sm-4 col-md-4 col-lg-4 col-12"
+                                         className="detailWtextHeaderImage col-sm-4 col-md-4 col-lg-4 col-xs-12"
                                          src={logos.extraWefticon}
                                        ></img>
                                      </div>
@@ -1812,18 +1815,18 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true}   className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 text-right "
+                                   className="col-xs-1 text-right "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "3" }}
                                    xs={{ size: "3" }}
                                    md={{ size: "3" }}
-                                   className="col-3 ml30"
+                                   className="col-xs-12 ml30"
                                  >
                                    <div
                                      ref={this.reedcountComplete}
@@ -1840,7 +1843,7 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "6" }}
                                    xs={{ size: "6" }}
                                    md={{ size: "6" }}
-                                   className="col-6 ml30"
+                                   className="col-xs-6 ml30"
                                  >
                                    <img
                                      className="reedcountImg"
@@ -1848,18 +1851,18 @@ relatedProductTemp[e.target.name] = option;
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true}   className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  ></Col>
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <select
                                      id="reedCount"
@@ -1890,22 +1893,21 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  ></Col>
                                </Row>
 
-                               <Row   className="mt100">
+                               <Row noGutters={true}   className="mt100">
                                  <Col
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 text-right "
+                                   className="col-xs-1 text-right "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "3" }}
-                                   xs={{ size: "3" }}
                                    md={{ size: "3" }}
-                                   className="col-3 ml30"
+                                   className="col-xs-12 ml30"
                                  >
                                    <div
                                      ref={this.dimensionsComplete}
@@ -1923,7 +1925,7 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "6" }}
                                    xs={{ size: "6" }}
                                    md={{ size: "6" }}
-                                   className="col-6 ml30"
+                                   className="col-xs-6 ml30"
                                  >
                                    <img
                                      className="dimensionsImg"
@@ -1931,18 +1933,18 @@ relatedProductTemp[e.target.name] = option;
                                    ></img>
                                  </Col>
                                </Row>
-                               <Row   className="mt30">
+                               <Row noGutters={true}   className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  ></Col>
                                  <Col
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <label className="productDropdown">
                                      {this.state.productTypeName
@@ -1954,14 +1956,14 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  ></Col>
                                </Row>
 
                                {this.state.lengths.length != 0 &&
                                this.state.widths.length != 0 ? (
                                  <>
-                                   <Row>
+                                   <Row noGutters={true}>
                                      <div className="col-md-3 text-right"></div>
                                      <div className="col-md-2 text-left">
                                        <span className="productDimensionHeading">
@@ -1979,12 +1981,12 @@ relatedProductTemp[e.target.name] = option;
                                      <div className="col-md-7 text-center"></div>
                                    </Row>
 
-                                   <Row>
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-6 text-right"
+                                       className="col-xs-6 "
                                      >
                                        {" "}
                                        <select
@@ -2019,7 +2021,7 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-12 text-left"
+                                       className="col-xs-12 text-left"
                                      >
                                        {" "}
                                        <span className="xicondimension">X</span>
@@ -2054,7 +2056,7 @@ relatedProductTemp[e.target.name] = option;
                                  </>
                                ) : (
                                  <>
-                                   <Row>
+                                   <Row noGutters={true}>
                                      <div className="col-md-3 text-right"></div>
                                      <div className="col-md-2 text-left">
                                        <span className="productDimensionHeading">
@@ -2065,12 +2067,12 @@ relatedProductTemp[e.target.name] = option;
                                      <div className="col-md-7 text-center"></div>
                                    </Row>
 
-                                   <Row>
+                                   <Row noGutters={true}>
                                      <Col
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-12 text-right"
+                                       className="col-xs-12 "
                                      >
                                        <input
                                          type="text"
@@ -2085,7 +2087,7 @@ relatedProductTemp[e.target.name] = option;
                                        sm={{ size: "6" }}
                                        xs={{ size: "6" }}
                                        md={{ size: "6" }}
-                                       className="col-12 text-left"
+                                       className="col-xs-12 text-left"
                                      >
                                        {" "}
                                        <span className="xicondimension">X</span>
@@ -2108,7 +2110,7 @@ relatedProductTemp[e.target.name] = option;
                                      (relatedItem) => {
                                        return (
                                          <>
-                                           <Row>
+                                           <Row noGutters={true}>
                                              <div className="col-md-3 text-right"></div>
 
                                              <div className="col-md-2 text-left">
@@ -2119,12 +2121,12 @@ relatedProductTemp[e.target.name] = option;
                                              <div className="col-md-7 text-left"></div>
                                            </Row>
 
-                                           <Row key={relatedItem.id}>
+                                           <Row noGutters={true} key={relatedItem.id}>
                                              <Col
                                                sm={{ size: "6" }}
                                                xs={{ size: "6" }}
                                                md={{ size: "6" }}
-                                               className="col-6 text-right"
+                                               className="col-xs-6 text-right"
                                              >
                                                {" "}
                                                <select
@@ -2170,7 +2172,7 @@ relatedProductTemp[e.target.name] = option;
                                                sm={{ size: "5" }}
                                                xs={{ size: "5" }}
                                                md={{ size: "5" }}
-                                               className="col-12 text-left"
+                                               className="col-xs-12 text-left"
                                              >
                                                {" "}
                                                <span className="xicondimension">
@@ -2222,12 +2224,12 @@ relatedProductTemp[e.target.name] = option;
                                  </>
                                ) : null}
 
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -2237,20 +2239,20 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Product specificcaions */}
 
                              {/* //#region Product wash and care */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.iswashAndCareComplete ? (
                                      <div
@@ -2276,13 +2278,13 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                </Row>
 
-                               <Row   className="washAndCareDiv">
-                                 <Row className="washAndCareDiv">
+                               <Row noGutters={true}   className="washAndCareDiv">
+                                 <Row noGutters={true} className="washAndCareDiv">
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
+                                    
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2311,9 +2313,8 @@ relatedProductTemp[e.target.name] = option;
                                    </Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2341,9 +2342,8 @@ relatedProductTemp[e.target.name] = option;
                                    </Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2371,9 +2371,8 @@ relatedProductTemp[e.target.name] = option;
                                    </Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2401,9 +2400,8 @@ relatedProductTemp[e.target.name] = option;
                                    </Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2431,9 +2429,8 @@ relatedProductTemp[e.target.name] = option;
                                    </Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2460,18 +2457,16 @@ relatedProductTemp[e.target.name] = option;
                                      </div>
                                    </Col>
                                  </Row>
-                                 <Row className="mt30 washAndCareDiv">
+                                 <Row noGutters={true} className="mt30 washAndCareDiv">
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className=""
                                    ></Col>
                                    <Col
                                      sm={{ size: "2" }}
-                                     xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2501,7 +2496,7 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2531,7 +2526,7 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2561,7 +2556,7 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    >
                                      <div
                                        onClick={() =>
@@ -2591,16 +2586,16 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "2" }}
                                      xs={{ size: "2" }}
                                      md={{ size: "2" }}
-                                     className="col-2"
+                                     className="col-xs-4 h180p"
                                    ></Col>
                                  </Row>
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -2611,20 +2606,20 @@ relatedProductTemp[e.target.name] = option;
 
                              {/* //#region availability */}
 
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.isMTO ||
                                    this.state.isavailable ? (
@@ -2648,24 +2643,22 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row className="washAndCareDiv mt30">
+                               <Row noGutters={true} className="washAndCareDiv mt30">
                                  <Col
                                    sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2"
+                                   className=""
+                                 ></Col>
+                                 <Col
+                                   sm={{ size: "2" }}
+                                   md={{ size: "2" }}
+                                   className=""
                                  ></Col>
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2"
-                                 ></Col>
-                                 <Col
-                                   sm={{ size: "2" }}
-                                   xs={{ size: "2" }}
-                                   md={{ size: "2" }}
-                                   className="col-2"
+                                   className="col-xs-5"
                                  >
                                    <div
                                      onClick={() => {
@@ -2698,7 +2691,7 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2"
+                                   className="col-xs-5"
                                  >
                                    <div
                                      onClick={() => {
@@ -2731,22 +2724,22 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2"
+                                   className="col-xs-2"
                                  ></Col>
                                  <Col
                                    sm={{ size: "2" }}
                                    xs={{ size: "2" }}
                                    md={{ size: "2" }}
-                                   className="col-2"
+                                   className="col-xs-2"
                                  ></Col>
                                </Row>
                             
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -2757,20 +2750,20 @@ relatedProductTemp[e.target.name] = option;
                              {this.state.showGSM ? (
                                <>
                                  {/* //#region Enter GSM (Gram per Square Metre) */}
-                                 <Row   className="mt60">
-                                   <Row  >
+                                 <Row noGutters={true}   className="mt60">
+                                   <Row noGutters={true}  >
                                      <Col
                                        className="text-center"
                                        sm={{ size: "1" }}
                                        xs={{ size: "1" }}
                                        md={{ size: "1" }}
-                                       className="col-1 "
+                                       className="col-xs-1 "
                                      ></Col>{" "}
                                      <Col
                                        sm={{ size: "11" }}
                                        xs={{ size: "11" }}
                                        md={{ size: "11" }}
-                                       className="col-11"
+                                       className="col-xs-11"
                                      >
                                        {this.state.GSMName == "" ? (
                                          <div
@@ -2794,24 +2787,24 @@ relatedProductTemp[e.target.name] = option;
                                        </h6>
                                      </Col>
                                    </Row>
-                                   <Row className="mt30">
+                                   <Row noGutters={true} className="mt30">
                                      <Col
                                        sm={{ size: "12" }}
                                        xs={{ size: "12" }}
                                        md={{ size: "12" }}
-                                       className="col-12 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        <span className="ml-160 text-right font13">
                                          GSM value for the fabric
                                        </span>
                                      </Col>
                                    </Row>
-                                   <Row className="">
+                                   <Row noGutters={true} className="">
                                      <Col
                                        sm={{ size: "12" }}
                                        xs={{ size: "12" }}
                                        md={{ size: "12" }}
-                                       className="col-12 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        <input
                                          type="text"
@@ -2823,12 +2816,12 @@ relatedProductTemp[e.target.name] = option;
                                        />
                                      </Col>
                                    </Row>
-                                   <Row   className="text-center">
+                                   <Row noGutters={true}   className="text-center">
                                      <Col
                                        sm={{ size: "12" }}
                                        xs={{ size: "12" }}
                                        md={{ size: "12" }}
-                                       className="col-12 text-center"
+                                       className="col-xs-12 text-center"
                                      >
                                        <div className="hrlineforAddProduct"></div>
                                      </Col>
@@ -2840,20 +2833,20 @@ relatedProductTemp[e.target.name] = option;
                              ) : null}
 
                              {/* //#region Enter Weight */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.weight == "" ? (
                                      <div
@@ -2875,18 +2868,16 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-2 text-center"
                                  ></Col>
                                  <Col
                                    sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-6 text-center"
                                  >
                                    <span className="ml-160 font13">
                                    {this.props.t("Pages.object.Weight (10 Characters)")}
@@ -2894,23 +2885,20 @@ relatedProductTemp[e.target.name] = option;
                                  </Col>
                                  <Col
                                    sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-2 text-center"
                                  ></Col>
                                </Row>
-                               <Row className="">
+                               <Row noGutters={true} className="">
                                  <Col
                                    sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-2 text-center"
                                  ></Col>
                                  <Col
                                    sm={{ size: "4" }}
-                                   xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-6 text-center"
                                  >
                                    <input
                                      type="text"
@@ -2925,15 +2913,15 @@ relatedProductTemp[e.target.name] = option;
                                    sm={{ size: "4" }}
                                    xs={{ size: "4" }}
                                    md={{ size: "4" }}
-                                   className="col-4 text-center"
+                                   className="col-xs-4 text-center"
                                  ></Col>
                                </Row>
-                               <Row   className="text-center">
+                               <Row noGutters={true}   className="text-center">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <div className="hrlineforAddProduct"></div>
                                  </Col>
@@ -2943,20 +2931,20 @@ relatedProductTemp[e.target.name] = option;
                              {/* //#endregion Enter Weight*/}
 
                              {/* //#region Describe the product */}
-                             <Row   className="mt60">
-                               <Row  >
+                             <Row noGutters={true}   className="mt60">
+                               <Row noGutters={true}  >
                                  <Col
                                    className="text-center"
                                    sm={{ size: "1" }}
                                    xs={{ size: "1" }}
                                    md={{ size: "1" }}
-                                   className="col-1 "
+                                   className="col-xs-1 "
                                  ></Col>{" "}
                                  <Col
                                    sm={{ size: "11" }}
                                    xs={{ size: "11" }}
                                    md={{ size: "11" }}
-                                   className="col-11"
+                                   className="col-xs-11"
                                  >
                                    {this.state.description == "" ? (
                                      <div
@@ -2980,24 +2968,24 @@ relatedProductTemp[e.target.name] = option;
                                    </h6>
                                  </Col>
                                </Row>
-                               <Row className="mt30">
+                               <Row noGutters={true} className="mt30">
                                  <Col
                                    sm={{ size: "9" }}
                                    xs={{ size: "9" }}
                                    md={{ size: "9" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <span className="ml-160 font13">
                                    {this.props.t("Pages.object.Describe the product")}
                                    </span>
                                  </Col>
                                </Row>
-                               <Row className="">
+                               <Row noGutters={true} className="">
                                  <Col
                                    sm={{ size: "12" }}
                                    xs={{ size: "12" }}
                                    md={{ size: "12" }}
-                                   className="col-12 text-center"
+                                   className="col-xs-12 text-center"
                                  >
                                    <textarea
                                      maxLength="500"
@@ -3011,25 +2999,24 @@ relatedProductTemp[e.target.name] = option;
                                </Row>
                              </Row>
                              {/* //#endregion Describe the product*/}
-                             <Row className="washAndCareDiv mt30">
+                             <Row noGutters={true} className="washAndCareDiv mt30">
                                <Col
                                  sm={{ size: "2" }}
                                  xs={{ size: "2" }}
                                  md={{ size: "2" }}
-                                 className="col-2"
+                                 className="col-xs-2"
                                ></Col>
                                <Col
                                  sm={{ size: "8" }}
-                                 xs={{ size: "8" }}
                                  md={{ size: "8" }}
-                                 className="col-2"
+                                 className="col-xs-12"
                                >
-                                 <Row>
+                                 <Row noGutters={true}>
                                    <Col
                                      sm={{ size: "4" }}
                                      xs={{ size: "4" }}
                                      md={{ size: "4" }}
-                                     className="col-4 text-right "
+                                     className="col-xs-4 text-right "
                                    >
                                      <button
                                        onClick={this.Cancel}
@@ -3042,7 +3029,7 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "4" }}
                                      xs={{ size: "4" }}
                                      md={{ size: "4" }}
-                                     className="col-4 text-center "
+                                     className="col-xs-4 text-center "
                                    >
                                      <button
                                        onClick={this.ResetAll}
@@ -3055,7 +3042,7 @@ relatedProductTemp[e.target.name] = option;
                                      sm={{ size: "4" }}
                                      xs={{ size: "4" }}
                                      md={{ size: "4" }}
-                                     className="col-4 text-left "
+                                     className="col-xs-4 text-left "
                                    >
                                      <button
                                        onClick={this.Save}
@@ -3071,16 +3058,16 @@ relatedProductTemp[e.target.name] = option;
                                  sm={{ size: "2" }}
                                  xs={{ size: "2" }}
                                  md={{ size: "2" }}
-                                 className="col-2"
+                                 className="col-xs-2"
                                ></Col>
                              </Row>
                              <div className="hrlineforAddProduct"></div>
-                             <Row   className="text-center">
+                             <Row noGutters={true}   className="text-center">
                                <Col
                                  sm={{ size: "12" }}
                                  xs={{ size: "12" }}
                                  md={{ size: "12" }}
-                                 className="col-12 text-center"
+                                 className="col-xs-12 text-center"
                                >
                                  <div className="mt30"></div>
                                </Col>
@@ -3088,7 +3075,7 @@ relatedProductTemp[e.target.name] = option;
                              </Row>
                            </div>
                          </Row>
-
+                         {/* </Table> */}
                        </Container>
                        <Footer></Footer>
 

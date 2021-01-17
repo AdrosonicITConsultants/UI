@@ -298,7 +298,7 @@ cursor: pointer;
 }
 
 .weaveselectionCheckbox{
-     width: 300px;
+     width: 275px;
     border-radius: 8px;
     background: var(--mainFont);
     border: 1px solid white;
@@ -314,7 +314,7 @@ cursor: pointer;
 
 
 .productDropdown{
-    width: 300px;
+    width: 275px;
     border-radius: 8px;
     background: var(--mainFont);
     border: 1px solid white;
@@ -328,7 +328,7 @@ cursor: pointer;
 }
 
 .ProductTextBox {
-   width: 300px;
+   width: 275px;
     border-radius: 8px;
     background: var(--mainFont);
     border: 1px solid white;
@@ -341,7 +341,7 @@ cursor: pointer;
 }
 
 .yarnProductTextBox {
-   width: 300px;
+   width: 275px;
     border-radius: 8px;
     background: #F0F0F0;
     border: 1px solid white;
@@ -628,8 +628,71 @@ position: relative;
 
 
 @media only screen and ( max-width: 480px ) {
-     .productDropdown{
-        width: 96%;
+
+    .productTextArea {
+        width: 80%;
+        height: 160px;
+        border-radius: 8px;
+        background: var(--mainFont);
+        border: 1px solid white;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        outline: none;
+        color: var(--lightFont);
+        resize: none;
+    }
+    .cancelBtnProduct {
+        color: #FFFFFF;
+        background-color: #CC0000;
+        /* width: 100% !important; */
+        padding-left: 12px;
+        font-size: 12px !important;
+        border: none;
+        width: 90px;
+        height: 32px;
+        text-align: center;
+        border-radius: 32px;
+        font-weight: bold;
+        /* letter-spacing: 0.5px; */
+    }
+    .saveBtnProduct {
+        color: white;
+        background-color: #4582F5;
+        /* width: 100% !important; */
+        padding-left: 12px;
+        font-size: 12px !important;
+        border: none;
+        width: 80px;
+        height: 32px;
+        text-align: center;
+        border-radius: 32px;
+        font-weight: bold;
+        /* letter-spacing: 0.5px; */
+    }
+    .resetBtnProduct {
+        color: #4582F5;
+        background-color: white;
+        /* width: 100% !important; */
+        padding-left: 12px;
+        font-size: 12px !important;
+        border: none;
+        width: 80px;
+        height: 32px;
+        text-align: center;
+        border-radius: 32px;
+        font-weight: bold;
+    }
+    .dimensionsImg {
+        width: 161px;
+        margin-left: 10px;
+        margin-top: 30px;
+    }
+    .reedcountImg {
+        width: 80px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin: auto;
     }
      .yarnProductTextBox{
 
@@ -640,76 +703,149 @@ position: relative;
              margin-bottom: 20px;
 
      }
+    
+    .warpweftImage {
+        width: 200px;
+        margin: auto;
+    }
+    .Plr60 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .warpweftheader {
+        color: #ADADAD;
+        font-size: 20px;
+        font-family: var(--LatoFont);
+        font-weight: 500;
+    }
 
-     .weaveselectionCheckbox{
-         width: 100%;
-     }
+     .weaveselectionCheckbox {
+        width: 100%;
+        border-radius: 8px;
+        background: var(--mainFont);
+        border: 1px solid white;
+        height: 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        outline: none;
+        color: #484848;
+        text-align: center;
+        line-height: 40px;
+        margin-left: 0px;
+    }
+    .productDropdown {
+        width: 96%;
+      
+    }
       .ProductTextBox{
-          width: 100%;
+          width: 96%;
+       
       }
       .washAndCareDiv {
-    padding-left: 30px;
-    padding-right: 30px;}
+    padding-left: 0px;
+    padding-right: 0px;}
     .inComplete {    
     margin-left: -30px;    
 }
-.reedcountImg {
-       margin-left: 20px;
+.h180p{
+    height: 180px;
 }
-.dimensionsImg {
-  
-    margin-left: -25px;
-    
+.xicondimension {
+    color: #B4B4B4;
+    font-size: 20px;
+    margin-left: 50%;
+    margin-right: 20px;
 }
-
+.ml30{
+    margin-left: 0px;
+    padding-left: 45px!important;
+}
 .ml-160{
     margin-left: 0px;
 }
 }
 @media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+    .productTextArea {
+        width: 90%;
+        height: 160px;
+        border-radius: 8px;
+        background: var(--mainFont);
+        border: 1px solid white;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        outline: none;
+        color: var(--lightFont);
+        resize: none;
+    }
+    .weaveselectionCheckbox {
+        width: 300px;
+        border-radius: 8px;
+        background: var(--mainFont);
+        border: 1px solid white;
+        height: 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        outline: none;
+        color: #484848;
+        text-align: center;
+        line-height: 40px;
+        margin-left: 45px;
+    }
 .artistLanding{
     text-align: center;
     text-align: -webkit-center;
 }
 
-     .productDropdown{
-        width: 48%;
-    }
-     .yarnProductTextBox{
-
-        width: 48%;
-     }
+.yarnProductTextBox {
+    width: 90%;
+}
+.reedcountImg {
+    width: 90px;
+    margin-top: 16px;
+    margin-left: 85px;
+    float: right;
+}
      .vrlineforAddProduct  
      {
              margin-bottom: 20px;
 
      }
+     .dimensionsImg {
+        width: 200px;
+        margin-left: 0px;
+        margin-top: 30px;
+        float: right;
+    }
+     .productDropdown {
+        width: 90%;
+    }
 
-     .weaveselectionCheckbox{
-         width: 48%;
-     }
-      .ProductTextBox{
-          width: 48%;
-      }
-      .washAndCareDiv {
-    padding-left: 30px;
-    padding-right: 30px;}
+
     .inComplete {    
     margin-left: -30px;    
 }
-.reedcountImg {
-       margin-left: 20px;
+.ProductTextBox {
+    width: 90%;
 }
-
-.dimensionsImg {
-  
-    margin-left: -25px;
-    
+.ml30 {
+    margin-left: 0px;
+    padding-left: 45px!important;
+}
+.h180p{
+    height: 180px;
+    padding: 10px 33px!important;
 }
 
 .ml-160{
     margin-left: 0px;
 }
+
+.washAndCareDiv {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
 }
 
 @media only screen and ( max-width: 991px ) and ( min-width: 768px ){

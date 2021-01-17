@@ -259,9 +259,64 @@ input[type="number"]:disabled {
 }
 
 
-
+.posrel{
+  position: relative!important;
+}
 @media only screen and ( max-width: 480px ) {
-   
+  .databackground {
+    background-image: none;
+    background-color: yellow;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 90%;
+    height: 1311px;
+    margin: 0 auto;
+    padding: 13px;
+}
+.pocbg2 {
+  background-color: rgba(236, 192, 1, 0.65);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 90%!important;
+  float: none;
+  min-height: 220px!important;
+  margin: 5%;
+}
+.pocbg1 {
+  background-color: rgba(236, 192, 1, 0.65);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 90%!important;
+  min-height: 220px!important;
+  margin: 5%;
+}
+.hrlinep2 {
+  color: black;
+  border-top: 0px solid;
+  width: 50%;
+}
+.bgdis {
+  width: 50%!important;
+  display: inline-block!important;
+  font-size: 14px!important;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  float: none!important;
+}
+.profilelogo {
+  /* background-image: url(../../assets/logo2.png); */
+  height: 140px;
+  margin: auto;
+  width: 140px;
+  position: initial;
+  border-radius: 50%;
+  /* top: -25px; */
+  /* left: 15px; */
+  background-size: 100% 100%;
+}
 }
 @media only screen and ( max-width: 990px ) and ( min-width: 768px ){
   .bdetail > div > input[type="text"]:disabled{
@@ -456,9 +511,39 @@ input[type="number"]:disabled {
 
 }
 
-@media only screen and ( max-width: 991px ) and ( min-width: 481px ){
-    
-    
+@media only screen and ( max-width: 767px ) and ( min-width: 481px ){
+  .close {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    float: none;
+}
+.hrlinep2 {
+  color: black;
+  border-top: 0px solid;
+  width: 50%;
+}
+  .databackground {
+    background-color: yellow;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 90%;
+    height: 1070px;
+    margin: 0 auto;
+    padding: 18px;
+}
+  .profilelogo {
+    /* background-image: url(../../assets/logo2.png); */
+    height: 140px;
+    margin: auto;
+    width: 140px;
+    position: initial;
+    border-radius: 50%;
+    /* top: -25px; */
+    /* left: 15px; */
+    background-size: 100% 100%;
+  }
       
 }
 @media only screen and ( min-width: 1200px ) {

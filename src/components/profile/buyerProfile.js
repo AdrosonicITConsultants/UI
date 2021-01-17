@@ -471,9 +471,11 @@ class BuyerProfile extends Component {
                    <Row  >
                         <Col sm = {{size: "1"}}></Col>
 
-                            <Col sm = {{size: "10"}}>
+                            <Col className="col-xs-12" >
                            <div className="profilelogo">
+                               <div className="posrel">
                            {$imagePreview2}
+                           </div>
                                                         <input
                                                             accept="image/png, image/jpeg"
                                                             onChange={this.fileChangedHandler2}
@@ -481,6 +483,7 @@ class BuyerProfile extends Component {
                                                             ref="fileUploader2"
                                                             style={{ display: "none" }}
                                                         ></input>
+                                                       
                                
                            </div>
                            <div className= "databackground">
@@ -701,7 +704,7 @@ class BuyerProfile extends Component {
                                         </Row>
                                         <hr className="hrlinep2"></hr>
                                         <Row  >
-                                            <Col sm = {{size: "6"}} className="pocbg1" >
+                                            <Col className="col-xs-12 col-sm-6 pocbg1" >
                                                 <div className="fw600 bdetailsheading">
                                                     Point of Contact
                                                 </div>
@@ -779,7 +782,7 @@ class BuyerProfile extends Component {
                                             </Row>
                                             </Col>
                                             
-                                            <Col sm = {{size: "6"}} className="pocbg2">
+                                            <Col  className="pocbg2 col-sm-6 col-xs-12">
                                                 <div className="fw600 bdetailsheading">
                                                     Delivery Address
                                                 </div>

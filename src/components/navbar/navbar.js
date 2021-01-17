@@ -270,6 +270,36 @@ componentDidMount(){
               
             </div>
             ) : null}
+
+            {
+            this.state.openMenu ? 
+            ""
+            :
+            userTypeId === 2 ? (
+                <a
+                  href="/buyerHome"
+                  className={
+                    this.state.activeTabClassName === "/" ? "active" : ""
+                  }
+                >
+                  {" "}
+                  <img
+                    className="navbarLogoMobileNew"
+                    src={logos.mainLogoNavbar}
+                  ></img>{" "}
+                </a>
+              ) : (
+                <a
+                  href="/home"
+                  className={
+                    this.state.activeTabClassName === "/" ? "active" : ""
+                  }
+                >
+                  {" "}
+                  {/* <img className="navbarLogoA" src={logos.artistMainLogo}></img> */}
+                  <img className="navbarLogoMobileNew" src={logos.mainLogoNavbar}></img>
+                </a>
+            )}
          
           <ol className={this.state.openMenu ? "mobile_menu" : ""}>
             <li className="menu-item">
@@ -360,9 +390,8 @@ componentDidMount(){
               </li>
             ) : null}
 
-            <li className="menu-item">
-              <img
-                onClick={() => this.toggleHover("isSearchClicked")}
+            <li className="menu-item" onClick={() => this.toggleHover("isSearchClicked")}>
+              <img                
                 className="navButtonImg"
                 src={logos.searchlogo}
               ></img>
@@ -730,6 +759,23 @@ componentDidMount(){
             
           </div>
           ) : null}
+
+          {this.state.openMenu ?
+          ""
+        :
+        <a
+          href="/buyerHome"
+          className={
+            this.state.activeTabClassName === "/" ? "active" : ""
+          }
+        >
+          {" "}
+          <img
+            className="navbarLogoMobileNew"
+            src={logos.mainLogoNavbar}
+          ></img>{" "}
+        </a>
+        }
        
         <ol className={this.state.openMenu ? "mobile_menu" : ""}>
           <li className="menu-item">

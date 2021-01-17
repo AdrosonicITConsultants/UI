@@ -427,15 +427,27 @@ padding: 0 0.75rem;
 	.menu-item-space {
 	      padding-left: 20em !important;
   }
-	.menu:after {
+
+	.menu:after{
 	  content: "";
 	  position: absolute;
 	  top: calc(50% - 2px);
 	  right: 1rem;
 	  width: 30px;
-	  height: 4px;
+	  height: 3px;
 	  background: black;
 	  box-shadow: 0 10px #FFF, 0 -10px #FFF;
+	}
+
+	.menu:before {
+		content: "";
+		position: absolute;
+		top: calc(50% - 8px);
+		right: 1rem;
+		width: 30px;
+		height: 3px;
+		background: black;
+		box-shadow: 0 10px #FFF, 0 -10px #FFF;
 	}
 	.menu > ol {
 	  display: none;
@@ -547,6 +559,11 @@ margin: 15px;
   .menu-item:hover > .sub-menu {
 	display: block;
   }
+
+  .navbarLogoMobileNew {
+	  display: none;
+  }
+
   @media screen and (max-width: 768px) {
 	  
 	.sub-menu {
@@ -563,6 +580,13 @@ margin: 15px;
 	.sub-menu .menu-item:hover {
 		background: #fff;
 		}
+
+		.navbarLogoMobileNew {
+			margin-top: 10px;
+			margin-left: 20px;
+			width: 145px;
+			display: inline-block;
+		  }
 		
   }
   
@@ -605,7 +629,7 @@ button:focus{
  /* border-color:transparent!important; */
  outline:none;}
 
-@media only screen and ( max-width: 990px ) and ( min-width: 768px ){
+@media only screen and ( max-width: 990px ) and ( min-width: 769px ){
 	.menu > ol > .menu-item{
 		padding: 1em 1px;
 	}

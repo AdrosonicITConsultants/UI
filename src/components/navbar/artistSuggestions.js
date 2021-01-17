@@ -197,7 +197,7 @@ class ArtistSuggestions extends Component {
 
     const renderInputComponent = (inputProps) => (
       <div>
-        <div className="searchbarNav inner-addon left-addon">
+        <div className="searchbarNav inner-addon left-addon hideMobileGlobalSearch">
           <img
             src={logos.searchlogo}
             className="searchIconinTextbox glyphicon"
@@ -223,7 +223,35 @@ class ArtistSuggestions extends Component {
             {...inputProps}
           ></input>
         </div>
+
+        <div className="searchbarNav inner-addon left-addon hideDesktopGlobalSearch">
+          <img
+            src={logos.searchlogo}
+            className="searchIconinTextbox glyphicon"
+          ></img>
+            <img
+              className="searchbarNav inner-addon right-addon"
+              style={{ width: "15px", left: "90%", top: "2rem" }}
+              src={logos.closelogo}
+              onClick={()=>{this.closesearch()}}
+            ></img>
+       
+          <input
+            style={{
+              border: "none",
+              marginLeft: "5px",
+              width: "-webkit-fill-available",
+              height: "-webkit-fill-available",
+              fontSize: "13px",
+              padding:" 3px 0px 7px 50px",
+              height: "66px"
+
+            }}
+            {...inputProps}
+          ></input>
+        </div>
       </div>
+      
     );
     return (
       

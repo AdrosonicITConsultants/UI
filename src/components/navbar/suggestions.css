@@ -78,3 +78,49 @@ margin-top: 4px;
 .padding0{
     padding: 0px!important;
 }
+
+.mobileAddSearchCross {
+    width: 15px;
+    left: 90%;
+    top: 3rem;
+}
+
+.mobileAddSearchInput {
+    border: none;
+    margin-left: 18px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    font-size: 20px;
+    padding: 3px 0px 7px 73px;
+    height: 66px;
+}
+
+.hideMobileGlobalSearch {
+    display: block;
+}
+
+.hideDesktopGlobalSearch {
+    display: none;
+}
+
+@media only screen and ( max-width: 767px ) {
+    .mobileAddSearchCross {
+        top: "2rem";
+    }
+
+    .mobileAddSearchInput {
+        margin-left: 0px;
+        font-size: 13px;
+        padding: 3px 0px 7px 50px;
+    }
+}
+
+@media only screen and ( max-width: 680px ) {
+    .hideMobileGlobalSearch {
+        display: none;
+    }
+
+    .hideDesktopGlobalSearch {
+        display: block;
+    }
+}

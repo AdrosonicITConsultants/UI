@@ -705,4 +705,28 @@ background-color: black;
     }
 }
 
+@media only screen and ( max-width: 375px ) {
+    .carousaltext32 {
+        margin-top: 115px !important;
+        color: black !important;
+    }
+
+    .carousaltext33 {
+        margin-top: 260px !important;
+        color: black !important;
+    }
+}
+
+@media only screen and ( max-width: 425px ) and ( min-width: 376px ) {
+    .carousaltext32 {
+        margin-top: 105px !important;
+        color: black !important;
+    }
+
+    .carousaltext33 {
+        margin-top: 225px !important;
+        color: black !important;
+    }
+}
+
 

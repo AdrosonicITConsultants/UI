@@ -18,7 +18,7 @@ export default class ForgotpassRouter extends Component {
                    super(props);
 
                    this.state = {
-                     userpage: 2,
+                     userpage: 0,
                      emailid: "",
                      password: "",
                      showHomeBg : false,

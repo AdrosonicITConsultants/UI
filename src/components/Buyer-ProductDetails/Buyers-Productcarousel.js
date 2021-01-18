@@ -30,7 +30,9 @@ import Footer from "../footer/footer";
         <React.Fragment>
           
             <div class="BPDcontainer" >
-            <ul class="thumbnails">
+              <Row noGutters={true}>
+                <Col className="col-xs-12">
+                <ul class="thumbnails">
               {this.state.Image[0]?
              <li>
              <a href="#slide1"><img src={this.state.ImageUrl +  '/' + this.state.Image[0].lable } /></a>
@@ -58,25 +60,32 @@ import Footer from "../footer/footer";
    
    
   </ul>
-          
-           <ul class="slides">
-         
-{this.state.Image[0]?
-  <li id="slide1"> <div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[0].lable } alt="" /></div> </li>
-:null
-}
-{this.state.Image[1]?
-   <li id="slide2"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[1].lable } alt="" /></div> </li>
-:null
-}
-{this.state.Image[2]?
-   <li id="slide3"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[2].lable } alt="" /></div> </li>
-:null
-}
-  
+                </Col>
 
+                <Col className="col-xs-12">
+                <ul class="slides">
+         
+         {this.state.Image[0]?
+           <li id="slide1"> <div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[0].lable } alt="" /></div> </li>
+         :null
+         }
+         {this.state.Image[1]?
+            <li id="slide2"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[1].lable } alt="" /></div> </li>
+         :null
+         }
+         {this.state.Image[2]?
+            <li id="slide3"><div className="ImgDivcar"><img src={this.state.ImageUrl + '/' + this.state.Image[2].lable } alt="" /></div> </li>
+         :null
+         }
+           
+         
+                   
+           </ul>
+                </Col>
+              </Row>
+           
           
-  </ul>
+         
           
        </div>
         </React.Fragment>

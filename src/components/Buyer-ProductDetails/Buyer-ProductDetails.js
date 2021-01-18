@@ -249,13 +249,13 @@ backoperation = () => {
                  </Col>
                </Row>
 <Row noGutters="true" id="#Top">
-  <Col md={6} lg={6}sm={12} xs={12} style={{marginTop:"27px"}}>
+  <Col md={6} lg={6} sm={12} className="col-xs-12" style={{marginTop:"27px"}}>
 
     <BPCarousel
   Image={this.state.ProductData.productImages?this.state.ProductData.productImages:null}
     />
   </Col>
-  <Col  md={6} lg={6}sm={12} xs={12} className="BPDCol2">
+  <Col  md={6} lg={6}sm={12} className="BPDCol2 col-xs-12">
   {this.state.ProductData.tag ?   <h1>{this.state.ProductData.tag}</h1>:null}
   {this.state.ProductData.productCategory ?  <h1>{this.state.ProductData.productCategory.productDesc}</h1> :null}
   
@@ -811,7 +811,7 @@ Pre Washed & Pre Shrunk
                     sm={{ size: "4" }}
                     md={{ size: "4" }}
                     xs={{ size: "4" }}
-                    className="artistbg3 col-4 text-center"
+                    className="artistbg3 col-4 text-center col-xs-12"
                   ></Col>
 
                   <Col

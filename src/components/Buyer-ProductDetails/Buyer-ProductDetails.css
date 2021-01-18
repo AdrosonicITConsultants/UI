@@ -587,9 +587,9 @@ transform-origin: 50% 50%;
     width: 100% !important;
     margin-bottom: 10px !important;
   }
-  .BPDcontainer {
+  /* .BPDcontainer {
     width: fit-content !important;
-  }
+  } */
   .Wishlistpdbtn{
     height: 50px !important;
     margin-top: 20px !important;

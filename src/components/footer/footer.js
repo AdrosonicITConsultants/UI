@@ -108,10 +108,16 @@ class Footer extends Component {
                     <br />
                     <div className="col-md-2"></div>
                     <div className="col-md-4 text-center">
+                      <a href="https://apps.apple.com/in/app/craft-xchange/id1532396054" target="_blank">
                       <img className="iconWidth" src={logos.appstorebtn}></img>
+                      </a>
+                      
                     </div>
                     <div className="col-md-4 text-center">
+                      <a href="https://play.google.com/store/apps/details?id=com.adrosonic.craftexchange" target="_blank">
                       <img className="iconWidth" src={logos.playstorebtn}></img>
+                      </a>
+                      
                     </div>
                     <div className="col-md-2"></div>
                   </div>
@@ -228,10 +234,14 @@ class Footer extends Component {
                     <br />
                     <div className="col-md-2"></div>
                     <div className="col-md-4 text-center">
+                    <a href="https://apps.apple.com/in/app/craft-xchange/id1532396054" target="_blank">
                       <img className="iconWidth" src={logos.appstorebtn}></img>
+                      </a>
                     </div>
                     <div className="col-md-4 text-center">
+                    <a href="https://play.google.com/store/apps/details?id=com.adrosonic.craftexchange" target="_blank">
                       <img className="iconWidth" src={logos.playstorebtn}></img>
+                      </a>
                     </div>
                     <div className="col-md-2"></div>
                   </div>

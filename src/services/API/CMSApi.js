@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-var env = "live";
+var env = "uat";
 var CMSUrl = "";
 
 if (env == "dev") {
